@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ADD5EABE15F325C5005E20E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5EABD15F325C5005E20E7 /* UIKit.framework */; };
+		ADD5EAC015F325C5005E20E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5EABF15F325C5005E20E7 /* Foundation.framework */; };
+		ADD5EAC215F325C5005E20E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5EAC115F325C5005E20E7 /* CoreGraphics.framework */; };
+		ADD5EAC815F325C5005E20E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD5EAC615F325C5005E20E7 /* InfoPlist.strings */; };
+		ADD5EACA15F325C5005E20E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD5EAC915F325C5005E20E7 /* main.m */; };
+		ADD5EACE15F325C5005E20E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD5EACD15F325C5005E20E7 /* AppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ADD5EAB915F325C5005E20E7 /* JFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADD5EABD15F325C5005E20E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ADD5EABF15F325C5005E20E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ADD5EAC115F325C5005E20E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ADD5EAC515F325C5005E20E7 /* JFramework-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFramework-Info.plist"; sourceTree = "<group>"; };
+		ADD5EAC715F325C5005E20E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ADD5EAC915F325C5005E20E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ADD5EACB15F325C5005E20E7 /* JFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFramework-Prefix.pch"; sourceTree = "<group>"; };
+		ADD5EACC15F325C5005E20E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ADD5EACD15F325C5005E20E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADD5EAB615F325C5005E20E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD5EABE15F325C5005E20E7 /* UIKit.framework in Frameworks */,
+				ADD5EAC015F325C5005E20E7 /* Foundation.framework in Frameworks */,
+				ADD5EAC215F325C5005E20E7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ADD5EAAE15F325C5005E20E7 = {
+			isa = PBXGroup;
+			children = (
+				ADD5EAC315F325C5005E20E7 /* JFramework */,
+				ADD5EABC15F325C5005E20E7 /* Frameworks */,
+				ADD5EABA15F325C5005E20E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ADD5EABA15F325C5005E20E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5EAB915F325C5005E20E7 /* JFramework.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADD5EABC15F325C5005E20E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5EABD15F325C5005E20E7 /* UIKit.framework */,
+				ADD5EABF15F325C5005E20E7 /* Foundation.framework */,
+				ADD5EAC115F325C5005E20E7 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ADD5EAC315F325C5005E20E7 /* JFramework */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5EACC15F325C5005E20E7 /* AppDelegate.h */,
+				ADD5EACD15F325C5005E20E7 /* AppDelegate.m */,
+				ADD5EAC415F325C5005E20E7 /* Supporting Files */,
+			);
+			path = JFramework;
+			sourceTree = "<group>";
+		};
+		ADD5EAC415F325C5005E20E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5EAC515F325C5005E20E7 /* JFramework-Info.plist */,
+				ADD5EAC615F325C5005E20E7 /* InfoPlist.strings */,
+				ADD5EAC915F325C5005E20E7 /* main.m */,
+				ADD5EACB15F325C5005E20E7 /* JFramework-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADD5EAB815F325C5005E20E7 /* JFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADD5EAD115F325C5005E20E7 /* Build configuration list for PBXNativeTarget "JFramework" */;
+			buildPhases = (
+				ADD5EAB515F325C5005E20E7 /* Sources */,
+				ADD5EAB615F325C5005E20E7 /* Frameworks */,
+				ADD5EAB715F325C5005E20E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JFramework;
+			productName = JFramework;
+			productReference = ADD5EAB915F325C5005E20E7 /* JFramework.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADD5EAB015F325C5005E20E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+			};
+			buildConfigurationList = ADD5EAB315F325C5005E20E7 /* Build configuration list for PBXProject "JFramework" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ADD5EAAE15F325C5005E20E7;
+			productRefGroup = ADD5EABA15F325C5005E20E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADD5EAB815F325C5005E20E7 /* JFramework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADD5EAB715F325C5005E20E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD5EAC815F325C5005E20E7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADD5EAB515F325C5005E20E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD5EACA15F325C5005E20E7 /* main.m in Sources */,
+				ADD5EACE15F325C5005E20E7 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ADD5EAC615F325C5005E20E7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ADD5EAC715F325C5005E20E7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ADD5EACF15F325C5005E20E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ADD5EAD015F325C5005E20E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ADD5EAD215F325C5005E20E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFramework/JFramework-Prefix.pch";
+				INFOPLIST_FILE = "JFramework/JFramework-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ADD5EAD315F325C5005E20E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JFramework/JFramework-Prefix.pch";
+				INFOPLIST_FILE = "JFramework/JFramework-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADD5EAB315F325C5005E20E7 /* Build configuration list for PBXProject "JFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADD5EACF15F325C5005E20E7 /* Debug */,
+				ADD5EAD015F325C5005E20E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADD5EAD115F325C5005E20E7 /* Build configuration list for PBXNativeTarget "JFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADD5EAD215F325C5005E20E7 /* Debug */,
+				ADD5EAD315F325C5005E20E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADD5EAB015F325C5005E20E7 /* Project object */;
+}
