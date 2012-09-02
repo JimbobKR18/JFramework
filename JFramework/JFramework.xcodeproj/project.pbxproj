@@ -13,6 +13,7 @@
 		ADD5EAC815F325C5005E20E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD5EAC615F325C5005E20E7 /* InfoPlist.strings */; };
 		ADD5EACA15F325C5005E20E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD5EAC915F325C5005E20E7 /* main.m */; };
 		ADD5EACE15F325C5005E20E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD5EACD15F325C5005E20E7 /* AppDelegate.m */; };
+		ADD5EAD815F32753005E20E7 /* AutoCrit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADD5EAD615F32753005E20E7 /* AutoCrit.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		ADD5EACB15F325C5005E20E7 /* JFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFramework-Prefix.pch"; sourceTree = "<group>"; };
 		ADD5EACC15F325C5005E20E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ADD5EACD15F325C5005E20E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ADD5EAD615F32753005E20E7 /* AutoCrit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AutoCrit.cpp; path = ../../Source/AutoCrit.cpp; sourceTree = "<group>"; };
+		ADD5EAD715F32753005E20E7 /* AutoCrit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCrit.h; path = ../../Source/AutoCrit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,9 +75,8 @@
 		ADD5EAC315F325C5005E20E7 /* JFramework */ = {
 			isa = PBXGroup;
 			children = (
-				ADD5EACC15F325C5005E20E7 /* AppDelegate.h */,
-				ADD5EACD15F325C5005E20E7 /* AppDelegate.m */,
-				ADD5EAC415F325C5005E20E7 /* Supporting Files */,
+				ADD5EAD515F326AB005E20E7 /* Mac */,
+				ADD5EAD415F326A1005E20E7 /* Source */,
 			);
 			path = JFramework;
 			sourceTree = "<group>";
@@ -88,6 +90,25 @@
 				ADD5EACB15F325C5005E20E7 /* JFramework-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADD5EAD415F326A1005E20E7 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5EAD615F32753005E20E7 /* AutoCrit.cpp */,
+				ADD5EAD715F32753005E20E7 /* AutoCrit.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		ADD5EAD515F326AB005E20E7 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5EAC415F325C5005E20E7 /* Supporting Files */,
+				ADD5EACD15F325C5005E20E7 /* AppDelegate.m */,
+				ADD5EACC15F325C5005E20E7 /* AppDelegate.h */,
+			);
+			name = Mac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +174,7 @@
 			files = (
 				ADD5EACA15F325C5005E20E7 /* main.m in Sources */,
 				ADD5EACE15F325C5005E20E7 /* AppDelegate.m in Sources */,
+				ADD5EAD815F32753005E20E7 /* AutoCrit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
