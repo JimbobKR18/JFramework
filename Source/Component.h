@@ -9,14 +9,25 @@
 #ifndef __JFramework__Component__
 #define __JFramework__Component__
 
-#include "Message"
+#include "GameObject.h"
+#include "Message.h"
+#include <assert.h>
+
 
 class Component
 {
 private:
+  std::string mName;
+  GameObject *mOwner;
+  
 public:
-  Component();
-  Component(Component const &aComponent);
+  Component() {assert(0);}
+  Component(std::string const &aName) : mName(aName) {}
+  Component(Component const &aComponent) : mName(aComponent.mName) {}
+  virtual ~Component();
+  
+  GameObject *GetOwner() {return mOwner;}
+  std::string GetName() {return mName;}
   
   virtual void Update() = 0;
   virtual void SendMessage(Message const &aMessage) = 0;

@@ -20,6 +20,7 @@ private:
   Message() {}
 protected:
   Message(Message const &aMessage) : mDesc(aMessage.mDesc) {}
+  virtual ~Message();
 };
 
 #endif
