@@ -29,6 +29,9 @@
 		ADD5EACD15F325C5005E20E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		ADD5EAD615F32753005E20E7 /* AutoCrit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AutoCrit.cpp; path = ../../Source/AutoCrit.cpp; sourceTree = "<group>"; };
 		ADD5EAD715F32753005E20E7 /* AutoCrit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCrit.h; path = ../../Source/AutoCrit.h; sourceTree = "<group>"; };
+		ADD5EB0515F33521005E20E7 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Component.h; path = ../../Source/Component.h; sourceTree = "<group>"; };
+		ADD5EB0715F33538005E20E7 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../../Source/Common.h; sourceTree = "<group>"; };
+		ADD5EB0815F3383F005E20E7 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Message.h; path = ../../Source/Message.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,9 @@
 			children = (
 				ADD5EAD615F32753005E20E7 /* AutoCrit.cpp */,
 				ADD5EAD715F32753005E20E7 /* AutoCrit.h */,
+				ADD5EB0515F33521005E20E7 /* Component.h */,
+				ADD5EB0715F33538005E20E7 /* Common.h */,
+				ADD5EB0815F3383F005E20E7 /* Message.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";

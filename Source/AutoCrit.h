@@ -9,7 +9,6 @@
 #ifndef __JFramework__AutoCrit__
 #define __JFramework__AutoCrit__
 
-#include <iostream>
 #include <pthread.h>
 
 int const kDurationForever = 0xffffffff;
