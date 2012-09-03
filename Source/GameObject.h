@@ -29,13 +29,13 @@ public:
   bool HasComponent(std::string const &aName);
 
   template<typename T>
-  T *GET(T)
+  T *GET()
   {
     return (T*)GetComponent(T::GetName());
   }
 
   template<typename T>
-  T *HAS(T)
+  T *HAS()
   {
     return HasComponent(T::GetName());
   }

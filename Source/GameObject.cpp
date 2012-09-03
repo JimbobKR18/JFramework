@@ -36,7 +36,10 @@ void GameObject::RemoveComponent(Component *aComponent)
   for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     if(aComponent == *it)
+    {
       mComponents.erase(it);
+      break;
+    }
   }
 }
 
