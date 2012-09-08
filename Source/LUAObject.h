@@ -11,8 +11,9 @@
 
 #include "Common.h"
 #include "LUAIncludes.h"
+#include "Component.h"
 
-class LUAObject
+class LUAObject : public Component
 {
 private:
   lua_State *mState;
@@ -25,6 +26,12 @@ public:
   
   void SetFilename(std::string const &aFilename);
   void Execute();
+  
+  void CallFunction(std::string const &aFuncName);
+  
+  void Update();
+  void SendMessage(Message const &aMessage);
+  void ReceiveMessage(Message const &aMessage);
 };
 
 #endif /* defined(__JFramework__LUAObject__) */

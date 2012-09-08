@@ -62,3 +62,11 @@ bool GameObject::HasComponent(std::string const &aName)
   }
   return false;
 }
+
+void GameObject::Update()
+{
+  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  {
+    (*it)->Update();
+  }
+}

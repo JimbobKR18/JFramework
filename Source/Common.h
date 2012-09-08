@@ -12,4 +12,6 @@
 #include <vector>
 #include <string>
 
+std::string const RelativePath(std::string const &aFileName);
+
 #endif

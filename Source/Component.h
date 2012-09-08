@@ -13,7 +13,6 @@
 #include "Message.h"
 #include <assert.h>
 
-
 class Component
 {
 private:
@@ -24,7 +23,7 @@ public:
   Component() {assert(0);}
   Component(std::string const &aName) : mName(aName) {}
   Component(Component const &aComponent) : mName(aComponent.mName) {}
-  virtual ~Component();
+  virtual ~Component() {}
   
   GameObject *GetOwner() {return mOwner;}
   std::string GetName() {return mName;}

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD1A3EDE15FC11C50093DAE2 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD1A3EDD15FC11C50093DAE2 /* Common.cpp */; };
+		AD4AB4D015FC0D4A0004499F /* PhysicsObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB4CE15FC0D4A0004499F /* PhysicsObject.cpp */; };
 		ADA1C64B15F3D5E70004914B /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADA1C64915F3D5E70004914B /* GameObject.cpp */; };
 		ADACB41215F473F10031D8EA /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADACB3B215F473F10031D8EA /* b2BroadPhase.cpp */; };
 		ADACB41315F473F10031D8EA /* b2CollideCircle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADACB3B415F473F10031D8EA /* b2CollideCircle.cpp */; };
@@ -96,6 +98,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD1A3EDD15FC11C50093DAE2 /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Common.cpp; path = ../../Source/Common.cpp; sourceTree = "<group>"; };
+		AD4AB4CE15FC0D4A0004499F /* PhysicsObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhysicsObject.cpp; path = ../../Source/PhysicsObject.cpp; sourceTree = "<group>"; };
+		AD4AB4CF15FC0D4A0004499F /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsObject.h; path = ../../Source/PhysicsObject.h; sourceTree = "<group>"; };
 		ADA1C64915F3D5E70004914B /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameObject.cpp; path = ../../Source/GameObject.cpp; sourceTree = "<group>"; };
 		ADA1C64A15F3D5E70004914B /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameObject.h; path = ../../Source/GameObject.h; sourceTree = "<group>"; };
 		ADACB3B015F473F10031D8EA /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
@@ -280,6 +285,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD4AB4CC15FC0D2C0004499F /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				ADF57F3515F5C29000DDBFBC /* LUAObject.cpp */,
+				ADF57F3615F5C29000DDBFBC /* LUAObject.h */,
+				AD4AB4CE15FC0D4A0004499F /* PhysicsObject.cpp */,
+				AD4AB4CF15FC0D4A0004499F /* PhysicsObject.h */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		ADA1C64615F3D5A60004914B /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +305,7 @@
 				ADD5EB0815F3383F005E20E7 /* Message.h */,
 				ADA1C64915F3D5E70004914B /* GameObject.cpp */,
 				ADA1C64A15F3D5E70004914B /* GameObject.h */,
+				AD1A3EDD15FC11C50093DAE2 /* Common.cpp */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -305,10 +322,9 @@
 		ADA3727F15F5BA0D00C03A2A /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				AD4AB4CC15FC0D2C0004499F /* Objects */,
 				ADF57F3815F5C2ED00DDBFBC /* LUAIncludes.h */,
 				ADF57ED615F5BE2900DDBFBC /* LUA */,
-				ADF57F3515F5C29000DDBFBC /* LUAObject.cpp */,
-				ADF57F3615F5C29000DDBFBC /* LUAObject.h */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -759,6 +775,8 @@
 				ADF57F3215F5BE2900DDBFBC /* lvm.c in Sources */,
 				ADF57F3315F5BE2900DDBFBC /* lzio.c in Sources */,
 				ADF57F3715F5C29000DDBFBC /* LUAObject.cpp in Sources */,
+				AD4AB4D015FC0D4A0004499F /* PhysicsObject.cpp in Sources */,
+				AD1A3EDE15FC11C50093DAE2 /* Common.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
