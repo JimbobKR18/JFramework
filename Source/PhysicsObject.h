@@ -15,10 +15,20 @@
 class PhysicsObject : public Component
 {
 private:
-public:
-  PhysicsObject() : Component("PhysicsObject") {}
+  b2Body *mBody;
+  std::vector<b2Joint *> mJoints;
   
+<<<<<<< HEAD
   virtual ~PhysicsObject() {}
+=======
+public:
+  PhysicsObject() : Component("PhysicsObject")
+  {
+    //mBody = b2World::CreateBody()
+  }
+  virtual ~PhysicsObject();
+  
+>>>>>>> Forgot some stuff
   void Update();
   void SendMessage(Message const &aMessage);
   void ReceiveMessage(Message const &aMessage);
