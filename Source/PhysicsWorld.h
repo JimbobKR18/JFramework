@@ -9,25 +9,37 @@
 #ifndef __JFramework__PhysicsWorld__
 #define __JFramework__PhysicsWorld__
 
+#include "Common.h"
 #include "Box2D/Box2D.h"
+#include "Manager.h"
 
-class PhysicsWorld
+class PhysicsObject;
+
+class PhysicsWorld : public Manager
 {
 private:
   b2World *mWorld;
   b2Vec2 mGravity;
   bool mDoSleep;
   
-public:
-  PhysicsWorld()
-  {
-    mGravity = b2Vec2(0.0f, -10.0f);
-    mDoSleep = true;
-    
-    mWorld = new b2World(mGravity);
-  }
+  std::vector<PhysicsObject *> mObjects;
 
-  b2World *GetWorld() {return mWorld;}
+public:
+  PhysicsWorld();
+  virtual ~PhysicsWorld();
+
+  PhysicsObject *CreateObject();
+  void DeleteObject(PhysicsObject *aObject);
+  void ClearObjects();
+
+  b2World *GetWorld();
+
+  virtual void Update();
+  virtual void SendMessage(Message &aMessage);
+
+private:
+  void AddObject(PhysicsObject *aObject);
+  void RemoveObject(PhysicsObject *aObject);
 };
 
 #endif /* defined(__JFramework__PhysicsWorld__) */

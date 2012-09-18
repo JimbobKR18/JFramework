@@ -20,14 +20,11 @@ private:
   b2BodyDef mBodyDef;
   PhysicsWorld *mWorld;
   std::vector<b2Joint *> mJoints;
+  std::vector<b2JointDef *> mJointDefs;
   
 public:
-  PhysicsObject() : Component("PhysicsObject")
-  {
-    mBody = mWorld->GetWorld()->CreateBody(&mBodyDef);
-  }
-
-  virtual ~PhysicsObject() {}
+  PhysicsObject(PhysicsWorld *aWorld);
+  virtual ~PhysicsObject();
   
   void Update();
   void SendMessage(Message const &aMessage);
