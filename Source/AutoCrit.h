@@ -14,6 +14,16 @@
 int const kDurationForever = 0xffffffff;
 int const kDurationImmediate = 0;
 
+class Thread
+{
+private:
+	pthread_t mThread;
+public:
+	Thread(void*(*func)(void *), void *args);
+	Thread(Thread const &rhs);
+	~Thread();
+};
+
 class CriticalSection
 {
 private:

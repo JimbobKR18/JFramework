@@ -10,7 +10,7 @@
 #define __JFramework__LUAObject__
 
 #include "Common.h"
-#include "LUAIncludes.h"
+#include "LuaIncludes.h"
 #include "Component.h"
 
 class LUAObject : public Component

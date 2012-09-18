@@ -7,3 +7,18 @@
 //
 
 #include "PhysicsObject.h"
+
+void PhysicsObject::Update()
+{
+
+}
+
+void PhysicsObject::SendMessage(Message const &aMessage)
+{
+
+}
+
+void PhysicsObject::ReceiveMessage(Message const &aMessage)
+{
+
+}

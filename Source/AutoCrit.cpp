@@ -9,6 +9,20 @@
 #include "AutoCrit.h"
 #include <assert.h>
 
+Thread::Thread(void*(*func)(void *), void *args)
+{
+	pthread_create(&mThread, NULL, func, args);
+}
+
+Thread::Thread(Thread const &rhs)
+{
+}
+
+Thread::~Thread()
+{
+	pthread_exit(&mThread);
+}
+
 CriticalSection::CriticalSection()
 {
 }

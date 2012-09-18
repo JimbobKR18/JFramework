@@ -18,7 +18,7 @@ private:
 public:
   PhysicsObject() : Component("PhysicsObject") {}
   
-  virtual ~PhysicsObject();
+  virtual ~PhysicsObject() {}
   void Update();
   void SendMessage(Message const &aMessage);
   void ReceiveMessage(Message const &aMessage);
