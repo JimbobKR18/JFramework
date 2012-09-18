@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AD1A3EDE15FC11C50093DAE2 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD1A3EDD15FC11C50093DAE2 /* Common.cpp */; };
+		AD1A3EE215FC29460093DAE2 /* PhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD1A3EE015FC29460093DAE2 /* PhysicsWorld.cpp */; };
 		AD4AB4D015FC0D4A0004499F /* PhysicsObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB4CE15FC0D4A0004499F /* PhysicsObject.cpp */; };
 		ADA1C64B15F3D5E70004914B /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADA1C64915F3D5E70004914B /* GameObject.cpp */; };
 		ADACB41215F473F10031D8EA /* b2BroadPhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADACB3B215F473F10031D8EA /* b2BroadPhase.cpp */; };
@@ -99,6 +100,8 @@
 
 /* Begin PBXFileReference section */
 		AD1A3EDD15FC11C50093DAE2 /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Common.cpp; path = ../../Source/Common.cpp; sourceTree = "<group>"; };
+		AD1A3EE015FC29460093DAE2 /* PhysicsWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhysicsWorld.cpp; path = ../../Source/PhysicsWorld.cpp; sourceTree = "<group>"; };
+		AD1A3EE115FC29460093DAE2 /* PhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsWorld.h; path = ../../Source/PhysicsWorld.h; sourceTree = "<group>"; };
 		AD4AB4CE15FC0D4A0004499F /* PhysicsObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PhysicsObject.cpp; path = ../../Source/PhysicsObject.cpp; sourceTree = "<group>"; };
 		AD4AB4CF15FC0D4A0004499F /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsObject.h; path = ../../Source/PhysicsObject.h; sourceTree = "<group>"; };
 		ADA1C64915F3D5E70004914B /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameObject.cpp; path = ../../Source/GameObject.cpp; sourceTree = "<group>"; };
@@ -340,6 +343,8 @@
 			isa = PBXGroup;
 			children = (
 				ADACB3AF15F473F10031D8EA /* Box2D */,
+				AD1A3EE015FC29460093DAE2 /* PhysicsWorld.cpp */,
+				AD1A3EE115FC29460093DAE2 /* PhysicsWorld.h */,
 			);
 			name = Physics;
 			sourceTree = "<group>";
@@ -777,6 +782,7 @@
 				ADF57F3715F5C29000DDBFBC /* LUAObject.cpp in Sources */,
 				AD4AB4D015FC0D4A0004499F /* PhysicsObject.cpp in Sources */,
 				AD1A3EDE15FC11C50093DAE2 /* Common.cpp in Sources */,
+				AD1A3EE215FC29460093DAE2 /* PhysicsWorld.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
