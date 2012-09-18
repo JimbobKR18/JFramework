@@ -26,6 +26,8 @@ public:
     
     mWorld = new b2World(mGravity);
   }
+
+  b2World *GetWorld() {return mWorld;}
 };
 
 #endif /* defined(__JFramework__PhysicsWorld__) */
