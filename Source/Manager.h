@@ -16,7 +16,7 @@ public:
 	std::string GetName() {return mName;}
 
 	virtual void Update() = 0;
-	virtual void SendMessage() = 0;
+	virtual void SendMessage(Message const &aMessage) = 0;
 };
 
 #endif

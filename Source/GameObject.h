@@ -10,6 +10,7 @@
 #define __JFramework__GameObject__
 
 #include "Common.h"
+#include "Message.h"
 
 class Component;
 
@@ -19,6 +20,7 @@ private:
   std::vector<Component*> mComponents;
 public:
   GameObject();
+  GameObject(std::string const &aFilename);
   GameObject(GameObject const &aGameObject);
   ~GameObject();
   
@@ -41,6 +43,7 @@ public:
   }
 
   void Update();
+  void ReceiveMessage(Message const &aMessage);
 };
 
 #endif /* defined(__JFramework__GameObject__) */

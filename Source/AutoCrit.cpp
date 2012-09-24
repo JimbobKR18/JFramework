@@ -14,7 +14,7 @@ Thread::Thread(void*(*func)(void *), void *args)
 	pthread_create(&mThread, NULL, func, args);
 }
 
-Thread::Thread(Thread const &rhs)
+Thread::Thread(Thread const &rhs) : mThread(rhs.mThread)
 {
 }
 

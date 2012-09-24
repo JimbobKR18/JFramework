@@ -8,20 +8,20 @@
 
 #include "LUAObject.h"
 
-LUAObject::LUAObject()
+LUAObject::LUAObject() : Component("LUAObject")
 {
   mState = luaL_newstate();
   luaL_openlibs(mState);
 }
 
-LUAObject::LUAObject(std::string const &aFilename) : mFilename(aFilename)
+LUAObject::LUAObject(std::string const &aFilename) : Component("LUAObject"),  mFilename(aFilename)
 {
   mState = luaL_newstate();
   luaL_openlibs(mState);
   luaL_dofile(mState, mFilename.c_str());
 }
 
-LUAObject::LUAObject(LUAObject const &aObject) : mFilename(aObject.mFilename)
+LUAObject::LUAObject(LUAObject const &aObject) : Component("LUAObject"), mFilename(aObject.mFilename)
 {
   mState = luaL_newstate();
   luaL_openlibs(mState);

@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include <cassert>
 
 std::string const RelativePath(std::string const &aFileName);
 

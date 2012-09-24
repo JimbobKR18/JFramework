@@ -35,7 +35,7 @@ public:
   b2World *GetWorld();
 
   virtual void Update();
-  virtual void SendMessage(Message &aMessage);
+  virtual void SendMessage(Message const &aMessage);
 
 private:
   void AddObject(PhysicsObject *aObject);

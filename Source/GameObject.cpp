@@ -13,6 +13,11 @@ GameObject::GameObject()
 {
 }
 
+GameObject::GameObject(std::string const &aFilename)
+{
+
+}
+
 // Sounds like a bad idea right now...
 GameObject::GameObject(GameObject const &aGameObject) : mComponents(aGameObject.mComponents)
 {
@@ -68,5 +73,13 @@ void GameObject::Update()
   for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     (*it)->Update();
+  }
+}
+
+void GameObject::ReceiveMessage(Message const &aMessage)
+{	
+  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  {
+    (*it)->ReceiveMessage(aMessage);
   }
 }

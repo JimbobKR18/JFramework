@@ -2,12 +2,12 @@
 
 int main(int argc, char *argv[])
 {
-	GameApp *gameApp = new GameApp();
+	gGameApp = new GameApp();
 	while(1)
 	{
-		gameApp->Update();
+		gGameApp->Update();
 	}
-	delete gameApp;
+	delete gGameApp;
 
 	return 0;
 }

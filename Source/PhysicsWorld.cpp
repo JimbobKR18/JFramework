@@ -37,6 +37,10 @@ void PhysicsWorld::DeleteObject(PhysicsObject *aObject)
 
 void PhysicsWorld::ClearObjects()
 {
+	for(std::vector<PhysicsObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	{
+		delete *it;
+	}
 	mObjects.clear();
 }
 
@@ -53,7 +57,7 @@ void PhysicsWorld::Update()
 	}
 }
 
-void PhysicsWorld::SendMessage(Message &aMessage)
+void PhysicsWorld::SendMessage(Message const &aMessage)
 {
 	for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
