@@ -1,6 +1,6 @@
 #include "GameApp.h"
 
-int main(int argc, char *argv[])
+int main()
 {
 	gGameApp = new GameApp();
 	while(1)

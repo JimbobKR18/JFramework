@@ -1,11 +1,15 @@
 #include "GameApp.h"
 #include "PhysicsWorld.h"
+#include "GraphicsManager.h"
 
 GameApp *gGameApp = NULL;
 
 GameApp::GameApp()
 {
-	AddManager(new PhysicsWorld());	
+  SDL_Init(SDL_INIT_EVERYTHING);
+
+	AddManager(new PhysicsWorld());
+	AddManager(new GraphicsManager());
 }
 
 GameApp::~GameApp()
@@ -16,6 +20,8 @@ GameApp::~GameApp()
 	}
 
 	mManagers.clear();
+
+	SDL_Quit();
 }
 
 void GameApp::Update()
