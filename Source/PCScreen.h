@@ -15,7 +15,7 @@ class PCScreen : public Screen
     PCScreen(int aW, int aH);
     virtual ~PCScreen();
 
-    void Draw();
+    void Draw(std::vector<Surface*> const &aObjects);
     void ChangeSize(int aW, int aH);
 };
 

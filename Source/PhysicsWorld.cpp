@@ -11,15 +11,10 @@
 
 PhysicsWorld::PhysicsWorld() : Manager("PhysicsWorld")
 {
-	mGravity = b2Vec2(0.0f, -10.0f);
-	mDoSleep = true;
-
-	mWorld = new b2World(mGravity);
 }
 
 PhysicsWorld::~PhysicsWorld()
 {
-	delete mWorld;
 }
 
 PhysicsObject *PhysicsWorld::CreateObject()
@@ -42,11 +37,6 @@ void PhysicsWorld::ClearObjects()
 		delete *it;
 	}
 	mObjects.clear();
-}
-
-b2World *PhysicsWorld::GetWorld()
-{
-	return mWorld;
 }
 
 void PhysicsWorld::Update()

@@ -10,7 +10,6 @@
 #define __JFramework__PhysicsWorld__
 
 #include "Common.h"
-#include "Box2D/Box2D.h"
 #include "Manager.h"
 
 class PhysicsObject;
@@ -18,10 +17,6 @@ class PhysicsObject;
 class PhysicsWorld : public Manager
 {
 private:
-  b2World *mWorld;
-  b2Vec2 mGravity;
-  bool mDoSleep;
-  
   std::vector<PhysicsObject *> mObjects;
 
 public:
@@ -31,8 +26,6 @@ public:
   PhysicsObject *CreateObject();
   void DeleteObject(PhysicsObject *aObject);
   void ClearObjects();
-
-  b2World *GetWorld();
 
   virtual void Update();
   virtual void SendMessage(Message const &aMessage);

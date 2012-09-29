@@ -2,6 +2,7 @@
 #define __JFramework_Screen_h_
 
 #include <SDL/SDL.h>
+#include "Surface.h"
 
 class Screen
 {
@@ -17,7 +18,7 @@ class Screen
     int GetHeight();
 
     virtual void ChangeSize(int aW, int aH) = 0;
-    virtual void Draw() = 0;
+    virtual void Draw(std::vector<Surface*> const &aObjects) = 0;
 };
 
 #endif

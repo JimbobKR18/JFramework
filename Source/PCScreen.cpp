@@ -14,7 +14,7 @@ PCScreen::~PCScreen()
 {
 }
 
-void PCScreen::Draw()
+void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();

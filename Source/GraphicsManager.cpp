@@ -18,7 +18,7 @@ GraphicsManager::~GraphicsManager()
 
 void GraphicsManager::Update()
 {
-  mScreen->Draw();
+  mScreen->Draw(mSurfaces);
 }
 
 void GraphicsManager::SendMessage(Message const &aMessage)
@@ -36,13 +36,23 @@ Surface *GraphicsManager::CreateSurface()
 
 void GraphicsManager::DeleteSurface(Surface *aSurface)
 {
+  RemoveSurface(aSurface);
 	delete aSurface;
 }
 
 void GraphicsManager::AddSurface(Surface *aSurface)
 {
+  mSurfaces.push_back(aSurface);
 }
 
 void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
+  for(std::vector<Surface *>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+	{
+		if(*it == aSurface)
+		{
+			mSurfaces.erase(it);
+			break;
+		}
+	}
 }

@@ -10,12 +10,10 @@
 
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld)
 {
-	mBody = mWorld->GetWorld()->CreateBody(&mBodyDef);
 }
 
 PhysicsObject::~PhysicsObject()
 {
-	mWorld->GetWorld()->DestroyBody(mBody);
 }
 
 void PhysicsObject::Update()
