@@ -41,10 +41,6 @@ void PhysicsWorld::ClearObjects()
 
 void PhysicsWorld::Update()
 {
-	for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
-	{
-		(*it)->Update();
-	}
 }
 
 void PhysicsWorld::SendMessage(Message const &aMessage)

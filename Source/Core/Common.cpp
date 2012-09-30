@@ -14,3 +14,16 @@ std::string const RelativePath(std::string const &aFileName)
   ret.append(aFileName);
   return ret;
 }
+
+long GetTickCount()
+{
+	struct timespec now;
+	clock_gettime(CLOCK_MONOTONIC, &now);
+	return now.tv_sec * 1000000000LL + now.tv_nsec;
+}
+
+unsigned timeGetTime()
+{
+	return GetTickCount();
+}
+

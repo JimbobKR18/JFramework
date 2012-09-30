@@ -11,6 +11,7 @@
 
 #include "Component.h"
 #include "PhysicsWorld.h"
+#include "Math.h"
 
 class PhysicsObject : public Component
 {
@@ -25,6 +26,9 @@ public:
   void Update();
   void SendMessage(Message const &aMessage);
   void ReceiveMessage(Message const &aMessage);
+
+  void AddForce(Vector3 const &rhs);
+  void SetVelocity(Vector3 const &rhs);
 };
 
 #endif /* defined(__JFramework__PhysicsObject__) */

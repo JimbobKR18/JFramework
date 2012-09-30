@@ -8,13 +8,19 @@ class GameApp
 {
 private:
 	std::vector<Manager*> mManagers;
+	long mLastFrame;
+	float mDT;
 public:
 	GameApp();
 	~GameApp();
+
+	float GetDT() const;
+
+	void AppStep();
 	void Update();
 
 	void AddManager(Manager* aManager);
-	
+
 	Manager* GetManager(std::string const &aName);
 
 	template<typename T>

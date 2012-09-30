@@ -15,7 +15,6 @@ GameObject::GameObject()
 
 GameObject::GameObject(std::string const &aFilename)
 {
-
 }
 
 // Sounds like a bad idea right now...
@@ -30,7 +29,7 @@ GameObject::~GameObject()
     delete *it;
   }
 }
-  
+
 void GameObject::AddComponent(Component*aComponent)
 {
   mComponents.push_back(aComponent);
@@ -77,7 +76,7 @@ void GameObject::Update()
 }
 
 void GameObject::ReceiveMessage(Message const &aMessage)
-{	
+{
   for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     (*it)->ReceiveMessage(aMessage);

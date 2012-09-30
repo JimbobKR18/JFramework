@@ -8,6 +8,8 @@ GameApp::GameApp()
 {
   SDL_Init(SDL_INIT_EVERYTHING);
 
+  mLastFrame = timeGetTime();
+
 	AddManager(new PhysicsWorld());
 	AddManager(new GraphicsManager());
 }
@@ -24,8 +26,22 @@ GameApp::~GameApp()
 	SDL_Quit();
 }
 
+float GameApp::GetDT() const
+{
+  return mDT;
+}
+
+void GameApp::AppStep()
+{
+  long currentTime = timeGetTime();
+  mDT = currentTime - mLastFrame;
+  mLastFrame = currentTime;
+}
+
 void GameApp::Update()
 {
+  AppStep();
+
 	for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
 	{
 		(*it)->Update();
