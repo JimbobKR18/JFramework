@@ -1,4 +1,5 @@
 #include "GameApp.h"
+#include "TextParser.h"
 
 int main()
 {
