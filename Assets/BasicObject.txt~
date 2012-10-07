@@ -1,0 +1,23 @@
+Start
+{
+	PhysicsObject
+	{
+		Mass = 50
+	}
+	Surface
+	{
+		TextureName = Blank
+	}
+	Transform
+	{
+		PositionX = 0
+		PositionY = 0
+		PositionZ = 0
+		ScaleX = 0
+		ScaleY = 0
+		ScaleZ = 0
+		SizeX = 0
+		SizeY = 0
+		SizeZ = 0
+	}
+}
