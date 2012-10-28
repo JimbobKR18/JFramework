@@ -14,7 +14,7 @@ class Parser
 
     std::string GetFilename() const;
 
-    virtual std::string Find(std::string const &aElement) = 0;
+    virtual bool Find(std::string const &aElement) = 0;
     virtual std::string Find(std::string const &aRoot, std::string const &aElement) = 0;
     virtual void Parse() = 0;
 };

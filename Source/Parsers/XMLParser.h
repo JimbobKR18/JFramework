@@ -12,7 +12,7 @@ public:
   XMLParser(std::string const &aFilename);
   ~XMLParser();
 
-  std::string Find(std::string const &aElement);
+  bool Find(std::string const &aElement);
   std::string Find(std::string const &aRoot, std::string const &aElement);
   void Parse();
 };

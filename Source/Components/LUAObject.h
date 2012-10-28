@@ -32,6 +32,7 @@ public:
   void Update();
   void SendMessage(Message const &aMessage);
   void ReceiveMessage(Message const &aMessage);
+  static std::string GetName() {return "LUAObject";}
 };
 
 #endif /* defined(__JFramework__LUAObject__) */

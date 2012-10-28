@@ -11,8 +11,16 @@ struct Root
   std::vector<Root*> mChildren;
   Root *mParent;
 
-  Root Search(std::string const &aValue) const;
+  Root const *Search(std::string const &aValue) const;
   ~Root();
+
+  void operator=(Root const &rhs)
+  {
+	  mValue = rhs.mValue;
+	  mName = rhs.mName;
+	  mChildren = rhs.mChildren;
+	  mParent = rhs.mParent;
+  }
 };
 
 class TextParser : public Parser
@@ -24,7 +32,7 @@ class TextParser : public Parser
     TextParser(std::string const &aFilename);
     ~TextParser();
 
-    std::string Find(std::string const &aElement);
+    bool Find(std::string const &aElement);
     std::string Find(std::string const &aRoot, std::string const &aElement);
     void Parse();
 };

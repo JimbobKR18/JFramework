@@ -1,16 +1,23 @@
 #include "TextParser.h"
 
-Root Root::Search(std::string const &aValue) const
+Root const *Root::Search(std::string const &aValue) const
 {
   if(mName == aValue)
-    return *this;
+    return this;
   else
   {
     for(std::vector<Root*>::const_iterator it = mChildren.begin(); it != mChildren.end(); ++it)
-      return (*it)->Search(aValue);
+    {
+      Root const *ret = (*it)->Search(aValue);
+      if(ret)
+      {
+    	  if(ret->mName == aValue)
+    		  return ret;
+      }
+    }
   }
 
-  return Root();
+  return NULL;
 }
 
 Root::~Root()
@@ -32,16 +39,16 @@ TextParser::~TextParser()
 
 }
 
-std::string TextParser::Find(std::string const &aElement)
+bool TextParser::Find(std::string const &aElement)
 {
-  Root value = mDictionary->Search(aElement);
-  return value.mValue;
+  Root const *value = mDictionary->Search(aElement);
+  return value->mName.length() > 0;
 }
 std::string TextParser::Find(std::string const &aRoot, std::string const &aElement)
 {
-  Root node = mDictionary->Search(aRoot);
-  Root value = node.Search(aElement);
-  return value.mValue;
+  Root const *node = mDictionary->Search(aRoot);
+  Root const *value = node->Search(aElement);
+  return value->mValue;
 }
 void TextParser::Parse()
 {

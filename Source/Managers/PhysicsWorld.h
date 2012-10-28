@@ -11,6 +11,9 @@
 
 #include "Common.h"
 #include "Manager.h"
+#include "Math.h"
+#include "ForceRegistry.h"
+#include "GravityGenerator.h"
 
 class PhysicsObject;
 
@@ -18,9 +21,11 @@ class PhysicsWorld : public Manager
 {
 private:
   std::vector<PhysicsObject *> mObjects;
+  ForceRegistry mRegistry;
+  GravityGenerator mGravity;
 
 public:
-  PhysicsWorld();
+  PhysicsWorld(GameApp *aApp);
   virtual ~PhysicsWorld();
 
   PhysicsObject *CreateObject();
@@ -29,6 +34,10 @@ public:
 
   virtual void Update();
   virtual void SendMessage(Message const &aMessage);
+  static std::string GetName() {return "PhysicsWorld";}
+
+  void RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
 
 private:
   void AddObject(PhysicsObject *aObject);

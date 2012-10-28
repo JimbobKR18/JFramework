@@ -5,7 +5,7 @@
   #include "PCScreen.h"
 #endif
 
-GraphicsManager::GraphicsManager() : Manager("GraphicsManager")
+GraphicsManager::GraphicsManager(GameApp *aApp) : Manager(aApp, "GraphicsManager")
 {
 #if !defined(IOS) && !defined(ANDROID)
   mScreen = new PCScreen(640, 480);
@@ -37,7 +37,7 @@ Surface *GraphicsManager::CreateSurface()
 void GraphicsManager::DeleteSurface(Surface *aSurface)
 {
   RemoveSurface(aSurface);
-	delete aSurface;
+  delete aSurface;
 }
 
 void GraphicsManager::AddSurface(Surface *aSurface)

@@ -11,11 +11,12 @@ private:
 	std::vector<Surface *> mSurfaces;
 	Screen *mScreen;
 public:
-	GraphicsManager();
+	GraphicsManager(GameApp *aApp);
 	~GraphicsManager();
 
 	void Update();
 	void SendMessage(Message const &aMessage);
+	static std::string GetName() {return "GraphicsManager";}
 
 	Surface *CreateSurface();
 	void DeleteSurface(Surface *aSurface);

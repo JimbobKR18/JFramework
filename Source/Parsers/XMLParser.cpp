@@ -9,11 +9,11 @@ XMLParser::~XMLParser()
 {
 }
 
-std::string XMLParser::Find(std::string const &aElement)
+bool XMLParser::Find(std::string const &aElement)
 {
   tinyxml2::XMLText *text = mDoc.FirstChildElement(aElement.c_str())->ToText();
   std::string ret = text->Value();
-  return ret;
+  return ret.length() > 0;
 }
 
 std::string XMLParser::Find(std::string const &aRoot, std::string const &aElement)

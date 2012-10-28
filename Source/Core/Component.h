@@ -27,11 +27,12 @@ public:
 
   GameObject *GetOwner() {return mOwner;}
   void SetOwner(GameObject *aOwner) {mOwner = aOwner;}
-  std::string GetName() {return mName;}
+  std::string GetDefinedName() {return mName;}
 
   virtual void Update() = 0;
   virtual void SendMessage(Message const &aMessage) = 0;
   virtual void ReceiveMessage(Message const &aMessage) = 0;
+  static std::string GetName() {return "Component";}
 };
 
 #endif /* defined(__JFramework__Component__) */

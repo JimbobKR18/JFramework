@@ -10,14 +10,14 @@ Start
 	}
 	Transform
 	{
-		PositionX = 0
-		PositionY = 0
+		PositionX = 50
+		PositionY = 150
 		PositionZ = 0
-		ScaleX = 0
-		ScaleY = 0
-		ScaleZ = 0
-		SizeX = 0
-		SizeY = 0
+		ScaleX = 1
+		ScaleY = 1
+		ScaleZ = 1
+		SizeX = 50
+		SizeY = 50
 		SizeZ = 0
 	}
 }

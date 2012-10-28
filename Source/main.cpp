@@ -3,12 +3,12 @@
 
 int main()
 {
-	gGameApp = new GameApp();
+	GameApp *app = new GameApp();
 	while(1)
 	{
-		gGameApp->Update();
+		app->Update();
 	}
-	delete gGameApp;
+	delete app;
 
 	return 0;
 }

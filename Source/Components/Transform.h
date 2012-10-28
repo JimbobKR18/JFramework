@@ -23,6 +23,11 @@ class Transform : public Component
 
     Vector3 GetSize() const;
     void SetSize(Vector3 const &aSize);
+
+    void Update() {}
+    void SendMessage(Message const &aMessage) {}
+    void ReceiveMessage(Message const &aMessage) {}
+    static std::string GetName() {return "Transform";}
 };
 
 #endif

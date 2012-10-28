@@ -30,8 +30,9 @@ GameObject::~GameObject()
   }
 }
 
-void GameObject::AddComponent(Component*aComponent)
+void GameObject::AddComponent(Component *aComponent)
 {
+  aComponent->SetOwner(this);
   mComponents.push_back(aComponent);
 }
 
@@ -51,7 +52,7 @@ Component *GameObject::GetComponent(std::string const &aName)
 {
   for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
   {
-    if((*it)->GetName() == aName)
+    if((*it)->GetDefinedName() == aName)
       return *it;
   }
   return NULL;
@@ -61,7 +62,7 @@ bool GameObject::HasComponent(std::string const &aName)
 {
   for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
   {
-    if((*it)->GetName() == aName)
+    if((*it)->GetDefinedName() == aName)
       return true;
   }
   return false;

@@ -15,15 +15,21 @@ std::string const RelativePath(std::string const &aFileName)
   return ret;
 }
 
-long GetTickCount()
+float GetTickCount()
 {
 	struct timespec now;
 	clock_gettime(CLOCK_MONOTONIC, &now);
-	return now.tv_sec * 1000000000LL + now.tv_nsec;
+	return now.tv_sec + (now.tv_nsec / (1000.0f * 1000.0f * 1000.0f));
 }
 
-unsigned timeGetTime()
+float timeGetTime()
 {
 	return GetTickCount();
+}
+
+int StringToInt(std::string const &value)
+{
+	int ret = atoi(value.c_str());
+	return ret;
 }
 

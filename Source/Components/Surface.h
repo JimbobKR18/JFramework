@@ -13,6 +13,7 @@ public:
 	void Update();
 	void SendMessage(Message const &aMessage);
 	void ReceiveMessage(Message const &aMessage);
+	static std::string GetName() {return "Surface";}
 };
 
 #endif

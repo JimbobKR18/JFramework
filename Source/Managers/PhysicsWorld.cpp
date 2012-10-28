@@ -9,7 +9,7 @@
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
 
-PhysicsWorld::PhysicsWorld() : Manager("PhysicsWorld")
+PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld"), mGravity(Vector3(0, -20.0f, 0))
 {
 }
 
@@ -41,6 +41,7 @@ void PhysicsWorld::ClearObjects()
 
 void PhysicsWorld::Update()
 {
+	mRegistry.Update();
 }
 
 void PhysicsWorld::SendMessage(Message const &aMessage)
@@ -51,9 +52,20 @@ void PhysicsWorld::SendMessage(Message const &aMessage)
 	}
 }
 
+void PhysicsWorld::RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator)
+{
+	mRegistry.Add(aObject, aGenerator);
+}
+
+void PhysicsWorld::UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator)
+{
+	mRegistry.Remove(aObject, aGenerator);
+}
+
 void PhysicsWorld::AddObject(PhysicsObject *aObject)
 {
 	mObjects.push_back(aObject);
+	RegisterForce(aObject, &mGravity);
 }
 
 void PhysicsWorld::RemoveObject(PhysicsObject *aObject)

@@ -23,8 +23,8 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
   {
     GameObject *owner = (*it)->GetOwner();
-    Vector3 position = ((Transform*)owner->GetComponent("Transform"))->GetPosition();
-    Vector3 size = ((Transform*)owner->GetComponent("Transform"))->GetSize();
+    Vector3 position = owner->GET<Transform>()->GetPosition();
+    Vector3 size = owner->GET<Transform>()->GetSize();
 
     glBegin(GL_QUADS);
       glColor3f(1, 0, 0); glVertex3f(position.x - size.x, position.y - size.y, 0);

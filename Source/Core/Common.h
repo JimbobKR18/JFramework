@@ -12,9 +12,12 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <cstdlib>
 
 std::string const RelativePath(std::string const &aFileName);
-long GetTickCount();
-unsigned timeGetTime();
+float GetTickCount();
+float timeGetTime();
+
+int StringToInt(std::string const &value);
 
 #endif

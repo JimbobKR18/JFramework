@@ -2,13 +2,14 @@
 #define __JFramework_GameApp_H_
 
 #include "Common.h"
-#include "Manager.h"
+
+class Manager;
 
 class GameApp
 {
 private:
 	std::vector<Manager*> mManagers;
-	long mLastFrame;
+	float mLastFrame;
 	float mDT;
 public:
 	GameApp();
@@ -24,9 +25,7 @@ public:
 	Manager* GetManager(std::string const &aName);
 
 	template<typename T>
-	T* GET() {return GetManager(T::GetName());}
+	T* GET() {return (T*)GetManager(T::GetName());}
 };
-
-extern GameApp *gGameApp;
 
 #endif

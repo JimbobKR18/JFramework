@@ -25,6 +25,7 @@
 								<option id="gnu.cpp.compiler.exe.debug.option.debugging.level.176356272" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1944934196" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="../../Source"/>
+									<listOptionValue builtIn="false" value="../../Source/Physics"/>
 									<listOptionValue builtIn="false" value="../../Source/Components"/>
 									<listOptionValue builtIn="false" value="../../Source/Managers"/>
 									<listOptionValue builtIn="false" value="../../Source/Core"/>
@@ -48,7 +49,6 @@
 								</option>
 								<option id="gnu.cpp.link.option.libs.1190564936" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="rt"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="GL"/>
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="GLU"/>
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="SDL"/>
 								</option>
@@ -63,6 +63,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="cdt.managedbuild.config.gnu.exe.debug.2077958269.780413226" name="Resolver.h" rcbsApplicability="disable" resourcePath="Source/Physics/Resolver.h" toolsToInvoke=""/>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

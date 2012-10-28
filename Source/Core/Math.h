@@ -1,6 +1,8 @@
 #ifndef __JFramework_Math_h_
 #define __JFramework_Math_h_
 
+#include <math.h>
+
 struct Vector3
 {
   float x, y, z;

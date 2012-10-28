@@ -1,6 +1,8 @@
 #include "GameApp.h"
+#include "Manager.h"
 #include "PhysicsWorld.h"
 #include "GraphicsManager.h"
+#include "ObjectManager.h"
 
 GameApp *gGameApp = NULL;
 
@@ -10,8 +12,11 @@ GameApp::GameApp()
 
   mLastFrame = timeGetTime();
 
-	AddManager(new PhysicsWorld());
-	AddManager(new GraphicsManager());
+  AddManager(new ObjectManager(this));
+  AddManager(new PhysicsWorld(this));
+  AddManager(new GraphicsManager(this));
+
+  GET<ObjectManager>()->CreateObject("../Assets/BasicObject.txt");
 }
 
 GameApp::~GameApp()
@@ -33,7 +38,7 @@ float GameApp::GetDT() const
 
 void GameApp::AppStep()
 {
-  long currentTime = timeGetTime();
+  float currentTime = timeGetTime();
   mDT = currentTime - mLastFrame;
   mLastFrame = currentTime;
 }
@@ -42,10 +47,10 @@ void GameApp::Update()
 {
   AppStep();
 
-	for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
-	{
-		(*it)->Update();
-	}
+  for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+  {
+    (*it)->Update();
+  }
 }
 
 void GameApp::AddManager(Manager *aManager)
@@ -57,7 +62,7 @@ Manager* GameApp::GetManager(std::string const &aName)
 {
 	for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
 	{
-		if((*it)->GetName() == aName)
+		if((*it)->GetDefinedName() == aName)
 			return *it;
 	}
 	return NULL;
