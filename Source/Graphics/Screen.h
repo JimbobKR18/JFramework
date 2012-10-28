@@ -1,7 +1,6 @@
 #ifndef __JFramework_Screen_h_
 #define __JFramework_Screen_h_
 
-#include <SDL/SDL.h>
 #include "Surface.h"
 
 class Screen

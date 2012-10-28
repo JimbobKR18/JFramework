@@ -4,6 +4,7 @@
 #include "Screen.h"
 #include <GL/gl.h>
 #include <GL/glext.h>
+#include <SDL/SDL.h>
 
 class PCScreen : public Screen
 {

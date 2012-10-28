@@ -8,8 +8,6 @@ GameApp *gGameApp = NULL;
 
 GameApp::GameApp()
 {
-  SDL_Init(SDL_INIT_EVERYTHING);
-
   mLastFrame = timeGetTime();
 
   AddManager(new ObjectManager(this));
@@ -27,8 +25,6 @@ GameApp::~GameApp()
 	}
 
 	mManagers.clear();
-
-	SDL_Quit();
 }
 
 float GameApp::GetDT() const

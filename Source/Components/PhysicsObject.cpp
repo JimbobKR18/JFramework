@@ -12,7 +12,7 @@
 
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
 													 mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
-													 mMass(0), mInverseMass(0), mDamping(0.1f)
+													 mMass(0), mInverseMass(0), mDamping(0.95f)
 {
 }
 
@@ -24,7 +24,7 @@ void PhysicsObject::Update()
 {
   Vector3 position = ((Transform*)GetOwner()->GetComponent("Transform"))->GetPosition();
 
-  double dt = mWorld->GetOwningApp()->GetDT();
+  float dt = mWorld->GetOwningApp()->GetDT();
 
   position += mVelocity * dt;
 

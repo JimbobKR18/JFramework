@@ -3,6 +3,7 @@
 
 PCScreen::PCScreen() : Screen()
 {
+  SDL_Init(SDL_INIT_EVERYTHING);
 }
 
 PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
@@ -13,6 +14,7 @@ PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 
 PCScreen::~PCScreen()
 {
+  SDL_Quit();
 }
 
 void PCScreen::Draw(std::vector<Surface*> const &aObjects)
