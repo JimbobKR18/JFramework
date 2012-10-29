@@ -3,12 +3,14 @@
 
 #if !defined(IOS) && !defined(ANDROID)
   #include "PCScreen.h"
+  #include "PCSurface.h"
 #endif
 
 GraphicsManager::GraphicsManager(GameApp *aApp) : Manager(aApp, "GraphicsManager")
 {
 #if !defined(IOS) && !defined(ANDROID)
   mScreen = new PCScreen(640, 480);
+#else
 #endif
 }
 
@@ -27,7 +29,11 @@ void GraphicsManager::SendMessage(Message const &aMessage)
 
 Surface *GraphicsManager::CreateSurface()
 {
+#if !defined(ANDROID) && !defined(IOS)
+	PCSurface *surface = new PCSurface();
+#else
 	Surface *surface = new Surface();
+#endif
 
 	AddSurface(surface);
 

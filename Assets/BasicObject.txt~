@@ -6,12 +6,12 @@ Start
 	}
 	Surface
 	{
-		TextureName = Blank.png
+		TextureName = Blank.bmp
 	}
 	Transform
 	{
 		PositionX = 50
-		PositionY = 50
+		PositionY = 150
 		PositionZ = 0
 		ScaleX = 1
 		ScaleY = 1

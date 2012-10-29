@@ -14,7 +14,7 @@ GameApp::GameApp()
   AddManager(new PhysicsWorld(this));
   AddManager(new GraphicsManager(this));
 
-  GET<ObjectManager>()->CreateObject("../Assets/BasicObject.txt");
+  GET<ObjectManager>()->CreateObject("BasicObject.txt");
 }
 
 GameApp::~GameApp()

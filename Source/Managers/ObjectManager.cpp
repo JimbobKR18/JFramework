@@ -5,6 +5,10 @@
 #include "Transform.h"
 #include "GraphicsManager.h"
 
+#if !defined(ANDROID) && !defined(IOS)
+  #include "PCSurface.h"
+#endif
+
 ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager")
 {
 }
@@ -28,7 +32,7 @@ void ObjectManager::SendMessage(Message const &aMsg)
 
 GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 {
-	TextParser parser(aFilename);
+	TextParser parser(RelativePath(aFilename));
 	GameObject *object = new GameObject();
 	AddObject(object);
 	ParseDictionary(object, parser);
@@ -80,7 +84,13 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 	}
 	if(aParser.Find("Surface"))
 	{
+#if !defined(ANDROID) && !defined(IOS)
+		PCSurface *surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+		std::string imageName = aParser.Find("Surface", "TextureName");
+		surface->LoadImage(imageName);
+#else
 		Surface *surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+#endif
 		aObject->AddComponent(surface);
 	}
 }
