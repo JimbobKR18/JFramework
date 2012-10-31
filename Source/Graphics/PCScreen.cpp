@@ -1,5 +1,6 @@
 #include "PCScreen.h"
 #include "Transform.h"
+#include "PCSurface.h"
 
 PCScreen::PCScreen() : Screen()
 {
@@ -27,12 +28,15 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     GameObject *owner = (*it)->GetOwner();
     Vector3 position = owner->GET<Transform>()->GetPosition();
     Vector3 size = owner->GET<Transform>()->GetSize();
+    GLuint texture = owner->GET<PCSurface>()->GetTexID();
+
+    glBindTexture(GL_TEXTURE_2D, texture);
 
     glBegin(GL_QUADS);
-      glColor3f(1, 0, 0); glVertex3f(position.x - size.x, position.y - size.y, 0);
-      glColor3f(1, 1, 0); glVertex3f(position.x + size.x, position.y - size.y, 0);
-      glColor3f(1, 0, 1); glVertex3f(position.x + size.x, position.y + size.y, 0);
-      glColor3f(1, 1, 1); glVertex3f(position.x - size.x, position.y + size.y, 0);
+      glTexCoord2i(0, 0); glVertex3f(position.x - size.x, position.y - size.y, 0);
+      glTexCoord2i(1, 0); glVertex3f(position.x + size.x, position.y - size.y, 0);
+      glTexCoord2i(1, 1); glVertex3f(position.x + size.x, position.y + size.y, 0);
+      glTexCoord2i(0, 1); glVertex3f(position.x - size.x, position.y + size.y, 0);
     glEnd();
   }
 

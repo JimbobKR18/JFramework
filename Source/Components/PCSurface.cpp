@@ -1,5 +1,6 @@
 #include "PCSurface.h"
 #include "Common.h"
+#include <SDL/SDL_image.h>
 
 PCSurface::PCSurface() : Surface()
 {
@@ -12,7 +13,7 @@ PCSurface::~PCSurface()
 
 void PCSurface::LoadImage(std::string const &aName)
 {
-	if((mSurface = SDL_LoadBMP(RelativePath(aName).c_str())))
+	if((mSurface = IMG_Load(RelativePath(aName).c_str())))
 	{
 		if ((mSurface->w & (mSurface->w - 1)) != 0 )
 		{
@@ -71,4 +72,9 @@ void PCSurface::SendMessage(Message const &aMessage)
 void PCSurface::ReceiveMessage(Message const &aMessage)
 {
 
+}
+
+GLuint PCSurface::GetTexID() const
+{
+	return mTextureID;
 }
