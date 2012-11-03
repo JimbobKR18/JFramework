@@ -26,6 +26,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
   {
     GameObject *owner = (*it)->GetOwner();
+    Vector3 cameraPosition = GetView().GetPosition();
     Vector3 position = owner->GET<Transform>()->GetPosition();
     Vector3 size = owner->GET<Transform>()->GetSize();
     GLuint texture = owner->GET<PCSurface>()->GetTexID();

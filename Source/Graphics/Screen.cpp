@@ -13,12 +13,17 @@ Screen::~Screen()
 
 }
 
-int Screen::GetWidth()
+int Screen::GetWidth() const
 {
   return mWidth;
 }
 
-int Screen::GetHeight()
+int Screen::GetHeight() const
 {
   return mHeight;
+}
+
+View &Screen::GetView()
+{
+	return mView;
 }
