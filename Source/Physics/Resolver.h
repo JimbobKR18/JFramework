@@ -15,9 +15,10 @@ public:
 
 	void Update();
 	void AddPair(CollisionPair const &aPair);
-	void Resolve(CollisionPair const &aPair);
+	bool Find(PhysicsObject *aObject1, PhysicsObject *aObject2);
 
 private:
+	void Resolve(CollisionPair const &aPair);
 	void SolveSphereToSphere(CollisionPair const &aPair);
 	void SolveSphereToCube(CollisionPair const &aPair);
 	void SolveCubeToCube(CollisionPair const &aPair);

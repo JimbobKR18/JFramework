@@ -8,6 +8,21 @@
 
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
+#include "Transform.h"
+#include <algorithm>
+
+#define X_LIMIT 10.0f
+
+bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
+{
+	if(object1->GetOwner()->GET<Transform>()->GetPosition().x <
+	   object2->GetOwner()->GET<Transform>()->GetPosition().x)
+	{
+		return true;
+	}
+
+	return false;
+}
 
 PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld"), mGravity(Vector3(0, -20.0f, 0))
 {
@@ -76,6 +91,32 @@ void PhysicsWorld::RemoveObject(PhysicsObject *aObject)
 		{
 			mObjects.erase(it);
 			break;
+		}
+	}
+}
+
+std::vector<PhysicsObject*> PhysicsWorld::SortOnAxis()
+{
+	std::vector<PhysicsObject*> ret = mObjects;
+	std::sort(ret.begin(), ret.end(), SortPredicate);
+	return ret;
+}
+
+void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
+{
+	for(std::vector<PhysicsObject*>::iterator it = aSortedObjects.begin();
+		it != aSortedObjects.end(); ++it)
+	{
+		for(std::vector<PhysicsObject*>::iterator it2 = aSortedObjects.begin();
+				it2 != aSortedObjects.end(); ++it2)
+		{
+			if(*it != *it2)
+			{
+				if(!mResolver.Find(*it, *it2))
+				{
+					// Check ranges blah blah
+				}
+			}
 		}
 	}
 }

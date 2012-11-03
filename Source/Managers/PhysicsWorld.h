@@ -14,6 +14,7 @@
 #include "Math.h"
 #include "ForceRegistry.h"
 #include "GravityGenerator.h"
+#include "Resolver.h"
 
 class PhysicsObject;
 
@@ -23,6 +24,7 @@ private:
   std::vector<PhysicsObject *> mObjects;
   ForceRegistry mRegistry;
   GravityGenerator mGravity;
+  Resolver mResolver;
 
 public:
   PhysicsWorld(GameApp *aApp);
@@ -42,6 +44,8 @@ public:
 private:
   void AddObject(PhysicsObject *aObject);
   void RemoveObject(PhysicsObject *aObject);
+  std::vector<PhysicsObject*> SortOnAxis();
+  void SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects);
 };
 
 #endif /* defined(__JFramework__PhysicsWorld__) */

@@ -64,7 +64,21 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 	if(aParser.Find("PhysicsObject"))
 	{
 		PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
+		std::string type = aParser.Find("PhysicsObject", "Shape");
 		object->SetMass(StringToInt(aParser.Find("PhysicsObject", "Mass")));
+
+		if(type == "CUBE")
+		{
+			object->mShape = PhysicsObject::CUBE;
+		}
+		else if(type == "SPHERE")
+		{
+			object->mShape = PhysicsObject::SPHERE;
+		}
+		else
+		{
+			assert(0);
+		}
 
 		aObject->AddComponent(object);
 	}

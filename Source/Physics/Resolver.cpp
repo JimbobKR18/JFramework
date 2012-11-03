@@ -1,4 +1,5 @@
 #include "Resolver.h"
+#include "PhysicsObject.h"
 
 Resolver::Resolver()
 {
@@ -21,6 +22,21 @@ void Resolver::Update()
 void Resolver::AddPair(CollisionPair const &aPair)
 {
 	mPairs.push_back(aPair);
+}
+
+bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
+{
+	CollisionPair temp(aObject1, aObject2);
+
+	for(std::list<CollisionPair>::iterator it = mPairs.begin();
+		it != mPairs.end(); ++it)
+	{
+		if(*it == temp)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Resolver::Resolve(CollisionPair const &aPair)

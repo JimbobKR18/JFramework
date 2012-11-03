@@ -2,6 +2,7 @@ Start
 {
 	PhysicsObject
 	{
+		Shape = CUBE
 		Mass = 50
 	}
 	Surface
