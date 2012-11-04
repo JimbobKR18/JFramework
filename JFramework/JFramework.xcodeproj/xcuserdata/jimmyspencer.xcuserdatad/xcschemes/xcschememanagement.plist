@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>JFrameworkMac.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>AD9D290A1646F7BE00240FDC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>ADD5EAB815F325C5005E20E7</key>
 		<dict>
 			<key>primary</key>
