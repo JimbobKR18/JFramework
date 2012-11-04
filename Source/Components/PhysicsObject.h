@@ -11,7 +11,7 @@
 
 #include "Component.h"
 #include "PhysicsWorld.h"
-#include "Math.h"
+#include "MathExt.h"
 
 class PhysicsObject : public Component
 {

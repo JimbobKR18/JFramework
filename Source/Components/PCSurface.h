@@ -1,9 +1,14 @@
 #ifndef __JFramework_PCSurface_h_
 #define __JFramework_PCSurface_h_
 
-#include <GL/gl.h>
-#include <GL/glext.h>
-#include <SDL/SDL.h>
+#if defined(_WIN32)
+  #include <Windows.h>
+  #include <GL/gl.h>
+#else
+  #include <GL/gl.h>
+  #include <GL/glext.h>
+  #include <SDL/SDL.h>
+#endif
 
 #include "Surface.h"
 

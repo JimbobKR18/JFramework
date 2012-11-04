@@ -2,9 +2,14 @@
 #define __JFramework_PCScreen_h_
 
 #include "Screen.h"
-#include <GL/gl.h>
-#include <GL/glext.h>
-#include <SDL/SDL.h>
+#if defined(_WIN32)
+  #include <Windows.h>
+  #include <GL/gl.h>
+#else
+  #include <GL/gl.h>
+  #include <GL/glext.h>
+  #include <SDL/SDL.h>
+#endif
 
 class PCScreen : public Screen
 {

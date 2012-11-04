@@ -1,7 +1,7 @@
 #ifndef __JFramework_Camera_h_
 #define __JFramework_Camera_h_
 
-#include "Math.h"
+#include "MathExt.h"
 
 class GameObject;
 

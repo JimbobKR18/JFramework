@@ -8,7 +8,7 @@
 #ifndef __JFramework_ForceGenerator_h_
 #define __JFramework_ForceGenerator_h_
 
-#include "Math.h"
+#include "MathExt.h"
 
 class PhysicsObject;
 

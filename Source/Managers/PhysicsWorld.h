@@ -11,7 +11,7 @@
 
 #include "Common.h"
 #include "Manager.h"
-#include "Math.h"
+#include "MathExt.h"
 #include "ForceRegistry.h"
 #include "GravityGenerator.h"
 #include "Resolver.h"
