@@ -4,6 +4,10 @@
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 GameApp *gGameApp = NULL;
 
 GameApp::GameApp()

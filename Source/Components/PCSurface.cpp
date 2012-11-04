@@ -1,6 +1,11 @@
 #include "PCSurface.h"
 #include "Common.h"
+
+#ifndef _WIN32
 #include <SDL/SDL_image.h>
+#else
+#include "SDL_image.h"
+#endif
 
 PCSurface::PCSurface() : Surface()
 {
@@ -31,14 +36,22 @@ void PCSurface::LoadImage(std::string const &aName)
 			if (mSurface->format->Rmask == 0x000000ff)
 				mTextureFormat = GL_RGBA;
 			else
+#ifndef _WIN32
 				mTextureFormat = GL_BGRA;
+#else
+				mTextureFormat = GL_RGBA;
+#endif
 		}
 		else if (mNumberOfColors == 3)
 		{
 			if (mSurface->format->Rmask == 0x000000ff)
 				mTextureFormat = GL_RGB;
 			else
+#ifndef _WIN32
 				mTextureFormat = GL_BGR;
+#else
+				mTextureFormat = GL_RGB;
+#endif
 		}
 		else
 		{

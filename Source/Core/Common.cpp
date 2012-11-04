@@ -11,27 +11,29 @@
 std::string const RelativePath(std::string const &aFileName)
 {
 #if !defined(ANDROID) && !defined(IOS)
+#ifdef _WIN32
+  std::string ret;
+#else
   std::string ret = "../Assets/";
+#endif
 #endif
   ret.append(aFileName);
   return ret;
 }
 
+#ifndef _WIN32
 float GetTickCount()
 {
-#ifdef _WIN32
-	return 0;
-#else
 	struct timespec now;
 	clock_gettime(CLOCK_MONOTONIC, &now);
 	return now.tv_sec + (now.tv_nsec / (1000.0f * 1000.0f * 1000.0f));
-#endif
 }
 
 float timeGetTime()
 {
 	return GetTickCount();
 }
+#endif
 
 int StringToInt(std::string const &value)
 {

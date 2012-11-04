@@ -11,16 +11,23 @@
 
 Thread::Thread(void*(*func)(void *), void *args)
 {
+#ifndef _WIN32
 	pthread_create(&mThread, NULL, func, args);
+#endif
 }
 
-Thread::Thread(Thread const &rhs) : mThread(rhs.mThread)
+Thread::Thread(Thread const &rhs)
 {
+#ifndef _WIN32
+	mThread = rhs.mThread;
+#endif
 }
 
 Thread::~Thread()
 {
+#ifndef _WIN32
 	pthread_exit(&mThread);
+#endif
 }
 
 CriticalSection::CriticalSection()
@@ -29,16 +36,21 @@ CriticalSection::CriticalSection()
 
 CriticalSection::~CriticalSection()
 {
+#ifndef _WIN32
   pthread_mutex_destroy(&mMutex);
+#endif
 }
 
 void CriticalSection::Init()
 {
+#ifndef _WIN32
   pthread_mutex_init(&mMutex, NULL);
+#endif
 }
 
 bool CriticalSection::EnterCriticalSection(int aTimeout)
 {
+#ifndef _WIN32
   if(aTimeout == kDurationForever)
 	{
 		pthread_mutex_lock(&mMutex);
@@ -53,11 +65,16 @@ bool CriticalSection::EnterCriticalSection(int aTimeout)
 	{
 		return false;
 	}
+#else
+	return false;
+#endif
 }
 
 bool CriticalSection::ExitCriticalSection()
 {
+#ifndef _WIN32
   pthread_mutex_unlock(&mMutex);
+#endif
   return true;
 }
 

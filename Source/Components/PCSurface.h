@@ -3,7 +3,10 @@
 
 #if defined(_WIN32)
   #include <Windows.h>
-  #include <GL/gl.h>
+  #include <gl/gl.h>
+  #include "SDL.h"
+
+#undef SendMessage
 #else
   #include <GL/gl.h>
   #include <GL/glext.h>

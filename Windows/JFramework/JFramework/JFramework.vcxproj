@@ -153,7 +153,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Jimbob\Documents\GitHub\JFramework\Source\TinyXML;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Parsers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Managers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\LUA;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Graphics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Core;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Physics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Components;C:\Users\Jimbob\Documents\GitHub\JFramework\Source;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Jimbob\Documents\GitHub\JFramework\Windows\SDLWindows\include;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\TinyXML;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Parsers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Managers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\LUA;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Graphics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Core;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Physics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Components;C:\Users\Jimbob\Documents\GitHub\JFramework\Source;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Jimbob\Documents\GitHub\JFramework\Windows\SDLWindows\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -162,6 +163,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_image.lib;OpenGL32.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

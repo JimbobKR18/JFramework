@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{3ac5b8c8-bd13-48cd-be02-cc359554d986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{d25ddcce-cd6e-47f2-a2ee-ac5100a6df65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{20d68aba-20e5-4cf7-8e8a-48428a976c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{aa2563a6-e9cf-4136-8583-23e89fa03eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LUA">
+      <UniqueIdentifier>{72a7539b-6feb-4a29-9bba-dcd68763dc5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parsers">
+      <UniqueIdentifier>{21fa2a9a-a6a2-4d1f-b912-d180a0a7673f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{18573c82-e824-47f3-a117-8b53febbbf2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\XML">
+      <UniqueIdentifier>{01d1f8b1-0dff-4f92-931b-5f4262f4ece2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\Components\LUAObject.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Components\PCSurface.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Components\PhysicsObject.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Components\Surface.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Components\Transform.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\GameApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Managers\GraphicsManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Managers\ObjectManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Managers\PhysicsWorld.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\AutoCrit.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Common.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\GameObject.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Graphics\PCScreen.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Graphics\Screen.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Graphics\View.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lapi.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lauxlib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lbaselib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lbitlib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lcode.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lcorolib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lctype.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\ldblib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\ldebug.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\ldo.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\ldump.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lfunc.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lgc.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\linit.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\liolib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\llex.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lmathlib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lmem.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\loadlib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lobject.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lopcodes.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\loslib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lparser.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lstate.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lstring.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lstrlib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\ltable.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\ltablib.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\ltm.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lundump.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lvm.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\LUA\lzio.c">
+      <Filter>Source Files\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\TinyXML\tinyxml2.cpp">
+      <Filter>Source Files\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Physics\CollisionPair.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Physics\ForceGenerator.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Physics\ForceRegistry.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Physics\GravityGenerator.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Physics\Resolver.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Parsers\Parser.cpp">
+      <Filter>Source Files\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Parsers\TextParser.cpp">
+      <Filter>Source Files\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Parsers\XMLParser.cpp">
+      <Filter>Source Files\Parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\MathExt.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\Components\LUAObject.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Components\PCSurface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Components\PhysicsObject.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Components\Surface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Components\Transform.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\GameApp.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Managers\GraphicsManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Managers\Manager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Managers\ObjectManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Managers\PhysicsWorld.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\AutoCrit.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Common.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Component.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\GameObject.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\LuaIncludes.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Message.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Graphics\PCScreen.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Graphics\Screen.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Graphics\View.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lapi.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lauxlib.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lcode.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lctype.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\ldebug.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\ldo.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lfunc.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lgc.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\llex.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\llimits.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lmem.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lobject.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lopcodes.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lparser.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lstate.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lstring.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\ltable.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\ltm.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lua.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lua.hpp">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\luaconf.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lualib.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lundump.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lvm.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\LUA\lzio.h">
+      <Filter>Source Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\TinyXML\tinyxml2.h">
+      <Filter>Source Files\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Physics\CollisionPair.h">
+      <Filter>Source Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Physics\ForceGenerator.h">
+      <Filter>Source Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Physics\ForceRegistry.h">
+      <Filter>Source Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Physics\GravityGenerator.h">
+      <Filter>Source Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Physics\Resolver.h">
+      <Filter>Source Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Parsers\Parser.h">
+      <Filter>Source Files\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Parsers\TextParser.h">
+      <Filter>Source Files\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Parsers\XMLParser.h">
+      <Filter>Source Files\Parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\MathExt.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

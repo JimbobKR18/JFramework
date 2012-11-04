@@ -9,7 +9,10 @@
 #ifndef __JFramework__AutoCrit__
 #define __JFramework__AutoCrit__
 
+#ifndef _WIN32
 #include <pthread.h>
+#else
+#endif
 
 int const kDurationForever = 0xffffffff;
 int const kDurationImmediate = 0;
@@ -17,7 +20,9 @@ int const kDurationImmediate = 0;
 class Thread
 {
 private:
+#ifndef _WIN32
 	pthread_t mThread;
+#endif
 public:
 	Thread(void*(*func)(void *), void *args);
 	Thread(Thread const &rhs);
@@ -27,7 +32,9 @@ public:
 class CriticalSection
 {
 private:
+#ifndef _WIN32
   pthread_mutex_t mMutex;
+#endif
   
 public:
   CriticalSection();

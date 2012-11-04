@@ -15,8 +15,11 @@
 #include <cstdlib>
 
 std::string const RelativePath(std::string const &aFileName);
+
+#ifndef _WIN32
 float GetTickCount();
 float timeGetTime();
+#endif
 
 int StringToInt(std::string const &value);
 
