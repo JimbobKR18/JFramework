@@ -8,8 +8,6 @@
 #include <Windows.h>
 #endif
 
-GameApp *gGameApp = NULL;
-
 GameApp::GameApp()
 {
   mLastFrame = timeGetTime();
@@ -18,7 +16,8 @@ GameApp::GameApp()
   AddManager(new PhysicsWorld(this));
   AddManager(new GraphicsManager(this));
 
-  GET<ObjectManager>()->CreateObject("BasicObject.txt");
+  GameObject* targetTest = GET<ObjectManager>()->CreateObject("BasicObject.txt");
+  GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(targetTest);
 }
 
 GameApp::~GameApp()

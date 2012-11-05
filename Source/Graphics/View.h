@@ -9,6 +9,7 @@ class View
 {
 private:
 	Vector3 mPosition;
+  Vector3 mSize;
 	GameObject *mTarget;
 	float mRate;
 
@@ -17,7 +18,9 @@ public:
 	~View();
 
 	Vector3 GetPosition() const;
+  Vector3 GetSize() const;
 
+  void SetSize(Vector3 const &aSize);
 	void SetPosition(Vector3 const &aPos);
 	void SetTarget(GameObject *aObj);
 	void SetRate(float aRate);

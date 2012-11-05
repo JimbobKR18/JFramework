@@ -10,12 +10,10 @@
 
 std::string const RelativePath(std::string const &aFileName)
 {
-#if !defined(ANDROID) && !defined(IOS)
 #ifdef _WIN32
   std::string ret;
 #else
   std::string ret = "../Assets/";
-#endif
 #endif
   ret.append(aFileName);
   return ret;

@@ -9,6 +9,7 @@ PCScreen::PCScreen() : Screen()
 
 PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 {
+  SDL_Init(SDL_INIT_EVERYTHING);
   mSurface = SDL_SetVideoMode(aW, aH, 32, SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
   ChangeSize(aW, aH);
 }
@@ -23,22 +24,34 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
 
+  // Camera Stuff
+  Vector3 cameraPosition = GetView().GetPosition();
+  Vector3 cameraSize = GetView().GetSize();
+
+  // Draw each object
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
   {
     GameObject *owner = (*it)->GetOwner();
-    Vector3 cameraPosition = GetView().GetPosition();
+
     Vector3 position = owner->GET<Transform>()->GetPosition();
     Vector3 size = owner->GET<Transform>()->GetSize();
     GLuint texture = owner->GET<PCSurface>()->GetTexID();
 
     glBindTexture(GL_TEXTURE_2D, texture);
 
+    float xPosition = position.x - (cameraPosition.x - cameraSize.x / 2.0f);
+    float yPosition = position.y - (cameraPosition.y - cameraSize.y / 2.0f);
+
+    glPushMatrix();
+
     glBegin(GL_QUADS);
-      glTexCoord2i(0, 0); glVertex3f(position.x - size.x, position.y - size.y, 0);
-      glTexCoord2i(1, 0); glVertex3f(position.x + size.x, position.y - size.y, 0);
-      glTexCoord2i(1, 1); glVertex3f(position.x + size.x, position.y + size.y, 0);
-      glTexCoord2i(0, 1); glVertex3f(position.x - size.x, position.y + size.y, 0);
+      glTexCoord2i(0, 0); glVertex3f(xPosition - size.x, yPosition - size.y, 0);
+      glTexCoord2i(1, 0); glVertex3f(xPosition + size.x, yPosition - size.y, 0);
+      glTexCoord2i(1, 1); glVertex3f(xPosition + size.x, yPosition + size.y, 0);
+      glTexCoord2i(0, 1); glVertex3f(xPosition - size.x, yPosition + size.y, 0);
     glEnd();
+
+    glPopMatrix();
   }
 
   SDL_GL_SwapBuffers();

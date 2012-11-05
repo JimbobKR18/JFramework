@@ -21,6 +21,8 @@ public:
 	Surface *CreateSurface();
 	void DeleteSurface(Surface *aSurface);
 	void ClearSurfaces();
+
+  Screen *GetScreen();
 private:
 	void AddSurface(Surface *aSurface);
 	void RemoveSurface(Surface *aSurface);

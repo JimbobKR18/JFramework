@@ -6,6 +6,7 @@ Screen::Screen() : mWidth(0), mHeight(0)
 
 Screen::Screen(int aW, int aH) : mWidth(aW), mHeight(aH)
 {
+  mView.SetSize(Vector3(aW, aH, 0));
 }
 
 Screen::~Screen()

@@ -36,7 +36,6 @@ TextParser::TextParser(std::string const &aFilename) : Parser(aFilename)
 }
 TextParser::~TextParser()
 {
-
 }
 
 bool TextParser::Find(std::string const &aElement)

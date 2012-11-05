@@ -1,7 +1,11 @@
 #include "GameApp.h"
 #include "TextParser.h"
 
-int main()
+#ifdef _WIN32
+  #include "SDL.h"
+#endif
+
+int main(int argc, char *argv[])
 {
 	GameApp *app = new GameApp();
 	while(1)

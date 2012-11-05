@@ -20,6 +20,7 @@ GraphicsManager::~GraphicsManager()
 
 void GraphicsManager::Update()
 {
+  mScreen->GetView().Update();
   mScreen->Draw(mSurfaces);
 }
 
@@ -46,6 +47,19 @@ void GraphicsManager::DeleteSurface(Surface *aSurface)
   delete aSurface;
 }
 
+void GraphicsManager::ClearSurfaces()
+{
+  for(std::vector<Surface*>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  {
+    DeleteSurface(*it);
+  }
+}
+
+Screen *GraphicsManager::GetScreen()
+{
+  return mScreen;
+}
+
 void GraphicsManager::AddSurface(Surface *aSurface)
 {
   mSurfaces.push_back(aSurface);
@@ -53,7 +67,7 @@ void GraphicsManager::AddSurface(Surface *aSurface)
 
 void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
-  for(std::vector<Surface *>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  for(std::vector<Surface*>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
 	{
 		if(*it == aSurface)
 		{
