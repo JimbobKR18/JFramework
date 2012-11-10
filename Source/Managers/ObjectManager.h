@@ -20,9 +20,9 @@ public:
 	GameObject *CreateObject(std::string const &aFilename);
 	void DeleteObject(GameObject *aObj);
 	void ClearObjects();
-private:
 	void AddObject(GameObject *aObj);
 	void RemoveObject(GameObject *aObj);
+private:
 	void ParseDictionary(GameObject *aObject, Parser &aParser);
 };
 

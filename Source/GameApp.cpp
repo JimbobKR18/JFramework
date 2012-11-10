@@ -3,6 +3,7 @@
 #include "PhysicsWorld.h"
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
+#include "LevelManager.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -15,6 +16,7 @@ GameApp::GameApp()
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
   AddManager(new GraphicsManager(this));
+  AddManager(new LevelManager(this));
 
   GameObject* targetTest = GET<ObjectManager>()->CreateObject("BasicObject.txt");
   GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(targetTest);

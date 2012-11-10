@@ -1,6 +1,6 @@
 #include "LevelManager.h"
 
-LevelManager::LevelManager()
+LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager")
 {
 
 }
@@ -12,9 +12,21 @@ LevelManager::~LevelManager()
 
 Level *LevelManager::CreateLevel(std::string const &aFilename)
 {
-	Level *ret = new Level(aFilename);
+	Level *ret = new Level(this, aFilename);
 	AddLevel(ret);
 	return ret;
+}
+
+Level *LevelManager::GetLevel(std::string const &aLevelName)
+{
+	for(std::vector<Level*>::iterator it = mLevels.begin(); it != mLevels.end(); ++it)
+	{
+		if((*it)->GetName() == aLevelName)
+		{
+			return *it;
+		}
+	}
+	return NULL;
 }
 
 void LevelManager::DeleteLevel(Level *aLevel)
@@ -40,7 +52,7 @@ void LevelManager::AddLevel(Level *aLevel)
 
 void LevelManager::RemoveLevel(Level *aLevel)
 {
-	for(std::vector<Surface*>::iterator it = mLevels.begin(); it != mLevels.end(); ++it)
+	for(std::vector<Level*>::iterator it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
 		if(*it == aLevel)
 		{

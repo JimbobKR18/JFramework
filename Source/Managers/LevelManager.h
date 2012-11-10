@@ -9,10 +9,11 @@ class LevelManager : public Manager
 private:
 	std::vector<Level*> mLevels;
 public:
-	LevelManager();
+	LevelManager(GameApp *aApp);
 	~LevelManager();
 
 	Level *CreateLevel(std::string const &aFilename);
+	Level *GetLevel(std::string const &aLevelName);
 	void DeleteLevel(Level *aLevel);
 
 	void Update();
