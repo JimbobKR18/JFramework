@@ -17,12 +17,15 @@ class Component;
 class GameObject
 {
 private:
+  std::string mFileName;
   std::vector<Component*> mComponents;
 public:
   GameObject();
   GameObject(std::string const &aFilename);
   GameObject(GameObject const &aGameObject);
   ~GameObject();
+
+  std::string GetFilename();
 
   void AddComponent(Component *aComponent);
   void RemoveComponent(Component *aComponent);

@@ -11,7 +11,7 @@ Level::Level()
 
 Level::Level(LevelManager *aManager, std::string const &aFileName) : mFileName(aFileName), mOwner(aManager), mActive(false)
 {
-	for(int i = aFileName.size()-1; aFileName[i] != '/'; --i)
+	for(int i = aFileName.size()-1; aFileName[i] != '/' && i >= 0; --i)
 	{
 		mName.push_back(aFileName[i]);
 	}
@@ -54,13 +54,18 @@ void Level::Unload()
 
 void Level::ParseFile()
 {
-	std::ifstream infile(mFileName.c_str());
+	std::ifstream infile(RelativePath(mFileName).c_str());
 
 	while(infile.good())
 	{
 		std::string filename;
 		infile >> filename;
 
-		mObjects.push_back(new GameObject(filename));
+		if(filename.length() == 0)
+			break;
+
+		GameObject *object = new GameObject(filename);
+		mOwner->GetOwningApp()->GET<ObjectManager>()->ParseObject(object);
+		mObjects.push_back(object);
 	}
 }

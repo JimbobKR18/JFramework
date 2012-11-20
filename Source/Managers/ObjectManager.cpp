@@ -33,10 +33,16 @@ void ObjectManager::SendMessage(Message const &aMsg)
 GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 {
 	TextParser parser(RelativePath(aFilename));
-	GameObject *object = new GameObject();
+	GameObject *object = new GameObject(aFilename);
 	AddObject(object);
 	ParseDictionary(object, parser);
 	return object;
+}
+
+void ObjectManager::ParseObject(GameObject *aObject)
+{
+	TextParser parser(RelativePath(aObject->GetFilename()));
+	ParseDictionary(aObject, parser);
 }
 
 void ObjectManager::DeleteObject(GameObject *aObj)
@@ -77,7 +83,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 		}
 		else
 		{
-			assert(0);
+			assert(!"Invalid shape given");
 		}
 
 		aObject->AddComponent(object);
@@ -111,10 +117,11 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 
 void ObjectManager::ClearObjects()
 {
+	/* Now belongs to LevelManager.cpp
 	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		delete *it;
-	}
+	}*/
 	mObjects.clear();
 }
 

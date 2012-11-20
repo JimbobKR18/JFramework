@@ -17,7 +17,7 @@ class PhysicsObject : public Component
 {
 private:
   PhysicsWorld *mWorld;
-  Vector3 mVelocity, mAcceleration, mForces;
+  Vector3 mVelocity, mAcceleration, mForces, mBroadSize;
   float mMass, mInverseMass;
   float mDamping;
 

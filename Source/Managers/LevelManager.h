@@ -7,6 +7,7 @@
 class LevelManager : public Manager
 {
 private:
+	Level *mActiveLevel;
 	std::vector<Level*> mLevels;
 public:
 	LevelManager(GameApp *aApp);
@@ -15,6 +16,7 @@ public:
 	Level *CreateLevel(std::string const &aFilename);
 	Level *GetLevel(std::string const &aLevelName);
 	void DeleteLevel(Level *aLevel);
+	void LoadLevel(std::string const &aLevelName);
 
 	void Update();
 	void SendMessage(Message const &aMessage);
