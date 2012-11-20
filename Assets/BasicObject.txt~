@@ -2,7 +2,7 @@ Start
 {
 	PhysicsObject
 	{
-		Shape = "CUBE"
+		Shape = CUBE
 		Mass = 50
 	}
 	Surface
@@ -13,7 +13,7 @@ Start
 	{
 		PositionX = 50
 		PositionY = 150
-		PositionZ = 0
+		PositionZ = 1
 		ScaleX = 1
 		ScaleY = 1
 		ScaleZ = 1
