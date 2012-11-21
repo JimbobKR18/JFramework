@@ -10,6 +10,7 @@
 #include "PhysicsObject.h"
 #include "Transform.h"
 #include <algorithm>
+#include <cmath>
 
 #define X_LIMIT 10.0f
 
@@ -56,6 +57,7 @@ void PhysicsWorld::ClearObjects()
 
 void PhysicsWorld::Update()
 {
+	SweepAndPrune(SortOnAxis());
 	mRegistry.Update();
 }
 
@@ -108,13 +110,17 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 		it != aSortedObjects.end(); ++it)
 	{
 		for(std::vector<PhysicsObject*>::iterator it2 = aSortedObjects.begin();
-				it2 != aSortedObjects.end(); ++it2)
+			it2 != aSortedObjects.end(); ++it2)
 		{
 			if(*it != *it2)
 			{
 				if(!mResolver.Find(*it, *it2))
 				{
-					// Check ranges blah blah
+					float delta = fabs((*it)->GetOwner()->GET<Transform>()->GetPosition().x - (*it2)->GetOwner()->GET<Transform>()->GetPosition().x);
+					if(delta < X_LIMIT)
+					{
+						mResolver.AddPair(CollisionPair(*it, *it2));
+					}
 				}
 			}
 		}
