@@ -13,12 +13,13 @@ GameObject::GameObject()
 {
 }
 
-GameObject::GameObject(std::string const &aFilename)
+GameObject::GameObject(std::string const &aFilename) : mFileName(aFilename)
 {
 }
 
 // Sounds like a bad idea right now...
-GameObject::GameObject(GameObject const &aGameObject) : mComponents(aGameObject.mComponents)
+GameObject::GameObject(GameObject const &aGameObject) : mFileName(aGameObject.mFileName),
+													    mComponents(aGameObject.mComponents)
 {
 }
 
@@ -28,6 +29,11 @@ GameObject::~GameObject()
   {
     delete *it;
   }
+}
+
+std::string GameObject::GetFilename()
+{
+	return mFileName;
 }
 
 void GameObject::AddComponent(Component *aComponent)

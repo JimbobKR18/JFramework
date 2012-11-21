@@ -41,14 +41,15 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 
     float xPosition = position.x - (cameraPosition.x - cameraSize.x / 2.0f);
     float yPosition = position.y - (cameraPosition.y - cameraSize.y / 2.0f);
+    float zPosition = position.z - (cameraPosition.z - cameraSize.z / 2.0f);
 
     glPushMatrix();
 
     glBegin(GL_QUADS);
-      glTexCoord2i(0, 0); glVertex3f(xPosition - size.x, yPosition - size.y, 0);
-      glTexCoord2i(1, 0); glVertex3f(xPosition + size.x, yPosition - size.y, 0);
-      glTexCoord2i(1, 1); glVertex3f(xPosition + size.x, yPosition + size.y, 0);
-      glTexCoord2i(0, 1); glVertex3f(xPosition - size.x, yPosition + size.y, 0);
+      glTexCoord2i(0, 0); glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
+      glTexCoord2i(1, 0); glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
+      glTexCoord2i(1, 1); glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
+      glTexCoord2i(0, 1); glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
     glEnd();
 
     glPopMatrix();

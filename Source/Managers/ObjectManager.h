@@ -18,11 +18,12 @@ public:
 	static std::string GetName() {return "ObjectManager";}
 
 	GameObject *CreateObject(std::string const &aFilename);
+	void ParseObject(GameObject *aObject);
 	void DeleteObject(GameObject *aObj);
 	void ClearObjects();
-private:
 	void AddObject(GameObject *aObj);
 	void RemoveObject(GameObject *aObj);
+private:
 	void ParseDictionary(GameObject *aObject, Parser &aParser);
 };
 

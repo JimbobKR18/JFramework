@@ -41,12 +41,24 @@ TextParser::~TextParser()
 bool TextParser::Find(std::string const &aElement)
 {
   Root const *value = mDictionary->Search(aElement);
+
+  if(!value)
+	  return NULL;
+
   return value->mName.length() > 0;
 }
 std::string TextParser::Find(std::string const &aRoot, std::string const &aElement)
 {
   Root const *node = mDictionary->Search(aRoot);
+
+  if(!node)
+	  return "BadString";
+
   Root const *value = node->Search(aElement);
+
+  if(!value)
+  	  return "BadString";
+
   return value->mValue;
 }
 void TextParser::Parse()
