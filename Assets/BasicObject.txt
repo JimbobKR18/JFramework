@@ -21,4 +21,8 @@ Start
 		SizeY = 50
 		SizeZ = 0
 	}
+	Focus
+	{
+		IsTarget = true
+	}
 }

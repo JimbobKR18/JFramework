@@ -113,6 +113,15 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 #endif
 		aObject->AddComponent(surface);
 	}
+	if(aParser.Find("Focus"))
+	{
+		std::string isTarget = aParser.Find("Focus", "IsTarget");
+
+		if(isTarget == "true")
+		{
+			GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
+		}
+	}
 }
 
 void ObjectManager::ClearObjects()
