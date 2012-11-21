@@ -17,6 +17,7 @@ void Resolver::Update()
 	{
 		Resolve(*it);
 	}
+	mPairs.clear();
 }
 
 void Resolver::AddPair(CollisionPair const &aPair)

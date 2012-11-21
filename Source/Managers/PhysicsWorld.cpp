@@ -116,11 +116,31 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 			{
 				if(!mResolver.Find(*it, *it2))
 				{
-					float delta = fabs((*it)->GetOwner()->GET<Transform>()->GetPosition().x -
-										(*it2)->GetOwner()->GET<Transform>()->GetPosition().x);
+					float x1max = (*it)->GetOwner()->GET<Transform>()->GetPosition().x +
+									(*it)->GetOwner()->GET<Transform>()->GetSize().x +
+									(*it)->GetBroadSize().x;
+					float x2max = (*it2)->GetOwner()->GET<Transform>()->GetPosition().x +
+									(*it2)->GetOwner()->GET<Transform>()->GetSize().x +
+									(*it2)->GetBroadSize().x;
+
+					float x1min = (*it)->GetOwner()->GET<Transform>()->GetPosition().x -
+									(*it)->GetOwner()->GET<Transform>()->GetSize().x -
+									(*it)->GetBroadSize().x;
+					float x2min = (*it2)->GetOwner()->GET<Transform>()->GetPosition().x -
+								   (*it2)->GetOwner()->GET<Transform>()->GetSize().x -
+								   (*it2)->GetBroadSize().x;
+
+					float xmax = fabs(x1max - x2max);
+					float xmin = fabs(x1min - x2min);
+
+					float delta = (xmax < xmin) ? xmax : xmin;
 					if(delta < X_LIMIT)
 					{
 						mResolver.AddPair(CollisionPair(*it, *it2));
+					}
+					else
+					{
+						break;
 					}
 				}
 			}

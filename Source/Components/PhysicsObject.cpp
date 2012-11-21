@@ -76,3 +76,8 @@ void PhysicsObject::SetMass(float aMass)
 	mMass= aMass;
 	mInverseMass = 1.0f / mMass;
 }
+
+Vector3 PhysicsObject::GetBroadSize() const
+{
+	return mBroadSize;
+}

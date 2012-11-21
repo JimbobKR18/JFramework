@@ -38,6 +38,8 @@ public:
 
   float GetMass() const;
   void SetMass(float aMass);
+
+  Vector3 GetBroadSize() const;
 };
 
 #endif /* defined(__JFramework__PhysicsObject__) */

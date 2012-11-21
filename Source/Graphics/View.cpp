@@ -40,6 +40,6 @@ void View::Update()
 {
 	if(mTarget)
 	{
-    mPosition = mTarget->GET<Transform>()->GetPosition();
+		mPosition = mTarget->GET<Transform>()->GetPosition();
 	}
 }
