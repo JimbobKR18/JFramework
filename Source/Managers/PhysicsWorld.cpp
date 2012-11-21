@@ -116,7 +116,8 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 			{
 				if(!mResolver.Find(*it, *it2))
 				{
-					float delta = fabs((*it)->GetOwner()->GET<Transform>()->GetPosition().x - (*it2)->GetOwner()->GET<Transform>()->GetPosition().x);
+					float delta = fabs((*it)->GetOwner()->GET<Transform>()->GetPosition().x -
+										(*it2)->GetOwner()->GET<Transform>()->GetPosition().x);
 					if(delta < X_LIMIT)
 					{
 						mResolver.AddPair(CollisionPair(*it, *it2));

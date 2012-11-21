@@ -61,7 +61,10 @@ void ObjectManager::RemoveObject(GameObject *aObj)
 	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		if(*it == aObj)
+		{
 			mObjects.erase(it);
+			break;
+		}
 	}
 }
 
