@@ -9,11 +9,11 @@
 #include <Windows.h>
 #endif
 
-#define DT ((1.0f/60.0f) * 1000.0f)
+#define DT (1.0f/60.0f)
 
 GameApp::GameApp()
 {
-  mLastFrame = timeGetTime();
+  mLastFrame = timeGetTime() / 1000.0f;
 
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
@@ -43,7 +43,7 @@ float GameApp::GetDT() const
 
 void GameApp::AppStep()
 {
-  float currentTime = timeGetTime();
+  float currentTime = timeGetTime() / 1000.0f;
   mDT += currentTime - mLastFrame;
   mLastFrame = currentTime;
 }
