@@ -25,7 +25,7 @@ bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 	return false;
 }
 
-PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld"), mGravity(Vector3(0, 10.0f, 0))
+PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld"), mGravity(Vector3(0, 20.0f, 0))
 {
 }
 
