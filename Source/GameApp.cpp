@@ -9,6 +9,8 @@
 #include <Windows.h>
 #endif
 
+#define DT 16.7f
+
 GameApp::GameApp()
 {
   mLastFrame = timeGetTime();
@@ -42,7 +44,7 @@ float GameApp::GetDT() const
 void GameApp::AppStep()
 {
   float currentTime = timeGetTime();
-  mDT = currentTime - mLastFrame;
+  mDT += currentTime - mLastFrame;
   mLastFrame = currentTime;
 }
 
@@ -50,9 +52,15 @@ void GameApp::Update()
 {
   AppStep();
 
-  for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+  if(mDT >= DT)
   {
-    (*it)->Update();
+    while(mDT >= DT)
+      mDT -= DT;
+
+    for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+    {
+      (*it)->Update();
+    }
   }
 }
 
