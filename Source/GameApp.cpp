@@ -9,7 +9,7 @@
 #include <Windows.h>
 #endif
 
-#define DT 16.7f
+#define DT ((1.0f/60.0f) * 1000.0f)
 
 GameApp::GameApp()
 {
