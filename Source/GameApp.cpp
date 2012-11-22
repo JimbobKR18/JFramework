@@ -13,7 +13,8 @@
 
 GameApp::GameApp()
 {
-  mLastFrame = timeGetTime() / 1000.0f;
+  mDT = 0;
+  mLastFrame = ((float)timeGetTime()) / 1000.0f;
 
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
@@ -43,7 +44,7 @@ float GameApp::GetDT() const
 
 void GameApp::AppStep()
 {
-  float currentTime = timeGetTime() / 1000.0f;
+  float currentTime = ((float)timeGetTime()) / 1000.0f;
   mDT += currentTime - mLastFrame;
   mLastFrame = currentTime;
 }
