@@ -20,14 +20,14 @@ std::string const RelativePath(std::string const &aFileName)
 }
 
 #ifndef _WIN32
-float GetTickCount()
+long GetTickCount()
 {
 	struct timespec now;
 	clock_gettime(CLOCK_MONOTONIC, &now);
-	return (now.tv_sec * 1000.0f) + (now.tv_nsec / (1000.0f * 1000.0f));
+	return (now.tv_sec * 1000) + (now.tv_nsec / (1000 * 1000));
 }
 
-float timeGetTime()
+long timeGetTime()
 {
 	return GetTickCount();
 }
