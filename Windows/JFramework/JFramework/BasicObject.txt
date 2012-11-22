@@ -1,0 +1,24 @@
+Start
+{
+	PhysicsObject
+	{
+		Shape = CUBE
+		Mass = 50
+	}
+	Surface
+	{
+		TextureName = Blank.png
+	}
+	Transform
+	{
+		PositionX = 50
+		PositionY = 350
+		PositionZ = 0
+		ScaleX = 1
+		ScaleY = 1
+		ScaleZ = 1
+		SizeX = 50
+		SizeY = 50
+		SizeZ = 0
+	}
+}
