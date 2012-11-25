@@ -8,10 +8,42 @@
 
 #include "Common.h"
 
+#ifdef __APPLE__
+#include <mach/mach_time.h>
+#define ORWL_NANO (+1.0E-9)
+#define ORWL_GIGA UINT64_C(1000000000)
+#define CLOCK_MONOTONIC 0
+
+double orwl_timebase = 0.0;
+uint64_t orwl_timestart = 0;
+
+// A mac replacement for the linux function clock_gettime
+void clock_gettime(int aEmpty, struct timespec *aTime)
+{
+  if (!orwl_timestart)
+  {
+    mach_timebase_info_data_t tb = { 0 };
+    mach_timebase_info(&tb);
+    orwl_timebase = tb.numer;
+    orwl_timebase /= tb.denom;
+    orwl_timestart = mach_absolute_time();
+  }
+  
+  struct timespec currTime;
+  double diff = (mach_absolute_time() - orwl_timestart) * orwl_timebase;
+  currTime.tv_sec = diff * ORWL_NANO;
+  currTime.tv_nsec = diff - (currTime.tv_sec * ORWL_GIGA);
+  
+  *aTime = currTime;
+}
+#endif
+
 std::string const RelativePath(std::string const &aFileName)
 {
 #ifdef _WIN32
   std::string ret;
+#elif defined(__APPLE__)
+  std::string ret = "/Users/jimmyspencer/Documents/JFramework/Assets/";
 #else
   std::string ret = "../Assets/";
 #endif

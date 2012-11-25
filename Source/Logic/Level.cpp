@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include <algorithm>
 #include <fstream>
+#include <iostream>
 
 Level::Level()
 {
@@ -56,6 +57,9 @@ void Level::ParseFile()
 {
 	std::ifstream infile(RelativePath(mFileName).c_str());
 
+  if(!infile.good())
+    std::cout << "Level file " << mFileName << " not found!" << std::endl;
+  
 	while(infile.good())
 	{
 		std::string filename;

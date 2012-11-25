@@ -1,8 +1,10 @@
 #include "PCSurface.h"
 #include "Common.h"
 
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__APPLE__)
 #include <SDL/SDL_image.h>
+#elif defined(__APPLE__)
+#include <SDL_image/SDL_image.h>
 #else
 #include "SDL_image.h"
 #endif
