@@ -29,12 +29,9 @@ void clock_gettime(int aEmpty, struct timespec *aTime)
     orwl_timestart = mach_absolute_time();
   }
   
-  struct timespec currTime;
   double diff = (mach_absolute_time() - orwl_timestart) * orwl_timebase;
-  currTime.tv_sec = diff * ORWL_NANO;
-  currTime.tv_nsec = diff - (currTime.tv_sec * ORWL_GIGA);
-  
-  *aTime = currTime;
+  aTime->tv_sec = diff * ORWL_NANO;
+  aTime->tv_nsec = diff - (aTime->tv_sec * ORWL_GIGA);
 }
 #endif
 

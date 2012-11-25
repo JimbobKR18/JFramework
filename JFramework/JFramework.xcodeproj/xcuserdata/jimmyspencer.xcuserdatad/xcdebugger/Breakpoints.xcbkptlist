@@ -188,13 +188,26 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Core/Common.cpp"
-         timestampString = "375527739.374949"
+         timestampString = "375534228.711374"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
          landmarkName = "RelativePath(std::string const &amp;aFileName)"
          landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../Source/GameApp.cpp"
+         timestampString = "375533834.251524"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "GameApp::AppStep()"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
