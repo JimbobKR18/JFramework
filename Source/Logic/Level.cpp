@@ -1,6 +1,9 @@
 #include "Level.h"
 #include "LevelManager.h"
 #include "ObjectManager.h"
+#include "MathExt.h"
+#include "Transform.h"
+#include "GraphicsManager.h"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -56,20 +59,87 @@ void Level::Unload()
 void Level::ParseFile()
 {
 	std::ifstream infile(RelativePath(mFileName).c_str());
+	GameObject *object = NULL;
 
   if(!infile.good())
     std::cout << "Level file " << mFileName << " not found!" << std::endl;
   
 	while(infile.good())
 	{
-		std::string filename;
-		infile >> filename;
+		std::string param;
+		infile >> param;
 
-		if(filename.length() == 0)
+		if(param.length() == 0)
 			break;
 
-		GameObject *object = new GameObject(filename);
-		mOwner->GetOwningApp()->GET<ObjectManager>()->ParseObject(object);
-		mObjects.push_back(object);
+		if(param == "Transform")
+		{
+		  if(object)
+		  {
+		    Transform *transform = object->GET<Transform>();
+
+		    float posX, posY, posZ,
+		          scaleX, scaleY, scaleZ,
+		          sizeX, sizeY, sizeZ;
+		    std::string empty;
+
+		    infile >> empty;
+		    infile >> empty;
+		    infile >> empty;
+		    infile >> posX;
+		    infile >> empty;
+		    infile >> empty;
+        infile >> posY;
+        infile >> empty;
+        infile >> empty;
+        infile >> posZ;
+        infile >> empty;
+        infile >> empty;
+        infile >> scaleX;
+        infile >> empty;
+        infile >> empty;
+        infile >> scaleY;
+        infile >> empty;
+        infile >> empty;
+        infile >> scaleZ;
+        infile >> empty;
+        infile >> empty;
+        infile >> sizeX;
+        infile >> empty;
+        infile >> empty;
+        infile >> sizeY;
+        infile >> empty;
+        infile >> empty;
+        infile >> sizeZ;
+        infile >> empty;
+
+        transform->SetPosition(Vector3(posX,posY,posZ));
+        transform->SetScale(Vector3(scaleX,scaleY,scaleZ));
+        transform->SetSize(Vector3(sizeX,sizeY,sizeZ));
+		  }
+		}
+		else if(param == "Focus")
+		{
+		  std::string value, empty;
+
+		  if(object)
+		  {
+		    infile >> empty;
+		    infile >> empty;
+		    infile >> empty;
+		    infile >> value;
+
+		    if(value == "true")
+		    {
+		      mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
+		    }
+		  }
+		}
+		else
+		{
+		  object = new GameObject(param);
+		  mOwner->GetOwningApp()->GET<ObjectManager>()->ParseObject(object);
+		  mObjects.push_back(object);
+		}
 	}
 }

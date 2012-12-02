@@ -23,6 +23,6 @@ Start
 	}
 	Focus
 	{
-		IsTarget = true
+		IsTarget = false
 	}
 }
