@@ -62,6 +62,8 @@ void GameApp::Update()
     {
       (*it)->Update();
     }
+
+    mDT = 0;
   }
 }
 

@@ -3,10 +3,11 @@
 
 #if defined(_WIN32) || defined(__APPLE__)
   #include "SDL.h"
+#else
+  #include <SDL/SDL.h>
 #endif
 
-#ifdef __APPLE__
-Uint32 SDLAppleUpdate(Uint32 aInterval, void *aParam)
+Uint32 SDLUpdateTimer(Uint32 aInterval, void *aParam)
 {
   SDL_Event event;
   
@@ -19,20 +20,12 @@ Uint32 SDLAppleUpdate(Uint32 aInterval, void *aParam)
   
   return aInterval;
 }
-#endif
 
 int main(int argc, char *argv[])
 {
-	GameApp *app = new GameApp();
-#ifndef __APPLE__
-	while(1)
-	{
-		app->Update();
-	}
-#else
+  GameApp *app = new GameApp();
   SDL_Event event;
-  SDL_TimerID timer;
-  timer = SDL_AddTimer(16, SDLAppleUpdate, app);
+  SDL_AddTimer((1.0f/60.0f)*1000.0f, SDLUpdateTimer, app);
   
   while(SDL_WaitEvent(&event))
   {
@@ -43,8 +36,7 @@ int main(int argc, char *argv[])
         break;
     }
   }
-#endif
   delete app;
 
-	return 0;
+  return 0;
 }
