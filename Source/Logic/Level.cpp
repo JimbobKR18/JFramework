@@ -63,7 +63,7 @@ void Level::ParseFile()
 
   if(!infile.good())
     std::cout << "Level file " << mFileName << " not found!" << std::endl;
-  
+
 	while(infile.good())
 	{
 		std::string param;
@@ -131,7 +131,7 @@ void Level::ParseFile()
 
 		    if(value == "true")
 		    {
-		      mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
+		      GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
 		    }
 		  }
 		}
