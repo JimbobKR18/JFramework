@@ -131,7 +131,7 @@ void Level::ParseFile()
 
 		    if(value == "true")
 		    {
-		      GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
+		      mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
 		    }
 		  }
 		}
