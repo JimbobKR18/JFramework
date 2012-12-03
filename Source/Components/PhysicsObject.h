@@ -33,6 +33,7 @@ public:
   static std::string GetName() {return "PhysicsObject";}
 
   void AddForce(Vector3 const &aForce);
+  Vector3 GetVelocity() const;
   void SetVelocity(Vector3 const &aVel);
   void SetAcceleration(Vector3 const &aAccel);
 

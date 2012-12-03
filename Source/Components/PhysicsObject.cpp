@@ -38,7 +38,7 @@ void PhysicsObject::Update()
 
   mForces *= 0;
 
-  mBroadSize = GetOwner()->GET<Transform>()->GetSize() + Vector3(5.0f, 5.0f, 5.0f);
+  mBroadSize = GetOwner()->GET<Transform>()->GetSize() + Vector3(15.0f, 15.0f, 15.0f);
 }
 
 void PhysicsObject::SendMessage(Message const &aMessage)
@@ -54,6 +54,11 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
 void PhysicsObject::AddForce(Vector3 const &aForce)
 {
   mForces += aForce;
+}
+
+Vector3 PhysicsObject::GetVelocity() const
+{
+  return mVelocity;
 }
 
 void PhysicsObject::SetVelocity(Vector3 const &aVel)
@@ -73,7 +78,7 @@ float PhysicsObject::GetMass() const
 
 void PhysicsObject::SetMass(float aMass)
 {
-	mMass= aMass;
+	mMass = aMass;
 	mInverseMass = 1.0f / mMass;
 }
 

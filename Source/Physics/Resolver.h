@@ -18,10 +18,12 @@ public:
 	bool Find(PhysicsObject *aObject1, PhysicsObject *aObject2);
 
 private:
-	void Resolve(CollisionPair const &aPair);
-	void SolveSphereToSphere(CollisionPair const &aPair);
-	void SolveSphereToCube(CollisionPair const &aPair);
-	void SolveCubeToCube(CollisionPair const &aPair);
+	void ResolvePenetration(CollisionPair const &aPair);
+	void ResolveVelocity(CollisionPair const &aPair);
+	void Resolve(CollisionPair &aPair);
+	void CalculateSphereToSphere(CollisionPair &aPair);
+	void CalculateSphereToCube(CollisionPair &aPair);
+	void CalculateCubeToCube(CollisionPair &aPair);
 };
 
 #endif

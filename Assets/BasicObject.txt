@@ -2,7 +2,7 @@ Start
 {
 	PhysicsObject
 	{
-		Shape = CUBE
+		Shape = SPHERE
 		Mass = 50
 	}
 	Surface
@@ -11,7 +11,7 @@ Start
 	}
 	Transform
 	{
-		PositionX = 50
+		PositionX = 100
 		PositionY = 150
 		PositionZ = -1
 		ScaleX = 1

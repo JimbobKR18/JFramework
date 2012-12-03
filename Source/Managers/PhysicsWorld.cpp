@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <cmath>
 
-#define X_LIMIT 10.0f
+#define X_LIMIT 50.0f
 
 bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 {
@@ -59,6 +59,7 @@ void PhysicsWorld::Update()
 {
 	SweepAndPrune(SortOnAxis());
 	mRegistry.Update();
+	mResolver.Update();
 }
 
 void PhysicsWorld::SendMessage(Message const &aMessage)
@@ -116,22 +117,18 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 			{
 				if(!mResolver.Find(*it, *it2))
 				{
-					float x1max = (*it)->GetOwner()->GET<Transform>()->GetPosition().x +
-									(*it)->GetOwner()->GET<Transform>()->GetSize().x +
-									(*it)->GetBroadSize().x;
-					float x2max = (*it2)->GetOwner()->GET<Transform>()->GetPosition().x +
-									(*it2)->GetOwner()->GET<Transform>()->GetSize().x +
-									(*it2)->GetBroadSize().x;
+				  float x1 = (*it)->GetOwner()->GET<Transform>()->GetPosition().x;
+				  float x1Size = (*it)->GetBroadSize().x / 2.0f;
+				  float x2 = (*it2)->GetOwner()->GET<Transform>()->GetPosition().x;
+				  float x2Size = (*it2)->GetBroadSize().x / 2.0f;
 
-					float x1min = (*it)->GetOwner()->GET<Transform>()->GetPosition().x -
-									(*it)->GetOwner()->GET<Transform>()->GetSize().x -
-									(*it)->GetBroadSize().x;
-					float x2min = (*it2)->GetOwner()->GET<Transform>()->GetPosition().x -
-								   (*it2)->GetOwner()->GET<Transform>()->GetSize().x -
-								   (*it2)->GetBroadSize().x;
+					float x1max = x1 + x1Size;
+					float x2max = x2 + x2Size;
+					float x1min = x1 - x1Size;
+					float x2min = x2 - x2Size;
 
-					float xmax = fabs(x1max - x2max);
-					float xmin = fabs(x1min - x2min);
+					float xmax = fabs(x1max - x2min);
+					float xmin = fabs(x1min - x2max);
 
 					float delta = (xmax < xmin) ? xmax : xmin;
 					if(delta < X_LIMIT)

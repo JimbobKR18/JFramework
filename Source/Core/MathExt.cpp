@@ -7,6 +7,23 @@ Vector3::Vector3(float aX, float aY, float aZ) : x(aX), y(aY), z(aZ)
 {
 }
 
+float Vector3::length() const
+{
+  return sqrt((x*x) + (y*y) + (z*z));
+}
+
+Vector3 Vector3::normalize() const
+{
+  Vector3 ret = *this;
+  float const len = length();
+
+  ret.x /= len;
+  ret.y /= len;
+  ret.z /= len;
+
+  return ret;
+}
+
 void Vector3::operator=(Vector3 const &rhs)
 {
   x = rhs.x;

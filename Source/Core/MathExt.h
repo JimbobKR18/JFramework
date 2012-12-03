@@ -10,6 +10,9 @@ struct Vector3
   Vector3();
   Vector3(float aX, float aY, float aZ);
 
+  float length() const;
+  Vector3 normalize() const;
+
   void operator=(Vector3 const &rhs);
   bool operator==(Vector3 const &rhs) const;
 
