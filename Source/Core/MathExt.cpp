@@ -17,6 +17,10 @@ Vector3 Vector3::normalize() const
   Vector3 ret = *this;
   float const len = length();
 
+  // Catch case if length is 0
+  if(len == 0)
+    return Vector3(1, 0, 0);
+
   ret.x /= len;
   ret.y /= len;
   ret.z /= len;
