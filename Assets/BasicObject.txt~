@@ -4,6 +4,7 @@ Start
 	{
 		Shape = SPHERE
 		Mass = 50
+		Gravity = true
 	}
 	Surface
 	{
@@ -23,6 +24,6 @@ Start
 	}
 	Focus
 	{
-		IsTarget = true
+		IsTarget = false
 	}
 }

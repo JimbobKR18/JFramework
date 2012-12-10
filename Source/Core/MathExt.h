@@ -23,6 +23,7 @@ struct Vector3
   Vector3 operator^(Vector3 const &rhs) const;
   Vector3 operator+(Vector3 const &rhs) const;
   Vector3 operator-(Vector3 const &rhs) const;
+  Vector3 operator%(Vector3 const &rhs) const;
   Vector3 operator-() const;
 
   void operator+=(Vector3 const &rhs);

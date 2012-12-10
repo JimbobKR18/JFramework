@@ -1,9 +1,10 @@
 Background.txt
+Floor.txt
 BasicObject.txt
 BasicObject.txt
 Transform
 {
-	PositionX = 0
+	PositionX = 100
 	PositionY = 150
 	PositionZ = -1
 	ScaleX = 1

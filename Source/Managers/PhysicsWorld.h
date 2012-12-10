@@ -40,6 +40,7 @@ public:
 
   void RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void UnregisterGravity(PhysicsObject *aObject);
 
 private:
   void AddObject(PhysicsObject *aObject);

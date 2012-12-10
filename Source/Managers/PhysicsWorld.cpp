@@ -80,6 +80,11 @@ void PhysicsWorld::UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGene
 	mRegistry.Remove(aObject, aGenerator);
 }
 
+void PhysicsWorld::UnregisterGravity(PhysicsObject *aObject)
+{
+  UnregisterForce(aObject, &mGravity);
+}
+
 void PhysicsWorld::AddObject(PhysicsObject *aObject)
 {
 	mObjects.push_back(aObject);

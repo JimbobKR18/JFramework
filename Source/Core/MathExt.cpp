@@ -94,6 +94,10 @@ Vector3 Vector3::operator-(Vector3 const &rhs) const
 
   return temp;
 }
+Vector3 Vector3::operator%(Vector3 const &rhs) const
+{
+  return rhs * ((*this * rhs)/(rhs * rhs));
+}
 Vector3 Vector3::operator-() const
 {
   return (*this * -1.0f);

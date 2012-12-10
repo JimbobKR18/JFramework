@@ -73,26 +73,34 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 	if(aParser.Find("PhysicsObject"))
 	{
 		PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
+
+		// What shape is our object? Is it affected by gravity?
+		// What is the object's mass? Is it static?
 		std::string type = aParser.Find("PhysicsObject", "Shape");
+		std::string gravity = aParser.Find("PhysicsObject", "Gravity");
+		std::string isstatic = aParser.Find("PhysicsObject", "Static");
 		object->SetMass(StringToInt(aParser.Find("PhysicsObject", "Mass")));
 
+		// default true
+		if(gravity == "false")
+		  GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(object);
+
+		// default false
+		if(isstatic == "true")
+		      object->SetStatic(true);
+
 		if(type == "CUBE")
-		{
 			object->mShape = PhysicsObject::CUBE;
-		}
 		else if(type == "SPHERE")
-		{
 			object->mShape = PhysicsObject::SPHERE;
-		}
 		else
-		{
 			assert(!"Invalid shape given");
-		}
 
 		aObject->AddComponent(object);
 	}
 	if(aParser.Find("Transform"))
 	{
+	  // Get Position, Scale, and Size
 		Transform *transform = new Transform();
 		transform->SetPosition(Vector3(StringToInt(aParser.Find("Transform", "PositionX")),
 				StringToInt(aParser.Find("Transform", "PositionY")),
