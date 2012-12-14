@@ -9,11 +9,6 @@
 #ifndef JFramework_LuaIncludes_h
 #define JFramework_LuaIncludes_h
 
-extern "C"
-{
-  #include "LUA/lua.h"
-  #include "LUA/lauxlib.h"
-  #include "LUA/lualib.h"
-}
+#include "LUA/SLB.hpp"
 
 #endif
