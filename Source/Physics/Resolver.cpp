@@ -40,14 +40,20 @@ bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
 {
 	CollisionPair temp(aObject1, aObject2);
 
-	for(std::list<CollisionPair>::iterator it = mPairs.begin();
-		it != mPairs.end(); ++it)
+	for(std::list<CollisionPair>::iterator it = mPairs.begin(); it != mPairs.end(); ++it)
 	{
 		if(*it == temp)
 		{
 			return true;
 		}
 	}
+	for(std::list<CollisionPair>::iterator it = mBroadPairs.begin(); it != mBroadPairs.end(); ++it)
+  {
+    if(*it == temp)
+    {
+      return true;
+    }
+  }
 	return false;
 }
 
@@ -65,17 +71,26 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
   Vector3 movePerIMass = aPair.mNormal * (-aPair.mPenetration / totalInverseMass);
   Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition();
   Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition();
+  Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) *
+                        (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f);
+  Vector3 b2Movement = (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) *
+                          (aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f);
 
   // Must check if objects can be moved
   if(!aPair.mBodies[0]->IsStatic())
-    aPair.mBodies[0]->GetOwner()->GET<Transform>()->SetPosition(b1Pos + (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())));
+  {
+    aPair.mBodies[0]->GetOwner()->GET<Transform>()->SetPosition(b1Pos + b1Movement);
+  }
   if(!aPair.mBodies[1]->IsStatic())
-    aPair.mBodies[1]->GetOwner()->GET<Transform>()->SetPosition(b2Pos - (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())));
+  {
+    aPair.mBodies[1]->GetOwner()->GET<Transform>()->SetPosition(b2Pos - b2Movement);
+  }
 }
 
 void Resolver::ResolveVelocity(CollisionPair const &aPair)
 {
-
+  aPair.mBodies[0]->SetVelocity(Vector3(0,0,0));
+  aPair.mBodies[1]->SetVelocity(Vector3(0,0,0));
 }
 
 void Resolver::Resolve(CollisionPair &aPair)
@@ -163,14 +178,19 @@ bool Resolver::CheckSphereToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  bool xCheck = t1->GetPosition().x + t1->GetSize().x > t2->GetPosition().x - t2->GetSize().x &&
-                t1->GetPosition().x - t1->GetSize().x < t2->GetPosition().x + t2->GetSize().x;
-  bool yCheck = t1->GetPosition().y + t1->GetSize().x > t2->GetPosition().y - t2->GetSize().y &&
-                t1->GetPosition().y - t1->GetSize().x < t2->GetPosition().y + t2->GetSize().y;
-  bool zCheck = t1->GetPosition().z + t1->GetSize().x > t2->GetPosition().z - t2->GetSize().z &&
-                t1->GetPosition().z - t1->GetSize().x < t2->GetPosition().z + t2->GetSize().z;
+  Vector3 halfSize1 = t1->GetSize()/2.0f;
+  Vector3 halfSize2 = t2->GetSize()/2.0f;
 
-  return xCheck && yCheck && zCheck;
+  for(int i = 0; i < 3; ++i)
+  {
+    float pos1 = t1->GetPosition()[i];
+    float pos2 = t2->GetPosition()[i];
+
+    if(fabs(pos1 - pos2) > (halfSize1[0] + halfSize2[i]))
+      return false;
+  }
+
+  return true;
 }
 
 bool Resolver::CheckCubeToCube(CollisionPair &aPair)
@@ -178,12 +198,12 @@ bool Resolver::CheckCubeToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  bool xCheck = t1->GetPosition().x + t1->GetSize().x > t2->GetPosition().x - t2->GetSize().x &&
-                t1->GetPosition().x - t1->GetSize().x < t2->GetPosition().x + t2->GetSize().x;
-  bool yCheck = t1->GetPosition().y + t1->GetSize().y > t2->GetPosition().y - t2->GetSize().y &&
-                t1->GetPosition().y - t1->GetSize().y < t2->GetPosition().y + t2->GetSize().y;
-  bool zCheck = t1->GetPosition().z + t1->GetSize().z > t2->GetPosition().z - t2->GetSize().z &&
-                t1->GetPosition().z - t1->GetSize().z < t2->GetPosition().z + t2->GetSize().z;
+  Vector3 halfSize1 = t1->GetSize()/2.0f;
+   Vector3 halfSize2 = t2->GetSize()/2.0f;
+
+  bool xCheck = fabs(t1->GetPosition().x - t2->GetPosition().x) < halfSize1.x + halfSize2.x;
+  bool yCheck = fabs(t1->GetPosition().y - t2->GetPosition().y) < halfSize1.y + halfSize2.z;
+  bool zCheck = fabs(t1->GetPosition().z - t2->GetPosition().z) < halfSize1.z + halfSize2.y;
 
   return xCheck && yCheck && zCheck;
 }
@@ -207,7 +227,7 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   Vector3 b1Pos = b1Transform->GetPosition();
   Vector3 b2Pos = b2Transform->GetPosition();
 
-  aPair.mPenetration = fabs(((b1Pos - b2Pos).normalize() * (b1Pos - b2Pos).length()).length());
+  aPair.mPenetration = fabs(((b2Pos - b1Pos).normalize() * (b1Pos - b2Pos).length()).length());
   aPair.mNormal = (b2Pos - b1Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
 }

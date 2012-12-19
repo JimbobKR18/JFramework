@@ -4,7 +4,7 @@ BasicObject.txt
 BasicObject.txt
 Transform
 {
-	PositionX = 100
+	PositionX = 150
 	PositionY = 150
 	PositionZ = -1
 	ScaleX = 1
@@ -12,7 +12,7 @@ Transform
 	ScaleZ = 1
 	SizeX = 50
 	SizeY = 50
-	SizeZ = 0
+	SizeZ = 50
 }
 Focus
 {

@@ -21,8 +21,6 @@ GameApp::GameApp()
   AddManager(new GraphicsManager(this));
   AddManager(new LevelManager(this));
 
-  //GameObject* targetTest = GET<ObjectManager>()->CreateObject("BasicObject.txt");
-  //GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(targetTest);
   Level *testLevel = GET<LevelManager>()->CreateLevel("BasicLevel.txt");
   testLevel->Load();
 }
