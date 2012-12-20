@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\..\Source\Graphics\PCScreen.cpp" />
     <ClCompile Include="..\..\..\Source\Graphics\Screen.cpp" />
     <ClCompile Include="..\..\..\Source\Graphics\View.cpp" />
+    <ClCompile Include="..\..\..\Source\Logic\Level.cpp" />
     <ClCompile Include="..\..\..\Source\LUA\lapi.c" />
     <ClCompile Include="..\..\..\Source\LUA\lauxlib.c" />
     <ClCompile Include="..\..\..\Source\LUA\lbaselib.c" />
@@ -58,6 +59,7 @@
     <ClCompile Include="..\..\..\Source\LUA\lzio.c" />
     <ClCompile Include="..\..\..\Source\main.cpp" />
     <ClCompile Include="..\..\..\Source\Managers\GraphicsManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Managers\LevelManager.cpp" />
     <ClCompile Include="..\..\..\Source\Managers\ObjectManager.cpp" />
     <ClCompile Include="..\..\..\Source\Managers\PhysicsWorld.cpp" />
     <ClCompile Include="..\..\..\Source\Parsers\Parser.cpp" />
@@ -87,6 +89,7 @@
     <ClInclude Include="..\..\..\Source\Graphics\PCScreen.h" />
     <ClInclude Include="..\..\..\Source\Graphics\Screen.h" />
     <ClInclude Include="..\..\..\Source\Graphics\View.h" />
+    <ClInclude Include="..\..\..\Source\Logic\Level.h" />
     <ClInclude Include="..\..\..\Source\LUA\lapi.h" />
     <ClInclude Include="..\..\..\Source\LUA\lauxlib.h" />
     <ClInclude Include="..\..\..\Source\LUA\lcode.h" />
@@ -113,6 +116,7 @@
     <ClInclude Include="..\..\..\Source\LUA\lvm.h" />
     <ClInclude Include="..\..\..\Source\LUA\lzio.h" />
     <ClInclude Include="..\..\..\Source\Managers\GraphicsManager.h" />
+    <ClInclude Include="..\..\..\Source\Managers\LevelManager.h" />
     <ClInclude Include="..\..\..\Source\Managers\Manager.h" />
     <ClInclude Include="..\..\..\Source\Managers\ObjectManager.h" />
     <ClInclude Include="..\..\..\Source\Managers\PhysicsWorld.h" />
@@ -153,7 +157,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Jimbob\Documents\GitHub\JFramework\Windows\SDLWindows\include;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\TinyXML;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Parsers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Managers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\LUA;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Graphics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Core;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Physics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Components;C:\Users\Jimbob\Documents\GitHub\JFramework\Source;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Jimbob\Documents\GitHub\JFramework\Windows\SDLWindows\include;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Logic;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\TinyXML;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Parsers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Managers;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\LUA;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Graphics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Core;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Physics;C:\Users\Jimbob\Documents\GitHub\JFramework\Source\Components;C:\Users\Jimbob\Documents\GitHub\JFramework\Source;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Jimbob\Documents\GitHub\JFramework\Windows\SDLWindows\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

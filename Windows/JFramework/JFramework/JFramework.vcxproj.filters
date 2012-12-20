@@ -37,6 +37,9 @@
     <Filter Include="Source Files\XML">
       <UniqueIdentifier>{01d1f8b1-0dff-4f92-931b-5f4262f4ece2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Logic">
+      <UniqueIdentifier>{6e19b192-563a-4ea1-b5b3-bfb38a1a7f49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Components\LUAObject.cpp">
@@ -213,6 +216,12 @@
     <ClCompile Include="..\..\..\Source\Core\MathExt.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Logic\Level.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Managers\LevelManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\Components\LUAObject.h">
@@ -376,6 +385,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\MathExt.h">
       <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Logic\Level.h">
+      <Filter>Source Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Managers\LevelManager.h">
+      <Filter>Source Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
