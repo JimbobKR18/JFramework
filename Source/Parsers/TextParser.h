@@ -29,12 +29,18 @@ class TextParser : public Parser
     std::ifstream mInput;
     Root *mDictionary;
   public:
-    TextParser(std::string const &aFilename);
+    TextParser(std::string const &aFilename, bool aAutoParse = true);
     ~TextParser();
 
     bool Find(std::string const &aElement);
     std::string Find(std::string const &aRoot, std::string const &aElement);
     void Parse();
+  
+    float GetNextFloat(float &rValue);
+    int GetNextInt(float &rValue);
+    std::string GetNextString(std::string &rValue);
+  
+    bool IsGood();
 };
 
 #endif

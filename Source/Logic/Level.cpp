@@ -4,9 +4,7 @@
 #include "MathExt.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
-#include <algorithm>
-#include <fstream>
-#include <iostream>
+#include "Common.h"
 
 Level::Level()
 {
@@ -15,7 +13,7 @@ Level::Level()
 
 Level::Level(LevelManager *aManager, std::string const &aFileName) : mFileName(aFileName), mOwner(aManager), mActive(false)
 {
-	for(int i = aFileName.size()-1; aFileName[i] != '/' && i >= 0; --i)
+	for(int i = static_cast<int>(aFileName.size()) - 1; aFileName[i] != '/' && i >= 0; --i)
 	{
 		mName.push_back(aFileName[i]);
 	}
@@ -58,16 +56,13 @@ void Level::Unload()
 
 void Level::ParseFile()
 {
-	std::ifstream infile(RelativePath(mFileName).c_str());
+	TextParser parser(RelativePath(mFileName).c_str(), false);
 	GameObject *object = NULL;
 
-  if(!infile.good())
-    std::cout << "Level file " << mFileName << " not found!" << std::endl;
-
-	while(infile.good())
+	while(parser.IsGood())
 	{
 		std::string param;
-		infile >> param;
+		parser.GetNextString(param);
 
 		if(param.length() == 0)
 			break;
@@ -81,37 +76,16 @@ void Level::ParseFile()
 		    float posX, posY, posZ,
 		          scaleX, scaleY, scaleZ,
 		          sizeX, sizeY, sizeZ;
-		    std::string empty;
 
-		    infile >> empty;
-		    infile >> empty;
-		    infile >> empty;
-		    infile >> posX;
-		    infile >> empty;
-		    infile >> empty;
-        infile >> posY;
-        infile >> empty;
-        infile >> empty;
-        infile >> posZ;
-        infile >> empty;
-        infile >> empty;
-        infile >> scaleX;
-        infile >> empty;
-        infile >> empty;
-        infile >> scaleY;
-        infile >> empty;
-        infile >> empty;
-        infile >> scaleZ;
-        infile >> empty;
-        infile >> empty;
-        infile >> sizeX;
-        infile >> empty;
-        infile >> empty;
-        infile >> sizeY;
-        infile >> empty;
-        infile >> empty;
-        infile >> sizeZ;
-        infile >> empty;
+        parser.GetNextFloat(posX);
+        parser.GetNextFloat(posY);
+        parser.GetNextFloat(posZ);
+        parser.GetNextFloat(scaleX);
+        parser.GetNextFloat(scaleY);
+        parser.GetNextFloat(scaleZ);
+        parser.GetNextFloat(sizeX);
+        parser.GetNextFloat(sizeY);
+        parser.GetNextFloat(sizeZ);
 
         transform->SetPosition(Vector3(posX,posY,posZ));
         transform->SetScale(Vector3(scaleX,scaleY,scaleZ));
@@ -124,10 +98,8 @@ void Level::ParseFile()
 
 		  if(object)
 		  {
-		    infile >> empty;
-		    infile >> empty;
-		    infile >> empty;
-		    infile >> value;
+        parser.GetNextString(empty);
+        parser.GetNextString(value);
 
 		    if(value == "true")
 		    {

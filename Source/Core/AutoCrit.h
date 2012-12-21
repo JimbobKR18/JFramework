@@ -27,6 +27,9 @@ public:
 	Thread(void*(*func)(void *), void *args);
 	Thread(Thread const &rhs);
 	~Thread();
+  
+  void Join();
+  void Kill();
 };
 
 class CriticalSection

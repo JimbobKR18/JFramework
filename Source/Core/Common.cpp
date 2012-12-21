@@ -63,9 +63,15 @@ long timeGetTime()
 }
 #endif
 
-int StringToInt(std::string const &value)
+int StringToInt(std::string const &aValue)
 {
-	int ret = atoi(value.c_str());
+	int ret = atoi(aValue.c_str());
 	return ret;
+}
+
+float StringToFloat(std::string const &aValue)
+{
+  float ret = atof(aValue.c_str());
+  return ret;
 }
 

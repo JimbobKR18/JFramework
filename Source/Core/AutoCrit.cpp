@@ -30,6 +30,20 @@ Thread::~Thread()
 #endif
 }
 
+void Thread::Join()
+{
+#ifndef _WIN32
+  pthread_join(mThread, 0);
+#endif
+}
+
+void Thread::Kill()
+{
+#ifndef _WIN32
+  pthread_kill(mThread, 0);
+#endif
+}
+
 CriticalSection::CriticalSection()
 {
 }
