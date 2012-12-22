@@ -65,6 +65,11 @@ Vector3 PhysicsObject::GetVelocity() const
   return mVelocity;
 }
 
+Vector3 PhysicsObject::GetAcceleration() const
+{
+  return mAcceleration;
+}
+
 void PhysicsObject::SetVelocity(Vector3 const &aVel)
 {
   mVelocity = aVel;

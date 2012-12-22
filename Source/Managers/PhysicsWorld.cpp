@@ -59,7 +59,7 @@ void PhysicsWorld::Update()
 {
 	SweepAndPrune(SortOnAxis());
 	mRegistry.Update();
-	mResolver.Update();
+	mResolver.Update(GetOwningApp()->GetDT());
 }
 
 void PhysicsWorld::SendMessage(Message const &aMessage)

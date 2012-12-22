@@ -14,16 +14,17 @@ public:
 	Resolver();
 	~Resolver();
 
-	void Update();
+	void Update(float aDuration);
 	void AddPrelimPair(CollisionPair const &aPair);
 	void AddPair(CollisionPair const &aPair);
 	bool Find(PhysicsObject *aObject1, PhysicsObject *aObject2);
 
 private:
 	// Methods to resolve collisions
+  float CalculateSeparatingVelocity(CollisionPair const &aPair);
 	void ResolvePenetration(CollisionPair const &aPair);
-	void ResolveVelocity(CollisionPair const &aPair);
-	void Resolve(CollisionPair &aPair);
+	void ResolveVelocity(CollisionPair const &aPair, float aDuration);
+	void Resolve(CollisionPair &aPair, float aDuration);
 
 	// Check if objects are actually colliding
 	void CheckCollision(CollisionPair &aPair);

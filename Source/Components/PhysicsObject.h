@@ -39,6 +39,7 @@ public:
 
   // Getters and setters
   Vector3 GetVelocity() const;
+  Vector3 GetAcceleration() const;
   void SetVelocity(Vector3 const &aVel);
   void SetAcceleration(Vector3 const &aAccel);
 

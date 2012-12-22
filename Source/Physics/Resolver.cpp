@@ -12,7 +12,7 @@ Resolver::~Resolver()
 
 }
 
-void Resolver::Update()
+void Resolver::Update(float aDuration)
 {
   for(std::list<CollisionPair>::iterator it = mBroadPairs.begin(); it != mBroadPairs.end(); ++it)
   {
@@ -20,7 +20,7 @@ void Resolver::Update()
   }
 	for(std::list<CollisionPair>::iterator it = mPairs.begin(); it != mPairs.end(); ++it)
 	{
-		Resolve(*it);
+		Resolve(*it, aDuration);
 	}
 	mPairs.clear();
 	mBroadPairs.clear();
@@ -57,6 +57,14 @@ bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
 	return false;
 }
 
+float Resolver::CalculateSeparatingVelocity(CollisionPair const &aPair)
+{
+  Vector3 separatingVelocity = aPair.mBodies[0]->GetVelocity();
+  if(aPair.mBodies[1])
+    separatingVelocity -= aPair.mBodies[1]->GetVelocity();
+  return separatingVelocity * aPair.mNormal;
+}
+
 void Resolver::ResolvePenetration(CollisionPair const &aPair)
 {
   if(aPair.mPenetration <= 0)
@@ -87,13 +95,51 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
   }
 }
 
-void Resolver::ResolveVelocity(CollisionPair const &aPair)
+void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
 {
-  aPair.mBodies[0]->SetVelocity(Vector3(0,0,0));
-  aPair.mBodies[1]->SetVelocity(Vector3(0,0,0));
+  float separatingVelocity = CalculateSeparatingVelocity(aPair);
+  
+  if(separatingVelocity > 0)
+    return;
+  
+  float newSeparatingVelocity = -separatingVelocity * aPair.mRestitution;
+  
+  Vector3 accCausedVelocity = aPair.mBodies[0]->GetAcceleration();
+  if(aPair.mBodies[1])
+    accCausedVelocity -= aPair.mBodies[1]->GetAcceleration();
+  
+  float accCausedSepVelocity = accCausedVelocity * aPair.mNormal * aDuration;
+  
+  if(accCausedSepVelocity < 0)
+  {
+    newSeparatingVelocity += aPair.mRestitution * accCausedSepVelocity;
+    if(newSeparatingVelocity < 0)
+      newSeparatingVelocity = 0;
+  }
+  
+  float deltaVelocity = separatingVelocity - newSeparatingVelocity;
+  float totalInverseMass = 1.0f / aPair.mBodies[0]->GetMass();
+  if(aPair.mBodies[1])
+    totalInverseMass += 1.0f / aPair.mBodies[1]->GetMass();
+  
+  if(totalInverseMass <= 0) return;
+  
+  float impulse = deltaVelocity / totalInverseMass;
+  Vector3 impulsePerIMass = aPair.mNormal * impulse;
+  
+  Vector3 b1Movement = (impulsePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) *
+                        (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f);
+  Vector3 b2Movement = (impulsePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) *
+                        (aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f);
+  
+  if(aPair.mBodies[0])
+    aPair.mBodies[0]->SetVelocity(aPair.mBodies[0]->GetVelocity() + b1Movement);
+  
+  if(aPair.mBodies[1])
+    aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() + b2Movement);
 }
 
-void Resolver::Resolve(CollisionPair &aPair)
+void Resolver::Resolve(CollisionPair &aPair, float aDuration)
 {
 	switch(aPair.mBodies[0]->mShape)
 	{
@@ -120,8 +166,8 @@ void Resolver::Resolve(CollisionPair &aPair)
 		}
 		break;
 	}
+	ResolveVelocity(aPair, aDuration);
 	ResolvePenetration(aPair);
-	ResolveVelocity(aPair);
 }
 
 void Resolver::CheckCollision(CollisionPair &aPair)
@@ -218,6 +264,7 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Transform->GetSize().x + b2Transform->GetSize().x));
   aPair.mNormal = (b2Pos - b1Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRestitution = 1.0f;
 }
 
 void Resolver::CalculateSphereToCube(CollisionPair &aPair)
@@ -230,6 +277,7 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   aPair.mPenetration = fabs(((b2Pos - b1Pos).normalize() * (b1Pos - b2Pos).length()).length());
   aPair.mNormal = (b2Pos - b1Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRestitution = 1.0f;
 }
 
 void Resolver::CalculateCubeToCube(CollisionPair &aPair)
