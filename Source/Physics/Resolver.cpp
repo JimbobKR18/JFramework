@@ -273,6 +273,18 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 b1Pos = b1Transform->GetPosition();
   Vector3 b2Pos = b2Transform->GetPosition();
+  
+  /*Vector3 b1Size = b1Transform->GetSize();
+   Vector3 b2Size = b2Transform->GetSize();
+   
+   float shortestDistance = 0xffffff;
+   
+   for(int i = 0; i < 3; ++i)
+   {
+   float distance = fabs(fabs(b1Pos[i] - b2Pos[i]) - (b1Size[0] + b2Size[i]));
+   if(distance < shortestDistance)
+   shortestDistance = distance;
+   }*/
 
   aPair.mPenetration = fabs(((b2Pos - b1Pos).normalize() * (b1Pos - b2Pos).length()).length());
   aPair.mNormal = (b2Pos - b1Pos).normalize();
