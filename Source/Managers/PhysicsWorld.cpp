@@ -127,15 +127,10 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 				  float x2 = (*it2)->GetOwner()->GET<Transform>()->GetPosition().x;
 				  float x2Size = (*it2)->GetBroadSize().x / 2.0f;
 
-					float x1max = x1 + x1Size;
-					float x2max = x2 + x2Size;
-
 					float xPosDiff = fabs(x1 - x2);
-					float xmax = fabs(x1max - x2);
-					float xmin = fabs(x1 - x2max);
+          float xSizeTotal = fabs(x1Size + x2Size);
 
-					float delta = (xmax < xmin) ? xmax : xmin;
-					if(delta < X_LIMIT || delta < x1Size || delta < x2Size || xPosDiff < X_LIMIT)
+					if(xPosDiff < X_LIMIT || xSizeTotal > xPosDiff)
 					{
 						mResolver.AddPrelimPair(CollisionPair(*it, *it2));
 					}

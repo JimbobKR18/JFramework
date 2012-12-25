@@ -76,7 +76,7 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
     return;
 
   // Find the rate in which each object must move
-  Vector3 movePerIMass = aPair.mNormal * (-aPair.mPenetration / totalInverseMass);
+  Vector3 movePerIMass = aPair.mNormal * (aPair.mPenetration / totalInverseMass);
   Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition();
   Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition();
   Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) *
@@ -117,7 +117,7 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
       newSeparatingVelocity = 0;
   }
   
-  float deltaVelocity = separatingVelocity - newSeparatingVelocity;
+  float deltaVelocity = newSeparatingVelocity - separatingVelocity;
   float totalInverseMass = 1.0f / aPair.mBodies[0]->GetMass();
   if(aPair.mBodies[1])
     totalInverseMass += 1.0f / aPair.mBodies[1]->GetMass();
@@ -127,16 +127,16 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   float impulse = deltaVelocity / totalInverseMass;
   Vector3 impulsePerIMass = aPair.mNormal * impulse;
   
-  Vector3 b1Movement = (impulsePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) *
-                        (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f);
-  Vector3 b2Movement = (impulsePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) *
-                        (aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f);
+  Vector3 b1Movement = (impulsePerIMass * (1.0f / aPair.mBodies[0]->GetMass()));// *
+                        //(aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f);
+  Vector3 b2Movement = (impulsePerIMass * (1.0f / aPair.mBodies[1]->GetMass()));// *
+                        //(aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f);
   
-  if(aPair.mBodies[0])
+  if(aPair.mBodies[0] && !aPair.mBodies[0]->IsStatic())
     aPair.mBodies[0]->SetVelocity(aPair.mBodies[0]->GetVelocity() + b1Movement);
   
-  if(aPair.mBodies[1])
-    aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() + b2Movement);
+  if(aPair.mBodies[1] && !aPair.mBodies[1]->IsStatic())
+    aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() - b2Movement);
 }
 
 void Resolver::Resolve(CollisionPair &aPair, float aDuration)
