@@ -247,9 +247,9 @@ bool Resolver::CheckCubeToCube(CollisionPair &aPair)
   Vector3 halfSize1 = t1->GetSize()/2.0f;
    Vector3 halfSize2 = t2->GetSize()/2.0f;
 
-  bool xCheck = fabs(t1->GetPosition().x - t2->GetPosition().x) < halfSize1.x + halfSize2.x;
-  bool yCheck = fabs(t1->GetPosition().y - t2->GetPosition().y) < halfSize1.y + halfSize2.z;
-  bool zCheck = fabs(t1->GetPosition().z - t2->GetPosition().z) < halfSize1.z + halfSize2.y;
+  bool xCheck = fabs(t1->GetPosition().x - t2->GetPosition().x) <= halfSize1.x + halfSize2.x;
+  bool yCheck = fabs(t1->GetPosition().y - t2->GetPosition().y) <= halfSize1.y + halfSize2.y;
+  bool zCheck = fabs(t1->GetPosition().z - t2->GetPosition().z) <= halfSize1.z + halfSize2.z;
 
   return xCheck && yCheck && zCheck;
 }
@@ -274,19 +274,23 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   Vector3 b1Pos = b1Transform->GetPosition();
   Vector3 b2Pos = b2Transform->GetPosition();
   
-  /*Vector3 b1Size = b1Transform->GetSize();
-   Vector3 b2Size = b2Transform->GetSize();
-   
-   float shortestDistance = 0xffffff;
-   
-   for(int i = 0; i < 3; ++i)
-   {
-   float distance = fabs(fabs(b1Pos[i] - b2Pos[i]) - (b1Size[0] + b2Size[i]));
-   if(distance < shortestDistance)
-   shortestDistance = distance;
-   }*/
+  Vector3 b1Size = b1Transform->GetSize();
+  Vector3 b2Size = b2Transform->GetSize();
+ 
+  int axis = 0;
+  float shortestDistance = 0xffffff;
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - (b1Size[0] + b2Size[i]));
+    if(distance < shortestDistance)
+    {
+      axis = i;
+      shortestDistance = distance;
+    }
+  }
 
-  aPair.mPenetration = fabs(((b2Pos - b1Pos).normalize() * (b1Pos - b2Pos).length()).length());
+  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Size[0] + b2Size[axis]));
   aPair.mNormal = (b2Pos - b1Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
@@ -294,5 +298,29 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
 
 void Resolver::CalculateCubeToCube(CollisionPair &aPair)
 {
-
+  Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 b1Pos = b1Transform->GetPosition();
+  Vector3 b2Pos = b2Transform->GetPosition();
+  
+  Vector3 b1Size = b1Transform->GetSize();
+  Vector3 b2Size = b2Transform->GetSize();
+  
+  int axis = 0;
+  float shortestDistance = 0xffffff;
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - (b1Size[i] + b2Size[i]));
+    if(distance < shortestDistance)
+    {
+      axis = i;
+      shortestDistance = distance;
+    }
+  }
+  
+  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Size[axis] + b2Size[axis]));
+  aPair.mNormal = (b2Pos - b1Pos).normalize();
+  aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRestitution = 1.0f;
 }

@@ -4,6 +4,8 @@
 #include "PhysicsObject.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
+#include "ControllerManager.h"
+#include "PlayerController.h"
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCSurface.h"
@@ -133,6 +135,14 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 			GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
 		}
 	}
+  if(aParser.Find("PlayerController"))
+  {
+    PlayerController *controller = new PlayerController();
+    controller->SetTarget(aObject);
+    
+    GetOwningApp()->GET<ControllerManager>()->AddController(controller);
+    aObject->AddComponent(controller);
+  }
 }
 
 void ObjectManager::ClearObjects()

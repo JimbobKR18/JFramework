@@ -2,6 +2,7 @@
 #define __JFramework_GameApp_H_
 
 #include "Common.h"
+#include "Message.h"
 
 class Manager;
 
@@ -19,6 +20,7 @@ public:
 
 	void AppStep();
 	void Update();
+  void SendMessage(Message const &aMessage);
 
 	void AddManager(Manager* aManager);
 

@@ -76,6 +76,12 @@
 		ADBBD29816619D2C00F2AF13 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADBBD21F16619D2C00F2AF13 /* tinyxml2.cpp */; };
 		ADBBD29A16619F8100F2AF13 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBBD29916619F8100F2AF13 /* SDL_image.framework */; };
 		ADBBD29D1661A4B500F2AF13 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBBD29C1661A4B500F2AF13 /* SDLMain.m */; };
+		ADC4B2C2168A9C3300E96A19 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADC4B2C0168A9C3300E96A19 /* PlayerController.cpp */; };
+		ADC4B2C3168A9C3300E96A19 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADC4B2C0168A9C3300E96A19 /* PlayerController.cpp */; };
+		ADC4B2C7168A9C4F00E96A19 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADC4B2C5168A9C4F00E96A19 /* Controller.cpp */; };
+		ADC4B2C8168A9C4F00E96A19 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADC4B2C5168A9C4F00E96A19 /* Controller.cpp */; };
+		ADC4B2CC168AF19000E96A19 /* ControllerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADC4B2CA168AF19000E96A19 /* ControllerManager.cpp */; };
+		ADC4B2CD168AF19000E96A19 /* ControllerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADC4B2CA168AF19000E96A19 /* ControllerManager.cpp */; };
 		ADD5EABE15F325C5005E20E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5EABD15F325C5005E20E7 /* UIKit.framework */; };
 		ADD5EAC015F325C5005E20E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5EABF15F325C5005E20E7 /* Foundation.framework */; };
 		ADD5EAC215F325C5005E20E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5EAC115F325C5005E20E7 /* CoreGraphics.framework */; };
@@ -95,6 +101,7 @@
 		AD0754D71683D454006DE741 /* SLB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SLB.cpp; sourceTree = "<group>"; };
 		AD0754D81683D454006DE741 /* SLB.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SLB.hpp; sourceTree = "<group>"; };
 		AD468D931661980C00A71745 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
+		AD803A0F168D035C004C2B11 /* InputMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputMessage.h; path = Messages/InputMessage.h; sourceTree = "<group>"; };
 		AD9D290B1646F7BE00240FDC /* JFrameworkMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFrameworkMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9D29151646F7BE00240FDC /* JFrameworkMac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFrameworkMac-Info.plist"; sourceTree = "<group>"; };
 		AD9D29171646F7BE00240FDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -164,6 +171,12 @@
 		ADBBD29916619F8100F2AF13 /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = ../../../../../Library/Frameworks/SDL_image.framework; sourceTree = "<group>"; };
 		ADBBD29B1661A4B500F2AF13 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
 		ADBBD29C1661A4B500F2AF13 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
+		ADC4B2C0168A9C3300E96A19 /* PlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayerController.cpp; path = ../Logic/PlayerController.cpp; sourceTree = "<group>"; };
+		ADC4B2C1168A9C3300E96A19 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerController.h; path = ../Logic/PlayerController.h; sourceTree = "<group>"; };
+		ADC4B2C5168A9C4F00E96A19 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Logic/Controller.cpp; sourceTree = "<group>"; };
+		ADC4B2C6168A9C4F00E96A19 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Logic/Controller.h; sourceTree = "<group>"; };
+		ADC4B2CA168AF19000E96A19 /* ControllerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControllerManager.cpp; sourceTree = "<group>"; };
+		ADC4B2CB168AF19000E96A19 /* ControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerManager.h; sourceTree = "<group>"; };
 		ADD5EAB915F325C5005E20E7 /* JFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD5EABD15F325C5005E20E7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ADD5EABF15F325C5005E20E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -212,6 +225,14 @@
 				AD0754D31683D454006DE741 /* lualib.h */,
 			);
 			path = lua;
+			sourceTree = "<group>";
+		};
+		AD803A0C168D033C004C2B11 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				AD803A0F168D035C004C2B11 /* InputMessage.h */,
+			);
+			name = Messages;
 			sourceTree = "<group>";
 		};
 		AD9D290F1646F7BE00240FDC /* Other Frameworks */ = {
@@ -265,6 +286,7 @@
 		ADBBD1A416619D2C00F2AF13 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				ADC4B2C9168AF16F00E96A19 /* Controller */,
 				ADBBD1A716619D2C00F2AF13 /* PCSurface.cpp */,
 				ADBBD1A816619D2C00F2AF13 /* PCSurface.h */,
 				ADBBD1A916619D2C00F2AF13 /* PhysicsObject.cpp */,
@@ -280,6 +302,7 @@
 		ADBBD1AF16619D2C00F2AF13 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				AD803A0C168D033C004C2B11 /* Messages */,
 				ADBBD1B016619D2C00F2AF13 /* AutoCrit.cpp */,
 				ADBBD1B116619D2C00F2AF13 /* AutoCrit.h */,
 				ADBBD1B216619D2C00F2AF13 /* Common.cpp */,
@@ -342,6 +365,8 @@
 				ADBBD20916619D2C00F2AF13 /* ObjectManager.h */,
 				ADBBD20A16619D2C00F2AF13 /* PhysicsWorld.cpp */,
 				ADBBD20B16619D2C00F2AF13 /* PhysicsWorld.h */,
+				ADC4B2CA168AF19000E96A19 /* ControllerManager.cpp */,
+				ADC4B2CB168AF19000E96A19 /* ControllerManager.h */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -383,6 +408,17 @@
 				ADBBD22016619D2C00F2AF13 /* tinyxml2.h */,
 			);
 			path = TinyXML;
+			sourceTree = "<group>";
+		};
+		ADC4B2C9168AF16F00E96A19 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ADC4B2C0168A9C3300E96A19 /* PlayerController.cpp */,
+				ADC4B2C1168A9C3300E96A19 /* PlayerController.h */,
+				ADC4B2C5168A9C4F00E96A19 /* Controller.cpp */,
+				ADC4B2C6168A9C4F00E96A19 /* Controller.h */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		ADD5EAAE15F325C5005E20E7 = {
@@ -570,6 +606,9 @@
 				AD0754DA1683D454006DE741 /* lua.c in Sources */,
 				AD0754DC1683D454006DE741 /* LUATypes.cpp in Sources */,
 				AD0754DE1683D454006DE741 /* SLB.cpp in Sources */,
+				ADC4B2C3168A9C3300E96A19 /* PlayerController.cpp in Sources */,
+				ADC4B2C8168A9C4F00E96A19 /* Controller.cpp in Sources */,
+				ADC4B2CD168AF19000E96A19 /* ControllerManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +648,9 @@
 				AD0754D91683D454006DE741 /* lua.c in Sources */,
 				AD0754DB1683D454006DE741 /* LUATypes.cpp in Sources */,
 				AD0754DD1683D454006DE741 /* SLB.cpp in Sources */,
+				ADC4B2C2168A9C3300E96A19 /* PlayerController.cpp in Sources */,
+				ADC4B2C7168A9C4F00E96A19 /* Controller.cpp in Sources */,
+				ADC4B2CC168AF19000E96A19 /* ControllerManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

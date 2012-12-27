@@ -4,6 +4,7 @@
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
 #include "LevelManager.h"
+#include "ControllerManager.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -20,6 +21,7 @@ GameApp::GameApp()
   AddManager(new PhysicsWorld(this));
   AddManager(new GraphicsManager(this));
   AddManager(new LevelManager(this));
+  AddManager(new ControllerManager(this));
 
   Level *testLevel = GET<LevelManager>()->CreateLevel("BasicLevel.txt");
   testLevel->Load();
@@ -63,6 +65,14 @@ void GameApp::Update()
 
     mDT = 0;
   }
+}
+
+void GameApp::SendMessage(Message const &aMessage)
+{
+  for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+	{
+    (*it)->SendMessage(aMessage);
+	}
 }
 
 void GameApp::AddManager(Manager *aManager)

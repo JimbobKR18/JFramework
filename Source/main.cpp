@@ -1,5 +1,6 @@
 #include "GameApp.h"
 #include "TextParser.h"
+#include "InputMessage.h"
 
 #if defined(_WIN32) || defined(__APPLE__)
   #include "SDL.h"
@@ -34,6 +35,24 @@ int main(int argc, char *argv[])
       case SDL_USEREVENT:
         app->Update();
         break;
+      case SDL_KEYDOWN:
+        switch(event.key.keysym.sym)
+        {
+          case SDLK_LEFT:
+            app->SendMessage(InputMessage("MoveLeft"));
+            break;
+          case SDLK_RIGHT:
+            app->SendMessage(InputMessage("MoveRight"));
+            break;
+          case SDLK_UP:
+            app->SendMessage(InputMessage("MoveUp"));
+            break;
+          case SDLK_DOWN:
+            app->SendMessage(InputMessage("MoveDown"));
+            break;
+          default:
+            break;
+        }
     }
   }
   delete app;
