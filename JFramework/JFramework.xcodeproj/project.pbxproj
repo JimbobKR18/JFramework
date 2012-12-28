@@ -13,6 +13,8 @@
 		AD0754DC1683D454006DE741 /* LUATypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD0754D51683D454006DE741 /* LUATypes.cpp */; };
 		AD0754DD1683D454006DE741 /* SLB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD0754D71683D454006DE741 /* SLB.cpp */; };
 		AD0754DE1683D454006DE741 /* SLB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD0754D71683D454006DE741 /* SLB.cpp */; };
+		AD26CCA3168D1400007C3551 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCA1168D1400007C3551 /* InputManager.cpp */; };
+		AD26CCA4168D1400007C3551 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCA1168D1400007C3551 /* InputManager.cpp */; };
 		AD468D941661980C00A71745 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD468D931661980C00A71745 /* SDL.framework */; };
 		AD9D29181646F7BE00240FDC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD9D29161646F7BE00240FDC /* InfoPlist.strings */; };
 		AD9D291E1646F7BE00240FDC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AD9D291C1646F7BE00240FDC /* Credits.rtf */; };
@@ -100,6 +102,8 @@
 		AD0754D61683D454006DE741 /* LUATypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUATypes.h; sourceTree = "<group>"; };
 		AD0754D71683D454006DE741 /* SLB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SLB.cpp; sourceTree = "<group>"; };
 		AD0754D81683D454006DE741 /* SLB.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SLB.hpp; sourceTree = "<group>"; };
+		AD26CCA1168D1400007C3551 /* InputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
+		AD26CCA2168D1400007C3551 /* InputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
 		AD468D931661980C00A71745 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
 		AD803A0F168D035C004C2B11 /* InputMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputMessage.h; path = Messages/InputMessage.h; sourceTree = "<group>"; };
 		AD9D290B1646F7BE00240FDC /* JFrameworkMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFrameworkMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +231,17 @@
 			path = lua;
 			sourceTree = "<group>";
 		};
+		AD26CCA6168D18EC007C3551 /* Surface */ = {
+			isa = PBXGroup;
+			children = (
+				ADBBD1A716619D2C00F2AF13 /* PCSurface.cpp */,
+				ADBBD1A816619D2C00F2AF13 /* PCSurface.h */,
+				ADBBD1AB16619D2C00F2AF13 /* Surface.cpp */,
+				ADBBD1AC16619D2C00F2AF13 /* Surface.h */,
+			);
+			name = Surface;
+			sourceTree = "<group>";
+		};
 		AD803A0C168D033C004C2B11 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,13 +301,10 @@
 		ADBBD1A416619D2C00F2AF13 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AD26CCA6168D18EC007C3551 /* Surface */,
 				ADC4B2C9168AF16F00E96A19 /* Controller */,
-				ADBBD1A716619D2C00F2AF13 /* PCSurface.cpp */,
-				ADBBD1A816619D2C00F2AF13 /* PCSurface.h */,
 				ADBBD1A916619D2C00F2AF13 /* PhysicsObject.cpp */,
 				ADBBD1AA16619D2C00F2AF13 /* PhysicsObject.h */,
-				ADBBD1AB16619D2C00F2AF13 /* Surface.cpp */,
-				ADBBD1AC16619D2C00F2AF13 /* Surface.h */,
 				ADBBD1AD16619D2C00F2AF13 /* Transform.cpp */,
 				ADBBD1AE16619D2C00F2AF13 /* Transform.h */,
 			);
@@ -367,6 +379,8 @@
 				ADBBD20B16619D2C00F2AF13 /* PhysicsWorld.h */,
 				ADC4B2CA168AF19000E96A19 /* ControllerManager.cpp */,
 				ADC4B2CB168AF19000E96A19 /* ControllerManager.h */,
+				AD26CCA1168D1400007C3551 /* InputManager.cpp */,
+				AD26CCA2168D1400007C3551 /* InputManager.h */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -609,6 +623,7 @@
 				ADC4B2C3168A9C3300E96A19 /* PlayerController.cpp in Sources */,
 				ADC4B2C8168A9C4F00E96A19 /* Controller.cpp in Sources */,
 				ADC4B2CD168AF19000E96A19 /* ControllerManager.cpp in Sources */,
+				AD26CCA4168D1400007C3551 /* InputManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,6 +666,7 @@
 				ADC4B2C2168A9C3300E96A19 /* PlayerController.cpp in Sources */,
 				ADC4B2C7168A9C4F00E96A19 /* Controller.cpp in Sources */,
 				ADC4B2CC168AF19000E96A19 /* ControllerManager.cpp in Sources */,
+				AD26CCA3168D1400007C3551 /* InputManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,12 +8,13 @@
 class GraphicsManager : public Manager
 {
 private:
-	std::vector<Surface *> mSurfaces;
+	std::vector<Surface*> mSurfaces;
 	Screen *mScreen;
 public:
 	GraphicsManager(GameApp *aApp);
 	~GraphicsManager();
 
+  // Derived from Manager
 	void Update();
 	void SendMessage(Message const &aMessage);
 	static std::string GetName() {return "GraphicsManager";}
@@ -26,6 +27,8 @@ public:
 private:
 	void AddSurface(Surface *aSurface);
 	void RemoveSurface(Surface *aSurface);
+public:
+  typedef std::vector<Surface*>::iterator SurfaceIT;
 };
 
 #endif

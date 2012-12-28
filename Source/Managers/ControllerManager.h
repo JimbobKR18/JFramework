@@ -25,9 +25,13 @@ public:
   void RemoveController(Controller *aController);
   void ClearControllers();
   
+  // Derived from Manager
   void Update();
 	void SendMessage(Message const &aMessage);
 	static std::string GetName() {return "ControllerManager";}
+  
+public:
+  typedef std::vector<Controller*>::iterator ControllerIT;
 };
 
 #endif /* defined(__JFramework__ControllerManager__) */

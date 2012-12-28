@@ -48,7 +48,7 @@ void PhysicsWorld::DeleteObject(PhysicsObject *aObject)
 
 void PhysicsWorld::ClearObjects()
 {
-	for(std::vector<PhysicsObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	for(PhysicsIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		delete *it;
 	}
@@ -112,10 +112,10 @@ std::vector<PhysicsObject*> PhysicsWorld::SortOnAxis()
 
 void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 {
-	for(std::vector<PhysicsObject*>::iterator it = aSortedObjects.begin();
+	for(PhysicsIT it = aSortedObjects.begin();
 		it != aSortedObjects.end(); ++it)
 	{
-		for(std::vector<PhysicsObject*>::iterator it2 = aSortedObjects.begin();
+		for(PhysicsIT it2 = aSortedObjects.begin();
 			it2 != aSortedObjects.end(); ++it2)
 		{
 			if(*it != *it2)

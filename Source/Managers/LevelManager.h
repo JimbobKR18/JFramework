@@ -18,12 +18,15 @@ public:
 	void DeleteLevel(Level *aLevel);
 	void LoadLevel(std::string const &aLevelName);
 
+  // Derived from Manager
 	void Update();
 	void SendMessage(Message const &aMessage);
 	static std::string GetName() {return "LevelManager";}
 private:
 	void AddLevel(Level *aLevel);
 	void RemoveLevel(Level *aLevel);
+public:
+  typedef std::vector<Level*>::iterator LevelsIT;
 };
 
 #endif

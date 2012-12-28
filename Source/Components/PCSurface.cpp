@@ -82,7 +82,7 @@ void PCSurface::Update()
 }
 void PCSurface::SendMessage(Message const &aMessage)
 {
-
+  GetOwner()->ReceiveMessage(aMessage);
 }
 void PCSurface::ReceiveMessage(Message const &aMessage)
 {

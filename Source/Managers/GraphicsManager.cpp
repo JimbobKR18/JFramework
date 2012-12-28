@@ -49,7 +49,7 @@ void GraphicsManager::DeleteSurface(Surface *aSurface)
 
 void GraphicsManager::ClearSurfaces()
 {
-  for(std::vector<Surface*>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
   {
     DeleteSurface(*it);
   }
@@ -67,7 +67,7 @@ void GraphicsManager::AddSurface(Surface *aSurface)
 
 void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
-  for(std::vector<Surface*>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
 	{
 		if(*it == aSurface)
 		{

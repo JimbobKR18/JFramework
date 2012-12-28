@@ -5,6 +5,7 @@
 #include "ObjectManager.h"
 #include "LevelManager.h"
 #include "ControllerManager.h"
+#include "InputManager.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -22,6 +23,7 @@ GameApp::GameApp()
   AddManager(new GraphicsManager(this));
   AddManager(new LevelManager(this));
   AddManager(new ControllerManager(this));
+  AddManager(new InputManager(this));
 
   Level *testLevel = GET<LevelManager>()->CreateLevel("BasicLevel.txt");
   testLevel->Load();

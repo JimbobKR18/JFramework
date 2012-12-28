@@ -19,7 +19,7 @@ Level *LevelManager::CreateLevel(std::string const &aFilename)
 
 Level *LevelManager::GetLevel(std::string const &aLevelName)
 {
-	for(std::vector<Level*>::iterator it = mLevels.begin(); it != mLevels.end(); ++it)
+	for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
 		if((*it)->GetName() == aLevelName)
 		{
@@ -68,7 +68,7 @@ void LevelManager::AddLevel(Level *aLevel)
 
 void LevelManager::RemoveLevel(Level *aLevel)
 {
-	for(std::vector<Level*>::iterator it = mLevels.begin(); it != mLevels.end(); ++it)
+	for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
 		if(*it == aLevel)
 		{

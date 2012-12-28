@@ -24,8 +24,7 @@ void ControllerManager::AddController(Controller *aController)
 }
 void ControllerManager::RemoveController(Controller *aController)
 {
-  for(std::vector<Controller*>::iterator it = mControllers.begin();
-      it != mControllers.end(); ++it)
+  for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
   {
     if(*it == aController)
     {
@@ -37,8 +36,7 @@ void ControllerManager::RemoveController(Controller *aController)
 }
 void ControllerManager::ClearControllers()
 {
-  for(std::vector<Controller*>::iterator it = mControllers.begin();
-      it != mControllers.end(); ++it)
+  for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
   {
     RemoveController(*it);
   }
@@ -51,9 +49,5 @@ void ControllerManager::Update()
 }
 void ControllerManager::SendMessage(Message const &aMessage)
 {
-  for(std::vector<Controller*>::iterator it = mControllers.begin();
-      it != mControllers.end(); ++it)
-  {
-    //(*it)->ReceiveMessage(aMessage);
-  }
+  
 }

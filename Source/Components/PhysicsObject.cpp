@@ -47,7 +47,7 @@ void PhysicsObject::Update()
 
 void PhysicsObject::SendMessage(Message const &aMessage)
 {
-
+  GetOwner()->ReceiveMessage(aMessage);
 }
 
 void PhysicsObject::ReceiveMessage(Message const &aMessage)

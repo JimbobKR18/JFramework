@@ -13,6 +13,7 @@ public:
 	ObjectManager(GameApp* aApp);
 	virtual ~ObjectManager();
 
+  // Derived from Manager
 	void Update();
 	void SendMessage(Message const &aMessage);
 	static std::string GetName() {return "ObjectManager";}
@@ -25,6 +26,8 @@ public:
 	void RemoveObject(GameObject *aObj);
 private:
 	void ParseDictionary(GameObject *aObject, Parser &aParser);
+public:
+  typedef std::vector<GameObject*>::iterator ObjectIT;
 };
 
 #endif

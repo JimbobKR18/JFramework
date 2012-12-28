@@ -22,13 +22,13 @@ ObjectManager::~ObjectManager()
 
 void ObjectManager::Update()
 {
-	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 		(*it)->Update();
 }
 
 void ObjectManager::SendMessage(Message const &aMsg)
 {
-	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 		(*it)->ReceiveMessage(aMsg);
 }
 
@@ -60,7 +60,7 @@ void ObjectManager::AddObject(GameObject *aObj)
 
 void ObjectManager::RemoveObject(GameObject *aObj)
 {
-	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		if(*it == aObj)
 		{
@@ -148,7 +148,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 void ObjectManager::ClearObjects()
 {
 	/* Now belongs to LevelManager.cpp
-	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		delete *it;
 	}*/

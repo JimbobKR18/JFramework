@@ -1,6 +1,6 @@
 #include "GameApp.h"
 #include "TextParser.h"
-#include "InputMessage.h"
+#include "InputManager.h"
 
 #if defined(_WIN32) || defined(__APPLE__)
   #include "SDL.h"
@@ -39,20 +39,40 @@ int main(int argc, char *argv[])
         switch(event.key.keysym.sym)
         {
           case SDLK_LEFT:
-            app->SendMessage(InputMessage("MoveLeft"));
+            app->GET<InputManager>()->AddInput("MoveLeft");
             break;
           case SDLK_RIGHT:
-            app->SendMessage(InputMessage("MoveRight"));
+            app->GET<InputManager>()->AddInput("MoveRight");
             break;
           case SDLK_UP:
-            app->SendMessage(InputMessage("MoveUp"));
+            app->GET<InputManager>()->AddInput("MoveUp");
             break;
           case SDLK_DOWN:
-            app->SendMessage(InputMessage("MoveDown"));
+            app->GET<InputManager>()->AddInput("MoveDown");
             break;
           default:
             break;
         }
+        break;
+      case SDL_KEYUP:
+        switch(event.key.keysym.sym)
+        {
+          case SDLK_LEFT:
+            app->GET<InputManager>()->RemoveInput("MoveLeft");
+            break;
+          case SDLK_RIGHT:
+            app->GET<InputManager>()->RemoveInput("MoveRight");
+            break;
+          case SDLK_UP:
+            app->GET<InputManager>()->RemoveInput("MoveUp");
+            break;
+          case SDLK_DOWN:
+            app->GET<InputManager>()->RemoveInput("MoveDown");
+            break;
+          default:
+            break;
+        }
+        break;
     }
   }
   delete app;

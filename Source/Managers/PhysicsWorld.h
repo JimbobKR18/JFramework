@@ -21,7 +21,7 @@ class PhysicsObject;
 class PhysicsWorld : public Manager
 {
 private:
-  std::vector<PhysicsObject *> mObjects;
+  std::vector<PhysicsObject*> mObjects;
   ForceRegistry mRegistry;
   GravityGenerator mGravity;
   Resolver mResolver;
@@ -34,6 +34,7 @@ public:
   void DeleteObject(PhysicsObject *aObject);
   void ClearObjects();
 
+  // Derived from Manager
   virtual void Update();
   virtual void SendMessage(Message const &aMessage);
   static std::string GetName() {return "PhysicsWorld";}
@@ -47,6 +48,9 @@ private:
   void RemoveObject(PhysicsObject *aObject);
   std::vector<PhysicsObject*> SortOnAxis();
   void SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects);
+  
+public:
+  typedef std::vector<PhysicsObject*>::iterator PhysicsIT;
 };
 
 #endif /* defined(__JFramework__PhysicsWorld__) */
