@@ -128,7 +128,7 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 				  float x2Size = (*it2)->GetBroadSize().x / 2.0f;
 
 					float xPosDiff = fabs(x1 - x2);
-          float xSizeTotal = fabs(x1Size + x2Size);
+          float xSizeTotal = fabs(x1Size + x2Size) + X_LIMIT;
 
 					if(xPosDiff < X_LIMIT || xSizeTotal > xPosDiff)
 					{
