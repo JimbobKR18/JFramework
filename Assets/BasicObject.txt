@@ -5,7 +5,7 @@ Start
 		Shape = SPHERE
 		Mass = 50
 		Static = false
-		Gravity = true
+		Gravity = false
 	}
 	Surface
 	{

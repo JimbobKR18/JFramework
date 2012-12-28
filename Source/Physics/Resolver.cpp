@@ -70,7 +70,10 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
   if(aPair.mPenetration <= 0)
     return;
 
-  float totalInverseMass = (1.0f / aPair.mBodies[0]->GetMass()) + (1.0f / aPair.mBodies[1]->GetMass());
+  float totalInverseMass = (1.0f / aPair.mBodies[0]->GetMass());
+  
+  if(!aPair.mBodies[1]->IsStatic())
+    totalInverseMass += (1.0f / aPair.mBodies[1]->GetMass());
 
   if(totalInverseMass <= 0)
     return;
@@ -79,10 +82,10 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
   Vector3 movePerIMass = aPair.mNormal * (aPair.mPenetration / totalInverseMass);
   Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition();
   Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition();
-  Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) *
-                        (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f);
-  Vector3 b2Movement = (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) *
-                          (aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f);
+  Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) /**
+                        (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f)*/;
+  Vector3 b2Movement = (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) /**
+                          (aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f)*/;
 
   // Must check if objects can be moved
   if(!aPair.mBodies[0]->IsStatic())
@@ -245,7 +248,7 @@ bool Resolver::CheckCubeToCube(CollisionPair &aPair)
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
   Vector3 halfSize1 = t1->GetSize()/2.0f;
-   Vector3 halfSize2 = t2->GetSize()/2.0f;
+  Vector3 halfSize2 = t2->GetSize()/2.0f;
 
   bool xCheck = fabs(t1->GetPosition().x - t2->GetPosition().x) <= halfSize1.x + halfSize2.x;
   bool yCheck = fabs(t1->GetPosition().y - t2->GetPosition().y) <= halfSize1.y + halfSize2.y;
@@ -262,7 +265,7 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
   Vector3 b2Pos = b2Transform->GetPosition();
 
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Transform->GetSize().x + b2Transform->GetSize().x));
-  aPair.mNormal = (b2Pos - b1Pos).normalize();
+  aPair.mNormal = (b1Pos - b2Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
@@ -291,7 +294,7 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   }
 
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Size[0] + b2Size[axis]));
-  aPair.mNormal = (b2Pos - b1Pos).normalize();
+  aPair.mNormal = (b1Pos - b2Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
@@ -320,7 +323,7 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
   }
   
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Size[axis] + b2Size[axis]));
-  aPair.mNormal = (b2Pos - b1Pos).normalize();
+  aPair.mNormal = (b1Pos - b2Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
