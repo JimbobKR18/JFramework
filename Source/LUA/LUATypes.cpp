@@ -24,6 +24,8 @@ namespace LUABind
   SLB::Manager mManager;
   std::map<std::string,std::string> mScripts;
   typedef std::pair<std::string,std::string> ScriptPair;
+  
+  GameApp* StaticGameApp::mApp = NULL;
 
   void Initialize()
   {
@@ -40,7 +42,7 @@ namespace LUABind
         .set("y", &Vector3::y)
         .set("z", &Vector3::z)
         .set("length", &Vector3::length)
-        .set("Equals", &Vector3::operator=)
+        .set("SetEqual", &Vector3::operator=)
         .set("IsEqual", &Vector3::operator==)
         .set("Add", &Vector3::Add)
         .set("Subtract", &Vector3::Subtract)
@@ -59,6 +61,27 @@ namespace LUABind
     // GameObject
     SLB::Class<GameObject>("GameObject").constructor<std::string>()
         .set("GetComponent", &GameObject::GetComponent);
+    // Level
+    SLB::Class<Level>("Level").constructor()
+        .set("Load", &Level::Load)
+        .set("Unload", &Level::Unload);
+    // Managers
+    SLB::Class<Manager, SLB::Instance::NoCopy>("Manager")
+        .set("GetOwningApp", &Manager::GetOwningApp);
+    SLB::Class<LevelManager>("LevelManager").inherits<Manager>()
+        .set("CreateLevel", &LevelManager::CreateLevel)
+        .set("LoadLevel", &LevelManager::LoadLevel);
+    SLB::Class<ObjectManager>("ObjectManager").inherits<Manager>()
+        .set("CreateObject", &ObjectManager::CreateObject);
+    // GameApp
+    SLB::Class<GameApp>("GameApp")
+        .set("GetManager", &GameApp::GetManager);
+    // StaticGameApp
+    SLB::Class<StaticGameApp, SLB::Instance::NoCopyNoDestroy>("StaticGameApp")
+        .set("GetApp", StaticGameApp::GetApp)
+        .set("GetLevelManager", StaticGameApp::GetLevelManager)
+        .set("GetObjectManager", StaticGameApp::GetObjectManager)
+        .set("LoadLevel", StaticGameApp::LoadLevel);
 
     // Platform specific scripts
 #ifdef PC
@@ -67,11 +90,11 @@ namespace LUABind
 
   void LoadScriptFromFile(std::string const &aFilename)
   {
-    SLB::Script script(&mManager);
+    SLB::Script script;
     // TODO: Get contents of file, use here.
     if(mScripts.find(aFilename) == mScripts.end())
     {
-      std::ifstream file(aFilename.c_str());
+      std::ifstream file(RelativePath(aFilename.c_str()));
       std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 
       mScripts.insert(ScriptPair(aFilename, contents));
@@ -82,7 +105,7 @@ namespace LUABind
 
   void LoadScriptFromString(std::string const &aString)
   {
-    SLB::Script script(&mManager);
+    SLB::Script script;
     script.doString(aString.c_str());
   }
 };

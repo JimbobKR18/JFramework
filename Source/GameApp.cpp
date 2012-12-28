@@ -6,6 +6,7 @@
 #include "LevelManager.h"
 #include "ControllerManager.h"
 #include "InputManager.h"
+#include "LUATypes.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -24,9 +25,13 @@ GameApp::GameApp()
   AddManager(new LevelManager(this));
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));
+  
+  LUABind::StaticGameApp::mApp = this;
+  LUABind::RegisterClasses();
 
-  Level *testLevel = GET<LevelManager>()->CreateLevel("BasicLevel.txt");
-  testLevel->Load();
+  //Level *testLevel = GET<LevelManager>()->CreateLevel("BasicLevel.txt");
+  //testLevel->Load();
+  LUABind::LoadScriptFromFile("BasicFile.LUA");
 }
 
 GameApp::~GameApp()
