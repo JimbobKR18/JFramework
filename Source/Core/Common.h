@@ -16,6 +16,7 @@
 #include <map>
 #include <set>
 #include <fstream>
+#include <sstream>
 #include <iostream>
 
 #if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
@@ -31,5 +32,6 @@ long timeGetTime();
 
 int StringToInt(std::string const &aValue);
 float StringToFloat(std::string const &aValue);
+std::vector<int> StringToIntVector(std::string const &aValue);
 
 #endif

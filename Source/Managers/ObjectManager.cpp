@@ -124,11 +124,18 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 #else
 		Surface *surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #endif
+    int numAnimations = 1;
     std::vector<int> numFrames;
-    
     numFrames.push_back(1);
     
-    surface->SetTextureCoordinateData(1, numFrames);
+    if(aParser.Find("Surface", "AnimationCount") != "BadString")
+    {
+      numFrames.clear();
+      numAnimations = StringToFloat(aParser.Find("Surface", "AnimationCount"));
+      numFrames = StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
+    }
+    
+    surface->SetTextureCoordinateData(numAnimations, numFrames);
 		aObject->AddComponent(surface);
 	}
 	if(aParser.Find("Focus"))

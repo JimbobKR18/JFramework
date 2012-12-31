@@ -29,15 +29,16 @@ TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int
       maxFrames = aNumFrames[i];
     }
   }
+  
+  // Figure out the gain per step of animation
+  mXGain = 1.0f / (float)maxFrames;
+  mYGain = 1.0f / (float)aNumAnimations;
+  
   // Set all values to starting positions
   mXValues[0] = mCurFrame * mXGain;
   mXValues[1] = (mCurFrame + 1) * mXGain;
   mYValues[0] = mCurAnimation * mYGain;
   mYValues[1] = (mCurAnimation + 1) * mYGain;
-  
-  // Figure out the gain per step of animation
-  mXGain = 1.0f / (float)maxFrames;
-  mYGain = 1.0f / (float)aNumAnimations;
 }
 
 TextureCoordinates::~TextureCoordinates()

@@ -9,7 +9,9 @@ Start
 	}
 	Surface
 	{
-		TextureName = Blank.png
+		TextureName = Blank2.png
+		AnimationCount = 1
+		FrameNumbers = 2
 	}
 	Transform
 	{

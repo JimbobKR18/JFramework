@@ -16,7 +16,8 @@ class TextureCoordinates
 {
 private:
   int mCurFrame, mCurAnimation;
-  int mNumAnimations, mXGain, mYGain;
+  int mNumAnimations;
+  float mXGain, mYGain;
   float mCurTime, mXValues[2], mYValues[2];
   
   // <currentAnimation, numberofFrames>

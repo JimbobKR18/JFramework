@@ -75,3 +75,34 @@ float StringToFloat(std::string const &aValue)
   return ret;
 }
 
+std::vector<int> StringToIntVector(std::string const &aValue)
+{
+  std::vector<int> ret;
+  std::istringstream stream(aValue);
+  char *buf = new char[10];
+  
+  // Early out case
+  if(aValue.find(",") == std::string::npos)
+  {
+    ret.push_back(StringToInt(aValue));
+    return ret;
+  }
+  
+  for(int i = 0; i < aValue.length();)
+  {
+    stream.getline(buf, aValue.length() - i, ',');
+    if(strlen(buf) != 0)
+    {
+      i += strlen(buf);
+      ret.push_back(atoi(buf));
+    }
+    else
+      ++i;
+    delete buf;
+    buf = new char[10];
+  }
+  
+  return ret;
+}
+
+

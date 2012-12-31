@@ -47,13 +47,13 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glPushMatrix();
 
     glBegin(GL_QUADS);
-      glTexCoord2i(texCoord->GetXValue(0), texCoord->GetYValue(0));
+      glTexCoord2f(texCoord->GetXValue(0), texCoord->GetYValue(0));
       glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
-      glTexCoord2i(texCoord->GetXValue(1), texCoord->GetYValue(0));
+      glTexCoord2f(texCoord->GetXValue(1), texCoord->GetYValue(0));
       glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
-      glTexCoord2i(texCoord->GetXValue(1), texCoord->GetYValue(1));
+      glTexCoord2f(texCoord->GetXValue(1), texCoord->GetYValue(1));
       glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
-      glTexCoord2i(texCoord->GetXValue(0), texCoord->GetYValue(1));
+      glTexCoord2f(texCoord->GetXValue(0), texCoord->GetYValue(1));
       glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
     glEnd();
 
