@@ -36,6 +36,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     Vector3 position = owner->GET<Transform>()->GetPosition();
     Vector3 size = owner->GET<Transform>()->GetSize();
     GLuint texture = owner->GET<PCSurface>()->GetTexID();
+    TextureCoordinates *texCoord = owner->GET<PCSurface>()->GetTextureData();
 
     glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -46,10 +47,14 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glPushMatrix();
 
     glBegin(GL_QUADS);
-      glTexCoord2i(0, 0); glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
-      glTexCoord2i(1, 0); glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
-      glTexCoord2i(1, 1); glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
-      glTexCoord2i(0, 1); glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
+      glTexCoord2i(texCoord->GetXValue(0), texCoord->GetYValue(0));
+      glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
+      glTexCoord2i(texCoord->GetXValue(1), texCoord->GetYValue(0));
+      glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
+      glTexCoord2i(texCoord->GetXValue(1), texCoord->GetYValue(1));
+      glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
+      glTexCoord2i(texCoord->GetXValue(0), texCoord->GetYValue(1));
+      glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
     glEnd();
 
     glPopMatrix();

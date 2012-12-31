@@ -124,6 +124,11 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 #else
 		Surface *surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #endif
+    std::vector<int> numFrames;
+    
+    numFrames.push_back(1);
+    
+    surface->SetTextureCoordinateData(1, numFrames);
 		aObject->AddComponent(surface);
 	}
 	if(aParser.Find("Focus"))

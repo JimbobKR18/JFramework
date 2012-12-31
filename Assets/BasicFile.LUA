@@ -7,11 +7,9 @@ function LoadLevel(levelname)
 	print("Got the app successfully")
 	levelmanager = gameapp:GetLevelManager()
 	print("Got the LevelManager successfully")
-	gameapp2 = levelmanager:GetOwningApp()
-	print("Got App from manager successfully")
-	testlevel = levelmanager:CreateLevel("BasicLevel.txt")
+	level = levelmanager:CreateLevel("BasicLevel.txt")
 	print("Got the level successfully")
-	testlevel:Load()
+	level:Load()
 	print("Loaded the level successfully")
 end
 
@@ -22,4 +20,9 @@ function LoadObject(objectname)
 	print("Got the ObjectManager successfully")
 	newobject = objectmanager:CreateObject("BasicObject.txt")
 	print("Loaded the object successfully")
+end
+
+-- Testing function calling
+function main()
+	LoadLevel("BasicLevel.txt")
 end

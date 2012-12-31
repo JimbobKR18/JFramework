@@ -78,7 +78,7 @@ void PCSurface::LoadImage(std::string const &aName)
 
 void PCSurface::Update()
 {
-
+  Surface::Update();
 }
 void PCSurface::SendMessage(Message const &aMessage)
 {

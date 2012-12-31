@@ -39,7 +39,7 @@ namespace LUABind
   std::string GetScript(std::string const &aFilename);
   
   struct FunctionCaller : public SLB::Script
-  { 
+  {
     template<typename T>
     void LoadFunction1p(std::string const &aFilename, std::string const &aFunctionName, T param)
     {
@@ -52,6 +52,12 @@ namespace LUABind
       call(param);
     }
   };
+  
+  /*void LoadFunction(std::string const &aFilename, std::string const &aFunctionName)
+  {
+    FunctionCaller caller;
+    caller.LoadFunction1p<std::string>(aFilename, aFunctionName, "");
+  }*/
   
   template<typename T>
   void LoadFunction(std::string const &aFilename, std::string const &aFunctionName, T param)

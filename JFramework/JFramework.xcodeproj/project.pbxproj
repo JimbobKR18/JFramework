@@ -13,6 +13,8 @@
 		AD0754DC1683D454006DE741 /* LUATypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD0754D51683D454006DE741 /* LUATypes.cpp */; };
 		AD0754DD1683D454006DE741 /* SLB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD0754D71683D454006DE741 /* SLB.cpp */; };
 		AD0754DE1683D454006DE741 /* SLB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD0754D71683D454006DE741 /* SLB.cpp */; };
+		AD1680D116914C0700B390A8 /* TextureCoordinates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD1680CF16914C0700B390A8 /* TextureCoordinates.cpp */; };
+		AD1680D216914C0700B390A8 /* TextureCoordinates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD1680CF16914C0700B390A8 /* TextureCoordinates.cpp */; };
 		AD26CCA3168D1400007C3551 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCA1168D1400007C3551 /* InputManager.cpp */; };
 		AD26CCA4168D1400007C3551 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCA1168D1400007C3551 /* InputManager.cpp */; };
 		AD26CCAC168D1DCB007C3551 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCA8168D1DCB007C3551 /* Controller.cpp */; };
@@ -102,6 +104,8 @@
 		AD0754D61683D454006DE741 /* LUATypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LUATypes.h; sourceTree = "<group>"; };
 		AD0754D71683D454006DE741 /* SLB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SLB.cpp; sourceTree = "<group>"; };
 		AD0754D81683D454006DE741 /* SLB.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SLB.hpp; sourceTree = "<group>"; };
+		AD1680CF16914C0700B390A8 /* TextureCoordinates.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureCoordinates.cpp; sourceTree = "<group>"; };
+		AD1680D016914C0700B390A8 /* TextureCoordinates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureCoordinates.h; sourceTree = "<group>"; };
 		AD26CCA1168D1400007C3551 /* InputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
 		AD26CCA2168D1400007C3551 /* InputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
 		AD26CCA8168D1DCB007C3551 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
@@ -350,6 +354,8 @@
 				ADBBD1C116619D2C00F2AF13 /* Screen.h */,
 				ADBBD1C216619D2C00F2AF13 /* View.cpp */,
 				ADBBD1C316619D2C00F2AF13 /* View.h */,
+				AD1680CF16914C0700B390A8 /* TextureCoordinates.cpp */,
+				AD1680D016914C0700B390A8 /* TextureCoordinates.h */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 				AD26CCA4168D1400007C3551 /* InputManager.cpp in Sources */,
 				AD26CCAD168D1DCB007C3551 /* Controller.cpp in Sources */,
 				AD26CCAF168D1DCB007C3551 /* PlayerController.cpp in Sources */,
+				AD1680D216914C0700B390A8 /* TextureCoordinates.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +674,7 @@
 				AD26CCA3168D1400007C3551 /* InputManager.cpp in Sources */,
 				AD26CCAC168D1DCB007C3551 /* Controller.cpp in Sources */,
 				AD26CCAE168D1DCB007C3551 /* PlayerController.cpp in Sources */,
+				AD1680D116914C0700B390A8 /* TextureCoordinates.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
