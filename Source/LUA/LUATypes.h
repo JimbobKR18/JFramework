@@ -17,23 +17,14 @@
 namespace LUABind
 {
   // A way to access the app and manage resources
-  class StaticGameApp
+  struct StaticGameApp
   {
-  public:
     static GameApp *mApp;
     
     StaticGameApp() { mApp = NULL; }
     ~StaticGameApp() { mApp = NULL; }
     
     static GameApp *GetApp() { return mApp; }
-    static LevelManager *GetLevelManager()
-    {
-      return (LevelManager*)mApp->GetManager("LevelManager");
-    }
-    static ObjectManager *GetObjectManager()
-    {
-      return (ObjectManager*)mApp->GetManager("ObjectManager");
-    }
     static void LoadLevel(std::string const &aFilename)
     {
       Level* level = ((LevelManager*)mApp->GetManager("LevelManager"))->CreateLevel(aFilename);
@@ -45,6 +36,29 @@ namespace LUABind
   void RegisterClasses();
   void LoadScriptFromFile(std::string const &aFilename);
   void LoadScriptFromString(std::string const &aString);
+  std::string GetScript(std::string const &aFilename);
+  
+  struct FunctionCaller : public SLB::Script
+  { 
+    template<typename T>
+    void LoadFunction1p(std::string const &aFilename, std::string const &aFunctionName, T param)
+    {
+      // Load the file up
+      doString(GetScript(aFilename).c_str());
+      
+      // Get the state and call the function
+      lua_State *state = getState();
+      SLB::LuaCall<void(T)> call(state, aFunctionName.c_str());
+      call(param);
+    }
+  };
+  
+  template<typename T>
+  void LoadFunction(std::string const &aFilename, std::string const &aFunctionName, T param)
+  {
+    FunctionCaller caller;
+    caller.LoadFunction1p<T>(aFilename, aFunctionName, param);
+  }
 };
 
 #endif /* LUATYPES_H_ */

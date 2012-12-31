@@ -18,15 +18,21 @@
 #include "Components/PCSurface.h"
 #endif
 
+#define LUAFILECHECK()  if(mScripts.find(aFilename) == mScripts.end()) \
+                        { \
+                          std::ifstream file(RelativePath(aFilename.c_str())); \
+                          std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()); \
+                          mScripts.insert(ScriptPair(aFilename, contents)); \
+                        }
+
 namespace LUABind
 {
   // Our manager and scripts
-  SLB::Manager mManager;
   std::map<std::string,std::string> mScripts;
   typedef std::pair<std::string,std::string> ScriptPair;
   
-  GameApp* StaticGameApp::mApp = NULL;
-
+  GameApp* StaticGameApp::mApp = NULL; 
+  
   void Initialize()
   {
   }
@@ -60,7 +66,8 @@ namespace LUABind
         .set("SetSize", &Transform::SetSize);
     // GameObject
     SLB::Class<GameObject>("GameObject").constructor<std::string>()
-        .set("GetComponent", &GameObject::GetComponent);
+        .set("GetComponent", &GameObject::GetComponent)
+        .set("GetTransform", &GameObject::GET<Transform>);
     // Level
     SLB::Class<Level>("Level").constructor()
         .set("Load", &Level::Load)
@@ -75,12 +82,12 @@ namespace LUABind
         .set("CreateObject", &ObjectManager::CreateObject);
     // GameApp
     SLB::Class<GameApp>("GameApp")
-        .set("GetManager", &GameApp::GetManager);
+        .set("GetManager", &GameApp::GetManager)
+        .set("GetLevelManager", &GameApp::GET<LevelManager>)
+        .set("GetObjectManager", &GameApp::GET<ObjectManager>);
     // StaticGameApp
     SLB::Class<StaticGameApp, SLB::Instance::NoCopyNoDestroy>("StaticGameApp")
         .set("GetApp", StaticGameApp::GetApp)
-        .set("GetLevelManager", StaticGameApp::GetLevelManager)
-        .set("GetObjectManager", StaticGameApp::GetObjectManager)
         .set("LoadLevel", StaticGameApp::LoadLevel);
 
     // Platform specific scripts
@@ -91,14 +98,7 @@ namespace LUABind
   void LoadScriptFromFile(std::string const &aFilename)
   {
     SLB::Script script;
-    // TODO: Get contents of file, use here.
-    if(mScripts.find(aFilename) == mScripts.end())
-    {
-      std::ifstream file(RelativePath(aFilename.c_str()));
-      std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-
-      mScripts.insert(ScriptPair(aFilename, contents));
-    }
+    LUAFILECHECK()
 
     script.doString(mScripts.find(aFilename)->second.c_str());
   }
@@ -107,5 +107,11 @@ namespace LUABind
   {
     SLB::Script script;
     script.doString(aString.c_str());
+  }
+  
+  std::string GetScript(std::string const &aFilename)
+  {
+    LUAFILECHECK()
+    return mScripts.find(aFilename)->second;
   }
 };

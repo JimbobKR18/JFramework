@@ -29,9 +29,8 @@ GameApp::GameApp()
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
 
-  //Level *testLevel = GET<LevelManager>()->CreateLevel("BasicLevel.txt");
-  //testLevel->Load();
-  LUABind::LoadScriptFromFile("BasicFile.LUA");
+  //LUABind::LoadScriptFromFile("BasicFile.LUA");
+  LUABind::LoadFunction<std::string>("BasicFile.LUA", "LoadLevel", "BasicLevel.txt");
 }
 
 GameApp::~GameApp()

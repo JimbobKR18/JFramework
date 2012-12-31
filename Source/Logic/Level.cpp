@@ -100,6 +100,7 @@ void Level::ParseFile()
 		  {
         parser.GetNextString(empty);
         parser.GetNextString(value);
+        parser.GetNextString(empty);
 
 		    if(value == "true")
 		    {
