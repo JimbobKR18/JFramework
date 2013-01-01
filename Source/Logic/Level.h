@@ -14,12 +14,17 @@ private:
 	std::vector<GameObject*> mObjects;
 	LevelManager *mOwner;
 	bool mActive;
+  
+  typedef std::vector<GameObject*>::iterator ObjectIT;
 public:
 	Level();
 	Level(LevelManager *aManager, std::string const &aFileName);
 	~Level();
 
-	std::string GetName();
+	std::string GetName() const;
+  LevelManager *GetManager() const;
+  
+  void AddObject(GameObject *aObject);
 
 	void Load();
 	void Unload();

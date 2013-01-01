@@ -37,7 +37,7 @@ class TextParser : public Parser
     void Parse();
   
     float GetNextFloat(float &rValue);
-    int GetNextInt(float &rValue);
+    int GetNextInt(int &rValue);
     std::string GetNextString(std::string &rValue);
   
     bool IsGood();

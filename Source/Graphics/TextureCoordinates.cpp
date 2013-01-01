@@ -9,6 +9,10 @@
 #include "TextureCoordinates.h"
 
 #define DT (1.0f/60.0f)
+#define SETFRAMES() mXValues[0] = mCurFrame * mXGain; \
+                    mXValues[1] = (mCurFrame + 1) * mXGain; \
+                    mYValues[0] = mCurAnimation * mYGain; \
+                    mYValues[1] = (mCurAnimation + 1) * mYGain
 
 TextureCoordinates::TextureCoordinates()
 {
@@ -35,10 +39,7 @@ TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int
   mYGain = 1.0f / (float)aNumAnimations;
   
   // Set all values to starting positions
-  mXValues[0] = mCurFrame * mXGain;
-  mXValues[1] = (mCurFrame + 1) * mXGain;
-  mYValues[0] = mCurAnimation * mYGain;
-  mYValues[1] = (mCurAnimation + 1) * mYGain;
+  SETFRAMES();
 }
 
 TextureCoordinates::~TextureCoordinates()
@@ -48,6 +49,9 @@ TextureCoordinates::~TextureCoordinates()
 
 void TextureCoordinates::Update(float aDT)
 {
+  if(!mAnimated)
+    return;
+  
   mCurTime += aDT;
   
   // If it's time to change a frame
@@ -63,10 +67,7 @@ void TextureCoordinates::Update(float aDT)
       mCurFrame = 0;
     
     // Set positions of coordinates
-    mXValues[0] = mCurFrame * mXGain;
-    mXValues[1] = (mCurFrame + 1) * mXGain;
-    mYValues[0] = mCurAnimation * mYGain;
-    mYValues[1] = (mCurAnimation + 1) * mYGain;
+    SETFRAMES();
   }
 }
 
@@ -84,9 +85,23 @@ int TextureCoordinates::GetCurrentAnimation() const
 {
   return mCurAnimation;
 }
+
 void TextureCoordinates::SetCurrentAnimation(int aAnimation)
 {
   mCurAnimation = aAnimation;
+}
+
+void TextureCoordinates::SetCurrentFrame(int aFrame)
+{
+  mCurFrame = aFrame;
+  
+  // Set positions of coordinates
+  SETFRAMES();
+}
+
+void TextureCoordinates::SetAnimated(bool aAnimated)
+{
+  mAnimated = aAnimated;
 }
 
 void TextureCoordinates::Reset()

@@ -21,6 +21,8 @@
 		AD26CCAD168D1DCB007C3551 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCA8168D1DCB007C3551 /* Controller.cpp */; };
 		AD26CCAE168D1DCB007C3551 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCAA168D1DCB007C3551 /* PlayerController.cpp */; };
 		AD26CCAF168D1DCB007C3551 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCAA168D1DCB007C3551 /* PlayerController.cpp */; };
+		AD38F3EF1692369900CE751D /* TileMapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */; };
+		AD38F3F01692369900CE751D /* TileMapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */; };
 		AD468D941661980C00A71745 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD468D931661980C00A71745 /* SDL.framework */; };
 		AD9D29181646F7BE00240FDC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD9D29161646F7BE00240FDC /* InfoPlist.strings */; };
 		AD9D291E1646F7BE00240FDC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AD9D291C1646F7BE00240FDC /* Credits.rtf */; };
@@ -114,6 +116,8 @@
 		AD26CCAB168D1DCB007C3551 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
 		AD26CCB1168D1DD3007C3551 /* InputMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputMessage.h; sourceTree = "<group>"; };
 		AD26CCB2168D1DD3007C3551 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileMapGenerator.cpp; sourceTree = "<group>"; };
+		AD38F3EE1692369900CE751D /* TileMapGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileMapGenerator.h; sourceTree = "<group>"; };
 		AD468D931661980C00A71745 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
 		AD9D290B1646F7BE00240FDC /* JFrameworkMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFrameworkMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9D29151646F7BE00240FDC /* JFrameworkMac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFrameworkMac-Info.plist"; sourceTree = "<group>"; };
@@ -365,6 +369,8 @@
 			children = (
 				ADBBD1C516619D2C00F2AF13 /* Level.cpp */,
 				ADBBD1C616619D2C00F2AF13 /* Level.h */,
+				AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */,
+				AD38F3EE1692369900CE751D /* TileMapGenerator.h */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -631,6 +637,7 @@
 				AD26CCAD168D1DCB007C3551 /* Controller.cpp in Sources */,
 				AD26CCAF168D1DCB007C3551 /* PlayerController.cpp in Sources */,
 				AD1680D216914C0700B390A8 /* TextureCoordinates.cpp in Sources */,
+				AD38F3F01692369900CE751D /* TileMapGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +682,7 @@
 				AD26CCAC168D1DCB007C3551 /* Controller.cpp in Sources */,
 				AD26CCAE168D1DCB007C3551 /* PlayerController.cpp in Sources */,
 				AD1680D116914C0700B390A8 /* TextureCoordinates.cpp in Sources */,
+				AD38F3EF1692369900CE751D /* TileMapGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

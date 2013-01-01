@@ -1,4 +1,12 @@
 Background.txt
+TileMapGenerator
+{
+	Width = 5
+	Height = 5
+	TileSize = 32
+	Image = TileMap.txt
+	Frames = 0,0,0,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,0,0,0,0
+}
 BasicObject.txt
 Floor.txt
 BasicObject.txt

@@ -19,6 +19,7 @@ private:
   int mNumAnimations;
   float mXGain, mYGain;
   float mCurTime, mXValues[2], mYValues[2];
+  bool mAnimated;
   
   // <currentAnimation, numberofFrames>
   std::map<int, int> mAnimations;
@@ -37,6 +38,8 @@ public:
   
   int GetCurrentAnimation() const;
   void SetCurrentAnimation(int aAnimation);
+  void SetCurrentFrame(int aFrame);
+  void SetAnimated(bool aAnimated);
   
   void Reset();
 };

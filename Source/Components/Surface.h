@@ -15,6 +15,7 @@ public:
   // Texture Coordinates
   TextureCoordinates *GetTextureData() const;
   void SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames);
+  void SetAnimated(bool aAnimated);
 
   // Derived from Component
 	void Update();

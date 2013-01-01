@@ -17,6 +17,12 @@ void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int
   mTexCoord = new TextureCoordinates(aNumAnimations, aNumFrames);
 }
 
+void Surface::SetAnimated(bool aAnimated)
+{
+  if(mTexCoord)
+    mTexCoord->SetAnimated(aAnimated);
+}
+
 void Surface::Update()
 {
   if(mTexCoord)

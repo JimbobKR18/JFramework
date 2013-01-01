@@ -25,7 +25,7 @@ void PlayerController::SetTarget(GameObject *aTarget)
 
 void PlayerController::DoAction(std::string const &aAction)
 {
-  const float moveSpeed = 20000.0f;
+  const float moveSpeed = 200000.0f;
   if(aAction == "MoveUp")
   {
     mObj->GET<PhysicsObject>()->AddForce(Vector3(0.0f, -moveSpeed, 0.0f));

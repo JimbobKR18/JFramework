@@ -1,18 +1,11 @@
 Start
 {
-	PhysicsObject
-	{
-		Shape = SPHERE
-		Mass = 50
-		Static = false
-		Gravity = false
-	}
 	Surface
 	{
-		TextureName = Blank2.png
+		TextureName = TileMap.png
 		AnimationCount = 1
-		FrameNumbers = 2
-		Animated = true
+		FrameNumbers = 4
+		Animated = false
 	}
 	Transform
 	{
@@ -25,9 +18,6 @@ Start
 		SizeX = 50
 		SizeY = 50
 		SizeZ = 50
-	}
-	PlayerController
-	{
 	}
 	Focus
 	{

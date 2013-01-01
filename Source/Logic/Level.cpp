@@ -4,6 +4,7 @@
 #include "MathExt.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
+#include "TileMapGenerator.h"
 #include "Common.h"
 
 Level::Level()
@@ -11,9 +12,11 @@ Level::Level()
 	assert(0);
 }
 
-Level::Level(LevelManager *aManager, std::string const &aFileName) : mFileName(aFileName), mOwner(aManager), mActive(false)
+Level::Level(LevelManager *aManager, std::string const &aFileName) :
+             mFileName(aFileName), mOwner(aManager), mActive(false)
 {
-	for(int i = static_cast<int>(aFileName.size()) - 1; aFileName[i] != '/' && i >= 0; --i)
+	for(int i = static_cast<int>(aFileName.size()) - 1;
+      aFileName[i] != '/' && i >= 0; --i)
 	{
 		mName.push_back(aFileName[i]);
 	}
@@ -27,18 +30,28 @@ Level::~Level()
 	if(mActive)
 		mObjects.clear();
 	else
-		for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+		for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 			delete *it;
 }
 
-std::string Level::GetName()
+std::string Level::GetName() const
 {
 	return mName;
 }
 
+LevelManager *Level::GetManager() const
+{
+  return mOwner;
+}
+
+void Level::AddObject(GameObject *aObject)
+{
+  mObjects.push_back(aObject);
+}
+
 void Level::Load()
 {
-	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
 	}
@@ -47,7 +60,7 @@ void Level::Load()
 
 void Level::Unload()
 {
-	for(std::vector<GameObject*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
 	}
@@ -76,6 +89,7 @@ void Level::ParseFile()
 		    float posX, posY, posZ,
 		          scaleX, scaleY, scaleZ,
 		          sizeX, sizeY, sizeZ;
+        std::string empty;
 
         parser.GetNextFloat(posX);
         parser.GetNextFloat(posY);
@@ -108,6 +122,24 @@ void Level::ParseFile()
 		    }
 		  }
 		}
+    else if(param == "TileMapGenerator")
+    {
+      std::string value, empty;
+      int width, height, tilesize;
+      std::string file, framedata;
+      std::vector<int> frames;
+      
+      parser.GetNextInt(width);
+      parser.GetNextInt(height);
+      parser.GetNextInt(tilesize);
+      parser.GetNextString(empty);
+      parser.GetNextString(file);
+      parser.GetNextString(empty);
+      parser.GetNextString(framedata);
+      frames = StringToIntVector(framedata);
+      
+      TileMapGenerator tilemap(width, height, tilesize, file, frames, this);
+    }
 		else
 		{
 		  object = new GameObject(param);

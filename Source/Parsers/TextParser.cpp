@@ -138,7 +138,7 @@ float TextParser::GetNextFloat(float &rValue)
   rValue = StringToFloat(empty);
   return rValue;
 }
-int TextParser::GetNextInt(float &rValue)
+int TextParser::GetNextInt(int &rValue)
 {
   std::string empty;
   
