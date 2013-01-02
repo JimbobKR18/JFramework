@@ -1,8 +1,8 @@
 Background.txt
 TileMapGenerator
 {
-	Width = 5
-	Height = 5
+	Width = 20
+	Height = 20
 	TileSize = 32
 	Image = TileMap.txt
 	Data = TileMapData.txt

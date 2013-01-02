@@ -43,6 +43,9 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     float xPosition = position.x - (cameraPosition.x - cameraSize.x / 2.0f);
     float yPosition = position.y - (cameraPosition.y - cameraSize.y / 2.0f);
     float zPosition = position.z - (cameraPosition.z - cameraSize.z / 2.0f);
+    
+    if(xPosition - size.x > GetWidth() || yPosition - size.y > GetHeight())
+      continue;
 
     glPushMatrix();
 
