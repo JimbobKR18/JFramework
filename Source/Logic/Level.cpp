@@ -125,20 +125,32 @@ void Level::ParseFile()
     else if(param == "TileMapGenerator")
     {
       std::string value, empty;
-      int width, height, tilesize;
-      std::string file, framedata;
-      std::vector<int> frames;
+      int width, height, tileSize;
+      std::string file, frameDataFilename, frameData,
+                  collisionData;
+      std::vector<int> frames, collision;
       
       parser.GetNextInt(width);
       parser.GetNextInt(height);
-      parser.GetNextInt(tilesize);
+      parser.GetNextInt(tileSize);
       parser.GetNextString(empty);
       parser.GetNextString(file);
       parser.GetNextString(empty);
-      parser.GetNextString(framedata);
-      frames = StringToIntVector(framedata);
       
-      TileMapGenerator tilemap(width, height, tilesize, file, frames, this);
+      // Get the tilemap data (separate file)
+      parser.GetNextString(frameDataFilename);
+      
+      TextParser tileMapData(RelativePath(frameDataFilename), false);
+      tileMapData.GetNextString(empty);
+      tileMapData.GetNextString(frameData);
+      tileMapData.GetNextString(empty);
+      tileMapData.GetNextString(collisionData);
+      
+      frames = StringToIntVector(frameData);
+      collision = StringToIntVector(collisionData);
+      
+      TileMapGenerator tilemap(width, height, tileSize,
+                               file, frames, collision, this);
     }
 		else
 		{

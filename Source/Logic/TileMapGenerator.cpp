@@ -11,6 +11,7 @@
 #include "LevelManager.h"
 #include "Transform.h"
 #include "Surface.h"
+#include "PhysicsObject.h"
 
 TileMapGenerator::TileMapGenerator()
 {
@@ -20,15 +21,22 @@ TileMapGenerator::TileMapGenerator()
 TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    std::string const &aFilename,
                                    std::vector<int> const &aTiles,
+                                   std::vector<int> const &aCollision,
                                    Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight),
                                    mTileSize(aTileSize), mFilename(aFilename),
-                                   mTiles(aTiles), mOwner(aOwner)
+                                   mTiles(aTiles), mCollision(aCollision),
+                                   mOwner(aOwner)
 {
   int xPos = 0, yPos = 0;
   float halfX = mWidth * aTileSize;
   float halfY = mHeight * aTileSize;
-  for(TilesIT it = mTiles.begin(); it != mTiles.end(); ++it)
+  // mTiles and mCollision MUST be same size, or it's not a valid map
+  
+  if(mTiles.size() != mCollision.size())
+    assert(!"Not a valid tilemap, art and collision maps of different sizes");
+  
+  for(unsigned int i = 0; i != mTiles.size(); ++i)
   {
     // Make GameObject to place
     GameObject *obj = new GameObject(mFilename);
@@ -40,10 +48,27 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    -halfY + (aTileSize * 2 * yPos),0));
     transform->SetSize(Vector3(mTileSize, mTileSize, 0));
     
+    // Set the frame data
     Surface *surface = obj->GET<Surface>();
     surface->SetAnimated(false);
-    surface->GetTextureData()->SetCurrentFrame(*it);
+    surface->GetTextureData()->SetCurrentFrame(mTiles[i]);
     
+    // Add PhysicsObject if the tile has collision
+    if(mCollision[i] == 1)
+    {
+      PhysicsObject *physics = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
+      
+      // What shape is our object? Is it affected by gravity?
+      // What is the object's mass? Is it static?
+      physics->SetMass(50);
+      mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(physics);
+      physics->SetStatic(true);
+      physics->mShape = PhysicsObject::CUBE;
+      
+      obj->AddComponent(physics);
+    }
+    
+    // Add object to our level for easier loading later
     mOwner->AddObject(obj);
     
     ++xPos;

@@ -115,7 +115,7 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 	for(PhysicsIT it = aSortedObjects.begin();
 		it != aSortedObjects.end(); ++it)
 	{
-		for(PhysicsIT it2 = aSortedObjects.begin();
+		for(PhysicsIT it2 = it;
 			it2 != aSortedObjects.end(); ++it2)
 		{
 			if(*it != *it2)
