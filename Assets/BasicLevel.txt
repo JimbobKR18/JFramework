@@ -8,8 +8,6 @@ TileMapGenerator
 	Data = TileMapData.txt
 }
 BasicObject.txt
-Floor.txt
-BasicObject.txt
 Transform
 {
 	PositionX = 0

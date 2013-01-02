@@ -227,8 +227,8 @@ bool Resolver::CheckSphereToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 halfSize1 = t1->GetSize()/2.0f;
-  Vector3 halfSize2 = t2->GetSize()/2.0f;
+  Vector3 halfSize1 = t1->GetSize();
+  Vector3 halfSize2 = t2->GetSize();
 
   for(int i = 0; i < 3; ++i)
   {
@@ -247,8 +247,8 @@ bool Resolver::CheckCubeToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 halfSize1 = t1->GetSize()/2.0f;
-  Vector3 halfSize2 = t2->GetSize()/2.0f;
+  Vector3 halfSize1 = t1->GetSize();
+  Vector3 halfSize2 = t2->GetSize();
 
   bool xCheck = fabs(t1->GetPosition().x - t2->GetPosition().x) <= halfSize1.x + halfSize2.x;
   bool yCheck = fabs(t1->GetPosition().y - t2->GetPosition().y) <= halfSize1.y + halfSize2.y;
@@ -292,9 +292,24 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
       shortestDistance = distance;
     }
   }
+  
+  Vector3 normal;
+  // Figure out the normal
+  switch(axis)
+  {
+    case 0:
+      normal = Vector3(b1Pos[axis] - b2Pos[axis],0,0).normalize();
+      break;
+    case 1:
+      normal = Vector3(0,b1Pos[axis] - b2Pos[axis],0).normalize();
+      break;
+    case 2:
+      normal = Vector3(0,0,b1Pos[axis] - b2Pos[axis]).normalize();
+      break;
+  }
 
-  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Size[0] + b2Size[axis]));
-  aPair.mNormal = (b1Pos - b2Pos).normalize();
+  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - (b1Size[0] + b2Size[axis]));
+  aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
@@ -322,8 +337,23 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
     }
   }
   
-  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Size[axis] + b2Size[axis]));
-  aPair.mNormal = (b1Pos - b2Pos).normalize();
+  Vector3 normal;
+  // Figure out the normal
+  switch(axis)
+  {
+    case 0:
+      normal = Vector3(b1Pos[axis] - b2Pos[axis],0,0).normalize();
+      break;
+    case 1:
+      normal = Vector3(0,b1Pos[axis] - b2Pos[axis],0).normalize();
+      break;
+    case 2:
+      normal = Vector3(0,0,b1Pos[axis] - b2Pos[axis]).normalize();
+      break;
+  }
+  
+  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - (b1Size[axis] + b2Size[axis]));
+  aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
