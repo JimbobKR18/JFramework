@@ -54,7 +54,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     surface->GetTextureData()->SetCurrentFrame(mTiles[i]);
     
     // Add PhysicsObject if the tile has collision
-    if(mCollision[i] == 1)
+    if(mCollision[i] != 0)
     {
       PhysicsObject *physics = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
       

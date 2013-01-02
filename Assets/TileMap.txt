@@ -4,7 +4,7 @@ Start
 	{
 		TextureName = TileMap.png
 		AnimationCount = 1
-		FrameNumbers = 4
+		FrameNumbers = 5
 		Animated = false
 	}
 	Transform
