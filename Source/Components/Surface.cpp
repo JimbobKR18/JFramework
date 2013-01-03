@@ -1,8 +1,17 @@
 #include "Surface.h"
+#include "GraphicsManager.h"
 
 Surface::Surface() : Component("Surface"), mTexCoord(NULL)
 {
+  assert(!"Surface needs a graphicsmanager");
 }
+
+Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NULL),
+                                              mManager(aManager)
+{
+  
+}
+
 
 TextureCoordinates *Surface::GetTextureData() const
 {

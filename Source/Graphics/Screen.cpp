@@ -1,5 +1,15 @@
 #include "Screen.h"
 
+bool SortPredicate(Surface *object1, Surface *object2)
+{
+	if(object1->GetTextureID() < object2->GetTextureID())
+	{
+		return true;
+	}
+  
+	return false;
+}
+
 Screen::Screen() : mWidth(0), mHeight(0)
 {
 }
@@ -27,4 +37,11 @@ int Screen::GetHeight() const
 View &Screen::GetView()
 {
 	return mView;
+}
+
+std::vector<Surface*> Screen::SortObjects(std::vector<Surface*> const &aObjects)
+{
+  std::vector<Surface*> ret = aObjects;
+  std::sort(ret.begin(), ret.end(), SortPredicate);
+  return ret;
 }

@@ -6,22 +6,27 @@
 
 class Screen
 {
-  private:
-    int mWidth, mHeight;
-    View mView;
+private:
+  int mWidth, mHeight;
+  View mView;
 
-  public:
-    Screen();
-    Screen(int aW, int aH);
-    virtual ~Screen();
+public:
+  Screen();
+  Screen(int aW, int aH);
+  virtual ~Screen();
 
-    int GetWidth() const;
-    int GetHeight() const;
+  // Width and Height
+  int GetWidth() const;
+  int GetHeight() const;
 
-    View &GetView();
+  // Get viewable space
+  View &GetView();
 
-    virtual void ChangeSize(int aW, int aH) = 0;
-    virtual void Draw(std::vector<Surface*> const &aObjects) = 0;
+  // Batching
+  std::vector<Surface*> SortObjects(std::vector<Surface*> const &aObjects);
+
+  virtual void ChangeSize(int aW, int aH) = 0;
+  virtual void Draw(std::vector<Surface*> const &aObjects) = 0;
 };
 
 #endif

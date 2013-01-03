@@ -1,5 +1,6 @@
 #include "PCSurface.h"
 #include "Common.h"
+#include "GraphicsManager.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <SDL/SDL_image.h>
@@ -11,16 +12,24 @@
 
 PCSurface::PCSurface() : Surface()
 {
-
+}
+PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager)
+{
 }
 PCSurface::~PCSurface()
 {
-
 }
 
 void PCSurface::LoadImage(std::string const &aName)
 {
-	if((mSurface = IMG_Load(RelativePath(aName).c_str())))
+  /* If the file was already loaded,
+     let's avoid assigning a new id. */
+  if(mManager->GetTextureID(aName) != (unsigned)-1)
+  {
+    mTextureID = mManager->GetTextureID(aName);
+  }
+  // else we load the image from file
+	else if((mSurface = IMG_Load(RelativePath(aName).c_str())))
 	{
 		if ((mSurface->w & (mSurface->w - 1)) != 0 )
 		{
@@ -69,11 +78,18 @@ void PCSurface::LoadImage(std::string const &aName)
 
 		glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
 						  mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
+    
+    mManager->AddTexturePairing(aName, mTextureID);
 	}
 	else
 	{
 		printf("warning: file not found or incompatible format, check this out\n");
 	}
+}
+
+unsigned PCSurface::GetIndexValue()
+{
+  return mTextureID;
 }
 
 void PCSurface::Update()
@@ -89,7 +105,7 @@ void PCSurface::ReceiveMessage(Message const &aMessage)
 
 }
 
-GLuint PCSurface::GetTexID() const
+unsigned PCSurface::GetTextureID() const
 {
 	return mTextureID;
 }

@@ -21,7 +21,8 @@ GraphicsManager::~GraphicsManager()
 void GraphicsManager::Update()
 {
   mScreen->GetView().Update();
-  mScreen->Draw(mSurfaces);
+  std::vector<Surface*> sortedObjects = mScreen->SortObjects(mSurfaces);
+  mScreen->Draw(sortedObjects);
 }
 
 void GraphicsManager::SendMessage(Message const &aMessage)
@@ -31,9 +32,9 @@ void GraphicsManager::SendMessage(Message const &aMessage)
 Surface *GraphicsManager::CreateSurface()
 {
 #if !defined(ANDROID) && !defined(IOS)
-	PCSurface *surface = new PCSurface();
+	PCSurface *surface = new PCSurface(this);
 #else
-	Surface *surface = new Surface();
+	Surface *surface = new Surface(this);
 #endif
 
 	AddSurface(surface);
@@ -75,4 +76,20 @@ void GraphicsManager::RemoveSurface(Surface *aSurface)
 			break;
 		}
 	}
+}
+
+void GraphicsManager::AddTexturePairing(std::string const &aFilename, unsigned aTextureId)
+{
+  mTextures.insert(std::pair<std::string, unsigned>(aFilename, aTextureId));
+}
+unsigned GraphicsManager::GetTextureID(std::string const &aFilename)
+{
+  std::map<std::string, unsigned>::iterator pos = mTextures.find(aFilename);
+  
+  if(pos == mTextures.end())
+  {
+    return -1;
+  }
+  
+  return pos->second;
 }

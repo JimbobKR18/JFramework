@@ -28,16 +28,20 @@ private:
 
 public:
 	PCSurface();
+  PCSurface(GraphicsManager *aManager);
 	~PCSurface();
 
 	void LoadImage(std::string const &aName);
+  
+  // Batching
+  unsigned GetIndexValue();
 
 	void Update();
 	void SendMessage(Message const &aMessage);
 	void ReceiveMessage(Message const &aMessage);
 	static std::string GetName() {return "Surface";}
 
-	GLuint GetTexID() const;
+	unsigned GetTextureID() const;
 };
 
 #endif

@@ -160,11 +160,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Components/PCSurface.cpp"
-         timestampString = "375527218.59254"
+         timestampString = "378884255.105783"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "23"
-         endingLineNumber = "23"
+         startingLineNumber = "32"
+         endingLineNumber = "32"
          landmarkName = "PCSurface::LoadImage(std::string const &amp;aName)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -599,19 +599,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../Source/Graphics/PCScreen.cpp"
-         timestampString = "378634836.351192"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "PCScreen::Draw(std::vector&lt;Surface*&gt; const &amp;aObjects)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "../Source/Managers/ObjectManager.cpp"
          timestampString = "378686496.058688"
          startingColumnNumber = "9223372036854775807"
@@ -860,11 +847,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Graphics/PCScreen.cpp"
-         timestampString = "378799664.639718"
+         timestampString = "378885467.161763"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "PCScreen::Draw(std::vector&lt;Surface*&gt; const &amp;aObjects)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -872,26 +859,39 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../Source/Graphics/PCScreen.cpp"
-         timestampString = "378799704.31238"
+         filePath = "../Source/Components/PCSurface.cpp"
+         timestampString = "378884255.105783"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "48"
-         endingLineNumber = "48"
-         landmarkName = "PCScreen::Draw(std::vector&lt;Surface*&gt; const &amp;aObjects)"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
+         landmarkName = "PCSurface::LoadImage(std::string const &amp;aName)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../Source/Graphics/PCScreen.cpp"
-         timestampString = "378799896.417276"
+         filePath = "../Source/Components/PCSurface.cpp"
+         timestampString = "378884255.105783"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
+         landmarkName = "PCSurface::LoadImage(std::string const &amp;aName)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../Source/Components/PCSurface.cpp"
+         timestampString = "378884311.797225"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "34"
          endingLineNumber = "34"
-         landmarkName = "PCScreen::Draw(std::vector&lt;Surface*&gt; const &amp;aObjects)"
+         landmarkName = "PCSurface::LoadImage(std::string const &amp;aName)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
