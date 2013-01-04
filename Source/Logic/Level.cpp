@@ -4,6 +4,7 @@
 #include "MathExt.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
+#include "PhysicsWorld.h"
 #include "TileMapGenerator.h"
 #include "Common.h"
 
@@ -67,6 +68,8 @@ void Level::Unload()
 		mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
 	}
 	mActive = false;
+  
+  mOwner->SetActiveLevel(NULL);
 }
 
 void Level::ParseFile()

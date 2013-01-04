@@ -29,7 +29,9 @@ void ObjectManager::Update()
 void ObjectManager::SendMessage(Message const &aMsg)
 {
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
 		(*it)->ReceiveMessage(aMsg);
+  }
 }
 
 GameObject *ObjectManager::CreateObject(std::string const &aFilename)

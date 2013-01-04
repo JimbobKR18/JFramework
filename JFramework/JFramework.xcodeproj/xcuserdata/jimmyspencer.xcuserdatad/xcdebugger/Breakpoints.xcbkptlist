@@ -173,11 +173,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "378342140.876571"
+         timestampString = "378966848.691635"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37"
+         startingLineNumber = "41"
+         endingLineNumber = "41"
          landmarkName = "ObjectManager::CreateObject(std::string const &amp;aFilename)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -340,11 +340,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "378686496.058688"
+         timestampString = "378966848.691635"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
          landmarkName = "ObjectManager::ParseDictionary(GameObject *aObject, Parser &amp;aParser)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -600,11 +600,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "378686496.058688"
+         timestampString = "378966848.691635"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
          landmarkName = "ObjectManager::ParseDictionary(GameObject *aObject, Parser &amp;aParser)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -613,11 +613,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "378686496.058688"
+         timestampString = "378966848.691635"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "134"
-         endingLineNumber = "134"
+         startingLineNumber = "138"
+         endingLineNumber = "138"
          landmarkName = "ObjectManager::ParseDictionary(GameObject *aObject, Parser &amp;aParser)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -652,11 +652,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Core/GameObject.cpp"
-         timestampString = "378966014.671122"
+         timestampString = "378966434.188402"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
          landmarkName = "GameObject::Update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -665,11 +665,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "378685608.012798"
+         timestampString = "378966848.691635"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "58"
-         endingLineNumber = "58"
+         startingLineNumber = "62"
+         endingLineNumber = "62"
          landmarkName = "ObjectManager::AddObject(GameObject *aObj)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -892,6 +892,19 @@
          startingLineNumber = "34"
          endingLineNumber = "34"
          landmarkName = "PCSurface::LoadImage(std::string const &amp;aName)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../Source/Managers/ObjectManager.cpp"
+         timestampString = "378966860.041956"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
+         landmarkName = "ObjectManager::Update()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

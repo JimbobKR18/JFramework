@@ -41,6 +41,11 @@ std::string GameObject::GetFilename()
 	return mFileName;
 }
 
+ObjectManager *GameObject::GetOwner()
+{
+  return mOwner;
+}
+
 void GameObject::AddComponent(Component *aComponent)
 {
   aComponent->SetOwner(this);

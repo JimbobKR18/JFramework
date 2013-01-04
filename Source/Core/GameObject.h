@@ -30,6 +30,7 @@ public:
   ~GameObject();
 
   std::string GetFilename();
+  ObjectManager *GetOwner();
 
   void AddComponent(Component *aComponent);
   void RemoveComponent(Component *aComponent);
