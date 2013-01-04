@@ -26,7 +26,6 @@ public:
 	void RemoveObject(GameObject *aObj);
 private:
 	void ParseDictionary(GameObject *aObject, Parser &aParser);
-public:
   typedef std::vector<GameObject*>::iterator ObjectIT;
 };
 

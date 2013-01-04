@@ -25,11 +25,6 @@ namespace LUABind
     ~StaticGameApp() { mApp = NULL; }
     
     static GameApp *GetApp() { return mApp; }
-    static void LoadLevel(std::string const &aFilename)
-    {
-      Level* level = ((LevelManager*)mApp->GetManager("LevelManager"))->CreateLevel(aFilename);
-      level->Load();
-    }
   };
   
   void Initialize();

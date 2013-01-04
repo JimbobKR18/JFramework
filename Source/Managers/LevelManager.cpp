@@ -51,6 +51,16 @@ void LevelManager::LoadLevel(std::string const &aLevelName)
 	assert(!"Level name specified not found.");
 }
 
+Level *LevelManager::GetActiveLevel()
+{
+  return mActiveLevel;
+}
+
+void LevelManager::SetActiveLevel(Level *aLevel)
+{
+  mActiveLevel = aLevel;
+}
+
 void LevelManager::Update()
 {
 

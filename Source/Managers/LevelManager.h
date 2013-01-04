@@ -17,6 +17,9 @@ public:
 	Level *GetLevel(std::string const &aLevelName);
 	void DeleteLevel(Level *aLevel);
 	void LoadLevel(std::string const &aLevelName);
+  
+  Level *GetActiveLevel();
+  void SetActiveLevel(Level *aLevel);
 
   // Derived from Manager
 	void Update();

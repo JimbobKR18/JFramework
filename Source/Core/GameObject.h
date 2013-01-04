@@ -13,15 +13,19 @@
 #include "Message.h"
 
 class Component;
+class ObjectManager;
 
 class GameObject
 {
 private:
   std::string mFileName;
   std::vector<Component*> mComponents;
+  ObjectManager *mOwner;
+  
+  typedef std::vector<Component*>::iterator ComponentIT;
 public:
   GameObject();
-  GameObject(std::string const &aFilename);
+  GameObject(ObjectManager *aOwner, std::string const &aFilename);
   GameObject(GameObject const &aGameObject);
   ~GameObject();
 

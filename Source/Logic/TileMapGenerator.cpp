@@ -39,8 +39,9 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   for(unsigned int i = 0; i != mTiles.size(); ++i)
   {
     // Make GameObject to place
-    GameObject *obj = new GameObject(mFilename);
-    mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>()->ParseObject(obj);
+    ObjectManager *manager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
+    GameObject *obj = new GameObject(manager, mFilename);
+    manager->ParseObject(obj);
     
     // Get Transform of new object
     Transform *transform = obj->GET<Transform>();

@@ -65,7 +65,7 @@ namespace LUABind
         .set("SetScale", &Transform::SetScale)
         .set("SetSize", &Transform::SetSize);
     // GameObject
-    SLB::Class<GameObject>("GameObject").constructor<std::string>()
+    SLB::Class<GameObject>("GameObject")
         .set("GetComponent", &GameObject::GetComponent)
         .set("GetTransform", &GameObject::GET<Transform>);
     // Level
@@ -87,8 +87,7 @@ namespace LUABind
         .set("GetObjectManager", &GameApp::GET<ObjectManager>);
     // StaticGameApp
     SLB::Class<StaticGameApp, SLB::Instance::NoCopyNoDestroy>("StaticGameApp")
-        .set("GetApp", StaticGameApp::GetApp)
-        .set("LoadLevel", StaticGameApp::LoadLevel);
+        .set("GetApp", StaticGameApp::GetApp);
 
     // Platform specific scripts
 #ifdef PC

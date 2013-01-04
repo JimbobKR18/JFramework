@@ -8,24 +8,29 @@
 
 #include "GameObject.h"
 #include "Component.h"
+#include "ObjectManager.h"
 
 GameObject::GameObject()
 {
+  assert(!"GameObject instantiated without a file!");
 }
 
-GameObject::GameObject(std::string const &aFilename) : mFileName(aFilename)
+GameObject::GameObject(ObjectManager *aOwner, std::string const &aFilename) :
+                       mFileName(aFilename), mOwner(aOwner)
 {
 }
 
 // Sounds like a bad idea right now...
-GameObject::GameObject(GameObject const &aGameObject) : mFileName(aGameObject.mFileName),
+GameObject::GameObject(GameObject const &aGameObject) :
+                              mFileName(aGameObject.mFileName),
 													    mComponents(aGameObject.mComponents)
 {
+  assert(!"Copying GameObjects is not supported!");
 }
 
 GameObject::~GameObject()
 {
-  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     delete *it;
   }
@@ -44,7 +49,7 @@ void GameObject::AddComponent(Component *aComponent)
 
 void GameObject::RemoveComponent(Component *aComponent)
 {
-  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     if(aComponent == *it)
     {
@@ -56,7 +61,7 @@ void GameObject::RemoveComponent(Component *aComponent)
 
 Component *GameObject::GetComponent(std::string const &aName)
 {
-  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     if((*it)->GetDefinedName() == aName)
       return *it;
@@ -66,7 +71,7 @@ Component *GameObject::GetComponent(std::string const &aName)
 
 bool GameObject::HasComponent(std::string const &aName)
 {
-  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     if((*it)->GetDefinedName() == aName)
       return true;
@@ -76,7 +81,7 @@ bool GameObject::HasComponent(std::string const &aName)
 
 void GameObject::Update()
 {
-  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     (*it)->Update();
   }
@@ -84,7 +89,7 @@ void GameObject::Update()
 
 void GameObject::ReceiveMessage(Message const &aMessage)
 {
-  for(std::vector<Component*>::iterator it = mComponents.begin(); it != mComponents.end(); ++it)
+  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
   {
     (*it)->ReceiveMessage(aMessage);
   }

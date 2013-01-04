@@ -56,6 +56,8 @@ void Level::Load()
 		mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
 	}
 	mActive = true;
+  
+  mOwner->SetActiveLevel(this);
 }
 
 void Level::Unload()
@@ -154,8 +156,9 @@ void Level::ParseFile()
     }
 		else
 		{
-		  object = new GameObject(param);
-		  mOwner->GetOwningApp()->GET<ObjectManager>()->ParseObject(object);
+      ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+		  object = new GameObject(manager, param);
+		  manager->ParseObject(object);
 		  mObjects.push_back(object);
 		}
 	}
