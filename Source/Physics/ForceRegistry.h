@@ -31,6 +31,7 @@ public:
 
 	void Add(PhysicsObject *aObject, ForceGenerator *aGenerator);
 	void Remove(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void RemoveForcesForObject(PhysicsObject *aObject);
 	void Clear();
 };
 

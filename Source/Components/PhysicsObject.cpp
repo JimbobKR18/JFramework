@@ -13,7 +13,7 @@
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
 						     mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
 						     mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
-						     mDamping(0.01f), mStatic(false), mShape(SPHERE)
+						     mDamping(0.01f), mStatic(false), mGravity(true), mShape(SPHERE)
 {
 }
 
@@ -91,7 +91,7 @@ void PhysicsObject::SetMass(float aMass)
 	mInverseMass = 1.0f / mMass;
 }
 
-bool PhysicsObject::IsStatic()
+bool PhysicsObject::IsStatic() const
 {
   return mStatic;
 }
@@ -99,6 +99,16 @@ bool PhysicsObject::IsStatic()
 void PhysicsObject::SetStatic(bool aStatic)
 {
   mStatic = aStatic;
+}
+
+bool PhysicsObject::IsAffectedByGravity() const
+{
+  return mGravity;
+}
+
+void PhysicsObject::SetAffectedByGravity(bool aGravity)
+{
+  mGravity = aGravity;
 }
 
 Vector3 PhysicsObject::GetBroadSize() const

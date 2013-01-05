@@ -38,6 +38,19 @@ void ForceRegistry::Remove(PhysicsObject *aObject, ForceGenerator *aGenerator)
 		}
 	}
 }
+void ForceRegistry::RemoveForcesForObject(PhysicsObject *aObject)
+{
+  for(std::vector<ForceRegistration>::iterator it = mRegistry.begin(); it != mRegistry.end();)
+	{
+		if(it->mObject == aObject)
+    {
+      mRegistry.erase(it);
+      it = mRegistry.begin();
+      continue;
+    }
+    ++it;
+	}
+}
 void ForceRegistry::Clear()
 {
 	mRegistry.clear();

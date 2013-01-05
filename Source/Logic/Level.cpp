@@ -5,6 +5,8 @@
 #include "Transform.h"
 #include "GraphicsManager.h"
 #include "PhysicsWorld.h"
+#include "PhysicsObject.h"
+#include "ControllerManager.h"
 #include "TileMapGenerator.h"
 #include "Common.h"
 
@@ -55,6 +57,12 @@ void Level::Load()
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
 		mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
+    if((*it)->GET<PhysicsObject>())
+      mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
+    if((*it)->GET<Surface>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
+    /*if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());*/
 	}
 	mActive = true;
   
@@ -65,11 +73,18 @@ void Level::Unload()
 {
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
+    // Remove all components
 		mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
+    if((*it)->GET<PhysicsObject>())
+      mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
+    if((*it)->GET<Surface>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
+    /*if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());*/
 	}
 	mActive = false;
   
-  mOwner->SetActiveLevel(NULL);
+  //mOwner->SetActiveLevel(NULL);
 }
 
 void Level::ParseFile()

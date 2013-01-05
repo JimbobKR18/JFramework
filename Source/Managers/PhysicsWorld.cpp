@@ -46,6 +46,38 @@ void PhysicsWorld::DeleteObject(PhysicsObject *aObject)
 	delete aObject;
 }
 
+void PhysicsWorld::AddObject(PhysicsObject *aObject)
+{
+  // Check to see if object is in our list
+  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	{
+		if(*it == aObject)
+		{
+			return;
+		}
+	}
+  
+	mObjects.push_back(aObject);
+  
+  // Check if the object needs gravity to be applied
+  if(aObject->IsAffectedByGravity() && !aObject->IsStatic())
+    RegisterForce(aObject, &mGravity);
+}
+
+void PhysicsWorld::RemoveObject(PhysicsObject *aObject)
+{
+	for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+	{
+		if(*it == aObject)
+		{
+      // Remove all forces associated with an object
+      mRegistry.RemoveForcesForObject(*it);
+			mObjects.erase(it);
+			break;
+		}
+	}
+}
+
 void PhysicsWorld::ClearObjects()
 {
 	for(PhysicsIT it = mObjects.begin(); it != mObjects.end(); ++it)
@@ -85,24 +117,6 @@ void PhysicsWorld::UnregisterGravity(PhysicsObject *aObject)
   UnregisterForce(aObject, &mGravity);
 }
 
-void PhysicsWorld::AddObject(PhysicsObject *aObject)
-{
-	mObjects.push_back(aObject);
-	RegisterForce(aObject, &mGravity);
-}
-
-void PhysicsWorld::RemoveObject(PhysicsObject *aObject)
-{
-	for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
-	{
-		if(*it == aObject)
-		{
-			mObjects.erase(it);
-			break;
-		}
-	}
-}
-
 std::vector<PhysicsObject*> PhysicsWorld::SortOnAxis()
 {
 	std::vector<PhysicsObject*> ret = mObjects;
@@ -120,7 +134,8 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 		{
 			if(*it != *it2)
 			{
-				if(!mResolver.Find(*it, *it2))
+				if((!(*it)->IsStatic() || !(*it2)->IsStatic()) &&
+           !mResolver.Find(*it, *it2))
 				{
 				  float x1 = (*it)->GetOwner()->GET<Transform>()->GetPosition().x;
 				  float x1Size = (*it)->GetBroadSize().x / 2.0f;

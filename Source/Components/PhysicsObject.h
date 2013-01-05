@@ -20,7 +20,7 @@ private:
   Vector3 mVelocity, mAcceleration, mForces, mBroadSize;
   float mMass, mInverseMass;
   float mDamping;
-  bool mStatic;
+  bool mStatic, mGravity;
 
 public:
   enum {SPHERE, CUBE} mShape;
@@ -46,8 +46,11 @@ public:
   float GetMass() const;
   void SetMass(float aMass);
 
-  bool IsStatic();
+  bool IsStatic() const;
   void SetStatic(bool aStatic);
+  
+  bool IsAffectedByGravity() const;
+  void SetAffectedByGravity(bool aGravity);
 
   Vector3 GetBroadSize() const;
 };

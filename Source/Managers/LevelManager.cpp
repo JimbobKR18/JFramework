@@ -73,6 +73,15 @@ void LevelManager::SendMessage(Message const &aMessage)
 
 void LevelManager::AddLevel(Level *aLevel)
 {
+  // Check to see if object is in our list
+  for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
+	{
+		if(*it == aLevel)
+		{
+      return;
+		}
+	}
+  
 	mLevels.push_back(aLevel);
 }
 

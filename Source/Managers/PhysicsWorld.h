@@ -32,6 +32,8 @@ public:
 
   PhysicsObject *CreateObject();
   void DeleteObject(PhysicsObject *aObject);
+  void AddObject(PhysicsObject *aObject);
+  void RemoveObject(PhysicsObject *aObject);
   void ClearObjects();
 
   // Derived from Manager
@@ -42,10 +44,8 @@ public:
   void RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void UnregisterGravity(PhysicsObject *aObject);
-
+  
 private:
-  void AddObject(PhysicsObject *aObject);
-  void RemoveObject(PhysicsObject *aObject);
   std::vector<PhysicsObject*> SortOnAxis();
   void SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects);
   

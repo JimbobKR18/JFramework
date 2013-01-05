@@ -20,6 +20,15 @@ ControllerManager::~ControllerManager()
 
 void ControllerManager::AddController(Controller *aController)
 {
+  // Check to see if object is in our list
+  for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
+  {
+    if(*it == aController)
+    {
+      return;
+    }
+  }
+  
   mControllers.push_back(aController);
 }
 void ControllerManager::RemoveController(Controller *aController)

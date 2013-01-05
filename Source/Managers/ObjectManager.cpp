@@ -57,6 +57,15 @@ void ObjectManager::DeleteObject(GameObject *aObj)
 
 void ObjectManager::AddObject(GameObject *aObj)
 {
+  // Check to see if object is in our list
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+	{
+		if(*it == aObj)
+		{
+      return;
+		}
+	}
+  
 	mObjects.push_back(aObj);
 }
 
@@ -87,11 +96,14 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 
 		// default true
 		if(gravity == "false")
+    {
 		  GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(object);
+      object->SetAffectedByGravity(false);
+    }
 
 		// default false
 		if(isstatic == "true")
-		      object->SetStatic(true);
+        object->SetStatic(true);
 
 		if(type == "CUBE")
 			object->mShape = PhysicsObject::CUBE;

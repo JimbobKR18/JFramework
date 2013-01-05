@@ -20,6 +20,15 @@ InputManager::~InputManager()
 
 void InputManager::AddInput(std::string const &aInput)
 {
+  // Check to see if object is in our list
+  for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
+  {
+    if(*it == aInput)
+    {
+      return;
+    }
+  }
+  
   mInputs.insert(aInput);
 }
 void InputManager::RemoveInput(std::string const &aInput)

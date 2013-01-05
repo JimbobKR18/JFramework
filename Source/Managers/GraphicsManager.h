@@ -23,6 +23,8 @@ public:
   // Manager stuff
 	Surface *CreateSurface();
 	void DeleteSurface(Surface *aSurface);
+  void AddSurface(Surface *aSurface);
+	void RemoveSurface(Surface *aSurface);
 	void ClearSurfaces();
 
   // Get the screen info
@@ -31,9 +33,6 @@ public:
   // Texture management
   void AddTexturePairing(std::string const &aFilename, unsigned aTextureId);
   unsigned GetTextureID(std::string const &aFilename);
-private:
-	void AddSurface(Surface *aSurface);
-	void RemoveSurface(Surface *aSurface);
 public:
   typedef std::vector<Surface*>::iterator SurfaceIT;
 };

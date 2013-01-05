@@ -48,21 +48,17 @@ void GraphicsManager::DeleteSurface(Surface *aSurface)
   delete aSurface;
 }
 
-void GraphicsManager::ClearSurfaces()
-{
-  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
-  {
-    DeleteSurface(*it);
-  }
-}
-
-Screen *GraphicsManager::GetScreen()
-{
-  return mScreen;
-}
-
 void GraphicsManager::AddSurface(Surface *aSurface)
 {
+  // Check to see if object is in our list
+  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+	{
+		if(*it == aSurface)
+		{
+			return;
+		}
+	}
+  
   mSurfaces.push_back(aSurface);
 }
 
@@ -76,6 +72,19 @@ void GraphicsManager::RemoveSurface(Surface *aSurface)
 			break;
 		}
 	}
+}
+
+void GraphicsManager::ClearSurfaces()
+{
+  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  {
+    DeleteSurface(*it);
+  }
+}
+
+Screen *GraphicsManager::GetScreen()
+{
+  return mScreen;
 }
 
 void GraphicsManager::AddTexturePairing(std::string const &aFilename, unsigned aTextureId)
