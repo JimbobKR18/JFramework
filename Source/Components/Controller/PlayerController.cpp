@@ -45,9 +45,6 @@ void PlayerController::DoAction(std::string const &aAction)
   {
     mObj->GET<PhysicsObject>()->AddForce(Vector3(moveSpeed, 0.0f, 0.0f));
   }
-  
-  mObj->GetOwner()->GetOwningApp()->GET<LevelManager>()->GetActiveLevel()->Unload();
-  mObj->GetOwner()->GetOwningApp()->GET<LevelManager>()->GetActiveLevel()->Load();
 }
 
 void PlayerController::Update()
