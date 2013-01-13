@@ -20,7 +20,7 @@
 
 #define LUAFILECHECK()  if(mScripts.find(aFilename) == mScripts.end()) \
                         { \
-                          std::ifstream file(RelativePath(aFilename.c_str())); \
+                          std::ifstream file(RelativePath(aFilename.c_str()).c_str()); \
                           std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()); \
                           mScripts.insert(ScriptPair(aFilename, contents)); \
                         }

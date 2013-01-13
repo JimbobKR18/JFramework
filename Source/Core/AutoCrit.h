@@ -10,6 +10,7 @@
 #define __JFramework__AutoCrit__
 
 #ifndef _WIN32
+#include <signal.h>
 #include <pthread.h>
 #else
 #endif

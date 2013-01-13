@@ -131,7 +131,7 @@ float TextParser::GetNextFloat(float &rValue)
   // Search for next value, could technically be int,
   // so you better know what you're searching for!
   mInput >> empty;
-  while(mInput.good() && ((empty.empty() || empty == "{" || empty == "}") || (!empty.empty() && !isnumber(empty[0]))))
+  while(mInput.good() && ((empty.empty() || empty == "{" || empty == "}") || (!empty.empty() && !isdigit(empty[0]))))
   {
     mInput >> empty;
   }
@@ -145,7 +145,7 @@ int TextParser::GetNextInt(int &rValue)
   // Search for next value, could technically be float,
   // so you better know what you're searching for!
   mInput >> empty;
-  while(mInput.good() && ((empty.empty() || empty == "{" || empty == "}") || (!empty.empty() && !isnumber(empty[0]))))
+  while(mInput.good() && ((empty.empty() || empty == "{" || empty == "}") || (!empty.empty() && !isdigit(empty[0]))))
   {
     mInput >> empty;
   }
