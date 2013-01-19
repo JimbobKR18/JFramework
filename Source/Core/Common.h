@@ -9,10 +9,12 @@
 #ifndef JFramework_Common_h
 #define JFramework_Common_h
 
+#include <algorithm>
 #include <vector>
 #include <string>
 #include <cassert>
 #include <cstdlib>
+#include <cctype>
 #include <map>
 #include <set>
 #include <fstream>
