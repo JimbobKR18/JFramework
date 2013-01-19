@@ -36,7 +36,7 @@ void ObjectManager::SendMessage(Message const &aMsg)
 
 GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 {
-	TextParser parser(RelativePath(aFilename));
+	TextParser parser(Common::RelativePath(aFilename));
 	GameObject *object = new GameObject(this, aFilename);
 	AddObject(object);
 	ParseDictionary(object, parser);
@@ -45,7 +45,7 @@ GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 
 void ObjectManager::ParseObject(GameObject *aObject)
 {
-	TextParser parser(RelativePath(aObject->GetFilename()));
+	TextParser parser(Common::RelativePath(aObject->GetFilename()));
 	ParseDictionary(aObject, parser);
 }
 
@@ -92,7 +92,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 		std::string type = aParser.Find("PhysicsObject", "Shape");
 		std::string gravity = aParser.Find("PhysicsObject", "Gravity");
 		std::string isstatic = aParser.Find("PhysicsObject", "Static");
-		object->SetMass(StringToInt(aParser.Find("PhysicsObject", "Mass")));
+		object->SetMass(Common::StringToInt(aParser.Find("PhysicsObject", "Mass")));
 
 		// default true
 		if(gravity == "false")
@@ -118,15 +118,15 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 	{
 	  // Get Position, Scale, and Size
 		Transform *transform = new Transform();
-		transform->SetPosition(Vector3(StringToInt(aParser.Find("Transform", "PositionX")),
-				StringToInt(aParser.Find("Transform", "PositionY")),
-				StringToInt(aParser.Find("Transform", "PositionZ"))));
-		transform->SetScale(Vector3(StringToInt(aParser.Find("Transform", "ScaleX")),
-						StringToInt(aParser.Find("Transform", "ScaleY")),
-						StringToInt(aParser.Find("Transform", "ScaleZ"))));
-		transform->SetSize(Vector3(StringToInt(aParser.Find("Transform", "SizeX")),
-								StringToInt(aParser.Find("Transform", "SizeY")),
-								StringToInt(aParser.Find("Transform", "SizeZ"))));
+		transform->SetPosition(Vector3(Common::StringToInt(aParser.Find("Transform", "PositionX")),
+				Common::StringToInt(aParser.Find("Transform", "PositionY")),
+				Common::StringToInt(aParser.Find("Transform", "PositionZ"))));
+		transform->SetScale(Vector3(Common::StringToInt(aParser.Find("Transform", "ScaleX")),
+						Common::StringToInt(aParser.Find("Transform", "ScaleY")),
+						Common::StringToInt(aParser.Find("Transform", "ScaleZ"))));
+		transform->SetSize(Vector3(Common::StringToInt(aParser.Find("Transform", "SizeX")),
+								Common::StringToInt(aParser.Find("Transform", "SizeY")),
+								Common::StringToInt(aParser.Find("Transform", "SizeZ"))));
 		aObject->AddComponent(transform);
 	}
 	if(aParser.Find("Surface"))
@@ -146,8 +146,8 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
     if(aParser.Find("Surface", "AnimationCount") != "BadString")
     {
       numFrames.clear();
-      numAnimations = StringToFloat(aParser.Find("Surface", "AnimationCount"));
-      numFrames = StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
+      numAnimations = Common::StringToFloat(aParser.Find("Surface", "AnimationCount"));
+      numFrames = Common::StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
       
       std::string isAnimated = aParser.Find("Surface", "Animated");
       if(isAnimated == "true")

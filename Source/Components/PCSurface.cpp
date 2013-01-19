@@ -29,7 +29,7 @@ void PCSurface::LoadImage(std::string const &aName)
     mTextureID = mManager->GetTextureID(aName);
   }
   // else we load the image from file
-	else if((mSurface = IMG_Load(RelativePath(aName).c_str())))
+	else if((mSurface = IMG_Load(Common::RelativePath(aName).c_str())))
 	{
 		if ((mSurface->w & (mSurface->w - 1)) != 0 )
 		{
@@ -75,6 +75,8 @@ void PCSurface::LoadImage(std::string const &aName)
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
 						  mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);

@@ -89,7 +89,7 @@ void Level::Unload()
 
 void Level::ParseFile()
 {
-	TextParser parser(RelativePath(mFileName).c_str(), false);
+	TextParser parser(Common::RelativePath(mFileName).c_str(), false);
 	GameObject *object = NULL;
 
 	while(parser.IsGood())
@@ -160,14 +160,14 @@ void Level::ParseFile()
       // Get the tilemap data (separate file)
       parser.GetNextString(frameDataFilename);
       
-      TextParser tileMapData(RelativePath(frameDataFilename), false);
+      TextParser tileMapData(Common::RelativePath(frameDataFilename), false);
       tileMapData.GetNextString(empty);
       tileMapData.GetNextString(frameData);
       tileMapData.GetNextString(empty);
       tileMapData.GetNextString(collisionData);
       
-      frames = StringToIntVector(frameData);
-      collision = StringToIntVector(collisionData);
+      frames = Common::StringToIntVector(frameData);
+      collision = Common::StringToIntVector(collisionData);
       
       TileMapGenerator tilemap(width, height, tileSize,
                                file, frames, collision, this);
