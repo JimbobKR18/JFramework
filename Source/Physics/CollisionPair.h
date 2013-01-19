@@ -7,9 +7,11 @@ class PhysicsObject;
 
 struct CollisionPair
 {
-	PhysicsObject *mBodies[2];
-	float mPenetration, mRestitution;
-	Vector3 mRelativeVelocity, mNormal;
+	PhysicsObject*  mBodies[2];
+	float           mPenetration,
+                  mRestitution;
+	Vector3         mRelativeVelocity,
+                  mNormal;
 
 	CollisionPair(PhysicsObject *aBody1, PhysicsObject *aBody2);
 	void operator=(CollisionPair const &rhs);

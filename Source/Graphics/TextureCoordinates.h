@@ -15,11 +15,14 @@
 class TextureCoordinates
 {
 private:
-  int mCurFrame, mCurAnimation;
-  int mNumAnimations;
+  int   mCurFrame,
+        mCurAnimation;
+  int   mNumAnimations;
   float mXGain, mYGain;
-  float mCurTime, mXValues[2], mYValues[2];
-  bool mAnimated;
+  float mCurTime,
+        mXValues[2],
+        mYValues[2];
+  bool  mAnimated;
   
   // <currentAnimation, numberofFrames>
   std::map<int, int> mAnimations;

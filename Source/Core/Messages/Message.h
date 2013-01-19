@@ -15,7 +15,8 @@
 class Message
 {
 private:
-  std::string mDesc, mContent;
+  std::string mDesc,
+              mContent;
   
 protected:
   void SetDescription(std::string const &aDesc) { mDesc = aDesc; }

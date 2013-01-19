@@ -7,7 +7,7 @@
 class LevelManager : public Manager
 {
 private:
-	Level *mActiveLevel;
+	Level*              mActiveLevel;
 	std::vector<Level*> mLevels;
 public:
 	LevelManager(GameApp *aApp);

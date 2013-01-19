@@ -7,7 +7,7 @@
 class Manager
 {
 private:
-	GameApp *mApp;
+	GameApp*    mApp;
 	std::string mName;
 
 public:

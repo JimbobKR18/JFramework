@@ -15,10 +15,13 @@
 class TileMapGenerator
 {
 private:
-  int mWidth, mHeight, mTileSize;
-  std::string mFilename;
-  std::vector<int> mTiles, mCollision;
-  Level *mOwner;
+  int               mWidth,
+                    mHeight,
+                    mTileSize;
+  std::string       mFilename;
+  std::vector<int>  mTiles,
+                    mCollision;
+  Level*            mOwner;
   
 public:
   TileMapGenerator();

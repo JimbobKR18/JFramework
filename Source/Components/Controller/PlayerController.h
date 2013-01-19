@@ -17,7 +17,7 @@
 class PlayerController : public Controller
 {
 private:
-  GameObject *mObj;
+  GameObject* mObj;
   
 public:
   PlayerController();

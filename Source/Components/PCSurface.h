@@ -21,10 +21,10 @@
 class PCSurface : public Surface
 {
 private:
-	GLuint mTextureID;
-	SDL_Surface *mSurface;
-	GLenum mTextureFormat;
-	GLint  mNumberOfColors;
+	GLuint        mTextureID;
+	SDL_Surface*  mSurface;
+	GLenum        mTextureFormat;
+	GLint         mNumberOfColors;
 
 public:
 	PCSurface();

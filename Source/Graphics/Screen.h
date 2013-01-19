@@ -7,8 +7,9 @@
 class Screen
 {
 private:
-  int mWidth, mHeight;
-  View mView;
+  int   mWidth,
+        mHeight;
+  View  mView;
 
 public:
   Screen();

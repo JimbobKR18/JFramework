@@ -8,10 +8,10 @@ class GameObject;
 class View
 {
 private:
-	Vector3 mPosition;
-  Vector3 mSize;
-	GameObject *mTarget;
-	float mRate;
+	Vector3     mPosition;
+  Vector3     mSize;
+	GameObject* mTarget;
+	float       mRate;
 
 public:
 	View(float aRate = 0.0f);

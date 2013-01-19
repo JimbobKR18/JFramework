@@ -22,9 +22,9 @@ class PhysicsWorld : public Manager
 {
 private:
   std::vector<PhysicsObject*> mObjects;
-  ForceRegistry mRegistry;
-  GravityGenerator mGravity;
-  Resolver mResolver;
+  ForceRegistry               mRegistry;
+  GravityGenerator            mGravity;
+  Resolver                    mResolver;
 
 public:
   PhysicsWorld(GameApp *aApp);

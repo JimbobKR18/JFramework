@@ -10,8 +10,8 @@ class GameApp
 {
 private:
 	std::vector<Manager*> mManagers;
-	float mLastFrame;
-	float mDT;
+	float                 mLastFrame;
+	float                 mDT;
 public:
 	GameApp();
 	~GameApp();

@@ -13,8 +13,8 @@
 
 struct ForceRegistration
 {
-	PhysicsObject *mObject;
-	ForceGenerator *mGenerator;
+	PhysicsObject*  mObject;
+	ForceGenerator* mGenerator;
 
 	ForceRegistration(PhysicsObject *aObject, ForceGenerator *aGenerator) : mObject(aObject), mGenerator(aGenerator) {}
 };

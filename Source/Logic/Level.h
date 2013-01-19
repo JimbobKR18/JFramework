@@ -9,11 +9,11 @@ class LevelManager;
 class Level
 {
 private:
-	std::string mName;
-	std::string mFileName;
-	std::vector<GameObject*> mObjects;
-	LevelManager *mOwner;
-	bool mActive;
+	std::string               mName;
+	std::string               mFileName;
+	std::vector<GameObject*>  mObjects;
+	LevelManager*             mOwner;
+	bool                      mActive;
   
   typedef std::vector<GameObject*>::iterator ObjectIT;
 public:

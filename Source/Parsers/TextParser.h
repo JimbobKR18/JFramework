@@ -6,10 +6,10 @@
 
 struct Root
 {
-  std::string mValue;
-  std::string mName;
-  std::vector<Root*> mChildren;
-  Root *mParent;
+  std::string         mValue;
+  std::string         mName;
+  std::vector<Root*>  mChildren;
+  Root*               mParent;
 
   Root const *Search(std::string const &aValue) const;
   ~Root();

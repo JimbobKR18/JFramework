@@ -18,9 +18,9 @@ class ObjectManager;
 class GameObject
 {
 private:
-  std::string mFileName;
+  std::string             mFileName;
   std::vector<Component*> mComponents;
-  ObjectManager *mOwner;
+  ObjectManager*          mOwner;
   
   typedef std::vector<Component*>::iterator ComponentIT;
 public:

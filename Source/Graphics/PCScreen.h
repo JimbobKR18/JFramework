@@ -20,7 +20,7 @@
 class PCScreen : public Screen
 {
   private:
-    SDL_Surface *mSurface;
+    SDL_Surface* mSurface;
 
   public:
     PCScreen();

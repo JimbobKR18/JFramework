@@ -8,9 +8,9 @@
 class GraphicsManager : public Manager
 {
 private:
-	std::vector<Surface*> mSurfaces;
+	std::vector<Surface*>           mSurfaces;
   std::map<std::string, unsigned> mTextures;
-	Screen *mScreen;
+	Screen*                         mScreen;
 public:
 	GraphicsManager(GameApp *aApp);
 	~GraphicsManager();

@@ -11,7 +11,7 @@ class Surface : public Component
 private:
   TextureCoordinates *mTexCoord;
 protected:
-  GraphicsManager *mManager;
+  GraphicsManager* mManager;
 public:
 	Surface();
 	Surface(GraphicsManager *aManager);

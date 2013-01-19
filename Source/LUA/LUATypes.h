@@ -19,7 +19,7 @@ namespace LUABind
   // A way to access the app and manage resources
   struct StaticGameApp
   {
-    static GameApp *mApp;
+    static GameApp* mApp;
     
     StaticGameApp() { mApp = NULL; }
     ~StaticGameApp() { mApp = NULL; }

@@ -16,7 +16,7 @@ class ForceGenerator
 {
 private:
 	Vector3 mForce;
-	bool mActive;
+	bool    mActive;
 public:
 	ForceGenerator(Vector3 const &aForce);
 	virtual void Update(PhysicsObject *aObject, float aDuration) = 0;

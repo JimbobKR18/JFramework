@@ -16,7 +16,7 @@
 class Component
 {
 private:
-  GameObject *mOwner;
+  GameObject* mOwner;
   std::string mName;
 
 public:
