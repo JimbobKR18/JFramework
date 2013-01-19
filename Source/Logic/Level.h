@@ -25,6 +25,8 @@ public:
   LevelManager *GetManager() const;
   
   void AddObject(GameObject *aObject);
+  void DeleteObject(GameObject *aObject);
+  void DeleteObjects();
 
 	void Load();
 	void Unload();

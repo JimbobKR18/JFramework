@@ -33,8 +33,7 @@ Level::~Level()
 	if(mActive)
 		mObjects.clear();
 	else
-		for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
-			delete *it;
+    DeleteObjects();
 }
 
 std::string Level::GetName() const
@@ -50,6 +49,18 @@ LevelManager *Level::GetManager() const
 void Level::AddObject(GameObject *aObject)
 {
   mObjects.push_back(aObject);
+}
+
+void Level::DeleteObject(GameObject *aObject)
+{
+  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  manager->DeleteObject(aObject);
+}
+
+void Level::DeleteObjects()
+{
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+    DeleteObject(*it);
 }
 
 void Level::Load()
