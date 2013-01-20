@@ -27,6 +27,7 @@ public:
   void AddObject(GameObject *aObject);
   void DeleteObject(GameObject *aObject);
   void DeleteObjects();
+  void Reset();
 
 	void Load();
 	void Unload();

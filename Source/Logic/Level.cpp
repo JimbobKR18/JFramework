@@ -63,6 +63,12 @@ void Level::DeleteObjects()
     DeleteObject(*it);
 }
 
+void Level::Reset()
+{
+  DeleteObjects();
+  ParseFile();
+}
+
 void Level::Load()
 {
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)

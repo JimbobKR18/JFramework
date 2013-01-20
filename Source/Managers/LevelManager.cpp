@@ -35,7 +35,7 @@ void LevelManager::DeleteLevel(Level *aLevel)
 	delete aLevel;
 }
 
-void LevelManager::LoadLevel(std::string const &aLevelName)
+void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
 {
 	if(mActiveLevel)
 		mActiveLevel->Unload();
@@ -44,6 +44,10 @@ void LevelManager::LoadLevel(std::string const &aLevelName)
 	{
 		if((*it)->GetName() == aLevelName)
 		{
+      if(aReset)
+      {
+        (*it)->Reset();
+      }
 			(*it)->Load();
 		}
 	}

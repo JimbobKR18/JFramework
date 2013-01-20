@@ -16,7 +16,7 @@ public:
 	Level *CreateLevel(std::string const &aFilename);
 	Level *GetLevel(std::string const &aLevelName);
 	void DeleteLevel(Level *aLevel);
-	void LoadLevel(std::string const &aLevelName);
+	void LoadLevel(std::string const &aLevelName, bool aReset = false);
   
   Level *GetActiveLevel();
   void SetActiveLevel(Level *aLevel);
