@@ -16,23 +16,23 @@ public:
 	~GraphicsManager();
 
   // Derived from Manager
-	void Update();
-	void SendMessage(Message const &aMessage);
-	static std::string GetName() {return "GraphicsManager";}
+	void                Update();
+	void                SendMessage(Message const &aMessage);
+	static std::string  GetName() {return "GraphicsManager";}
 
   // Manager stuff
-	Surface *CreateSurface();
-	void DeleteSurface(Surface *aSurface);
-  void AddSurface(Surface *aSurface);
-	void RemoveSurface(Surface *aSurface);
-	void ClearSurfaces();
+	Surface*            CreateSurface();
+	void                DeleteSurface(Surface *aSurface);
+  void                AddSurface(Surface *aSurface);
+	void                RemoveSurface(Surface *aSurface);
+	void                ClearSurfaces();
 
   // Get the screen info
-  Screen *GetScreen();
+  Screen*             GetScreen();
   
   // Texture management
-  void AddTexturePairing(std::string const &aFilename, unsigned aTextureId);
-  unsigned GetTextureID(std::string const &aFilename);
+  void                AddTexturePairing(std::string const &aFilename, unsigned aTextureId);
+  unsigned            GetTextureID(std::string const &aFilename);
 public:
   typedef std::vector<Surface*>::iterator SurfaceIT;
 };

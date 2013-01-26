@@ -15,18 +15,19 @@
 class TextureCoordinates
 {
 private:
-  int   mCurFrame,
-        mCurAnimation;
-  int   mNumAnimations;
-  float mXGain, mYGain;
-  float mCurTime,
-        mXValues[2],
-        mYValues[2];
-  bool  mAnimated;
+  int                         mCurFrame;
+  int                         mCurAnimation;
+  int                         mNumAnimations;
+  float                       mXGain;
+  float                       mYGain;
+  float                       mCurTime;
+  float                       mXValues[2];
+  float                       mYValues[2];
+  bool                        mAnimated;
   
   // <currentAnimation, numberofFrames>
-  std::map<int, int> mAnimations;
-  typedef std::pair<int,int> AnimationData;
+  std::map<int, int>          mAnimations;
+  typedef std::pair<int,int>  AnimationData;
   
 public:
   TextureCoordinates();
@@ -34,17 +35,14 @@ public:
   
   ~TextureCoordinates();
   
-  void Update(float aDT);
-  
+  void  Update(float aDT);
   float GetXValue(int aValue) const;
   float GetYValue(int aValue) const;
-  
-  int GetCurrentAnimation() const;
-  void SetCurrentAnimation(int aAnimation);
-  void SetCurrentFrame(int aFrame);
-  void SetAnimated(bool aAnimated);
-  
-  void Reset();
+  int   GetCurrentAnimation() const;
+  void  SetCurrentAnimation(int aAnimation);
+  void  SetCurrentFrame(int aFrame);
+  void  SetAnimated(bool aAnimated);
+  void  Reset();
 };
 
 #endif /* defined(__JFramework__TextureCoordinates__) */

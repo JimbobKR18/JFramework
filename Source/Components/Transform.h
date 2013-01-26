@@ -15,19 +15,19 @@ class Transform : public Component
     Transform();
     ~Transform();
 
-    Vector3 GetPosition() const;
-    void SetPosition(Vector3 const &aPos);
+    Vector3             GetPosition() const;
+    void                SetPosition(Vector3 const &aPos);
 
-    Vector3 GetScale() const;
-    void SetScale(Vector3 const &aScale);
+    Vector3             GetScale() const;
+    void                SetScale(Vector3 const &aScale);
 
-    Vector3 GetSize() const;
-    void SetSize(Vector3 const &aSize);
+    Vector3             GetSize() const;
+    void                SetSize(Vector3 const &aSize);
 
-    void Update() {}
-    void SendMessage(Message const &aMessage) {}
-    void ReceiveMessage(Message const &aMessage) {}
-    static std::string GetName() {return "Transform";}
+    void                Update() {}
+    void                SendMessage(Message const &aMessage) {}
+    void                ReceiveMessage(Message const &aMessage) {}
+    static std::string  GetName() {return "Transform";}
 };
 
 #endif

@@ -16,18 +16,15 @@ public:
 	GameApp();
 	~GameApp();
 
-	float GetDT() const;
-
-	void AppStep();
-	void Update();
-  void SendMessage(Message const &aMessage);
-
-	void AddManager(Manager* aManager);
-
-	Manager* GetManager(std::string const &aName);
+	float     GetDT() const;
+	void      AppStep();
+	void      Update();
+  void      SendMessage(Message const &aMessage);
+	void      AddManager(Manager* aManager);
+	Manager*  GetManager(std::string const &aName);
 
 	template<typename T>
-	T* GET() {return (T*)GetManager(T::GetName());}
+	T*        GET() {return (T*)GetManager(T::GetName());}
 };
 
 #endif

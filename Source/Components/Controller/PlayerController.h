@@ -26,13 +26,13 @@ public:
   void SetTarget(GameObject *aTarget);
   
   // Virtuals derived from Controller
-  virtual void DoAction(std::string const &aAction);
+  virtual void        DoAction(std::string const &aAction);
   
   // Virtuals derived from Component
-  virtual void Update();
-  virtual void SendMessage(Message const &aMessage);
-  virtual void ReceiveMessage(Message const &aMessage);
-  static std::string GetName() {return "PlayerController";}
+  virtual void        Update();
+  virtual void        SendMessage(Message const &aMessage);
+  virtual void        ReceiveMessage(Message const &aMessage);
+  static std::string  GetName() {return "PlayerController";}
 };
 
 #endif /* defined(__JFramework__PlayerController__) */

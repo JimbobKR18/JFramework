@@ -27,20 +27,18 @@ class TextParser : public Parser
 {
   private:
     std::ifstream mInput;
-    Root *mDictionary;
+    Root*         mDictionary;
   public:
     TextParser(std::string const &aFilename, bool aAutoParse = true);
     ~TextParser();
 
-    bool Find(std::string const &aElement);
-    std::string Find(std::string const &aRoot, std::string const &aElement);
-    void Parse();
-  
-    float GetNextFloat(float &rValue);
-    int GetNextInt(int &rValue);
-    std::string GetNextString(std::string &rValue);
-  
-    bool IsGood();
+    bool          Find(std::string const &aElement);
+    std::string   Find(std::string const &aRoot, std::string const &aElement);
+    void          Parse();
+    float         GetNextFloat(float &rValue);
+    int           GetNextInt(int &rValue);
+    std::string   GetNextString(std::string &rValue);
+    bool          IsGood();
 };
 
 #endif

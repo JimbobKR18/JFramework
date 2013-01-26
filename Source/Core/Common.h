@@ -30,13 +30,13 @@ namespace Common
   std::string const RelativePath(std::string const &aFileName);
 
   #ifndef _WIN32
-  long GetTickCount();
-  long timeGetTime();
+  long              GetTickCount();
+  long              timeGetTime();
   #endif
 
-  int StringToInt(std::string const &aValue);
-  float StringToFloat(std::string const &aValue);
-  std::vector<int> StringToIntVector(std::string const &aValue);
+  int               StringToInt(std::string const &aValue);
+  float             StringToFloat(std::string const &aValue);
+  std::vector<int>  StringToIntVector(std::string const &aValue);
 }
 
 #endif

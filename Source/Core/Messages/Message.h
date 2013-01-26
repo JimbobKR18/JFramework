@@ -15,18 +15,19 @@
 class Message
 {
 private:
-  std::string mDesc,
-              mContent;
-  
-protected:
-  void SetDescription(std::string const &aDesc) { mDesc = aDesc; }
-  void SetContent(std::string const &aContent) { mContent = aContent; }
+  std::string mDesc;
+  std::string mContent;
   
 public:
   Message() {}
   Message(Message const &aMessage) : mDesc(aMessage.mDesc) {}
   virtual ~Message() {}
+
+protected:
+  void        SetDescription(std::string const &aDesc) { mDesc = aDesc; }
+  void        SetContent(std::string const &aContent) { mContent = aContent; }
   
+public:
   std::string GetDescription() const { return mDesc; }
   std::string GetContent() const { return mContent; }
 };

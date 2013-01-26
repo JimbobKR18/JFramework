@@ -29,29 +29,26 @@ public:
   GameObject(GameObject const &aGameObject);
   ~GameObject();
 
-  std::string GetFilename();
-  ObjectManager *GetOwner();
+  std::string             GetFilename();
+  ObjectManager*          GetOwner();
 
-  void AddComponent(Component *aComponent);
-  void RemoveComponent(Component *aComponent);
+  void                    AddComponent(Component *aComponent);
+  void                    RemoveComponent(Component *aComponent);
+  Component*              GetComponent(std::string const &aName);
+  bool                    HasComponent(std::string const &aName);
 
-  Component *GetComponent(std::string const &aName);
-  bool HasComponent(std::string const &aName);
-
-  template<typename T>
-  T *GET()
+  template<typename T> T* GET()
   {
     return (T*)GetComponent(T::GetName());
   }
 
-  template<typename T>
-  T *HAS()
+  template<typename T> T* HAS()
   {
     return HasComponent(T::GetName());
   }
 
-  void Update();
-  void ReceiveMessage(Message const &aMessage);
+  void                    Update();
+  void                    ReceiveMessage(Message const &aMessage);
 };
 
 #endif /* defined(__JFramework__GameObject__) */

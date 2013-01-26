@@ -21,14 +21,14 @@ public:
   ControllerManager(GameApp* aApp);
   ~ControllerManager();
   
-  void AddController(Controller *aController);
-  void RemoveController(Controller *aController);
-  void ClearControllers();
+  void                AddController(Controller *aController);
+  void                RemoveController(Controller *aController);
+  void                ClearControllers();
   
   // Derived from Manager
-  void Update();
-	void SendMessage(Message const &aMessage);
-	static std::string GetName() {return "ControllerManager";}
+  void                Update();
+	void                SendMessage(Message const &aMessage);
+	static std::string  GetName() {return "ControllerManager";}
   
 public:
   typedef std::vector<Controller*>::iterator ControllerIT;

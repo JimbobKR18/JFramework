@@ -17,15 +17,13 @@ public:
 	View(float aRate = 0.0f);
 	~View();
 
-	Vector3 GetPosition() const;
-  Vector3 GetSize() const;
-
-  void SetSize(Vector3 const &aSize);
-	void SetPosition(Vector3 const &aPos);
-	void SetTarget(GameObject *aObj);
-	void SetRate(float aRate);
-
-	void Update();
+	Vector3   GetPosition() const;
+  Vector3   GetSize() const;
+  void      SetSize(Vector3 const &aSize);
+	void      SetPosition(Vector3 const &aPos);
+	void      SetTarget(GameObject *aObj);
+	void      SetRate(float aRate);
+	void      Update();
 };
 
 #endif

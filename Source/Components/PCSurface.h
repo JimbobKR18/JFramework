@@ -31,17 +31,16 @@ public:
   PCSurface(GraphicsManager *aManager);
 	~PCSurface();
 
-	void LoadImage(std::string const &aName);
-  
+	void                LoadImage(std::string const &aName);
   // Batching
-  unsigned GetIndexValue();
+  unsigned            GetIndexValue();
 
-	void Update();
-	void SendMessage(Message const &aMessage);
-	void ReceiveMessage(Message const &aMessage);
-	static std::string GetName() {return "Surface";}
+	void                Update();
+	void                SendMessage(Message const &aMessage);
+	void                ReceiveMessage(Message const &aMessage);
+	static std::string  GetName() {return "Surface";}
 
-	unsigned GetTextureID() const;
+	unsigned            GetTextureID() const;
 };
 
 #endif

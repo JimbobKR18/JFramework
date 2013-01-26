@@ -20,13 +20,13 @@ public:
   Controller();
   ~Controller();
   
-  virtual void DoAction(std::string const &aAction) = 0;
+  virtual void        DoAction(std::string const &aAction) = 0;
   
   // Virtuals derived from Component
-  virtual void Update() = 0;
-  virtual void SendMessage(Message const &aMessage) = 0;
-  virtual void ReceiveMessage(Message const &aMessage) = 0;
-  static std::string GetName() {return "Controller";}
+  virtual void        Update() = 0;
+  virtual void        SendMessage(Message const &aMessage) = 0;
+  virtual void        ReceiveMessage(Message const &aMessage) = 0;
+  static std::string  GetName() {return "Controller";}
 };
 
 #endif /* defined(__JFramework__Controller__) */

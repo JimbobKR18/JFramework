@@ -14,18 +14,18 @@ public:
 	virtual ~ObjectManager();
 
   // Derived from Manager
-	void Update();
-	void SendMessage(Message const &aMessage);
-	static std::string GetName() {return "ObjectManager";}
+	void                Update();
+	void                SendMessage(Message const &aMessage);
+	static std::string  GetName() {return "ObjectManager";}
 
-	GameObject *CreateObject(std::string const &aFilename);
-	void ParseObject(GameObject *aObject);
-	void DeleteObject(GameObject *aObj);
-	void ClearObjects();
-	void AddObject(GameObject *aObj);
-	void RemoveObject(GameObject *aObj);
+	GameObject*         CreateObject(std::string const &aFilename);
+	void                ParseObject(GameObject *aObject);
+	void                DeleteObject(GameObject *aObj);
+	void                ClearObjects();
+	void                AddObject(GameObject *aObj);
+	void                RemoveObject(GameObject *aObj);
 private:
-	void ParseDictionary(GameObject *aObject, Parser &aParser);
+	void                ParseDictionary(GameObject *aObject, Parser &aParser);
   typedef std::vector<GameObject*>::iterator ObjectIT;
 };
 

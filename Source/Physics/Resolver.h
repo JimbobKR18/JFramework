@@ -22,20 +22,20 @@ public:
 private:
 	// Methods to resolve collisions
   float CalculateSeparatingVelocity(CollisionPair const &aPair);
-	void ResolvePenetration(CollisionPair const &aPair);
-	void ResolveVelocity(CollisionPair const &aPair, float aDuration);
-	void Resolve(CollisionPair &aPair, float aDuration);
+	void  ResolvePenetration(CollisionPair const &aPair);
+	void  ResolveVelocity(CollisionPair const &aPair, float aDuration);
+	void  Resolve(CollisionPair &aPair, float aDuration);
 
 	// Check if objects are actually colliding
-	void CheckCollision(CollisionPair &aPair);
-	bool CheckSphereToSphere(CollisionPair &aPair);
-  bool CheckSphereToCube(CollisionPair &aPair);
-  bool CheckCubeToCube(CollisionPair &aPair);
+	void  CheckCollision(CollisionPair &aPair);
+	bool  CheckSphereToSphere(CollisionPair &aPair);
+  bool  CheckSphereToCube(CollisionPair &aPair);
+  bool  CheckCubeToCube(CollisionPair &aPair);
 
   // Calculation of normals etc.
-	void CalculateSphereToSphere(CollisionPair &aPair);
-	void CalculateSphereToCube(CollisionPair &aPair);
-	void CalculateCubeToCube(CollisionPair &aPair);
+	void  CalculateSphereToSphere(CollisionPair &aPair);
+	void  CalculateSphereToCube(CollisionPair &aPair);
+	void  CalculateCubeToCube(CollisionPair &aPair);
 };
 
 #endif

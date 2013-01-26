@@ -17,17 +17,15 @@ public:
   virtual ~Screen();
 
   // Width and Height
-  int GetWidth() const;
-  int GetHeight() const;
-
+  int                     GetWidth() const;
+  int                     GetHeight() const;
   // Get viewable space
-  View &GetView();
-
+  View&                   GetView();
   // Batching
-  std::vector<Surface*> SortObjects(std::vector<Surface*> const &aObjects);
+  std::vector<Surface*>   SortObjects(std::vector<Surface*> const &aObjects);
 
-  virtual void ChangeSize(int aW, int aH) = 0;
-  virtual void Draw(std::vector<Surface*> const &aObjects) = 0;
+  virtual void            ChangeSize(int aW, int aH) = 0;
+  virtual void            Draw(std::vector<Surface*> const &aObjects) = 0;
 };
 
 #endif

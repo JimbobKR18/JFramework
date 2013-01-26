@@ -21,18 +21,18 @@ public:
 	Level(LevelManager *aManager, std::string const &aFileName);
 	~Level();
 
-	std::string GetName() const;
-  LevelManager *GetManager() const;
+	std::string   GetName() const;
+  LevelManager* GetManager() const;
   
-  void AddObject(GameObject *aObject);
-  void DeleteObject(GameObject *aObject);
-  void DeleteObjects();
-  void Reset();
+  void          AddObject(GameObject *aObject);
+  void          DeleteObject(GameObject *aObject);
+  void          DeleteObjects();
+  void          Reset();
 
-	void Load();
-	void Unload();
+	void          Load();
+	void          Unload();
 private:
-	void ParseFile();
+	void          ParseFile();
 };
 
 #endif

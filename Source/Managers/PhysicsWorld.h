@@ -30,24 +30,24 @@ public:
   PhysicsWorld(GameApp *aApp);
   virtual ~PhysicsWorld();
 
-  PhysicsObject *CreateObject();
-  void DeleteObject(PhysicsObject *aObject);
-  void AddObject(PhysicsObject *aObject);
-  void RemoveObject(PhysicsObject *aObject);
-  void ClearObjects();
-
+  // Object Management
+  PhysicsObject*                CreateObject();
+  void                          DeleteObject(PhysicsObject *aObject);
+  void                          AddObject(PhysicsObject *aObject);
+  void                          RemoveObject(PhysicsObject *aObject);
+  void                          ClearObjects();
   // Derived from Manager
-  virtual void Update();
-  virtual void SendMessage(Message const &aMessage);
-  static std::string GetName() {return "PhysicsWorld";}
-
-  void RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
-  void UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
-  void UnregisterGravity(PhysicsObject *aObject);
+  virtual void                  Update();
+  virtual void                  SendMessage(Message const &aMessage);
+  static std::string            GetName() {return "PhysicsWorld";}
+  // Forces
+  void                          RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void                          UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void                          UnregisterGravity(PhysicsObject *aObject);
   
 private:
-  std::vector<PhysicsObject*> SortOnAxis();
-  void SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects);
+  std::vector<PhysicsObject*>   SortOnAxis();
+  void                          SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects);
   
 public:
   typedef std::vector<PhysicsObject*>::iterator PhysicsIT;

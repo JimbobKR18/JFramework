@@ -19,13 +19,13 @@ public:
   InputManager(GameApp *aApp);
   ~InputManager();
   
-  void AddInput(std::string const &aInput);
-  void RemoveInput(std::string const &aInput);
+  void                AddInput(std::string const &aInput);
+  void                RemoveInput(std::string const &aInput);
   
   // Derived from Manager
-  void Update();
-	void SendMessage(Message const &aMessage);
-	static std::string GetName() {return "InputManager";}
+  void                Update();
+	void                SendMessage(Message const &aMessage);
+	static std::string  GetName() {return "InputManager";}
   
 public:
   typedef std::set<std::string>::iterator InputIT;

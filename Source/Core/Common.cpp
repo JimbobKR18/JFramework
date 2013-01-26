@@ -8,17 +8,18 @@
 
 #include "Common.h"
 
-#ifdef __APPLE__
-#include <mach/mach_time.h>
-#define ORWL_NANO (+1.0E-9)
-#define ORWL_GIGA UINT64_C(1000000000)
-#define CLOCK_MONOTONIC 0
-
-double orwl_timebase = 0.0;
-uint64_t orwl_timestart = 0;
-
 namespace Common
 {
+  #ifdef __APPLE__
+  #include <mach/mach_time.h>
+  #define ORWL_NANO (+1.0E-9)
+  #define ORWL_GIGA UINT64_C(1000000000)
+  #define CLOCK_MONOTONIC 0
+
+  double orwl_timebase = 0.0;
+  uint64_t orwl_timestart = 0;
+
+
   // A mac replacement for the linux function clock_gettime
   void clock_gettime(int aEmpty, struct timespec *aTime)
   {

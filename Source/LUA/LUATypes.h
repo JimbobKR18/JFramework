@@ -27,11 +27,11 @@ namespace LUABind
     static GameApp *GetApp() { return mApp; }
   };
   
-  void Initialize();
-  void RegisterClasses();
-  void LoadScriptFromFile(std::string const &aFilename);
-  void LoadScriptFromString(std::string const &aString);
-  std::string GetScript(std::string const &aFilename);
+  void          Initialize();
+  void          RegisterClasses();
+  void          LoadScriptFromFile(std::string const &aFilename);
+  void          LoadScriptFromString(std::string const &aString);
+  std::string   GetScript(std::string const &aFilename);
   
   struct FunctionCaller : public SLB::Script
   {
