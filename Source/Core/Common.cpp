@@ -19,7 +19,6 @@ namespace Common
   double orwl_timebase = 0.0;
   uint64_t orwl_timestart = 0;
 
-
   // A mac replacement for the linux function clock_gettime
   void clock_gettime(int aEmpty, struct timespec *aTime)
   {

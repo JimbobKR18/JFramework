@@ -45,6 +45,10 @@ void PlayerController::DoAction(std::string const &aAction)
   {
     mObj->GET<PhysicsObject>()->AddForce(Vector3(moveSpeed, 0.0f, 0.0f));
   }
+  else if(aAction == "QPressed")
+  {
+    GetOwner()->GetOwner()->GetOwningApp()->GET<ObjectManager>()->CreateObject(Common::RelativePath("BasicObject2.txt"));
+  }
   
   //mOwner->GetOwner()->GetOwningApp()->GET<LevelManager>()->
 }

@@ -39,16 +39,23 @@ int main(int argc, char *argv[])
         switch(event.key.keysym.sym)
         {
           case SDLK_LEFT:
+          case SDLK_a:
             app->GET<InputManager>()->AddInput("MoveLeft");
             break;
           case SDLK_RIGHT:
+          case SDLK_d:
             app->GET<InputManager>()->AddInput("MoveRight");
             break;
           case SDLK_UP:
+          case SDLK_w:
             app->GET<InputManager>()->AddInput("MoveUp");
             break;
           case SDLK_DOWN:
+          case SDLK_s:
             app->GET<InputManager>()->AddInput("MoveDown");
+            break;
+          case SDLK_q:
+            app->GET<InputManager>()->AddInput("QPressed");
             break;
           default:
             break;
@@ -58,16 +65,23 @@ int main(int argc, char *argv[])
         switch(event.key.keysym.sym)
         {
           case SDLK_LEFT:
+          case SDLK_a:
             app->GET<InputManager>()->RemoveInput("MoveLeft");
             break;
           case SDLK_RIGHT:
+          case SDLK_d:
             app->GET<InputManager>()->RemoveInput("MoveRight");
             break;
           case SDLK_UP:
+          case SDLK_w:
             app->GET<InputManager>()->RemoveInput("MoveUp");
             break;
           case SDLK_DOWN:
+          case SDLK_s:
             app->GET<InputManager>()->RemoveInput("MoveDown");
+            break;
+          case SDLK_q:
+            app->GET<InputManager>()->RemoveInput("QPressed");
             break;
           default:
             break;

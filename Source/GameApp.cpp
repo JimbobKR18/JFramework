@@ -6,6 +6,7 @@
 #include "LevelManager.h"
 #include "ControllerManager.h"
 #include "InputManager.h"
+#include "SoundManager.h"
 #include "LUATypes.h"
 
 #ifdef _WIN32
@@ -25,6 +26,7 @@ GameApp::GameApp()
   AddManager(new LevelManager(this));
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));
+  AddManager(new SoundManager(this));
   
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
