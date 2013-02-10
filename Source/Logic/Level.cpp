@@ -8,6 +8,7 @@
 #include "PhysicsObject.h"
 #include "ControllerManager.h"
 #include "TileMapGenerator.h"
+#include "Menu.h"
 #include "Common.h"
 
 Level::Level()
@@ -46,6 +47,23 @@ LevelManager *Level::GetManager() const
   return mOwner;
 }
 
+void Level::AddMenu(Menu *aMenu)
+{
+  mMenus.push_back(aMenu);
+}
+
+void Level::RemoveMenu(Menu *aMenu)
+{
+  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
+  {
+    if(*it == aMenu)
+    {
+      mMenus.erase(it);
+      aMenu->DeleteObjects();
+    }
+  }
+}
+
 void Level::AddObject(GameObject *aObject)
 {
   mObjects.push_back(aObject);
@@ -53,8 +71,16 @@ void Level::AddObject(GameObject *aObject)
 
 void Level::DeleteObject(GameObject *aObject)
 {
-  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  manager->DeleteObject(aObject);
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
+    if(aObject == *it)
+    {
+      mObjects.erase(it);
+      ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+      manager->DeleteObject(aObject);
+      break;
+    }
+  }
 }
 
 void Level::DeleteObjects()

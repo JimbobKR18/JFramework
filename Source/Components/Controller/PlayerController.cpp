@@ -49,8 +49,6 @@ void PlayerController::DoAction(std::string const &aAction)
   {
     GetOwner()->GetOwner()->GetOwningApp()->GET<ObjectManager>()->CreateObject(Common::RelativePath("BasicObject2.txt"));
   }
-  
-  //mOwner->GetOwner()->GetOwningApp()->GET<LevelManager>()->
 }
 
 void PlayerController::Update()
