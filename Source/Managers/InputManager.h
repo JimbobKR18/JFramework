@@ -10,16 +10,26 @@
 #define __JFramework__InputManager__
 
 #include "Manager.h"
+#include "MathExt.h"
+
+struct InputInfo
+{
+  std::string mInput;
+  Vector3     mLocation;
+
+  InputInfo(std::string const &aInput, Vector3 const &aLocation) : mInput(aInput), mLocation(aLocation) {}
+  bool operator<(InputInfo const &aRhs) const {return mInput < aRhs.mInput;}
+};
 
 class InputManager : public Manager
 {
 private:
-  std::set<std::string> mInputs;
+  std::set<InputInfo> mInputs;
 public:
   InputManager(GameApp *aApp);
   ~InputManager();
   
-  void                AddInput(std::string const &aInput);
+  void                AddInput(std::string const &aInput, Vector3 const &aLocation);
   void                RemoveInput(std::string const &aInput);
   
   // Derived from Manager
@@ -28,7 +38,7 @@ public:
 	static std::string  GetName() {return "InputManager";}
   
 public:
-  typedef std::set<std::string>::iterator InputIT;
+  typedef std::set<InputInfo>::iterator InputIT;
 };
 
 #endif /* defined(__JFramework__InputManager__) */

@@ -24,9 +24,9 @@ void PCSurface::LoadImage(std::string const &aName)
 {
   /* If the file was already loaded,
      let's avoid assigning a new id. */
-  if(mManager->GetTextureID(aName) != (unsigned)-1)
+  if(GetManager()->GetTextureID(aName) != (unsigned)-1)
   {
-    mTextureID = mManager->GetTextureID(aName);
+    mTextureID = GetManager()->GetTextureID(aName);
   }
   // else we load the image from file
 	else if((mSurface = IMG_Load(Common::RelativePath(aName).c_str())))
@@ -81,7 +81,7 @@ void PCSurface::LoadImage(std::string const &aName)
 		glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
 						  mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
     
-    mManager->AddTexturePairing(aName, mTextureID);
+    GetManager()->AddTexturePairing(aName, mTextureID);
 	}
 	else
 	{

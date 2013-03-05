@@ -7,6 +7,7 @@
 #include "ControllerManager.h"
 #include "InputManager.h"
 #include "SoundManager.h"
+#include "DebugManager.h"
 #include "LUATypes.h"
 
 #ifdef _WIN32
@@ -14,6 +15,7 @@
 #endif
 
 #define DT (1.0f/60.0f)
+#define _DEBUG
 
 GameApp::GameApp()
 {
@@ -27,12 +29,15 @@ GameApp::GameApp()
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));
   AddManager(new SoundManager(this));
+#ifdef _DEBUG
+  AddManager(new DebugManager(this));
+#endif
   
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
 
   //LUABind::LoadScriptFromFile("BasicFile.LUA");
-  //LUABind::LoadFunction<std::string>("BasicFile.LUA", "main", "BasicLevel.txt");
+  //LUABind::LoadFunction<std::string>("BasicFile.LUA", "LoadLevel", "BasicLevel.txt");
   LUABind::LoadFunction<std::string>("BasicFile.LUA", "main", "");
 }
 

@@ -15,6 +15,9 @@ public:
 	Surface();
 	Surface(GraphicsManager *aManager);
 	virtual ~Surface() {}
+
+	// Getters
+	GraphicsManager*    GetManager() { return mManager; }
   
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;

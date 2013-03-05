@@ -26,7 +26,7 @@ public:
   void SetTarget(GameObject *aTarget);
   
   // Virtuals derived from Controller
-  virtual void        DoAction(std::string const &aAction);
+  virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation);
   
   // Virtuals derived from Component
   virtual void        Update();

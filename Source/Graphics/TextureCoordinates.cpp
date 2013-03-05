@@ -18,7 +18,10 @@ TextureCoordinates::TextureCoordinates()
 {
   assert(0);
 }
-TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames) : mCurFrame(0), mCurAnimation(0), mCurTime(0), mNumAnimations(aNumAnimations)
+TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames) : mCurFrame(0),
+                                                                                                      mCurAnimation(0),
+                                                                                                      mNumAnimations(aNumAnimations),
+                                                                                                      mCurTime(0)
 {
   int maxFrames = 0;
   

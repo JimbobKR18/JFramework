@@ -13,6 +13,7 @@
 
 #include "Common.h"
 #include "Component.h"
+#include "MathExt.h"
 
 class Controller : public Component
 {
@@ -20,7 +21,7 @@ public:
   Controller();
   ~Controller();
   
-  virtual void        DoAction(std::string const &aAction) = 0;
+  virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation) = 0;
   
   // Virtuals derived from Component
   virtual void        Update() = 0;
