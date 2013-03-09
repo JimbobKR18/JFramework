@@ -15,8 +15,8 @@ GameObject::GameObject()
   assert(!"GameObject instantiated without a file!");
 }
 
-GameObject::GameObject(ObjectManager *aOwner, std::string const &aFilename) :
-                       mFileName(aFilename), mOwner(aOwner)
+GameObject::GameObject(ObjectManager *aManager, std::string const &aFilename) :
+                       mFileName(aFilename), mManager(aManager)
 {
 }
 
@@ -41,9 +41,9 @@ std::string GameObject::GetFilename()
 	return mFileName;
 }
 
-ObjectManager *GameObject::GetOwner()
+ObjectManager *GameObject::GetManager()
 {
-  return mOwner;
+  return mManager;
 }
 
 void GameObject::AddComponent(Component *aComponent)

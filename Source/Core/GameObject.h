@@ -20,17 +20,17 @@ class GameObject
 private:
   std::string             mFileName;
   std::vector<Component*> mComponents;
-  ObjectManager*          mOwner;
+  ObjectManager*          mManager;
   
   typedef std::vector<Component*>::iterator ComponentIT;
 public:
   GameObject();
-  GameObject(ObjectManager *aOwner, std::string const &aFilename);
+  GameObject(ObjectManager *aManager, std::string const &aFilename);
   GameObject(GameObject const &aGameObject);
   ~GameObject();
 
   std::string             GetFilename();
-  ObjectManager*          GetOwner();
+  ObjectManager*          GetManager();
 
   void                    AddComponent(Component *aComponent);
   void                    RemoveComponent(Component *aComponent);

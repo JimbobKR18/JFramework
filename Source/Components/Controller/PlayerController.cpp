@@ -59,9 +59,9 @@ void PlayerController::DoAction(std::string const &aAction, Vector3 const &aLoca
   }
   else if(aAction == "Mouse")
   {
-    GameObject *obj = GetOwner()->GetOwner()->GetOwningApp()->GET<ObjectManager>()->CreateObject(Common::RelativePath("BasicObject2.txt"));
-    Vector3 pos = GetOwner()->GetOwner()->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().GetPosition();
-    Vector3 size = GetOwner()->GetOwner()->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().GetSize();
+    GameObject *obj = GetOwner()->GetManager()->GetOwningApp()->GET<ObjectManager>()->CreateObject(Common::RelativePath("BasicObject2.txt"));
+    Vector3 pos = GetOwner()->GetManager()->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().GetPosition();
+    Vector3 size = GetOwner()->GetManager()->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().GetSize();
     pos -= size/2;
     pos += aLocation;
     obj->GET<Transform>()->SetPosition(pos);
