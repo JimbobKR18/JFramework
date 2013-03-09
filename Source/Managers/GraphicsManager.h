@@ -33,6 +33,10 @@ public:
   // Texture management
   void                AddTexturePairing(std::string const &aFilename, unsigned aTextureId);
   unsigned            GetTextureID(std::string const &aFilename);
+
+  // Misc.
+  Vector3             AbsToRel(Vector3 const &aPosition) const;
+  Vector3             RelToAbs(Vector3 const &aPosition) const;
 public:
   typedef std::vector<Surface*>::iterator SurfaceIT;
 };

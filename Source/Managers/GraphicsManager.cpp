@@ -102,3 +102,24 @@ unsigned GraphicsManager::GetTextureID(std::string const &aFilename)
   
   return pos->second;
 }
+
+Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
+{
+  Vector3 ret = mScreen->GetView().GetPosition();
+
+  ret -= mScreen->GetView().GetSize()/2;
+  ret += aPosition;
+
+  return ret;
+}
+
+Vector3 GraphicsManager::RelToAbs(Vector3 const &aPosition) const
+{
+  // TODO test this sometime
+  Vector3 ret = aPosition;
+
+  ret += mScreen->GetView().GetSize()/2;
+  ret -= mScreen->GetView().GetPosition();
+
+  return ret;
+}

@@ -60,10 +60,7 @@ void PlayerController::DoAction(std::string const &aAction, Vector3 const &aLoca
   else if(aAction == "Mouse")
   {
     GameObject *obj = GetOwner()->GetManager()->GetOwningApp()->GET<ObjectManager>()->CreateObject(Common::RelativePath("BasicObject2.txt"));
-    Vector3 pos = GetOwner()->GetManager()->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().GetPosition();
-    Vector3 size = GetOwner()->GetManager()->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().GetSize();
-    pos -= size/2;
-    pos += aLocation;
+    Vector3 pos = GetOwner()->GetManager()->GetOwningApp()->GET<GraphicsManager>()->AbsToRel(aLocation);
     obj->GET<Transform>()->SetPosition(pos);
   }
 }
@@ -80,7 +77,12 @@ void PlayerController::SendMessage(Message const &aMessage)
 
 void PlayerController::ReceiveMessage(Message const &aMessage)
 {
-  InputMessage *message = (InputMessage*)&aMessage;
   if(aMessage.GetDescription() == "Input")
+  {
+    InputMessage *message = (InputMessage*)&aMessage;
     DoAction(message->GetContent(), message->GetLocation());
+  }
+  else if(aMessage.GetDescription() == "Collision")
+  {
+  }
 }
