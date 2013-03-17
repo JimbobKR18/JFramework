@@ -1,6 +1,7 @@
 #include "Resolver.h"
 #include "PhysicsObject.h"
 #include "Transform.h"
+#include "CollisionMessage.h"
 
 Resolver::Resolver()
 {
@@ -20,6 +21,7 @@ void Resolver::Update(float aDuration)
   }
 	for(std::list<CollisionPair>::iterator it = mPairs.begin(); it != mPairs.end(); ++it)
 	{
+	  SendCollisionMessages(*it);
 		Resolve(*it, aDuration);
 	}
 	mPairs.clear();
@@ -140,6 +142,13 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   
   if(aPair.mBodies[1] && !aPair.mBodies[1]->IsStatic())
     aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() - b2Movement);
+}
+
+void Resolver::SendCollisionMessages(CollisionPair &aPair) const
+{
+  CollisionMessage message("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner());
+  aPair.mBodies[0]->GetOwner()->ReceiveMessage(message);
+  aPair.mBodies[1]->GetOwner()->ReceiveMessage(message);
 }
 
 void Resolver::Resolve(CollisionPair &aPair, float aDuration)

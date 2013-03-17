@@ -24,6 +24,7 @@ private:
   float CalculateSeparatingVelocity(CollisionPair const &aPair);
 	void  ResolvePenetration(CollisionPair const &aPair);
 	void  ResolveVelocity(CollisionPair const &aPair, float aDuration);
+	void  SendCollisionMessages(CollisionPair &aPair) const;
 	void  Resolve(CollisionPair &aPair, float aDuration);
 
 	// Check if objects are actually colliding

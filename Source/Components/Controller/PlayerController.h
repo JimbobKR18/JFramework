@@ -13,11 +13,13 @@
 
 #include "Controller.h"
 #include "GameObject.h"
+#include "Common.h"
 
 class PlayerController : public Controller
 {
 private:
-  GameObject* mObj;
+  GameObject*             mObj;
+  std::set<GameObject*>   mCollidedObjects;
   
 public:
   PlayerController();

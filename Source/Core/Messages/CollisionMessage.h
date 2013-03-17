@@ -12,10 +12,14 @@
 
 #include "Message.h"
 #include "MathExt.h"
+#include "GameObject.h"
 
 class CollisionMessage: public Message
 {
 private:
+  GameObject*   mObject1;
+  GameObject*   mObject2;
+
   CollisionMessage() : Message()
   {
   }
@@ -24,13 +28,28 @@ private:
   }
 
 public:
-  CollisionMessage(std::string const &aContent) : Message()
+  CollisionMessage(std::string const &aContent,
+                   GameObject *aObject1,
+                   GameObject *aObject2) : Message(),
+                                           mObject1(aObject1),
+                                           mObject2(aObject2)
   {
     SetDescription("Collision");
     SetContent(aContent);
   }
   ~CollisionMessage()
   {
+  }
+
+  GameObject *GetObject(int index)
+  {
+    // Stay in bounds
+    assert(index < 2);
+
+    if(index)
+      return mObject1;
+    else
+      return mObject2;
   }
 };
 

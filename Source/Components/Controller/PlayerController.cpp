@@ -15,6 +15,7 @@
 #include "GraphicsManager.h"
 #include "Menu.h"
 #include "InputMessage.h"
+#include "CollisionMessage.h"
 
 PlayerController::PlayerController() : mObj(NULL)
 {
@@ -67,7 +68,7 @@ void PlayerController::DoAction(std::string const &aAction, Vector3 const &aLoca
 
 void PlayerController::Update()
 {
-  
+  mCollidedObjects.clear();
 }
 
 void PlayerController::SendMessage(Message const &aMessage)
@@ -84,5 +85,10 @@ void PlayerController::ReceiveMessage(Message const &aMessage)
   }
   else if(aMessage.GetDescription() == "Collision")
   {
+    CollisionMessage *message = (CollisionMessage*)&aMessage;
+    if(message->GetObject(0) != GetOwner())
+      mCollidedObjects.insert(message->GetObject(0));
+    if(message->GetObject(1) != GetOwner())
+      mCollidedObjects.insert(message->GetObject(1));
   }
 }

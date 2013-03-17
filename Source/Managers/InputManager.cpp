@@ -53,5 +53,4 @@ void InputManager::Update()
 }
 void InputManager::SendMessage(Message const &aMessage)
 {
-
 }
