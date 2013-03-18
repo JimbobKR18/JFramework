@@ -21,6 +21,12 @@
 		AD26CCAD168D1DCB007C3551 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCA8168D1DCB007C3551 /* Controller.cpp */; };
 		AD26CCAE168D1DCB007C3551 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCAA168D1DCB007C3551 /* PlayerController.cpp */; };
 		AD26CCAF168D1DCB007C3551 /* PlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD26CCAA168D1DCB007C3551 /* PlayerController.cpp */; };
+		AD35B89516F69DEC001DD957 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD35B89316F69DEC001DD957 /* Menu.cpp */; };
+		AD35B89616F69DEC001DD957 /* Menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD35B89316F69DEC001DD957 /* Menu.cpp */; };
+		AD35B89B16F69E0F001DD957 /* DebugManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD35B89716F69E0F001DD957 /* DebugManager.cpp */; };
+		AD35B89C16F69E0F001DD957 /* DebugManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD35B89716F69E0F001DD957 /* DebugManager.cpp */; };
+		AD35B89D16F69E0F001DD957 /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD35B89916F69E0F001DD957 /* SoundManager.cpp */; };
+		AD35B89E16F69E0F001DD957 /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD35B89916F69E0F001DD957 /* SoundManager.cpp */; };
 		AD38F3EF1692369900CE751D /* TileMapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */; };
 		AD38F3F01692369900CE751D /* TileMapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */; };
 		AD468D941661980C00A71745 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD468D931661980C00A71745 /* SDL.framework */; };
@@ -116,6 +122,14 @@
 		AD26CCAB168D1DCB007C3551 /* PlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerController.h; sourceTree = "<group>"; };
 		AD26CCB1168D1DD3007C3551 /* InputMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputMessage.h; sourceTree = "<group>"; };
 		AD26CCB2168D1DD3007C3551 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		AD35B89216F69DDE001DD957 /* CollisionMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionMessage.h; sourceTree = "<group>"; };
+		AD35B89316F69DEC001DD957 /* Menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Menu.cpp; sourceTree = "<group>"; };
+		AD35B89416F69DEC001DD957 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		AD35B89716F69E0F001DD957 /* DebugManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebugManager.cpp; sourceTree = "<group>"; };
+		AD35B89816F69E0F001DD957 /* DebugManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugManager.h; sourceTree = "<group>"; };
+		AD35B89916F69E0F001DD957 /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
+		AD35B89A16F69E0F001DD957 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
+		AD35B89F16F69EC5001DD957 /* AntTweakBar.lib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = AntTweakBar.lib; path = ../Source/AntTweakBar/lib/AntTweakBar.lib; sourceTree = "<group>"; };
 		AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileMapGenerator.cpp; sourceTree = "<group>"; };
 		AD38F3EE1692369900CE751D /* TileMapGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileMapGenerator.h; sourceTree = "<group>"; };
 		AD468D931661980C00A71745 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
@@ -264,6 +278,7 @@
 		AD26CCB0168D1DD3007C3551 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				AD35B89216F69DDE001DD957 /* CollisionMessage.h */,
 				AD26CCB1168D1DD3007C3551 /* InputMessage.h */,
 				AD26CCB2168D1DD3007C3551 /* Message.h */,
 			);
@@ -367,6 +382,8 @@
 		ADBBD1C416619D2C00F2AF13 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				AD35B89316F69DEC001DD957 /* Menu.cpp */,
+				AD35B89416F69DEC001DD957 /* Menu.h */,
 				ADBBD1C516619D2C00F2AF13 /* Level.cpp */,
 				ADBBD1C616619D2C00F2AF13 /* Level.h */,
 				AD38F3ED1692369900CE751D /* TileMapGenerator.cpp */,
@@ -391,6 +408,10 @@
 		ADBBD20216619D2C00F2AF13 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				AD35B89716F69E0F001DD957 /* DebugManager.cpp */,
+				AD35B89816F69E0F001DD957 /* DebugManager.h */,
+				AD35B89916F69E0F001DD957 /* SoundManager.cpp */,
+				AD35B89A16F69E0F001DD957 /* SoundManager.h */,
 				ADBBD20316619D2C00F2AF13 /* GraphicsManager.cpp */,
 				ADBBD20416619D2C00F2AF13 /* GraphicsManager.h */,
 				ADBBD20516619D2C00F2AF13 /* LevelManager.cpp */,
@@ -450,6 +471,7 @@
 		ADD5EAAE15F325C5005E20E7 = {
 			isa = PBXGroup;
 			children = (
+				AD35B89F16F69EC5001DD957 /* AntTweakBar.lib */,
 				ADD5EAC315F325C5005E20E7 /* JFramework */,
 				AD9D29131646F7BE00240FDC /* JFrameworkMac */,
 				ADD5EABC15F325C5005E20E7 /* Frameworks */,
@@ -638,6 +660,9 @@
 				AD26CCAF168D1DCB007C3551 /* PlayerController.cpp in Sources */,
 				AD1680D216914C0700B390A8 /* TextureCoordinates.cpp in Sources */,
 				AD38F3F01692369900CE751D /* TileMapGenerator.cpp in Sources */,
+				AD35B89616F69DEC001DD957 /* Menu.cpp in Sources */,
+				AD35B89C16F69E0F001DD957 /* DebugManager.cpp in Sources */,
+				AD35B89E16F69E0F001DD957 /* SoundManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +708,9 @@
 				AD26CCAE168D1DCB007C3551 /* PlayerController.cpp in Sources */,
 				AD1680D116914C0700B390A8 /* TextureCoordinates.cpp in Sources */,
 				AD38F3EF1692369900CE751D /* TileMapGenerator.cpp in Sources */,
+				AD35B89516F69DEC001DD957 /* Menu.cpp in Sources */,
+				AD35B89B16F69E0F001DD957 /* DebugManager.cpp in Sources */,
+				AD35B89D16F69E0F001DD957 /* SoundManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,6 +761,10 @@
 				GCC_PREFIX_HEADER = "JFrameworkMac/JFrameworkMac-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "JFrameworkMac/JFrameworkMac-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Source/AntTweakBar/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -759,6 +791,10 @@
 				GCC_PREFIX_HEADER = "JFrameworkMac/JFrameworkMac-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "JFrameworkMac/JFrameworkMac-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Source/AntTweakBar/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
