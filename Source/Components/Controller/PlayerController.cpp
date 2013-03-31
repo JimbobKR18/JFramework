@@ -56,11 +56,11 @@ void PlayerController::DoAction(std::string const &aAction, Vector3 const &aLoca
     Vector3 pos = GetOwner()->GET<Transform>()->GetPosition();
     obj->GET<Transform>()->SetPosition(pos);*/
 
-    //Menu *menu = new Menu(GetOwner()->GetOwner()->GetOwningApp()->GET<LevelManager>()->GetCurrentLevel(), RelativePath("BasicMenu.txt"));
+    Menu *menu = new Menu(GetOwner()->GetManager()->GetOwningApp()->GET<LevelManager>()->GetActiveLevel(), Common::RelativePath("BasicMenu.txt"));
   }
   else if(aAction == "Mouse")
   {
-    GameObject *obj = GetOwner()->GetManager()->GetOwningApp()->GET<ObjectManager>()->CreateObject(Common::RelativePath("BasicObject2.txt"));
+    GameObject *obj = GetOwner()->GetManager()->GetOwningApp()->GET<ObjectManager>()->CreateObject("BasicObject2.txt");
     Vector3 pos = GetOwner()->GetManager()->GetOwningApp()->GET<GraphicsManager>()->AbsToRel(aLocation);
     obj->GET<Transform>()->SetPosition(pos);
   }

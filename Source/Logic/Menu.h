@@ -8,7 +8,7 @@
 #ifndef __JFramework_Menu_h_
 #define __JFramework_Menu_h_
 
-#include "GameObject.h"
+#include "MenuElement.h"
 #include "Level.h"
 
 class Menu
@@ -16,7 +16,7 @@ class Menu
 private:
   Level*                                      mOwner;
   std::string                                 mFilename;
-  std::vector<GameObject*>                    mObjects;
+  std::vector<MenuElement*>                   mMenuElements;
   typedef std::vector<GameObject*>::iterator  ObjectIT;
 
 public:

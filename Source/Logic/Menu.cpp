@@ -26,12 +26,12 @@ Level* Menu::GetLevel()
 
 void Menu::AddObject(GameObject *aObject)
 {
-  mObjects.push_back(aObject);
+  //mObjects.push_back(aObject);
   mOwner->AddObject(aObject);
 }
 void Menu::DeleteObject(GameObject *aObject)
 {
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  /*for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     if(aObject == *it)
     {
@@ -39,12 +39,12 @@ void Menu::DeleteObject(GameObject *aObject)
       mOwner->DeleteObject(aObject);
       break;
     }
-  }
+  }*/
 }
 void Menu::DeleteObjects()
 {
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  /*for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     DeleteObject(*it);
-  }
+  }*/
 }
