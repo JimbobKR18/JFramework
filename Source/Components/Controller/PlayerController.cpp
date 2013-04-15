@@ -92,3 +92,13 @@ void PlayerController::ReceiveMessage(Message const &aMessage)
       mCollidedObjects.insert(message->GetObject(1));
   }
 }
+
+void PlayerController::Serialize(Parser &aParser)
+{
+  
+}
+
+void PlayerController::Deserialize(Parser &aParser)
+{
+  
+}

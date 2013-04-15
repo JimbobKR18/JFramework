@@ -31,6 +31,8 @@ public:
 	void                Update();
 	void                SendMessage(Message const &aMessage);
 	void                ReceiveMessage(Message const &aMessage);
+  void                Serialize(Parser &aParser);
+  void                Deserialize(Parser &aParser);
 	static std::string  GetName() {return "Surface";}
 };
 

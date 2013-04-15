@@ -1,14 +1,2 @@
 BasicObject.txt
-Transform
-{
-	PositionX = 0
-	PositionY = 0
-	PositionZ = 0
-	ScaleX = 1
-	ScaleY = 1
-	ScaleZ = 1
-	SizeX = Screen_Width
-	SizeY = 32
-	SizeZ = 32
-}
 BasicObject.txt

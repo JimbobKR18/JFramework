@@ -75,9 +75,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "27"
-         endingLineNumber = "27"
-         landmarkName = "main(int argc, char *argv[])"
-         landmarkType = "7">
+         endingLineNumber = "27">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -327,11 +325,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "379049110.753621"
+         timestampString = "387695073.999164"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "174"
-         endingLineNumber = "174"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "ObjectManager::ParseDictionary(GameObject *aObject, Parser &amp;aParser)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -584,32 +582,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "379049110.753621"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
-         landmarkName = "ObjectManager::ParseDictionary(GameObject *aObject, Parser &amp;aParser)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../Source/Managers/ObjectManager.cpp"
-         timestampString = "379049110.753621"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
-         landmarkName = "ObjectManager::ParseDictionary(GameObject *aObject, Parser &amp;aParser)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "../Source/Graphics/TextureCoordinates.cpp"
          timestampString = "378686496.058688"
          startingColumnNumber = "9223372036854775807"
@@ -760,19 +732,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../Source/Logic/Level.cpp"
-         timestampString = "379049303.155663"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "166"
-         endingLineNumber = "166"
-         landmarkName = "Level::ParseFile()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "../Source/Logic/TileMapGenerator.cpp"
          timestampString = "378966014.671122"
          startingColumnNumber = "9223372036854775807"
@@ -780,32 +739,6 @@
          startingLineNumber = "43"
          endingLineNumber = "43"
          landmarkName = "TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, std::string const &amp;aFilename, std::vector&lt;int&gt; const &amp;aTiles, std::vector&lt;int&gt; const &amp;aCollision, Level *aOwner)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../Source/Logic/Level.cpp"
-         timestampString = "379049303.155663"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
-         landmarkName = "Level::ParseFile()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../Source/Logic/Level.cpp"
-         timestampString = "379049303.155663"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
-         landmarkName = "Level::ParseFile()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

@@ -38,8 +38,6 @@ int main(int argc, char *argv[])
       continue;
 #endif
 
-    char *pos;
-
     switch(event.type)
     {
       case SDL_QUIT:

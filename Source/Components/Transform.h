@@ -13,7 +13,7 @@ class Transform : public Component
 
   public:
     Transform();
-    ~Transform();
+    virtual ~Transform();
 
     Vector3             GetPosition() const;
     void                SetPosition(Vector3 const &aPos);
@@ -27,6 +27,8 @@ class Transform : public Component
     void                Update() {}
     void                SendMessage(Message const &aMessage) {}
     void                ReceiveMessage(Message const &aMessage) {}
+    void                Serialize(Parser &aParser);
+    void                Deserialize(Parser &aParser);
     static std::string  GetName() {return "Transform";}
 };
 

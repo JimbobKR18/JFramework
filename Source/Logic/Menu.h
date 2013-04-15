@@ -17,7 +17,7 @@ private:
   Level*                                      mOwner;
   std::string                                 mFilename;
   std::vector<MenuElement*>                   mMenuElements;
-  typedef std::vector<GameObject*>::iterator  ObjectIT;
+  typedef std::vector<MenuElement*>::iterator ElementIT;
 
 public:
   Menu(Level* aLevel, std::string const &aFilename);
@@ -26,9 +26,12 @@ public:
   std::string   GetName();
   Level*        GetLevel();
 
-  void          AddObject(GameObject *aObject);
-  void          DeleteObject(GameObject *aObject);
+  void          AddObject(MenuElement *aElement);
+  void          DeleteObject(MenuElement *aElement);
   void          DeleteObjects();
+  
+private:
+  void          ParseFile();
 };
 
 #endif /* MENU_H_ */

@@ -23,7 +23,7 @@ private:
   
 public:
   PlayerController();
-  ~PlayerController();
+  virtual ~PlayerController();
   
   void SetTarget(GameObject *aTarget);
   
@@ -34,6 +34,8 @@ public:
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ReceiveMessage(Message const &aMessage);
+  virtual void        Serialize(Parser &aParser);
+  virtual void        Deserialize(Parser &aParser);
   static std::string  GetName() {return "PlayerController";}
 };
 

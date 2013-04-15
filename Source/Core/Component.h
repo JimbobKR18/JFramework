@@ -11,6 +11,7 @@
 
 #include "GameObject.h"
 #include "Message.h"
+#include "Parser.h"
 #include <assert.h>
 
 class Component
@@ -32,6 +33,8 @@ public:
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;
   virtual void        ReceiveMessage(Message const &aMessage) = 0;
+  virtual void        Serialize(Parser &aParser) = 0;
+  virtual void        Deserialize(Parser &aParser) = 0;
   static std::string  GetName() {return "Component";}
 };
 

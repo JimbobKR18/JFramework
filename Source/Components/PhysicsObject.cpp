@@ -9,6 +9,7 @@
 #include "PhysicsObject.h"
 #include "Transform.h"
 #include "GameApp.h"
+#include "ObjectManager.h"
 
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
 						     mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
@@ -53,6 +54,39 @@ void PhysicsObject::SendMessage(Message const &aMessage)
 void PhysicsObject::ReceiveMessage(Message const &aMessage)
 {
 
+}
+
+void PhysicsObject::Serialize(Parser &aParser)
+{
+  
+}
+
+void PhysicsObject::Deserialize(Parser &aParser)
+{
+  // What shape is our object? Is it affected by gravity?
+  // What is the object's mass? Is it static?
+  std::string type = aParser.Find("PhysicsObject", "Shape");
+  std::string gravity = aParser.Find("PhysicsObject", "Gravity");
+  std::string isstatic = aParser.Find("PhysicsObject", "Static");
+  SetMass(Common::StringToInt(aParser.Find("PhysicsObject", "Mass")));
+  
+  // default true
+  if(gravity == "false")
+  {
+    GetOwner()->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(this);
+    SetAffectedByGravity(false);
+  }
+  
+  // default false
+  if(isstatic == "true")
+    SetStatic(true);
+  
+  if(type == "CUBE")
+    mShape = PhysicsObject::CUBE;
+  else if(type == "SPHERE")
+    mShape = PhysicsObject::SPHERE;
+  else
+    assert(!"Invalid shape given");
 }
 
 void PhysicsObject::AddForce(Vector3 const &aForce)

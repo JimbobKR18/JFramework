@@ -107,6 +107,35 @@ void PCSurface::ReceiveMessage(Message const &aMessage)
 
 }
 
+void PCSurface::Serialize(Parser &aParser)
+{
+}
+
+void PCSurface::Deserialize(Parser &aParser)
+{
+  std::string imageName = aParser.Find("Surface", "TextureName");
+  LoadImage(imageName);
+  
+  bool animated = false;
+  int numAnimations = 1;
+  std::vector<int> numFrames;
+  numFrames.push_back(1);
+  
+  if(aParser.Find("Surface", "AnimationCount") != "BadString")
+  {
+    numFrames.clear();
+    numAnimations = Common::StringToFloat(aParser.Find("Surface", "AnimationCount"));
+    numFrames = Common::StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
+    
+    std::string isAnimated = aParser.Find("Surface", "Animated");
+    if(isAnimated == "true")
+      animated = true;
+  }
+  
+  SetTextureCoordinateData(numAnimations, numFrames);
+  SetAnimated(animated);
+}
+
 unsigned PCSurface::GetTextureID() const
 {
 	return mTextureID;

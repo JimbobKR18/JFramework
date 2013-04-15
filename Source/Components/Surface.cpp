@@ -46,3 +46,30 @@ void Surface::SendMessage(Message const &aMessage)
 void Surface::ReceiveMessage(Message const &aMessage)
 {
 }
+
+void Surface::Serialize(Parser &aParser)
+{
+  
+}
+
+void Surface::Deserialize(Parser &aParser)
+{
+  bool animated = false;
+  int numAnimations = 1;
+  std::vector<int> numFrames;
+  numFrames.push_back(1);
+  
+  if(aParser.Find("Surface", "AnimationCount") != "BadString")
+  {
+    numFrames.clear();
+    numAnimations = Common::StringToFloat(aParser.Find("Surface", "AnimationCount"));
+    numFrames = Common::StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
+    
+    std::string isAnimated = aParser.Find("Surface", "Animated");
+    if(isAnimated == "true")
+      animated = true;
+  }
+  
+  SetTextureCoordinateData(numAnimations, numFrames);
+  SetAnimated(animated);
+}

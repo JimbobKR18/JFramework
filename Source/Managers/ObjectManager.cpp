@@ -86,76 +86,24 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 	if(aParser.Find("PhysicsObject"))
 	{
 		PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
-
-		// What shape is our object? Is it affected by gravity?
-		// What is the object's mass? Is it static?
-		std::string type = aParser.Find("PhysicsObject", "Shape");
-		std::string gravity = aParser.Find("PhysicsObject", "Gravity");
-		std::string isstatic = aParser.Find("PhysicsObject", "Static");
-		object->SetMass(Common::StringToInt(aParser.Find("PhysicsObject", "Mass")));
-
-		// default true
-		if(gravity == "false")
-    {
-		  GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(object);
-      object->SetAffectedByGravity(false);
-    }
-
-		// default false
-		if(isstatic == "true")
-        object->SetStatic(true);
-
-		if(type == "CUBE")
-			object->mShape = PhysicsObject::CUBE;
-		else if(type == "SPHERE")
-			object->mShape = PhysicsObject::SPHERE;
-		else
-			assert(!"Invalid shape given");
-
 		aObject->AddComponent(object);
+    object->Deserialize(aParser);
 	}
 	if(aParser.Find("Transform"))
 	{
 	  // Get Position, Scale, and Size
 		Transform *transform = new Transform();
-		transform->SetPosition(Vector3(Common::StringToInt(aParser.Find("Transform", "PositionX")),
-				Common::StringToInt(aParser.Find("Transform", "PositionY")),
-				Common::StringToInt(aParser.Find("Transform", "PositionZ"))));
-		transform->SetScale(Vector3(Common::StringToInt(aParser.Find("Transform", "ScaleX")),
-						Common::StringToInt(aParser.Find("Transform", "ScaleY")),
-						Common::StringToInt(aParser.Find("Transform", "ScaleZ"))));
-		transform->SetSize(Vector3(Common::StringToInt(aParser.Find("Transform", "SizeX")),
-								Common::StringToInt(aParser.Find("Transform", "SizeY")),
-								Common::StringToInt(aParser.Find("Transform", "SizeZ"))));
+    transform->Deserialize(aParser);
 		aObject->AddComponent(transform);
 	}
 	if(aParser.Find("Surface"))
 	{
 #if !defined(ANDROID) && !defined(IOS)
 		PCSurface *surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
-		std::string imageName = aParser.Find("Surface", "TextureName");
-		surface->LoadImage(imageName);
 #else
 		Surface *surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #endif
-    bool animated = false;
-    int numAnimations = 1;
-    std::vector<int> numFrames;
-    numFrames.push_back(1);
-    
-    if(aParser.Find("Surface", "AnimationCount") != "BadString")
-    {
-      numFrames.clear();
-      numAnimations = Common::StringToFloat(aParser.Find("Surface", "AnimationCount"));
-      numFrames = Common::StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
-      
-      std::string isAnimated = aParser.Find("Surface", "Animated");
-      if(isAnimated == "true")
-        animated = true;
-    }
-    
-    surface->SetTextureCoordinateData(numAnimations, numFrames);
-    surface->SetAnimated(animated);
+    surface->Deserialize(aParser);
 		aObject->AddComponent(surface);
 	}
 	if(aParser.Find("Focus"))

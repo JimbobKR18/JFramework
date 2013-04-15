@@ -19,7 +19,7 @@ class Controller : public Component
 {
 public:
   Controller();
-  ~Controller();
+  virtual ~Controller();
   
   virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation) = 0;
   
@@ -27,6 +27,8 @@ public:
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;
   virtual void        ReceiveMessage(Message const &aMessage) = 0;
+  virtual void        Serialize(Parser &aParser) = 0;
+  virtual void        Deserialize(Parser &aParser) = 0;
   static std::string  GetName() {return "Controller";}
 };
 
