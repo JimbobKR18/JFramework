@@ -46,15 +46,7 @@ protected:
     {
       // Get Position, Scale, and Size
       Transform *transform = new Transform();
-      transform->SetPosition(Vector3(Common::StringToInt(aParser.Find("Transform", "PositionX")),
-                                     Common::StringToInt(aParser.Find("Transform", "PositionY")),
-                                     Common::StringToInt(aParser.Find("Transform", "PositionZ"))));
-      transform->SetScale(Vector3(Common::StringToInt(aParser.Find("Transform", "ScaleX")),
-                                  Common::StringToInt(aParser.Find("Transform", "ScaleY")),
-                                  Common::StringToInt(aParser.Find("Transform", "ScaleZ"))));
-      transform->SetSize(Vector3(Common::StringToInt(aParser.Find("Transform", "SizeX")),
-                                 Common::StringToInt(aParser.Find("Transform", "SizeY")),
-                                 Common::StringToInt(aParser.Find("Transform", "SizeZ"))));
+      transform->Deserialize(aParser);
       mObject->AddComponent(transform);
     }
     if(aParser.Find("Surface"))
@@ -66,24 +58,7 @@ protected:
 #else
       Surface *surface = new Surface();
 #endif
-      bool animated = false;
-      int numAnimations = 1;
-      std::vector<int> numFrames;
-      numFrames.push_back(1);
-      
-      if(aParser.Find("Surface", "AnimationCount") != "BadString")
-      {
-        numFrames.clear();
-        numAnimations = Common::StringToFloat(aParser.Find("Surface", "AnimationCount"));
-        numFrames = Common::StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
-        
-        std::string isAnimated = aParser.Find("Surface", "Animated");
-        if(isAnimated == "true")
-          animated = true;
-      }
-      
-      surface->SetTextureCoordinateData(numAnimations, numFrames);
-      surface->SetAnimated(animated);
+      surface->Deserialize(aParser);
       mObject->AddComponent(surface);
     }
   }

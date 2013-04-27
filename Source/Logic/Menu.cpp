@@ -65,13 +65,16 @@ void Menu::ParseFile()
     
     parser.GetNextString(type);
     
-    MenuElement *element;
+    MenuElement *element = nullptr;
     
     if(type == "Image")
       element = new MenuImage(param);
-    /*else
+    /*else if(type == "Text")
       element = new MenuText(param);*/
-      
-    AddObject(element);
+    else
+      assert(!"Invalid MenuElement passed into menu");
+    
+    if(element)
+      AddObject(element);
 	}
 }
