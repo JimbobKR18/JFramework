@@ -10,6 +10,7 @@
 
 Menu::Menu(Level *aLevel, std::string const &aFilename) : mOwner(aLevel), mFilename(aFilename)
 {
+  ParseFile();
 }
 Menu::~Menu()
 {
@@ -58,12 +59,11 @@ void Menu::ParseFile()
 	while(parser.IsGood())
 	{
 		std::string param, type;
+    parser.GetNextString(type);
 		parser.GetNextString(param);
     
 		if(param.length() == 0)
 			break;
-    
-    parser.GetNextString(type);
     
     MenuElement *element = nullptr;
     

@@ -10,6 +10,8 @@
 #include "Transform.h"
 #include "GameApp.h"
 #include "ObjectManager.h"
+#include "LUATypes.h"
+#include "CollisionMessage.h"
 
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
 						     mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
@@ -53,7 +55,12 @@ void PhysicsObject::SendMessage(Message const &aMessage)
 
 void PhysicsObject::ReceiveMessage(Message const &aMessage)
 {
-
+  CollisionMessage *message = (CollisionMessage*)&aMessage;
+  GameObject *otherBody = message->GetObject(0) != GetOwner() ?
+                          message->GetObject(0) : message->GetObject(1);
+  LUABind::LoadFunction<GameObject*>("CollisionMessages.LUA",
+                                     GetOwner()->GetFilename() + "_CollisionReceive",
+                                     otherBody);
 }
 
 void PhysicsObject::Serialize(Parser &aParser)

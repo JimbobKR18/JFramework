@@ -13,6 +13,8 @@
 #include "TextParser.h"
 #include "Transform.h"
 #include "PCSurface.h"
+#include "ObjectManager.h"
+#include "GraphicsManager.h"
 #include "Message.h"
 
 class MenuElement

@@ -10,7 +10,7 @@
 
 MenuImage::MenuImage(std::string const &aFilename) : MenuElement(aFilename)
 {
-  TextParser parser(aFilename);
+  TextParser parser(Common::RelativePath(aFilename));
   ParseFile(parser);
 }
 
