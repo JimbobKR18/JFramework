@@ -6,9 +6,11 @@
 //
 //
 
+#include "LuaIncludes.h"
 #include "GameObject.h"
 #include "Component.h"
 #include "ObjectManager.h"
+#include "Transform.h"
 
 GameObject::GameObject()
 {
@@ -98,4 +100,11 @@ void GameObject::ReceiveMessage(Message const &aMessage)
   {
     (*it)->ReceiveMessage(aMessage);
   }
+}
+
+void GameObject::SerializeLUA()
+{
+  SLB::Class<GameObject>("GameObject")
+          .set("GetComponent", &GameObject::GetComponent)
+          .set("GetTransform", &GameObject::GET<Transform>);
 }

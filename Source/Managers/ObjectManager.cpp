@@ -6,6 +6,7 @@
 #include "GraphicsManager.h"
 #include "ControllerManager.h"
 #include "PlayerController.h"
+#include "LuaIncludes.h"
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCSurface.h"
@@ -79,6 +80,12 @@ void ObjectManager::RemoveObject(GameObject *aObj)
 			break;
 		}
 	}
+}
+
+void ObjectManager::SerializeLUA()
+{
+  SLB::Class<ObjectManager>("ObjectManager").inherits<Manager>()
+          .set("CreateObject", &ObjectManager::CreateObject);
 }
 
 void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)

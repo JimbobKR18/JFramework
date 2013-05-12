@@ -24,6 +24,7 @@ public:
 	void                ClearObjects();
 	void                AddObject(GameObject *aObj);
 	void                RemoveObject(GameObject *aObj);
+	static void         SerializeLUA();
 private:
 	void                ParseDictionary(GameObject *aObject, Parser &aParser);
   typedef std::vector<GameObject*>::iterator ObjectIT;

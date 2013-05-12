@@ -10,6 +10,7 @@
 #include "TileMapGenerator.h"
 #include "Menu.h"
 #include "Common.h"
+#include "LuaIncludes.h"
 
 Level::Level()
 {
@@ -128,6 +129,13 @@ void Level::Unload()
 	mActive = false;
   
   //mOwner->SetActiveLevel(NULL);
+}
+
+void Level::SerializeLUA()
+{
+  SLB::Class<Level>("Level").constructor()
+          .set("Load", &Level::Load)
+          .set("Unload", &Level::Unload);
 }
 
 void Level::ParseFile()

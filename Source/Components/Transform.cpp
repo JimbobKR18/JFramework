@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "TextParser.h"
+#include "LuaIncludes.h"
 
 Transform::Transform() : Component("Transform"), mPosition(0, 0, 0), mScale(1, 1, 1)
 {
@@ -52,4 +53,15 @@ void Transform::Deserialize(Parser &aParser)
   SetSize(Vector3(Common::StringToInt(aParser.Find("Transform", "SizeX")),
                   Common::StringToInt(aParser.Find("Transform", "SizeY")),
                   Common::StringToInt(aParser.Find("Transform", "SizeZ"))));
+}
+
+void Transform::SerializeLUA()
+{
+  SLB::Class<Transform>("Transform").constructor()
+          .set("GetPosition", &Transform::GetPosition)
+          .set("GetScale", &Transform::GetScale)
+          .set("GetSize", &Transform::GetSize)
+          .set("SetPosition", &Transform::SetPosition)
+          .set("SetScale", &Transform::SetScale)
+          .set("SetSize", &Transform::SetSize);
 }

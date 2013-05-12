@@ -1,4 +1,5 @@
 #include "LevelManager.h"
+#include "LuaIncludes.h"
 
 LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager"), mActiveLevel(NULL)
 {
@@ -73,6 +74,13 @@ void LevelManager::Update()
 void LevelManager::SendMessage(Message const &aMessage)
 {
 
+}
+
+void LevelManager::SerializeLUA()
+{
+  SLB::Class<LevelManager>("LevelManager").inherits<Manager>()
+          .set("CreateLevel", &LevelManager::CreateLevel)
+          .set("LoadLevel", &LevelManager::LoadLevel);
 }
 
 void LevelManager::AddLevel(Level *aLevel)

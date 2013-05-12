@@ -49,6 +49,7 @@ public:
 
   void                    Update();
   void                    ReceiveMessage(Message const &aMessage);
+  static void             SerializeLUA();
 };
 
 #endif /* defined(__JFramework__GameObject__) */

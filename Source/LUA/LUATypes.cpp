@@ -43,48 +43,23 @@ namespace LUABind
        Helper functions will be great!
        ^____________________________^'''''' */
     // Vector3
-    SLB::Class<Vector3>("Vector3").constructor<float,float,float>()
-        .set("x", &Vector3::x)
-        .set("y", &Vector3::y)
-        .set("z", &Vector3::z)
-        .set("length", &Vector3::length)
-        .set("SetEqual", &Vector3::operator=)
-        .set("IsEqual", &Vector3::operator==)
-        .set("Add", &Vector3::Add)
-        .set("Subtract", &Vector3::Subtract)
-        .set("Dot", &Vector3::Dot)
-        .set("Cross", &Vector3::Cross)
-        .set("Project", &Vector3::Project)
-        .set("Invert", &Vector3::Invert);
+    Vector3::SerializeLUA();
+
     // Transform
-    SLB::Class<Transform>("Transform").constructor()
-        .set("GetPosition", &Transform::GetPosition)
-        .set("GetScale", &Transform::GetScale)
-        .set("GetSize", &Transform::GetSize)
-        .set("SetPosition", &Transform::SetPosition)
-        .set("SetScale", &Transform::SetScale)
-        .set("SetSize", &Transform::SetSize);
+    Transform::SerializeLUA();
+
     // GameObject
-    SLB::Class<GameObject>("GameObject")
-        .set("GetComponent", &GameObject::GetComponent)
-        .set("GetTransform", &GameObject::GET<Transform>);
+    GameObject::SerializeLUA();
+
     // Level
-    SLB::Class<Level>("Level").constructor()
-        .set("Load", &Level::Load)
-        .set("Unload", &Level::Unload);
+    Level::SerializeLUA();
+
     // Managers
-    SLB::Class<Manager, SLB::Instance::NoCopy>("Manager")
-        .set("GetOwningApp", &Manager::GetOwningApp);
-    SLB::Class<LevelManager>("LevelManager").inherits<Manager>()
-        .set("CreateLevel", &LevelManager::CreateLevel)
-        .set("LoadLevel", &LevelManager::LoadLevel);
-    SLB::Class<ObjectManager>("ObjectManager").inherits<Manager>()
-        .set("CreateObject", &ObjectManager::CreateObject);
+    Manager::SerializeLUA();
+    LevelManager::SerializeLUA();
+    ObjectManager::SerializeLUA();
     // GameApp
-    SLB::Class<GameApp>("GameApp")
-        .set("GetManager", &GameApp::GetManager)
-        .set("GetLevelManager", &GameApp::GET<LevelManager>)
-        .set("GetObjectManager", &GameApp::GET<ObjectManager>);
+    GameApp::SerializeLUA();
     // StaticGameApp
     SLB::Class<StaticGameApp, SLB::Instance::NoCopyNoDestroy>("StaticGameApp")
         .set("GetApp", StaticGameApp::GetApp);
