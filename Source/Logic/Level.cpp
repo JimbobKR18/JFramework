@@ -140,7 +140,7 @@ void Level::SerializeLUA()
 
 void Level::ParseFile()
 {
-	TextParser parser(Common::RelativePath(mFileName).c_str(), false);
+	TextParser parser(Common::RelativePath("Game", mFileName).c_str(), false);
 	GameObject *object = NULL;
 
 	while(parser.IsGood())
@@ -211,7 +211,7 @@ void Level::ParseFile()
       // Get the tilemap data (separate file)
       parser.GetNextString(frameDataFilename);
       
-      TextParser tileMapData(Common::RelativePath(frameDataFilename), false);
+      TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename), false);
       tileMapData.GetNextString(empty);
       tileMapData.GetNextString(frameData);
       tileMapData.GetNextString(empty);

@@ -37,7 +37,7 @@ namespace Common
   }
   #endif
 
-  std::string const RelativePath(std::string const &aFileName)
+  std::string const RelativePath(std::string const &aSubFolder, std::string const &aFileName)
   {
   #ifdef _WIN32
     std::string ret;
@@ -46,6 +46,8 @@ namespace Common
   #else
     std::string ret = "../Assets/";
   #endif
+    ret.append(aSubFolder);
+    ret.append("/");
     ret.append(aFileName);
     return ret;
   }

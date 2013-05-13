@@ -44,7 +44,10 @@ TextParser::TextParser(std::string const &aFilename, bool aAutoParse) : Parser(a
       Parse();
   }
   else
+  {
     std::cout << "Input file: " << aFilename << " not found!" << std::endl;
+    assert(0);
+  }
 }
 TextParser::~TextParser()
 {
