@@ -46,9 +46,6 @@ namespace LUABind
 
   void RegisterClasses()
   {
-    /* This function will be long... and painful.
-       Helper functions will be great!
-       ^____________________________^'''''' */
     // Vector3
     Vector3::SerializeLUA();
 
