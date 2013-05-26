@@ -29,7 +29,7 @@ void PCSurface::LoadImage(std::string const &aName)
     mTextureID = GetManager()->GetTextureID(aName);
   }
   // else we load the image from file
-	else if((mSurface = IMG_Load(Common::RelativePath(aName).c_str())))
+	else if((mSurface = IMG_Load(Common::RelativePath("Art", aName).c_str())))
 	{
 		if ((mSurface->w & (mSurface->w - 1)) != 0 )
 		{

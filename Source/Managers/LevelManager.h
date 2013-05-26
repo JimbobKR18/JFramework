@@ -23,6 +23,7 @@ public:
 	void                Update();
 	void                SendMessage(Message const &aMessage);
 	static std::string  GetName() {return "LevelManager";}
+	static void         SerializeLUA();
 private:
 	void                AddLevel(Level *aLevel);
 	void                RemoveLevel(Level *aLevel);

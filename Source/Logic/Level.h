@@ -37,6 +37,8 @@ public:
 
 	void          Load();
 	void          Unload();
+
+	static void   SerializeLUA();
 private:
 	void          ParseFile();
 };

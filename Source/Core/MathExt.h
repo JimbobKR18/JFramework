@@ -41,6 +41,8 @@ struct Vector3
   void    operator-=(Vector3 const &rhs);
   void    operator*=(float const aMultiplier);
   void    operator/=(float const aMultiplier);
+
+  static void SerializeLUA();
 };
 
 #endif

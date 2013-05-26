@@ -25,6 +25,8 @@ public:
 
 	template<typename T>
 	T*        GET() {return (T*)GetManager(T::GetName());}
+
+	static void SerializeLUA();
 };
 
 #endif

@@ -6,6 +6,7 @@
 #include "GraphicsManager.h"
 #include "ControllerManager.h"
 #include "PlayerController.h"
+#include "LuaIncludes.h"
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCSurface.h"
@@ -36,7 +37,7 @@ void ObjectManager::SendMessage(Message const &aMsg)
 
 GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 {
-	TextParser parser(Common::RelativePath(aFilename));
+	TextParser parser(Common::RelativePath("Game", aFilename));
 	GameObject *object = new GameObject(this, aFilename);
 	AddObject(object);
 	ParseDictionary(object, parser);
@@ -45,7 +46,7 @@ GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 
 void ObjectManager::ParseObject(GameObject *aObject)
 {
-	TextParser parser(Common::RelativePath(aObject->GetFilename()));
+	TextParser parser(Common::RelativePath("Game", aObject->GetFilename()));
 	ParseDictionary(aObject, parser);
 }
 
@@ -79,6 +80,12 @@ void ObjectManager::RemoveObject(GameObject *aObj)
 			break;
 		}
 	}
+}
+
+void ObjectManager::SerializeLUA()
+{
+  SLB::Class<ObjectManager>("ObjectManager").inherits<Manager>()
+          .set("CreateObject", &ObjectManager::CreateObject);
 }
 
 void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)

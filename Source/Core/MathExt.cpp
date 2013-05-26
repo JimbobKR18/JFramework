@@ -1,4 +1,5 @@
 #include "MathExt.h"
+#include "LuaIncludes.h"
 #include <assert.h>
 
 Vector3::Vector3() : x(0), y(0), z(0)
@@ -170,4 +171,21 @@ void Vector3::operator/=(float const aMultiplier)
   x /= aMultiplier;
   y /= aMultiplier;
   z /= aMultiplier;
+}
+
+void Vector3::SerializeLUA()
+{
+  SLB::Class<Vector3>("Vector3").constructor<float,float,float>()
+          .set("x", &Vector3::x)
+          .set("y", &Vector3::y)
+          .set("z", &Vector3::z)
+          .set("length", &Vector3::length)
+          .set("SetEqual", &Vector3::operator=)
+          .set("IsEqual", &Vector3::operator==)
+          .set("Add", &Vector3::Add)
+          .set("Subtract", &Vector3::Subtract)
+          .set("Dot", &Vector3::Dot)
+          .set("Cross", &Vector3::Cross)
+          .set("Project", &Vector3::Project)
+          .set("Invert", &Vector3::Invert);
 }

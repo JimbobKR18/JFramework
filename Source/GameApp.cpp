@@ -103,3 +103,11 @@ Manager* GameApp::GetManager(std::string const &aName)
 	}
 	return NULL;
 }
+
+void GameApp::SerializeLUA()
+{
+  SLB::Class<GameApp>("GameApp")
+          .set("GetManager", &GameApp::GetManager)
+          .set("GetLevelManager", &GameApp::GET<LevelManager>)
+          .set("GetObjectManager", &GameApp::GET<ObjectManager>);
+}

@@ -54,7 +54,7 @@ void Menu::DeleteObjects()
 
 void Menu::ParseFile()
 {
-  TextParser parser(Common::RelativePath(mFilename).c_str(), false);
+  TextParser parser(Common::RelativePath("Menus", mFilename).c_str(), false);
   
 	while(parser.IsGood())
 	{

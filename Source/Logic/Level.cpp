@@ -10,6 +10,7 @@
 #include "TileMapGenerator.h"
 #include "Menu.h"
 #include "Common.h"
+#include "LuaIncludes.h"
 
 Level::Level()
 {
@@ -130,9 +131,16 @@ void Level::Unload()
   //mOwner->SetActiveLevel(NULL);
 }
 
+void Level::SerializeLUA()
+{
+  SLB::Class<Level>("Level").constructor()
+          .set("Load", &Level::Load)
+          .set("Unload", &Level::Unload);
+}
+
 void Level::ParseFile()
 {
-	TextParser parser(Common::RelativePath(mFileName).c_str(), false);
+	TextParser parser(Common::RelativePath("Game", mFileName).c_str(), false);
 	GameObject *object = NULL;
 
 	while(parser.IsGood())
@@ -203,7 +211,7 @@ void Level::ParseFile()
       // Get the tilemap data (separate file)
       parser.GetNextString(frameDataFilename);
       
-      TextParser tileMapData(Common::RelativePath(frameDataFilename), false);
+      TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename), false);
       tileMapData.GetNextString(empty);
       tileMapData.GetNextString(frameData);
       tileMapData.GetNextString(empty);

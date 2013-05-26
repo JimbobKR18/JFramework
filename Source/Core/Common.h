@@ -29,7 +29,7 @@
 
 namespace Common
 {
-  std::string const RelativePath(std::string const &aFileName);
+  std::string const RelativePath(std::string const &aSubFolder, std::string const &aFileName);
 
   #ifndef _WIN32
   long              GetTickCount();

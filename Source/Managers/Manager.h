@@ -3,6 +3,7 @@
 
 #include "Message.h"
 #include "GameApp.h"
+#include "LuaIncludes.h"
 
 class Manager
 {
@@ -21,6 +22,11 @@ public:
 	virtual void        Update() = 0;
 	virtual void        SendMessage(Message const &aMessage) = 0;
 	static std::string  GetName() {return "";}
+	static void         SerializeLUA()
+	{
+	  SLB::Class<Manager, SLB::Instance::NoCopy>("Manager")
+        .set("GetOwningApp", &Manager::GetOwningApp);
+	}
 };
 
 #endif

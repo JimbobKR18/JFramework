@@ -30,6 +30,7 @@ class Transform : public Component
     void                Serialize(Parser &aParser);
     void                Deserialize(Parser &aParser);
     static std::string  GetName() {return "Transform";}
+    static void         SerializeLUA();
 };
 
 #endif
