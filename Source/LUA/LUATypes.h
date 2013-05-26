@@ -39,7 +39,21 @@ namespace LUABind
     void LoadFunction1p(std::string const &aFilename, std::string const &aFunctionName, T param)
     {
       // Load the file up
-      doString(GetScript(aFilename).c_str());
+      std::string contents = GetScript(aFilename);
+      
+      if(contents.empty())
+      {
+        DebugLogPrint("LUA File: %s not found!\n", aFilename.c_str());
+        return;
+      }
+      else if(contents.find(aFunctionName) == std::string::npos)
+      {
+        DebugLogPrint("LUA function: %s in file: %s not found!\n",
+                      aFunctionName.c_str(), aFilename.c_str());
+        return;
+      }
+      
+      doString(contents.c_str());
       
       // Get the state and call the function
       lua_State *state = getState();

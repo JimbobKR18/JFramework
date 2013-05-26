@@ -25,6 +25,8 @@
 #define PC 1
 #endif
 
+#define DebugLogPrint std::printf
+
 namespace Common
 {
   std::string const RelativePath(std::string const &aFileName);
