@@ -31,6 +31,7 @@ public:
   
   void                AddInput(std::string const &aInput, Vector3 const &aLocation);
   void                RemoveInput(std::string const &aInput);
+  void                ClearInputs();
   
   // Derived from Manager
   void                Update();

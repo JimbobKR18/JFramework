@@ -22,14 +22,14 @@
                         { \
                           std::ifstream file(Common::RelativePath("Game", aFilename.c_str()).c_str()); \
                           if(file.is_open()) \
-                          {\
+                          { \
                             std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()); \
                             mScripts.insert(ScriptPair(aFilename, contents)); \
-                          }\
-                          else\
-                          {\
-                            mScripts.insert(ScriptPair(aFilename, ""));\
-                          }\
+                          } \
+                          else \
+                          { \
+                            mScripts.insert(ScriptPair(aFilename, "")); \
+                          } \
                         }
 
 namespace LUABind

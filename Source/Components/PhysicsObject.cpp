@@ -55,13 +55,17 @@ void PhysicsObject::SendMessage(Message const &aMessage)
 
 void PhysicsObject::ReceiveMessage(Message const &aMessage)
 {
-  // TODO fix these messages
   CollisionMessage *message = (CollisionMessage*)&aMessage;
   GameObject *otherBody = message->GetObject(0) != GetOwner() ?
                           message->GetObject(0) : message->GetObject(1);
-  LUABind::LoadFunction<GameObject*>("CollisionMessages.LUA",
-                                     GetOwner()->GetFilename() + "_CollisionReceive",
-                                     otherBody);
+  std::string objectName = GetOwner()->GetFilename().substr(0, GetOwner()->GetFilename().length() - 4);
+  
+  if(!LUABind::LoadFunction<GameObject*>("CollisionMessages.LUA",
+                                     objectName + "_CollisionReceive",
+                                     otherBody))
+  {
+    // Do some fallback logic here
+  }
 }
 
 void PhysicsObject::Serialize(Parser &aParser)

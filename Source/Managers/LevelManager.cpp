@@ -1,4 +1,5 @@
 #include "LevelManager.h"
+#include "InputManager.h"
 #include "LuaIncludes.h"
 
 LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager"), mActiveLevel(NULL)
@@ -40,7 +41,7 @@ void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
 {
 	if(mActiveLevel)
 		mActiveLevel->Unload();
-
+  
 	for(std::vector<Level*>::const_iterator it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
 		if((*it)->GetName() == aLevelName)

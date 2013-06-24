@@ -35,8 +35,9 @@ namespace LUABind
   
   struct FunctionCaller : public SLB::Script
   {
+    // Returns true if function called successfully
     template<typename T>
-    void LoadFunction1p(std::string const &aFilename, std::string const &aFunctionName, T param)
+    bool LoadFunction1p(std::string const &aFilename, std::string const &aFunctionName, T param)
     {
       // Load the file up
       std::string contents = GetScript(aFilename);
@@ -44,13 +45,13 @@ namespace LUABind
       if(contents.empty())
       {
         DebugLogPrint("LUA File: %s not found!\n", aFilename.c_str());
-        return;
+        return false;
       }
       else if(contents.find(aFunctionName) == std::string::npos)
       {
         DebugLogPrint("LUA function: %s in file: %s not found!\n",
                       aFunctionName.c_str(), aFilename.c_str());
-        return;
+        return false;
       }
       
       doString(contents.c_str());
@@ -59,6 +60,7 @@ namespace LUABind
       lua_State *state = getState();
       SLB::LuaCall<void(T)> call(state, aFunctionName.c_str());
       call(param);
+      return true;
     }
   };
   
@@ -69,10 +71,10 @@ namespace LUABind
   }*/
   
   template<typename T>
-  void LoadFunction(std::string const &aFilename, std::string const &aFunctionName, T param)
+  bool LoadFunction(std::string const &aFilename, std::string const &aFunctionName, T param)
   {
     FunctionCaller caller;
-    caller.LoadFunction1p<T>(aFilename, aFunctionName, param);
+    return caller.LoadFunction1p<T>(aFilename, aFunctionName, param);
   }
 };
 

@@ -42,6 +42,10 @@ void InputManager::RemoveInput(std::string const &aInput)
     }
   }
 }
+void InputManager::ClearInputs()
+{
+  mInputs.clear();
+}
 
 // Derived from Manager
 void InputManager::Update()
