@@ -51,6 +51,7 @@ void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
         (*it)->Reset();
       }
 			(*it)->Load();
+			return;
 		}
 	}
 
@@ -81,7 +82,8 @@ void LevelManager::SerializeLUA()
 {
   SLB::Class<LevelManager>("LevelManager").inherits<Manager>()
           .set("CreateLevel", &LevelManager::CreateLevel)
-          .set("LoadLevel", &LevelManager::LoadLevel);
+          .set("LoadLevel", &LevelManager::LoadLevel)
+          .set("GetActiveLevel", &LevelManager::GetActiveLevel);
 }
 
 void LevelManager::AddLevel(Level *aLevel)
@@ -89,7 +91,7 @@ void LevelManager::AddLevel(Level *aLevel)
   // Check to see if object is in our list
   for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
-		if(*it == aLevel)
+		if(*it == aLevel || (*it)->GetName() == aLevel->GetName())
 		{
       return;
 		}

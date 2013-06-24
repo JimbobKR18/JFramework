@@ -8,7 +8,8 @@ function LoadLevel(levelname)
 	print("Got the LevelManager successfully")
 	level = levelmanager:CreateLevel(levelname)
 	print("Got the level successfully")
-	level:Load()
+	-- THE CRASH LIES IN HERE SOMEWHERE
+	levelmanager:LoadLevel(levelname, true)
 	print("Loaded the level successfully")
 end
 

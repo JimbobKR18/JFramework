@@ -9,7 +9,7 @@ function LoadLevel(levelname)
 	print("Got the LevelManager successfully")
 	level = levelmanager:CreateLevel(levelname)
 	print("Got the level successfully")
-	level:Load()
+	levelmanager:LoadLevel(levelname, false)
 	print("Loaded the level successfully")
 end
 
