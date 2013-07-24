@@ -57,3 +57,6 @@ void DebugManager::Update()
 void DebugManager::SendMessage(Message const &aMessage)
 {
 }
+void DebugManager::ProcessDelayedMessage(Message *aMessage)
+{
+}

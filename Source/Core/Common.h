@@ -17,6 +17,7 @@
 #include <cctype>
 #include <map>
 #include <set>
+#include <list>
 #include <fstream>
 #include <sstream>
 #include <iostream>

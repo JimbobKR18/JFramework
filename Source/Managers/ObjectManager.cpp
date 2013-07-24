@@ -35,6 +35,10 @@ void ObjectManager::SendMessage(Message const &aMsg)
   }
 }
 
+void ObjectManager::ProcessDelayedMessage(Message *aMessage)
+{
+}
+
 GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 {
 	TextParser parser(Common::RelativePath("Game", aFilename));

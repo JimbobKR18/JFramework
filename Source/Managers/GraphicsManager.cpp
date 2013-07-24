@@ -29,6 +29,10 @@ void GraphicsManager::SendMessage(Message const &aMessage)
 {
 }
 
+void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
+{
+}
+
 Surface *GraphicsManager::CreateSurface()
 {
 #if !defined(ANDROID) && !defined(IOS)

@@ -60,6 +60,7 @@ void GameObject::RemoveComponent(Component *aComponent)
   {
     if(aComponent == *it)
     {
+      delete *it;
       mComponents.erase(it);
       break;
     }

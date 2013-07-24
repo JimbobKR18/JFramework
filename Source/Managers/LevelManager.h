@@ -16,12 +16,14 @@ public:
 	Level*              CreateLevel(std::string const &aFilename);
 	Level*              GetLevel(std::string const &aLevelName);
 	void                DeleteLevel(Level *aLevel);
+	void                LoadLevelDelayed(std::string const &aLevelName, bool aReset = false);
 	void                LoadLevel(std::string const &aLevelName, bool aReset = false);
   Level*              GetActiveLevel();
   void                SetActiveLevel(Level *aLevel);
   // Derived from Manager
-	void                Update();
-	void                SendMessage(Message const &aMessage);
+	virtual void        Update();
+	virtual void        SendMessage(Message const &aMessage);
+  virtual void        ProcessDelayedMessage(Message *aMessage);
 	static std::string  GetName() {return "LevelManager";}
 	static void         SerializeLUA();
 private:

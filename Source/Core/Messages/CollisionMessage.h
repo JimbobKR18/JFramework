@@ -37,7 +37,7 @@ public:
     SetDescription("Collision");
     SetContent(aContent);
   }
-  ~CollisionMessage()
+  virtual ~CollisionMessage()
   {
   }
 

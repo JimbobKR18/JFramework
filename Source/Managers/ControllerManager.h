@@ -26,8 +26,9 @@ public:
   void                ClearControllers();
   
   // Derived from Manager
-  void                Update();
-	void                SendMessage(Message const &aMessage);
+  virtual void        Update();
+	virtual void        SendMessage(Message const &aMessage);
+  virtual void        ProcessDelayedMessage(Message *aMessage);
 	static std::string  GetName() {return "ControllerManager";}
   
 public:

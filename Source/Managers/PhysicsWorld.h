@@ -39,6 +39,7 @@ public:
   // Derived from Manager
   virtual void                  Update();
   virtual void                  SendMessage(Message const &aMessage);
+  virtual void                  ProcessDelayedMessage(Message *aMessage);
   static std::string            GetName() {return "PhysicsWorld";}
   // Forces
   void                          RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);

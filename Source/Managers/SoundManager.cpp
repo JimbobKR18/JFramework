@@ -72,7 +72,9 @@ void SoundManager::Update()
 }
 void SoundManager::SendMessage(Message const &aMessage)
 {
-
+}
+void SoundManager::ProcessDelayedMessage(Message *aMessage)
+{
 }
 
 void SoundManager::AddSound(Sound *aSound)

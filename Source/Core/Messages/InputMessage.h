@@ -27,7 +27,7 @@ public:
     SetDescription("Input");
     SetContent(aContent);
   }
-  ~InputMessage() {}
+  virtual ~InputMessage() {}
 
   Vector3 GetLocation() const {return mLocation;}
 };

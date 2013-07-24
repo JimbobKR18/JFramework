@@ -98,8 +98,12 @@ void PhysicsWorld::SendMessage(Message const &aMessage)
 {
 	for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
-		(*it)->ReceiveMessage(aMessage);
+	  (*it)->ReceiveMessage(aMessage);
 	}
+}
+
+void PhysicsWorld::ProcessDelayedMessage(Message *aMessage)
+{
 }
 
 void PhysicsWorld::RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator)

@@ -9,9 +9,8 @@
 #include "InputManager.h"
 #include "InputMessage.h"
 
-InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager")
+InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager"), mAcceptInput(true)
 {
-  
 }
 InputManager::~InputManager()
 {
@@ -20,6 +19,9 @@ InputManager::~InputManager()
 
 void InputManager::AddInput(std::string const &aInput, Vector3 const &aLocation)
 {
+  if(!mAcceptInput)
+    return;
+
   // Check to see if object is in our list
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
@@ -47,6 +49,17 @@ void InputManager::ClearInputs()
   mInputs.clear();
 }
 
+void InputManager::AcceptInputs()
+{
+  mAcceptInput = true;
+  ClearInputs();
+}
+void InputManager::DeclineInputs()
+{
+  mAcceptInput = false;
+  ClearInputs();
+}
+
 // Derived from Manager
 void InputManager::Update()
 {
@@ -56,5 +69,9 @@ void InputManager::Update()
   }
 }
 void InputManager::SendMessage(Message const &aMessage)
+{
+}
+
+void InputManager::ProcessDelayedMessage(Message *aMessage)
 {
 }

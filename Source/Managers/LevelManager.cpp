@@ -1,6 +1,7 @@
 #include "LevelManager.h"
 #include "InputManager.h"
 #include "LuaIncludes.h"
+#include "LevelChangeMessage.h"
 
 LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager"), mActiveLevel(NULL)
 {
@@ -37,6 +38,13 @@ void LevelManager::DeleteLevel(Level *aLevel)
 	delete aLevel;
 }
 
+void LevelManager::LoadLevelDelayed(std::string const &aLevelName, bool aReset)
+{
+  GetOwningApp()->GET<InputManager>()->DeclineInputs();
+  LevelChangeMessage *msg = new LevelChangeMessage(aLevelName, (aReset ? "true" : "false"));
+  ProcessDelayedMessage(msg);
+}
+
 void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
 {
 	if(mActiveLevel)
@@ -51,6 +59,7 @@ void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
         (*it)->Reset();
       }
 			(*it)->Load();
+			GetOwningApp()->GET<InputManager>()->AcceptInputs();
 			return;
 		}
 	}
@@ -70,7 +79,13 @@ void LevelManager::SetActiveLevel(Level *aLevel)
 
 void LevelManager::Update()
 {
-
+  for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  {
+    LevelChangeMessage *msg = (LevelChangeMessage*)*it;
+    LoadLevel(msg->GetDescription(), (msg->GetContent() == "true" ? true : false));
+    delete *it;
+  }
+  mDelayedMessages.clear();
 }
 
 void LevelManager::SendMessage(Message const &aMessage)
@@ -78,11 +93,16 @@ void LevelManager::SendMessage(Message const &aMessage)
 
 }
 
+void LevelManager::ProcessDelayedMessage(Message *aMessage)
+{
+  mDelayedMessages.push_back(aMessage);
+}
+
 void LevelManager::SerializeLUA()
 {
   SLB::Class<LevelManager>("LevelManager").inherits<Manager>()
           .set("CreateLevel", &LevelManager::CreateLevel)
-          .set("LoadLevel", &LevelManager::LoadLevel)
+          .set("LoadLevel", &LevelManager::LoadLevelDelayed)
           .set("GetActiveLevel", &LevelManager::GetActiveLevel);
 }
 

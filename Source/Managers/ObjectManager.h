@@ -14,8 +14,9 @@ public:
 	virtual ~ObjectManager();
 
   // Derived from Manager
-	void                Update();
-	void                SendMessage(Message const &aMessage);
+	virtual void        Update();
+	virtual void        SendMessage(Message const &aMessage);
+  virtual void        ProcessDelayedMessage(Message *aMessage);
 	static std::string  GetName() {return "ObjectManager";}
 
 	GameObject*         CreateObject(std::string const &aFilename);

@@ -38,8 +38,9 @@ public:
                                float *aVariable);
   int                 HandleEvent(SDL_Event &event);
 
-  void                Update();
-  void                SendMessage(Message const &aMessage);
+  virtual void        Update();
+  virtual void        SendMessage(Message const &aMessage);
+  virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "DebugManager";}
 };
 

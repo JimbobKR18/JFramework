@@ -25,6 +25,7 @@ class InputManager : public Manager
 {
 private:
   std::set<InputInfo> mInputs;
+  bool                mAcceptInput;
 public:
   InputManager(GameApp *aApp);
   ~InputManager();
@@ -33,9 +34,13 @@ public:
   void                RemoveInput(std::string const &aInput);
   void                ClearInputs();
   
+  void                AcceptInputs();
+  void                DeclineInputs();
+
   // Derived from Manager
-  void                Update();
-	void                SendMessage(Message const &aMessage);
+  virtual void        Update();
+	virtual void        SendMessage(Message const &aMessage);
+  virtual void        ProcessDelayedMessage(Message *aMessage);
 	static std::string  GetName() {return "InputManager";}
   
 public:

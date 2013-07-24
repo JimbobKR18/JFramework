@@ -60,3 +60,6 @@ void ControllerManager::SendMessage(Message const &aMessage)
 {
   
 }
+void ControllerManager::ProcessDelayedMessage(Message *aMessage)
+{
+}
