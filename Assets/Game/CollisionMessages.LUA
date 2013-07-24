@@ -25,5 +25,5 @@ end
 
 function BasicObject_CollisionReceive(collidingObject)
 	print("Found BasicObject_CollisionReceive function successfully.")
-	LoadLevel("BasicLevel.txt")
+	--LoadLevel("BasicLevel.txt")
 end

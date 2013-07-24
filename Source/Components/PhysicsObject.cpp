@@ -10,6 +10,7 @@
 #include "Transform.h"
 #include "GameApp.h"
 #include "ObjectManager.h"
+#include "InputManager.h"
 #include "LUATypes.h"
 #include "CollisionMessage.h"
 
@@ -65,6 +66,7 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
                                      otherBody))
   {
     // Do some fallback logic here
+    GetOwner()->GetManager()->GetOwningApp()->GET<LevelManager>()->LoadLevel("BasicLevel.txt");
   }
 }
 

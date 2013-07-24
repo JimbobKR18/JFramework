@@ -36,6 +36,7 @@ public:
   
   void                AcceptInputs();
   void                DeclineInputs();
+  bool                AcceptingInputs();
 
   // Derived from Manager
   virtual void        Update();
