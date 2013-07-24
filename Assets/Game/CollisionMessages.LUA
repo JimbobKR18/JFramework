@@ -10,7 +10,7 @@ function LoadLevel(levelname)
 	print("Got the level successfully")
 	-- THE CRASH LIES IN HERE SOMEWHERE
 	-- DELAYED MESSAGE SYSTEM HOOOOOO
-	levelmanager:LoadLevel(levelname, true)
+	levelmanager:LoadLevel(levelname, false)
 	print("Loaded the level successfully")
 end
 
