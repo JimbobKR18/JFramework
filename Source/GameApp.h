@@ -10,6 +10,7 @@ class GameApp
 {
 private:
 	std::vector<Manager*> mManagers;
+	std::vector<Message*> mDelayedMessages;
 	float                 mLastFrame;
 	float                 mDT;
 public:
@@ -20,6 +21,7 @@ public:
 	void      AppStep();
 	void      Update();
   void      SendMessage(Message const &aMessage);
+  void      SendMessageDelayed(Message *aMessage);
 	void      AddManager(Manager* aManager);
 	Manager*  GetManager(std::string const &aName);
 

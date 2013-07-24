@@ -79,6 +79,13 @@ void GameApp::Update()
 
     mDT = 0;
   }
+
+  for(std::vector<Message*>::iterator it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  {
+    SendMessage(**it);
+    delete *it;
+  }
+  mDelayedMessages.clear();
 }
 
 void GameApp::SendMessage(Message const &aMessage)
@@ -87,6 +94,11 @@ void GameApp::SendMessage(Message const &aMessage)
 	{
     (*it)->SendMessage(aMessage);
 	}
+}
+
+void GameApp::SendMessageDelayed(Message *aMessage)
+{
+  mDelayedMessages.push_back(aMessage);
 }
 
 void GameApp::AddManager(Manager *aManager)

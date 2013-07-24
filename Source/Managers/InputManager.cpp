@@ -22,9 +22,7 @@ void InputManager::AddInput(std::string const &aInput, Vector3 const &aLocation)
   if(!mAcceptInput)
     return;
 
-  GetOwningApp()->SendMessage(InputMessage(aInput, aLocation));
-
-  /*// Check to see if object is in our list
+  // Check to see if object is in our list
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
     if(it->mInput == aInput)
@@ -33,18 +31,18 @@ void InputManager::AddInput(std::string const &aInput, Vector3 const &aLocation)
     }
   }
   
-  mInputs.insert(InputInfo(aInput, aLocation));*/
+  mInputs.insert(InputInfo(aInput, aLocation));
 }
 void InputManager::RemoveInput(std::string const &aInput)
 {
-  /*for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
+  for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
     if(it->mInput == aInput)
     {
       mInputs.erase(it);
       break;
     }
-  }*/
+  }
 }
 void InputManager::ClearInputs()
 {
@@ -71,7 +69,7 @@ void InputManager::Update()
 {
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
-    GetOwningApp()->SendMessage(InputMessage(it->mInput, it->mLocation));
+    GetOwningApp()->SendMessageDelayed(new InputMessage(it->mInput, it->mLocation));
   }
 }
 void InputManager::SendMessage(Message const &aMessage)
