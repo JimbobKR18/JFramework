@@ -36,8 +36,6 @@ GameApp::GameApp()
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
 
-  //LUABind::LoadScriptFromFile("BasicFile.LUA");
-  //LUABind::LoadFunction<std::string>("BasicFile.LUA", "LoadLevel", "BasicLevel.txt");
   LUABind::LoadFunction<std::string>("BasicFile.LUA", "main", "");
 }
 

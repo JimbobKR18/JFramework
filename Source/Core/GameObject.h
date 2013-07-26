@@ -50,6 +50,9 @@ public:
   void                    Update();
   void                    ReceiveMessage(Message const &aMessage);
   static void             SerializeLUA();
+
+  // Fallback logic for collisions
+  void                    Interact(GameObject *aObject) {}
 };
 
 #endif /* defined(__JFramework__GameObject__) */

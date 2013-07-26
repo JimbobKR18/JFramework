@@ -20,7 +20,6 @@ MenuImage::~MenuImage()
 
 void MenuImage::Draw()
 {
-  
 }
 void MenuImage::SendMessage(Message const &aMessage)
 {

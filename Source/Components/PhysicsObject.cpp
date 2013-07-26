@@ -56,6 +56,9 @@ void PhysicsObject::SendMessage(Message const &aMessage)
 
 void PhysicsObject::ReceiveMessage(Message const &aMessage)
 {
+  if(aMessage.GetDescription() != "Collision")
+    return;
+
   CollisionMessage *message = (CollisionMessage*)&aMessage;
   GameObject *otherBody = message->GetObject(0) != GetOwner() ?
                           message->GetObject(0) : message->GetObject(1);
@@ -66,7 +69,7 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
                                      otherBody))
   {
     // Do some fallback logic here
-    GetOwner()->GetManager()->GetOwningApp()->GET<LevelManager>()->LoadLevel("BasicLevel.txt");
+    otherBody->Interact(GetOwner());
   }
 }
 
