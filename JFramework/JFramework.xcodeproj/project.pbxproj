@@ -102,6 +102,8 @@
 		ADD5EAC815F325C5005E20E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ADD5EAC615F325C5005E20E7 /* InfoPlist.strings */; };
 		ADD5EACA15F325C5005E20E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD5EAC915F325C5005E20E7 /* main.m */; };
 		ADD5EACE15F325C5005E20E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD5EACD15F325C5005E20E7 /* AppDelegate.m */; };
+		ADF3EF0B17A8B4A200D0592D /* MenuElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADF3EF0A17A8B4A200D0592D /* MenuElement.cpp */; };
+		ADF3EF0C17A8B4A200D0592D /* MenuElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADF3EF0A17A8B4A200D0592D /* MenuElement.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,6 +220,8 @@
 		ADD5EACB15F325C5005E20E7 /* JFramework-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JFramework-Prefix.pch"; sourceTree = "<group>"; };
 		ADD5EACC15F325C5005E20E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ADD5EACD15F325C5005E20E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ADF3EF0A17A8B4A200D0592D /* MenuElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuElement.cpp; sourceTree = "<group>"; };
+		ADF3EF0D17A8B4AB00D0592D /* LevelChangeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelChangeMessage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +287,7 @@
 		AD26CCB0168D1DD3007C3551 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				ADF3EF0D17A8B4AB00D0592D /* LevelChangeMessage.h */,
 				AD35B89216F69DDE001DD957 /* CollisionMessage.h */,
 				AD26CCB1168D1DD3007C3551 /* InputMessage.h */,
 				AD26CCB2168D1DD3007C3551 /* Message.h */,
@@ -387,6 +392,7 @@
 		ADBBD1C416619D2C00F2AF13 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				ADF3EF0A17A8B4A200D0592D /* MenuElement.cpp */,
 				AD35B89316F69DEC001DD957 /* Menu.cpp */,
 				AD35B89416F69DEC001DD957 /* Menu.h */,
 				ADBBD1C516619D2C00F2AF13 /* Level.cpp */,
@@ -672,6 +678,7 @@
 				AD35B89C16F69E0F001DD957 /* DebugManager.cpp in Sources */,
 				AD35B89E16F69E0F001DD957 /* SoundManager.cpp in Sources */,
 				AD59AEBD1702B35300B187BC /* MenuImage.cpp in Sources */,
+				ADF3EF0C17A8B4A200D0592D /* MenuElement.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +728,7 @@
 				AD35B89B16F69E0F001DD957 /* DebugManager.cpp in Sources */,
 				AD35B89D16F69E0F001DD957 /* SoundManager.cpp in Sources */,
 				AD59AEBC1702B35300B187BC /* MenuImage.cpp in Sources */,
+				ADF3EF0B17A8B4A200D0592D /* MenuElement.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

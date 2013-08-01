@@ -1,0 +1,18 @@
+Background.txt
+BasicObject.txt
+Transform
+{
+	PositionX = 0
+	PositionY = 0
+	PositionZ = 0
+	ScaleX = 1
+	ScaleY = 1
+	ScaleZ = 1
+	SizeX = 32
+	SizeY = 32
+	SizeZ = 32
+}
+Focus
+{
+	isFocus = true
+}

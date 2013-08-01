@@ -175,9 +175,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "ObjectManager::CreateObject(std::string const &amp;aFilename)"
-         landmarkType = "5">
+         endingLineNumber = "41">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -343,7 +341,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "129"
          endingLineNumber = "129"
-         landmarkName = "PhysicsWorld::SweepAndPrune(std::vector&lt;PhysicsObject*&gt; aSortedObjects)"
+         landmarkName = "PhysicsWorld::SortOnAxis()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -368,9 +366,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "36"
-         endingLineNumber = "36"
-         landmarkName = "InputManager::RemoveInput(std::string const &amp;aInput)"
-         landmarkType = "5">
+         endingLineNumber = "36">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -431,9 +427,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "16"
-         endingLineNumber = "16"
-         landmarkName = "LevelManager::CreateLevel(std::string const &amp;aFilename)"
-         landmarkType = "5">
+         endingLineNumber = "16">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -457,9 +451,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "14"
-         endingLineNumber = "14"
-         landmarkName = "Level::Level()"
-         landmarkType = "5">
+         endingLineNumber = "14">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -700,7 +692,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "97"
-         endingLineNumber = "97">
+         endingLineNumber = "97"
+         landmarkName = "Level::Reset()"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -842,7 +836,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "44"
          endingLineNumber = "44"
-         landmarkName = "LevelManager::LoadLevel(std::string const &amp;aLevelName, bool aReset)"
+         landmarkName = "LevelManager::LoadLevelDelayed(std::string const &amp;aLevelName, bool aReset)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
