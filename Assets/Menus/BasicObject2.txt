@@ -1,0 +1,26 @@
+Start
+{
+	Surface
+	{
+		TextureName = Blank2.png
+		AnimationCount = 1
+		FrameNumbers = 2
+		Animated = true
+	}
+	Transform
+	{
+		PositionX = 0
+		PositionY = 0
+		PositionZ = 0
+		ScaleX = 1
+		ScaleY = 1
+		ScaleZ = 1
+		SizeX = 50
+		SizeY = 50
+		SizeZ = 50
+	}
+	Focus
+	{
+		IsTarget = false
+	}
+}
