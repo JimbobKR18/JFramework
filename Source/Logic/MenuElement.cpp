@@ -53,6 +53,7 @@ void MenuElement::ParseFile(Parser &aParser)
 #else
     Surface *surface = new Surface();
 #endif
+    surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
     surface->Deserialize(aParser);
     mObject->AddComponent(surface);
   }

@@ -6,18 +6,29 @@
 
 class GraphicsManager;
 
+enum Viewspace
+{
+  VIEW_RELATIVE_TO_CAMERA = 0,
+  VIEW_ABSOLUTE
+};
+
 class Surface : public Component
 {
 private:
   TextureCoordinates* mTexCoord;
   GraphicsManager*    mManager;
+  Viewspace           mViewmode;
 public:
 	Surface();
 	Surface(GraphicsManager *aManager);
 	virtual ~Surface() {}
 
 	// Getters
-	GraphicsManager*    GetManager() { return mManager; }
+	GraphicsManager*    GetManager() const { return mManager; }
+	Viewspace           GetViewMode() const { return mViewmode; }
+
+	// Setters
+	void                SetViewMode(Viewspace const &aViewmode) { mViewmode = aViewmode; }
   
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;
