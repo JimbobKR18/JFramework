@@ -47,7 +47,7 @@ void MenuElement::ParseFile(Parser &aParser)
   if(aParser.Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)
-    PCSurface *surface = new PCSurface(app->GET<GraphicsManager>());
+    PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateSurface();
     std::string imageName = aParser.Find("Surface", "TextureName");
     surface->LoadImage(imageName);
 #else

@@ -7,6 +7,7 @@
 //
 
 #include "MenuImage.h"
+#include "LUATypes.h"
 
 MenuImage::MenuImage(std::string const &aFilename) : MenuElement(aFilename)
 {
