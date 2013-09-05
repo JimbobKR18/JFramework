@@ -21,7 +21,7 @@ private:
 public:
 	Surface();
 	Surface(GraphicsManager *aManager);
-	virtual ~Surface() {}
+	virtual ~Surface();
 
 	// Getters
 	GraphicsManager*    GetManager() const { return mManager; }

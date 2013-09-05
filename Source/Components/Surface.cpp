@@ -1,5 +1,6 @@
 #include "Surface.h"
 #include "GraphicsManager.h"
+#include "ObjectManager.h"
 
 Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE)
 {
@@ -10,6 +11,11 @@ Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NU
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE)
 {
   
+}
+
+Surface::~Surface()
+{
+  GetManager()->RemoveSurface(this);
 }
 
 
