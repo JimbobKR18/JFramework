@@ -1,5 +1,4 @@
 #include "GameApp.h"
-#include "TextParser.h"
 #include "InputManager.h"
 #include "DebugManager.h"
 
