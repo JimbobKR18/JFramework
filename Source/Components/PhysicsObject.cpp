@@ -13,6 +13,8 @@
 #include "InputManager.h"
 #include "LUATypes.h"
 #include "CollisionMessage.h"
+#include "PhysicsWorld.h"
+#include "ObjectManager.h"
 
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
 						     mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
@@ -23,6 +25,7 @@ PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"),
 
 PhysicsObject::~PhysicsObject()
 {
+  mWorld->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject(this);
 }
 
 void PhysicsObject::Update()

@@ -13,11 +13,10 @@
 #include "ObjectManager.h"
 #include "LevelManager.h"
 #include "GraphicsManager.h"
-#include "Menu.h"
 #include "InputMessage.h"
 #include "CollisionMessage.h"
 
-PlayerController::PlayerController() : mObj(NULL)
+PlayerController::PlayerController() : mObj(NULL), mGameMenu(NULL)
 {
 }
 
@@ -52,11 +51,16 @@ void PlayerController::DoAction(std::string const &aAction, Vector3 const &aLoca
   }
   else if(aAction == "QPressed")
   {
-    /*GameObject *obj = GetOwner()->GetOwner()->GetOwningApp()->GET<ObjectManager>()->CreateObject(Common::RelativePath("BasicObject2.txt"));
-    Vector3 pos = GetOwner()->GET<Transform>()->GetPosition();
-    obj->GET<Transform>()->SetPosition(pos);*/
-
-    Menu *menu = new Menu(GetOwner()->GetManager()->GetOwningApp()->GET<LevelManager>()->GetActiveLevel(), "BasicMenu.txt");
+    if(!mGameMenu)
+      mGameMenu = new Menu(GetOwner()->GetManager()->GetOwningApp()->GET<LevelManager>()->GetActiveLevel(), "BasicMenu.txt");
+  }
+  else if(aAction == "EPressed")
+  {
+    if(mGameMenu)
+    {
+      delete mGameMenu;
+      mGameMenu = NULL;
+    }
   }
   else if(aAction == "Mouse")
   {

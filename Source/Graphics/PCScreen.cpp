@@ -55,9 +55,16 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       TextureCoordinates *texCoord = owner->GET<PCSurface>()->GetTextureData();
       
       // Get positions relative to the camera
-      float xPosition = position.x - (cameraPosition.x - cameraSize.x / 2.0f);
-      float yPosition = position.y - (cameraPosition.y - cameraSize.y / 2.0f);
-      float zPosition = position.z - (cameraPosition.z - cameraSize.z / 2.0f);
+      float xPosition = position.x;
+      float yPosition = position.y;
+      float zPosition = position.z;
+
+      if(owner->GET<PCSurface>()->GetViewMode() == VIEW_ABSOLUTE)
+      {
+        xPosition -= (cameraPosition.x - cameraSize.x / 2.0f);
+        yPosition -= (cameraPosition.y - cameraSize.y / 2.0f);
+        zPosition -= (cameraPosition.z - cameraSize.z / 2.0f);
+      }
       
       if(xPosition - size.x > GetWidth() || yPosition - size.y > GetHeight())
         continue;

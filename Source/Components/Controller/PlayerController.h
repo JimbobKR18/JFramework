@@ -13,6 +13,7 @@
 
 #include "Controller.h"
 #include "GameObject.h"
+#include "Menu.h"
 #include "Common.h"
 
 class PlayerController : public Controller
@@ -20,6 +21,7 @@ class PlayerController : public Controller
 private:
   GameObject*             mObj;
   std::set<GameObject*>   mCollidedObjects;
+  Menu*                   mGameMenu;
   
 public:
   PlayerController();

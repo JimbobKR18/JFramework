@@ -1,15 +1,21 @@
 #include "Surface.h"
 #include "GraphicsManager.h"
+#include "ObjectManager.h"
 
-Surface::Surface() : Component("Surface"), mTexCoord(NULL)
+Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE)
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NULL),
-                                              mManager(aManager)
+                                              mManager(aManager), mViewmode(VIEW_ABSOLUTE)
 {
   
+}
+
+Surface::~Surface()
+{
+  GetManager()->RemoveSurface(this);
 }
 
 

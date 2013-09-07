@@ -73,6 +73,9 @@ int main(int argc, char *argv[])
           case SDLK_q:
             app->GET<InputManager>()->AddInput("QPressed", Vector3(0,0,0));
             break;
+          case SDLK_e:
+            app->GET<InputManager>()->AddInput("EPressed", Vector3(0,0,0));
+            break;
           default:
             break;
         }
@@ -98,6 +101,9 @@ int main(int argc, char *argv[])
             break;
           case SDLK_q:
             app->GET<InputManager>()->RemoveInput("QPressed");
+            break;
+          case SDLK_e:
+            app->GET<InputManager>()->RemoveInput("EPressed");
             break;
           default:
             break;
