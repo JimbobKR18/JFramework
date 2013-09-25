@@ -46,9 +46,10 @@ void Menu::DeleteObject(MenuElement *aElement)
 }
 void Menu::DeleteObjects()
 {
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end();)
   {
     DeleteObject(*it);
+    it = mMenuElements.begin();
   }
 }
 
