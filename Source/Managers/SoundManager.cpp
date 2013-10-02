@@ -7,26 +7,9 @@
 
 
 #include "SoundManager.h"
-#include <SDL/SDL.h>
-#include <SDL/SDL_audio.h>
-
-Sound::Sound()
-{
-  assert(!"Sound initialized without a name!");
-}
-Sound::Sound(std::string const &aFilename) : mName(aFilename)
-{
-  // TODO
-}
-Sound::~Sound()
-{
-  delete mData;
-}
-
-void Sound::Play()
-{
-
-}
+#if !defined(ANDROID) && !defined(IOS)
+#include "PCSound.h"
+#endif
 
 SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager")
 {
@@ -38,7 +21,11 @@ SoundManager::~SoundManager()
 
 Sound* SoundManager::CreateSound(std::string const &aFilename)
 {
+#if !defined(ANDROID) && !defined(IOS)
+  Sound *newSound = new PCSound(aFilename);
+#else
   Sound *newSound = new Sound(aFilename);
+#endif
   AddSound(newSound);
   return newSound;
 }
@@ -53,16 +40,9 @@ void SoundManager::PlaySound(std::string const &aFilename)
 }
 void SoundManager::MixAudio(void *aUnused, unsigned char *aStream, unsigned int aLength)
 {
-  unsigned int amount = 0;
-
   for(SoundIt it = mSounds.begin(); it != mSounds.end(); ++it)
   {
-    amount = it->second->mLength - it->second->mPos;
-    if(amount > aLength)
-      amount = aLength;
-
-    SDL_MixAudio(aStream, &it->second->mData[it->second->mPos], amount, SDL_MIX_MAXVOLUME);
-    it->second->mPos += amount;
+    it->second->Mix(aUnused, aStream, aLength);
   }
 }
 

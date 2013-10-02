@@ -32,6 +32,10 @@
 		AD468D941661980C00A71745 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD468D931661980C00A71745 /* SDL.framework */; };
 		AD59AEBC1702B35300B187BC /* MenuImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD59AEBA1702B35300B187BC /* MenuImage.cpp */; };
 		AD59AEBD1702B35300B187BC /* MenuImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD59AEBA1702B35300B187BC /* MenuImage.cpp */; };
+		AD779EC117FC0F2600E7B8EE /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD779EBF17FC0F2600E7B8EE /* Sound.cpp */; };
+		AD779EC217FC0F2600E7B8EE /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD779EBF17FC0F2600E7B8EE /* Sound.cpp */; };
+		AD779EC517FC102D00E7B8EE /* PCSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD779EC317FC102D00E7B8EE /* PCSound.cpp */; };
+		AD779EC617FC102D00E7B8EE /* PCSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AD779EC317FC102D00E7B8EE /* PCSound.cpp */; };
 		AD9D29181646F7BE00240FDC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD9D29161646F7BE00240FDC /* InfoPlist.strings */; };
 		AD9D291E1646F7BE00240FDC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AD9D291C1646F7BE00240FDC /* Credits.rtf */; };
 		AD9D292D1646F89000240FDC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD9D292C1646F89000240FDC /* OpenGL.framework */; };
@@ -140,6 +144,10 @@
 		AD59AEB7170176DD00B187BC /* MenuElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuElement.h; sourceTree = "<group>"; };
 		AD59AEBA1702B35300B187BC /* MenuImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuImage.cpp; sourceTree = "<group>"; };
 		AD59AEBB1702B35300B187BC /* MenuImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuImage.h; sourceTree = "<group>"; };
+		AD779EBF17FC0F2600E7B8EE /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sound.cpp; path = Sound/Sound.cpp; sourceTree = "<group>"; };
+		AD779EC017FC0F2600E7B8EE /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sound.h; path = Sound/Sound.h; sourceTree = "<group>"; };
+		AD779EC317FC102D00E7B8EE /* PCSound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PCSound.cpp; path = Sound/PCSound.cpp; sourceTree = "<group>"; };
+		AD779EC417FC102D00E7B8EE /* PCSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PCSound.h; path = Sound/PCSound.h; sourceTree = "<group>"; };
 		AD9D290B1646F7BE00240FDC /* JFrameworkMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JFrameworkMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9D29151646F7BE00240FDC /* JFrameworkMac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JFrameworkMac-Info.plist"; sourceTree = "<group>"; };
 		AD9D29171646F7BE00240FDC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -295,6 +303,17 @@
 			path = Messages;
 			sourceTree = "<group>";
 		};
+		AD779EBE17FC0EEF00E7B8EE /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				AD779EBF17FC0F2600E7B8EE /* Sound.cpp */,
+				AD779EC017FC0F2600E7B8EE /* Sound.h */,
+				AD779EC317FC102D00E7B8EE /* PCSound.cpp */,
+				AD779EC417FC102D00E7B8EE /* PCSound.h */,
+			);
+			name = Sound;
+			sourceTree = "<group>";
+		};
 		AD9D290F1646F7BE00240FDC /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +349,7 @@
 				ADBBD1AF16619D2C00F2AF13 /* Core */,
 				ADBBD1BB16619D2C00F2AF13 /* GameApp.cpp */,
 				ADBBD1BC16619D2C00F2AF13 /* GameApp.h */,
+				AD779EBE17FC0EEF00E7B8EE /* Sound */,
 				ADBBD1BD16619D2C00F2AF13 /* Graphics */,
 				ADBBD1C416619D2C00F2AF13 /* Logic */,
 				ADBBD1C716619D2C00F2AF13 /* LUA */,
@@ -638,8 +658,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADBBD22416619D2C00F2AF13 /* PCSurface.cpp in Sources */,
+				AD779EC217FC0F2600E7B8EE /* Sound.cpp in Sources */,
 				ADBBD22616619D2C00F2AF13 /* PhysicsObject.cpp in Sources */,
 				ADBBD22816619D2C00F2AF13 /* Surface.cpp in Sources */,
+				AD779EC617FC102D00E7B8EE /* PCSound.cpp in Sources */,
 				ADBBD22A16619D2C00F2AF13 /* Transform.cpp in Sources */,
 				ADBBD22C16619D2C00F2AF13 /* AutoCrit.cpp in Sources */,
 				ADBBD22E16619D2C00F2AF13 /* Common.cpp in Sources */,
@@ -694,6 +716,7 @@
 				ADBBD22916619D2C00F2AF13 /* Transform.cpp in Sources */,
 				ADBBD22B16619D2C00F2AF13 /* AutoCrit.cpp in Sources */,
 				ADBBD22D16619D2C00F2AF13 /* Common.cpp in Sources */,
+				AD779EC517FC102D00E7B8EE /* PCSound.cpp in Sources */,
 				ADBBD22F16619D2C00F2AF13 /* GameObject.cpp in Sources */,
 				ADBBD23116619D2C00F2AF13 /* MathExt.cpp in Sources */,
 				ADBBD23316619D2C00F2AF13 /* GameApp.cpp in Sources */,
@@ -725,6 +748,7 @@
 				AD1680D116914C0700B390A8 /* TextureCoordinates.cpp in Sources */,
 				AD38F3EF1692369900CE751D /* TileMapGenerator.cpp in Sources */,
 				AD35B89516F69DEC001DD957 /* Menu.cpp in Sources */,
+				AD779EC117FC0F2600E7B8EE /* Sound.cpp in Sources */,
 				AD35B89B16F69E0F001DD957 /* DebugManager.cpp in Sources */,
 				AD35B89D16F69E0F001DD957 /* SoundManager.cpp in Sources */,
 				AD59AEBC1702B35300B187BC /* MenuImage.cpp in Sources */,

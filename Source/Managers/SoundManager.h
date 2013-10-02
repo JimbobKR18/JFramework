@@ -11,20 +11,7 @@
 #define __JFramework_SoundManager_h_
 
 #include "Manager.h"
-
-struct Sound
-{
-  std::string     mName;
-  unsigned char*  mData;
-  unsigned int    mPos;
-  unsigned int    mLength;
-
-  Sound();
-  Sound(std::string const &aFilename);
-  ~Sound();
-
-  void Play();
-};
+#include "Sound.h"
 
 class SoundManager : public Manager
 {
