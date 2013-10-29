@@ -15,7 +15,7 @@ private:
 	float                 mDT;
 public:
 	GameApp();
-	~GameApp();
+	virtual ~GameApp();
 
 	float     GetDT() const;
 	void      AppStep();

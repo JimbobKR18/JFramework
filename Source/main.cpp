@@ -1,4 +1,4 @@
-#include "GameApp.h"
+/*#include "GameApp.h"
 #include "InputManager.h"
 #include "DebugManager.h"
 
@@ -13,14 +13,14 @@
 Uint32 SDLUpdateTimer(Uint32 aInterval, void *aParam)
 {
   SDL_Event event;
-  
+
   event.type = SDL_USEREVENT;
   event.user.code = 1;
   event.user.data1 = 0;
   event.user.data2 = 0;
-  
+
   SDL_PushEvent(&event);
-  
+
   return aInterval;
 }
 
@@ -114,4 +114,4 @@ int main(int argc, char *argv[])
   delete app;
 
   return 0;
-}
+}*/
