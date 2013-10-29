@@ -103,10 +103,24 @@
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.release.1772002462" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.release"/>
 							<builder buildPath="${workspace_loc:/JFrameworkLinux/Release}" id="cdt.managedbuild.target.gnu.builder.exe.release.393270150" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.795335106" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
-							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1267213751" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
+							<tool command="g++ -std=gnu++0x" id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1267213751" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 								<option id="gnu.cpp.compiler.exe.release.option.optimization.level.165416369" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.exe.release.option.debugging.level.355099471" name="Debug Level" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.118081825" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="../../Source"/>
+									<listOptionValue builtIn="false" value="../../Source/Sound"/>
+									<listOptionValue builtIn="false" value="../../Source/AntTweakBar/include"/>
+									<listOptionValue builtIn="false" value="../../Source/Components/Controller"/>
+									<listOptionValue builtIn="false" value="../../Source/Logic"/>
+									<listOptionValue builtIn="false" value="../../Source/Physics"/>
+									<listOptionValue builtIn="false" value="../../Source/Components"/>
+									<listOptionValue builtIn="false" value="../../Source/Managers"/>
+									<listOptionValue builtIn="false" value="../../Source/Core"/>
+									<listOptionValue builtIn="false" value="../../Source/Graphics"/>
+									<listOptionValue builtIn="false" value="../../Source/LUA"/>
+									<listOptionValue builtIn="false" value="../../Source/Parsers"/>
+									<listOptionValue builtIn="false" value="../../Source/TinyXML"/>
+									<listOptionValue builtIn="false" value="../../Source/Core/Messages"/>
 									<listOptionValue builtIn="false" value="../../Source/Box2D"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1361348631" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>

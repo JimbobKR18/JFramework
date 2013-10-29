@@ -1,4 +1,4 @@
-//
+/*//
 //  PlayerController.cpp
 //  JFramework
 //
@@ -105,4 +105,4 @@ void PlayerController::Serialize(Parser &aParser)
 void PlayerController::Deserialize(Parser &aParser)
 {
   
-}
+}*/
