@@ -17,18 +17,18 @@ public:
 	GameApp();
 	virtual ~GameApp();
 
-	float     GetDT() const;
-	void      AppStep();
-	void      Update();
-  void      SendMessage(Message const &aMessage);
-  void      SendMessageDelayed(Message *aMessage);
-	void      AddManager(Manager* aManager);
-	Manager*  GetManager(std::string const &aName);
+	float             GetDT() const;
+	void              AppStep();
+	virtual void      Update();
+  void              SendMessage(Message const &aMessage);
+  void              SendMessageDelayed(Message *aMessage);
+	void              AddManager(Manager* aManager);
+	Manager*          GetManager(std::string const &aName);
 
 	template<typename T>
-	T*        GET() {return (T*)GetManager(T::GetName());}
+	T*                GET() {return (T*)GetManager(T::GetName());}
 
-	static void SerializeLUA();
+	static void       SerializeLUA();
 };
 
 #endif
