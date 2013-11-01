@@ -17,14 +17,14 @@
 #define DT (1.0f/60.0f)
 #define _DEBUG
 
-GameApp::GameApp()
+GameApp::GameApp(int aWidth, int aHeight)
 {
   mDT = 0;
   mLastFrame = ((float)Common::timeGetTime()) / 1000.0f;
 
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
-  AddManager(new GraphicsManager(this));
+  AddManager(new GraphicsManager(this, aWidth, aHeight));
   AddManager(new LevelManager(this));
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));

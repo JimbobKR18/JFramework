@@ -12,7 +12,7 @@ private:
   std::map<std::string, unsigned> mTextures;
 	Screen*                         mScreen;
 public:
-	GraphicsManager(GameApp *aApp);
+	GraphicsManager(GameApp *aApp, int aWidth, int aHeight);
 	~GraphicsManager();
 
   // Derived from Manager

@@ -6,10 +6,10 @@
   #include "PCSurface.h"
 #endif
 
-GraphicsManager::GraphicsManager(GameApp *aApp) : Manager(aApp, "GraphicsManager")
+GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manager(aApp, "GraphicsManager")
 {
 #if !defined(IOS) && !defined(ANDROID)
-  mScreen = new PCScreen(640, 480);
+  mScreen = new PCScreen(aWidth, aHeight);
 #else
 #endif
 }

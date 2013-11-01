@@ -14,7 +14,7 @@ private:
 	float                 mLastFrame;
 	float                 mDT;
 public:
-	GameApp();
+	GameApp(int aWidth, int aHeight);
 	virtual ~GameApp();
 
 	float             GetDT() const;
