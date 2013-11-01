@@ -36,7 +36,7 @@ GameApp::GameApp(int aWidth, int aHeight)
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
 
-  LUABind::LoadFunction<std::string>("BasicFile.LUA", "main", "");
+  LUABind::LoadFunction<std::string>("Main.LUA", "main", "");
 }
 
 GameApp::~GameApp()
