@@ -19,6 +19,7 @@ class GameObject
 {
 private:
   std::string             mFileName;
+  std::string             mName;
   std::vector<Component*> mComponents;
   ObjectManager*          mManager;
   
@@ -27,10 +28,13 @@ public:
   GameObject();
   GameObject(ObjectManager *aManager, std::string const &aFilename);
   GameObject(GameObject const &aGameObject);
-  ~GameObject();
+  virtual ~GameObject();
 
+  std::string             GetName();
   std::string             GetFilename();
   ObjectManager*          GetManager();
+
+  void                    SetName(std::string const &aName);
 
   void                    AddComponent(Component *aComponent);
   void                    RemoveComponent(Component *aComponent);
@@ -52,7 +56,7 @@ public:
   static void             SerializeLUA();
 
   // Fallback logic for collisions
-  void                    Interact(GameObject *aObject) {}
+  virtual void            Interact(GameObject *aObject) {}
 };
 
 #endif /* defined(__JFramework__GameObject__) */

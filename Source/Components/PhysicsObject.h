@@ -16,16 +16,17 @@
 class PhysicsObject : public Component
 {
 private:
-  PhysicsWorld*     mWorld;
-  Vector3           mVelocity,
-                    mAcceleration,
-                    mForces,
-                    mBroadSize;
-  float             mMass,
-                    mInverseMass;
-  float             mDamping;
-  bool              mStatic,
-                    mGravity;
+  PhysicsWorld*             mWorld;
+  Vector3                   mVelocity,
+                            mAcceleration,
+                            mForces,
+                            mBroadSize;
+  float                     mMass,
+                            mInverseMass;
+  float                     mDamping;
+  bool                      mStatic,
+                            mGravity;
+  std::vector<std::string>  mIgnoreList;
 
 public:
   enum {SPHERE, CUBE} mShape;
@@ -43,6 +44,8 @@ public:
 
   // Methods - Misc.
   void                AddForce(Vector3 const &aForce);
+  void                AddIgnore(std::string const &aObjectName);
+  bool                IgnoreObject(std::string const &aObjectName);
 
   // Getters and setters
   Vector3             GetVelocity() const;

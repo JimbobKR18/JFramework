@@ -18,14 +18,15 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(ObjectManager *aManager, std::string const &aFilename) :
-                       mFileName(aFilename), mManager(aManager)
+                       mFileName(aFilename), mManager(aManager), mName("")
 {
 }
 
 // Sounds like a bad idea right now...
 GameObject::GameObject(GameObject const &aGameObject) :
                               mFileName(aGameObject.mFileName),
-													    mComponents(aGameObject.mComponents)
+													    mComponents(aGameObject.mComponents),
+													    mName(aGameObject.mName)
 {
   assert(!"Copying GameObjects is not supported!");
 }
@@ -38,6 +39,11 @@ GameObject::~GameObject()
   }
 }
 
+std::string GameObject::GetName()
+{
+  return mName;
+}
+
 std::string GameObject::GetFilename()
 {
 	return mFileName;
@@ -46,6 +52,11 @@ std::string GameObject::GetFilename()
 ObjectManager *GameObject::GetManager()
 {
   return mManager;
+}
+
+void GameObject::SetName(std::string const &aName)
+{
+  mName = aName;
 }
 
 void GameObject::AddComponent(Component *aComponent)
@@ -107,5 +118,6 @@ void GameObject::SerializeLUA()
 {
   SLB::Class<GameObject>("GameObject")
           .set("GetComponent", &GameObject::GetComponent)
-          .set("GetTransform", &GameObject::GET<Transform>);
+          .set("GetTransform", &GameObject::GET<Transform>)
+          .set("GetName", &GameObject::GetName);
 }

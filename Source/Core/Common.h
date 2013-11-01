@@ -40,6 +40,8 @@ namespace Common
   int               StringToInt(std::string const &aValue);
   float             StringToFloat(std::string const &aValue);
   std::vector<int>  StringToIntVector(std::string const &aValue);
+
+  std::string       IntToString(int aValue);
 }
 
 #endif

@@ -95,4 +95,11 @@ namespace Common
     
     return ret;
   }
+
+  std::string IntToString(int aValue)
+  {
+    char buffer[33];
+    sprintf(buffer, "%d", aValue);
+    return std::string(buffer);
+  }
 }

@@ -94,6 +94,11 @@ void ObjectManager::SerializeLUA()
 
 void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 {
+  if(aParser.Find("Name"))
+  {
+    std::string name = aParser.Find("Name", "Value");
+    aObject->SetName(name);
+  }
 	if(aParser.Find("PhysicsObject"))
 	{
 		PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();

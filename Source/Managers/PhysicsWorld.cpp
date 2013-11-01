@@ -136,7 +136,11 @@ void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 		for(PhysicsIT it2 = it;
 			it2 != aSortedObjects.end(); ++it2)
 		{
-			if(*it != *it2)
+		  std::string itName = (*it)->GetOwner()->GetName();
+		  std::string it2Name = (*it2)->GetOwner()->GetName();
+		  bool ignore = (*it)->IgnoreObject(it2Name) || (*it2)->IgnoreObject(itName);
+
+			if(*it != *it2 && !ignore)
 			{
 				if((!(*it)->IsStatic() || !(*it2)->IsStatic()) &&
            !mResolver.Find(*it, *it2))

@@ -43,6 +43,9 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     GameObject *obj = new GameObject(manager, mFilename);
     manager->ParseObject(obj);
     
+    // Set name of tile, for collision reasons
+    obj->SetName(std::string("Tile_") + Common::IntToString(mCollision[i]));
+
     // Get Transform of new object
     Transform *transform = obj->GET<Transform>();
     transform->SetPosition(Vector3(-halfX + (aTileSize * 2 * xPos),
@@ -66,6 +69,14 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
       physics->SetStatic(true);
       physics->mShape = PhysicsObject::CUBE;
       
+      // Make tiles ignore other tiles for collision
+      for(int i = 0; i < 99; ++i)
+      {
+        char buffer[33];
+        sprintf(buffer, "Tile_%d", i);
+        physics->AddIgnore(std::string(buffer));
+      }
+
       obj->AddComponent(physics);
     }
     

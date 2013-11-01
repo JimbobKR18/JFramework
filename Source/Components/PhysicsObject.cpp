@@ -90,6 +90,8 @@ void PhysicsObject::Deserialize(Parser &aParser)
   std::string isstatic = aParser.Find("PhysicsObject", "Static");
   SetMass(Common::StringToInt(aParser.Find("PhysicsObject", "Mass")));
   
+  //TODO serialize ignore list for collisions
+
   // default true
   if(gravity == "false")
   {
@@ -112,6 +114,22 @@ void PhysicsObject::Deserialize(Parser &aParser)
 void PhysicsObject::AddForce(Vector3 const &aForce)
 {
   mForces += aForce;
+}
+
+void PhysicsObject::AddIgnore(std::string const &aObjectName)
+{
+  mIgnoreList.push_back(aObjectName);
+}
+
+bool PhysicsObject::IgnoreObject(std::string const &aObjectName)
+{
+  std::vector<std::string>::iterator end = mIgnoreList.end();
+  for(std::vector<std::string>::iterator it = mIgnoreList.begin(); it != end; ++it)
+  {
+    if(aObjectName == *it)
+      return true;
+  }
+  return false;
 }
 
 Vector3 PhysicsObject::GetVelocity() const
