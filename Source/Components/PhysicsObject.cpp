@@ -89,7 +89,8 @@ void PhysicsObject::Deserialize(Parser &aParser)
   std::string gravity = aParser.Find("PhysicsObject", "Gravity");
   std::string isstatic = aParser.Find("PhysicsObject", "Static");
   SetMass(Common::StringToInt(aParser.Find("PhysicsObject", "Mass")));
-  
+  mDamping = Common::StringToFloat(aParser.Find("PhysicsObject", "Damping"));
+
   //TODO serialize ignore list for collisions
 
   // default true
