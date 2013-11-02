@@ -130,11 +130,10 @@ std::vector<PhysicsObject*> PhysicsWorld::SortOnAxis()
 
 void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
 {
-	for(PhysicsIT it = aSortedObjects.begin();
-		it != aSortedObjects.end(); ++it)
+  PhysicsIT end = aSortedObjects.end();
+	for(PhysicsIT it = aSortedObjects.begin(); it != end; ++it)
 	{
-		for(PhysicsIT it2 = it;
-			it2 != aSortedObjects.end(); ++it2)
+		for(PhysicsIT it2 = it; it2 != end; ++it2)
 		{
 		  std::string itName = (*it)->GetOwner()->GetName();
 		  std::string it2Name = (*it2)->GetOwner()->GetName();

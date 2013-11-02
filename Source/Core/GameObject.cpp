@@ -37,6 +37,7 @@ GameObject::~GameObject()
   {
     delete *it;
   }
+  mComponents.clear();
 }
 
 std::string GameObject::GetName()
@@ -67,12 +68,14 @@ void GameObject::AddComponent(Component *aComponent)
 
 void GameObject::RemoveComponent(Component *aComponent)
 {
-  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
+  ComponentIT end = mComponents.end();
+  for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
     if(aComponent == *it)
     {
       delete *it;
       mComponents.erase(it);
+      end = mComponents.end();
       break;
     }
   }
@@ -80,7 +83,8 @@ void GameObject::RemoveComponent(Component *aComponent)
 
 Component *GameObject::GetComponent(std::string const &aName)
 {
-  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
+  ComponentIT end = mComponents.end();
+  for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
     if((*it)->GetDefinedName() == aName)
       return *it;
@@ -90,7 +94,8 @@ Component *GameObject::GetComponent(std::string const &aName)
 
 bool GameObject::HasComponent(std::string const &aName)
 {
-  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
+  ComponentIT end = mComponents.end();
+  for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
     if((*it)->GetDefinedName() == aName)
       return true;
@@ -100,7 +105,8 @@ bool GameObject::HasComponent(std::string const &aName)
 
 void GameObject::Update()
 {
-  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
+  ComponentIT end = mComponents.end();
+  for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
     (*it)->Update();
   }
@@ -108,7 +114,8 @@ void GameObject::Update()
 
 void GameObject::ReceiveMessage(Message const &aMessage)
 {
-  for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
+  ComponentIT end = mComponents.end();
+  for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
     (*it)->ReceiveMessage(aMessage);
   }

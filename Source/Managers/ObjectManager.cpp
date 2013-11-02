@@ -23,13 +23,15 @@ ObjectManager::~ObjectManager()
 
 void ObjectManager::Update()
 {
-	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  ObjectIT end = mObjects.end();
+	for(ObjectIT it = mObjects.begin(); it != end; ++it)
 		(*it)->Update();
 }
 
 void ObjectManager::SendMessage(Message const &aMsg)
 {
-	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  ObjectIT end = mObjects.end();
+	for(ObjectIT it = mObjects.begin(); it != end; ++it)
   {
 		(*it)->ReceiveMessage(aMsg);
   }

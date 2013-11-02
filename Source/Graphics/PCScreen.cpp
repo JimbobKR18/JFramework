@@ -30,7 +30,8 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
-  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != aObjects.end();)
+  std::vector<Surface*>::const_iterator end = aObjects.end();
+  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
     // Get the texture id of the surface
     GLuint texture = (*it)->GetOwner()->GET<PCSurface>()->GetTextureID();
@@ -40,7 +41,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glBegin(GL_QUADS);
     
     // while other texture share the same texture id, draw them
-    while(it != aObjects.end() &&
+    while(it != end &&
           (*it)->GetOwner()->GET<PCSurface>()->GetTextureID() == texture)
     {
       GameObject *owner = (*it)->GetOwner();
