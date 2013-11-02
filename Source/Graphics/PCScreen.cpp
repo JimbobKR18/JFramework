@@ -66,9 +66,9 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
         zPosition -= (cameraPosition.z - cameraSize.z / 2.0f);
       }
       
-      // TODO FIX THIS
-      if(xPosition - size.x > GetWidth() || yPosition - size.y > GetHeight() ||
-         xPosition + size.x < GetWidth()/2 || yPosition + size.y < GetHeight()/2)
+      bool draw = xPosition - size.x < GetWidth() && yPosition - size.y < GetHeight() &&
+                  xPosition + size.x > 0 && yPosition + size.y > 0;
+      if(!draw)
       {
         continue;
       }
