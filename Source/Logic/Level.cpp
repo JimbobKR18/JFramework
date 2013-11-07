@@ -135,7 +135,8 @@ void Level::SerializeLUA()
 {
   SLB::Class<Level>("Level").constructor()
           .set("Load", &Level::Load)
-          .set("Unload", &Level::Unload);
+          .set("Unload", &Level::Unload)
+          .set("GetName", &Level::GetName);
 }
 
 void Level::ParseFile()

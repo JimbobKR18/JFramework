@@ -28,6 +28,7 @@ public:
   virtual ~PlayerController();
   
   void SetTarget(GameObject *aTarget);
+  bool IsPaused() const;
   
   // Virtuals derived from Controller
   virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation);
