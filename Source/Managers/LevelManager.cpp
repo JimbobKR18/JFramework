@@ -59,6 +59,7 @@ void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
         (*it)->Reset();
       }
 			(*it)->Load();
+			mActiveLevel = *it;
 			GetOwningApp()->GET<InputManager>()->AcceptInputs();
 			return;
 		}
@@ -79,6 +80,8 @@ void LevelManager::SetActiveLevel(Level *aLevel)
 
 void LevelManager::Update()
 {
+  if(mActiveLevel)
+    mActiveLevel->Update();
   for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
   {
     LevelChangeMessage *msg = (LevelChangeMessage*)*it;

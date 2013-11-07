@@ -38,6 +38,8 @@ public:
 	void          Load();
 	void          Unload();
 
+	virtual void  Update();
+
 	static void   SerializeLUA();
 private:
 	void          ParseFile();

@@ -131,6 +131,10 @@ void Level::Unload()
   //mOwner->SetActiveLevel(NULL);
 }
 
+void Level::Update()
+{
+}
+
 void Level::SerializeLUA()
 {
   SLB::Class<Level>("Level").constructor()
