@@ -18,7 +18,8 @@ Level::Level()
 }
 
 Level::Level(LevelManager *aManager, std::string const &aFileName) :
-             mFileName(aFileName), mOwner(aManager), mActive(false)
+             mName(""), mFileName(aFileName), mObjects(),
+             mMenus(), mOwner(aManager), mActive(false)
 {
 	for(int i = static_cast<int>(aFileName.size()) - 1;
       aFileName[i] != '/' && i >= 0; --i)
@@ -105,8 +106,8 @@ void Level::Load()
       mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
     if((*it)->GET<Surface>())
       mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
-    /*if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());*/
+    if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
 	}
 	mActive = true;
   
@@ -123,16 +124,12 @@ void Level::Unload()
       mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
     if((*it)->GET<Surface>())
       mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
-    /*if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());*/
+    if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
 	}
 	mActive = false;
   
   //mOwner->SetActiveLevel(NULL);
-}
-
-void Level::Update()
-{
 }
 
 void Level::SerializeLUA()
@@ -153,7 +150,7 @@ void Level::ParseFile()
 		std::string param;
 		parser.GetNextString(param);
 
-		if(param.length() == 0)
+		if(param.length() == 0 || param == "}")
 			break;
 
 		if(param == "Transform")

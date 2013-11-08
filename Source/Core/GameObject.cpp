@@ -18,15 +18,16 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(ObjectManager *aManager, std::string const &aFilename) :
-                       mFileName(aFilename), mManager(aManager), mName("")
+                       mFileName(aFilename), mName(""), mComponents(), mManager(aManager)
 {
 }
 
 // Sounds like a bad idea right now...
 GameObject::GameObject(GameObject const &aGameObject) :
                               mFileName(aGameObject.mFileName),
+													    mName(aGameObject.mName),
 													    mComponents(aGameObject.mComponents),
-													    mName(aGameObject.mName)
+													    mManager(NULL)
 {
   assert(!"Copying GameObjects is not supported!");
 }

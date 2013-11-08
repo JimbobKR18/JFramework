@@ -22,7 +22,7 @@ private:
 public:
 	Level();
 	Level(LevelManager *aManager, std::string const &aFileName);
-	~Level();
+	virtual ~Level();
 
 	std::string   GetName() const;
   LevelManager* GetManager() const;
@@ -38,7 +38,7 @@ public:
 	void          Load();
 	void          Unload();
 
-	virtual void  Update();
+	virtual void  Update() {};
 
 	static void   SerializeLUA();
 private:

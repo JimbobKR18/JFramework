@@ -23,6 +23,7 @@ public:
   
   void                AddController(Controller *aController);
   void                RemoveController(Controller *aController);
+  void                DeleteController(Controller *aController);
   void                ClearControllers();
   
   // Derived from Manager

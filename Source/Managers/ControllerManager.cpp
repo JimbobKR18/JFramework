@@ -38,10 +38,14 @@ void ControllerManager::RemoveController(Controller *aController)
     if(*it == aController)
     {
       mControllers.erase(it);
-      delete *it;
       break;
     }
   }
+}
+void ControllerManager::DeleteController(Controller *aController)
+{
+  RemoveController(aController);
+  delete aController;
 }
 void ControllerManager::ClearControllers()
 {

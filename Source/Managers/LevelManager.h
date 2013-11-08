@@ -26,7 +26,6 @@ public:
   virtual void        ProcessDelayedMessage(Message *aMessage);
 	static std::string  GetName() {return "LevelManager";}
 	static void         SerializeLUA();
-private:
 	void                AddLevel(Level *aLevel);
 	void                RemoveLevel(Level *aLevel);
 public:

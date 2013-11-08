@@ -59,7 +59,6 @@ void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
         (*it)->Reset();
       }
 			(*it)->Load();
-			mActiveLevel = *it;
 			GetOwningApp()->GET<InputManager>()->AcceptInputs();
 			return;
 		}
