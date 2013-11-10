@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "GameObject.h"
+#include "Parser.h"
 
 class LevelManager;
 class Menu;
@@ -39,6 +40,7 @@ public:
 	void          Unload();
 
 	virtual void  Update() {};
+	virtual void  ParseAdditionalData(Parser *aParser) {};
 
 	static void   SerializeLUA();
 private:

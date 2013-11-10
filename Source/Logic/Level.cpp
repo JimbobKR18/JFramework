@@ -88,7 +88,11 @@ void Level::DeleteObject(GameObject *aObject)
 void Level::DeleteObjects()
 {
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
-    DeleteObject(*it);
+  {
+    ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+    manager->DeleteObject(*it);
+  }
+  mObjects.clear();
 }
 
 void Level::Reset()
@@ -129,7 +133,7 @@ void Level::Unload()
 	}
 	mActive = false;
   
-  //mOwner->SetActiveLevel(NULL);
+  mOwner->SetActiveLevel(NULL);
 }
 
 void Level::SerializeLUA()
@@ -225,12 +229,16 @@ void Level::ParseFile()
       TileMapGenerator tilemap(width, height, tileSize,
                                file, frames, collision, this);
     }
-		else
+		else if(param[param.size() - 4] == '.')
 		{
       ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
 		  object = new GameObject(manager, param);
 		  manager->ParseObject(object);
 		  mObjects.push_back(object);
+		}
+		else
+		{
+		  ParseAdditionalData(&parser);
 		}
 	}
 }
