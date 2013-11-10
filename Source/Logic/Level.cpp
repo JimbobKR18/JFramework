@@ -131,6 +131,7 @@ void Level::Unload()
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
 	}
+	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);
 	mActive = false;
   
   mOwner->SetActiveLevel(NULL);
