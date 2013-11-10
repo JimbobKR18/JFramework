@@ -73,12 +73,12 @@ void Level::AddObject(GameObject *aObject)
 
 void Level::DeleteObject(GameObject *aObject)
 {
+  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     if(aObject == *it)
     {
       mObjects.erase(it);
-      ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
       manager->DeleteObject(aObject);
       break;
     }
@@ -87,9 +87,9 @@ void Level::DeleteObject(GameObject *aObject)
 
 void Level::DeleteObjects()
 {
+  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
-    ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
     manager->DeleteObject(*it);
   }
   mObjects.clear();
