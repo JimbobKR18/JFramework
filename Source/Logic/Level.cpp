@@ -239,7 +239,7 @@ void Level::ParseFile()
 		}
 		else
 		{
-		  ParseAdditionalData(&parser);
+		  ParseAdditionalData(&parser, param);
 		}
 	}
 }

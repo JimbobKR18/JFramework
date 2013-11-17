@@ -40,7 +40,7 @@ public:
 	void          Unload();
 
 	virtual void  Update() {};
-	virtual void  ParseAdditionalData(Parser *aParser) {};
+	virtual void  ParseAdditionalData(Parser *aParser, std::string const &aFirstParam) {};
 
 	static void   SerializeLUA();
 private:
