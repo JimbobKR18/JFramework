@@ -53,17 +53,26 @@ private:
   T       mFinish;
   T       mRate;
   float   mTime;
+  float   mCurrentTime;
 
 public:
-  Interpolation(T* aStart, T const& aFinish, float aTime) : mStart(aStart), mFinish(aFinish), mTime(aTime)
+  Interpolation(T* aStart, T const& aFinish, float aTime) : mStart(aStart), mFinish(aFinish), mTime(aTime), mCurrentTime(0)
   {
     mRate = (mFinish - (*mStart)) / mTime;
   }
   virtual ~Interpolation() {}
 
-  void Update()
+  void Update(float dt)
   {
-    (*mStart) += mRate;
+    mCurrentTime += dt;
+
+    if(mCurrentTime < mTime)
+      (*mStart) += mRate * dt;
+  }
+
+  bool IsComplete()
+  {
+    return mCurrentTime >= mTime;
   }
 };
 
