@@ -10,7 +10,7 @@ Transform::~Transform()
 {
 }
 
-Vector3 Transform::GetPosition() const
+Vector3& Transform::GetPosition()
 {
   return mPosition;
 }
@@ -19,7 +19,7 @@ void Transform::SetPosition(Vector3 const &aPos)
   mPosition = aPos;
 }
 
-Vector3 Transform::GetScale() const
+Vector3& Transform::GetScale()
 {
   return mScale;
 }
@@ -28,7 +28,7 @@ void Transform::SetScale(Vector3 const &aScale)
   mScale = aScale;
 }
 
-Vector3 Transform::GetSize() const
+Vector3& Transform::GetSize()
 {
   return mSize;
 }

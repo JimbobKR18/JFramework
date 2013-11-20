@@ -15,13 +15,13 @@ class Transform : public Component
     Transform();
     virtual ~Transform();
 
-    Vector3             GetPosition() const;
+    Vector3&            GetPosition();
     void                SetPosition(Vector3 const &aPos);
 
-    Vector3             GetScale() const;
+    Vector3&            GetScale();
     void                SetScale(Vector3 const &aScale);
 
-    Vector3             GetSize() const;
+    Vector3&            GetSize();
     void                SetSize(Vector3 const &aSize);
 
     void                Update() {}

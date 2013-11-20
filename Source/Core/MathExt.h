@@ -45,4 +45,26 @@ struct Vector3
   static void SerializeLUA();
 };
 
+template<typename T>
+class Interpolation
+{
+private:
+  T*      mStart;
+  T       mFinish;
+  T       mRate;
+  float   mTime;
+
+public:
+  Interpolation(T* aStart, T const& aFinish, float aTime) : mStart(aStart), mFinish(aFinish), mTime(aTime)
+  {
+    mRate = (mFinish - (*mStart)) / mTime;
+  }
+  virtual ~Interpolation() {}
+
+  void Update()
+  {
+    (*mStart) += mRate;
+  }
+};
+
 #endif
