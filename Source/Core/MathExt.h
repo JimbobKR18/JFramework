@@ -49,16 +49,17 @@ template<typename T>
 class Interpolation
 {
 private:
-  T*      mStart;
+  T*      mCurrent;
+  T       mStart;
   T       mFinish;
   T       mRate;
   float   mTime;
   float   mCurrentTime;
 
 public:
-  Interpolation(T* aStart, T const& aFinish, float aTime) : mStart(aStart), mFinish(aFinish), mTime(aTime), mCurrentTime(0)
+  Interpolation(T* aStart, T const& aFinish, float aTime) : mCurrent(aStart), mStart(*aStart), mFinish(aFinish), mTime(aTime), mCurrentTime(0)
   {
-    mRate = (mFinish - (*mStart)) / mTime;
+    mRate = mFinish - mStart;
   }
   virtual ~Interpolation() {}
 
@@ -67,7 +68,10 @@ public:
     mCurrentTime += dt;
 
     if(mCurrentTime < mTime)
-      (*mStart) += mRate * dt;
+    {
+      float percentage = mCurrentTime / mTime;
+      (*mCurrent) = mStart + (mRate * percentage);
+    }
   }
 
   bool IsComplete()
