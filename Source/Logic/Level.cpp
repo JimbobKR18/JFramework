@@ -7,6 +7,7 @@
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
 #include "ControllerManager.h"
+#include "PlayerController.h"
 #include "TileMapGenerator.h"
 #include "Menu.h"
 #include "Common.h"
@@ -199,6 +200,14 @@ void Level::ParseFile()
 		      mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
 		    }
 		  }
+		}
+		else if(param == "PlayerController")
+		{
+		  PlayerController *controller = new PlayerController();
+		  controller->SetTarget(object);
+
+		  mOwner->GetOwningApp()->GET<ControllerManager>()->AddController(controller);
+		  object->AddComponent(controller);
 		}
     else if(param == "TileMapGenerator")
     {
