@@ -8,6 +8,7 @@
 
 #include "Common.h"
 #include "ControllerManager.h"
+#include "ControllerChangeMessage.h"
 
 ControllerManager::ControllerManager(GameApp* aApp) : Manager(aApp, "ControllerManager")
 {
@@ -58,7 +59,15 @@ void ControllerManager::ClearControllers()
 
 void ControllerManager::Update()
 {
-  
+  for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  {
+    ControllerChangeMessage *msg = (ControllerChangeMessage*)*it;
+    msg->mCurrentOwner->RemoveComponent(msg->mController, false);
+    if(msg->mNewOwner)
+      msg->mNewOwner->AddComponent(msg->mController);
+    delete *it;
+  }
+  mDelayedMessages.clear();
 }
 void ControllerManager::SendMessage(Message const &aMessage)
 {
@@ -66,4 +75,5 @@ void ControllerManager::SendMessage(Message const &aMessage)
 }
 void ControllerManager::ProcessDelayedMessage(Message *aMessage)
 {
+  mDelayedMessages.push_back(aMessage);
 }

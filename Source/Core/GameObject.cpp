@@ -67,14 +67,15 @@ void GameObject::AddComponent(Component *aComponent)
   mComponents.push_back(aComponent);
 }
 
-void GameObject::RemoveComponent(Component *aComponent)
+void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
 {
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
     if(aComponent == *it)
     {
-      delete *it;
+      if(aDelete)
+        delete *it;
       mComponents.erase(it);
       end = mComponents.end();
       break;
