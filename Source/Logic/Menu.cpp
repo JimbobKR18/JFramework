@@ -51,6 +51,7 @@ void Menu::DeleteObjects()
     DeleteObject(*it);
     it = mMenuElements.begin();
   }
+  mMenuElements.clear();
 }
 
 void Menu::ParseFile()

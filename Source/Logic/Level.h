@@ -40,6 +40,7 @@ public:
 	void          Load();
 	void          Unload();
 
+	virtual void  PreReset() {};
 	virtual void  Update() {};
 	virtual void  ParseAdditionalData(Parser *aParser, GameObject *aObject, std::string const &aFirstParam) {};
 

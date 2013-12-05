@@ -99,6 +99,7 @@ void Level::DeleteObjects()
 
 void Level::Reset()
 {
+  PreReset();
   DeleteObjects();
   ParseFile();
 }
