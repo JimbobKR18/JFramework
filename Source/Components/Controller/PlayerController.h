@@ -29,6 +29,7 @@ public:
   
   void SetTarget(GameObject *aTarget);
   bool IsPaused() const;
+  void ClearMenu();
   
   // Virtuals derived from Controller
   virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation);

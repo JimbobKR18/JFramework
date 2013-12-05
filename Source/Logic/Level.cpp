@@ -20,7 +20,8 @@ Level::Level()
 
 Level::Level(LevelManager *aManager, std::string const &aFileName) :
              mName(""), mFileName(aFileName), mObjects(),
-             mMenus(), mOwner(aManager), mActive(false)
+             mMenus(), mOwner(aManager), mFocusTarget(NULL),
+             mActive(false)
 {
 	for(int i = static_cast<int>(aFileName.size()) - 1;
       aFileName[i] != '/' && i >= 0; --i)
@@ -114,6 +115,7 @@ void Level::Load()
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
 	}
+	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
 	mActive = true;
   
   mOwner->SetActiveLevel(this);
@@ -198,6 +200,7 @@ void Level::ParseFile()
 		    if(value == "true")
 		    {
 		      mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
+		      mFocusTarget = object;
 		    }
 		  }
 		}

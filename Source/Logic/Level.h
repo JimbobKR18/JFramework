@@ -16,6 +16,7 @@ private:
 	std::vector<GameObject*>  mObjects;
 	std::vector<Menu*>        mMenus;
 	LevelManager*             mOwner;
+	GameObject*               mFocusTarget;
 	bool                      mActive;
   
   typedef std::vector<GameObject*>::iterator ObjectIT;

@@ -15,8 +15,14 @@ LevelManager::~LevelManager()
 
 Level *LevelManager::CreateLevel(std::string const &aFilename)
 {
-	Level *ret = new Level(this, aFilename);
-	AddLevel(ret);
+  Level *ret = GetLevel(aFilename);
+
+  if(!ret)
+  {
+    ret = new Level(this, aFilename);
+	  AddLevel(ret);
+  }
+
 	return ret;
 }
 
