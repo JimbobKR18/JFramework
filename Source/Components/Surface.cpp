@@ -75,6 +75,12 @@ void Surface::Deserialize(Parser &aParser)
     if(isAnimated == "true")
       animated = true;
   }
+  if(aParser.Find("Surface", "NoRender") != "BadString")
+  {
+    std::string norender = aParser.Find("Surface", "NoRender");
+    if(norender == "true")
+      mManager->RemoveSurface(this);
+  }
   
   SetTextureCoordinateData(numAnimations, numFrames);
   SetAnimated(animated);
