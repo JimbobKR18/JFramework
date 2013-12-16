@@ -128,6 +128,7 @@ void PCScreen::ChangeSize(int aW, int aH)
   glMatrixMode(GL_MODELVIEW);
 
   glEnable(GL_TEXTURE_2D);
+  glEnable(GL_BLEND);
 
   glLoadIdentity();
 }

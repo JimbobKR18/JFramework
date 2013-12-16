@@ -14,9 +14,11 @@
   #include <GL/gl.h>
   #include <GL/glext.h>
   #include <SDL/SDL.h>
+  #include <SDL/SDL_ttf.h>
 #endif
 
 #include "Surface.h"
+#include "MathExt.h"
 
 class PCSurface : public Surface
 {
@@ -25,6 +27,7 @@ private:
 	SDL_Surface*  mSurface;
 	GLenum        mTextureFormat;
 	GLint         mNumberOfColors;
+	TTF_Font*     mFont;
 
 public:
 	PCSurface();
@@ -32,6 +35,7 @@ public:
 	virtual ~PCSurface();
 
 	void                LoadImage(std::string const &aName);
+	void                LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize);
   // Batching
   unsigned            GetIndexValue();
 

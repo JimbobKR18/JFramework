@@ -7,6 +7,7 @@
 
 #include "Menu.h"
 #include "MenuImage.h"
+#include "MenuText.h"
 
 Menu::Menu(Level *aLevel, std::string const &aFilename) : mOwner(aLevel), mFilename(aFilename)
 {
@@ -71,8 +72,8 @@ void Menu::ParseFile()
     
     if(type == "Image")
       element = new MenuImage(param);
-    /*else if(type == "Text")
-      element = new MenuText(param);*/
+    else if(type == "Text")
+      element = new MenuText(param);
     else
       assert(!"Invalid MenuElement passed into menu");
     

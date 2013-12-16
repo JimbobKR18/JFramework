@@ -6,7 +6,6 @@
  */
 
 #include "MenuElement.h"
-#include "LUATypes.h"
 
 MenuElement::MenuElement(std::string const &aFilename)
 {
@@ -35,8 +34,6 @@ void MenuElement::SetLayer(int const aLayer)
 
 void MenuElement::ParseFile(Parser &aParser)
 {
-  // Borrowing the static game app from our LUA stuff
-  GameApp* app = LUABind::StaticGameApp::GetApp();
   if(aParser.Find("Transform"))
   {
     // Get Position, Scale, and Size
@@ -44,17 +41,5 @@ void MenuElement::ParseFile(Parser &aParser)
     transform->Deserialize(aParser);
     mObject->AddComponent(transform);
   }
-  if(aParser.Find("Surface"))
-  {
-#if !defined(ANDROID) && !defined(IOS)
-    PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateSurface();
-    std::string imageName = aParser.Find("Surface", "TextureName");
-    surface->LoadImage(imageName);
-#else
-    Surface *surface = new Surface();
-#endif
-    surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
-    surface->Deserialize(aParser);
-    mObject->AddComponent(surface);
-  }
+  ParseAdditionalData(aParser);
 }

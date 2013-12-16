@@ -13,11 +13,13 @@
 PCSurface::PCSurface() : Surface()
 {
 }
-PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager)
+PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(NULL), mFont(NULL)
 {
 }
 PCSurface::~PCSurface()
 {
+  if(mFont)
+    TTF_CloseFont(mFont);
 }
 
 void PCSurface::LoadImage(std::string const &aName)
@@ -87,6 +89,60 @@ void PCSurface::LoadImage(std::string const &aName)
 	{
 		printf("warning: file not found or incompatible format, check this out\n");
 	}
+}
+
+void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize)
+{
+  // Endianness is important here
+  Uint32 rmask, gmask, bmask, amask;
+  #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+      rmask = 0xff000000;
+      gmask = 0x00ff0000;
+      bmask = 0x0000ff00;
+      amask = 0x000000ff;
+  #else
+      rmask = 0x000000ff;
+      gmask = 0x0000ff00;
+      bmask = 0x00ff0000;
+      amask = 0xff000000;
+  #endif
+
+  if(GetManager()->GetTextureID(aText) != (unsigned)-1)
+  {
+    mTextureID = GetManager()->GetTextureID(aText);
+  }
+  else
+  {
+    if(!TTF_WasInit())
+      TTF_Init();
+    mFont = TTF_OpenFont(Common::RelativePath("Fonts", aFont).c_str(), aSize);
+    if(!mFont)
+    {
+      mFont = NULL;
+      printf("warning: file not found or incompatible format, check this out\n");
+      printf("%s", TTF_GetError());
+      return;
+    }
+
+    // Create text texture
+    SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
+    SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
+    SDL_Surface *msg = TTF_RenderText_Shaded(mFont, aText.c_str(), fgColor, bgColor);
+    SDL_SetAlpha(msg, 0, 0);
+    assert(msg);
+
+    SDL_Surface *tmp = SDL_CreateRGBSurface(0, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
+    SDL_BlitSurface(msg, NULL, tmp, NULL);
+
+    glGenTextures(1, &mTextureID);
+    glBindTexture(GL_TEXTURE_2D, mTextureID);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, msg->w, msg->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, msg->pixels);
+
+    GetManager()->AddTexturePairing(aText, mTextureID);
+  }
 }
 
 unsigned PCSurface::GetIndexValue()

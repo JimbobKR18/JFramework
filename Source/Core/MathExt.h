@@ -45,6 +45,48 @@ struct Vector3
   static void SerializeLUA();
 };
 
+struct Vector4
+{
+  float x, y, z, w;
+
+  Vector4();
+  Vector4(float aX, float aY, float aZ, float aW);
+
+  float   length() const;
+  float   operator[](int aValue) const;
+  Vector4 normalize() const;
+
+  // Equivalence
+  void    operator=(Vector4 const &rhs);
+  bool    operator==(Vector4 const &rhs) const;
+
+  // Scaling
+  Vector4 operator*(float const aMultiplier) const;
+  Vector4 operator/(float const aMultiplier) const;
+
+  // Operator involving other vectors
+  float   operator*(Vector4 const &rhs) const;
+  Vector3 operator^(Vector4 const &rhs) const;
+  Vector4 operator+(Vector4 const &rhs) const;
+  Vector4 operator-(Vector4 const &rhs) const;
+  Vector4 operator%(Vector4 const &rhs) const;
+  Vector4 operator-() const;
+
+  float   Dot(Vector4 const &rhs) const;
+  Vector3 Cross(Vector4 const &rhs) const;
+  Vector4 Add(Vector4 const &rhs) const;
+  Vector4 Subtract(Vector4 const &rhs) const;
+  Vector4 Project(Vector4 const &rhs) const;
+  Vector4 Invert() const;
+
+  void    operator+=(Vector4 const &rhs);
+  void    operator-=(Vector4 const &rhs);
+  void    operator*=(float const aMultiplier);
+  void    operator/=(float const aMultiplier);
+
+  static void SerializeLUA();
+};
+
 template<typename T>
 class Interpolation
 {

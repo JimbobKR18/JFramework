@@ -12,9 +12,21 @@
 
 class MenuText : public MenuElement
 {
+private:
+  std::string   mText;
+  std::string   mFont;
+  int           mSize;
+  Vector4       mForegroundColor;
+  Vector4       mBackgroundColor;
+
 public:
-  MenuText();
+  MenuText(std::string const &aFilename);
   virtual ~MenuText();
+
+  virtual void Draw();
+  virtual void SendMessage(Message const &aMessage);
+  virtual void ReceiveMessage(Message const &aMessage);
+  virtual void ParseAdditionalData(Parser &aParser);
 };
 
 #endif /* MENUTEXT_H_ */

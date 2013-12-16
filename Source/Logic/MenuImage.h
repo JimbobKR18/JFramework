@@ -20,6 +20,7 @@ public:
   virtual void Draw();
   virtual void SendMessage(Message const &aMessage);
   virtual void ReceiveMessage(Message const &aMessage);
+  virtual void ParseAdditionalData(Parser &aParser);
 };
 
 #endif /* defined(__JFramework__MenuImage__) */

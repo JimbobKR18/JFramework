@@ -19,7 +19,7 @@
 
 class MenuElement
 {
-private:
+protected:
   GameObject* mObject;
   int         mLayer;
   
@@ -35,6 +35,7 @@ public:
   virtual void  Draw() = 0;
   virtual void  SendMessage(Message const &aMessage) = 0;
   virtual void  ReceiveMessage(Message const &aMessage) = 0;
+  virtual void  ParseAdditionalData(Parser &aParser) = 0;
   
 protected:
   // For now: a helper function
