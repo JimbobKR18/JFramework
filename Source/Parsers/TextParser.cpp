@@ -102,7 +102,38 @@ void TextParser::Parse()
     // We found our value
     if(type == "=")
     {
-      mInput >> node->mValue;
+      std::string value;
+      mInput >> value;
+      if(value.find("Literal") == std::string::npos)
+        node->mValue = value;
+      else
+      {
+        // Getting the full string
+        unsigned pos = value.find("Literal") + 8;
+        char next;
+        bool earlyout = false;
+        // Litera(blah is one whole word, extract
+        while(pos < value.length())
+        {
+          char next = value[pos];
+          if(next == '\n')
+          {
+            earlyout = true;
+            break;
+          }
+          if(next != ')' && next != '(')
+            node->mValue.push_back(next);
+          ++pos;
+        }
+        // Didn't hit newline, get rest of sentence
+        while(!earlyout && mInput.get(next))
+        {
+          if(next == '\n')
+            break;
+          if(next != ')' && next != '(')
+            node->mValue.push_back(next);
+        }
+      }
       node->mParent = mCurNode;
       mCurNode->mChildren.push_back(node);
     }
