@@ -7,6 +7,7 @@
 
 #include "MenuText.h"
 #include "LUATypes.h"
+#include "Transform.h"
 
 // TODO platform specifics
 
