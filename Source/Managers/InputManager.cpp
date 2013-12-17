@@ -32,6 +32,7 @@ void InputManager::AddInput(std::string const &aInput, Vector3 const &aLocation)
   }
   
   mInputs.insert(InputInfo(aInput, aLocation));
+  GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Down"), aLocation));
 }
 void InputManager::RemoveInput(std::string const &aInput)
 {
@@ -43,6 +44,7 @@ void InputManager::RemoveInput(std::string const &aInput)
       break;
     }
   }
+  GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Up"), Vector3()));
 }
 void InputManager::ClearInputs()
 {
