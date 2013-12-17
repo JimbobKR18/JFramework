@@ -126,12 +126,12 @@ void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vec
 
     // Create text texture
     SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
-    SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
-    SDL_Surface *msg = TTF_RenderText_Shaded(mFont, aText.c_str(), fgColor, bgColor);
+    //SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
+    SDL_Surface *msg = TTF_RenderText_Blended(mFont, aText.c_str(), fgColor);
     SDL_SetAlpha(msg, 0, 0);
     assert(msg);
 
-    SDL_Surface *tmp = SDL_CreateRGBSurface(0, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
+    SDL_Surface *tmp = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
     SDL_BlitSurface(msg, NULL, tmp, NULL);
 
     glGenTextures(1, &mTextureID);
@@ -139,9 +139,9 @@ void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vec
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, msg->w, msg->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, msg->pixels);
+
+    SDL_FreeSurface(tmp);
 
     GetManager()->AddTexturePairing(aText, mTextureID);
   }
