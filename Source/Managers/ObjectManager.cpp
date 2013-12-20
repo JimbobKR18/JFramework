@@ -7,6 +7,7 @@
 #include "ControllerManager.h"
 #include "PlayerController.h"
 #include "LuaIncludes.h"
+#include "ObjectDeleteMessage.h"
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCSurface.h"
@@ -26,6 +27,14 @@ void ObjectManager::Update()
   ObjectIT end = mObjects.end();
 	for(ObjectIT it = mObjects.begin(); it != end; ++it)
 		(*it)->Update();
+
+	for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  {
+    ObjectDeleteMessage *msg = (ObjectDeleteMessage*)*it;
+    DeleteObject(msg->mObject);
+    delete *it;
+  }
+	mDelayedMessages.clear();
 }
 
 void ObjectManager::SendMessage(Message const &aMsg)
@@ -39,6 +48,7 @@ void ObjectManager::SendMessage(Message const &aMsg)
 
 void ObjectManager::ProcessDelayedMessage(Message *aMessage)
 {
+  mDelayedMessages.push_back(aMessage);
 }
 
 GameObject *ObjectManager::CreateObject(std::string const &aFilename)

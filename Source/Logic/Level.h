@@ -34,6 +34,7 @@ public:
 
   void          AddObject(GameObject *aObject);
   void          DeleteObject(GameObject *aObject);
+  void          DeleteObjectDelayed(GameObject *aObject);
   void          DeleteObjects();
   void          Reset();
 

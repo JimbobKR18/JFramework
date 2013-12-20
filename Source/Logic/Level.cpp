@@ -12,6 +12,7 @@
 #include "Menu.h"
 #include "Common.h"
 #include "LuaIncludes.h"
+#include "ObjectDeleteMessage.h"
 
 Level::Level()
 {
@@ -82,6 +83,21 @@ void Level::DeleteObject(GameObject *aObject)
     {
       mObjects.erase(it);
       manager->DeleteObject(aObject);
+      break;
+    }
+  }
+}
+
+void Level::DeleteObjectDelayed(GameObject *aObject)
+{
+  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
+    if(aObject == *it)
+    {
+      mObjects.erase(it);
+      ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
+      manager->ProcessDelayedMessage(msg);
       break;
     }
   }
