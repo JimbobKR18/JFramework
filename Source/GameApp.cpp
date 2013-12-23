@@ -119,5 +119,6 @@ void GameApp::SerializeLUA()
   SLB::Class<GameApp>("GameApp")
           .set("GetManager", &GameApp::GetManager)
           .set("GetLevelManager", &GameApp::GET<LevelManager>)
-          .set("GetObjectManager", &GameApp::GET<ObjectManager>);
+          .set("GetObjectManager", &GameApp::GET<ObjectManager>)
+          .set("GetSoundManager", &GameApp::GET<SoundManager>);
 }
