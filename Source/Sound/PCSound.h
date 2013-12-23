@@ -11,18 +11,21 @@
 
 #include "Sound.h"
 #include <SDL/SDL.h>
-#include <SDL/SDL_audio.h>
+#include <SDL/SDL_mixer.h>
 
 class PCSound : public Sound
 {
 private:
+  Mix_Chunk *mChunk;
 public:
   PCSound();
   PCSound(std::string const &aFilename);
   virtual ~PCSound();
   
   virtual void Play();
-  virtual void Mix(void *aUnused, unsigned char *aStream, unsigned int aLength);
+  virtual void Play(int aTime);
+  virtual void FadeIn(int aTime);
+  virtual void FadeIn(int aFadeTime, int aPlayTime);
 };
 
 #endif /* defined(__JFramework__PCSound__) */

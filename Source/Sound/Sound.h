@@ -23,7 +23,9 @@ struct Sound
   virtual ~Sound();
   
   virtual void Play() = 0;
-  virtual void Mix(void *aUnused, unsigned char *aStream, unsigned int aLength) = 0;
+  virtual void Play(int aTime) = 0;
+  virtual void FadeIn(int aTime) = 0;
+  virtual void FadeIn(int aFadeTime, int aPlayTime) = 0;
 };
 
 #endif /* defined(__JFramework__Sound__) */

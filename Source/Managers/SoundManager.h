@@ -26,17 +26,14 @@ public:
 
   Sound*              CreateSound(std::string const &aFilename);
   void                DeleteSound(Sound* aSound);
+  void                AddSound(Sound *aSound);
+  void                RemoveSound(Sound *aSound);
   void                PlaySound(std::string const &aFilename);
-  void                MixAudio(void *aUnused, unsigned char *aStream, unsigned int aLength);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "SoundManager";}
-
-private:
-  void                AddSound(Sound *aSound);
-  void                RemoveSound(Sound *aSound);
 };
 
 #endif
