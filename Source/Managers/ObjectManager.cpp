@@ -44,6 +44,10 @@ void ObjectManager::SendMessage(Message const &aMsg)
   {
 		(*it)->ReceiveMessage(aMsg);
   }
+	/*for(ObjectIT it = mStaticObjects.begin(); it != end; ++it)
+  {
+    (*it)->ReceiveMessage(aMsg);
+  }*/
 }
 
 void ObjectManager::ProcessDelayedMessage(Message *aMessage)
@@ -72,7 +76,7 @@ void ObjectManager::DeleteObject(GameObject *aObj)
 	delete aObj;
 }
 
-void ObjectManager::AddObject(GameObject *aObj)
+void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
 {
   // Check to see if object is in our list
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
@@ -82,8 +86,18 @@ void ObjectManager::AddObject(GameObject *aObj)
       return;
 		}
 	}
+  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  {
+    if(*it == aObj)
+    {
+      return;
+    }
+  }
   
-	mObjects.push_back(aObj);
+  if(!aStatic)
+    mObjects.push_back(aObj);
+  else
+    mStaticObjects.push_back(aObj);
 }
 
 void ObjectManager::RemoveObject(GameObject *aObj)
@@ -96,6 +110,14 @@ void ObjectManager::RemoveObject(GameObject *aObj)
 			break;
 		}
 	}
+	for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  {
+    if(*it == aObj)
+    {
+      mStaticObjects.erase(it);
+      break;
+    }
+  }
 }
 
 void ObjectManager::SerializeLUA()
@@ -161,5 +183,6 @@ void ObjectManager::ClearObjects()
 		delete *it;
 	}*/
 	mObjects.clear();
+	mStaticObjects.clear();
 }
 

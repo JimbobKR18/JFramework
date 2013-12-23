@@ -14,6 +14,7 @@ private:
 	std::string               mName;
 	std::string               mFileName;
 	std::vector<GameObject*>  mObjects;
+	std::vector<GameObject*>  mStaticObjects;
 	std::vector<Menu*>        mMenus;
 	LevelManager*             mOwner;
 	GameObject*               mFocusTarget;
@@ -33,6 +34,7 @@ public:
   void          RemoveMenu(Menu *aMenu);
 
   void          AddObject(GameObject *aObject);
+  void          AddStaticObject(GameObject *aObject);
   void          DeleteObject(GameObject *aObject);
   void          DeleteObjectDelayed(GameObject *aObject);
   void          DeleteObjects();

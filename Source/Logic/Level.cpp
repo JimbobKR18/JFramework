@@ -20,7 +20,7 @@ Level::Level()
 }
 
 Level::Level(LevelManager *aManager, std::string const &aFileName) :
-             mName(""), mFileName(aFileName), mObjects(),
+             mName(""), mFileName(aFileName), mObjects(), mStaticObjects(),
              mMenus(), mOwner(aManager), mFocusTarget(NULL),
              mActive(false)
 {
@@ -37,7 +37,10 @@ Level::Level(LevelManager *aManager, std::string const &aFileName) :
 Level::~Level()
 {
 	if(mActive)
+	{
 		mObjects.clear();
+		mStaticObjects.clear();
+	}
 	else
     DeleteObjects();
 }
@@ -74,6 +77,11 @@ void Level::AddObject(GameObject *aObject)
   mObjects.push_back(aObject);
 }
 
+void Level::AddStaticObject(GameObject *aObject)
+{
+  mStaticObjects.push_back(aObject);
+}
+
 void Level::DeleteObject(GameObject *aObject)
 {
   ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
@@ -82,6 +90,15 @@ void Level::DeleteObject(GameObject *aObject)
     if(aObject == *it)
     {
       mObjects.erase(it);
+      manager->DeleteObject(aObject);
+      break;
+    }
+  }
+  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  {
+    if(aObject == *it)
+    {
+      mStaticObjects.erase(it);
       manager->DeleteObject(aObject);
       break;
     }
@@ -101,12 +118,26 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
       break;
     }
   }
+  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  {
+    if(aObject == *it)
+    {
+      mStaticObjects.erase(it);
+      ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
+      manager->ProcessDelayedMessage(msg);
+      break;
+    }
+  }
 }
 
 void Level::DeleteObjects()
 {
   ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
+    manager->DeleteObject(*it);
+  }
+  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
   {
     manager->DeleteObject(*it);
   }
@@ -132,6 +163,16 @@ void Level::Load()
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
 	}
+	for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  {
+    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it, true);
+    if((*it)->GET<PhysicsObject>())
+      mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
+    if((*it)->GET<Surface>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
+    if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
+  }
 	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
 	mActive = true;
   
@@ -151,6 +192,17 @@ void Level::Unload()
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
 	}
+	for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  {
+    // Remove all components
+    mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
+    if((*it)->GET<PhysicsObject>())
+      mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
+    if((*it)->GET<Surface>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
+    if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
+  }
 	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);
 	mActive = false;
   

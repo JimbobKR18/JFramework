@@ -9,6 +9,7 @@ class ObjectManager : public Manager
 {
 private:
 	std::vector<GameObject*> mObjects;
+	std::vector<GameObject*> mStaticObjects;
 public:
 	ObjectManager(GameApp* aApp);
 	virtual ~ObjectManager();
@@ -23,7 +24,7 @@ public:
 	void                ParseObject(GameObject *aObject);
 	void                DeleteObject(GameObject *aObj);
 	void                ClearObjects();
-	void                AddObject(GameObject *aObj);
+	void                AddObject(GameObject *aObj, bool aStatic = false);
 	void                RemoveObject(GameObject *aObj);
 	static void         SerializeLUA();
 private:

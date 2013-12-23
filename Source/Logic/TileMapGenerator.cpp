@@ -81,7 +81,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     }
     
     // Add object to our level for easier loading later
-    mOwner->AddObject(obj);
+    mOwner->AddStaticObject(obj);
     
     ++xPos;
     if(xPos >= mWidth)
