@@ -11,6 +11,7 @@
 #include "Components/Transform.h"
 #include "Components/PhysicsObject.h"
 #include "Core/GameObject.h"
+#include "Managers/SoundManager.h"
 #include "Core/MathExt.h"
 #include "Logic/Level.h"
 
@@ -62,6 +63,7 @@ namespace LUABind
     Manager::SerializeLUA();
     LevelManager::SerializeLUA();
     ObjectManager::SerializeLUA();
+    SoundManager::SerializeLUA();
     // GameApp
     GameApp::SerializeLUA();
     // StaticGameApp

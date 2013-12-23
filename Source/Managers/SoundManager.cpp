@@ -81,3 +81,9 @@ void SoundManager::SendMessage(Message const &aMessage)
 void SoundManager::ProcessDelayedMessage(Message *aMessage)
 {
 }
+
+void SoundManager::SerializeLUA()
+{
+  SLB::Class<SoundManager>("SoundManager").inherits<Manager>()
+      .set("PlaySound", &SoundManager::PlaySound);
+}

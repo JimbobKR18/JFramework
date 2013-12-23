@@ -34,6 +34,8 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "SoundManager";}
+
+  static void         SerializeLUA();
 };
 
 #endif
