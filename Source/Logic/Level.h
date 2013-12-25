@@ -13,6 +13,7 @@ class Level
 private:
 	std::string               mName;
 	std::string               mFileName;
+	std::string               mMusicName;
 	std::vector<GameObject*>  mObjects;
 	std::vector<GameObject*>  mStaticObjects;
 	std::vector<Menu*>        mMenus;

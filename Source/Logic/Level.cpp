@@ -7,6 +7,7 @@
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
 #include "ControllerManager.h"
+#include "SoundManager.h"
 #include "PlayerController.h"
 #include "TileMapGenerator.h"
 #include "Menu.h"
@@ -20,8 +21,8 @@ Level::Level()
 }
 
 Level::Level(LevelManager *aManager, std::string const &aFileName) :
-             mName(""), mFileName(aFileName), mObjects(), mStaticObjects(),
-             mMenus(), mOwner(aManager), mFocusTarget(NULL),
+             mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
+             mStaticObjects(), mMenus(), mOwner(aManager), mFocusTarget(NULL),
              mActive(false)
 {
 	for(int i = static_cast<int>(aFileName.size()) - 1;
@@ -173,6 +174,10 @@ void Level::Load()
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
   }
+
+	if(!mMusicName.empty())
+	  mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName);
+
 	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
 	mActive = true;
   
@@ -310,6 +315,14 @@ void Level::ParseFile()
       
       TileMapGenerator tilemap(width, height, tileSize,
                                file, frames, collision, this);
+    }
+    else if(param == "Music")
+    {
+      std::string empty, music;
+      parser.GetNextString(music);
+      parser.GetNextString(empty);
+
+      mMusicName = music;
     }
 		else if(param[param.size() - 4] == '.')
 		{
