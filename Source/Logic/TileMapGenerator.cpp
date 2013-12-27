@@ -12,6 +12,7 @@
 #include "Transform.h"
 #include "Surface.h"
 #include "PhysicsObject.h"
+#include "Level.h"
 
 TileMapGenerator::TileMapGenerator()
 {
@@ -95,4 +96,32 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
 TileMapGenerator::~TileMapGenerator()
 {
   mTiles.clear();
+}
+
+int TileMapGenerator::GetWidth() const
+{
+  return mWidth;
+}
+
+int TileMapGenerator::GetHeight() const
+{
+  return mHeight;
+}
+
+int TileMapGenerator::GetTileSize() const
+{
+  return mTileSize;
+}
+
+std::string TileMapGenerator::GetFilename() const
+{
+  return mFilename;
+}
+std::vector<int>& TileMapGenerator::GetArtTiles()
+{
+  return mTiles;
+}
+std::vector<int>& TileMapGenerator::GetCollisionTiles()
+{
+  return mCollision;
 }

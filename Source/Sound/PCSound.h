@@ -16,7 +16,8 @@
 class PCSound : public Sound
 {
 private:
-  Mix_Chunk *mChunk;
+  Mix_Chunk*  mChunk;
+  int         mChannel;
 public:
   PCSound();
   PCSound(std::string const &aFilename);
@@ -26,6 +27,8 @@ public:
   virtual void Play(int aTime);
   virtual void FadeIn(int aTime);
   virtual void FadeIn(int aFadeTime, int aPlayTime);
+
+  virtual void Stop();
 };
 
 #endif /* defined(__JFramework__PCSound__) */

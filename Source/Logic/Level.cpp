@@ -22,8 +22,8 @@ Level::Level()
 
 Level::Level(LevelManager *aManager, std::string const &aFileName) :
              mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
-             mStaticObjects(), mMenus(), mOwner(aManager), mFocusTarget(NULL),
-             mActive(false)
+             mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
+             mFocusTarget(NULL), mActive(false)
 {
 	for(int i = static_cast<int>(aFileName.size()) - 1;
       aFileName[i] != '/' && i >= 0; --i)
@@ -44,6 +44,9 @@ Level::~Level()
 	}
 	else
     DeleteObjects();
+
+	if(mGenerator)
+	  delete mGenerator;
 }
 
 std::string Level::GetName() const
@@ -208,6 +211,9 @@ void Level::Unload()
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
   }
+	if(!mMusicName.empty())
+	  mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
+
 	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);
 	mActive = false;
   
@@ -216,7 +222,7 @@ void Level::Unload()
 
 void Level::SerializeLUA()
 {
-  SLB::Class<Level>("Level").constructor()
+  SLB::Class<Level>("Level")
           .set("Load", &Level::Load)
           .set("Unload", &Level::Unload)
           .set("GetName", &Level::GetName);
@@ -313,8 +319,8 @@ void Level::ParseFile()
       frames = Common::StringToIntVector(frameData);
       collision = Common::StringToIntVector(collisionData);
       
-      TileMapGenerator tilemap(width, height, tileSize,
-                               file, frames, collision, this);
+      mGenerator = new TileMapGenerator(width, height, tileSize,
+                                       file, frames, collision, this);
     }
     else if(param == "Music")
     {

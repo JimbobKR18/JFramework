@@ -70,6 +70,11 @@ void SoundManager::PlaySound(std::string const &aFilename)
   mSounds[aFilename]->Play();
 }
 
+void SoundManager::StopSound(std::string const &aFilename)
+{
+  mSounds[aFilename]->Stop();
+}
+
 void SoundManager::Update()
 {
 }

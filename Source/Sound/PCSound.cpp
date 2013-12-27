@@ -9,11 +9,11 @@
 #include "PCSound.h"
 #include "Common.h"
 
-PCSound::PCSound() : Sound()
+PCSound::PCSound() : Sound(), mChannel(-1)
 {
 }
 
-PCSound::PCSound(std::string const &aFilename) : Sound(aFilename)
+PCSound::PCSound(std::string const &aFilename) : Sound(aFilename), mChannel(-1)
 {
   mChunk = Mix_LoadWAV(aFilename.c_str());
   if(!mChunk)
@@ -29,7 +29,8 @@ PCSound::~PCSound()
 
 void PCSound::Play()
 {
-  if(Mix_PlayChannel(-1, mChunk, 0) == -1)
+  mChannel = Mix_PlayChannel(-1, mChunk, 0);
+  if(mChannel == -1)
   {
     printf("Mix_PlayChannel: %s\n", Mix_GetError());
     assert(!"Mix_PlayChannel failed, aborting.");
@@ -38,7 +39,8 @@ void PCSound::Play()
 
 void PCSound::Play(int aTime)
 {
-  if(Mix_PlayChannelTimed(-1, mChunk, 0, aTime) == -1)
+  mChannel = Mix_PlayChannelTimed(-1, mChunk, 0, aTime);
+  if(mChannel == -1)
   {
     printf("Mix_PlayChannelTimed: %s\n", Mix_GetError());
     assert(!"Mix_PlayChannelTimed failed, aborting.");
@@ -47,7 +49,8 @@ void PCSound::Play(int aTime)
 
 void PCSound::FadeIn(int aTime)
 {
-  if(Mix_FadeInChannel(-1, mChunk, 0, aTime) == -1)
+  mChannel = Mix_FadeInChannel(-1, mChunk, 0, aTime);
+  if(mChannel == -1)
   {
     printf("Mix_FadeInChannel: %s\n", Mix_GetError());
     assert(!"Mix_FadeInChannel failed, aborting.");
@@ -56,9 +59,16 @@ void PCSound::FadeIn(int aTime)
 
 void PCSound::FadeIn(int aFadeTime, int aPlayTime)
 {
-  if(Mix_FadeInChannelTimed(-1, mChunk, 0, aFadeTime, aPlayTime) == -1)
+  mChannel = Mix_FadeInChannelTimed(-1, mChunk, 0, aFadeTime, aPlayTime);
+  if(mChannel == -1)
   {
     printf("Mix_FadeInChannelTimed: %s\n", Mix_GetError());
     assert(!"Mix_FadeInChannelTimed failed, aborting.");
   }
+}
+
+void PCSound::Stop()
+{
+  Mix_HaltChannel(mChannel);
+  mChannel = -1;
 }

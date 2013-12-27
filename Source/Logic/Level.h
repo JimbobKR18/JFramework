@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "GameObject.h"
 #include "Parser.h"
+#include "TileMapGenerator.h"
 
 class LevelManager;
 class Menu;
@@ -18,6 +19,7 @@ private:
 	std::vector<GameObject*>  mStaticObjects;
 	std::vector<Menu*>        mMenus;
 	LevelManager*             mOwner;
+	TileMapGenerator*         mGenerator;
 	GameObject*               mFocusTarget;
 	bool                      mActive;
   

@@ -29,6 +29,7 @@ public:
   void                AddSound(Sound *aSound);
   void                RemoveSound(Sound *aSound);
   void                PlaySound(std::string const &aFilename);
+  void                StopSound(std::string const &aFilename);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);

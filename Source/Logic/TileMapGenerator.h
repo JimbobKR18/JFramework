@@ -10,7 +10,8 @@
 #define __JFramework__TileMapGenerator__
 
 #include "Common.h"
-#include "Level.h"
+
+class Level;
 
 class TileMapGenerator
 {
@@ -30,6 +31,13 @@ public:
                    std::vector<int> const &aTiles,
                    std::vector<int> const &aCollision, Level *aOwner);
   ~TileMapGenerator();
+
+  int               GetWidth() const;
+  int               GetHeight() const;
+  int               GetTileSize() const;
+  std::string       GetFilename() const;
+  std::vector<int>& GetArtTiles();
+  std::vector<int>& GetCollisionTiles();
 };
 
 #endif /* defined(__JFramework__TileMapGenerator__) */
