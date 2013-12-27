@@ -211,6 +211,7 @@ void Level::Unload()
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
   }
+
 	if(!mMusicName.empty())
 	  mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
 
