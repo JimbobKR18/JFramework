@@ -2,6 +2,8 @@
 #include "Transform.h"
 #include "PCSurface.h"
 
+#define VERTEX_ARRAYS
+
 PCScreen::PCScreen() : Screen()
 {
   SDL_Init(SDL_INIT_EVERYTHING);
@@ -38,7 +40,14 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glBindTexture(GL_TEXTURE_2D, texture);
     
     glPushMatrix();
+
+#ifdef VERTEX_ARRAYS
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    std::vector<Vector3> points, texcoord;
+#else
     glBegin(GL_QUADS);
+#endif
     
     // while other texture share the same texture id, draw them
     while(it != end &&
@@ -74,6 +83,18 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
         continue;
       }
       
+#ifdef VERTEX_ARRAYS
+      // Vertex points
+      points.push_back(Vector3(xPosition - size.x, yPosition - size.y, zPosition));
+      points.push_back(Vector3(xPosition + size.x, yPosition - size.y, zPosition));
+      points.push_back(Vector3(xPosition + size.x, yPosition + size.y, zPosition));
+      points.push_back(Vector3(xPosition - size.x, yPosition + size.y, zPosition));
+      // Texture coordinates
+      texcoord.push_back(Vector3(texCoord->GetXValue(0), texCoord->GetYValue(0), 0));
+      texcoord.push_back(Vector3(texCoord->GetXValue(1), texCoord->GetYValue(0), 0));
+      texcoord.push_back(Vector3(texCoord->GetXValue(1), texCoord->GetYValue(1), 0));
+      texcoord.push_back(Vector3(texCoord->GetXValue(0), texCoord->GetYValue(1), 0));
+#else
       // Actually draw the object
       glTexCoord2f(texCoord->GetXValue(0), texCoord->GetYValue(0));
       glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
@@ -83,11 +104,21 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
       glTexCoord2f(texCoord->GetXValue(0), texCoord->GetYValue(1));
       glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
+#endif
     }
     
+#ifdef VERTEX_ARRAYS
+    // Pointers and draw
+    glVertexPointer(3, GL_FLOAT, sizeof(Vector3), &points[0]);
+    glTexCoordPointer(3, GL_FLOAT, sizeof(Vector3), &texcoord[0]);
+    glDrawArrays(GL_QUADS, 0, points.size());
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+#else
     glEnd();
+#endif
     glPopMatrix();
-    
+
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
   }
