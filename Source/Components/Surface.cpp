@@ -38,6 +38,19 @@ void Surface::SetAnimated(bool aAnimated)
     mTexCoord->SetAnimated(aAnimated);
 }
 
+void Surface::SetAnimation(int aAnimation)
+{
+  if(mTexCoord)
+    mTexCoord->SetCurrentAnimation(aAnimation);
+}
+
+bool Surface::CurrentAnimationCompleted()
+{
+  if(mTexCoord)
+    return mTexCoord->GetCompleted();
+  return false;
+}
+
 void Surface::Update()
 {
   if(mTexCoord)

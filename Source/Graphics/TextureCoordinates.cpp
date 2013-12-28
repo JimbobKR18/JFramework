@@ -21,7 +21,8 @@ TextureCoordinates::TextureCoordinates()
 TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames) : mCurFrame(0),
                                                                                                       mCurAnimation(0),
                                                                                                       mNumAnimations(aNumAnimations),
-                                                                                                      mCurTime(0)
+                                                                                                      mCurTime(0),
+                                                                                                      mCompleted(false)
 {
   int maxFrames = 0;
   
@@ -67,7 +68,10 @@ void TextureCoordinates::Update(float aDT)
     
     // Make sure we're within bounds
     if(mCurFrame >= mAnimations.find(mCurAnimation)->second)
+    {
       mCurFrame = 0;
+      mCompleted = true;
+    }
     
     // Set positions of coordinates
     SETFRAMES();
@@ -89,9 +93,15 @@ int TextureCoordinates::GetCurrentAnimation() const
   return mCurAnimation;
 }
 
+bool TextureCoordinates::GetCompleted() const
+{
+  return mCompleted;
+}
+
 void TextureCoordinates::SetCurrentAnimation(int aAnimation)
 {
   mCurAnimation = aAnimation;
+  mCompleted = false;
 }
 
 void TextureCoordinates::SetCurrentFrame(int aFrame)
@@ -111,4 +121,5 @@ void TextureCoordinates::Reset()
 {
   mCurFrame = 0;
   mCurTime = 0;
+  mCompleted = false;
 }

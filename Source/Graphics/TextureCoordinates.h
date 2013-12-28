@@ -24,6 +24,7 @@ private:
   float                       mXValues[2];
   float                       mYValues[2];
   bool                        mAnimated;
+  bool                        mCompleted;
   
   // <currentAnimation, numberofFrames>
   std::map<int, int>          mAnimations;
@@ -39,6 +40,7 @@ public:
   float GetXValue(int aValue) const;
   float GetYValue(int aValue) const;
   int   GetCurrentAnimation() const;
+  bool  GetCompleted() const;
   void  SetCurrentAnimation(int aAnimation);
   void  SetCurrentFrame(int aFrame);
   void  SetAnimated(bool aAnimated);
