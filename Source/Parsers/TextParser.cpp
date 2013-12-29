@@ -30,17 +30,21 @@ Root::~Root()
       delete *it;
 }
 
-TextParser::TextParser(std::string const &aFilename, bool aAutoParse) : Parser(aFilename)
+TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode const &aMode) : Parser(aFilename)
 {
   mDictionary = new Root();
-  mInput.open(aFilename.c_str());
+
+  if(aMode == MODE_INPUT)
+    mInput.open(aFilename.c_str());
+  else
+    mOutput.open(aFilename.c_str());
 
   if(mInput.good())
   {
     // If we want to push all objects into a dictionary,
     // set it to autoparse, but for files with values
     // of similar name, that file cannot be autoparsed.
-    if(aAutoParse)
+    if(aMode == MODE_INPUT && aAutoParse)
       Parse();
   }
   else
@@ -156,6 +160,21 @@ void TextParser::Parse()
   }
 
   mDictionary = mCurNode;
+}
+
+void TextParser::Place(std::string const &aElement)
+{
+  // TODO
+}
+
+void TextParser::Place(std::string const &aRoot, std::string const &aElement)
+{
+  // TODO
+}
+
+void TextParser::Write()
+{
+  // TODO
 }
 
 float TextParser::GetNextFloat(float &rValue)

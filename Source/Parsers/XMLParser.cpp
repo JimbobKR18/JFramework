@@ -25,5 +25,20 @@ std::string XMLParser::Find(std::string const &aRoot, std::string const &aElemen
 
 void XMLParser::Parse()
 {
+  // TODO?
+}
 
+void XMLParser::Place(std::string const &aElement)
+{
+  // TODO
+}
+
+void XMLParser::Place(std::string const &aRoot, std::string const &aElement)
+{
+  // TODO
+}
+
+void XMLParser::Write()
+{
+  // TODO
 }

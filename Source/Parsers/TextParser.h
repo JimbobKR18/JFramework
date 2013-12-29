@@ -4,6 +4,12 @@
 #include <fstream>
 #include "Parser.h"
 
+enum TextMode
+{
+  MODE_INPUT = 0,
+  MODE_OUTPUT
+};
+
 struct Root
 {
   std::string         mValue;
@@ -27,14 +33,21 @@ class TextParser : public Parser
 {
   private:
     std::ifstream mInput;
+    std::ofstream mOutput;
     Root*         mDictionary;
   public:
-    TextParser(std::string const &aFilename, bool aAutoParse = true);
+    TextParser(std::string const &aFilename, bool aAutoParse = true, TextMode const &aMode = MODE_INPUT);
     ~TextParser();
 
+    // Read
     bool          Find(std::string const &aElement);
     std::string   Find(std::string const &aRoot, std::string const &aElement);
     void          Parse();
+    // Write
+    void          Place(std::string const &aElement);
+    void          Place(std::string const &aRoot, std::string const &aElement);
+    void          Write();
+    // Manual
     float         GetNextFloat(float &rValue);
     int           GetNextInt(int &rValue);
     std::string   GetNextString(std::string &rValue);

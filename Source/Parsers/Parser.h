@@ -13,9 +13,16 @@ class Parser
     virtual ~Parser();
 
     std::string           GetFilename() const;
+
+    // Reading
     virtual bool          Find(std::string const &aElement) = 0;
     virtual std::string   Find(std::string const &aRoot, std::string const &aElement) = 0;
     virtual void          Parse() = 0;
+
+    // Writing
+    virtual void          Place(std::string const &aElement) = 0;
+    virtual void          Place(std::string const &aRoot, std::string const &aElement) = 0;
+    virtual void          Write() = 0;
 };
 
 #endif
