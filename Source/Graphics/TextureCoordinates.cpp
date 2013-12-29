@@ -21,6 +21,7 @@ TextureCoordinates::TextureCoordinates()
 TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames) : mCurFrame(0),
                                                                                                       mCurAnimation(0),
                                                                                                       mNumAnimations(aNumAnimations),
+                                                                                                      mSpeed(DT),
                                                                                                       mCurTime(0),
                                                                                                       mCompleted(false)
 {
@@ -59,9 +60,9 @@ void TextureCoordinates::Update(float aDT)
   mCurTime += aDT;
   
   // If it's time to change a frame
-  while(mCurTime >= DT)
+  while(mCurTime >= mSpeed)
   {
-    mCurTime -= DT;
+    mCurTime -= mSpeed;
     
     // Increase the frame
     ++mCurFrame;
@@ -115,6 +116,11 @@ void TextureCoordinates::SetCurrentFrame(int aFrame)
 void TextureCoordinates::SetAnimated(bool aAnimated)
 {
   mAnimated = aAnimated;
+}
+
+void TextureCoordinates::SetSpeed(float aSpeed)
+{
+  mSpeed = aSpeed;
 }
 
 void TextureCoordinates::Reset()

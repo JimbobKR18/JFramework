@@ -53,8 +53,10 @@ bool Surface::CurrentAnimationCompleted()
 
 void Surface::Update()
 {
+  float dt = GetOwner()->GetManager()->GetOwningApp()->GetDT();
+
   if(mTexCoord)
-    mTexCoord->Update(1.0f/60.0f);
+    mTexCoord->Update(dt);
 }
 
 void Surface::SendMessage(Message const &aMessage)

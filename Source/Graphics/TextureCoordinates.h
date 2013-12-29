@@ -18,6 +18,7 @@ private:
   int                         mCurFrame;
   int                         mCurAnimation;
   int                         mNumAnimations;
+  float                       mSpeed;
   float                       mXGain;
   float                       mYGain;
   float                       mCurTime;
@@ -44,6 +45,7 @@ public:
   void  SetCurrentAnimation(int aAnimation);
   void  SetCurrentFrame(int aFrame);
   void  SetAnimated(bool aAnimated);
+  void  SetSpeed(float aSpeed);
   void  Reset();
 };
 
