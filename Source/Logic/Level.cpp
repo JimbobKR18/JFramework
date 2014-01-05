@@ -155,7 +155,7 @@ void Level::Reset()
   ParseFile();
 }
 
-void Level::Load()
+void Level::Load(Level* const aPrevLevel)
 {
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
@@ -178,7 +178,7 @@ void Level::Load()
       mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
   }
 
-	if(!mMusicName.empty())
+	if(!mMusicName.empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
 	  mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName);
 
 	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
@@ -187,7 +187,7 @@ void Level::Load()
   mOwner->SetActiveLevel(this);
 }
 
-void Level::Unload()
+void Level::Unload(Level* const aNextLevel)
 {
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
@@ -212,7 +212,7 @@ void Level::Unload()
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
   }
 
-	if(!mMusicName.empty())
+	if(!mMusicName.empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
 	  mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
 
 	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);

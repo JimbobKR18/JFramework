@@ -53,18 +53,16 @@ void LevelManager::LoadLevelDelayed(std::string const &aLevelName, bool aReset)
 
 void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
 {
-	if(mActiveLevel)
-		mActiveLevel->Unload();
-  
 	for(std::vector<Level*>::const_iterator it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
 		if((*it)->GetName() == aLevelName)
 		{
+		  Level* prevLevel = mActiveLevel;
+		  if(mActiveLevel)
+		    mActiveLevel->Unload(*it);
       if(aReset)
-      {
         (*it)->Reset();
-      }
-			(*it)->Load();
+			(*it)->Load(prevLevel);
 			GetOwningApp()->GET<InputManager>()->AcceptInputs();
 			return;
 		}

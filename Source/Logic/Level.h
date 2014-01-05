@@ -43,8 +43,8 @@ public:
   void          DeleteObjects();
   void          Reset();
 
-	void          Load();
-	void          Unload();
+	void          Load(Level* const aPrevLevel);
+	void          Unload(Level* const aNextLevel);
 
 	virtual void  PreReset() {};
 	virtual void  Update() {};
