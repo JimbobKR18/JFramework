@@ -49,10 +49,16 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
 
     // Get Transform of new object
     Transform *transform = obj->GET<Transform>();
-    transform->SetPosition(Vector3(-halfX + (aTileSize * 2 * xPos),
-                                   -halfY + (aTileSize * 2 * yPos),0));
+    Vector3 position = Vector3(-halfX + (aTileSize * 2 * xPos),
+                               -halfY + (aTileSize * 2 * yPos),0);
+    transform->SetPosition(position);
     transform->SetSize(Vector3(mTileSize, mTileSize, 0));
     
+    if(i == 0)
+      mOwner->SetMinBoundary(position);
+    else if(i == mTiles.size() - 1)
+      mOwner->SetMaxBoundary(position);
+
     // Set the frame data
     Surface *surface = obj->GET<Surface>();
     surface->SetAnimated(false);

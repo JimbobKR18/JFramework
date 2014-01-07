@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Parser.h"
 #include "TileMapGenerator.h"
+#include "MathExt.h"
 
 class LevelManager;
 class Menu;
@@ -22,6 +23,9 @@ private:
 	TileMapGenerator*         mGenerator;
 	GameObject*               mFocusTarget;
 	bool                      mActive;
+
+	Vector3                   mMaxBoundary;
+	Vector3                   mMinBoundary;
   
   typedef std::vector<GameObject*>::iterator ObjectIT;
   typedef std::vector<Menu*>::iterator MenuIT;
@@ -42,6 +46,9 @@ public:
   void          DeleteObjectDelayed(GameObject *aObject);
   void          DeleteObjects();
   void          Reset();
+
+  void          SetMaxBoundary(Vector3 const &aMaxBoundary);
+  void          SetMinBoundary(Vector3 const &aMinBoundary);
 
 	void          Load(Level* const aPrevLevel);
 	void          Unload(Level* const aNextLevel);

@@ -23,7 +23,7 @@ Level::Level()
 Level::Level(LevelManager *aManager, std::string const &aFileName) :
              mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
              mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
-             mFocusTarget(NULL), mActive(false)
+             mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0)
 {
 	for(int i = static_cast<int>(aFileName.size()) - 1;
       aFileName[i] != '/' && i >= 0; --i)
@@ -155,6 +155,16 @@ void Level::Reset()
   ParseFile();
 }
 
+void Level::SetMaxBoundary(Vector3 const &aMaxBoundary)
+{
+  mMaxBoundary = aMaxBoundary;
+}
+
+void Level::SetMinBoundary(Vector3 const &aMinBoundary)
+{
+  mMinBoundary = aMinBoundary;
+}
+
 void Level::Load(Level* const aPrevLevel)
 {
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
@@ -183,6 +193,9 @@ void Level::Load(Level* const aPrevLevel)
 
 	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
 	mActive = true;
+
+	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMaxBoundary(mMaxBoundary);
+	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMinBoundary(mMinBoundary);
   
   mOwner->SetActiveLevel(this);
 }
