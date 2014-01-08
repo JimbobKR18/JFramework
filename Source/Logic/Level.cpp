@@ -351,7 +351,8 @@ void Level::ParseFile()
     }
     else if(param == "Bounds")
     {
-      /* Set camera bounds manually
+      /*
+       * Set camera bounds manually
        * 3 places where bounds can be set:
        * 1. Auto set from object transforms, see above
        * 2. Calculated from tilemap, see TileMapGenerator.cpp
