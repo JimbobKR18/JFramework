@@ -279,6 +279,12 @@ void Level::ParseFile()
         transform->SetPosition(Vector3(posX,posY,posZ));
         transform->SetScale(Vector3(scaleX,scaleY,scaleZ));
         transform->SetSize(Vector3(sizeX,sizeY,sizeZ));
+
+        // Auto set camera bounds based on objects in environment
+        mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
+        mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
+        mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
+        mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
 		  }
 		}
 		else if(param == "Focus")
@@ -340,9 +346,25 @@ void Level::ParseFile()
     {
       std::string empty, music;
       parser.GetNextString(music);
-      parser.GetNextString(empty);
 
       mMusicName = music;
+    }
+    else if(param == "Bounds")
+    {
+      /* Set camera bounds manually
+       * 3 places where bounds can be set:
+       * 1. Auto set from object transforms, see above
+       * 2. Calculated from tilemap, see TileMapGenerator.cpp
+       * 3. See below
+       */
+      std::string empty;
+      int x, y;
+      parser.GetNextInt(x);
+      parser.GetNextInt(y);
+      mMaxBoundary = Vector3(x, y, 0);
+      parser.GetNextInt(x);
+      parser.GetNextInt(y);
+      mMinBoundary = Vector3(x, y, 0);
     }
 		else if(param[param.size() - 4] == '.')
 		{

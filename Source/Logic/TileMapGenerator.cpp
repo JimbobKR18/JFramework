@@ -51,13 +51,15 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     Transform *transform = obj->GET<Transform>();
     Vector3 position = Vector3(-halfX + (aTileSize * 2 * xPos),
                                -halfY + (aTileSize * 2 * yPos),0);
+    Vector3 tileSize = Vector3(mTileSize, mTileSize, 0);
     transform->SetPosition(position);
-    transform->SetSize(Vector3(mTileSize, mTileSize, 0));
+    transform->SetSize(tileSize);
     
+    // Figure out the max and min camera boundaries based on tilemap
     if(i == 0)
-      mOwner->SetMinBoundary(position);
+      mOwner->SetMinBoundary(position - tileSize);
     else if(i == mTiles.size() - 1)
-      mOwner->SetMaxBoundary(position);
+      mOwner->SetMaxBoundary(position + tileSize);
 
     // Set the frame data
     Surface *surface = obj->GET<Surface>();

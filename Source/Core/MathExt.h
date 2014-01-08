@@ -105,9 +105,9 @@ public:
   }
   virtual ~Interpolation() {}
 
-  void Update(float dt)
+  void Update(float aDT)
   {
-    mCurrentTime += dt;
+    mCurrentTime += aDT;
 
     if(mCurrentTime < mTime)
     {
@@ -121,5 +121,21 @@ public:
     return mCurrentTime >= mTime;
   }
 };
+
+template<typename T>
+T Lesser(T const& aA, T const& aB)
+{
+  if(aA <= aB)
+    return aA;
+  return aB;
+}
+
+template<typename T>
+T Greater(T const& aA, T const& aB)
+{
+  if(aA >= aB)
+    return aA;
+  return aB;
+}
 
 #endif
