@@ -35,8 +35,6 @@ GameApp::GameApp(int aWidth, int aHeight)
   
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
-
-  LUABind::LoadFunction<std::string>("Main.LUA", "main", "");
 }
 
 GameApp::~GameApp()
@@ -97,6 +95,11 @@ void GameApp::SendMessage(Message const &aMessage)
 void GameApp::SendMessageDelayed(Message *aMessage)
 {
   mDelayedMessages.push_back(aMessage);
+}
+
+void GameApp::Start()
+{
+  LUABind::LoadFunction<std::string>("Main.LUA", "main", "");
 }
 
 void GameApp::AddManager(Manager *aManager)

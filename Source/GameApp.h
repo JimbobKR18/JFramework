@@ -22,6 +22,7 @@ public:
 	virtual void      Update();
   void              SendMessage(Message const &aMessage);
   void              SendMessageDelayed(Message *aMessage);
+  void              Start();
 	void              AddManager(Manager* aManager);
 	Manager*          GetManager(std::string const &aName);
 
