@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <cstring>
 #include <cassert>
 #include <cstdlib>
 #include <cctype>
@@ -27,6 +28,25 @@
 #endif
 
 #define DebugLogPrint std::printf
+
+// Basically an extension of std::string, now with hashing.
+class JString
+{
+private:
+  std::string mString;
+  int         mHash;
+public:
+  JString();
+  JString(char const* aString);
+  JString(std::string const &aString);
+  // Equality
+  void operator=(JString const &aRhs);
+  // Comparison
+  bool operator==(JString const &aRhs);
+  char operator[](int aValue);
+private:
+  void Hash();
+};
 
 namespace Common
 {

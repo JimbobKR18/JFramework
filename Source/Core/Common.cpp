@@ -8,6 +8,47 @@
 
 #include "Common.h"
 
+JString::JString() : mString(""), mHash(0)
+{
+}
+
+JString::JString(char const* aString) : mString(aString)
+{
+  Hash();
+}
+
+JString::JString(std::string const &aString) : mString(aString)
+{
+  Hash();
+}
+
+void JString::operator=(JString const &aRhs)
+{
+  mString = aRhs.mString;
+  mHash = aRhs.mHash;
+}
+
+bool JString::operator==(JString const &aRhs)
+{
+  return mHash == aRhs.mHash;
+}
+
+char JString::operator[](int aValue)
+{
+  return mString[aValue];
+}
+
+void JString::Hash()
+{
+  mHash = 0;
+  char const *key = "srkfadcult";
+  int len = strlen(key);
+  for(unsigned i = 0; i < mString.length(); ++i)
+  {
+    mHash += (static_cast<int>(mString[i]) + i) ^ key[i % len];
+  }
+}
+
 namespace Common
 {
   #ifdef __APPLE__
