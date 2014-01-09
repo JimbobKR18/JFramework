@@ -59,6 +59,36 @@ LevelManager *Level::GetManager() const
   return mOwner;
 }
 
+TileMapGenerator* Level::GetTileMap() const
+{
+  return mGenerator;
+}
+
+GameObject* Level::GetFocusTarget() const
+{
+  return mFocusTarget;
+}
+
+GameObject* Level::FindObject(std::string const &aObjectName)
+{
+  // This is designed to be naive
+  // if two objects share the same name...
+  // well, too bad.
+  ObjectIT end = mObjects.end();
+  for(ObjectIT it = mObjects.begin(); it != end; ++it)
+  {
+    if(aObjectName == (*it)->GetName())
+      return *it;
+  }
+  end = mStaticObjects.end();
+  for(ObjectIT it = mStaticObjects.begin(); it != end; ++it)
+  {
+    if(aObjectName == (*it)->GetName())
+      return *it;
+  }
+  return NULL;
+}
+
 void Level::AddMenu(Menu *aMenu)
 {
   mMenus.push_back(aMenu);

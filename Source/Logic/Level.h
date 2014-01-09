@@ -37,29 +37,33 @@ public:
 	std::string   GetName() const;
   LevelManager* GetManager() const;
   
-  void          AddMenu(Menu *aMenu);
-  void          RemoveMenu(Menu *aMenu);
+  TileMapGenerator* GetTileMap() const;
+  GameObject*       GetFocusTarget() const;
+  GameObject*       FindObject(std::string const &aObjectName);
 
-  void          AddObject(GameObject *aObject);
-  void          AddStaticObject(GameObject *aObject);
-  void          DeleteObject(GameObject *aObject);
-  void          DeleteObjectDelayed(GameObject *aObject);
-  void          DeleteObjects();
-  void          Reset();
+  void              AddMenu(Menu *aMenu);
+  void              RemoveMenu(Menu *aMenu);
 
-  void          SetMaxBoundary(Vector3 const &aMaxBoundary);
-  void          SetMinBoundary(Vector3 const &aMinBoundary);
+  void              AddObject(GameObject *aObject);
+  void              AddStaticObject(GameObject *aObject);
+  void              DeleteObject(GameObject *aObject);
+  void              DeleteObjectDelayed(GameObject *aObject);
+  void              DeleteObjects();
+  void              Reset();
 
-	void          Load(Level* const aPrevLevel);
-	void          Unload(Level* const aNextLevel);
+  void              SetMaxBoundary(Vector3 const &aMaxBoundary);
+  void              SetMinBoundary(Vector3 const &aMinBoundary);
 
-	virtual void  PreReset() {};
-	virtual void  Update() {};
-	virtual void  ParseAdditionalData(Parser *aParser, GameObject *aObject, std::string const &aFirstParam) {};
+	void              Load(Level* const aPrevLevel);
+	void              Unload(Level* const aNextLevel);
 
-	static void   SerializeLUA();
+	virtual void      PreReset() {};
+	virtual void      Update() {};
+	virtual void      ParseAdditionalData(Parser *aParser, GameObject *aObject, std::string const &aFirstParam) {};
+
+	static void       SerializeLUA();
 private:
-	void          ParseFile();
+	void              ParseFile();
 };
 
 #endif
