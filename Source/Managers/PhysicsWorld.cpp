@@ -89,7 +89,8 @@ void PhysicsWorld::ClearObjects()
 
 void PhysicsWorld::Update()
 {
-	SweepAndPrune(SortOnAxis());
+  SortOnAxis();
+	SweepAndPrune();
 	mRegistry.Update();
 	mResolver.Update(GetOwningApp()->GetDT());
 }
@@ -121,40 +122,42 @@ void PhysicsWorld::UnregisterGravity(PhysicsObject *aObject)
   UnregisterForce(aObject, &mGravity);
 }
 
-std::vector<PhysicsObject*> PhysicsWorld::SortOnAxis()
+void PhysicsWorld::SortOnAxis()
 {
-	std::vector<PhysicsObject*> ret = mObjects;
-	std::sort(ret.begin(), ret.end(), SortPredicate);
-	return ret;
+	std::sort(mObjects.begin(), mObjects.end(), SortPredicate);
 }
 
-void PhysicsWorld::SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects)
+void PhysicsWorld::SweepAndPrune()
 {
-  PhysicsIT end = aSortedObjects.end();
-	for(PhysicsIT it = aSortedObjects.begin(); it != end; ++it)
+  PhysicsIT end = mObjects.end();
+	for(PhysicsIT it = mObjects.begin(); it != end; ++it)
 	{
+	  PhysicsObject *itObject = *it;
+	  std::string itName = itObject->GetOwner()->GetName();
+	  Transform *itTransform = itObject->GetOwner()->GET<Transform>();
+
 		for(PhysicsIT it2 = it; it2 != end; ++it2)
 		{
-		  std::string itName = (*it)->GetOwner()->GetName();
-		  std::string it2Name = (*it2)->GetOwner()->GetName();
-		  bool ignore = (*it)->IgnoreObject(it2Name) || (*it2)->IgnoreObject(itName);
+		  PhysicsObject *it2Object = *it2;
+		  std::string it2Name = it2Object->GetOwner()->GetName();
+		  bool ignore = itObject->IgnoreObject(it2Name) || it2Object->IgnoreObject(itName);
 
-			if(*it != *it2 && !ignore)
+			if(itObject != it2Object && !ignore)
 			{
-				if((!(*it)->IsStatic() || !(*it2)->IsStatic()) &&
-           !mResolver.Find(*it, *it2))
+				if((!itObject->IsStatic() || !it2Object->IsStatic()) &&
+           !mResolver.Find(itObject, it2Object))
 				{
-				  float x1 = (*it)->GetOwner()->GET<Transform>()->GetPosition().x;
-				  float x1Size = (*it)->GetBroadSize().x / 2.0f;
-				  float x2 = (*it2)->GetOwner()->GET<Transform>()->GetPosition().x;
-				  float x2Size = (*it2)->GetBroadSize().x / 2.0f;
+				  float x1 = itTransform->GetPosition().x;
+				  float x1Size = itObject->GetBroadSize().x / 2.0f;
+				  float x2 = it2Object->GetOwner()->GET<Transform>()->GetPosition().x;
+				  float x2Size = it2Object->GetBroadSize().x / 2.0f;
 
 					float xPosDiff = fabs(x1 - x2);
           float xSizeTotal = fabs(x1Size + x2Size) + X_LIMIT;
 
 					if(xPosDiff < X_LIMIT || xSizeTotal > xPosDiff)
 					{
-						mResolver.AddPrelimPair(CollisionPair(*it, *it2));
+						mResolver.AddPrelimPair(CollisionPair(itObject, it2Object));
 					}
 					else
 					{

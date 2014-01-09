@@ -47,8 +47,8 @@ public:
   void                          UnregisterGravity(PhysicsObject *aObject);
   
 private:
-  std::vector<PhysicsObject*>   SortOnAxis();
-  void                          SweepAndPrune(std::vector<PhysicsObject*> aSortedObjects);
+  void                          SortOnAxis();
+  void                          SweepAndPrune();
   
 public:
   typedef std::vector<PhysicsObject*>::iterator PhysicsIT;
