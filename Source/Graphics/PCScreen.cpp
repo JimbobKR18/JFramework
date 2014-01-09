@@ -54,22 +54,24 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
           (*it)->GetOwner()->GET<PCSurface>()->GetTextureID() == texture)
     {
       GameObject *owner = (*it)->GetOwner();
+      PCSurface *surface = owner->GET<PCSurface>();
+      Transform *transform = owner->GET<Transform>();
       
       // Gotta progress this somehow
       ++it;
       
       // Get position and size
-      Vector3 position = owner->GET<Transform>()->GetPosition();
-      Vector3 size = owner->GET<Transform>()->GetSize();
+      Vector3 position = transform->GetPosition();
+      Vector3 size = transform->GetSize();
       
-      TextureCoordinates *texCoord = owner->GET<PCSurface>()->GetTextureData();
+      TextureCoordinates *texCoord = surface->GetTextureData();
       
       // Get positions relative to the camera
       float xPosition = position.x;
       float yPosition = position.y;
       float zPosition = position.z;
 
-      if(owner->GET<PCSurface>()->GetViewMode() == VIEW_ABSOLUTE)
+      if(surface->GetViewMode() == VIEW_ABSOLUTE)
       {
         xPosition -= (cameraPosition.x - cameraSize.x / 2.0f);
         yPosition -= (cameraPosition.y - cameraSize.y / 2.0f);
