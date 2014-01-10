@@ -55,7 +55,7 @@ float GameApp::GetDT() const
 void GameApp::AppStep()
 {
   Common::TimePoint currentTime = Common::GetNow();
-  mDT = (float)(TimePointToMilliseconds(currentTime - mLastFrame).count()) / 1000.0f;
+  mDT += (float)(TimePointToMilliseconds(currentTime - mLastFrame).count()) / 1000.0f;
   mLastFrame = currentTime;
 }
 
