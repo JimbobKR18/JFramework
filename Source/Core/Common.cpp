@@ -143,4 +143,9 @@ namespace Common
     sprintf(buffer, "%d", aValue);
     return std::string(buffer);
   }
+
+  TimePoint GetNow()
+  {
+    return Clock::now();
+  }
 }

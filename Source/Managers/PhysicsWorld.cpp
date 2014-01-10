@@ -140,7 +140,7 @@ void PhysicsWorld::SweepAndPrune()
 		{
 		  PhysicsObject *it2Object = *it2;
 		  std::string it2Name = it2Object->GetOwner()->GetName();
-		  bool ignore = itObject->IgnoreObject(it2Name) || it2Object->IgnoreObject(itName);
+		  bool ignore = false;//itObject->IgnoreObject(it2Name) || it2Object->IgnoreObject(itName);
 
 			if(itObject != it2Object && !ignore)
 			{

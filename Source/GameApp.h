@@ -11,7 +11,7 @@ class GameApp
 private:
 	std::vector<Manager*> mManagers;
 	std::vector<Message*> mDelayedMessages;
-	float                 mLastFrame;
+	Common::TimePoint     mLastFrame;
 	float                 mDT;
 public:
 	GameApp(int aWidth, int aHeight);

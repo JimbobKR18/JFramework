@@ -22,12 +22,14 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <chrono>
 
 #if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
 #define PC 1
 #endif
 
 #define DebugLogPrint std::printf
+#define TimePointToMilliseconds std::chrono::duration_cast<std::chrono::milliseconds>
 
 // Basically an extension of std::string, now with hashing.
 class JString
@@ -62,6 +64,10 @@ namespace Common
   std::vector<int>  StringToIntVector(std::string const &aValue);
 
   std::string       IntToString(int aValue);
+
+  typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;
+  typedef std::chrono::steady_clock Clock;
+  TimePoint         GetNow();
 }
 
 #endif

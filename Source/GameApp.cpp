@@ -20,7 +20,7 @@
 GameApp::GameApp(int aWidth, int aHeight)
 {
   mDT = 0;
-  mLastFrame = ((float)Common::timeGetTime()) / 1000.0f;
+  mLastFrame = Common::GetNow();
 
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
@@ -54,8 +54,8 @@ float GameApp::GetDT() const
 
 void GameApp::AppStep()
 {
-  float currentTime = ((float)Common::timeGetTime()) / 1000.0f;
-  mDT += currentTime - mLastFrame;
+  Common::TimePoint currentTime = Common::GetNow();
+  mDT = (float)(TimePointToMilliseconds(currentTime - mLastFrame).count()) / 1000.0f;
   mLastFrame = currentTime;
 }
 
@@ -65,15 +65,12 @@ void GameApp::Update()
 
   if(mDT >= DT)
   {
-    while(mDT >= DT)
-      mDT -= DT;
+    mDT = DT;
 
     for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
     {
       (*it)->Update();
     }
-
-    mDT = 0;
   }
 
   for(std::vector<Message*>::iterator it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
