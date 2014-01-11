@@ -44,7 +44,9 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 #ifdef VERTEX_ARRAYS
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
     std::vector<Vector3> points, texcoords;
+    std::vector<Vector4> colors;
 #else
     glBegin(GL_QUADS);
 #endif
@@ -65,6 +67,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       Vector3 size = transform->GetSize();
       
       TextureCoordinates *texCoord = surface->GetTextureData();
+      Vector4 color = surface->GetColor();
       
       // Get positions relative to the camera
       float xPosition = position.x;
@@ -96,8 +99,14 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       texcoords.push_back(Vector3(texCoord->GetXValue(1), texCoord->GetYValue(0), 0));
       texcoords.push_back(Vector3(texCoord->GetXValue(1), texCoord->GetYValue(1), 0));
       texcoords.push_back(Vector3(texCoord->GetXValue(0), texCoord->GetYValue(1), 0));
+      // Colors (Assuming uniform color)
+      colors.push_back(color);
+      colors.push_back(color);
+      colors.push_back(color);
+      colors.push_back(color);
 #else
       // Actually draw the object
+      glColor4f(color.x, color.y, color.z, color.w);
       glTexCoord2f(texCoord->GetXValue(0), texCoord->GetYValue(0));
       glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
       glTexCoord2f(texCoord->GetXValue(1), texCoord->GetYValue(0));
@@ -113,9 +122,11 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     // Pointers and draw
     glVertexPointer(3, GL_FLOAT, sizeof(Vector3), &points[0]);
     glTexCoordPointer(3, GL_FLOAT, sizeof(Vector3), &texcoords[0]);
+    glColorPointer(4, GL_FLOAT, sizeof(Vector4), &colors[0]);
     glDrawArrays(GL_QUADS, 0, points.size());
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
 #else
     glEnd();
 #endif

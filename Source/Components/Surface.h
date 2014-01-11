@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "TextureCoordinates.h"
+#include "MathExt.h"
 
 class GraphicsManager;
 
@@ -18,6 +19,7 @@ private:
   TextureCoordinates* mTexCoord;
   GraphicsManager*    mManager;
   Viewspace           mViewmode;
+  Vector4             mColor;
 public:
 	Surface();
 	Surface(GraphicsManager *aManager);
@@ -26,9 +28,11 @@ public:
 	// Getters
 	GraphicsManager*    GetManager() const { return mManager; }
 	Viewspace           GetViewMode() const { return mViewmode; }
+	Vector4             GetColor() const { return mColor; }
 
 	// Setters
 	void                SetViewMode(Viewspace const &aViewmode) { mViewmode = aViewmode; }
+	void                SetColor(Vector4 const& aColor) { mColor = aColor; }
   
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;

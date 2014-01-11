@@ -317,6 +317,17 @@ void Level::ParseFile()
         mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
 		  }
 		}
+		else if(param == "Surface")
+		{
+		  float r, g, b, a;
+		  parser.GetNextFloat(r);
+		  parser.GetNextFloat(g);
+		  parser.GetNextFloat(b);
+		  parser.GetNextFloat(a);
+
+		  Surface* surface = object->GET<Surface>();
+		  surface->SetColor(Vector4(r, g, b, a));
+		}
 		else if(param == "Focus")
 		{
 		  std::string value, empty;

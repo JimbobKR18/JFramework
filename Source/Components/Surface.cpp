@@ -2,13 +2,14 @@
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
 
-Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE)
+Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE), mColor(1,1,1,1)
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NULL),
-                                              mManager(aManager), mViewmode(VIEW_ABSOLUTE)
+                                              mManager(aManager), mViewmode(VIEW_ABSOLUTE),
+                                              mColor(1,1,1,1)
 {
   
 }
@@ -95,6 +96,15 @@ void Surface::Deserialize(Parser &aParser)
     std::string norender = aParser.Find("Surface", "NoRender");
     if(norender == "true")
       mManager->RemoveSurface(this);
+  }
+  if(aParser.Find("Surface", "ColorR") != "BadString")
+  {
+    float red = Common::StringToFloat(aParser.Find("Surface", "ColorR"));
+    float green = Common::StringToFloat(aParser.Find("Surface", "ColorG"));
+    float blue = Common::StringToFloat(aParser.Find("Surface", "ColorB"));
+    float alpha = Common::StringToFloat(aParser.Find("Surface", "ColorA"));
+
+    mColor = Vector4(red, green, blue, alpha);
   }
   
   SetTextureCoordinateData(numAnimations, numFrames);
