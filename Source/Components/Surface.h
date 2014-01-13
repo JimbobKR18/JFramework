@@ -28,7 +28,7 @@ public:
 	// Getters
 	GraphicsManager*    GetManager() const { return mManager; }
 	Viewspace           GetViewMode() const { return mViewmode; }
-	Vector4             GetColor() const { return mColor; }
+	Vector4&            GetColor() { return mColor; }
 
 	// Setters
 	void                SetViewMode(Viewspace const &aViewmode) { mViewmode = aViewmode; }

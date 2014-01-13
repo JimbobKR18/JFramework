@@ -22,6 +22,7 @@ private:
   GameObject*             mObj;
   std::set<GameObject*>   mCollidedObjects;
   Menu*                   mGameMenu;
+  bool                    mPaused;
   
 public:
   PlayerController();
@@ -31,6 +32,8 @@ public:
   bool IsPaused() const;
   void ClearMenu();
   
+  void SetPaused(bool aPaused);
+
   // Virtuals derived from Controller
   virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation);
   
