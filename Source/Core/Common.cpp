@@ -41,7 +41,7 @@ char JString::operator[](int aValue)
 void JString::Hash()
 {
   mHash = 0;
-  char const *key = "srkfadcult";
+  char const *key = "srkfadcultjylenoqickbwnxmpvg";
   int len = strlen(key);
   for(unsigned i = 0; i < mString.length(); ++i)
   {
