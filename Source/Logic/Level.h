@@ -31,7 +31,7 @@ private:
   typedef std::vector<Menu*>::iterator MenuIT;
 public:
 	Level();
-	Level(LevelManager *aManager, std::string const &aFileName);
+	Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse);
 	virtual ~Level();
 
 	std::string   GetName() const;
@@ -62,7 +62,7 @@ public:
 	virtual void      ParseAdditionalData(Parser *aParser, GameObject *aObject, std::string const &aFirstParam) {};
 
 	static void       SerializeLUA();
-private:
+
 	void              ParseFile();
 };
 

@@ -20,7 +20,7 @@ Level::Level()
 	assert(0);
 }
 
-Level::Level(LevelManager *aManager, std::string const &aFileName) :
+Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse) :
              mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
              mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
              mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0)
@@ -32,7 +32,8 @@ Level::Level(LevelManager *aManager, std::string const &aFileName) :
 	}
 	std::reverse(mName.begin(), mName.end());
 
-	ParseFile();
+	if(aAutoParse)
+	  ParseFile();
 }
 
 Level::~Level()

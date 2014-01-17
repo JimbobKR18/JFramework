@@ -19,7 +19,7 @@ Level *LevelManager::CreateLevel(std::string const &aFilename)
 
   if(!ret)
   {
-    ret = new Level(this, aFilename);
+    ret = new Level(this, aFilename, true);
 	  AddLevel(ret);
   }
 
