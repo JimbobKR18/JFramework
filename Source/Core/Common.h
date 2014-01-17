@@ -52,22 +52,23 @@ private:
 
 namespace Common
 {
-  std::string const RelativePath(std::string const &aSubFolder, std::string const &aFileName);
+  std::string const         RelativePath(std::string const &aSubFolder, std::string const &aFileName);
 
   #ifndef _WIN32
-  long              GetTickCount();
-  long              timeGetTime();
+  long                      GetTickCount();
+  long                      timeGetTime();
   #endif
 
-  int               StringToInt(std::string const &aValue);
-  float             StringToFloat(std::string const &aValue);
-  std::vector<int>  StringToIntVector(std::string const &aValue);
+  int                       StringToInt(std::string const &aValue);
+  float                     StringToFloat(std::string const &aValue);
+  std::vector<int>          StringToIntVector(std::string const &aValue);
+  std::vector<std::string>  StringToStringVector(std::string const &aValue);
 
-  std::string       IntToString(int aValue);
+  std::string               IntToString(int aValue);
 
   typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;
   typedef std::chrono::steady_clock Clock;
-  TimePoint         GetNow();
+  TimePoint                 GetNow();
 }
 
 #endif

@@ -137,6 +137,26 @@ namespace Common
     return ret;
   }
 
+  std::vector<std::string> StringToStringVector(std::string const &aValue)
+  {
+    std::vector<std::string> ret;
+    std::string value;
+    for(unsigned i = 0; i < aValue.length(); ++i)
+    {
+      if(aValue[i] == ',')
+      {
+        ret.push_back(value);
+        value.clear();
+      }
+      else
+      {
+        value.push_back(aValue[i]);
+      }
+    }
+    ret.push_back(value);
+    return ret;
+  }
+
   std::string IntToString(int aValue)
   {
     char buffer[33];
