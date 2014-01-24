@@ -2,6 +2,10 @@
 #define __JFramework_MathExt_h_
 
 #include <math.h>
+#include "Common.h"
+
+#define DEGREE_TO_RADS (3.141592f / 180.0f)
+#define RADS_TO_DEGREE (180.0f / 3.141592f)
 
 struct Vector3
 {
@@ -85,6 +89,42 @@ struct Vector4
   void    operator/=(float const aMultiplier);
 
   static void SerializeLUA();
+};
+
+struct Matrix33
+{
+  float values[3][3];
+
+  Matrix33();
+  Matrix33(float aValues[3][3]);
+  Matrix33(float aValues[9]);
+
+  Matrix33 Concatenate(Matrix33 const &rhs) const;
+  Matrix33 Rotate(Vector3 const &aAxis, float const aAngle) const;
+  Matrix33 Invert() const;
+  float Determinant() const;
+  float Determinant(float const aA, float const aB, float const aC, float const aD) const;
+
+  Matrix33 operator*(Matrix33 const &rhs) const;
+  Matrix33 operator*(float const aValue) const;
+  Vector3  operator*(Vector3 const &rhs) const;
+
+  void RotateX(float const aAngle);
+  void RotateY(float const aAngle);
+  void RotateZ(float const aAngle);
+  void operator*=(Matrix33 const &rhs);
+  void operator*=(float const aValue);
+};
+
+struct LineSegment
+{
+  Vector3 position;
+  float length;
+
+  LineSegment();
+  LineSegment(Vector3 const &aPosition, float aLength);
+
+  std::vector<Vector3> GetCollisions(LineSegment const &aCompare, int const aPrecision);
 };
 
 template<typename T>

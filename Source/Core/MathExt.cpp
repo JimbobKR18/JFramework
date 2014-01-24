@@ -396,3 +396,293 @@ void Vector4::SerializeLUA()
           .set("Project", &Vector4::Project)
           .set("Invert", &Vector4::Invert);
 }
+
+//-----------------------------
+// MATRIX33
+//-----------------------------
+
+Matrix33::Matrix33()
+{
+  for(int i = 0; i < 3; ++i)
+  {
+    for(int j = 0; j < 3; ++j)
+    {
+      if(i == j)
+        values[i][j] = 1;
+      else
+        values[i][j] = 0;
+    }
+  }
+}
+
+Matrix33::Matrix33(float aValues[3][3])
+{
+  for(int i = 0; i < 3; ++i)
+  {
+    for(int j = 0; j < 3; ++j)
+    {
+      values[i][j] = aValues[i][j];
+    }
+  }
+}
+
+Matrix33::Matrix33(float aValues[9])
+{
+  for(int i = 0; i < 3; ++i)
+  {
+    for(int j = 0; j < 3; ++j)
+    {
+      values[i][j] = aValues[(i * 3) + j];
+    }
+  }
+}
+
+Matrix33 Matrix33::Concatenate(Matrix33 const &rhs) const
+{
+  return *this * rhs;
+}
+
+Matrix33 Matrix33::Rotate(Vector3 const &aAxis, float const aAngle) const
+{
+  // THE IDEA:
+  // Rotate to xz plane
+  // Rotate to z axis
+  // Rotate about z axis
+  // Rotate by inverse z axis transform
+  // Rotate by inverse xz plane transform
+  float angle = aAngle * DEGREE_TO_RADS;
+  float cosine = cos(angle);
+  float sine = sin(angle);
+  float xylength = sqrt(aAxis.x * aAxis.x + aAxis.y * aAxis.y);
+  float xyzlength = aAxis.length();
+
+  // What if we're already on the z plane?
+  float templength = xylength > 0.0f ? xylength : 1.0f;
+
+  float xzvalues[3][3] = {{aAxis.x / templength, aAxis.y / templength, 0},
+        {-aAxis.y / templength, aAxis.x / templength, 0},
+        {0, 0, 1}};
+  float zvalues[3][3] = {{aAxis.z / xyzlength, 0, -xylength / xyzlength},
+        {0, 1, 0},
+        {xylength / xyzlength, 0 , aAxis.z / xyzlength}};
+  float rotvalues[3][3] = {{cosine, -sine, 0},
+         {sine, cosine, 0},
+         {0, 0, 1}};
+
+  // Create identity matrix if on z plane already
+  if(xylength <= 0.0f)
+  {
+    xzvalues[0][0] = 1.0f;
+    xzvalues[1][1] = 1.0f;
+  }
+
+  Matrix33 ret;
+  Matrix33 xztrans(xzvalues);
+  Matrix33 ztrans(zvalues);
+  Matrix33 xzinvert = xztrans.Invert();
+  Matrix33 zinvert = ztrans.Invert();
+  Matrix33 rotation(rotvalues);
+
+  ret = xzinvert * zinvert * rotation * ztrans * xztrans;
+
+  return ret;
+}
+
+Matrix33 Matrix33::Invert() const
+{
+  Matrix33 ret;
+  float det = Determinant();
+
+  ret.values[0][0] = Determinant(values[1][1], values[1][2], values[2][1], values[2][2]);
+  ret.values[0][1] = Determinant(values[0][2], values[0][1], values[2][2], values[2][1]);
+  ret.values[0][2] = Determinant(values[0][1], values[0][2], values[1][1], values[1][2]);
+
+  ret.values[1][0] = Determinant(values[1][2], values[1][0], values[2][2], values[2][0]);
+  ret.values[1][1] = Determinant(values[0][0], values[0][2], values[2][0], values[2][2]);
+  ret.values[1][2] = Determinant(values[0][2], values[0][0], values[1][2], values[1][0]);
+
+  ret.values[2][0] = Determinant(values[1][0], values[1][1], values[2][0], values[2][1]);
+  ret.values[2][1] = Determinant(values[0][1], values[0][0], values[2][1], values[2][0]);
+  ret.values[2][2] = Determinant(values[0][0], values[0][1], values[1][0], values[1][1]);
+
+  return ret * (1.0f / det);
+}
+
+float Matrix33::Determinant() const
+{
+  return values[0][0] * ((values[1][1] * values[2][2]) - (values[1][2] * values[2][1])) -
+    values[0][1] * ((values[1][0] * values[2][2]) - (values[1][2] * values[2][0])) +
+    values[0][2] * ((values[1][0] * values[2][1]) - (values[1][1] * values[2][0]));
+}
+
+float Matrix33::Determinant(float const aA, float const aB, float const aC, float const aD) const
+{
+  return (aA * aD) - (aB * aC);
+}
+
+Matrix33 Matrix33::operator*(Matrix33 const &rhs) const
+{
+  Matrix33 ret;
+
+  ret.values[0][0] = values[0][0] * rhs.values[0][0] +
+            values[0][1] * rhs.values[1][0] +
+            values[0][2] * rhs.values[2][0];
+  ret.values[0][1] = values[0][0] * rhs.values[0][1] +
+            values[0][1] * rhs.values[1][1] +
+            values[0][2] * rhs.values[2][1];
+  ret.values[0][2] = values[0][0] * rhs.values[0][2] +
+            values[0][1] * rhs.values[1][2] +
+            values[0][2] * rhs.values[2][2];
+
+  ret.values[1][0] = values[1][0] * rhs.values[0][0] +
+            values[1][1] * rhs.values[1][0] +
+            values[1][2] * rhs.values[2][0];
+  ret.values[1][1] = values[1][0] * rhs.values[0][1] +
+            values[1][1] * rhs.values[1][1] +
+            values[1][2] * rhs.values[2][1];
+  ret.values[1][2] = values[1][0] * rhs.values[0][2] +
+            values[1][1] * rhs.values[1][2] +
+            values[1][2] * rhs.values[2][2];
+
+  ret.values[2][0] = values[2][0] * rhs.values[0][0] +
+            values[2][1] * rhs.values[1][0] +
+            values[2][2] * rhs.values[2][0];
+  ret.values[2][1] = values[2][0] * rhs.values[0][1] +
+            values[2][1] * rhs.values[1][1] +
+            values[2][2] * rhs.values[2][1];
+  ret.values[2][2] = values[2][0] * rhs.values[0][2] +
+            values[2][1] * rhs.values[1][2] +
+            values[2][2] * rhs.values[2][2];
+
+  return ret;
+}
+
+Matrix33 Matrix33::operator*(float const aValue) const
+{
+  Matrix33 ret = *this;
+
+  for(int i = 0; i < 3; ++i)
+  {
+    for(int j = 0; j < 3; ++j)
+    {
+      ret.values[i][j] *= aValue;
+    }
+  }
+
+  return ret;
+}
+
+Vector3 Matrix33::operator*(Vector3 const &rhs) const
+{
+  Vector3 ret;
+
+  ret.x = values[0][0] * rhs.x +
+      values[0][1] * rhs.y +
+      values[0][2] * rhs.z;
+  ret.y = values[1][0] * rhs.x +
+      values[1][1] * rhs.y +
+      values[1][2] * rhs.z;
+  ret.z = values[2][0] * rhs.x +
+      values[2][1] * rhs.y +
+      values[2][2] * rhs.z;
+
+  return ret;
+}
+
+void Matrix33::operator*=(Matrix33 const &rhs)
+{
+  *this = *this * rhs;
+}
+
+void Matrix33::operator*=(float const aValue)
+{
+  *this = *this * aValue;
+}
+
+
+//------------------------------
+// LINESEGMENT
+//------------------------------
+
+LineSegment::LineSegment() : position(), length(0)
+{
+}
+
+LineSegment::LineSegment(Vector3 const &aPosition, float aLength) : position(aPosition), length(aLength)
+{
+}
+
+std::vector<Vector3> LineSegment::GetCollisions(LineSegment const &aCompare, int const _precision)
+{
+  std::vector<Vector3> ret;
+
+  Vector3 d = aCompare.position - position;
+  float dist = d.length();
+
+  // > is an early out
+  if(dist < length + aCompare.length)
+  {
+    // THE IDEA: Find one point, rotate about arbitrary axis between spheres
+    // Reduce the problem to solving a circle
+    Vector3 axis = d.normalize();
+    float rate = 360.0f / _precision;
+    float xylength = sqrt(axis.x * axis.x + axis.y * axis.y);
+    float xyzlength = axis.length();
+    // Don't want to divide by zero
+    float templength = xylength > 0.0f ? xylength : 1.0f;
+    // Our matrices
+    // First, go to xz plane
+    float xzvalues[3][3] = {{axis.x / templength, axis.y / templength, 0},
+                                {-axis.y / templength, axis.x / templength, 0},
+                                {0, 0, 1}};
+    // Then, only to z axis
+    float zvalues[3][3] = {{axis.z / xyzlength, 0, -xylength / xyzlength},
+                                {0, 1, 0},
+                                {xylength / xyzlength, 0 , axis.z / xyzlength}};
+
+    // Create identity matrix if we're already on the z plane
+    if(xylength <= 0.0f)
+    {
+      xzvalues[0][0] = 1.0f;
+      xzvalues[1][1] = 1.0f;
+    }
+
+    // Create our matrices and invert them
+    Matrix33 xztrans(xzvalues);
+    Matrix33 ztrans(zvalues);
+    Matrix33 toZAxisInverse = xztrans.Invert() * ztrans.Invert();
+
+    // Circle collision function
+    float z = ((dist * dist) + (length * length) - (aCompare.length * aCompare.length)) /
+          (2.0f * dist);
+    float y = sqrt((length * length) - (z * z));
+
+    Vector3 point = Vector3(0, y, z);
+    for(int i = 0; i < _precision; ++i)
+    {
+      float angle = (rate * i) * DEGREE_TO_RADS;
+      float cosine = cos(angle);
+      float sine = sin(angle);
+      // Generate the rotation around teh z axis
+      float matvalues[3][3] = {{cosine, -sine, 0},
+                  {sine, cosine, 0},
+                  {0, 0, 1}};
+      Matrix33 zrot(matvalues);
+      Vector3 newpoint = toZAxisInverse * zrot * point;
+      // Translate back away from origin
+      newpoint += position;
+      ret.push_back(newpoint);
+    }
+  }
+  else if(dist == length + aCompare.length)
+  {
+    // They barely touch
+    ret.push_back(position + d / 2.0f);
+  }
+  else
+  {
+    printf("These LineSegments can never touch.\n");
+  }
+
+  return ret;
+}
