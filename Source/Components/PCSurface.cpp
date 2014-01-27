@@ -13,7 +13,8 @@
 PCSurface::PCSurface() : Surface()
 {
 }
-PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(NULL), mFont(NULL)
+PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(NULL),
+                                                  mWrapMode(GL_CLAMP_TO_EDGE), mFont(NULL)
 {
 }
 PCSurface::~PCSurface()
@@ -35,12 +36,12 @@ void PCSurface::LoadImage(std::string const &aName)
 	{
 		if ((mSurface->w & (mSurface->w - 1)) != 0 )
 		{
-			printf("warning: image.bmp's width is not a power of 2\n");
+			printf("warning: width of image: %s is not a power of 2\n", aName.c_str());
 		}
 
 		if ((mSurface->h & (mSurface->h - 1)) != 0 )
 		{
-			printf("warning: image.bmp's height is not a power of 2\n");
+			printf("warning: height of image: %s is not a power of 2\n", aName.c_str());
 		}
 
 		mNumberOfColors = mSurface->format->BytesPerPixel;
@@ -68,7 +69,7 @@ void PCSurface::LoadImage(std::string const &aName)
 		}
 		else
 		{
-			printf("warning: the image is not truecolor..  this will probably break\n");
+			printf("warning: image %s is not truecolor..  this will probably break\n", aName.c_str());
 		}
 
 		glGenTextures(1, &mTextureID);
@@ -77,8 +78,8 @@ void PCSurface::LoadImage(std::string const &aName)
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mWrapMode);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mWrapMode);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
 						  mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
@@ -87,7 +88,7 @@ void PCSurface::LoadImage(std::string const &aName)
 	}
 	else
 	{
-		printf("warning: file not found or incompatible format, check this out\n");
+		printf("warning: file: %s not found or incompatible format, check this out\n", aName.c_str());
 	}
 }
 
@@ -150,6 +151,19 @@ void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vec
 unsigned PCSurface::GetIndexValue()
 {
   return mTextureID;
+}
+
+void PCSurface::SetWrapMode(WrapMode const &aWrapMode)
+{
+  switch(aWrapMode)
+  {
+  case REPEAT:
+    mWrapMode = GL_REPEAT;
+    break;
+  case CLAMP:
+    mWrapMode = GL_CLAMP_TO_EDGE;
+    break;
+  }
 }
 
 void PCSurface::Update()
