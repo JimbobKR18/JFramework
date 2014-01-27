@@ -38,6 +38,9 @@ public:
   std::string       GetFilename() const;
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
+
+  int               GetTileValue(int aX, int aY);
+  int               GetCollisionValue(int aX, int aY);
 };
 
 #endif /* defined(__JFramework__TileMapGenerator__) */

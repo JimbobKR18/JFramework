@@ -133,3 +133,24 @@ std::vector<int>& TileMapGenerator::GetCollisionTiles()
 {
   return mCollision;
 }
+int TileMapGenerator::GetTileValue(int aX, int aY)
+{
+  float halfX = mWidth * mTileSize;
+  float halfY = mHeight * mTileSize;
+  aX += halfX;
+  aX += halfY;
+  aX /= mTileSize;
+  aY /= mTileSize;
+  return mTiles[(aY * mWidth) + aX];
+}
+int TileMapGenerator::GetCollisionValue(int aX, int aY)
+{
+  float halfX = mWidth * mTileSize;
+  float halfY = mHeight * mTileSize;
+  aX += halfX;
+  aX += halfY;
+  aX /= mTileSize;
+  aY /= mTileSize;
+  return mCollision[(aY * mWidth) + aX];
+}
+
