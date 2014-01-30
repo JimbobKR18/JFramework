@@ -18,6 +18,7 @@ struct Root
   Root*               mParent;
 
   Root const *Search(std::string const &aValue) const;
+  void Place(std::string const &aElement, std::string const &aValue);
   ~Root();
 
   void operator=(Root const &rhs)
@@ -27,6 +28,11 @@ struct Root
 	  mChildren = rhs.mChildren;
 	  mParent = rhs.mParent;
   }
+private:
+  Root *Find(std::string const &aValue);
+
+  typedef std::vector<Root*>::const_iterator rootConstIT;
+  typedef std::vector<Root*>::iterator rootIT;
 };
 
 class TextParser : public Parser
@@ -44,8 +50,8 @@ class TextParser : public Parser
     std::string   Find(std::string const &aRoot, std::string const &aElement);
     void          Parse();
     // Write
-    void          Place(std::string const &aElement);
-    void          Place(std::string const &aRoot, std::string const &aElement);
+    void          Place(std::string const &aElement, std::string const &aValue);
+    void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
     void          Write();
     // Manual
     float         GetNextFloat(float &rValue);

@@ -20,8 +20,8 @@ class Parser
     virtual void          Parse() = 0;
 
     // Writing
-    virtual void          Place(std::string const &aElement) = 0;
-    virtual void          Place(std::string const &aRoot, std::string const &aElement) = 0;
+    virtual void          Place(std::string const &aElement, std::string const &aValue) = 0;
+    virtual void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue) = 0;
     virtual void          Write() = 0;
 };
 

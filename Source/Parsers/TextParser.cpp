@@ -3,19 +3,55 @@
 
 Root const *Root::Search(std::string const &aValue) const
 {
+  if(mName == aValue)
+    return this;
+  else
+  {
+    // Search children for node
+    for(rootConstIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    {
+      Root const *ret = (*it)->Search(aValue);
+      if(ret)
+      {
+        if(ret->mName == aValue)
+          return ret;
+      }
+    }
+  }
+
+  return NULL;
+}
+
+void Root::Place(std::string const &aElement, std::string const &aValue)
+{
+  if(mName == aElement)
+  {
+    mValue = aValue;
+  }
+  else
+  {
+    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    {
+      (*it)->Place(aElement, aValue);
+    }
+  }
+}
+
+Root *Root::Find(std::string const &aValue)
+{
   // Found our node
   if(mName == aValue)
     return this;
   else
   {
     // Search children for node
-    for(std::vector<Root*>::const_iterator it = mChildren.begin(); it != mChildren.end(); ++it)
+    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
-      Root const *ret = (*it)->Search(aValue);
+      Root *ret = (*it)->Find(aValue);
       if(ret)
       {
-    	  if(ret->mName == aValue)
-    		  return ret;
+        if(ret->mName == aValue)
+          return ret;
       }
     }
   }
@@ -162,12 +198,12 @@ void TextParser::Parse()
   mDictionary = mCurNode;
 }
 
-void TextParser::Place(std::string const &aElement)
+void TextParser::Place(std::string const &aElement, std::string const &aValue)
 {
   // TODO
 }
 
-void TextParser::Place(std::string const &aRoot, std::string const &aElement)
+void TextParser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
   // TODO
 }
