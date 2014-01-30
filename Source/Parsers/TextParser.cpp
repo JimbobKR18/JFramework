@@ -1,6 +1,10 @@
 #include "TextParser.h"
 #include "Common.h"
 
+Root::Root() : mValue(""), mName("Start"), mChildren(), mParent(NULL)
+{
+}
+
 Root const *Root::Search(std::string const &aValue) const
 {
   if(mName == aValue)
@@ -22,17 +26,34 @@ Root const *Root::Search(std::string const &aValue) const
   return NULL;
 }
 
-void Root::Place(std::string const &aElement, std::string const &aValue)
+void Root::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
-  if(mName == aElement)
+  if(mName == aRoot)
   {
-    mValue = aValue;
+    Root *node = Find(aElement);
+
+    if(!node)
+    {
+      node = new Root();
+    }
+    node->mName = aElement;
+    node->mValue = aValue;
+    node->mParent = this;
+    mChildren.push_back(node);
+    return;
   }
   else
   {
-    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    if(mName == aElement)
     {
-      (*it)->Place(aElement, aValue);
+      mValue = aValue;
+    }
+    else
+    {
+      for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+      {
+        (*it)->Place(aRoot, aElement, aValue);
+      }
     }
   }
 }
@@ -152,7 +173,7 @@ void TextParser::Parse()
         unsigned pos = value.find("Literal") + 8;
         char next;
         bool earlyout = false;
-        // Litera(blah is one whole word, extract
+        // Literal(blah) is one whole word, extract
         while(pos < value.length())
         {
           char next = value[pos];
@@ -200,17 +221,17 @@ void TextParser::Parse()
 
 void TextParser::Place(std::string const &aElement, std::string const &aValue)
 {
-  // TODO
+  mDictionary->Place(mDictionary->mName, aElement, aValue);
 }
 
 void TextParser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
-  // TODO
+  mDictionary->Place(aRoot, aElement, aValue);
 }
 
 void TextParser::Write()
 {
-  // TODO
+  WriteRoot(mDictionary);
 }
 
 float TextParser::GetNextFloat(float &rValue)
@@ -259,4 +280,22 @@ bool TextParser::IsGood()
 {
   // Helper function to determine if file is read
   return mInput.good();
+}
+
+void TextParser::WriteRoot(Root const *aRoot)
+{
+  if(aRoot->mValue == "")
+  {
+    rootConstIT end = aRoot->mChildren.end();
+    mOutput << aRoot->mName << std::endl << "{" << std::endl;
+    for(rootConstIT it = aRoot->mChildren.begin(); it != end; ++it)
+    {
+      WriteRoot(*it);
+    }
+    mOutput << "}" << std::endl;
+  }
+  else
+  {
+    mOutput << aRoot->mName << " = " << aRoot->mValue << std::endl;
+  }
 }

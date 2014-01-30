@@ -17,8 +17,10 @@ struct Root
   std::vector<Root*>  mChildren;
   Root*               mParent;
 
+  Root();
+
   Root const *Search(std::string const &aValue) const;
-  void Place(std::string const &aElement, std::string const &aValue);
+  void Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
   ~Root();
 
   void operator=(Root const &rhs)
@@ -30,10 +32,10 @@ struct Root
   }
 private:
   Root *Find(std::string const &aValue);
-
-  typedef std::vector<Root*>::const_iterator rootConstIT;
-  typedef std::vector<Root*>::iterator rootIT;
 };
+
+typedef std::vector<Root*>::const_iterator rootConstIT;
+typedef std::vector<Root*>::iterator rootIT;
 
 class TextParser : public Parser
 {
@@ -58,6 +60,8 @@ class TextParser : public Parser
     int           GetNextInt(int &rValue);
     std::string   GetNextString(std::string &rValue);
     bool          IsGood();
+  private:
+    void          WriteRoot(Root const *aRoot);
 };
 
 #endif
