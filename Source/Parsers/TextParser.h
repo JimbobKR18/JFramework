@@ -43,6 +43,8 @@ class TextParser : public Parser
     std::ifstream mInput;
     std::ofstream mOutput;
     Root*         mDictionary;
+    std::string   mCurrentRoot;
+    bool          mAutoParse;
   public:
     TextParser(std::string const &aFilename, bool aAutoParse = true, TextMode const &aMode = MODE_INPUT);
     ~TextParser();
@@ -52,7 +54,7 @@ class TextParser : public Parser
     std::string   Find(std::string const &aRoot, std::string const &aElement);
     void          Parse();
     // Write
-    void          Place(std::string const &aElement, std::string const &aValue);
+    void          Place(std::string const &aRoot, std::string const &aValue);
     void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
     void          Write();
     // Manual

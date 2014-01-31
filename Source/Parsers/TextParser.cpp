@@ -35,8 +35,8 @@ void Root::Place(std::string const &aRoot, std::string const &aElement, std::str
     if(!node)
     {
       node = new Root();
+      node->mName = aElement;
     }
-    node->mName = aElement;
     node->mValue = aValue;
     node->mParent = this;
     mChildren.push_back(node);
@@ -87,7 +87,9 @@ Root::~Root()
       delete *it;
 }
 
-TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode const &aMode) : Parser(aFilename)
+TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode const &aMode) : Parser(aFilename),
+                                                                                               mCurrentRoot(""),
+                                                                                               mAutoParse(aAutoParse)
 {
   mDictionary = new Root();
 
@@ -101,7 +103,7 @@ TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode c
     // If we want to push all objects into a dictionary,
     // set it to autoparse, but for files with values
     // of similar name, that file cannot be autoparsed.
-    if(aMode == MODE_INPUT && aAutoParse)
+    if(aMode == MODE_INPUT && mAutoParse)
       Parse();
   }
   else
@@ -124,6 +126,7 @@ bool TextParser::Find(std::string const &aElement)
 
   return value->mName.length() > 0;
 }
+
 std::string TextParser::Find(std::string const &aRoot, std::string const &aElement)
 {
   // Find node and search it for an element
@@ -139,6 +142,7 @@ std::string TextParser::Find(std::string const &aRoot, std::string const &aEleme
 
   return value->mValue;
 }
+
 void TextParser::Parse()
 {
   Root *mCurNode = NULL;
@@ -219,14 +223,48 @@ void TextParser::Parse()
   mDictionary = mCurNode;
 }
 
-void TextParser::Place(std::string const &aElement, std::string const &aValue)
+void TextParser::Place(std::string const &aRoot, std::string const &aValue)
 {
-  mDictionary->Place(mDictionary->mName, aElement, aValue);
+  if(mAutoParse)
+    mDictionary->Place(mDictionary->mName, aRoot, aValue);
+  else
+  {
+    if(aValue == "")
+    {
+      if(aRoot != mCurrentRoot && !mCurrentRoot.empty())
+        mOutput << "}" << std::endl;
+
+      mOutput << aRoot << std::endl;
+      mOutput << "{" << std::endl;
+      mCurrentRoot = aRoot;
+    }
+    else
+    {
+      mOutput << aRoot << " = " <<  aValue << std::endl;
+    }
+  }
 }
 
 void TextParser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
-  mDictionary->Place(aRoot, aElement, aValue);
+  if(mAutoParse)
+    mDictionary->Place(aRoot, aElement, aValue);
+  else
+  {
+    if(aValue == "")
+    {
+      if(aRoot != mCurrentRoot && !mCurrentRoot.empty())
+        mOutput << "}" << std::endl;
+
+      mOutput << aRoot << std::endl;
+      mOutput << "{" << std::endl;
+      mCurrentRoot = aRoot;
+    }
+    else
+    {
+      mOutput << aElement << " = " <<  aValue << std::endl;
+    }
+  }
 }
 
 void TextParser::Write()
@@ -287,7 +325,12 @@ void TextParser::WriteRoot(Root const *aRoot)
   if(aRoot->mValue == "")
   {
     rootConstIT end = aRoot->mChildren.end();
-    mOutput << aRoot->mName << std::endl << "{" << std::endl;
+    mOutput << aRoot->mName << std::endl;
+
+    if(aRoot->mChildren.empty())
+      return;
+
+    mOutput << "{" << std::endl;
     for(rootConstIT it = aRoot->mChildren.begin(); it != end; ++it)
     {
       WriteRoot(*it);
