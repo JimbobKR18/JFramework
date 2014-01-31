@@ -123,6 +123,16 @@ void GameObject::ReceiveMessage(Message const &aMessage)
   }
 }
 
+void GameObject::Serialize(Parser &aParser)
+{
+  aParser.Place(mFileName, "");
+  ComponentIT end = mComponents.end();
+  for(ComponentIT it = mComponents.begin(); it != end; ++it)
+  {
+    (*it)->Serialize(aParser);
+  }
+}
+
 void GameObject::SerializeLUA()
 {
   SLB::Class<GameObject>("GameObject")

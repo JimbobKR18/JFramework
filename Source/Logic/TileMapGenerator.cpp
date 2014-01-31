@@ -20,14 +20,15 @@ TileMapGenerator::TileMapGenerator()
 }
 
 TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
-                                   std::string const &aFilename,
+                                   std::string const &aImageName,
+                                   std::string const &aDataName,
                                    std::vector<int> const &aTiles,
                                    std::vector<int> const &aCollision,
                                    Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight),
-                                   mTileSize(aTileSize), mFilename(aFilename),
-                                   mTiles(aTiles), mCollision(aCollision),
-                                   mOwner(aOwner)
+                                   mTileSize(aTileSize), mImageName(aImageName),
+                                   mDataName(aDataName), mTiles(aTiles),
+                                   mCollision(aCollision), mOwner(aOwner)
 {
   int xPos = 0, yPos = 0;
   float halfX = mWidth * aTileSize;
@@ -41,7 +42,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   {
     // Make GameObject to place
     ObjectManager *manager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
-    GameObject *obj = new GameObject(manager, mFilename);
+    GameObject *obj = new GameObject(manager, mImageName);
     manager->ParseObject(obj);
     
     // Set name of tile, for collision reasons
@@ -121,9 +122,9 @@ int TileMapGenerator::GetTileSize() const
   return mTileSize;
 }
 
-std::string TileMapGenerator::GetFilename() const
+std::string TileMapGenerator::GetImageName() const
 {
-  return mFilename;
+  return mImageName;
 }
 std::vector<int>& TileMapGenerator::GetArtTiles()
 {
@@ -152,5 +153,15 @@ int TileMapGenerator::GetCollisionValue(int aX, int aY)
   aX /= mTileSize;
   aY /= mTileSize;
   return mCollision[(aY * mWidth) + aX];
+}
+
+void TileMapGenerator::Serialize(Parser &aParser)
+{
+  aParser.Place("TileMapGenerator", "");
+  aParser.Place("TileMapGenerator", "Width", Common::IntToString(mWidth));
+  aParser.Place("TileMapGenerator", "Height", Common::IntToString(mHeight));
+  aParser.Place("TileMapGenerator", "TileSize", Common::IntToString(mTileSize));
+  aParser.Place("TileMapGenerator", "Image", mImageName);
+  aParser.Place("TileMapGenerator", "Data", mDataName);
 }
 

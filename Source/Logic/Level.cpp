@@ -265,6 +265,22 @@ void Level::Unload(Level* const aNextLevel)
   mOwner->SetActiveLevel(NULL);
 }
 
+void Level::Serialize(Parser &aParser)
+{
+  mGenerator->Serialize(aParser);
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
+    (*it)->Serialize(aParser);
+  }
+  /*for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  {
+    (*it)->Serialize(aParser);
+  }*/
+  // TODO focus target
+  aParser.Place("Music", "");
+  aParser.Place("Music", "Music", mMusicName);
+}
+
 void Level::SerializeLUA()
 {
   SLB::Class<Level>("Level")
@@ -382,7 +398,8 @@ void Level::ParseFile()
       collision = Common::StringToIntVector(collisionData);
       
       mGenerator = new TileMapGenerator(width, height, tileSize,
-                                       file, frames, collision, this);
+                                       file, frameDataFilename,
+                                       frames, collision, this);
     }
     else if(param == "Music")
     {

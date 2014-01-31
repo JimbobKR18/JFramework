@@ -11,6 +11,7 @@
 
 #include "Common.h"
 #include "Message.h"
+#include "Parser.h"
 
 class Component;
 class ObjectManager;
@@ -53,6 +54,7 @@ public:
 
   void                    Update();
   void                    ReceiveMessage(Message const &aMessage);
+  void                    Serialize(Parser &aParser);
   static void             SerializeLUA();
 
   // Fallback logic for collisions
