@@ -2,14 +2,15 @@
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
 
-Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE), mColor(1,1,1,1)
+Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
+                     mColor(1,1,1,1), mFileName(""), mNoRender("false")
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NULL),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
-                                              mColor(1,1,1,1)
+                                              mColor(1,1,1,1), mFileName(""), mNoRender("false")
 {
   
 }
@@ -17,6 +18,8 @@ Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NU
 Surface::~Surface()
 {
   GetManager()->RemoveSurface(this);
+  if(mTexCoord)
+    delete mTexCoord;
 }
 
 
@@ -71,7 +74,29 @@ void Surface::ReceiveMessage(Message const &aMessage)
 
 void Surface::Serialize(Parser &aParser)
 {
-  
+  TextureCoordinates *coords = GetTextureData();
+  std::vector<int> animations;
+  bool animated = coords->GetAnimated();
+  int numanimations = coords->GetNumberofAnimations();
+  char const* values[4] = { "ColorR",
+                            "ColorG",
+                            "ColorB",
+                            "ColorA"};
+
+  aParser.Place("Surface", "");
+  aParser.Place("Surface", "AnimationCount", Common::IntToString(numanimations));
+  for(int i = 0; i < numanimations; ++i)
+  {
+    animations.push_back(coords->GetAnimationFrameCounts(i));
+  }
+  aParser.Place("Surface", "FrameNumbers", Common::IntVectorToString(animations));
+  aParser.Place("Surface", "Animated", Common::BoolToString(animated));
+
+  aParser.Place("Surface", "NoRender", mNoRender);
+  for(int i = 0; i < 4; ++i)
+  {
+    aParser.Place("Surface", values[i], Common::IntToString(mColor[i]));
+  }
 }
 
 void Surface::Deserialize(Parser &aParser)
@@ -84,7 +109,7 @@ void Surface::Deserialize(Parser &aParser)
   if(aParser.Find("Surface", "AnimationCount") != "BadString")
   {
     numFrames.clear();
-    numAnimations = Common::StringToFloat(aParser.Find("Surface", "AnimationCount"));
+    numAnimations = Common::StringToInt(aParser.Find("Surface", "AnimationCount"));
     numFrames = Common::StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
     
     std::string isAnimated = aParser.Find("Surface", "Animated");
@@ -93,8 +118,8 @@ void Surface::Deserialize(Parser &aParser)
   }
   if(aParser.Find("Surface", "NoRender") != "BadString")
   {
-    std::string norender = aParser.Find("Surface", "NoRender");
-    if(norender == "true")
+    mNoRender = aParser.Find("Surface", "NoRender");
+    if(mNoRender == "true")
       mManager->RemoveSurface(this);
   }
   if(aParser.Find("Surface", "ColorR") != "BadString")

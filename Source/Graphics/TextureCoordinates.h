@@ -38,14 +38,23 @@ public:
   ~TextureCoordinates();
   
   void  Update(float aDT);
+
+  // GETTERS
   float GetXValue(int aValue) const;
   float GetYValue(int aValue) const;
   int   GetCurrentAnimation() const;
+  int   GetNumberofAnimations() const;
+  int   GetAnimationFrameCounts(int const aAnimation) const;
   bool  GetCompleted() const;
+  bool  GetAnimated() const;
+
+  // SETTERS
   void  SetCurrentAnimation(int aAnimation);
   void  SetCurrentFrame(int aFrame);
   void  SetAnimated(bool aAnimated);
   void  SetSpeed(float aSpeed);
+
+  // HELPERS
   void  Reset();
 };
 

@@ -61,10 +61,15 @@ namespace Common
 
   int                       StringToInt(std::string const &aValue);
   float                     StringToFloat(std::string const &aValue);
+  bool                      StringToBool(std::string const &aValue);
   std::vector<int>          StringToIntVector(std::string const &aValue);
   std::vector<std::string>  StringToStringVector(std::string const &aValue);
 
-  std::string               IntToString(int aValue);
+  std::string               IntToString(int const aValue);
+  std::string               FloatToString(float const aValue);
+  std::string               BoolToString(bool const aValue);
+  std::string               IntVectorToString(std::vector<int> &aValue);
+  std::string               StringVectorToString(std::vector<std::string> &aValue);
 
   typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;
   typedef std::chrono::steady_clock Clock;

@@ -94,9 +94,24 @@ int TextureCoordinates::GetCurrentAnimation() const
   return mCurAnimation;
 }
 
+int TextureCoordinates::GetNumberofAnimations() const
+{
+  return mAnimations.size();
+}
+
+int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
+{
+  return mAnimations.find(aAnimation)->second;
+}
+
 bool TextureCoordinates::GetCompleted() const
 {
   return mCompleted;
+}
+
+bool TextureCoordinates::GetAnimated() const
+{
+  return mAnimated;
 }
 
 void TextureCoordinates::SetCurrentAnimation(int aAnimation)

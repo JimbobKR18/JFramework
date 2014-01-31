@@ -78,7 +78,14 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
 
 void PhysicsObject::Serialize(Parser &aParser)
 {
-  
+  std::string shape = mShape == PhysicsObject::CUBE ? "CUBE" : "SPHERE";
+
+  aParser.Place("PhysicsObject", "");
+  aParser.Place("PhysicsObject", "Shape", shape);
+  aParser.Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
+  aParser.Place("PhysicsObject", "Static", Common::BoolToString(mStatic));
+  aParser.Place("PhysicsObject", "Mass", Common::FloatToString(mMass));
+  aParser.Place("PhysicsObject", "Damping", Common::FloatToString(mDamping));
 }
 
 void PhysicsObject::Deserialize(Parser &aParser)

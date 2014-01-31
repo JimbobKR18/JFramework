@@ -120,6 +120,12 @@ namespace Common
     return ret;
   }
 
+  bool StringToBool(std::string const &aValue)
+  {
+    bool ret = (aValue == "True") ? true : false;
+    return ret;
+  }
+
   std::vector<int> StringToIntVector(std::string const &aValue)
   {
     std::vector<int> ret;
@@ -157,11 +163,55 @@ namespace Common
     return ret;
   }
 
-  std::string IntToString(int aValue)
+  std::string IntToString(int const aValue)
   {
     char buffer[33];
     sprintf(buffer, "%d", aValue);
     return std::string(buffer);
+  }
+
+  std::string FloatToString(float const aValue)
+  {
+    std::ostringstream stream;
+    stream << aValue;
+    return stream.str();
+  }
+
+  std::string BoolToString(bool const aValue)
+  {
+    if(aValue)
+      return "true";
+    else
+      return "false";
+  }
+
+  std::string IntVectorToString(std::vector<int> &aValue)
+  {
+    std::string ret;
+    std::vector<int>::iterator end = aValue.end();
+    for(std::vector<int>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      std::ostringstream stream;
+      stream << *it;
+      ret += stream.str();
+      ret += ", ";
+    }
+    ret = ret.substr(0, ret.size() - 2);
+
+    return ret;
+  }
+
+  std::string StringVectorToString(std::vector<std::string> &aValue)
+  {
+    std::string ret;
+    std::vector<std::string>::iterator end = aValue.end();
+    for(std::vector<std::string>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      ret += *it;
+      ret += ", ";
+    }
+    ret = ret.substr(0, ret.size() - 2);
+    return ret;
   }
 
   TimePoint GetNow()

@@ -20,6 +20,8 @@ private:
   GraphicsManager*    mManager;
   Viewspace           mViewmode;
   Vector4             mColor;
+  std::string         mFileName;
+  std::string         mNoRender;
 public:
 	Surface();
 	Surface(GraphicsManager *aManager);
@@ -29,10 +31,12 @@ public:
 	GraphicsManager*    GetManager() const { return mManager; }
 	Viewspace           GetViewMode() const { return mViewmode; }
 	Vector4&            GetColor() { return mColor; }
+	std::string         GetFileName() { return mFileName; }
 
 	// Setters
-	void                SetViewMode(Viewspace const &aViewmode) { mViewmode = aViewmode; }
+	void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
 	void                SetColor(Vector4 const& aColor) { mColor = aColor; }
+	void                SetFileName(std::string const& aFileName) { mFileName = aFileName; }
   
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;

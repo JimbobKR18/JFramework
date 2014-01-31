@@ -39,16 +39,27 @@ void Transform::SetSize(Vector3 const &aSize)
 
 void Transform::Serialize(Parser &aParser)
 {
-  aParser.Place("Transform", "PositionX = ");
-  aParser.Place("Transform", "PositionY = ");
-  aParser.Place("Transform", "PositionZ = ");
-  aParser.Place("Transform", "ScaleX = ");
-  aParser.Place("Transform", "ScaleY = ");
-  aParser.Place("Transform", "ScaleZ = ");
-  aParser.Place("Transform", "SizeX = ");
-  aParser.Place("Transform", "SizeX = ");
-  aParser.Place("Transform", "SizeY = ");
-  aParser.Place("Transform", "SizeZ = ");
+  char const *values[9] = {"PositionX",
+                            "PositionY",
+                            "PositionZ",
+                            "ScaleX",
+                            "ScaleY",
+                            "ScaleZ",
+                            "SizeX",
+                            "SizeY",
+                            "SizeZ"};
+  aParser.Place("Transform", "");
+  for(int i = 0; i < 9; ++i)
+  {
+    int value = 0;
+    if(i < 3)
+      value = mPosition[i];
+    else if(i >= 3 && i < 7)
+      value = mScale[i - 3];
+    else
+      value = mSize[i - 7];
+    aParser.Place("Transform", values[i], Common::IntToString(value));
+  }
 }
 
 void Transform::Deserialize(Parser &aParser)
