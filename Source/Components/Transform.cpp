@@ -51,14 +51,14 @@ void Transform::Serialize(Parser &aParser)
   aParser.Place("Transform", "");
   for(int i = 0; i < 9; ++i)
   {
-    int value = 0;
+    float value = 0;
     if(i < 3)
       value = mPosition[i];
     else if(i >= 3 && i < 7)
       value = mScale[i - 3];
     else
       value = mSize[i - 7];
-    aParser.Place("Transform", values[i], Common::IntToString(value));
+    aParser.Place("Transform", values[i], Common::FloatToString(value));
   }
 }
 
