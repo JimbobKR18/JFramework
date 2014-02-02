@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "LuaIncludes.h"
 #include "LevelChangeMessage.h"
+#include "TextParser.h"
 
 LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager"), mActiveLevel(NULL)
 {
@@ -79,6 +80,13 @@ Level *LevelManager::GetActiveLevel()
 void LevelManager::SetActiveLevel(Level *aLevel)
 {
   mActiveLevel = aLevel;
+}
+
+void LevelManager::SaveActiveLevelAs(std::string const &aFolder, std::string const &aFileName)
+{
+  TextParser parser(Common::RelativePath(aFolder, aFileName), false, MODE_OUTPUT);
+  mActiveLevel->Serialize(parser);
+  parser.Write();
 }
 
 void LevelManager::Update()

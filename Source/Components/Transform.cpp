@@ -54,10 +54,10 @@ void Transform::Serialize(Parser &aParser)
     float value = 0;
     if(i < 3)
       value = mPosition[i];
-    else if(i >= 3 && i < 7)
+    else if(i >= 3 && i < 6)
       value = mScale[i - 3];
     else
-      value = mSize[i - 7];
+      value = mSize[i - 6];
     aParser.Place("Transform", values[i], Common::FloatToString(value));
   }
 }
