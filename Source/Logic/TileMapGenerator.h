@@ -39,6 +39,7 @@ public:
   int               GetHeight() const;
   int               GetTileSize() const;
   std::string       GetImageName() const;
+  std::string       GetDataName() const;
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
 

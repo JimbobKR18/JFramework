@@ -281,6 +281,12 @@ void Level::Serialize(Parser &aParser)
   aParser.Place("Music", "Music", mMusicName);
 }
 
+void Level::SerializeTileMap(Parser &aParser)
+{
+  aParser.Place("MapArtData", Common::IntVectorToString(mGenerator->GetArtTiles()));
+  aParser.Place("Collision", Common::IntVectorToString(mGenerator->GetCollisionTiles()));
+}
+
 void Level::SerializeLUA()
 {
   SLB::Class<Level>("Level")
