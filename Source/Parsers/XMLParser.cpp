@@ -1,8 +1,8 @@
 #include "XMLParser.h"
 
-XMLParser::XMLParser(std::string const &aFilename) : Parser(aFilename)
+XMLParser::XMLParser(std::string const &aFileName) : Parser(aFileName)
 {
-  mDoc.LoadFile(aFilename.c_str());
+  mDoc.LoadFile(aFileName.c_str());
 }
 
 XMLParser::~XMLParser()
@@ -28,17 +28,17 @@ void XMLParser::Parse()
   // TODO?
 }
 
-void XMLParser::Place(std::string const &aElement)
+void XMLParser::Place(std::string const &aRoot, std::string const &aValue)
 {
   // TODO
 }
 
-void XMLParser::Place(std::string const &aRoot, std::string const &aElement)
+void XMLParser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
   // TODO
 }
 
 void XMLParser::Write()
 {
-  // TODO
+  mDoc.Save(mFileName.c_str());
 }

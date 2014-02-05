@@ -9,7 +9,7 @@ class XMLParser : public Parser
 private:
   tinyxml2::XMLDocument mDoc;
 public:
-  XMLParser(std::string const &aFilename);
+  XMLParser(std::string const &aFileName);
   ~XMLParser();
 
   // Read
@@ -18,8 +18,8 @@ public:
   void          Parse();
 
   // Write
-  void          Place(std::string const &aElement);
-  void          Place(std::string const &aRoot, std::string const &aElement);
+  void          Place(std::string const &aRoot, std::string const &aValue)
+  void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
   void          Write();
 };
 
