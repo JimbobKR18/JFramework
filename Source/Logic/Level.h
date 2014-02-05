@@ -61,6 +61,7 @@ public:
 	virtual void      Update() {};
 	virtual void      ParseAdditionalData(Parser *aParser, GameObject *aObject, std::string const &aFirstParam) {};
 	virtual void      Serialize(Parser &aParser);
+	void              SerializeTileMap(Parser &aParser);
 
 	static void       SerializeLUA();
 

@@ -126,14 +126,22 @@ std::string TileMapGenerator::GetImageName() const
 {
   return mImageName;
 }
+
+std::string TileMapGenerator::GetDataName() const
+{
+  return mDataName;
+}
+
 std::vector<int>& TileMapGenerator::GetArtTiles()
 {
   return mTiles;
 }
+
 std::vector<int>& TileMapGenerator::GetCollisionTiles()
 {
   return mCollision;
 }
+
 int TileMapGenerator::GetTileValue(int aX, int aY)
 {
   float halfX = mWidth * mTileSize;
@@ -144,6 +152,7 @@ int TileMapGenerator::GetTileValue(int aX, int aY)
   aY /= mTileSize;
   return mTiles[(aY * mWidth) + aX];
 }
+
 int TileMapGenerator::GetCollisionValue(int aX, int aY)
 {
   float halfX = mWidth * mTileSize;

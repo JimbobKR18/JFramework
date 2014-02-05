@@ -20,6 +20,7 @@ public:
 	void                LoadLevel(std::string const &aLevelName, bool aReset = false);
   Level*              GetActiveLevel();
   void                SetActiveLevel(Level *aLevel);
+  void                SaveActiveLevelAs(std::string const &aFolder, std::string const &aFileName);
   // Derived from Manager
 	virtual void        Update();
 	virtual void        SendMessage(Message const &aMessage);

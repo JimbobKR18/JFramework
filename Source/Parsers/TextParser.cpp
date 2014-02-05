@@ -1,7 +1,7 @@
 #include "TextParser.h"
 #include "Common.h"
 
-Root::Root() : mValue(""), mName("Start"), mChildren(), mParent(NULL)
+Root::Root() : mValue(""), mName(""), mChildren(), mParent(NULL)
 {
 }
 
@@ -231,12 +231,21 @@ void TextParser::Place(std::string const &aRoot, std::string const &aValue)
   {
     if(aValue == "")
     {
-      if(aRoot != mCurrentRoot && !mCurrentRoot.empty())
+      bool isTextFile = false;
+      bool newRoot = aRoot != mCurrentRoot;
+      bool empty = mCurrentRoot.empty();
+
+      mCurrentRoot = aRoot;
+
+      //if(mCurrentRoot.length() > 5)
+        //isTextFile = mCurrentRoot.substr(mCurrentRoot.length() - 4, 4) == ".txt";
+      if(newRoot && !empty && !isTextFile)
         mOutput << "}" << std::endl;
 
       mOutput << aRoot << std::endl;
-      mOutput << "{" << std::endl;
-      mCurrentRoot = aRoot;
+
+      if(!isTextFile)
+        mOutput << "{" << std::endl;
     }
     else
     {
@@ -253,12 +262,21 @@ void TextParser::Place(std::string const &aRoot, std::string const &aElement, st
   {
     if(aValue == "")
     {
-      if(aRoot != mCurrentRoot && !mCurrentRoot.empty())
-        mOutput << "}" << std::endl;
+      bool isTextFile = false;
+      bool newRoot = aRoot != mCurrentRoot;
+      bool empty = mCurrentRoot.empty();
 
-      mOutput << aRoot << std::endl;
-      mOutput << "{" << std::endl;
       mCurrentRoot = aRoot;
+
+      //if(mCurrentRoot.length() > 5)
+        //isTextFile = mCurrentRoot.substr(mCurrentRoot.length() - 4, 4) == ".txt";
+
+      if(newRoot && !empty && !isTextFile)
+        mOutput << "}" << std::endl;
+      mOutput << aRoot << std::endl;
+
+      if(!isTextFile)
+        mOutput << "{" << std::endl;
     }
     else
     {
@@ -269,7 +287,10 @@ void TextParser::Place(std::string const &aRoot, std::string const &aElement, st
 
 void TextParser::Write()
 {
-  WriteRoot(mDictionary);
+  if(mAutoParse)
+    WriteRoot(mDictionary);
+  else
+    mOutput << "}" << std::endl;
 }
 
 float TextParser::GetNextFloat(float &rValue)

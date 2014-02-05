@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "LuaIncludes.h"
 #include "LevelChangeMessage.h"
+#include "TextParser.h"
 
 LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager"), mActiveLevel(NULL)
 {
@@ -79,6 +80,16 @@ Level *LevelManager::GetActiveLevel()
 void LevelManager::SetActiveLevel(Level *aLevel)
 {
   mActiveLevel = aLevel;
+}
+
+void LevelManager::SaveActiveLevelAs(std::string const &aFolder, std::string const &aFileName)
+{
+  TextParser objectParser(Common::RelativePath(aFolder, aFileName + ".txt"), false, MODE_OUTPUT);
+  TextParser mapParser(Common::RelativePath(aFolder, aFileName + "_Map.txt"), false, MODE_OUTPUT);
+  mActiveLevel->Serialize(objectParser);
+  mActiveLevel->SerializeTileMap(mapParser);
+  objectParser.Write();
+  mapParser.Write();
 }
 
 void LevelManager::Update()
