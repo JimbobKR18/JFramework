@@ -65,7 +65,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     // Set the frame data
     Surface *surface = obj->GET<Surface>();
     surface->SetAnimated(false);
-    surface->GetTextureData()->SetCurrentFrame(mTiles[i]);
+    surface->SetCurrentFrame(mTiles[i]);
     
     // Add PhysicsObject if the tile has collision
     if(mCollision[i] != 0)
@@ -142,26 +142,25 @@ std::vector<int>& TileMapGenerator::GetCollisionTiles()
   return mCollision;
 }
 
-int TileMapGenerator::GetTileValue(int aX, int aY)
+int TileMapGenerator::GetTileValue(int const aX, int const aY)
 {
-  float halfX = mWidth * mTileSize;
-  float halfY = mHeight * mTileSize;
-  aX += halfX;
-  aX += halfY;
-  aX /= mTileSize;
-  aY /= mTileSize;
-  return mTiles[(aY * mWidth) + aX];
+  return mTiles[GetIndex(aX, aY)];
 }
 
-int TileMapGenerator::GetCollisionValue(int aX, int aY)
+int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
 {
-  float halfX = mWidth * mTileSize;
-  float halfY = mHeight * mTileSize;
-  aX += halfX;
-  aX += halfY;
-  aX /= mTileSize;
-  aY /= mTileSize;
-  return mCollision[(aY * mWidth) + aX];
+  return mCollision[GetIndex(aX, aY)];
+}
+
+int TileMapGenerator::GetIndex(int const aX, int const aY)
+{
+  float x = mWidth * mTileSize;
+  float y = mHeight * mTileSize;
+  x += aX;
+  y += aY;
+  x /= mTileSize;
+  y /= mTileSize;
+  return (y * mWidth) + x;
 }
 
 void TileMapGenerator::Serialize(Parser &aParser)

@@ -43,6 +43,7 @@ public:
   void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames);
   void                SetAnimated(bool aAnimated);
   void                SetAnimation(int aAnimation);
+  void                SetCurrentFrame(int aFrame);
   bool                CurrentAnimationCompleted();
   
   // Batching

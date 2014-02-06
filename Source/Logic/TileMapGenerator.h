@@ -43,8 +43,9 @@ public:
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
 
-  int               GetTileValue(int aX, int aY);
-  int               GetCollisionValue(int aX, int aY);
+  int               GetTileValue(int const aX, int const aY);
+  int               GetCollisionValue(int const aX, int const aY);
+  int               GetIndex(int const aX, int const aY);
 
   void              Serialize(Parser &aParser);
 };
