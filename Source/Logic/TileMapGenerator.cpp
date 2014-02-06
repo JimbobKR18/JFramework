@@ -162,8 +162,8 @@ int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
 
 int TileMapGenerator::GetIndex(int const aX, int const aY)
 {
-  float x = mWidth * mTileSize;
-  float y = mHeight * mTileSize;
+  float x = mWidth;
+  float y = mHeight;
   x += aX;
   y += aY;
   x /= mTileSize;
