@@ -18,7 +18,7 @@ public:
   void          Parse();
 
   // Write
-  void          Place(std::string const &aRoot, std::string const &aValue)
+  void          Place(std::string const &aRoot, std::string const &aValue);
   void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
   void          Write();
 };

@@ -40,5 +40,5 @@ void XMLParser::Place(std::string const &aRoot, std::string const &aElement, std
 
 void XMLParser::Write()
 {
-  mDoc.Save(mFileName.c_str());
+  //mDoc.Save(GetFileName().c_str());
 }

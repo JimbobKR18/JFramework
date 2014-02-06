@@ -28,7 +28,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    mWidth(aWidth), mHeight(aHeight),
                                    mTileSize(aTileSize), mImageName(aImageName),
                                    mDataName(aDataName), mTiles(aTiles),
-                                   mCollision(aCollision), mOwner(aOwner)
+                                   mCollision(aCollision), mObjects(), mOwner(aOwner)
 {
   int xPos = 0, yPos = 0;
   float halfX = mWidth * aTileSize;
@@ -93,6 +93,9 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     // Add object to our level for easier loading later
     mOwner->AddStaticObject(obj);
     
+    // Add object to our tile list
+    mObjects.push_back(obj);
+
     ++xPos;
     if(xPos >= mWidth)
     {
@@ -140,6 +143,11 @@ std::vector<int>& TileMapGenerator::GetArtTiles()
 std::vector<int>& TileMapGenerator::GetCollisionTiles()
 {
   return mCollision;
+}
+
+GameObject* TileMapGenerator::GetObject(int const aX, int const aY)
+{
+  return mObjects[GetIndex(aX, aY)];
 }
 
 int TileMapGenerator::GetTileValue(int const aX, int const aY)

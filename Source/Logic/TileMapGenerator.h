@@ -11,20 +11,22 @@
 
 #include "Common.h"
 #include "Parser.h"
+#include "GameObject.h"
 
 class Level;
 
 class TileMapGenerator
 {
 private:
-  int               mWidth,
-                    mHeight,
-                    mTileSize;
-  std::string       mImageName,
-                    mDataName;
-  std::vector<int>  mTiles,
-                    mCollision;
-  Level*            mOwner;
+  int                       mWidth;
+  int                       mHeight;
+  int                       mTileSize;
+  std::string               mImageName;
+  std::string               mDataName;
+  std::vector<int>          mTiles;
+  std::vector<int>          mCollision;
+  std::vector<GameObject*>  mObjects;
+  Level*                    mOwner;
   
 public:
   TileMapGenerator();
@@ -43,6 +45,7 @@ public:
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
 
+  GameObject*       GetObject(int const aX, int const aY);
   int               GetTileValue(int const aX, int const aY);
   int               GetCollisionValue(int const aX, int const aY);
   int               GetIndex(int const aX, int const aY);
