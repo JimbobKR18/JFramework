@@ -194,7 +194,7 @@ namespace Common
       std::ostringstream stream;
       stream << *it;
       ret += stream.str();
-      ret += ", ";
+      ret += ",";
     }
     ret = ret.substr(0, ret.size() - 2);
 
