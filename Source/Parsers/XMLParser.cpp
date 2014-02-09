@@ -2,7 +2,7 @@
 
 XMLParser::XMLParser(std::string const &aFileName) : Parser(aFileName)
 {
-  mDoc.LoadFile(aFileName.c_str());
+  Parse();
 }
 
 XMLParser::~XMLParser()
@@ -25,20 +25,25 @@ std::string XMLParser::Find(std::string const &aRoot, std::string const &aElemen
 
 void XMLParser::Parse()
 {
-  // TODO?
+  mDoc.LoadFile(GetFilename().c_str());
 }
 
 void XMLParser::Place(std::string const &aRoot, std::string const &aValue)
 {
-  // TODO
+  mPrinter.OpenElement(aRoot.c_str());
+  mPrinter.PushAttribute(aRoot.c_str(), aValue.c_str());
+  mPrinter.CloseElement();
 }
 
 void XMLParser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
-  // TODO
+  mPrinter.OpenElement(aRoot.c_str());
+  mPrinter.PushAttribute(aElement.c_str(), aValue.c_str());
+  mPrinter.CloseElement();
 }
 
 void XMLParser::Write()
 {
+  mDoc.Print(&mPrinter);
   mDoc.SaveFile(GetFilename().c_str());
 }

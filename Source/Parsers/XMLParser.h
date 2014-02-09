@@ -8,6 +8,7 @@ class XMLParser : public Parser
 {
 private:
   tinyxml2::XMLDocument mDoc;
+  tinyxml2::XMLPrinter  mPrinter;
 public:
   XMLParser(std::string const &aFileName);
   ~XMLParser();
