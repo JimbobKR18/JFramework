@@ -37,7 +37,8 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   
   if(mTiles.size() != mCollision.size())
     assert(!"Not a valid tilemap, art and collision maps of different sizes");
-  
+
+  Vector3 tileSize = Vector3(mTileSize, mTileSize, 0);
   for(unsigned int i = 0; i != mTiles.size(); ++i)
   {
     // Make GameObject to place
@@ -52,7 +53,6 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     Transform *transform = obj->GET<Transform>();
     Vector3 position = Vector3(-halfX + (aTileSize * 2 * xPos),
                                -halfY + (aTileSize * 2 * yPos),0);
-    Vector3 tileSize = Vector3(mTileSize, mTileSize, 0);
     transform->SetPosition(position);
     transform->SetSize(tileSize);
     
@@ -162,13 +162,20 @@ int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
 
 int TileMapGenerator::GetIndex(int const aX, int const aY)
 {
-  float x = mWidth;
-  float y = mHeight;
+  int tileMult = mTileSize;
+  float x = mWidth * tileMult;
+  float y = mHeight * tileMult;
   x += aX;
   y += aY;
-  x /= mTileSize;
-  y /= mTileSize;
-  return (y * mWidth) + x;
+  x /= mTileSize * 2.0f;
+  y /= mTileSize * 2.0f;
+
+  if(x < 0)
+    x = 0;
+  if(y < 0)
+    y = 0;
+
+  return (round(y) * mWidth) + round(x);
 }
 
 void TileMapGenerator::Serialize(Parser &aParser)
