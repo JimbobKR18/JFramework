@@ -46,9 +46,11 @@ public:
   std::vector<int>& GetCollisionTiles();
 
   GameObject*       GetObject(int const aX, int const aY);
+  GameObject*       GetObject(int const aIndex);
   int               GetTileValue(int const aX, int const aY);
   int               GetCollisionValue(int const aX, int const aY);
   int               GetIndex(int const aX, int const aY);
+  std::vector<int>  GetIndices(int const aX, int const aY, int const bX, int const bY);
 
   void              Serialize(Parser &aParser);
 };

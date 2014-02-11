@@ -150,6 +150,11 @@ GameObject* TileMapGenerator::GetObject(int const aX, int const aY)
   return mObjects[GetIndex(aX, aY)];
 }
 
+GameObject* TileMapGenerator::GetObject(int const aIndex)
+{
+  return mObjects[aIndex];
+}
+
 int TileMapGenerator::GetTileValue(int const aX, int const aY)
 {
   return mTiles[GetIndex(aX, aY)];
@@ -176,6 +181,31 @@ int TileMapGenerator::GetIndex(int const aX, int const aY)
     y = 0;
 
   return (round(y) * mWidth) + round(x);
+}
+
+std::vector<int> TileMapGenerator::GetIndices(int const aX, int const aY, int const bX, int const bY)
+{
+  std::vector<int> ret;
+  int y = aY;
+  int x = aX;
+  int xDir = (aX < bX) ? 1 : -1;
+  int yDir = (aY < bY) ? 1 : -1;
+  int step = mTileSize * 2.0f;
+  int xStep = step * xDir;
+  int yStep = step * yDir;
+  int xHalfStep = xStep / 2.0f;
+  int yHalfStep = yStep / 2.0f;
+  int xEnd = ((bX + xHalfStep) - aX) / xStep;
+  int yEnd = ((bY + yHalfStep) - aY) / yStep;
+  for(int yCur = 0; yCur <= yEnd; y += yStep, ++yCur)
+  {
+    x = aX;
+    for(int xCur = 0; xCur <= xEnd; x += xStep, ++xCur)
+    {
+      ret.push_back(GetIndex(x, y));
+    }
+  }
+  return ret;
 }
 
 void TileMapGenerator::Serialize(Parser &aParser)
