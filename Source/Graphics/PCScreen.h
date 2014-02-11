@@ -28,6 +28,8 @@ class PCScreen : public Screen
     virtual ~PCScreen();
 
     virtual void Draw(std::vector<Surface*> const &aObjects);
+    virtual void DebugDraw(std::vector<Surface*> const &aObjects);
+    virtual void SwapBuffers();
     virtual void ChangeSize(int aW, int aH);
 };
 

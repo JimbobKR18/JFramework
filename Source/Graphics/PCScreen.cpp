@@ -1,5 +1,6 @@
 #include "PCScreen.h"
 #include "Transform.h"
+#include "PhysicsObject.h"
 #include "PCSurface.h"
 
 #define VERTEX_ARRAYS
@@ -19,6 +20,48 @@ PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 PCScreen::~PCScreen()
 {
   SDL_Quit();
+}
+
+void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
+{
+  // Draw debug hitboxes for objects in environment, requires PhysicsObject
+  Vector3 cameraPosition = GetView().GetPosition();
+  Vector3 cameraSize = GetView().GetSize();
+  std::vector<Surface*>::const_iterator end = aObjects.end();
+  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
+  {
+    GameObject *obj = (*it)->GetOwner();
+
+    if(obj->HAS<PhysicsObject>())
+    {
+      Transform *transform = obj->GET<Transform>();
+      Vector3 position = transform->GetPosition();
+      Vector3 size = transform->GetSize();
+
+      // Get positions relative to the camera
+      float xPosition = position.x;
+      float yPosition = position.y;
+      float zPosition = position.z;
+
+      if((*it)->GetViewMode() == VIEW_ABSOLUTE)
+      {
+        xPosition -= (cameraPosition.x - cameraSize.x / 2.0f);
+        yPosition -= (cameraPosition.y - cameraSize.y / 2.0f);
+        zPosition -= (cameraPosition.z - cameraSize.z / 2.0f);
+      }
+
+      glLoadIdentity();
+      glPushMatrix();
+      glBegin(GL_LINES);
+      glColor3f(1.0f, 0.0f, 0.0f);
+      glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
+      glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
+      glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
+      glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
+      glEnd();
+      glPopMatrix();
+    }
+  }
 }
 
 void PCScreen::Draw(std::vector<Surface*> const &aObjects)
@@ -135,7 +178,10 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
   }
-  
+}
+
+void PCScreen::SwapBuffers()
+{
   SDL_GL_SwapBuffers();
 }
 

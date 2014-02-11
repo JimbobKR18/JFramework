@@ -23,6 +23,11 @@ void GraphicsManager::Update()
   mScreen->GetView().Update();
   std::vector<Surface*> sortedObjects = mScreen->SortObjects(mSurfaces);
   mScreen->Draw(sortedObjects);
+#ifdef _DEBUG
+  // Displays bounds of objects with PhysicsObject
+  mScreen->DebugDraw(sortedObjects);
+#endif
+  mScreen->SwapBuffers();
 }
 
 void GraphicsManager::SendMessage(Message const &aMessage)

@@ -47,7 +47,7 @@ public:
     return (T*)GetComponent(T::GetName());
   }
 
-  template<typename T> T* HAS()
+  template<typename T> bool HAS()
   {
     return HasComponent(T::GetName());
   }

@@ -26,6 +26,8 @@ public:
 
   virtual void            ChangeSize(int aW, int aH) = 0;
   virtual void            Draw(std::vector<Surface*> const &aObjects) = 0;
+  virtual void            DebugDraw(std::vector<Surface*> const &aObjects) = 0;
+  virtual void            SwapBuffers() = 0;
 };
 
 #endif
