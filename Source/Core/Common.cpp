@@ -214,6 +214,13 @@ namespace Common
     return ret;
   }
 
+  float RandomFloatInRange(float const aX, float const bX)
+  {
+    float diff = bX - aX;
+    diff *= (rand() % 1000) / 1000.0f;
+    return aX + diff;
+  }
+
   TimePoint GetNow()
   {
     return Clock::now();

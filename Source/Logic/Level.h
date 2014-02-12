@@ -53,6 +53,8 @@ public:
 
   void              SetMaxBoundary(Vector3 const &aMaxBoundary);
   void              SetMinBoundary(Vector3 const &aMinBoundary);
+  Vector3           GetMaxBoundary() const;
+  Vector3           GetMinBoundary() const;
 
 	void              Load(Level* const aPrevLevel);
 	void              Unload(Level* const aNextLevel);

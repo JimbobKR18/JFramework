@@ -71,6 +71,8 @@ namespace Common
   std::string               IntVectorToString(std::vector<int> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
 
+  float                     RandomFloatInRange(float const aX, float const bX);
+
   typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;
   typedef std::chrono::steady_clock Clock;
   TimePoint                 GetNow();

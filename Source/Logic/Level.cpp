@@ -196,6 +196,16 @@ void Level::SetMinBoundary(Vector3 const &aMinBoundary)
   mMinBoundary = aMinBoundary;
 }
 
+Vector3 Level::GetMaxBoundary() const
+{
+  return mMaxBoundary;
+}
+
+Vector3 Level::GetMinBoundary() const
+{
+  return mMinBoundary;
+}
+
 void Level::Load(Level* const aPrevLevel)
 {
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
