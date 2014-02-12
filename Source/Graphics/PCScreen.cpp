@@ -28,7 +28,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
   Vector3 cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetSize();
   std::vector<Surface*>::const_iterator end = aObjects.end();
-  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
+  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end; ++it)
   {
     GameObject *obj = (*it)->GetOwner();
 
@@ -52,12 +52,13 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 
       glLoadIdentity();
       glPushMatrix();
-      glBegin(GL_LINES);
+      glBegin(GL_LINE_STRIP);
       glColor3f(1.0f, 0.0f, 0.0f);
       glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
       glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
       glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
       glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
+      glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
       glEnd();
       glPopMatrix();
     }
