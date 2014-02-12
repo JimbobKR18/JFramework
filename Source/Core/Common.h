@@ -32,20 +32,23 @@
 #define TimePointToMilliseconds std::chrono::duration_cast<std::chrono::milliseconds>
 
 // Basically an extension of std::string, now with hashing.
-class JString
+class HashString
 {
 private:
   std::string mString;
   int         mHash;
 public:
-  JString();
-  JString(char const* aString);
-  JString(std::string const &aString);
+  HashString();
+  HashString(char const* aString);
+  HashString(std::string const &aString);
   // Equality
-  void operator=(JString const &aRhs);
+  void operator=(HashString const &aRhs);
   // Comparison
-  bool operator==(JString const &aRhs);
+  bool operator==(HashString const &aRhs);
   char operator[](int aValue);
+  // Conversion
+  operator std::string();
+  operator char const*();
 private:
   void Hash();
 };

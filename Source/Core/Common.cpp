@@ -8,37 +8,47 @@
 
 #include "Common.h"
 
-JString::JString() : mString(""), mHash(0)
+HashString::HashString() : mString(""), mHash(0)
 {
 }
 
-JString::JString(char const* aString) : mString(aString)
-{
-  Hash();
-}
-
-JString::JString(std::string const &aString) : mString(aString)
+HashString::HashString(char const* aString) : mString(aString)
 {
   Hash();
 }
 
-void JString::operator=(JString const &aRhs)
+HashString::HashString(std::string const &aString) : mString(aString)
+{
+  Hash();
+}
+
+void HashString::operator=(HashString const &aRhs)
 {
   mString = aRhs.mString;
   mHash = aRhs.mHash;
 }
 
-bool JString::operator==(JString const &aRhs)
+bool HashString::operator==(HashString const &aRhs)
 {
   return mHash == aRhs.mHash;
 }
 
-char JString::operator[](int aValue)
+char HashString::operator[](int aValue)
 {
   return mString[aValue];
 }
 
-void JString::Hash()
+HashString::operator std::string()
+{
+  return mString;
+}
+
+HashString::operator char const*()
+{
+  return mString.c_str();
+}
+
+void HashString::Hash()
 {
   mHash = 0;
   char const *key = "srkfadcultjylenoqickbwnxmpvg";
