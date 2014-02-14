@@ -17,6 +17,12 @@ MenuText::MenuText(std::string const& aFilename) : MenuElement(aFilename)
   ParseFile(parser);
 }
 
+MenuText::MenuText(std::string const &aSettingsFilename, std::string const &aText) : MenuElement(aSettingsFilename), mText(aText)
+{
+  TextParser parser(Common::RelativePath("Menus", aSettingsFilename));
+  ParseFile(parser);
+}
+
 MenuText::~MenuText()
 {
 }

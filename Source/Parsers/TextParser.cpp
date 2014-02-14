@@ -169,36 +169,7 @@ void TextParser::Parse()
     {
       std::string value;
       mInput >> value;
-      if(value.find("Literal") == std::string::npos)
-        node->mValue = value;
-      else
-      {
-        // Getting the full string
-        unsigned pos = value.find("Literal") + 8;
-        char next;
-        bool earlyout = false;
-        // Literal(blah) is one whole word, extract
-        while(pos < value.length())
-        {
-          char next = value[pos];
-          if(next == '\n')
-          {
-            earlyout = true;
-            break;
-          }
-          if(next != ')' && next != '(')
-            node->mValue.push_back(next);
-          ++pos;
-        }
-        // Didn't hit newline, get rest of sentence
-        while(!earlyout && mInput.get(next))
-        {
-          if(next == '\n')
-            break;
-          if(next != ')' && next != '(')
-            node->mValue.push_back(next);
-        }
-      }
+      node->mValue = ParseLiteral(value);
       node->mParent = mCurNode;
       mCurNode->mChildren.push_back(node);
     }
@@ -331,7 +302,7 @@ std::string TextParser::GetNextString(std::string &rValue)
   {
     mInput >> empty;
   }
-  rValue = empty;
+  rValue = ParseLiteral(empty);
   return rValue;
 }
 
@@ -362,4 +333,40 @@ void TextParser::WriteRoot(Root const *aRoot)
   {
     mOutput << aRoot->mName << " = " << aRoot->mValue << std::endl;
   }
+}
+
+std::string TextParser::ParseLiteral(std::string const &aLiteral)
+{
+  std::string ret;
+  if(aLiteral.find("Literal") == std::string::npos)
+    ret = aLiteral;
+  else
+  {
+    // Getting the full string
+    unsigned pos = aLiteral.find("Literal") + 8;
+    char next;
+    bool earlyout = false;
+    // Literal(blah) is one whole word, extract
+    while(pos < aLiteral.length())
+    {
+      char next = aLiteral[pos];
+      if(next == '\n')
+      {
+        earlyout = true;
+        break;
+      }
+      if(next != ')' && next != '(')
+        ret.push_back(next);
+      ++pos;
+    }
+    // Didn't hit newline, get rest of sentence
+    while(!earlyout && mInput.get(next))
+    {
+      if(next == '\n')
+        break;
+      if(next != ')' && next != '(')
+        ret.push_back(next);
+    }
+  }
+  return ret;
 }

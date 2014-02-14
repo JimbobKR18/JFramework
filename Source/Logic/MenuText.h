@@ -21,6 +21,7 @@ private:
 
 public:
   MenuText(std::string const &aFilename);
+  MenuText(std::string const &aSettingsFilename, std::string const &aText);
   virtual ~MenuText();
 
   virtual void Draw();

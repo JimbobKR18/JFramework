@@ -64,6 +64,7 @@ class TextParser : public Parser
     bool          IsGood();
   private:
     void          WriteRoot(Root const *aRoot);
+    std::string   ParseLiteral(std::string const &aLiteral);
 };
 
 #endif
