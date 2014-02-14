@@ -2,6 +2,52 @@
 #include "LuaIncludes.h"
 #include <assert.h>
 
+// Helpful print functions
+void print_matrix(Matrix33 const &_matrix)
+{
+  printf("MATRIX:\n");
+  for(int i = 0; i < 3; ++i)
+  {
+          printf("ROW%d:", i);
+          for(int j = 0; j < 3; ++j)
+          {
+                  printf(" %f ", _matrix.values[i][j]);
+          }
+          printf("\n");
+  }
+  printf("DETERMINANT: %f\n", _matrix.Determinant());
+}
+
+void print_vector(Vector3 const &_point)
+{
+  printf("VECTOR:\n");
+  printf("X: %f, Y: %f, Z: %f\n", _point.x, _point.y, _point.z);
+}
+
+void print_line(LineSegment const &_line)
+{
+  printf("LINE:\n");
+  printf("POSITION:\n");
+  print_vector(_line.position);
+  printf("LENGTH: %f\n", _line.length);
+}
+
+void print_circle(Circle const &_circle)
+{
+  printf("\n");
+  printf("-------------------------\n");
+  printf("RESULTS:\n");
+  printf("-------------------------\n");
+  printf("CIRCLE:\n");
+  printf("POSITION:\n");
+  print_vector(_circle.position);
+  printf("UP:\n");
+  print_vector(_circle.up);
+  printf("RIGHT:\n");
+  print_vector(_circle.right);
+  printf("RADIUS: %f\n", _circle.radius);
+}
+
 //--------------------------------
 // VECTOR3
 //--------------------------------
@@ -599,6 +645,17 @@ void Matrix33::operator*=(float const aValue)
   *this = *this * aValue;
 }
 
+//------------------------------
+// CIRCLE
+//------------------------------
+
+Circle::Circle() : position(), up(), right(), radius(0)
+{
+}
+
+Circle::Circle(Vector3 const &_position, Vector3 const &_up, Vector3 const &_right, float const _radius) : position(_position), up(_up), right(_right), radius(fabs(_radius))
+{
+}
 
 //------------------------------
 // LINESEGMENT
@@ -612,20 +669,45 @@ LineSegment::LineSegment(Vector3 const &aPosition, float aLength) : position(aPo
 {
 }
 
-std::vector<Vector3> LineSegment::GetCollisions(LineSegment const &aCompare, int const _precision)
+// Returns true is circle is found, otherwise false
+bool LineSegment::GetCollisions(LineSegment const &_compare, Circle &_output)
 {
-  std::vector<Vector3> ret;
-
-  Vector3 d = aCompare.position - position;
+  Vector3 d =  _compare.position - position;
   float dist = d.length();
+  float longer = length >= _compare.length ? length : _compare.length;
+  float shorter = length >= _compare.length ? _compare.length : length;
+
+  print_line(*this);
+  print_line(_compare);
+
+  // If they're in the exact same location that would be a problem
+  if(position == _compare.position)
+  {
+    // IS THIS THE SAME EXACT SPHERE?!
+    if(length == _compare.length)
+    {
+      _output.position = position;
+      _output.radius = length;
+      _output.up = Vector3(0, 1, 0);
+      _output.right = Vector3(0, 0, 1);
+      printf("Same exact sphere, gonna return false\n\n");
+    }
+    else
+    {
+      printf("One sphere is inside of another, WAT\n");
+      printf("Therefore, cannot touch, gonna return false\n\n");
+    }
+    print_circle(_output);
+    printf("\n\n");
+    return false;
+  }
 
   // > is an early out
-  if(dist < length + aCompare.length)
+  if(dist < length + _compare.length && dist != longer - shorter)
   {
     // THE IDEA: Find one point, rotate about arbitrary axis between spheres
     // Reduce the problem to solving a circle
     Vector3 axis = d.normalize();
-    float rate = 360.0f / _precision;
     float xylength = sqrt(axis.x * axis.x + axis.y * axis.y);
     float xyzlength = axis.length();
     // Don't want to divide by zero
@@ -633,56 +715,82 @@ std::vector<Vector3> LineSegment::GetCollisions(LineSegment const &aCompare, int
     // Our matrices
     // First, go to xz plane
     float xzvalues[3][3] = {{axis.x / templength, axis.y / templength, 0},
-                                {-axis.y / templength, axis.x / templength, 0},
-                                {0, 0, 1}};
+                            {-axis.y / templength, axis.x / templength, 0},
+                            {0, 0, 1}};
     // Then, only to z axis
     float zvalues[3][3] = {{axis.z / xyzlength, 0, -xylength / xyzlength},
-                                {0, 1, 0},
-                                {xylength / xyzlength, 0 , axis.z / xyzlength}};
+                           {0, 1, 0},
+                           {xylength / xyzlength, 0 , axis.z / xyzlength}};
 
     // Create identity matrix if we're already on the z plane
     if(xylength <= 0.0f)
     {
       xzvalues[0][0] = 1.0f;
       xzvalues[1][1] = 1.0f;
+      xzvalues[1][0] = 0.0f;
+      xzvalues[0][1] = 0.0f;
     }
 
     // Create our matrices and invert them
     Matrix33 xztrans(xzvalues);
     Matrix33 ztrans(zvalues);
-    Matrix33 toZAxisInverse = xztrans.Invert() * ztrans.Invert();
+    Matrix33 toZAxis = ztrans * xztrans;
+    Matrix33 toZAxisInverse = toZAxis.Invert();
+
+    Vector3 comparePos = toZAxis * d;
+    dist = comparePos.length();
 
     // Circle collision function
-    float z = ((dist * dist) + (length * length) - (aCompare.length * aCompare.length)) /
+    float z = ((dist * dist) - (_compare.length * _compare.length) + (length * length)) /
           (2.0f * dist);
     float y = sqrt((length * length) - (z * z));
 
-    Vector3 point = Vector3(0, y, z);
-    for(int i = 0; i < _precision; ++i)
-    {
-      float angle = (rate * i) * DEGREE_TO_RADS;
-      float cosine = cos(angle);
-      float sine = sin(angle);
-      // Generate the rotation around teh z axis
-      float matvalues[3][3] = {{cosine, -sine, 0},
-                  {sine, cosine, 0},
-                  {0, 0, 1}};
-      Matrix33 zrot(matvalues);
-      Vector3 newpoint = toZAxisInverse * zrot * point;
-      // Translate back away from origin
-      newpoint += position;
-      ret.push_back(newpoint);
-    }
+    // Create our circle
+    _output.position = Vector3(0, 0, z);
+    _output.up = Vector3(0, 1, 0);
+    _output.right = Vector3(0, 0, 1);
+    _output.radius = y;
+
+    _output.position = toZAxisInverse * _output.position;
+    _output.position += position;
+    _output.up = toZAxisInverse * _output.up;
+    _output.right = toZAxisInverse * _output.right;
   }
-  else if(dist == length + aCompare.length)
+  else if(dist == length + _compare.length)
   {
-    // They barely touch
-    ret.push_back(position + d / 2.0f);
+    // They barely touch, from the outside
+    Vector3 largerPos = length >= _compare.length ? position : _compare.position;
+    Vector3 smallerPos = length >= _compare.length ? _compare.position : position;
+    float smallerLen = length >= _compare.length ? _compare.length : length;
+    d = smallerPos - largerPos;
+
+    printf("The radii barely touch, will still return true, but radius is zero\n");
+    _output.position = smallerPos - (d.normalize() * smallerLen);
+    _output.radius = 0;
+    _output.up = Vector3(0, 1, 0);
+    _output.right = Vector3(0, 0, 1);
+  }
+  else if(dist == longer - shorter)
+  {
+    // They barely touch, from the inside
+    Vector3 largerPos = length >= _compare.length ? position : _compare.position;
+    Vector3 smallerPos = length >= _compare.length ? _compare.position : position;
+    float smallerLen = length >= _compare.length ? _compare.length : length;
+    d = smallerPos - largerPos;
+
+    printf("The radii barely touch, will still return true, but radius is zero\n");
+    _output.position = smallerPos + (d.normalize() * smallerLen);
+    _output.radius = 0;
+    _output.up = Vector3(0, 1, 0);
+    _output.right = Vector3(0, 0, 1);
   }
   else
   {
-    printf("These LineSegments can never touch.\n");
+    printf("These LineSegments can never touch. Returning false.\n\n");
+    return false;
   }
 
-  return ret;
+  print_circle(_output);
+  printf("\n\n");
+  return true;
 }

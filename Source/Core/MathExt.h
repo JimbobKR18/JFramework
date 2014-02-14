@@ -116,6 +116,17 @@ struct Matrix33
   void operator*=(float const aValue);
 };
 
+struct Circle
+{
+  Vector3 position;
+  Vector3 up;
+  Vector3 right;
+  float radius;
+
+  Circle();
+  Circle(Vector3 const &_position, Vector3 const &_up, Vector3 const &_right, float const _radius);
+};
+
 struct LineSegment
 {
   Vector3 position;
@@ -124,7 +135,7 @@ struct LineSegment
   LineSegment();
   LineSegment(Vector3 const &aPosition, float aLength);
 
-  std::vector<Vector3> GetCollisions(LineSegment const &aCompare, int const aPrecision);
+  bool GetCollisions(LineSegment const &_compare, Circle &_output);
 };
 
 template<typename T>
@@ -177,5 +188,10 @@ T Greater(T const& aA, T const& aB)
     return aA;
   return aB;
 }
+
+void print_matrix(Matrix33 const &_matrix);
+void print_vector(Vector3 const &_point);
+void print_line(LineSegment const &_line);
+void print_circle(Circle const &_circle);
 
 #endif
