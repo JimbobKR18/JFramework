@@ -32,7 +32,6 @@
 									<listOptionValue builtIn="false" value="../../Source"/>
 									<listOptionValue builtIn="false" value="../../Source/Sound"/>
 									<listOptionValue builtIn="false" value="../../Source/AntTweakBar/include"/>
-									<listOptionValue builtIn="false" value="../../Source/Components/Controller"/>
 									<listOptionValue builtIn="false" value="../../Source/Logic"/>
 									<listOptionValue builtIn="false" value="../../Source/Physics"/>
 									<listOptionValue builtIn="false" value="../../Source/Components"/>
@@ -45,7 +44,7 @@
 									<listOptionValue builtIn="false" value="../../Source/Core/Messages"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.2088219339" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0" valueType="string"/>
-								<option id="gnu.cpp.compiler.option.preprocessor.def.1199814586" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1199814586" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="_DEBUG=1"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.882221453" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
