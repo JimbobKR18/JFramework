@@ -10,6 +10,11 @@
 #include "ControllerManager.h"
 #include "ObjectManager.h"
 
+// PROTECTED
+Controller::Controller(std::string const &aName) : Component(aName)
+{
+}
+
 Controller::Controller() : Component("Controller")
 {
 }

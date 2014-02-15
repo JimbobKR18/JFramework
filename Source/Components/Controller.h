@@ -17,6 +17,8 @@
 
 class Controller : public Component
 {
+protected:
+  Controller(std::string const &aName);
 public:
   Controller();
   virtual ~Controller();
