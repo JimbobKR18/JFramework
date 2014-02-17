@@ -95,7 +95,11 @@ void Surface::Serialize(Parser &aParser)
   {
     animations.push_back(coords->GetAnimationFrameCounts(i));
   }
-  aParser.Place("Surface", "FrameNumbers", Common::IntVectorToString(animations));
+
+  if(animated)
+  {
+    aParser.Place("Surface", "FrameNumbers", Common::IntVectorToString(animations));
+  }
   aParser.Place("Surface", "Animated", Common::BoolToString(animated));
 
   aParser.Place("Surface", "NoRender", mNoRender);
