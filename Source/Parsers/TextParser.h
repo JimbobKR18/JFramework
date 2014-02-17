@@ -57,6 +57,7 @@ class TextParser : public Parser
     void          Place(std::string const &aRoot, std::string const &aValue);
     void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
     void          Write();
+    void          ResetCurrentRoot();
     // Manual
     float         GetNextFloat(float &rValue);
     int           GetNextInt(int &rValue);

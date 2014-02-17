@@ -264,6 +264,11 @@ void TextParser::Write()
     mOutput << "}" << std::endl;
 }
 
+void TextParser::ResetCurrentRoot()
+{
+  mCurrentRoot = "!";
+}
+
 float TextParser::GetNextFloat(float &rValue)
 {
   std::string empty;
