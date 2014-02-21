@@ -53,6 +53,46 @@ private:
   void Hash();
 };
 
+template<typename T>
+class SmartPointer
+{
+private:
+  T*  mPointer;
+public:
+  SmartPointer() { assert(!"Invalid pointer assigned in SmartPointer"); }
+  SmartPointer(SmartPointer<T> &aPointer) { mPointer = aPointer.mPointer; }
+  SmartPointer(T &aPointer) : mPointer(aPointer) {}
+  ~SmartPointer() { delete mPointer; }
+  T &operator*() { return *mPointer; }
+  operator T*() { return mPointer; }
+  void operator=(SmartPointer<T> &aPtr)
+  {
+    ReassignValue(aPtr.mPointer);
+  }
+  void operator=(T &aPtr)
+  {
+    ReassignValue(aPtr);
+  }
+  bool operator==(SmartPointer<T> &aPtr)
+  {
+    return isEqual(aPtr.mPointer);
+  }
+  bool operator==(T *aPtr)
+  {
+    return isEqual(aPtr);
+  }
+private:
+  void ReassignValue(T &aPtr)
+  {
+    delete mPointer;
+    mPointer = aPtr.mPointer;
+  }
+  bool isEqual(T *aPtr)
+  {
+    return aPtr == mPointer;
+  }
+};
+
 namespace Common
 {
   std::string const         RelativePath(std::string const &aSubFolder, std::string const &aFileName);
