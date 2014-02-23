@@ -56,7 +56,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
     mForegroundColor.z = Common::StringToInt(aParser.Find("ForegroundColor", "b"));
     mForegroundColor.w = Common::StringToInt(aParser.Find("ForegroundColor", "a"));
   }
-  if(aParser.Find("ForegroundColor"))
+  if(aParser.Find("BackgroundColor"))
   {
     mBackgroundColor.x = Common::StringToInt(aParser.Find("BackgroundColor", "r"));
     mBackgroundColor.y = Common::StringToInt(aParser.Find("BackgroundColor", "g"));
@@ -70,11 +70,14 @@ void MenuText::ParseAdditionalData(Parser &aParser)
 
 #if !defined(ANDROID) && !defined(IOS)
   PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateSurface();
-  surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize);
+  Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize);
 #else
   Surface *surface = new Surface();
 #endif
   surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
   surface->Deserialize(aParser);
   mObject->AddComponent(surface);
+
+  // Update texture to be the right size.
+  mObject->GET<Transform>()->SetSize(size);
 }

@@ -21,15 +21,18 @@ PCSurface::~PCSurface()
 {
   if(mFont)
     TTF_CloseFont(mFont);
+  if(mSurface)
+    SDL_FreeSurface(mSurface);
 }
 
 void PCSurface::LoadImage(std::string const &aName)
 {
   /* If the file was already loaded,
      let's avoid assigning a new id. */
-  if(GetManager()->GetTextureID(aName) != (unsigned)-1)
+  unsigned id = GetManager()->GetTextureID(aName);
+  if(id != (unsigned)-1)
   {
-    mTextureID = GetManager()->GetTextureID(aName);
+    mTextureID = id;
   }
   // else we load the image from file
 	else if((mSurface = IMG_Load(Common::RelativePath("Art", aName).c_str())))
@@ -84,7 +87,7 @@ void PCSurface::LoadImage(std::string const &aName)
 		glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
 						  mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
     
-    GetManager()->AddTexturePairing(aName, mTextureID);
+    GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
 	}
 	else
 	{
@@ -92,7 +95,8 @@ void PCSurface::LoadImage(std::string const &aName)
 	}
 }
 
-void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize)
+// Returns the size of the Text texture
+Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize)
 {
   // Endianness is important here
   Uint32 rmask, gmask, bmask, amask;
@@ -108,9 +112,11 @@ void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vec
       amask = 0xff000000;
   #endif
 
-  if(GetManager()->GetTextureID(aText) != (unsigned)-1)
+  TextureData const& data = GetManager()->GetTextureData(aText);
+  if(data.mTextureID != (unsigned)-1)
   {
-    mTextureID = GetManager()->GetTextureID(aText);
+    mTextureID = data.mTextureID;
+    return Vector3(data.mWidth, data.mHeight, 0);
   }
   else
   {
@@ -122,7 +128,7 @@ void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vec
       mFont = NULL;
       printf("warning: file not found or incompatible format, check this out\n");
       printf("%s", TTF_GetError());
-      return;
+      return Vector3(0, 0, 0);
     }
 
     // Create text texture
@@ -132,23 +138,23 @@ void PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vec
     SDL_SetAlpha(msg, 0, 0);
     assert(msg);
 
-    SDL_Surface *tmp = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
-    SDL_BlitSurface(msg, NULL, tmp, NULL);
+    mSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
+    SDL_BlitSurface(msg, NULL, mSurface, NULL);
 
     glGenTextures(1, &mTextureID);
     glBindTexture(GL_TEXTURE_2D, mTextureID);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, msg->w, msg->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, msg->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, mSurface->pixels);
 
-    SDL_FreeSurface(tmp);
+    GetManager()->AddTexturePairing(aText, TextureData(mTextureID, mSurface->w, mSurface->h));
 
-    GetManager()->AddTexturePairing(aText, mTextureID);
+    return Vector3(mSurface->w, mSurface->h, 0);
   }
 }
 
-unsigned PCSurface::GetIndexValue()
+unsigned PCSurface::GetIndexValue() const
 {
   return mTextureID;
 }

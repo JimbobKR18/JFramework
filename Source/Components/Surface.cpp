@@ -22,7 +22,6 @@ Surface::~Surface()
     delete mTexCoord;
 }
 
-
 TextureCoordinates *Surface::GetTextureData() const
 {
   return mTexCoord;

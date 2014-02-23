@@ -6,8 +6,12 @@
   #include "PCSurface.h"
 #endif
 
+#define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
+
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manager(aApp, "GraphicsManager")
 {
+  // Add Default Texture
+  AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
 #if !defined(IOS) && !defined(ANDROID)
   mScreen = new PCScreen(aWidth, aHeight);
 #else
@@ -96,19 +100,32 @@ Screen *GraphicsManager::GetScreen()
   return mScreen;
 }
 
-void GraphicsManager::AddTexturePairing(std::string const &aFilename, unsigned aTextureId)
+void GraphicsManager::AddTexturePairing(std::string const &aFilename, TextureData const &aData)
 {
-  mTextures.insert(std::pair<std::string, unsigned>(aFilename, aTextureId));
+  mTextures.insert(std::pair<std::string, TextureData>(aFilename, aData));
 }
-unsigned GraphicsManager::GetTextureID(std::string const &aFilename)
+
+unsigned GraphicsManager::GetTextureID(std::string const &aFilename) const
 {
-  std::map<std::string, unsigned>::iterator pos = mTextures.find(aFilename);
+  std::map<std::string, TextureData>::const_iterator pos = mTextures.find(aFilename);
   
   if(pos == mTextures.end())
   {
     return -1;
   }
   
+  return pos->second.mTextureID;
+}
+
+TextureData const& GraphicsManager::GetTextureData(std::string const &aFilename) const
+{
+  std::map<std::string, TextureData>::const_iterator pos = mTextures.find(aFilename);
+
+  if(pos == mTextures.end())
+  {
+    return mTextures.find(DEFAULT_TEXTURE_NAME)->second;
+  }
+
   return pos->second;
 }
 

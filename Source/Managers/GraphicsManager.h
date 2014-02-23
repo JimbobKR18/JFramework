@@ -4,13 +4,14 @@
 #include "Manager.h"
 #include "Surface.h"
 #include "Screen.h"
+#include "TextureData.h"
 
 class GraphicsManager : public Manager
 {
 private:
-	std::vector<Surface*>           mSurfaces;
-  std::map<std::string, unsigned> mTextures;
-	Screen*                         mScreen;
+	std::vector<Surface*>               mSurfaces;
+  std::map<std::string, TextureData>  mTextures;
+	Screen*                             mScreen;
 public:
 	GraphicsManager(GameApp *aApp, int aWidth, int aHeight);
 	~GraphicsManager();
@@ -32,8 +33,9 @@ public:
   Screen*             GetScreen();
   
   // Texture management
-  void                AddTexturePairing(std::string const &aFilename, unsigned aTextureId);
-  unsigned            GetTextureID(std::string const &aFilename);
+  void                AddTexturePairing(std::string const &aFilename, TextureData const &aData);
+  unsigned            GetTextureID(std::string const &aFilename) const;
+  TextureData const&  GetTextureData(std::string const &aFilename) const;
 
   // Misc.
   Vector3             AbsToRel(Vector3 const &aPosition) const;

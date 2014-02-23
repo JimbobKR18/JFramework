@@ -42,9 +42,9 @@ public:
 	virtual ~PCSurface();
 
 	void                LoadImage(std::string const &aName);
-	void                LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize);
+	Vector3             LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize);
   // Batching
-  unsigned            GetIndexValue();
+  unsigned            GetIndexValue() const;
   // Wrap Mode
   void                SetWrapMode(WrapMode const &aWrapMode);
 
