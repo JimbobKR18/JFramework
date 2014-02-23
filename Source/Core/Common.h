@@ -60,7 +60,7 @@ private:
   T*  mPointer;
 public:
   SmartPointer() { assert(!"Invalid pointer assigned in SmartPointer"); }
-  SmartPointer(SmartPointer<T> &aPointer) { mPointer = aPointer.mPointer; }
+  SmartPointer(SmartPointer<T> &aPointer) { mPointer = new T(*aPointer); }
   SmartPointer(T *aPointer) : mPointer(aPointer) {}
   ~SmartPointer() { delete mPointer; }
   T &operator*() { return *mPointer; }
