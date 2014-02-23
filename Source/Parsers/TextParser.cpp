@@ -133,12 +133,12 @@ std::string TextParser::Find(std::string const &aRoot, std::string const &aEleme
   Root const *node = mDictionary->Search(aRoot);
 
   if(!node)
-	  return "BadString";
+	  return "";
 
   Root const *value = node->Search(aElement);
 
   if(!value)
-  	  return "BadString";
+  	  return "";
 
   return value->mValue;
 }

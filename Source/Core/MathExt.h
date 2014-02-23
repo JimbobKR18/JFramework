@@ -7,6 +7,27 @@
 #define DEGREE_TO_RADS (3.141592f / 180.0f)
 #define RADS_TO_DEGREE (180.0f / 3.141592f)
 
+enum X_ALIGNMENT
+{
+  X_ALIGN_LEFT = 0,
+  X_ALIGN_CENTER,
+  X_ALIGN_RIGHT
+};
+
+enum Y_ALIGNMENT
+{
+  Y_ALIGN_TOP = 0,
+  Y_ALIGN_CENTER,
+  Y_ALIGN_BOTTOM
+};
+
+enum Z_ALIGNMENT
+{
+  Z_ALIGN_FRONT = 0,
+  Z_ALIGN_CENTER,
+  Z_ALIGN_BACK
+};
+
 struct Vector3
 {
   float x, y, z;

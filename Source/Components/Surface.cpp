@@ -115,7 +115,7 @@ void Surface::Deserialize(Parser &aParser)
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
-  if(aParser.Find("Surface", "AnimationCount") != "BadString")
+  if(aParser.Find("Surface", "AnimationCount") != "")
   {
     numFrames.clear();
     numAnimations = Common::StringToInt(aParser.Find("Surface", "AnimationCount"));
@@ -125,13 +125,13 @@ void Surface::Deserialize(Parser &aParser)
     if(isAnimated == "true")
       animated = true;
   }
-  if(aParser.Find("Surface", "NoRender") != "BadString")
+  if(aParser.Find("Surface", "NoRender") != "")
   {
     mNoRender = aParser.Find("Surface", "NoRender");
     if(mNoRender == "true")
       mManager->RemoveSurface(this);
   }
-  if(aParser.Find("Surface", "ColorR") != "BadString")
+  if(aParser.Find("Surface", "ColorR") != "")
   {
     float red = Common::StringToFloat(aParser.Find("Surface", "ColorR"));
     float green = Common::StringToFloat(aParser.Find("Surface", "ColorG"));

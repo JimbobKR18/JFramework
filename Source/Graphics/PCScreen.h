@@ -2,6 +2,7 @@
 #define __JFramework_PCScreen_h_
 
 #include "Screen.h"
+#include "Transform.h"
 #if defined(_WIN32)
   #include <Windows.h>
   #include <gl/gl.h>
@@ -31,6 +32,9 @@ class PCScreen : public Screen
     virtual void DebugDraw(std::vector<Surface*> const &aObjects);
     virtual void SwapBuffers();
     virtual void ChangeSize(int aW, int aH);
+
+  private:
+    void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, float &aXPosition, float &aYPosition, float &aZPosition);
 };
 
 #endif

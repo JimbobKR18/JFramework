@@ -1,5 +1,4 @@
 #include "PCScreen.h"
-#include "Transform.h"
 #include "PhysicsObject.h"
 #include "PCSurface.h"
 
@@ -95,7 +94,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glBegin(GL_QUADS);
 #endif
     
-    // while other texture share the same texture id, draw them
+    // While other texture share the same texture id, draw them
     while(it != end &&
           (*it)->GetOwner()->GET<PCSurface>()->GetTextureID() == texture)
     {
@@ -124,7 +123,10 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
         yPosition -= (cameraPosition.y - cameraSize.y / 2.0f);
         zPosition -= (cameraPosition.z - cameraSize.z / 2.0f);
       }
-      
+
+      // Logic too long, put into helper
+      AlignmentHelper(transform, size, xPosition, yPosition, zPosition);
+
       bool draw = xPosition - size.x < GetWidth() && yPosition - size.y < GetHeight() &&
                   xPosition + size.x > 0 && yPosition + size.y > 0;
       if(!draw)
@@ -225,4 +227,47 @@ void PCScreen::ChangeSize(int aW, int aH)
   glShadeModel(GL_SMOOTH);
 
   glLoadIdentity();
+}
+
+void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, float &aXPosition, float &aYPosition, float &aZPosition)
+{
+  X_ALIGNMENT xAlign = aTransform->GetXAlignment();
+  Y_ALIGNMENT yAlign = aTransform->GetYAlignment();
+  Z_ALIGNMENT zAlign = aTransform->GetZAlignment();
+
+  switch(xAlign)
+  {
+  case X_ALIGN_LEFT:
+    aXPosition += aSize.x;
+    break;
+  case X_ALIGN_RIGHT:
+    aXPosition -= aSize.x;
+    break;
+  default:
+    break;
+  }
+
+  switch(yAlign)
+  {
+  case Y_ALIGN_TOP:
+    aYPosition += aSize.y;
+    break;
+  case Y_ALIGN_BOTTOM:
+    aYPosition -= aSize.y;
+    break;
+  default:
+    break;
+  }
+
+  switch(zAlign)
+  {
+  case Z_ALIGN_FRONT:
+    aZPosition += aSize.z;
+    break;
+  case Z_ALIGN_BACK:
+    aZPosition -= aSize.z;
+    break;
+  default:
+    break;
+  }
 }
