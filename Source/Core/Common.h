@@ -59,33 +59,36 @@ class SmartPointer
 private:
   T*  mPointer;
 public:
-  SmartPointer() { assert(!"Invalid pointer assigned in SmartPointer"); }
-  SmartPointer(SmartPointer<T> &aPointer) { mPointer = new T(*aPointer); }
+  SmartPointer() : mPointer(NULL) {}
   SmartPointer(T *aPointer) : mPointer(aPointer) {}
-  ~SmartPointer() { delete mPointer; }
-  T &operator*() { return *mPointer; }
+  SmartPointer(SmartPointer<T> &aPointer) { mPointer = new T(*aPointer); }
+  ~SmartPointer() { if(mPointer) delete mPointer; }
+  T& operator*() { return *mPointer; }
+  T* operator->() { return mPointer; }
   operator T*() { return mPointer; }
-  void operator=(SmartPointer<T> &aPtr)
-  {
-    ReassignValue(aPtr.mPointer);
-  }
-  void operator=(T &aPtr)
+  operator bool() { return mPointer != NULL; }
+  void operator=(T *aPtr)
   {
     ReassignValue(aPtr);
   }
-  bool operator==(SmartPointer<T> &aPtr)
+  void operator=(SmartPointer<T> &aPtr)
   {
-    return isEqual(aPtr.mPointer);
+    ReassignValue(aPtr.mPointer);
   }
   bool operator==(T *aPtr)
   {
     return isEqual(aPtr);
   }
-private:
-  void ReassignValue(T &aPtr)
+  bool operator==(SmartPointer<T> &aPtr)
   {
-    delete mPointer;
-    mPointer = aPtr.mPointer;
+    return isEqual(aPtr.mPointer);
+  }
+private:
+  void ReassignValue(T *aPtr)
+  {
+    //if(aPtr == NULL)
+      //delete mPointer;
+    mPointer = aPtr;
   }
   bool isEqual(T *aPtr)
   {
