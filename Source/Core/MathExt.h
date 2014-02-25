@@ -144,6 +144,19 @@ struct Cube
 
   Cube();
   Cube(Vector3 const &_position, Vector3 const &_size);
+
+  bool GetCollision(Vector3 const &_position);
+};
+
+struct Sphere
+{
+  Vector3 position;
+  float radius;
+
+  Sphere();
+  Sphere(Vector3 const &_position, float const _radius);
+
+  bool GetCollision(Vector3 const &_position);
 };
 
 struct Circle

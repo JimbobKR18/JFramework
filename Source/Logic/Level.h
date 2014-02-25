@@ -12,23 +12,28 @@ class Menu;
 
 class Level
 {
-private:
-	std::string               mName;
-	std::string               mFileName;
-	std::string               mMusicName;
-	std::vector<GameObject*>  mObjects;
-	std::vector<GameObject*>  mStaticObjects;
-	std::vector<Menu*>        mMenus;
-	LevelManager*             mOwner;
-	TileMapGenerator*         mGenerator;
-	GameObject*               mFocusTarget;
-	bool                      mActive;
+public:
+  typedef std::vector<GameObject*> ObjectContainer;
+  typedef std::vector<Menu*> MenuContainer;
+  typedef ObjectContainer::iterator ObjectIT;
+  typedef ObjectContainer::const_iterator ConstObjectIT;
+  typedef MenuContainer::iterator MenuIT;
 
-	Vector3                   mMaxBoundary;
-	Vector3                   mMinBoundary;
-  
-  typedef std::vector<GameObject*>::iterator ObjectIT;
-  typedef std::vector<Menu*>::iterator MenuIT;
+private:
+	std::string       mName;
+	std::string       mFileName;
+	std::string       mMusicName;
+	ObjectContainer   mObjects;
+	ObjectContainer   mStaticObjects;
+	MenuContainer     mMenus;
+	LevelManager*     mOwner;
+	TileMapGenerator* mGenerator;
+	GameObject*       mFocusTarget;
+	bool              mActive;
+
+	Vector3           mMaxBoundary;
+	Vector3           mMinBoundary;
+
 public:
 	Level();
 	Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse);
@@ -40,6 +45,7 @@ public:
   TileMapGenerator* GetTileMap() const;
   GameObject*       GetFocusTarget() const;
   GameObject*       FindObject(std::string const &aObjectName);
+  ObjectContainer   FindObjects(Vector3 const &aPosition) const;
 
   void              AddMenu(Menu *aMenu);
   void              RemoveMenu(Menu *aMenu);

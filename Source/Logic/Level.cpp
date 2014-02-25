@@ -89,6 +89,22 @@ GameObject* Level::FindObject(std::string const &aObjectName)
   return NULL;
 }
 
+Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
+{
+  ObjectContainer ret;
+  for(ConstObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
+    Transform* transform = (*it)->GET<Transform>();
+    Cube cube(transform->GetPosition(), transform->GetSize());
+
+    if(cube.GetCollision(aPosition))
+    {
+      ret.push_back(*it);
+    }
+  }
+  return ret;
+}
+
 void Level::AddMenu(Menu *aMenu)
 {
   mMenus.push_back(aMenu);

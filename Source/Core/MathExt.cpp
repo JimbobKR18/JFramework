@@ -646,7 +646,7 @@ void Matrix33::operator*=(float const aValue)
 }
 
 //------------------------------
-// CIRCLE
+// CUBE
 //------------------------------
 Cube::Cube()
 {
@@ -654,6 +654,37 @@ Cube::Cube()
 
 Cube::Cube(Vector3 const &_position, Vector3 const &_size) : position(_position), size(_size)
 {
+}
+
+bool Cube::GetCollision(Vector3 const &_position)
+{
+  // SEPARATING AXIS THEORUM
+  Vector3 dist = _position - position;
+  for(int i = 0; i < 2; ++i)
+  {
+    if(fabs(dist[i]) > size[i])
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+//------------------------------
+// SPHERE
+//------------------------------
+Sphere::Sphere()
+{
+}
+
+Sphere::Sphere(Vector3 const &_position, float const _radius) : position(_position), radius(_radius)
+{
+}
+
+bool Sphere::GetCollision(Vector3 const &_position)
+{
+  float dist = (_position - position).length();
+  return dist <= radius;
 }
 
 //------------------------------

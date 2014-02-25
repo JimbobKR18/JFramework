@@ -13,11 +13,14 @@
 
 class Menu
 {
+public:
+  typedef std::vector<MenuElement*>   ElementContainer;
+  typedef ElementContainer::iterator  ElementIT;
+
 private:
-  Level*                                      mOwner;
-  std::string                                 mFilename;
-  std::vector<MenuElement*>                   mMenuElements;
-  typedef std::vector<MenuElement*>::iterator ElementIT;
+  Level*            mOwner;
+  std::string       mFilename;
+  ElementContainer  mMenuElements;
 
 public:
   Menu(Level* aLevel, std::string const &aFilename);
