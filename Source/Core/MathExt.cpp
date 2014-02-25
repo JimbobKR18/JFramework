@@ -648,6 +648,17 @@ void Matrix33::operator*=(float const aValue)
 //------------------------------
 // CIRCLE
 //------------------------------
+Cube::Cube()
+{
+}
+
+Cube::Cube(Vector3 const &_position, Vector3 const &_size) : position(_position), size(_size)
+{
+}
+
+//------------------------------
+// CIRCLE
+//------------------------------
 
 Circle::Circle() : position(), up(), right(), radius(0)
 {

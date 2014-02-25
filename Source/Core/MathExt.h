@@ -137,6 +137,15 @@ struct Matrix33
   void operator*=(float const aValue);
 };
 
+struct Cube
+{
+  Vector3 position;
+  Vector3 size;
+
+  Cube();
+  Cube(Vector3 const &_position, Vector3 const &_size);
+};
+
 struct Circle
 {
   Vector3 position;
