@@ -344,7 +344,7 @@ std::string TextParser::ParseLiteral(std::string const &aLiteral)
 {
   std::string ret;
   if(aLiteral.find("Literal") == std::string::npos)
-    ret = aLiteral;
+    ret = ParseNegative(aLiteral);
   else
   {
     // Getting the full string
@@ -373,5 +373,19 @@ std::string TextParser::ParseLiteral(std::string const &aLiteral)
         ret.push_back(next);
     }
   }
+  return ret;
+}
+
+std::string TextParser::ParseNegative(std::string const &aValue)
+{
+  std::string ret;
+  //if(aValue.find("-") == std::string::npos)
+    ret = aValue;
+  /*else
+  {
+    std::string value;
+    mInput >> value;
+    ret = value;
+  }*/
   return ret;
 }

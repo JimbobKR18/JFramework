@@ -66,6 +66,7 @@ class TextParser : public Parser
   private:
     void          WriteRoot(Root const *aRoot);
     std::string   ParseLiteral(std::string const &aLiteral);
+    std::string   ParseNegative(std::string const &aValue);
 };
 
 #endif
