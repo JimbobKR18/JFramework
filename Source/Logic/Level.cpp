@@ -118,6 +118,7 @@ void Level::RemoveMenu(Menu *aMenu)
     {
       mMenus.erase(it);
       aMenu->DeleteObjects();
+      break;
     }
   }
 }
