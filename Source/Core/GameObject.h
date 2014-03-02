@@ -39,6 +39,7 @@ public:
 
   void                    AddComponent(Component *aComponent);
   void                    RemoveComponent(Component *aComponent, bool aDelete);
+  void                    RemoveComponent(std::string const &aName, bool aDelete);
   Component*              GetComponent(std::string const &aName);
   bool                    HasComponent(std::string const &aName);
 

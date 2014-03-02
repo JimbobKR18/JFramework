@@ -14,6 +14,8 @@
 #include "Parser.h"
 #include <assert.h>
 
+#define OWNER_CHECK() if(mOwner && aOwner != nullptr) assert(!"This component already has an owner.")
+
 class Component
 {
 private:
@@ -21,13 +23,13 @@ private:
   std::string mName;
 
 public:
-  Component() {assert(0);}
-  Component(std::string const &aName) : mName(aName) {}
+  Component() {assert(!"Not supported.");}
+  Component(std::string const &aName) : mOwner(nullptr), mName(aName) {}
   Component(Component const &aComponent) : mOwner(aComponent.mOwner) {}
   virtual ~Component() {}
 
   GameObject*         GetOwner() {return mOwner;}
-  void                SetOwner(GameObject *aOwner) {mOwner = aOwner;}
+  void                SetOwner(GameObject *aOwner) {OWNER_CHECK(); mOwner = aOwner;}
   std::string         GetDefinedName() {return mName;}
 
   virtual void        Update() = 0;

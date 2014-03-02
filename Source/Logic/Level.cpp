@@ -116,8 +116,8 @@ void Level::RemoveMenu(Menu *aMenu)
   {
     if(*it == aMenu)
     {
+      (*it)->DeleteObjects();
       mMenus.erase(it);
-      aMenu->DeleteObjects();
       break;
     }
   }
@@ -193,6 +193,7 @@ void Level::DeleteObjects()
     manager->DeleteObject(*it);
   }
   mObjects.clear();
+  mStaticObjects.clear();
 }
 
 void Level::Reset()

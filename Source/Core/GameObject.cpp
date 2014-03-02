@@ -74,12 +74,31 @@ void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
   {
     if(aComponent == *it)
     {
+      (*it)->SetOwner(nullptr);
       if(aDelete)
         delete *it;
       mComponents.erase(it);
       end = mComponents.end();
       break;
     }
+  }
+}
+
+void GameObject::RemoveComponent(std::string const &aName, bool aDelete)
+{
+  ComponentIT end = mComponents.end();
+  for(ComponentIT it = mComponents.begin(); it != end;)
+  {
+    if(aName == (*it)->GetName())
+    {
+      (*it)->SetOwner(nullptr);
+      if(aDelete)
+        delete *it;
+      it = mComponents.erase(it);
+      end = mComponents.end();
+    }
+    else
+      ++it;
   }
 }
 
