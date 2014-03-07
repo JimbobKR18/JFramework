@@ -319,7 +319,8 @@ void Level::SerializeLUA()
   SLB::Class<Level>("Level")
           .set("Load", &Level::Load)
           .set("Unload", &Level::Unload)
-          .set("GetName", &Level::GetName);
+          .set("GetName", &Level::GetName)
+          .set("DeleteObject", &Level::DeleteObjectDelayed);
 }
 
 void Level::ParseFile()
