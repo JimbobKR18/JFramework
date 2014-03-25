@@ -89,7 +89,8 @@ Root::~Root()
 
 TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode const &aMode) : Parser(aFilename),
                                                                                                mCurrentRoot(""),
-                                                                                               mAutoParse(aAutoParse)
+                                                                                               mAutoParse(aAutoParse),
+                                                                                               mWrittenOut(false)
 {
   mDictionary = new Root();
 
@@ -114,6 +115,11 @@ TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode c
 }
 TextParser::~TextParser()
 {
+  if(mOutput.good() && !mWrittenOut)
+    Write();
+
+  mOutput.close();
+  mInput.close();
 }
 
 bool TextParser::Find(std::string const &aElement)
@@ -258,6 +264,7 @@ void TextParser::Place(std::string const &aRoot, std::string const &aElement, st
 
 void TextParser::Write()
 {
+  mWrittenOut = true;
   if(mAutoParse)
     WriteRoot(mDictionary);
   else

@@ -45,6 +45,7 @@ class TextParser : public Parser
     Root*         mDictionary;
     std::string   mCurrentRoot;
     bool          mAutoParse;
+    bool          mWrittenOut;
   public:
     TextParser(std::string const &aFilename, bool aAutoParse = true, TextMode const &aMode = MODE_INPUT);
     ~TextParser();
