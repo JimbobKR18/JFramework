@@ -387,7 +387,6 @@ void Level::ParseFile()
 		  {
         parser.GetNextString(empty);
         parser.GetNextString(value);
-        parser.GetNextString(empty);
 
 		    if(value == "true")
 		    {
@@ -430,6 +429,7 @@ void Level::ParseFile()
     else if(param == "Music")
     {
       std::string empty, music;
+      parser.GetNextString(empty);
       parser.GetNextString(music);
 
       mMusicName = music;
