@@ -156,6 +156,7 @@ void GameObject::SerializeLUA()
 {
   SLB::Class<GameObject>("GameObject")
           .set("GetComponent", &GameObject::GetComponent)
+          .set("HasComponent", &GameObject::HasComponent)
           .set("GetTransform", &GameObject::GET<Transform>)
           .set("GetName", &GameObject::GetName);
 }
