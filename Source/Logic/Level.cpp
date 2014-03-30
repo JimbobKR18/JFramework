@@ -342,20 +342,20 @@ void Level::ParseFile()
 		  {
 		    Transform *transform = object->GET<Transform>();
 
-		    float posX, posY, posZ,
-		          scaleX, scaleY, scaleZ,
-		          sizeX, sizeY, sizeZ;
+		    int posX, posY, posZ,
+		        scaleX, scaleY, scaleZ,
+		        sizeX, sizeY, sizeZ;
         std::string empty;
 
-        parser.GetNextFloat(posX);
-        parser.GetNextFloat(posY);
-        parser.GetNextFloat(posZ);
-        parser.GetNextFloat(scaleX);
-        parser.GetNextFloat(scaleY);
-        parser.GetNextFloat(scaleZ);
-        parser.GetNextFloat(sizeX);
-        parser.GetNextFloat(sizeY);
-        parser.GetNextFloat(sizeZ);
+        parser.GetNextInt(posX);
+        parser.GetNextInt(posY);
+        parser.GetNextInt(posZ);
+        parser.GetNextInt(scaleX);
+        parser.GetNextInt(scaleY);
+        parser.GetNextInt(scaleZ);
+        parser.GetNextInt(sizeX);
+        parser.GetNextInt(sizeY);
+        parser.GetNextInt(sizeZ);
 
         transform->SetPosition(Vector3(posX,posY,posZ));
         transform->SetScale(Vector3(scaleX,scaleY,scaleZ));

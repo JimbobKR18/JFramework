@@ -86,7 +86,7 @@ void Transform::Serialize(Parser &aParser)
       value = mScale[i - 3];
     else
       value = mSize[i - 6];
-    aParser.Place("Transform", values[i], Common::FloatToString(value));
+    aParser.Place("Transform", values[i], Common::IntToString(value));
   }
 
   if(mXAlign == X_ALIGN_LEFT)
