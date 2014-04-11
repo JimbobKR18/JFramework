@@ -9,6 +9,7 @@
 #include "SoundManager.h"
 #include "DebugManager.h"
 #include "LUATypes.h"
+#include "Constants.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -22,6 +23,8 @@ GameApp::GameApp(int aWidth, int aHeight)
   mDT = 0;
   mLastFrame = Common::GetNow();
 
+  // All current managers added here
+  // You can add your own manager in your derived class from GameApp.
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
   AddManager(new GraphicsManager(this, aWidth, aHeight));
@@ -33,8 +36,13 @@ GameApp::GameApp(int aWidth, int aHeight)
   AddManager(new DebugManager(this));
 #endif
   
+  // LUABind needs to register all LUA classes.
+  // You can bind your own classes in your derived class from GameApp.
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
+
+  // Autoparses Game/Constants.txt
+  Constants::Deserialize();
 }
 
 GameApp::~GameApp()
