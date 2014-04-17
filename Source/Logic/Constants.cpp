@@ -17,7 +17,7 @@ Constants::~Constants()
 {
 }
 
-std::string Constants::GetValue(std::string const &aValue)
+std::string Constants::GetString(std::string const &aValue)
 {
   valIT it = mValues.find(aValue);
 
@@ -25,6 +25,21 @@ std::string Constants::GetValue(std::string const &aValue)
     assert(!"Value not found!");
 
   return it->second;
+}
+
+int Constants::GetInteger(std::string const &aValue)
+{
+  return Common::StringToInt(GetString(aValue));
+}
+
+float Constants::GetFloat(std::string const &aValue)
+{
+  return Common::StringToFloat(GetString(aValue));
+}
+
+bool Constants::GetBoolean(std::string const &aValue)
+{
+  return Common::StringToBool(GetString(aValue));
 }
 
 void Constants::Deserialize()

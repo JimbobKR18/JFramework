@@ -21,7 +21,10 @@ public:
   Constants();
   virtual ~Constants();
 
-  static std::string GetValue(std::string const &aValue);
+  static std::string GetString(std::string const &aValue);
+  static int GetInteger(std::string const &aValue);
+  static float GetFloat(std::string const &aValue);
+  static bool GetBoolean(std::string const &aValue);
   static void Deserialize();
 };
 
