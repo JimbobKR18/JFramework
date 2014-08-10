@@ -14,6 +14,11 @@
 #include "LuaIncludes.h"
 #include "ObjectDeleteMessage.h"
 
+bool SortPredicate(GameObject *aLhs, GameObject *aRhs)
+{
+  return aLhs->GET<Transform>()->GetPosition().z <= aRhs->GET<Transform>()->GetPosition().z;
+}
+
 Level::Level()
 {
 	assert(0);
@@ -102,6 +107,7 @@ Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
       ret.push_back(*it);
     }
   }
+  std::sort(ret.begin(), ret.end(), SortPredicate);
   return ret;
 }
 

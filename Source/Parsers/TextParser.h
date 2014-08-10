@@ -10,11 +10,19 @@ enum TextMode
   MODE_OUTPUT
 };
 
+// Forward declare Root
+class Root;
+
+// ... for these
+typedef std::set<Root*> RootContainer;
+typedef RootContainer::const_iterator rootConstIT;
+typedef RootContainer::iterator rootIT;
+
 struct Root
 {
   std::string         mValue;
   std::string         mName;
-  std::vector<Root*>  mChildren;
+  RootContainer       mChildren;
   Root*               mParent;
 
   Root();
@@ -33,9 +41,6 @@ struct Root
 private:
   Root *Find(std::string const &aValue);
 };
-
-typedef std::vector<Root*>::const_iterator rootConstIT;
-typedef std::vector<Root*>::iterator rootIT;
 
 class TextParser : public Parser
 {

@@ -8,20 +8,92 @@
 
 #include "Common.h"
 
+// Constructors
 HashString::HashString() : mString(""), mHash(0)
 {
 }
 
-HashString::HashString(char const* aString) : mString(aString)
+HashString::HashString(char const* aString, unsigned aStart, unsigned aEnd)
 {
+  if(aEnd > strlen(aString))
+    assert(!"HashString constructor will run off the end!");
+  else if(aEnd == 0)
+    mString = aString;
+  else
+  {
+    for(unsigned i = aStart; i <= aEnd; ++i)
+    {
+      mString.push_back(aString[i]);
+    }
+  }
   Hash();
 }
 
-HashString::HashString(std::string const &aString) : mString(aString)
+HashString::HashString(std::string const &aString, unsigned aStart, unsigned aEnd)
 {
+  // Use previous definition for ease
+  *this = HashString(aString.c_str(), aStart, aEnd);
+}
+
+// Const Operations
+int HashString::Size() const
+{
+  return mString.length();
+}
+
+int HashString::Length() const
+{
+  return Size();
+}
+
+int HashString::Find(HashString const &aString) const
+{
+  if(aString.Length() == 0)
+    assert(!"HashString is empty being passed into Find");
+
+  return mString.find(aString.mString);
+}
+
+HashString HashString::SubString(int aStart, int aLength) const
+{
+  return mString.substr(aStart, aLength);
+}
+
+std::vector<HashString> HashString::Split(HashString const &aDelimiter) const
+{
+  std::vector<HashString> ret;
+  unsigned curPos = 0;
+  unsigned nextMatch = mString.find(aDelimiter.mString);
+
+  // Catch all in case no delimiter
+  if(nextMatch == (unsigned)std::string::npos)
+  {
+    ret.push_back(mString);
+  }
+  // Find delimiter and split
+  while(nextMatch != (unsigned)std::string::npos)
+  {
+    ret.push_back(HashString(mString, curPos, nextMatch));
+    curPos = nextMatch + 1;
+    nextMatch = mString.find(aDelimiter.mString, curPos);
+  }
+  return ret;
+}
+
+// Non-Const Operations
+void HashString::Reverse()
+{
+  std::reverse(mString.begin(), mString.end());
   Hash();
 }
 
+void HashString::Push(char aChar)
+{
+  mString.push_back(aChar);
+  Hash();
+}
+
+// Operators
 void HashString::operator=(HashString const &aRhs)
 {
   mString = aRhs.mString;
@@ -55,7 +127,10 @@ void HashString::Hash()
   int len = strlen(key);
   for(unsigned i = 0; i < mString.length(); ++i)
   {
-    mHash += (static_cast<int>(mString[i]) + i) ^ key[i % len];
+    if(mHash % 2 == 0)
+      mHash += (static_cast<int>(mString[i]) + i) ^ key[i % len];
+    else
+      mHash += (static_cast<int>(mString[i]) + i) & key[i % len];
   }
 }
 

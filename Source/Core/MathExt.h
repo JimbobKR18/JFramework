@@ -143,7 +143,7 @@ struct Cube
   Vector3 size;
 
   Cube();
-  Cube(Vector3 const &_position, Vector3 const &_size);
+  Cube(Vector3 const &aPosition, Vector3 const &aSize);
 
   bool GetCollision(Vector3 const &_position);
 };
@@ -154,9 +154,9 @@ struct Sphere
   float radius;
 
   Sphere();
-  Sphere(Vector3 const &_position, float const _radius);
+  Sphere(Vector3 const &aPosition, float const aRadius);
 
-  bool GetCollision(Vector3 const &_position);
+  bool GetCollision(Vector3 const &aPosition);
 };
 
 struct Circle
@@ -167,7 +167,7 @@ struct Circle
   float radius;
 
   Circle();
-  Circle(Vector3 const &_position, Vector3 const &_up, Vector3 const &_right, float const _radius);
+  Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight, float const aRadius);
 };
 
 struct LineSegment
@@ -178,7 +178,7 @@ struct LineSegment
   LineSegment();
   LineSegment(Vector3 const &aPosition, float aLength);
 
-  bool GetCollisions(LineSegment const &_compare, Circle &_output);
+  bool GetCollisions(LineSegment const &aCompare, Circle &aOutput);
 };
 
 template<typename T>

@@ -39,7 +39,7 @@ void Root::Place(std::string const &aRoot, std::string const &aElement, std::str
     }
     node->mValue = aValue;
     node->mParent = this;
-    mChildren.push_back(node);
+    mChildren.insert(node);
     return;
   }
   else
@@ -83,7 +83,7 @@ Root *Root::Find(std::string const &aValue)
 Root::~Root()
 {
   // Delete all children associated with this root
-  for(std::vector<Root*>::iterator it = mChildren.begin(); it != mChildren.end(); ++it)
+  for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
       delete *it;
 }
 
@@ -136,17 +136,27 @@ bool TextParser::Find(std::string const &aElement)
 std::string TextParser::Find(std::string const &aRoot, std::string const &aElement)
 {
   // Find node and search it for an element
-  Root const *node = mDictionary->Search(aRoot);
+  unsigned curLevel = 0;
+  std::vector<HashString> splitString = HashString(aRoot).Split("/");
+  Root const *node = mDictionary->Search(splitString[0]);
 
   if(!node)
-	  return "";
+    return "";
 
-  Root const *value = node->Search(aElement);
+  while(curLevel < splitString.size() - 1)
+  {
+    node = node->Search(splitString[curLevel]);
+    ++curLevel;
+    if(!node)
+      return "";
+  }
 
-  if(!value)
-  	  return "";
+  node = node->Search(aElement);
 
-  return value->mValue;
+  if(!node)
+    return "";
+
+  return node->mValue;
 }
 
 void TextParser::Parse()
@@ -177,13 +187,13 @@ void TextParser::Parse()
       mInput >> value;
       node->mValue = ParseLiteral(value);
       node->mParent = mCurNode;
-      mCurNode->mChildren.push_back(node);
+      mCurNode->mChildren.insert(node);
     }
     // Start a new child node
     else if(type == "{")
     {
       if(mCurNode)
-    	  mCurNode->mChildren.push_back(node);
+    	  mCurNode->mChildren.insert(node);
 
       node->mParent = mCurNode;
       mCurNode = node;

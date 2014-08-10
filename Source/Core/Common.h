@@ -37,10 +37,27 @@ class HashString
 private:
   std::string mString;
   int         mHash;
+
+  std::string::iterator stringIT;
+  std::string::const_iterator constStringIT;
 public:
+  // Constructors
   HashString();
-  HashString(char const* aString);
-  HashString(std::string const &aString);
+  HashString(char const* aString, unsigned aStart = 0, unsigned aEnd = 0);
+  HashString(std::string const &aString, unsigned aStart = 0, unsigned aEnd = 0);
+
+  // Const Operations
+  int Size() const;
+  int Length() const;
+  int Find(HashString const &aString) const;
+  HashString SubString(int aStart, int aLength) const;
+  std::vector<HashString> Split(HashString const &aDelimiter) const;
+
+  // Non-Const Operations
+  void Reverse();
+  void Push(char aChar);
+
+  // Operators
   // Equality
   void operator=(HashString const &aRhs);
   // Comparison
@@ -67,22 +84,11 @@ public:
   T* operator->() { return mPointer; }
   operator T*() { return mPointer; }
   operator bool() { return mPointer != NULL; }
-  void operator=(T *aPtr)
-  {
-    ReassignValue(aPtr);
-  }
-  void operator=(SmartPointer<T> &aPtr)
-  {
-    ReassignValue(aPtr.mPointer);
-  }
-  bool operator==(T *aPtr)
-  {
-    return isEqual(aPtr);
-  }
-  bool operator==(SmartPointer<T> &aPtr)
-  {
-    return isEqual(aPtr.mPointer);
-  }
+  bool isNULL() const { return mPointer == NULL; }
+  void operator=(T *aPtr) { ReassignValue(aPtr); }
+  void operator=(SmartPointer<T> &aPtr) { ReassignValue(aPtr.mPointer); }
+  bool operator==(T *aPtr) { return isEqual(aPtr); }
+  bool operator==(SmartPointer<T> &aPtr) { return isEqual(aPtr.mPointer); }
 private:
   void ReassignValue(T *aPtr)
   {
