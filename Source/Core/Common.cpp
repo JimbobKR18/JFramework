@@ -120,6 +120,17 @@ HashString::operator char const*()
   return mString.c_str();
 }
 
+HashString HashString::operator+(HashString const &aRhs) const
+{
+  return HashString(mString + aRhs.mString);
+}
+
+void HashString::operator+=(HashString const &aRhs)
+{
+  mString += aRhs.mString;
+  Hash();
+}
+
 void HashString::Hash()
 {
   mHash = 0;

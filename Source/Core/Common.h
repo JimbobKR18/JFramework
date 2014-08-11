@@ -66,6 +66,9 @@ public:
   // Conversion
   operator std::string();
   operator char const*();
+  // Addition
+  HashString operator+(HashString const &aRhs) const;
+  void operator+=(HashString const &aRhs);
 private:
   void Hash();
 };
