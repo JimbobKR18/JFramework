@@ -69,6 +69,9 @@ public:
   // Addition
   HashString operator+(HashString const &aRhs) const;
   void operator+=(HashString const &aRhs);
+  // Misc.
+  std::string ToString() const;
+  char const* ToCharArray() const;
 private:
   void Hash();
 };

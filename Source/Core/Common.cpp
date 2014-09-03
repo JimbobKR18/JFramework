@@ -131,6 +131,16 @@ void HashString::operator+=(HashString const &aRhs)
   Hash();
 }
 
+std::string HashString::ToString() const
+{
+  return mString;
+}
+
+char const* HashString::ToCharArray() const
+{
+  return mString.c_str();
+}
+
 void HashString::Hash()
 {
   mHash = 0;
