@@ -66,12 +66,18 @@ public:
   // Conversion
   operator std::string();
   operator char const*();
+  operator std::string() const;
+  operator char const*() const;
   // Addition
   HashString operator+(HashString const &aRhs) const;
   void operator+=(HashString const &aRhs);
   // Misc.
   std::string ToString() const;
   char const* ToCharArray() const;
+  int ToInt() const;
+  float ToFloat() const;
+  bool ToBool() const;
+  std::vector<std::string> ToStringVector() const;
 private:
   void Hash();
 };

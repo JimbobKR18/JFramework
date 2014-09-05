@@ -120,6 +120,16 @@ HashString::operator char const*()
   return mString.c_str();
 }
 
+HashString::operator std::string() const
+{
+  return mString;
+}
+
+HashString::operator char const*() const
+{
+  return mString.c_str();
+}
+
 HashString HashString::operator+(HashString const &aRhs) const
 {
   return HashString(mString + aRhs.mString);
@@ -139,6 +149,26 @@ std::string HashString::ToString() const
 char const* HashString::ToCharArray() const
 {
   return mString.c_str();
+}
+
+int HashString::ToInt() const
+{
+  return Common::StringToInt(mString);
+}
+
+float HashString::ToFloat() const
+{
+  return Common::StringToFloat(mString);
+}
+
+bool HashString::ToBool() const
+{
+  return Common::StringToBool(mString);
+}
+
+std::vector<std::string> HashString::ToStringVector() const
+{
+  return Common::StringToStringVector(mString);
 }
 
 void HashString::Hash()
