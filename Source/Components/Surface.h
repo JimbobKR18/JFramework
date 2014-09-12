@@ -21,7 +21,7 @@ private:
   Viewspace           mViewmode;
   Vector4             mColor;
   std::string         mFileName;
-  std::string         mNoRender;
+  bool                mNoRender;
 public:
 	Surface();
 	Surface(GraphicsManager *aManager);

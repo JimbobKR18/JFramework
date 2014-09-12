@@ -37,8 +37,8 @@ void MenuImage::ParseAdditionalData(Parser &aParser)
   if(aParser.Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)
-    PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateSurface();
-    std::string imageName = aParser.Find("Surface", "TextureName");
+    PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateUISurface();
+    std::string imageName = aParser.Find("Surface", "TextureName")->GetValue().ToString();
     surface->LoadImage(imageName);
 #else
     Surface *surface = new Surface();

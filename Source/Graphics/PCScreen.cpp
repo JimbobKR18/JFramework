@@ -23,6 +23,9 @@ PCScreen::~PCScreen()
 
 void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
+  // Disable to draw our lines
+  glDisable(GL_DEPTH_TEST);
+
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
   Vector3 cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetSize();
@@ -62,13 +65,18 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       glPopMatrix();
     }
   }
+  glEnable(GL_DEPTH_TEST);
+}
+
+
+void PCScreen::PreDraw()
+{
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glLoadIdentity();
 }
 
 void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glLoadIdentity();
-  
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetSize();
@@ -183,6 +191,17 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   }
 }
 
+void PCScreen::DrawUI(std::vector<Surface*> const &aObjects)
+{
+  // Disable to draw our UI elements
+  glDisable(GL_DEPTH_TEST);
+
+  Draw(aObjects);
+
+  // Reenable to draw all other elements with depth
+  glEnable(GL_DEPTH_TEST);
+}
+
 void PCScreen::SwapBuffers()
 {
   SDL_GL_SwapBuffers();
@@ -222,6 +241,7 @@ void PCScreen::ChangeSize(int aW, int aH)
 
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
+  glEnable(GL_DEPTH_TEST);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   glShadeModel(GL_SMOOTH);

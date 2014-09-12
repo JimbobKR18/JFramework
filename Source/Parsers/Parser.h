@@ -2,27 +2,38 @@
 #define __JFramework_Parser_h_
 
 #include "Common.h"
+#include "Root.h"
 
 class Parser
 {
   private:
+    int         mCurrentObjectIndex;
     std::string mFilename;
+
+  protected:
+    Root* mDictionary;
 
   public:
     Parser(std::string const &aFilename);
     virtual ~Parser();
 
-    std::string           GetFilename() const;
+    // Getters
+    int           GetCurrentObjectIndex() const;
+    std::string   GetFilename() const;
+    Root*         GetBaseRoot() const;
+
+    // Setters
+    void          SetCurrentObjectIndex(int const aIndex);
 
     // Reading
-    virtual bool          Find(std::string const &aElement) = 0;
-    virtual std::string   Find(std::string const &aRoot, std::string const &aElement) = 0;
-    virtual void          Parse() = 0;
+    Root*         Find(std::string const &aElement);
+    Root*         Find(std::string const &aRoot, std::string const &aElement);
+    virtual void  Parse() = 0;
 
     // Writing
-    virtual void          Place(std::string const &aRoot, std::string const &aValue) = 0;
-    virtual void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue) = 0;
-    virtual void          Write() = 0;
+    void          Place(std::string const &aElement, std::string const &aValue);
+    void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
+    virtual void  Write() = 0;
 };
 
 #endif

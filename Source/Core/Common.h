@@ -23,6 +23,8 @@
 #include <sstream>
 #include <iostream>
 #include <chrono>
+#include "HashString.h"
+#include "SmartPointer.h"
 
 #if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
 #define PC 1
@@ -30,89 +32,6 @@
 
 #define DebugLogPrint std::printf
 #define TimePointToMilliseconds std::chrono::duration_cast<std::chrono::milliseconds>
-
-// Basically an extension of std::string, now with hashing.
-class HashString
-{
-private:
-  std::string mString;
-  int         mHash;
-
-  std::string::iterator stringIT;
-  std::string::const_iterator constStringIT;
-public:
-  // Constructors
-  HashString();
-  HashString(char const* aString, unsigned aStart = 0, unsigned aEnd = 0);
-  HashString(std::string const &aString, unsigned aStart = 0, unsigned aEnd = 0);
-
-  // Const Operations
-  int Size() const;
-  int Length() const;
-  int Find(HashString const &aString) const;
-  HashString SubString(int aStart, int aLength) const;
-  std::vector<HashString> Split(HashString const &aDelimiter) const;
-
-  // Non-Const Operations
-  void Reverse();
-  void Push(char aChar);
-
-  // Operators
-  // Equality
-  void operator=(HashString const &aRhs);
-  // Comparison
-  bool operator==(HashString const &aRhs);
-  char operator[](int aValue);
-  // Conversion
-  operator std::string();
-  operator char const*();
-  operator std::string() const;
-  operator char const*() const;
-  // Addition
-  HashString operator+(HashString const &aRhs) const;
-  void operator+=(HashString const &aRhs);
-  // Misc.
-  std::string ToString() const;
-  char const* ToCharArray() const;
-  int ToInt() const;
-  float ToFloat() const;
-  bool ToBool() const;
-  std::vector<std::string> ToStringVector() const;
-private:
-  void Hash();
-};
-
-template<typename T>
-class SmartPointer
-{
-private:
-  T*  mPointer;
-public:
-  SmartPointer() : mPointer(NULL) {}
-  SmartPointer(T *aPointer) : mPointer(aPointer) {}
-  SmartPointer(SmartPointer<T> &aPointer) { mPointer = new T(*aPointer); }
-  ~SmartPointer() { if(mPointer) delete mPointer; }
-  T& operator*() { return *mPointer; }
-  T* operator->() { return mPointer; }
-  operator T*() { return mPointer; }
-  operator bool() { return mPointer != NULL; }
-  bool isNULL() const { return mPointer == NULL; }
-  void operator=(T *aPtr) { ReassignValue(aPtr); }
-  void operator=(SmartPointer<T> &aPtr) { ReassignValue(aPtr.mPointer); }
-  bool operator==(T *aPtr) { return isEqual(aPtr); }
-  bool operator==(SmartPointer<T> &aPtr) { return isEqual(aPtr.mPointer); }
-private:
-  void ReassignValue(T *aPtr)
-  {
-    //if(aPtr == NULL)
-      //delete mPointer;
-    mPointer = aPtr;
-  }
-  bool isEqual(T *aPtr)
-  {
-    return aPtr == mPointer;
-  }
-};
 
 namespace Common
 {

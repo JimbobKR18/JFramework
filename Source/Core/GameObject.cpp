@@ -144,7 +144,9 @@ void GameObject::ReceiveMessage(Message const &aMessage)
 
 void GameObject::Serialize(Parser &aParser)
 {
-  aParser.Place(mFileName, "");
+  std::string object = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  aParser.Place(object, "File", mFileName);
+
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {

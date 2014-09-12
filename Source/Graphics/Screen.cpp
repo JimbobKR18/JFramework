@@ -2,7 +2,8 @@
 
 bool SortPredicate(Surface *object1, Surface *object2)
 {
-	if(object1->GetTextureID() < object2->GetTextureID())
+  // TODO maybe organize by z axis?
+  if(object1->GetTextureID() < object2->GetTextureID())
 	{
 		return true;
 	}

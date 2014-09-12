@@ -25,7 +25,9 @@ public:
   std::vector<Surface*>   SortObjects(std::vector<Surface*> const &aObjects);
 
   virtual void            ChangeSize(int aW, int aH) = 0;
+  virtual void            PreDraw() = 0;
   virtual void            Draw(std::vector<Surface*> const &aObjects) = 0;
+  virtual void            DrawUI(std::vector<Surface*> const &aObjects) = 0;
   virtual void            DebugDraw(std::vector<Surface*> const &aObjects) = 0;
   virtual void            SwapBuffers() = 0;
 };

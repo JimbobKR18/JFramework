@@ -8,183 +8,6 @@
 
 #include "Common.h"
 
-// Constructors
-HashString::HashString() : mString(""), mHash(0)
-{
-}
-
-HashString::HashString(char const* aString, unsigned aStart, unsigned aEnd)
-{
-  if(aEnd > strlen(aString))
-    assert(!"HashString constructor will run off the end!");
-  else if(aEnd == 0)
-    mString = aString;
-  else
-  {
-    for(unsigned i = aStart; i <= aEnd; ++i)
-    {
-      mString.push_back(aString[i]);
-    }
-  }
-  Hash();
-}
-
-HashString::HashString(std::string const &aString, unsigned aStart, unsigned aEnd)
-{
-  // Use previous definition for ease
-  *this = HashString(aString.c_str(), aStart, aEnd);
-}
-
-// Const Operations
-int HashString::Size() const
-{
-  return mString.length();
-}
-
-int HashString::Length() const
-{
-  return Size();
-}
-
-int HashString::Find(HashString const &aString) const
-{
-  if(aString.Length() == 0)
-    assert(!"HashString is empty being passed into Find");
-
-  return mString.find(aString.mString);
-}
-
-HashString HashString::SubString(int aStart, int aLength) const
-{
-  return mString.substr(aStart, aLength);
-}
-
-std::vector<HashString> HashString::Split(HashString const &aDelimiter) const
-{
-  std::vector<HashString> ret;
-  unsigned curPos = 0;
-  unsigned nextMatch = mString.find(aDelimiter.mString);
-
-  // Catch all in case no delimiter
-  if(nextMatch == (unsigned)std::string::npos)
-  {
-    ret.push_back(mString);
-  }
-  // Find delimiter and split
-  while(nextMatch != (unsigned)std::string::npos)
-  {
-    ret.push_back(HashString(mString, curPos, nextMatch));
-    curPos = nextMatch + 1;
-    nextMatch = mString.find(aDelimiter.mString, curPos);
-  }
-  return ret;
-}
-
-// Non-Const Operations
-void HashString::Reverse()
-{
-  std::reverse(mString.begin(), mString.end());
-  Hash();
-}
-
-void HashString::Push(char aChar)
-{
-  mString.push_back(aChar);
-  Hash();
-}
-
-// Operators
-void HashString::operator=(HashString const &aRhs)
-{
-  mString = aRhs.mString;
-  mHash = aRhs.mHash;
-}
-
-bool HashString::operator==(HashString const &aRhs)
-{
-  return mHash == aRhs.mHash;
-}
-
-char HashString::operator[](int aValue)
-{
-  return mString[aValue];
-}
-
-HashString::operator std::string()
-{
-  return mString;
-}
-
-HashString::operator char const*()
-{
-  return mString.c_str();
-}
-
-HashString::operator std::string() const
-{
-  return mString;
-}
-
-HashString::operator char const*() const
-{
-  return mString.c_str();
-}
-
-HashString HashString::operator+(HashString const &aRhs) const
-{
-  return HashString(mString + aRhs.mString);
-}
-
-void HashString::operator+=(HashString const &aRhs)
-{
-  mString += aRhs.mString;
-  Hash();
-}
-
-std::string HashString::ToString() const
-{
-  return mString;
-}
-
-char const* HashString::ToCharArray() const
-{
-  return mString.c_str();
-}
-
-int HashString::ToInt() const
-{
-  return Common::StringToInt(mString);
-}
-
-float HashString::ToFloat() const
-{
-  return Common::StringToFloat(mString);
-}
-
-bool HashString::ToBool() const
-{
-  return Common::StringToBool(mString);
-}
-
-std::vector<std::string> HashString::ToStringVector() const
-{
-  return Common::StringToStringVector(mString);
-}
-
-void HashString::Hash()
-{
-  mHash = 0;
-  char const *key = "srkfadcultjylenoqickbwnxmpvg";
-  int len = strlen(key);
-  for(unsigned i = 0; i < mString.length(); ++i)
-  {
-    if(mHash % 2 == 0)
-      mHash += (static_cast<int>(mString[i]) + i) ^ key[i % len];
-    else
-      mHash += (static_cast<int>(mString[i]) + i) & key[i % len];
-  }
-}
-
 namespace Common
 {
   #ifdef __APPLE__
@@ -258,7 +81,7 @@ namespace Common
 
   bool StringToBool(std::string const &aValue)
   {
-    bool ret = (aValue == "True") ? true : false;
+    bool ret = (aValue == "true") ? true : false;
     return ret;
   }
 
@@ -332,7 +155,7 @@ namespace Common
       ret += stream.str();
       ret += ",";
     }
-    ret = ret.substr(0, ret.size() - 2);
+    ret = ret.substr(0, ret.size() - 1);
 
     return ret;
   }

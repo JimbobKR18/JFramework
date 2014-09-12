@@ -33,8 +33,9 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   int xPos = 0, yPos = 0;
   float halfX = mWidth * aTileSize;
   float halfY = mHeight * aTileSize;
+  float const zPos = 0.9999f;
+
   // mTiles and mCollision MUST be same size, or it's not a valid map
-  
   if(mTiles.size() != mCollision.size())
     assert(!"Not a valid tilemap, art and collision maps of different sizes");
 
@@ -52,7 +53,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     // Get Transform of new object
     Transform *transform = obj->GET<Transform>();
     Vector3 position = Vector3(-halfX + (aTileSize * 2 * xPos),
-                               -halfY + (aTileSize * 2 * yPos),0);
+                               -halfY + (aTileSize * 2 * yPos), zPos);
     transform->SetPosition(position);
     transform->SetSize(tileSize);
     

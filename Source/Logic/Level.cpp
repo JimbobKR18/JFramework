@@ -300,10 +300,21 @@ void Level::Unload(Level* const aNextLevel)
 
 void Level::Serialize(Parser &aParser)
 {
+  int curIndex = 0;
+  std::string object = "Object_";
   mGenerator->Serialize(aParser);
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it, ++curIndex)
   {
+    std::string objectString = object + Common::IntToString(curIndex);
+    aParser.SetCurrentObjectIndex(curIndex);
+    aParser.Place(objectString, "");
     (*it)->Serialize(aParser);
+
+    if(*it == mFocusTarget)
+    {
+      aParser.Place(objectString, "Focus", "");
+      aParser.Find(objectString)->Place("Focus", "IsFocus", "true");
+    }
   }
   /*for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
   {
@@ -311,7 +322,7 @@ void Level::Serialize(Parser &aParser)
   }*/
   // TODO focus target
   aParser.Place("Music", "");
-  aParser.Place("Music", "Music", mMusicName);
+  aParser.Place("Music", "Song", mMusicName);
 }
 
 void Level::SerializeTileMap(Parser &aParser)
@@ -331,143 +342,133 @@ void Level::SerializeLUA()
 
 void Level::ParseFile()
 {
-	TextParser parser(Common::RelativePath("Game", mFileName).c_str(), false);
+	TextParser parser(Common::RelativePath("Game", mFileName).c_str());
 	GameObject *object = NULL;
+	HashString const curObject = "Object_";
+	int curIndex = 0;
 
-	while(parser.IsGood())
+	HashString tempIndex = curObject + Common::IntToString(curIndex);
+	Root* curRoot = parser.Find(tempIndex);
+
+	while(curRoot)
 	{
-		std::string param;
-		parser.GetNextString(param);
+	  // Make Object to assign params to
+	  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+	  object = new GameObject(manager, curRoot->Find("File")->GetValue());
+	  manager->ParseObject(object);
+	  mObjects.push_back(object);
 
-		if(param.length() == 0 || param == "}")
-			break;
+	  if(curRoot->Find("Transform"))
+	  {
+	    Root* transform = curRoot->Find("Transform");
+	    int posX, posY, posZ,
+	        scaleX, scaleY, scaleZ,
+	        sizeX, sizeY, sizeZ;
+	    posX = transform->Find("PositionX")->GetValue().ToFloat();
+	    posY = transform->Find("PositionY")->GetValue().ToFloat();
+	    posZ = transform->Find("PositionZ")->GetValue().ToFloat();
+	    scaleX = transform->Find("ScaleX")->GetValue().ToFloat();
+	    scaleY = transform->Find("ScaleY")->GetValue().ToFloat();
+	    scaleZ = transform->Find("ScaleZ")->GetValue().ToFloat();
+	    sizeX = transform->Find("SizeX")->GetValue().ToFloat();
+	    sizeY = transform->Find("SizeY")->GetValue().ToFloat();
+	    sizeZ = transform->Find("SizeZ")->GetValue().ToFloat();
 
-		if(param == "Transform")
-		{
-		  if(object)
+	    Transform* objTransform = object->GET<Transform>();
+	    objTransform->SetPosition(Vector3(posX,posY,posZ));
+	    objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
+	    objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
+
+	    // Auto set camera bounds based on objects in environment
+	    mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
+	    mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
+	    mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
+	    mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
+	  }
+	  if(curRoot->Find("Surface"))
+	  {
+	    Root* surface = curRoot->Find("Surface");
+	    float r, g, b, a;
+	    r = surface->Find("ColorR")->GetValue().ToFloat();
+	    g = surface->Find("ColorG")->GetValue().ToFloat();
+	    b = surface->Find("ColorB")->GetValue().ToFloat();
+	    a = surface->Find("ColorA")->GetValue().ToFloat();
+
+		  Surface* objSurface = object->GET<Surface>();
+		  objSurface->SetColor(Vector4(r, g, b, a));
+	  }
+	  if(curRoot->Find("Focus"))
+	  {
+	    bool value = curRoot->Find("Focus")->Find("IsFocus")->GetValue().ToBool();
+		  if(value)
 		  {
-		    Transform *transform = object->GET<Transform>();
-
-		    int posX, posY, posZ,
-		        scaleX, scaleY, scaleZ,
-		        sizeX, sizeY, sizeZ;
-        std::string empty;
-
-        parser.GetNextInt(posX);
-        parser.GetNextInt(posY);
-        parser.GetNextInt(posZ);
-        parser.GetNextInt(scaleX);
-        parser.GetNextInt(scaleY);
-        parser.GetNextInt(scaleZ);
-        parser.GetNextInt(sizeX);
-        parser.GetNextInt(sizeY);
-        parser.GetNextInt(sizeZ);
-
-        transform->SetPosition(Vector3(posX,posY,posZ));
-        transform->SetScale(Vector3(scaleX,scaleY,scaleZ));
-        transform->SetSize(Vector3(sizeX,sizeY,sizeZ));
-
-        // Auto set camera bounds based on objects in environment
-        mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
-        mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
-        mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
-        mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
+		    mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
+		    mFocusTarget = object;
 		  }
-		}
-		else if(param == "Surface")
-		{
-		  float r, g, b, a;
-		  parser.GetNextFloat(r);
-		  parser.GetNextFloat(g);
-		  parser.GetNextFloat(b);
-		  parser.GetNextFloat(a);
+	  }
 
-		  Surface* surface = object->GET<Surface>();
-		  surface->SetColor(Vector4(r, g, b, a));
-		}
-		else if(param == "Focus")
-		{
-		  std::string value, empty;
+	  RootContainer untouched = curRoot->GetUntouchedRoots();
+	  for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
+	  {
+	    ParseAdditionalData(*it, object);
+	  }
 
-		  if(object)
-		  {
-        parser.GetNextString(empty);
-        parser.GetNextString(value);
-
-		    if(value == "true")
-		    {
-		      mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
-		      mFocusTarget = object;
-		    }
-		  }
-		}
-    else if(param == "TileMapGenerator")
-    {
-      std::string value, empty;
-      int width, height, tileSize;
-      std::string file, frameDataFilename, frameData,
-                  collisionData;
-      std::vector<int> frames, collision;
-      
-      parser.GetNextInt(width);
-      parser.GetNextInt(height);
-      parser.GetNextInt(tileSize);
-      parser.GetNextString(empty);
-      parser.GetNextString(file);
-      parser.GetNextString(empty);
-      
-      // Get the tilemap data (separate file)
-      parser.GetNextString(frameDataFilename);
-      
-      TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename), false);
-      tileMapData.GetNextString(empty);
-      tileMapData.GetNextString(frameData);
-      tileMapData.GetNextString(empty);
-      tileMapData.GetNextString(collisionData);
-      
-      frames = Common::StringToIntVector(frameData);
-      collision = Common::StringToIntVector(collisionData);
-      
-      mGenerator = new TileMapGenerator(width, height, tileSize,
-                                       file, frameDataFilename,
-                                       frames, collision, this);
-    }
-    else if(param == "Music")
-    {
-      std::string empty, music;
-      parser.GetNextString(empty);
-      parser.GetNextString(music);
-
-      mMusicName = music;
-    }
-    else if(param == "Bounds")
-    {
-      /*
-       * Set camera bounds manually
-       * 3 places where bounds can be set:
-       * 1. Auto set from object transforms, see above
-       * 2. Calculated from tilemap, see TileMapGenerator.cpp
-       * 3. See below
-       */
-      std::string empty;
-      int x, y;
-      parser.GetNextInt(x);
-      parser.GetNextInt(y);
-      mMaxBoundary = Vector3(x, y, 0);
-      parser.GetNextInt(x);
-      parser.GetNextInt(y);
-      mMinBoundary = Vector3(x, y, 0);
-    }
-		else if(param[param.size() - 4] == '.')
-		{
-      ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
-		  object = new GameObject(manager, param);
-		  manager->ParseObject(object);
-		  mObjects.push_back(object);
-		}
-		else
-		{
-		  ParseAdditionalData(&parser, object, param);
-		}
+	  ++curIndex;
+	  tempIndex = curObject + Common::IntToString(curIndex);
+	  curRoot = parser.Find(tempIndex);
 	}
+
+  if(parser.Find("TileMapGenerator"))
+  {
+    Root* tileMap = parser.Find("TileMapGenerator");
+    HashString value, empty;
+    int width, height, tileSize;
+    HashString file, frameDataFilename, frameData,
+                      collisionData;
+    std::vector<int> frames, collision;
+
+    width = tileMap->Find("Width")->GetValue().ToInt();
+    height = tileMap->Find("Height")->GetValue().ToInt();
+    tileSize = tileMap->Find("TileSize")->GetValue().ToInt();
+    file = tileMap->Find("Image")->GetValue();
+    frameDataFilename = tileMap->Find("Data")->GetValue();
+
+    TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
+    frameData = tileMapData.Find("MapArtData")->GetValue();
+    collisionData = tileMapData.Find("Collision")->GetValue();
+
+    frames = Common::StringToIntVector(frameData);
+    collision = Common::StringToIntVector(collisionData);
+
+    mGenerator = new TileMapGenerator(width, height, tileSize,
+                                     file, frameDataFilename,
+                                     frames, collision, this);
+  }
+  if(parser.Find("Music"))
+  {
+    mMusicName = parser.Find("Music")->Find("Song")->GetValue().ToString();
+  }
+  if(parser.Find("Bounds"))
+  {
+    /*
+     * Set camera bounds manually
+     * 3 places where bounds can be set:
+     * 1. Auto set from object transforms, see above
+     * 2. Calculated from tilemap, see TileMapGenerator.cpp
+     * 3. See below
+     */
+    int x, y;
+    x = parser.Find("Bounds")->Find("MaxX")->GetValue().ToInt();
+    y = parser.Find("Bounds")->Find("MaxY")->GetValue().ToInt();
+    mMaxBoundary = Vector3(x, y, 0);
+    x = parser.Find("Bounds")->Find("MinX")->GetValue().ToInt();
+    y = parser.Find("Bounds")->Find("MinY")->GetValue().ToInt();
+    mMinBoundary = Vector3(x, y, 0);
+  }
+
+  RootContainer untouched = parser.GetBaseRoot()->GetUntouchedRoots();
+  for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
+  {
+    ParseAdditionalData(*it, nullptr);
+  }
 }

@@ -79,6 +79,8 @@ void Surface::ReceiveMessage(Message const &aMessage)
 
 void Surface::Serialize(Parser &aParser)
 {
+  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  Root* object = aParser.Find(objectName);
   TextureCoordinates *coords = GetTextureData();
   std::vector<int> animations;
   bool animated = coords->GetAnimated();
@@ -88,8 +90,8 @@ void Surface::Serialize(Parser &aParser)
                             "ColorB",
                             "ColorA"};
 
-  aParser.Place("Surface", "");
-  aParser.Place("Surface", "AnimationCount", Common::IntToString(numanimations));
+  object->Place(objectName, "Surface", "");
+  object->Place("Surface", "AnimationCount", Common::IntToString(numanimations));
   for(int i = 0; i < numanimations; ++i)
   {
     animations.push_back(coords->GetAnimationFrameCounts(i));
@@ -97,14 +99,14 @@ void Surface::Serialize(Parser &aParser)
 
   if(animated)
   {
-    aParser.Place("Surface", "FrameNumbers", Common::IntVectorToString(animations));
+    object->Place("Surface", "FrameNumbers", Common::IntVectorToString(animations));
   }
-  aParser.Place("Surface", "Animated", Common::BoolToString(animated));
+  object->Place("Surface", "Animated", Common::BoolToString(animated));
 
-  aParser.Place("Surface", "NoRender", mNoRender);
+  object->Place("Surface", "NoRender", Common::BoolToString(mNoRender));
   for(int i = 0; i < 4; ++i)
   {
-    aParser.Place("Surface", values[i], Common::IntToString(mColor[i]));
+    object->Place("Surface", values[i], Common::IntToString(mColor[i]));
   }
 }
 
@@ -115,28 +117,30 @@ void Surface::Deserialize(Parser &aParser)
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
-  if(aParser.Find("Surface", "AnimationCount") != "")
+  if(aParser.Find("Surface", "AnimationCount"))
   {
+    Root* animationCount = aParser.Find("Surface", "AnimationCount");
+
     numFrames.clear();
-    numAnimations = Common::StringToInt(aParser.Find("Surface", "AnimationCount"));
-    numFrames = Common::StringToIntVector(aParser.Find("Surface", "FrameNumbers"));
+    numAnimations = animationCount->GetValue().ToInt();
+    numFrames = aParser.Find("Surface", "FrameNumbers")->GetValue().ToIntVector();
     
-    std::string isAnimated = aParser.Find("Surface", "Animated");
-    if(isAnimated == "true")
+    bool isAnimated = aParser.Find("Surface", "Animated")->GetValue().ToBool();
+    if(isAnimated)
       animated = true;
   }
-  if(aParser.Find("Surface", "NoRender") != "")
+  if(aParser.Find("Surface", "NoRender"))
   {
-    mNoRender = aParser.Find("Surface", "NoRender");
-    if(mNoRender == "true")
+    mNoRender = aParser.Find("Surface", "NoRender")->GetValue().ToBool();
+    if(mNoRender)
       mManager->RemoveSurface(this);
   }
-  if(aParser.Find("Surface", "ColorR") != "")
+  if(aParser.Find("Surface", "ColorR"))
   {
-    float red = Common::StringToFloat(aParser.Find("Surface", "ColorR"));
-    float green = Common::StringToFloat(aParser.Find("Surface", "ColorG"));
-    float blue = Common::StringToFloat(aParser.Find("Surface", "ColorB"));
-    float alpha = Common::StringToFloat(aParser.Find("Surface", "ColorA"));
+    float red = aParser.Find("Surface", "ColorR")->GetValue().ToFloat();
+    float green = aParser.Find("Surface", "ColorG")->GetValue().ToFloat();
+    float blue = aParser.Find("Surface", "ColorB")->GetValue().ToFloat();
+    float alpha = aParser.Find("Surface", "ColorA")->GetValue().ToFloat();
 
     mColor = Vector4(red, green, blue, alpha);
   }

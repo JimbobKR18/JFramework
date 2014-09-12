@@ -46,30 +46,30 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   GameApp* app = LUABind::StaticGameApp::GetApp();
   if(aParser.Find("Font"))
   {
-    mFont = aParser.Find("Font", "Name");
-    mSize = Common::StringToInt(aParser.Find("Font", "Size"));
+    mFont = aParser.Find("Font", "Name")->GetValue().ToString();
+    mSize = Common::StringToInt(aParser.Find("Font", "Size")->GetValue());
   }
   if(aParser.Find("ForegroundColor"))
   {
-    mForegroundColor.x = Common::StringToInt(aParser.Find("ForegroundColor", "r"));
-    mForegroundColor.y = Common::StringToInt(aParser.Find("ForegroundColor", "g"));
-    mForegroundColor.z = Common::StringToInt(aParser.Find("ForegroundColor", "b"));
-    mForegroundColor.w = Common::StringToInt(aParser.Find("ForegroundColor", "a"));
+    mForegroundColor.x = aParser.Find("ForegroundColor", "r")->GetValue().ToInt();
+    mForegroundColor.y = aParser.Find("ForegroundColor", "g")->GetValue().ToInt();
+    mForegroundColor.z = aParser.Find("ForegroundColor", "b")->GetValue().ToInt();
+    mForegroundColor.w = aParser.Find("ForegroundColor", "a")->GetValue().ToInt();
   }
   if(aParser.Find("BackgroundColor"))
   {
-    mBackgroundColor.x = Common::StringToInt(aParser.Find("BackgroundColor", "r"));
-    mBackgroundColor.y = Common::StringToInt(aParser.Find("BackgroundColor", "g"));
-    mBackgroundColor.z = Common::StringToInt(aParser.Find("BackgroundColor", "b"));
-    mBackgroundColor.w = Common::StringToInt(aParser.Find("BackgroundColor", "a"));
+    mBackgroundColor.x = aParser.Find("BackgroundColor", "r")->GetValue().ToInt();
+    mBackgroundColor.y = aParser.Find("BackgroundColor", "g")->GetValue().ToInt();
+    mBackgroundColor.z = aParser.Find("BackgroundColor", "b")->GetValue().ToInt();
+    mBackgroundColor.w = aParser.Find("BackgroundColor", "a")->GetValue().ToInt();
   }
   if(aParser.Find("Text"))
   {
-    mText = aParser.Find("Text", "Value");
+    mText = aParser.Find("Text", "Value")->GetValue().ToString();
   }
 
 #if !defined(ANDROID) && !defined(IOS)
-  PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateSurface();
+  PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateUISurface();
   Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize);
 #else
   Surface *surface = new Surface();

@@ -129,7 +129,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 {
   if(aParser.Find("Name"))
   {
-    std::string name = aParser.Find("Name", "Value");
+    std::string name = aParser.Find("Name", "Value")->GetValue().ToString();
     aObject->SetName(name);
   }
 	if(aParser.Find("PhysicsObject"))
@@ -157,9 +157,9 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 	}
 	if(aParser.Find("Focus"))
 	{
-		std::string isTarget = aParser.Find("Focus", "IsTarget");
+		bool isTarget = aParser.Find("Focus", "IsFocus")->GetValue().ToBool();
 
-		if(isTarget == "true")
+		if(isTarget)
 		{
 			GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
 		}

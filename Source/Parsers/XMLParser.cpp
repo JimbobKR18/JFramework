@@ -9,18 +9,20 @@ XMLParser::~XMLParser()
 {
 }
 
-bool XMLParser::Find(std::string const &aElement)
+Root* XMLParser::Find(std::string const &aElement)
 {
   tinyxml2::XMLText *text = mDoc.FirstChildElement(aElement.c_str())->ToText();
   std::string ret = text->Value();
-  return ret.length() > 0;
+  return NULL;
+  //return ret.length() > 0;
 }
 
-std::string XMLParser::Find(std::string const &aRoot, std::string const &aElement)
+Root* XMLParser::Find(std::string const &aRoot, std::string const &aElement)
 {
   tinyxml2::XMLText *text = mDoc.FirstChildElement(aRoot.c_str())->FirstChildElement(aElement.c_str())->ToText();
   std::string ret = text->Value();
-  return ret;
+  return NULL;
+  //return ret;
 }
 
 void XMLParser::Parse()

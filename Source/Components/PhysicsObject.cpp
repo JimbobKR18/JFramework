@@ -78,38 +78,38 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
 
 void PhysicsObject::Serialize(Parser &aParser)
 {
+  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  Root* object = aParser.Find(objectName);
   std::string shape = mShape == PhysicsObject::CUBE ? "CUBE" : "SPHERE";
 
-  aParser.Place("PhysicsObject", "");
-  aParser.Place("PhysicsObject", "Shape", shape);
-  aParser.Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
-  aParser.Place("PhysicsObject", "Static", Common::BoolToString(mStatic));
-  aParser.Place("PhysicsObject", "Mass", Common::FloatToString(mMass));
-  aParser.Place("PhysicsObject", "Damping", Common::FloatToString(mDamping));
+  object->Place(objectName, "PhysicsObject", "");
+  object->Place("PhysicsObject", "Shape", shape);
+  object->Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
+  object->Place("PhysicsObject", "Static", Common::BoolToString(mStatic));
+  object->Place("PhysicsObject", "Mass", Common::FloatToString(mMass));
+  object->Place("PhysicsObject", "Damping", Common::FloatToString(mDamping));
 }
 
 void PhysicsObject::Deserialize(Parser &aParser)
 {
   // What shape is our object? Is it affected by gravity?
   // What is the object's mass? Is it static?
-  std::string type = aParser.Find("PhysicsObject", "Shape");
-  std::string gravity = aParser.Find("PhysicsObject", "Gravity");
-  std::string isstatic = aParser.Find("PhysicsObject", "Static");
-  SetMass(Common::StringToInt(aParser.Find("PhysicsObject", "Mass")));
-  mDamping = Common::StringToFloat(aParser.Find("PhysicsObject", "Damping"));
+  HashString type = aParser.Find("PhysicsObject", "Shape")->GetValue();
+  bool gravity = aParser.Find("PhysicsObject", "Gravity")->GetValue().ToBool();
+  bool isStatic = aParser.Find("PhysicsObject", "Static")->GetValue().ToBool();
+  SetMass(aParser.Find("PhysicsObject", "Mass")->GetValue().ToInt());
+  mDamping = aParser.Find("PhysicsObject", "Damping")->GetValue().ToFloat();
 
   //TODO serialize ignore list for collisions
 
   // default true
-  if(gravity == "false")
+  if(!gravity)
   {
     GetOwner()->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(this);
     SetAffectedByGravity(false);
   }
   
-  // default false
-  if(isstatic == "true")
-    SetStatic(true);
+  SetStatic(isStatic);
   
   if(type == "CUBE")
     mShape = PhysicsObject::CUBE;

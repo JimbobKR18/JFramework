@@ -182,18 +182,24 @@ void PCSurface::SendMessage(Message const &aMessage)
 }
 void PCSurface::ReceiveMessage(Message const &aMessage)
 {
-
 }
 
 void PCSurface::Serialize(Parser &aParser)
 {
+  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  Root* object = aParser.Find(objectName);
   Surface::Serialize(aParser);
-  aParser.Place("Surface", "TextureName", GetFileName());
+  object->Place("Surface", "TextureName", GetFileName());
 }
 
 void PCSurface::Deserialize(Parser &aParser)
 {
-  SetFileName(aParser.Find("Surface", "TextureName"));
+  // Get file name if specified
+  std::string fileName = "";
+  if(aParser.Find("Surface", "TextureName"))
+    fileName = aParser.Find("Surface", "TextureName")->GetValue().ToString();
+
+  SetFileName(fileName);
   LoadImage(GetFileName());
   
   Surface::Deserialize(aParser);

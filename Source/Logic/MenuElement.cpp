@@ -39,6 +39,7 @@ void MenuElement::ParseFile(Parser &aParser)
     // Get Position, Scale, and Size
     Transform *transform = new Transform();
     transform->Deserialize(aParser);
+    transform->GetPosition().z = 0.99f;
     mObject->AddComponent(transform);
   }
   ParseAdditionalData(aParser);

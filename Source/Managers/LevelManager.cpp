@@ -84,8 +84,8 @@ void LevelManager::SetActiveLevel(Level *aLevel)
 
 void LevelManager::SaveActiveLevelAs(std::string const &aFolder, std::string const &aFileName)
 {
-  TextParser objectParser(Common::RelativePath(aFolder, aFileName + ".txt"), false, MODE_OUTPUT);
-  TextParser mapParser(Common::RelativePath(aFolder, aFileName + "_Map.txt"), false, MODE_OUTPUT);
+  TextParser objectParser(Common::RelativePath(aFolder, aFileName + ".txt"), MODE_OUTPUT);
+  TextParser mapParser(Common::RelativePath(aFolder, aFileName + "_Map.txt"), MODE_OUTPUT);
   mActiveLevel->Serialize(objectParser);
   mActiveLevel->SerializeTileMap(mapParser);
   objectParser.Write();

@@ -1,96 +1,10 @@
 #include "TextParser.h"
 #include "Common.h"
 
-Root::Root() : mValue(""), mName(""), mChildren(), mParent(NULL)
-{
-}
-
-Root const *Root::Search(std::string const &aValue) const
-{
-  if(mName == aValue)
-    return this;
-  else
-  {
-    // Search children for node
-    for(rootConstIT it = mChildren.begin(); it != mChildren.end(); ++it)
-    {
-      Root const *ret = (*it)->Search(aValue);
-      if(ret)
-      {
-        if(ret->mName == aValue)
-          return ret;
-      }
-    }
-  }
-
-  return NULL;
-}
-
-void Root::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
-{
-  if(mName == aRoot)
-  {
-    Root *node = Find(aElement);
-
-    if(!node)
-    {
-      node = new Root();
-      node->mName = aElement;
-    }
-    node->mValue = aValue;
-    node->mParent = this;
-    mChildren.insert(node);
-    return;
-  }
-  else
-  {
-    if(mName == aElement)
-    {
-      mValue = aValue;
-    }
-    else
-    {
-      for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
-      {
-        (*it)->Place(aRoot, aElement, aValue);
-      }
-    }
-  }
-}
-
-Root *Root::Find(std::string const &aValue)
-{
-  // Found our node
-  if(mName == aValue)
-    return this;
-  else
-  {
-    // Search children for node
-    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
-    {
-      Root *ret = (*it)->Find(aValue);
-      if(ret)
-      {
-        if(ret->mName == aValue)
-          return ret;
-      }
-    }
-  }
-
-  return NULL;
-}
-
-Root::~Root()
-{
-  // Delete all children associated with this root
-  for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
-      delete *it;
-}
-
-TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode const &aMode) : Parser(aFilename),
-                                                                                               mCurrentRoot(""),
-                                                                                               mAutoParse(aAutoParse),
-                                                                                               mWrittenOut(false)
+TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Parser(aFilename),
+                                                                              mWrittenOut(false),
+                                                                              mMode(aMode),
+                                                                              mCurrentIndent(0)
 {
   mDictionary = new Root();
 
@@ -99,13 +13,14 @@ TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode c
   else
     mOutput.open(aFilename.c_str());
 
-  if(mInput.good())
+  if(aMode == MODE_INPUT && mInput.good())
   {
-    // If we want to push all objects into a dictionary,
-    // set it to autoparse, but for files with values
-    // of similar name, that file cannot be autoparsed.
-    if(aMode == MODE_INPUT && mAutoParse)
-      Parse();
+    Parse();
+  }
+  else if(aMode == MODE_OUTPUT && mOutput.good())
+  {
+    mDictionary = new Root();
+    mDictionary->SetName("Start");
   }
   else
   {
@@ -115,48 +30,11 @@ TextParser::TextParser(std::string const &aFilename, bool aAutoParse, TextMode c
 }
 TextParser::~TextParser()
 {
-  if(mOutput.good() && !mWrittenOut)
+  if(mMode == MODE_OUTPUT && !mWrittenOut)
     Write();
 
   mOutput.close();
   mInput.close();
-}
-
-bool TextParser::Find(std::string const &aElement)
-{
-  // Search inside roots to find value
-  Root const *value = mDictionary->Search(aElement);
-
-  if(!value)
-	  return NULL;
-
-  return value->mName.length() > 0;
-}
-
-std::string TextParser::Find(std::string const &aRoot, std::string const &aElement)
-{
-  // Find node and search it for an element
-  unsigned curLevel = 0;
-  std::vector<HashString> splitString = HashString(aRoot).Split("/");
-  Root const *node = mDictionary->Search(splitString[0]);
-
-  if(!node)
-    return "";
-
-  while(curLevel < splitString.size() - 1)
-  {
-    node = node->Search(splitString[curLevel]);
-    ++curLevel;
-    if(!node)
-      return "";
-  }
-
-  node = node->Search(aElement);
-
-  if(!node)
-    return "";
-
-  return node->mValue;
 }
 
 void TextParser::Parse()
@@ -167,14 +45,16 @@ void TextParser::Parse()
   {
     Root *node = new Root();
     std::string type;
-    mInput >> node->mName;
+    std::string name;
+    mInput >> name;
+    node->SetName(name);
 
     // If a closing bracket, the node is done
-    if(node->mName == "}")
+    if(node->GetName().ToString() == "}")
     {
       delete node;
-      if(mCurNode->mParent)
-        mCurNode = mCurNode->mParent;
+      if(mCurNode->GetParent())
+        mCurNode = mCurNode->GetParent();
       continue;
     }
 
@@ -185,176 +65,66 @@ void TextParser::Parse()
     {
       std::string value;
       mInput >> value;
-      node->mValue = ParseLiteral(value);
-      node->mParent = mCurNode;
-      mCurNode->mChildren.insert(node);
+      node->SetValue(ParseLiteral(value));
+      node->SetParent(mCurNode);
+      mCurNode->Insert(node);
     }
     // Start a new child node
     else if(type == "{")
     {
       if(mCurNode)
-    	  mCurNode->mChildren.insert(node);
+    	  mCurNode->Insert(node);
 
-      node->mParent = mCurNode;
+      node->SetParent(mCurNode);
       mCurNode = node;
     }
     // Close the node
     else if(type == "}")
     {
       delete node;
-      if(mCurNode->mParent)
-    	  mCurNode = mCurNode->mParent;
+      if(mCurNode->GetParent())
+    	  mCurNode = mCurNode->GetParent();
     }
   }
 
   mDictionary = mCurNode;
 }
 
-void TextParser::Place(std::string const &aRoot, std::string const &aValue)
-{
-  if(mAutoParse)
-    mDictionary->Place(mDictionary->mName, aRoot, aValue);
-  else
-  {
-    if(aValue == "")
-    {
-      bool isTextFile = false;
-      bool newRoot = aRoot != mCurrentRoot;
-      bool empty = mCurrentRoot.empty();
-
-      mCurrentRoot = aRoot;
-
-      //if(mCurrentRoot.length() > 5)
-        //isTextFile = mCurrentRoot.substr(mCurrentRoot.length() - 4, 4) == ".txt";
-      if(newRoot && !empty && !isTextFile)
-        mOutput << "}" << std::endl;
-
-      mOutput << aRoot << std::endl;
-
-      if(!isTextFile)
-        mOutput << "{" << std::endl;
-    }
-    else
-    {
-      mOutput << aRoot << " = " <<  aValue << std::endl;
-    }
-  }
-}
-
-void TextParser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
-{
-  if(mAutoParse)
-    mDictionary->Place(aRoot, aElement, aValue);
-  else
-  {
-    if(aValue == "")
-    {
-      bool isTextFile = false;
-      bool newRoot = aRoot != mCurrentRoot;
-      bool empty = mCurrentRoot.empty();
-
-      mCurrentRoot = aRoot;
-
-      //if(mCurrentRoot.length() > 5)
-        //isTextFile = mCurrentRoot.substr(mCurrentRoot.length() - 4, 4) == ".txt";
-
-      if(newRoot && !empty && !isTextFile)
-        mOutput << "}" << std::endl;
-      mOutput << aRoot << std::endl;
-
-      if(!isTextFile)
-        mOutput << "{" << std::endl;
-    }
-    else
-    {
-      mOutput << aElement << " = " <<  aValue << std::endl;
-    }
-  }
-}
-
 void TextParser::Write()
 {
   mWrittenOut = true;
-  if(mAutoParse)
-    WriteRoot(mDictionary);
-  else
-    mOutput << "}" << std::endl;
+  WriteRoot(mDictionary);
 }
 
-void TextParser::ResetCurrentRoot()
+void TextParser::WriteRoot(Root *aRoot)
 {
-  mCurrentRoot = "!";
-}
-
-float TextParser::GetNextFloat(float &rValue)
-{
-  std::string empty;
-  
-  // Search for next value, could technically be int,
-  // so you better know what you're searching for!
-  mInput >> empty;
-  while(mInput.good() && ((empty.empty() || empty == "{" || empty == "}") || (!empty.empty() && !(isdigit(empty[0]) || empty[0] == '-'))))
+  if(aRoot->GetValue().ToString() == "")
   {
-    mInput >> empty;
-  }
-  rValue = Common::StringToFloat(empty);
-  return rValue;
-}
-int TextParser::GetNextInt(int &rValue)
-{
-  std::string empty;
-  
-  // Search for next value, could technically be float,
-  // so you better know what you're searching for!
-  mInput >> empty;
-  while(mInput.good() && ((empty.empty() || empty == "{" || empty == "}") || (!empty.empty() && !(isdigit(empty[0]) || empty[0] == '-'))))
-  {
-    mInput >> empty;
-  }
-  rValue = Common::StringToInt(empty);
-  return rValue;
-}
-std::string TextParser::GetNextString(std::string &rValue)
-{
-  std::string empty;
-  
-  // Search for next value, finding a string isn't hard
-  mInput >> empty;
-  while(mInput.good() && (empty.empty() || empty == "{" || empty == "}" || empty == "="))
-  {
-    mInput >> empty;
-  }
-  rValue = ParseLiteral(empty);
-  return rValue;
-}
-
-bool TextParser::IsGood()
-{
-  // Helper function to determine if file is read
-  return mInput.good();
-}
-
-void TextParser::WriteRoot(Root const *aRoot)
-{
-  if(aRoot->mValue == "")
-  {
-    rootConstIT end = aRoot->mChildren.end();
-    mOutput << aRoot->mName << std::endl;
-
-    if(aRoot->mChildren.empty())
-      return;
-
-    mOutput << "{" << std::endl;
-    for(rootConstIT it = aRoot->mChildren.begin(); it != end; ++it)
+    rootIT end = aRoot->GetChildren().end();
+    mOutput << InsertIndents() << aRoot->GetName() << std::endl;
+    mOutput << InsertIndents() << "{" << std::endl;
+    ++mCurrentIndent;
+    for(rootIT it = aRoot->GetChildren().begin(); it != end; ++it)
     {
       WriteRoot(*it);
     }
-    mOutput << "}" << std::endl;
+    --mCurrentIndent;
+    mOutput << InsertIndents() << "}" << std::endl;
   }
   else
   {
-    mOutput << aRoot->mName << " = " << aRoot->mValue << std::endl;
+    mOutput << InsertIndents() << aRoot->GetName() << " = " << aRoot->GetValue() << std::endl;
   }
+}
+
+std::string TextParser::InsertIndents()
+{
+  std::string ret;
+  for(int i = 0; i < mCurrentIndent; ++i)
+  {
+    ret.push_back('\t');
+  }
+  return ret;
 }
 
 std::string TextParser::ParseLiteral(std::string const &aLiteral)

@@ -6,6 +6,7 @@
  */
 
 #include "Constants.h"
+#include <fstream>
 
 std::map<std::string, std::string> Constants::mValues;
 
@@ -44,12 +45,15 @@ bool Constants::GetBoolean(std::string const &aValue)
 
 void Constants::Deserialize()
 {
-  TextParser parser(Common::RelativePath("Game", "Constants.txt"), false);
-  while(parser.IsGood())
+  // Read line by line, much easier
+  std::ifstream infile(Common::RelativePath("Game", "Constants.txt"));
+  while(!infile.eof())
   {
-    std::string key, value;
-    parser.GetNextString(key);
-    parser.GetNextString(value);
+    std::string key, value, empty;
+    infile >> key;
+    infile >> empty;
+    infile >> value;
     mValues[key] = value;
   }
+  infile.close();
 }

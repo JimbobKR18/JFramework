@@ -67,6 +67,8 @@ void Transform::SetZAlignment(Z_ALIGNMENT const &aAlign)
 
 void Transform::Serialize(Parser &aParser)
 {
+  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  Root* object = aParser.Find(objectName);
   char const *values[9] = {"PositionX",
                             "PositionY",
                             "PositionZ",
@@ -76,7 +78,7 @@ void Transform::Serialize(Parser &aParser)
                             "SizeX",
                             "SizeY",
                             "SizeZ"};
-  aParser.Place("Transform", "");
+  object->Place(objectName, "Transform", "");
   for(int i = 0; i < 9; ++i)
   {
     float value = 0;
@@ -86,46 +88,46 @@ void Transform::Serialize(Parser &aParser)
       value = mScale[i - 3];
     else
       value = mSize[i - 6];
-    aParser.Place("Transform", values[i], Common::IntToString(value));
+    object->Place("Transform", values[i], Common::IntToString(value));
   }
 
   if(mXAlign == X_ALIGN_LEFT)
-    aParser.Place("Transform", "AlignX", "LEFT");
+    object->Place("Transform", "AlignX", "LEFT");
   else if(mXAlign == X_ALIGN_CENTER)
-    aParser.Place("Transform", "AlignX", "CENTER");
+    object->Place("Transform", "AlignX", "CENTER");
   else if(mXAlign == X_ALIGN_RIGHT)
-      aParser.Place("Transform", "AlignX", "RIGHT");
+    object->Place("Transform", "AlignX", "RIGHT");
 
   if(mYAlign == Y_ALIGN_TOP)
-    aParser.Place("Transform", "AlignY", "TOP");
+    object->Place("Transform", "AlignY", "TOP");
   else if(mYAlign == Y_ALIGN_CENTER)
-    aParser.Place("Transform", "AlignY", "CENTER");
+    object->Place("Transform", "AlignY", "CENTER");
   else if(mYAlign == Y_ALIGN_BOTTOM)
-    aParser.Place("Transform", "AlignY", "BOTTOM");
+    object->Place("Transform", "AlignY", "BOTTOM");
 
   if(mZAlign == Z_ALIGN_FRONT)
-    aParser.Place("Transform", "AlignZ", "FRONT");
+    object->Place("Transform", "AlignZ", "FRONT");
   else if(mZAlign == Z_ALIGN_CENTER)
-    aParser.Place("Transform", "AlignZ", "CENTER");
+    object->Place("Transform", "AlignZ", "CENTER");
   else if(mZAlign == Z_ALIGN_BACK)
-    aParser.Place("Transform", "AlignZ", "BACK");
+    object->Place("Transform", "AlignZ", "BACK");
 }
 
 void Transform::Deserialize(Parser &aParser)
 {
-  SetPosition(Vector3(Common::StringToInt(aParser.Find("Transform", "PositionX")),
-                      Common::StringToInt(aParser.Find("Transform", "PositionY")),
-                      Common::StringToInt(aParser.Find("Transform", "PositionZ"))));
-  SetScale(Vector3(Common::StringToInt(aParser.Find("Transform", "ScaleX")),
-                   Common::StringToInt(aParser.Find("Transform", "ScaleY")),
-                   Common::StringToInt(aParser.Find("Transform", "ScaleZ"))));
-  SetSize(Vector3(Common::StringToInt(aParser.Find("Transform", "SizeX")),
-                  Common::StringToInt(aParser.Find("Transform", "SizeY")),
-                  Common::StringToInt(aParser.Find("Transform", "SizeZ"))));
+  SetPosition(Vector3(aParser.Find("Transform", "PositionX")->GetValue().ToFloat(),
+                      aParser.Find("Transform", "PositionY")->GetValue().ToFloat(),
+                      aParser.Find("Transform", "PositionZ")->GetValue().ToFloat()));
+  SetScale(Vector3(aParser.Find("Transform", "ScaleX")->GetValue().ToFloat(),
+                   aParser.Find("Transform", "ScaleY")->GetValue().ToFloat(),
+                   aParser.Find("Transform", "ScaleZ")->GetValue().ToFloat()));
+  SetSize(Vector3(aParser.Find("Transform", "SizeX")->GetValue().ToFloat(),
+                  aParser.Find("Transform", "SizeY")->GetValue().ToFloat(),
+                  aParser.Find("Transform", "SizeZ")->GetValue().ToFloat()));
 
-  std::string xAlign = aParser.Find("Transform", "AlignX");
-  std::string yAlign = aParser.Find("Transform", "AlignY");
-  std::string zAlign = aParser.Find("Transform", "AlignZ");
+  HashString xAlign = aParser.Find("Transform", "AlignX")->GetValue();
+  HashString yAlign = aParser.Find("Transform", "AlignY")->GetValue();
+  HashString zAlign = aParser.Find("Transform", "AlignZ")->GetValue();
   if(xAlign != "")
   {
     if(xAlign == "LEFT")

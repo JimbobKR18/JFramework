@@ -10,6 +10,7 @@ class GraphicsManager : public Manager
 {
 private:
 	std::vector<Surface*>               mSurfaces;
+	std::vector<Surface*>               mUIElements;
   std::map<std::string, TextureData>  mTextures;
 	Screen*                             mScreen;
 public:
@@ -24,8 +25,10 @@ public:
 
   // Manager stuff
 	Surface*            CreateSurface();
+	Surface*            CreateUISurface();
 	void                DeleteSurface(Surface *aSurface);
   void                AddSurface(Surface *aSurface);
+  void                AddUISurface(Surface *aSurface);
 	void                RemoveSurface(Surface *aSurface);
 	void                ClearSurfaces();
 

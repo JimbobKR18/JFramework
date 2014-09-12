@@ -57,27 +57,28 @@ void Menu::DeleteObjects()
 
 void Menu::ParseFile()
 {
-  TextParser parser(Common::RelativePath("Menus", mFilename).c_str(), false);
-  
-	while(parser.IsGood())
-	{
-		std::string param, type;
-    parser.GetNextString(type);
-		parser.GetNextString(param);
-    
-		if(param.length() == 0)
-			break;
-    
-    MenuElement *element = nullptr;
-    
-    if(type == "Image")
-      element = new MenuImage(param);
-    else if(type == "Text")
-      element = new MenuText(param);
+  TextParser parser(Common::RelativePath("Menus", mFilename).c_str());
+
+  MenuElement *element = nullptr;
+  HashString object = "Object_";
+  int curIndex = 0;
+  HashString curObject = object + Common::IntToString(curIndex);
+
+
+  while(parser.Find(curObject.ToString()))
+  {
+    Root* newElement = parser.Find(curObject.ToString());
+    if(newElement->Find("Type")->GetValue().ToString() == "Image")
+      element = new MenuImage(newElement->Find("Name")->GetValue().ToString());
+    else if(newElement->Find("Type")->GetValue().ToString() == "Text")
+      element = new MenuText(newElement->Find("Name")->GetValue().ToString());
     else
       assert(!"Invalid MenuElement passed into menu");
-    
+
     if(element)
       AddObject(element);
-	}
+
+    ++curIndex;
+    curObject = object + Common::IntToString(curIndex);
+  }
 }

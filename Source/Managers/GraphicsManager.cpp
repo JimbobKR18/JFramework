@@ -26,7 +26,9 @@ void GraphicsManager::Update()
 {
   mScreen->GetView().Update();
   std::vector<Surface*> sortedObjects = mScreen->SortObjects(mSurfaces);
+  mScreen->PreDraw();
   mScreen->Draw(sortedObjects);
+  mScreen->DrawUI(mUIElements);
 #ifdef _DEBUG
   // Displays bounds of objects with PhysicsObject
   mScreen->DebugDraw(sortedObjects);
@@ -55,6 +57,19 @@ Surface *GraphicsManager::CreateSurface()
 	return surface;
 }
 
+Surface *GraphicsManager::CreateUISurface()
+{
+#if !defined(ANDROID) && !defined(IOS)
+  PCSurface *surface = new PCSurface(this);
+#else
+  Surface *surface = new Surface(this);
+#endif
+
+  AddUISurface(surface);
+
+  return surface;
+}
+
 void GraphicsManager::DeleteSurface(Surface *aSurface)
 {
   RemoveSurface(aSurface);
@@ -64,7 +79,8 @@ void GraphicsManager::DeleteSurface(Surface *aSurface)
 void GraphicsManager::AddSurface(Surface *aSurface)
 {
   // Check to see if object is in our list
-  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  SurfaceIT end = mSurfaces.end();
+  for(SurfaceIT it = mSurfaces.begin(); it != end; ++it)
 	{
 		if(*it == aSurface)
 		{
@@ -75,9 +91,25 @@ void GraphicsManager::AddSurface(Surface *aSurface)
   mSurfaces.push_back(aSurface);
 }
 
+void GraphicsManager::AddUISurface(Surface *aSurface)
+{
+  // Check to see if object is in our list
+  SurfaceIT end = mUIElements.end();
+  for(SurfaceIT it = mUIElements.begin(); it != end; ++it)
+  {
+    if(*it == aSurface)
+    {
+      return;
+    }
+  }
+
+  mUIElements.push_back(aSurface);
+}
+
 void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
-  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  SurfaceIT end = mSurfaces.end();
+  for(SurfaceIT it = mSurfaces.begin(); it != end; ++it)
 	{
 		if(*it == aSurface)
 		{
@@ -85,11 +117,25 @@ void GraphicsManager::RemoveSurface(Surface *aSurface)
 			break;
 		}
 	}
+
+  end = mUIElements.end();
+  for(SurfaceIT it = mUIElements.begin(); it != end; ++it)
+  {
+    if(*it == aSurface)
+    {
+      mUIElements.erase(it);
+      break;
+    }
+  }
 }
 
 void GraphicsManager::ClearSurfaces()
 {
   for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  {
+    DeleteSurface(*it);
+  }
+  for(SurfaceIT it = mUIElements.begin(); it != mUIElements.end(); ++it)
   {
     DeleteSurface(*it);
   }
