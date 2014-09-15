@@ -18,6 +18,7 @@ private:
   int                         mCurFrame;
   int                         mCurAnimation;
   int                         mNumAnimations;
+  int                         mTotalFrames;
   float                       mSpeed;
   float                       mXGain;
   float                       mYGain;
@@ -44,6 +45,7 @@ public:
   float GetYValue(int aValue) const;
   int   GetCurrentAnimation() const;
   int   GetNumberofAnimations() const;
+  int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
   bool  GetCompleted() const;
   bool  GetAnimated() const;
@@ -51,6 +53,7 @@ public:
   // SETTERS
   void  SetCurrentAnimation(int aAnimation);
   void  SetCurrentFrame(int aFrame);
+  void  SetFrameByID(int aFrameID);
   void  SetAnimated(bool aAnimated);
   void  SetSpeed(float aSpeed);
 

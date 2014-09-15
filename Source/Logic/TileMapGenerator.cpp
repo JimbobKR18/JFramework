@@ -66,7 +66,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     // Set the frame data
     Surface *surface = obj->GET<Surface>();
     surface->SetAnimated(false);
-    surface->SetCurrentFrame(mTiles[i]);
+    surface->SetFrameByID(mTiles[i]);
     
     // Add PhysicsObject if the tile has collision
     if(mCollision[i] != 0)

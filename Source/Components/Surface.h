@@ -44,6 +44,7 @@ public:
   void                SetAnimated(bool aAnimated);
   void                SetAnimation(int aAnimation);
   void                SetCurrentFrame(int aFrame);
+  void                SetFrameByID(int aFrameID);
   bool                CurrentAnimationCompleted();
   
   // Batching

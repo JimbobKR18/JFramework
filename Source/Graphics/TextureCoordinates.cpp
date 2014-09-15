@@ -21,6 +21,7 @@ TextureCoordinates::TextureCoordinates()
 TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames) : mCurFrame(0),
                                                                                                       mCurAnimation(0),
                                                                                                       mNumAnimations(aNumAnimations),
+                                                                                                      mTotalFrames(0),
                                                                                                       mSpeed(DT),
                                                                                                       mCurTime(0),
                                                                                                       mCompleted(false)
@@ -30,6 +31,7 @@ TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int
   // Push back all frame data
   for(int i = 0; i < aNumAnimations; ++i)
   {
+    mTotalFrames += aNumFrames[i];
     mAnimations.insert(AnimationData(i, aNumFrames[i]));
     
     // Need to figure out each frame size
@@ -99,6 +101,11 @@ int TextureCoordinates::GetNumberofAnimations() const
   return mAnimations.size();
 }
 
+int TextureCoordinates::GetTotalFrames() const
+{
+  return mTotalFrames;
+}
+
 int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
 {
   return mAnimations.find(aAnimation)->second;
@@ -122,8 +129,35 @@ void TextureCoordinates::SetCurrentAnimation(int aAnimation)
 
 void TextureCoordinates::SetCurrentFrame(int aFrame)
 {
+  if(mCurFrame > mAnimations.find(mCurAnimation)->second)
+  {
+    assert(!"SetCurrentFrame: aFrame is larger than number of frames in animation");
+  }
+
   mCurFrame = aFrame;
   
+  // Set positions of coordinates
+  SETFRAMES();
+}
+
+void TextureCoordinates::SetFrameByID(int aFrameID)
+{
+  // Set frame, if above frames for current animation,
+  // move onto next animation, so on and so on.
+  if(aFrameID > mTotalFrames)
+  {
+    assert(!"SetFrameByID: aFrameID exceeds total frames in animation.");
+  }
+
+  mCurAnimation = 0;
+  mCurFrame = aFrameID;
+
+  while(mCurFrame > mAnimations.find(mCurAnimation)->second)
+  {
+    ++mCurAnimation;
+    mCurFrame -= mAnimations.find(mCurAnimation)->second;
+  }
+
   // Set positions of coordinates
   SETFRAMES();
 }
