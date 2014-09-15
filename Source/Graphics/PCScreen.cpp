@@ -36,6 +36,12 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       Transform *transform = obj->GET<Transform>();
       Vector3 position = transform->GetPosition();
       Vector3 size = transform->GetSize();
+      Vector3 broadSize = Vector3();
+
+      if(obj->GET<PhysicsObject>())
+      {
+        obj->GET<PhysicsObject>()->GetBroadSize() / 2.0f;
+      }
 
       // Get positions relative to the camera
       float xPosition = position.x;
@@ -51,6 +57,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 
       glLoadIdentity();
       glPushMatrix();
+      // Physics Box Line
       glBegin(GL_LINE_STRIP);
       glColor3f(1.0f, 0.0f, 0.0f);
       glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
@@ -58,6 +65,16 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
       glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
       glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
+      glEnd();
+
+      // Broad Size Line
+      glBegin(GL_LINE_STRIP);
+      glColor3f(1.0f, 1.0f, 0.0f);
+      glVertex3f(xPosition - broadSize.x, yPosition - broadSize.y, zPosition);
+      glVertex3f(xPosition + broadSize.x, yPosition - broadSize.y, zPosition);
+      glVertex3f(xPosition + broadSize.x, yPosition + broadSize.y, zPosition);
+      glVertex3f(xPosition - broadSize.x, yPosition + broadSize.y, zPosition);
+      glVertex3f(xPosition - broadSize.x, yPosition - broadSize.y, zPosition);
       glEnd();
       glPopMatrix();
     }

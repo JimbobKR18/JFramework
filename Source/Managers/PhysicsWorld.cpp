@@ -148,9 +148,9 @@ void PhysicsWorld::SweepAndPrune()
            !mResolver.Find(itObject, it2Object))
 				{
 				  float x1 = itTransform->GetPosition().x;
-				  float x1Size = itObject->GetBroadSize().x / 2.0f;
+				  float x1Size = itObject->GetBroadSize().x;
 				  float x2 = it2Object->GetOwner()->GET<Transform>()->GetPosition().x;
-				  float x2Size = it2Object->GetBroadSize().x / 2.0f;
+				  float x2Size = it2Object->GetBroadSize().x;
 
 					float xPosDiff = fabs(x1 - x2);
           float xSizeTotal = fabs(x1Size + x2Size) + X_LIMIT;

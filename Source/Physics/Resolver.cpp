@@ -220,7 +220,12 @@ bool Resolver::CheckSphereToSphere(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  if(t1->GetSize().x + t2->GetSize().x > (t1->GetPosition() - t2->GetPosition()).length())
+  Vector3 t1Pos = t1->GetPosition();
+  Vector3 t2Pos = t2->GetPosition();
+  Vector3 t1Size = t1->GetSize();
+  Vector3 t2Size = t2->GetSize();
+
+  if(t1Size.x + t2Size.x > (t1Pos - t2Pos).length())
   {
     return true;
   }
@@ -236,15 +241,17 @@ bool Resolver::CheckSphereToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
+  Vector3 t1Pos = t1->GetPosition();
+  Vector3 t2Pos = t2->GetPosition();
   Vector3 halfSize1 = t1->GetSize();
   Vector3 halfSize2 = t2->GetSize();
 
   for(int i = 0; i < 3; ++i)
   {
-    float pos1 = t1->GetPosition()[i];
-    float pos2 = t2->GetPosition()[i];
+    float pos1 = t1Pos[i];
+    float pos2 = t2Pos[i];
 
-    if(fabs(pos1 - pos2) > (halfSize1[0] + halfSize2[i]))
+    if(fabs(pos1 - pos2) > (halfSize1[i] + halfSize2[i]))
       return false;
   }
 
@@ -256,12 +263,14 @@ bool Resolver::CheckCubeToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
+  Vector3 t1Pos = t1->GetPosition();
+  Vector3 t2Pos = t2->GetPosition();
   Vector3 halfSize1 = t1->GetSize();
   Vector3 halfSize2 = t2->GetSize();
 
-  bool xCheck = fabs(t1->GetPosition().x - t2->GetPosition().x) <= halfSize1.x + halfSize2.x;
-  bool yCheck = fabs(t1->GetPosition().y - t2->GetPosition().y) <= halfSize1.y + halfSize2.y;
-  bool zCheck = fabs(t1->GetPosition().z - t2->GetPosition().z) <= halfSize1.z + halfSize2.z;
+  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= halfSize1.x + halfSize2.x;
+  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= halfSize1.y + halfSize2.y;
+  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= halfSize1.z + halfSize2.z;
 
   return xCheck && yCheck && zCheck;
 }
