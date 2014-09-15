@@ -79,6 +79,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
       mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(physics);
       physics->SetStatic(true);
       physics->mShape = PhysicsObject::CUBE;
+      physics->SetBroadSize(transform->GetSize() * 1.5f);
       
       // Make tiles ignore other tiles for collision
       for(int i = 0; i < 99; ++i)

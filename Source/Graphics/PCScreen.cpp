@@ -36,12 +36,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       Transform *transform = obj->GET<Transform>();
       Vector3 position = transform->GetPosition();
       Vector3 size = transform->GetSize();
-      Vector3 broadSize = Vector3();
-
-      if(obj->GET<PhysicsObject>())
-      {
-        obj->GET<PhysicsObject>()->GetBroadSize() / 2.0f;
-      }
+      Vector3 broadSize = obj->GET<PhysicsObject>()->GetBroadSize();
 
       // Get positions relative to the camera
       float xPosition = position.x;

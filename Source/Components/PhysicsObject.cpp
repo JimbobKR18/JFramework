@@ -49,7 +49,7 @@ void PhysicsObject::Update()
   mForces *= 0;
 
   // Update the size for broadphasing
-  mBroadSize = GetOwner()->GET<Transform>()->GetSize() + Vector3(15.0f, 15.0f, 15.0f);
+  mBroadSize = GetOwner()->GET<Transform>()->GetSize() * 1.5f;
 }
 
 void PhysicsObject::SendMessage(Message const &aMessage)
@@ -194,4 +194,9 @@ void PhysicsObject::SetAffectedByGravity(bool aGravity)
 Vector3 PhysicsObject::GetBroadSize() const
 {
 	return mBroadSize;
+}
+
+void PhysicsObject::SetBroadSize(Vector3 const &aSize)
+{
+  mBroadSize = aSize;
 }

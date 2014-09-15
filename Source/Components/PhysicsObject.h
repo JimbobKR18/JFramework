@@ -63,6 +63,7 @@ public:
   void                SetAffectedByGravity(bool aGravity);
 
   Vector3             GetBroadSize() const;
+  void                SetBroadSize(Vector3 const &aSize);
 };
 
 #endif /* defined(__JFramework__PhysicsObject__) */

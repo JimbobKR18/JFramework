@@ -12,12 +12,14 @@
 #include <algorithm>
 #include <cmath>
 
-#define X_LIMIT 50.0f
-
 bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 {
-	if(object1->GetOwner()->GET<Transform>()->GetPosition().x <
-	   object2->GetOwner()->GET<Transform>()->GetPosition().x)
+  // Left aligned
+  float x1 = object1->GetOwner()->GET<Transform>()->GetPosition().x -
+      object1->GetBroadSize().x;
+  float x2 = object2->GetOwner()->GET<Transform>()->GetPosition().x -
+        object2->GetBroadSize().x;
+	if(x1 < x2)
 	{
 		return true;
 	}
@@ -153,9 +155,9 @@ void PhysicsWorld::SweepAndPrune()
 				  float x2Size = it2Object->GetBroadSize().x;
 
 					float xPosDiff = fabs(x1 - x2);
-          float xSizeTotal = fabs(x1Size + x2Size) + X_LIMIT;
+          float xSizeTotal = x1Size + x2Size;
 
-					if(xPosDiff < X_LIMIT || xSizeTotal > xPosDiff)
+					if(xSizeTotal > xPosDiff)
 					{
 						mResolver.AddPrelimPair(CollisionPair(itObject, it2Object));
 					}
