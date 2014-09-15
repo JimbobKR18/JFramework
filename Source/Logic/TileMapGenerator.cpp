@@ -33,7 +33,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   int xPos = 0, yPos = 0;
   float halfX = mWidth * aTileSize;
   float halfY = mHeight * aTileSize;
-  float const zPos = 0.9999f;
+  float const zPos = -0.9999f;
 
   // mTiles and mCollision MUST be same size, or it's not a valid map
   if(mTiles.size() != mCollision.size())

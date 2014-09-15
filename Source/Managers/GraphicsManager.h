@@ -14,6 +14,8 @@ private:
   std::map<std::string, TextureData>  mTextures;
 	Screen*                             mScreen;
 public:
+  typedef std::vector<Surface*>::iterator SurfaceIT;
+
 	GraphicsManager(GameApp *aApp, int aWidth, int aHeight);
 	~GraphicsManager();
 
@@ -43,8 +45,6 @@ public:
   // Misc.
   Vector3             AbsToRel(Vector3 const &aPosition) const;
   Vector3             RelToAbs(Vector3 const &aPosition) const;
-public:
-  typedef std::vector<Surface*>::iterator SurfaceIT;
 };
 
 #endif
