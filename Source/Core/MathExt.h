@@ -170,15 +170,24 @@ struct Circle
   Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight, float const aRadius);
 };
 
-struct LineSegment
+struct Line
 {
   Vector3 position;
   float length;
 
-  LineSegment();
-  LineSegment(Vector3 const &aPosition, float aLength);
+  Line();
+  Line(Vector3 const &aPosition, float aLength);
 
-  bool GetCollisions(LineSegment const &aCompare, Circle &aOutput);
+  bool GetCollisions(Line const &aCompare, Circle &aOutput);
+};
+
+struct LineSegment
+{
+  Vector3 start;
+  Vector3 end;
+
+  LineSegment();
+  LineSegment(Vector3 const &aStart, Vector3 const &aEnd);
 };
 
 template<typename T>
@@ -234,7 +243,7 @@ T Greater(T const& aA, T const& aB)
 
 void print_matrix(Matrix33 const &_matrix);
 void print_vector(Vector3 const &_point);
-void print_line(LineSegment const &_line);
+void print_line(Line const &_line);
 void print_circle(Circle const &_circle);
 
 #endif

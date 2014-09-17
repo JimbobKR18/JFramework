@@ -27,12 +27,6 @@ private:
 	void  SendCollisionMessages(CollisionPair &aPair) const;
 	void  Resolve(CollisionPair &aPair, float aDuration);
 
-	// Check if objects are actually colliding
-	void  CheckCollision(CollisionPair &aPair);
-	bool  CheckSphereToSphere(CollisionPair &aPair);
-  bool  CheckSphereToCube(CollisionPair &aPair);
-  bool  CheckCubeToCube(CollisionPair &aPair);
-
   // Calculation of normals etc.
 	void  CalculateSphereToSphere(CollisionPair &aPair);
 	void  CalculateSphereToCube(CollisionPair &aPair);

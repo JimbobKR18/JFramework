@@ -24,7 +24,7 @@ void print_vector(Vector3 const &_point)
   printf("X: %f, Y: %f, Z: %f\n", _point.x, _point.y, _point.z);
 }
 
-void print_line(LineSegment const &_line)
+void print_line(Line const &_line)
 {
   printf("LINE:\n");
   printf("POSITION:\n");
@@ -700,19 +700,19 @@ Circle::Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRig
 }
 
 //------------------------------
-// LINESEGMENT
+// LINE
 //------------------------------
 
-LineSegment::LineSegment() : position(), length(0)
+Line::Line() : position(), length(0)
 {
 }
 
-LineSegment::LineSegment(Vector3 const &aPosition, float aLength) : position(aPosition), length(aLength)
+Line::Line(Vector3 const &aPosition, float aLength) : position(aPosition), length(aLength)
 {
 }
 
 // Returns true is circle is found, otherwise false
-bool LineSegment::GetCollisions(LineSegment const &aCompare, Circle &aOutput)
+bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
 {
   Vector3 d =  aCompare.position - position;
   float dist = d.length();
@@ -835,4 +835,16 @@ bool LineSegment::GetCollisions(LineSegment const &aCompare, Circle &aOutput)
   print_circle(aOutput);
   printf("\n\n");
   return true;
+}
+
+//------------------------------
+// LINESEGMENT
+//------------------------------
+
+LineSegment::LineSegment() : start(), end()
+{
+}
+
+LineSegment::LineSegment(Vector3 const &aStart, Vector3 const &aEnd) : start(aStart), end(aEnd)
+{
 }

@@ -2,6 +2,7 @@
 #include "PhysicsObject.h"
 #include "Transform.h"
 #include "CollisionMessage.h"
+#include "CollisionChecker.h"
 
 Resolver::Resolver()
 {
@@ -17,7 +18,8 @@ void Resolver::Update(float aDuration)
 {
   for(std::list<CollisionPair>::iterator it = mBroadPairs.begin(); it != mBroadPairs.end(); ++it)
   {
-    CheckCollision(*it);
+    if(CollisionChecker::CheckShapeCollision(*it))
+      AddPair(*it);
   }
 	for(std::list<CollisionPair>::iterator it = mPairs.begin(); it != mPairs.end(); ++it)
 	{
@@ -180,99 +182,6 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
 	}
 	ResolveVelocity(aPair, aDuration);
 	ResolvePenetration(aPair);
-}
-
-void Resolver::CheckCollision(CollisionPair &aPair)
-{
-  switch(aPair.mBodies[0]->mShape)
-  {
-  case PhysicsObject::SPHERE:
-    switch(aPair.mBodies[1]->mShape)
-    {
-    case PhysicsObject::SPHERE:
-      if(CheckSphereToSphere(aPair))
-        AddPair(aPair);
-      break;
-    case PhysicsObject::CUBE:
-      if(CheckSphereToCube(aPair))
-        AddPair(aPair);
-      break;
-    }
-    break;
-  case PhysicsObject::CUBE:
-    switch(aPair.mBodies[1]->mShape)
-    {
-    case PhysicsObject::SPHERE:
-      if(CheckSphereToCube(aPair))
-        AddPair(aPair);
-      break;
-    case PhysicsObject::CUBE:
-      if(CheckCubeToCube(aPair))
-        AddPair(aPair);
-      break;
-    }
-    break;
-  }
-}
-
-bool Resolver::CheckSphereToSphere(CollisionPair &aPair)
-{
-  Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-
-  Vector3 t1Pos = t1->GetPosition();
-  Vector3 t2Pos = t2->GetPosition();
-  Vector3 t1Size = t1->GetSize();
-  Vector3 t2Size = t2->GetSize();
-
-  if(t1Size.x + t2Size.x > (t1Pos - t2Pos).length())
-  {
-    return true;
-  }
-
-  return false;
-}
-
-bool Resolver::CheckSphereToCube(CollisionPair &aPair)
-{
-  if(aPair.mBodies[0]->mShape != PhysicsObject::SPHERE)
-    aPair.Switch();
-
-  Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-
-  Vector3 t1Pos = t1->GetPosition();
-  Vector3 t2Pos = t2->GetPosition();
-  Vector3 halfSize1 = t1->GetSize();
-  Vector3 halfSize2 = t2->GetSize();
-
-  for(int i = 0; i < 3; ++i)
-  {
-    float pos1 = t1Pos[i];
-    float pos2 = t2Pos[i];
-
-    if(fabs(pos1 - pos2) > (halfSize1[i] + halfSize2[i]))
-      return false;
-  }
-
-  return true;
-}
-
-bool Resolver::CheckCubeToCube(CollisionPair &aPair)
-{
-  Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-
-  Vector3 t1Pos = t1->GetPosition();
-  Vector3 t2Pos = t2->GetPosition();
-  Vector3 halfSize1 = t1->GetSize();
-  Vector3 halfSize2 = t2->GetSize();
-
-  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= halfSize1.x + halfSize2.x;
-  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= halfSize1.y + halfSize2.y;
-  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= halfSize1.z + halfSize2.z;
-
-  return xCheck && yCheck && zCheck;
 }
 
 void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
