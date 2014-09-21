@@ -6,14 +6,14 @@
 void print_matrix(Matrix33 const &_matrix)
 {
   printf("MATRIX:\n");
-  for(int i = 0; i < 3; ++i)
+  for (int i = 0; i < 3; ++i)
   {
-          printf("ROW%d:", i);
-          for(int j = 0; j < 3; ++j)
-          {
-                  printf(" %f ", _matrix.values[i][j]);
-          }
-          printf("\n");
+    printf("ROW%d:", i);
+    for (int j = 0; j < 3; ++j)
+    {
+      printf(" %f ", _matrix.values[i][j]);
+    }
+    printf("\n");
   }
   printf("DETERMINANT: %f\n", _matrix.Determinant());
 }
@@ -60,12 +60,12 @@ Vector3::Vector3(float aX, float aY, float aZ) : x(aX), y(aY), z(aZ)
 
 float Vector3::length() const
 {
-  return sqrt((x*x) + (y*y) + (z*z));
+  return sqrt((x * x) + (y * y) + (z * z));
 }
 
-float Vector3::operator[](int aValue) const
+float& Vector3::operator[](int const aValue)
 {
-  switch(aValue)
+  switch (aValue)
   {
   case 0:
     return x;
@@ -84,7 +84,7 @@ Vector3 Vector3::normalize() const
   float const len = length();
 
   // Catch case if length is 0
-  if(len == 0)
+  if (len == 0)
     return Vector3(1, 0, 0);
 
   ret.x /= len;
@@ -103,7 +103,8 @@ void Vector3::operator=(Vector3 const &rhs)
 }
 bool Vector3::operator==(Vector3 const &rhs) const
 {
-  return ((int)x == (int)rhs.x && (int)y == (int)rhs.y && (int)z == (int)rhs.z);
+  return ((int) x == (int) rhs.x && (int) y == (int) rhs.y
+      && (int) z == (int) rhs.z);
 }
 
 // Scaling
@@ -165,7 +166,7 @@ Vector3 Vector3::operator-(Vector3 const &rhs) const
 }
 Vector3 Vector3::operator%(Vector3 const &rhs) const
 {
-  return rhs * ((*this * rhs)/(rhs * rhs));
+  return rhs * ((*this * rhs) / (rhs * rhs));
 }
 Vector3 Vector3::operator-() const
 {
@@ -224,39 +225,40 @@ void Vector3::operator/=(float const aMultiplier)
 
 void Vector3::SerializeLUA()
 {
-  SLB::Class<Vector3>("Vector3").constructor<float,float,float>()
-          .set("x", &Vector3::x)
-          .set("y", &Vector3::y)
-          .set("z", &Vector3::z)
-          .set("length", &Vector3::length)
-          .set("SetEqual", &Vector3::operator=)
-          .set("IsEqual", &Vector3::operator==)
-          .set("Add", &Vector3::Add)
-          .set("Subtract", &Vector3::Subtract)
-          .set("Dot", &Vector3::Dot)
-          .set("Cross", &Vector3::Cross)
-          .set("Project", &Vector3::Project)
-          .set("Invert", &Vector3::Invert);
+  SLB::Class<Vector3>("Vector3").constructor<float, float, float>().set("x", &Vector3::x)
+      .set("y", &Vector3::y)
+      .set("z", &Vector3::z)
+      .set("length", &Vector3::length)
+      .set("SetEqual", &Vector3::operator=)
+      .set("IsEqual", &Vector3::operator==)
+      .set("Add", &Vector3::Add)
+      .set("Subtract", &Vector3::Subtract)
+      .set("Dot", &Vector3::Dot)
+      .set("Cross", &Vector3::Cross)
+      .set("Project", &Vector3::Project)
+      .set("Invert", &Vector3::Invert);
 }
 
 //------------------------------
 // VECTOR4
 //------------------------------
-Vector4::Vector4() : x(0), y(0), z(0), w(0)
+Vector4::Vector4() :
+    x(0), y(0), z(0), w(0)
 {
 }
-Vector4::Vector4(float aX, float aY, float aZ, float aW) : x(aX), y(aY), z(aZ), w(aW)
+Vector4::Vector4(float aX, float aY, float aZ, float aW) :
+    x(aX), y(aY), z(aZ), w(aW)
 {
 }
 
 float Vector4::length() const
 {
-  return sqrt((x*x) + (y*y) + (z*z) + (w*w));
+  return sqrt((x * x) + (y * y) + (z * z) + (w * w));
 }
 
 float Vector4::operator[](int aValue) const
 {
-  switch(aValue)
+  switch (aValue)
   {
   case 0:
     return x;
@@ -277,7 +279,7 @@ Vector4 Vector4::normalize() const
   float const len = length();
 
   // Catch case if length is 0
-  if(len == 0)
+  if (len == 0)
     return Vector4(1, 0, 0, 0);
 
   ret.x /= len;
@@ -298,7 +300,8 @@ void Vector4::operator=(Vector4 const &rhs)
 }
 bool Vector4::operator==(Vector4 const &rhs) const
 {
-  return ((int)x == (int)rhs.x && (int)y == (int)rhs.y && (int)z == (int)rhs.z && (int)w == (int)rhs.w);
+  return ((int) x == (int) rhs.x && (int) y == (int) rhs.y
+      && (int) z == (int) rhs.z && (int) w == (int) rhs.w);
 }
 
 // Scaling
@@ -364,7 +367,7 @@ Vector4 Vector4::operator-(Vector4 const &rhs) const
 }
 Vector4 Vector4::operator%(Vector4 const &rhs) const
 {
-  return rhs * ((*this * rhs)/(rhs * rhs));
+  return rhs * ((*this * rhs) / (rhs * rhs));
 }
 Vector4 Vector4::operator-() const
 {
@@ -427,20 +430,20 @@ void Vector4::operator/=(float const aMultiplier)
 
 void Vector4::SerializeLUA()
 {
-  SLB::Class<Vector4>("Vector4").constructor<float,float,float,float>()
-          .set("x", &Vector4::x)
-          .set("y", &Vector4::y)
-          .set("z", &Vector4::z)
-          .set("w", &Vector4::w)
-          .set("length", &Vector4::length)
-          .set("SetEqual", &Vector4::operator=)
-          .set("IsEqual", &Vector4::operator==)
-          .set("Add", &Vector4::Add)
-          .set("Subtract", &Vector4::Subtract)
-          .set("Dot", &Vector4::Dot)
-          .set("Cross", &Vector4::Cross)
-          .set("Project", &Vector4::Project)
-          .set("Invert", &Vector4::Invert);
+  SLB::Class<Vector4>("Vector4").constructor<float, float, float, float>()
+      .set("x", &Vector4::x)
+      .set("y", &Vector4::y)
+      .set("z", &Vector4::z)
+      .set("w", &Vector4::w)
+      .set("length", &Vector4::length)
+      .set("SetEqual", &Vector4::operator=)
+      .set("IsEqual", &Vector4::operator==)
+      .set("Add", &Vector4::Add)
+      .set("Subtract", &Vector4::Subtract)
+      .set("Dot", &Vector4::Dot)
+      .set("Cross", &Vector4::Cross)
+      .set("Project", &Vector4::Project)
+      .set("Invert", &Vector4::Invert);
 }
 
 //-----------------------------
@@ -449,11 +452,11 @@ void Vector4::SerializeLUA()
 
 Matrix33::Matrix33()
 {
-  for(int i = 0; i < 3; ++i)
+  for (int i = 0; i < 3; ++i)
   {
-    for(int j = 0; j < 3; ++j)
+    for (int j = 0; j < 3; ++j)
     {
-      if(i == j)
+      if (i == j)
         values[i][j] = 1;
       else
         values[i][j] = 0;
@@ -463,9 +466,9 @@ Matrix33::Matrix33()
 
 Matrix33::Matrix33(float aValues[3][3])
 {
-  for(int i = 0; i < 3; ++i)
+  for (int i = 0; i < 3; ++i)
   {
-    for(int j = 0; j < 3; ++j)
+    for (int j = 0; j < 3; ++j)
     {
       values[i][j] = aValues[i][j];
     }
@@ -474,9 +477,9 @@ Matrix33::Matrix33(float aValues[3][3])
 
 Matrix33::Matrix33(float aValues[9])
 {
-  for(int i = 0; i < 3; ++i)
+  for (int i = 0; i < 3; ++i)
   {
-    for(int j = 0; j < 3; ++j)
+    for (int j = 0; j < 3; ++j)
     {
       values[i][j] = aValues[(i * 3) + j];
     }
@@ -505,18 +508,24 @@ Matrix33 Matrix33::Rotate(Vector3 const &aAxis, float const aAngle) const
   // What if we're already on the z plane?
   float templength = xylength > 0.0f ? xylength : 1.0f;
 
-  float xzvalues[3][3] = {{aAxis.x / templength, aAxis.y / templength, 0},
-        {-aAxis.y / templength, aAxis.x / templength, 0},
-        {0, 0, 1}};
-  float zvalues[3][3] = {{aAxis.z / xyzlength, 0, -xylength / xyzlength},
-        {0, 1, 0},
-        {xylength / xyzlength, 0 , aAxis.z / xyzlength}};
-  float rotvalues[3][3] = {{cosine, -sine, 0},
-         {sine, cosine, 0},
-         {0, 0, 1}};
+  float xzvalues[3][3] =
+  {
+  { aAxis.x / templength, aAxis.y / templength, 0 },
+  { -aAxis.y / templength, aAxis.x / templength, 0 },
+  { 0, 0, 1 } };
+  float zvalues[3][3] =
+  {
+  { aAxis.z / xyzlength, 0, -xylength / xyzlength },
+  { 0, 1, 0 },
+  { xylength / xyzlength, 0, aAxis.z / xyzlength } };
+  float rotvalues[3][3] =
+  {
+  { cosine, -sine, 0 },
+  { sine, cosine, 0 },
+  { 0, 0, 1 } };
 
   // Create identity matrix if on z plane already
-  if(xylength <= 0.0f)
+  if (xylength <= 0.0f)
   {
     xzvalues[0][0] = 1.0f;
     xzvalues[1][1] = 1.0f;
@@ -539,29 +548,42 @@ Matrix33 Matrix33::Invert() const
   Matrix33 ret;
   float det = Determinant();
 
-  ret.values[0][0] = Determinant(values[1][1], values[1][2], values[2][1], values[2][2]);
-  ret.values[0][1] = Determinant(values[0][2], values[0][1], values[2][2], values[2][1]);
-  ret.values[0][2] = Determinant(values[0][1], values[0][2], values[1][1], values[1][2]);
+  ret.values[0][0] = Determinant(values[1][1], values[1][2], values[2][1],
+      values[2][2]);
+  ret.values[0][1] = Determinant(values[0][2], values[0][1], values[2][2],
+      values[2][1]);
+  ret.values[0][2] = Determinant(values[0][1], values[0][2], values[1][1],
+      values[1][2]);
 
-  ret.values[1][0] = Determinant(values[1][2], values[1][0], values[2][2], values[2][0]);
-  ret.values[1][1] = Determinant(values[0][0], values[0][2], values[2][0], values[2][2]);
-  ret.values[1][2] = Determinant(values[0][2], values[0][0], values[1][2], values[1][0]);
+  ret.values[1][0] = Determinant(values[1][2], values[1][0], values[2][2],
+      values[2][0]);
+  ret.values[1][1] = Determinant(values[0][0], values[0][2], values[2][0],
+      values[2][2]);
+  ret.values[1][2] = Determinant(values[0][2], values[0][0], values[1][2],
+      values[1][0]);
 
-  ret.values[2][0] = Determinant(values[1][0], values[1][1], values[2][0], values[2][1]);
-  ret.values[2][1] = Determinant(values[0][1], values[0][0], values[2][1], values[2][0]);
-  ret.values[2][2] = Determinant(values[0][0], values[0][1], values[1][0], values[1][1]);
+  ret.values[2][0] = Determinant(values[1][0], values[1][1], values[2][0],
+      values[2][1]);
+  ret.values[2][1] = Determinant(values[0][1], values[0][0], values[2][1],
+      values[2][0]);
+  ret.values[2][2] = Determinant(values[0][0], values[0][1], values[1][0],
+      values[1][1]);
 
   return ret * (1.0f / det);
 }
 
 float Matrix33::Determinant() const
 {
-  return values[0][0] * ((values[1][1] * values[2][2]) - (values[1][2] * values[2][1])) -
-    values[0][1] * ((values[1][0] * values[2][2]) - (values[1][2] * values[2][0])) +
-    values[0][2] * ((values[1][0] * values[2][1]) - (values[1][1] * values[2][0]));
+  return values[0][0]
+      * ((values[1][1] * values[2][2]) - (values[1][2] * values[2][1]))
+      - values[0][1]
+          * ((values[1][0] * values[2][2]) - (values[1][2] * values[2][0]))
+      + values[0][2]
+          * ((values[1][0] * values[2][1]) - (values[1][1] * values[2][0]));
 }
 
-float Matrix33::Determinant(float const aA, float const aB, float const aC, float const aD) const
+float Matrix33::Determinant(float const aA, float const aB, float const aC,
+    float const aD) const
 {
   return (aA * aD) - (aB * aC);
 }
@@ -570,35 +592,26 @@ Matrix33 Matrix33::operator*(Matrix33 const &rhs) const
 {
   Matrix33 ret;
 
-  ret.values[0][0] = values[0][0] * rhs.values[0][0] +
-            values[0][1] * rhs.values[1][0] +
-            values[0][2] * rhs.values[2][0];
-  ret.values[0][1] = values[0][0] * rhs.values[0][1] +
-            values[0][1] * rhs.values[1][1] +
-            values[0][2] * rhs.values[2][1];
-  ret.values[0][2] = values[0][0] * rhs.values[0][2] +
-            values[0][1] * rhs.values[1][2] +
-            values[0][2] * rhs.values[2][2];
+  ret.values[0][0] = values[0][0] * rhs.values[0][0]
+      + values[0][1] * rhs.values[1][0] + values[0][2] * rhs.values[2][0];
+  ret.values[0][1] = values[0][0] * rhs.values[0][1]
+      + values[0][1] * rhs.values[1][1] + values[0][2] * rhs.values[2][1];
+  ret.values[0][2] = values[0][0] * rhs.values[0][2]
+      + values[0][1] * rhs.values[1][2] + values[0][2] * rhs.values[2][2];
 
-  ret.values[1][0] = values[1][0] * rhs.values[0][0] +
-            values[1][1] * rhs.values[1][0] +
-            values[1][2] * rhs.values[2][0];
-  ret.values[1][1] = values[1][0] * rhs.values[0][1] +
-            values[1][1] * rhs.values[1][1] +
-            values[1][2] * rhs.values[2][1];
-  ret.values[1][2] = values[1][0] * rhs.values[0][2] +
-            values[1][1] * rhs.values[1][2] +
-            values[1][2] * rhs.values[2][2];
+  ret.values[1][0] = values[1][0] * rhs.values[0][0]
+      + values[1][1] * rhs.values[1][0] + values[1][2] * rhs.values[2][0];
+  ret.values[1][1] = values[1][0] * rhs.values[0][1]
+      + values[1][1] * rhs.values[1][1] + values[1][2] * rhs.values[2][1];
+  ret.values[1][2] = values[1][0] * rhs.values[0][2]
+      + values[1][1] * rhs.values[1][2] + values[1][2] * rhs.values[2][2];
 
-  ret.values[2][0] = values[2][0] * rhs.values[0][0] +
-            values[2][1] * rhs.values[1][0] +
-            values[2][2] * rhs.values[2][0];
-  ret.values[2][1] = values[2][0] * rhs.values[0][1] +
-            values[2][1] * rhs.values[1][1] +
-            values[2][2] * rhs.values[2][1];
-  ret.values[2][2] = values[2][0] * rhs.values[0][2] +
-            values[2][1] * rhs.values[1][2] +
-            values[2][2] * rhs.values[2][2];
+  ret.values[2][0] = values[2][0] * rhs.values[0][0]
+      + values[2][1] * rhs.values[1][0] + values[2][2] * rhs.values[2][0];
+  ret.values[2][1] = values[2][0] * rhs.values[0][1]
+      + values[2][1] * rhs.values[1][1] + values[2][2] * rhs.values[2][1];
+  ret.values[2][2] = values[2][0] * rhs.values[0][2]
+      + values[2][1] * rhs.values[1][2] + values[2][2] * rhs.values[2][2];
 
   return ret;
 }
@@ -607,9 +620,9 @@ Matrix33 Matrix33::operator*(float const aValue) const
 {
   Matrix33 ret = *this;
 
-  for(int i = 0; i < 3; ++i)
+  for (int i = 0; i < 3; ++i)
   {
-    for(int j = 0; j < 3; ++j)
+    for (int j = 0; j < 3; ++j)
     {
       ret.values[i][j] *= aValue;
     }
@@ -622,15 +635,9 @@ Vector3 Matrix33::operator*(Vector3 const &rhs) const
 {
   Vector3 ret;
 
-  ret.x = values[0][0] * rhs.x +
-      values[0][1] * rhs.y +
-      values[0][2] * rhs.z;
-  ret.y = values[1][0] * rhs.x +
-      values[1][1] * rhs.y +
-      values[1][2] * rhs.z;
-  ret.z = values[2][0] * rhs.x +
-      values[2][1] * rhs.y +
-      values[2][2] * rhs.z;
+  ret.x = values[0][0] * rhs.x + values[0][1] * rhs.y + values[0][2] * rhs.z;
+  ret.y = values[1][0] * rhs.x + values[1][1] * rhs.y + values[1][2] * rhs.z;
+  ret.z = values[2][0] * rhs.x + values[2][1] * rhs.y + values[2][2] * rhs.z;
 
   return ret;
 }
@@ -652,7 +659,8 @@ Cube::Cube()
 {
 }
 
-Cube::Cube(Vector3 const &aPosition, Vector3 const &aSize) : position(aPosition), size(aSize)
+Cube::Cube(Vector3 const &aPosition, Vector3 const &aSize) :
+    position(aPosition), size(aSize)
 {
 }
 
@@ -660,9 +668,9 @@ bool Cube::GetCollision(Vector3 const &aPosition)
 {
   // SEPARATING AXIS THEORUM
   Vector3 dist = aPosition - position;
-  for(int i = 0; i < 2; ++i)
+  for (int i = 0; i < 2; ++i)
   {
-    if(fabs(dist[i]) > size[i])
+    if (fabs(dist[i]) > size[i])
     {
       return false;
     }
@@ -677,7 +685,8 @@ Sphere::Sphere()
 {
 }
 
-Sphere::Sphere(Vector3 const &aPosition, float const aRadius) : position(aPosition), radius(aRadius)
+Sphere::Sphere(Vector3 const &aPosition, float const aRadius) :
+    position(aPosition), radius(aRadius)
 {
 }
 
@@ -691,11 +700,14 @@ bool Sphere::GetCollision(Vector3 const &aPosition)
 // CIRCLE
 //------------------------------
 
-Circle::Circle() : position(), up(), right(), radius(0)
+Circle::Circle() :
+    position(), up(), right(), radius(0)
 {
 }
 
-Circle::Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight, float const aRadius) : position(aPosition), up(aUp), right(aRight), radius(fabs(aRadius))
+Circle::Circle(Vector3 const &aPosition, Vector3 const &aUp,
+    Vector3 const &aRight, float const aRadius) :
+    position(aPosition), up(aUp), right(aRight), radius(fabs(aRadius))
 {
 }
 
@@ -703,18 +715,28 @@ Circle::Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRig
 // LINE
 //------------------------------
 
-Line::Line() : position(), length(0)
+Line::Line() :
+    position(), direction(), length(0)
 {
 }
 
-Line::Line(Vector3 const &aPosition, float aLength) : position(aPosition), length(aLength)
+Line::Line(Vector3 const &aPosition, Vector3 const &aDirection, float aLength) :
+    position(aPosition), direction(aDirection), length(aLength)
 {
+}
+
+Line::Line(Vector3 const &aStart, Vector3 const &aEnd) :
+    position(aStart)
+{
+  Vector3 diff = aEnd - aStart;
+  direction = diff.normalize();
+  length = diff.length();
 }
 
 // Returns true is circle is found, otherwise false
 bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
 {
-  Vector3 d =  aCompare.position - position;
+  Vector3 d = aCompare.position - position;
   float dist = d.length();
   float longer = length >= aCompare.length ? length : aCompare.length;
   float shorter = length >= aCompare.length ? aCompare.length : length;
@@ -723,10 +745,10 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
   print_line(aCompare);
 
   // If they're in the exact same location that would be a problem
-  if(position == aCompare.position)
+  if (position == aCompare.position)
   {
     // IS THIS THE SAME EXACT SPHERE?!
-    if(length == aCompare.length)
+    if (length == aCompare.length)
     {
       aOutput.position = position;
       aOutput.radius = length;
@@ -745,7 +767,7 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
   }
 
   // > is an early out
-  if(dist < length + aCompare.length && dist != longer - shorter)
+  if (dist < length + aCompare.length && dist != longer - shorter)
   {
     // THE IDEA: Find one point, rotate about arbitrary axis between spheres
     // Reduce the problem to solving a circle
@@ -756,16 +778,20 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
     float templength = xylength > 0.0f ? xylength : 1.0f;
     // Our matrices
     // First, go to xz plane
-    float xzvalues[3][3] = {{axis.x / templength, axis.y / templength, 0},
-                            {-axis.y / templength, axis.x / templength, 0},
-                            {0, 0, 1}};
+    float xzvalues[3][3] =
+    {
+    { axis.x / templength, axis.y / templength, 0 },
+    { -axis.y / templength, axis.x / templength, 0 },
+    { 0, 0, 1 } };
     // Then, only to z axis
-    float zvalues[3][3] = {{axis.z / xyzlength, 0, -xylength / xyzlength},
-                           {0, 1, 0},
-                           {xylength / xyzlength, 0 , axis.z / xyzlength}};
+    float zvalues[3][3] =
+    {
+    { axis.z / xyzlength, 0, -xylength / xyzlength },
+    { 0, 1, 0 },
+    { xylength / xyzlength, 0, axis.z / xyzlength } };
 
     // Create identity matrix if we're already on the z plane
-    if(xylength <= 0.0f)
+    if (xylength <= 0.0f)
     {
       xzvalues[0][0] = 1.0f;
       xzvalues[1][1] = 1.0f;
@@ -783,8 +809,8 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
     dist = comparePos.length();
 
     // Circle collision function
-    float z = ((dist * dist) - (aCompare.length * aCompare.length) + (length * length)) /
-          (2.0f * dist);
+    float z = ((dist * dist) - (aCompare.length * aCompare.length)
+        + (length * length)) / (2.0f * dist);
     float y = sqrt((length * length) - (z * z));
 
     // Create our circle
@@ -798,29 +824,35 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
     aOutput.up = toZAxisInverse * aOutput.up;
     aOutput.right = toZAxisInverse * aOutput.right;
   }
-  else if(dist == length + aCompare.length)
+  else if (dist == length + aCompare.length)
   {
     // They barely touch, from the outside
-    Vector3 largerPos = length >= aCompare.length ? position : aCompare.position;
-    Vector3 smallerPos = length >= aCompare.length ? aCompare.position : position;
+    Vector3 largerPos =
+        length >= aCompare.length ? position : aCompare.position;
+    Vector3 smallerPos =
+        length >= aCompare.length ? aCompare.position : position;
     float smallerLen = length >= aCompare.length ? aCompare.length : length;
     d = smallerPos - largerPos;
 
-    printf("The radii barely touch, will still return true, but radius is zero\n");
+    printf(
+        "The radii barely touch, will still return true, but radius is zero\n");
     aOutput.position = smallerPos - (d.normalize() * smallerLen);
     aOutput.radius = 0;
     aOutput.up = Vector3(0, 1, 0);
     aOutput.right = Vector3(0, 0, 1);
   }
-  else if(dist == longer - shorter)
+  else if (dist == longer - shorter)
   {
     // They barely touch, from the inside
-    Vector3 largerPos = length >= aCompare.length ? position : aCompare.position;
-    Vector3 smallerPos = length >= aCompare.length ? aCompare.position : position;
+    Vector3 largerPos =
+        length >= aCompare.length ? position : aCompare.position;
+    Vector3 smallerPos =
+        length >= aCompare.length ? aCompare.position : position;
     float smallerLen = length >= aCompare.length ? aCompare.length : length;
     d = smallerPos - largerPos;
 
-    printf("The radii barely touch, will still return true, but radius is zero\n");
+    printf(
+        "The radii barely touch, will still return true, but radius is zero\n");
     aOutput.position = smallerPos + (d.normalize() * smallerLen);
     aOutput.radius = 0;
     aOutput.up = Vector3(0, 1, 0);
@@ -835,16 +867,4 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
   print_circle(aOutput);
   printf("\n\n");
   return true;
-}
-
-//------------------------------
-// LINESEGMENT
-//------------------------------
-
-LineSegment::LineSegment() : start(), end()
-{
-}
-
-LineSegment::LineSegment(Vector3 const &aStart, Vector3 const &aEnd) : start(aStart), end(aEnd)
-{
 }

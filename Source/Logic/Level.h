@@ -49,6 +49,7 @@ public:
 
   void              AddMenu(Menu *aMenu);
   void              RemoveMenu(Menu *aMenu);
+  void              RemoveMenus();
 
   void              AddObject(GameObject *aObject);
   void              AddStaticObject(GameObject *aObject);

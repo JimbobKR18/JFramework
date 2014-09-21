@@ -45,6 +45,8 @@ public:
   void                          RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void                          UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void                          UnregisterGravity(PhysicsObject *aObject);
+  // Misc.
+  bool                          LineCollidesWithAnything(Line const &aLine, std::vector<PhysicsObject*> const &aIgnoreList);
   
 private:
   void                          SortOnAxis();

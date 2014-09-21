@@ -52,15 +52,31 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 
       glLoadIdentity();
       glPushMatrix();
-      // Physics Box Line
-      glBegin(GL_LINE_STRIP);
-      glColor3f(1.0f, 0.0f, 0.0f);
-      glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
-      glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
-      glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
-      glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
-      glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
-      glEnd();
+
+      if(obj->GET<PhysicsObject>()->mShape == PhysicsObject::SPHERE)
+      {
+        glBegin(GL_LINE_STRIP);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        for(int i = 0; i < 360; ++i)
+        {
+          float radians = i * (3.14159f / 180.0f);
+          glVertex3f(xPosition + (size.x * cos(radians)),
+              yPosition + (size.y * sin(radians)), zPosition);
+        }
+        glEnd();
+      }
+      else if(obj->GET<PhysicsObject>()->mShape == PhysicsObject::CUBE)
+      {
+        // Physics Box Line
+        glBegin(GL_LINE_STRIP);
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
+        glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
+        glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
+        glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
+        glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
+        glEnd();
+      }
 
       // Broad Size Line
       glBegin(GL_LINE_STRIP);

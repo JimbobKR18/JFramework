@@ -9,8 +9,8 @@
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
 #include "Transform.h"
-#include <algorithm>
-#include <cmath>
+#include "CollisionChecker.h"
+#include "Common.h"
 
 bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 {
@@ -122,6 +122,19 @@ void PhysicsWorld::UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGene
 void PhysicsWorld::UnregisterGravity(PhysicsObject *aObject)
 {
   UnregisterForce(aObject, &mGravity);
+}
+
+bool PhysicsWorld::LineCollidesWithAnything(Line const &aLine, std::vector<PhysicsObject*> const &aIgnoreList)
+{
+  PhysicsIT end = mObjects.end();
+	for(PhysicsIT it = mObjects.begin(); it != end; ++it)
+	{
+	  if(std::find(aIgnoreList.begin(), aIgnoreList.end(), *it) != aIgnoreList.end())
+	    continue;
+	  if(CollisionChecker::CheckLineCollision(aLine, *it))
+	    return true;
+	}
+	return false;
 }
 
 void PhysicsWorld::SortOnAxis()

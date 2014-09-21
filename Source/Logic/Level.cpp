@@ -123,10 +123,21 @@ void Level::RemoveMenu(Menu *aMenu)
     if(*it == aMenu)
     {
       (*it)->DeleteObjects();
+      delete *it;
       mMenus.erase(it);
       break;
     }
   }
+}
+
+void Level::RemoveMenus()
+{
+  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
+  {
+    (*it)->DeleteObjects();
+    delete *it;
+  }
+  mMenus.clear();
 }
 
 void Level::AddObject(GameObject *aObject)
@@ -266,6 +277,9 @@ void Level::Load(Level* const aPrevLevel)
 
 void Level::Unload(Level* const aNextLevel)
 {
+  // Remove menu items because they're not level files.
+  RemoveMenus();
+
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
     // Remove all components

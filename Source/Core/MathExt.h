@@ -36,7 +36,7 @@ struct Vector3
   Vector3(float aX, float aY, float aZ);
 
   float   length() const;
-  float   operator[](int aValue) const;
+  float&  operator[](int const aValue);
   Vector3 normalize() const;
 
   // Equivalence
@@ -173,21 +173,14 @@ struct Circle
 struct Line
 {
   Vector3 position;
+  Vector3 direction;
   float length;
 
   Line();
-  Line(Vector3 const &aPosition, float aLength);
+  Line(Vector3 const &aPosition, Vector3 const &aDirection, float aLength);
+  Line(Vector3 const &aStart, Vector3 const &aEnd);
 
   bool GetCollisions(Line const &aCompare, Circle &aOutput);
-};
-
-struct LineSegment
-{
-  Vector3 start;
-  Vector3 end;
-
-  LineSegment();
-  LineSegment(Vector3 const &aStart, Vector3 const &aEnd);
 };
 
 template<typename T>
