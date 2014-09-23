@@ -59,7 +59,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         glColor3f(1.0f, 0.0f, 0.0f);
         for(int i = 0; i < 360; ++i)
         {
-          float radians = i * (3.14159f / 180.0f);
+          float radians = i * DEGREE_TO_RADS;
           glVertex3f(xPosition + (size.x * cos(radians)),
               yPosition + (size.y * sin(radians)), zPosition);
         }

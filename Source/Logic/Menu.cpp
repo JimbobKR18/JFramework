@@ -81,4 +81,7 @@ void Menu::ParseFile()
     ++curIndex;
     curObject = object + Common::IntToString(curIndex);
   }
+
+  // Add our menu to the level
+  mOwner->AddMenu(this);
 }
