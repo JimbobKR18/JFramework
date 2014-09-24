@@ -5,7 +5,7 @@
  *      Author: jimmy
  */
 
-#ifndef __JFramework_Forceregistry_h_
+#ifndef __JFramework_ForceRegistry_h_
 #define __JFramework_ForceRegistry_h_
 
 #include "ForceGenerator.h"

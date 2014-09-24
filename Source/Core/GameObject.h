@@ -59,7 +59,7 @@ public:
   static void             SerializeLUA();
 
   // Fallback logic for collisions
-  virtual void            Interact(GameObject *aObject) {}
+  virtual void            Interact(GameObject *aObject);
 };
 
 #endif /* defined(__JFramework__GameObject__) */

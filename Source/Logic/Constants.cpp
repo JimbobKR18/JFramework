@@ -47,7 +47,7 @@ void Constants::Deserialize()
 {
   // Read line by line, much easier
   std::ifstream infile(Common::RelativePath("Game", "Constants.txt"));
-  while(!infile.eof())
+  while(infile.good() && !infile.eof())
   {
     std::string key, value, empty;
     infile >> key;

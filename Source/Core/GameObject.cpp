@@ -162,3 +162,8 @@ void GameObject::SerializeLUA()
           .set("GetTransform", &GameObject::GET<Transform>)
           .set("GetName", &GameObject::GetName);
 }
+
+void GameObject::Interact(GameObject *aObject) 
+{ 
+  printf("%s collided into %s", mName.c_str(), aObject->GetName().c_str()); 
+}
