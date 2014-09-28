@@ -16,7 +16,6 @@
 #endif
 
 #define DT (1.0f/60.0f)
-#define _DEBUG
 
 GameApp::GameApp(int aWidth, int aHeight)
 {

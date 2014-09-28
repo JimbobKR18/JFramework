@@ -8,6 +8,11 @@
 
 #include "Common.h"
 
+// Two macros ensures the macro passed will
+// be expanded before being converted to a string.
+#define STRINGIZE_DETAIL(str) #str
+#define STRINGIZE(str) STRINGIZE_DETAIL(str)
+
 namespace Common
 {
   #ifdef __APPLE__
@@ -39,11 +44,15 @@ namespace Common
 
   std::string const RelativePath(std::string const &aSubFolder, std::string const &aFileName)
   {
-  #ifdef _WIN32
+    // Manually setting the asset directory
+    // Or use defaults based on OS
+  #ifdef ASSET_DIRECTORY
+    std::string ret = STRINGIZE(ASSET_DIRECTORY);
+  #elif defined(_WIN32)
     std::string ret;
   #elif defined(__APPLE__)
     std::string ret = "/Users/jimmyspencer/Documents/JFramework/Assets/";
-  #else
+  #else // Linux
     std::string ret = "../Assets/";
   #endif
     ret.append(aSubFolder);

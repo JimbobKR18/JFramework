@@ -25,7 +25,7 @@ TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Pa
   else
   {
     std::cout << "Input file: " << aFilename << " not found!" << std::endl;
-    assert(0);
+    assert(!"Input file not found, check the logs");
   }
 }
 TextParser::~TextParser()

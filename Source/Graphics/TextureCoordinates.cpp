@@ -152,10 +152,10 @@ void TextureCoordinates::SetFrameByID(int aFrameID)
   mCurAnimation = 0;
   mCurFrame = aFrameID;
 
-  while(mCurFrame > mAnimations.find(mCurAnimation)->second)
+  while(mCurFrame >= mAnimations.find(mCurAnimation)->second)
   {
-    ++mCurAnimation;
     mCurFrame -= mAnimations.find(mCurAnimation)->second;
+    ++mCurAnimation;
   }
 
   // Set positions of coordinates
