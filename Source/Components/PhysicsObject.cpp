@@ -25,6 +25,13 @@ PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"),
 
 PhysicsObject::~PhysicsObject()
 {
+  // Delete all shapes associated with this object
+  for(shapeIT it = mShapes.begin(); it != mShapes.end(); ++it)
+  {
+    delete *it;
+  }
+  mShapes.clear();
+  
   mWorld->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject(this);
 }
 
