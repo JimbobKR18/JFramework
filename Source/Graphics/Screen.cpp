@@ -17,11 +17,11 @@ bool ZSortPredicate(Surface *object1, Surface *object2)
 
   // Right hand rule
   if(z1 < z2)
-	{
-		return true;
-	}
+  {
+    return true;
+  }
   
-	return false;
+  return false;
 }
 
 bool BatchSortPredicate(Surface *object1, Surface *object2)
