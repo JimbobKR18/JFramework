@@ -17,9 +17,9 @@
 #include "ObjectManager.h"
 
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
-						     mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
-						     mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
-						     mDamping(0.01f), mStatic(false), mGravity(true), mShape(SPHERE)
+                  mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
+                  mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
+                  mDamping(0.01f), mStatic(false), mGravity(true)
 {
 }
 
@@ -80,21 +80,48 @@ void PhysicsObject::Serialize(Parser &aParser)
 {
   std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   Root* object = aParser.Find(objectName);
-  std::string shape = mShape == PhysicsObject::CUBE ? "CUBE" : "SPHERE";
 
   object->Place(objectName, "PhysicsObject", "");
-  object->Place("PhysicsObject", "Shape", shape);
   object->Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
   object->Place("PhysicsObject", "Static", Common::BoolToString(mStatic));
   object->Place("PhysicsObject", "Mass", Common::FloatToString(mMass));
   object->Place("PhysicsObject", "Damping", Common::FloatToString(mDamping));
+  
+  // Serialize each shape
+  // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
+  HashString const SHAPE = "Shape_";
+  int curIndex = 0;
+  for(shapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
+  {
+    HashString curShape = SHAPE + Common::IntToString(curIndex);
+    object->Place("PhysicsObject", curShape, "");
+    Root* physicsObject = object->Find("PhysicsObject");
+    physicsObject->Place(curShape, "PositionX", Common::IntToString((*it)->position.x));
+    physicsObject->Place(curShape, "PositionY", Common::IntToString((*it)->position.y));
+    physicsObject->Place(curShape, "PositionZ", Common::IntToString((*it)->position.z));
+    
+    switch((*it)->shape)
+    {
+    case Shape::CUBE:
+      physicsObject->Place(curShape, "Type", "CUBE");
+      physicsObject->Place(curShape, "SizeX", Common::IntToString((*it)->GetSize(0)));
+      physicsObject->Place(curShape, "SizeY", Common::IntToString((*it)->GetSize(1)));
+      physicsObject->Place(curShape, "SizeZ", Common::IntToString((*it)->GetSize(2)));
+      break;
+    case Shape::SPHERE:
+      physicsObject->Place(curShape, "Type", "SPHERE");
+      physicsObject->Place(curShape, "Radius", Common::IntToString((*it)->GetSize(0)));
+      break;
+    default:
+      break;
+    }
+  }
 }
 
 void PhysicsObject::Deserialize(Parser &aParser)
 {
-  // What shape is our object? Is it affected by gravity?
+  // Is our object affected by gravity?
   // What is the object's mass? Is it static?
-  HashString type = aParser.Find("PhysicsObject", "Shape")->GetValue();
   bool gravity = aParser.Find("PhysicsObject", "Gravity")->GetValue().ToBool();
   bool isStatic = aParser.Find("PhysicsObject", "Static")->GetValue().ToBool();
   SetMass(aParser.Find("PhysicsObject", "Mass")->GetValue().ToInt());
@@ -111,12 +138,50 @@ void PhysicsObject::Deserialize(Parser &aParser)
   
   SetStatic(isStatic);
   
-  if(type == "CUBE")
-    mShape = PhysicsObject::CUBE;
-  else if(type == "SPHERE")
-    mShape = PhysicsObject::SPHERE;
-  else
-    assert(!"Invalid shape given");
+  HashString const SHAPE = "Shape_";
+  int curIndex = 0;
+  HashString curShape = SHAPE + Common::IntToString(curIndex);
+  
+  // Adding shapes
+  // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
+  while(aParser.Find("PhysicsObject", curShape))
+  {
+    Root* tempShape = aParser.Find("PhysicsObject", curShape);
+    Shape* newShape = nullptr;
+    
+    HashString type = tempShape->Find("Type")->GetValue();
+    
+    // TODO support more shapes
+    if(type == "CUBE")
+    {
+      newShape = new Cube();
+      Cube* cube = (Cube*)newShape;
+      cube->size = Vector3(tempShape->Find("SizeX")->GetValue().ToFloat(),
+                          tempShape->Find("SizeY")->GetValue().ToFloat(),
+                          tempShape->Find("SizeZ")->GetValue().ToFloat());
+    }
+    else if(type == "SPHERE")
+    {
+      newShape = new Sphere();
+      Sphere* sphere = (Sphere*)newShape;
+      sphere->radius = tempShape->Find("Radius")->GetValue().ToFloat();
+    }
+    else
+      assert(!"Invalid shape given");
+      
+    newShape->position = Vector3(tempShape->Find("PositionX")->GetValue().ToFloat(),
+                          tempShape->Find("PositionY")->GetValue().ToFloat(),
+                          tempShape->Find("PositionZ")->GetValue().ToFloat());
+    AddShape(newShape);
+    
+    ++curIndex;
+    curShape = SHAPE + Common::IntToString(curIndex);
+  }
+}
+
+void PhysicsObject::AddShape(Shape* aShape)
+{
+  mShapes.push_back(aShape);
 }
 
 void PhysicsObject::AddForce(Vector3 const &aForce)
@@ -199,4 +264,9 @@ Vector3 PhysicsObject::GetBroadSize() const
 void PhysicsObject::SetBroadSize(Vector3 const &aSize)
 {
   mBroadSize = aSize;
+}
+
+std::vector<Shape*>& PhysicsObject::GetShapes()
+{
+  return mShapes;
 }

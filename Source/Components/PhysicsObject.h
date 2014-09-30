@@ -27,43 +27,48 @@ private:
   bool                      mStatic,
                             mGravity;
   std::vector<std::string>  mIgnoreList;
+  std::vector<Shape*>       mShapes;
 
 public:
-  enum {SPHERE, CUBE} mShape;
+  typedef std::vector<Shape*>::iterator shapeIT;
+  typedef std::vector<Shape*>::const_iterator constShapeIT;
 
   PhysicsObject(PhysicsWorld *aWorld);
   virtual ~PhysicsObject();
 
   // Methods from Component
-  void                Update();
-  void                SendMessage(Message const &aMessage);
-  void                ReceiveMessage(Message const &aMessage);
-  void                Serialize(Parser &aParser);
-  void                Deserialize(Parser &aParser);
-  static std::string  GetName() {return "PhysicsObject";}
+  void                 Update();
+  void                 SendMessage(Message const &aMessage);
+  void                 ReceiveMessage(Message const &aMessage);
+  void                 Serialize(Parser &aParser);
+  void                 Deserialize(Parser &aParser);
+  static std::string   GetName() {return "PhysicsObject";}
 
   // Methods - Misc.
-  void                AddForce(Vector3 const &aForce);
-  void                AddIgnore(std::string const &aObjectName);
-  bool                IgnoreObject(std::string const &aObjectName);
+  void                 AddShape(Shape* aShape);
+  void                 AddForce(Vector3 const &aForce);
+  void                 AddIgnore(std::string const &aObjectName);
+  bool                 IgnoreObject(std::string const &aObjectName);
 
   // Getters and setters
-  Vector3             GetVelocity() const;
-  Vector3             GetAcceleration() const;
-  void                SetVelocity(Vector3 const &aVel);
-  void                SetAcceleration(Vector3 const &aAccel);
+  Vector3              GetVelocity() const;
+  Vector3              GetAcceleration() const;
+  void                 SetVelocity(Vector3 const &aVel);
+  void                 SetAcceleration(Vector3 const &aAccel);
 
-  float               GetMass() const;
-  void                SetMass(float aMass);
+  float                GetMass() const;
+  void                 SetMass(float aMass);
 
-  bool                IsStatic() const;
-  void                SetStatic(bool aStatic);
+  bool                 IsStatic() const;
+  void                 SetStatic(bool aStatic);
   
-  bool                IsAffectedByGravity() const;
-  void                SetAffectedByGravity(bool aGravity);
+  bool                 IsAffectedByGravity() const;
+  void                 SetAffectedByGravity(bool aGravity);
 
-  Vector3             GetBroadSize() const;
-  void                SetBroadSize(Vector3 const &aSize);
+  Vector3              GetBroadSize() const;
+  void                 SetBroadSize(Vector3 const &aSize);
+  
+  std::vector<Shape*>& GetShapes();
 };
 
 #endif /* defined(__JFramework__PhysicsObject__) */

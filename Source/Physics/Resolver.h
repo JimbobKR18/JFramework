@@ -3,20 +3,21 @@
 
 #include <list>
 #include "CollisionPair.h"
+#include "PotentialPair.h"
 
 class Resolver
 {
 private:
-	std::list<CollisionPair> mPairs;
-	std::list<CollisionPair> mBroadPairs;
+	std::list<CollisionPair> mCollidedPairs;
+	std::list<PotentialPair> mPotentialPairs;
 
 public:
 	Resolver();
 	~Resolver();
 
 	void Update(float aDuration);
-	void AddPrelimPair(CollisionPair const &aPair);
-	void AddPair(CollisionPair const &aPair);
+	void AddPrelimPair(PotentialPair const &aPair);
+	void AddCollidedPair(CollisionPair const &aPair);
 	bool Find(PhysicsObject *aObject1, PhysicsObject *aObject2);
 
 private:
@@ -24,7 +25,7 @@ private:
   float CalculateSeparatingVelocity(CollisionPair const &aPair);
 	void  ResolvePenetration(CollisionPair const &aPair);
 	void  ResolveVelocity(CollisionPair const &aPair, float aDuration);
-	void  SendCollisionMessages(CollisionPair &aPair) const;
+	void  SendCollisionMessages(PotentialPair &aPair) const;
 	void  Resolve(CollisionPair &aPair, float aDuration);
 
   // Calculation of normals etc.

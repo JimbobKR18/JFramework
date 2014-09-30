@@ -8,41 +8,63 @@
 #include "CollisionChecker.h"
 #include "PhysicsObject.h"
 
-bool CollisionChecker::CheckShapeCollision(CollisionPair &aPair)
+std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair const &aPair)
 {
-  switch(aPair.mBodies[0]->mShape)
+  std::vector<CollisionPair> pairs;
+  PhysicsObject::constShapeIT it1End = aPair.mBodies[0]->GetShapes().end();
+  PhysicsObject::constShapeIT it2End = aPair.mBodies[1]->GetShapes().end();
+  for(PhysicsObject::constShapeIT it = aPair.mBodies[0]->GetShapes().begin();
+      it != it1End; ++it)
   {
-  case PhysicsObject::SPHERE:
-    switch(aPair.mBodies[1]->mShape)
+    for(PhysicsObject::constShapeIT it2 = aPair.mBodies[1]->GetShapes().begin();
+      it2 != it2End; ++it2)
     {
-    case PhysicsObject::SPHERE:
-      return CheckSphereToSphere(aPair);
-    case PhysicsObject::CUBE:
-      return CheckSphereToCube(aPair);
+      bool collided = false;
+      CollisionPair potentialPair(aPair.mBodies[0], aPair.mBodies[1], *it, *it2);
+        
+      switch((*it)->shape)
+      {
+      case Shape::SPHERE:
+        switch((*it2)->shape)
+        {
+        case Shape::SPHERE:
+          collided = CheckSphereToSphere(potentialPair);
+        case Shape::CUBE:
+          collided = CheckSphereToCube(potentialPair);
+        default:
+          break;
+        }
+        break;
+      case Shape::CUBE:
+        switch((*it2)->shape)
+        {
+        case Shape::SPHERE:
+          collided = CheckSphereToCube(potentialPair);
+        case Shape::CUBE:
+          collided = CheckCubeToCube(potentialPair);
+        default:
+          break;
+        }
+        break;
+      default:
+        break;
+      }
+      
+      if(collided)
+        pairs.push_back(potentialPair);
     }
-    break;
-  case PhysicsObject::CUBE:
-    switch(aPair.mBodies[1]->mShape)
-    {
-    case PhysicsObject::SPHERE:
-      return CheckSphereToCube(aPair);
-    case PhysicsObject::CUBE:
-      return CheckCubeToCube(aPair);
-    }
-    break;
   }
-  // Default fallback
-  return false;
+  return pairs;
 }
 
-bool CollisionChecker::CheckLineCollision(Line const &aSegment, PhysicsObject *aBody)
+bool CollisionChecker::CheckLineCollision(Line const &aSegment, Transform* aTransform, Shape* aShape)
 {
-  switch(aBody->mShape)
+  switch(aShape->shape)
   {
-  case PhysicsObject::SPHERE:
-    return CheckLineToSphere(aSegment, aBody->GetOwner()->GET<Transform>());
-  case PhysicsObject::CUBE:
-    return CheckLineToCube(aSegment, aBody->GetOwner()->GET<Transform>());
+  case Shape::SPHERE:
+    return CheckLineToSphere(aSegment, aTransform, aShape);
+  case Shape::CUBE:
+    return CheckLineToCube(aSegment, aTransform, aShape);
   default:
     return false;
   }
@@ -53,12 +75,12 @@ bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition();
-  Vector3 t2Pos = t2->GetPosition();
-  Vector3 t1Size = t1->GetSize();
-  Vector3 t2Size = t2->GetSize();
+  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position;
+  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position;
+  float t1Size = aPair.mShapes[0]->GetSize(0);
+  float t2Size = aPair.mShapes[1]->GetSize(0);
 
-  if(t1Size.x + t2Size.x > (t1Pos - t2Pos).length())
+  if(t1Size + t2Size > (t1Pos - t2Pos).length())
   {
     return true;
   }
@@ -68,23 +90,23 @@ bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
 
 bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
 {
-  if(aPair.mBodies[0]->mShape != PhysicsObject::SPHERE)
+  if(aPair.mShapes[0]->shape != Shape::SPHERE)
     aPair.Switch();
 
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition();
-  Vector3 t2Pos = t2->GetPosition();
-  Vector3 halfSize1 = t1->GetSize();
-  Vector3 halfSize2 = t2->GetSize();
+  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position;
+  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position;
 
   for(int i = 0; i < 3; ++i)
   {
     float pos1 = t1Pos[i];
     float pos2 = t2Pos[i];
+    float size1 = aPair.mShapes[0]->GetSize(i);
+    float size2 = aPair.mShapes[1]->GetSize(i);
 
-    if(fabs(pos1 - pos2) > (halfSize1[i] + halfSize2[i]))
+    if(fabs(pos1 - pos2) > (size1 + size2))
       return false;
   }
 
@@ -96,24 +118,22 @@ bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition();
-  Vector3 t2Pos = t2->GetPosition();
-  Vector3 halfSize1 = t1->GetSize();
-  Vector3 halfSize2 = t2->GetSize();
+  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position;
+  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position;
 
-  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= halfSize1.x + halfSize2.x;
-  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= halfSize1.y + halfSize2.y;
-  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= halfSize1.z + halfSize2.z;
+  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(0);
+  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= aPair.mShapes[0]->GetSize(1) + aPair.mShapes[1]->GetSize(1);
+  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= aPair.mShapes[0]->GetSize(2) + aPair.mShapes[1]->GetSize(2);
 
   return xCheck && yCheck && zCheck;
 }
 
-bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSphere)
+bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape)
 {
   // http://bit.ly/1uFUfXK
   Vector3 end = aSegment.position + (aSegment.direction * aSegment.length);
-  Vector3 position = aSphere->GetPosition();
-  float radius = aSphere->GetSize().x;
+  Vector3 position = aSphere->GetPosition() + aShape->position;
+  float radius = aShape->GetSize(0);
   Vector3 direction = (end - aSegment.position).normalize();
   Vector3 oc = aSegment.position - position;
   float l = (direction.Dot(oc));
@@ -121,7 +141,7 @@ bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSpher
   return d >= 0.0f;
 }
 
-bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube)
+bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, Shape* aShape)
 {
   // http://bit.ly/1p1SX3G
   const int RIGHT = 0;
@@ -134,8 +154,12 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube)
   float candidatePlane[3];
   Vector3 position = aSegment.position;
   Vector3 direction = aSegment.direction;
-  Vector3 min = aCube->GetPosition() - aCube->GetSize();
-  Vector3 max = aCube->GetPosition() + aCube->GetSize();
+  Vector3 min = Vector3(aCube->GetPosition().x + aShape->position.x - aShape->GetSize(0),
+                        aCube->GetPosition().y + aShape->position.y - aShape->GetSize(1),
+                        aCube->GetPosition().z + aShape->position.z - aShape->GetSize(2));
+  Vector3 max = Vector3(aCube->GetPosition().x + aShape->position.x + aShape->GetSize(0),
+                        aCube->GetPosition().y + aShape->position.y + aShape->GetSize(1),
+                        aCube->GetPosition().z + aShape->position.z + aShape->GetSize(2));
   Vector3 collision;
 
   /* Find candidate planes; this loop can be avoided if

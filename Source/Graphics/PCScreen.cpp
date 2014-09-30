@@ -35,7 +35,6 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
     {
       Transform *transform = obj->GET<Transform>();
       Vector3 position = transform->GetPosition();
-      Vector3 size = transform->GetSize();
       Vector3 broadSize = obj->GET<PhysicsObject>()->GetBroadSize();
 
       // Get positions relative to the camera
@@ -53,29 +52,44 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       glLoadIdentity();
       glPushMatrix();
 
-      if(obj->GET<PhysicsObject>()->mShape == PhysicsObject::SPHERE)
+      // For each shape, draw the outline
+      std::vector<Shape*> const& shapes = obj->GET<PhysicsObject>()->GetShapes();
+      PhysicsObject::constShapeIT end = shapes.end();
+      for(PhysicsObject::constShapeIT it = shapes.begin(); it != end; ++it)
       {
-        glBegin(GL_LINE_STRIP);
-        glColor3f(1.0f, 0.0f, 0.0f);
-        for(int i = 0; i < 360; ++i)
+        if((*it)->shape == Shape::SPHERE)
         {
-          float radians = i * DEGREE_TO_RADS;
-          glVertex3f(xPosition + (size.x * cos(radians)),
-              yPosition + (size.y * sin(radians)), zPosition);
+          Vector3 spherePos = Vector3(xPosition, yPosition, zPosition) +
+                              (*it)->position;
+          glBegin(GL_LINE_STRIP);
+          glColor3f(1.0f, 0.0f, 0.0f);
+          
+          // Rotate in a circle
+          for(int i = 0; i < 360; ++i)
+          {
+            float radians = i * DEGREE_TO_RADS;
+            glVertex3f(spherePos.x + ((*it)->GetSize(0) * cos(radians)),
+                spherePos.y + ((*it)->GetSize(1) * sin(radians)), spherePos.z);
+          }
+          glEnd();
         }
-        glEnd();
-      }
-      else if(obj->GET<PhysicsObject>()->mShape == PhysicsObject::CUBE)
-      {
-        // Physics Box Line
-        glBegin(GL_LINE_STRIP);
-        glColor3f(1.0f, 0.0f, 0.0f);
-        glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
-        glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
-        glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
-        glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
-        glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
-        glEnd();
+        else if((*it)->shape == Shape::CUBE)
+        {
+          Vector3 cubePos = Vector3(xPosition, yPosition, zPosition) +
+                              (*it)->position;
+          float xSize = (*it)->GetSize(0);
+          float ySize = (*it)->GetSize(1);
+          
+          // Physics Box Line
+          glBegin(GL_LINE_STRIP);
+          glColor3f(1.0f, 0.0f, 0.0f);
+          glVertex3f(cubePos.x - xSize, cubePos.y - ySize, cubePos.z);
+          glVertex3f(cubePos.x + xSize, cubePos.y - ySize, cubePos.z);
+          glVertex3f(cubePos.x + xSize, cubePos.y + ySize, cubePos.z);
+          glVertex3f(cubePos.x - xSize, cubePos.y + ySize, cubePos.z);
+          glVertex3f(cubePos.x - xSize, cubePos.y - ySize, cubePos.z);
+          glEnd();
+        }
       }
 
       // Broad Size Line

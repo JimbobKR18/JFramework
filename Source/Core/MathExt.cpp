@@ -653,15 +653,23 @@ void Matrix33::operator*=(float const aValue)
 }
 
 //------------------------------
-// CUBE
+// SHAPE
 //------------------------------
-Cube::Cube()
+Shape::Shape(ShapeType aShape) : position(), shape(aShape)
 {
 }
 
-Cube::Cube(Vector3 const &aPosition, Vector3 const &aSize) :
-    position(aPosition), size(aSize)
+//------------------------------
+// CUBE
+//------------------------------
+Cube::Cube() : Shape(CUBE)
 {
+}
+
+Cube::Cube(Vector3 const &aPosition, Vector3 const &aSize) : 
+    Shape(CUBE), size(aSize)
+{
+  position = aPosition;
 }
 
 bool Cube::GetCollision(Vector3 const &aPosition)
@@ -678,16 +686,22 @@ bool Cube::GetCollision(Vector3 const &aPosition)
   return true;
 }
 
+float Cube::GetSize(int index)
+{
+  return size[index];
+}
+
 //------------------------------
 // SPHERE
 //------------------------------
-Sphere::Sphere()
+Sphere::Sphere() : Shape(SPHERE)
 {
 }
 
 Sphere::Sphere(Vector3 const &aPosition, float const aRadius) :
-    position(aPosition), radius(aRadius)
+    Shape(SPHERE), radius(aRadius)
 {
+  position = aPosition;
 }
 
 bool Sphere::GetCollision(Vector3 const &aPosition)
@@ -696,19 +710,30 @@ bool Sphere::GetCollision(Vector3 const &aPosition)
   return dist <= radius;
 }
 
+float Sphere::GetSize(int index)
+{
+  return radius;
+}
+
 //------------------------------
 // CIRCLE
 //------------------------------
 
 Circle::Circle() :
-    position(), up(), right(), radius(0)
+    Shape(CIRCLE), up(), right(), radius(0)
 {
 }
 
 Circle::Circle(Vector3 const &aPosition, Vector3 const &aUp,
     Vector3 const &aRight, float const aRadius) :
-    position(aPosition), up(aUp), right(aRight), radius(fabs(aRadius))
+    Shape(CIRCLE), up(aUp), right(aRight), radius(fabs(aRadius))
 {
+  position = aPosition;
+}
+
+float Circle::GetSize(int index)
+{
+  return radius;
 }
 
 //------------------------------
@@ -716,18 +741,20 @@ Circle::Circle(Vector3 const &aPosition, Vector3 const &aUp,
 //------------------------------
 
 Line::Line() :
-    position(), direction(), length(0)
+    Shape(LINE), direction(), length(0)
 {
 }
 
 Line::Line(Vector3 const &aPosition, Vector3 const &aDirection, float aLength) :
-    position(aPosition), direction(aDirection), length(aLength)
+    Shape(LINE), direction(aDirection), length(aLength)
 {
+  position = aPosition;
 }
 
 Line::Line(Vector3 const &aStart, Vector3 const &aEnd) :
-    position(aStart)
+    Shape(LINE)
 {
+  position = aStart;
   Vector3 diff = aEnd - aStart;
   direction = diff.normalize();
   length = diff.length();
@@ -867,4 +894,9 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
   print_circle(aOutput);
   printf("\n\n");
   return true;
+}
+
+float Line::GetSize(int index)
+{
+  return length;
 }

@@ -7,16 +7,17 @@ class PhysicsObject;
 
 struct CollisionPair
 {
-	PhysicsObject*  mBodies[2];
-	float           mPenetration;
+  PhysicsObject*  mBodies[2];
+  Shape*          mShapes[2];
+  float           mPenetration;
   float           mRestitution;
-	Vector3         mRelativeVelocity;
+  Vector3         mRelativeVelocity;
   Vector3         mNormal;
 
-	CollisionPair(PhysicsObject *aBody1, PhysicsObject *aBody2);
-	void operator=(CollisionPair const &rhs);
-	bool operator==(CollisionPair const &rhs);
-	void Switch();
+  CollisionPair(PhysicsObject* aBody1, PhysicsObject* aBody2, Shape* aShape1, Shape* aShape2);
+  void operator=(CollisionPair const &rhs);
+  bool operator==(CollisionPair const &rhs);
+  void Switch();
 };
 
 #endif

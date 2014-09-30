@@ -137,42 +137,60 @@ struct Matrix33
   void operator*=(float const aValue);
 };
 
-struct Cube
+struct Shape
 {
   Vector3 position;
+  
+  enum ShapeType
+  {
+    CUBE = 0,
+    SPHERE,
+    CIRCLE,
+    LINE
+  } shape;
+  
+  Shape(ShapeType aShape);
+  virtual float GetSize(int index) = 0;
+};
+
+struct Cube : public Shape
+{
   Vector3 size;
 
   Cube();
   Cube(Vector3 const &aPosition, Vector3 const &aSize);
 
   bool GetCollision(Vector3 const &_position);
+  
+  virtual float GetSize(int index);
 };
 
-struct Sphere
+struct Sphere : public Shape
 {
-  Vector3 position;
   float radius;
 
   Sphere();
   Sphere(Vector3 const &aPosition, float const aRadius);
 
   bool GetCollision(Vector3 const &aPosition);
+  
+  virtual float GetSize(int index);
 };
 
-struct Circle
+struct Circle : public Shape
 {
-  Vector3 position;
   Vector3 up;
   Vector3 right;
   float radius;
 
   Circle();
   Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight, float const aRadius);
+  
+  virtual float GetSize(int index);
 };
 
-struct Line
+struct Line : public Shape
 {
-  Vector3 position;
   Vector3 direction;
   float length;
 
@@ -181,6 +199,8 @@ struct Line
   Line(Vector3 const &aStart, Vector3 const &aEnd);
 
   bool GetCollisions(Line const &aCompare, Circle &aOutput);
+  
+  virtual float GetSize(int index);
 };
 
 template<typename T>

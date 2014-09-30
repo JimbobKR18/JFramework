@@ -6,59 +6,56 @@
 
 Resolver::Resolver()
 {
-
 }
 
 Resolver::~Resolver()
 {
-
 }
 
 void Resolver::Update(float aDuration)
 {
-  for(std::list<CollisionPair>::iterator it = mBroadPairs.begin(); it != mBroadPairs.end(); ++it)
+  for(std::list<PotentialPair>::iterator it = mPotentialPairs.begin(); it != mPotentialPairs.end(); ++it)
   {
-    if(CollisionChecker::CheckShapeCollision(*it))
-      AddPair(*it);
+    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(*it);
+    for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairs.end(); ++it2)
+    {
+      AddCollidedPair(*it2);
+    }
+    if(!pairs.empty())
+    {
+      SendCollisionMessages(*it);
+    }
   }
-	for(std::list<CollisionPair>::iterator it = mPairs.begin(); it != mPairs.end(); ++it)
-	{
-	  SendCollisionMessages(*it);
-		Resolve(*it, aDuration);
-	}
-	mPairs.clear();
-	mBroadPairs.clear();
+  for(std::list<CollisionPair>::iterator it = mCollidedPairs.begin(); it != mCollidedPairs.end(); ++it)
+  {
+    Resolve(*it, aDuration);
+  }
+  mCollidedPairs.clear();
+  mPotentialPairs.clear();
 }
 
-void Resolver::AddPrelimPair(CollisionPair const &aPair)
+void Resolver::AddPrelimPair(PotentialPair const &aPair)
 {
-  mBroadPairs.push_back(aPair);
+  mPotentialPairs.push_back(aPair);
 }
 
-void Resolver::AddPair(CollisionPair const &aPair)
+void Resolver::AddCollidedPair(CollisionPair const &aPair)
 {
-	mPairs.push_back(aPair);
+  mCollidedPairs.push_back(aPair);
 }
 
 bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
 {
-	CollisionPair temp(aObject1, aObject2);
+  PotentialPair temp(aObject1, aObject2);
 
-	for(std::list<CollisionPair>::iterator it = mPairs.begin(); it != mPairs.end(); ++it)
-	{
-		if(*it == temp)
-		{
-			return true;
-		}
-	}
-	for(std::list<CollisionPair>::iterator it = mBroadPairs.begin(); it != mBroadPairs.end(); ++it)
+  for(std::list<PotentialPair>::iterator it = mPotentialPairs.begin(); it != mPotentialPairs.end(); ++it)
   {
     if(*it == temp)
     {
       return true;
     }
   }
-	return false;
+  return false;
 }
 
 float Resolver::CalculateSeparatingVelocity(CollisionPair const &aPair)
@@ -84,8 +81,10 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
 
   // Find the rate in which each object must move
   Vector3 movePerIMass = aPair.mNormal * (aPair.mPenetration / totalInverseMass);
-  Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition();
-  Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition();
+  Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition() +
+                  aPair.mShapes[0]->position;
+  Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition() +
+                  aPair.mShapes[1]->position;
   Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) /**
                         (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f)*/;
   Vector3 b2Movement = (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) /**
@@ -146,7 +145,7 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
     aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() - b2Movement);
 }
 
-void Resolver::SendCollisionMessages(CollisionPair &aPair) const
+void Resolver::SendCollisionMessages(PotentialPair &aPair) const
 {
   CollisionMessage message("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner());
   aPair.mBodies[0]->GetOwner()->ReceiveMessage(message);
@@ -155,41 +154,47 @@ void Resolver::SendCollisionMessages(CollisionPair &aPair) const
 
 void Resolver::Resolve(CollisionPair &aPair, float aDuration)
 {
-	switch(aPair.mBodies[0]->mShape)
-	{
-	case PhysicsObject::SPHERE:
-		switch(aPair.mBodies[1]->mShape)
-		{
-		case PhysicsObject::SPHERE:
-			CalculateSphereToSphere(aPair);
-			break;
-		case PhysicsObject::CUBE:
-		  CalculateSphereToCube(aPair);
-			break;
-		}
-		break;
-	case PhysicsObject::CUBE:
-		switch(aPair.mBodies[1]->mShape)
-		{
-		case PhysicsObject::SPHERE:
-		  CalculateSphereToCube(aPair);
-			break;
-		case PhysicsObject::CUBE:
-		  CalculateCubeToCube(aPair);
-			break;
-		}
-		break;
-	}
-	ResolveVelocity(aPair, aDuration);
-	ResolvePenetration(aPair);
+  switch(aPair.mShapes[0]->shape)
+  {
+  case Shape::SPHERE:
+    switch(aPair.mShapes[1]->shape)
+    {
+    case Shape::SPHERE:
+      CalculateSphereToSphere(aPair);
+      break;
+    case Shape::CUBE:
+      CalculateSphereToCube(aPair);
+      break;
+    default:
+      break;
+    }
+    break;
+  case Shape::CUBE:
+    switch(aPair.mShapes[1]->shape)
+    {
+    case Shape::SPHERE:
+      CalculateSphereToCube(aPair);
+      break;
+    case Shape::CUBE:
+      CalculateCubeToCube(aPair);
+      break;
+    default:
+      break;
+    }
+    break;
+  default:
+    break;
+  }
+  ResolveVelocity(aPair, aDuration);
+  ResolvePenetration(aPair);
 }
 
 void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetPosition();
-  Vector3 b2Pos = b2Transform->GetPosition();
+  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position;
+  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position;
 
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Transform->GetSize().x + b2Transform->GetSize().x));
   aPair.mNormal = (b1Pos - b2Pos).normalize();
@@ -201,18 +206,16 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetPosition();
-  Vector3 b2Pos = b2Transform->GetPosition();
-  
-  Vector3 b1Size = b1Transform->GetSize();
-  Vector3 b2Size = b2Transform->GetSize();
+  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position;
+  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position;
  
   int axis = 0;
   float shortestDistance = 0xffffff;
   
   for(int i = 0; i < 3; ++i)
   {
-    float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - (b1Size[0] + b2Size[i]));
+    float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - 
+                      (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(i)));
     if(distance < shortestDistance)
     {
       axis = i;
@@ -235,7 +238,8 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
       break;
   }
 
-  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - (b1Size[0] + b2Size[axis]));
+  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
+                        (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
@@ -245,18 +249,16 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetPosition();
-  Vector3 b2Pos = b2Transform->GetPosition();
-  
-  Vector3 b1Size = b1Transform->GetSize();
-  Vector3 b2Size = b2Transform->GetSize();
+  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position;
+  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position;
   
   int axis = 0;
   float shortestDistance = 0xffffff;
   
   for(int i = 0; i < 3; ++i)
   {
-    float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - (b1Size[i] + b2Size[i]));
+    float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - 
+                      (aPair.mShapes[0]->GetSize(i) + aPair.mShapes[1]->GetSize(i)));
     if(distance < shortestDistance)
     {
       axis = i;
@@ -279,7 +281,8 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
       break;
   }
   
-  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - (b1Size[axis] + b2Size[axis]));
+  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
+                        (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
