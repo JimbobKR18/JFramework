@@ -29,8 +29,10 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         {
         case Shape::SPHERE:
           collided = CheckSphereToSphere(potentialPair);
+          break;
         case Shape::CUBE:
           collided = CheckSphereToCube(potentialPair);
+          break;
         default:
           break;
         }
@@ -40,8 +42,10 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         {
         case Shape::SPHERE:
           collided = CheckSphereToCube(potentialPair);
+          break;
         case Shape::CUBE:
           collided = CheckCubeToCube(potentialPair);
+          break;
         default:
           break;
         }
@@ -63,10 +67,13 @@ bool CollisionChecker::CheckLineCollision(Line const &aSegment, Transform* aTran
   {
   case Shape::SPHERE:
     return CheckLineToSphere(aSegment, aTransform, aShape);
+    break;
   case Shape::CUBE:
     return CheckLineToCube(aSegment, aTransform, aShape);
+    break;
   default:
     return false;
+    break;
   }
 }
 
