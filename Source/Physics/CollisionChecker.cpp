@@ -100,24 +100,35 @@ bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
   if(aPair.mShapes[0]->shape != Shape::SPHERE)
     aPair.Switch();
 
-  Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Transform *sphere = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *cube = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position;
-  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position;
+  Vector3 spherePos = sphere->GetPosition() + aPair.mShapes[0]->position;
+  Vector3 cubePos = cube->GetPosition() + aPair.mShapes[1]->position;
+  Vector3 relPos = spherePos - cubePos;
+  
+  Vector3 closestPoint;
 
   for(int i = 0; i < 3; ++i)
   {
-    float pos1 = t1Pos[i];
-    float pos2 = t2Pos[i];
-    float size1 = aPair.mShapes[0]->GetSize(i);
-    float size2 = aPair.mShapes[1]->GetSize(i);
-
-    if(fabs(pos1 - pos2) > (size1 + size2))
-      return false;
+    float cubeSize = aPair.mShapes[1]->GetSize(i);
+    
+    if(relPos[i] < -cubeSize)
+    {
+      closestPoint[i] = -cubeSize;
+    }
+    else if(relPos[i] > cubeSize)
+    {
+      closestPoint[i] = cubeSize;
+    }
+    else
+    {
+      closestPoint[i] = relPos[i];
+    }
   }
 
-  return true;
+  Vector3 dist = relPos - closestPoint;
+  return dist.x*dist.x + dist.y*dist.y + dist.z*dist.z < aPair.mShapes[0]->GetSize(0)*aPair.mShapes[0]->GetSize(0);
 }
 
 bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
