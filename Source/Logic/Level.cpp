@@ -354,81 +354,85 @@ void Level::SerializeLUA()
 
 void Level::ParseFile()
 {
-	TextParser parser(Common::RelativePath("Game", mFileName).c_str());
-	GameObject *object = NULL;
-	HashString const curObject = "Object_";
-	int curIndex = 0;
+  TextParser parser(Common::RelativePath("Game", mFileName).c_str());
+  GameObject *object = NULL;
+  HashString const curObject = "Object_";
+  int curIndex = 0;
 
-	HashString tempIndex = curObject + Common::IntToString(curIndex);
-	Root* curRoot = parser.Find(tempIndex);
+  HashString tempIndex = curObject + Common::IntToString(curIndex);
+  Root* curRoot = parser.Find(tempIndex);
 
-	while(curRoot)
-	{
-	  // Make Object to assign params to
-	  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
-	  object = new GameObject(manager, curRoot->Find("File")->GetValue());
-	  manager->ParseObject(object);
-	  mObjects.push_back(object);
+  while(curRoot)
+  {
+    // Make Object to assign params to
+    ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+    object = new GameObject(manager, curRoot->Find("File")->GetValue());
+    manager->ParseObject(object);
+    mObjects.push_back(object);
 
-	  if(curRoot->Find("Transform"))
-	  {
-	    Root* transform = curRoot->Find("Transform");
-	    int posX, posY, posZ,
-	        scaleX, scaleY, scaleZ,
-	        sizeX, sizeY, sizeZ;
-	    posX = transform->Find("PositionX")->GetValue().ToFloat();
-	    posY = transform->Find("PositionY")->GetValue().ToFloat();
-	    posZ = transform->Find("PositionZ")->GetValue().ToFloat();
-	    scaleX = transform->Find("ScaleX")->GetValue().ToFloat();
-	    scaleY = transform->Find("ScaleY")->GetValue().ToFloat();
-	    scaleZ = transform->Find("ScaleZ")->GetValue().ToFloat();
-	    sizeX = transform->Find("SizeX")->GetValue().ToFloat();
-	    sizeY = transform->Find("SizeY")->GetValue().ToFloat();
-	    sizeZ = transform->Find("SizeZ")->GetValue().ToFloat();
+    if(curRoot->Find("Transform"))
+    {
+      Root* transform = curRoot->Find("Transform");
+      int posX, posY, posZ,
+          scaleX, scaleY, scaleZ,
+          sizeX, sizeY, sizeZ;
+      posX = transform->Find("PositionX")->GetValue().ToFloat();
+      posY = transform->Find("PositionY")->GetValue().ToFloat();
+      posZ = transform->Find("PositionZ")->GetValue().ToFloat();
+      scaleX = transform->Find("ScaleX")->GetValue().ToFloat();
+      scaleY = transform->Find("ScaleY")->GetValue().ToFloat();
+      scaleZ = transform->Find("ScaleZ")->GetValue().ToFloat();
+      sizeX = transform->Find("SizeX")->GetValue().ToFloat();
+      sizeY = transform->Find("SizeY")->GetValue().ToFloat();
+      sizeZ = transform->Find("SizeZ")->GetValue().ToFloat();
 
-	    Transform* objTransform = object->GET<Transform>();
-	    objTransform->SetPosition(Vector3(posX,posY,posZ));
-	    objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
-	    objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
+      Transform* objTransform = object->GET<Transform>();
+      objTransform->SetPosition(Vector3(posX,posY,posZ));
+      objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
+      objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
 
-	    // Auto set camera bounds based on objects in environment
-	    mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
-	    mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
-	    mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
-	    mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
-	  }
-	  if(curRoot->Find("Surface"))
-	  {
-	    Root* surface = curRoot->Find("Surface");
-	    float r, g, b, a;
-	    r = surface->Find("ColorR")->GetValue().ToFloat();
-	    g = surface->Find("ColorG")->GetValue().ToFloat();
-	    b = surface->Find("ColorB")->GetValue().ToFloat();
-	    a = surface->Find("ColorA")->GetValue().ToFloat();
+      // Auto set camera bounds based on objects in environment
+      mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
+      mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
+      mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
+      mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
+    }
+    if(curRoot->Find("Surface"))
+    {
+      Root* surface = curRoot->Find("Surface");
+      float r, g, b, a;
+      r = surface->Find("ColorR")->GetValue().ToFloat();
+      g = surface->Find("ColorG")->GetValue().ToFloat();
+      b = surface->Find("ColorB")->GetValue().ToFloat();
+      a = surface->Find("ColorA")->GetValue().ToFloat();
 
-		  Surface* objSurface = object->GET<Surface>();
-		  objSurface->SetColor(Vector4(r, g, b, a));
-	  }
-	  if(curRoot->Find("Focus"))
-	  {
-	    bool value = curRoot->Find("Focus")->Find("IsFocus")->GetValue().ToBool();
-		  if(value)
-		  {
-		    mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
-		    mFocusTarget = object;
-		  }
-	  }
+      Surface* objSurface = object->GET<Surface>();
+      objSurface->SetColor(Vector4(r, g, b, a));
+    }
+    if(curRoot->Find("Focus"))
+    {
+      bool value = curRoot->Find("Focus")->Find("IsFocus")->GetValue().ToBool();
+      if(value)
+      {
+        mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
+        mFocusTarget = object;
+      }
+    }
+    if(curRoot->Find("Name"))
+    {
+      object->SetName(curRoot->Find("Name")->GetValue());
+    }
 
-	  RootContainer untouched = curRoot->GetUntouchedRoots();
-	  for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
-	  {
-	    ParseAdditionalData(*it, object);
-	  }
+    RootContainer untouched = curRoot->GetUntouchedRoots();
+    for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
+    {
+      ParseAdditionalData(*it, object);
+    }
 
-	  ++curIndex;
-	  tempIndex = curObject + Common::IntToString(curIndex);
-	  curRoot = parser.Find(tempIndex);
-	}
+    ++curIndex;
+    tempIndex = curObject + Common::IntToString(curIndex);
+    curRoot = parser.Find(tempIndex);
+  }
 
   if(parser.Find("TileMapGenerator"))
   {
@@ -483,4 +487,9 @@ void Level::ParseFile()
   {
     ParseAdditionalData(*it, nullptr);
   }
+}
+
+Level::ObjectContainer& Level::GetObjects()
+{
+  return mObjects;
 }

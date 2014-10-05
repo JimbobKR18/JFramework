@@ -102,7 +102,11 @@ void HashString::operator=(HashString const &aRhs)
 
 bool HashString::operator==(HashString const &aRhs)
 {
-  return mHash == aRhs.mHash;
+  // If the hashes aren't equal, early out.
+  if(mHash != aRhs.mHash)
+    return false;
+  
+  return mString == aRhs.mString;
 }
 
 bool HashString::operator==(std::string const &aRhs)
@@ -117,7 +121,11 @@ bool HashString::operator==(char const* aRhs)
 
 bool HashString::operator!=(HashString const &aRhs)
 {
-  return mHash != aRhs.mHash;
+  // If the hashes aren't equal, early out.
+  if(mHash != aRhs.mHash)
+    return true;
+    
+  return mString != aRhs.mString;
 }
 
 bool HashString::operator!=(std::string const &aRhs)

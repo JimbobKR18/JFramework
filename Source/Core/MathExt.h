@@ -150,6 +150,7 @@ struct Shape
   } shape;
   
   Shape(ShapeType aShape);
+  virtual ~Shape();
   virtual float GetSize(int index) = 0;
 };
 
@@ -159,6 +160,7 @@ struct Cube : public Shape
 
   Cube();
   Cube(Vector3 const &aPosition, Vector3 const &aSize);
+  virtual ~Cube();
 
   bool GetCollision(Vector3 const &_position);
   
@@ -171,6 +173,7 @@ struct Sphere : public Shape
 
   Sphere();
   Sphere(Vector3 const &aPosition, float const aRadius);
+  virtual ~Sphere();
 
   bool GetCollision(Vector3 const &aPosition);
   
@@ -185,6 +188,7 @@ struct Circle : public Shape
 
   Circle();
   Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight, float const aRadius);
+  virtual ~Circle();
   
   virtual float GetSize(int index);
 };
@@ -197,6 +201,7 @@ struct Line : public Shape
   Line();
   Line(Vector3 const &aPosition, Vector3 const &aDirection, float aLength);
   Line(Vector3 const &aStart, Vector3 const &aEnd);
+  virtual ~Line();
 
   bool GetCollisions(Line const &aCompare, Circle &aOutput);
   

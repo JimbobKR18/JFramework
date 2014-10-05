@@ -75,6 +75,9 @@ public:
 	static void       SerializeLUA();
 
 	void              ParseFile();
+  
+protected:
+  ObjectContainer&  GetObjects();
 };
 
 #endif

@@ -25,9 +25,9 @@ GameObject::GameObject(ObjectManager *aManager, std::string const &aFilename) :
 // Sounds like a bad idea right now...
 GameObject::GameObject(GameObject const &aGameObject) :
                               mFileName(aGameObject.mFileName),
-													    mName(aGameObject.mName),
-													    mComponents(aGameObject.mComponents),
-													    mManager(NULL)
+                              mName(aGameObject.mName),
+                              mComponents(aGameObject.mComponents),
+                              mManager(NULL)
 {
   assert(!"Copying GameObjects is not supported!");
 }
@@ -146,6 +146,7 @@ void GameObject::Serialize(Parser &aParser)
 {
   std::string object = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   aParser.Place(object, "File", mFileName);
+  aParser.Place(object, "Name", mName);
 
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)

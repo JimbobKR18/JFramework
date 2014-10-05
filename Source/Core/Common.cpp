@@ -176,7 +176,7 @@ namespace Common
     for(std::vector<std::string>::iterator it = aValue.begin(); it != end; ++it)
     {
       ret += *it;
-      ret += ", ";
+      ret += ",";
     }
     ret = ret.substr(0, ret.size() - 2);
     return ret;

@@ -659,6 +659,10 @@ Shape::Shape(ShapeType aShape) : position(), shape(aShape)
 {
 }
 
+Shape::~Shape()
+{
+}
+
 //------------------------------
 // CUBE
 //------------------------------
@@ -670,6 +674,10 @@ Cube::Cube(Vector3 const &aPosition, Vector3 const &aSize) :
     Shape(CUBE), size(aSize)
 {
   position = aPosition;
+}
+
+Cube::~Cube()
+{
 }
 
 bool Cube::GetCollision(Vector3 const &aPosition)
@@ -704,6 +712,10 @@ Sphere::Sphere(Vector3 const &aPosition, float const aRadius) :
   position = aPosition;
 }
 
+Sphere::~Sphere()
+{
+}
+
 bool Sphere::GetCollision(Vector3 const &aPosition)
 {
   float dist = (aPosition - position).length();
@@ -729,6 +741,10 @@ Circle::Circle(Vector3 const &aPosition, Vector3 const &aUp,
     Shape(CIRCLE), up(aUp), right(aRight), radius(fabs(aRadius))
 {
   position = aPosition;
+}
+
+Circle::~Circle()
+{
 }
 
 float Circle::GetSize(int index)
@@ -758,6 +774,10 @@ Line::Line(Vector3 const &aStart, Vector3 const &aEnd) :
   Vector3 diff = aEnd - aStart;
   direction = diff.normalize();
   length = diff.length();
+}
+
+Line::~Line()
+{
 }
 
 // Returns true is circle is found, otherwise false
