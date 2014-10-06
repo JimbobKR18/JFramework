@@ -132,8 +132,12 @@ bool PhysicsWorld::LineCollidesWithAnything(Line const &aLine, std::vector<Physi
   {
     if(std::find(aIgnoreList.begin(), aIgnoreList.end(), *it) != aIgnoreList.end())
       continue;
-    /*if(CollisionChecker::CheckLineCollision(aLine, *it))
-      return true;*/
+    PhysicsObject::shapeIT shapesEnd = (*it)->GetShapes().end();
+    for(PhysicsObject::shapeIT it2 = (*it)->GetShapes().begin(); it2 != shapesEnd; ++it2)
+    {
+      if(CollisionChecker::CheckLineCollision(aLine, (*it)->GetOwner()->GET<Transform>(), *it2))
+        return true;
+    }
   }
   return false;
 }
