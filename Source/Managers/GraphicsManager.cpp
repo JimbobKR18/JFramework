@@ -25,13 +25,13 @@ GraphicsManager::~GraphicsManager()
 void GraphicsManager::Update()
 {
   mScreen->GetView().Update();
-  std::vector<Surface*> sortedObjects = mScreen->SortObjects(mSurfaces);
+  mScreen->SortObjects(mSurfaces);
   mScreen->PreDraw();
-  mScreen->Draw(sortedObjects);
+  mScreen->Draw(mSurfaces);
   mScreen->DrawUI(mUIElements);
 #ifdef _DEBUG
   // Displays bounds of objects with PhysicsObject
-  mScreen->DebugDraw(sortedObjects);
+  mScreen->DebugDraw(mSurfaces);
 #endif
   mScreen->SwapBuffers();
 }

@@ -35,6 +35,7 @@ Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoPar
 		mName.push_back(aFileName[i]);
 	}
 	std::reverse(mName.begin(), mName.end());
+	mName = mName.substr(0, mName.size() - 4);
 
 	if(aAutoParse)
 	  ParseFile();
@@ -57,6 +58,11 @@ Level::~Level()
 std::string Level::GetName() const
 {
 	return mName;
+}
+
+std::string Level::GetFileName() const
+{
+  return mFileName;
 }
 
 LevelManager *Level::GetManager() const
@@ -118,15 +124,19 @@ void Level::AddMenu(Menu *aMenu)
 
 void Level::RemoveMenu(Menu *aMenu)
 {
+  if(aMenu == NULL)
+    return;
+
   for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
   {
     if(*it == aMenu)
     {
       delete *it;
       mMenus.erase(it);
-      break;
+      return;
     }
   }
+  assert(!"Menu not found, you sure you added it to this list?");
 }
 
 void Level::RemoveMenus()
@@ -349,6 +359,7 @@ void Level::SerializeLUA()
           .set("Load", &Level::Load)
           .set("Unload", &Level::Unload)
           .set("GetName", &Level::GetName)
+          .set("GetFileName", &Level::GetFileName)
           .set("DeleteObject", &Level::DeleteObjectDelayed);
 }
 

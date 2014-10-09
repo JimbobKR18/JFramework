@@ -168,11 +168,6 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 
 void ObjectManager::ClearObjects()
 {
-	/* Now belongs to LevelManager.cpp
-	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
-	{
-		delete *it;
-	}*/
 	mObjects.clear();
 	mStaticObjects.clear();
 }

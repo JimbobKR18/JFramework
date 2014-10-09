@@ -34,12 +34,13 @@ void Menu::AddObject(MenuElement *aElement)
 }
 void Menu::DeleteObject(MenuElement *aElement)
 {
+  // Using delayed delete
   for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     if(aElement == *it)
     {
       mMenuElements.erase(it);
-      mOwner->DeleteObject(aElement->GetObject());
+      mOwner->DeleteObjectDelayed(aElement->GetObject());
       break;
     }
   }

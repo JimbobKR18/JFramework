@@ -78,14 +78,15 @@ void GameApp::Update()
     {
       (*it)->Update();
     }
+    
+    // Delete objects
+    for(std::vector<Message*>::iterator it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+    {
+      SendMessage(**it);
+      delete *it;
+    }
+    mDelayedMessages.clear();
   }
-
-  for(std::vector<Message*>::iterator it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
-  {
-    SendMessage(**it);
-    delete *it;
-  }
-  mDelayedMessages.clear();
 }
 
 void GameApp::SendMessage(Message const &aMessage)

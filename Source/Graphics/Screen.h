@@ -22,7 +22,7 @@ public:
   // Get viewable space
   View&                   GetView();
   // Batching
-  std::vector<Surface*>   SortObjects(std::vector<Surface*> const &aObjects);
+  void                    SortObjects(std::vector<Surface*> &aObjects);
 
   virtual void            ChangeSize(int aW, int aH) = 0;
   virtual void            PreDraw() = 0;

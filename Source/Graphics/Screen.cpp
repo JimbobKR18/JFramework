@@ -65,10 +65,8 @@ View &Screen::GetView()
 }
 
 // This assumes that objects of same texture ID are at the same z depth.
-std::vector<Surface*> Screen::SortObjects(std::vector<Surface*> const &aObjects)
+void Screen::SortObjects(std::vector<Surface*> &aObjects)
 {
-  std::vector<Surface*> ret = aObjects;
-  std::sort(ret.begin(), ret.end(), BatchSortPredicate);
-  std::sort(ret.begin(), ret.end(), ZSortPredicate);
-  return ret;
+  std::sort(aObjects.begin(), aObjects.end(), BatchSortPredicate);
+  std::sort(aObjects.begin(), aObjects.end(), ZSortPredicate);
 }

@@ -40,6 +40,7 @@ public:
 	virtual ~Level();
 
 	std::string   GetName() const;
+	std::string   GetFileName() const;
   LevelManager* GetManager() const;
   
   TileMapGenerator* GetTileMap() const;
