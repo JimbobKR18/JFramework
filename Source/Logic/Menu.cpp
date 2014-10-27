@@ -9,8 +9,10 @@
 #include "MenuImage.h"
 #include "MenuText.h"
 
-Menu::Menu(Level *aLevel, std::string const &aFilename) : mOwner(aLevel), mFilename(aFilename)
+Menu::Menu(Level *aLevel, std::string const &aFileName) : mOwner(aLevel), mFileName(aFileName)
 {
+  mName = Common::RetrieveNameFromFileName(aFileName);
+  
   ParseFile();
 }
 Menu::~Menu()
@@ -18,13 +20,28 @@ Menu::~Menu()
   DeleteObjects();
 }
 
-std::string Menu::GetName()
+HashString Menu::GetName()
 {
-  return mFilename;
+  return mName;
+}
+HashString Menu::GetFileName()
+{
+  return mFileName;
 }
 Level* Menu::GetLevel()
 {
   return mOwner;
+}
+MenuElement* Menu::GetElement(HashString const &aFileName)
+{
+  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  {
+    if((*it)->GetObject()->GetFileName() == aFileName.ToString())
+    {
+      return *it;
+    }
+  }
+  return nullptr;
 }
 
 void Menu::AddObject(MenuElement *aElement)
@@ -58,13 +75,12 @@ void Menu::DeleteObjects()
 
 void Menu::ParseFile()
 {
-  TextParser parser(Common::RelativePath("Menus", mFilename).c_str());
+  TextParser parser(Common::RelativePath("Menus", mFileName).c_str());
 
   MenuElement *element = nullptr;
   HashString object = "Object_";
   int curIndex = 0;
   HashString curObject = object + Common::IntToString(curIndex);
-
 
   while(parser.Find(curObject.ToString()))
   {

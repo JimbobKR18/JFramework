@@ -181,6 +181,20 @@ namespace Common
     ret = ret.substr(0, ret.size() - 2);
     return ret;
   }
+  
+  HashString RetrieveNameFromFileName(HashString const &aFileName)
+  {
+    HashString ret;
+    
+    for(int i = static_cast<int>(aFileName.Size()) - 1;
+      aFileName[i] != '/' && i >= 0; --i)
+    {
+      ret.Push(aFileName[i]);
+    }
+    ret.Reverse();
+    
+    return ret;
+  }
 
   float RandomFloatInRange(float const aX, float const bX)
   {

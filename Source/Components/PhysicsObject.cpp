@@ -72,7 +72,7 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
   CollisionMessage *message = (CollisionMessage*)&aMessage;
   GameObject *otherBody = message->GetObject(0) != GetOwner() ?
                           message->GetObject(0) : message->GetObject(1);
-  std::string objectName = GetOwner()->GetFilename().substr(0, GetOwner()->GetFilename().length() - 4);
+  std::string objectName = GetOwner()->GetFileName().substr(0, GetOwner()->GetFileName().length() - 4);
   
   if(!LUABind::LoadFunction<GameObject*>("CollisionMessages.LUA",
                                      objectName + "_CollisionReceive",

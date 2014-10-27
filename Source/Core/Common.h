@@ -53,6 +53,8 @@ namespace Common
   std::string               BoolToString(bool const aValue);
   std::string               IntVectorToString(std::vector<int> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
+  
+  HashString                RetrieveNameFromFileName(HashString const &aFileName);              
 
   float                     RandomFloatInRange(float const aX, float const bX);
 

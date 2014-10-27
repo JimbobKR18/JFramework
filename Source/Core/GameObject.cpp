@@ -17,9 +17,16 @@ GameObject::GameObject()
   assert(!"GameObject instantiated without a file!");
 }
 
-GameObject::GameObject(ObjectManager *aManager, std::string const &aFilename) :
-                       mFileName(aFilename), mName(""), mComponents(), mManager(aManager)
+GameObject::GameObject(ObjectManager *aManager, std::string const &aFileName) :
+                       mFileName(aFileName), mName(""), mComponents(), mManager(aManager)
 {
+  for(int i = static_cast<int>(aFileName.size()) - 1;
+      aFileName[i] != '/' && i >= 0; --i)
+  {
+    mName.push_back(aFileName[i]);
+  }
+  std::reverse(mName.begin(), mName.end());
+  mName = mName.substr(0, mName.size() - 4);
 }
 
 // Sounds like a bad idea right now...
@@ -46,7 +53,7 @@ std::string GameObject::GetName()
   return mName;
 }
 
-std::string GameObject::GetFilename()
+std::string GameObject::GetFileName()
 {
 	return mFileName;
 }

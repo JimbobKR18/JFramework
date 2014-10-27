@@ -25,20 +25,19 @@ Level::Level()
 }
 
 Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse) :
-             mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
+             mName(""), mMusicName(""), mObjects(),
              mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
              mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0)
 {
-	for(int i = static_cast<int>(aFileName.size()) - 1;
+  for(int i = static_cast<int>(aFileName.size()) - 1;
       aFileName[i] != '/' && i >= 0; --i)
-	{
-		mName.push_back(aFileName[i]);
-	}
-	std::reverse(mName.begin(), mName.end());
-	mName = mName.substr(0, mName.size() - 4);
+  {
+    mName.push_back(aFileName[i]);
+  }
+  std::reverse(mName.begin(), mName.end());
 
-	if(aAutoParse)
-	  ParseFile();
+  if(aAutoParse)
+    ParseFile();
 }
 
 Level::~Level()
@@ -58,11 +57,6 @@ Level::~Level()
 std::string Level::GetName() const
 {
 	return mName;
-}
-
-std::string Level::GetFileName() const
-{
-  return mFileName;
 }
 
 LevelManager *Level::GetManager() const
@@ -117,9 +111,22 @@ Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
   return ret;
 }
 
+Menu* Level::FindMenu(std::string const &aMenuName)
+{
+  for(ConstMenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
+  {
+    if((*it)->GetName() == aMenuName)
+    {
+      return *it;
+    }
+  }
+  return nullptr;
+}
+
 void Level::AddMenu(Menu *aMenu)
 {
-  mMenus.push_back(aMenu);
+  if(!FindMenu(aMenu->GetName()))
+    mMenus.push_back(aMenu);
 }
 
 void Level::RemoveMenu(Menu *aMenu)
@@ -285,9 +292,9 @@ void Level::Load(Level* const aPrevLevel)
 
 void Level::Unload(Level* const aNextLevel)
 {
-  // Remove menu items because they're not level files.
+  // Remove menus because they are not level files.
   RemoveMenus();
-
+  
 	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
 	{
     // Remove all components
@@ -359,13 +366,12 @@ void Level::SerializeLUA()
           .set("Load", &Level::Load)
           .set("Unload", &Level::Unload)
           .set("GetName", &Level::GetName)
-          .set("GetFileName", &Level::GetFileName)
           .set("DeleteObject", &Level::DeleteObjectDelayed);
 }
 
 void Level::ParseFile()
 {
-  TextParser parser(Common::RelativePath("Game", mFileName).c_str());
+  TextParser parser(Common::RelativePath("Game", mName).c_str());
   GameObject *object = NULL;
   HashString const curObject = "Object_";
   int curIndex = 0;

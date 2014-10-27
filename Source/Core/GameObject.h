@@ -27,12 +27,12 @@ private:
   typedef std::vector<Component*>::iterator ComponentIT;
 public:
   GameObject();
-  GameObject(ObjectManager *aManager, std::string const &aFilename);
+  GameObject(ObjectManager *aManager, std::string const &aFileName);
   GameObject(GameObject const &aGameObject);
   virtual ~GameObject();
 
   std::string             GetName();
-  std::string             GetFilename();
+  std::string             GetFileName();
   ObjectManager*          GetManager();
 
   void                    SetName(std::string const &aName);

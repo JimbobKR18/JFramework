@@ -65,7 +65,7 @@ GameObject *ObjectManager::CreateObject(std::string const &aFilename)
 
 void ObjectManager::ParseObject(GameObject *aObject)
 {
-	TextParser parser(Common::RelativePath("Game", aObject->GetFilename()));
+	TextParser parser(Common::RelativePath("Game", aObject->GetFileName()));
 	ParseDictionary(aObject, parser);
 }
 

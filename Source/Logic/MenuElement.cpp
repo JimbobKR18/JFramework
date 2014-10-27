@@ -6,10 +6,13 @@
  */
 
 #include "MenuElement.h"
+#include "LUATypes.h"
+#include "ObjectManager.h"
 
-MenuElement::MenuElement(std::string const &aFilename)
+MenuElement::MenuElement(std::string const &aFileName)
 {
-  mObject = new GameObject(nullptr, aFilename);
+  ObjectManager* manager = LUABind::StaticGameApp::GetApp()->GET<ObjectManager>();
+  mObject = new GameObject(manager, aFileName);
   mLayer = 0;
 }
 

@@ -18,10 +18,10 @@ public:
   typedef ObjectContainer::iterator ObjectIT;
   typedef ObjectContainer::const_iterator ConstObjectIT;
   typedef MenuContainer::iterator MenuIT;
+  typedef MenuContainer::const_iterator ConstMenuIT;
 
 private:
 	std::string       mName;
-	std::string       mFileName;
 	std::string       mMusicName;
 	ObjectContainer   mObjects;
 	ObjectContainer   mStaticObjects;
@@ -40,13 +40,13 @@ public:
 	virtual ~Level();
 
 	std::string   GetName() const;
-	std::string   GetFileName() const;
   LevelManager* GetManager() const;
   
   TileMapGenerator* GetTileMap() const;
   GameObject*       GetFocusTarget() const;
   GameObject*       FindObject(std::string const &aObjectName);
   ObjectContainer   FindObjects(Vector3 const &aPosition) const;
+  Menu*             FindMenu(std::string const &aMenuName);
 
   void              AddMenu(Menu *aMenu);
   void              RemoveMenu(Menu *aMenu);

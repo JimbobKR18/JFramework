@@ -19,15 +19,18 @@ public:
 
 private:
   Level*            mOwner;
-  std::string       mFilename;
+  HashString        mName;
+  HashString        mFileName;
   ElementContainer  mMenuElements;
 
 public:
-  Menu(Level* aLevel, std::string const &aFilename);
+  Menu(Level* aLevel, std::string const &aFileName);
   ~Menu();
 
-  std::string   GetName();
+  HashString    GetName();
+  HashString    GetFileName();
   Level*        GetLevel();
+  MenuElement*  GetElement(HashString const &aFileName);
 
   void          AddObject(MenuElement *aElement);
   void          DeleteObject(MenuElement *aElement);
