@@ -178,7 +178,9 @@ namespace Common
       ret += *it;
       ret += ",";
     }
-    ret = ret.substr(0, ret.size() - 2);
+    
+    // Remove last comma
+    ret = ret.substr(0, ret.size() - 1);
     return ret;
   }
   

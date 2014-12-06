@@ -73,6 +73,18 @@ void Menu::DeleteObjects()
   mMenuElements.clear();
 }
 
+void Menu::ReceiveMessage(Message const& aMessage)
+{
+  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end();)
+  {
+    (*it)->ReceiveMessage(aMessage);
+  }
+}
+
+void Menu::SendMessage(Message const& aMessage)
+{
+}
+
 void Menu::ParseFile()
 {
   TextParser parser(Common::RelativePath("Menus", mFileName).c_str());

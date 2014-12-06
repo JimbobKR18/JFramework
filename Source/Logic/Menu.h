@@ -36,6 +36,9 @@ public:
   void          DeleteObject(MenuElement *aElement);
   void          DeleteObjects();
   
+  virtual void  ReceiveMessage(Message const& aMessage);
+  virtual void  SendMessage(Message const& aMessage);
+  
 private:
   void          ParseFile();
 };
