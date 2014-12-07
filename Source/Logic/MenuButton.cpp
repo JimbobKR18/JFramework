@@ -44,7 +44,7 @@ void MenuButton::ReceiveMessage(Message const& aMessage)
   if(aMessage.GetDescription() == "Click")
   {
     ClickMessage *clickMessage = (ClickMessage*)&aMessage;
-    if(mClickableArea.Get2DCollision(clickMessage->GetLocation())
+    if(mClickableArea.Get2DCollision(clickMessage->GetLocation()))
     {
       OnDownClick();
     }
