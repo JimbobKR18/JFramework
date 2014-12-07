@@ -162,7 +162,8 @@ struct Cube : public Shape
   Cube(Vector3 const &aPosition, Vector3 const &aSize);
   virtual ~Cube();
 
-  bool GetCollision(Vector3 const &_position);
+  bool Get3DCollision(Vector3 const &aPosition);
+  bool Get2DCollision(Vector3 const &aPosition);
   
   virtual float GetSize(int index);
 };

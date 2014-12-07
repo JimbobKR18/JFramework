@@ -38,7 +38,6 @@ public:
   virtual void  ParseAdditionalData(Parser &aParser) = 0;
   
 protected:
-  // For now: a helper function
   void          ParseFile(Parser &aParser);
 };
 

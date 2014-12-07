@@ -680,7 +680,21 @@ Cube::~Cube()
 {
 }
 
-bool Cube::GetCollision(Vector3 const &aPosition)
+bool Cube::Get3DCollision(Vector3 const &aPosition)
+{
+  // SEPARATING AXIS THEORUM
+  Vector3 dist = aPosition - position;
+  for (int i = 0; i <= 2; ++i)
+  {
+    if (fabs(dist[i]) > size[i])
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool Cube::Get2DCollision(Vector3 const &aPosition)
 {
   // SEPARATING AXIS THEORUM
   Vector3 dist = aPosition - position;

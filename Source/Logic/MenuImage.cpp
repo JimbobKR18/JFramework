@@ -22,14 +22,15 @@ MenuImage::~MenuImage()
 void MenuImage::Draw()
 {
 }
+
 void MenuImage::SendMessage(Message const &aMessage)
 {
-  
 }
+
 void MenuImage::ReceiveMessage(Message const &aMessage)
 {
-  
 }
+
 void MenuImage::ParseAdditionalData(Parser &aParser)
 {
   // Borrowing the static game app from our LUA stuff

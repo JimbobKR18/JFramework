@@ -25,7 +25,7 @@ private:
 
 public:
   Menu(Level* aLevel, std::string const &aFileName);
-  ~Menu();
+  virtual ~Menu();
 
   HashString    GetName();
   HashString    GetFileName();

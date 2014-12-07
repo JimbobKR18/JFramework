@@ -1,11 +1,14 @@
 #ifndef MENUBUTTON_H
 #define MENUBUTTON_H
 
-#include "MenuElement.h" // Base class: MenuElement
+#include "MathExt.h"
+#include "MenuImage.h"
 
-class MenuButton: public MenuElement
+class MenuButton: public MenuImage
 {
 private:
+  Cube mClickableArea;
+  
 public:
   MenuButton(std::string const &aFilename);
   virtual ~MenuButton();

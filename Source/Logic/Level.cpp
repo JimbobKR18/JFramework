@@ -102,7 +102,7 @@ Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
     Transform* transform = (*it)->GET<Transform>();
     Cube cube(transform->GetPosition(), transform->GetSize());
 
-    if(cube.GetCollision(aPosition))
+    if(cube.Get2DCollision(aPosition))
     {
       ret.push_back(*it);
     }
