@@ -75,7 +75,7 @@ void Menu::DeleteObjects()
 
 void Menu::ReceiveMessage(Message const& aMessage)
 {
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end();)
+  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     (*it)->ReceiveMessage(aMessage);
   }
