@@ -4,6 +4,9 @@
 
 MenuButton::MenuButton(std::string const &aFilename) : MenuImage(aFilename), mClickableArea()
 {
+  // MenuImage base hasn't initialized yet.
+  TextParser parser(Common::RelativePath("Menus", aFilename));
+  ParseAdditionalData(parser);
 }
 
 MenuButton::~MenuButton()
@@ -16,9 +19,6 @@ void MenuButton::Draw()
 
 void MenuButton::ParseAdditionalData(Parser& aParser)
 {
-  // Get image data
-  MenuImage::ParseAdditionalData(aParser);
-  
   // This should be in screen space
   if(aParser.Find("ClickableArea"))
   {
@@ -46,6 +46,7 @@ void MenuButton::ReceiveMessage(Message const& aMessage)
     ClickMessage *clickMessage = (ClickMessage*)&aMessage;
     if(mClickableArea.Get2DCollision(clickMessage->GetLocation()))
     {
+      clickMessage->SetContacted(true);
       OnDownClick();
     }
   }
