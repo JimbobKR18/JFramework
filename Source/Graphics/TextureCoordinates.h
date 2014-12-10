@@ -34,7 +34,7 @@ private:
   
 public:
   TextureCoordinates();
-  TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames);
+  TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed);
   
   ~TextureCoordinates();
   

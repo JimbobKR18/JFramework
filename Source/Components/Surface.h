@@ -40,7 +40,7 @@ public:
   
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;
-  void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames);
+  void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed);
   void                SetAnimated(bool aAnimated);
   void                SetAnimation(int aAnimation);
   void                SetCurrentFrame(int aFrame);

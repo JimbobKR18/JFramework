@@ -2,6 +2,8 @@
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
 
+#define DT (1.0f/60.0f)
+
 Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
                      mColor(1,1,1,1), mFileName(""), mNoRender("false")
 {
@@ -27,12 +29,12 @@ TextureCoordinates *Surface::GetTextureData() const
   return mTexCoord;
 }
 
-void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames)
+void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed)
 {
   if(mTexCoord)
     delete mTexCoord;
   
-  mTexCoord = new TextureCoordinates(aNumAnimations, aNumFrames);
+  mTexCoord = new TextureCoordinates(aNumAnimations, aNumFrames, aAnimationSpeed);
 }
 
 void Surface::SetAnimated(bool aAnimated)
@@ -120,6 +122,7 @@ void Surface::Deserialize(Parser &aParser)
 {
   bool animated = false;
   int numAnimations = 1;
+  float animationSpeed = DT;
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
@@ -134,6 +137,12 @@ void Surface::Deserialize(Parser &aParser)
     bool isAnimated = aParser.Find("Surface", "Animated")->GetValue().ToBool();
     if(isAnimated)
       animated = true;
+  }
+  if(aParser.Find("Surface", "AnimationSpeed"))
+  {
+    // Optional parameter to change the animation speed.
+    Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeed");
+    animationSpeed = animationSpeedNode->GetValue().ToFloat();
   }
   if(aParser.Find("Surface", "NoRender"))
   {
@@ -151,6 +160,6 @@ void Surface::Deserialize(Parser &aParser)
     mColor = Vector4(red, green, blue, alpha);
   }
   
-  SetTextureCoordinateData(numAnimations, numFrames);
+  SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
   SetAnimated(animated);
 }

@@ -8,7 +8,6 @@
 
 #include "TextureCoordinates.h"
 
-#define DT (1.0f/60.0f)
 #define SETFRAMES() mXValues[0] = mCurFrame * mXGain; \
                     mXValues[1] = (mCurFrame + 1) * mXGain; \
                     mYValues[0] = mCurAnimation * mYGain; \
@@ -18,13 +17,15 @@ TextureCoordinates::TextureCoordinates()
 {
   assert(0);
 }
-TextureCoordinates::TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames) : mCurFrame(0),
-                                                                                                      mCurAnimation(0),
-                                                                                                      mNumAnimations(aNumAnimations),
-                                                                                                      mTotalFrames(0),
-                                                                                                      mSpeed(DT),
-                                                                                                      mCurTime(0),
-                                                                                                      mCompleted(false)
+TextureCoordinates::TextureCoordinates(int const aNumAnimations,
+                                       std::vector<int> const aNumFrames,
+                                       float aAnimationSpeed) : mCurFrame(0),
+                                                                mCurAnimation(0),
+                                                                mNumAnimations(aNumAnimations),
+                                                                mTotalFrames(0),
+                                                                mSpeed(aAnimationSpeed),
+                                                                mCurTime(0),
+                                                                mCompleted(false)
 {
   int maxFrames = 0;
   
@@ -123,8 +124,23 @@ bool TextureCoordinates::GetAnimated() const
 
 void TextureCoordinates::SetCurrentAnimation(int aAnimation)
 {
+  // So as to not reset the animation, we have an early out.
+  if(mCurAnimation == aAnimation)
+  {
+    return;
+  }
+  // Assert in case of terribleness.
+  else if(aAnimation > mAnimations.size())
+  {
+    assert(!"SetCurrentAnimation: aAnimation is larger than the number of animations.");
+  }
+  
   mCurAnimation = aAnimation;
+  mCurFrame = 0;
   mCompleted = false;
+  
+  // Set positions of coordinates
+  SETFRAMES();
 }
 
 void TextureCoordinates::SetCurrentFrame(int aFrame)
