@@ -56,6 +56,7 @@ namespace Common
   
   HashString                RetrieveNameFromFileName(HashString const &aFileName);              
 
+  int                       RandomIntInRange(int const aX, int const bX);
   float                     RandomFloatInRange(float const aX, float const bX);
 
   typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;

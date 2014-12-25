@@ -198,6 +198,11 @@ namespace Common
     return ret;
   }
 
+  int RandomIntInRange(int const aX, int const bX)
+  {
+    return aX + (rand() % (bX - aX));
+  }
+
   float RandomFloatInRange(float const aX, float const bX)
   {
     float diff = bX - aX;
