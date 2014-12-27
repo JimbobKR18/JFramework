@@ -154,6 +154,10 @@ void Resolver::SendCollisionMessages(PotentialPair &aPair) const
 
 void Resolver::Resolve(CollisionPair &aPair, float aDuration)
 {
+  // Skip resolving if either object is passable.
+  if(aPair.mBodies[0]->IsPassable() || aPair.mBodies[1]->IsPassable())
+    return;
+    
   switch(aPair.mShapes[0]->shape)
   {
   case Shape::SPHERE:

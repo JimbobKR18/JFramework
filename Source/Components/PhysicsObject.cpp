@@ -91,6 +91,7 @@ void PhysicsObject::Serialize(Parser &aParser)
   object->Place(objectName, "PhysicsObject", "");
   object->Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
   object->Place("PhysicsObject", "Static", Common::BoolToString(mStatic));
+  object->Place("PhysicsObject", "Passable", Common::BoolToString(mPassable));
   object->Place("PhysicsObject", "Mass", Common::FloatToString(mMass));
   object->Place("PhysicsObject", "Damping", Common::FloatToString(mDamping));
   
@@ -131,6 +132,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
   // What is the object's mass? Is it static?
   bool gravity = aParser.Find("PhysicsObject", "Gravity")->GetValue().ToBool();
   bool isStatic = aParser.Find("PhysicsObject", "Static")->GetValue().ToBool();
+  bool isPassable = aParser.Find("PhysicsObject", "Passable")->GetValue().ToBool();
   SetMass(aParser.Find("PhysicsObject", "Mass")->GetValue().ToInt());
   mDamping = aParser.Find("PhysicsObject", "Damping")->GetValue().ToFloat();
 
@@ -144,6 +146,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
   }
   
   SetStatic(isStatic);
+  SetPassable(isPassable);
   
   HashString const SHAPE = "Shape_";
   int curIndex = 0;
@@ -261,6 +264,16 @@ bool PhysicsObject::IsAffectedByGravity() const
 void PhysicsObject::SetAffectedByGravity(bool aGravity)
 {
   mGravity = aGravity;
+}
+
+bool PhysicsObject::IsPassable() const
+{
+  return mPassable;
+}
+
+void PhysicsObject::SetPassable(bool aPassable)
+{
+  mPassable = aPassable;
 }
 
 Vector3 PhysicsObject::GetBroadSize() const

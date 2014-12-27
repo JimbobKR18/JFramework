@@ -25,7 +25,8 @@ private:
                             mInverseMass;
   float                     mDamping;
   bool                      mStatic,
-                            mGravity;
+                            mGravity,
+                            mPassable;
   std::vector<std::string>  mIgnoreList;
   std::vector<Shape*>       mShapes;
 
@@ -64,6 +65,9 @@ public:
   
   bool                 IsAffectedByGravity() const;
   void                 SetAffectedByGravity(bool aGravity);
+  
+  bool                 IsPassable() const;
+  void                 SetPassable(bool aPassable);
 
   Vector3              GetBroadSize() const;
   void                 SetBroadSize(Vector3 const &aSize);
