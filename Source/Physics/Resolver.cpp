@@ -71,10 +71,8 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
   if(aPair.mPenetration <= 0)
     return;
 
-  float totalInverseMass = (1.0f / aPair.mBodies[0]->GetMass());
-  
-  if(!aPair.mBodies[1]->IsStatic())
-    totalInverseMass += (1.0f / aPair.mBodies[1]->GetMass());
+  float totalInverseMass = (1.0f / aPair.mBodies[0]->GetMass()) + 
+                           (1.0f / aPair.mBodies[1]->GetMass());
 
   if(totalInverseMass <= 0)
     return;
@@ -124,7 +122,9 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   }
   
   float deltaVelocity = newSeparatingVelocity - separatingVelocity;
-  float totalInverseMass = 1.0f / aPair.mBodies[0]->GetMass();
+  float totalInverseMass = 0.0f;
+  if(aPair.mBodies[0])
+    totalInverseMass += (1.0f / aPair.mBodies[0]->GetMass());
   if(aPair.mBodies[1])
     totalInverseMass += 1.0f / aPair.mBodies[1]->GetMass();
   
