@@ -124,7 +124,7 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   float deltaVelocity = newSeparatingVelocity - separatingVelocity;
   float totalInverseMass = 0.0f;
   if(aPair.mBodies[0])
-    totalInverseMass += (1.0f / aPair.mBodies[0]->GetMass());
+    totalInverseMass += 1.0f / aPair.mBodies[0]->GetMass();
   if(aPair.mBodies[1])
     totalInverseMass += 1.0f / aPair.mBodies[1]->GetMass();
   
