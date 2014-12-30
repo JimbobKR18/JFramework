@@ -1,6 +1,7 @@
 #include "PCScreen.h"
 #include "PhysicsObject.h"
 #include "PCSurface.h"
+#include "Constants.h"
 
 #define VERTEX_ARRAYS
 
@@ -13,9 +14,9 @@ PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   mWindow = SDL_CreateWindow("JFramework", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
-                             SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_GL_DOUBLEBUFFER | SDL_WINDOW_OPENGL);
+                             SDL_GL_DOUBLEBUFFER | SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
-  ChangeSize(aW, aH);
+  ChangeSize(aW, aH, false);
 }
 
 PCScreen::~PCScreen()
@@ -242,8 +243,14 @@ void PCScreen::SwapBuffers()
   SDL_GL_SwapWindow(mWindow);
 }
 
-void PCScreen::ChangeSize(int aW, int aH)
+void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 {
+  // Set full screen or not
+  int fullScreen = 0;
+  if(aFullScreen)
+    fullScreen = SDL_WINDOW_FULLSCREEN;
+  SDL_SetWindowFullscreen(mWindow, fullScreen);
+  
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,        1);
   
   SDL_GL_SetAttribute(SDL_GL_RED_SIZE,            8);

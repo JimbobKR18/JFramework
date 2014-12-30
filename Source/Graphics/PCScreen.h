@@ -34,7 +34,7 @@ class PCScreen : public Screen
     virtual void DrawUI(std::vector<Surface*> const &aObjects);
     virtual void DebugDraw(std::vector<Surface*> const &aObjects);
     virtual void SwapBuffers();
-    virtual void ChangeSize(int aW, int aH);
+    virtual void ChangeSize(int aW, int aH, bool aFullScreen);
 
   private:
     void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, float &aXPosition, float &aYPosition, float &aZPosition);

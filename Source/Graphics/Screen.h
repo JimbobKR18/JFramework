@@ -24,7 +24,7 @@ public:
   // Batching
   void                    SortObjects(std::vector<Surface*> &aObjects);
 
-  virtual void            ChangeSize(int aW, int aH) = 0;
+  virtual void            ChangeSize(int aW, int aH, bool aFullScreen) = 0;
   virtual void            PreDraw() = 0;
   virtual void            Draw(std::vector<Surface*> const &aObjects) = 0;
   virtual void            DrawUI(std::vector<Surface*> const &aObjects) = 0;

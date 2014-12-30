@@ -42,21 +42,21 @@ Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoPar
 
 Level::~Level()
 {
-	if(mActive)
-	{
-		mObjects.clear();
-		mStaticObjects.clear();
-	}
-	else
+  if(mActive)
+  {
+    mObjects.clear();
+    mStaticObjects.clear();
+  }
+  else
     DeleteObjects();
 
-	if(mGenerator)
-	  delete mGenerator;
+  if(mGenerator)
+    delete mGenerator;
 }
 
 std::string Level::GetName() const
 {
-	return mName;
+  return mName;
 }
 
 LevelManager *Level::GetManager() const
@@ -387,6 +387,7 @@ void Level::ParseFile()
     manager->ParseObject(object);
     mObjects.push_back(object);
 
+    // TODO PhysicsObject serialization
     if(curRoot->Find("Transform"))
     {
       Root* transform = curRoot->Find("Transform");
