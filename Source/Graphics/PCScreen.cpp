@@ -12,12 +12,15 @@ PCScreen::PCScreen() : Screen()
 PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
-  mSurface = SDL_SetVideoMode(aW, aH, 32, SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
+  mWindow = SDL_CreateWindow("JFramework", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
+                             SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_GL_DOUBLEBUFFER | SDL_WINDOW_OPENGL);
+  mGLContext = SDL_GL_CreateContext(mWindow);
   ChangeSize(aW, aH);
 }
 
 PCScreen::~PCScreen()
 {
+  SDL_GL_DeleteContext(mGLContext);
   SDL_Quit();
 }
 
@@ -236,7 +239,7 @@ void PCScreen::DrawUI(std::vector<Surface*> const &aObjects)
 
 void PCScreen::SwapBuffers()
 {
-  SDL_GL_SwapBuffers();
+  SDL_GL_SwapWindow(mWindow);
 }
 
 void PCScreen::ChangeSize(int aW, int aH)

@@ -9,27 +9,30 @@ class Manager;
 class GameApp
 {
 private:
-	std::vector<Manager*> mManagers;
-	std::vector<Message*> mDelayedMessages;
-	Common::TimePoint     mLastFrame;
-	float                 mDT;
+  std::vector<Manager*> mManagers;
+  std::vector<Message*> mDelayedMessages;
+  Common::TimePoint     mLastFrame;
+  float                 mDT;
+  bool                  mActive;
 public:
-	GameApp(int aWidth, int aHeight);
-	virtual ~GameApp();
+  GameApp(int aWidth, int aHeight);
+  virtual ~GameApp();
 
-	float             GetDT() const;
-	void              AppStep();
-	virtual void      Update();
+  float             GetDT() const;
+  bool              GetActive() const;
+  void              SetActive(bool const aActive);
+  void              AppStep();
+  virtual void      Update();
   void              SendMessage(Message const &aMessage);
   void              SendMessageDelayed(Message *aMessage);
   void              Start();
-	void              AddManager(Manager* aManager);
-	Manager*          GetManager(std::string const &aName);
+  void              AddManager(Manager* aManager);
+  Manager*          GetManager(std::string const &aName);
 
-	template<typename T>
-	T*                GET() {return (T*)GetManager(T::GetName());}
+  template<typename T>
+  T*                GET() {return (T*)GetManager(T::GetName());}
 
-	static void       SerializeLUA();
+  static void       SerializeLUA();
 };
 
 #endif

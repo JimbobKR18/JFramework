@@ -20,6 +20,7 @@
 GameApp::GameApp(int aWidth, int aHeight)
 {
   mDT = 0;
+  mActive = true;
   mLastFrame = Common::GetNow();
 
   // All current managers added here
@@ -46,17 +47,27 @@ GameApp::GameApp(int aWidth, int aHeight)
 
 GameApp::~GameApp()
 {
-	for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
-	{
-		delete (*it);
-	}
+  for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+  {
+    delete (*it);
+  }
 
-	mManagers.clear();
+  mManagers.clear();
 }
 
 float GameApp::GetDT() const
 {
   return mDT;
+}
+
+bool GameApp::GetActive() const
+{
+  return mActive;
+}
+
+void GameApp::SetActive(bool const aActive)
+{
+  mActive = aActive;
 }
 
 void GameApp::AppStep()
@@ -92,9 +103,9 @@ void GameApp::Update()
 void GameApp::SendMessage(Message const &aMessage)
 {
   for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
-	{
+  {
     (*it)->SendMessage(aMessage);
-	}
+  }
 }
 
 void GameApp::SendMessageDelayed(Message *aMessage)
@@ -114,12 +125,12 @@ void GameApp::AddManager(Manager *aManager)
 
 Manager* GameApp::GetManager(std::string const &aName)
 {
-	for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
-	{
-		if((*it)->GetDefinedName() == aName)
-			return *it;
-	}
-	return NULL;
+  for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+  {
+    if((*it)->GetDefinedName() == aName)
+      return *it;
+  }
+  return NULL;
 }
 
 void GameApp::SerializeLUA()

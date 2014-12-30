@@ -10,8 +10,8 @@
 #define __JFramework__PCSound__
 
 #include "Sound.h"
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 class PCSound : public Sound
 {

@@ -14,7 +14,7 @@
 #if defined(_WIN32) || defined(__APPLE__)
   #include "SDL.h"
 #else
-  #include <SDL/SDL.h>
+  #include <SDL2/SDL.h>
 #endif
 
 class DebugManager : public Manager

@@ -16,6 +16,7 @@ private:
   std::string   mText;
   std::string   mFont;
   int           mSize;
+  int           mMaxWidth;
   Vector4       mForegroundColor;
   Vector4       mBackgroundColor;
 

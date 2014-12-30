@@ -13,8 +13,8 @@
 #else
   #include <GL/gl.h>
   #include <GL/glext.h>
-  #include <SDL/SDL.h>
-  #include <SDL/SDL_ttf.h>
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_ttf.h>
 #endif
 
 #include "Surface.h"
@@ -42,7 +42,7 @@ public:
 	virtual ~PCSurface();
 
 	void                LoadImage(std::string const &aName);
-	Vector3             LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize);
+	Vector3             LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
   // Batching
   unsigned            GetIndexValue() const;
   // Wrap Mode

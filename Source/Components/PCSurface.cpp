@@ -3,7 +3,7 @@
 #include "GraphicsManager.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL_image.h>
 #elif defined(__APPLE__)
 #include <SDL_image/SDL_image.h>
 #else
@@ -96,7 +96,7 @@ void PCSurface::LoadImage(std::string const &aName)
 }
 
 // Returns the size of the Text texture
-Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize)
+Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
 {
   // Endianness is important here
   Uint32 rmask, gmask, bmask, amask;
@@ -134,8 +134,8 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
     // Create text texture
     SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
     //SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
-    SDL_Surface *msg = TTF_RenderText_Blended(mFont, aText.c_str(), fgColor);
-    SDL_SetAlpha(msg, 0, 0);
+    SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(mFont, aText.c_str(), fgColor, aMaxWidth);
+    //SDL_SetAlpha(msg, 0, 0);
     assert(msg);
 
     mSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);

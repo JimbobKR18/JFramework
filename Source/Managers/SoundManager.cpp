@@ -15,13 +15,11 @@
 SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager")
 {
 #if !defined(ANDROID) && !defined(IOS)
-  int flags=MIX_INIT_OGG|MIX_INIT_MOD;
+  int flags=MIX_INIT_OGG;
   int initted = Mix_Init(flags);
   if((initted & flags) != flags)
   {
       printf("Mix_Init: %s\n", Mix_GetError());
-      assert(!"Could not initialize SDL_Mixer, aborting.");
-      // handle error
   }
   if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1)
   {

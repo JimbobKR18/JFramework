@@ -67,10 +67,20 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   {
     mText = aParser.Find("Text", "Value")->GetValue().ToString();
   }
+  
+  // Set a max width, otherwise default to screen width..
+  if(aParser.Find("MaxWidth"))
+  {
+    mMaxWidth = aParser.Find("MaxWidth", "Value")->GetValue().ToInt();
+  }
+  else
+  {
+    mMaxWidth = app->GET<GraphicsManager>()->GetScreen()->GetWidth();
+  }
 
 #if !defined(ANDROID) && !defined(IOS)
   PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateUISurface();
-  Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize);
+  Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
 #else
   Surface *surface = new Surface();
 #endif

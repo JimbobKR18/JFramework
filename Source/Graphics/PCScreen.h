@@ -15,13 +15,14 @@
 #else
   #include <GL/gl.h>
   #include <GL/glext.h>
-  #include <SDL/SDL.h>
+  #include <SDL2/SDL.h>
 #endif
 
 class PCScreen : public Screen
 {
   private:
-    SDL_Surface* mSurface;
+    SDL_Window*   mWindow;
+    SDL_GLContext mGLContext;
 
   public:
     PCScreen();
