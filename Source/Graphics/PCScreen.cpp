@@ -13,7 +13,7 @@ PCScreen::PCScreen() : Screen()
 PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
-  mWindow = SDL_CreateWindow("JFramework", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
+  mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
                              SDL_GL_DOUBLEBUFFER | SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
   ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
@@ -109,7 +109,6 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
     }
   }
 }
-
 
 void PCScreen::PreDraw()
 {

@@ -15,7 +15,7 @@ private:
   float                 mDT;
   bool                  mActive;
 public:
-  GameApp(int aWidth, int aHeight);
+  GameApp();
   virtual ~GameApp();
 
   float             GetDT() const;

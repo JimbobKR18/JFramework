@@ -17,7 +17,7 @@
 
 #define DT (1.0f/60.0f)
 
-GameApp::GameApp(int aWidth, int aHeight)
+GameApp::GameApp()
 {
   mDT = 0;
   mActive = true;
@@ -30,7 +30,7 @@ GameApp::GameApp(int aWidth, int aHeight)
   // You can add your own manager in your derived class from GameApp.
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
-  AddManager(new GraphicsManager(this, aWidth, aHeight));
+  AddManager(new GraphicsManager(this, Constants::GetFloat("ScreenWidth"), Constants::GetFloat("ScreenHeight")));
   AddManager(new LevelManager(this));
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));
