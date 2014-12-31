@@ -22,6 +22,9 @@ GameApp::GameApp(int aWidth, int aHeight)
   mDT = 0;
   mActive = true;
   mLastFrame = Common::GetNow();
+  
+  // Autoparses Game/Constants.txt
+  Constants::Deserialize();
 
   // All current managers added here
   // You can add your own manager in your derived class from GameApp.
@@ -40,9 +43,6 @@ GameApp::GameApp(int aWidth, int aHeight)
   // You can bind your own classes in your derived class from GameApp.
   LUABind::StaticGameApp::mApp = this;
   LUABind::RegisterClasses();
-
-  // Autoparses Game/Constants.txt
-  Constants::Deserialize();
 }
 
 GameApp::~GameApp()

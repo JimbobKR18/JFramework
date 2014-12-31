@@ -16,7 +16,7 @@ PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
   mWindow = SDL_CreateWindow("JFramework", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
                              SDL_GL_DOUBLEBUFFER | SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
-  ChangeSize(aW, aH, false);
+  ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
 }
 
 PCScreen::~PCScreen()
