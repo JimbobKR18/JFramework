@@ -46,6 +46,11 @@ int HashString::Length() const
   return Size();
 }
 
+bool HashString::Empty() const
+{
+  return mString.empty();
+}
+
 int HashString::Find(HashString const &aString) const
 {
   if(aString.Length() == 0)
@@ -229,6 +234,14 @@ HashString HashString::ToUpper() const
   }
   temp.Hash();
   return temp;
+}
+
+HashString HashString::ToLiteral() const
+{
+  HashString literal = "Literal(";
+  literal += mString;
+  literal += ")";
+  return literal;
 }
 
 void HashString::Hash()
