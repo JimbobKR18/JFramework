@@ -5,14 +5,14 @@
 #define DT (1.0f/60.0f)
 
 Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
-                     mColor(1,1,1,1), mFileName(""), mNoRender("false")
+                     mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender("false")
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NULL),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
-                                              mColor(1,1,1,1), mFileName(""), mNoRender("false")
+                                              mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender("false")
 {
   
 }
@@ -34,7 +34,7 @@ void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int
   if(mTexCoord)
     delete mTexCoord;
   
-  mTexCoord = new TextureCoordinates(aNumAnimations, aNumFrames, aAnimationSpeed);
+  mTexCoord = new TextureCoordinates(mTextureSize.x, mTextureSize.y, aNumAnimations, aNumFrames, aAnimationSpeed);
 }
 
 void Surface::SetAnimated(bool aAnimated)

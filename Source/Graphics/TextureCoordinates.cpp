@@ -8,20 +8,24 @@
 
 #include "TextureCoordinates.h"
 
-#define SETFRAMES() mXValues[0] = mCurFrame * mXGain; \
-                    mXValues[1] = (mCurFrame + 1) * mXGain; \
-                    mYValues[0] = mCurAnimation * mYGain; \
-                    mYValues[1] = (mCurAnimation + 1) * mYGain
+#define SETFRAMES() mXValues[0] = mCurFrame * mXGain + (0.5f / (float)mXSize); \
+                    mXValues[1] = (mCurFrame + 1) * mXGain - (0.5f / (float)mXSize); \
+                    mYValues[0] = mCurAnimation * mYGain + (0.5f / (float)mYSize); \
+                    mYValues[1] = (mCurAnimation + 1) * mYGain - (0.5f / (float)mYSize)
 
 TextureCoordinates::TextureCoordinates()
 {
   assert(0);
 }
-TextureCoordinates::TextureCoordinates(int const aNumAnimations,
+TextureCoordinates::TextureCoordinates(int const aXSize,
+                                       int const aYSize, 
+                                       int const aNumAnimations,
                                        std::vector<int> const aNumFrames,
                                        float aAnimationSpeed) : mCurFrame(0),
                                                                 mCurAnimation(0),
                                                                 mTotalFrames(0),
+                                                                mXSize(aXSize),
+                                                                mYSize(aYSize),
                                                                 mSpeed(aAnimationSpeed),
                                                                 mCurTime(0),
                                                                 mCompleted(false)

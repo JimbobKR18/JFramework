@@ -9,30 +9,30 @@
 class GraphicsManager : public Manager
 {
 private:
-	std::vector<Surface*>               mSurfaces;
-	std::vector<Surface*>               mUIElements;
+  std::vector<Surface*>               mSurfaces;
+  std::vector<Surface*>               mUIElements;
   std::map<std::string, TextureData>  mTextures;
-	Screen*                             mScreen;
+  Screen*                             mScreen;
 public:
   typedef std::vector<Surface*>::iterator SurfaceIT;
 
-	GraphicsManager(GameApp *aApp, int aWidth, int aHeight);
-	~GraphicsManager();
+  GraphicsManager(GameApp *aApp, int aWidth, int aHeight);
+  ~GraphicsManager();
 
   // Derived from Manager
-	virtual void        Update();
-	virtual void        SendMessage(Message const &aMessage);
+  virtual void        Update();
+  virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
-	static std::string  GetName() {return "GraphicsManager";}
+  static std::string  GetName() {return "GraphicsManager";}
 
   // Manager stuff
-	Surface*            CreateSurface();
-	Surface*            CreateUISurface();
-	void                DeleteSurface(Surface *aSurface);
+  Surface*            CreateSurface();
+  Surface*            CreateUISurface();
+  void                DeleteSurface(Surface *aSurface);
   void                AddSurface(Surface *aSurface);
   void                AddUISurface(Surface *aSurface);
-	void                RemoveSurface(Surface *aSurface);
-	void                ClearSurfaces();
+  void                RemoveSurface(Surface *aSurface);
+  void                ClearSurfaces();
 
   // Get the screen info
   Screen*             GetScreen();

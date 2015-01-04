@@ -18,6 +18,8 @@ private:
   int                         mCurFrame;
   int                         mCurAnimation;
   int                         mTotalFrames;
+  int                         mXSize;
+  int                         mYSize;
   float                       mSpeed;
   float                       mCurTime;
   float                       mXGain;
@@ -33,7 +35,7 @@ private:
   
 public:
   TextureCoordinates();
-  TextureCoordinates(int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed);
+  TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed);
   
   ~TextureCoordinates();
   

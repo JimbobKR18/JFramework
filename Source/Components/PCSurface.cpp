@@ -29,70 +29,72 @@ void PCSurface::LoadImage(std::string const &aName)
 {
   /* If the file was already loaded,
      let's avoid assigning a new id. */
-  unsigned id = GetManager()->GetTextureID(aName);
-  if(id != (unsigned)-1)
+  TextureData const& textureData = GetManager()->GetTextureData(aName);
+  if(textureData.mTextureID != (unsigned)-1)
   {
-    mTextureID = id;
+    mTextureID = textureData.mTextureID;
+    SetTextureSize(Vector3(textureData.mWidth, textureData.mHeight, 0));
   }
   // else we load the image from file
-	else if((mSurface = IMG_Load(Common::RelativePath("Art", aName).c_str())))
-	{
-		if ((mSurface->w & (mSurface->w - 1)) != 0 )
-		{
-			printf("warning: width of image: %s is not a power of 2\n", aName.c_str());
-		}
+  else if((mSurface = IMG_Load(Common::RelativePath("Art", aName).c_str())))
+  {
+    if ((mSurface->w & (mSurface->w - 1)) != 0 )
+    {
+      printf("warning: width of image: %s is not a power of 2\n", aName.c_str());
+    }
 
-		if ((mSurface->h & (mSurface->h - 1)) != 0 )
-		{
-			printf("warning: height of image: %s is not a power of 2\n", aName.c_str());
-		}
-
-		mNumberOfColors = mSurface->format->BytesPerPixel;
-		if (mNumberOfColors == 4)
-		{
-			if (mSurface->format->Rmask == 0x000000ff)
-				mTextureFormat = GL_RGBA;
-			else
+    if ((mSurface->h & (mSurface->h - 1)) != 0 )
+    {
+      printf("warning: height of image: %s is not a power of 2\n", aName.c_str());
+    }
+    
+    SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
+    mNumberOfColors = mSurface->format->BytesPerPixel;
+    if (mNumberOfColors == 4)
+    {
+      if (mSurface->format->Rmask == 0x000000ff)
+        mTextureFormat = GL_RGBA;
+      else
 #ifndef _WIN32
-				mTextureFormat = GL_BGRA;
+        mTextureFormat = GL_BGRA;
 #else
-				mTextureFormat = GL_RGBA;
+        mTextureFormat = GL_RGBA;
 #endif
-		}
-		else if (mNumberOfColors == 3)
-		{
-			if (mSurface->format->Rmask == 0x000000ff)
-				mTextureFormat = GL_RGB;
-			else
+    }
+    else if (mNumberOfColors == 3)
+    {
+      if (mSurface->format->Rmask == 0x000000ff)
+        mTextureFormat = GL_RGB;
+      else
 #ifndef _WIN32
-				mTextureFormat = GL_BGR;
+        mTextureFormat = GL_BGR;
 #else
-				mTextureFormat = GL_RGB;
+        mTextureFormat = GL_RGB;
 #endif
-		}
-		else
-		{
-			printf("warning: image %s is not truecolor..  this will probably break\n", aName.c_str());
-		}
+    }
+    else
+    {
+      printf("warning: image %s is not truecolor..  this will probably break\n", aName.c_str());
+    }
 
-		glGenTextures(1, &mTextureID);
+    glGenTextures(1, &mTextureID);
 
-		glBindTexture(GL_TEXTURE_2D, mTextureID);
+    glBindTexture(GL_TEXTURE_2D, mTextureID);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mWrapMode);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mWrapMode);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
-						  mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
+              mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
     
     GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
-	}
-	else
-	{
-		printf("warning: file: %s not found or incompatible format, check this out\n", aName.c_str());
-	}
+  }
+  else
+  {
+    printf("warning: file: %s not found or incompatible format, check this out\n", aName.c_str());
+  }
 }
 
 // Returns the size of the Text texture
@@ -138,6 +140,7 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
     assert(msg);
 
     mSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
+    SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
     SDL_BlitSurface(msg, NULL, mSurface, NULL);
 
     glGenTextures(1, &mTextureID);

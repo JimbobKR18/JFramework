@@ -81,12 +81,12 @@ void GraphicsManager::AddSurface(Surface *aSurface)
   // Check to see if object is in our list
   SurfaceIT end = mSurfaces.end();
   for(SurfaceIT it = mSurfaces.begin(); it != end; ++it)
-	{
-		if(*it == aSurface)
-		{
-			return;
-		}
-	}
+  {
+    if(*it == aSurface)
+    {
+      return;
+    }
+  }
   
   mSurfaces.push_back(aSurface);
 }
@@ -110,13 +110,13 @@ void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
   SurfaceIT end = mSurfaces.end();
   for(SurfaceIT it = mSurfaces.begin(); it != end; ++it)
-	{
-		if(*it == aSurface)
-		{
-			mSurfaces.erase(it);
-			break;
-		}
-	}
+  {
+    if(*it == aSurface)
+    {
+      mSurfaces.erase(it);
+      break;
+    }
+  }
 
   end = mUIElements.end();
   for(SurfaceIT it = mUIElements.begin(); it != end; ++it)

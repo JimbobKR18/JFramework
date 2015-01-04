@@ -19,24 +19,26 @@ private:
   TextureCoordinates* mTexCoord;
   GraphicsManager*    mManager;
   Viewspace           mViewmode;
+  Vector3             mTextureSize;
   Vector4             mColor;
   std::string         mFileName;
   bool                mNoRender;
 public:
-	Surface();
-	Surface(GraphicsManager *aManager);
-	virtual ~Surface();
+  Surface();
+  Surface(GraphicsManager *aManager);
+  virtual ~Surface();
 
-	// Getters
-	GraphicsManager*    GetManager() const { return mManager; }
-	Viewspace           GetViewMode() const { return mViewmode; }
-	Vector4&            GetColor() { return mColor; }
-	std::string         GetFileName() { return mFileName; }
+  // Getters
+  GraphicsManager*    GetManager() const { return mManager; }
+  Viewspace           GetViewMode() const { return mViewmode; }
+  Vector4&            GetColor() { return mColor; }
+  std::string         GetFileName() { return mFileName; }
 
-	// Setters
-	void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
-	void                SetColor(Vector4 const& aColor) { mColor = aColor; }
-	void                SetFileName(std::string const& aFileName) { mFileName = aFileName; }
+  // Setters
+  void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
+  void                SetTextureSize(Vector3 const& aTextureSize) { mTextureSize = aTextureSize; }
+  void                SetColor(Vector4 const& aColor) { mColor = aColor; }
+  void                SetFileName(std::string const& aFileName) { mFileName = aFileName; }
   
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;
@@ -48,15 +50,15 @@ public:
   bool                CurrentAnimationCompleted();
   
   // Batching
-	virtual unsigned    GetTextureID() const = 0;
+  virtual unsigned    GetTextureID() const = 0;
   
   // Derived from Component
-	void                Update();
-	void                SendMessage(Message const &aMessage);
-	void                ReceiveMessage(Message const &aMessage);
+  void                Update();
+  void                SendMessage(Message const &aMessage);
+  void                ReceiveMessage(Message const &aMessage);
   void                Serialize(Parser &aParser);
   void                Deserialize(Parser &aParser);
-	static std::string  GetName() {return "Surface";}
+  static std::string  GetName() {return "Surface";}
 };
 
 #endif
