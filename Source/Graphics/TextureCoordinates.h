@@ -17,12 +17,11 @@ class TextureCoordinates
 private:
   int                         mCurFrame;
   int                         mCurAnimation;
-  int                         mNumAnimations;
   int                         mTotalFrames;
   float                       mSpeed;
+  float                       mCurTime;
   float                       mXGain;
   float                       mYGain;
-  float                       mCurTime;
   float                       mXValues[2];
   float                       mYValues[2];
   bool                        mAnimated;
@@ -43,6 +42,7 @@ public:
   // GETTERS
   float GetXValue(int aValue) const;
   float GetYValue(int aValue) const;
+  float GetAnimationSpeed() const;
   int   GetCurrentAnimation() const;
   int   GetNumberofAnimations() const;
   int   GetTotalFrames() const;

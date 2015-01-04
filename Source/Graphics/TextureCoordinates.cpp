@@ -21,7 +21,6 @@ TextureCoordinates::TextureCoordinates(int const aNumAnimations,
                                        std::vector<int> const aNumFrames,
                                        float aAnimationSpeed) : mCurFrame(0),
                                                                 mCurAnimation(0),
-                                                                mNumAnimations(aNumAnimations),
                                                                 mTotalFrames(0),
                                                                 mSpeed(aAnimationSpeed),
                                                                 mCurTime(0),
@@ -90,6 +89,11 @@ float TextureCoordinates::GetXValue(int aValue) const
 float TextureCoordinates::GetYValue(int aValue) const
 {
   return mYValues[aValue];
+}
+
+float TextureCoordinates::GetAnimationSpeed() const
+{
+  return mSpeed;
 }
 
 int TextureCoordinates::GetCurrentAnimation() const

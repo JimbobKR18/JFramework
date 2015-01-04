@@ -93,6 +93,7 @@ void Surface::Serialize(Parser &aParser)
   std::vector<int> animations;
   bool animated = coords->GetAnimated();
   int numanimations = coords->GetNumberofAnimations();
+  float animationSpeed = coords->GetAnimationSpeed();
   char const* values[4] = { "ColorR",
                             "ColorG",
                             "ColorB",
@@ -110,7 +111,7 @@ void Surface::Serialize(Parser &aParser)
     object->Place("Surface", "FrameNumbers", Common::IntVectorToString(animations));
   }
   object->Place("Surface", "Animated", Common::BoolToString(animated));
-
+  object->Place("Surface", "AnimationSpeed", Common::FloatToString(animationSpeed));
   object->Place("Surface", "NoRender", Common::BoolToString(mNoRender));
   for(int i = 0; i < 4; ++i)
   {
