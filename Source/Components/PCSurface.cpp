@@ -117,8 +117,10 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
   TextureData const& data = GetManager()->GetTextureData(aText);
   if(data.mTextureID != (unsigned)-1)
   {
+    Vector3 size = Vector3(data.mWidth, data.mHeight, 0);
     mTextureID = data.mTextureID;
-    return Vector3(data.mWidth, data.mHeight, 0);
+    SetTextureSize(size);
+    return size;
   }
   else
   {
