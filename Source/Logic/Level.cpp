@@ -331,7 +331,9 @@ void Level::Serialize(Parser &aParser)
 {
   int curIndex = 0;
   std::string object = "Object_";
-  mGenerator->Serialize(aParser);
+  
+  if(mGenerator)
+    mGenerator->Serialize(aParser);
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it, ++curIndex)
   {
     std::string objectString = object + Common::IntToString(curIndex);
@@ -356,6 +358,11 @@ void Level::Serialize(Parser &aParser)
 
 void Level::SerializeTileMap(Parser &aParser)
 {
+  if(!mGenerator)
+  {
+    printf("No TileMapGenerator available to Serialize in Level::SerializeTileMap");
+    return;
+  }
   aParser.Place("MapArtData", Common::IntVectorToString(mGenerator->GetArtTiles()));
   aParser.Place("Collision", Common::IntVectorToString(mGenerator->GetCollisionTiles()));
 }

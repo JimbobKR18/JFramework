@@ -34,6 +34,9 @@ class Parser
     void          Place(std::string const &aElement, std::string const &aValue);
     void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
     virtual void  Write() = 0;
+    
+  private:
+    Root*         SetUpTree(Root* aBase, std::vector<HashString> const &aStringHierarchy); 
 };
 
 #endif

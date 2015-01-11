@@ -43,17 +43,15 @@ Root* Parser::Find(std::string const &aElement)
 Root* Parser::Find(std::string const &aRoot, std::string const &aElement)
 {
   // Find node and search it for an element
-  unsigned curLevel = 0;
   std::vector<HashString> splitString = HashString(aRoot).Split("/");
   Root *node = mDictionary->Find(splitString[0]);
 
   if(!node)
     return nullptr;
 
-  while(curLevel < splitString.size() - 1)
+  for(unsigned curLevel = 0; curLevel < splitString.size(); ++curLevel)
   {
     node = node->Find(splitString[curLevel]);
-    ++curLevel;
     if(!node)
       return nullptr;
   }
@@ -65,26 +63,36 @@ Root* Parser::Find(std::string const &aRoot, std::string const &aElement)
 // Writing
 void Parser::Place(std::string const &aElement, std::string const &aValue)
 {
-  Root* newRoot = mDictionary->Find(aElement);
-  if(!newRoot)
-  {
-    newRoot = new Root();
-    mDictionary->Insert(newRoot);
-    newRoot->SetParent(mDictionary);
-  }
-  newRoot->SetName(aElement);
+  Root* newRoot = SetUpTree(mDictionary, HashString(aElement).Split("/"));
   newRoot->SetValue(aValue);
 }
 
 void Parser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
-  Root* newRoot = mDictionary->Find(aRoot)->Find(aElement);
-  if(!newRoot)
-  {
-    newRoot = new Root();
-    mDictionary->Find(aRoot)->Insert(newRoot);
-    newRoot->SetParent(mDictionary->Find(aRoot));
-  }
-  newRoot->SetName(aElement);
+  Root* newNodes = SetUpTree(mDictionary, HashString(aRoot).Split("/"));
+  Root* newRoot = SetUpTree(newNodes, HashString(aElement).Split("/"));
   newRoot->SetValue(aValue);
+}
+
+// Returns the deepest node.
+Root* Parser::SetUpTree(Root* aBase, std::vector<HashString> const &aStringHierarchy)
+{
+  Root* current = aBase;
+  Root* ret = nullptr;
+  
+  for(int i = 0; i < aStringHierarchy.size(); ++i)
+  {
+    Root* next = current->Find(aStringHierarchy[i]);
+    if(!next)
+    {
+      next = new Root();
+      current->Insert(next);
+      next->SetParent(current);
+      next->SetName(aStringHierarchy[i]);
+    }
+    ret = next;
+    current = next;
+  }
+  
+  return ret;
 }
