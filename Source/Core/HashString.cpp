@@ -67,21 +67,17 @@ HashString HashString::SubString(int aStart, int aLength) const
 std::vector<HashString> HashString::Split(HashString const &aDelimiter) const
 {
   std::vector<HashString> ret;
-  unsigned curPos = 0;
   unsigned nextMatch = mString.find(aDelimiter.mString);
+  unsigned lastMatch = 0;
 
-  // Catch all in case no delimiter
-  if(nextMatch == (unsigned)std::string::npos)
-  {
-    ret.push_back(mString);
-  }
   // Find delimiter and split
   while(nextMatch != (unsigned)std::string::npos)
   {
-    ret.push_back(HashString(mString, curPos, nextMatch));
-    curPos = nextMatch + 1;
-    nextMatch = mString.find(aDelimiter.mString, curPos);
+    ret.push_back(HashString(mString, lastMatch, nextMatch-1));
+    lastMatch = nextMatch + 1;
+    nextMatch = mString.find(aDelimiter.mString, nextMatch+1);
   }
+  ret.push_back(HashString(mString, lastMatch, mString.size()-1));
   return ret;
 }
 
