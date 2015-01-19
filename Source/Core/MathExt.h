@@ -68,6 +68,7 @@ struct Vector3
   void    operator/=(float const aMultiplier);
 
   static void SerializeLUA();
+  static std::string GetName();
 };
 
 struct Vector4
@@ -110,6 +111,7 @@ struct Vector4
   void    operator/=(float const aMultiplier);
 
   static void SerializeLUA();
+  static std::string GetName();
 };
 
 struct Matrix33
@@ -207,41 +209,6 @@ struct Line : public Shape
   bool GetCollisions(Line const &aCompare, Circle &aOutput);
   
   virtual float GetSize(int index);
-};
-
-template<typename T>
-class Interpolation
-{
-private:
-  T*      mCurrent;
-  T       mStart;
-  T       mFinish;
-  T       mRate;
-  float   mTime;
-  float   mCurrentTime;
-
-public:
-  Interpolation(T* aStart, T const& aFinish, float aTime) : mCurrent(aStart), mStart(*aStart), mFinish(aFinish), mTime(aTime), mCurrentTime(0)
-  {
-    mRate = mFinish - mStart;
-  }
-  virtual ~Interpolation() {}
-
-  void Update(float aDT)
-  {
-    mCurrentTime += aDT;
-
-    if(mCurrentTime < mTime)
-    {
-      float percentage = mCurrentTime / mTime;
-      (*mCurrent) = mStart + (mRate * percentage);
-    }
-  }
-
-  bool IsComplete()
-  {
-    return mCurrentTime >= mTime;
-  }
 };
 
 template<typename T>

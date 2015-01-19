@@ -225,7 +225,8 @@ void Vector3::operator/=(float const aMultiplier)
 
 void Vector3::SerializeLUA()
 {
-  SLB::Class<Vector3>("Vector3").constructor<float, float, float>().set("x", &Vector3::x)
+  SLB::Class<Vector3>("Vector3").constructor<float, float, float>()
+      .set("x", &Vector3::x)
       .set("y", &Vector3::y)
       .set("z", &Vector3::z)
       .set("length", &Vector3::length)
@@ -237,6 +238,11 @@ void Vector3::SerializeLUA()
       .set("Cross", &Vector3::Cross)
       .set("Project", &Vector3::Project)
       .set("Invert", &Vector3::Invert);
+}
+
+std::string Vector3::GetName()
+{
+  return "Vector3";
 }
 
 //------------------------------
@@ -444,6 +450,11 @@ void Vector4::SerializeLUA()
       .set("Cross", &Vector4::Cross)
       .set("Project", &Vector4::Project)
       .set("Invert", &Vector4::Invert);
+}
+
+std::string Vector4::GetName()
+{
+  return "Vector4";
 }
 
 //-----------------------------

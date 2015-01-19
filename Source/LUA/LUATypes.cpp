@@ -14,6 +14,7 @@
 #include "Managers/SoundManager.h"
 #include "Core/MathExt.h"
 #include "Logic/Level.h"
+#include "Core/Interpolation.h"
 
 #ifdef PC
 #include "Components/PCSurface.h"
@@ -49,6 +50,10 @@ namespace LUABind
   {
     // Vector3
     Vector3::SerializeLUA();
+    
+    // Interpolation
+    Interpolation<Vector3>::SerializeLUA();
+    Interpolation<Vector4>::SerializeLUA();
 
     // Transform
     Transform::SerializeLUA();
