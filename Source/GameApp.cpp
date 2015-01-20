@@ -139,5 +139,6 @@ void GameApp::SerializeLUA()
           .set("GetManager", &GameApp::GetManager)
           .set("GetLevelManager", &GameApp::GET<LevelManager>)
           .set("GetObjectManager", &GameApp::GET<ObjectManager>)
-          .set("GetSoundManager", &GameApp::GET<SoundManager>);
+          .set("GetSoundManager", &GameApp::GET<SoundManager>)
+          .set("GetDT", &GameApp::GetDT);
 }
