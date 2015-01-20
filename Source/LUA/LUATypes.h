@@ -59,7 +59,14 @@ namespace LUABind
       // Get the state and call the function
       lua_State *state = getState();
       SLB::LuaCall<void(T)> call(state, aFunctionName.c_str());
-      call(param);
+      try
+      {
+        call(param);
+      }
+      catch(...)
+      {
+        assert(!aFunctionName.c_str());
+      }
       return true;
     }
   };

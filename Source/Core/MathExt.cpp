@@ -5,47 +5,47 @@
 // Helpful print functions
 void print_matrix(Matrix33 const &_matrix)
 {
-  printf("MATRIX:\n");
+  DebugLogPrint("MATRIX:\n");
   for (int i = 0; i < 3; ++i)
   {
-    printf("ROW%d:", i);
+    DebugLogPrint("ROW%d:", i);
     for (int j = 0; j < 3; ++j)
     {
-      printf(" %f ", _matrix.values[i][j]);
+      DebugLogPrint(" %f ", _matrix.values[i][j]);
     }
-    printf("\n");
+    DebugLogPrint("\n");
   }
-  printf("DETERMINANT: %f\n", _matrix.Determinant());
+  DebugLogPrint("DETERMINANT: %f\n", _matrix.Determinant());
 }
 
 void print_vector(Vector3 const &_point)
 {
-  printf("VECTOR:\n");
-  printf("X: %f, Y: %f, Z: %f\n", _point.x, _point.y, _point.z);
+  DebugLogPrint("VECTOR:\n");
+  DebugLogPrint("X: %f, Y: %f, Z: %f\n", _point.x, _point.y, _point.z);
 }
 
 void print_line(Line const &_line)
 {
-  printf("LINE:\n");
-  printf("POSITION:\n");
+  DebugLogPrint("LINE:\n");
+  DebugLogPrint("POSITION:\n");
   print_vector(_line.position);
-  printf("LENGTH: %f\n", _line.length);
+  DebugLogPrint("LENGTH: %f\n", _line.length);
 }
 
 void print_circle(Circle const &_circle)
 {
-  printf("\n");
-  printf("-------------------------\n");
-  printf("RESULTS:\n");
-  printf("-------------------------\n");
-  printf("CIRCLE:\n");
-  printf("POSITION:\n");
+  DebugLogPrint("\n");
+  DebugLogPrint("-------------------------\n");
+  DebugLogPrint("RESULTS:\n");
+  DebugLogPrint("-------------------------\n");
+  DebugLogPrint("CIRCLE:\n");
+  DebugLogPrint("POSITION:\n");
   print_vector(_circle.position);
-  printf("UP:\n");
+  DebugLogPrint("UP:\n");
   print_vector(_circle.up);
-  printf("RIGHT:\n");
+  DebugLogPrint("RIGHT:\n");
   print_vector(_circle.right);
-  printf("RADIUS: %f\n", _circle.radius);
+  DebugLogPrint("RADIUS: %f\n", _circle.radius);
 }
 
 //--------------------------------
@@ -826,15 +826,15 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
       aOutput.radius = length;
       aOutput.up = Vector3(0, 1, 0);
       aOutput.right = Vector3(0, 0, 1);
-      printf("Same exact sphere, gonna return false\n\n");
+      DebugLogPrint("Same exact sphere, gonna return false\n\n");
     }
     else
     {
-      printf("One sphere is inside of another, WAT\n");
-      printf("Therefore, cannot touch, gonna return false\n\n");
+      DebugLogPrint("One sphere is inside of another, WAT\n");
+      DebugLogPrint("Therefore, cannot touch, gonna return false\n\n");
     }
     print_circle(aOutput);
-    printf("\n\n");
+    DebugLogPrint("\n\n");
     return false;
   }
 
@@ -906,8 +906,7 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
     float smallerLen = length >= aCompare.length ? aCompare.length : length;
     d = smallerPos - largerPos;
 
-    printf(
-        "The radii barely touch, will still return true, but radius is zero\n");
+    DebugLogPrint("The radii barely touch, will still return true, but radius is zero\n");
     aOutput.position = smallerPos - (d.normalize() * smallerLen);
     aOutput.radius = 0;
     aOutput.up = Vector3(0, 1, 0);
@@ -923,8 +922,7 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
     float smallerLen = length >= aCompare.length ? aCompare.length : length;
     d = smallerPos - largerPos;
 
-    printf(
-        "The radii barely touch, will still return true, but radius is zero\n");
+    DebugLogPrint("The radii barely touch, will still return true, but radius is zero\n");
     aOutput.position = smallerPos + (d.normalize() * smallerLen);
     aOutput.radius = 0;
     aOutput.up = Vector3(0, 1, 0);
@@ -932,12 +930,12 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
   }
   else
   {
-    printf("These LineSegments can never touch. Returning false.\n\n");
+    DebugLogPrint("These LineSegments can never touch. Returning false.\n\n");
     return false;
   }
 
   print_circle(aOutput);
-  printf("\n\n");
+  DebugLogPrint("\n\n");
   return true;
 }
 

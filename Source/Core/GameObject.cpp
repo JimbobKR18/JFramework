@@ -173,5 +173,5 @@ void GameObject::SerializeLUA()
 
 void GameObject::Interact(GameObject *aObject) 
 { 
-  printf("%s collided into %s", mName.c_str(), aObject->GetName().c_str()); 
+  DebugLogPrint("%s collided into %s", mName.c_str(), aObject->GetName().c_str()); 
 }

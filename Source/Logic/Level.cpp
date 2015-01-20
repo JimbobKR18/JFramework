@@ -360,7 +360,7 @@ void Level::SerializeTileMap(Parser &aParser)
 {
   if(!mGenerator)
   {
-    printf("No TileMapGenerator available to Serialize in Level::SerializeTileMap");
+    DebugLogPrint("No TileMapGenerator available to Serialize in Level::SerializeTileMap");
     return;
   }
   aParser.Place("MapArtData", Common::IntVectorToString(mGenerator->GetArtTiles()));

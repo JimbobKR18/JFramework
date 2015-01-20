@@ -40,12 +40,12 @@ void PCSurface::LoadImage(std::string const &aName)
   {
     if ((mSurface->w & (mSurface->w - 1)) != 0 )
     {
-      printf("warning: width of image: %s is not a power of 2\n", aName.c_str());
+      DebugLogPrint("warning: width of image: %s is not a power of 2\n", aName.c_str());
     }
 
     if ((mSurface->h & (mSurface->h - 1)) != 0 )
     {
-      printf("warning: height of image: %s is not a power of 2\n", aName.c_str());
+      DebugLogPrint("warning: height of image: %s is not a power of 2\n", aName.c_str());
     }
     
     SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
@@ -74,7 +74,7 @@ void PCSurface::LoadImage(std::string const &aName)
     }
     else
     {
-      printf("warning: image %s is not truecolor..  this will probably break\n", aName.c_str());
+      DebugLogPrint("warning: image %s is not truecolor..  this will probably break\n", aName.c_str());
     }
 
     glGenTextures(1, &mTextureID);
@@ -93,7 +93,7 @@ void PCSurface::LoadImage(std::string const &aName)
   }
   else
   {
-    printf("warning: file: %s not found or incompatible format, check this out\n", aName.c_str());
+    DebugLogPrint("warning: file: %s not found or incompatible format, check this out\n", aName.c_str());
   }
 }
 
@@ -130,8 +130,8 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
     if(!mFont)
     {
       mFont = NULL;
-      printf("warning: file not found or incompatible format, check this out\n");
-      printf("%s", TTF_GetError());
+      DebugLogPrint("warning: file not found or incompatible format, check this out\n");
+      DebugLogPrint("%s", TTF_GetError());
       return Vector3(0, 0, 0);
     }
 

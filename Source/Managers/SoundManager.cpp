@@ -19,11 +19,11 @@ SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager")
   int initted = Mix_Init(flags);
   if((initted & flags) != flags)
   {
-      printf("Mix_Init: %s\n", Mix_GetError());
+      DebugLogPrint("Mix_Init: %s\n", Mix_GetError());
   }
   if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1)
   {
-      printf("Mix_OpenAudio: %s\n", Mix_GetError());
+      DebugLogPrint("Mix_OpenAudio: %s\n", Mix_GetError());
       assert(!"Could not open SDL_Mix OpenAudio, aborting.");
   }
 #endif
