@@ -12,6 +12,7 @@
 #include "Component.h"
 #include "PhysicsWorld.h"
 #include "MathExt.h"
+#include "Shape.h"
 
 class PhysicsObject : public Component
 {

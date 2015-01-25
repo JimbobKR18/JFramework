@@ -2,6 +2,7 @@
 #define __JFramework_CollisionPair_h_
 
 #include "MathExt.h"
+#include "Shape.h"
 
 class PhysicsObject;
 

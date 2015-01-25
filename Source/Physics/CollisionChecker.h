@@ -16,15 +16,18 @@
 class CollisionChecker
 {
 public:
-	// Check if objects are actually colliding.
-	static std::vector<CollisionPair> CheckShapeCollision(PotentialPair const &aPair);
-	static bool CheckLineCollision(Line const &aSegment, Transform* aTransform, Shape* aShape);
-
+  // Check if objects are actually colliding.
+  static std::vector<CollisionPair> CheckShapeCollision(PotentialPair const &aPair);
+  static bool CheckLineCollision(Line const &aSegment, Transform* aTransform, Shape* aShape);
+  
 private:
-	// Shape specific functions that shouldn't be visible.
-	static bool CheckSphereToSphere(CollisionPair &aPair);
+  // Shape specific functions that shouldn't be visible.
+  static bool CheckSphereToSphere(CollisionPair &aPair);
   static bool CheckSphereToCube(CollisionPair &aPair);
   static bool CheckCubeToCube(CollisionPair &aPair);
+  static bool CheckTriangleToSphere(CollisionPair &aPair);
+  static bool CheckTriangleToCube(CollisionPair &aPair);
+  static bool CheckTriangleToTriangle(CollisionPair &aPair);
 
   // Line functions, also not visible.
   static bool CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape);

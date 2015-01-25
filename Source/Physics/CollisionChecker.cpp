@@ -33,6 +33,9 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::CUBE:
           collided = CheckSphereToCube(potentialPair);
           break;
+        case Shape::TRIANGLE:
+          collided = CheckTriangleToSphere(potentialPair);
+          break;
         default:
           break;
         }
@@ -45,6 +48,25 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
           break;
         case Shape::CUBE:
           collided = CheckCubeToCube(potentialPair);
+          break;
+        case Shape::TRIANGLE:
+          collided = CheckTriangleToCube(potentialPair);
+          break;
+        default:
+          break;
+        }
+        break;
+      case Shape::TRIANGLE:
+        switch((*it2)->shape)
+        {
+        case Shape::SPHERE:
+          collided = CheckTriangleToSphere(potentialPair);
+          break;
+        case Shape::CUBE:
+          collided = CheckTriangleToCube(potentialPair);
+          break;
+        case Shape::TRIANGLE:
+          collided = CheckTriangleToTriangle(potentialPair);
           break;
         default:
           break;
@@ -146,22 +168,101 @@ bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
   return xCheck && yCheck && zCheck;
 }
 
+/* http://realtimecollisiondetection.net/blog/?p=103 */
+bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::SPHERE)
+    aPair.Switch();
+    
+  Triangle* triangle = (Triangle*)aPair.mShapes[0];
+  Sphere* sphere = (Sphere*)aPair.mShapes[1];
+  Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 spherePos = sphere->position + sphereTransform->GetPosition();
+  for(int i = 0; i < 3; ++i)
+  {
+    // Trivial intersection of vertices test
+    Vector3 vecPos = triTransform->GetPosition() + triangle->points[i];
+    Vector3 dist = vecPos - spherePos;
+    if(dist.length() < sphere->GetSize(0))
+    {
+      return true;
+    }
+    
+    // Line segment test
+    int j = i + 1;
+    if (j > 2)
+      j = 0;
+    
+    Line line(vecPos, triTransform->GetPosition() + triangle->points[j]);
+    if(CheckLineToSphere(line, sphereTransform, sphere))
+    {
+      return true;
+    }
+    
+    // TODO Check if sphere inside of triangle
+  }
+  return false;
+}
+
+bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::CUBE)
+    aPair.Switch();
+    
+  Triangle* triangle = (Triangle*)aPair.mShapes[0];
+  Cube* cube = (Cube*)aPair.mShapes[1];
+  Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 cubePos = cube->position + cubeTransform->GetPosition();
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    // Trivial intersection of vertices test
+    Vector3 vecPos = triTransform->GetPosition() + triangle->points[i];
+    Vector3 dist = vecPos - cubePos;
+    
+    // Separating axis test
+    bool xCheck = fabs(dist.x) <= aPair.mShapes[1]->GetSize(0);
+    bool yCheck = fabs(dist.y) <= aPair.mShapes[1]->GetSize(1);
+    bool zCheck = fabs(dist.z) <= aPair.mShapes[1]->GetSize(2);
+
+    if(xCheck && yCheck && zCheck)
+      return true;
+    
+    // Line segment test
+    int j = i + 1;
+    if (j > 2)
+      j = 0;
+    
+    Line line(vecPos, triTransform->GetPosition() + triangle->points[j]);
+    if(CheckLineToCube(line, cubeTransform, cube))
+    {
+      return true;
+    }
+    
+    // TODO Check if cube inside of triangle
+  }
+    
+  return false;
+}
+
+bool CollisionChecker::CheckTriangleToTriangle(CollisionPair &aPair)
+{
+  // TODO
+  return false;
+}
+
 bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape)
 {
-  // http://bit.ly/1uFUfXK
-  Vector3 end = aSegment.position + (aSegment.direction * aSegment.length);
-  Vector3 position = aSphere->GetPosition() + aShape->position;
   float radius = aShape->GetSize(0);
-  Vector3 direction = (end - aSegment.position).normalize();
-  Vector3 oc = aSegment.position - position;
-  float l = (direction.Dot(oc));
-  float d = (l * l) - (oc.length() * oc.length()) + (radius * radius);
-  return d >= 0.0f;
+  Vector3 closestPoint = aSegment.ClosestPointToPoint(aSphere->GetPosition() + aShape->position);
+  return (closestPoint - (aSphere->GetPosition() + aShape->position)).length() < radius;
 }
 
 bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, Shape* aShape)
 {
-  // http://bit.ly/1p1SX3G
+  /*// http://bit.ly/1p1SX3G
   const int RIGHT = 0;
   const int LEFT = 1;
   const int CENTER = 2;
@@ -182,7 +283,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
 
   /* Find candidate planes; this loop can be avoided if
       rays cast all from the eye(assume perspective view) */
-  for(int i = 0; i < 3; ++i)
+  /*for(int i = 0; i < 3; ++i)
   {
     if(position[i] < min[i])
     {
@@ -210,7 +311,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Calculate T distances to candidate planes */
-  for(int i = 0; i < 3; ++i)
+  /*for(int i = 0; i < 3; ++i)
   {
     if(quadrant[i] != CENTER && direction[i] != 0)
     {
@@ -223,7 +324,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Get largest of the maxT's for final choice of intersection */
-  whichPlane = 0;
+  /*whichPlane = 0;
   for(int i = 1; i < 3; ++i)
   {
     if(maxT[whichPlane] < maxT[i])
@@ -233,7 +334,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Check final candidate actually inside box */
-  if(maxT[whichPlane] < 0) return false;
+  /*if(maxT[whichPlane] < 0) return false;
   for(int i = 0; i < 3; ++i)
   {
     if(whichPlane != i)
@@ -250,6 +351,65 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
     }
   }
 
-  return true;
+  return true; false;
+    }
+    else
+    {
+      quadrant[i] = CENTER;
+    }
+  }
+
+  // Line origin inside cube
+  if(inside)
+  {
+    collision = aSegment.position;
+    return true;
+  }
+
+  /* Calculate T distances to candidate planes */
+  /*for(int i = 0; i < 3; ++i)
+  {
+    if(quadrant[i] != CENTER && direction[i] != 0)
+    {
+      maxT[i] = (candidatePlane[i] - position[i]) / direction[i];
+    }
+    else
+    {
+      maxT[i] = -1.0f;
+    }
+  }
+
+  /* Get largest of the maxT's for final choice of intersection */
+  /*whichPlane = 0;
+  for(int i = 1; i < 3; ++i)
+  {
+    if(maxT[whichPlane] < maxT[i])
+    {
+      whichPlane = i;
+    }
+  }
+
+  /* Check final candidate actually inside box */
+  /*if(maxT[whichPlane] < 0) return false;
+  for(int i = 0; i < 3; ++i)
+  {
+    if(whichPlane != i)
+    {
+      collision[i] = position[i] + maxT[whichPlane] * direction[i];
+      if(collision[i] < min[i] || collision[i] > max[i])
+      {
+        return false;
+      }
+    }
+    else
+    {
+        collision[i] = candidatePlane[i];
+    }
+  }
+
+  return true;*/
+  
+  // TODO broken
+  return false;
 }
 

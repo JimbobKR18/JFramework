@@ -2,6 +2,7 @@
 #define MENUBUTTON_H
 
 #include "MathExt.h"
+#include "Shape.h"
 #include "MenuImage.h"
 
 class MenuButton: public MenuImage

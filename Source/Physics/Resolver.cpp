@@ -169,6 +169,9 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::CUBE:
       CalculateSphereToCube(aPair);
       break;
+    case Shape::TRIANGLE:
+      CalculateTriangleToSphere(aPair);
+      break;
     default:
       break;
     }
@@ -181,6 +184,25 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       break;
     case Shape::CUBE:
       CalculateCubeToCube(aPair);
+      break;
+    case Shape::TRIANGLE:
+      CalculateTriangleToCube(aPair);
+      break;
+    default:
+      break;
+    }
+    break;
+  case Shape::TRIANGLE:
+    switch(aPair.mShapes[1]->shape)
+    {
+    case Shape::SPHERE:
+      CalculateTriangleToSphere(aPair);
+      break;
+    case Shape::CUBE:
+      CalculateTriangleToCube(aPair);
+      break;
+    case Shape::TRIANGLE:
+      CalculateTriangleToTriangle(aPair);
       break;
     default:
       break;
@@ -290,4 +312,58 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
+}
+
+void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
+{
+  Triangle* triangle = (Triangle*)aPair.mShapes[0];
+  Sphere* sphere = (Sphere*)aPair.mShapes[1];
+  Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 spherePos = sphere->position + sphereTransform->GetPosition();
+  for(int i = 0; i < 3; ++i)
+  {
+    // Trivial intersection of vertices test
+    Vector3 vecPos = triTransform->GetPosition() + triangle->points[i];
+    Vector3 dist = vecPos - spherePos;
+    float radius = sphere->GetSize(0);
+    if(dist.length() < radius)
+    {
+      aPair.mPenetration = radius - dist.length();
+      aPair.mNormal = dist.normalize();
+      aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+      aPair.mRestitution = 1.0f;
+      return;
+    }
+    
+    // Line segment test
+    int j = i + 1;
+    if (j > 2)
+      j = 0;
+    
+    Line line(vecPos, triTransform->GetPosition() + triangle->points[j]);
+    
+    Vector3 closestPoint = line.ClosestPointToPoint(spherePos);
+    dist = closestPoint - spherePos;
+    if(dist.length() < radius)
+    {
+      aPair.mPenetration = radius - dist.length();
+      aPair.mNormal = dist.normalize();
+      aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+      aPair.mRestitution = 1.0f;
+    }
+    
+    // TODO Check if sphere inside of triangle
+  }
+}
+
+void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
+{
+  // TODO
+  //assert(!"TODO");
+}
+
+void Resolver::CalculateTriangleToTriangle(CollisionPair &aPair)
+{
+  assert(!"TODO");
 }

@@ -94,6 +94,22 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           glVertex3f(cubePos.x - xSize, cubePos.y - ySize, cubePos.z);
           glEnd();
         }
+        else if((*it)->shape == Shape::TRIANGLE)
+        {
+          Triangle* triangle = (Triangle*)(*it);
+          Vector3 triPos = Vector3(xPosition, yPosition, zPosition) +
+                              (*it)->position;
+          glBegin(GL_LINE_STRIP);
+          glColor3f(1.0f, 0.0f, 0.0f);
+          for(int i = 0; i < 3; ++i)
+          {
+            Vector3 point = triPos + triangle->GetPoint(i);
+            glVertex3f(point.x, point.y, point.z);
+          }
+          Vector3 point = triPos + triangle->GetPoint(0);
+          glVertex3f(point.x, point.y, point.z);
+          glEnd();
+        }
       }
 
       // Broad Size Line

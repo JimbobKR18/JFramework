@@ -73,7 +73,7 @@ void TextParser::Parse()
     else if(type == "{")
     {
       if(mCurNode)
-    	  mCurNode->Insert(node);
+        mCurNode->Insert(node);
 
       node->SetParent(mCurNode);
       mCurNode = node;
@@ -83,7 +83,7 @@ void TextParser::Parse()
     {
       delete node;
       if(mCurNode->GetParent())
-    	  mCurNode = mCurNode->GetParent();
+        mCurNode = mCurNode->GetParent();
     }
   }
 

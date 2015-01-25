@@ -120,6 +120,20 @@ void PhysicsObject::Serialize(Parser &aParser)
       physicsObject->Place(curShape, "Type", "SPHERE");
       physicsObject->Place(curShape, "Radius", Common::IntToString((*it)->GetSize(0)));
       break;
+    case Shape::TRIANGLE:
+    {
+      Triangle* triangle = (Triangle*)(*it);
+      physicsObject->Place(curShape, "Type", "TRIANGLE");
+      HashString point = "Point_";
+      for(int i = 0; i < 3; ++i)
+      {
+        HashString pointId = point + Common::IntToString(i);
+        physicsObject->Place(curShape, pointId + "X", Common::IntToString(triangle->points[i].x));
+        physicsObject->Place(curShape, pointId + "Y", Common::IntToString(triangle->points[i].y));
+        physicsObject->Place(curShape, pointId + "Z", Common::IntToString(triangle->points[i].z));
+      }
+      break;
+    }
     default:
       break;
     }
@@ -161,7 +175,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
     
     HashString type = tempShape->Find("Type")->GetValue();
     
-    // TODO support more shapes
+    // Discern type and serialize accordingly
     if(type == "CUBE")
     {
       newShape = new Cube();
@@ -176,12 +190,26 @@ void PhysicsObject::Deserialize(Parser &aParser)
       Sphere* sphere = (Sphere*)newShape;
       sphere->radius = tempShape->Find("Radius")->GetValue().ToFloat();
     }
+    else if(type == "TRIANGLE")
+    {
+      newShape = new Triangle();
+      Triangle* triangle = (Triangle*)newShape;
+      HashString point = "Point_";
+      for(int i = 0; i < 3; ++i)
+      {
+        HashString pointId = point + Common::IntToString(i);
+        Vector3 point(tempShape->Find(pointId + "X")->GetValue().ToFloat(),
+                      tempShape->Find(pointId + "Y")->GetValue().ToFloat(),
+                      tempShape->Find(pointId + "Z")->GetValue().ToFloat());
+        triangle->points[i] = point;
+      }
+    }
     else
       assert(!"Invalid shape given");
       
     newShape->position = Vector3(tempShape->Find("PositionX")->GetValue().ToFloat(),
-                          tempShape->Find("PositionY")->GetValue().ToFloat(),
-                          tempShape->Find("PositionZ")->GetValue().ToFloat());
+                                 tempShape->Find("PositionY")->GetValue().ToFloat(),
+                                 tempShape->Find("PositionZ")->GetValue().ToFloat());
     AddShape(newShape);
     
     ++curIndex;
