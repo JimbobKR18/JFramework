@@ -23,20 +23,23 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    std::string const &aImageName,
                                    std::string const &aDataName,
                                    std::vector<int> const &aTiles,
-                                   std::vector<int> const &aCollision,
+                                   std::vector<int> const &aCollisionData,
+                                   std::vector<int> const &aCollisionShapes,
                                    Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight),
                                    mTileSize(aTileSize), mImageName(aImageName),
                                    mDataName(aDataName), mTiles(aTiles),
-                                   mCollision(aCollision), mObjects(), mOwner(aOwner)
+                                   mCollisionData(aCollisionData), mCollisionShapes(aCollisionShapes),
+                                   mObjects(), mOwner(aOwner)
 {
   int xPos = 0, yPos = 0;
   float halfX = mWidth * aTileSize;
   float halfY = mHeight * aTileSize;
   float const zPos = -0.9999f;
 
-  // mTiles and mCollision MUST be same size, or it's not a valid map
-  if(mTiles.size() != mCollision.size())
+  // mTiles and mCollisionData MUST be same size, or it's not a valid map.
+  // For compatibility reasons, the shape data can be a different size because it can be empty.
+  if(mTiles.size() != mCollisionData.size())
     assert(!"Not a valid tilemap, art and collision maps of different sizes");
 
   Vector3 tileSize = Vector3(mTileSize, mTileSize, 0);
@@ -48,7 +51,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     manager->ParseObject(obj);
     
     // Set name of tile, for collision reasons
-    obj->SetName(std::string("Tile_") + Common::IntToString(mCollision[i]));
+    obj->SetName(std::string("Tile_") + Common::IntToString(mCollisionData[i]));
 
     // Get Transform of new object
     Transform *transform = obj->GET<Transform>();
@@ -69,7 +72,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     surface->SetFrameByID(mTiles[i]);
     
     // Add PhysicsObject if the tile has collision
-    if(mCollision[i] != 0)
+    if(mCollisionData[i] != CollisionShapes::EMPTY)
     {
       PhysicsObject *physics = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
       
@@ -80,8 +83,51 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
       physics->SetStatic(true);
       physics->SetBroadSize(transform->GetSize() * 1.5f);
       
-      physics->AddShape(new Cube(Vector3(0,0,0),
-                                 Vector3(transform->GetSize())));
+      // Based on the shape passed in from file
+      Shape *shape = nullptr;
+      float triSize = aTileSize;
+      if(mCollisionShapes.size() < mCollisionData.size() ||
+         mCollisionShapes[i] == CollisionShapes::CUBE ||
+         mCollisionShapes[i] > CollisionShapes::BOTTOMRIGHT)
+      {
+        shape = new Cube(Vector3(0,0,0), Vector3(transform->GetSize()));
+        
+        if(mCollisionShapes.size() < mCollisionData.size())
+        {
+          mCollisionShapes.push_back(CollisionShapes::CUBE);
+        }
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::TOPLEFT)
+      {
+        Vector3 point1(-triSize, -triSize, 0);
+        Vector3 point2(triSize, -triSize, 0);
+        Vector3 point3(-triSize, triSize, 0);
+        shape = new Triangle(point1, point2, point3);
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT)
+      {
+        Vector3 point1(-triSize, -triSize, 0);
+        Vector3 point2(triSize, triSize, 0);
+        Vector3 point3(-triSize, triSize, 0);
+        shape = new Triangle(point1, point2, point3);
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::TOPRIGHT)
+      {
+        Vector3 point1(-triSize, -triSize, 0);
+        Vector3 point2(triSize, -triSize, 0);
+        Vector3 point3(triSize, triSize, 0);
+        shape = new Triangle(point1, point2, point3);
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT)
+      {
+        Vector3 point1(triSize, -triSize, 0);
+        Vector3 point2(triSize, triSize, 0);
+        Vector3 point3(-triSize, triSize, 0);
+        shape = new Triangle(point1, point2, point3);
+      }
+      
+      // Finally, add shape to our physicsobject
+      physics->AddShape(shape);
       
       // Make tiles ignore other tiles for collision
       for(int i = 0; i < 99; ++i)
@@ -92,6 +138,10 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
       }
 
       obj->AddComponent(physics);
+    }
+    else if(mCollisionShapes.size() < mCollisionData.size())
+    {
+      mCollisionShapes.push_back(CollisionShapes::EMPTY);
     }
     
     // Add object to our level for easier loading later
@@ -146,7 +196,12 @@ std::vector<int>& TileMapGenerator::GetArtTiles()
 
 std::vector<int>& TileMapGenerator::GetCollisionTiles()
 {
-  return mCollision;
+  return mCollisionData;
+}
+
+std::vector<int>& TileMapGenerator::GetCollisionShapes()
+{
+  return mCollisionShapes;
 }
 
 GameObject* TileMapGenerator::GetObject(int const aX, int const aY)
@@ -166,7 +221,7 @@ int TileMapGenerator::GetTileValue(int const aX, int const aY)
 
 int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
 {
-  return mCollision[GetIndex(aX, aY)];
+  return mCollisionData[GetIndex(aX, aY)];
 }
 
 int TileMapGenerator::GetIndex(int const aX, int const aY)

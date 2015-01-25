@@ -365,6 +365,7 @@ void Level::SerializeTileMap(Parser &aParser)
   }
   aParser.Place("MapArtData", Common::IntVectorToString(mGenerator->GetArtTiles()));
   aParser.Place("Collision", Common::IntVectorToString(mGenerator->GetCollisionTiles()));
+  aParser.Place("CollisionShapes", Common::IntVectorToString(mGenerator->GetCollisionShapes()));
 }
 
 void Level::SerializeLUA()
@@ -464,9 +465,8 @@ void Level::ParseFile()
     Root* tileMap = parser.Find("TileMapGenerator");
     HashString value, empty;
     int width, height, tileSize;
-    HashString file, frameDataFilename, frameData,
-                      collisionData;
-    std::vector<int> frames, collision;
+    HashString file, frameDataFilename;
+    std::vector<int> frames, collision, shapes;
 
     width = tileMap->Find("Width")->GetValue().ToInt();
     height = tileMap->Find("Height")->GetValue().ToInt();
@@ -475,15 +475,17 @@ void Level::ParseFile()
     frameDataFilename = tileMap->Find("Data")->GetValue();
 
     TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
-    frameData = tileMapData.Find("MapArtData")->GetValue();
-    collisionData = tileMapData.Find("Collision")->GetValue();
-
-    frames = Common::StringToIntVector(frameData);
-    collision = Common::StringToIntVector(collisionData);
+    frames = Common::StringToIntVector(tileMapData.Find("MapArtData")->GetValue());
+    collision = Common::StringToIntVector(tileMapData.Find("Collision")->GetValue());
+    
+    if(tileMapData.Find("CollisionShapes"))
+    {
+      shapes = Common::StringToIntVector(tileMapData.Find("CollisionShapes")->GetValue());
+    }
 
     mGenerator = new TileMapGenerator(width, height, tileSize,
                                      file, frameDataFilename,
-                                     frames, collision, this);
+                                     frames, collision, shapes, this);
   }
   if(parser.Find("Music"))
   {

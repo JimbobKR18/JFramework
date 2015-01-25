@@ -18,13 +18,24 @@ class Level;
 class TileMapGenerator
 {
 private:
+  enum CollisionShapes
+  {
+    EMPTY = 0,
+    CUBE,
+    TOPLEFT,
+    BOTTOMLEFT,
+    TOPRIGHT,
+    BOTTOMRIGHT
+  };
+
   int                       mWidth;
   int                       mHeight;
   int                       mTileSize;
   std::string               mImageName;
   std::string               mDataName;
   std::vector<int>          mTiles;
-  std::vector<int>          mCollision;
+  std::vector<int>          mCollisionData;
+  std::vector<int>          mCollisionShapes;
   std::vector<GameObject*>  mObjects;
   Level*                    mOwner;
   
@@ -34,7 +45,8 @@ public:
                    std::string const &aImageName,
                    std::string const &aDataName,
                    std::vector<int> const &aTiles,
-                   std::vector<int> const &aCollision, Level *aOwner);
+                   std::vector<int> const &aCollisionData, 
+                   std::vector<int> const &aCollisionShapes, Level *aOwner);
   ~TileMapGenerator();
 
   int               GetWidth() const;
@@ -44,6 +56,7 @@ public:
   std::string       GetDataName() const;
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
+  std::vector<int>& GetCollisionShapes();
 
   GameObject*       GetObject(int const aX, int const aY);
   GameObject*       GetObject(int const aIndex);
