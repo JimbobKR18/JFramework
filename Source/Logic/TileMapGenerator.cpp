@@ -86,6 +86,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
       // Based on the shape passed in from file
       Shape *shape = nullptr;
       float triSize = aTileSize;
+      float triZ = -zPos;
       if(mCollisionShapes.size() < mCollisionData.size() ||
          mCollisionShapes[i] == CollisionShapes::CUBE ||
          mCollisionShapes[i] > CollisionShapes::BOTTOMRIGHT)
@@ -99,30 +100,30 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
       }
       else if(mCollisionShapes[i] == CollisionShapes::TOPLEFT)
       {
-        Vector3 point1(-triSize, -triSize, 0);
-        Vector3 point2(triSize, -triSize, 0);
-        Vector3 point3(-triSize, triSize, 0);
+        Vector3 point1(-triSize, -triSize, triZ);
+        Vector3 point2(triSize, -triSize, triZ);
+        Vector3 point3(-triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
       else if(mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT)
       {
-        Vector3 point1(-triSize, -triSize, 0);
-        Vector3 point2(triSize, triSize, 0);
-        Vector3 point3(-triSize, triSize, 0);
+        Vector3 point1(-triSize, -triSize, triZ);
+        Vector3 point2(triSize, triSize, triZ);
+        Vector3 point3(-triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
       else if(mCollisionShapes[i] == CollisionShapes::TOPRIGHT)
       {
-        Vector3 point1(-triSize, -triSize, 0);
-        Vector3 point2(triSize, -triSize, 0);
-        Vector3 point3(triSize, triSize, 0);
+        Vector3 point1(-triSize, -triSize, triZ);
+        Vector3 point2(triSize, -triSize, triZ);
+        Vector3 point3(triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
       else if(mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT)
       {
-        Vector3 point1(triSize, -triSize, 0);
-        Vector3 point2(triSize, triSize, 0);
-        Vector3 point3(-triSize, triSize, 0);
+        Vector3 point1(triSize, -triSize, triZ);
+        Vector3 point2(triSize, triSize, triZ);
+        Vector3 point3(-triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
       
