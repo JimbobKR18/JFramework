@@ -222,7 +222,7 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
   Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position;
   Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position;
 
-  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (b1Transform->GetSize().x + b2Transform->GetSize().x));
+  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(0)));
   aPair.mNormal = (b1Pos - b2Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
   aPair.mRestitution = 1.0f;
