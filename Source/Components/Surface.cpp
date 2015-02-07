@@ -117,6 +117,9 @@ void Surface::Serialize(Parser &aParser)
   {
     object->Place("Surface", values[i], Common::IntToString(mColor[i]));
   }
+  
+  HashString viewMode = (mViewmode == VIEW_ABSOLUTE) ? "Absolute" : "Relative";
+  object->Place("Surface", "ViewMode", viewMode.ToString());
 }
 
 void Surface::Deserialize(Parser &aParser)
@@ -159,6 +162,16 @@ void Surface::Deserialize(Parser &aParser)
     float alpha = aParser.Find("Surface", "ColorA")->GetValue().ToFloat();
 
     mColor = Vector4(red, green, blue, alpha);
+  }
+  if(aParser.Find("Surface", "ViewMode"))
+  {
+    HashString viewMode = aParser.Find("Surface", "ViewMode")->GetValue();
+    if(viewMode == "Absolute")
+      mViewmode = VIEW_ABSOLUTE;
+    else if(viewMode == "Relative")
+      mViewmode = VIEW_RELATIVE_TO_CAMERA;
+    else
+      assert(!"Invalid value passed into ViewMode for Surface. (Surface.cpp)");  
   }
   
   SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
