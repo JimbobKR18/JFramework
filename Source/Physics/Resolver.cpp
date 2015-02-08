@@ -224,7 +224,7 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
 
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(0)));
   aPair.mNormal = (b1Pos - b2Pos).normalize();
-  aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
 
@@ -267,7 +267,7 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
                         (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
-  aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
 
@@ -310,7 +310,7 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
   aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
                         (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
-  aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
 
@@ -331,7 +331,7 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
     {
       aPair.mPenetration = radius - dist.length();
       aPair.mNormal = dist.normalize();
-      aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+      aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
       aPair.mRestitution = 1.0f;
       return;
     }
@@ -349,7 +349,7 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
     {
       aPair.mPenetration = radius - dist.length();
       aPair.mNormal = dist.normalize();
-      aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+      aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
       aPair.mRestitution = 1.0f;
     }
     
