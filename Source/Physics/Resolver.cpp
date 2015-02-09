@@ -79,10 +79,8 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
 
   // Find the rate in which each object must move
   Vector3 movePerIMass = aPair.mNormal * (aPair.mPenetration / totalInverseMass);
-  Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition() +
-                  aPair.mShapes[0]->position;
-  Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition() +
-                  aPair.mShapes[1]->position;
+  Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition();
+  Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition();
   Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) /**
                         (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f)*/;
   Vector3 b2Movement = (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) /**
