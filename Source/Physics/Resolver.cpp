@@ -79,10 +79,8 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
 
   // Find the rate in which each object must move
   Vector3 movePerIMass = aPair.mNormal * (aPair.mPenetration / totalInverseMass);
-  Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition() +
-                  aPair.mShapes[0]->position;
-  Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition() +
-                  aPair.mShapes[1]->position;
+  Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition();
+  Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition();
   Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) /**
                         (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f)*/;
   Vector3 b2Movement = (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) /**
@@ -224,7 +222,7 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
 
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(0)));
   aPair.mNormal = (b1Pos - b2Pos).normalize();
-  aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
 
@@ -267,7 +265,7 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
                         (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
-  aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
 
@@ -310,7 +308,7 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
   aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
                         (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
-  aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mRestitution = 1.0f;
 }
 
@@ -331,7 +329,7 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
     {
       aPair.mPenetration = radius - dist.length();
       aPair.mNormal = dist.normalize();
-      aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+      aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
       aPair.mRestitution = 1.0f;
       return;
     }
@@ -349,7 +347,7 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
     {
       aPair.mPenetration = radius - dist.length();
       aPair.mNormal = dist.normalize();
-      aPair.mRelativeVelocity = aPair.mBodies[1]->GetVelocity() - aPair.mBodies[0]->GetVelocity();
+      aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
       aPair.mRestitution = 1.0f;
     }
     

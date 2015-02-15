@@ -257,17 +257,17 @@ Vector3 Level::GetMinBoundary() const
 
 void Level::Load(Level* const aPrevLevel)
 {
-	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
-	{
-		mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
+    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
     if((*it)->GET<PhysicsObject>())
       mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
     if((*it)->GET<Surface>())
       mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
-	}
-	for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  }
+  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
   {
     mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it, true);
     if((*it)->GET<PhysicsObject>())
@@ -278,14 +278,14 @@ void Level::Load(Level* const aPrevLevel)
       mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
   }
 
-	if(!mMusicName.empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
-	  mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName);
+  if(!mMusicName.empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
+    mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName);
 
-	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
-	mActive = true;
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
+  mActive = true;
 
-	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMaxBoundary(mMaxBoundary);
-	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMinBoundary(mMinBoundary);
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMaxBoundary(mMaxBoundary);
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMinBoundary(mMinBoundary);
   
   mOwner->SetActiveLevel(this);
 }
@@ -295,18 +295,18 @@ void Level::Unload(Level* const aNextLevel)
   // Remove menus because they are not level files.
   RemoveMenus();
   
-	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
-	{
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  {
     // Remove all components
-		mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
+    mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
     if((*it)->GET<PhysicsObject>())
       mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
     if((*it)->GET<Surface>())
       mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
-	}
-	for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  }
+  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
   {
     // Remove all components
     mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
@@ -318,11 +318,11 @@ void Level::Unload(Level* const aNextLevel)
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
   }
 
-	if(!mMusicName.empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
-	  mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
+  if(!mMusicName.empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
+    mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
 
-	mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);
-	mActive = false;
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);
+  mActive = false;
   
   mOwner->SetActiveLevel(NULL);
 }
