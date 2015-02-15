@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FBB0E980-175E-4DD2-9A60-B233126AE80F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>JFramework</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>95D3B2BE10C3C9452998E36EFFD3DFDD53F0B937</key>
+		<string>https://github.com/JimbobKR18/JFramework.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>JFramework/JFramework.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>95D3B2BE10C3C9452998E36EFFD3DFDD53F0B937</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JimbobKR18/JFramework.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>95D3B2BE10C3C9452998E36EFFD3DFDD53F0B937</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>95D3B2BE10C3C9452998E36EFFD3DFDD53F0B937</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JFramework</string>
+		</dict>
+	</array>
+</dict>
+</plist>

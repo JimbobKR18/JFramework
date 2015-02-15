@@ -10,8 +10,14 @@
 #define __JFramework__PCSound__
 
 #include "Sound.h"
+#if defined(_WIN32)
+#elif defined(__APPLE__)
+#include <SDL2/SDL.h>
+#include <SDL2_mixer/SDL_mixer.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
+#endif
 
 class PCSound : public Sound
 {

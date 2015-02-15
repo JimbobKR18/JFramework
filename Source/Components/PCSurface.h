@@ -9,7 +9,8 @@
 #elif defined(__APPLE__)
   #include <OpenGL/gl.h>
   #include <OpenGL/glext.h>
-  #include <SDL/SDL.h>
+  #include <SDL2/SDL.h>
+  #include <SDL2_ttf/SDL_ttf.h>
 #else
   #include <GL/gl.h>
   #include <GL/glext.h>
