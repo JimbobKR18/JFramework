@@ -5,7 +5,7 @@
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <SDL2/SDL_image.h>
 #elif defined(__APPLE__)
-#include <SDL_image/SDL_image.h>
+#include <SDL2_image/SDL_image.h>
 #else
 #include "SDL_image.h"
 #endif

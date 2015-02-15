@@ -11,8 +11,10 @@
 #include "Manager.h"
 #include "Common.h"
 
-#if defined(_WIN32) || defined(__APPLE__)
+#if defined(_WIN32)
   #include "SDL.h"
+#elif defined(__APPLE__)
+  #include <SDL2/SDL.h>
 #else
   #include <SDL2/SDL.h>
 #endif
