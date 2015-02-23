@@ -19,7 +19,7 @@
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
                   mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
-                  mDamping(0.01f), mStatic(false), mGravity(true)
+                  mDamping(0.01f), mStatic(false), mGravity(true), mPassable(false)
 {
 }
 
