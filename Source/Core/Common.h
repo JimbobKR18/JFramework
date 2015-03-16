@@ -46,12 +46,14 @@ namespace Common
   float                     StringToFloat(std::string const &aValue);
   bool                      StringToBool(std::string const &aValue);
   std::vector<int>          StringToIntVector(std::string const &aValue);
+  std::vector<float>        StringToFloatVector(std::string const &aValue);
   std::vector<std::string>  StringToStringVector(std::string const &aValue);
 
   std::string               IntToString(int const aValue);
   std::string               FloatToString(float const aValue);
   std::string               BoolToString(bool const aValue);
   std::string               IntVectorToString(std::vector<int> &aValue);
+  std::string               FloatVectorToString(std::vector<float> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   
   HashString                RetrieveNameFromFileName(HashString const &aFileName);              

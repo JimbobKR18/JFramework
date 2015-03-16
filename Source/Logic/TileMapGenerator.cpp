@@ -25,17 +25,18 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    std::vector<int> const &aTiles,
                                    std::vector<int> const &aCollisionData,
                                    std::vector<int> const &aCollisionShapes,
+                                   std::map<int, float> const &aTileHeights,
                                    Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight),
                                    mTileSize(aTileSize), mImageName(aImageName),
                                    mDataName(aDataName), mTiles(aTiles),
                                    mCollisionData(aCollisionData), mCollisionShapes(aCollisionShapes),
-                                   mObjects(), mOwner(aOwner)
+                                   mTileHeights(aTileHeights), mObjects(), mOwner(aOwner)
 {
   int xPos = 0, yPos = 0;
   float halfX = mWidth * aTileSize;
   float halfY = mHeight * aTileSize;
-  float const zPos = -0.9999f;
+  float const defaultZPos = -0.9999f;
 
   // mTiles and mCollisionData MUST be same size, or it's not a valid map.
   // For compatibility reasons, the shape data can be a different size because it can be empty.
@@ -54,6 +55,14 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
     obj->SetName(std::string("Tile_") + Common::IntToString(mCollisionData[i]));
 
     // Get Transform of new object
+    float zPos = defaultZPos;
+    
+    // If we have a height for this id, use it.
+    if(mTileHeights.find(mTiles[i]) != mTileHeights.end())
+    {
+      zPos = mTileHeights[mTiles[i]];
+    }
+    
     Transform *transform = obj->GET<Transform>();
     Vector3 position = Vector3(-halfX + (aTileSize * 2 * xPos),
                                -halfY + (aTileSize * 2 * yPos), zPos);
@@ -208,6 +217,11 @@ std::vector<int>& TileMapGenerator::GetCollisionTiles()
 std::vector<int>& TileMapGenerator::GetCollisionShapes()
 {
   return mCollisionShapes;
+}
+
+std::map<int, float>& TileMapGenerator::GetTileHeights()
+{
+  return mTileHeights;
 }
 
 GameObject* TileMapGenerator::GetObject(int const aX, int const aY)

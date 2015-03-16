@@ -36,6 +36,7 @@ private:
   std::vector<int>          mTiles;
   std::vector<int>          mCollisionData;
   std::vector<int>          mCollisionShapes;
+  std::map<int, float>      mTileHeights;
   std::vector<GameObject*>  mObjects;
   Level*                    mOwner;
   
@@ -46,7 +47,8 @@ public:
                    std::string const &aDataName,
                    std::vector<int> const &aTiles,
                    std::vector<int> const &aCollisionData, 
-                   std::vector<int> const &aCollisionShapes, Level *aOwner);
+                   std::vector<int> const &aCollisionShapes,
+                   std::map<int, float> const &aTileHeights, Level *aOwner);
   ~TileMapGenerator();
 
   int               GetWidth() const;
@@ -57,6 +59,7 @@ public:
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
   std::vector<int>& GetCollisionShapes();
+  std::map<int, float>& GetTileHeights();
 
   GameObject*       GetObject(int const aX, int const aY);
   GameObject*       GetObject(int const aIndex);

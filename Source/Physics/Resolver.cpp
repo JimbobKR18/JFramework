@@ -143,7 +143,7 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
     aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() - b2Movement);
 }
 
-void Resolver::SendCollisionMessages(PotentialP0air &aPair) const
+void Resolver::SendCollisionMessages(PotentialPair &aPair) const
 {
   CollisionMessage message("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner());
   aPair.mBodies[0]->GetOwner()->ReceiveMessage(message);

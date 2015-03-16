@@ -110,6 +110,23 @@ namespace Common
     
     return ret;
   }
+  
+  std::vector<float> StringToFloatVector(std::string const &aValue)
+  {
+    std::vector<float> ret;
+    std::istringstream stream(aValue);
+    
+    float value;
+    
+    while(!stream.eof())
+    {
+      stream >> value;
+      ret.push_back(value);
+      stream.ignore();
+    }
+    
+    return ret;
+  }
 
   std::vector<std::string> StringToStringVector(std::string const &aValue)
   {
@@ -158,6 +175,22 @@ namespace Common
     std::string ret;
     std::vector<int>::iterator end = aValue.end();
     for(std::vector<int>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      std::ostringstream stream;
+      stream << *it;
+      ret += stream.str();
+      ret += ",";
+    }
+    ret = ret.substr(0, ret.size() - 1);
+
+    return ret;
+  }
+  
+  std::string FloatVectorToString(std::vector<float> &aValue)
+  {
+    std::string ret;
+    std::vector<float>::iterator end = aValue.end();
+    for(std::vector<float>::iterator it = aValue.begin(); it != end; ++it)
     {
       std::ostringstream stream;
       stream << *it;

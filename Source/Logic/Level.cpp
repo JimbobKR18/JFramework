@@ -465,14 +465,32 @@ void Level::ParseFile()
     Root* tileMap = parser.Find("TileMapGenerator");
     HashString value, empty;
     int width, height, tileSize;
-    HashString file, frameDataFilename;
+    HashString file, frameDataFilename, heightMapDataFileName;
     std::vector<int> frames, collision, shapes;
+    std::map<int, float> heights;
 
     width = tileMap->Find("Width")->GetValue().ToInt();
     height = tileMap->Find("Height")->GetValue().ToInt();
     tileSize = tileMap->Find("TileSize")->GetValue().ToInt();
     file = tileMap->Find("Image")->GetValue();
     frameDataFilename = tileMap->Find("Data")->GetValue();
+    
+    // If there's heightmap data, parse it in and use it.
+    if(tileMap->Find("HeightData"))
+    {
+      HashString object = "Object_";
+      heightMapDataFileName = tileMap->Find("HeightData")->GetValue();
+      
+      HashString curIndex = object + Common::IntToString(0);
+      TextParser heightMapData(Common::RelativePath("Maps", heightMapDataFileName));
+      
+      for(int i = 0; heightMapData.Find(curIndex); ++i)
+      {
+        std::vector<float> values = Common::StringToFloatVector(heightMapData.Find(curIndex)->GetValue());
+        heights[static_cast<int>(values[0])] = values[1];
+        curIndex = object + Common::IntToString(i);
+      }
+    }
 
     TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
     frames = Common::StringToIntVector(tileMapData.Find("MapArtData")->GetValue());
@@ -485,7 +503,8 @@ void Level::ParseFile()
 
     mGenerator = new TileMapGenerator(width, height, tileSize,
                                      file, frameDataFilename,
-                                     frames, collision, shapes, this);
+                                     frames, collision, shapes,
+                                     heights, this);
   }
   if(parser.Find("Music"))
   {
