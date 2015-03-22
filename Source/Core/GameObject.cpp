@@ -153,7 +153,7 @@ void GameObject::Serialize(Parser &aParser)
 {
   std::string object = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   aParser.Place(object, "File", mFileName);
-  aParser.Place(object, "Name", mName);
+  aParser.Place(object, "Name", std::string("Literal(") + mName + std::string(")"));
 
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
