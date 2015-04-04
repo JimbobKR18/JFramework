@@ -55,19 +55,14 @@ namespace LUABind
       }
       
       // Try catch in case anything happens
-      try
-      {
-        doString(contents.c_str());
+      doString(contents.c_str());
+    
+      // Get the state and call the function
+      lua_State *state = getState();
+      SLB::LuaCall<void(T)> call(state, aFunctionName.c_str());
+      call(param);
       
-        // Get the state and call the function
-        lua_State *state = getState();
-        SLB::LuaCall<void(T)> call(state, aFunctionName.c_str());
-        call(param);
-      }
-      catch(...)
-      {
-        assert(!aFunctionName.c_str());
-      }
+      // Return on success
       return true;
     }
   };

@@ -58,7 +58,8 @@
 
 // -- EXCEPTIONS -----------------------------------------------------------------
 #if SLB_USE_EXCEPTIONS
-  #define SLB_CRITICAL_ERROR(...) /*nothing*/
+  #define SLB_CRITICAL_ERROR(msg) \
+    {fprintf(stderr, "SLB Critical Error (%s:%d) -> %s", __FILE__, __LINE__, msg);}
   #define SLB_THROW(...) throw __VA_ARGS__
 #else
   #include <stdlib.h>
