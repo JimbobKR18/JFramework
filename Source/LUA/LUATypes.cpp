@@ -57,6 +57,10 @@ namespace LUABind
 
     // Transform
     Transform::SerializeLUA();
+    
+    // Surface
+    Surface::SerializeLUA();
+    PCSurface::SerializeLUA();
 
     // GameObject
     GameObject::SerializeLUA();

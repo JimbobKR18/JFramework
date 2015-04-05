@@ -50,7 +50,7 @@ public:
   bool                CurrentAnimationCompleted();
   
   // Batching
-  virtual unsigned    GetTextureID() const = 0;
+  virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); }
   
   // Derived from Component
   void                Update();
@@ -58,6 +58,7 @@ public:
   void                ReceiveMessage(Message const &aMessage);
   void                Serialize(Parser &aParser);
   void                Deserialize(Parser &aParser);
+  static void         SerializeLUA();
   static std::string  GetName() {return "Surface";}
 };
 

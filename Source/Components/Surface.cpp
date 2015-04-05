@@ -1,4 +1,5 @@
 #include "Surface.h"
+#include "LUATypes.h"
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
 
@@ -176,4 +177,15 @@ void Surface::Deserialize(Parser &aParser)
   
   SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
   SetAnimated(animated);
+}
+
+void Surface::SerializeLUA()
+{
+  SLB::Class<Surface>("Surface")
+    .set("SetAnimation", &Surface::SetAnimation)
+    .set("SetFrameByID", &Surface::SetFrameByID)
+    .set("SetAnimated", &Surface::SetAnimated)
+    .set("SetCurrentFrame", &Surface::SetCurrentFrame)
+    .set("CurrentAnimatedCompleted", &Surface::CurrentAnimationCompleted)
+    .set("SetColor", &Surface::SetColor);
 }

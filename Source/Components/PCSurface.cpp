@@ -1,6 +1,7 @@
 #include "PCSurface.h"
 #include "Common.h"
 #include "GraphicsManager.h"
+#include "LUATypes.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <SDL2/SDL_image.h>
@@ -207,6 +208,12 @@ void PCSurface::Deserialize(Parser &aParser)
   LoadImage(GetFileName());
   
   Surface::Deserialize(aParser);
+}
+
+void PCSurface::SerializeLUA()
+{
+  SLB::Class<PCSurface>("PCSurface")
+    .inherits<Surface>();
 }
 
 unsigned PCSurface::GetTextureID() const

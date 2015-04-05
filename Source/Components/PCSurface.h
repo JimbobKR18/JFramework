@@ -54,6 +54,7 @@ public:
 	void                ReceiveMessage(Message const &aMessage);
   void                Serialize(Parser &aParser);
   void                Deserialize(Parser &aParser);
+  static void         SerializeLUA();
 	static std::string  GetName() {return "Surface";}
 
 	unsigned            GetTextureID() const;
