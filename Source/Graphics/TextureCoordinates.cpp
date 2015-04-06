@@ -61,7 +61,11 @@ TextureCoordinates::~TextureCoordinates()
 void TextureCoordinates::Update(float aDT)
 {
   if(!mAnimated)
+  {
+    // If it's not animated, the animation is complete.
+    mCompleted = true;
     return;
+  }
   
   mCurTime += aDT;
   
