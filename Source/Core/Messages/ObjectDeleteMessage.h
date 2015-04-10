@@ -11,6 +11,8 @@
 #include "Message.h"
 #include "GameObject.h"
 
+HashString const OBJECT_DELETE = "ObjectDelete";
+
 class ObjectDeleteMessage : public Message
 {
 private:
@@ -20,7 +22,7 @@ public:
   GameObject *mObject;
   ObjectDeleteMessage(GameObject *aObject) : mObject(aObject)
   {
-    SetDescription("ObjectDelete");
+    SetDescription(OBJECT_DELETE);
   }
   virtual ~ObjectDeleteMessage() {}
 };

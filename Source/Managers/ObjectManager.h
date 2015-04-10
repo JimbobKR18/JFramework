@@ -21,6 +21,7 @@ public:
 	static std::string  GetName() {return "ObjectManager";}
 
 	GameObject*         CreateObject(std::string const &aFilename);
+  GameObject*         CreateObjectNoAdd(std::string const &aFilename);
 	void                ParseObject(GameObject *aObject);
 	void                DeleteObject(GameObject *aObj);
 	void                ClearObjects();

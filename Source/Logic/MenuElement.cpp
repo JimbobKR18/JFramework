@@ -20,21 +20,37 @@ MenuElement::~MenuElement()
 {
 }
 
+/**
+ * @brief Get object associated with element.
+ * @return 
+ */
 GameObject* MenuElement::GetObject()
 {
   return mObject;
 }
 
+/**
+ * @brief Get view layer associated with this element
+ * @return 
+ */
 int MenuElement::GetLayer()
 {
   return mLayer;
 }
 
+/**
+ * @brief Set view layer.
+ * @param aLayer
+ */
 void MenuElement::SetLayer(int const aLayer)
 {
   mLayer = aLayer;
 }
 
+/**
+ * @brief Helper to create an element.
+ * @param aParser
+ */
 void MenuElement::ParseFile(Parser &aParser)
 {
   if(aParser.Find("Transform"))

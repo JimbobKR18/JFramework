@@ -55,6 +55,7 @@ public:
   void              AddObject(GameObject *aObject);
   void              AddStaticObject(GameObject *aObject);
   void              DeleteObject(GameObject *aObject);
+  GameObject*       CreateObjectDelayed(HashString const &aFileName);
   void              DeleteObjectDelayed(GameObject *aObject);
   void              DeleteObjects();
   void              Reset();

@@ -118,7 +118,7 @@ Component *GameObject::GetComponent(std::string const &aName)
     if((*it)->GetDefinedName() == aName)
       return *it;
   }
-  return NULL;
+  return nullptr;
 }
 
 bool GameObject::HasComponent(std::string const &aName)

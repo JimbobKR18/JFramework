@@ -13,6 +13,7 @@
 #include "Common.h"
 #include "LuaIncludes.h"
 #include "ObjectDeleteMessage.h"
+#include "ObjectCreateMessage.h"
 
 bool SortPredicate(GameObject *aLhs, GameObject *aRhs)
 {
@@ -74,6 +75,11 @@ GameObject* Level::GetFocusTarget() const
   return mFocusTarget;
 }
 
+/**
+ * @brief Find an object by name.
+ * @param aObjectName
+ * @return The object, or nullptr.
+ */
 GameObject* Level::FindObject(std::string const &aObjectName)
 {
   // This is designed to be naive
@@ -91,9 +97,14 @@ GameObject* Level::FindObject(std::string const &aObjectName)
     if(aObjectName == (*it)->GetName())
       return *it;
   }
-  return NULL;
+  return nullptr;
 }
 
+/**
+ * @brief Find all objects touching a position
+ * @param aPosition
+ * @return A vector of objects touching the location, can be empty.
+ */
 Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
 {
   ObjectContainer ret;
@@ -111,6 +122,11 @@ Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
   return ret;
 }
 
+/**
+ * @brief Find a menu by name.
+ * @param aMenuName
+ * @return The menu, or nullptr.
+ */
 Menu* Level::FindMenu(std::string const &aMenuName)
 {
   for(ConstMenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
@@ -123,12 +139,20 @@ Menu* Level::FindMenu(std::string const &aMenuName)
   return nullptr;
 }
 
+/**
+ * @brief Add a menu to our level.
+ * @param aMenu
+ */
 void Level::AddMenu(Menu *aMenu)
 {
   if(!FindMenu(aMenu->GetName()))
     mMenus.push_back(aMenu);
 }
 
+/**
+ * @brief Remove a menu from our level.
+ * @param aMenu
+ */
 void Level::RemoveMenu(Menu *aMenu)
 {
   if(aMenu == NULL)
@@ -146,6 +170,9 @@ void Level::RemoveMenu(Menu *aMenu)
   assert(!"Menu not found, you sure you added it to this list?");
 }
 
+/**
+ * @brief Remove all menus, the right way.
+ */
 void Level::RemoveMenus()
 {
   for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
@@ -155,16 +182,28 @@ void Level::RemoveMenus()
   mMenus.clear();
 }
 
+/**
+ * @brief Add object to our vector of objects.
+ * @param aObject
+ */
 void Level::AddObject(GameObject *aObject)
 {
   mObjects.push_back(aObject);
 }
 
+/**
+ * @brief Add an object that's not meant to be updated.
+ * @param aObject
+ */
 void Level::AddStaticObject(GameObject *aObject)
 {
   mStaticObjects.push_back(aObject);
 }
 
+/**
+ * @brief Delete object and remove from our objects vector.
+ * @param aObject
+ */
 void Level::DeleteObject(GameObject *aObject)
 {
   ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
@@ -188,6 +227,26 @@ void Level::DeleteObject(GameObject *aObject)
   }
 }
 
+/**
+ * @brief Create an object to be added next frame.
+ * @param aFileName
+ * @return The newly created object.
+ */
+GameObject* Level::CreateObjectDelayed(HashString const &aFileName)
+{
+  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  GameObject *object = manager->CreateObjectNoAdd(aFileName);
+  ObjectCreateMessage *msg = new ObjectCreateMessage(object);
+  manager->ProcessDelayedMessage(msg);
+  // Maybe?
+  //AddObject(object);
+  return object;
+}
+
+/**
+ * @brief Marks an object for deletion next frame.
+ * @param aObject
+ */
 void Level::DeleteObjectDelayed(GameObject *aObject)
 {
   ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
@@ -213,6 +272,9 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
   }
 }
 
+/**
+ * @brief Delete all objects in level.
+ */
 void Level::DeleteObjects()
 {
   ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
@@ -228,6 +290,9 @@ void Level::DeleteObjects()
   mStaticObjects.clear();
 }
 
+/**
+ * @brief Delete objects and start level over.
+ */
 void Level::Reset()
 {
   PreReset();
@@ -235,11 +300,19 @@ void Level::Reset()
   ParseFile();
 }
 
+/**
+ * @brief Set max area for camera view.
+ * @param aMaxBoundary
+ */
 void Level::SetMaxBoundary(Vector3 const &aMaxBoundary)
 {
   mMaxBoundary = aMaxBoundary;
 }
 
+/**
+ * @brief Set min area for camera view.
+ * @param aMinBoundary
+ */
 void Level::SetMinBoundary(Vector3 const &aMinBoundary)
 {
   mMinBoundary = aMinBoundary;
@@ -255,6 +328,10 @@ Vector3 Level::GetMinBoundary() const
   return mMinBoundary;
 }
 
+/**
+ * @brief Place all objects to be rendered / updated.
+ * @param aPrevLevel
+ */
 void Level::Load(Level* const aPrevLevel)
 {
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
@@ -290,6 +367,10 @@ void Level::Load(Level* const aPrevLevel)
   mOwner->SetActiveLevel(this);
 }
 
+/**
+ * @brief Specify all objects to be be displayed / updated.
+ * @param aNextLevel
+ */
 void Level::Unload(Level* const aNextLevel)
 {
   // Remove menus because they are not level files.
@@ -327,6 +408,10 @@ void Level::Unload(Level* const aNextLevel)
   mOwner->SetActiveLevel(NULL);
 }
 
+/**
+ * @brief Serialize level to file.
+ * @param aParser
+ */
 void Level::Serialize(Parser &aParser)
 {
   int curIndex = 0;
@@ -356,6 +441,10 @@ void Level::Serialize(Parser &aParser)
   aParser.Place("Music", "Song", mMusicName);
 }
 
+/**
+ * @brief Serialize the tile map portion of level to another file.
+ * @param aParser
+ */
 void Level::SerializeTileMap(Parser &aParser)
 {
   if(!mGenerator)
@@ -368,6 +457,9 @@ void Level::SerializeTileMap(Parser &aParser)
   aParser.Place("CollisionShapes", Common::IntVectorToString(mGenerator->GetCollisionShapes()));
 }
 
+/**
+ * @brief Make this object viewable in LUA.
+ */
 void Level::SerializeLUA()
 {
   SLB::Class<Level>("Level")
@@ -377,6 +469,9 @@ void Level::SerializeLUA()
           .set("DeleteObject", &Level::DeleteObjectDelayed);
 }
 
+/**
+ * @brief Parse file to create our level. Include game object component overrides.
+ */
 void Level::ParseFile()
 {
   TextParser parser(Common::RelativePath("Game", mName).c_str());
@@ -535,6 +630,10 @@ void Level::ParseFile()
   }
 }
 
+/**
+ * @brief Get all objects in level.
+ * @return 
+ */
 Level::ObjectContainer& Level::GetObjects()
 {
   return mObjects;

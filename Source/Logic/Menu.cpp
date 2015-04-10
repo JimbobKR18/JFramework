@@ -32,6 +32,12 @@ Level* Menu::GetLevel()
 {
   return mOwner;
 }
+
+/**
+ * @brief Retrieve an element if available.
+ * @param aFileName
+ * @return The element specified, else nullptr.
+ */
 MenuElement* Menu::GetElement(HashString const &aFileName)
 {
   for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
@@ -44,11 +50,20 @@ MenuElement* Menu::GetElement(HashString const &aFileName)
   return nullptr;
 }
 
+/**
+ * @brief Adds an element to our menu.
+ * @param aElement
+ */
 void Menu::AddObject(MenuElement *aElement)
 {
   mMenuElements.push_back(aElement);
   mOwner->AddObject(aElement->GetObject());
 }
+
+/**
+ * @brief Deletes and removes an element.
+ * @param aElement
+ */
 void Menu::DeleteObject(MenuElement *aElement)
 {
   // Using delayed delete
@@ -63,6 +78,10 @@ void Menu::DeleteObject(MenuElement *aElement)
   }
   delete aElement;
 }
+
+/**
+ * @brief Delete all objects, the right way.
+ */
 void Menu::DeleteObjects()
 {
   for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end();)
@@ -73,6 +92,10 @@ void Menu::DeleteObjects()
   mMenuElements.clear();
 }
 
+/**
+ * @brief Sends a message to all menu elements.
+ * @param aMessage
+ */
 void Menu::ReceiveMessage(Message const& aMessage)
 {
   for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
@@ -81,10 +104,17 @@ void Menu::ReceiveMessage(Message const& aMessage)
   }
 }
 
+/**
+ * @brief Does nothing for now.
+ * @param aMessage
+ */
 void Menu::SendMessage(Message const& aMessage)
 {
 }
 
+/**
+ * @brief Helper function to parse a text or xml (or whatever) file.
+ */
 void Menu::ParseFile()
 {
   TextParser parser(Common::RelativePath("Menus", mFileName).c_str());
