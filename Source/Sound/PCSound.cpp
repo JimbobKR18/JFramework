@@ -27,6 +27,9 @@ PCSound::~PCSound()
 {
 }
 
+/**
+ * @brief Plays sound all the way through.
+ */
 void PCSound::Play()
 {
   mChannel = Mix_PlayChannel(-1, mChunk, 0);
@@ -37,6 +40,10 @@ void PCSound::Play()
   }
 }
 
+/**
+ * @brief Play sound for a set amount of time.
+ * @param aTime Time in millis.
+ */
 void PCSound::Play(int aTime)
 {
   mChannel = Mix_PlayChannelTimed(-1, mChunk, 0, aTime);
@@ -47,6 +54,10 @@ void PCSound::Play(int aTime)
   }
 }
 
+/**
+ * @brief Fade in a sound.
+ * @param aTime Time in millis.
+ */
 void PCSound::FadeIn(int aTime)
 {
   mChannel = Mix_FadeInChannel(-1, mChunk, 0, aTime);
@@ -57,6 +68,10 @@ void PCSound::FadeIn(int aTime)
   }
 }
 
+/**
+ * @brief Fade out a sound.
+ * @param aTime Time in millis.
+ */
 void PCSound::FadeIn(int aFadeTime, int aPlayTime)
 {
   mChannel = Mix_FadeInChannelTimed(-1, mChunk, 0, aFadeTime, aPlayTime);
@@ -67,6 +82,9 @@ void PCSound::FadeIn(int aFadeTime, int aPlayTime)
   }
 }
 
+/**
+ * @brief Stop a sound.
+ */
 void PCSound::Stop()
 {
   Mix_HaltChannel(mChannel);

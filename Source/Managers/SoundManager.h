@@ -29,6 +29,7 @@ public:
   void                AddSound(Sound *aSound);
   void                RemoveSound(Sound *aSound);
   void                PlaySound(std::string const &aFilename);
+  void                PlaySoundTimed(std::string const &aFilename, int const aMillis);
   void                StopSound(std::string const &aFilename);
 
   virtual void        Update();
