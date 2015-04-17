@@ -494,7 +494,7 @@ void Level::ParseFile()
     if(curRoot->Find("Transform"))
     {
       Root* transform = curRoot->Find("Transform");
-      int posX, posY, posZ,
+      float posX, posY, posZ,
           scaleX, scaleY, scaleZ,
           sizeX, sizeY, sizeZ;
       posX = transform->Find("PositionX")->GetValue().ToFloat();
