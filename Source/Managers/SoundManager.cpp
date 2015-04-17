@@ -110,6 +110,16 @@ void SoundManager::StopSound(std::string const &aFilename)
 }
 
 /**
+ * @brief Fade out a sound over time
+ * @param aFilename
+ * @param aMillis Time in millis
+ */
+void SoundManager::StopSoundTimed(std::string const &aFilename, int const aMillis)
+{
+  mSounds[aFilename]->FadeOut(aMillis);
+}
+
+/**
  * @brief Does nothing for now.
  */
 void SoundManager::Update()

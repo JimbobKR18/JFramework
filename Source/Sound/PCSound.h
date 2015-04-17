@@ -35,6 +35,7 @@ public:
   virtual void FadeIn(int aFadeTime, int aPlayTime);
 
   virtual void Stop();
+  virtual void FadeOut(int aTime);
 };
 
 #endif /* defined(__JFramework__PCSound__) */

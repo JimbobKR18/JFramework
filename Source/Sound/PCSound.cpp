@@ -69,7 +69,7 @@ void PCSound::FadeIn(int aTime)
 }
 
 /**
- * @brief Fade out a sound.
+ * @brief Fade in a sound.
  * @param aTime Time in millis.
  */
 void PCSound::FadeIn(int aFadeTime, int aPlayTime)
@@ -88,5 +88,15 @@ void PCSound::FadeIn(int aFadeTime, int aPlayTime)
 void PCSound::Stop()
 {
   Mix_HaltChannel(mChannel);
+  mChannel = -1;
+}
+
+/**
+ * @brief Fade out a sound.
+ * @param aTime Time in millis.
+ */
+void PCSound::FadeOut(int aTime)
+{
+  mChannel = Mix_FadeOutChannel(mChannel, aTime);
   mChannel = -1;
 }
