@@ -104,9 +104,9 @@ void PhysicsObject::Serialize(Parser &aParser)
     HashString curShape = SHAPE + Common::IntToString(curIndex);
     object->Place("PhysicsObject", curShape, "");
     Root* physicsObject = object->Find("PhysicsObject");
-    physicsObject->Place(curShape, "PositionX", Common::IntToString((*it)->position.x));
-    physicsObject->Place(curShape, "PositionY", Common::IntToString((*it)->position.y));
-    physicsObject->Place(curShape, "PositionZ", Common::IntToString((*it)->position.z));
+    physicsObject->Place(curShape, "PositionX", Common::FloatToString((*it)->position.x));
+    physicsObject->Place(curShape, "PositionY", Common::FloatToString((*it)->position.y));
+    physicsObject->Place(curShape, "PositionZ", Common::FloatToString((*it)->position.z));
     
     switch((*it)->shape)
     {

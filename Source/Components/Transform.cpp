@@ -88,7 +88,7 @@ void Transform::Serialize(Parser &aParser)
       value = mScale[i - 3];
     else
       value = mSize[i - 6];
-    object->Place("Transform", values[i], Common::IntToString(value));
+    object->Place("Transform", values[i], Common::FloatToString(value));
   }
 
   if(mXAlign == X_ALIGN_LEFT)
