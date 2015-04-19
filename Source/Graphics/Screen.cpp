@@ -48,6 +48,10 @@ ScreenRenderSorter* Screen::GetRenderSorter()
   return mRenderSorter;
 }
 
+/**
+ * @brief Redefine behavior of how objects should be rendered.
+ * @param aRenderSorter
+ */
 void Screen::SetRenderSorter(ScreenRenderSorter *aRenderSorter)
 {
   if(mRenderSorter)
@@ -56,7 +60,10 @@ void Screen::SetRenderSorter(ScreenRenderSorter *aRenderSorter)
   mRenderSorter = aRenderSorter;
 }
 
-// This assumes that objects of same texture ID are at the same z depth.
+/**
+ * @brief Sorts objects to be rendered. (Assumes that objects of same texture ID are at the same z depth.)
+ * @param aObjects
+ */
 void Screen::SortObjects(std::vector<Surface*> &aObjects)
 {
   std::sort(aObjects.begin(), aObjects.end(), BatchSortPredicate);

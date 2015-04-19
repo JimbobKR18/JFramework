@@ -1,6 +1,12 @@
 #include "ZRenderSorter.h"
 #include "Transform.h"
 
+/**
+ * @brief Sorts objects by Z axis
+ * @param object1
+ * @param object2
+ * @return true if object1 goes before object2, false oterhwise.
+ */
 bool ZSortPredicate(Surface *object1, Surface *object2)
 {
   // Default values in case no owner found.
@@ -41,6 +47,10 @@ ZRenderSorter::~ZRenderSorter()
 {
 }
 
+/**
+ * @brief Sorts a list of surfaces.
+ * @param aSurfaces
+ */
 void ZRenderSorter::SortPredicate(std::vector<Surface*> &aSurfaces)
 {
   std::sort(aSurfaces.begin(), aSurfaces.end(), ZSortPredicate);
