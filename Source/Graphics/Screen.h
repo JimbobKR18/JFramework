@@ -3,6 +3,7 @@
 
 #include "Surface.h"
 #include "View.h"
+#include "ScreenRenderSorter.h"
 
 class Screen
 {
@@ -10,6 +11,7 @@ private:
   int   mWidth,
         mHeight;
   View  mView;
+  ScreenRenderSorter *mRenderSorter;
 
 public:
   Screen();
@@ -21,6 +23,10 @@ public:
   int                     GetHeight() const;
   // Get viewable space
   View&                   GetView();
+  // Get render sorting method (Post batching)
+  ScreenRenderSorter*     GetRenderSorter();
+  // Set render sorting method
+  void                    SetRenderSorter(ScreenRenderSorter *aRenderSorter);
   // Batching
   void                    SortObjects(std::vector<Surface*> &aObjects);
 
