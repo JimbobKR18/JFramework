@@ -8,10 +8,11 @@
 class Screen
 {
 private:
-  int   mWidth,
-        mHeight;
-  View  mView;
-  ScreenRenderSorter *mRenderSorter;
+  int                 mWidth;
+  int                 mHeight;
+  View                mView;
+  ScreenRenderSorter* mBatchRenderSorter;
+  ScreenRenderSorter* mDepthRenderSorter;
 
 public:
   Screen();
@@ -23,10 +24,14 @@ public:
   int                     GetHeight() const;
   // Get viewable space
   View&                   GetView();
-  // Get render sorting method (Post batching)
-  ScreenRenderSorter*     GetRenderSorter();
-  // Set render sorting method
-  void                    SetRenderSorter(ScreenRenderSorter *aRenderSorter);
+  // Get batch render sorting method
+  ScreenRenderSorter*     GetBatchRenderSorter();
+  // Set batch render sorting method
+  void                    SetBatchRenderSorter(ScreenRenderSorter *aBatchRenderSorter);
+  // Get depth render sorting method (Post batching)
+  ScreenRenderSorter*     GetDepthRenderSorter();
+  // Set depth render sorting method
+  void                    SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter);
   // Batching
   void                    SortObjects(std::vector<Surface*> &aObjects);
 

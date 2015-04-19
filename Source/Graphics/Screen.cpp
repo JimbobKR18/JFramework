@@ -1,31 +1,22 @@
 #include "Screen.h"
 #include "Transform.h"
 #include "ZRenderSorter.h"
+#include "BatchRenderSorter.h"
 
-bool BatchSortPredicate(Surface *object1, Surface *object2)
-{
-  // Simple enough
-  if(object1->GetTextureID() < object2->GetTextureID())
-  {
-    return true;
-  }
-
-  return false;
-}
-
-Screen::Screen() : mWidth(0), mHeight(0), mRenderSorter(nullptr)
+Screen::Screen() : mWidth(0), mHeight(0), mDepthRenderSorter(nullptr)
 {
 }
 
 Screen::Screen(int aW, int aH) : mWidth(aW), mHeight(aH)
 {
   mView.SetSize(Vector3(aW, aH, 0));
-  mRenderSorter = new ZRenderSorter();
+  mDepthRenderSorter = new ZRenderSorter();
+  mBatchRenderSorter = new BatchRenderSorter();
 }
 
 Screen::~Screen()
 {
-  delete mRenderSorter;
+  delete mDepthRenderSorter;
 }
 
 int Screen::GetWidth() const
@@ -40,24 +31,41 @@ int Screen::GetHeight() const
 
 View &Screen::GetView()
 {
-	return mView;
+  return mView;
 }
 
-ScreenRenderSorter* Screen::GetRenderSorter()
+ScreenRenderSorter* Screen::GetBatchRenderSorter()
 {
-  return mRenderSorter;
+  return mBatchRenderSorter;
 }
 
 /**
  * @brief Redefine behavior of how objects should be rendered.
  * @param aRenderSorter
  */
-void Screen::SetRenderSorter(ScreenRenderSorter *aRenderSorter)
+void Screen::SetBatchRenderSorter(ScreenRenderSorter *aBatchRenderSorter)
 {
-  if(mRenderSorter)
-    delete mRenderSorter;
+  if(mBatchRenderSorter)
+    delete mBatchRenderSorter;
     
-  mRenderSorter = aRenderSorter;
+  mBatchRenderSorter = aBatchRenderSorter;
+}
+
+ScreenRenderSorter* Screen::GetDepthRenderSorter()
+{
+  return mDepthRenderSorter;
+}
+
+/**
+ * @brief Redefine behavior of how objects should be rendered.
+ * @param aRenderSorter
+ */
+void Screen::SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter)
+{
+  if(mDepthRenderSorter)
+    delete mDepthRenderSorter;
+    
+  mDepthRenderSorter = aDepthRenderSorter;
 }
 
 /**
@@ -66,6 +74,6 @@ void Screen::SetRenderSorter(ScreenRenderSorter *aRenderSorter)
  */
 void Screen::SortObjects(std::vector<Surface*> &aObjects)
 {
-  std::sort(aObjects.begin(), aObjects.end(), BatchSortPredicate);
-  mRenderSorter->SortPredicate(aObjects);
+  mBatchRenderSorter->SortPredicate(aObjects);
+  mDepthRenderSorter->SortPredicate(aObjects);
 }
