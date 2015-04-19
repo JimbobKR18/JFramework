@@ -17,6 +17,7 @@ Screen::Screen(int aW, int aH) : mWidth(aW), mHeight(aH), mView()
 Screen::~Screen()
 {
   delete mDepthRenderSorter;
+  delete mBatchRenderSorter;
 }
 
 int Screen::GetWidth() const
