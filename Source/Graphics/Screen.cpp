@@ -3,11 +3,11 @@
 #include "ZRenderSorter.h"
 #include "BatchRenderSorter.h"
 
-Screen::Screen() : mWidth(0), mHeight(0), mDepthRenderSorter(nullptr)
+Screen::Screen() : mWidth(0), mHeight(0), mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr)
 {
 }
 
-Screen::Screen(int aW, int aH) : mWidth(aW), mHeight(aH)
+Screen::Screen(int aW, int aH) : mWidth(aW), mHeight(aH), mView()
 {
   mView.SetSize(Vector3(aW, aH, 0));
   mDepthRenderSorter = new ZRenderSorter();
