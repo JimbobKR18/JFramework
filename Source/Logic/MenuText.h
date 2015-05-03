@@ -19,6 +19,7 @@ private:
   int           mMaxWidth;
   Vector4       mForegroundColor;
   Vector4       mBackgroundColor;
+  Vector3       mOriginalSize;
 
 public:
   MenuText(std::string const &aFilename);
@@ -26,6 +27,7 @@ public:
   virtual ~MenuText();
 
   virtual void Draw();
+  virtual void Update();
   virtual void SendMessage(Message const &aMessage);
   virtual void ReceiveMessage(Message const &aMessage);
   virtual void ParseAdditionalData(Parser &aParser);

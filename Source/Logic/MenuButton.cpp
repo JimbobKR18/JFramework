@@ -13,10 +13,24 @@ MenuButton::~MenuButton()
 {
 }
 
+/**
+ * @brief Does nothing
+ */
 void MenuButton::Draw()
 {
 }
 
+/**
+ * @brief Does nothing
+ */
+void MenuButton::Update()
+{
+}
+
+/**
+ * @brief Gather additional data from deserialized file.
+ * @param aParser
+ */
 void MenuButton::ParseAdditionalData(Parser& aParser)
 {
   // This should be in screen space
@@ -39,6 +53,10 @@ void MenuButton::ParseAdditionalData(Parser& aParser)
   }
 }
 
+/**
+ * @brief Receive click messages.
+ * @param aMessage
+ */
 void MenuButton::ReceiveMessage(Message const& aMessage)
 {
   if(aMessage.GetDescription() == "Click")
@@ -56,6 +74,10 @@ void MenuButton::ReceiveMessage(Message const& aMessage)
   }
 }
 
+/**
+ * @brief Does nothing (yet)
+ * @param aMessage
+ */
 void MenuButton::SendMessage(Message const& aMessage)
 {
 }

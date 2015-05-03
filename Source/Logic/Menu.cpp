@@ -93,6 +93,17 @@ void Menu::DeleteObjects()
 }
 
 /**
+ * @brief Updates menu elements if need be.
+ */
+void Menu::Update()
+{
+  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  {
+    (*it)->Update();
+  }
+}
+
+/**
  * @brief Sends a message to all menu elements.
  * @param aMessage
  */

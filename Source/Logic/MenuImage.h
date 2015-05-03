@@ -18,6 +18,7 @@ public:
   ~MenuImage();
   
   virtual void Draw();
+  virtual void Update();
   virtual void SendMessage(Message const &aMessage);
   virtual void ReceiveMessage(Message const &aMessage);
   virtual void ParseAdditionalData(Parser &aParser);

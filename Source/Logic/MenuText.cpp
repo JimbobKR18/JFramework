@@ -27,20 +27,46 @@ MenuText::~MenuText()
 {
 }
 
+/**
+ * @brief Does nothing.
+ */
 void MenuText::Draw()
 {
 }
 
+/**
+ * @brief Updates image size and texture corrdinates.
+ */
+void MenuText::Update()
+{
+  Transform *transform = mObject->GET<Transform>();
+  Surface *surface = mObject->GET<Surface>();
+  surface->Update();
+  transform->GetSize().x = surface->GetTextureData()->GetXValue(1) * mOriginalSize.x;
+}
+
+/**
+ * @brief Does nothing.
+ * @param aMessage
+ */
 void MenuText::SendMessage(Message const &aMessage)
 {
 
 }
 
+/**
+ * @brief Does nothing.
+ * @param aMessage
+ */
 void MenuText::ReceiveMessage(Message const &aMessage)
 {
 
 }
 
+/**
+ * @brief Gathers additional data from deserialized file.
+ * @param aParser
+ */
 void MenuText::ParseAdditionalData(Parser &aParser)
 {
   GameApp* app = LUABind::StaticGameApp::GetApp();
@@ -86,8 +112,23 @@ void MenuText::ParseAdditionalData(Parser &aParser)
 #endif
   surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
   surface->Deserialize(aParser);
+  
+  // Reveal the text slowly rather than all at once.
+  if(aParser.Find("Animation"))
+  {
+    Root* animation = aParser.Find("Animation");
+    std::vector<int> numFrames = animation->Find("NumFrames")->GetValue().ToIntVector();
+    float animationSpeed = animation->Find("AnimationSpeed")->GetValue().ToFloat();
+
+    surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
+    surface->GetTextureData()->SetXGain(0, 0);
+    surface->SetAnimation(0);
+    surface->SetAnimated(true);
+  }
+  
   mObject->AddComponent(surface);
 
   // Update texture to be the right size.
   mObject->GET<Transform>()->SetSize(size);
+  mOriginalSize = size;
 }

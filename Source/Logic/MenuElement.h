@@ -33,6 +33,7 @@ public:
   void          SetLayer(int const aLayer);
   
   virtual void  Draw() = 0;
+  virtual void  Update() = 0;
   virtual void  SendMessage(Message const &aMessage) = 0;
   virtual void  ReceiveMessage(Message const &aMessage) = 0;
   virtual void  ParseAdditionalData(Parser &aParser) = 0;

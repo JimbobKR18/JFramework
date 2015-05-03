@@ -22,8 +22,8 @@ private:
   int                         mYSize;
   float                       mSpeed;
   float                       mCurTime;
-  float                       mXGain;
-  float                       mYGain;
+  float                       mXGain[2];
+  float                       mYGain[2];
   float                       mXValues[2];
   float                       mYValues[2];
   bool                        mAnimated;
@@ -42,8 +42,8 @@ public:
   void  Update(float aDT);
 
   // GETTERS
-  float GetXValue(int aValue) const;
-  float GetYValue(int aValue) const;
+  float GetXValue(int const aIndex) const;
+  float GetYValue(int const aIndex) const;
   float GetAnimationSpeed() const;
   int   GetCurrentAnimation() const;
   int   GetNumberofAnimations() const;
@@ -53,11 +53,13 @@ public:
   bool  GetAnimated() const;
 
   // SETTERS
-  void  SetCurrentAnimation(int aAnimation);
-  void  SetCurrentFrame(int aFrame);
-  void  SetFrameByID(int aFrameID);
-  void  SetAnimated(bool aAnimated);
-  void  SetSpeed(float aSpeed);
+  void  SetCurrentAnimation(int const aAnimation);
+  void  SetCurrentFrame(int const aFrame);
+  void  SetFrameByID(int const aFrameID);
+  void  SetAnimated(bool const aAnimated);
+  void  SetSpeed(float const aSpeed);
+  void  SetXGain(int const aIndex, float const aX);
+  void  SetYGain(int const aIndex, float const aY);
 
   // HELPERS
   void  Reset();

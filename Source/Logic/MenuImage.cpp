@@ -19,18 +19,40 @@ MenuImage::~MenuImage()
 {
 }
 
+/**
+ * @brief Does nothing.
+ */
 void MenuImage::Draw()
 {
 }
 
+/**
+ * @brief Does nothing.
+ */
+void MenuImage::Update()
+{
+}
+
+/**
+ * @brief Does nothing.
+ * @param aMessage
+ */
 void MenuImage::SendMessage(Message const &aMessage)
 {
 }
 
+/**
+ * @brief Does nothing.
+ * @param aMessage
+ */
 void MenuImage::ReceiveMessage(Message const &aMessage)
 {
 }
 
+/**
+ * @brief Gather additional data from deserialized file.
+ * @param aParser
+ */
 void MenuImage::ParseAdditionalData(Parser &aParser)
 {
   // Borrowing the static game app from our LUA stuff

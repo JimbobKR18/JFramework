@@ -8,10 +8,10 @@
 
 #include "TextureCoordinates.h"
 
-#define SETFRAMES() mXValues[0] = mCurFrame * mXGain + (0.5f / (float)mXSize); \
-                    mXValues[1] = (mCurFrame + 1) * mXGain - (0.5f / (float)mXSize); \
-                    mYValues[0] = mCurAnimation * mYGain + (0.5f / (float)mYSize); \
-                    mYValues[1] = (mCurAnimation + 1) * mYGain - (0.5f / (float)mYSize)
+#define SETFRAMES() mXValues[0] = mCurFrame * mXGain[0] + (0.5f / (float)mXSize); \
+                    mXValues[1] = (mCurFrame + 1) * mXGain[1] - (0.5f / (float)mXSize); \
+                    mYValues[0] = mCurAnimation * mYGain[0] + (0.5f / (float)mYSize); \
+                    mYValues[1] = (mCurAnimation + 1) * mYGain[1] - (0.5f / (float)mYSize)
 
 TextureCoordinates::TextureCoordinates()
 {
@@ -46,8 +46,8 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
   }
   
   // Figure out the gain per step of animation
-  mXGain = 1.0f / (float)maxFrames;
-  mYGain = 1.0f / (float)aNumAnimations;
+  mXGain[0] = mXGain[1] = 1.0f / (float)maxFrames;
+  mYGain[0] = mYGain[1] = 1.0f / (float)aNumAnimations;
   
   // Set all values to starting positions
   SETFRAMES();
@@ -58,6 +58,10 @@ TextureCoordinates::~TextureCoordinates()
   
 }
 
+/**
+ * @brief Basic update loop, updates texture coordinates based on DT
+ * @param aDT
+ */
 void TextureCoordinates::Update(float aDT)
 {
   if(!mAnimated)
@@ -89,52 +93,95 @@ void TextureCoordinates::Update(float aDT)
   }
 }
 
-float TextureCoordinates::GetXValue(int aValue) const
+/**
+ * @brief Get current x coordinate.
+ * @param aIndex 0 for left, 1 for right.
+ * @return 
+ */
+float TextureCoordinates::GetXValue(int const aIndex) const
 {
-  return mXValues[aValue];
+  return mXValues[aIndex];
 }
 
-float TextureCoordinates::GetYValue(int aValue) const
+/**
+ * @brief Get current y coordinate.
+ * @param aIndex 0 for top, 1 for bottom.
+ * @return 
+ */
+float TextureCoordinates::GetYValue(int const aIndex) const
 {
-  return mYValues[aValue];
+  return mYValues[aIndex];
 }
 
+/**
+ * @brief Get animation speed.
+ * @return 
+ */
 float TextureCoordinates::GetAnimationSpeed() const
 {
   return mSpeed;
 }
 
+/**
+ * @brief Get current animation index.
+ * @return 
+ */
 int TextureCoordinates::GetCurrentAnimation() const
 {
   return mCurAnimation;
 }
 
+/**
+ * @brief Get the total number of animations.
+ * @return 
+ */
 int TextureCoordinates::GetNumberofAnimations() const
 {
   return mAnimations.size();
 }
 
+/**
+ * @brief Get the total number of frames across all animations.
+ * @return 
+ */
 int TextureCoordinates::GetTotalFrames() const
 {
   return mTotalFrames;
 }
 
+/**
+ * @brief Get number of frames for an animation
+ * @param aAnimation The animation index.
+ * @return 
+ */
 int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
 {
   return mAnimations.find(aAnimation)->second;
 }
 
+/**
+ * @brief Is the current animation finished cycling through?
+ * @return 
+ */
 bool TextureCoordinates::GetCompleted() const
 {
   return mCompleted;
 }
 
+/**
+ * @brief Are we animated at all?
+ * @return 
+ */
 bool TextureCoordinates::GetAnimated() const
 {
   return mAnimated;
 }
 
-void TextureCoordinates::SetCurrentAnimation(int aAnimation)
+/**
+ * @brief Sets the current animation, starts from beginning.
+ * @param aAnimation
+ */
+void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
 {
   // So as to not reset the animation, we have an early out.
   if(mCurAnimation == aAnimation)
@@ -155,7 +202,11 @@ void TextureCoordinates::SetCurrentAnimation(int aAnimation)
   SETFRAMES();
 }
 
-void TextureCoordinates::SetCurrentFrame(int aFrame)
+/**
+ * @brief Set current frame in animation
+ * @param aFrame
+ */
+void TextureCoordinates::SetCurrentFrame(int const aFrame)
 {
   if(mCurFrame > mAnimations.find(mCurAnimation)->second)
   {
@@ -168,7 +219,11 @@ void TextureCoordinates::SetCurrentFrame(int aFrame)
   SETFRAMES();
 }
 
-void TextureCoordinates::SetFrameByID(int aFrameID)
+/**
+ * @brief Across all frames, what index do you want to be in?
+ * @param aFrameID
+ */
+void TextureCoordinates::SetFrameByID(int const aFrameID)
 {
   // Set frame, if above frames for current animation,
   // move onto next animation, so on and so on.
@@ -190,16 +245,47 @@ void TextureCoordinates::SetFrameByID(int aFrameID)
   SETFRAMES();
 }
 
-void TextureCoordinates::SetAnimated(bool aAnimated)
+/**
+ * @brief Set whether or not to animate this object.
+ * @param aAnimated
+ */
+void TextureCoordinates::SetAnimated(bool const aAnimated)
 {
   mAnimated = aAnimated;
 }
 
-void TextureCoordinates::SetSpeed(float aSpeed)
+/**
+ * @brief Set time before next frame (in seconds).
+ * @param aSpeed
+ */
+void TextureCoordinates::SetSpeed(float const aSpeed)
 {
   mSpeed = aSpeed;
 }
 
+/**
+ * @brief Set pace in which the x coordinate should gain per frame.
+ * @param aIndex 0 for left, 1 for right.
+ * @param aX The gain.
+ */
+void TextureCoordinates::SetXGain(int const aIndex, float const aXGain)
+{
+  mXGain[aIndex] = aXGain;
+}
+
+/**
+ * @brief Set pace in which the y coordinate should gain per animation.
+ * @param aIndex 0 for top, 1 for bottom.
+ * @param aY The gain.
+ */
+void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
+{
+  mYGain[aIndex] = aYGain;
+}
+
+/**
+ * @brief Start animation at the beginning.
+ */
 void TextureCoordinates::Reset()
 {
   mCurFrame = 0;

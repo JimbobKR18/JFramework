@@ -35,6 +35,7 @@ public:
   void          AddObject(MenuElement *aElement);
   void          DeleteObject(MenuElement *aElement);
   void          DeleteObjects();
+  void          Update();
   
   virtual void  ReceiveMessage(Message const& aMessage);
   virtual void  SendMessage(Message const& aMessage);

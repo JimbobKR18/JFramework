@@ -69,7 +69,7 @@ public:
 	void              Unload(Level* const aNextLevel);
 
 	virtual void      PreReset() {};
-	virtual void      Update() {};
+	virtual void      Update();
 	virtual void      ParseAdditionalData(Root *aRoot, GameObject *aObject) {};
 	virtual void      Serialize(Parser &aParser);
 	void              SerializeTileMap(Parser &aParser);

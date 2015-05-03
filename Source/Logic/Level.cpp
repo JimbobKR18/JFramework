@@ -408,6 +408,14 @@ void Level::Unload(Level* const aNextLevel)
   mOwner->SetActiveLevel(NULL);
 }
 
+void Level::Update()
+{
+  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
+  {
+    (*it)->Update();
+  }
+}
+
 /**
  * @brief Serialize level to file.
  * @param aParser
