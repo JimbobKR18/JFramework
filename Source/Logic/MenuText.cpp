@@ -122,7 +122,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
 
     surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
     surface->GetTextureData()->SetXGain(0, 0);
-    surface->SetAnimation(0);
+    surface->SetAnimation(0, true);
     surface->SetAnimated(true);
   }
   

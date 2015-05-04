@@ -44,10 +44,13 @@ void Surface::SetAnimated(bool aAnimated)
     mTexCoord->SetAnimated(aAnimated);
 }
 
-void Surface::SetAnimation(int aAnimation)
+void Surface::SetAnimation(int aAnimation, bool aRunOnce)
 {
   if(mTexCoord)
+  {
     mTexCoord->SetCurrentAnimation(aAnimation);
+    mTexCoord->SetRunOnce(aRunOnce);
+  }
 }
 
 void Surface::SetCurrentFrame(int aFrame)

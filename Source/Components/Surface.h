@@ -44,7 +44,7 @@ public:
   TextureCoordinates* GetTextureData() const;
   void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed);
   void                SetAnimated(bool aAnimated);
-  void                SetAnimation(int aAnimation);
+  void                SetAnimation(int aAnimation, bool aRunOnce = false);
   void                SetCurrentFrame(int aFrame);
   void                SetFrameByID(int aFrameID);
   bool                CurrentAnimationCompleted();

@@ -28,7 +28,9 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
                                                                 mYSize(aYSize),
                                                                 mSpeed(aAnimationSpeed),
                                                                 mCurTime(0),
-                                                                mCompleted(false)
+                                                                mAnimated(false),
+                                                                mCompleted(false),
+                                                                mRunOnce(false)
 {
   int maxFrames = 0;
   
@@ -84,8 +86,16 @@ void TextureCoordinates::Update(float aDT)
     // Make sure we're within bounds
     if(mCurFrame >= mAnimations.find(mCurAnimation)->second)
     {
-      mCurFrame = 0;
       mCompleted = true;
+      // If only run once, do not reset the frames.
+      if(!mRunOnce)
+      {
+        mCurFrame = 0;
+      }
+      else
+      {
+        return;
+      }
     }
     
     // Set positions of coordinates
@@ -252,6 +262,15 @@ void TextureCoordinates::SetFrameByID(int const aFrameID)
 void TextureCoordinates::SetAnimated(bool const aAnimated)
 {
   mAnimated = aAnimated;
+}
+
+/**
+ * @brief Set whether or not to run the current animation only once.
+ * @param aRunOnce
+ */
+void TextureCoordinates::SetRunOnce(bool const aRunOnce)
+{
+  mRunOnce = aRunOnce;
 }
 
 /**

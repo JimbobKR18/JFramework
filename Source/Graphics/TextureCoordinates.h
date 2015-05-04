@@ -28,6 +28,7 @@ private:
   float                       mYValues[2];
   bool                        mAnimated;
   bool                        mCompleted;
+  bool                        mRunOnce;
   
   // <currentAnimation, numberofFrames>
   std::map<int, int>          mAnimations;
@@ -57,6 +58,7 @@ public:
   void  SetCurrentFrame(int const aFrame);
   void  SetFrameByID(int const aFrameID);
   void  SetAnimated(bool const aAnimated);
+  void  SetRunOnce(bool const aRunOnce);
   void  SetSpeed(float const aSpeed);
   void  SetXGain(int const aIndex, float const aX);
   void  SetYGain(int const aIndex, float const aY);
