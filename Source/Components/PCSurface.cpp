@@ -140,7 +140,11 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
     SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
     //SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
     SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(mFont, aText.c_str(), fgColor, aMaxWidth);
-    assert(msg);
+    if(!msg)
+    {
+      DebugLogPrint("TTF_RenderText failed: %s", TTF_GetError());
+      assert(msg);
+    }
 
     mSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
     SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
