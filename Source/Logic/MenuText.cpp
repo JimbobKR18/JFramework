@@ -113,6 +113,11 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
   surface->Deserialize(aParser);
   
+  // Update texture to be the right size.
+  Transform *transform = mObject->GET<Transform>();
+  mOriginalSize = size;
+  transform->SetSize(size);
+  
   // Reveal the text slowly rather than all at once.
   if(aParser.Find("Animation"))
   {
@@ -124,11 +129,8 @@ void MenuText::ParseAdditionalData(Parser &aParser)
     surface->GetTextureData()->SetXGain(0, 0);
     surface->SetAnimation(0, true);
     surface->SetAnimated(true);
+    transform->GetSize().x = 0;
   }
   
   mObject->AddComponent(surface);
-
-  // Update texture to be the right size.
-  mObject->GET<Transform>()->SetSize(size);
-  mOriginalSize = size;
 }
