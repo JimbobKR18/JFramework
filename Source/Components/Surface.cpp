@@ -65,6 +65,12 @@ void Surface::SetFrameByID(int aFrameID)
     mTexCoord->SetFrameByID(aFrameID);
 }
 
+void Surface::FinishAnimation()
+{
+  if(mTexCoord)
+    mTexCoord->Finish();
+}
+
 bool Surface::CurrentAnimationCompleted()
 {
   if(mTexCoord)

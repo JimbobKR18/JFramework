@@ -60,7 +60,14 @@ void MenuText::SendMessage(Message const &aMessage)
  */
 void MenuText::ReceiveMessage(Message const &aMessage)
 {
-
+  if(aMessage.GetDescription() == "Finish")
+  {
+    Transform *transform = mObject->GET<Transform>();
+    Surface *surface = mObject->GET<Surface>();
+    
+    transform->SetSize(mOriginalSize);
+    surface->FinishAnimation();
+  }
 }
 
 /**

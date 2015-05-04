@@ -64,6 +64,7 @@ public:
   void  SetYGain(int const aIndex, float const aY);
 
   // HELPERS
+  void  Finish();
   void  Reset();
 };
 

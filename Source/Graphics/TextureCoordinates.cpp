@@ -303,6 +303,17 @@ void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
 }
 
 /**
+ * @brief Finish current animation.
+ */
+void TextureCoordinates::Finish()
+{
+  // Set to last frame.
+  mCurFrame = mAnimations.find(mCurAnimation)->second - 1;
+  // Set positions of coordinates
+  SETFRAMES();
+}
+
+/**
  * @brief Start animation at the beginning.
  */
 void TextureCoordinates::Reset()
