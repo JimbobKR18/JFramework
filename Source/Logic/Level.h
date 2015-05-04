@@ -72,6 +72,8 @@ public:
 	virtual void      Update();
 	virtual void      ParseAdditionalData(Root *aRoot, GameObject *aObject) {};
 	virtual void      Serialize(Parser &aParser);
+  virtual void      ReceiveMessage(Message const& aMessage) {};
+  virtual void      SendMessage(Message const& aMessage) {};
 	void              SerializeTileMap(Parser &aParser);
 
 	static void       SerializeLUA();

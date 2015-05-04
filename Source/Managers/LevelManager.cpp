@@ -146,11 +146,13 @@ void LevelManager::Update()
 }
 
 /**
- * @brief Does nothing for now.
+ * @brief Relays a message to current active level.
  * @param aMessage
  */
 void LevelManager::SendMessage(Message const &aMessage)
 {
+  if(mActiveLevel)
+    mActiveLevel->ReceiveMessage(aMessage);
 }
 
 /**
