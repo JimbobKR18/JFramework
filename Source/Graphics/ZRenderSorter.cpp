@@ -5,7 +5,7 @@
  * @brief Sorts objects by Z axis
  * @param object1
  * @param object2
- * @return true if object1 goes before object2, false oterhwise.
+ * @return true if object1 goes before object2, false otherwise.
  */
 bool ZSortPredicate(Surface *object1, Surface *object2)
 {
