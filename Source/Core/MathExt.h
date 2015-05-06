@@ -155,6 +155,18 @@ T Greater(T const& aA, T const& aB)
   return aB;
 }
 
+template<typename T>
+bool WithinRange(T const& aRoot, T const& aCompare, T const& aRange)
+{
+  T max = aRoot + aRange;
+  T min = aRoot - aRange;
+  if(max > aCompare && min < aCompare)
+  {
+    return true;
+  }
+  return false;
+}
+
 void print_matrix(Matrix33 const &_matrix);
 void print_vector(Vector3 const &_point);
 
