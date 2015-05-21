@@ -44,7 +44,7 @@ void PCSound::Play()
  * @brief Play sound for a set amount of time.
  * @param aTime Time in millis.
  */
-void PCSound::Play(int aTime)
+void PCSound::Play(int const aTime)
 {
   mChannel = Mix_PlayChannelTimed(-1, mChunk, 0, aTime);
   if(mChannel == -1)
@@ -58,7 +58,7 @@ void PCSound::Play(int aTime)
  * @brief Fade in a sound.
  * @param aTime Time in millis.
  */
-void PCSound::FadeIn(int aTime)
+void PCSound::FadeIn(int const aTime)
 {
   mChannel = Mix_FadeInChannel(-1, mChunk, 0, aTime);
   if(mChannel == -1)
@@ -72,13 +72,47 @@ void PCSound::FadeIn(int aTime)
  * @brief Fade in a sound.
  * @param aTime Time in millis.
  */
-void PCSound::FadeIn(int aFadeTime, int aPlayTime)
+void PCSound::FadeIn(int const aFadeTime, int const aPlayTime)
 {
   mChannel = Mix_FadeInChannelTimed(-1, mChunk, 0, aFadeTime, aPlayTime);
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_FadeInChannelTimed: %s\n", Mix_GetError());
     assert(!"Mix_FadeInChannelTimed failed, aborting.");
+  }
+}
+
+/**
+ * @brief Set volume for this sound.
+ * @param aVolume The volume, from 0 to MAX_VOLUME(128)
+ */
+void PCSound::SetVolume(int const aVolume)
+{
+  if(mChannel != -1)
+  {
+    Mix_Volume(mChannel, aVolume);
+  }
+}
+
+/**
+ * @brief Resumes a sound
+ */
+void PCSound::Resume()
+{
+  if(mChannel != -1)
+  {
+    Mix_Resume(mChannel);
+  }
+}
+
+/**
+ * @brief Pauses a sound.
+ */
+void PCSound::Pause()
+{
+  if(mChannel != -1)
+  {
+    Mix_Pause(mChannel);
   }
 }
 
@@ -95,7 +129,7 @@ void PCSound::Stop()
  * @brief Fade out a sound.
  * @param aTime Time in millis.
  */
-void PCSound::FadeOut(int aTime)
+void PCSound::FadeOut(int const aTime)
 {
   mChannel = Mix_FadeOutChannel(mChannel, aTime);
   mChannel = -1;

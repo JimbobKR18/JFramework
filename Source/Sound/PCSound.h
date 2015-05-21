@@ -25,17 +25,24 @@ private:
   Mix_Chunk*  mChunk;
   int         mChannel;
 public:
+  static int const MAX_VOUME = 128;
+
   PCSound();
   PCSound(std::string const &aFilename);
   virtual ~PCSound();
   
   virtual void Play();
-  virtual void Play(int aTime);
-  virtual void FadeIn(int aTime);
-  virtual void FadeIn(int aFadeTime, int aPlayTime);
+  virtual void Play(int const aTime);
+  virtual void FadeIn(int const aTime);
+  virtual void FadeIn(int const aFadeTime, int const aPlayTime);
+  
+  virtual void SetVolume(int const aVolume);
+  
+  virtual void Resume();
+  virtual void Pause();
 
   virtual void Stop();
-  virtual void FadeOut(int aTime);
+  virtual void FadeOut(int const aTime);
 };
 
 #endif /* defined(__JFramework__PCSound__) */

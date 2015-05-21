@@ -120,6 +120,34 @@ void SoundManager::StopSoundTimed(std::string const &aFilename, int const aMilli
 }
 
 /**
+ * @brief Set the volume of a sound.
+ * @param aFilename
+ * @param aVolume The volume to set the sound to.
+ */
+void SoundManager::SetSoundVolume(std::string const &aFilename, int const aVolume)
+{
+  mSounds[aFilename]->SetVolume(aVolume);
+}
+
+/**
+ * @brief Resume a sound from pause.
+ * @param aFilename
+ */
+void SoundManager::ResumeSound(std::string const &aFilename)
+{
+  mSounds[aFilename]->Resume();
+}
+
+/**
+ * @brief Pause a sound.
+ * @param aFilename
+ */
+void SoundManager::PauseSound(std::string const &aFilename)
+{
+  mSounds[aFilename]->Pause();
+}
+
+/**
  * @brief Does nothing for now.
  */
 void SoundManager::Update()
@@ -149,5 +177,10 @@ void SoundManager::SerializeLUA()
 {
   SLB::Class<SoundManager>("SoundManager").inherits<Manager>()
       .set("PlaySound", &SoundManager::PlaySound)
-      .set("PlaySoundTime", &SoundManager::PlaySoundTimed);
+      .set("PlaySoundTime", &SoundManager::PlaySoundTimed)
+      .set("StopSound", &SoundManager::StopSound)
+      .set("StopSoundTimed", &SoundManager::StopSoundTimed)
+      .set("SetSoundVolume", &SoundManager::SetSoundVolume)
+      .set("ResumeSound", &SoundManager::ResumeSound)
+      .set("PauseSound", &SoundManager::PauseSound);
 }

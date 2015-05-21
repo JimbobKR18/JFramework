@@ -32,6 +32,9 @@ public:
   void                PlaySoundTimed(std::string const &aFilename, int const aMillis);
   void                StopSound(std::string const &aFilename);
   void                StopSoundTimed(std::string const &aFilename, int const aMillis);
+  void                SetSoundVolume(std::string const &aFilename, int const aVolume);
+  void                ResumeSound(std::string const &aFilename);
+  void                PauseSound(std::string const &aFilename);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);

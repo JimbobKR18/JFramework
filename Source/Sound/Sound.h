@@ -23,12 +23,17 @@ struct Sound
   virtual ~Sound();
   
   virtual void Play() = 0;
-  virtual void Play(int aTime) = 0;
-  virtual void FadeIn(int aTime) = 0;
-  virtual void FadeIn(int aFadeTime, int aPlayTime) = 0;
+  virtual void Play(int const aTime) = 0;
+  virtual void FadeIn(int const aTime) = 0;
+  virtual void FadeIn(int const aFadeTime, int const aPlayTime) = 0;
+  
+  virtual void SetVolume(int const aVolume) = 0;
+  
+  virtual void Resume() = 0;
+  virtual void Pause() = 0;
 
   virtual void Stop() = 0;
-  virtual void FadeOut(int aTime) = 0;
+  virtual void FadeOut(int const aTime) = 0;
 };
 
 #endif /* defined(__JFramework__Sound__) */
