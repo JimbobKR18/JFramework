@@ -85,9 +85,9 @@ void SoundManager::RemoveSound(Sound *aSound)
  * @brief Play a sound until it finishes.
  * @param aFilename
  */
-void SoundManager::PlaySound(std::string const &aFilename)
+void SoundManager::PlaySound(std::string const &aFilename, int const aNumLoops)
 {
-  mSounds[aFilename]->Play();
+  mSounds[aFilename]->Play(aNumLoops);
 }
 
 /**
@@ -95,9 +95,9 @@ void SoundManager::PlaySound(std::string const &aFilename)
  * @param aFilename
  * @param aMillis Time in millis.
  */
-void SoundManager::PlaySoundTimed(std::string const &aFilename, int const aMillis)
+void SoundManager::PlaySoundTimed(std::string const &aFilename, int const aNumLoops, int const aMillis)
 {
-  mSounds[aFilename]->Play(aMillis);
+  mSounds[aFilename]->Play(aNumLoops, aMillis);
 }
 
 /**

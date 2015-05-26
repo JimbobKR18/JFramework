@@ -31,10 +31,10 @@ public:
   PCSound(std::string const &aFilename);
   virtual ~PCSound();
   
-  virtual void Play();
-  virtual void Play(int const aTime);
-  virtual void FadeIn(int const aTime);
-  virtual void FadeIn(int const aFadeTime, int const aPlayTime);
+  virtual void Play(int const aNumLoops);
+  virtual void Play(int const aNumLoops, int const aTime);
+  virtual void FadeIn(int const aNumLoops, int const aTime);
+  virtual void FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTime);
   
   virtual void SetVolume(int const aVolume);
   

@@ -30,9 +30,9 @@ PCSound::~PCSound()
 /**
  * @brief Plays sound all the way through.
  */
-void PCSound::Play()
+void PCSound::Play(int const aNumLoops)
 {
-  mChannel = Mix_PlayChannel(-1, mChunk, 0);
+  mChannel = Mix_PlayChannel(-1, mChunk, aNumLoops);
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_PlayChannel: %s\n", Mix_GetError());
@@ -44,9 +44,9 @@ void PCSound::Play()
  * @brief Play sound for a set amount of time.
  * @param aTime Time in millis.
  */
-void PCSound::Play(int const aTime)
+void PCSound::Play(int const aNumLoops, int const aTime)
 {
-  mChannel = Mix_PlayChannelTimed(-1, mChunk, 0, aTime);
+  mChannel = Mix_PlayChannelTimed(-1, mChunk, aNumLoops, aTime);
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_PlayChannelTimed: %s\n", Mix_GetError());
@@ -58,9 +58,9 @@ void PCSound::Play(int const aTime)
  * @brief Fade in a sound.
  * @param aTime Time in millis.
  */
-void PCSound::FadeIn(int const aTime)
+void PCSound::FadeIn(int const aNumLoops, int const aTime)
 {
-  mChannel = Mix_FadeInChannel(-1, mChunk, 0, aTime);
+  mChannel = Mix_FadeInChannel(-1, mChunk, aNumLoops, aTime);
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_FadeInChannel: %s\n", Mix_GetError());
@@ -72,9 +72,9 @@ void PCSound::FadeIn(int const aTime)
  * @brief Fade in a sound.
  * @param aTime Time in millis.
  */
-void PCSound::FadeIn(int const aFadeTime, int const aPlayTime)
+void PCSound::FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTime)
 {
-  mChannel = Mix_FadeInChannelTimed(-1, mChunk, 0, aFadeTime, aPlayTime);
+  mChannel = Mix_FadeInChannelTimed(-1, mChunk, aNumLoops, aFadeTime, aPlayTime);
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_FadeInChannelTimed: %s\n", Mix_GetError());

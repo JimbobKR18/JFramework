@@ -24,12 +24,12 @@ public:
   SoundManager(GameApp *aApp);
   ~SoundManager();
 
-  Sound*              CreateSound(std::string const &aFilename);
+  Sound*          CreateSound(std::string const &aFilename);
   void                DeleteSound(Sound* aSound);
   void                AddSound(Sound *aSound);
   void                RemoveSound(Sound *aSound);
-  void                PlaySound(std::string const &aFilename);
-  void                PlaySoundTimed(std::string const &aFilename, int const aMillis);
+  void                PlaySound(std::string const &aFilename, int const aNumLoops);
+  void                PlaySoundTimed(std::string const &aFilename, int const aNumLoops, int const aMillis);
   void                StopSound(std::string const &aFilename);
   void                StopSoundTimed(std::string const &aFilename, int const aMillis);
   void                SetSoundVolume(std::string const &aFilename, int const aVolume);

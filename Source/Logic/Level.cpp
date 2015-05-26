@@ -356,7 +356,7 @@ void Level::Load(Level* const aPrevLevel)
   }
 
   if(!mMusicName.empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
-    mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName);
+    mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, Sound::INFINITE_LOOPS);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
   mActive = true;
