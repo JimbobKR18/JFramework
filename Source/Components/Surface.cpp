@@ -102,7 +102,7 @@ void Surface::Serialize(Parser &aParser)
   TextureCoordinates *coords = GetTextureData();
   std::vector<int> animations;
   bool animated = coords->GetAnimated();
-  int numanimations = coords->GetNumberofAnimations();
+  int numanimations = coords->GetNumberOfAnimations();
   float animationSpeed = coords->GetAnimationSpeed();
   char const* values[4] = { "ColorR",
                             "ColorG",

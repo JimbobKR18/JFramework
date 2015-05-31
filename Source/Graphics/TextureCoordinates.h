@@ -47,7 +47,7 @@ public:
   float GetYValue(int const aIndex) const;
   float GetAnimationSpeed() const;
   int   GetCurrentAnimation() const;
-  int   GetNumberofAnimations() const;
+  int   GetNumberOfAnimations() const;
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
   bool  GetCompleted() const;

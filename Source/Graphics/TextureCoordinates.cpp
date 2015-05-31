@@ -145,7 +145,7 @@ int TextureCoordinates::GetCurrentAnimation() const
  * @brief Get the total number of animations.
  * @return 
  */
-int TextureCoordinates::GetNumberofAnimations() const
+int TextureCoordinates::GetNumberOfAnimations() const
 {
   return mAnimations.size();
 }
