@@ -30,6 +30,8 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
   Vector3 cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetSize();
+  Vector3 cameraDiff = cameraPosition - (cameraSize / 2.0f);
+  
   std::vector<Surface*>::const_iterator end = aObjects.end();
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end; ++it)
   {
@@ -48,9 +50,9 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 
       if((*it)->GetViewMode() == VIEW_ABSOLUTE)
       {
-        xPosition -= (cameraPosition.x - cameraSize.x / 2.0f);
-        yPosition -= (cameraPosition.y - cameraSize.y / 2.0f);
-        zPosition -= (cameraPosition.z - cameraSize.z / 2.0f);
+        xPosition -= cameraDiff.x;
+        yPosition -= cameraDiff.y;
+        zPosition -= cameraDiff.z;
       }
 
       glLoadIdentity();
@@ -137,6 +139,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetSize();
+  Vector3 cameraDiff = cameraPosition - (cameraSize / 2.0f);
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -184,9 +187,9 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 
       if(surface->GetViewMode() == VIEW_ABSOLUTE)
       {
-        xPosition -= (cameraPosition.x - cameraSize.x / 2.0f);
-        yPosition -= (cameraPosition.y - cameraSize.y / 2.0f);
-        zPosition -= (cameraPosition.z - cameraSize.z / 2.0f);
+        xPosition -= cameraDiff.x;
+        yPosition -= cameraDiff.y;
+        zPosition -= cameraDiff.z;
       }
 
       // Logic too long, put into helper
