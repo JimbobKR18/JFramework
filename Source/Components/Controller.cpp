@@ -10,12 +10,14 @@
 #include "ControllerManager.h"
 #include "ObjectManager.h"
 
+int const Controller::sUID = Common::StringHashFunction("Controller");
+
 // PROTECTED
-Controller::Controller(std::string const &aName) : Component(aName)
+Controller::Controller(int const &aUID) : Component(aUID)
 {
 }
 
-Controller::Controller() : Component("Controller")
+Controller::Controller() : Component(Controller::sUID)
 {
 }
 

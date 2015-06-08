@@ -13,6 +13,8 @@ class Transform : public Component
     X_ALIGNMENT mXAlign;
     Y_ALIGNMENT mYAlign;
     Z_ALIGNMENT mZAlign;
+    
+    static int const sUID;
 
   public:
     Transform();
@@ -41,7 +43,7 @@ class Transform : public Component
     void                ReceiveMessage(Message const &aMessage) {}
     void                Serialize(Parser &aParser);
     void                Deserialize(Parser &aParser);
-    static std::string  GetName() {return "Transform";}
+    static int           GetUID() {return sUID;}
     static void         SerializeLUA();
 };
 

@@ -2,7 +2,9 @@
 #include "TextParser.h"
 #include "LuaIncludes.h"
 
-Transform::Transform() : Component("Transform"), mPosition(0, 0, 0), mScale(1, 1, 1),
+int const Transform::sUID = Common::StringHashFunction("Transform");
+
+Transform::Transform() : Component(Transform::sUID), mPosition(0, 0, 0), mScale(1, 1, 1),
                          mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER)
 {
 }

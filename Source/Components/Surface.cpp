@@ -5,13 +5,15 @@
 
 #define DT (1.0f/60.0f)
 
-Surface::Surface() : Component("Surface"), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
+int const Surface::sUID = Common::StringHashFunction("Surface");
+
+Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
                      mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender("false")
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
-Surface::Surface(GraphicsManager *aManager) : Component("Surface"), mTexCoord(NULL),
+Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
                                               mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender("false")
 {

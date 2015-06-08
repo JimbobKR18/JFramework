@@ -30,6 +30,8 @@ private:
                             mPassable;
   std::vector<std::string>  mIgnoreList;
   std::vector<Shape*>       mShapes;
+  
+  static int const sUID;
 
 public:
   typedef std::vector<Shape*>::iterator shapeIT;
@@ -44,7 +46,7 @@ public:
   void                 ReceiveMessage(Message const &aMessage);
   void                 Serialize(Parser &aParser);
   void                 Deserialize(Parser &aParser);
-  static std::string   GetName() {return "PhysicsObject";}
+  static int           GetUID() {return sUID;}
 
   // Methods - Misc.
   void                 AddShape(Shape* aShape);

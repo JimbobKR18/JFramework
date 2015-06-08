@@ -11,6 +11,8 @@
 #include "SDL_image.h"
 #endif
 
+int const PCSurface::sUID = Common::StringHashFunction("Surface");
+
 PCSurface::PCSurface() : Surface()
 {
 }

@@ -17,8 +17,10 @@
 
 class Controller : public Component
 {
+private:
+  static int const sUID;
 protected:
-  Controller(std::string const &aName);
+  Controller(int const &aUID);
 public:
   Controller();
   virtual ~Controller();
@@ -31,7 +33,7 @@ public:
   virtual void        ReceiveMessage(Message const &aMessage) = 0;
   virtual void        Serialize(Parser &aParser) = 0;
   virtual void        Deserialize(Parser &aParser) = 0;
-  static std::string  GetName() {return "Controller";}
+  static int           GetUID() {return sUID;}
 };
 
 #endif /* defined(__JFramework__Controller__) */

@@ -230,6 +230,21 @@ namespace Common
     
     return ret;
   }
+  
+  int StringHashFunction(std::string const &aString)
+  {
+    int hashValue = 0;
+    char const *key = "srkfadcultjylenoqickbwnxmpvg";
+    int len = strlen(key);
+    for(unsigned i = 0; i < aString.length(); ++i)
+    {
+      if(hashValue % 2 == 0)
+        hashValue += (static_cast<int>(aString[i]) + i) ^ key[i % len];
+      else
+        hashValue += (static_cast<int>(aString[i]) + i) & key[i % len];
+    }
+    return hashValue;
+  }
 
   int RandomIntInRange(int const aX, int const bX)
   {

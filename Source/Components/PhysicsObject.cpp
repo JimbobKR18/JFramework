@@ -16,7 +16,9 @@
 #include "PhysicsWorld.h"
 #include "ObjectManager.h"
 
-PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component("PhysicsObject"), mWorld(aWorld),
+int const PhysicsObject::sUID = Common::StringHashFunction("PhysicsObject");
+
+PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sUID), mWorld(aWorld),
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
                   mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
                   mDamping(0.01f), mStatic(false), mGravity(true), mPassable(false)
@@ -38,7 +40,7 @@ PhysicsObject::~PhysicsObject()
 void PhysicsObject::Update()
 {
   // Store position for later
-  Vector3 position = ((Transform*)GetOwner()->GetComponent("Transform"))->GetPosition();
+  Vector3 position = GetOwner()->GET<Transform>()->GetPosition();
 
   float dt = mWorld->GetOwningApp()->GetDT();
 

@@ -36,6 +36,8 @@ private:
 	GLint         mNumberOfColors;
 	GLint         mWrapMode;
 	TTF_Font*     mFont;
+  
+  static int const sUID;
 
 public:
 	PCSurface();
@@ -55,7 +57,7 @@ public:
   void                Serialize(Parser &aParser);
   void                Deserialize(Parser &aParser);
   static void         SerializeLUA();
-	static std::string  GetName() {return "Surface";}
+	static int           GetUID() {return sUID;}
 
 	unsigned            GetTextureID() const;
 };

@@ -23,6 +23,8 @@ private:
   Vector4             mColor;
   std::string         mFileName;
   bool                mNoRender;
+  
+  static int const sUID;
 public:
   Surface();
   Surface(GraphicsManager *aManager);
@@ -60,7 +62,7 @@ public:
   void                Serialize(Parser &aParser);
   void                Deserialize(Parser &aParser);
   static void         SerializeLUA();
-  static std::string  GetName() {return "Surface";}
+  static int           GetUID() {return sUID;}
 };
 
 #endif

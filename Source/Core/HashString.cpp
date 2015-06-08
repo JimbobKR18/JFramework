@@ -242,14 +242,5 @@ HashString HashString::ToLiteral() const
 
 void HashString::Hash()
 {
-  mHash = 0;
-  char const *key = "srkfadcultjylenoqickbwnxmpvg";
-  int len = strlen(key);
-  for(unsigned i = 0; i < mString.length(); ++i)
-  {
-    if(mHash % 2 == 0)
-      mHash += (static_cast<int>(mString[i]) + i) ^ key[i % len];
-    else
-      mHash += (static_cast<int>(mString[i]) + i) & key[i % len];
-  }
+  mHash = Common::StringHashFunction(mString);
 }

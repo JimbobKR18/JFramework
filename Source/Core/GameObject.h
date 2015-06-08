@@ -39,18 +39,20 @@ public:
 
   void                    AddComponent(Component *aComponent);
   void                    RemoveComponent(Component *aComponent, bool aDelete);
-  void                    RemoveComponent(std::string const &aName, bool aDelete);
-  Component*              GetComponent(std::string const &aName);
-  bool                    HasComponent(std::string const &aName);
+  void                    RemoveComponent(int const &aUID, bool aDelete);
+  Component*              GetComponent(int const &aUID);
+  Component*              GetComponentByName(std::string const &aName);
+  bool                    HasComponent(int const &aUID);
+  bool                    HasComponentByName(std::string const &aName);
 
   template<typename T> T* GET()
   {
-    return (T*)GetComponent(T::GetName());
+    return (T*)GetComponent(T::GetUID());
   }
 
   template<typename T> bool HAS()
   {
-    return HasComponent(T::GetName());
+    return HasComponent(T::GetUID());
   }
 
   void                    Update();

@@ -92,12 +92,12 @@ void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
   }
 }
 
-void GameObject::RemoveComponent(std::string const &aName, bool aDelete)
+void GameObject::RemoveComponent(int const &aUID, bool aDelete)
 {
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end;)
   {
-    if(aName == (*it)->GetName())
+    if(aUID == (*it)->GetUID())
     {
       (*it)->SetOwner(nullptr);
       if(aDelete)
@@ -110,26 +110,38 @@ void GameObject::RemoveComponent(std::string const &aName, bool aDelete)
   }
 }
 
-Component *GameObject::GetComponent(std::string const &aName)
+Component *GameObject::GetComponent(int const &aUID)
 {
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
-    if((*it)->GetDefinedName() == aName)
+    if((*it)->GetDefinedUID() == aUID)
       return *it;
   }
   return nullptr;
 }
 
-bool GameObject::HasComponent(std::string const &aName)
+Component* GameObject::GetComponentByName(std::string const &aName)
+{
+  int uid = Common::StringHashFunction(aName);
+  return GetComponent(uid);
+}
+
+bool GameObject::HasComponent(int const &aUID)
 {
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
-    if((*it)->GetDefinedName() == aName)
+    if((*it)->GetDefinedUID() == aUID)
       return true;
   }
   return false;
+}
+
+bool GameObject::HasComponentByName(std::string const &aName)
+{
+  int uid = Common::StringHashFunction(aName);
+  return HasComponent(uid);
 }
 
 void GameObject::Update()
@@ -166,8 +178,8 @@ void GameObject::Serialize(Parser &aParser)
 void GameObject::SerializeLUA()
 {
   SLB::Class<GameObject>("GameObject")
-          .set("GetComponent", &GameObject::GetComponent)
-          .set("HasComponent", &GameObject::HasComponent)
+          .set("GetComponent", &GameObject::GetComponentByName)
+          .set("HasComponent", &GameObject::HasComponentByName)
           .set("GetTransform", &GameObject::GET<Transform>)
           .set("GetSurface", &GameObject::GET<Surface>)
           .set("GetName", &GameObject::GetName);
