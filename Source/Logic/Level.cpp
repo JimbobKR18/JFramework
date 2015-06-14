@@ -490,6 +490,7 @@ void Level::ParseFile()
   HashString tempIndex = curObject + Common::IntToString(curIndex);
   Root* curRoot = parser.Find(tempIndex);
 
+  // While there are objects to find.
   while(curRoot)
   {
     // Make Object to assign params to
@@ -499,45 +500,17 @@ void Level::ParseFile()
     mObjects.push_back(object);
 
     // TODO PhysicsObject serialization
+    // Get transform information
     if(curRoot->Find("Transform"))
     {
-      Root* transform = curRoot->Find("Transform");
-      float posX, posY, posZ,
-          scaleX, scaleY, scaleZ,
-          sizeX, sizeY, sizeZ;
-      posX = transform->Find("PositionX")->GetValue().ToFloat();
-      posY = transform->Find("PositionY")->GetValue().ToFloat();
-      posZ = transform->Find("PositionZ")->GetValue().ToFloat();
-      scaleX = transform->Find("ScaleX")->GetValue().ToFloat();
-      scaleY = transform->Find("ScaleY")->GetValue().ToFloat();
-      scaleZ = transform->Find("ScaleZ")->GetValue().ToFloat();
-      sizeX = transform->Find("SizeX")->GetValue().ToFloat();
-      sizeY = transform->Find("SizeY")->GetValue().ToFloat();
-      sizeZ = transform->Find("SizeZ")->GetValue().ToFloat();
-
-      Transform* objTransform = object->GET<Transform>();
-      objTransform->SetPosition(Vector3(posX,posY,posZ));
-      objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
-      objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
-
-      // Auto set camera bounds based on objects in environment
-      mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
-      mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
-      mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
-      mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
+      ParseTransform(curRoot->Find("Transform"));
     }
+    // Get surface information
     if(curRoot->Find("Surface"))
     {
-      Root* surface = curRoot->Find("Surface");
-      float r, g, b, a;
-      r = surface->Find("ColorR")->GetValue().ToFloat();
-      g = surface->Find("ColorG")->GetValue().ToFloat();
-      b = surface->Find("ColorB")->GetValue().ToFloat();
-      a = surface->Find("ColorA")->GetValue().ToFloat();
-
-      Surface* objSurface = object->GET<Surface>();
-      objSurface->SetColor(Vector4(r, g, b, a));
+      ParseSurface(curRoot->Find("Surface"));
     }
+    // Who is the focus of this level?
     if(curRoot->Find("Focus"))
     {
       bool value = curRoot->Find("Focus")->Find("IsFocus")->GetValue().ToBool();
@@ -565,49 +538,7 @@ void Level::ParseFile()
 
   if(parser.Find("TileMapGenerator"))
   {
-    Root* tileMap = parser.Find("TileMapGenerator");
-    HashString value, empty;
-    int width, height, tileSize;
-    HashString file, frameDataFilename, heightMapDataFileName;
-    std::vector<int> frames, collision, shapes;
-    std::map<int, float> heights;
-
-    width = tileMap->Find("Width")->GetValue().ToInt();
-    height = tileMap->Find("Height")->GetValue().ToInt();
-    tileSize = tileMap->Find("TileSize")->GetValue().ToInt();
-    file = tileMap->Find("Image")->GetValue();
-    frameDataFilename = tileMap->Find("Data")->GetValue();
-    
-    // If there's heightmap data, parse it in and use it.
-    if(tileMap->Find("HeightData"))
-    {
-      HashString object = "Object_";
-      heightMapDataFileName = tileMap->Find("HeightData")->GetValue();
-      
-      HashString curIndex = object + Common::IntToString(0);
-      TextParser heightMapData(Common::RelativePath("Maps", heightMapDataFileName));
-      
-      for(int i = 0; heightMapData.Find(curIndex); ++i)
-      {
-        std::vector<float> values = Common::StringToFloatVector(heightMapData.Find(curIndex)->GetValue());
-        heights[static_cast<int>(values[0])] = values[1];
-        curIndex = object + Common::IntToString(i);
-      }
-    }
-
-    TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
-    frames = Common::StringToIntVector(tileMapData.Find("MapArtData")->GetValue());
-    collision = Common::StringToIntVector(tileMapData.Find("Collision")->GetValue());
-    
-    if(tileMapData.Find("CollisionShapes"))
-    {
-      shapes = Common::StringToIntVector(tileMapData.Find("CollisionShapes")->GetValue());
-    }
-
-    mGenerator = new TileMapGenerator(width, height, tileSize,
-                                     file, frameDataFilename,
-                                     frames, collision, shapes,
-                                     heights, this);
+    ParseTileGenerator(parser);
   }
   if(parser.Find("Music"))
   {
@@ -645,4 +576,102 @@ void Level::ParseFile()
 Level::ObjectContainer& Level::GetObjects()
 {
   return mObjects;
+}
+
+/**
+ * @brief Get transform data for an object from a root.
+ * @param aTransform
+ */
+void Level::ParseTransform(Root *aTransform)
+{
+  float posX, posY, posZ,
+      scaleX, scaleY, scaleZ,
+      sizeX, sizeY, sizeZ;
+  posX = aTransform->Find("PositionX")->GetValue().ToFloat();
+  posY = aTransform->Find("PositionY")->GetValue().ToFloat();
+  posZ = aTransform->Find("PositionZ")->GetValue().ToFloat();
+  scaleX = aTransform->Find("ScaleX")->GetValue().ToFloat();
+  scaleY = aTransform->Find("ScaleY")->GetValue().ToFloat();
+  scaleZ = aTransform->Find("ScaleZ")->GetValue().ToFloat();
+  sizeX = aTransform->Find("SizeX")->GetValue().ToFloat();
+  sizeY = aTransform->Find("SizeY")->GetValue().ToFloat();
+  sizeZ = aTransform->Find("SizeZ")->GetValue().ToFloat();
+
+  Transform* objTransform = object->GET<Transform>();
+  objTransform->SetPosition(Vector3(posX,posY,posZ));
+  objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
+  objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
+
+  // Auto set camera bounds based on objects in environment
+  mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
+  mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
+  mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
+  mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
+}
+
+/**
+ * @brief Get surface data from a root.
+ * @param aSurface
+ */
+void Level::ParseSurface(Root *aSurface)
+{
+  float r, g, b, a;
+  r = aSurface->Find("ColorR")->GetValue().ToFloat();
+  g = aSurface->Find("ColorG")->GetValue().ToFloat();
+  b = aSurface->Find("ColorB")->GetValue().ToFloat();
+  a = aSurface->Find("ColorA")->GetValue().ToFloat();
+
+  Surface* objSurface = object->GET<Surface>();
+  objSurface->SetColor(Vector4(r, g, b, a));
+}
+
+/**
+ * @brief Create tile generator helper.
+ * @param aParser
+ */
+void Level::ParseTileGenerator(TextParser &aParser)
+{
+  Root* tileMap = aParser.Find("TileMapGenerator");
+  HashString value, empty;
+  int width, height, tileSize;
+  HashString file, frameDataFilename, heightMapDataFileName;
+  std::vector<int> frames, collision, shapes;
+  std::map<int, float> heights;
+
+  width = tileMap->Find("Width")->GetValue().ToInt();
+  height = tileMap->Find("Height")->GetValue().ToInt();
+  tileSize = tileMap->Find("TileSize")->GetValue().ToInt();
+  file = tileMap->Find("Image")->GetValue();
+  frameDataFilename = tileMap->Find("Data")->GetValue();
+  
+  // If there's heightmap data, parse it in and use it.
+  if(tileMap->Find("HeightData"))
+  {
+    HashString object = "Object_";
+    heightMapDataFileName = tileMap->Find("HeightData")->GetValue();
+    
+    HashString curIndex = object + Common::IntToString(0);
+    TextParser heightMapData(Common::RelativePath("Maps", heightMapDataFileName));
+    
+    for(int i = 0; heightMapData.Find(curIndex); ++i)
+    {
+      std::vector<float> values = Common::StringToFloatVector(heightMapData.Find(curIndex)->GetValue());
+      heights[static_cast<int>(values[0])] = values[1];
+      curIndex = object + Common::IntToString(i);
+    }
+  }
+
+  TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
+  frames = Common::StringToIntVector(tileMapData.Find("MapArtData")->GetValue());
+  collision = Common::StringToIntVector(tileMapData.Find("Collision")->GetValue());
+  
+  if(tileMapData.Find("CollisionShapes"))
+  {
+    shapes = Common::StringToIntVector(tileMapData.Find("CollisionShapes")->GetValue());
+  }
+
+  mGenerator = new TileMapGenerator(width, height, tileSize,
+                                   file, frameDataFilename,
+                                   frames, collision, shapes,
+                                   heights, this);
 }

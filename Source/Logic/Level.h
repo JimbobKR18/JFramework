@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "GameObject.h"
 #include "Parser.h"
+#include "TextParser.h"
 #include "TileMapGenerator.h"
 #include "MathExt.h"
 
@@ -82,6 +83,10 @@ public:
   
 protected:
   ObjectContainer&  GetObjects();
+private:
+  void ParseTransform(Root* aTransform);
+  void ParseSurface(Root* aSurface);
+  void ParseTileGenerator(TextParser &aParser);
 };
 
 #endif
