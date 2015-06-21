@@ -40,7 +40,8 @@ PhysicsObject::~PhysicsObject()
 void PhysicsObject::Update()
 {
   // Store position for later
-  Vector3 position = GetOwner()->GET<Transform>()->GetPosition();
+  Transform* transform = GetOwner()->GET<Transform>();
+  Vector3 position = transform->GetPosition();
 
   float dt = mWorld->GetOwningApp()->GetDT();
 
@@ -52,13 +53,14 @@ void PhysicsObject::Update()
   mVelocity += finalAcceleration * dt;
   mVelocity *= powf(mDamping, dt);
 
-  GetOwner()->GET<Transform>()->SetPosition(position);
+  // Set position
+  transform->SetPosition(position);
 
   // Nullify all forces
   mForces *= 0;
 
   // Update the size for broadphasing
-  mBroadSize = GetOwner()->GET<Transform>()->GetSize() * 1.5f;
+  mBroadSize = transform->GetSize() * 1.5f;
 }
 
 void PhysicsObject::SendMessage(Message const &aMessage)

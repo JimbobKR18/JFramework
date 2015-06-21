@@ -40,8 +40,9 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
     if(obj->HAS<PhysicsObject>())
     {
       Transform *transform = obj->GET<Transform>();
+      PhysicsObject *physicsObject = obj->GET<PhysicsObject>();
       Vector3 position = transform->GetPosition();
-      Vector3 broadSize = obj->GET<PhysicsObject>()->GetBroadSize();
+      Vector3 broadSize = physicsObject->GetBroadSize();
 
       // Get positions relative to the camera
       float xPosition = position.x;
@@ -59,7 +60,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       glPushMatrix();
 
       // For each shape, draw the outline
-      std::vector<Shape*> const& shapes = obj->GET<PhysicsObject>()->GetShapes();
+      std::vector<Shape*> const& shapes = physicsObject->GetShapes();
       PhysicsObject::constShapeIT end = shapes.end();
       for(PhysicsObject::constShapeIT it = shapes.begin(); it != end; ++it)
       {

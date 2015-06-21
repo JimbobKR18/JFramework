@@ -84,8 +84,8 @@ public:
 protected:
   ObjectContainer&  GetObjects();
 private:
-  void ParseTransform(Root* aTransform);
-  void ParseSurface(Root* aSurface);
+  void ParseTransform(GameObject *aObject, Root* aTransform);
+  void ParseSurface(GameObject *aObject, Root* aSurface);
   void ParseTileGenerator(TextParser &aParser);
 };
 

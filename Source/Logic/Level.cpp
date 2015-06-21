@@ -503,12 +503,12 @@ void Level::ParseFile()
     // Get transform information
     if(curRoot->Find("Transform"))
     {
-      ParseTransform(curRoot->Find("Transform"));
+      ParseTransform(object, curRoot->Find("Transform"));
     }
     // Get surface information
     if(curRoot->Find("Surface"))
     {
-      ParseSurface(curRoot->Find("Surface"));
+      ParseSurface(object, curRoot->Find("Surface"));
     }
     // Who is the focus of this level?
     if(curRoot->Find("Focus"))
@@ -582,7 +582,7 @@ Level::ObjectContainer& Level::GetObjects()
  * @brief Get transform data for an object from a root.
  * @param aTransform
  */
-void Level::ParseTransform(Root *aTransform)
+void Level::ParseTransform(GameObject *aObject, Root *aTransform)
 {
   float posX, posY, posZ,
       scaleX, scaleY, scaleZ,
@@ -597,7 +597,7 @@ void Level::ParseTransform(Root *aTransform)
   sizeY = aTransform->Find("SizeY")->GetValue().ToFloat();
   sizeZ = aTransform->Find("SizeZ")->GetValue().ToFloat();
 
-  Transform* objTransform = object->GET<Transform>();
+  Transform* objTransform = aObject->GET<Transform>();
   objTransform->SetPosition(Vector3(posX,posY,posZ));
   objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
   objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
@@ -613,7 +613,7 @@ void Level::ParseTransform(Root *aTransform)
  * @brief Get surface data from a root.
  * @param aSurface
  */
-void Level::ParseSurface(Root *aSurface)
+void Level::ParseSurface(GameObject *aObject, Root *aSurface)
 {
   float r, g, b, a;
   r = aSurface->Find("ColorR")->GetValue().ToFloat();
@@ -621,7 +621,7 @@ void Level::ParseSurface(Root *aSurface)
   b = aSurface->Find("ColorB")->GetValue().ToFloat();
   a = aSurface->Find("ColorA")->GetValue().ToFloat();
 
-  Surface* objSurface = object->GET<Surface>();
+  Surface* objSurface = aObject->GET<Surface>();
   objSurface->SetColor(Vector4(r, g, b, a));
 }
 
