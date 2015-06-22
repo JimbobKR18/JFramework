@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="JFramework" InternalType="Library">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+    </Plugin>
+    <Plugin Name="CMakePlugin">
+      <![CDATA[[{
+  "name": "Debug",
+  "enabled": false,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
+ }, {
+  "name": "Release",
+  "enabled": false,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
+ }]]]>
+    </Plugin>
+  </Plugins>
+  <VirtualDirectory Name="LUA">
+    <VirtualDirectory Name="lua">
+      <File Name="../../Source/LUA/lua/lua.h"/>
+      <File Name="../../Source/LUA/lua/lualib.h"/>
+      <File Name="../../Source/LUA/lua/lauxlib.h"/>
+      <File Name="../../Source/LUA/lua/luaconf.h"/>
+    </VirtualDirectory>
+    <File Name="../../Source/LUA/LUATypes.h"/>
+    <File Name="../../Source/LUA/lua.c"/>
+    <File Name="../../Source/LUA/SLB.cpp"/>
+    <File Name="../../Source/LUA/LUATypes.cpp"/>
+    <File Name="../../Source/LUA/SLB.hpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Core">
+    <VirtualDirectory Name="Messages">
+      <File Name="../../Source/Core/Messages/Message.h"/>
+      <File Name="../../Source/Core/Messages/ObjectDeleteMessage.h"/>
+      <File Name="../../Source/Core/Messages/LevelChangeMessage.h"/>
+      <File Name="../../Source/Core/Messages/CollisionMessage.h"/>
+      <File Name="../../Source/Core/Messages/ControllerChangeMessage.h"/>
+      <File Name="../../Source/Core/Messages/InputMessage.h"/>
+      <File Name="../../Source/Core/Messages/ClickMessage.h"/>
+      <File Name="../../Source/Core/Messages/ObjectCreateMessage.h"/>
+    </VirtualDirectory>
+    <File Name="../../Source/Core/MathExt.cpp"/>
+    <File Name="../../Source/Core/SmartPointer.h"/>
+    <File Name="../../Source/Core/MathExt.h"/>
+    <File Name="../../Source/Core/AutoCrit.cpp"/>
+    <File Name="../../Source/Core/Common.cpp"/>
+    <File Name="../../Source/Core/Component.h"/>
+    <File Name="../../Source/Core/AutoCrit.h"/>
+    <File Name="../../Source/Core/LuaIncludes.h"/>
+    <File Name="../../Source/Core/GameObject.h"/>
+    <File Name="../../Source/Core/GameObject.cpp"/>
+    <File Name="../../Source/Core/HashString.cpp"/>
+    <File Name="../../Source/Core/HashString.h"/>
+    <File Name="../../Source/Core/Common.h"/>
+    <File Name="../../Source/Core/Interpolation.h"/>
+    <File Name="../../Source/Core/Shape.h"/>
+    <File Name="../../Source/Core/Shape.cpp"/>
+  </VirtualDirectory>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="Source">
+    <File Name="../../Source/GameApp.h"/>
+    <File Name="../../Source/main.cpp"/>
+    <File Name="../../Source/GameApp.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Components">
+    <File Name="../../Source/Components/PCSurface.h"/>
+    <File Name="../../Source/Components/PhysicsObject.h"/>
+    <File Name="../../Source/Components/Surface.cpp"/>
+    <File Name="../../Source/Components/PCSurface.cpp"/>
+    <File Name="../../Source/Components/Surface.h"/>
+    <File Name="../../Source/Components/Transform.h"/>
+    <File Name="../../Source/Components/Controller.cpp"/>
+    <File Name="../../Source/Components/Controller.h"/>
+    <File Name="../../Source/Components/Transform.cpp"/>
+    <File Name="../../Source/Components/PhysicsObject.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Graphics">
+    <File Name="../../Source/Graphics/TextureCoordinates.h"/>
+    <File Name="../../Source/Graphics/PCScreen.h"/>
+    <File Name="../../Source/Graphics/Screen.h"/>
+    <File Name="../../Source/Graphics/TextureData.h"/>
+    <File Name="../../Source/Graphics/View.cpp"/>
+    <File Name="../../Source/Graphics/Screen.cpp"/>
+    <File Name="../../Source/Graphics/TextureCoordinates.cpp"/>
+    <File Name="../../Source/Graphics/PCScreen.cpp"/>
+    <File Name="../../Source/Graphics/View.h"/>
+    <File Name="../../Source/Graphics/ScreenRenderSorter.h"/>
+    <File Name="../../Source/Graphics/ZRenderSorter.h"/>
+    <File Name="../../Source/Graphics/ZRenderSorter.cpp"/>
+    <File Name="../../Source/Graphics/BatchRenderSorter.h"/>
+    <File Name="../../Source/Graphics/BatchRenderSorter.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Logic">
+    <File Name="../../Source/Logic/MenuElement.h"/>
+    <File Name="../../Source/Logic/Constants.cpp"/>
+    <File Name="../../Source/Logic/Constants.h"/>
+    <File Name="../../Source/Logic/TileMapGenerator.h"/>
+    <File Name="../../Source/Logic/Level.cpp"/>
+    <File Name="../../Source/Logic/Level.h"/>
+    <File Name="../../Source/Logic/MenuElement.cpp"/>
+    <File Name="../../Source/Logic/MenuText.h"/>
+    <File Name="../../Source/Logic/MenuImage.cpp"/>
+    <File Name="../../Source/Logic/Menu.cpp"/>
+    <File Name="../../Source/Logic/Menu.h"/>
+    <File Name="../../Source/Logic/MenuText.cpp"/>
+    <File Name="../../Source/Logic/MenuImage.h"/>
+    <File Name="../../Source/Logic/TileMapGenerator.cpp"/>
+    <File Name="../../Source/Logic/MenuButton.h"/>
+    <File Name="../../Source/Logic/MenuButton.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Managers">
+    <File Name="../../Source/Managers/InputManager.h"/>
+    <File Name="../../Source/Managers/ObjectManager.cpp"/>
+    <File Name="../../Source/Managers/ControllerManager.cpp"/>
+    <File Name="../../Source/Managers/ObjectManager.h"/>
+    <File Name="../../Source/Managers/PhysicsWorld.h"/>
+    <File Name="../../Source/Managers/LevelManager.cpp"/>
+    <File Name="../../Source/Managers/LevelManager.h"/>
+    <File Name="../../Source/Managers/GraphicsManager.h"/>
+    <File Name="../../Source/Managers/SoundManager.h"/>
+    <File Name="../../Source/Managers/ControllerManager.h"/>
+    <File Name="../../Source/Managers/SoundManager.cpp"/>
+    <File Name="../../Source/Managers/DebugManager.cpp"/>
+    <File Name="../../Source/Managers/PhysicsWorld.cpp"/>
+    <File Name="../../Source/Managers/Manager.h"/>
+    <File Name="../../Source/Managers/GraphicsManager.cpp"/>
+    <File Name="../../Source/Managers/InputManager.cpp"/>
+    <File Name="../../Source/Managers/DebugManager.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Parsers">
+    <File Name="../../Source/Parsers/TextParser.h"/>
+    <File Name="../../Source/Parsers/Parser.cpp"/>
+    <File Name="../../Source/Parsers/TextParser.cpp"/>
+    <File Name="../../Source/Parsers/Parser.h"/>
+    <File Name="../../Source/Parsers/Root.h"/>
+    <File Name="../../Source/Parsers/XMLParser.h"/>
+    <File Name="../../Source/Parsers/Root.cpp"/>
+    <File Name="../../Source/Parsers/XMLParser.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Physics">
+    <File Name="../../Source/Physics/GravityGenerator.cpp"/>
+    <File Name="../../Source/Physics/Resolver.h"/>
+    <File Name="../../Source/Physics/Resolver.cpp"/>
+    <File Name="../../Source/Physics/CollisionPair.cpp"/>
+    <File Name="../../Source/Physics/ForceRegistry.h"/>
+    <File Name="../../Source/Physics/CollisionChecker.h"/>
+    <File Name="../../Source/Physics/ForceGenerator.cpp"/>
+    <File Name="../../Source/Physics/GravityGenerator.h"/>
+    <File Name="../../Source/Physics/ForceRegistry.cpp"/>
+    <File Name="../../Source/Physics/ForceGenerator.h"/>
+    <File Name="../../Source/Physics/CollisionPair.h"/>
+    <File Name="../../Source/Physics/CollisionChecker.cpp"/>
+    <File Name="../../Source/Physics/PotentialPair.h"/>
+    <File Name="../../Source/Physics/PotentialPair.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Sound">
+    <File Name="../../Source/Sound/Sound.h"/>
+    <File Name="../../Source/Sound/PCSound.h"/>
+    <File Name="../../Source/Sound/Sound.cpp"/>
+    <File Name="../../Source/Sound/PCSound.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="TinyXML">
+    <File Name="../../Source/TinyXML/tinyxml2.h"/>
+    <File Name="../../Source/TinyXML/tinyxml2.cpp"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+  <Settings Type="Static Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-O0;-std=c++11;-Wall;-fno-inline;-fno-eliminate-unused-debug-types" C_Options="-g;-O0;-Wall;-fno-inline;-fno-eliminate-unused-debug-types" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+        <IncludePath Value="../../Source"/>
+        <IncludePath Value="../../Source/Core"/>
+        <IncludePath Value="../../Source/Logic"/>
+        <IncludePath Value="../../Source/Components"/>
+        <IncludePath Value="../../Source/Physics"/>
+        <IncludePath Value="../../Source/Sound"/>
+        <IncludePath Value="../../Source/Managers"/>
+        <IncludePath Value="../../Source/Graphics"/>
+        <IncludePath Value="../../Source/LUA"/>
+        <IncludePath Value="../../Source/Parsers"/>
+        <IncludePath Value="../../Source/TinyXML"/>
+        <IncludePath Value="../../Source/Core/Messages"/>
+        <Preprocessor Value="ASSET_DIRECTORY=../../../../Assets/"/>
+        <Preprocessor Value="_DEBUG"/>
+        <Preprocessor Value="SLB_USE_EXCEPTIONS"/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).a" IntermediateDirectory="./Debug" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="clang( tags/RELEASE_34/final )" DebuggerType="LLDB Debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O;-O3;-std=c++11;-Wall" C_Options="-O;-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+        <IncludePath Value="../../Source"/>
+        <IncludePath Value="../../Source/Core"/>
+        <IncludePath Value="../../Source/Logic"/>
+        <IncludePath Value="../../Source/Components"/>
+        <IncludePath Value="../../Source/Physics"/>
+        <IncludePath Value="../../Source/Sound"/>
+        <IncludePath Value="../../Source/Managers"/>
+        <IncludePath Value="../../Source/Graphics"/>
+        <IncludePath Value="../../Source/LUA"/>
+        <IncludePath Value="../../Source/Parsers"/>
+        <IncludePath Value="../../Source/TinyXML"/>
+        <IncludePath Value="../../Source/Core/Messages"/>
+        <Preprocessor Value="ASSET_DIRECTORY=../../../../Assets/"/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).a" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="yes">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands>-nx</StartupCommands>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>

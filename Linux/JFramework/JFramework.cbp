@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="JFramework" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="libJFramework" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-std=c++0x" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="libJFramework" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-pedantic" />
+			<Add option="-std=c++0x" />
+			<Add option="-Wextra" />
+			<Add option="-Wall" />
+			<Add option="-ansi" />
+			<Add directory="../../Source" />
+			<Add directory="../../Source/AntTweakBar/include" />
+			<Add directory="../../Source/Components" />
+			<Add directory="../../Source/Core" />
+			<Add directory="../../Source/Graphics" />
+			<Add directory="../../Source/Logic" />
+			<Add directory="../../Source/LUA" />
+			<Add directory="../../Source/Managers" />
+			<Add directory="../../Source/Parsers" />
+			<Add directory="../../Source/Physics" />
+			<Add directory="../../Source/Sound" />
+			<Add directory="../../Source/TinyXML" />
+			<Add directory="../../Source/LUA/lua" />
+			<Add directory="../../Source/Core/Messages" />
+			<Add directory="../../Source/Components/Controller" />
+		</Compiler>
+		<Unit filename="../../Source/AntTweakBar/include/AntTweakBar.h" />
+		<Unit filename="../../Source/Components/Controller/Controller.cpp" />
+		<Unit filename="../../Source/Components/Controller/Controller.h" />
+		<Unit filename="../../Source/Components/Controller/PlayerController.cpp" />
+		<Unit filename="../../Source/Components/Controller/PlayerController.h" />
+		<Unit filename="../../Source/Components/PCSurface.cpp" />
+		<Unit filename="../../Source/Components/PCSurface.h" />
+		<Unit filename="../../Source/Components/PhysicsObject.cpp" />
+		<Unit filename="../../Source/Components/PhysicsObject.h" />
+		<Unit filename="../../Source/Components/Surface.cpp" />
+		<Unit filename="../../Source/Components/Surface.h" />
+		<Unit filename="../../Source/Components/Transform.cpp" />
+		<Unit filename="../../Source/Components/Transform.h" />
+		<Unit filename="../../Source/Core/AutoCrit.cpp" />
+		<Unit filename="../../Source/Core/AutoCrit.h" />
+		<Unit filename="../../Source/Core/Common.cpp" />
+		<Unit filename="../../Source/Core/Common.h" />
+		<Unit filename="../../Source/Core/Component.h" />
+		<Unit filename="../../Source/Core/GameObject.cpp" />
+		<Unit filename="../../Source/Core/GameObject.h" />
+		<Unit filename="../../Source/Core/LuaIncludes.h" />
+		<Unit filename="../../Source/Core/MathExt.cpp" />
+		<Unit filename="../../Source/Core/MathExt.h" />
+		<Unit filename="../../Source/Core/Messages/CollisionMessage.h" />
+		<Unit filename="../../Source/Core/Messages/InputMessage.h" />
+		<Unit filename="../../Source/Core/Messages/LevelChangeMessage.h" />
+		<Unit filename="../../Source/Core/Messages/Message.h" />
+		<Unit filename="../../Source/GameApp.cpp" />
+		<Unit filename="../../Source/GameApp.h" />
+		<Unit filename="../../Source/Graphics/PCScreen.cpp" />
+		<Unit filename="../../Source/Graphics/PCScreen.h" />
+		<Unit filename="../../Source/Graphics/Screen.cpp" />
+		<Unit filename="../../Source/Graphics/Screen.h" />
+		<Unit filename="../../Source/Graphics/TextureCoordinates.cpp" />
+		<Unit filename="../../Source/Graphics/TextureCoordinates.h" />
+		<Unit filename="../../Source/Graphics/View.cpp" />
+		<Unit filename="../../Source/Graphics/View.h" />
+		<Unit filename="../../Source/LUA/LUATypes.cpp" />
+		<Unit filename="../../Source/LUA/LUATypes.h" />
+		<Unit filename="../../Source/LUA/SLB.cpp" />
+		<Unit filename="../../Source/LUA/SLB.hpp" />
+		<Unit filename="../../Source/LUA/lua.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../Source/LUA/lua/lauxlib.h" />
+		<Unit filename="../../Source/LUA/lua/lua.h" />
+		<Unit filename="../../Source/LUA/lua/luaconf.h" />
+		<Unit filename="../../Source/LUA/lua/lualib.h" />
+		<Unit filename="../../Source/Logic/Level.cpp" />
+		<Unit filename="../../Source/Logic/Level.h" />
+		<Unit filename="../../Source/Logic/Menu.cpp" />
+		<Unit filename="../../Source/Logic/Menu.h" />
+		<Unit filename="../../Source/Logic/MenuElement.cpp" />
+		<Unit filename="../../Source/Logic/MenuElement.h" />
+		<Unit filename="../../Source/Logic/MenuImage.cpp" />
+		<Unit filename="../../Source/Logic/MenuImage.h" />
+		<Unit filename="../../Source/Logic/TileMapGenerator.cpp" />
+		<Unit filename="../../Source/Logic/TileMapGenerator.h" />
+		<Unit filename="../../Source/Managers/ControllerManager.cpp" />
+		<Unit filename="../../Source/Managers/ControllerManager.h" />
+		<Unit filename="../../Source/Managers/DebugManager.cpp" />
+		<Unit filename="../../Source/Managers/DebugManager.h" />
+		<Unit filename="../../Source/Managers/GraphicsManager.cpp" />
+		<Unit filename="../../Source/Managers/GraphicsManager.h" />
+		<Unit filename="../../Source/Managers/InputManager.cpp" />
+		<Unit filename="../../Source/Managers/InputManager.h" />
+		<Unit filename="../../Source/Managers/LevelManager.cpp" />
+		<Unit filename="../../Source/Managers/LevelManager.h" />
+		<Unit filename="../../Source/Managers/Manager.h" />
+		<Unit filename="../../Source/Managers/ObjectManager.cpp" />
+		<Unit filename="../../Source/Managers/ObjectManager.h" />
+		<Unit filename="../../Source/Managers/PhysicsWorld.cpp" />
+		<Unit filename="../../Source/Managers/PhysicsWorld.h" />
+		<Unit filename="../../Source/Managers/SoundManager.cpp" />
+		<Unit filename="../../Source/Managers/SoundManager.h" />
+		<Unit filename="../../Source/Parsers/Parser.cpp" />
+		<Unit filename="../../Source/Parsers/Parser.h" />
+		<Unit filename="../../Source/Parsers/TextParser.cpp" />
+		<Unit filename="../../Source/Parsers/TextParser.h" />
+		<Unit filename="../../Source/Parsers/XMLParser.cpp" />
+		<Unit filename="../../Source/Parsers/XMLParser.h" />
+		<Unit filename="../../Source/Physics/CollisionPair.cpp" />
+		<Unit filename="../../Source/Physics/CollisionPair.h" />
+		<Unit filename="../../Source/Physics/ForceGenerator.cpp" />
+		<Unit filename="../../Source/Physics/ForceGenerator.h" />
+		<Unit filename="../../Source/Physics/ForceRegistry.cpp" />
+		<Unit filename="../../Source/Physics/ForceRegistry.h" />
+		<Unit filename="../../Source/Physics/GravityGenerator.cpp" />
+		<Unit filename="../../Source/Physics/GravityGenerator.h" />
+		<Unit filename="../../Source/Physics/Resolver.cpp" />
+		<Unit filename="../../Source/Physics/Resolver.h" />
+		<Unit filename="../../Source/Sound/PCSound.cpp" />
+		<Unit filename="../../Source/Sound/PCSound.h" />
+		<Unit filename="../../Source/Sound/Sound.cpp" />
+		<Unit filename="../../Source/Sound/Sound.h" />
+		<Unit filename="../../Source/TinyXML/tinyxml2.cpp" />
+		<Unit filename="../../Source/TinyXML/tinyxml2.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

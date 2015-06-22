@@ -9,6 +9,11 @@ Android/.DS_Store
 *.swp
 
 Linux/.DS_Store
+Linux/Debug
+Linux/Release
+Linux/JFramework/Debug
+Linux/JFramework/Release
+Linux/JFramework/obj
 
 Windows/.DS_Store
 

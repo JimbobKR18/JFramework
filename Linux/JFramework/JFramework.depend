@@ -1,0 +1,703 @@
+# depslib dependency file v1.0
+1378581727 source:/home/jimbob/Documents/JFramework/Source/Components/Controller/Controller.cpp
+	"Controller.h"
+	"ControllerManager.h"
+	"ObjectManager.h"
+
+1368342289 /home/jimbob/Documents/JFramework/Source/Components/Controller/Controller.h
+	"Common.h"
+	"Component.h"
+	"MathExt.h"
+
+1426483178 /home/jimbob/Documents/JFramework/Source/Core/Common.h
+	<algorithm>
+	<vector>
+	<string>
+	<cstring>
+	<cassert>
+	<cstdlib>
+	<cctype>
+	<map>
+	<set>
+	<list>
+	<fstream>
+	<sstream>
+	<iostream>
+	<chrono>
+	"HashString.h"
+	"SmartPointer.h"
+
+1393729264 /home/jimbob/Documents/JFramework/Source/Core/Component.h
+	"GameObject.h"
+	"Message.h"
+	"Parser.h"
+	<assert.h>
+
+1414358323 /home/jimbob/Documents/JFramework/Source/Core/GameObject.h
+	"Common.h"
+	"Message.h"
+	"Parser.h"
+
+1359192136 /home/jimbob/Documents/JFramework/Source/Core/Messages/Message.h
+	<string>
+
+1420959719 /home/jimbob/Documents/JFramework/Source/Parsers/Parser.h
+	"Common.h"
+	"Root.h"
+
+1422158445 /home/jimbob/Documents/JFramework/Source/Core/MathExt.h
+	<math.h>
+	"Common.h"
+
+1383890803 /home/jimbob/Documents/JFramework/Source/Managers/ControllerManager.h
+	"Manager.h"
+	"Controller.h"
+
+1372305809 /home/jimbob/Documents/JFramework/Source/Managers/Manager.h
+	"Common.h"
+	"Message.h"
+	"GameApp.h"
+	"LuaIncludes.h"
+
+1389324409 /home/jimbob/Documents/JFramework/Source/GameApp.h
+	"Common.h"
+	"Message.h"
+
+1358042016 /home/jimbob/Documents/JFramework/Source/Core/LuaIncludes.h
+	"LUA/SLB.hpp"
+
+1428175058 /home/jimbob/Documents/JFramework/Source/LUA/SLB.hpp
+	<stdlib.h>
+	<cstdio>
+	<cstring>
+	<sstream>
+	<stdexcept>
+	<lua.h>
+	<lauxlib.h>
+	<lualib.h>
+	"lua/lua.h"
+	"lua/lauxlib.h"
+	"lua/lualib.h"
+	<stddef.h>
+	<new>
+	<stdexcept>
+	<string>
+	<typeinfo>
+	<assert.h>
+	<typeinfo>
+	<map>
+	<sstream>
+	<vector>
+	<typeinfo>
+	<iostream>
+	<stdexcept>
+	<map>
+	<cstdlib>
+	<windows.h>
+	<pthread.h>
+	<map>
+	<iostream>
+	<vector>
+	<typeinfo>
+	<typeinfo>
+	<vector>
+	<typeinfo>
+	<typeinfo>
+	<map>
+	<vector>
+	<string>
+	<typeinfo>
+	<map>
+	<vector>
+	<iostream>
+	<stdexcept>
+
+1358042016 /home/jimbob/Documents/JFramework/Source/LUA/lua/lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1358042016 /home/jimbob/Documents/JFramework/Source/LUA/lua/luaconf.h
+	<limits.h>
+	<stddef.h>
+	<stdio.h>
+	<math.h>
+
+1358042016 /home/jimbob/Documents/JFramework/Source/LUA/lua/lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1358042016 /home/jimbob/Documents/JFramework/Source/LUA/lua/lualib.h
+	"lua.h"
+
+1389303275 /home/jimbob/Documents/JFramework/Source/Managers/ObjectManager.h
+	"GameObject.h"
+	"Manager.h"
+	"TextParser.h"
+
+1410501522 /home/jimbob/Documents/JFramework/Source/Parsers/TextParser.h
+	<fstream>
+	"Parser.h"
+
+1378581727 source:/home/jimbob/Documents/JFramework/Source/Components/Controller/PlayerController.cpp
+	"PlayerController.h"
+	"PhysicsObject.h"
+	"Transform.h"
+	"GameApp.h"
+	"ObjectManager.h"
+	"LevelManager.h"
+	"GraphicsManager.h"
+	"InputMessage.h"
+	"CollisionMessage.h"
+
+1378581727 /home/jimbob/Documents/JFramework/Source/Components/Controller/PlayerController.h
+	"Controller.h"
+	"GameObject.h"
+	"Menu.h"
+	"Common.h"
+
+1393311204 /home/jimbob/Documents/JFramework/Source/Logic/Menu.h
+	"MenuElement.h"
+	"Level.h"
+
+1387156198 /home/jimbob/Documents/JFramework/Source/Logic/MenuElement.h
+	"GameObject.h"
+	"TextParser.h"
+	"Transform.h"
+	"PCSurface.h"
+	"ObjectManager.h"
+	"GraphicsManager.h"
+	"Message.h"
+
+1393194364 /home/jimbob/Documents/JFramework/Source/Components/Transform.h
+	"Component.h"
+	"MathExt.h"
+
+1393188863 /home/jimbob/Documents/JFramework/Source/Components/PCSurface.h
+	<Windows.h>
+	<gl/gl.h>
+	"SDL.h"
+	<OpenGL/gl.h>
+	<OpenGL/glext.h>
+	<SDL/SDL.h>
+	<GL/gl.h>
+	<GL/glext.h>
+	<SDL/SDL.h>
+	<SDL/SDL_ttf.h>
+	"Surface.h"
+	"MathExt.h"
+
+1411280098 /home/jimbob/Documents/JFramework/Source/Components/Surface.h
+	"Component.h"
+	"TextureCoordinates.h"
+	"MathExt.h"
+
+1411280092 /home/jimbob/Documents/JFramework/Source/Graphics/TextureCoordinates.h
+	"Common.h"
+
+1411280098 /home/jimbob/Documents/JFramework/Source/Managers/GraphicsManager.h
+	"Manager.h"
+	"Surface.h"
+	"Screen.h"
+	"TextureData.h"
+
+1410501522 /home/jimbob/Documents/JFramework/Source/Graphics/Screen.h
+	"Surface.h"
+	"View.h"
+
+1389075998 /home/jimbob/Documents/JFramework/Source/Graphics/View.h
+	"MathExt.h"
+
+1411280098 /home/jimbob/Documents/JFramework/Source/Logic/Level.h
+	"Common.h"
+	"GameObject.h"
+	"Parser.h"
+	"TileMapGenerator.h"
+	"MathExt.h"
+
+1411280092 /home/jimbob/Documents/JFramework/Source/Components/PhysicsObject.h
+	"Component.h"
+	"PhysicsWorld.h"
+	"MathExt.h"
+
+1411280092 /home/jimbob/Documents/JFramework/Source/Managers/PhysicsWorld.h
+	"Common.h"
+	"Manager.h"
+	"MathExt.h"
+	"ForceRegistry.h"
+	"GravityGenerator.h"
+	"Resolver.h"
+
+1411535216 /home/jimbob/Documents/JFramework/Source/Physics/ForceRegistry.h
+	"ForceGenerator.h"
+	<vector>
+
+1359192977 /home/jimbob/Documents/JFramework/Source/Physics/ForceGenerator.h
+	"MathExt.h"
+
+1358042016 /home/jimbob/Documents/JFramework/Source/Physics/GravityGenerator.h
+	"ForceGenerator.h"
+
+1411280092 /home/jimbob/Documents/JFramework/Source/Physics/Resolver.h
+	<list>
+	"CollisionPair.h"
+
+1359192963 /home/jimbob/Documents/JFramework/Source/Physics/CollisionPair.h
+	"MathExt.h"
+
+1391150933 /home/jimbob/Documents/JFramework/Source/Managers/LevelManager.h
+	"Manager.h"
+	"Level.h"
+
+1372305146 /home/jimbob/Documents/JFramework/Source/Core/Messages/InputMessage.h
+	"Message.h"
+	"MathExt.h"
+
+1372305152 /home/jimbob/Documents/JFramework/Source/Core/Messages/CollisionMessage.h
+	"Message.h"
+	"MathExt.h"
+	"GameObject.h"
+
+1410501522 source:/home/jimbob/Documents/JFramework/Source/Components/PCSurface.cpp
+	"PCSurface.h"
+	"Common.h"
+	"GraphicsManager.h"
+	<SDL/SDL_image.h>
+	<SDL_image/SDL_image.h>
+	"SDL_image.h"
+
+1411280098 source:/home/jimbob/Documents/JFramework/Source/Components/PhysicsObject.cpp
+	"PhysicsObject.h"
+	"Transform.h"
+	"GameApp.h"
+	"ObjectManager.h"
+	"InputManager.h"
+	"LUATypes.h"
+	"CollisionMessage.h"
+	"PhysicsWorld.h"
+	"ObjectManager.h"
+
+1374642803 /home/jimbob/Documents/JFramework/Source/Managers/InputManager.h
+	"Manager.h"
+	"MathExt.h"
+
+1372035547 /home/jimbob/Documents/JFramework/Source/LUA/LUATypes.h
+	"Core/LuaIncludes.h"
+	"GameApp.h"
+	"Managers/Manager.h"
+	"Managers/LevelManager.h"
+	"Managers/ObjectManager.h"
+
+1411280098 source:/home/jimbob/Documents/JFramework/Source/Components/Surface.cpp
+	"Surface.h"
+	"GraphicsManager.h"
+	"ObjectManager.h"
+
+1410501522 source:/home/jimbob/Documents/JFramework/Source/Components/Transform.cpp
+	"Transform.h"
+	"TextParser.h"
+	"LuaIncludes.h"
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/Core/AutoCrit.cpp
+	"AutoCrit.h"
+	<assert.h>
+
+1358043475 /home/jimbob/Documents/JFramework/Source/Core/AutoCrit.h
+	<signal.h>
+	<pthread.h>
+
+1411624480 source:/home/jimbob/Documents/JFramework/Source/Core/Common.cpp
+	"Common.h"
+	<mach/mach_time.h>
+
+1411541140 source:/home/jimbob/Documents/JFramework/Source/Core/GameObject.cpp
+	"LuaIncludes.h"
+	"GameObject.h"
+	"Component.h"
+	"ObjectManager.h"
+	"Transform.h"
+
+1411280092 source:/home/jimbob/Documents/JFramework/Source/Core/MathExt.cpp
+	"MathExt.h"
+	"LuaIncludes.h"
+	<assert.h>
+
+1397173200 source:/home/jimbob/Documents/JFramework/Source/GameApp.cpp
+	"GameApp.h"
+	"Manager.h"
+	"PhysicsWorld.h"
+	"GraphicsManager.h"
+	"ObjectManager.h"
+	"LevelManager.h"
+	"ControllerManager.h"
+	"InputManager.h"
+	"SoundManager.h"
+	"DebugManager.h"
+	"LUATypes.h"
+	"Constants.h"
+	<Windows.h>
+
+1388808231 /home/jimbob/Documents/JFramework/Source/Managers/SoundManager.h
+	"Manager.h"
+	"Sound.h"
+
+1388808231 /home/jimbob/Documents/JFramework/Source/Sound/Sound.h
+	<string>
+
+1400303496 /home/jimbob/Documents/JFramework/Source/Managers/DebugManager.h
+	"Manager.h"
+	"Common.h"
+	"SDL.h"
+	<SDL/SDL.h>
+
+1344537626 /home/jimbob/Documents/JFramework/Source/AntTweakBar/include/AntTweakBar.h
+	<stddef.h>
+	<string>
+	<string>
+
+1411350677 source:/home/jimbob/Documents/JFramework/Source/Graphics/PCScreen.cpp
+	"PCScreen.h"
+	"PhysicsObject.h"
+	"PCSurface.h"
+
+1410501522 /home/jimbob/Documents/JFramework/Source/Graphics/PCScreen.h
+	"Screen.h"
+	"Transform.h"
+	<Windows.h>
+	<gl/gl.h>
+	"SDL.h"
+	<OpenGL/gl.h>
+	<OpenGL/glext.h>
+	<SDL/SDL.h>
+	<GL/gl.h>
+	<GL/glext.h>
+	<SDL/SDL.h>
+
+1411280205 source:/home/jimbob/Documents/JFramework/Source/Graphics/Screen.cpp
+	"Screen.h"
+	"Transform.h"
+
+1411280092 source:/home/jimbob/Documents/JFramework/Source/Graphics/TextureCoordinates.cpp
+	"TextureCoordinates.h"
+
+1389076057 source:/home/jimbob/Documents/JFramework/Source/Graphics/View.cpp
+	"View.h"
+	"GameObject.h"
+	"Transform.h"
+
+1372035547 source:/home/jimbob/Documents/JFramework/Source/LUA/LUATypes.cpp
+	"LUATypes.h"
+	"Core/Common.h"
+	"Components/Surface.h"
+	"Components/Transform.h"
+	"Components/PhysicsObject.h"
+	"Core/GameObject.h"
+	"Core/MathExt.h"
+	"Logic/Level.h"
+	"Components/PCSurface.h"
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/LUA/SLB.cpp
+	"SLB.hpp"
+	<cstdlib>
+	<sstream>
+	<cassert>
+	<sstream>
+	<iostream>
+	<sstream>
+	<iostream>
+	<assert.h>
+	<iostream>
+	<sstream>
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/LUA/lua.c
+	<limits.h>
+	<stddef.h>
+	<stdio.h>
+	<math.h>
+	<stdarg.h>
+	<stddef.h>
+	<limits.h>
+	<stddef.h>
+	<assert.h>
+	<math.h>
+	<float.h>
+	<math.h>
+	<stdarg.h>
+	<stddef.h>
+	<stddef.h>
+	<stdio.h>
+	<limits.h>
+	<ctype.h>
+	<stdarg.h>
+	<string.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<string.h>
+	<setjmp.h>
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+	<stddef.h>
+	<string.h>
+	<locale.h>
+	<string.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<string.h>
+	<stddef.h>
+	<string.h>
+	<time.h>
+	<string.h>
+	<string.h>
+	<string.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<string.h>
+	<float.h>
+	<math.h>
+	<string.h>
+	<errno.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/wait.h>
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdlib.h>
+	<math.h>
+	<windows.h>
+	<stdlib.h>
+	<string.h>
+	<dlfcn.h>
+	<errno.h>
+	<locale.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	<ctype.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+
+1411281457 source:/home/jimbob/Documents/JFramework/Source/Logic/Level.cpp
+	"Level.h"
+	"LevelManager.h"
+	"ObjectManager.h"
+	"MathExt.h"
+	"Transform.h"
+	"GraphicsManager.h"
+	"PhysicsWorld.h"
+	"PhysicsObject.h"
+	"ControllerManager.h"
+	"SoundManager.h"
+	"TileMapGenerator.h"
+	"Menu.h"
+	"Common.h"
+	"LuaIncludes.h"
+	"ObjectDeleteMessage.h"
+
+1392101524 /home/jimbob/Documents/JFramework/Source/Logic/TileMapGenerator.h
+	"Common.h"
+	"Parser.h"
+	"GameObject.h"
+
+1411280949 source:/home/jimbob/Documents/JFramework/Source/Logic/Menu.cpp
+	"Menu.h"
+	"MenuImage.h"
+	"MenuText.h"
+
+1387155624 /home/jimbob/Documents/JFramework/Source/Logic/MenuImage.h
+	"MenuElement.h"
+
+1410501522 source:/home/jimbob/Documents/JFramework/Source/Logic/MenuElement.cpp
+	"MenuElement.h"
+
+1410501522 source:/home/jimbob/Documents/JFramework/Source/Logic/MenuImage.cpp
+	"MenuImage.h"
+	"LUATypes.h"
+
+1411280228 source:/home/jimbob/Documents/JFramework/Source/Logic/TileMapGenerator.cpp
+	"TileMapGenerator.h"
+	"ObjectManager.h"
+	"LevelManager.h"
+	"Transform.h"
+	"Surface.h"
+	"PhysicsObject.h"
+	"Level.h"
+
+1372305867 source:/home/jimbob/Documents/JFramework/Source/Managers/ControllerManager.cpp
+	"Common.h"
+	"ControllerManager.h"
+
+1372305864 source:/home/jimbob/Documents/JFramework/Source/Managers/DebugManager.cpp
+	"DebugManager.h"
+	"GraphicsManager.h"
+
+1372305862 source:/home/jimbob/Documents/JFramework/Source/Managers/GraphicsManager.cpp
+	"Common.h"
+	"GraphicsManager.h"
+	"PCScreen.h"
+	"PCSurface.h"
+
+1374648917 source:/home/jimbob/Documents/JFramework/Source/Managers/InputManager.cpp
+	"InputManager.h"
+	"InputMessage.h"
+
+1374649881 source:/home/jimbob/Documents/JFramework/Source/Managers/LevelManager.cpp
+	"LevelManager.h"
+	"InputManager.h"
+	"LuaIncludes.h"
+	"LevelChangeMessage.h"
+
+1372305158 /home/jimbob/Documents/JFramework/Source/Core/Messages/LevelChangeMessage.h
+	"Message.h"
+
+1372305900 source:/home/jimbob/Documents/JFramework/Source/Managers/ObjectManager.cpp
+	"Common.h"
+	"ObjectManager.h"
+	"PhysicsWorld.h"
+	"PhysicsObject.h"
+	"Transform.h"
+	"GraphicsManager.h"
+	"ControllerManager.h"
+	"PlayerController.h"
+	"LuaIncludes.h"
+	"PCSurface.h"
+
+1372317177 source:/home/jimbob/Documents/JFramework/Source/Managers/PhysicsWorld.cpp
+	"PhysicsWorld.h"
+	"PhysicsObject.h"
+	"Transform.h"
+	<algorithm>
+	<cmath>
+
+1381136880 source:/home/jimbob/Documents/JFramework/Source/Managers/SoundManager.cpp
+	"SoundManager.h"
+	"PCSound.h"
+
+1381136880 /home/jimbob/Documents/JFramework/Source/Sound/PCSound.h
+	"Sound.h"
+	<SDL/SDL.h>
+	<SDL/SDL_audio.h>
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/Parsers/Parser.cpp
+	"Parser.h"
+
+1368415397 source:/home/jimbob/Documents/JFramework/Source/Parsers/TextParser.cpp
+	"TextParser.h"
+	"Common.h"
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/Parsers/XMLParser.cpp
+	"XMLParser.h"
+
+1359192909 /home/jimbob/Documents/JFramework/Source/Parsers/XMLParser.h
+	"Parser.h"
+	"TinyXML/tinyxml2.h"
+
+1358042016 /home/jimbob/Documents/JFramework/Source/TinyXML/tinyxml2.h
+	<ctype.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+	<cctype>
+	<climits>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<cstdarg>
+	<android/log.h>
+	<assert.h>
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/Physics/CollisionPair.cpp
+	"CollisionPair.h"
+	"PhysicsObject.h"
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/Physics/ForceGenerator.cpp
+	"ForceGenerator.h"
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/Physics/ForceRegistry.cpp
+	"ForceRegistry.h"
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/Physics/GravityGenerator.cpp
+	"GravityGenerator.h"
+	"PhysicsObject.h"
+
+1363234595 source:/home/jimbob/Documents/JFramework/Source/Physics/Resolver.cpp
+	"Resolver.h"
+	"PhysicsObject.h"
+	"Transform.h"
+	"CollisionMessage.h"
+
+1381136880 source:/home/jimbob/Documents/JFramework/Source/Sound/PCSound.cpp
+	"PCSound.h"
+
+1381136880 source:/home/jimbob/Documents/JFramework/Source/Sound/Sound.cpp
+	"Sound.h"
+	"Common.h"
+
+1358042016 source:/home/jimbob/Documents/JFramework/Source/TinyXML/tinyxml2.cpp
+	"tinyxml2.h"
+	<new>
+	<stddef.h>
+	<cstddef>
+
+1381566743 source:/home/jimbob/Documents/JFramework/Source/main.cpp
+	"GameApp.h"
+	"InputManager.h"
+	"DebugManager.h"
+	"SDL.h"
+	<SDL/SDL.h>
+
+1420156208 /home/jimbob/Documents/JFramework/Source/Core/HashString.h
+	<string>
+	<vector>
+
+1410501522 /home/jimbob/Documents/JFramework/Source/Core/SmartPointer.h
+
+1410501522 /home/jimbob/Documents/JFramework/Source/Parsers/Root.h
+	<string>
+	<set>
+	"Common.h"
+
+1393143804 /home/jimbob/Documents/JFramework/Source/Graphics/TextureData.h
+
+1392496461 /home/jimbob/Documents/JFramework/Source/Components/Controller.h
+	"Common.h"
+	"Component.h"
+	"MathExt.h"
+
+1397708893 /home/jimbob/Documents/JFramework/Source/Logic/Constants.h
+	"Common.h"
+	"TextParser.h"
+
+1388808231 /home/jimbob/Documents/JFramework/Source/Core/Messages/ObjectDeleteMessage.h
+	"Message.h"
+	"GameObject.h"
+
+1392359916 /home/jimbob/Documents/JFramework/Source/Logic/MenuText.h
+	"MenuElement.h"
+
