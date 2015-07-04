@@ -19,7 +19,7 @@ bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
   float x1 = object1->GetOwner()->GET<Transform>()->GetPosition().x -
       object1->GetBroadSize().x;
   float x2 = object2->GetOwner()->GET<Transform>()->GetPosition().x -
-        object2->GetBroadSize().x;
+      object2->GetBroadSize().x;
   if(x1 < x2)
   {
     return true;
@@ -52,7 +52,8 @@ void PhysicsWorld::DeleteObject(PhysicsObject *aObject)
 void PhysicsWorld::AddObject(PhysicsObject *aObject)
 {
   // Check to see if object is in our list
-  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
+  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != objectEnd; ++it)
   {
     if(*it == aObject)
     {
@@ -69,7 +70,8 @@ void PhysicsWorld::AddObject(PhysicsObject *aObject)
 
 void PhysicsWorld::RemoveObject(PhysicsObject *aObject)
 {
-  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
+  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != objectEnd; ++it)
   {
     if(*it == aObject)
     {
@@ -83,7 +85,8 @@ void PhysicsWorld::RemoveObject(PhysicsObject *aObject)
 
 void PhysicsWorld::ClearObjects()
 {
-  for(PhysicsIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
+  for(PhysicsIT it = mObjects.begin(); it != objectEnd; ++it)
   {
     delete *it;
   }
@@ -100,7 +103,8 @@ void PhysicsWorld::Update()
 
 void PhysicsWorld::SendMessage(Message const &aMessage)
 {
-  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
+  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != objectEnd; ++it)
   {
     (*it)->ReceiveMessage(aMessage);
   }

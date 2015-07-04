@@ -27,11 +27,14 @@ ObjectManager::~ObjectManager()
  */
 void ObjectManager::Update()
 {
-  ObjectIT end = mObjects.end();
-	for(ObjectIT it = mObjects.begin(); it != end; ++it)
+  ObjectIT objectEnd = mObjects.end();
+	for(ObjectIT it = mObjects.begin(); it != objectEnd; ++it)
+  {
 		(*it)->Update();
+  }
 
-	for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  MessageIT msgEnd = mDelayedMessages.end();
+	for(MessageIT it = mDelayedMessages.begin(); it != msgEnd; ++it)
   {
     if((*it)->GetDescription() == OBJECT_DELETE.ToCharArray()) 
     {
@@ -130,14 +133,16 @@ void ObjectManager::DeleteObject(GameObject *aObj)
 void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
 {
   // Check to see if object is in our list
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  ObjectIT objectsEnd = mObjects.end();
+  for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
 	{
 		if(*it == aObj)
 		{
       return;
 		}
 	}
-  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  ObjectIT staticObjectsEnd = mStaticObjects.end();
+  for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
   {
     if(*it == aObj)
     {
@@ -157,7 +162,8 @@ void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
  */
 void ObjectManager::RemoveObject(GameObject *aObj)
 {
-	for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  ObjectIT objectsEnd = mObjects.end();
+	for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
 	{
 		if(*it == aObj)
 		{
@@ -165,7 +171,8 @@ void ObjectManager::RemoveObject(GameObject *aObj)
 			break;
 		}
 	}
-	for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
+  ObjectIT staticObjectsEnd = mStaticObjects.end();
+	for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
   {
     if(*it == aObj)
     {

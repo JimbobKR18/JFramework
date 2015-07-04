@@ -136,7 +136,8 @@ void LevelManager::Update()
 {
   if(mActiveLevel)
     mActiveLevel->Update();
-  for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  MessageIT msgEnd = mDelayedMessages.end();
+  for(MessageIT it = mDelayedMessages.begin(); it != msgEnd; ++it)
   {
     LevelChangeMessage *msg = (LevelChangeMessage*)*it;
     LoadLevel(msg->GetDescription(), (msg->GetContent() == "true" ? true : false));
