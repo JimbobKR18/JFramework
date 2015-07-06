@@ -23,6 +23,7 @@ private:
 public:
   // Constructors
   HashString();
+  HashString(HashString  const &aRhs);
   HashString(char const* aString, unsigned aStart = 0, unsigned aEnd = 0);
   HashString(std::string const &aString, unsigned aStart = 0, unsigned aEnd = 0);
 
@@ -42,12 +43,12 @@ public:
   // Equality
   void operator=(HashString const &aRhs);
   // Comparison
-  bool operator==(HashString const &aRhs);
-  bool operator==(std::string const &aRhs);
-  bool operator==(char const* aRhs);
-  bool operator!=(HashString const &aRhs);
-  bool operator!=(std::string const &aRhs);
-  bool operator!=(char const* aRhs);
+  bool operator==(HashString const &aRhs) const;
+  bool operator==(std::string const &aRhs) const;
+  bool operator==(char const* aRhs) const;
+  bool operator!=(HashString const &aRhs) const;
+  bool operator!=(std::string const &aRhs) const;
+  bool operator!=(char const* aRhs) const;
   char operator[](int aValue);
   // Conversion
   operator std::string();

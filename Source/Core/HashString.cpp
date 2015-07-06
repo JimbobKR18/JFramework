@@ -13,6 +13,10 @@ HashString::HashString() : mString(""), mHash(0)
 {
 }
 
+HashString::HashString(HashString  const &aRhs) : mString(aRhs.mString), mHash(aRhs.mHash)
+{
+}
+
 HashString::HashString(char const* aString, unsigned aStart, unsigned aEnd)
 {
   if(aEnd > strlen(aString))
@@ -101,7 +105,7 @@ void HashString::operator=(HashString const &aRhs)
   mHash = aRhs.mHash;
 }
 
-bool HashString::operator==(HashString const &aRhs)
+bool HashString::operator==(HashString const &aRhs) const
 {
   // If the hashes aren't equal, early out.
   if(mHash != aRhs.mHash)
@@ -110,17 +114,17 @@ bool HashString::operator==(HashString const &aRhs)
   return mString == aRhs.mString;
 }
 
-bool HashString::operator==(std::string const &aRhs)
+bool HashString::operator==(std::string const &aRhs) const
 {
   return mString == aRhs;
 }
 
-bool HashString::operator==(char const* aRhs)
+bool HashString::operator==(char const* aRhs) const
 {
   return mString == aRhs;
 }
 
-bool HashString::operator!=(HashString const &aRhs)
+bool HashString::operator!=(HashString const &aRhs) const
 {
   // If the hashes aren't equal, early out.
   if(mHash != aRhs.mHash)
@@ -129,12 +133,12 @@ bool HashString::operator!=(HashString const &aRhs)
   return mString != aRhs.mString;
 }
 
-bool HashString::operator!=(std::string const &aRhs)
+bool HashString::operator!=(std::string const &aRhs) const
 {
   return mString != aRhs;
 }
 
-bool HashString::operator!=(char const* aRhs)
+bool HashString::operator!=(char const* aRhs) const
 {
   return mString != aRhs;
 }
