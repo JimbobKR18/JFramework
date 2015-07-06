@@ -51,7 +51,7 @@ namespace Common
   #elif defined(_WIN32)
     std::string ret;
   #elif defined(__APPLE__)
-    std::string ret = "/Users/jimmyspencer/Documents/JFramework/Assets/";
+    std::string ret = "/Users/jimmyspencer/Documents/project-chang-e/Assets/";
   #else // Linux
     std::string ret = "../Assets/";
   #endif
