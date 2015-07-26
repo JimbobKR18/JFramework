@@ -238,8 +238,7 @@ GameObject* Level::CreateObjectDelayed(HashString const &aFileName)
   GameObject *object = manager->CreateObjectNoAdd(aFileName);
   ObjectCreateMessage *msg = new ObjectCreateMessage(object);
   manager->ProcessDelayedMessage(msg);
-  // Maybe?
-  //AddObject(object);
+  AddObject(object);
   return object;
 }
 
