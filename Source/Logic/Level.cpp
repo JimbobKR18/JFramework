@@ -188,6 +188,14 @@ void Level::RemoveMenus()
  */
 void Level::AddObject(GameObject *aObject)
 {
+  ObjectIT objectsEnd = mObjects.end();
+  for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
+	{
+		if(*it == aObject)
+		{
+      return;
+		}
+	}
   mObjects.push_back(aObject);
 }
 
@@ -197,6 +205,14 @@ void Level::AddObject(GameObject *aObject)
  */
 void Level::AddStaticObject(GameObject *aObject)
 {
+  ObjectIT staticObjectsEnd = mStaticObjects.end();
+  for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
+  {
+    if(*it == aObject)
+    {
+      return;
+    }
+  }
   mStaticObjects.push_back(aObject);
 }
 
