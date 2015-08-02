@@ -85,6 +85,7 @@ public:
   
 protected:
   ObjectContainer&  GetObjects();
+  ObjectContainer&  GetStaticObjects();
 private:
   void ParseTransform(GameObject *aObject, Root* aTransform);
   void ParseSurface(GameObject *aObject, Root* aSurface);

@@ -614,11 +614,20 @@ void Level::ParseFile()
 
 /**
  * @brief Get all objects in level.
- * @return 
+ * @return All objects.
  */
 Level::ObjectContainer& Level::GetObjects()
 {
   return mObjects;
+}
+
+/**
+ * @brief Get all static objects in level.
+ * @return All static objects.
+ */
+Level::ObjectContainer& Level::GetStaticObjects()
+{
+  return mStaticObjects;
 }
 
 /**
