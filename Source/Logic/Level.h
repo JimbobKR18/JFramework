@@ -68,6 +68,8 @@ public:
 
 	void              Load(Level* const aPrevLevel);
 	void              Unload(Level* const aNextLevel);
+  void              LoadObjects(ObjectContainer const &aObjects);
+  void              UnloadObjects(ObjectContainer const &aObjects);
 
 	virtual void      PreReset() {};
 	virtual void      Update();

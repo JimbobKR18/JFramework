@@ -55,21 +55,37 @@ Level::~Level()
     delete mGenerator;
 }
 
+/**
+ * @brief Get the level name. Not the file name.
+ * @return The level name.
+ */
 std::string Level::GetName() const
 {
   return mName;
 }
 
+/**
+ * @brief Get the level manager.
+ * @return The level manager.
+ */
 LevelManager *Level::GetManager() const
 {
   return mOwner;
 }
 
+/**
+ * @brief Get the tile map generator. You can get individual tiles and other helperful things here.
+ * @return The tile map generator.
+ */
 TileMapGenerator* Level::GetTileMap() const
 {
   return mGenerator;
 }
 
+/**
+ * @brief Get the camera's focus target for the level.
+ * @return The camera target.
+ */
 GameObject* Level::GetFocusTarget() const
 {
   return mFocusTarget;
@@ -333,11 +349,19 @@ void Level::SetMinBoundary(Vector3 const &aMinBoundary)
   mMinBoundary = aMinBoundary;
 }
 
+/**
+ * @brief Get the max boundary of the level.
+ * @return The max boundary of the level.
+ */
 Vector3 Level::GetMaxBoundary() const
 {
   return mMaxBoundary;
 }
 
+/**
+ * @brief Get the min boundary of the level.
+ * @return The min boundary of the level.
+ */
 Vector3 Level::GetMinBoundary() const
 {
   return mMinBoundary;
@@ -349,26 +373,9 @@ Vector3 Level::GetMinBoundary() const
  */
 void Level::Load(Level* const aPrevLevel)
 {
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
-  {
-    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
-    if((*it)->GET<PhysicsObject>())
-      mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
-    if((*it)->GET<Surface>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
-    if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
-  }
-  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
-  {
-    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it, true);
-    if((*it)->GET<PhysicsObject>())
-      mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
-    if((*it)->GET<Surface>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
-    if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
-  }
+  // Load all objects
+  LoadObjects(mObjects);
+  LoadObjects(mStaticObjects);
 
   if(!mMusicName.empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, Sound::INFINITE_LOOPS);
@@ -391,28 +398,9 @@ void Level::Unload(Level* const aNextLevel)
   // Remove menus because they are not level files.
   RemoveMenus();
   
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
-  {
-    // Remove all components
-    mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
-    if((*it)->GET<PhysicsObject>())
-      mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
-    if((*it)->GET<Surface>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
-    if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
-  }
-  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
-  {
-    // Remove all components
-    mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
-    if((*it)->GET<PhysicsObject>())
-      mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
-    if((*it)->GET<Surface>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
-    if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
-  }
+  // Unload all objects
+  UnloadObjects(mObjects);
+  UnloadObjects(mStaticObjects);
 
   if(!mMusicName.empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
@@ -423,6 +411,46 @@ void Level::Unload(Level* const aNextLevel)
   mOwner->SetActiveLevel(NULL);
 }
 
+/**
+ * @brief Load all objects in list into view.
+ * @param aObjects Objects to add.
+ */
+void Level::LoadObjects(ObjectContainer const &aObjects)
+{
+  for(ConstObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
+  {
+    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
+    if((*it)->GET<PhysicsObject>())
+      mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
+    if((*it)->GET<Surface>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
+    if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
+  }
+}
+
+/**
+ * @brief Unload all objects in the list from view, they will still exist in then level file.
+ * @param aObjects Objects to unload.
+ */
+void Level::UnloadObjects(ObjectContainer const &aObjects)
+{
+  for(ConstObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
+  {
+    // Remove all components
+    mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
+    if((*it)->GET<PhysicsObject>())
+      mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
+    if((*it)->GET<Surface>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
+    if((*it)->GET<Controller>())
+      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
+  }
+}
+
+/**
+ * @brief Update loop for levels. LevelManager will call this for you.
+ */
 void Level::Update()
 {
   for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)

@@ -80,7 +80,7 @@ Root* Parser::SetUpTree(Root* aBase, std::vector<HashString> const &aStringHiera
   Root* current = aBase;
   Root* ret = nullptr;
   
-  for(int i = 0; i < aStringHierarchy.size(); ++i)
+  for(unsigned i = 0; i < aStringHierarchy.size(); ++i)
   {
     Root* next = current->Find(aStringHierarchy[i]);
     if(!next)
