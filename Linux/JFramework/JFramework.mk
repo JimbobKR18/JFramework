@@ -2,12 +2,12 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Release
 ProjectName            :=JFramework
-ConfigurationName      :=Debug
+ConfigurationName      :=Release
 WorkspacePath          := "/home/jimbob/Documents/Chang-e/Linux/Chang-e"
 ProjectPath            := "/home/jimbob/Documents/JFramework/Linux/JFramework"
-IntermediateDirectory  :=./Debug
+IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/lib$(ProjectName).a
-Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=../../../../Assets/ $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)SLB_USE_EXCEPTIONS 
+Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=../../../../Assets/ 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := /usr/bin/ar rcu
 CXX      := /usr/bin/g++
 CC       := /usr/bin/gcc
-CXXFLAGS :=  -g -O0 -std=c++11 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
-CFLAGS   :=  -g -O0 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
+CXXFLAGS :=  -O -O3 -std=c++11 -Wall $(Preprocessors)
+CFLAGS   :=  -O -O3 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := /usr/bin/as
 
@@ -76,7 +76,7 @@ Objects=$(Objects0) $(Objects1)
 ##
 ## Main Build Targets 
 ##
-.PHONY: all clean PreBuild PrePreBuild PostBuild
+.PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: $(IntermediateDirectory) $(OutputFile)
 
 $(OutputFile): $(Objects)
@@ -85,11 +85,15 @@ $(OutputFile): $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	@echo $(Objects1) >> $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
-	@$(MakeDirCommand) "/home/jimbob/Documents/Chang-e/Linux/Chang-e/.build-debug"
-	@echo rebuilt > "/home/jimbob/Documents/Chang-e/Linux/Chang-e/.build-debug/JFramework"
+	@$(MakeDirCommand) "/home/jimbob/Documents/Chang-e/Linux/Chang-e/.build-release"
+	@echo rebuilt > "/home/jimbob/Documents/Chang-e/Linux/Chang-e/.build-release/JFramework"
 
-./Debug:
-	@test -d ./Debug || $(MakeDirCommand) ./Debug
+MakeIntermediateDirs:
+	@test -d ./Release || $(MakeDirCommand) ./Release
+
+
+./Release:
+	@test -d ./Release || $(MakeDirCommand) ./Release
 
 PreBuild:
 
@@ -519,6 +523,6 @@ $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(PreprocessSuffix): ../../Source/T
 ## Clean
 ##
 clean:
-	$(RM) -r ./Debug/
+	$(RM) -r ./Release/
 
 
