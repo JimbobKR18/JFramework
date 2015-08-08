@@ -49,6 +49,12 @@ public:
   bool operator!=(HashString const &aRhs) const;
   bool operator!=(std::string const &aRhs) const;
   bool operator!=(char const* aRhs) const;
+  bool operator<(HashString const &aRhs) const;
+  bool operator<(std::string const &aRhs) const;
+  bool operator<(char const* aRhs) const;
+  bool operator>(HashString const &aRhs) const;
+  bool operator>(std::string const &aRhs) const;
+  bool operator>(char const* aRhs) const;
   char operator[](int aValue);
   // Conversion
   operator std::string();
@@ -69,6 +75,7 @@ public:
   HashString ToLower() const;
   HashString ToUpper() const;
   HashString ToLiteral() const;
+  bool ComesBefore(HashString const &aRhs) const;
 private:
   void Hash();
 };
