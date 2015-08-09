@@ -3,7 +3,7 @@
 //------------------------------
 // SHAPE
 //------------------------------
-Shape::Shape(ShapeType aShape) : position(), shape(aShape)
+Shape::Shape(ShapeType aShape) : position(), passable(false), shape(aShape)
 {
 }
 
@@ -28,6 +28,11 @@ Cube::~Cube()
 {
 }
 
+/**
+ * @brief See if point collides with box. 3D space.
+ * @param aPosition Point to check
+ * @return True if collided.
+ */
 bool Cube::Get3DCollision(Vector3 const &aPosition)
 {
   // SEPARATING AXIS THEORUM
@@ -42,6 +47,11 @@ bool Cube::Get3DCollision(Vector3 const &aPosition)
   return true;
 }
 
+/**
+ * @brief See if point collides with box. 2D space.
+ * @param aPosition Point to check
+ * @return True if collided.
+ */
 bool Cube::Get2DCollision(Vector3 const &aPosition)
 {
   // SEPARATING AXIS THEORUM
@@ -56,6 +66,11 @@ bool Cube::Get2DCollision(Vector3 const &aPosition)
   return true;
 }
 
+/**
+ * @brief Get box size
+ * @param index Axis to check (x = 0, y = 1, z = 2)
+ * @return Size on axis
+ */
 float Cube::GetSize(int index)
 {
   return size[index];
@@ -78,12 +93,22 @@ Sphere::~Sphere()
 {
 }
 
+/**
+ * @brief See if point collides with box. 3D space.
+ * @param aPosition Point to check
+ * @return True if collided.
+ */
 bool Sphere::GetCollision(Vector3 const &aPosition)
 {
   float dist = (aPosition - position).length();
   return dist <= radius;
 }
 
+/**
+ * @brief Get size of sphere
+ * @param index Does nothing
+ * @return Size of sphere (radius)
+ */
 float Sphere::GetSize(int index)
 {
   return radius;
@@ -109,6 +134,11 @@ Circle::~Circle()
 {
 }
 
+/**
+ * @brief Get size of circle
+ * @param index Does nothing
+ * @return Size of circle (radius)
+ */
 float Circle::GetSize(int index)
 {
   return radius;
@@ -142,6 +172,11 @@ Line::~Line()
 {
 }
 
+/**
+ * @brief Get closest point on line to point
+ * @param aPoint Point to check
+ * @return Closest point on line to said point.
+ */
 // http://bit.ly/1zFqgQ7
 Vector3 Line::ClosestPointToPoint(Vector3 const &aPoint) const
 {
@@ -159,7 +194,12 @@ Vector3 Line::ClosestPointToPoint(Vector3 const &aPoint) const
   return position + (direction * (length * t));
 }
 
-// Returns true is circle is found, otherwise false
+/**
+ * @brief Get all possible collisions with another line
+ * @param aCompare Line to check
+ * @param aOutput Output circle
+ * @return If circle is found or not
+ */
 bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
 {
   Vector3 d = aCompare.position - position;
@@ -293,6 +333,11 @@ bool Line::GetCollisions(Line const &aCompare, Circle &aOutput)
   return true;
 }
 
+/**
+ * @brief Get length of line
+ * @param index Does nothing
+ * @return Length
+ */
 float Line::GetSize(int index)
 {
   return length;
@@ -323,12 +368,22 @@ Triangle::Triangle(std::vector<Vector3> const &aPoints) : Triangle(aPoints[0], a
 Triangle::~Triangle()
 {
 }
-  
+
+/**
+ * @brief Get point by index
+ * @param index Point index
+ * @return Point at index
+ */
 Vector3 Triangle::GetPoint(int index)
 {
   return points[index];
 }
 
+/**
+ * @brief Get max value along axis
+ * @param index Axis (x = 0, y = 1, z = 2)
+ * @return Size along axis
+ */
 float Triangle::GetSize(int index)
 {
   float highest = -1000000.0f;
@@ -349,6 +404,10 @@ float Triangle::GetSize(int index)
 //------------------------------
 // PRINTING
 //------------------------------
+/**
+ * @brief Print line info
+ * @param _line Line to print
+ */
 void print_line(Line const &_line)
 {
   DebugLogPrint("LINE:\n");
@@ -357,6 +416,10 @@ void print_line(Line const &_line)
   DebugLogPrint("LENGTH: %f\n", _line.length);
 }
 
+/**
+ * @brief Print circle info
+ * @param _circle Circle to print
+ */
 void print_circle(Circle const &_circle)
 {
   DebugLogPrint("\n");

@@ -37,6 +37,9 @@ PhysicsObject::~PhysicsObject()
   mWorld->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject(this);
 }
 
+/**
+ * @brief Update loop
+ */
 void PhysicsObject::Update()
 {
   // Store position for later
@@ -63,11 +66,19 @@ void PhysicsObject::Update()
   mBroadSize = transform->GetSize() * 1.5f;
 }
 
+/**
+ * @brief Send message to other objects.
+ * @param aMessage Message to send.
+ */
 void PhysicsObject::SendMessage(Message const &aMessage)
 {
   GetOwner()->ReceiveMessage(aMessage);
 }
 
+/**
+ * @brief Receive message from other objects or managers.
+ * @param aMessage Message to receive.
+ */
 void PhysicsObject::ReceiveMessage(Message const &aMessage)
 {
   if(aMessage.GetDescription() != "Collision")
@@ -87,6 +98,10 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
   }
 }
 
+/**
+ * @brief Serialize to file
+ * @param aParser The file to serialize to.
+ */
 void PhysicsObject::Serialize(Parser &aParser)
 {
   std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
@@ -111,6 +126,7 @@ void PhysicsObject::Serialize(Parser &aParser)
     physicsObject->Place(curShape, "PositionX", Common::FloatToString((*it)->position.x));
     physicsObject->Place(curShape, "PositionY", Common::FloatToString((*it)->position.y));
     physicsObject->Place(curShape, "PositionZ", Common::FloatToString((*it)->position.z));
+    physicsObject->Place(curShape, "Passable", Common::BoolToString((*it)->passable));
     
     switch((*it)->shape)
     {
@@ -144,6 +160,10 @@ void PhysicsObject::Serialize(Parser &aParser)
   }
 }
 
+/**
+ * @brief Read from file
+ * @param aParser File to read from.
+ */
 void PhysicsObject::Deserialize(Parser &aParser)
 {
   // Is our object affected by gravity?
@@ -214,6 +234,12 @@ void PhysicsObject::Deserialize(Parser &aParser)
     newShape->position = Vector3(tempShape->Find("PositionX")->GetValue().ToFloat(),
                                  tempShape->Find("PositionY")->GetValue().ToFloat(),
                                  tempShape->Find("PositionZ")->GetValue().ToFloat());
+                                 
+    // If passable flag is found, use it. Default false.
+    if(tempShape->Find("Passable"))
+    {
+      newShape->passable = tempShape->Find("Passable")->GetValue().ToBool();
+    }
     AddShape(newShape);
     
     ++curIndex;
@@ -221,21 +247,38 @@ void PhysicsObject::Deserialize(Parser &aParser)
   }
 }
 
+/**
+ * @brief Add shape to list
+ * @param aShape Shape to add
+ */
 void PhysicsObject::AddShape(Shape* aShape)
 {
   mShapes.push_back(aShape);
 }
 
+/**
+ * @brief Add force to list
+ * @param aForce Force to add
+ */
 void PhysicsObject::AddForce(Vector3 const &aForce)
 {
   mForces += aForce;
 }
 
+/**
+ * @brief Add object to ignore list
+ * @param aObjectName Name of object to ignore
+ */
 void PhysicsObject::AddIgnore(std::string const &aObjectName)
 {
   mIgnoreList.push_back(aObjectName);
 }
 
+/**
+ * @brief Check if we should ignore the object in question
+ * @param aObjectName The name of the object to maybe ignore
+ * @return Whether or not to ignore collision with this object
+ */
 bool PhysicsObject::IgnoreObject(std::string const &aObjectName)
 {
   std::vector<std::string>::iterator end = mIgnoreList.end();
@@ -247,77 +290,137 @@ bool PhysicsObject::IgnoreObject(std::string const &aObjectName)
   return false;
 }
 
+/**
+ * @brief Get velocity
+ * @return Current velocity
+ */
 Vector3 PhysicsObject::GetVelocity() const
 {
   return mVelocity;
 }
 
+/**
+ * @brief Get acceleration
+ * @return Current acceleration
+ */
 Vector3 PhysicsObject::GetAcceleration() const
 {
   return mAcceleration;
 }
 
+/**
+ * @brief Set velocity for this object
+ * @param aVel Velocity to set to
+ */
 void PhysicsObject::SetVelocity(Vector3 const &aVel)
 {
   mVelocity = aVel;
 }
 
+/**
+ * @brief Set acceleration for this object
+ * @param aAccel Acceleration to set to
+ */
 void PhysicsObject::SetAcceleration(Vector3 const &aAccel)
 {
   mAcceleration = aAccel;
 }
 
+/**
+ * @brief Get mass of this object
+ * @return Mass
+ */
 float PhysicsObject::GetMass() const
 {
 	return mMass;
 }
 
+/**
+ * @brief Set mass of this object
+ * @param aMass Mass to set to
+ */
 void PhysicsObject::SetMass(float aMass)
 {
 	mMass = aMass;
 	mInverseMass = 1.0f / mMass;
 }
 
+/**
+ * @brief Is this object static? (i.e. doesn't move)
+ * @return If this object is static or not
+ */
 bool PhysicsObject::IsStatic() const
 {
   return mStatic;
 }
 
+/**
+ * @brief Set whether this object is static or not
+ * @param aStatic Static
+ */
 void PhysicsObject::SetStatic(bool aStatic)
 {
   mStatic = aStatic;
 }
 
+/**
+ * @brief Is this object affected by gravity force?
+ * @return Is it?
+ */
 bool PhysicsObject::IsAffectedByGravity() const
 {
   return mGravity;
 }
 
+/**
+ * @brief Set if this object is affected by gravity
+ * @param aGravity Gravity set.
+ */
 void PhysicsObject::SetAffectedByGravity(bool aGravity)
 {
   mGravity = aGravity;
 }
 
+/**
+ * @brief Is this object passable? Can things walk through it?
+ * @return Whether or not the object is passable.
+ */
 bool PhysicsObject::IsPassable() const
 {
   return mPassable;
 }
 
+/**
+ * @brief Set if obejct is passable
+ * @param aPassable Passable
+ */
 void PhysicsObject::SetPassable(bool aPassable)
 {
   mPassable = aPassable;
 }
 
+/**
+ * @brief Set size for broadphasing (bigger than normal box)
+ * @return Size for broadphasing
+ */
 Vector3 PhysicsObject::GetBroadSize() const
 {
 	return mBroadSize;
 }
 
+/**
+ * @brief Set broadphasing box size (bigger than normal box)
+ * @param aSize Size for broadphasing
+ */
 void PhysicsObject::SetBroadSize(Vector3 const &aSize)
 {
   mBroadSize = aSize;
 }
 
+/**
+ * @brief Get all shapes
+ * @return Shapes belonging to this object.
+ */
 std::vector<Shape*>& PhysicsObject::GetShapes()
 {
   return mShapes;

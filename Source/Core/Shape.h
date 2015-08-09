@@ -6,6 +6,7 @@
 struct Shape
 {
   Vector3 position;
+  bool passable;
   
   enum ShapeType
   {

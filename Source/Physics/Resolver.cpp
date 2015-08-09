@@ -12,6 +12,10 @@ Resolver::~Resolver()
 {
 }
 
+/**
+ * @brief Update loop for resolving shapes.
+ * @param aDuration Time elapsed between flames.
+ */
 void Resolver::Update(float aDuration)
 {
   for(std::list<PotentialPair>::iterator it = mPotentialPairs.begin(); it != mPotentialPairs.end(); ++it)
@@ -34,16 +38,30 @@ void Resolver::Update(float aDuration)
   mPotentialPairs.clear();
 }
 
+/**
+ * @brief Add a pair to be checked in pre check.
+ * @param aPair Pair to add
+ */
 void Resolver::AddPrelimPair(PotentialPair const &aPair)
 {
   mPotentialPairs.push_back(aPair);
 }
 
+/**
+ * @brief Add pair that collided.
+ * @param aPair The pair to add.
+ */
 void Resolver::AddCollidedPair(CollisionPair const &aPair)
 {
   mCollidedPairs.push_back(aPair);
 }
 
+/**
+ * @brief Find a pair in our list of potential pairs.
+ * @param aObject1 First object
+ * @param aObject2 Second object
+ * @return Whether or not that pair already exists
+ */
 bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
 {
   PotentialPair temp(aObject1, aObject2);
@@ -58,6 +76,11 @@ bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
   return false;
 }
 
+/**
+ * @brief Calculate separating velocities
+ * @param aPair Pair to calculate
+ * @return The separating velocity along the normal.
+ */
 float Resolver::CalculateSeparatingVelocity(CollisionPair const &aPair)
 {
   Vector3 separatingVelocity = aPair.mBodies[0]->GetVelocity();
@@ -97,6 +120,11 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
   }
 }
 
+/**
+ * @brief Resolve for velocities
+ * @param aPair Pair to resolve
+ * @param aDuration Length of frame
+ */
 void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
 {
   float separatingVelocity = CalculateSeparatingVelocity(aPair);
@@ -143,6 +171,10 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
     aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() - b2Movement);
 }
 
+/**
+ * @brief Notify object of collision
+ * @param aPair Pair to message
+ */
 void Resolver::SendCollisionMessages(PotentialPair &aPair) const
 {
   CollisionMessage message("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner());
@@ -150,10 +182,16 @@ void Resolver::SendCollisionMessages(PotentialPair &aPair) const
   aPair.mBodies[1]->GetOwner()->ReceiveMessage(message);
 }
 
+/**
+ * @brief Resolve pairs
+ * @param aPair Pair to resolve
+ * @param aDuration Time between frames
+ */
 void Resolver::Resolve(CollisionPair &aPair, float aDuration)
 {
   // Skip resolving if either object is passable.
-  if(aPair.mBodies[0]->IsPassable() || aPair.mBodies[1]->IsPassable())
+  if(aPair.mBodies[0]->IsPassable() || aPair.mBodies[1]->IsPassable() ||
+     aPair.mShapes[0]->passable || aPair.mShapes[1]->passable)
     return;
     
   switch(aPair.mShapes[0]->shape)
@@ -213,6 +251,10 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
   ResolvePenetration(aPair);
 }
 
+/**
+ * @brief Resolve sphere.
+ * @param aPair Pair of spheres
+ */
 void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
@@ -226,6 +268,10 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
   aPair.mRestitution = 1.0f;
 }
 
+/**
+ * @brief Resolve sphere and cube
+ * @param aPair Sphere and cube
+ */
 void Resolver::CalculateSphereToCube(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
@@ -269,6 +315,10 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   aPair.mRestitution = 1.0f;
 }
 
+/**
+ * @brief Resolve cubes
+ * @param aPair Cubes
+ */
 void Resolver::CalculateCubeToCube(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
@@ -312,6 +362,10 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
   aPair.mRestitution = 1.0f;
 }
 
+/**
+ * @brief Resolve triangle and sphere
+ * @param aPair Triangle and sphere
+ */
 void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
 {
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
@@ -355,12 +409,20 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
   }
 }
 
+/**
+ * @brief Resolve Triangle and cube. Work in progress.
+ * @param aPair Triangle and cube.
+ */
 void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
 {
   // TODO
   //assert(!"TODO");
 }
 
+/**
+ * @brief Calculate triangles. Work in progress.
+ * @param aPair Triangles.
+ */
 void Resolver::CalculateTriangleToTriangle(CollisionPair &aPair)
 {
   assert(!"TODO");
