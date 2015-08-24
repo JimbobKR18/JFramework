@@ -199,7 +199,7 @@ void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
     return;
   }
   // Assert in case of terribleness.
-  else if(aAnimation >= mAnimations.size())
+  else if(aAnimation >= (int)mAnimations.size())
   {
     assert(!"SetCurrentAnimation: aAnimation is larger than the number of animations.");
   }
