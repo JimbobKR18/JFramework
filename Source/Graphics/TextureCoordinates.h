@@ -22,8 +22,8 @@ private:
   int                         mYSize;
   float                       mSpeed;
   float                       mCurTime;
-  float                       mXGain[2];
-  float                       mYGain[2];
+  float                       mXGain;
+  float                       mYGain;
   float                       mXValues[2];
   float                       mYValues[2];
   bool                        mAnimated;
@@ -60,8 +60,8 @@ public:
   void  SetAnimated(bool const aAnimated);
   void  SetRunOnce(bool const aRunOnce);
   void  SetSpeed(float const aSpeed);
-  void  SetXGain(int const aIndex, float const aX);
-  void  SetYGain(int const aIndex, float const aY);
+  void  SetXGain(float const aX);
+  void  SetYGain(float const aY);
 
   // HELPERS
   void  Finish();

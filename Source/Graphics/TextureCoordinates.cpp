@@ -8,10 +8,10 @@
 
 #include "TextureCoordinates.h"
 
-#define SETFRAMES() mXValues[0] = mCurFrame * mXGain[0] + (0.5f / (float)mXSize); \
-                    mXValues[1] = (mCurFrame + 1) * mXGain[1] - (0.5f / (float)mXSize); \
-                    mYValues[0] = mCurAnimation * mYGain[0] + (0.5f / (float)mYSize); \
-                    mYValues[1] = (mCurAnimation + 1) * mYGain[1] - (0.5f / (float)mYSize)
+#define SETFRAMES() mXValues[0] = mCurFrame * mXGain + (0.5f / (float)mXSize); \
+                    mXValues[1] = (mCurFrame + 1) * mXGain - (0.5f / (float)mXSize); \
+                    mYValues[0] = mCurAnimation * mYGain + (0.5f / (float)mYSize); \
+                    mYValues[1] = (mCurAnimation + 1) * mYGain - (0.5f / (float)mYSize)
 
 TextureCoordinates::TextureCoordinates()
 {
@@ -48,8 +48,8 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
   }
   
   // Figure out the gain per step of animation
-  mXGain[0] = mXGain[1] = 1.0f / (float)maxFrames;
-  mYGain[0] = mYGain[1] = 1.0f / (float)aNumAnimations;
+  mXGain = 1.0f / (float)maxFrames;
+  mYGain = 1.0f / (float)aNumAnimations;
   
   // Set all values to starting positions
   SETFRAMES();
@@ -199,7 +199,7 @@ void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
     return;
   }
   // Assert in case of terribleness.
-  else if(aAnimation >= mAnimations.size())
+  else if(aAnimation >= (int)mAnimations.size())
   {
     assert(!"SetCurrentAnimation: aAnimation is larger than the number of animations.");
   }
@@ -284,22 +284,20 @@ void TextureCoordinates::SetSpeed(float const aSpeed)
 
 /**
  * @brief Set pace in which the x coordinate should gain per frame.
- * @param aIndex 0 for left, 1 for right.
  * @param aX The gain.
  */
-void TextureCoordinates::SetXGain(int const aIndex, float const aXGain)
+void TextureCoordinates::SetXGain(float const aXGain)
 {
-  mXGain[aIndex] = aXGain;
+  mXGain = aXGain;
 }
 
 /**
  * @brief Set pace in which the y coordinate should gain per animation.
- * @param aIndex 0 for top, 1 for bottom.
  * @param aY The gain.
  */
-void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
+void TextureCoordinates::SetYGain(float const aYGain)
 {
-  mYGain[aIndex] = aYGain;
+  mYGain = aYGain;
 }
 
 /**

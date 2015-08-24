@@ -133,7 +133,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
     float animationSpeed = animation->Find("AnimationSpeed")->GetValue().ToFloat();
 
     surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
-    surface->GetTextureData()->SetXGain(0, 0);
+    surface->GetTextureData()->SetXGain(0);
     surface->SetAnimation(0, true);
     surface->SetAnimated(true);
     transform->GetSize().x = 0;
