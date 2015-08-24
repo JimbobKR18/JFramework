@@ -8,10 +8,12 @@
 
 #include "TextureCoordinates.h"
 
-#define SETFRAMES() mXValues[0] = mCurFrame * mXGain[0] + (0.5f / (float)mXSize); \
-                    mXValues[1] = (mCurFrame + 1) * mXGain[1] - (0.5f / (float)mXSize); \
-                    mYValues[0] = mCurAnimation * mYGain[0] + (0.5f / (float)mYSize); \
-                    mYValues[1] = (mCurAnimation + 1) * mYGain[1] - (0.5f / (float)mYSize)
+#define SETFRAMES() float xBias = (0.5f / (float)mXSize); \
+                    float yBias = (0.5f / (float)mYSize); \
+                    mXValues[0] = mCurFrame * mXGain[0] + xBias; \
+                    mXValues[1] = (mCurFrame + 1) * mXGain[1] - xBias; \
+                    mYValues[0] = mCurAnimation * mYGain[0] + yBias; \
+                    mYValues[1] = (mCurAnimation + 1) * mYGain[1] - yBias
 
 TextureCoordinates::TextureCoordinates()
 {
