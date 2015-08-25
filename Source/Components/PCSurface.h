@@ -40,7 +40,7 @@ public:
 	void                LoadImage(std::string const &aName);
 	Vector3             LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
   // Batching
-  unsigned            GetIndexValue() const;
+  unsigned            GetTextureID() const;
 
 	void                Update();
 	void                SendMessage(Message const &aMessage);
@@ -49,8 +49,6 @@ public:
   void                Deserialize(Parser &aParser);
   static void         SerializeLUA();
 	static int           GetUID() {return sUID;}
-
-	unsigned            GetTextureID() const;
   
 private:
   void                AddTexturePairing(std::string const &aName);

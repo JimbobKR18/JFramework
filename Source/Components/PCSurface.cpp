@@ -28,6 +28,10 @@ PCSurface::~PCSurface()
     SDL_FreeSurface(mSurface);
 }
 
+/**
+ * @brief Load an image by file name.
+ * @param aName Name of the file.
+ */
 void PCSurface::LoadImage(std::string const &aName)
 {
   /* If the file was already loaded,
@@ -88,7 +92,16 @@ void PCSurface::LoadImage(std::string const &aName)
   }
 }
 
-// Returns the size of the Text texture
+/**
+ * @brief Loads a text surface in font.
+ * @param aFont Font to use.
+ * @param aText Text to render.
+ * @param aForegroundColor Color of the text.
+ * @param aBackgroundColor Color of the background.
+ * @param aSize Size of font.
+ * @param aMaxWidth Max width of a single line (in pixels).
+ * @return 
+ */
 Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
 {
   // Endianness is important here
@@ -147,23 +160,44 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
   }
 }
 
-unsigned PCSurface::GetIndexValue() const
+/**
+ * @brief Get GL specified texture value.
+ * @return Texture ID.
+ */
+unsigned PCSurface::GetTextureID() const
 {
-  return mTextureID;
+	return mTextureID;
 }
 
+/**
+ * @brief Simple update loop.
+ */
 void PCSurface::Update()
 {
   Surface::Update();
 }
+
+/**
+ * @brief Send message to owner.
+ * @param aMessage Message to send.
+ */
 void PCSurface::SendMessage(Message const &aMessage)
 {
   GetOwner()->ReceiveMessage(aMessage);
 }
+
+/**
+ * @brief Does nothing.
+ * @param aMessage Message to receive.
+ */
 void PCSurface::ReceiveMessage(Message const &aMessage)
 {
 }
 
+/**
+ * @brief Serialize to file.
+ * @param aParser File to write into.
+ */
 void PCSurface::Serialize(Parser &aParser)
 {
   std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
@@ -172,6 +206,10 @@ void PCSurface::Serialize(Parser &aParser)
   object->Place("Surface", "TextureName", GetFileName());
 }
 
+/**
+ * @brief Read from file.
+ * @param aParser File to read from.
+ */
 void PCSurface::Deserialize(Parser &aParser)
 {
   // Get file name if specified
@@ -185,17 +223,19 @@ void PCSurface::Deserialize(Parser &aParser)
   Surface::Deserialize(aParser);
 }
 
+/**
+ * @brief LUA functionality.
+ */
 void PCSurface::SerializeLUA()
 {
   SLB::Class<PCSurface>("PCSurface")
     .inherits<Surface>();
 }
 
-unsigned PCSurface::GetTextureID() const
-{
-	return mTextureID;
-}
-
+/**
+ * @brief Helper to set basic texture params via config file.
+ * @param aName Name of object in texture pairing.
+ */
 void PCSurface::AddTexturePairing(std::string const &aName)
 {
   GLint minFilter = GL_LINEAR;
@@ -229,5 +269,4 @@ void PCSurface::AddTexturePairing(std::string const &aName)
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
 
   GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
-
 }
