@@ -53,7 +53,7 @@ public:
   bool                CurrentAnimationCompleted();
   
   // Batching
-  virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); }
+  virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); return 0; }
   
   // Derived from Component
   void                Update();
