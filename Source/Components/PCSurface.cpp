@@ -2,6 +2,7 @@
 #include "Common.h"
 #include "GraphicsManager.h"
 #include "LUATypes.h"
+#include "Constants.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <SDL2/SDL_image.h>
@@ -16,8 +17,7 @@ int const PCSurface::sUID = Common::StringHashFunction("Surface");
 PCSurface::PCSurface() : Surface()
 {
 }
-PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(NULL),
-                                                  mWrapMode(GL_CLAMP_TO_EDGE), mFont(NULL)
+PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(NULL), mFont(NULL)
 {
 }
 PCSurface::~PCSurface()
@@ -80,19 +80,7 @@ void PCSurface::LoadImage(std::string const &aName)
       DebugLogPrint("warning: image %s is not truecolor..  this will probably break\n", aName.c_str());
     }
 
-    glGenTextures(1, &mTextureID);
-
-    glBindTexture(GL_TEXTURE_2D, mTextureID);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mWrapMode);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mWrapMode);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, mNumberOfColors, mSurface->w, mSurface->h, 0,
-              mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
-    
-    GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
+    AddTexturePairing(aName);
   }
   else
   {
@@ -148,18 +136,12 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
       assert(msg);
     }
 
+    mTextureFormat = GL_RGBA;
     mSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
     SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
     SDL_BlitSurface(msg, NULL, mSurface, NULL);
 
-    glGenTextures(1, &mTextureID);
-    glBindTexture(GL_TEXTURE_2D, mTextureID);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, mSurface->pixels);
-
-    GetManager()->AddTexturePairing(aText, TextureData(mTextureID, mSurface->w, mSurface->h));
+    AddTexturePairing(aText);
 
     return Vector3(mSurface->w, mSurface->h, 0);
   }
@@ -168,19 +150,6 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
 unsigned PCSurface::GetIndexValue() const
 {
   return mTextureID;
-}
-
-void PCSurface::SetWrapMode(WrapMode const &aWrapMode)
-{
-  switch(aWrapMode)
-  {
-  case REPEAT:
-    mWrapMode = GL_REPEAT;
-    break;
-  case CLAMP:
-    mWrapMode = GL_CLAMP_TO_EDGE;
-    break;
-  }
 }
 
 void PCSurface::Update()
@@ -225,4 +194,40 @@ void PCSurface::SerializeLUA()
 unsigned PCSurface::GetTextureID() const
 {
 	return mTextureID;
+}
+
+void PCSurface::AddTexturePairing(std::string const &aName)
+{
+  GLint minFilter = GL_LINEAR;
+  GLint magFilter = GL_LINEAR;
+  GLint wrapS = GL_REPEAT;
+  GLint wrapT = GL_REPEAT;
+  if(Constants::GetString("OpenGLMinFilter") == "GL_NEAREST")
+  {
+    minFilter = GL_NEAREST;
+  }
+  if(Constants::GetString("OpenGLMagFilter") == "GL_NEAREST")
+  {
+    magFilter = GL_NEAREST;
+  }
+  if(Constants::GetString("OpenGLWrapModeS") == "GL_CLAMP_TO_EDGE")
+  {
+    wrapS = GL_CLAMP_TO_EDGE;
+  }
+  if(Constants::GetString("OpenGLWrapModeT") == "GL_CLAMP_TO_EDGE")
+  {
+    wrapT = GL_CLAMP_TO_EDGE;
+  }
+
+  glGenTextures(1, &mTextureID);
+  glBindTexture(GL_TEXTURE_2D, mTextureID);
+
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapT);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
+
+  GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
+
 }

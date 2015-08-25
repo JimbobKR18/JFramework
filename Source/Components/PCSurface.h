@@ -21,12 +21,6 @@
 #include "Surface.h"
 #include "MathExt.h"
 
-enum WrapMode
-{
-  REPEAT = 0,
-  CLAMP
-};
-
 class PCSurface : public Surface
 {
 private:
@@ -34,7 +28,6 @@ private:
 	SDL_Surface*  mSurface;
 	GLenum        mTextureFormat;
 	GLint         mNumberOfColors;
-	GLint         mWrapMode;
 	TTF_Font*     mFont;
   
   static int const sUID;
@@ -48,8 +41,6 @@ public:
 	Vector3             LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
   // Batching
   unsigned            GetIndexValue() const;
-  // Wrap Mode
-  void                SetWrapMode(WrapMode const &aWrapMode);
 
 	void                Update();
 	void                SendMessage(Message const &aMessage);
@@ -60,6 +51,9 @@ public:
 	static int           GetUID() {return sUID;}
 
 	unsigned            GetTextureID() const;
+  
+private:
+  void                AddTexturePairing(std::string const &aName);
 };
 
 #endif
