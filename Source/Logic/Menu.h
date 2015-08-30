@@ -16,6 +16,7 @@ class Menu
 public:
   typedef std::vector<MenuElement*>   ElementContainer;
   typedef ElementContainer::iterator  ElementIT;
+  typedef ElementContainer::const_iterator  ConstElementIT;
 
 private:
   Level*            mOwner;
@@ -27,10 +28,11 @@ public:
   Menu(Level* aLevel, std::string const &aFileName);
   virtual ~Menu();
 
-  HashString    GetName();
-  HashString    GetFileName();
-  Level*        GetLevel();
-  MenuElement*  GetElement(HashString const &aFileName);
+  HashString    GetName() const;
+  HashString    GetFileName() const;
+  Level*        GetLevel() const;
+  MenuElement*  GetElement(HashString const &aFileName) const;
+  ElementContainer GetElements() const;
 
   void          AddObject(MenuElement *aElement);
   void          DeleteObject(MenuElement *aElement);

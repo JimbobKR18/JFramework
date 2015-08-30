@@ -20,15 +20,29 @@ Menu::~Menu()
   DeleteObjects();
 }
 
-HashString Menu::GetName()
+/**
+ * @brief Get name of menu
+ * @return Name of menu
+ */
+HashString Menu::GetName() const
 {
   return mName;
 }
-HashString Menu::GetFileName()
+
+/**
+ * @brief Get file name for menu
+ * @return File name for menu
+ */
+HashString Menu::GetFileName() const
 {
   return mFileName;
 }
-Level* Menu::GetLevel()
+
+/**
+ * @brief Get level of menu
+ * @return Level of menu
+ */
+Level* Menu::GetLevel() const
 {
   return mOwner;
 }
@@ -38,9 +52,9 @@ Level* Menu::GetLevel()
  * @param aFileName
  * @return The element specified, else nullptr.
  */
-MenuElement* Menu::GetElement(HashString const &aFileName)
+MenuElement* Menu::GetElement(HashString const &aFileName) const
 {
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(ConstElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     if((*it)->GetObject()->GetFileName() == aFileName.ToString())
     {
@@ -48,6 +62,15 @@ MenuElement* Menu::GetElement(HashString const &aFileName)
     }
   }
   return nullptr;
+}
+
+/**
+ * @brief Get all elements in menu.
+ * @return All elements in menu.
+ */
+Menu::ElementContainer Menu::GetElements() const
+{
+  return mMenuElements;
 }
 
 /**
