@@ -67,14 +67,14 @@ bool HashString::Empty() const
 /**
  * @brief Find a substring in our string.
  * @param aString The substring to search for.
- * @return Location of the substring.
+ * @return If substring is in our string.
  */
-int HashString::Find(HashString const &aString) const
+bool HashString::Find(HashString const &aString) const
 {
   if(aString.Length() == 0)
     assert(!"HashString is empty being passed into Find");
 
-  return mString.find(aString.mString);
+  return mString.find(aString.mString) != std::string::npos;
 }
 
 /**

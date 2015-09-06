@@ -31,7 +31,7 @@ public:
   int Size() const;
   int Length() const;
   bool Empty() const;
-  int Find(HashString const &aString) const;
+  bool Find(HashString const &aString) const;
   HashString SubString(int aStart, int aLength) const;
   std::vector<HashString> Split(HashString const &aDelimiter) const;
 
