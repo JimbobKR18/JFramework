@@ -13,6 +13,7 @@
 #include "Surface.h"
 #include "PhysicsObject.h"
 #include "Level.h"
+#include "AutoCrit.h"
 
 TileMapGenerator::TileMapGenerator()
 {
@@ -33,145 +34,15 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    mCollisionData(aCollisionData), mCollisionShapes(aCollisionShapes),
                                    mTileHeights(aTileHeights), mObjects(), mOwner(aOwner)
 {
-  int xPos = 0, yPos = 0;
-  float halfX = mWidth * aTileSize;
-  float halfY = mHeight * aTileSize;
-  float const defaultZPos = -0.9999f;
-
   // mTiles and mCollisionData MUST be same size, or it's not a valid map.
   // For compatibility reasons, the shape data can be a different size because it can be empty.
   if(mTiles.size() != mCollisionData.size())
     assert(!"Not a valid tilemap, art and collision maps of different sizes");
 
+  ObjectManager *objectManager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
+  PhysicsWorld *physicsWorld = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>();
   Vector3 tileSize = Vector3(mTileSize, mTileSize, 0);
-  for(unsigned int i = 0; i != mTiles.size(); ++i)
-  {
-    // Make GameObject to place
-    ObjectManager *manager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
-    GameObject *obj = new GameObject(manager, mImageName);
-    manager->ParseObject(obj);
-    
-    // Set name of tile, for collision reasons
-    obj->SetName(std::string("Tile_") + Common::IntToString(mCollisionData[i]));
-
-    // Get Transform of new object
-    float zPos = defaultZPos;
-    
-    // If we have a height for this id, use it.
-    if(mTileHeights.find(mTiles[i]) != mTileHeights.end())
-    {
-      zPos = mTileHeights[mTiles[i]];
-    }
-    
-    Transform *transform = obj->GET<Transform>();
-    Vector3 position = Vector3(-halfX + (aTileSize * 2 * xPos),
-                               -halfY + (aTileSize * 2 * yPos), zPos);
-    transform->SetPosition(position);
-    transform->SetSize(tileSize);
-    
-    // Figure out the max and min camera boundaries based on tilemap
-    if(i == 0)
-      mOwner->SetMinBoundary(position - tileSize);
-    else if(i == mTiles.size() - 1)
-      mOwner->SetMaxBoundary(position + tileSize);
-
-    // Set the frame data
-    Surface *surface = obj->GET<Surface>();
-    surface->SetAnimated(false);
-    surface->SetFrameByID(mTiles[i]);
-    
-    // Add PhysicsObject if the tile has collision
-    if(mCollisionData[i] != CollisionShapes::EMPTY ||
-        (mCollisionShapes.size() > i && mCollisionShapes[i] != CollisionShapes::EMPTY))
-    {
-      PhysicsObject *physics = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
-      
-      // What shape is our object? Is it affected by gravity?
-      // What is the object's mass? Is it static?
-      physics->SetMass(50);
-      mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(physics);
-      physics->SetStatic(true);
-      physics->SetBroadSize(transform->GetSize() * 1.5f);
-      
-      // Based on the shape passed in from file
-      Shape *shape = nullptr;
-      float triSize = aTileSize;
-      float triZ = -zPos;
-      if(mCollisionShapes.size() < mCollisionData.size() ||
-         mCollisionShapes[i] == CollisionShapes::CUBE ||
-         mCollisionShapes[i] > CollisionShapes::BOTTOMRIGHT)
-      {
-        shape = new Cube(Vector3(0,0,0), Vector3(transform->GetSize()));
-        
-        if(mCollisionShapes.size() < mCollisionData.size())
-        {
-          mCollisionShapes.push_back(CollisionShapes::CUBE);
-        }
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPLEFT)
-      {
-        Vector3 point1(-triSize, -triSize, triZ);
-        Vector3 point2(triSize, -triSize, triZ);
-        Vector3 point3(-triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT)
-      {
-        Vector3 point1(-triSize, -triSize, triZ);
-        Vector3 point2(triSize, triSize, triZ);
-        Vector3 point3(-triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPRIGHT)
-      {
-        Vector3 point1(-triSize, -triSize, triZ);
-        Vector3 point2(triSize, -triSize, triZ);
-        Vector3 point3(triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT)
-      {
-        Vector3 point1(triSize, -triSize, triZ);
-        Vector3 point2(triSize, triSize, triZ);
-        Vector3 point3(-triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else
-      {
-        assert(!"Invalid value handed into TileMapGenerator.");
-      }
-      
-      // Finally, add shape to our physicsobject
-      physics->AddShape(shape);
-      
-      // Make tiles ignore other tiles for collision
-      for(int i = 0; i < 99; ++i)
-      {
-        char buffer[33];
-        sprintf(buffer, "Tile_%d", i);
-        physics->AddIgnore(std::string(buffer));
-      }
-
-      obj->AddComponent(physics);
-    }
-    else if(mCollisionShapes.size() < mCollisionData.size())
-    {
-      mCollisionShapes.push_back(CollisionShapes::EMPTY);
-    }
-    
-    // Add object to our level for easier loading later
-    mOwner->AddStaticObject(obj);
-    
-    // Add object to our tile list
-    mObjects.push_back(obj);
-
-    ++xPos;
-    if(xPos >= mWidth)
-    {
-      xPos = 0;
-      ++yPos;
-    }
-  }
+  CreateTilesInRange(0, mTiles.size(), tileSize, objectManager, physicsWorld);
 }
 
 TileMapGenerator::~TileMapGenerator()
@@ -297,3 +168,145 @@ void TileMapGenerator::Serialize(Parser &aParser)
   aParser.Place("TileMapGenerator", "Data", mDataName);
 }
 
+void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld)
+{
+  int xPos = aStart, yPos = 0;
+  float halfX = mWidth * mTileSize;
+  float halfY = mHeight * mTileSize;
+  float const defaultZPos = -0.9999f;
+  
+  // Get the position of the starting index.
+  while(xPos >= mWidth)
+  {
+    ++yPos;
+    xPos -= mWidth;
+  }
+  
+  for(unsigned int i = aStart; i != aEnd; ++i)
+  {
+    // Make GameObject to place
+    GameObject *obj = new GameObject(aObjectManager, mImageName);
+    aObjectManager->ParseObject(obj);
+    
+    // Set name of tile, for collision reasons
+    obj->SetName(std::string("Tile_") + Common::IntToString(mCollisionData[i]));
+
+    // Get Transform of new object
+    float zPos = defaultZPos;
+    
+    // If we have a height for this id, use it.
+    if(mTileHeights.find(mTiles[i]) != mTileHeights.end())
+    {
+      zPos = mTileHeights[mTiles[i]];
+    }
+    
+    Transform *transform = obj->GET<Transform>();
+    Vector3 position = Vector3(-halfX + (mTileSize * 2 * xPos),
+                                                  -halfY + (mTileSize * 2 * yPos), zPos);
+    transform->SetPosition(position);
+    transform->SetSize(aTileSize);
+    
+    // Figure out the max and min camera boundaries based on tilemap
+    if(i == 0)
+      mOwner->SetMinBoundary(position - aTileSize);
+    else if(i == mTiles.size() - 1)
+      mOwner->SetMaxBoundary(position + aTileSize);
+
+    // Set the frame data
+    Surface *surface = obj->GET<Surface>();
+    surface->SetAnimated(false);
+    surface->SetFrameByID(mTiles[i]);
+    
+    // Add PhysicsObject if the tile has collision
+    if(mCollisionData[i] != CollisionShapes::EMPTY ||
+        (mCollisionShapes.size() > i && mCollisionShapes[i] != CollisionShapes::EMPTY))
+    {
+      PhysicsObject *physics = aPhysicsWorld->CreateObject();
+      
+      // What shape is our object? Is it affected by gravity?
+      // What is the object's mass? Is it static?
+      aPhysicsWorld->UnregisterGravity(physics);
+      physics->SetMass(50);
+      physics->SetStatic(true);
+      physics->SetBroadSize(transform->GetSize() * 1.5f);
+      
+      // Based on the shape passed in from file
+      Shape *shape = nullptr;
+      float triSize = mTileSize;
+      float triZ = -zPos;
+      if(mCollisionShapes.size() < mCollisionData.size() ||
+         mCollisionShapes[i] == CollisionShapes::CUBE ||
+         mCollisionShapes[i] > CollisionShapes::BOTTOMRIGHT)
+      {
+        shape = new Cube(Vector3(0,0,0), Vector3(transform->GetSize()));
+        
+        if(mCollisionShapes.size() < mCollisionData.size())
+        {
+          mCollisionShapes.push_back(CollisionShapes::CUBE);
+        }
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::TOPLEFT)
+      {
+        Vector3 point1(-triSize, -triSize, triZ);
+        Vector3 point2(triSize, -triSize, triZ);
+        Vector3 point3(-triSize, triSize, triZ);
+        shape = new Triangle(point1, point2, point3);
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT)
+      {
+        Vector3 point1(-triSize, -triSize, triZ);
+        Vector3 point2(triSize, triSize, triZ);
+        Vector3 point3(-triSize, triSize, triZ);
+        shape = new Triangle(point1, point2, point3);
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::TOPRIGHT)
+      {
+        Vector3 point1(-triSize, -triSize, triZ);
+        Vector3 point2(triSize, -triSize, triZ);
+        Vector3 point3(triSize, triSize, triZ);
+        shape = new Triangle(point1, point2, point3);
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT)
+      {
+        Vector3 point1(triSize, -triSize, triZ);
+        Vector3 point2(triSize, triSize, triZ);
+        Vector3 point3(-triSize, triSize, triZ);
+        shape = new Triangle(point1, point2, point3);
+      }
+      else
+      {
+        assert(!"Invalid value handed into TileMapGenerator.");
+      }
+      
+      // Finally, add shape to our physicsobject
+      physics->AddShape(shape);
+      
+      // Make tiles ignore other tiles for collision
+      for(int i = 0; i < 99; ++i)
+      {
+        char buffer[33];
+        sprintf(buffer, "Tile_%d", i);
+        physics->AddIgnore(std::string(buffer));
+      }
+
+      obj->AddComponent(physics);
+    }
+    else if(mCollisionShapes.size() < mCollisionData.size())
+    {
+      mCollisionShapes.push_back(CollisionShapes::EMPTY);
+    }
+    
+    // Add object to our level for easier loading later
+    mOwner->AddStaticObject(obj);
+    
+    // Add object to our tile list
+    mObjects.push_back(obj);
+
+    ++xPos;
+    if(xPos >= mWidth)
+    {
+      xPos = 0;
+      ++yPos;
+    }
+  }
+}

@@ -12,6 +12,9 @@
 #include "Common.h"
 #include "Parser.h"
 #include "GameObject.h"
+#include "PhysicsWorld.h"
+#include "ObjectManager.h"
+#include "MathExt.h"
 
 class Level;
 
@@ -69,6 +72,9 @@ public:
   std::vector<int>  GetIndices(int const aX, int const aY, int const bX, int const bY);
 
   void              Serialize(Parser &aParser);
+  
+private:
+  void              CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld);
 };
 
 #endif /* defined(__JFramework__TileMapGenerator__) */
