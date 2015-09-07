@@ -50,71 +50,136 @@ TileMapGenerator::~TileMapGenerator()
   mTiles.clear();
 }
 
+/**
+ * @brief Get Tilemap width
+ * @return Width of tilemap
+ */
 int TileMapGenerator::GetWidth() const
 {
   return mWidth;
 }
 
+/**
+ * @brief Get Tilemap height
+ * @return Height of tilemap
+ */
 int TileMapGenerator::GetHeight() const
 {
   return mHeight;
 }
 
+/**
+ * @brief Get tile size (in pixels)
+ * @return Size of tiles in pixels.
+ */
 int TileMapGenerator::GetTileSize() const
 {
   return mTileSize;
 }
 
+/**
+ * @brief Get source image name
+ * @return Name of source image
+ */
 std::string TileMapGenerator::GetImageName() const
 {
   return mImageName;
 }
 
+/**
+ * @brief Get data file name
+ * @return Data file name
+ */
 std::string TileMapGenerator::GetDataName() const
 {
   return mDataName;
 }
 
+/**
+ * @brief Get art tiles vector
+ * @return Art tiles vector
+ */
 std::vector<int>& TileMapGenerator::GetArtTiles()
 {
   return mTiles;
 }
 
+/**
+ * @brief Get collision tiles vector
+ * @return Collision tiles vector
+ */
 std::vector<int>& TileMapGenerator::GetCollisionTiles()
 {
   return mCollisionData;
 }
 
+/**
+ * @brief Get collision shapes vector
+ * @return Collision shapes vector
+ */
 std::vector<int>& TileMapGenerator::GetCollisionShapes()
 {
   return mCollisionShapes;
 }
 
+/**
+ * @brief Get tile height map
+ * @return Tile height map
+ */
 std::map<int, float>& TileMapGenerator::GetTileHeights()
 {
   return mTileHeights;
 }
 
+/**
+ * @brief Get object at x, y index
+ * @param aX X in world coordinates
+ * @param aY Y in world coordinates
+ * @return Object at position
+ */
 GameObject* TileMapGenerator::GetObject(int const aX, int const aY)
 {
   return mObjects[GetIndex(aX, aY)];
 }
 
+/**
+ * @brief Get object at index
+ * @param aIndex Index to check
+ * @return Object at index
+ */
 GameObject* TileMapGenerator::GetObject(int const aIndex)
 {
   return mObjects[aIndex];
 }
 
+/**
+ * @brief Get art value of tile at position
+ * @param aX X in world coordinates
+ * @param aY Y in world coordinates
+ * @return Art value of tile at position
+ */
 int TileMapGenerator::GetTileValue(int const aX, int const aY)
 {
   return mTiles[GetIndex(aX, aY)];
 }
 
+/**
+ * @brief Get collision value of tile at position
+ * @param aX X in world coordinates
+ * @param aY Y in world coordinates
+ * @return Collision value of tile at position
+ */
 int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
 {
   return mCollisionData[GetIndex(aX, aY)];
 }
 
+/**
+ * @brief Helper method to get index value at position in world coordinates
+ * @param aX X in world coordinates
+ * @param aY Y in world coordinates
+ * @return Index at position
+ */
 int TileMapGenerator::GetIndex(int const aX, int const aY)
 {
   int tileMult = mTileSize;
@@ -133,6 +198,14 @@ int TileMapGenerator::GetIndex(int const aX, int const aY)
   return (round(y) * mWidth) + round(x);
 }
 
+/**
+ * @brief Helper method to get index values from position A to position B
+ * @param aX aX in world coordinates
+ * @param aY aY in world coordinates
+ * @param bX bX in world coordinates
+ * @param bY bY in world coordinates
+ * @return Indices captured inside box drawn by coordinates.
+ */
 std::vector<int> TileMapGenerator::GetIndices(int const aX, int const aY, int const bX, int const bY)
 {
   std::vector<int> ret;
@@ -158,6 +231,10 @@ std::vector<int> TileMapGenerator::GetIndices(int const aX, int const aY, int co
   return ret;
 }
 
+/**
+ * @brief Serialize to file
+ * @param aParser The file parser
+ */
 void TileMapGenerator::Serialize(Parser &aParser)
 {
   aParser.Place("TileMapGenerator", "");
@@ -168,6 +245,14 @@ void TileMapGenerator::Serialize(Parser &aParser)
   aParser.Place("TileMapGenerator", "Data", mDataName);
 }
 
+/**
+ * @brief Helper method to create tiles from one index to another
+ * @param aStart Index to start
+ * @param aEnd Index to end
+ * @param aTileSize Size of tiles in pixels
+ * @param aObjectManager Object manager to add objects to
+ * @param aPhysicsWorld Physics manager to add physics objects to
+ */
 void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld)
 {
   int xPos = aStart, yPos = 0;
