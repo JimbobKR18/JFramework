@@ -42,6 +42,9 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   ObjectManager *objectManager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
   PhysicsWorld *physicsWorld = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>();
   Vector3 tileSize = Vector3(mTileSize, mTileSize, 0);
+  
+  // Reserve total tiles ahead of time to avoid reallocs
+  mObjects.reserve(mTiles.size());
   CreateTilesInRange(0, mTiles.size(), tileSize, objectManager, physicsWorld);
 }
 
@@ -259,6 +262,9 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   float halfX = mWidth * mTileSize;
   float halfY = mHeight * mTileSize;
   float const defaultZPos = -0.9999f;
+  Vector3 const zeroVector = Vector3(0,0,0);
+  unsigned const collisionDataVectorSize = mCollisionData.size();
+  unsigned const tileDataVectorSize = mTiles.size();
   
   // Get the position of the starting index.
   while(xPos >= mWidth)
@@ -280,7 +286,8 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     float zPos = defaultZPos;
     
     // If we have a height for this id, use it.
-    if(mTileHeights.find(mTiles[i]) != mTileHeights.end())
+    std::map<int, float>::iterator tileHeightsEnd = mTileHeights.end();
+    if(mTileHeights.find(mTiles[i]) != tileHeightsEnd)
     {
       zPos = mTileHeights[mTiles[i]];
     }
@@ -294,7 +301,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     // Figure out the max and min camera boundaries based on tilemap
     if(i == 0)
       mOwner->SetMinBoundary(position - aTileSize);
-    else if(i == mTiles.size() - 1)
+    else if(i == tileDataVectorSize - 1)
       mOwner->SetMaxBoundary(position + aTileSize);
 
     // Set the frame data
@@ -319,13 +326,13 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       Shape *shape = nullptr;
       float triSize = mTileSize;
       float triZ = -zPos;
-      if(mCollisionShapes.size() < mCollisionData.size() ||
+      if(mCollisionShapes.size() < collisionDataVectorSize ||
          mCollisionShapes[i] == CollisionShapes::CUBE ||
          mCollisionShapes[i] > CollisionShapes::BOTTOMRIGHT)
       {
-        shape = new Cube(Vector3(0,0,0), Vector3(transform->GetSize()));
+        shape = new Cube(zeroVector, transform->GetSize());
         
-        if(mCollisionShapes.size() < mCollisionData.size())
+        if(mCollisionShapes.size() < collisionDataVectorSize)
         {
           mCollisionShapes.push_back(CollisionShapes::CUBE);
         }
@@ -367,16 +374,16 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       physics->AddShape(shape);
       
       // Make tiles ignore other tiles for collision
-      for(int i = 0; i < 99; ++i)
+      /*for(int i = 0; i < 99; ++i)
       {
         char buffer[33];
         sprintf(buffer, "Tile_%d", i);
         physics->AddIgnore(std::string(buffer));
-      }
+      }*/
 
       obj->AddComponent(physics);
     }
-    else if(mCollisionShapes.size() < mCollisionData.size())
+    else if(mCollisionShapes.size() < collisionDataVectorSize)
     {
       mCollisionShapes.push_back(CollisionShapes::EMPTY);
     }

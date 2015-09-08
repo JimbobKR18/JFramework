@@ -2,18 +2,18 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Release
 ProjectName            :=JFramework
-ConfigurationName      :=Debug
+ConfigurationName      :=Release
 WorkspacePath          := "/home/jimmy/Documents/project-chang-e/Linux/Chang-e"
 ProjectPath            := "/home/jimmy/Documents/JFramework/Linux/JFramework"
-IntermediateDirectory  :=./Debug
+IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=07/09/15
+Date                   :=08/09/15
 CodeLitePath           :="/home/jimmy/.codelite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/lib$(ProjectName).a
-Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=../../../../Assets/ $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)SLB_USE_EXCEPTIONS 
+Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=../../../../Assets/ 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := ar rcus
 CXX      := g++
 CC       := gcc
-CXXFLAGS :=  -g -O0 -std=c++11 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
-CFLAGS   :=  -g -O0 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
+CXXFLAGS :=  -O -O3 -std=c++11 -Wall $(Preprocessors)
+CFLAGS   :=  -O -O3 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -85,15 +85,15 @@ $(OutputFile): $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	@echo $(Objects1) >> $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
-	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug"
-	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug/JFramework"
+	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release"
+	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release/JFramework"
 
 MakeIntermediateDirs:
-	@test -d ./Debug || $(MakeDirCommand) ./Debug
+	@test -d ./Release || $(MakeDirCommand) ./Release
 
 
-./Debug:
-	@test -d ./Debug || $(MakeDirCommand) ./Debug
+./Release:
+	@test -d ./Release || $(MakeDirCommand) ./Release
 
 PreBuild:
 
@@ -523,6 +523,6 @@ $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(PreprocessSuffix): ../../Source/T
 ## Clean
 ##
 clean:
-	$(RM) -r ./Debug/
+	$(RM) -r ./Release/
 
 

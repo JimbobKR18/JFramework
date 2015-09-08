@@ -696,6 +696,13 @@ void Level::ParseTileGenerator(TextParser &aParser)
   file = tileMap->Find("Image")->GetValue();
   frameDataFilename = tileMap->Find("Data")->GetValue();
   
+  // Reserve the tilemap data to avoid reallocs.
+  int totalAllocation = width * height;
+  mStaticObjects.reserve(totalAllocation);
+  frames.reserve(totalAllocation);
+  collision.reserve(totalAllocation);
+  shapes.reserve(totalAllocation);
+  
   // If there's heightmap data, parse it in and use it.
   if(tileMap->Find("HeightData"))
   {
