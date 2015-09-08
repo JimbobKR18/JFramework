@@ -8,7 +8,7 @@
 #include "Constants.h"
 #include <fstream>
 
-std::map<std::string, std::string> Constants::mValues;
+std::map<HashString, HashString> Constants::mValues;
 
 Constants::Constants()
 {
@@ -18,7 +18,7 @@ Constants::~Constants()
 {
 }
 
-std::string Constants::GetString(std::string const &aValue)
+HashString Constants::GetString(HashString const &aValue)
 {
   valIT it = mValues.find(aValue);
 
@@ -28,19 +28,19 @@ std::string Constants::GetString(std::string const &aValue)
   return it->second;
 }
 
-int Constants::GetInteger(std::string const &aValue)
+int Constants::GetInteger(HashString const &aValue)
 {
-  return Common::StringToInt(GetString(aValue));
+  return GetString(aValue).ToInt();
 }
 
-float Constants::GetFloat(std::string const &aValue)
+float Constants::GetFloat(HashString const &aValue)
 {
-  return Common::StringToFloat(GetString(aValue));
+  return GetString(aValue).ToFloat();
 }
 
-bool Constants::GetBoolean(std::string const &aValue)
+bool Constants::GetBoolean(HashString const &aValue)
 {
-  return Common::StringToBool(GetString(aValue));
+  return GetString(aValue).ToBool();
 }
 
 void Constants::Deserialize()
