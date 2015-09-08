@@ -2,12 +2,12 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=JFramework
-ConfigurationName      :=Release
+ConfigurationName      :=Debug
 WorkspacePath          := "/home/jimmy/Documents/project-chang-e/Linux/Chang-e"
 ProjectPath            := "/home/jimmy/Documents/JFramework/Linux/JFramework"
-IntermediateDirectory  :=./Release
+IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/lib$(ProjectName).a
-Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=../../../../Assets/ 
+Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=../../../../Assets/ $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)SLB_USE_EXCEPTIONS 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := ar rcus
 CXX      := g++
 CC       := gcc
-CXXFLAGS :=  -O -O3 -std=c++11 -Wall $(Preprocessors)
-CFLAGS   :=  -O -O3 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -O0 -std=c++11 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
+CFLAGS   :=  -g -O0 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -85,15 +85,15 @@ $(OutputFile): $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	@echo $(Objects1) >> $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
-	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release"
-	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release/JFramework"
+	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug"
+	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug/JFramework"
 
 MakeIntermediateDirs:
-	@test -d ./Release || $(MakeDirCommand) ./Release
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 
-./Release:
-	@test -d ./Release || $(MakeDirCommand) ./Release
+./Debug:
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 PreBuild:
 
@@ -523,6 +523,6 @@ $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(PreprocessSuffix): ../../Source/T
 ## Clean
 ##
 clean:
-	$(RM) -r ./Release/
+	$(RM) -r ./Debug/
 
 

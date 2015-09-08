@@ -265,6 +265,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   Vector3 const zeroVector = Vector3(0,0,0);
   unsigned const collisionDataVectorSize = mCollisionData.size();
   unsigned const tileDataVectorSize = mTiles.size();
+  std::map<int, float>::const_iterator tileHeightsEnd = mTileHeights.end();
   
   // Get the position of the starting index.
   while(xPos >= mWidth)
@@ -286,7 +287,6 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     float zPos = defaultZPos;
     
     // If we have a height for this id, use it.
-    std::map<int, float>::iterator tileHeightsEnd = mTileHeights.end();
     if(mTileHeights.find(mTiles[i]) != tileHeightsEnd)
     {
       zPos = mTileHeights[mTiles[i]];
