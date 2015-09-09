@@ -374,8 +374,8 @@ Vector3 Level::GetMinBoundary() const
 void Level::Load(Level* const aPrevLevel)
 {
   // Load all objects
-  LoadObjects(mObjects);
-  LoadObjects(mStaticObjects);
+  LoadObjects(mObjects, false);
+  LoadObjects(mStaticObjects, true);
 
   if(!mMusicName.empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, Sound::INFINITE_LOOPS);
@@ -415,11 +415,11 @@ void Level::Unload(Level* const aNextLevel)
  * @brief Load all objects in list into view.
  * @param aObjects Objects to add.
  */
-void Level::LoadObjects(ObjectContainer const &aObjects)
+void Level::LoadObjects(ObjectContainer const &aObjects, bool const aStatic)
 {
   for(ConstObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it);
+    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it, aStatic);
     if((*it)->GET<PhysicsObject>())
       mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
     if((*it)->GET<Surface>())
