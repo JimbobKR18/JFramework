@@ -14,6 +14,7 @@
 #include "LuaIncludes.h"
 #include "ObjectDeleteMessage.h"
 #include "ObjectCreateMessage.h"
+#include "ResetLevelMessage.h"
 
 bool SortPredicate(GameObject *aLhs, GameObject *aRhs)
 {
@@ -317,8 +318,15 @@ void Level::DeleteObjects()
   {
     manager->DeleteObject(*it);
   }
+  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
+  {
+    delete *it;
+  }
+  mMenus.clear();
   mObjects.clear();
   mStaticObjects.clear();
+  manager->ClearObjects();
+  manager->GetOwningApp()->ClearDelayedMessages();
 }
 
 /**
@@ -326,9 +334,18 @@ void Level::DeleteObjects()
  */
 void Level::Reset()
 {
+  GetManager()->ProcessDelayedMessage(new ResetLevelMessage());
+}
+
+/**
+ * @brief Reset level helper
+ */
+void Level::ResetLevel()
+{
   PreReset();
   DeleteObjects();
   ParseFile();
+  PostReset();
 }
 
 /**
@@ -490,6 +507,27 @@ void Level::Serialize(Parser &aParser)
   // TODO focus target
   aParser.Place("Music", "");
   aParser.Place("Music", "Song", mMusicName);
+}
+
+/**
+ * @brief Receive message loop
+ * @param aMessage message to receive
+ */
+void Level::ReceiveMessage(Message const& aMessage) 
+{
+  if(aMessage.GetDescription() == "ResetLevel")
+  {
+    ResetLevel();
+  }
+}
+
+/**
+ * @brief Send message to manager
+ * @param aMessage Message to send
+ */
+void Level::SendMessage(Message const& aMessage) 
+{
+  GetManager()->SendMessage(aMessage);
 }
 
 /**

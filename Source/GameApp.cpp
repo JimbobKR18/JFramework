@@ -55,21 +55,36 @@ GameApp::~GameApp()
   mManagers.clear();
 }
 
+/**
+ * @brief Get time between frames
+ * @return Time between frames, known as DT.
+ */
 float GameApp::GetDT() const
 {
   return mDT;
 }
 
+/**
+ * @brief Get if app is active
+ * @return App is active
+ */
 bool GameApp::GetActive() const
 {
   return mActive;
 }
 
+/**
+ * @brief Set if app is active
+ * @param aActive Active state
+ */
 void GameApp::SetActive(bool const aActive)
 {
   mActive = aActive;
 }
 
+/**
+ * @brief Calculate DT
+ */
 void GameApp::AppStep()
 {
   Common::TimePoint currentTime = Common::GetNow();
@@ -77,6 +92,9 @@ void GameApp::AppStep()
   mLastFrame = currentTime;
 }
 
+/**
+ * @brief Update loop
+ */
 void GameApp::Update()
 {
   AppStep();
@@ -100,6 +118,10 @@ void GameApp::Update()
   }
 }
 
+/**
+ * @brief Send message to managers, right now. Delete or add object calls are not advised in this manner.
+ * @param aMessage Message to send
+ */
 void GameApp::SendMessage(Message const &aMessage)
 {
   for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
@@ -108,31 +130,62 @@ void GameApp::SendMessage(Message const &aMessage)
   }
 }
 
+/**
+ * @brief Send message to managers next frame.
+ * @param aMessage Message to process next frame
+ */
 void GameApp::SendMessageDelayed(Message *aMessage)
 {
   mDelayedMessages.push_back(aMessage);
 }
 
+/**
+ * @brief Clear out delayed messages queue.
+ */
+void GameApp::ClearDelayedMessages()
+{
+  for(std::vector<Message*>::iterator it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  {
+    delete *it;
+  }
+  mDelayedMessages.clear();
+}
+
+/**
+ * @brief Start the app.
+ */
 void GameApp::Start()
 {
   LUABind::LoadFunction<std::string>("Main.LUA", "main", "");
 }
 
+/**
+ * @brief Add a manager to our app
+ * @param aManager Manager to add
+ */
 void GameApp::AddManager(Manager *aManager)
 {
 	mManagers.push_back(aManager);
 }
 
-Manager* GameApp::GetManager(std::string const &aName)
+/**
+ * @brief Get manager by name
+ * @param aName Name of manager
+ * @return Manager, or nullptr
+ */
+Manager* GameApp::GetManager(HashString const &aName)
 {
   for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
   {
-    if((*it)->GetDefinedName() == aName)
+    if(aName == (*it)->GetDefinedName())
       return *it;
   }
-  return NULL;
+  return nullptr;
 }
 
+/**
+ * @brief Set up for LUA
+ */
 void GameApp::SerializeLUA()
 {
   SLB::Class<GameApp>("GameApp")

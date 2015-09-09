@@ -78,22 +78,22 @@ void LevelManager::LoadLevelDelayed(std::string const &aLevelName, bool aReset)
  */
 void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
 {
-	for(std::vector<Level*>::const_iterator it = mLevels.begin(); it != mLevels.end(); ++it)
-	{
-		if((*it)->GetName() == aLevelName)
-		{
-		  Level* prevLevel = mActiveLevel;
-		  if(mActiveLevel)
-		    mActiveLevel->Unload(*it);
+  for(std::vector<Level*>::const_iterator it = mLevels.begin(); it != mLevels.end(); ++it)
+  {
+    if((*it)->GetName() == aLevelName)
+    {
+      Level* prevLevel = mActiveLevel;
+      if(mActiveLevel)
+        mActiveLevel->Unload(*it);
       if(aReset)
-        (*it)->Reset();
-			(*it)->Load(prevLevel);
-			GetOwningApp()->GET<InputManager>()->AcceptInputs();
-			return;
-		}
-	}
+        (*it)->ResetLevel();
+      (*it)->Load(prevLevel);
+      GetOwningApp()->GET<InputManager>()->AcceptInputs();
+      return;
+    }
+  }
 
-	assert(!"Level name specified not found.");
+  assert(!"Level name specified not found.");
 }
 
 /**
@@ -139,8 +139,15 @@ void LevelManager::Update()
   MessageIT msgEnd = mDelayedMessages.end();
   for(MessageIT it = mDelayedMessages.begin(); it != msgEnd; ++it)
   {
-    LevelChangeMessage *msg = (LevelChangeMessage*)*it;
-    LoadLevel(msg->GetDescription(), (msg->GetContent() == "true" ? true : false));
+    if((*it)->GetDescription() == "ResetLevel")
+    {
+      mActiveLevel->ResetLevel();
+    }
+    else
+    {
+      LevelChangeMessage *msg = (LevelChangeMessage*)*it;
+      LoadLevel(msg->GetDescription(), (msg->GetContent() == "true" ? true : false));
+    }
     delete *it;
   }
   mDelayedMessages.clear();

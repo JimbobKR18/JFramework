@@ -49,6 +49,7 @@
       <File Name="../../Source/Core/Messages/InputMessage.h"/>
       <File Name="../../Source/Core/Messages/ClickMessage.h"/>
       <File Name="../../Source/Core/Messages/ObjectCreateMessage.h"/>
+      <File Name="../../Source/Core/Messages/ResetLevelMessage.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Core/MathExt.cpp"/>
     <File Name="../../Source/Core/SmartPointer.h"/>

@@ -26,7 +26,7 @@ public:
 	void                DeleteObject(GameObject *aObj);
 	void                ClearObjects();
 	void                AddObject(GameObject *aObj, bool aStatic = false);
-	void                RemoveObject(GameObject *aObj);
+	void                RemoveObject(GameObject *aObj, bool const aDelete = false);
 	static void         SerializeLUA();
 private:
 	void                ParseDictionary(GameObject *aObject, Parser &aParser);

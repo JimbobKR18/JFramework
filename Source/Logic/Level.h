@@ -60,6 +60,7 @@ public:
   void              DeleteObjectDelayed(GameObject *aObject);
   void              DeleteObjects();
   void              Reset();
+  void              ResetLevel();
 
   void              SetMaxBoundary(Vector3 const &aMaxBoundary);
   void              SetMinBoundary(Vector3 const &aMinBoundary);
@@ -72,11 +73,12 @@ public:
   void              UnloadObjects(ObjectContainer const &aObjects);
 
 	virtual void      PreReset() {};
+    virtual void      PostReset() {};
 	virtual void      Update();
 	virtual void      ParseAdditionalData(Root *aRoot, GameObject *aObject) {};
 	virtual void      Serialize(Parser &aParser);
-  virtual void      ReceiveMessage(Message const& aMessage) {};
-  virtual void      SendMessage(Message const& aMessage) {};
+  virtual void      ReceiveMessage(Message const& aMessage);
+  virtual void      SendMessage(Message const& aMessage);
 	void              SerializeTileMap(Parser &aParser);
 
 	static void       SerializeLUA();

@@ -8,6 +8,8 @@
 #include "Menu.h"
 #include "MenuImage.h"
 #include "MenuText.h"
+#include "ObjectManager.h"
+#include "LevelManager.h"
 
 Menu::Menu(Level *aLevel, std::string const &aFileName) : mOwner(aLevel), mFileName(aFileName)
 {

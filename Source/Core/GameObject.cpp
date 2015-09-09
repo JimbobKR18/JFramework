@@ -49,32 +49,57 @@ GameObject::~GameObject()
   mComponents.clear();
 }
 
+/**
+ * @brief Get name of game object
+ * @return Name of object
+ */
 std::string GameObject::GetName()
 {
   return mName;
 }
 
+/**
+ * @brief  Get file name of object
+ * @return Object's file name
+ */
 std::string GameObject::GetFileName()
 {
 	return mFileName;
 }
 
+/**
+ * @brief Get objectmanager for object
+ * @return ObjectManager
+ */
 ObjectManager *GameObject::GetManager()
 {
   return mManager;
 }
 
+/**
+ * @brief Set name of object
+ * @param aName New name of object
+ */
 void GameObject::SetName(std::string const &aName)
 {
   mName = aName;
 }
 
+/**
+ * @brief Add a component to game object
+ * @param aComponent Component to add
+ */
 void GameObject::AddComponent(Component *aComponent)
 {
   aComponent->SetOwner(this);
   mComponents.push_back(aComponent);
 }
 
+/**
+ * @brief Remove a component from gameobject
+ * @param aComponent Component to remove
+ * @param aDelete True to delete component while you are at it
+ */
 void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
 {
   ComponentIT end = mComponents.end();
@@ -92,6 +117,11 @@ void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
   }
 }
 
+/**
+ * @brief Remove component by component's uid
+ * @param aUID UID of component to remove
+ * @param aDelete True to delete component while you are at it
+ */
 void GameObject::RemoveComponent(int const &aUID, bool aDelete)
 {
   ComponentIT end = mComponents.end();
@@ -110,6 +140,11 @@ void GameObject::RemoveComponent(int const &aUID, bool aDelete)
   }
 }
 
+/**
+ * @brief Get component by uid
+ * @param aUID uid of component
+ * @return Component or nullptr
+ */
 Component *GameObject::GetComponent(int const &aUID)
 {
   ComponentIT end = mComponents.end();
@@ -121,12 +156,22 @@ Component *GameObject::GetComponent(int const &aUID)
   return nullptr;
 }
 
+/**
+ * @brief Get component by name
+ * @param aName Name of component
+ * @return Component or nullptr
+ */
 Component* GameObject::GetComponentByName(std::string const &aName)
 {
   int uid = Common::StringHashFunction(aName);
   return GetComponent(uid);
 }
 
+/**
+ * @brief Same as get component except returns true or false
+ * @param aUID uid of component
+ * @return True if object has component
+ */
 bool GameObject::HasComponent(int const &aUID)
 {
   ComponentIT end = mComponents.end();
@@ -138,12 +183,20 @@ bool GameObject::HasComponent(int const &aUID)
   return false;
 }
 
+/**
+ * @brief Same as get component by name except returns true or false
+ * @param aName Name of component
+ * @return True if object has component
+ */
 bool GameObject::HasComponentByName(std::string const &aName)
 {
   int uid = Common::StringHashFunction(aName);
   return HasComponent(uid);
 }
 
+/**
+ * @brief Updates components
+ */
 void GameObject::Update()
 {
   ComponentIT end = mComponents.end();
@@ -153,6 +206,10 @@ void GameObject::Update()
   }
 }
 
+/**
+ * @brief Recieve messages from other objects
+ * @param aMessage Message to process
+ */
 void GameObject::ReceiveMessage(Message const &aMessage)
 {
   ComponentIT end = mComponents.end();
@@ -162,6 +219,10 @@ void GameObject::ReceiveMessage(Message const &aMessage)
   }
 }
 
+/**
+ * @brief Output to file
+ * @param aParser File to output to
+ */
 void GameObject::Serialize(Parser &aParser)
 {
   std::string object = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
@@ -175,6 +236,9 @@ void GameObject::Serialize(Parser &aParser)
   }
 }
 
+/**
+ * @brief Make object usable in LUA
+ */
 void GameObject::SerializeLUA()
 {
   SLB::Class<GameObject>("GameObject")
@@ -185,6 +249,10 @@ void GameObject::SerializeLUA()
           .set("GetName", &GameObject::GetName);
 }
 
+/**
+ * @brief Interact with another game object
+ * @param aObject Object to interact with
+ */
 void GameObject::Interact(GameObject *aObject) 
 { 
   DebugLogPrint("%s collided into %s\n", mName.c_str(), aObject->GetName().c_str()); 

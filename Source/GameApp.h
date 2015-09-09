@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "Message.h"
+#include "HashString.h"
 
 class Manager;
 
@@ -25,9 +26,10 @@ public:
   virtual void      Update();
   void              SendMessage(Message const &aMessage);
   void              SendMessageDelayed(Message *aMessage);
+  void              ClearDelayedMessages();
   void              Start();
   void              AddManager(Manager* aManager);
-  Manager*          GetManager(std::string const &aName);
+  Manager*          GetManager(HashString const &aName);
 
   template<typename T>
   T*                GET() {return (T*)GetManager(T::GetName());}

@@ -18,6 +18,7 @@ MenuElement::MenuElement(std::string const &aFileName)
 
 MenuElement::~MenuElement()
 {
+  delete mObject;
 }
 
 /**

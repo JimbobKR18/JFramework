@@ -374,12 +374,12 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       physics->AddShape(shape);
       
       // Make tiles ignore other tiles for collision
-      /*for(int i = 0; i < 99; ++i)
+      for(int i = 0; i < 99; ++i)
       {
         char buffer[33];
         sprintf(buffer, "Tile_%d", i);
         physics->AddIgnore(std::string(buffer));
-      }*/
+      }
 
       obj->AddComponent(physics);
     }

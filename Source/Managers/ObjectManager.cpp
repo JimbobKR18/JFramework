@@ -121,8 +121,7 @@ void ObjectManager::ParseObject(GameObject *aObject)
  */
 void ObjectManager::DeleteObject(GameObject *aObj)
 {
-	RemoveObject(aObj);
-	delete aObj;
+	RemoveObject(aObj, true);
 }
 
 /**
@@ -158,25 +157,30 @@ void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
 
 /**
  * @brief Remove object from objects array
- * @param aObj
+ * @param aObj Object to remove
+ * @param aDelete Set to true to delete object on the way out.
  */
-void ObjectManager::RemoveObject(GameObject *aObj)
+void ObjectManager::RemoveObject(GameObject *aObj, bool const aDelete)
 {
   ObjectIT objectsEnd = mObjects.end();
-	for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
-	{
-		if(*it == aObj)
-		{
-			mObjects.erase(it);
-			break;
-		}
-	}
+  for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
+  {
+    if(*it == aObj)
+    {
+      mObjects.erase(it);
+      if(aDelete)
+        delete aObj;
+      break;
+    }
+  }
   ObjectIT staticObjectsEnd = mStaticObjects.end();
 	for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
   {
     if(*it == aObj)
     {
       mStaticObjects.erase(it);
+      if(aDelete)
+        delete aObj;
       break;
     }
   }

@@ -34,7 +34,7 @@ PhysicsObject::~PhysicsObject()
   }
   mShapes.clear();
   
-  mWorld->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject(this);
+  mWorld->RemoveObject(this);
 }
 
 /**
