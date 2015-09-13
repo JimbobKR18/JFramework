@@ -24,7 +24,16 @@ Root const *Root::Search(std::string const &aValue) const
     return this;
   else
   {
-    // Search children for node
+    // Search for node of same name first, early out
+    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    {
+      Root *ret = *it;
+      if(ret->mName == aValue)
+      {
+        return ret;
+      }
+    }
+    // Search children for node (deeper)
     for(rootConstIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
       Root const *ret = (*it)->Search(aValue);
@@ -38,7 +47,7 @@ Root const *Root::Search(std::string const &aValue) const
     }
   }
 
-  return NULL;
+  return nullptr;
 }
 
 
@@ -52,7 +61,17 @@ Root *Root::Find(std::string const &aValue)
   }
   else
   {
-    // Search children for node
+    // Search for node of same name first, early out
+    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    {
+      Root *ret = *it;
+      if(ret->mName == aValue)
+      {
+        ret->mTouched = true;
+        return ret;
+      }
+    }
+    // Search children for node (deeper)
     for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
       Root *ret = (*it)->Find(aValue);
@@ -67,7 +86,7 @@ Root *Root::Find(std::string const &aValue)
     }
   }
 
-  return NULL;
+  return nullptr;
 }
 
 void Root::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
