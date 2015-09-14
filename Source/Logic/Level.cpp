@@ -184,7 +184,10 @@ void Level::RemoveMenu(Menu *aMenu)
       return;
     }
   }
-  assert(!"Menu not found, you sure you added it to this list?");
+  
+  #ifdef _DEBUG
+    assert(!"Menu not found, you sure you added it to this list?");
+  #endif
 }
 
 /**
