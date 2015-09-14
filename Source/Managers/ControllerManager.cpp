@@ -48,6 +48,13 @@ void ControllerManager::DeleteController(Controller *aController)
   RemoveController(aController);
   delete aController;
 }
+void ControllerManager::SetControllersPauseState(bool const aPaused)
+{
+  for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
+  {
+    (*it)->SetPaused(aPaused);
+  }
+}
 void ControllerManager::ClearControllers()
 {
   for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)

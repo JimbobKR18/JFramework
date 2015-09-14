@@ -19,11 +19,15 @@ class Controller : public Component
 {
 private:
   static int const sUID;
+  bool mPaused;
 protected:
   Controller(int const &aUID);
 public:
   Controller();
   virtual ~Controller();
+  
+  void                  SetPaused(bool const aPaused);
+  bool                  GetPaused() const;
   
   virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation) = 0;
   

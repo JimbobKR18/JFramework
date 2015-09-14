@@ -24,13 +24,14 @@ public:
   void                AddController(Controller *aController);
   void                RemoveController(Controller *aController);
   void                DeleteController(Controller *aController);
+  void                SetControllersPauseState(bool const aPaused);
   void                ClearControllers();
   
   // Derived from Manager
   virtual void        Update();
-	virtual void        SendMessage(Message const &aMessage);
+  virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
-	static std::string  GetName() {return "ControllerManager";}
+  static std::string  GetName() {return "ControllerManager";}
   
 public:
   typedef std::vector<Controller*>::iterator ControllerIT;

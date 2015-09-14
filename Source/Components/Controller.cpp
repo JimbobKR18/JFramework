@@ -13,15 +13,25 @@
 int const Controller::sUID = Common::StringHashFunction("Controller");
 
 // PROTECTED
-Controller::Controller(int const &aUID) : Component(aUID)
+Controller::Controller(int const &aUID) : Component(aUID), mPaused(false)
 {
 }
 
-Controller::Controller() : Component(Controller::sUID)
+Controller::Controller() : Component(Controller::sUID), mPaused(false)
 {
 }
 
 Controller::~Controller()
 {
   GetOwner()->GetManager()->GetOwningApp()->GET<ControllerManager>()->RemoveController(this);
+}
+
+void Controller::SetPaused(bool const aPaused)
+{
+  mPaused = aPaused;
+}
+
+bool Controller::GetPaused() const
+{
+  return mPaused;
 }
