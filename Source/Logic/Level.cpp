@@ -343,6 +343,7 @@ void Level::Reset()
 void Level::ResetLevel()
 {
   PreReset();
+  // NOTE: Removes menus too
   DeleteObjects();
   ParseFile();
   PostReset();
