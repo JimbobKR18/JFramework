@@ -91,6 +91,7 @@ void PhysicsWorld::ClearObjects()
     delete *it;
   }
   mObjects.clear();
+  mRegistry.Clear();
 }
 
 void PhysicsWorld::Update()
