@@ -15,6 +15,7 @@ class GravityGenerator : public ForceGenerator
 private:
 public:
 	GravityGenerator(Vector3 const &aForce);
+    virtual ~GravityGenerator();
 
 	void Update(PhysicsObject *aObject, float aDuration);
 };

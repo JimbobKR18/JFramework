@@ -12,6 +12,10 @@ GravityGenerator::GravityGenerator(Vector3 const &aForce) : ForceGenerator(aForc
 {
 }
 
+GravityGenerator::~GravityGenerator()
+{
+}
+
 void GravityGenerator::Update(PhysicsObject *aObject, float aDuration)
 {
 	aObject->AddForce(GetForce() * aObject->GetMass());

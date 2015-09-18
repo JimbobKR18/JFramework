@@ -11,6 +11,10 @@ ForceGenerator::ForceGenerator(Vector3 const &aForce) : mForce(aForce), mActive(
 {
 }
 
+ForceGenerator::~ForceGenerator()
+{
+}
+
 Vector3 ForceGenerator::GetForce() const
 {
 	return mForce;
