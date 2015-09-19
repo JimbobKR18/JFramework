@@ -254,7 +254,7 @@ namespace Common
   float RandomFloatInRange(float const aX, float const bX)
   {
     float diff = bX - aX;
-    diff *= (rand() / RAND_MAX);
+    diff *= (static_cast<float>(rand()) / static_cast<float>(RAND_MAX));
     return aX + diff;
   }
 
