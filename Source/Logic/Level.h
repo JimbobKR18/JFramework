@@ -36,11 +36,11 @@ private:
 	Vector3           mMinBoundary;
 
 public:
-	Level();
-	Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse);
-	virtual ~Level();
+  Level();
+  Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse);
+  virtual ~Level();
 
-	std::string   GetName() const;
+  std::string   GetName() const;
   LevelManager* GetManager() const;
   
   TileMapGenerator* GetTileMap() const;
@@ -67,23 +67,23 @@ public:
   Vector3           GetMaxBoundary() const;
   Vector3           GetMinBoundary() const;
 
-	void              Load(Level* const aPrevLevel);
-	void              Unload(Level* const aNextLevel);
+  void              Load(Level* const aPrevLevel);
+  void              Unload(Level* const aNextLevel);
   void              LoadObjects(ObjectContainer const &aObjects, bool const aStatic);
   void              UnloadObjects(ObjectContainer const &aObjects);
 
-	virtual void      PreReset() {};
-    virtual void      PostReset() {};
-	virtual void      Update();
-	virtual void      ParseAdditionalData(Root *aRoot, GameObject *aObject) {};
-	virtual void      Serialize(Parser &aParser);
+  virtual void      PreReset() {};
+  virtual void      PostReset() {};
+  virtual void      Update();
+  virtual void      ParseAdditionalData(Root *aRoot, GameObject *aObject);
+  virtual void      Serialize(Parser &aParser);
   virtual void      ReceiveMessage(Message const& aMessage);
   virtual void      SendMessage(Message const& aMessage);
-	void              SerializeTileMap(Parser &aParser);
+  void              SerializeTileMap(Parser &aParser);
 
-	static void       SerializeLUA();
+  static void       SerializeLUA();
 
-	void              ParseFile();
+  void              ParseFile();
   
 protected:
   ObjectContainer&  GetObjects();

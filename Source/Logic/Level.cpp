@@ -346,6 +346,9 @@ void Level::Reset()
 void Level::ResetLevel()
 {
   PreReset();
+  // Reset view to set when reparsing file.
+  GraphicsManager *graphicsManager = GetManager()->GetOwningApp()->GET<GraphicsManager>();
+  graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   // NOTE: Removes menus too
   DeleteObjects();
   ParseFile();
@@ -478,6 +481,16 @@ void Level::Update()
   {
     (*it)->Update();
   }
+}
+
+/**
+ * @brief Any extra nodes inside of a level file need to be parsed, but if we reach here then you are autoparsing a level file that derives from level.
+ * @param aRoot Root node to read from.
+ * @param aObject Object to apply data to.
+ */
+void Level::ParseAdditionalData(Root *aRoot, GameObject *aObject)
+{ 
+  DebugLogPrint("Root %s skipped, are you trying to read in additional data for a new level type?", aRoot->GetName().ToCharArray()) 
 }
 
 /**
