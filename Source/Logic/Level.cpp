@@ -490,7 +490,7 @@ void Level::Update()
  */
 void Level::ParseAdditionalData(Root *aRoot, GameObject *aObject)
 { 
-  DebugLogPrint("Root %s skipped, are you trying to read in additional data for a new level type?", aRoot->GetName().ToCharArray()) 
+  DebugLogPrint("Root %s skipped, are you trying to read in additional data for a new level type?", aRoot->GetName().ToCharArray());
 }
 
 /**
