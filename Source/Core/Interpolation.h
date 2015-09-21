@@ -32,6 +32,26 @@ public:
       (*mCurrent) = mStart + (mRate * percentage);
     }
   }
+  
+  T GetCurrent()
+  {
+    return *mCurrent;
+  }
+  
+  T GetStart()
+  {
+    return mStart;
+  }
+  
+  T GetFinish()
+  {
+    return mFinish;
+  }
+  
+  T GetRate()
+  {
+    return mRate;
+  }
 
   bool IsComplete()
   {
@@ -44,6 +64,10 @@ public:
     HashString name = HashString("Interpolation_") + T::GetName();
     SLB::Class<Interpolation<T>>(name.ToCharArray())
       .set("Update", &Interpolation<T>::Update)
+      .set("GetCurrent", &Interpolation<T>::GetCurrent)
+      .set("GetStart", &Interpolation<T>::GetStart)
+      .set("GetFinish", &Interpolation<T>::GetFinish)
+      .set("GetRate", &Interpolation<T>::GetRate)
       .set("IsComplete", &Interpolation<T>::IsComplete);
   }
 };
