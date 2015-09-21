@@ -33,27 +33,27 @@ public:
     }
   }
   
-  T GetCurrent()
+  T GetCurrent() const
   {
     return *mCurrent;
   }
   
-  T GetStart()
+  T GetStart() const
   {
     return mStart;
   }
   
-  T GetFinish()
+  T GetFinish() const
   {
     return mFinish;
   }
   
-  T GetRate()
+  T GetRate() const
   {
     return mRate;
   }
 
-  bool IsComplete()
+  bool IsComplete() const
   {
     return mCurrentTime >= mTime;
   }
