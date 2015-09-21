@@ -49,6 +49,7 @@ public:
   void                SetAnimation(int aAnimation, bool aRunOnce = false);
   void                SetCurrentFrame(int aFrame);
   void                SetFrameByID(int aFrameID);
+  void                SetAnimationSpeed(float aAnimationSpeed);
   void                FinishAnimation();
   bool                CurrentAnimationCompleted();
   

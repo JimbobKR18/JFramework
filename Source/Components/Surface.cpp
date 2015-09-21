@@ -27,11 +27,21 @@ Surface::~Surface()
     delete mTexCoord;
 }
 
+/**
+ * @brief Get texture coordinate data (animation data)
+ * @return Texture coordinate data.
+ */
 TextureCoordinates *Surface::GetTextureData() const
 {
   return mTexCoord;
 }
 
+/**
+ * @brief Set up animation data helper
+ * @param aNumAnimations Total number of animations
+ * @param aNumFrames Number of frames per animation
+ * @param aAnimationSpeed Time between frames
+ */
 void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed)
 {
   if(mTexCoord)
@@ -40,12 +50,21 @@ void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int
   mTexCoord = new TextureCoordinates(mTextureSize.x, mTextureSize.y, aNumAnimations, aNumFrames, aAnimationSpeed);
 }
 
+/**
+ * @brief Set whether this surface is animated
+ * @param aAnimated True is animated, false otherwise
+ */
 void Surface::SetAnimated(bool aAnimated)
 {
   if(mTexCoord)
     mTexCoord->SetAnimated(aAnimated);
 }
 
+/**
+ * @brief Get current animation
+ * @param aAnimation Animation id to run
+ * @param aRunOnce Iterates only once then stops if true.
+ */
 void Surface::SetAnimation(int aAnimation, bool aRunOnce)
 {
   if(mTexCoord)
@@ -55,24 +74,49 @@ void Surface::SetAnimation(int aAnimation, bool aRunOnce)
   }
 }
 
+/**
+ * @brief Set current frame of animation
+ * @param aFrame Frame of current animation
+ */
 void Surface::SetCurrentFrame(int aFrame)
 {
   if(mTexCoord)
     mTexCoord->SetCurrentFrame(aFrame);
 }
 
+/**
+ * @brief Set frame by id in animation file. (Regardless of animation)
+ * @param aFrameID The id to set to.
+ */
 void Surface::SetFrameByID(int aFrameID)
 {
   if(mTexCoord)
     mTexCoord->SetFrameByID(aFrameID);
 }
 
+/**
+ * @brief Set speed of current animation
+ * @param aAnimationSpeed Time between frames (in seconds)
+ */
+void Surface::SetAnimationSpeed(float aAnimationSpeed)
+{
+  if(mTexCoord)
+    mTexCoord->SetAnimationSpeed(aAnimationSpeed);
+}
+
+/**
+ * @brief Force finish animation
+ */
 void Surface::FinishAnimation()
 {
   if(mTexCoord)
     mTexCoord->Finish();
 }
 
+/**
+ * @brief Check if current animation has iterated at least once
+ * @return True if true.
+ */
 bool Surface::CurrentAnimationCompleted()
 {
   if(mTexCoord)
@@ -80,6 +124,9 @@ bool Surface::CurrentAnimationCompleted()
   return false;
 }
 
+/**
+ * @brief Simple update loop.
+ */
 void Surface::Update()
 {
   float dt = GetOwner()->GetManager()->GetOwningApp()->GetDT();
@@ -88,15 +135,27 @@ void Surface::Update()
     mTexCoord->Update(dt);
 }
 
+/**
+ * @brief Send message to owner for other components
+ * @param aMessage Message to send.
+ */
 void Surface::SendMessage(Message const &aMessage)
 {
   GetOwner()->ReceiveMessage(aMessage);
 }
 
+/**
+ * @brief Receive a message
+ * @param aMessage Received message
+ */
 void Surface::ReceiveMessage(Message const &aMessage)
 {
 }
 
+/**
+ * @brief Serialize to file
+ * @param aParser File stream to write to.
+ */
 void Surface::Serialize(Parser &aParser)
 {
   std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
@@ -134,6 +193,10 @@ void Surface::Serialize(Parser &aParser)
   object->Place("Surface", "ViewMode", viewMode.ToString());
 }
 
+/**
+ * @brief Read from file
+ * @param aParser File stream to read from
+ */
 void Surface::Deserialize(Parser &aParser)
 {
   bool animated = false;
@@ -190,6 +253,9 @@ void Surface::Deserialize(Parser &aParser)
   SetAnimated(animated);
 }
 
+/**
+ * @brief Make this object usable in LUA
+ */
 void Surface::SerializeLUA()
 {
   SLB::Class<Surface>("Surface")
@@ -197,6 +263,7 @@ void Surface::SerializeLUA()
     .set("SetFrameByID", &Surface::SetFrameByID)
     .set("SetAnimated", &Surface::SetAnimated)
     .set("SetCurrentFrame", &Surface::SetCurrentFrame)
+    .set("SetAnimationSpeed", &Surface::SetAnimationSpeed)
     .set("CurrentAnimatedCompleted", &Surface::CurrentAnimationCompleted)
     .set("SetColor", &Surface::SetColor);
 }

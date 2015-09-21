@@ -59,7 +59,7 @@ public:
   void  SetFrameByID(int const aFrameID);
   void  SetAnimated(bool const aAnimated);
   void  SetRunOnce(bool const aRunOnce);
-  void  SetSpeed(float const aSpeed);
+  void  SetAnimationSpeed(float const aSpeed);
   void  SetXGain(int const aIndex, float const aX);
   void  SetYGain(int const aIndex, float const aY);
 

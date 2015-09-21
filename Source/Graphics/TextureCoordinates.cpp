@@ -279,7 +279,7 @@ void TextureCoordinates::SetRunOnce(bool const aRunOnce)
  * @brief Set time before next frame (in seconds).
  * @param aSpeed
  */
-void TextureCoordinates::SetSpeed(float const aSpeed)
+void TextureCoordinates::SetAnimationSpeed(float const aSpeed)
 {
   mSpeed = aSpeed;
 }
