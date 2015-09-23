@@ -22,6 +22,10 @@ public:
   }
   virtual ~Interpolation() {}
 
+  /**
+   * @brief Updates interpolation, marks finished if complete.
+   * @param aDT Change in millis
+   */
   void Update(float aDT)
   {
     mCurrentTime += aDT;
@@ -33,32 +37,54 @@ public:
     }
   }
   
+  /**
+   * @brief Get value of current value in interpolation
+   * @return Current value in interpolation
+   */
   T GetCurrent() const
   {
     return *mCurrent;
   }
   
+  /**
+   * @brief Get start value.
+   * @return Where our interpolation started.
+   */
   T GetStart() const
   {
     return mStart;
   }
   
+  /**
+   * @brief Get end value.
+   * @return Where the interpolation ends.
+   */
   T GetFinish() const
   {
     return mFinish;
   }
   
+  /**
+   * @brief Get rate of change.
+   * @return Rate of change.
+   */
   T GetRate() const
   {
     return mRate;
   }
 
+  /**
+   * @brief Is our interpolation complete?
+   * @return True if complete, false otherwise.
+   */
   bool IsComplete() const
   {
     return mCurrentTime >= mTime;
   }
   
-  // Any datatype that is serialized in LUA must have the GetName() function defined.
+  /**
+   * @brief Serialize to be usable in LUA.
+   */
   static void SerializeLUA()
   {
     HashString name = HashString("Interpolation_") + T::GetName();
