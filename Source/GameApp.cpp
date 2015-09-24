@@ -11,10 +11,6 @@
 #include "LUATypes.h"
 #include "Constants.h"
 
-#ifdef _WIN32
-#include <Windows.h>
-#endif
-
 #define DT (1.0f/60.0f)
 
 GameApp::GameApp()

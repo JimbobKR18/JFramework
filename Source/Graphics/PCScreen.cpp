@@ -5,6 +5,14 @@
 
 #define VERTEX_ARRAYS
 
+#ifdef _WIN32
+  #include <Windows.h>
+  #include <gl/gl.h>
+  #undef SendMessage
+  #undef GetYValue
+  #undef PlaySound
+#endif
+
 PCScreen::PCScreen() : Screen()
 {
   SDL_Init(SDL_INIT_EVERYTHING);

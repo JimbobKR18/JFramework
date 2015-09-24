@@ -4,10 +4,7 @@
 #include "Screen.h"
 #include "Transform.h"
 #if defined(_WIN32)
-  #include <Windows.h>
-  #include <gl/gl.h>
   #include "SDL.h"
-  #undef SendMessage
 #elif defined(__APPLE__)
   #include <OpenGL/gl.h>
   #include <OpenGL/glext.h>

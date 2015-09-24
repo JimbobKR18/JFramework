@@ -9,7 +9,14 @@
 #elif defined(__APPLE__)
 #include <SDL2_image/SDL_image.h>
 #else
+#include "Windows.h"
+#include <gl/gl.h>
 #include "SDL_image.h"
+#undef LoadImage
+#undef SendMessage
+#ifndef GL_CLAMP_TO_EDGE
+#define GL_CLAMP_TO_EDGE 0x812F
+#endif
 #endif
 
 int const PCSurface::sUID = Common::StringHashFunction("Surface");

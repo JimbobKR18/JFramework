@@ -27,7 +27,7 @@
 #include "SmartPointer.h"
 
 #if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
-#define PC 1
+  #define PC 1
 #endif
 
 #define DebugLogPrint std::printf
