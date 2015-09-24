@@ -242,11 +242,14 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     }
     
 #ifdef VERTEX_ARRAYS
-    // Pointers and draw
-    glVertexPointer(3, GL_FLOAT, sizeof(Vector3), &points[0]);
-    glTexCoordPointer(3, GL_FLOAT, sizeof(Vector3), &texcoords[0]);
-    glColorPointer(4, GL_FLOAT, sizeof(Vector4), &colors[0]);
-    glDrawArrays(GL_QUADS, 0, points.size());
+    // Pointers and draw (there has to be something to draw though
+    if (points.size() > 0 && texcoords.size() > 0 && colors.size() > 0)
+    {
+      glVertexPointer(3, GL_FLOAT, sizeof(Vector3), &points[0]);
+      glTexCoordPointer(3, GL_FLOAT, sizeof(Vector3), &texcoords[0]);
+      glColorPointer(4, GL_FLOAT, sizeof(Vector4), &colors[0]);
+      glDrawArrays(GL_QUADS, 0, points.size());
+    }
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);

@@ -32,7 +32,7 @@ Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoPar
              mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0)
 {
   for(int i = static_cast<int>(aFileName.size()) - 1;
-      aFileName[i] != '/' && i >= 0; --i)
+      i >= 0 && aFileName[i] != '/'; --i)
   {
     mName.push_back(aFileName[i]);
   }

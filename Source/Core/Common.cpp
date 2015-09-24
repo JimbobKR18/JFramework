@@ -49,7 +49,7 @@ namespace Common
   #ifdef ASSET_DIRECTORY
     std::string ret = STRINGIZE(ASSET_DIRECTORY);
   #elif defined(_WIN32)
-    std::string ret;
+    std::string ret = "../../../Assets/";
   #elif defined(__APPLE__)
     std::string ret = "/Users/jimmyspencer/Documents/project-chang-e/Assets/";
   #else // Linux
