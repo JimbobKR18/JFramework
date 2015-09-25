@@ -58,15 +58,11 @@ void ObjectManager::Update()
  */
 void ObjectManager::SendMessage(Message const &aMsg)
 {
-  ObjectIT end = mObjects.end();
-	for(ObjectIT it = mObjects.begin(); it != end; ++it)
+  // Can't cache the end because objects can be deleted during message handling.
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
 		(*it)->ReceiveMessage(aMsg);
   }
-	/*for(ObjectIT it = mStaticObjects.begin(); it != end; ++it)
-  {
-    (*it)->ReceiveMessage(aMsg);
-  }*/
 }
 
 /**
