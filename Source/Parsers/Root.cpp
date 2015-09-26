@@ -7,7 +7,7 @@
 
 #include "Root.h"
 
-Root::Root() : mValue(""), mName(""), mChildren(), mParent(NULL), mTouched(false)
+Root::Root() : mValue(""), mName(""), mChildren(), mParent(nullptr), mTouched(false)
 {
 }
 
@@ -16,6 +16,7 @@ Root::~Root()
   // Delete all children associated with this root
   for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
       delete *it;
+  mChildren.clear();
 }
 
 Root const *Root::Search(std::string const &aValue) const

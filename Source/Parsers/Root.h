@@ -31,7 +31,7 @@ private:
 
 public:
   Root();
-  ~Root();
+  virtual ~Root();
 
   Root const*    Search(std::string const &aValue) const;
   Root*          Find(std::string const &aValue);

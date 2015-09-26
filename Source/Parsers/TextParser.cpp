@@ -6,8 +6,6 @@ TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Pa
                                                                               mMode(aMode),
                                                                               mCurrentIndent(0)
 {
-  mDictionary = new Root();
-
   if(aMode == MODE_INPUT)
     mInput.open(aFilename.c_str());
   else
@@ -39,25 +37,24 @@ TextParser::~TextParser()
 
 void TextParser::Parse()
 {
-  Root *mCurNode = NULL;
+  Root *mCurNode = nullptr;
 
   while(!mInput.eof())
   {
-    Root *node = new Root();
     std::string type;
     std::string name;
     mInput >> name;
-    node->SetName(name);
 
     // If a closing bracket, the node is done
-    if(node->GetName().ToString() == "}")
+    if(name == "}")
     {
-      delete node;
       if(mCurNode->GetParent())
         mCurNode = mCurNode->GetParent();
       continue;
     }
 
+    Root *node = new Root();
+    node->SetName(name);
     mInput >> type;
 
     // We found our value
@@ -84,6 +81,10 @@ void TextParser::Parse()
       delete node;
       if(mCurNode->GetParent())
         mCurNode = mCurNode->GetParent();
+    }
+    else
+    {
+      delete node;
     }
   }
 
@@ -166,13 +167,6 @@ std::string TextParser::ParseLiteral(std::string const &aLiteral)
 std::string TextParser::ParseNegative(std::string const &aValue)
 {
   std::string ret;
-  //if(aValue.find("-") == std::string::npos)
-    ret = aValue;
-  /*else
-  {
-    std::string value;
-    mInput >> value;
-    ret = value;
-  }*/
+  ret = aValue;
   return ret;
 }

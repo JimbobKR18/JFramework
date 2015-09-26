@@ -1,13 +1,12 @@
 #include "Parser.h"
 
 Parser::Parser(std::string const &aFilename) : mCurrentObjectIndex(0),
-                                               mFilename(aFilename), mDictionary(NULL)
+                                               mFilename(aFilename), mDictionary(nullptr)
 {
-
 }
 Parser::~Parser()
 {
-
+  delete mDictionary;
 }
 
 // Getters
