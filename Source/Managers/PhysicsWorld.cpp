@@ -28,7 +28,8 @@ bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
   return false;
 }
 
-PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld"), mGravity(Vector3(0, 20000.0f, 0))
+unsigned const PhysicsWorld::sUID = Common::StringHashFunction("PhysicsWorld");
+PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld", PhysicsWorld::sUID), mGravity(Vector3(0, 20000.0f, 0))
 {
 }
 

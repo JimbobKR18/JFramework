@@ -12,7 +12,8 @@
 #include "PCSound.h"
 #endif
 
-SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager")
+unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
+SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID)
 {
 #if !defined(ANDROID) && !defined(IOS)
   int flags=MIX_INIT_OGG;

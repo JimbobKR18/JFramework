@@ -8,7 +8,8 @@
 #include "DebugManager.h"
 #include "GraphicsManager.h"
 
-DebugManager::DebugManager(GameApp *aApp) : Manager(aApp, "DebugManager")
+unsigned const DebugManager::sUID = Common::StringHashFunction("DebugManager");
+DebugManager::DebugManager(GameApp *aApp) : Manager(aApp, "DebugManager", DebugManager::sUID)
 {
 }
 

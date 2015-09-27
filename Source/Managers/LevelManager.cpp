@@ -4,7 +4,8 @@
 #include "LevelChangeMessage.h"
 #include "TextParser.h"
 
-LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager"), mActiveLevel(NULL)
+unsigned const LevelManager::sUID = Common::StringHashFunction("LevelManager");
+LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager", LevelManager::sUID), mActiveLevel(NULL)
 {
 
 }

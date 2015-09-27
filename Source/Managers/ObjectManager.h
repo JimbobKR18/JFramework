@@ -10,6 +10,8 @@ class ObjectManager : public Manager
 private:
 	std::vector<GameObject*> mObjects;
 	std::vector<GameObject*> mStaticObjects;
+
+  static unsigned const sUID;
 public:
 	ObjectManager(GameApp* aApp);
 	virtual ~ObjectManager();
@@ -19,6 +21,7 @@ public:
 	virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
 	static std::string  GetName() {return "ObjectManager";}
+  static unsigned     GetUID() {return sUID;}
 
 	GameObject*         CreateObject(std::string const &aFilename);
   GameObject*         CreateObjectNoAdd(std::string const &aFilename);

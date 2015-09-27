@@ -29,10 +29,11 @@ public:
   void              ClearDelayedMessages();
   void              Start();
   void              AddManager(Manager* aManager);
-  Manager*          GetManager(HashString const &aName);
+  Manager*          GetManagerByName(HashString const &aName);
+  Manager*          GetManagerByUID(unsigned const aUID);
 
   template<typename T>
-  T*                GET() {return (T*)GetManager(T::GetName());}
+  T*                GET() {return (T*)GetManagerByUID(T::GetUID());}
 
   static void       SerializeLUA();
 };

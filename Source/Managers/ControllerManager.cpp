@@ -10,9 +10,9 @@
 #include "ControllerManager.h"
 #include "ControllerChangeMessage.h"
 
-ControllerManager::ControllerManager(GameApp* aApp) : Manager(aApp, "ControllerManager")
+unsigned const ControllerManager::sUID = Common::StringHashFunction("ControllerManager");
+ControllerManager::ControllerManager(GameApp* aApp) : Manager(aApp, "ControllerManager", ControllerManager::sUID)
 {
-  
 }
 ControllerManager::~ControllerManager()
 {

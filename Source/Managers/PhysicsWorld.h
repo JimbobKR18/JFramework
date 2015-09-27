@@ -26,6 +26,8 @@ private:
   GravityGenerator            mGravity;
   Resolver                    mResolver;
 
+  static unsigned const sUID;
+
 public:
   PhysicsWorld(GameApp *aApp);
   virtual ~PhysicsWorld();
@@ -41,6 +43,7 @@ public:
   virtual void                  SendMessage(Message const &aMessage);
   virtual void                  ProcessDelayedMessage(Message *aMessage);
   static std::string            GetName() {return "PhysicsWorld";}
+  static unsigned               GetUID() {return sUID;}
   // Forces
   void                          RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void                          UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);

@@ -31,14 +31,14 @@ public:
 
   GameObject*         GetOwner() {return mOwner;}
   void                SetOwner(GameObject *aOwner) {OWNER_CHECK(); mOwner = aOwner;}
-  int                  GetDefinedUID() {return mUID;}
+  int                 GetDefinedUID() {return mUID;}
 
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;
   virtual void        ReceiveMessage(Message const &aMessage) = 0;
   virtual void        Serialize(Parser &aParser) = 0;
   virtual void        Deserialize(Parser &aParser) = 0;
-  static int           GetUID() {return DEFAULT_COMPONENT_UID;}
+  static int          GetUID() {return DEFAULT_COMPONENT_UID;}
 };
 
 #endif /* defined(__JFramework__Component__) */

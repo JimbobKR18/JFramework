@@ -20,11 +20,13 @@ private:
   typedef std::map<std::string, Sound*>::iterator   SoundIt;
   std::map<std::string, Sound*>                     mSounds;
 
+  static unsigned const sUID;
+
 public:
   SoundManager(GameApp *aApp);
   ~SoundManager();
 
-  Sound*          CreateSound(std::string const &aFilename);
+  Sound*              CreateSound(std::string const &aFilename);
   void                DeleteSound(Sound* aSound);
   void                AddSound(Sound *aSound);
   void                RemoveSound(Sound *aSound);
@@ -40,6 +42,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "SoundManager";}
+  static unsigned     GetUID() {return sUID;}
 
   static void         SerializeLUA();
 };

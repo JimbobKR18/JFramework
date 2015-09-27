@@ -17,6 +17,7 @@ class ControllerManager : public Manager
 private:
   std::vector<Controller*> mControllers;
   
+  static unsigned const sUID;
 public:
   ControllerManager(GameApp* aApp);
   ~ControllerManager();
@@ -32,6 +33,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "ControllerManager";}
+  static unsigned     GetUID() {return sUID;}
   
 public:
   typedef std::vector<Controller*>::iterator ControllerIT;

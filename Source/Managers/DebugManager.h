@@ -22,6 +22,7 @@
 class DebugManager : public Manager
 {
 private:
+  static unsigned const sUID;
 public:
   DebugManager(GameApp *aApp);
   ~DebugManager();
@@ -32,6 +33,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "DebugManager";}
+  static unsigned     GetUID() {return sUID;}
 };
 
 #endif /* DEBUGMANAGER_H_ */

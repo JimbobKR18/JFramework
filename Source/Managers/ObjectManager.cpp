@@ -13,7 +13,8 @@
   #include "PCSurface.h"
 #endif
 
-ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager")
+unsigned const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
+ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", ObjectManager::sUID)
 {
 }
 

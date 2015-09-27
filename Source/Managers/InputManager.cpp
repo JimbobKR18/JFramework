@@ -9,7 +9,8 @@
 #include "InputManager.h"
 #include "InputMessage.h"
 
-InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager"), mAcceptInput(true)
+unsigned const InputManager::sUID = Common::StringHashFunction("InputManager");
+InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager", InputManager::sUID), mAcceptInput(true)
 {
 }
 InputManager::~InputManager()

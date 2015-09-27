@@ -9,6 +9,8 @@ class LevelManager : public Manager
 private:
 	Level*              mActiveLevel;
 	std::vector<Level*> mLevels;
+
+  static unsigned const sUID;
 public:
 	LevelManager(GameApp *aApp);
 	~LevelManager();
@@ -26,6 +28,7 @@ public:
 	virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
 	static std::string  GetName() {return "LevelManager";}
+  static unsigned     GetUID() {return sUID;}
 	static void         SerializeLUA();
 	void                AddLevel(Level *aLevel);
 	void                RemoveLevel(Level *aLevel);

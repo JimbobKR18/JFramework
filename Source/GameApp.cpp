@@ -169,11 +169,26 @@ void GameApp::AddManager(Manager *aManager)
  * @param aName Name of manager
  * @return Manager, or nullptr
  */
-Manager* GameApp::GetManager(HashString const &aName)
+Manager* GameApp::GetManagerByName(HashString const &aName)
 {
   for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
   {
     if(aName == (*it)->GetDefinedName())
+      return *it;
+  }
+  return nullptr;
+}
+
+/**
+* @brief Get manager by UID
+* @param aUID UID of manager
+* @return Manager, or nullptr
+*/
+Manager* GameApp::GetManagerByUID(unsigned const aUID)
+{
+  for (std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+  {
+    if (aUID == (*it)->GetDefinedUID())
       return *it;
   }
   return nullptr;
@@ -185,7 +200,7 @@ Manager* GameApp::GetManager(HashString const &aName)
 void GameApp::SerializeLUA()
 {
   SLB::Class<GameApp>("GameApp")
-          .set("GetManager", &GameApp::GetManager)
+          .set("GetManager", &GameApp::GetManagerByName)
           .set("GetLevelManager", &GameApp::GET<LevelManager>)
           .set("GetObjectManager", &GameApp::GET<ObjectManager>)
           .set("GetSoundManager", &GameApp::GET<SoundManager>)

@@ -8,7 +8,8 @@
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
 
-GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manager(aApp, "GraphicsManager")
+unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
+GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID)
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));

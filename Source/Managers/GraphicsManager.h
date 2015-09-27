@@ -13,6 +13,8 @@ private:
   std::vector<Surface*>               mUIElements;
   std::map<std::string, TextureData>  mTextures;
   Screen*                             mScreen;
+
+  static unsigned const sUID;
 public:
   typedef std::vector<Surface*>::iterator SurfaceIT;
 
@@ -24,6 +26,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "GraphicsManager";}
+  static unsigned     GetUID() {return sUID;}
 
   // Manager stuff
   Surface*            CreateSurface();
