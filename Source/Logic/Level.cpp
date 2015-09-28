@@ -27,7 +27,7 @@ Level::Level()
 }
 
 Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse) :
-             mName(""), mMusicName(""), mObjects(),
+             mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
              mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
              mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0)
 {
@@ -37,6 +37,7 @@ Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoPar
     mName.push_back(aFileName[i]);
   }
   std::reverse(mName.begin(), mName.end());
+  mName = mName.substr(0, mName.size() - 4);
 
   if(aAutoParse)
     ParseFile();
@@ -63,6 +64,15 @@ Level::~Level()
 std::string Level::GetName() const
 {
   return mName;
+}
+
+/**
+* @brief Get the file name, not the level name.
+* @return The file name.
+*/
+std::string Level::GetFileName() const
+{
+  return mFileName;
 }
 
 /**
@@ -572,6 +582,7 @@ void Level::SerializeLUA()
           .set("Load", &Level::Load)
           .set("Unload", &Level::Unload)
           .set("GetName", &Level::GetName)
+          .set("GetFileName", &Level::GetFileName)
           .set("DeleteObject", &Level::DeleteObjectDelayed);
 }
 
@@ -580,7 +591,7 @@ void Level::SerializeLUA()
  */
 void Level::ParseFile()
 {
-  TextParser parser(Common::RelativePath("Game", mName).c_str());
+  TextParser parser(Common::RelativePath("Game", mFileName).c_str());
   GameObject *object = NULL;
   HashString const curObject = "Object_";
   int curIndex = 0;

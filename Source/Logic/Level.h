@@ -22,18 +22,19 @@ public:
   typedef MenuContainer::const_iterator ConstMenuIT;
 
 private:
-	std::string       mName;
-	std::string       mMusicName;
-	ObjectContainer   mObjects;
-	ObjectContainer   mStaticObjects;
-	MenuContainer     mMenus;
-	LevelManager*     mOwner;
-	TileMapGenerator* mGenerator;
-	GameObject*       mFocusTarget;
-	bool              mActive;
+  std::string       mName;
+  std::string       mFileName;
+  std::string       mMusicName;
+  ObjectContainer   mObjects;
+  ObjectContainer   mStaticObjects;
+  MenuContainer     mMenus;
+  LevelManager*     mOwner;
+  TileMapGenerator* mGenerator;
+  GameObject*       mFocusTarget;
+  bool              mActive;
 
-	Vector3           mMaxBoundary;
-	Vector3           mMinBoundary;
+  Vector3           mMaxBoundary;
+  Vector3           mMinBoundary;
 
 public:
   Level();
@@ -41,8 +42,9 @@ public:
   virtual ~Level();
 
   std::string   GetName() const;
+  std::string   GetFileName() const;
   LevelManager* GetManager() const;
-  
+
   TileMapGenerator* GetTileMap() const;
   GameObject*       GetFocusTarget() const;
   GameObject*       FindObject(std::string const &aObjectName);
@@ -84,7 +86,7 @@ public:
   static void       SerializeLUA();
 
   void              ParseFile();
-  
+
 protected:
   ObjectContainer&  GetObjects();
   ObjectContainer&  GetStaticObjects();

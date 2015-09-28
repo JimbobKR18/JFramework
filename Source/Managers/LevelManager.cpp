@@ -42,7 +42,7 @@ Level *LevelManager::GetLevel(std::string const &aLevelName)
 {
 	for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
-		if((*it)->GetName() == aLevelName)
+		if((*it)->GetFileName() == aLevelName)
 		{
 			return *it;
 		}
@@ -81,7 +81,7 @@ void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
 {
   for(std::vector<Level*>::const_iterator it = mLevels.begin(); it != mLevels.end(); ++it)
   {
-    if((*it)->GetName() == aLevelName)
+    if((*it)->GetFileName() == aLevelName)
     {
       Level* prevLevel = mActiveLevel;
       if(mActiveLevel)
@@ -193,7 +193,7 @@ void LevelManager::AddLevel(Level *aLevel)
   // Check to see if object is in our list
   for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
 	{
-		if(*it == aLevel || (*it)->GetName() == aLevel->GetName())
+		if(*it == aLevel || (*it)->GetFileName() == aLevel->GetFileName())
 		{
       return;
 		}
