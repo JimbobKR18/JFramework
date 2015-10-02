@@ -88,7 +88,8 @@ void PCSurface::LoadImage(std::string const &aName)
     }
     else
     {
-      DebugLogPrint("warning: image %s is not truecolor..  this will probably break\n", aName.c_str());
+      DebugLogPrint("warning: image %s is not truecolor...  this will probably break\n", aName.c_str());
+      DebugLogPrint("warning: bytes per pixel for image %s: %d\n", aName.c_str(), mNumberOfColors);
     }
 
     AddTexturePairing(aName);
