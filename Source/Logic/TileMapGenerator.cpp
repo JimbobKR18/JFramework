@@ -27,12 +27,16 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    std::vector<int> const &aCollisionData,
                                    std::vector<int> const &aCollisionShapes,
                                    std::map<int, float> const &aTileHeights,
-                                   Level *aOwner) :
+                                   std::map<int, std::vector<int>> const &aAnimations,
+                                   float const aAnimationSpeed, Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight),
                                    mTileSize(aTileSize), mImageName(aImageName),
                                    mDataName(aDataName), mTiles(aTiles),
                                    mCollisionData(aCollisionData), mCollisionShapes(aCollisionShapes),
-                                   mTileHeights(aTileHeights), mObjects(), mOwner(aOwner)
+                                   mTileHeights(aTileHeights), mObjects(),
+                                   mAnimationSpeed(aAnimationSpeed), mCurrentAnimationTime(0),
+                                   mAnimatedObjects(), mAnimations(aAnimations), mCurrentFrames(),
+                                   mOwner(aOwner)
 {
   // mTiles and mCollisionData MUST be same size, or it's not a valid map.
   // For compatibility reasons, the shape data can be a different size because it can be empty.
@@ -51,6 +55,44 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
 TileMapGenerator::~TileMapGenerator()
 {
   mTiles.clear();
+}
+
+/**
+  * @brief Update loop (i.e. update animations)
+  */
+void TileMapGenerator::Update()
+{
+  mCurrentAnimationTime += mOwner->GetManager()->GetOwningApp()->GetDT();
+
+  if (mCurrentAnimationTime < mAnimationSpeed)
+    return;
+  mCurrentAnimationTime -= mAnimationSpeed;
+
+  // Advance frames
+  std::map<int, int>::iterator framesEnd = mCurrentFrames.end();
+  for (std::map<int, int>::iterator it = mCurrentFrames.begin(); it != framesEnd; ++it)
+  {
+    int key = it->first;
+    std::vector<int> animation = mAnimations.find(key)->second;
+    int currentFrame = mCurrentFrames.find(key)->second;
+
+    ++currentFrame;
+
+    if (currentFrame >= animation.size())
+      currentFrame = 0;
+
+    mCurrentFrames.find(key)->second = currentFrame;
+  }
+
+  // Set frames
+  std::map<Surface*, int>::iterator animatedEnd = mAnimatedObjects.end();
+  for (std::map<Surface*, int>::iterator it = mAnimatedObjects.begin(); it != animatedEnd; ++it)
+  {
+    std::vector<int> animation = mAnimations.find(it->second)->second;
+    int currentFrame = mCurrentFrames.find(it->second)->second;
+
+    it->first->SetFrameByID(animation[currentFrame]);
+  }
 }
 
 /**
@@ -386,6 +428,13 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     else if(mCollisionShapes.size() < collisionDataVectorSize)
     {
       mCollisionShapes.push_back(CollisionShapes::EMPTY);
+    }
+
+    // Animation
+    if (mAnimations.find(mTiles[i]) != mAnimations.end())
+    {
+      mAnimatedObjects[surface] = mTiles[i];
+      mCurrentFrames[mTiles[i]] = 0;
     }
     
     // Add object to our level for easier loading later

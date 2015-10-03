@@ -15,6 +15,7 @@
 #include "PhysicsWorld.h"
 #include "ObjectManager.h"
 #include "MathExt.h"
+#include "Surface.h"
 
 class Level;
 
@@ -31,17 +32,27 @@ private:
     BOTTOMRIGHT
   };
 
-  int                       mWidth;
-  int                       mHeight;
-  int                       mTileSize;
-  std::string               mImageName;
-  std::string               mDataName;
-  std::vector<int>          mTiles;
-  std::vector<int>          mCollisionData;
-  std::vector<int>          mCollisionShapes;
-  std::map<int, float>      mTileHeights;
-  std::vector<GameObject*>  mObjects;
-  Level*                    mOwner;
+  // Basics
+  int                             mWidth;
+  int                             mHeight;
+  int                             mTileSize;
+  std::string                     mImageName;
+  std::string                     mDataName;
+  std::vector<int>                mTiles;
+  std::vector<int>                mCollisionData;
+  std::vector<int>                mCollisionShapes;
+  std::map<int, float>            mTileHeights;
+  std::vector<GameObject*>        mObjects;
+
+  // Animated tiles
+  float                           mAnimationSpeed;
+  float                           mCurrentAnimationTime;
+  std::map<Surface*, int>         mAnimatedObjects;
+  std::map<int, std::vector<int>> mAnimations;
+  std::map<int, int>              mCurrentFrames;
+
+  // Level owning this generator
+  Level*                          mOwner;
   
 public:
   TileMapGenerator();
@@ -51,8 +62,12 @@ public:
                    std::vector<int> const &aTiles,
                    std::vector<int> const &aCollisionData, 
                    std::vector<int> const &aCollisionShapes,
-                   std::map<int, float> const &aTileHeights, Level *aOwner);
+                   std::map<int, float> const &aTileHeights, 
+                   std::map<int, std::vector<int>> const &aAnimations,
+                   float const aAnimationSpeed, Level *aOwner);
   ~TileMapGenerator();
+
+  void              Update();
 
   int               GetWidth() const;
   int               GetHeight() const;

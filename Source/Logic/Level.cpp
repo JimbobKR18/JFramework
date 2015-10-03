@@ -491,6 +491,9 @@ void Level::Update()
   {
     (*it)->Update();
   }
+
+  // Update tile animations if possible
+  mGenerator->Update();
 }
 
 /**
@@ -752,9 +755,11 @@ void Level::ParseTileGenerator(TextParser &aParser)
   Root* tileMap = aParser.Find("TileMapGenerator");
   HashString value, empty;
   int width, height, tileSize;
-  HashString file, frameDataFilename, heightMapDataFileName;
+  HashString file, frameDataFilename, settingsDataFileName;
   std::vector<int> frames, collision, shapes;
   std::map<int, float> heights;
+  std::map<int, std::vector<int>> animations;
+  float tileAnimationSpeed = 0.0f;
 
   width = tileMap->Find("Width")->GetValue().ToInt();
   height = tileMap->Find("Height")->GetValue().ToInt();
@@ -769,21 +774,35 @@ void Level::ParseTileGenerator(TextParser &aParser)
   collision.reserve(totalAllocation);
   shapes.reserve(totalAllocation);
   
-  // If there's heightmap data, parse it in and use it.
-  if(tileMap->Find("HeightData"))
+  // If there's setting data, parse it in and use it.
+  if(tileMap->Find("SettingsFile"))
   {
-    HashString object = "Object_";
-    heightMapDataFileName = tileMap->Find("HeightData")->GetValue();
+    HashString const height = "Height_";
+    HashString const animation = "Animation_";
+    settingsDataFileName = tileMap->Find("SettingsFile")->GetValue();
+    TextParser settingsData(Common::RelativePath("Maps", settingsDataFileName));
     
-    HashString curIndex = object + Common::IntToString(0);
-    TextParser heightMapData(Common::RelativePath("Maps", heightMapDataFileName));
-    
-    for(int i = 0; heightMapData.Find(curIndex); ++i)
+    // Heightmap
+    HashString curIndex = height + Common::IntToString(0);
+    for(int i = 0; settingsData.Find(curIndex); ++i)
     {
-      std::vector<float> values = Common::StringToFloatVector(heightMapData.Find(curIndex)->GetValue());
+      std::vector<float> values = Common::StringToFloatVector(settingsData.Find(curIndex)->GetValue());
       heights[static_cast<int>(values[0])] = values[1];
-      curIndex = object + Common::IntToString(i);
+      curIndex = height + Common::IntToString(i);
     }
+
+    // Animations
+    curIndex = animation + Common::IntToString(0);
+    for (int i = 0; settingsData.Find(curIndex); ++i)
+    {
+      int tileID = settingsData.Find(curIndex)->Find("TileID")->GetValue().ToInt();
+      std::vector<int> animationData = settingsData.Find(curIndex)->Find("Animation")->GetValue().ToIntVector();
+      animations[tileID] = animationData;
+      curIndex = animation + Common::IntToString(i);
+    }
+
+    // Animation speed
+    tileAnimationSpeed = settingsData.Find("AnimationSpeed")->GetValue().ToFloat();
   }
 
   TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
@@ -798,5 +817,6 @@ void Level::ParseTileGenerator(TextParser &aParser)
   mGenerator = new TileMapGenerator(width, height, tileSize,
                                    file, frameDataFilename,
                                    frames, collision, shapes,
-                                   heights, this);
+                                   heights, animations, 
+                                   tileAnimationSpeed, this);
 }
