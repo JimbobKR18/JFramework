@@ -783,22 +783,26 @@ void Level::ParseTileGenerator(TextParser &aParser)
     TextParser settingsData(Common::RelativePath("Maps", settingsDataFileName));
     
     // Heightmap
-    HashString curIndex = height + Common::IntToString(0);
-    for(int i = 0; settingsData.Find(curIndex); ++i)
+    int index = 0;
+    HashString curIndex = height + Common::IntToString(index);
+    while(settingsData.Find(curIndex))
     {
       std::vector<float> values = Common::StringToFloatVector(settingsData.Find(curIndex)->GetValue());
       heights[static_cast<int>(values[0])] = values[1];
-      curIndex = height + Common::IntToString(i);
+      ++index;
+      curIndex = height + Common::IntToString(index);
     }
 
     // Animations
-    curIndex = animation + Common::IntToString(0);
-    for (int i = 0; settingsData.Find(curIndex); ++i)
+    index = 0;
+    curIndex = animation + Common::IntToString(index);
+    while(settingsData.Find(curIndex))
     {
       int tileID = settingsData.Find(curIndex)->Find("TileID")->GetValue().ToInt();
       std::vector<int> animationData = settingsData.Find(curIndex)->Find("Animation")->GetValue().ToIntVector();
       animations[tileID] = animationData;
-      curIndex = animation + Common::IntToString(i);
+      ++index;
+      curIndex = animation + Common::IntToString(index);
     }
 
     // Animation speed
