@@ -493,7 +493,10 @@ void Level::Update()
   }
 
   // Update tile animations if possible
-  mGenerator->Update();
+  if(mGenerator)
+  {
+    mGenerator->Update();
+  }
 }
 
 /**
@@ -806,7 +809,10 @@ void Level::ParseTileGenerator(TextParser &aParser)
     }
 
     // Animation speed
-    tileAnimationSpeed = settingsData.Find("AnimationSpeed")->GetValue().ToFloat();
+    if(settingsData.Find("AnimationSpeed"))
+    {
+      tileAnimationSpeed = settingsData.Find("AnimationSpeed")->GetValue().ToFloat();
+    }
   }
 
   TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
