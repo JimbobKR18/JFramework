@@ -76,6 +76,8 @@ public:
   HashString ToUpper() const;
   HashString ToLiteral() const;
   bool ComesBefore(HashString const &aRhs) const;
+
+  static void SerializeLUA();
 private:
   void Hash();
 };

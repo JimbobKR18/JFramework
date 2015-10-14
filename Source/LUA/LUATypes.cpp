@@ -50,6 +50,9 @@ namespace LUABind
   {
     // Vector3
     Vector3::SerializeLUA();
+
+    // HashString
+    HashString::SerializeLUA();
     
     // Interpolation
     Interpolation<Vector3>::SerializeLUA();

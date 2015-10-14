@@ -7,6 +7,7 @@
 
 #include "HashString.h"
 #include "Common.h"
+#include "LUATypes.h"
 
 // Constructors
 HashString::HashString() : mString(""), mHash(0)
@@ -453,4 +454,30 @@ bool HashString::ComesBefore(HashString const &aRhs) const
 void HashString::Hash()
 {
   mHash = Common::StringHashFunction(mString);
+}
+
+/**
+* @brief Serialize to LUA
+*/
+void HashString::SerializeLUA()
+{
+  SLB::Class<HashString>("HashString")
+    .constructor()
+    .constructor<const char*>()
+    .constructor<std::string>()
+    .set("Size", &HashString::Size)
+    .set("Length", &HashString::Length)
+    .set("Empty", &HashString::Empty)
+    .set("Find", &HashString::Find)
+    .set("SubString", &HashString::SubString)
+    .set("Reverse", &HashString::Reverse)
+    .set("Push", &HashString::Push)
+    .set("ToString", &HashString::ToString)
+    .set("ToCharArray", &HashString::ToCharArray)
+    .set("ToInt", &HashString::ToInt)
+    .set("ToFloat", &HashString::ToFloat)
+    .set("ToBool", &HashString::ToBool)
+    .set("ToLower", &HashString::ToLower)
+    .set("ToUpper", &HashString::ToUpper)
+    .set("ToLiteral", &HashString::ToLiteral);
 }
