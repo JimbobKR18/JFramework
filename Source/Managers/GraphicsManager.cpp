@@ -30,7 +30,7 @@ void GraphicsManager::Update()
   mScreen->PreDraw();
   mScreen->Draw(mSurfaces);
   mScreen->DrawUI(mUIElements);
-#ifdef _DEBUG
+#ifdef _DEBUG_DRAW
   // Displays bounds of objects with PhysicsObject
   mScreen->DebugDraw(mSurfaces);
 #endif
