@@ -205,6 +205,7 @@
         <IncludePath Value="../../Source/Core/Messages"/>
         <Preprocessor Value="ASSET_DIRECTORY=../../../../Assets/"/>
         <Preprocessor Value="_DEBUG"/>
+        <Preprocessor Value="_DEBUG_DRAW"/>
         <Preprocessor Value="SLB_USE_EXCEPTIONS"/>
       </Compiler>
       <Linker Options="" Required="yes"/>

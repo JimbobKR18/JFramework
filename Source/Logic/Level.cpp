@@ -710,7 +710,8 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
 {
   float posX, posY, posZ,
       scaleX, scaleY, scaleZ,
-      sizeX, sizeY, sizeZ;
+      sizeX, sizeY, sizeZ,
+      rotateX, rotateY, rotateZ;
   posX = aTransform->Find("PositionX")->GetValue().ToFloat();
   posY = aTransform->Find("PositionY")->GetValue().ToFloat();
   posZ = aTransform->Find("PositionZ")->GetValue().ToFloat();
@@ -720,11 +721,20 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
   sizeX = aTransform->Find("SizeX")->GetValue().ToFloat();
   sizeY = aTransform->Find("SizeY")->GetValue().ToFloat();
   sizeZ = aTransform->Find("SizeZ")->GetValue().ToFloat();
+  rotateX = aTransform->Find("RotationX")->GetValue().ToFloat();
+  rotateY = aTransform->Find("RotationY")->GetValue().ToFloat();
+  rotateZ = aTransform->Find("RotationZ")->GetValue().ToFloat();
 
   Transform* objTransform = aObject->GET<Transform>();
   objTransform->SetPosition(Vector3(posX,posY,posZ));
   objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
   objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
+  
+  Matrix33 rotation;
+  rotation = rotation.Rotate(Vector3(1,0,0), rotateX);
+  rotation = rotation.Rotate(Vector3(0,1,0), rotateY);
+  rotation = rotation.Rotate(Vector3(0,0,1), rotateZ);
+  objTransform->SetRotation(rotation);
 
   // Auto set camera bounds based on objects in environment
   mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);

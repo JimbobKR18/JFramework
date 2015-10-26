@@ -160,16 +160,12 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glBindTexture(GL_TEXTURE_2D, texture);
     
     glPushMatrix();
-
-#ifdef VERTEX_ARRAYS
+    
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     std::vector<Vector3> points, texcoords;
     std::vector<Vector4> colors;
-#else
-    glBegin(GL_QUADS);
-#endif
     
     // While other texture share the same texture id, draw them
     while(it != end &&
@@ -184,39 +180,57 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       
       // Get position and size
       Vector3 position = transform->GetPosition();
+      Matrix33 rotation = transform->GetRotation();
       Vector3 size = transform->GetSize();
+      Vector3 scale = transform->GetScale();
       
       TextureCoordinates *texCoord = surface->GetTextureData();
       Vector4 color = surface->GetColor();
-      
-      // Get positions relative to the camera
-      float xPosition = position.x;
-      float yPosition = position.y;
-      float zPosition = position.z;
 
       if(surface->GetViewMode() == VIEW_ABSOLUTE)
       {
-        xPosition -= cameraDiff.x;
-        yPosition -= cameraDiff.y;
-        zPosition -= cameraDiff.z;
+        position -= cameraDiff;
       }
 
       // Logic too long, put into helper
-      AlignmentHelper(transform, size, xPosition, yPosition, zPosition);
+      AlignmentHelper(transform, size, position.x, position.y, position.z);
 
-      bool draw = xPosition - size.x < GetWidth() && yPosition - size.y < GetHeight() &&
-                  xPosition + size.x > 0 && yPosition + size.y > 0;
+      // Scaling
+      size.x *= scale.x;
+      size.y *= scale.y;
+      size.z *= scale.z;
+      
+      // Get the basic coordinates for the quad
+      Vector3 topLeft = Vector3(-size.x, -size.y, 0);
+      Vector3 topRight = Vector3(size.x, -size.y, 0);
+      Vector3 bottomRight = Vector3(size.x, size.y, 0);
+      Vector3 bottomLeft = Vector3(-size.x, size.y, 0);
+      
+      // Rotate
+      topLeft = rotation * topLeft;
+      topRight = rotation * topRight;
+      bottomLeft = rotation * bottomLeft;
+      bottomRight = rotation * bottomRight;
+
+      // Translate
+      topLeft += position;
+      topRight += position;
+      bottomRight += position;
+      bottomLeft += position;
+      
+      // Determine whether or not to draw
+      bool draw = topLeft.x < GetWidth() && topLeft.y < GetHeight() &&
+                  bottomRight.x > 0 && bottomRight.y > 0;
       if(!draw)
       {
         continue;
       }
       
-#ifdef VERTEX_ARRAYS
       // Vertex points
-      points.push_back(Vector3(xPosition - size.x, yPosition - size.y, zPosition));
-      points.push_back(Vector3(xPosition + size.x, yPosition - size.y, zPosition));
-      points.push_back(Vector3(xPosition + size.x, yPosition + size.y, zPosition));
-      points.push_back(Vector3(xPosition - size.x, yPosition + size.y, zPosition));
+      points.push_back(topLeft);
+      points.push_back(topRight);
+      points.push_back(bottomRight);
+      points.push_back(bottomLeft);
       // Texture coordinates
       texcoords.push_back(Vector3(texCoord->GetXValue(0), texCoord->GetYValue(0), 0));
       texcoords.push_back(Vector3(texCoord->GetXValue(1), texCoord->GetYValue(0), 0));
@@ -227,21 +241,8 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       colors.push_back(color);
       colors.push_back(color);
       colors.push_back(color);
-#else
-      // Actually draw the object
-      glColor4f(color.x, color.y, color.z, color.w);
-      glTexCoord2f(texCoord->GetXValue(0), texCoord->GetYValue(0));
-      glVertex3f(xPosition - size.x, yPosition - size.y, zPosition);
-      glTexCoord2f(texCoord->GetXValue(1), texCoord->GetYValue(0));
-      glVertex3f(xPosition + size.x, yPosition - size.y, zPosition);
-      glTexCoord2f(texCoord->GetXValue(1), texCoord->GetYValue(1));
-      glVertex3f(xPosition + size.x, yPosition + size.y, zPosition);
-      glTexCoord2f(texCoord->GetXValue(0), texCoord->GetYValue(1));
-      glVertex3f(xPosition - size.x, yPosition + size.y, zPosition);
-#endif
     }
     
-#ifdef VERTEX_ARRAYS
     // Pointers and draw (there has to be something to draw though
     if (points.size() > 0)
     {
@@ -253,9 +254,6 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
-#else
-    glEnd();
-#endif
     glPopMatrix();
 
     // Reset to default texture

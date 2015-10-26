@@ -127,6 +127,9 @@ struct Matrix33
   Matrix33 Invert() const;
   float Determinant() const;
   float Determinant(float const aA, float const aB, float const aC, float const aD) const;
+  
+  void operator=(Matrix33 const &aMatrix);
+  bool operator==(Matrix33 const &aMatrix) const;
 
   Matrix33 operator*(Matrix33 const &rhs) const;
   Matrix33 operator*(float const aValue) const;

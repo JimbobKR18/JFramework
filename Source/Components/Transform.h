@@ -10,6 +10,7 @@ class Transform : public Component
     Vector3     mPosition;
     Vector3     mScale;
     Vector3     mSize;
+    Matrix33    mRotation;
     X_ALIGNMENT mXAlign;
     Y_ALIGNMENT mYAlign;
     Z_ALIGNMENT mZAlign;
@@ -28,6 +29,9 @@ class Transform : public Component
 
     Vector3&            GetSize();
     void                SetSize(Vector3 const &aSize);
+    
+    Matrix33&           GetRotation();
+    void                SetRotation(Matrix33 const &aRotation);
 
     X_ALIGNMENT         GetXAlignment() const;
     void                SetXAlignment(X_ALIGNMENT const &aAlign);

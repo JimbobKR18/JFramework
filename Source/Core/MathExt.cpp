@@ -575,6 +575,30 @@ float Matrix33::Determinant(float const aA, float const aB, float const aC,
   return (aA * aD) - (aB * aC);
 }
 
+void Matrix33::operator=(Matrix33 const &aMatrix)
+{
+  for(int i = 0; i < 2; ++i)
+  {
+    for(int j = 0; j < 2; ++j)
+    {
+      values[i][j] = aMatrix.values[i][j];
+    }
+  }
+}
+
+bool Matrix33::operator==(Matrix33 const &aMatrix) const
+{
+  for(int i = 0; i < 2; ++i)
+  {
+    for(int j = 0; j < 2; ++j)
+    {
+      if(values[i][j] != aMatrix.values[i][j])
+        return false;
+    }
+  }
+  return true;
+}
+
 Matrix33 Matrix33::operator*(Matrix33 const &rhs) const
 {
   Matrix33 ret;
