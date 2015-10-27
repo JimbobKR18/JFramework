@@ -147,8 +147,15 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 {
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
-  Vector3 cameraSize = GetView().GetSize();
-  Vector3 cameraDiff = cameraPosition - (cameraSize / 2.0f);
+  Vector3 cameraSize = GetView().GetHalfSize();
+  Vector3 cameraDiff = cameraPosition - cameraSize;
+  Vector3 cameraScale = GetView().GetScale();
+  Matrix33 cameraRotation = GetView().GetRotation();
+  
+  // Camera scaling
+  cameraDiff.x *= cameraScale.x;
+  cameraDiff.y *= cameraScale.y;
+  cameraDiff.z *= cameraScale.z;
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -178,15 +185,24 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       // Gotta progress this somehow
       ++it;
       
-      // Get position and size
+      // Get position, rotation, scale, and size
       Vector3 position = transform->GetPosition();
-      Matrix33 rotation = transform->GetRotation();
+      Matrix33 rotation = transform->GetRotation() * cameraRotation;
       Vector3 size = transform->GetSize();
       Vector3 scale = transform->GetScale();
       
       TextureCoordinates *texCoord = surface->GetTextureData();
       Vector4 color = surface->GetColor();
+      
+      // Camera scale
+      size.x *= cameraScale.x;
+      size.y *= cameraScale.y;
+      size.z *= cameraScale.z;
+      
+      // Camera rotation
+      position = cameraRotation * position;
 
+      // Camera translation
       if(surface->GetViewMode() == VIEW_ABSOLUTE)
       {
         position -= cameraDiff;
