@@ -129,10 +129,13 @@ void View::SetMinBoundary(Vector3 const &aMinBoundary)
   mMinBoundary = aMinBoundary;
 }
 
+/**
+ * @brief Update loop
+ */
 void View::Update()
 {
   // Temporary position
-  Vector3 position = mTransform.GetPosition();
+  Vector3 &position = mTransform.GetPosition();
   
   // Follow target
   if(mTarget)
@@ -148,6 +151,4 @@ void View::Update()
     position.y = mMinBoundary.y + mHalfSize.y;
   else if(position.y + mHalfSize.y > mMaxBoundary.y)
     position.y = mMaxBoundary.y - mHalfSize.y;
-    
-  SetPosition(position);
 }
