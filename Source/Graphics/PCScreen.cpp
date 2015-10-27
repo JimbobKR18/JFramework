@@ -37,8 +37,8 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
   Vector3 cameraPosition = GetView().GetPosition();
-  Vector3 cameraSize = GetView().GetSize();
-  Vector3 cameraDiff = cameraPosition - (cameraSize / 2.0f);
+  Vector3 cameraSize = GetView().GetHalfSize();
+  Vector3 cameraDiff = cameraPosition - cameraSize;
   
   std::vector<Surface*>::const_iterator end = aObjects.end();
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end; ++it)
