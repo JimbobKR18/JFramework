@@ -653,6 +653,21 @@ Vector3 Matrix33::operator*(Vector3 const &rhs) const
   return ret;
 }
 
+void Matrix33::RotateX(float const aAngle)
+{
+  (*this) = Rotate(Vector3(1,0,0), aAngle);
+}
+
+void Matrix33::RotateY(float const aAngle)
+{
+  (*this) = Rotate(Vector3(0,1,0), aAngle);
+}
+
+void Matrix33::RotateZ(float const aAngle)
+{
+  (*this) = Rotate(Vector3(0,0,1), aAngle);
+}
+
 void Matrix33::operator*=(Matrix33 const &rhs)
 {
   *this = *this * rhs;
@@ -661,4 +676,20 @@ void Matrix33::operator*=(Matrix33 const &rhs)
 void Matrix33::operator*=(float const aValue)
 {
   *this = *this * aValue;
+}
+
+void Matrix33::SerializeLUA()
+{
+  SLB::Class<Matrix33>("Matrix33")
+      .set("Concatenate", &Matrix33::Concatenate)
+      .set("Rotate", &Matrix33::Rotate)
+      .set("RotateX", &Matrix33::RotateX)
+      .set("RotateY", &Matrix33::RotateY)
+      .set("RotateZ", &Matrix33::RotateZ)
+      .set("Invert", &Matrix33::Invert);
+}
+
+std::string Matrix33::GetName()
+{
+  return "Matrix33";
 }

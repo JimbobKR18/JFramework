@@ -48,8 +48,10 @@ namespace LUABind
 
   void RegisterClasses()
   {
-    // Vector3
+    // Math
     Vector3::SerializeLUA();
+    Vector4::SerializeLUA();
+    Matrix33::SerializeLUA();
 
     // HashString
     HashString::SerializeLUA();
@@ -76,8 +78,10 @@ namespace LUABind
     LevelManager::SerializeLUA();
     ObjectManager::SerializeLUA();
     SoundManager::SerializeLUA();
+    
     // GameApp
     GameApp::SerializeLUA();
+    
     // StaticGameApp
     SLB::Class<StaticGameApp, SLB::Instance::NoCopyNoDestroy>("StaticGameApp")
         .set("GetApp", StaticGameApp::GetApp);

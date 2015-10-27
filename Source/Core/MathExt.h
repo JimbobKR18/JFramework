@@ -140,6 +140,9 @@ struct Matrix33
   void RotateZ(float const aAngle);
   void operator*=(Matrix33 const &rhs);
   void operator*=(float const aValue);
+  
+  static void SerializeLUA();
+  static std::string GetName();
 };
 
 template<typename T>
