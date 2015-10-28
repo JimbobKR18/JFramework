@@ -165,6 +165,18 @@ Vector3 Vector3::Subtract(Vector3 const &rhs) const
 {
   return *this - rhs;
 }
+Vector3 Vector3::Multiply(Vector3 const &rhs) const
+{
+  Vector3 ret = *this;
+  ret *= rhs;
+  return ret;
+}
+Vector3 Vector3::Divide(Vector3 const &rhs) const
+{
+  Vector3 ret = *this;
+  ret /= rhs;
+  return ret;
+}
 Vector3 Vector3::Project(Vector3 const &rhs) const
 {
   return *this % rhs;
@@ -185,6 +197,18 @@ void Vector3::operator-=(Vector3 const &rhs)
   x -= rhs.x;
   y -= rhs.y;
   z -= rhs.z;
+}
+void Vector3::operator*=(Vector3 const &rhs)
+{
+  x *= rhs.x;
+  y *= rhs.y;
+  z *= rhs.z;
+}
+void Vector3::operator/=(Vector3 const &rhs)
+{
+  x /= rhs.x;
+  y /= rhs.y;
+  z /= rhs.z;
 }
 void Vector3::operator*=(float const aMultiplier)
 {
@@ -210,6 +234,8 @@ void Vector3::SerializeLUA()
       .set("IsEqual", &Vector3::operator==)
       .set("Add", &Vector3::Add)
       .set("Subtract", &Vector3::Subtract)
+      .set("Multiply", &Vector3::Multiply)
+      .set("Divide", &Vector3::Divide)
       .set("Dot", &Vector3::Dot)
       .set("Cross", &Vector3::Cross)
       .set("Project", &Vector3::Project)

@@ -34,7 +34,7 @@ class PCScreen : public Screen
     virtual void ChangeSize(int aW, int aH, bool aFullScreen);
 
   private:
-    void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, float &aXPosition, float &aYPosition, float &aZPosition);
+    void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
 };
 
 #endif

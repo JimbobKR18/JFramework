@@ -59,11 +59,15 @@ struct Vector3
   Vector3 Cross(Vector3 const &rhs) const;
   Vector3 Add(Vector3 const &rhs) const;
   Vector3 Subtract(Vector3 const &rhs) const;
+  Vector3 Multiply(Vector3 const &rhs) const;
+  Vector3 Divide(Vector3 const &rhs) const;
   Vector3 Project(Vector3 const &rhs) const;
   Vector3 Invert() const;
 
   void    operator+=(Vector3 const &rhs);
   void    operator-=(Vector3 const &rhs);
+  void    operator*=(Vector3 const &rhs);
+  void    operator/=(Vector3 const &rhs);
   void    operator*=(float const aMultiplier);
   void    operator/=(float const aMultiplier);
 

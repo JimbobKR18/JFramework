@@ -78,7 +78,7 @@ void TileMapGenerator::Update()
 
     ++currentFrame;
 
-    if (currentFrame >= animation.size())
+    if(currentFrame >= static_cast<int>(animation.size()))
       currentFrame = 0;
 
     mCurrentFrames.find(key)->second = currentFrame;

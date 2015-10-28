@@ -147,15 +147,12 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 {
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
-  Vector3 cameraSize = GetView().GetHalfSize();
-  Vector3 cameraDiff = cameraPosition - cameraSize;
   Vector3 cameraScale = GetView().GetScale();
+  Vector3 cameraSize = GetView().GetHalfSize();
   Matrix33 cameraRotation = GetView().GetRotation();
   
-  // Camera scaling
-  cameraDiff.x *= cameraScale.x;
-  cameraDiff.y *= cameraScale.y;
-  cameraDiff.z *= cameraScale.z;
+  // Must scale, rotate, then translate camera offset
+  Vector3 cameraDiff = (cameraRotation * cameraPosition.Multiply(cameraScale)) - cameraSize;
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -195,13 +192,8 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       Vector4 color = surface->GetColor();
       
       // Camera scale
-      size.x *= cameraScale.x;
-      size.y *= cameraScale.y;
-      size.z *= cameraScale.z;
-      
-      position.x *= cameraScale.x;
-      position.y *= cameraScale.y;
-      position.z *= cameraScale.z;
+      size *= cameraScale;
+      position *= cameraScale;
       
       // Camera rotation
       position = cameraRotation * position;
@@ -212,13 +204,11 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
         position -= cameraDiff;
       }
 
-      // Logic too long, put into helper
-      AlignmentHelper(transform, size, position.x, position.y, position.z);
+      // Move object based on its alignment
+      AlignmentHelper(transform, size, position);
 
-      // Scaling
-      size.x *= scale.x;
-      size.y *= scale.y;
-      size.z *= scale.z;
+      // Local scaling
+      size *= scale;
       
       // Get the basic coordinates for the quad
       Vector3 topLeft = Vector3(-size.x, -size.y, 0);
@@ -226,13 +216,13 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       Vector3 bottomRight = Vector3(size.x, size.y, 0);
       Vector3 bottomLeft = Vector3(-size.x, size.y, 0);
       
-      // Rotate
+      // Local rotate
       topLeft = rotation * topLeft;
       topRight = rotation * topRight;
       bottomLeft = rotation * bottomLeft;
       bottomRight = rotation * bottomRight;
 
-      // Translate
+      // Local translate
       topLeft += position;
       topRight += position;
       bottomRight += position;
@@ -338,7 +328,7 @@ void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glLoadIdentity();
 }
 
-void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, float &aXPosition, float &aYPosition, float &aZPosition)
+void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition)
 {
   X_ALIGNMENT xAlign = aTransform->GetXAlignment();
   Y_ALIGNMENT yAlign = aTransform->GetYAlignment();
@@ -347,10 +337,10 @@ void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, floa
   switch(xAlign)
   {
   case X_ALIGN_LEFT:
-    aXPosition += aSize.x;
+    aPosition.x += aSize.x;
     break;
   case X_ALIGN_RIGHT:
-    aXPosition -= aSize.x;
+    aPosition.x -= aSize.x;
     break;
   default:
     break;
@@ -359,10 +349,10 @@ void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, floa
   switch(yAlign)
   {
   case Y_ALIGN_TOP:
-    aYPosition += aSize.y;
+    aPosition.y += aSize.y;
     break;
   case Y_ALIGN_BOTTOM:
-    aYPosition -= aSize.y;
+    aPosition.y -= aSize.y;
     break;
   default:
     break;
@@ -371,10 +361,10 @@ void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, floa
   switch(zAlign)
   {
   case Z_ALIGN_FRONT:
-    aZPosition += aSize.z;
+    aPosition.z += aSize.z;
     break;
   case Z_ALIGN_BACK:
-    aZPosition -= aSize.z;
+    aPosition.z -= aSize.z;
     break;
   default:
     break;
