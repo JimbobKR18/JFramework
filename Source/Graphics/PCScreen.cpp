@@ -199,6 +199,10 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       size.y *= cameraScale.y;
       size.z *= cameraScale.z;
       
+      position.x *= cameraScale.x;
+      position.y *= cameraScale.y;
+      position.z *= cameraScale.z;
+      
       // Camera rotation
       position = cameraRotation * position;
 
