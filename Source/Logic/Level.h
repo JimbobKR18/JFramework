@@ -93,6 +93,7 @@ protected:
 private:
   void ParseTransform(GameObject *aObject, Root* aTransform);
   void ParseSurface(GameObject *aObject, Root* aSurface);
+  void ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject);
   void ParseTileGenerator(TextParser &aParser);
 };
 

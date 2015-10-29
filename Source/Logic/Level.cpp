@@ -625,6 +625,10 @@ void Level::ParseFile()
     {
       ParseSurface(object, curRoot->Find("Surface"));
     }
+    if(curRoot->Find("PhysicsObject"))
+    {
+      ParsePhysicsObject(object, curRoot->Find("PhysicsObject"));
+    }
     // Who is the focus of this level?
     if(curRoot->Find("Focus"))
     {
@@ -757,6 +761,106 @@ void Level::ParseSurface(GameObject *aObject, Root *aSurface)
 
   Surface* objSurface = aObject->GET<Surface>();
   objSurface->SetColor(Vector4(r, g, b, a));
+}
+
+/**
+ * @brief Get physics object data from a root.
+ * @param aPhysicsObject
+ */
+void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
+{
+  // If object doesn't have physicsobject, it does now.
+  PhysicsObject* physicsObject = aObject->GET<PhysicsObject>();
+  if(!physicsObject)
+  {
+    physicsObject = new PhysicsObject(GetManager()->GetOwningApp()->GET<PhysicsWorld>());
+    aObject->AddComponent(physicsObject);
+  }
+  
+  // Clear out current shapes.
+  std::vector<Shape*>& shapes = physicsObject->GetShapes();
+  for(std::vector<Shape*>::iterator it = shapes.begin(); it != shapes.end(); ++it)
+  {
+    delete *it;
+  }
+  shapes.clear();
+  
+  // Serialize the physicsobject
+  bool gravity = aPhysicsObject->Find("Gravity")->GetValue().ToBool();
+  bool isStatic = aPhysicsObject->Find("Static")->GetValue().ToBool();
+  bool isPassable = aPhysicsObject->Find("Passable")->GetValue().ToBool();
+  physicsObject->SetMass(aPhysicsObject->Find("Mass")->GetValue().ToInt());
+  physicsObject->SetDamping(aPhysicsObject->Find("Damping")->GetValue().ToFloat());
+  
+  // default true
+  if(!gravity)
+  {
+    GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(physicsObject);
+    physicsObject->SetAffectedByGravity(false);
+  }
+  
+  physicsObject->SetStatic(isStatic);
+  physicsObject->SetPassable(isPassable);
+  
+  HashString const SHAPE = "Shape_";
+  int curIndex = 0;
+  HashString curShape = SHAPE + Common::IntToString(curIndex);
+  
+  // Adding shapes
+  // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
+  while(aPhysicsObject->Find(curShape))
+  {
+    Root* tempShape = aPhysicsObject->Find(curShape);
+    Shape* newShape = nullptr;
+    
+    HashString type = tempShape->Find("Type")->GetValue();
+    
+    // Discern type and serialize accordingly
+    if(type == "CUBE")
+    {
+      newShape = new Cube();
+      Cube* cube = (Cube*)newShape;
+      cube->size = Vector3(tempShape->Find("SizeX")->GetValue().ToFloat(),
+                          tempShape->Find("SizeY")->GetValue().ToFloat(),
+                          tempShape->Find("SizeZ")->GetValue().ToFloat());
+    }
+    else if(type == "SPHERE")
+    {
+      newShape = new Sphere();
+      Sphere* sphere = (Sphere*)newShape;
+      sphere->radius = tempShape->Find("Radius")->GetValue().ToFloat();
+    }
+    else if(type == "TRIANGLE")
+    {
+      newShape = new Triangle();
+      Triangle* triangle = (Triangle*)newShape;
+      HashString point = "Point_";
+      for(int i = 0; i < 3; ++i)
+      {
+        HashString pointId = point + Common::IntToString(i);
+        Vector3 point(tempShape->Find(pointId + "X")->GetValue().ToFloat(),
+                      tempShape->Find(pointId + "Y")->GetValue().ToFloat(),
+                      tempShape->Find(pointId + "Z")->GetValue().ToFloat());
+        triangle->points[i] = point;
+      }
+    }
+    else
+      assert(!"Invalid shape given");
+      
+    newShape->position = Vector3(tempShape->Find("PositionX")->GetValue().ToFloat(),
+                                 tempShape->Find("PositionY")->GetValue().ToFloat(),
+                                 tempShape->Find("PositionZ")->GetValue().ToFloat());
+                                 
+    // If passable flag is found, use it. Default false.
+    if(tempShape->Find("Passable"))
+    {
+      newShape->passable = tempShape->Find("Passable")->GetValue().ToBool();
+    }
+    physicsObject->AddShape(newShape);
+    
+    ++curIndex;
+    curShape = SHAPE + Common::IntToString(curIndex);
+  }
 }
 
 /**

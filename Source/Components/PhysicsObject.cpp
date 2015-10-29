@@ -346,6 +346,24 @@ void PhysicsObject::SetMass(float aMass)
 }
 
 /**
+ * @brief Get damping for this object
+ * @return Damping
+ */
+float PhysicsObject::GetDamping() const
+{
+  return mDamping;
+}
+
+/**
+ * @brief Set damping for this object
+ * @param aDamping Damping to set to
+ */
+void PhysicsObject::SetDamping(float aDamping)
+{
+  mDamping = aDamping;
+}
+
+/**
  * @brief Is this object static? (i.e. doesn't move)
  * @return If this object is static or not
  */

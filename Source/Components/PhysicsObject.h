@@ -62,6 +62,9 @@ public:
 
   float                GetMass() const;
   void                 SetMass(float aMass);
+  
+  float                GetDamping() const;
+  void                 SetDamping(float aDamping);
 
   bool                 IsStatic() const;
   void                 SetStatic(bool aStatic);
