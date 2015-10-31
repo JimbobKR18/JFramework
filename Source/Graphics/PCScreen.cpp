@@ -228,9 +228,10 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       bottomRight += position;
       bottomLeft += position;
       
-      // Determine whether or not to draw
-      bool draw = topLeft.x < GetWidth() && topLeft.y < GetHeight() &&
-                  bottomRight.x > 0 && bottomRight.y > 0;
+      // Determine whether or not to draw (If any point is on screen or box collides)
+      bool draw = PointIsOnScreen(topLeft) || PointIsOnScreen(topRight) || 
+        PointIsOnScreen(bottomLeft) || PointIsOnScreen(bottomRight) ||
+        BoxIsOnScreen(topLeft, bottomRight);
       if(!draw)
       {
         continue;
@@ -369,4 +370,28 @@ void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vect
   default:
     break;
   }
+}
+
+bool PCScreen::PointIsOnScreen(Vector3 const &aPoint)
+{
+  return aPoint.x < GetWidth() && aPoint.y < GetHeight() &&
+         aPoint.x > 0 && aPoint.y > 0;
+}
+
+bool PCScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
+{
+  // Separating axis theorum
+  Vector3 objectCenter = (aStart + aEnd) * 0.5f;
+  Vector3 objectSize = (aEnd - aStart) * 0.5f;
+  Vector3 screenCenter = Vector3(GetWidth() / 2.0f, GetHeight() / 2.0f, 0.0f);
+  Vector3 screenSize = Vector3(GetWidth() / 2.0f, GetHeight() / 2.0f, 0.0f);
+  for(int i = 0; i < 2; ++i)
+  {
+    if(objectCenter[i] - screenCenter[i] < objectSize[i] + screenSize[i])
+    {
+      continue;
+    }
+    return false;
+  }
+  return true;
 }

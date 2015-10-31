@@ -35,6 +35,8 @@ class PCScreen : public Screen
 
   private:
     void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
+    bool PointIsOnScreen(Vector3 const &aPoint);
+    bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
 };
 
 #endif
