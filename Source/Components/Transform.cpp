@@ -145,7 +145,6 @@ void Transform::SetZAlignment(Z_ALIGNMENT const &aAlign)
  */
 void Transform::Serialize(Parser &aParser)
 {
-  // NOTE rotations are kinda dumb to do here...
   std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   Root* object = aParser.Find(objectName);
   char const *values[9] = {"PositionX",
@@ -190,6 +189,11 @@ void Transform::Serialize(Parser &aParser)
     object->Place("Transform", "AlignZ", "CENTER");
   else if(mZAlign == Z_ALIGN_BACK)
     object->Place("Transform", "AlignZ", "BACK");
+    
+  // Rotations are a little TOO complicated, so set them to 0
+  object->Place("Transform", "RotationX", Common::IntToString(0));
+  object->Place("Transform", "RotationY", Common::IntToString(0));
+  object->Place("Transform", "RotationZ", Common::IntToString(0));
 }
 
 /**
