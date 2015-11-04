@@ -28,6 +28,7 @@ public:
   Vector3   GetHalfSize() const;
   Vector3   GetMaxBoundary() const;
   Vector3   GetMinBoundary() const;
+  GameObject* GetTarget();
 
   // Setters
   void      SetSize(Vector3 const &aSize);

@@ -75,6 +75,15 @@ Vector3 View::GetMinBoundary() const
 }
 
 /**
+ * @brief Get target for view
+ * @return Target
+ */
+GameObject* View::GetTarget()
+{
+  return mTarget;
+}
+
+/**
  * @brief Set size of view
  * @param aSize size
  */

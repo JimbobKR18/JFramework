@@ -1,5 +1,6 @@
 #include "Common.h"
 #include "GraphicsManager.h"
+#include "ObjectDeleteMessage.h"
 
 #if !defined(IOS) && !defined(ANDROID)
   #include "PCScreen.h"
@@ -43,6 +44,16 @@ void GraphicsManager::SendMessage(Message const &aMessage)
 
 void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
 {
+  if(aMessage->GetDescription() == OBJECT_DELETE.ToCharArray()) 
+  {
+    ObjectDeleteMessage *msg = (ObjectDeleteMessage*)aMessage;
+    // If this object was our view target, remember to unassociate.
+    if(mScreen->GetView().GetTarget() == msg->mObject)
+    {
+      mScreen->GetView().SetTarget(nullptr);
+    }
+    delete aMessage;
+  }
 }
 
 Surface *GraphicsManager::CreateSurface()

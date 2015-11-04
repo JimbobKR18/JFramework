@@ -252,13 +252,14 @@ void Level::AddStaticObject(GameObject *aObject)
  */
 void Level::DeleteObject(GameObject *aObject)
 {
-  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     if(aObject == *it)
     {
       mObjects.erase(it);
-      manager->DeleteObject(aObject);
+      objectManager->DeleteObject(aObject);
       break;
     }
   }
@@ -267,9 +268,15 @@ void Level::DeleteObject(GameObject *aObject)
     if(aObject == *it)
     {
       mStaticObjects.erase(it);
-      manager->DeleteObject(aObject);
+      objectManager->DeleteObject(aObject);
       break;
     }
+  }
+  
+  // Unassociate object from view target if need be
+  if(graphicsManager->GetScreen()->GetView().GetTarget() == aObject)
+  {
+    graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   }
 }
 
@@ -280,10 +287,10 @@ void Level::DeleteObject(GameObject *aObject)
  */
 GameObject* Level::CreateObjectDelayed(HashString const &aFileName)
 {
-  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  GameObject *object = manager->CreateObjectNoAdd(aFileName);
+  ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  GameObject *object = objectManager->CreateObjectNoAdd(aFileName);
   ObjectCreateMessage *msg = new ObjectCreateMessage(object);
-  manager->ProcessDelayedMessage(msg);
+  objectManager->ProcessDelayedMessage(msg);
   AddObject(object);
   return object;
 }
@@ -294,14 +301,15 @@ GameObject* Level::CreateObjectDelayed(HashString const &aFileName)
  */
 void Level::DeleteObjectDelayed(GameObject *aObject)
 {
-  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     if(aObject == *it)
     {
       mObjects.erase(it);
       ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
-      manager->ProcessDelayedMessage(msg);
+      objectManager->ProcessDelayedMessage(msg);
       break;
     }
   }
@@ -311,10 +319,12 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
     {
       mStaticObjects.erase(it);
       ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
-      manager->ProcessDelayedMessage(msg);
+      objectManager->ProcessDelayedMessage(msg);
       break;
     }
   }
+  ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
+  graphicsManager->ProcessDelayedMessage(msg);
 }
 
 /**
