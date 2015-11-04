@@ -51,6 +51,7 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
     if(mScreen->GetView().GetTarget() == msg->mObject)
     {
       mScreen->GetView().SetTarget(nullptr);
+      mScreen->GetView().SetTime(0.0f);
     }
     delete aMessage;
   }
