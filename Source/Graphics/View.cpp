@@ -107,12 +107,17 @@ void View::SetPosition(Vector3 const &aPos)
 }
 
 /**
- * @brief Set view target (who to follow)
+ * @brief Set view target (who to follow), clears interpolator.
  * @param aObj target
  */
 void View::SetTarget(GameObject *aObj)
 {
   mTarget = aObj;
+  if(mInterpolator)
+  {
+    delete mInterpolator;
+    mInterpolator = nullptr;
+  }
 }
 
 /**
