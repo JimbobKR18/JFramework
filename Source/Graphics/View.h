@@ -15,12 +15,11 @@ private:
   Vector3                 mMaxBoundary;
   Vector3                 mMinBoundary;
   GameObject*             mTarget;
-  float                   mRate;
   float                   mTime;
   Interpolation<Vector3>* mInterpolator;
 
 public:
-  View(float aRate = 0.0f);
+  View(float aTime = 0.0f);
   virtual ~View();
 
   // Getters
@@ -37,7 +36,6 @@ public:
   void      SetSize(Vector3 const &aSize);
   void      SetPosition(Vector3 const &aPos);
   void      SetTarget(GameObject *aObj);
-  void      SetRate(float aRate);
   void      SetTime(float aTime);
   void      SetMaxBoundary(Vector3 const &aMaxBoundary);
   void      SetMinBoundary(Vector3 const &aMinBoundary);

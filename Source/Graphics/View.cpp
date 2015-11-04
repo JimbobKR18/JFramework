@@ -3,9 +3,9 @@
 #include "Transform.h"
 #include "ObjectManager.h"
 
-View::View(float aRate) : mTransform(), mHalfSize(0,0,0), mMaxBoundary(0,0,0),
-                          mMinBoundary(0,0,0), mTarget(nullptr), mRate(aRate),
-                          mTime(0), mInterpolator(nullptr)
+View::View(float aTime) : mTransform(), mHalfSize(0,0,0), mMaxBoundary(0,0,0),
+                          mMinBoundary(0,0,0), mTarget(nullptr), mTime(0), 
+                          mInterpolator(nullptr)
 {
 }
 
@@ -116,15 +116,6 @@ void View::SetTarget(GameObject *aObj)
 }
 
 /**
- * @brief Set rate of motion
- * @param aRate rate
- */
-void View::SetRate(float aRate)
-{
-  mRate = aRate;
-}
-
-/**
  * @brief Set travel time of motion
  * @param aTime time
  */
@@ -162,8 +153,8 @@ void View::Update()
   // Follow target
   if(mTarget)
   {
-    // For tiny rates, just go to the target.
-    if(mRate <= 0.01f)
+    // For tiny times, just go to the target.
+    if(mTime <= 0.01f)
       position = mTarget->GET<Transform>()->GetPosition();
     else
     {
