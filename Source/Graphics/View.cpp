@@ -1,14 +1,18 @@
 #include "View.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "ObjectManager.h"
 
 View::View(float aRate) : mTransform(), mHalfSize(0,0,0), mMaxBoundary(0,0,0),
-                          mMinBoundary(0,0,0), mTarget(NULL), mRate(aRate)
+                          mMinBoundary(0,0,0), mTarget(nullptr), mRate(aRate),
+                          mTime(0), mInterpolator(nullptr)
 {
 }
 
 View::~View()
 {
+  if(mInterpolator)
+    delete mInterpolator;
 }
 
 /**
@@ -121,6 +125,15 @@ void View::SetRate(float aRate)
 }
 
 /**
+ * @brief Set travel time of motion
+ * @param aTime time
+ */
+void View::SetTime(float aTime)
+{
+  mTime = aTime;
+}
+
+/**
  * @brief Set max boundary of view
  * @param aMaxBoundary max boundary
  */
@@ -148,7 +161,27 @@ void View::Update()
   
   // Follow target
   if(mTarget)
-    position = mTarget->GET<Transform>()->GetPosition();
+  {
+    // For tiny rates, just go to the target.
+    if(mRate <= 0.01f)
+      position = mTarget->GET<Transform>()->GetPosition();
+    else
+    {
+      if(!mInterpolator)
+      {
+        mInterpolator = new Interpolation<Vector3>(&position, mTarget->GET<Transform>()->GetPosition(), mTime);
+      }
+      else
+      {
+        mInterpolator->Update(mTarget->GetManager()->GetOwningApp()->GetDT());
+        if(mInterpolator->IsComplete())
+        {
+          delete mInterpolator;
+          mInterpolator = nullptr;
+        }
+      }
+    }
+  }
 
   // Boundary check
   if(position.x - mHalfSize.x < mMinBoundary.x)
