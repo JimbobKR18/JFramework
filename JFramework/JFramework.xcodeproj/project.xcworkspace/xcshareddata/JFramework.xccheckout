@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>FBB0E980-175E-4DD2-9A60-B233126AE80F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>JFramework</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>95D3B2BE10C3C9452998E36EFFD3DFDD53F0B937</key>
 		<string>https://github.com/JimbobKR18/JFramework.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>JFramework/JFramework.xcodeproj</string>
+	<string>JFramework/JFramework.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>95D3B2BE10C3C9452998E36EFFD3DFDD53F0B937</key>
