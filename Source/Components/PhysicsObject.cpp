@@ -60,7 +60,7 @@ void PhysicsObject::Update()
   transform->SetPosition(position);
 
   // Nullify all forces
-  mForces *= 0;
+  ClearForces();
 
   // Update the size for broadphasing
   mBroadSize = transform->GetSize() * 1.5f;
