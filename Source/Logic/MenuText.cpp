@@ -129,8 +129,18 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   if(aParser.Find("Animation"))
   {
     Root* animation = aParser.Find("Animation");
-    std::vector<int> numFrames = animation->Find("NumFrames")->GetValue().ToIntVector();
     float animationSpeed = animation->Find("AnimationSpeed")->GetValue().ToFloat();
+    std::vector<int> numFrames;
+    
+    // Manually set the number of frames, or auto jump a character at a time.
+    if(animation->Find("NumFrames"))
+    {
+      numFrames = animation->Find("NumFrames")->GetValue().ToIntVector();
+    }
+    else
+    {
+      numFrames.push_back(mText.length());
+    }
 
     surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
     surface->GetTextureData()->SetXGain(0, 0);
