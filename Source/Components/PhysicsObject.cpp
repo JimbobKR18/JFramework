@@ -266,6 +266,14 @@ void PhysicsObject::AddForce(Vector3 const &aForce)
 }
 
 /**
+ * @brief Clear all forces for object
+ */
+void PhysicsObject::ClearForces()
+{
+  mForces *= 0;
+}
+
+/**
  * @brief Add object to ignore list
  * @param aObjectName Name of object to ignore
  */

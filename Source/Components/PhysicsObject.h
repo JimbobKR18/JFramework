@@ -51,6 +51,7 @@ public:
   // Methods - Misc.
   void                 AddShape(Shape* aShape);
   void                 AddForce(Vector3 const &aForce);
+  void                 ClearForces();
   void                 AddIgnore(std::string const &aObjectName);
   bool                 IgnoreObject(std::string const &aObjectName);
 
