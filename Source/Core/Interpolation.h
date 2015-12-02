@@ -29,12 +29,13 @@ public:
   void Update(float aDT)
   {
     mCurrentTime += aDT;
-
-    if(mCurrentTime < mTime)
-    {
-      float percentage = mCurrentTime / mTime;
-      (*mCurrent) = mStart + (mRate * percentage);
-    }
+    
+    float timeNumerator = mCurrentTime;
+    if(timeNumerator > mTime)
+      timeNumerator = mTime;
+    
+    float percentage = timeNumerator / mTime;
+    (*mCurrent) = mStart + (mRate * percentage);
   }
   
   /**
