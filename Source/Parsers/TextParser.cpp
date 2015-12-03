@@ -25,14 +25,15 @@ TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Pa
     std::cout << "Input file: " << aFilename << " not found!" << std::endl;
     assert(!"Input file not found, check the logs");
   }
+  
+  if(aMode == MODE_INPUT)
+    mInput.close();
 }
 TextParser::~TextParser()
 {
   if(mMode == MODE_OUTPUT && !mWrittenOut)
     Write();
-
   mOutput.close();
-  mInput.close();
 }
 
 void TextParser::Parse()

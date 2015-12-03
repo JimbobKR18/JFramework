@@ -21,7 +21,7 @@
 
 int const PCSurface::sUID = Common::StringHashFunction("Surface");
 
-PCSurface::PCSurface() : Surface()
+PCSurface::PCSurface() : Surface(), mSurface(nullptr), mFont(nullptr)
 {
 }
 PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(nullptr), mFont(nullptr)
