@@ -397,6 +397,15 @@ std::vector<int> HashString::ToIntVector() const
 }
 
 /**
+ * @brief Convert to float vector, split by ","
+ * @return String as float vector
+ */
+std::vector<float> HashString::ToFloatVector() const
+{
+  return Common::StringToFloatVector(mString);
+}
+
+/**
  * @brief Convert to lower case.
  * @return The string as lower case.
  */

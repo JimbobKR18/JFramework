@@ -72,6 +72,7 @@ public:
   bool ToBool() const;
   std::vector<std::string> ToStringVector() const;
   std::vector<int> ToIntVector() const;
+  std::vector<float> ToFloatVector() const;
   HashString ToLower() const;
   HashString ToUpper() const;
   HashString ToLiteral() const;

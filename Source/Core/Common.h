@@ -57,7 +57,7 @@ namespace Common
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   
   HashString                RetrieveNameFromFileName(HashString const &aFileName);
-  int                           StringHashFunction(std::string const &aString);
+  int                       StringHashFunction(std::string const &aString);
 
   int                       RandomIntInRange(int const aX, int const bX);
   float                     RandomFloatInRange(float const aX, float const bX);
