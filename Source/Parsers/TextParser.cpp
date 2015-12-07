@@ -36,6 +36,9 @@ TextParser::~TextParser()
   mOutput.close();
 }
 
+/**
+ * @brief Parse text file
+ */
 void TextParser::Parse()
 {
   Root *mCurNode = nullptr;
@@ -92,12 +95,19 @@ void TextParser::Parse()
   mDictionary = mCurNode;
 }
 
+/**
+ * @brief Write out to text file.
+ */
 void TextParser::Write()
 {
   mWrittenOut = true;
   WriteRoot(mDictionary);
 }
 
+/**
+ * @brief Write out root and all children below it.
+ * @param aRoot Root to write
+ */
 void TextParser::WriteRoot(Root *aRoot)
 {
   if(aRoot->GetValue().ToString() == "")
@@ -119,6 +129,9 @@ void TextParser::WriteRoot(Root *aRoot)
   }
 }
 
+/**
+ * @brief Indentation helper.
+ */
 std::string TextParser::InsertIndents()
 {
   std::string ret;
@@ -129,6 +142,10 @@ std::string TextParser::InsertIndents()
   return ret;
 }
 
+/**
+ * @brief If find "Literal(" keep forming string until find ")"
+ * @param aLiteral
+ */
 std::string TextParser::ParseLiteral(std::string const &aLiteral)
 {
   std::string ret;
@@ -165,6 +182,9 @@ std::string TextParser::ParseLiteral(std::string const &aLiteral)
   return ret;
 }
 
+/**
+ * @brief Negative parse helper
+ */
 std::string TextParser::ParseNegative(std::string const &aValue)
 {
   std::string ret;

@@ -29,6 +29,9 @@ bool CollisionPair::operator==(CollisionPair const &rhs)
   return false;
 }
 
+/**
+ * @brief Switch sides for objects.
+ */
 void CollisionPair::Switch()
 {
   Shape* temp = mShapes[0];

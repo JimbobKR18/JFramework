@@ -8,6 +8,10 @@
 #include "CollisionChecker.h"
 #include "PhysicsObject.h"
 
+/**
+ * @brief General catch all shape collision caller.
+ * @param aPair
+ */
 std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair const &aPair)
 {
   std::vector<CollisionPair> pairs;
@@ -83,6 +87,12 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
   return pairs;
 }
 
+/**
+ * @brief General catch all line collision caller.
+ * @param aSegment Line
+ * @param aTransform Object Transform
+ * @param aShape Shape to check collision with
+ */
 bool CollisionChecker::CheckLineCollision(Line const &aSegment, Transform* aTransform, Shape* aShape)
 {
   switch(aShape->shape)
@@ -99,6 +109,10 @@ bool CollisionChecker::CheckLineCollision(Line const &aSegment, Transform* aTran
   }
 }
 
+/**
+ * @brief Sphere to sphere check
+ * @param aPair
+ */
 bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
 {
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
@@ -117,6 +131,10 @@ bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
   return false;
 }
 
+/**
+ * @brief Sphere to cube check
+ * @param aPair
+ */
 bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape != Shape::SPHERE)
@@ -153,6 +171,10 @@ bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
   return dist.x*dist.x + dist.y*dist.y + dist.z*dist.z < aPair.mShapes[0]->GetSize(0)*aPair.mShapes[0]->GetSize(0);
 }
 
+/**
+ * @brief Cube to cube check
+ * @param aPair
+ */
 bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
 {
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
@@ -168,6 +190,10 @@ bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
   return xCheck && yCheck && zCheck;
 }
 
+/**
+ * @brief Triangle to sphere check
+ * @param aPair
+ */
 /* http://realtimecollisiondetection.net/blog/?p=103 */
 bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
 {
@@ -205,6 +231,10 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   return false;
 }
 
+/**
+ * @brief Triangle to Cube check
+ * @param aPair
+ */
 bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::CUBE)
@@ -247,12 +277,22 @@ bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
   return false;
 }
 
+/**
+ * @brief Triangle to Triangle check.
+ * @param aPair
+ */
 bool CollisionChecker::CheckTriangleToTriangle(CollisionPair &aPair)
 {
   // TODO
   return false;
 }
 
+/**
+ * @brief Line to sphere check
+ * @param aSegment Line
+ * @param aSphere Sphere transform
+ * @param aShape Sphere shape
+ */
 bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape)
 {
   float radius = aShape->GetSize(0);
@@ -260,6 +300,12 @@ bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSpher
   return (closestPoint - (aSphere->GetPosition() + aShape->position)).length() < radius;
 }
 
+/**
+ * @brief Line to cube check
+ * @param aSegment Line
+ * @param aSphere Cube transform
+ * @param aShape Cube shape
+ */
 bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, Shape* aShape)
 {
   /*// http://bit.ly/1p1SX3G

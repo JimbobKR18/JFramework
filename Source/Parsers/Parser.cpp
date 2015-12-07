@@ -9,29 +9,43 @@ Parser::~Parser()
   delete mDictionary;
 }
 
-// Getters
+/**
+ * @brief Get current object index (which object are we looking at?
+ */
 int Parser::GetCurrentObjectIndex() const
 {
   return mCurrentObjectIndex;
 }
 
+/**
+ * @brief Get name of file.
+ */
 std::string Parser::GetFilename() const
 {
   return mFilename;
 }
 
+/**
+ * @brief Get top level root node.
+ */
 Root* Parser::GetBaseRoot() const
 {
   return mDictionary;
 }
 
-// Setters
+/**
+ * @brief Set object index.
+ * @param aIndex
+ */
 void Parser::SetCurrentObjectIndex(int const aIndex)
 {
   mCurrentObjectIndex = aIndex;
 }
 
-// Reading
+/**
+ * @brief Find element by name (first occurrence)
+ * @param aElement Element string to find
+ */
 Root* Parser::Find(std::string const &aElement)
 {
   // Search inside roots to find value
@@ -39,6 +53,11 @@ Root* Parser::Find(std::string const &aElement)
   return value;
 }
 
+/**
+ * @brief Find node by name two levels deep (first parent, then element)
+ * @param aRoot
+ * @param aElement
+ */
 Root* Parser::Find(std::string const &aRoot, std::string const &aElement)
 {
   // Find node and search it for an element
@@ -59,13 +78,23 @@ Root* Parser::Find(std::string const &aRoot, std::string const &aElement)
   return node;
 }
 
-// Writing
+/**
+ * @brief Write value to element
+ * @param aElement
+ * @param aValue
+ */
 void Parser::Place(std::string const &aElement, std::string const &aValue)
 {
   Root* newRoot = SetUpTree(mDictionary, HashString(aElement).Split("/"));
   newRoot->SetValue(aValue);
 }
 
+/**
+ * @brief Write value to element under parent node.
+ * @param aRoot
+ * @param aElement
+ * @param aValue
+ */
 void Parser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
   Root* newNodes = SetUpTree(mDictionary, HashString(aRoot).Split("/"));
@@ -73,7 +102,11 @@ void Parser::Place(std::string const &aRoot, std::string const &aElement, std::s
   newRoot->SetValue(aValue);
 }
 
-// Returns the deepest node.
+/**
+ * @brief From root, build tree, return lowest level node creating
+ * @param aBase Where to start building from.
+ * @param aStringHierarchy
+ */
 Root* Parser::SetUpTree(Root* aBase, std::vector<HashString> const &aStringHierarchy)
 {
   Root* current = aBase;

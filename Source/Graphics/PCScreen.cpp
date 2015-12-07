@@ -22,7 +22,7 @@ PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
-                             SDL_GL_DOUBLEBUFFER | SDL_WINDOW_OPENGL);
+                             SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
   ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
 }
@@ -33,6 +33,10 @@ PCScreen::~PCScreen()
   SDL_Quit();
 }
 
+/**
+ * @brief Draw debug lines around objects, physics boxes only.
+ * @param aObjects
+ */
 void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
@@ -137,12 +141,19 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
   }
 }
 
+/**
+ * @brief Operations to run before draw phase.
+ */
 void PCScreen::PreDraw()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
 }
 
+/**
+ * @brief Draw objects
+ * @param aObjects
+ */
 void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 {
   // Camera position and size
@@ -272,16 +283,29 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   }
 }
 
+/**
+ * @brief Draw UI objects
+ * @param aObjects
+ */
 void PCScreen::DrawUI(std::vector<Surface*> const &aObjects)
 {
   Draw(aObjects);
 }
 
+/**
+ * @brief Swap buffers
+ */
 void PCScreen::SwapBuffers()
 {
   SDL_GL_SwapWindow(mWindow);
 }
 
+/**
+ * @brief Change window size
+ * @param aW Width
+ * @param aH Height
+ * @param aFullScreen
+ */
 void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 {
   // Set full screen or not
@@ -329,6 +353,12 @@ void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glLoadIdentity();
 }
 
+/**
+ * @brief Align objects
+ * @param aTransform Transform of object
+ * @param aSize Object size
+ * @param aPosition Object position
+ */
 void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition)
 {
   X_ALIGNMENT xAlign = aTransform->GetXAlignment();
@@ -372,12 +402,21 @@ void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vect
   }
 }
 
+/**
+ * @brief Check if point is on screen
+ * @param aPoint Point to check
+ */
 bool PCScreen::PointIsOnScreen(Vector3 const &aPoint)
 {
   return aPoint.x < GetWidth() && aPoint.y < GetHeight() &&
          aPoint.x > 0 && aPoint.y > 0;
 }
 
+/**
+ * @brief Check if box is on screen
+ * @param aStart Top left of box
+ * @param aEnd Bottom right of box
+ */
 bool PCScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
 {
   // Separating axis theorum

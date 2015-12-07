@@ -19,6 +19,10 @@ ControllerManager::~ControllerManager()
   ClearControllers();
 }
 
+/**
+ * @brief Add controller to list
+ * @param aController
+ */
 void ControllerManager::AddController(Controller *aController)
 {
   // Check to see if object is in our list
@@ -32,6 +36,11 @@ void ControllerManager::AddController(Controller *aController)
   
   mControllers.push_back(aController);
 }
+
+/**
+ * @brief Remove controller to list
+ * @param aController
+ */
 void ControllerManager::RemoveController(Controller *aController)
 {
   for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
@@ -43,11 +52,21 @@ void ControllerManager::RemoveController(Controller *aController)
     }
   }
 }
+
+/**
+ * @brief Delete Controller
+ * @param aController
+ */
 void ControllerManager::DeleteController(Controller *aController)
 {
   RemoveController(aController);
   delete aController;
 }
+
+/**
+ * @brief Set pause state for all controllers
+ * @param aPaused
+ */
 void ControllerManager::SetControllersPauseState(bool const aPaused)
 {
   for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
@@ -55,6 +74,10 @@ void ControllerManager::SetControllersPauseState(bool const aPaused)
     (*it)->SetPaused(aPaused);
   }
 }
+
+/**
+ * @brief Clear all controllers (deletes them too)
+ */
 void ControllerManager::ClearControllers()
 {
   for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
@@ -64,6 +87,9 @@ void ControllerManager::ClearControllers()
   mControllers.clear();
 }
 
+/**
+ * @brief Update loop
+ */
 void ControllerManager::Update()
 {
   for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
@@ -76,10 +102,19 @@ void ControllerManager::Update()
   }
   mDelayedMessages.clear();
 }
+
+/**
+ * @brief Send out message
+ * @param aMessage
+ */
 void ControllerManager::SendMessage(Message const &aMessage)
 {
-  
 }
+
+/**
+ * @brief Receive messages
+ * @param aMessage
+ */
 void ControllerManager::ProcessDelayedMessage(Message *aMessage)
 {
   mDelayedMessages.push_back(aMessage);

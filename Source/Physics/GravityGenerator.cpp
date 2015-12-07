@@ -16,9 +16,10 @@ GravityGenerator::~GravityGenerator()
 {
 }
 
+/**
+ * @brief Apply force to object every frame.
+ */
 void GravityGenerator::Update(PhysicsObject *aObject, float aDuration)
 {
 	aObject->AddForce(GetForce() * aObject->GetMass());
 }
-
-

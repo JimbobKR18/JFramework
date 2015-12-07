@@ -15,11 +15,18 @@ ForceGenerator::~ForceGenerator()
 {
 }
 
+/**
+ * @brief Get force.
+ */
 Vector3 ForceGenerator::GetForce() const
 {
 	return mForce;
 }
 
+/**
+ * @brief Set whether of not this generator is active.
+ * @param aActive
+ */
 void ForceGenerator::SetActive(bool aActive)
 {
 	mActive = aActive;

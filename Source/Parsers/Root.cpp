@@ -19,6 +19,10 @@ Root::~Root()
   mChildren.clear();
 }
 
+/**
+ * @brief Search for node whose name matches value.
+ * @param aValue
+ */
 Root const *Root::Search(std::string const &aValue) const
 {
   if(mName.ToString() == aValue)
@@ -51,7 +55,10 @@ Root const *Root::Search(std::string const &aValue) const
   return nullptr;
 }
 
-
+/**
+ * @brief Find node whose name matches value.
+ * @param aValue
+ */
 Root *Root::Find(std::string const &aValue)
 {
   // Found our node
@@ -90,6 +97,12 @@ Root *Root::Find(std::string const &aValue)
   return nullptr;
 }
 
+/**
+ * @brief Place node under this node with root and element name, with value.
+ * @param aRoot
+ * @param aElement
+ * @param aValue
+ */
 void Root::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
 {
   if(mName == aRoot)
@@ -122,31 +135,50 @@ void Root::Place(std::string const &aRoot, std::string const &aElement, std::str
   }
 }
 
+/**
+ * @brief Insert root into children.
+ * @param root
+ */
 void Root::Insert(Root* root)
 {
   mChildren.insert(root);
 }
 
+/**
+ * @brief Get name of node.
+ */
 HashString Root::GetName() const
 {
   return mName;
 }
 
+/**
+ * @brief Get value of node
+ */
 HashString Root::GetValue() const
 {
   return mValue;
 }
 
+/**
+ * @brief Get children for node
+ */
 RootContainer& Root::GetChildren()
 {
   return mChildren;
 }
 
+/**
+ * @brief Get node parent
+ */
 Root* Root::GetParent() const
 {
   return mParent;
 }
 
+/**
+ * @brief Get untouched roots of node (unsearched)
+ */
 RootContainer Root::GetUntouchedRoots() const
 {
   RootContainer ret;
@@ -166,17 +198,28 @@ RootContainer Root::GetUntouchedRoots() const
   return ret;
 }
 
-
+/**
+ * @brief Set node name
+ * @param aName
+ */
 void Root::SetName(HashString const &aName)
 {
   mName = aName;
 }
 
+/**
+ * @brief Set node value
+ * @param aValue
+ */
 void Root::SetValue(HashString const &aValue)
 {
   mValue = aValue;
 }
 
+/**
+ * @brief Set node parent
+ * @param aParent
+ */
 void Root::SetParent(Root* aParent)
 {
   mParent = aParent;

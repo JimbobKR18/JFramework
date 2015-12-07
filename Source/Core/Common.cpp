@@ -15,6 +15,7 @@
 
 namespace Common
 {
+  // Mac specific functions
   #ifdef __APPLE__
   #include <mach/mach_time.h>
   #define ORWL_NANO (+1.0E-9)
@@ -42,6 +43,12 @@ namespace Common
   }
   #endif
 
+  /**
+   * @brief Gets relative path for asset files, can be either set by macro ASSET_DIRECTORY
+   *        or automatically.
+   * @param aSubFolder Sub folder to search inside of asset directory.
+   * @param aFileName File to find (extension included)
+   */
   std::string const RelativePath(std::string const &aSubFolder, std::string const &aFileName)
   {
     // Manually setting the asset directory
@@ -61,6 +68,7 @@ namespace Common
     return ret;
   }
 
+  // Functions that Windows provides that need to be set for Mac and Linux
   #ifndef _WIN32
   long GetTickCount()
   {
@@ -76,24 +84,40 @@ namespace Common
   }
   #endif
 
+  /**
+   * @brief Converts String to Int
+   * @param aValue
+   */
   int StringToInt(std::string const &aValue)
   {
     int ret = atoi(aValue.c_str());
     return ret;
   }
 
+  /**
+   * @brief Converts String to Float
+   * @param aValue
+   */
   float StringToFloat(std::string const &aValue)
   {
     float ret = atof(aValue.c_str());
     return ret;
   }
 
+  /**
+   * @brief Converts String to Boolean, hard set to look for "true"
+   * @param aValue
+   */
   bool StringToBool(std::string const &aValue)
   {
     bool ret = (aValue == "true") ? true : false;
     return ret;
   }
 
+  /**
+   * @brief Converts String to Int Vector
+   * @param aValue
+   */
   std::vector<int> StringToIntVector(std::string const &aValue)
   {
     std::vector<int> ret;
@@ -111,6 +135,10 @@ namespace Common
     return ret;
   }
   
+  /**
+   * @brief Converts String to Float Vector
+   * @param aValue
+   */
   std::vector<float> StringToFloatVector(std::string const &aValue)
   {
     std::vector<float> ret;
@@ -128,6 +156,10 @@ namespace Common
     return ret;
   }
 
+  /**
+   * @brief Converts String to String Vector
+   * @param aValue
+   */
   std::vector<std::string> StringToStringVector(std::string const &aValue)
   {
     std::vector<std::string> ret;
@@ -148,6 +180,10 @@ namespace Common
     return ret;
   }
 
+  /**
+   * @brief Converts Int to String
+   * @param aValue
+   */
   std::string IntToString(int const aValue)
   {
     char buffer[33];
@@ -155,6 +191,10 @@ namespace Common
     return std::string(buffer);
   }
 
+  /**
+   * @brief Converts Float to String
+   * @param aValue
+   */
   std::string FloatToString(float const aValue)
   {
     std::ostringstream stream;
@@ -162,6 +202,10 @@ namespace Common
     return stream.str();
   }
 
+  /**
+   * @brief Converts Boolean to String
+   * @param aValue
+   */
   std::string BoolToString(bool const aValue)
   {
     if(aValue)
@@ -170,6 +214,10 @@ namespace Common
       return "false";
   }
 
+  /**
+   * @brief Converts Int Vector to String (comma separated)
+   * @param aValue
+   */
   std::string IntVectorToString(std::vector<int> &aValue)
   {
     std::string ret;
@@ -186,6 +234,10 @@ namespace Common
     return ret;
   }
   
+  /**
+   * @brief Converts Float Vector to String (comma separated)
+   * @param aValue
+   */
   std::string FloatVectorToString(std::vector<float> &aValue)
   {
     std::string ret;
@@ -202,6 +254,10 @@ namespace Common
     return ret;
   }
 
+  /**
+   * @brief Converts String Vector to String (comma separated)
+   * @param aValue
+   */
   std::string StringVectorToString(std::vector<std::string> &aValue)
   {
     std::string ret;
@@ -217,6 +273,10 @@ namespace Common
     return ret;
   }
   
+  /**
+   * @brief Get bottom level filename (last sequence after last /)
+   * @param aFileName
+   */
   HashString RetrieveNameFromFileName(HashString const &aFileName)
   {
     HashString ret;
@@ -231,6 +291,10 @@ namespace Common
     return ret;
   }
   
+  /**
+   * @brief String hash function, good enough default
+   * @param aString
+   */
   int StringHashFunction(std::string const &aString)
   {
     int hashValue = 0;
@@ -246,11 +310,21 @@ namespace Common
     return hashValue;
   }
 
+  /**
+   * @brief Get random Int within a range.
+   * @param aX Minimum (inclusive)
+   * @param bX Maximum (exclusive)
+   */
   int RandomIntInRange(int const aX, int const bX)
   {
     return aX + (rand() % (bX - aX));
   }
 
+  /**
+   * @brief Get random Float within a range.
+   * @param aX Minimum (inclusive)
+   * @param bX Maximum (exclusive)
+   */
   float RandomFloatInRange(float const aX, float const bX)
   {
     float diff = bX - aX;
@@ -258,6 +332,9 @@ namespace Common
     return aX + diff;
   }
 
+  /**
+   * @brief Get clock now
+   */
   TimePoint GetNow()
   {
     return Clock::now();

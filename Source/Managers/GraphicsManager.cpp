@@ -24,6 +24,9 @@ GraphicsManager::~GraphicsManager()
 {
 }
 
+/**
+ * @brief Update screen, swap buffers, etc.
+ */
 void GraphicsManager::Update()
 {
   mScreen->GetView().Update();
@@ -38,10 +41,18 @@ void GraphicsManager::Update()
   mScreen->SwapBuffers();
 }
 
+/**
+ * @brief Does nothing
+ * @param aMessage
+ */
 void GraphicsManager::SendMessage(Message const &aMessage)
 {
 }
 
+/**
+ * @brief Stores a message to be processed next frame.
+ * @param aMessage Message to store
+ */
 void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
 {
   if(aMessage->GetDescription() == OBJECT_DELETE.ToCharArray()) 
@@ -57,6 +68,9 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
   }
 }
 
+/**
+ * @brief Create a new surface with owner this.
+ */
 Surface *GraphicsManager::CreateSurface()
 {
 #if !defined(ANDROID) && !defined(IOS)
@@ -70,6 +84,9 @@ Surface *GraphicsManager::CreateSurface()
 	return surface;
 }
 
+/**
+ * @brief Create surface at UI layer, handy helper.
+ */
 Surface *GraphicsManager::CreateUISurface()
 {
 #if !defined(ANDROID) && !defined(IOS)
@@ -83,12 +100,20 @@ Surface *GraphicsManager::CreateUISurface()
   return surface;
 }
 
+/**
+ * @brief Delete and remove surface.
+ * @param aSurface
+ */
 void GraphicsManager::DeleteSurface(Surface *aSurface)
 {
   RemoveSurface(aSurface);
   delete aSurface;
 }
 
+/**
+ * @brief Add surface to list.
+ * @param aSurface
+ */
 void GraphicsManager::AddSurface(Surface *aSurface)
 {
   // Check to see if object is in our list
@@ -104,6 +129,10 @@ void GraphicsManager::AddSurface(Surface *aSurface)
   mSurfaces.push_back(aSurface);
 }
 
+/**
+ * @brief Add surface to UI list.
+ * @param aSurface
+ */
 void GraphicsManager::AddUISurface(Surface *aSurface)
 {
   // Check to see if object is in our list
@@ -119,6 +148,10 @@ void GraphicsManager::AddUISurface(Surface *aSurface)
   mUIElements.push_back(aSurface);
 }
 
+/**
+ * @brief Remove surface, do not delete.
+ * @param aSurface
+ */
 void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
   SurfaceIT end = mSurfaces.end();
@@ -142,6 +175,9 @@ void GraphicsManager::RemoveSurface(Surface *aSurface)
   }
 }
 
+/**
+ * @brief Remove and delete all surfaces
+ */
 void GraphicsManager::ClearSurfaces()
 {
   for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
@@ -154,16 +190,28 @@ void GraphicsManager::ClearSurfaces()
   }
 }
 
+/**
+ * @brief Get screen object (the renderer)
+ */
 Screen *GraphicsManager::GetScreen()
 {
   return mScreen;
 }
 
+/**
+ * @brief Add texture name and data to map.
+ * @param aFilename
+ * @param aData
+ */
 void GraphicsManager::AddTexturePairing(std::string const &aFilename, TextureData const &aData)
 {
   mTextures.insert(std::pair<std::string, TextureData>(aFilename, aData));
 }
 
+/**
+ * @brief Get id for texture by filename
+ * @param aFilename
+ */
 unsigned GraphicsManager::GetTextureID(std::string const &aFilename) const
 {
   std::map<std::string, TextureData>::const_iterator pos = mTextures.find(aFilename);
@@ -176,6 +224,10 @@ unsigned GraphicsManager::GetTextureID(std::string const &aFilename) const
   return pos->second.mTextureID;
 }
 
+/**
+ * @brief Get data for texture by filename
+ * @param aFilename
+ */
 TextureData const& GraphicsManager::GetTextureData(std::string const &aFilename) const
 {
   std::map<std::string, TextureData>::const_iterator pos = mTextures.find(aFilename);
@@ -188,6 +240,10 @@ TextureData const& GraphicsManager::GetTextureData(std::string const &aFilename)
   return pos->second;
 }
 
+/**
+ * @brief Converts absolute coordinate point to point in local screen space.
+ * @param aPosition
+ */
 Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
 {
   Vector3 ret = mScreen->GetView().GetPosition();
@@ -198,6 +254,10 @@ Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
   return ret;
 }
 
+/**
+ * @brief Converts local coordinate point to point in world space.
+ * @param aPosition
+ */
 Vector3 GraphicsManager::RelToAbs(Vector3 const &aPosition) const
 {
   // TODO test this sometime

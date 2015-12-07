@@ -18,6 +18,10 @@ Constants::~Constants()
 {
 }
 
+/**
+ * @brief Get string from values map, asserts if nothign found.
+ * @param aValue Value to find.
+ */
 HashString Constants::GetString(HashString const &aValue)
 {
   valIT it = mValues.find(aValue);
@@ -28,21 +32,36 @@ HashString Constants::GetString(HashString const &aValue)
   return it->second;
 }
 
+/**
+ * @brief Get int from values map, asserts if nothign found.
+ * @param aValue Value to find.
+ */
 int Constants::GetInteger(HashString const &aValue)
 {
   return GetString(aValue).ToInt();
 }
 
+/**
+ * @brief Get float from values map, asserts if nothign found.
+ * @param aValue Value to find.
+ */
 float Constants::GetFloat(HashString const &aValue)
 {
   return GetString(aValue).ToFloat();
 }
 
+/**
+ * @brief Get bool from values map, asserts if nothign found.
+ * @param aValue Value to find.
+ */
 bool Constants::GetBoolean(HashString const &aValue)
 {
   return GetString(aValue).ToBool();
 }
 
+/**
+ * @brief Read in values from file
+ */
 void Constants::Deserialize()
 {
   // Read line by line, much easier

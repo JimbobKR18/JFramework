@@ -15,6 +15,9 @@ ForceRegistry::~ForceRegistry()
 	Clear();
 }
 
+/**
+ * @brief Apply forces to objects
+ */
 void ForceRegistry::Update()
 {
 	for(std::vector<ForceRegistration>::iterator it = mRegistry.begin(); it != mRegistry.end(); ++it)
@@ -23,10 +26,21 @@ void ForceRegistry::Update()
 	}
 }
 
+/**
+ * @brief Add force to be apllied to object every frame.
+ * @param aObject
+ * @param aGenerator
+ */
 void ForceRegistry::Add(PhysicsObject *aObject, ForceGenerator *aGenerator)
 {
 	mRegistry.push_back(ForceRegistration(aObject, aGenerator));
 }
+
+/**
+ * @brief Remove force object pairing
+ * @param aObject
+ * @param aGenerator
+ */
 void ForceRegistry::Remove(PhysicsObject *aObject, ForceGenerator *aGenerator)
 {
 	for(std::vector<ForceRegistration>::iterator it = mRegistry.begin(); it != mRegistry.end(); ++it)
@@ -38,6 +52,11 @@ void ForceRegistry::Remove(PhysicsObject *aObject, ForceGenerator *aGenerator)
 		}
 	}
 }
+
+/**
+ * @brief For an object, remove all forces.
+ * @param aObject
+ */
 void ForceRegistry::RemoveForcesForObject(PhysicsObject *aObject)
 {
   for(std::vector<ForceRegistration>::iterator it = mRegistry.begin(); it != mRegistry.end();)
@@ -51,6 +70,10 @@ void ForceRegistry::RemoveForcesForObject(PhysicsObject *aObject)
     ++it;
 	}
 }
+
+/**
+ * @brief Clear all forces
+ */
 void ForceRegistry::Clear()
 {
 	mRegistry.clear();

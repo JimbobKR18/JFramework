@@ -57,6 +57,7 @@ private:
   
 public:
   typedef std::vector<PhysicsObject*>::iterator PhysicsIT;
+  typedef std::vector<PhysicsObject*>::const_iterator PhysicsConstIT;
 };
 
 #endif /* defined(__JFramework__PhysicsWorld__) */
