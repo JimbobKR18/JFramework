@@ -165,6 +165,7 @@ void Surface::Serialize(Parser &aParser)
   bool animated = coords->GetAnimated();
   int numanimations = coords->GetNumberOfAnimations();
   float animationSpeed = coords->GetAnimationSpeed();
+  int currentAnimation = coords->GetCurrentAnimation();
   char const* values[4] = { "ColorR",
                             "ColorG",
                             "ColorB",
@@ -184,6 +185,7 @@ void Surface::Serialize(Parser &aParser)
   object->Place("Surface", "Animated", Common::BoolToString(animated));
   object->Place("Surface", "AnimationSpeed", Common::FloatToString(animationSpeed));
   object->Place("Surface", "NoRender", Common::BoolToString(mNoRender));
+  object->Place("Surface", "StartingAnimation", Common::IntToString(currentAnimation));
   for(int i = 0; i < 4; ++i)
   {
     object->Place("Surface", values[i], Common::IntToString(mColor[i]));
@@ -201,6 +203,7 @@ void Surface::Deserialize(Parser &aParser)
 {
   bool animated = false;
   int numAnimations = 1;
+  int startingAnimation = 0;
   float animationSpeed = DT;
   std::vector<int> numFrames;
   numFrames.push_back(1);
@@ -248,9 +251,14 @@ void Surface::Deserialize(Parser &aParser)
     else
       assert(!"Invalid value passed into ViewMode for Surface. (Surface.cpp)");  
   }
+  if(aParser.Find("Surface", "StartingAnimation"))
+  {
+    startingAnimation = aParser.Find("Surface", "StartingAnimation")->GetValue().ToInt();
+  }
   
   SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
   SetAnimated(animated);
+  SetAnimation(startingAnimation);
 }
 
 /**
