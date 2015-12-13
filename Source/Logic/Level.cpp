@@ -26,18 +26,18 @@ Level::Level()
 	assert(0);
 }
 
-Level::Level(LevelManager *aManager, std::string const &aFileName, bool aAutoParse) :
+Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoParse) :
              mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
              mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
              mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0)
 {
-  for(int i = static_cast<int>(aFileName.size()) - 1;
+  for(int i = static_cast<int>(aFileName.Size()) - 1;
       i >= 0 && aFileName[i] != '/'; --i)
   {
-    mName.push_back(aFileName[i]);
+    mName.Push(aFileName[i]);
   }
-  std::reverse(mName.begin(), mName.end());
-  mName = mName.substr(0, mName.size() - 4);
+  mName.Reverse();
+  mName = mName.SubString(0, mName.Size() - 4);
 
   if(aAutoParse)
     ParseFile();
@@ -61,7 +61,7 @@ Level::~Level()
  * @brief Get the level name. Not the file name.
  * @return The level name.
  */
-std::string Level::GetName() const
+HashString Level::GetName() const
 {
   return mName;
 }
@@ -70,9 +70,18 @@ std::string Level::GetName() const
 * @brief Get the file name, not the level name.
 * @return The file name.
 */
-std::string Level::GetFileName() const
+HashString Level::GetFileName() const
 {
   return mFileName;
+}
+
+/**
+* @brief Get the music name.
+* @return The music name.
+*/
+HashString Level::GetMusicName() const
+{
+  return mMusicName;
 }
 
 /**
@@ -107,7 +116,7 @@ GameObject* Level::GetFocusTarget() const
  * @param aObjectName
  * @return The object, or nullptr.
  */
-GameObject* Level::FindObject(std::string const &aObjectName)
+GameObject* Level::FindObject(HashString const &aObjectName)
 {
   // This is designed to be naive
   // if two objects share the same name...
@@ -154,7 +163,7 @@ Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
  * @param aMenuName
  * @return The menu, or nullptr.
  */
-Menu* Level::FindMenu(std::string const &aMenuName)
+Menu* Level::FindMenu(HashString const &aMenuName)
 {
   for(ConstMenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
   {
@@ -421,7 +430,7 @@ void Level::Load(Level* const aPrevLevel)
   LoadObjects(mObjects, false);
   LoadObjects(mStaticObjects, true);
 
-  if(!mMusicName.empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
+  if(!mMusicName.Empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, Sound::INFINITE_LOOPS);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
@@ -446,7 +455,7 @@ void Level::Unload(Level* const aNextLevel)
   UnloadObjects(mObjects);
   UnloadObjects(mStaticObjects);
 
-  if(!mMusicName.empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
+  if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);
@@ -526,13 +535,13 @@ void Level::ParseAdditionalData(Root *aRoot, GameObject *aObject)
 void Level::Serialize(Parser &aParser)
 {
   int curIndex = 0;
-  std::string object = "Object_";
+  HashString object = "Object_";
   
   if(mGenerator)
     mGenerator->Serialize(aParser);
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it, ++curIndex)
   {
-    std::string objectString = object + Common::IntToString(curIndex);
+    HashString objectString = object + Common::IntToString(curIndex);
     aParser.SetCurrentObjectIndex(curIndex);
     aParser.Place(objectString, "");
     (*it)->Serialize(aParser);
