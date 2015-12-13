@@ -27,7 +27,7 @@ private:
   Mix_Chunk*  mChunk;
   int         mChannel;
 public:
-  static int const MAX_VOUME = 128;
+  static int const MAX_VOLUME = 128;
 
   PCSound();
   PCSound(std::string const &aFilename);
