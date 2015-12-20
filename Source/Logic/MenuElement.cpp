@@ -11,8 +11,8 @@
 
 MenuElement::MenuElement(std::string const &aFileName)
 {
-  ObjectManager* manager = LUABind::StaticGameApp::GetApp()->GET<ObjectManager>();
-  mObject = new GameObject(manager, aFileName);
+  mManager = LUABind::StaticGameApp::GetApp()->GET<ObjectManager>();
+  mObject = new GameObject(mManager, aFileName);
   mLayer = 0;
 }
 

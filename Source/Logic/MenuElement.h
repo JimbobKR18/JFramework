@@ -20,6 +20,7 @@
 class MenuElement
 {
 protected:
+  ObjectManager* mManager;
   GameObject* mObject;
   int         mLayer;
   
