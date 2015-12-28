@@ -50,7 +50,22 @@ float& Vector3::operator[](int const aValue)
   case 2:
     return z;
   default:
-    assert(0);
+    assert(!"Invalid value passed into Vector3 value retrieval");
+  }
+}
+
+float Vector3::GetValue(int const aValue) const
+{
+  switch (aValue)
+  {
+  case 0:
+    return x;
+  case 1:
+    return y;
+  case 2:
+    return z;
+  default:
+    assert(!"Invalid value passed into Vector3 value retrieval");
   }
 }
 

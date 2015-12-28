@@ -37,6 +37,7 @@ struct Vector3
 
   float   length() const;
   float&  operator[](int const aValue);
+  float   GetValue(int const aValue) const;
   Vector3 normalize() const;
 
   // Equivalence
