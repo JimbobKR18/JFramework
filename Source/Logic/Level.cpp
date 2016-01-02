@@ -845,12 +845,14 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
       cube->size = Vector3(tempShape->Find("SizeX")->GetValue().ToFloat(),
                           tempShape->Find("SizeY")->GetValue().ToFloat(),
                           tempShape->Find("SizeZ")->GetValue().ToFloat());
+      cube->shape = Shape::CUBE;
     }
     else if(type == "SPHERE")
     {
       newShape = new Sphere();
       Sphere* sphere = (Sphere*)newShape;
       sphere->radius = tempShape->Find("Radius")->GetValue().ToFloat();
+      sphere->shape = Shape::SPHERE;
     }
     else if(type == "TRIANGLE")
     {
@@ -865,6 +867,7 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
                       tempShape->Find(pointId + "Z")->GetValue().ToFloat());
         triangle->points[i] = point;
       }
+      triangle->shape = Shape::TRIANGLE;
     }
     else
       assert(!"Invalid shape given");

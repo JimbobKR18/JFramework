@@ -106,6 +106,8 @@ void PhysicsObject::Serialize(Parser &aParser)
 {
   std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   Root* object = aParser.Find(objectName);
+  Transform* transform = GetOwner()->GET<Transform>();
+  Vector3 position = transform->GetPosition();
 
   object->Place(objectName, "PhysicsObject", "");
   object->Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
@@ -123,9 +125,10 @@ void PhysicsObject::Serialize(Parser &aParser)
     HashString curShape = SHAPE + Common::IntToString(curIndex);
     object->Place("PhysicsObject", curShape, "");
     Root* physicsObject = object->Find("PhysicsObject");
-    physicsObject->Place(curShape, "PositionX", Common::FloatToString((*it)->position.x));
-    physicsObject->Place(curShape, "PositionY", Common::FloatToString((*it)->position.y));
-    physicsObject->Place(curShape, "PositionZ", Common::FloatToString((*it)->position.z));
+    Vector3 localPosition = (*it)->position - position;
+    physicsObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
+    physicsObject->Place(curShape, "PositionY", Common::FloatToString(localPosition.y));
+    physicsObject->Place(curShape, "PositionZ", Common::FloatToString(localPosition.z));
     physicsObject->Place(curShape, "Passable", Common::BoolToString((*it)->passable));
     
     switch((*it)->shape)
@@ -207,12 +210,14 @@ void PhysicsObject::Deserialize(Parser &aParser)
       cube->size = Vector3(tempShape->Find("SizeX")->GetValue().ToFloat(),
                           tempShape->Find("SizeY")->GetValue().ToFloat(),
                           tempShape->Find("SizeZ")->GetValue().ToFloat());
+      cube->shape = Shape::CUBE;
     }
     else if(type == "SPHERE")
     {
       newShape = new Sphere();
       Sphere* sphere = (Sphere*)newShape;
       sphere->radius = tempShape->Find("Radius")->GetValue().ToFloat();
+      sphere->shape = Shape::SPHERE;
     }
     else if(type == "TRIANGLE")
     {
@@ -227,6 +232,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
                       tempShape->Find(pointId + "Z")->GetValue().ToFloat());
         triangle->points[i] = point;
       }
+      triangle->shape = Shape::TRIANGLE;
     }
     else
       assert(!"Invalid shape given");
