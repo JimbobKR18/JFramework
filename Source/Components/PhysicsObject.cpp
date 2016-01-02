@@ -106,8 +106,6 @@ void PhysicsObject::Serialize(Parser &aParser)
 {
   std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   Root* object = aParser.Find(objectName);
-  Transform* transform = GetOwner()->GET<Transform>();
-  Vector3 position = transform->GetPosition();
 
   object->Place(objectName, "PhysicsObject", "");
   object->Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
@@ -125,7 +123,7 @@ void PhysicsObject::Serialize(Parser &aParser)
     HashString curShape = SHAPE + Common::IntToString(curIndex);
     object->Place("PhysicsObject", curShape, "");
     Root* physicsObject = object->Find("PhysicsObject");
-    Vector3 localPosition = (*it)->position - position;
+    Vector3 localPosition = (*it)->position;
     physicsObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
     physicsObject->Place(curShape, "PositionY", Common::FloatToString(localPosition.y));
     physicsObject->Place(curShape, "PositionZ", Common::FloatToString(localPosition.z));
