@@ -24,10 +24,7 @@ void Resolver::Update(float aDuration)
     for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairs.end(); ++it2)
     {
       AddCollidedPair(*it2);
-    }
-    if(!pairs.empty())
-    {
-      SendCollisionMessages(*it);
+      SendCollisionMessages(*it2);
     }
   }
   for(std::list<CollisionPair>::iterator it = mCollidedPairs.begin(); it != mCollidedPairs.end(); ++it)
@@ -175,9 +172,10 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
  * @brief Notify object of collision
  * @param aPair Pair to message
  */
-void Resolver::SendCollisionMessages(PotentialPair &aPair) const
+void Resolver::SendCollisionMessages(CollisionPair &aPair) const
 {
-  CollisionMessage message("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner());
+  CollisionMessage message("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner(),
+                           aPair.mShapes[0], aPair.mShapes[1]);
   aPair.mBodies[0]->GetOwner()->ReceiveMessage(message);
   aPair.mBodies[1]->GetOwner()->ReceiveMessage(message);
 }

@@ -872,6 +872,7 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
     else
       assert(!"Invalid shape given");
       
+    newShape->id = curIndex;
     newShape->position = Vector3(tempShape->Find("PositionX")->GetValue().ToFloat(),
                                  tempShape->Find("PositionY")->GetValue().ToFloat(),
                                  tempShape->Find("PositionZ")->GetValue().ToFloat());

@@ -19,6 +19,8 @@ class CollisionMessage: public Message
 private:
   GameObject*   mObject1;
   GameObject*   mObject2;
+  Shape*        mShape1;
+  Shape*        mShape2;
 
   CollisionMessage() : Message()
   {
@@ -30,9 +32,13 @@ private:
 public:
   CollisionMessage(std::string const &aContent,
                    GameObject *aObject1,
-                   GameObject *aObject2) : Message(),
-                                           mObject1(aObject1),
-                                           mObject2(aObject2)
+                   GameObject *aObject2,
+                   Shape *aShape1,
+                   Shape *aShape2) : Message(),
+                                     mObject1(aObject1),
+                                     mObject2(aObject2),
+                                     mShape1(aShape1),
+                                     mShape2(aShape2)
   {
     SetDescription("Collision");
     SetContent(aContent);
@@ -50,6 +56,17 @@ public:
       return mObject1;
     else
       return mObject2;
+  }
+  
+  Shape *GetShape(int index)
+  {
+    // Stay in bounds
+    assert(index < 2);
+
+    if(index)
+      return mShape1;
+    else
+      return mShape2;
   }
 };
 

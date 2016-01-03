@@ -116,14 +116,14 @@ void PhysicsObject::Serialize(Parser &aParser)
   
   // Serialize each shape
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
+  Root* physicsObject = object->Find("PhysicsObject");
   HashString const SHAPE = "Shape_";
   int curIndex = 0;
   for(shapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
   {
-    HashString curShape = SHAPE + Common::IntToString(curIndex);
-    object->Place("PhysicsObject", curShape, "");
-    Root* physicsObject = object->Find("PhysicsObject");
+    HashString curShape = SHAPE + (*it)->id;
     Vector3 localPosition = (*it)->position;
+    physicsObject->Place("PhysicsObject", curShape, "");
     physicsObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
     physicsObject->Place(curShape, "PositionY", Common::FloatToString(localPosition.y));
     physicsObject->Place(curShape, "PositionZ", Common::FloatToString(localPosition.z));
@@ -235,6 +235,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
     else
       assert(!"Invalid shape given");
       
+    newShape->id = curIndex;
     newShape->position = Vector3(tempShape->Find("PositionX")->GetValue().ToFloat(),
                                  tempShape->Find("PositionY")->GetValue().ToFloat(),
                                  tempShape->Find("PositionZ")->GetValue().ToFloat());

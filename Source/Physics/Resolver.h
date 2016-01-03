@@ -25,7 +25,7 @@ private:
   float CalculateSeparatingVelocity(CollisionPair const &aPair);
   void  ResolvePenetration(CollisionPair const &aPair);
   void  ResolveVelocity(CollisionPair const &aPair, float aDuration);
-  void  SendCollisionMessages(PotentialPair &aPair) const;
+  void  SendCollisionMessages(CollisionPair &aPair) const;
   void  Resolve(CollisionPair &aPair, float aDuration);
 
   // Calculation of normals etc.

@@ -3,7 +3,7 @@
 //------------------------------
 // SHAPE
 //------------------------------
-Shape::Shape(ShapeType aShape) : position(), passable(false), shape(aShape)
+Shape::Shape(ShapeType aShape) : id(0), position(), passable(false), shape(aShape)
 {
 }
 

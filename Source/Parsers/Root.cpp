@@ -117,20 +117,16 @@ void Root::Place(std::string const &aRoot, std::string const &aElement, std::str
     node->mValue = aValue;
     node->mParent = this;
     mChildren.insert(node);
-    return;
+  }
+  else if(mName == aElement)
+  {
+    mValue = aValue;
   }
   else
   {
-    if(mName == aElement)
+    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
-      mValue = aValue;
-    }
-    else
-    {
-      for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
-      {
-        (*it)->Place(aRoot, aElement, aValue);
-      }
+      (*it)->Place(aRoot, aElement, aValue);
     }
   }
 }

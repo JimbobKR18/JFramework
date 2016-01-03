@@ -5,6 +5,7 @@
 
 struct Shape
 {
+  int id;
   Vector3 position;
   bool passable;
   
