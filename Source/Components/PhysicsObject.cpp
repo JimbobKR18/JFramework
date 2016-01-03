@@ -121,7 +121,7 @@ void PhysicsObject::Serialize(Parser &aParser)
   int curIndex = 0;
   for(shapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
   {
-    HashString curShape = SHAPE + (*it)->id;
+    HashString curShape = SHAPE + Common::IntToString((*it)->id);
     Vector3 localPosition = (*it)->position;
     physicsObject->Place("PhysicsObject", curShape, "");
     physicsObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
