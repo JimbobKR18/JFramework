@@ -208,10 +208,12 @@ void PCSurface::ReceiveMessage(Message const &aMessage)
  */
 void PCSurface::Serialize(Parser &aParser)
 {
-  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const SURFACE = "Surface";
   Root* object = aParser.Find(objectName);
   Surface::Serialize(aParser);
-  object->Place("Surface", "TextureName", GetFileName());
+  Root* surface = object->Find(SURFACE);
+  surface->Place(SURFACE, "TextureName", GetFileName());
 }
 
 /**

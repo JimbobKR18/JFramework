@@ -120,6 +120,8 @@ void Root::Place(std::string const &aRoot, std::string const &aElement, std::str
   }
   else if(mName == aElement)
   {
+    DebugLogPrint("info: Value %s found in %s, old value: %s new value: %s\n", 
+      aElement.c_str(), aRoot.c_str(), mValue.ToCharArray(), aValue.c_str());
     mValue = aValue;
   }
   else
@@ -219,4 +221,26 @@ void Root::SetValue(HashString const &aValue)
 void Root::SetParent(Root* aParent)
 {
   mParent = aParent;
+}
+
+/**
+ * @brief Set root equal to another
+ * @param rhs Root to set this equal to.
+ */
+void Root::operator=(Root const &rhs)
+{
+  mValue = rhs.mValue;
+  mName = rhs.mName;
+  mChildren = rhs.mChildren;
+  mParent = rhs.mParent;
+}
+
+/**
+ * @brief Simple alphabetical ordering helper.
+ * @param rhs Root to check against.
+ * @return True if comes before.
+ */
+bool Root::operator<(Root const &rhs)
+{
+  return mName < rhs.mName;
 }

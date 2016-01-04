@@ -158,7 +158,8 @@ void Surface::ReceiveMessage(Message const &aMessage)
  */
 void Surface::Serialize(Parser &aParser)
 {
-  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const SURFACE = "Surface";
   Root* object = aParser.Find(objectName);
   TextureCoordinates *coords = GetTextureData();
   std::vector<int> animations;
@@ -171,8 +172,9 @@ void Surface::Serialize(Parser &aParser)
                             "ColorB",
                             "ColorA"};
 
-  object->Place(objectName, "Surface", "");
-  object->Place("Surface", "AnimationCount", Common::IntToString(numanimations));
+  object->Place(objectName, SURFACE, "");
+  Root* surface = object->Find(SURFACE);
+  surface->Place(SURFACE, "AnimationCount", Common::IntToString(numanimations));
   for(int i = 0; i < numanimations; ++i)
   {
     animations.push_back(coords->GetAnimationFrameCounts(i));
@@ -180,19 +182,19 @@ void Surface::Serialize(Parser &aParser)
 
   if(animated)
   {
-    object->Place("Surface", "FrameNumbers", Common::IntVectorToString(animations));
+    surface->Place(SURFACE, "FrameNumbers", Common::IntVectorToString(animations));
   }
-  object->Place("Surface", "Animated", Common::BoolToString(animated));
-  object->Place("Surface", "AnimationSpeed", Common::FloatToString(animationSpeed));
-  object->Place("Surface", "NoRender", Common::BoolToString(mNoRender));
-  object->Place("Surface", "StartingAnimation", Common::IntToString(currentAnimation));
+  surface->Place(SURFACE, "Animated", Common::BoolToString(animated));
+  surface->Place(SURFACE, "AnimationSpeed", Common::FloatToString(animationSpeed));
+  surface->Place(SURFACE, "NoRender", Common::BoolToString(mNoRender));
+  surface->Place(SURFACE, "StartingAnimation", Common::IntToString(currentAnimation));
   for(int i = 0; i < 4; ++i)
   {
-    object->Place("Surface", values[i], Common::IntToString(mColor[i]));
+    surface->Place("Surface", values[i], Common::IntToString(mColor[i]));
   }
   
   HashString viewMode = (mViewmode == VIEW_ABSOLUTE) ? "Absolute" : "Relative";
-  object->Place("Surface", "ViewMode", viewMode.ToString());
+  surface->Place(SURFACE, "ViewMode", viewMode.ToString());
 }
 
 /**

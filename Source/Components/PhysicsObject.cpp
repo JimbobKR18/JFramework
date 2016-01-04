@@ -104,15 +104,16 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
  */
 void PhysicsObject::Serialize(Parser &aParser)
 {
-  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const PHYSICS_OBJECT = "PhysicsObject";
   Root* object = aParser.Find(objectName);
-
-  object->Place(objectName, "PhysicsObject", "");
-  object->Place("PhysicsObject", "Gravity", Common::BoolToString(IsAffectedByGravity()));
-  object->Place("PhysicsObject", "Static", Common::BoolToString(mStatic));
-  object->Place("PhysicsObject", "Passable", Common::BoolToString(mPassable));
-  object->Place("PhysicsObject", "Mass", Common::FloatToString(mMass));
-  object->Place("PhysicsObject", "Damping", Common::FloatToString(mDamping));
+  
+  object->Place(objectName, PHYSICS_OBJECT, "");
+  object->Place(PHYSICS_OBJECT, "Gravity", Common::BoolToString(IsAffectedByGravity()));
+  object->Place(PHYSICS_OBJECT, "Static", Common::BoolToString(mStatic));
+  object->Place(PHYSICS_OBJECT, "Passable", Common::BoolToString(mPassable));
+  object->Place(PHYSICS_OBJECT, "Mass", Common::FloatToString(mMass));
+  object->Place(PHYSICS_OBJECT, "Damping", Common::FloatToString(mDamping));
   
   // Serialize each shape
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
@@ -123,35 +124,37 @@ void PhysicsObject::Serialize(Parser &aParser)
   {
     HashString curShape = SHAPE + Common::IntToString((*it)->id);
     Vector3 localPosition = (*it)->position;
-    physicsObject->Place("PhysicsObject", curShape, "");
-    physicsObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
-    physicsObject->Place(curShape, "PositionY", Common::FloatToString(localPosition.y));
-    physicsObject->Place(curShape, "PositionZ", Common::FloatToString(localPosition.z));
-    physicsObject->Place(curShape, "Passable", Common::BoolToString((*it)->passable));
+    physicsObject->Place(PHYSICS_OBJECT, curShape, "");
+    Root* shapeObject = physicsObject->Find(curShape);
+    
+    shapeObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
+    shapeObject->Place(curShape, "PositionY", Common::FloatToString(localPosition.y));
+    shapeObject->Place(curShape, "PositionZ", Common::FloatToString(localPosition.z));
+    shapeObject->Place(curShape, "Passable", Common::BoolToString((*it)->passable));
     
     switch((*it)->shape)
     {
     case Shape::CUBE:
-      physicsObject->Place(curShape, "Type", "CUBE");
-      physicsObject->Place(curShape, "SizeX", Common::IntToString((*it)->GetSize(0)));
-      physicsObject->Place(curShape, "SizeY", Common::IntToString((*it)->GetSize(1)));
-      physicsObject->Place(curShape, "SizeZ", Common::IntToString((*it)->GetSize(2)));
+      shapeObject->Place(curShape, "Type", "CUBE");
+      shapeObject->Place(curShape, "SizeX", Common::IntToString((*it)->GetSize(0)));
+      shapeObject->Place(curShape, "SizeY", Common::IntToString((*it)->GetSize(1)));
+      shapeObject->Place(curShape, "SizeZ", Common::IntToString((*it)->GetSize(2)));
       break;
     case Shape::SPHERE:
-      physicsObject->Place(curShape, "Type", "SPHERE");
-      physicsObject->Place(curShape, "Radius", Common::IntToString((*it)->GetSize(0)));
+      shapeObject->Place(curShape, "Type", "SPHERE");
+      shapeObject->Place(curShape, "Radius", Common::IntToString((*it)->GetSize(0)));
       break;
     case Shape::TRIANGLE:
     {
       Triangle* triangle = (Triangle*)(*it);
-      physicsObject->Place(curShape, "Type", "TRIANGLE");
+      shapeObject->Place(curShape, "Type", "TRIANGLE");
       HashString point = "Point_";
       for(int i = 0; i < 3; ++i)
       {
         HashString pointId = point + Common::IntToString(i);
-        physicsObject->Place(curShape, pointId + "X", Common::IntToString(triangle->points[i].x));
-        physicsObject->Place(curShape, pointId + "Y", Common::IntToString(triangle->points[i].y));
-        physicsObject->Place(curShape, pointId + "Z", Common::IntToString(triangle->points[i].z));
+        shapeObject->Place(curShape, pointId + "X", Common::IntToString(triangle->points[i].x));
+        shapeObject->Place(curShape, pointId + "Y", Common::IntToString(triangle->points[i].y));
+        shapeObject->Place(curShape, pointId + "Z", Common::IntToString(triangle->points[i].z));
       }
       break;
     }

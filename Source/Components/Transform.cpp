@@ -145,7 +145,8 @@ void Transform::SetZAlignment(Z_ALIGNMENT const &aAlign)
  */
 void Transform::Serialize(Parser &aParser)
 {
-  std::string objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const TRANSFORM = "Transform";
   Root* object = aParser.Find(objectName);
   char const *values[9] = {"PositionX",
                             "PositionY",
@@ -156,7 +157,9 @@ void Transform::Serialize(Parser &aParser)
                             "SizeX",
                             "SizeY",
                             "SizeZ"};
-  object->Place(objectName, "Transform", "");
+  object->Place(objectName, TRANSFORM, "");
+  Root* transform = object->Find(TRANSFORM);
+  
   for(int i = 0; i < 9; ++i)
   {
     float value = 0;
@@ -166,34 +169,34 @@ void Transform::Serialize(Parser &aParser)
       value = mScale[i - 3];
     else
       value = mSize[i - 6];
-    object->Place("Transform", values[i], Common::FloatToString(value));
+    transform->Place(TRANSFORM, values[i], Common::FloatToString(value));
   }
 
   if(mXAlign == X_ALIGN_LEFT)
-    object->Place("Transform", "AlignX", "LEFT");
+    transform->Place(TRANSFORM, "AlignX", "LEFT");
   else if(mXAlign == X_ALIGN_CENTER)
-    object->Place("Transform", "AlignX", "CENTER");
+    transform->Place(TRANSFORM, "AlignX", "CENTER");
   else if(mXAlign == X_ALIGN_RIGHT)
-    object->Place("Transform", "AlignX", "RIGHT");
+    transform->Place(TRANSFORM, "AlignX", "RIGHT");
 
   if(mYAlign == Y_ALIGN_TOP)
-    object->Place("Transform", "AlignY", "TOP");
+    transform->Place(TRANSFORM, "AlignY", "TOP");
   else if(mYAlign == Y_ALIGN_CENTER)
-    object->Place("Transform", "AlignY", "CENTER");
+    transform->Place(TRANSFORM, "AlignY", "CENTER");
   else if(mYAlign == Y_ALIGN_BOTTOM)
-    object->Place("Transform", "AlignY", "BOTTOM");
+    transform->Place(TRANSFORM, "AlignY", "BOTTOM");
 
   if(mZAlign == Z_ALIGN_FRONT)
-    object->Place("Transform", "AlignZ", "FRONT");
+    transform->Place(TRANSFORM, "AlignZ", "FRONT");
   else if(mZAlign == Z_ALIGN_CENTER)
-    object->Place("Transform", "AlignZ", "CENTER");
+    transform->Place(TRANSFORM, "AlignZ", "CENTER");
   else if(mZAlign == Z_ALIGN_BACK)
-    object->Place("Transform", "AlignZ", "BACK");
+    transform->Place(TRANSFORM, "AlignZ", "BACK");
     
   // Rotations are a little TOO complicated, so set them to 0
-  object->Place("Transform", "RotationX", Common::IntToString(0));
-  object->Place("Transform", "RotationY", Common::IntToString(0));
-  object->Place("Transform", "RotationZ", Common::IntToString(0));
+  transform->Place(TRANSFORM, "RotationX", Common::IntToString(0));
+  transform->Place(TRANSFORM, "RotationY", Common::IntToString(0));
+  transform->Place(TRANSFORM, "RotationZ", Common::IntToString(0));
 }
 
 /**

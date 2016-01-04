@@ -50,13 +50,9 @@ public:
   void           SetValue(HashString const &aValue);
   void           SetParent(Root* aParent);
 
-  void           operator=(Root const &rhs)
-  {
-    mValue = rhs.mValue;
-    mName = rhs.mName;
-    mChildren = rhs.mChildren;
-    mParent = rhs.mParent;
-  }
+  // OPERATIONS
+  void           operator=(Root const &rhs);
+  bool           operator<(Root const &rhs);
 };
 
 #endif /* ROOT_H_ */

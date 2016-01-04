@@ -1,6 +1,11 @@
 #include "TextParser.h"
 #include "Common.h"
 
+bool RootSortPredicate(Root* aRoot1, Root* aRoot2)
+{
+  return (*aRoot1) < (*aRoot2);
+}
+
 TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Parser(aFilename),
                                                                               mWrittenOut(false),
                                                                               mMode(aMode),
@@ -112,11 +117,16 @@ void TextParser::WriteRoot(Root *aRoot)
 {
   if(aRoot->GetValue().ToString() == "")
   {
-    rootIT end = aRoot->GetChildren().end();
+    // Sorting for cleanliness
+    std::vector<Root*> roots;
+    std::copy(aRoot->GetChildren().begin(), aRoot->GetChildren().end(), std::back_inserter(roots));
+    std::sort(roots.begin(), roots.end(), RootSortPredicate);
+    std::vector<Root*>::iterator begin = roots.begin();
+    std::vector<Root*>::iterator end = roots.end();
     mOutput << InsertIndents() << aRoot->GetName() << std::endl;
     mOutput << InsertIndents() << "{" << std::endl;
     ++mCurrentIndent;
-    for(rootIT it = aRoot->GetChildren().begin(); it != end; ++it)
+    for(std::vector<Root*>::iterator it = begin; it != end; ++it)
     {
       WriteRoot(*it);
     }
