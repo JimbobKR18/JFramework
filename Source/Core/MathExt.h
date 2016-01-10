@@ -71,6 +71,9 @@ struct Vector3
   void    operator/=(Vector3 const &rhs);
   void    operator*=(float const aMultiplier);
   void    operator/=(float const aMultiplier);
+  
+  // Helpful debugging
+  bool    validate() const;
 
   static void SerializeLUA();
   static std::string GetName();
@@ -85,6 +88,7 @@ struct Vector4
 
   float   length() const;
   float   operator[](int aValue) const;
+  float   GetValue(int const aValue) const;
   Vector4 normalize() const;
 
   // Equivalence
@@ -114,6 +118,9 @@ struct Vector4
   void    operator-=(Vector4 const &rhs);
   void    operator*=(float const aMultiplier);
   void    operator/=(float const aMultiplier);
+  
+  // Helpful debugging
+  bool validate() const;
 
   static void SerializeLUA();
   static std::string GetName();
@@ -145,6 +152,8 @@ struct Matrix33
   void RotateZ(float const aAngle);
   void operator*=(Matrix33 const &rhs);
   void operator*=(float const aValue);
+  
+  bool validate() const;
   
   static void SerializeLUA();
   static std::string GetName();

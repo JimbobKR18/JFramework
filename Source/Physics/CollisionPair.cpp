@@ -1,7 +1,8 @@
 #include "CollisionPair.h"
 #include "PhysicsObject.h"
 
-CollisionPair::CollisionPair(PhysicsObject* aBody1, PhysicsObject* aBody2, Shape* aShape1, Shape* aShape2)
+CollisionPair::CollisionPair(PhysicsObject* aBody1, PhysicsObject* aBody2, Shape* aShape1, Shape* aShape2) : 
+  mPenetration(0), mRestitution(0), mRelativeVelocity(), mNormal()
 {
   mBodies[0] = aBody1;
   mBodies[1] = aBody2;
@@ -15,6 +16,10 @@ void CollisionPair::operator=(CollisionPair const &rhs)
   mShapes[1] = rhs.mShapes[1];
   mBodies[0] = rhs.mBodies[0];
   mBodies[1] = rhs.mBodies[1];
+  mPenetration = rhs.mPenetration;
+  mRestitution = rhs.mRestitution;
+  mRelativeVelocity = rhs.mRelativeVelocity;
+  mNormal = rhs.mNormal;
 }
 
 bool CollisionPair::operator==(CollisionPair const &rhs)

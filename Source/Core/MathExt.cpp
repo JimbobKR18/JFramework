@@ -238,6 +238,13 @@ void Vector3::operator/=(float const aMultiplier)
   z /= aMultiplier;
 }
 
+bool Vector3::validate() const
+{
+  if(std::isnan(x) || std::isnan(y) || std::isnan(z))
+    assert(!"Vector3 has failed validation");
+  return true;
+}
+
 void Vector3::SerializeLUA()
 {
   SLB::Class<Vector3>("Vector3").constructor<float, float, float>()
@@ -292,7 +299,24 @@ float Vector4::operator[](int aValue) const
   case 3:
     return w;
   default:
-    assert(0);
+    assert(!"Invalid value passed into Vector4 value retrieval");
+  }
+}
+
+float Vector4::GetValue(int const aValue) const
+{
+  switch (aValue)
+  {
+  case 0:
+    return x;
+  case 1:
+    return y;
+  case 2:
+    return z;
+  case 3:
+    return w;
+  default:
+    assert(!"Invalid value passed into Vector4 value retrieval");
   }
 }
 
@@ -449,6 +473,13 @@ void Vector4::operator/=(float const aMultiplier)
   y /= aMultiplier;
   z /= aMultiplier;
   w /= aMultiplier;
+}
+
+bool Vector4::validate() const
+{
+  if(std::isnan(x) || std::isnan(y) || std::isnan(z) || std::isnan(w))
+    assert(!"Vector4 has failed validation");
+  return true;
 }
 
 void Vector4::SerializeLUA()
@@ -717,6 +748,19 @@ void Matrix33::operator*=(Matrix33 const &rhs)
 void Matrix33::operator*=(float const aValue)
 {
   *this = *this * aValue;
+}
+
+bool Matrix33::validate() const
+{
+  for (int i = 0; i < 3; ++i)
+  {
+    for (int j = 0; j < 3; ++j)
+    {
+      if(std::isnan(values[i][j]))
+        assert(!"Matrix33 has failed validation.");
+    }
+  }
+  return true;
 }
 
 void Matrix33::SerializeLUA()

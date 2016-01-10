@@ -283,7 +283,7 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - 
-                      (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(i)));
+                      (aPair.mShapes[0]->GetSize(i) + aPair.mShapes[1]->GetSize(i)));
     if(distance < shortestDistance)
     {
       axis = i;
@@ -307,7 +307,7 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   }
 
   aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
-                        (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(axis)));
+                        (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mRestitution = 1.0f;
@@ -366,6 +366,12 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
  */
 void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
 {
+  // Ordering is important
+  if(aPair.mShapes[0]->shape != Shape::TRIANGLE)
+  {
+    aPair.Switch();
+  }
+  
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
   Sphere* sphere = (Sphere*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
