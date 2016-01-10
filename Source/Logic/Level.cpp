@@ -40,7 +40,7 @@ Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoPars
   mName = mName.SubString(0, mName.Size() - 4);
 
   if(aAutoParse)
-    Parse();
+    ParseBaseFile();
 }
 
 Level::~Level()
@@ -380,7 +380,7 @@ void Level::ResetLevel()
   graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   // NOTE: Removes menus too
   DeleteObjects();
-  Parse();
+  ParseBaseFile();
   PostReset();
 }
 
@@ -723,7 +723,7 @@ void Level::ParseFile(HashString const &aFileName)
 /**
  * @brief Helper function to parse self
  */
-void Level::Parse()
+void Level::ParseBaseFile()
 {
   ParseFile(mFileName);
 }

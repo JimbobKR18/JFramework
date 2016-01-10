@@ -89,7 +89,7 @@ public:
   void              ParseFile(HashString const &aFileName);
 
 protected:
-  void              Parse();
+  void              ParseBaseFile();
   ObjectContainer&  GetObjects();
   ObjectContainer&  GetStaticObjects();
 private:
