@@ -86,9 +86,10 @@ public:
 
   static void       SerializeLUA();
 
-  void              ParseFile();
+  void              ParseFile(HashString const &aFileName);
 
 protected:
+  void              Parse();
   ObjectContainer&  GetObjects();
   ObjectContainer&  GetStaticObjects();
 private:

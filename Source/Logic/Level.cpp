@@ -40,7 +40,7 @@ Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoPars
   mName = mName.SubString(0, mName.Size() - 4);
 
   if(aAutoParse)
-    ParseFile();
+    Parse();
 }
 
 Level::~Level()
@@ -380,7 +380,7 @@ void Level::ResetLevel()
   graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   // NOTE: Removes menus too
   DeleteObjects();
-  ParseFile();
+  Parse();
   PostReset();
 }
 
@@ -620,15 +620,16 @@ void Level::SerializeLUA()
           .set("Unload", &Level::Unload)
           .set("GetName", &Level::GetName)
           .set("GetFileName", &Level::GetFileName)
-          .set("DeleteObject", &Level::DeleteObjectDelayed);
+          .set("DeleteObject", &Level::DeleteObjectDelayed)
+          .set("ParseFile", &Level::ParseFile);
 }
 
 /**
  * @brief Parse file to create our level. Include game object component overrides.
  */
-void Level::ParseFile()
+void Level::ParseFile(HashString const &aFileName)
 {
-  TextParser parser(Common::RelativePath("Game", mFileName).c_str());
+  TextParser parser(Common::RelativePath("Game", aFileName).c_str());
   GameObject *object = NULL;
   HashString const curObject = "Object_";
   int curIndex = 0;
@@ -717,6 +718,14 @@ void Level::ParseFile()
   {
     ParseAdditionalData(*it, nullptr);
   }
+}
+
+/**
+ * @brief Helper function to parse self
+ */
+void Level::Parse()
+{
+  ParseFile(mFileName);
 }
 
 /**
