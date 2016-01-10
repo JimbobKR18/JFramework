@@ -537,10 +537,25 @@ void Level::Serialize(Parser &aParser)
   int curIndex = 0;
   HashString object = "Object_";
   
+  // Put menu objects into container.
+  ObjectContainer menuObjects;
+  for(MenuIT menuIT = mMenus.begin(); menuIT != mMenus.end(); ++menuIT)
+  {
+    Menu::ElementContainer elements = (*menuIT)->GetElements();
+    for(Menu::ElementIT elementIT = elements.begin(); elementIT != elements.end(); ++elementIT)
+    {
+      menuObjects.push_back((*elementIT)->GetObject());
+    }
+  }
+  
   if(mGenerator)
     mGenerator->Serialize(aParser);
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it, ++curIndex)
+  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
+    // Avoid menu objects
+    if(std::find(menuObjects.begin(), menuObjects.end(), *it) != menuObjects.end())
+      continue;
+    
     HashString objectString = object + Common::IntToString(curIndex);
     aParser.SetCurrentObjectIndex(curIndex);
     aParser.Place(objectString, "");
@@ -551,12 +566,9 @@ void Level::Serialize(Parser &aParser)
       aParser.Place(objectString, "Focus", "");
       aParser.Find(objectString)->Place("Focus", "IsFocus", "true");
     }
+    ++curIndex;
   }
-  /*for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
-  {
-    (*it)->Serialize(aParser);
-  }*/
-  // TODO focus target
+  
   aParser.Place("Music", "");
   aParser.Place("Music", "Song", mMusicName);
 }
