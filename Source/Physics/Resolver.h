@@ -35,6 +35,10 @@ private:
   void  CalculateTriangleToSphere(CollisionPair &aPair);
   void  CalculateTriangleToCube(CollisionPair &aPair);
   void  CalculateTriangleToTriangle(CollisionPair &aPair);
+  void  CalculateLineToSphere(CollisionPair &aPair);
+  void  CalculateLineToCube(CollisionPair &aPair);
+  void  CalculateLineToTriangle(CollisionPair &aPair);
+  void  CalculateLineToLine(CollisionPair &aPair);
 };
 
 #endif

@@ -40,6 +40,9 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::TRIANGLE:
           collided = CheckTriangleToSphere(potentialPair);
           break;
+        case Shape::LINE:
+          collided = CheckLineToSphere(potentialPair);
+          break;
         default:
           break;
         }
@@ -55,6 +58,9 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
           break;
         case Shape::TRIANGLE:
           collided = CheckTriangleToCube(potentialPair);
+          break;
+        case Shape::LINE:
+          collided = CheckLineToCube(potentialPair);
           break;
         default:
           break;
@@ -72,10 +78,31 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::TRIANGLE:
           collided = CheckTriangleToTriangle(potentialPair);
           break;
+        case Shape::LINE:
+          collided = CheckLineToTriangle(potentialPair);
+          break;
         default:
           break;
         }
         break;
+      case Shape::LINE:
+        switch((*it2)->shape)
+        {
+        case Shape::SPHERE:
+          collided = CheckLineToSphere(potentialPair);
+          break;
+        case Shape::CUBE:
+          collided = CheckLineToCube(potentialPair);
+          break;
+        case Shape::TRIANGLE:
+          collided = CheckLineToTriangle(potentialPair);
+          break;
+        case Shape::LINE:
+          collided = CheckLineToLine(potentialPair);
+          break;
+        default:
+          break;
+        }
       default:
         break;
       }
@@ -282,6 +309,68 @@ bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
  * @param aPair
  */
 bool CollisionChecker::CheckTriangleToTriangle(CollisionPair &aPair)
+{
+  // TODO
+  return false;
+}
+
+/**
+ * @brief Line to Sphere check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckLineToSphere(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::SPHERE)
+    aPair.Switch();
+  
+  // Move line into world space
+  // This is a bit slow since it makes a new line every time.
+  Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Line* line = (Line*)(aPair.mShapes[0]);
+  Line tempLine = (*line);
+  tempLine.position += lineTransform->GetPosition();
+    
+  return CheckLineToSphere(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
+}
+
+/**
+ * @brief Line to Cube check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckLineToCube(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::CUBE)
+    aPair.Switch();
+    
+  // Move line into world space
+  // This is a bit slow since it makes a new line every time.
+  Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Line* line = (Line*)(aPair.mShapes[0]);
+  Line tempLine = (*line);
+  tempLine.position += lineTransform->GetPosition();
+    
+  return CheckLineToCube(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
+}
+
+/**
+ * @brief Line to Triangle check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckLineToTriangle(CollisionPair &aPair)
+{
+  // TODO
+  return false;
+}
+
+/**
+ * @brief Line to Line check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckLineToLine(CollisionPair &aPair)
 {
   // TODO
   return false;

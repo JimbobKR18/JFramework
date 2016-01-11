@@ -28,6 +28,10 @@ private:
   static bool CheckTriangleToSphere(CollisionPair &aPair);
   static bool CheckTriangleToCube(CollisionPair &aPair);
   static bool CheckTriangleToTriangle(CollisionPair &aPair);
+  static bool CheckLineToSphere(CollisionPair &aPair);
+  static bool CheckLineToCube(CollisionPair &aPair);
+  static bool CheckLineToTriangle(CollisionPair &aPair);
+  static bool CheckLineToLine(CollisionPair &aPair);
 
   // Line functions, also not visible.
   static bool CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape);

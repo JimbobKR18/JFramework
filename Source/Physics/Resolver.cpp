@@ -206,6 +206,9 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::TRIANGLE:
       CalculateTriangleToSphere(aPair);
       break;
+    case Shape::LINE:
+      CalculateLineToSphere(aPair);
+      break;
     default:
       break;
     }
@@ -222,6 +225,9 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::TRIANGLE:
       CalculateTriangleToCube(aPair);
       break;
+    case Shape::LINE:
+      CalculateLineToCube(aPair);
+      break;
     default:
       break;
     }
@@ -237,6 +243,28 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       break;
     case Shape::TRIANGLE:
       CalculateTriangleToTriangle(aPair);
+      break;
+    case Shape::LINE:
+      CalculateLineToTriangle(aPair);
+      break;
+    default:
+      break;
+    }
+    break;
+  case Shape::LINE:
+    switch(aPair.mShapes[1]->shape)
+    {
+    case Shape::SPHERE:
+      CalculateLineToSphere(aPair);
+      break;
+    case Shape::CUBE:
+      CalculateLineToCube(aPair);
+      break;
+    case Shape::TRIANGLE:
+      CalculateLineToTriangle(aPair);
+      break;
+    case Shape::LINE:
+      CalculateLineToLine(aPair);
       break;
     default:
       break;
@@ -430,4 +458,71 @@ void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
 void Resolver::CalculateTriangleToTriangle(CollisionPair &aPair)
 {
   assert(!"TODO");
+}
+
+/**
+ * @brief Calculate Line to Sphere resolution
+ * @param aPair Line and Sphere
+ */
+void Resolver::CalculateLineToSphere(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::SPHERE)
+  {
+    aPair.Switch();
+  }
+  
+  // Basic set up
+  Line *line = (Line*)aPair.mShapes[0];
+  Sphere *sphere = (Sphere*)aPair.mShapes[1];
+  Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  // This is a bit slow since it makes a new line every time.
+  // Move line into world space.
+  Line tempLine = (*line);
+  tempLine.position += lineTransform->GetPosition();
+  
+  // Find closest point on line to sphere pos and calculate penetration
+  // based on radius.
+  Vector3 spherePos = sphereTransform->GetPosition() + sphere->position;
+  Vector3 closestPoint = tempLine.ClosestPointToPoint(spherePos);
+  Vector3 dist = closestPoint - spherePos;
+  float radius = sphere->GetSize(0);
+  if(dist.length() < radius)
+  {
+    aPair.mPenetration = radius - dist.length();
+    aPair.mNormal = dist.normalize();
+    aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
+    aPair.mRestitution = 1.0f;
+  }
+}
+
+/**
+ * @brief Calculate Line to Cube resolution
+ * @param aPair Line and Cube
+ */
+void Resolver::CalculateLineToCube(CollisionPair &aPair)
+{
+  // TODO
+  //assert(!"TODO");
+}
+
+/**
+ * @brief Calculate Line to Triangle resolution
+ * @param aPair Line and Triangle
+ */
+void Resolver::CalculateLineToTriangle(CollisionPair &aPair)
+{
+  // TODO
+  //assert(!"TODO");
+}
+
+/**
+ * @brief Calculate Line to Line resolution
+ * @param aPair Both Lines
+ */
+void Resolver::CalculateLineToLine(CollisionPair &aPair)
+{
+  // TODO
+  //assert(!"TODO");
 }

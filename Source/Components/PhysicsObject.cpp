@@ -158,6 +158,15 @@ void PhysicsObject::Serialize(Parser &aParser)
       }
       break;
     }
+    case Shape::LINE:
+    {
+      Line *line = (Line*)(*it);
+      shapeObject->Place(curShape, "Type", "LINE");
+      shapeObject->Place(curShape, "Length", Common::IntToString((*it)->GetSize(0)));
+      shapeObject->Place(curShape, "DirectionX", Common::IntToString(line->direction.x));
+      shapeObject->Place(curShape, "DirectionY", Common::IntToString(line->direction.y));
+      shapeObject->Place(curShape, "DirectionZ", Common::IntToString(line->direction.z));
+    }
     default:
       break;
     }
@@ -234,6 +243,16 @@ void PhysicsObject::Deserialize(Parser &aParser)
         triangle->points[i] = point;
       }
       triangle->shape = Shape::TRIANGLE;
+    }
+    else if(type == "LINE")
+    {
+      newShape = new Line();
+      Line *line = (Line*)newShape;
+      line->direction = Vector3(tempShape->Find("DirectionX")->GetValue().ToFloat(),
+                                tempShape->Find("DirectionY")->GetValue().ToFloat(),
+                                tempShape->Find("DirectionZ")->GetValue().ToFloat());
+      line->length = tempShape->Find("Length")->GetValue().ToFloat();
+      line->shape = Shape::LINE;
     }
     else
       assert(!"Invalid shape given");

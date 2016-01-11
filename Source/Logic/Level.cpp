@@ -890,6 +890,16 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
       }
       triangle->shape = Shape::TRIANGLE;
     }
+    else if(type == "LINE")
+    {
+      newShape = new Line();
+      Line *line = (Line*)newShape;
+      line->direction = Vector3(tempShape->Find("DirectionX")->GetValue().ToFloat(),
+                                tempShape->Find("DirectionY")->GetValue().ToFloat(),
+                                tempShape->Find("DirectionZ")->GetValue().ToFloat());
+      line->length = tempShape->Find("Length")->GetValue().ToFloat();
+      line->shape = Shape::LINE;
+    }
     else
       assert(!"Invalid shape given");
       

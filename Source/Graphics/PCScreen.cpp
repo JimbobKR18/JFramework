@@ -125,6 +125,18 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           glVertex3f(point.x, point.y, point.z);
           glEnd();
         }
+        else if((*it)->shape == Shape::LINE)
+        {
+          Line *line = (Line*)(*it);
+          Vector3 linePos = Vector3(xPosition, yPosition, zPosition) +
+                            (*it)->position;
+          Vector3 lineEnd = linePos + (line->direction * line->length);
+          glBegin(GL_LINE_STRIP);
+          glColor3f(1.0f, 0.0f, 0.0f);
+          glVertex3f(linePos.x, linePos.y, linePos.z);
+          glVertex3f(lineEnd.x, lineEnd.y, lineEnd.z);
+          glEnd();
+        }
       }
 
       // Broad Size Line
