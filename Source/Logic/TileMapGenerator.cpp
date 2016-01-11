@@ -370,7 +370,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       float triZ = -zPos;
       if(mCollisionShapes.size() < collisionDataVectorSize ||
          mCollisionShapes[i] == CollisionShapes::CUBE ||
-         mCollisionShapes[i] > CollisionShapes::BOTTOMRIGHT)
+         mCollisionShapes[i] >= CollisionShapes::ALL_COLLISION_SHAPES)
       {
         shape = new Cube(zeroVector, transform->GetSize());
         
@@ -406,6 +406,36 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
         Vector3 point2(triSize, triSize, triZ);
         Vector3 point3(-triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::BACKSLASH)
+      {
+        shape = new Line(Vector3(-triSize, -triSize, triZ), 
+                         Vector3(triSize, triSize, triZ));
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::FORWARDSLASH)
+      {
+        shape = new Line(Vector3(-triSize, triSize, triZ), 
+                         Vector3(triSize, -triSize, triZ));
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::LEFTSIDE)
+      {
+        shape = new Line(Vector3(-triSize, -triSize, triZ), 
+                         Vector3(-triSize, triSize, triZ));
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::RIGHTSIDE)
+      {
+        shape = new Line(Vector3(triSize, triSize, triZ), 
+                         Vector3(triSize, -triSize, triZ));
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::TOPSIDE)
+      {
+        shape = new Line(Vector3(-triSize, -triSize, triZ), 
+                         Vector3(triSize, -triSize, triZ));
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMSIDE)
+      {
+        shape = new Line(Vector3(-triSize, triSize, triZ), 
+                         Vector3(triSize, triSize, triZ));
       }
       else
       {
