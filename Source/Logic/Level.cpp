@@ -229,12 +229,12 @@ void Level::AddObject(GameObject *aObject)
 {
   ObjectIT objectsEnd = mObjects.end();
   for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
-	{
-		if(*it == aObject)
-		{
+  {
+    if(*it == aObject)
+    {
       return;
-		}
-	}
+    }
+  }
   mObjects.push_back(aObject);
 }
 
@@ -267,6 +267,7 @@ void Level::DeleteObject(GameObject *aObject)
   {
     if(aObject == *it)
     {
+      RemoveObjectFromScenarios(*it);
       mObjects.erase(it);
       objectManager->DeleteObject(aObject);
       break;
@@ -316,6 +317,7 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
   {
     if(aObject == *it)
     {
+      RemoveObjectFromScenarios(*it);
       mObjects.erase(it);
       ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
       objectManager->ProcessDelayedMessage(msg);
@@ -344,6 +346,7 @@ void Level::DeleteObjects()
   ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
+    RemoveObjectFromScenarios(*it);
     manager->DeleteObject(*it);
   }
   for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
@@ -534,9 +537,6 @@ void Level::ParseAdditionalData(Root *aRoot, GameObject *aObject)
  */
 void Level::Serialize(Parser &aParser)
 {
-  int curIndex = 0;
-  HashString object = "Object_";
-  
   // Put menu objects into container.
   ObjectContainer menuObjects;
   for(MenuIT menuIT = mMenus.begin(); menuIT != mMenus.end(); ++menuIT)
@@ -550,24 +550,16 @@ void Level::Serialize(Parser &aParser)
   
   if(mGenerator)
     mGenerator->Serialize(aParser);
+    
+  // For each object not in a scenario, place in default scenario.
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
-    // Avoid menu objects
-    if(std::find(menuObjects.begin(), menuObjects.end(), *it) != menuObjects.end())
-      continue;
-    
-    HashString objectString = object + Common::IntToString(curIndex);
-    aParser.SetCurrentObjectIndex(curIndex);
-    aParser.Place(objectString, "");
-    (*it)->Serialize(aParser);
-
-    if(*it == mFocusTarget)
-    {
-      aParser.Place(objectString, "Focus", "");
-      aParser.Find(objectString)->Place("Focus", "IsFocus", "true");
-    }
-    ++curIndex;
+    if(ObjectNotInScenario(*it))
+      mScenarios[mFileName].push_back(*it);
   }
+    
+  SerializeObjects(aParser, mScenarios[mFileName], menuObjects);
+  SerializeScenarios(aParser, menuObjects);
   
   aParser.Place("Music", "");
   aParser.Place("Music", "Song", mMusicName);
@@ -621,7 +613,10 @@ void Level::SerializeLUA()
           .set("GetName", &Level::GetName)
           .set("GetFileName", &Level::GetFileName)
           .set("DeleteObject", &Level::DeleteObjectDelayed)
-          .set("ParseFile", &Level::ParseFile);
+          .set("ParseFile", &Level::ParseFile)
+          .set("LoadScenario", &Level::LoadScenario)
+          .set("UnloadScenario", &Level::UnloadScenario)
+          .set("UnloadScenarios", &Level::UnloadScenarios);
 }
 
 /**
@@ -645,6 +640,7 @@ void Level::ParseFile(HashString const &aFileName)
     object = new GameObject(manager, curRoot->Find("File")->GetValue());
     manager->ParseObject(object);
     mObjects.push_back(object);
+    mScenarios[aFileName].push_back(object);
 
     // TODO PhysicsObject serialization
     // Get transform information
@@ -721,6 +717,67 @@ void Level::ParseFile(HashString const &aFileName)
 }
 
 /**
+ * @brief Load a scenario by file name
+ * @param aFileName Name of file to load.
+ */
+void Level::LoadScenario(HashString const &aFileName)
+{
+  if(mScenarios.find(aFileName) != mScenarios.end())
+  {
+    ObjectContainer &objects = mScenarios[aFileName];
+    LoadObjects(objects, false);
+  }
+  else
+  {
+    DebugLogPrint("%s scenario file not found", aFileName.ToCharArray());
+    assert(!"Scenario file not found.");
+  }
+}
+
+/**
+ * @brief Unload scenario by filename
+ * @param aFileName Name of file to unload scenario objects from.
+ */
+void Level::UnloadScenario(HashString const &aFileName)
+{
+  if(mScenarios.find(aFileName) != mScenarios.end())
+  {
+    ObjectContainer &objects = mScenarios[aFileName];
+    UnloadObjects(objects);
+    for(ObjectIT it = objects.begin(); it != objects.end(); ++it)
+    {
+      DeleteObjectDelayed(*it);
+    }
+    objects.clear();
+    mScenarios.erase(aFileName);
+  }
+  else
+  {
+    DebugLogPrint("%s scenario file not found", aFileName.ToCharArray());
+    assert(!"Scenario file not found.");
+  }
+}
+
+/**
+ * @brief Unload all scenarios
+ */
+void Level::UnloadScenarios()
+{
+  for(FileContainerIT it = mScenarios.begin(); it != mScenarios.end();)
+  {
+    if(mScenarios.size() == 1)
+      break;
+    if(it->first == mFileName)
+    {
+      ++it;
+      continue;
+    }
+    UnloadScenario(it->first);
+    it = mScenarios.begin();
+  }
+}
+
+/**
  * @brief Helper function to parse self
  */
 void Level::ParseBaseFile()
@@ -744,6 +801,100 @@ Level::ObjectContainer& Level::GetObjects()
 Level::ObjectContainer& Level::GetStaticObjects()
 {
   return mStaticObjects;
+}
+
+/**
+ * @brief Serialize out objects
+ * @param aParser Parser to write objects to
+ * @param aObjects Objects to write
+ * @param aMenuObjects Objects to avoid writing
+ */
+void Level::SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects)
+{
+  int curIndex = 0;
+  HashString object = "Object_";
+  for(ObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
+  {
+    // Avoid menu objects
+    if(std::find(aMenuObjects.begin(), aMenuObjects.end(), *it) != aMenuObjects.end())
+      continue;
+    
+    HashString objectString = object + Common::IntToString(curIndex);
+    aParser.SetCurrentObjectIndex(curIndex);
+    aParser.Place(objectString, "");
+    (*it)->Serialize(aParser);
+
+    if(*it == mFocusTarget)
+    {
+      aParser.Place(objectString, "Focus", "");
+      aParser.Find(objectString)->Place("Focus", "IsFocus", "true");
+    }
+    ++curIndex;
+  }
+}
+
+/**
+ * @brief Serialize all scenario files into separate chunks.
+ * @param aParser Parser to get filename and directory from. (To be in same place as main level file.)
+ * @param aMenuObjects Objects to avoid writing
+ */
+void Level::SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects)
+{
+  int curIndex = 0;
+  HashString parserFile = aParser.GetFilename();
+  std::vector<HashString> splitParserFile = parserFile.Split("/");
+  HashString fileName = splitParserFile[splitParserFile.size() - 1].Split(".")[0] + "Scenario";
+  HashString folder = splitParserFile[splitParserFile.size() - 2];
+  for(FileContainerIT it = mScenarios.begin(); it != mScenarios.end(); ++it)
+  {
+    if(it->first == mFileName)
+    {
+      continue;
+    }
+    HashString currentFileName = fileName + Common::IntToString(curIndex);
+    TextParser *parser = new TextParser(Common::RelativePath(folder, currentFileName + ".txt"), MODE_OUTPUT);
+    SerializeObjects(*(Parser*)parser, it->second, aMenuObjects);
+    parser->Write();
+    delete parser;
+    ++curIndex;
+  }
+}
+
+/**
+ * @brief Helper to find lingering objects.
+ * @param aObject Object to search for.
+ * @return Whether file is in a scenario or not.
+ */
+bool Level::ObjectNotInScenario(GameObject *aObject)
+{
+  for(FileContainerIT it = mScenarios.begin(); it != mScenarios.end(); ++it)
+  {
+    for(ObjectIT it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+    {
+      if(aObject == *it2)
+        return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * @brief Remove object from all scenarios.
+ * @param aObject Object to remove.
+ */
+void Level::RemoveObjectFromScenarios(GameObject *aObject)
+{
+  for(FileContainerIT it = mScenarios.begin(); it != mScenarios.end(); ++it)
+  {
+    for(ObjectIT it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+    {
+      if(aObject == *it2)
+      {
+        it->second.erase(it2);
+        break;
+      }
+    }
+  }
 }
 
 /**

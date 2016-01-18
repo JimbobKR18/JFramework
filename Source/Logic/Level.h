@@ -16,10 +16,13 @@ class Level
 public:
   typedef std::vector<GameObject*> ObjectContainer;
   typedef std::vector<Menu*> MenuContainer;
+  typedef std::map<HashString, ObjectContainer> FileContainer;
   typedef ObjectContainer::iterator ObjectIT;
   typedef ObjectContainer::const_iterator ConstObjectIT;
   typedef MenuContainer::iterator MenuIT;
   typedef MenuContainer::const_iterator ConstMenuIT;
+  typedef FileContainer::iterator FileContainerIT;
+  typedef FileContainer::const_iterator ConstFileContainerIT;
 
 private:
   HashString        mName;
@@ -35,6 +38,8 @@ private:
 
   Vector3           mMaxBoundary;
   Vector3           mMinBoundary;
+  
+  FileContainer     mScenarios;
 
 public:
   Level();
@@ -87,11 +92,18 @@ public:
   static void       SerializeLUA();
 
   void              ParseFile(HashString const &aFileName);
+  void              LoadScenario(HashString const &aFileName);
+  void              UnloadScenario(HashString const &aFileName);
+  void              UnloadScenarios();
 
 protected:
   void              ParseBaseFile();
   ObjectContainer&  GetObjects();
   ObjectContainer&  GetStaticObjects();
+  void              SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects);
+  void              SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects);
+  bool              ObjectNotInScenario(GameObject *aObject);
+  void              RemoveObjectFromScenarios(GameObject *aObject);
 private:
   void ParseTransform(GameObject *aObject, Root* aTransform);
   void ParseSurface(GameObject *aObject, Root* aSurface);
