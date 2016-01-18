@@ -100,15 +100,15 @@ protected:
   void              ParseBaseFile();
   ObjectContainer&  GetObjects();
   ObjectContainer&  GetStaticObjects();
+private:
   void              SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects);
   void              SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects);
   bool              ObjectNotInScenario(GameObject *aObject);
   void              RemoveObjectFromScenarios(GameObject *aObject);
-private:
-  void ParseTransform(GameObject *aObject, Root* aTransform);
-  void ParseSurface(GameObject *aObject, Root* aSurface);
-  void ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject);
-  void ParseTileGenerator(TextParser &aParser);
+  void              ParseTransform(GameObject *aObject, Root* aTransform);
+  void              ParseSurface(GameObject *aObject, Root* aSurface);
+  void              ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject);
+  void              ParseTileGenerator(TextParser &aParser);
 };
 
 #endif
