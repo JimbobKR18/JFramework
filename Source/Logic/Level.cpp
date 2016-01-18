@@ -745,9 +745,14 @@ void Level::UnloadScenario(HashString const &aFileName)
   {
     ObjectContainer &objects = mScenarios[aFileName];
     UnloadObjects(objects);
-    for(ObjectIT it = objects.begin(); it != objects.end(); ++it)
+    for(ObjectIT it = objects.begin(); it != objects.end();)
     {
+      if(objects.size() == 0)
+        break;
+      
+      // This method already removes object from scenarios.
       DeleteObjectDelayed(*it);
+      it = objects.begin();
     }
     objects.clear();
     mScenarios.erase(aFileName);
