@@ -29,7 +29,8 @@ Level::Level()
 Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoParse) :
              mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
              mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
-             mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0)
+             mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0),
+             mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
       i >= 0 && aFileName[i] != '/'; --i)
