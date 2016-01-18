@@ -23,7 +23,7 @@ bool SortPredicate(GameObject *aLhs, GameObject *aRhs)
 
 Level::Level()
 {
-	assert(0);
+	assert(!"Do not use the level default constructor.");
 }
 
 Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoParse) :
