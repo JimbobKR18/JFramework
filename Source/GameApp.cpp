@@ -11,12 +11,8 @@
 #include "LUATypes.h"
 #include "Constants.h"
 
-GameApp::GameApp()
+GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(Common::GetNow()), mDT(0), mAppStep(0), mActive(true)
 {
-  mDT = 0;
-  mActive = true;
-  mLastFrame = Common::GetNow();
-  
   // Autoparses Game/Constants.txt
   Constants::Deserialize();
   
