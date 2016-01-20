@@ -62,7 +62,7 @@ TileMapGenerator::~TileMapGenerator()
   */
 void TileMapGenerator::Update()
 {
-  mCurrentAnimationTime += mOwner->GetManager()->GetOwningApp()->GetDT();
+  mCurrentAnimationTime += mOwner->GetManager()->GetOwningApp()->GetAppStep();
 
   if (mCurrentAnimationTime < mAnimationSpeed)
     return;

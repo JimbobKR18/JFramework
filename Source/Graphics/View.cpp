@@ -169,7 +169,7 @@ void View::Update()
       }
       else
       {
-        mInterpolator->Update(mTarget->GetManager()->GetOwningApp()->GetDT());
+        mInterpolator->Update(mTarget->GetManager()->GetOwningApp()->GetAppStep());
         if(mInterpolator->IsComplete())
         {
           delete mInterpolator;

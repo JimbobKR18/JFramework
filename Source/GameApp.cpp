@@ -11,8 +11,6 @@
 #include "LUATypes.h"
 #include "Constants.h"
 
-#define DT (1.0f/60.0f)
-
 GameApp::GameApp()
 {
   mDT = 0;
@@ -21,6 +19,9 @@ GameApp::GameApp()
   
   // Autoparses Game/Constants.txt
   Constants::Deserialize();
+  
+  // Set app refresh rate
+  mAppStep = 1.0f / Constants::GetFloat("RefreshRate");
 
   // All current managers added here
   // You can add your own manager in your derived class from GameApp.
@@ -52,12 +53,21 @@ GameApp::~GameApp()
 }
 
 /**
- * @brief Get time between frames
- * @return Time between frames, known as DT.
+ * @brief Get refresh time for app.
+ * @return Refresh time for app.
  */
-float GameApp::GetDT() const
+float GameApp::GetAppStep() const
 {
-  return mDT;
+  return mAppStep;
+}
+
+/**
+ * @brief Set refresh time for app.
+ * @param aAppStep Refresh time for app.
+ */
+void GameApp::SetAppStep(float const aAppStep)
+{
+  mAppStep = aAppStep;
 }
 
 /**
@@ -95,9 +105,9 @@ void GameApp::Update()
 {
   AppStep();
 
-  if(mDT >= DT)
+  if(mDT >= mAppStep)
   {
-    mDT = DT;
+    mDT -= mAppStep;
 
     for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
     {
@@ -204,5 +214,5 @@ void GameApp::SerializeLUA()
           .set("GetLevelManager", &GameApp::GET<LevelManager>)
           .set("GetObjectManager", &GameApp::GET<ObjectManager>)
           .set("GetSoundManager", &GameApp::GET<SoundManager>)
-          .set("GetDT", &GameApp::GetDT);
+          .set("GetAppStep", &GameApp::GetAppStep);
 }

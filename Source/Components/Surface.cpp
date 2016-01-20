@@ -129,7 +129,7 @@ bool Surface::CurrentAnimationCompleted()
  */
 void Surface::Update()
 {
-  float dt = GetOwner()->GetManager()->GetOwningApp()->GetDT();
+  float dt = GetOwner()->GetManager()->GetOwningApp()->GetAppStep();
 
   if(mTexCoord)
     mTexCoord->Update(dt);

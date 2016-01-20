@@ -127,7 +127,7 @@ void PhysicsWorld::Update()
   SortOnAxis();
   SweepAndPrune();
   mRegistry.Update();
-  mResolver.Update(GetOwningApp()->GetDT());
+  mResolver.Update(GetOwningApp()->GetAppStep());
 }
 
 /**

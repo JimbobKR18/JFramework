@@ -46,7 +46,7 @@ void PhysicsObject::Update()
   Transform* transform = GetOwner()->GET<Transform>();
   Vector3 position = transform->GetPosition();
 
-  float dt = mWorld->GetOwningApp()->GetDT();
+  float dt = mWorld->GetOwningApp()->GetAppStep();
 
   position += mVelocity * dt;
 

@@ -14,12 +14,14 @@ private:
   std::vector<Message*> mDelayedMessages;
   Common::TimePoint     mLastFrame;
   float                 mDT;
+  float                 mAppStep;
   bool                  mActive;
 public:
   GameApp();
   virtual ~GameApp();
 
-  float             GetDT() const;
+  float             GetAppStep() const;
+  void              SetAppStep(float const aAppStep);
   bool              GetActive() const;
   void              SetActive(bool const aActive);
   void              AppStep();
