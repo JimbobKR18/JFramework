@@ -94,7 +94,8 @@ void GameApp::SetActive(bool const aActive)
 void GameApp::AppStep()
 {
   Common::TimePoint currentTime = Common::GetNow();
-  mDT += (float)(TimePointToMilliseconds(currentTime - mLastFrame).count()) / 1000.0f;
+  float timeDiff = (float)(TimePointToMilliseconds(currentTime - mLastFrame).count()) / 1000.0f;
+  mDT += timeDiff;
   mLastFrame = currentTime;
 }
 
@@ -107,7 +108,10 @@ void GameApp::Update()
 
   if(mDT >= mAppStep)
   {
-    mDT -= mAppStep;
+    // TODO, using -= seems to cause a freeze where
+    // steady_clock decides it doesn't want to update
+    // anymore. May be a bug with chrono.
+    mDT = mAppStep;
 
     for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
     {
