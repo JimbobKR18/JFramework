@@ -22,7 +22,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <chrono>
 #include "HashString.h"
 #include "SmartPointer.h"
 
@@ -31,16 +30,10 @@
 #endif
 
 #define DebugLogPrint std::printf
-#define TimePointToMilliseconds std::chrono::duration_cast<std::chrono::milliseconds>
 
 namespace Common
 {
   std::string const         RelativePath(std::string const &aSubFolder, std::string const &aFileName);
-
-  #ifndef _WIN32
-  long                      GetTickCount();
-  long                      timeGetTime();
-  #endif
 
   int                       StringToInt(std::string const &aValue);
   float                     StringToFloat(std::string const &aValue);
@@ -61,10 +54,6 @@ namespace Common
 
   int                       RandomIntInRange(int const aX, int const bX);
   float                     RandomFloatInRange(float const aX, float const bX);
-
-  typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;
-  typedef std::chrono::steady_clock Clock;
-  TimePoint                 GetNow();
 }
 
 #endif

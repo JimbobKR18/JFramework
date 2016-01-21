@@ -15,34 +15,6 @@
 
 namespace Common
 {
-  // Mac specific functions
-  #ifdef __APPLE__
-  #include <mach/mach_time.h>
-  #define ORWL_NANO (+1.0E-9)
-  #define ORWL_GIGA UINT64_C(1000000000)
-  #define CLOCK_MONOTONIC 0
-
-  double orwl_timebase = 0.0;
-  uint64_t orwl_timestart = 0;
-
-  // A mac replacement for the linux function clock_gettime
-  void clock_gettime(int aEmpty, struct timespec *aTime)
-  {
-    if (!orwl_timestart)
-    {
-      mach_timebase_info_data_t tb = { 0 };
-      mach_timebase_info(&tb);
-      orwl_timebase = tb.numer;
-      orwl_timebase /= tb.denom;
-      orwl_timestart = mach_absolute_time();
-    }
-    
-    double diff = (mach_absolute_time() - orwl_timestart) * orwl_timebase;
-    aTime->tv_sec = diff * ORWL_NANO;
-    aTime->tv_nsec = diff - (aTime->tv_sec * ORWL_GIGA);
-  }
-  #endif
-
   /**
    * @brief Gets relative path for asset files, can be either set by macro ASSET_DIRECTORY
    *        or automatically.
@@ -67,22 +39,6 @@ namespace Common
     ret.append(aFileName);
     return ret;
   }
-
-  // Functions that Windows provides that need to be set for Mac and Linux
-  #ifndef _WIN32
-  long GetTickCount()
-  {
-    return timeGetTime();
-  }
-
-  long timeGetTime()
-  {
-    // Returns time in milliseconds
-    struct timespec now;
-    clock_gettime(CLOCK_MONOTONIC, &now);
-    return (now.tv_sec * 1000) + (now.tv_nsec / (1000 * 1000));
-  }
-  #endif
 
   /**
    * @brief Converts String to Int
@@ -330,13 +286,5 @@ namespace Common
     float diff = bX - aX;
     diff *= (static_cast<float>(rand()) / static_cast<float>(RAND_MAX));
     return aX + diff;
-  }
-
-  /**
-   * @brief Get clock now
-   */
-  TimePoint GetNow()
-  {
-    return Clock::now();
   }
 }

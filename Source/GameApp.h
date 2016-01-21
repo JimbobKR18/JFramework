@@ -12,7 +12,7 @@ class GameApp
 private:
   std::vector<Manager*> mManagers;
   std::vector<Message*> mDelayedMessages;
-  Common::TimePoint     mLastFrame;
+  unsigned int          mLastFrame;
   float                 mDT;
   float                 mAppStep;
   bool                  mActive;
@@ -24,8 +24,8 @@ public:
   void              SetAppStep(float const aAppStep);
   bool              GetActive() const;
   void              SetActive(bool const aActive);
-  void              AppStep();
-  virtual void      Update();
+  void              SetLastFrameTime(unsigned int const &aLastFrame);
+  virtual void      Update(unsigned int const &aTicksSinceStart);
   void              SendMessage(Message const &aMessage);
   void              SendMessageDelayed(Message *aMessage);
   void              ClearDelayedMessages();

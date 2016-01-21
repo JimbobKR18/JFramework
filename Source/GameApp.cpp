@@ -11,7 +11,7 @@
 #include "LUATypes.h"
 #include "Constants.h"
 
-GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(Common::GetNow()), mDT(0), mAppStep(0), mActive(true)
+GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAppStep(0), mActive(true)
 {
   // Autoparses Game/Constants.txt
   Constants::Deserialize();
@@ -85,29 +85,31 @@ void GameApp::SetActive(bool const aActive)
 }
 
 /**
- * @brief Calculate DT
+ * @brief Set last frame time, in millis since app start.
+ * @param aLastFrame Time, in millis.
  */
-void GameApp::AppStep()
+void GameApp::SetLastFrameTime(unsigned int const &aLastFrame)
 {
-  Common::TimePoint currentTime = Common::GetNow();
-  float timeDiff = (float)(TimePointToMilliseconds(currentTime - mLastFrame).count()) / 1000.0f;
-  mDT += timeDiff;
-  mLastFrame = currentTime;
+  mLastFrame = aLastFrame;
 }
 
 /**
  * @brief Update loop
+ * @param aTicksSinceStart Time, in millis, since the app started.
  */
-void GameApp::Update()
+void GameApp::Update(unsigned int const &aTicksSinceStart)
 {
-  AppStep();
+  float diff = (float)(aTicksSinceStart - mLastFrame) / 1000.0f;
+  mDT += diff;
+  mLastFrame = aTicksSinceStart;
 
-  if(mDT >= mAppStep)
+  while(mDT >= mAppStep)
   {
-    // TODO, using -= seems to cause a freeze where
-    // steady_clock decides it doesn't want to update
-    // anymore. May be a bug with chrono.
-    mDT = mAppStep;
+    // Shave off any extra time.
+    while(mDT >= mAppStep)
+    {
+      mDT -= mAppStep;
+    }
 
     for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
     {
