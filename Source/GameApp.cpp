@@ -207,6 +207,13 @@ Manager* GameApp::GetManagerByUID(unsigned const aUID)
 }
 
 /**
+ * @brief Empty method, is virtual to be overwritten. Mainly used to accept input.
+ */
+void GameApp::BetweenFrameUpdate()
+{
+}
+
+/**
  * @brief Set up for LUA
  */
 void GameApp::SerializeLUA()

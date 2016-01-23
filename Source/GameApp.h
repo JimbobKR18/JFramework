@@ -34,7 +34,7 @@ public:
   Manager*          GetManagerByName(HashString const &aName);
   Manager*          GetManagerByUID(unsigned const aUID);
   
-  virtual void      BetweenFrameUpdate() {}
+  virtual void      BetweenFrameUpdate();
 
   template<typename T>
   T*                GET() {return (T*)GetManagerByUID(T::GetUID());}
