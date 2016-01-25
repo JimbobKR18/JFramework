@@ -123,8 +123,8 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
         SendMessage(**it);
         delete *it;
       }
+      mDelayedMessages.clear();
     }
-    mDelayedMessages.clear();
     
     BetweenFrameUpdate();
   }
