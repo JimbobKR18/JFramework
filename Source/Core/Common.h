@@ -22,6 +22,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iterator>
 #include "HashString.h"
 #include "SmartPointer.h"
 
