@@ -105,7 +105,6 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
   mDT += diff;
   mLastFrame = aTicksSinceStart;
   
-  BetweenFrameUpdate();
   while(mDT >= mAppStep)
   {
     mDT -= mAppStep;
@@ -127,7 +126,7 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
     }
     mDelayedMessages.clear();
     
-    //BetweenFrameUpdate();
+    BetweenFrameUpdate();
   }
 }
 
