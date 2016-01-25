@@ -9,14 +9,14 @@
 #ifndef JFramework_Message_h
 #define JFramework_Message_h
 
-#include <string>
+#include "HashString.h"
 
 // This class should be derived from, not directly instantiated;
 class Message
 {
 private:
-  std::string mDesc;
-  std::string mContent;
+  HashString mDesc;
+  HashString mContent;
   
 public:
   Message() {}
@@ -24,12 +24,12 @@ public:
   virtual ~Message() {}
 
 protected:
-  void        SetDescription(std::string const &aDesc) { mDesc = aDesc; }
-  void        SetContent(std::string const &aContent) { mContent = aContent; }
+  void        SetDescription(HashString const &aDesc) { mDesc = aDesc; }
+  void        SetContent(HashString const &aContent) { mContent = aContent; }
   
 public:
-  std::string GetDescription() const { return mDesc; }
-  std::string GetContent() const { return mContent; }
+  HashString  GetDescription() const { return mDesc; }
+  HashString  GetContent() const { return mContent; }
 };
 
 #endif

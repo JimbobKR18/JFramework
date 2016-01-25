@@ -14,6 +14,8 @@
 #include "MathExt.h"
 #include "GameObject.h"
 
+HashString const COLLISION = "Collision";
+
 class CollisionMessage: public Message
 {
 private:
@@ -30,7 +32,7 @@ private:
   }
 
 public:
-  CollisionMessage(std::string const &aContent,
+  CollisionMessage(HashString const &aContent,
                    GameObject *aObject1,
                    GameObject *aObject2,
                    Shape *aShape1,
@@ -40,7 +42,7 @@ public:
                                      mShape1(aShape1),
                                      mShape2(aShape2)
   {
-    SetDescription("Collision");
+    SetDescription(COLLISION);
     SetContent(aContent);
   }
   virtual ~CollisionMessage()

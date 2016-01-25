@@ -1,6 +1,9 @@
 #ifndef CLICKMESSAGE_H
 #define CLICKMESSAGE_H
 
+HashString const CLICK = "Click";
+HashString const EMPTY = "";
+
 class ClickMessage: public Message
 {
 private:
@@ -14,8 +17,8 @@ public:
   ClickMessage(Vector3 const &aLocation) : mContact(false)
   {
     mLocation = aLocation;
-    SetDescription("Click");
-    SetContent("");
+    SetDescription(CLICK);
+    SetContent(EMPTY);
   }
   virtual ~ClickMessage() {}
   

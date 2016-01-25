@@ -14,10 +14,10 @@
 
 struct InputInfo
 {
-  std::string mInput;
+  HashString  mInput;
   Vector3     mLocation;
 
-  InputInfo(std::string const &aInput, Vector3 const &aLocation) : mInput(aInput), mLocation(aLocation) {}
+  InputInfo(HashString const &aInput, Vector3 const &aLocation) : mInput(aInput), mLocation(aLocation) {}
   bool operator<(InputInfo const &aRhs) const {return mInput < aRhs.mInput;}
 };
 
@@ -32,8 +32,8 @@ public:
   InputManager(GameApp *aApp);
   ~InputManager();
   
-  void                AddInput(std::string const &aInput, Vector3 const &aLocation);
-  void                RemoveInput(std::string const &aInput);
+  void                AddInput(HashString const &aInput, Vector3 const &aLocation);
+  void                RemoveInput(HashString const &aInput);
   void                ClearInputs();
   
   void                AcceptInputs();

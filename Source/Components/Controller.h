@@ -29,7 +29,7 @@ public:
   void                  SetPaused(bool const aPaused);
   bool                  GetPaused() const;
   
-  virtual void        DoAction(std::string const &aAction, Vector3 const &aLocation) = 0;
+  virtual void        DoAction(HashString const &aAction, Vector3 const &aLocation) = 0;
   
   // Virtuals derived from Component
   virtual void        Update() = 0;

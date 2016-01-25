@@ -22,7 +22,7 @@ private:
   InputMessage(InputMessage const &aMessage) : Message(), mLocation(aMessage.mLocation) {}
   
 public:
-  InputMessage(std::string const &aContent, Vector3 const &aLocation) : Message(), mLocation(aLocation)
+  InputMessage(HashString const &aContent, Vector3 const &aLocation) : Message(), mLocation(aLocation)
   {
     SetDescription("Input");
     SetContent(aContent);

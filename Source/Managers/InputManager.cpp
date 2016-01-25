@@ -25,7 +25,7 @@ InputManager::~InputManager()
  * @param aInput Input type
  * @param aLocation Lcoation in screen space where input happened.
  */
-void InputManager::AddInput(std::string const &aInput, Vector3 const &aLocation)
+void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation)
 {
   if(!mAcceptInput)
     return;
@@ -47,7 +47,7 @@ void InputManager::AddInput(std::string const &aInput, Vector3 const &aLocation)
  * @brief Removes input
  * @param aInput Input type
  */
-void InputManager::RemoveInput(std::string const &aInput)
+void InputManager::RemoveInput(HashString const &aInput)
 {
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {

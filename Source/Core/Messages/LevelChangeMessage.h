@@ -17,7 +17,7 @@ private:
   LevelChangeMessage(LevelChangeMessage const &aMessage) : Message() {}
 
 public:
-  LevelChangeMessage(std::string const &aLevelName, std::string const &aReset) : Message()
+  LevelChangeMessage(HashString const &aLevelName, HashString const &aReset) : Message()
   {
     SetDescription(aLevelName);
     SetContent(aReset);

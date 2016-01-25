@@ -99,11 +99,13 @@ void GameApp::SetLastFrameTime(unsigned int const &aLastFrame)
  */
 void GameApp::Update(unsigned int const &aTicksSinceStart)
 {
+  std::vector<Message*>::iterator messagesEnd;
   std::vector<Manager*>::iterator managersEnd = mManagers.end();
   float diff = (float)(aTicksSinceStart - mLastFrame) / 1000.0f;
   mDT += diff;
   mLastFrame = aTicksSinceStart;
-
+  
+  BetweenFrameUpdate();
   while(mDT >= mAppStep)
   {
     mDT -= mAppStep;
@@ -113,16 +115,19 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
       (*it)->Update();
     }
     
-    // Delete objects
-    std::vector<Message*>::iterator messagesEnd = mDelayedMessages.end();
-    for(std::vector<Message*>::iterator it = mDelayedMessages.begin(); it != messagesEnd; ++it)
+    // Delete messages
+    if(!mDelayedMessages.empty())
     {
-      SendMessage(**it);
-      delete *it;
+      messagesEnd = mDelayedMessages.end();
+      for(std::vector<Message*>::iterator it = mDelayedMessages.begin(); it != messagesEnd; ++it)
+      {
+        SendMessage(**it);
+        delete *it;
+      }
     }
     mDelayedMessages.clear();
     
-    BetweenFrameUpdate();
+    //BetweenFrameUpdate();
   }
 }
 
