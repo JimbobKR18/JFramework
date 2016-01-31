@@ -3,8 +3,8 @@
 #include "ObjectDeleteMessage.h"
 
 #if !defined(IOS) && !defined(ANDROID)
-  #include "PCShaderScreen.h"
-  #include "PCShaderSurface.h"
+  #include "PCScreen.h"
+  #include "PCSurface.h"
 #endif
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
@@ -16,7 +16,7 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manag
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
 #if !defined(IOS) && !defined(ANDROID)
-  mScreen = new PCShaderScreen(aWidth, aHeight);
+  mScreen = new PCScreen(aWidth, aHeight);
 #else
 #endif
 }
@@ -75,7 +75,7 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
 Surface *GraphicsManager::CreateSurface()
 {
 #if !defined(ANDROID) && !defined(IOS)
-	Surface *surface = new PCShaderSurface(this);
+	Surface *surface = new PCSurface(this);
 #else
 	Surface *surface = new Surface(this);
 #endif
@@ -91,7 +91,7 @@ Surface *GraphicsManager::CreateSurface()
 Surface *GraphicsManager::CreateUISurface()
 {
 #if !defined(ANDROID) && !defined(IOS)
-  Surface *surface = new PCShaderSurface(this);
+  Surface *surface = new PCSurface(this);
 #else
   Surface *surface = new Surface(this);
 #endif
