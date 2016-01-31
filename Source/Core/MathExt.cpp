@@ -276,6 +276,10 @@ Vector4::Vector4() :
     x(0), y(0), z(0), w(0)
 {
 }
+Vector4::Vector4(Vector3 const &aVector3) :
+    x(aVector3.x), y(aVector3.y), z(aVector3.z), w(1.0f)
+{
+}
 Vector4::Vector4(float aX, float aY, float aZ, float aW) :
     x(aX), y(aY), z(aZ), w(aW)
 {

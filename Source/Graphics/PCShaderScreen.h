@@ -21,6 +21,8 @@ class PCShaderScreen : public Screen
 private:
   SDL_Window*   mWindow;
   SDL_GLContext mGLContext;
+  GLuint        mVertexBufferID;
+  GLuint        mVertexArrayObjectID;
 
 public:
   PCShaderScreen();

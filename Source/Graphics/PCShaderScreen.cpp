@@ -175,6 +175,7 @@ void PCShaderScreen::PreDraw()
  */
 void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
 {
+  // TODO this is almost complete, have to pass camera and object params to shader.
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
   Vector3 cameraScale = GetView().GetScale();
@@ -192,34 +193,20 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     // Get the texture id of the surface
     GLuint texture = (*it)->GetOwner()->GET<PCShaderSurface>()->GetTextureID();
     GLuint program = (*it)->GetOwner()->GET<PCShaderSurface>()->GetProgramID();
-    //GLint vertexPos3DLocation = glGetAttribLocation(program, "vertexPos");
-    //GLint texture3DLocation = glGetAttribLocation(program, "texCoord3D");
-    //GLint colorLocation = glGetAttribLocation(program, "vertexColor");
-    //GLint textureUnitLocation = glGetUniformLocation(program, "textureUnit");
     
     glBindTexture(GL_TEXTURE_2D, texture);
     
     glPushMatrix();
     
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    //glEnableVertexAttribArray(vertexPos3DLocation);
-    //glEnableVertexAttribArray(texture3DLocation);
-    //glEnableVertexAttribArray(textureUnitLocation);
-    std::vector<Vector3> points, texcoords;
-    std::vector<Vector4> colors;
-    
-    points.reserve(1024);
-    texcoords.reserve(1024);
-    colors.reserve(1024);
+    std::vector<Vector4> renderData;
+    renderData.reserve(1024);
     
     // While other texture share the same texture id, draw them
     while(it != end &&
           (*it)->GetOwner()->GET<PCShaderSurface>()->GetTextureID() == texture)
     {
       GameObject *owner = (*it)->GetOwner();
-      PCShaderSurface *surface = owner->GET<PCShaderSurface>();
+      PCShaderSurface *surface = (PCShaderSurface*)(*it);
       Transform *transform = owner->GET<Transform>();
       
       // Gotta progress this somehow
@@ -281,44 +268,43 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       }
       
       // Vertex points
-      points.push_back(topLeft);
-      points.push_back(topRight);
-      points.push_back(bottomRight);
-      points.push_back(bottomLeft);
+      renderData.push_back(topLeft);
+      renderData.push_back(topRight);
+      renderData.push_back(bottomRight);
+      renderData.push_back(bottomLeft);
       // Texture coordinates
-      texcoords.push_back(Vector3(texCoord->GetXValue(0), texCoord->GetYValue(0), 0));
-      texcoords.push_back(Vector3(texCoord->GetXValue(1), texCoord->GetYValue(0), 0));
-      texcoords.push_back(Vector3(texCoord->GetXValue(1), texCoord->GetYValue(1), 0));
-      texcoords.push_back(Vector3(texCoord->GetXValue(0), texCoord->GetYValue(1), 0));
+      renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+      renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
+      renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+      renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
       // Colors (Assuming uniform color)
-      colors.push_back(color);
-      colors.push_back(color);
-      colors.push_back(color);
-      colors.push_back(color);
+      renderData.push_back(color);
+      renderData.push_back(color);
+      renderData.push_back(color);
+      renderData.push_back(color);
     }
     
-    // Pointers and draw (there has to be something to draw though
+    // TODO. vertex shaders are in clip space (-1,1)
+    // Whereas our objects are in camera space.
     glUseProgram(program);
-    if (points.size() > 0)
+    glBindVertexArray(mVertexArrayObjectID);
+    glEnableVertexAttribArray(0);
+    if (renderData.size() > 0)
     {
-      //glVertexAttribPointer(vertexPos3DLocation, 3, GL_FLOAT, false, sizeof(Vector3), &points[0]);
-      //glVertexAttribPointer(texture3DLocation, 3, GL_FLOAT, false, sizeof(Vector3), &texcoords[0]);
-      //glVertexAttribPointer(colorLocation, 4, GL_FLOAT, false, sizeof(Vector4), &colors[0]);
-      glVertexPointer(3, GL_FLOAT, sizeof(Vector3), &points[0]);
-      glTexCoordPointer(3, GL_FLOAT, sizeof(Vector3), &texcoords[0]);
-      glColorPointer(4, GL_FLOAT, sizeof(Vector4), &colors[0]);
-      glDrawArrays(GL_QUADS, 0, points.size());
+      glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
+      glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
+      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+      glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vector4), &renderData[1]);
+      glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vector4), &renderData[2]);
+      glDrawArrays(GL_QUADS, 0, renderData.size() / 3);
     }
-    //glDisableVertexAttribArray(vertexPos3DLocation);
-    //glDisableVertexAttribArray(texture3DLocation);
-    //glDisableVertexAttribArray(textureUnitLocation);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableVertexAttribArray(0);
     glPopMatrix();
 
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
   }
 }
 
@@ -390,6 +376,10 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glShadeModel(GL_SMOOTH);
 
   glLoadIdentity();
+  
+  glGenVertexArrays(1, &mVertexArrayObjectID);
+  glGenBuffers(1, &mVertexBufferID);
+  glBindVertexArray(mVertexArrayObjectID);
 }
 
 /**

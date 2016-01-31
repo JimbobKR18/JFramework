@@ -183,7 +183,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
     // Get the texture id of the surface
-    GLuint texture = (*it)->GetOwner()->GET<PCSurface>()->GetTextureID();
+    GLuint texture = ((PCSurface*)(*it))->GetTextureID();
     glBindTexture(GL_TEXTURE_2D, texture);
     
     glPushMatrix();
@@ -203,7 +203,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
           (*it)->GetOwner()->GET<PCSurface>()->GetTextureID() == texture)
     {
       GameObject *owner = (*it)->GetOwner();
-      PCSurface *surface = owner->GET<PCSurface>();
+      PCSurface *surface = (PCSurface*)*it;
       Transform *transform = owner->GET<Transform>();
       
       // Gotta progress this somehow

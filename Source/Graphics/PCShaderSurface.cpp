@@ -193,21 +193,20 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
     GLenum program = glCreateProgram();
     GLenum vertexShader = glCreateShader(GL_VERTEX_SHADER);
     GLenum fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    
-    const char* vertexContents = std::string((std::istreambuf_iterator<char>(vertexFile)), std::istreambuf_iterator<char>()).c_str();
-    const char* fragmentContents = std::string((std::istreambuf_iterator<char>(fragmentFile)), std::istreambuf_iterator<char>()).c_str();
-    
-    glShaderSource(vertexShader, 1, &vertexContents, NULL);
-    glShaderSource(fragmentShader, 1, &fragmentContents, NULL);
-    
-    glCompileShader(vertexShader);
-    glCompileShader(fragmentShader);
-    
-    // Compile check.
     GLint didCompile = 0;
+    GLint isLinked = 0;
+    
+    HashString vertexFileContents = std::string((std::istreambuf_iterator<char>(vertexFile)), std::istreambuf_iterator<char>());
+    const char* vertexContents = vertexFileContents.ToCharArray();
+    
+    // Compile
+    glShaderSource(vertexShader, 1, &vertexContents, NULL);
+    glCompileShader(vertexShader);
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &didCompile);
     if(didCompile == GL_FALSE)
     {
+      DebugLogPrint("VERTEX SHADER %s READ:\n%s\n", aVertexShaderFilename.ToCharArray(), vertexContents);
+      
       GLint maxLength = 0;
       glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -215,15 +214,21 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
       std::vector<char> infoLog(maxLength);
       glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
       
-      DebugLogPrint("GLERROR: %s\n", &infoLog[0]);
+      DebugLogPrint("GLERROR %s: %s\n", aVertexShaderFilename.ToCharArray(), &infoLog[0]);
 	
       //We don't need the shader anymore.
       glDeleteShader(vertexShader);
     }
     
+    HashString fragmentFileContents = std::string((std::istreambuf_iterator<char>(fragmentFile)), std::istreambuf_iterator<char>());
+    const char* fragmentContents = fragmentFileContents.ToCharArray();
+    glShaderSource(fragmentShader, 1, &fragmentContents, NULL);
+    glCompileShader(fragmentShader);
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &didCompile);
-    if(fragmentShader == GL_FALSE)
+    if(didCompile == GL_FALSE)
     {
+      DebugLogPrint("FRAGMENT SHADER %s READ:\n%s\n", aFragmentShaderFilename.ToCharArray(), fragmentContents);
+      
       GLint maxLength = 0;
       glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
 
@@ -231,20 +236,17 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
       std::vector<char> infoLog(maxLength);
       glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
       
-      DebugLogPrint("GLERROR: %s\n", &infoLog[0]);
+      DebugLogPrint("GLERROR %s: %s\n", aFragmentShaderFilename.ToCharArray(), &infoLog[0]);
 	
       //We don't need the shader anymore.
       glDeleteShader(fragmentShader);
     }
     
+    // Linking
     glAttachShader(program, vertexShader);
     glAttachShader(program, fragmentShader);
-    
     glLinkProgram(program);
-    
-    // Link check
-    GLint isLinked = 0;
-    glGetProgramiv(program, GL_LINK_STATUS, (int *)&isLinked);
+    glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
     if(isLinked == GL_FALSE)
     {
       GLint maxLength = 0;
@@ -260,7 +262,7 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
       glDeleteShader(vertexShader);
       glDeleteShader(fragmentShader);
 
-      DebugLogPrint("GLERROR: %s\n", &infoLog[0]);
+      DebugLogPrint("GL LINK ERROR: %s\n", &infoLog[0]);
     }
     
     GetManager()->AddShaderPairing(aVertexShaderFilename, ShaderData(program, vertexShader, vertexContents));

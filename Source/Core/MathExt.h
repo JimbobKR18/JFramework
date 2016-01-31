@@ -84,6 +84,7 @@ struct Vector4
   float x, y, z, w;
 
   Vector4();
+  Vector4(Vector3 const &aVector3);
   Vector4(float aX, float aY, float aZ, float aW);
 
   float   length() const;
