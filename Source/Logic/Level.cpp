@@ -939,9 +939,9 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
 
   // Auto set camera bounds based on objects in environment
   mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
-  mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.x);
+  mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.y);
   mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
-  mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.x);
+  mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.y);
 }
 
 /**
