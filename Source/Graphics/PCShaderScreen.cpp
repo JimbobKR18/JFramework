@@ -1,6 +1,6 @@
-#include "PCScreen.h"
+#include "PCShaderScreen.h"
 #include "PhysicsObject.h"
-#include "PCSurface.h"
+#include "PCShaderSurface.h"
 #include "Constants.h"
 
 #define VERTEX_ARRAYS
@@ -13,21 +13,28 @@
   #undef PlaySound
 #endif
 
-PCScreen::PCScreen() : Screen()
+PCShaderScreen::PCShaderScreen() : Screen()
 {
-  SDL_Init(SDL_INIT_EVERYTHING);
+  assert(!"Do not use this");
 }
 
-PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
+PCShaderScreen::PCShaderScreen(int aW, int aH) : Screen(aW, aH)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
+  GLenum glError = glewInit();
+  if(glError != GLEW_OK)
+  {
+    DebugLogPrint("Error: %s\n", glewGetErrorString(glError));
+    assert(!"GLEW failed to init.");
+  }
+  
   ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
 }
 
-PCScreen::~PCScreen()
+PCShaderScreen::~PCShaderScreen()
 {
   SDL_GL_DeleteContext(mGLContext);
   SDL_Quit();
@@ -37,7 +44,7 @@ PCScreen::~PCScreen()
  * @brief Draw debug lines around objects, physics boxes only.
  * @param aObjects
  */
-void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
+void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
   Vector3 cameraPosition = GetView().GetPosition();
@@ -156,7 +163,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 /**
  * @brief Operations to run before draw phase.
  */
-void PCScreen::PreDraw()
+void PCShaderScreen::PreDraw()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glLoadIdentity();
@@ -166,7 +173,7 @@ void PCScreen::PreDraw()
  * @brief Draw objects
  * @param aObjects
  */
-void PCScreen::Draw(std::vector<Surface*> const &aObjects)
+void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
 {
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
@@ -183,7 +190,13 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
     // Get the texture id of the surface
-    GLuint texture = (*it)->GetOwner()->GET<PCSurface>()->GetTextureID();
+    GLuint texture = (*it)->GetOwner()->GET<PCShaderSurface>()->GetTextureID();
+    GLuint program = (*it)->GetOwner()->GET<PCShaderSurface>()->GetProgramID();
+    //GLint vertexPos3DLocation = glGetAttribLocation(program, "vertexPos");
+    //GLint texture3DLocation = glGetAttribLocation(program, "texCoord3D");
+    //GLint colorLocation = glGetAttribLocation(program, "vertexColor");
+    //GLint textureUnitLocation = glGetUniformLocation(program, "textureUnit");
+    
     glBindTexture(GL_TEXTURE_2D, texture);
     
     glPushMatrix();
@@ -191,6 +204,9 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
+    //glEnableVertexAttribArray(vertexPos3DLocation);
+    //glEnableVertexAttribArray(texture3DLocation);
+    //glEnableVertexAttribArray(textureUnitLocation);
     std::vector<Vector3> points, texcoords;
     std::vector<Vector4> colors;
     
@@ -200,10 +216,10 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     
     // While other texture share the same texture id, draw them
     while(it != end &&
-          (*it)->GetOwner()->GET<PCSurface>()->GetTextureID() == texture)
+          (*it)->GetOwner()->GET<PCShaderSurface>()->GetTextureID() == texture)
     {
       GameObject *owner = (*it)->GetOwner();
-      PCSurface *surface = owner->GET<PCSurface>();
+      PCShaderSurface *surface = owner->GET<PCShaderSurface>();
       Transform *transform = owner->GET<Transform>();
       
       // Gotta progress this somehow
@@ -282,13 +298,20 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
     }
     
     // Pointers and draw (there has to be something to draw though
+    glUseProgram(program);
     if (points.size() > 0)
     {
+      //glVertexAttribPointer(vertexPos3DLocation, 3, GL_FLOAT, false, sizeof(Vector3), &points[0]);
+      //glVertexAttribPointer(texture3DLocation, 3, GL_FLOAT, false, sizeof(Vector3), &texcoords[0]);
+      //glVertexAttribPointer(colorLocation, 4, GL_FLOAT, false, sizeof(Vector4), &colors[0]);
       glVertexPointer(3, GL_FLOAT, sizeof(Vector3), &points[0]);
       glTexCoordPointer(3, GL_FLOAT, sizeof(Vector3), &texcoords[0]);
       glColorPointer(4, GL_FLOAT, sizeof(Vector4), &colors[0]);
       glDrawArrays(GL_QUADS, 0, points.size());
     }
+    //glDisableVertexAttribArray(vertexPos3DLocation);
+    //glDisableVertexAttribArray(texture3DLocation);
+    //glDisableVertexAttribArray(textureUnitLocation);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
@@ -303,7 +326,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
  * @brief Draw UI objects
  * @param aObjects
  */
-void PCScreen::DrawUI(std::vector<Surface*> const &aObjects)
+void PCShaderScreen::DrawUI(std::vector<Surface*> const &aObjects)
 {
   Draw(aObjects);
 }
@@ -311,7 +334,7 @@ void PCScreen::DrawUI(std::vector<Surface*> const &aObjects)
 /**
  * @brief Swap buffers
  */
-void PCScreen::SwapBuffers()
+void PCShaderScreen::SwapBuffers()
 {
   SDL_GL_SwapWindow(mWindow);
 }
@@ -322,7 +345,7 @@ void PCScreen::SwapBuffers()
  * @param aH Height
  * @param aFullScreen
  */
-void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
+void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 {
   // Set full screen or not
   int fullScreen = 0;
@@ -375,7 +398,7 @@ void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
  * @param aSize Object size
  * @param aPosition Object position
  */
-void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition)
+void PCShaderScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition)
 {
   X_ALIGNMENT xAlign = aTransform->GetXAlignment();
   Y_ALIGNMENT yAlign = aTransform->GetYAlignment();
@@ -422,7 +445,7 @@ void PCScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vect
  * @brief Check if point is on screen
  * @param aPoint Point to check
  */
-bool PCScreen::PointIsOnScreen(Vector3 const &aPoint)
+bool PCShaderScreen::PointIsOnScreen(Vector3 const &aPoint)
 {
   return aPoint.x < GetWidth() && aPoint.y < GetHeight() &&
          aPoint.x > 0 && aPoint.y > 0;
@@ -433,7 +456,7 @@ bool PCScreen::PointIsOnScreen(Vector3 const &aPoint)
  * @param aStart Top left of box
  * @param aEnd Bottom right of box
  */
-bool PCScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
+bool PCShaderScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
 {
   // Separating axis theorum
   Vector3 objectCenter = (aStart + aEnd) * 0.5f;

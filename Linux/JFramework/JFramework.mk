@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=24/01/16
+Date                   :=30/01/16
 CodeLitePath           :="/home/jimmy/.codelite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/lib$(ProjectName).a
-Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=../../../../Assets/ $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)_DEBUG_DRAW $(PreprocessorSwitch)SLB_USE_EXCEPTIONS 
+Preprocessors          :=$(PreprocessorSwitch)ASSET_DIRECTORY=/home/jimmy/Documents/project-chang-e/Assets/ $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)_DEBUG_DRAW $(PreprocessorSwitch)SLB_USE_EXCEPTIONS 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -41,7 +41,7 @@ IncludePCH             :=
 RcIncludePath          := 
 Libs                   := 
 ArLibs                 :=  
-LibPath                := $(LibraryPathSwitch). 
+LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/lib $(LibraryPathSwitch)/usr/lib 
 
 ##
 ## Common variables
@@ -61,13 +61,13 @@ AS       := as
 ##
 CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/LUA_lua.c$(ObjectSuffix) $(IntermediateDirectory)/LUA_SLB.cpp$(ObjectSuffix) $(IntermediateDirectory)/LUA_LUATypes.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_MathExt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_AutoCrit.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_Common.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_GameObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_HashString.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_Shape.cpp$(ObjectSuffix) $(IntermediateDirectory)/Source_main.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Source_GameApp.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_PCSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Controller.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Transform.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_PhysicsObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_View.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Graphics_ZRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_BatchRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_Constants.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_Level.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuImage.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_Menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuText.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_TileMapGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuButton.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_LevelManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_TextParser.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_XMLParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceRegistry.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/Source_GameApp.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Controller.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Transform.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_PhysicsObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_View.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_ZRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_BatchRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_Constants.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Logic_Level.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuImage.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_Menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuText.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_TileMapGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuButton.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_LevelManager.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_XMLParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_GravityGenerator.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_PotentialPair.cpp$(ObjectSuffix) 
 
-Objects1=$(IntermediateDirectory)/Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sound_Sound.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(ObjectSuffix) 
+Objects1=$(IntermediateDirectory)/Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) 
 
 
 
@@ -197,14 +197,6 @@ $(IntermediateDirectory)/Components_Surface.cpp$(DependSuffix): ../../Source/Com
 $(IntermediateDirectory)/Components_Surface.cpp$(PreprocessSuffix): ../../Source/Components/Surface.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Components_Surface.cpp$(PreprocessSuffix) "../../Source/Components/Surface.cpp"
 
-$(IntermediateDirectory)/Components_PCSurface.cpp$(ObjectSuffix): ../../Source/Components/PCSurface.cpp $(IntermediateDirectory)/Components_PCSurface.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/PCSurface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Components_PCSurface.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Components_PCSurface.cpp$(DependSuffix): ../../Source/Components/PCSurface.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Components_PCSurface.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Components_PCSurface.cpp$(DependSuffix) -MM "../../Source/Components/PCSurface.cpp"
-
-$(IntermediateDirectory)/Components_PCSurface.cpp$(PreprocessSuffix): ../../Source/Components/PCSurface.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Components_PCSurface.cpp$(PreprocessSuffix) "../../Source/Components/PCSurface.cpp"
-
 $(IntermediateDirectory)/Components_Controller.cpp$(ObjectSuffix): ../../Source/Components/Controller.cpp $(IntermediateDirectory)/Components_Controller.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/Controller.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Components_Controller.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Components_Controller.cpp$(DependSuffix): ../../Source/Components/Controller.cpp
@@ -237,14 +229,6 @@ $(IntermediateDirectory)/Graphics_View.cpp$(DependSuffix): ../../Source/Graphics
 $(IntermediateDirectory)/Graphics_View.cpp$(PreprocessSuffix): ../../Source/Graphics/View.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_View.cpp$(PreprocessSuffix) "../../Source/Graphics/View.cpp"
 
-$(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix): ../../Source/Graphics/Screen.cpp $(IntermediateDirectory)/Graphics_Screen.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/Screen.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Graphics_Screen.cpp$(DependSuffix): ../../Source/Graphics/Screen.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Graphics_Screen.cpp$(DependSuffix) -MM "../../Source/Graphics/Screen.cpp"
-
-$(IntermediateDirectory)/Graphics_Screen.cpp$(PreprocessSuffix): ../../Source/Graphics/Screen.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_Screen.cpp$(PreprocessSuffix) "../../Source/Graphics/Screen.cpp"
-
 $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(ObjectSuffix): ../../Source/Graphics/TextureCoordinates.cpp $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/TextureCoordinates.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(DependSuffix): ../../Source/Graphics/TextureCoordinates.cpp
@@ -252,14 +236,6 @@ $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(DependSuffix): ../../S
 
 $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(PreprocessSuffix): ../../Source/Graphics/TextureCoordinates.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(PreprocessSuffix) "../../Source/Graphics/TextureCoordinates.cpp"
-
-$(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix): ../../Source/Graphics/PCScreen.cpp $(IntermediateDirectory)/Graphics_PCScreen.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/PCScreen.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Graphics_PCScreen.cpp$(DependSuffix): ../../Source/Graphics/PCScreen.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Graphics_PCScreen.cpp$(DependSuffix) -MM "../../Source/Graphics/PCScreen.cpp"
-
-$(IntermediateDirectory)/Graphics_PCScreen.cpp$(PreprocessSuffix): ../../Source/Graphics/PCScreen.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(PreprocessSuffix) "../../Source/Graphics/PCScreen.cpp"
 
 $(IntermediateDirectory)/Graphics_ZRenderSorter.cpp$(ObjectSuffix): ../../Source/Graphics/ZRenderSorter.cpp $(IntermediateDirectory)/Graphics_ZRenderSorter.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/ZRenderSorter.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_ZRenderSorter.cpp$(ObjectSuffix) $(IncludePath)
@@ -516,6 +492,46 @@ $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(DependSuffix): ../../Source/TinyX
 
 $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(PreprocessSuffix): ../../Source/TinyXML/tinyxml2.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(PreprocessSuffix) "../../Source/TinyXML/tinyxml2.cpp"
+
+$(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix): ../../Source/Graphics/PCSurface.cpp $(IntermediateDirectory)/Graphics_PCSurface.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/PCSurface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Graphics_PCSurface.cpp$(DependSuffix): ../../Source/Graphics/PCSurface.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Graphics_PCSurface.cpp$(DependSuffix) -MM "../../Source/Graphics/PCSurface.cpp"
+
+$(IntermediateDirectory)/Graphics_PCSurface.cpp$(PreprocessSuffix): ../../Source/Graphics/PCSurface.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_PCSurface.cpp$(PreprocessSuffix) "../../Source/Graphics/PCSurface.cpp"
+
+$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix): ../../Source/Graphics/PCShaderSurface.cpp $(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/PCShaderSurface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(DependSuffix): ../../Source/Graphics/PCShaderSurface.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(DependSuffix) -MM "../../Source/Graphics/PCShaderSurface.cpp"
+
+$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(PreprocessSuffix): ../../Source/Graphics/PCShaderSurface.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(PreprocessSuffix) "../../Source/Graphics/PCShaderSurface.cpp"
+
+$(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix): ../../Source/Graphics/PCScreen.cpp $(IntermediateDirectory)/Graphics_PCScreen.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/PCScreen.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Graphics_PCScreen.cpp$(DependSuffix): ../../Source/Graphics/PCScreen.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Graphics_PCScreen.cpp$(DependSuffix) -MM "../../Source/Graphics/PCScreen.cpp"
+
+$(IntermediateDirectory)/Graphics_PCScreen.cpp$(PreprocessSuffix): ../../Source/Graphics/PCScreen.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(PreprocessSuffix) "../../Source/Graphics/PCScreen.cpp"
+
+$(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix): ../../Source/Graphics/PCShaderScreen.cpp $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/PCShaderScreen.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(DependSuffix): ../../Source/Graphics/PCShaderScreen.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(DependSuffix) -MM "../../Source/Graphics/PCShaderScreen.cpp"
+
+$(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(PreprocessSuffix): ../../Source/Graphics/PCShaderScreen.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(PreprocessSuffix) "../../Source/Graphics/PCShaderScreen.cpp"
+
+$(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix): ../../Source/Graphics/Screen.cpp $(IntermediateDirectory)/Graphics_Screen.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/Screen.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Graphics_Screen.cpp$(DependSuffix): ../../Source/Graphics/Screen.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Graphics_Screen.cpp$(DependSuffix) -MM "../../Source/Graphics/Screen.cpp"
+
+$(IntermediateDirectory)/Graphics_Screen.cpp$(PreprocessSuffix): ../../Source/Graphics/Screen.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_Screen.cpp$(PreprocessSuffix) "../../Source/Graphics/Screen.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

@@ -17,7 +17,7 @@
 #include "Core/Interpolation.h"
 
 #ifdef PC
-#include "Components/PCSurface.h"
+#include "Graphics/PCSurface.h"
 #endif
 
 #define LUAFILECHECK()  if(mScripts.find(aFilename) == mScripts.end()) \

@@ -3,19 +3,20 @@
 #include "ObjectDeleteMessage.h"
 
 #if !defined(IOS) && !defined(ANDROID)
-  #include "PCScreen.h"
-  #include "PCSurface.h"
+  #include "PCShaderScreen.h"
+  #include "PCShaderSurface.h"
 #endif
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
 
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
-GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID)
+GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
+                                                                           mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr)
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
 #if !defined(IOS) && !defined(ANDROID)
-  mScreen = new PCScreen(aWidth, aHeight);
+  mScreen = new PCShaderScreen(aWidth, aHeight);
 #else
 #endif
 }
@@ -74,7 +75,7 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
 Surface *GraphicsManager::CreateSurface()
 {
 #if !defined(ANDROID) && !defined(IOS)
-	PCSurface *surface = new PCSurface(this);
+	Surface *surface = new PCShaderSurface(this);
 #else
 	Surface *surface = new Surface(this);
 #endif
@@ -90,7 +91,7 @@ Surface *GraphicsManager::CreateSurface()
 Surface *GraphicsManager::CreateUISurface()
 {
 #if !defined(ANDROID) && !defined(IOS)
-  PCSurface *surface = new PCSurface(this);
+  Surface *surface = new PCShaderSurface(this);
 #else
   Surface *surface = new Surface(this);
 #endif
@@ -203,34 +204,18 @@ Screen *GraphicsManager::GetScreen()
  * @param aFilename
  * @param aData
  */
-void GraphicsManager::AddTexturePairing(std::string const &aFilename, TextureData const &aData)
+void GraphicsManager::AddTexturePairing(HashString const &aFilename, TextureData const &aData)
 {
-  mTextures.insert(std::pair<std::string, TextureData>(aFilename, aData));
-}
-
-/**
- * @brief Get id for texture by filename
- * @param aFilename
- */
-unsigned GraphicsManager::GetTextureID(std::string const &aFilename) const
-{
-  std::map<std::string, TextureData>::const_iterator pos = mTextures.find(aFilename);
-  
-  if(pos == mTextures.end())
-  {
-    return -1;
-  }
-  
-  return pos->second.mTextureID;
+  mTextures.insert(std::pair<HashString, TextureData>(aFilename, aData));
 }
 
 /**
  * @brief Get data for texture by filename
  * @param aFilename
  */
-TextureData const& GraphicsManager::GetTextureData(std::string const &aFilename) const
+TextureData const& GraphicsManager::GetTextureData(HashString const &aFilename) const
 {
-  std::map<std::string, TextureData>::const_iterator pos = mTextures.find(aFilename);
+  std::map<HashString, TextureData>::const_iterator pos = mTextures.find(aFilename);
 
   if(pos == mTextures.end())
   {
@@ -238,6 +223,51 @@ TextureData const& GraphicsManager::GetTextureData(std::string const &aFilename)
   }
 
   return pos->second;
+}
+
+/**
+ * @brief Add shader pairing by name and data.
+ * @param aFilename Name of shader file.
+ * @param aData Data of shader file.
+ */
+void GraphicsManager::AddShaderPairing(HashString const &aFilename, ShaderData const &aData)
+{
+  mShaders.insert(std::pair<HashString, ShaderData>(aFilename, aData));
+}
+
+/**
+ * @brief Get data of shader based on file name.
+ * @param aFilename Name of shader file.
+ * @return Data of shader file. Will assert if file not found.
+ */
+ShaderData const& GraphicsManager::GetShaderData(HashString const &aFilename) const
+{
+  std::map<HashString, ShaderData>::const_iterator pos = mShaders.find(aFilename);
+
+  if(pos == mShaders.end())
+  {
+    DebugLogPrint("No shader with name %s found\n", aFilename.ToCharArray());
+    assert(!"No shader found.");
+  }
+
+  return pos->second;
+}
+
+/**
+ * @brief Get if shader already exists.
+ * @param aFilename Name of shader file.
+ * @return False if not found, true otherwise.
+ */
+bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
+{
+  std::map<HashString, ShaderData>::const_iterator pos = mShaders.find(aFilename);
+
+  if(pos == mShaders.end())
+  {
+    return false;
+  }
+
+  return true;
 }
 
 /**
@@ -260,7 +290,6 @@ Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
  */
 Vector3 GraphicsManager::RelToAbs(Vector3 const &aPosition) const
 {
-  // TODO test this sometime
   Vector3 ret = aPosition;
 
   ret += mScreen->GetView().GetSize()/2;

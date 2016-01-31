@@ -5,13 +5,15 @@
 #include "Surface.h"
 #include "Screen.h"
 #include "TextureData.h"
+#include "ShaderData.h"
 
 class GraphicsManager : public Manager
 {
 private:
   std::vector<Surface*>               mSurfaces;
   std::vector<Surface*>               mUIElements;
-  std::map<std::string, TextureData>  mTextures;
+  std::map<HashString, TextureData>   mTextures;
+  std::map<HashString, ShaderData>    mShaders;
   Screen*                             mScreen;
 
   static unsigned const sUID;
@@ -41,9 +43,13 @@ public:
   Screen*             GetScreen();
   
   // Texture management
-  void                AddTexturePairing(std::string const &aFilename, TextureData const &aData);
-  unsigned            GetTextureID(std::string const &aFilename) const;
-  TextureData const&  GetTextureData(std::string const &aFilename) const;
+  void                AddTexturePairing(HashString const &aFilename, TextureData const &aData);
+  TextureData const&  GetTextureData(HashString const &aFilename) const;
+  
+  // Shader management
+  void                AddShaderPairing(HashString const &aFilename, ShaderData const &aData);
+  ShaderData const&   GetShaderData(HashString const &aFilename) const;
+  bool                ShaderDataExists(HashString const &aFilename) const;
 
   // Misc.
   Vector3             AbsToRel(Vector3 const &aPosition) const;

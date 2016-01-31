@@ -76,10 +76,8 @@
     <File Name="../../Source/GameApp.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Components">
-    <File Name="../../Source/Components/PCSurface.h"/>
     <File Name="../../Source/Components/PhysicsObject.h"/>
     <File Name="../../Source/Components/Surface.cpp"/>
-    <File Name="../../Source/Components/PCSurface.cpp"/>
     <File Name="../../Source/Components/Surface.h"/>
     <File Name="../../Source/Components/Transform.h"/>
     <File Name="../../Source/Components/Controller.cpp"/>
@@ -89,19 +87,30 @@
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>
-    <File Name="../../Source/Graphics/PCScreen.h"/>
-    <File Name="../../Source/Graphics/Screen.h"/>
     <File Name="../../Source/Graphics/TextureData.h"/>
     <File Name="../../Source/Graphics/View.cpp"/>
-    <File Name="../../Source/Graphics/Screen.cpp"/>
     <File Name="../../Source/Graphics/TextureCoordinates.cpp"/>
-    <File Name="../../Source/Graphics/PCScreen.cpp"/>
     <File Name="../../Source/Graphics/View.h"/>
     <File Name="../../Source/Graphics/ScreenRenderSorter.h"/>
     <File Name="../../Source/Graphics/ZRenderSorter.h"/>
     <File Name="../../Source/Graphics/ZRenderSorter.cpp"/>
     <File Name="../../Source/Graphics/BatchRenderSorter.h"/>
     <File Name="../../Source/Graphics/BatchRenderSorter.cpp"/>
+    <VirtualDirectory Name="Surfaces">
+      <File Name="../../Source/Graphics/PCSurface.h"/>
+      <File Name="../../Source/Graphics/PCSurface.cpp"/>
+      <File Name="../../Source/Graphics/PCShaderSurface.h"/>
+      <File Name="../../Source/Graphics/PCShaderSurface.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Screens">
+      <File Name="../../Source/Graphics/PCScreen.cpp"/>
+      <File Name="../../Source/Graphics/PCScreen.h"/>
+      <File Name="../../Source/Graphics/PCShaderScreen.cpp"/>
+      <File Name="../../Source/Graphics/PCShaderScreen.h"/>
+      <File Name="../../Source/Graphics/Screen.cpp"/>
+      <File Name="../../Source/Graphics/Screen.h"/>
+    </VirtualDirectory>
+    <File Name="../../Source/Graphics/ShaderData.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Logic">
     <File Name="../../Source/Logic/MenuElement.h"/>
@@ -203,12 +212,15 @@
         <IncludePath Value="../../Source/Parsers"/>
         <IncludePath Value="../../Source/TinyXML"/>
         <IncludePath Value="../../Source/Core/Messages"/>
-        <Preprocessor Value="ASSET_DIRECTORY=../../../../Assets/"/>
+        <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/project-chang-e/Assets/"/>
         <Preprocessor Value="_DEBUG"/>
         <Preprocessor Value="_DEBUG_DRAW"/>
         <Preprocessor Value="SLB_USE_EXCEPTIONS"/>
       </Compiler>
-      <Linker Options="" Required="yes"/>
+      <Linker Options="" Required="yes">
+        <LibraryPath Value="/lib"/>
+        <LibraryPath Value="/usr/lib"/>
+      </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).a" IntermediateDirectory="./Debug" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">

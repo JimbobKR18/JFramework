@@ -57,11 +57,11 @@ public:
   virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); return 0; }
   
   // Derived from Component
-  void                Update();
-  void                SendMessage(Message const &aMessage);
-  void                ReceiveMessage(Message const &aMessage);
-  void                Serialize(Parser &aParser);
-  void                Deserialize(Parser &aParser);
+  virtual void        Update();
+  virtual void        SendMessage(Message const &aMessage);
+  virtual void        ReceiveMessage(Message const &aMessage);
+  virtual void        Serialize(Parser &aParser);
+  virtual void        Deserialize(Parser &aParser);
   static void         SerializeLUA();
   static int           GetUID() {return sUID;}
 };

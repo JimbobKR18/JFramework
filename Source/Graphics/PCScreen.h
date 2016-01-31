@@ -17,26 +17,26 @@
 
 class PCScreen : public Screen
 {
-  private:
-    SDL_Window*   mWindow;
-    SDL_GLContext mGLContext;
+private:
+  SDL_Window*   mWindow;
+  SDL_GLContext mGLContext;
 
-  public:
-    PCScreen();
-    PCScreen(int aW, int aH);
-    virtual ~PCScreen();
+public:
+  PCScreen();
+  PCScreen(int aW, int aH);
+  virtual ~PCScreen();
 
-    virtual void PreDraw();
-    virtual void Draw(std::vector<Surface*> const &aObjects);
-    virtual void DrawUI(std::vector<Surface*> const &aObjects);
-    virtual void DebugDraw(std::vector<Surface*> const &aObjects);
-    virtual void SwapBuffers();
-    virtual void ChangeSize(int aW, int aH, bool aFullScreen);
+  virtual void PreDraw();
+  virtual void Draw(std::vector<Surface*> const &aObjects);
+  virtual void DrawUI(std::vector<Surface*> const &aObjects);
+  virtual void DebugDraw(std::vector<Surface*> const &aObjects);
+  virtual void SwapBuffers();
+  virtual void ChangeSize(int aW, int aH, bool aFullScreen);
 
-  private:
-    void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
-    bool PointIsOnScreen(Vector3 const &aPoint);
-    bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
+private:
+  void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
+  bool PointIsOnScreen(Vector3 const &aPoint);
+  bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
 };
 
 #endif

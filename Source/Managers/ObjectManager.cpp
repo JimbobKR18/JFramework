@@ -10,6 +10,7 @@
 #include "ObjectCreateMessage.h"
 
 #if !defined(ANDROID) && !defined(IOS)
+  #include "PCShaderSurface.h"
   #include "PCSurface.h"
 #endif
 
@@ -20,7 +21,7 @@ ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", Obj
 
 ObjectManager::~ObjectManager()
 {
-	ClearObjects();
+  ClearObjects();
 }
 
 /**
@@ -204,38 +205,38 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
     std::string name = aParser.Find("Name", "Value")->GetValue().ToString();
     aObject->SetName(name);
   }
-	if(aParser.Find("PhysicsObject"))
-	{
-		PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
-		aObject->AddComponent(object);
+  if(aParser.Find("PhysicsObject"))
+  {
+    PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
+    aObject->AddComponent(object);
     object->Deserialize(aParser);
-	}
-	if(aParser.Find("Transform"))
-	{
-	  // Get Position, Scale, and Size
-		Transform *transform = new Transform();
+  }
+  if(aParser.Find("Transform"))
+  {
+    // Get Position, Scale, and Size
+    Transform *transform = new Transform();
     transform->Deserialize(aParser);
-		aObject->AddComponent(transform);
-	}
-	if(aParser.Find("Surface"))
-	{
+    aObject->AddComponent(transform);
+  }
+  if(aParser.Find("Surface"))
+  {
 #if !defined(ANDROID) && !defined(IOS)
-		PCSurface *surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+    PCSurface *surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #else
-		Surface *surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+    Surface *surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #endif
     surface->Deserialize(aParser);
-		aObject->AddComponent(surface);
-	}
-	if(aParser.Find("Focus"))
-	{
-		bool isTarget = aParser.Find("Focus", "IsFocus")->GetValue().ToBool();
+    aObject->AddComponent(surface);
+  }
+  if(aParser.Find("Focus"))
+  {
+    bool isTarget = aParser.Find("Focus", "IsFocus")->GetValue().ToBool();
 
-		if(isTarget)
-		{
-			GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
-		}
-	}
+    if(isTarget)
+    {
+        GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
+    }
+  }
 }
 
 /**

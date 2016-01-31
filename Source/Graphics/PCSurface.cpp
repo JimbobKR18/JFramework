@@ -21,10 +21,12 @@
 
 int const PCSurface::sUID = Common::StringHashFunction("Surface");
 
-PCSurface::PCSurface() : Surface(), mSurface(nullptr), mFont(nullptr)
+PCSurface::PCSurface() : Surface(), mSurface(nullptr), mTextureFormat(), 
+                         mNumberOfColors(0), mFont(nullptr)
 {
 }
-PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(nullptr), mFont(nullptr)
+PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(nullptr), mTextureFormat(), 
+                                                  mNumberOfColors(0), mFont(nullptr)
 {
 }
 PCSurface::~PCSurface()
@@ -174,7 +176,7 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
  */
 unsigned PCSurface::GetTextureID() const
 {
-	return mTextureID;
+  return mTextureID;
 }
 
 /**
@@ -246,7 +248,7 @@ void PCSurface::SerializeLUA()
  * @brief Helper to set basic texture params via config file.
  * @param aName Name of object in texture pairing.
  */
-void PCSurface::AddTexturePairing(std::string const &aName)
+void PCSurface::AddTexturePairing(HashString const &aName)
 {
   GLint minFilter = GL_LINEAR;
   GLint magFilter = GL_LINEAR;
