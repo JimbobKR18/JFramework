@@ -653,9 +653,9 @@ float Matrix33::Determinant(float const aA, float const aB, float const aC,
 
 void Matrix33::operator=(Matrix33 const &aMatrix)
 {
-  for(int i = 0; i < 2; ++i)
+  for(int i = 0; i < 3; ++i)
   {
-    for(int j = 0; j < 2; ++j)
+    for(int j = 0; j < 3; ++j)
     {
       values[i][j] = aMatrix.values[i][j];
     }
@@ -664,9 +664,9 @@ void Matrix33::operator=(Matrix33 const &aMatrix)
 
 bool Matrix33::operator==(Matrix33 const &aMatrix) const
 {
-  for(int i = 0; i < 2; ++i)
+  for(int i = 0; i < 3; ++i)
   {
-    for(int j = 0; j < 2; ++j)
+    for(int j = 0; j < 3; ++j)
     {
       if(values[i][j] != aMatrix.values[i][j])
         return false;
