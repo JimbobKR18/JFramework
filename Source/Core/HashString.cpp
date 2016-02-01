@@ -99,6 +99,13 @@ std::vector<HashString> HashString::Split(HashString const &aDelimiter) const
   std::vector<HashString> ret;
   unsigned nextMatch = mString.find(aDelimiter.mString);
   unsigned lastMatch = 0;
+  
+  // If character is first match, add blank string and move on.
+  if(nextMatch == 0)
+  {
+    ret.push_back(HashString());
+    nextMatch = mString.find(aDelimiter.mString, nextMatch+1);
+  }
 
   // Find delimiter and split
   while(nextMatch != (unsigned)std::string::npos)
