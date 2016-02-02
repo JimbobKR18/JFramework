@@ -27,6 +27,7 @@ public:
   Vector3&  GetSize();
   Matrix33& GetRotation();
   Vector3&  GetScale();
+  Matrix33  GetFinalTransform();
   Vector3   GetHalfSize() const;
   Vector3   GetMaxBoundary() const;
   Vector3   GetMinBoundary() const;

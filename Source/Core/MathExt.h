@@ -134,6 +134,7 @@ struct Matrix33
   Matrix33();
   Matrix33(float aValues[3][3]);
   Matrix33(float aValues[9]);
+  Matrix33(Vector3 const &aValues);
 
   Matrix33 Concatenate(Matrix33 const &rhs) const;
   Matrix33 Rotate(Vector3 const &aAxis, float const aAngle) const;
@@ -148,6 +149,7 @@ struct Matrix33
   Matrix33 operator*(float const aValue) const;
   Vector3  operator*(Vector3 const &rhs) const;
 
+  void Scale(Vector3 const &aScale);
   void RotateX(float const aAngle);
   void RotateY(float const aAngle);
   void RotateZ(float const aAngle);

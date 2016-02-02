@@ -47,7 +47,7 @@ class Transform : public Component
     void                ReceiveMessage(Message const &aMessage) {}
     void                Serialize(Parser &aParser);
     void                Deserialize(Parser &aParser);
-    static int           GetUID() {return sUID;}
+    static int          GetUID() {return sUID;}
     static void         SerializeLUA();
 };
 

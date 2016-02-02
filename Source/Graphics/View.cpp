@@ -52,6 +52,15 @@ Vector3& View::GetScale()
 }
 
 /**
+ * @brief Helper method to combine matrices together
+ * @return Combined matrices.
+ */
+Matrix33 View::GetFinalTransform()
+{
+  return mTransform.GetRotation() * Matrix33(mTransform.GetScale());
+}
+
+/**
  * @brief Get half size of view
  * @return half size
  */

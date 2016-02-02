@@ -170,12 +170,11 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 {
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
-  Vector3 cameraScale = GetView().GetScale();
   Vector3 cameraSize = GetView().GetHalfSize();
-  Matrix33 cameraRotation = GetView().GetRotation();
+  Matrix33 viewMatrix = GetView().GetFinalTransform();
   
   // Must scale, rotate, then translate camera offset
-  Vector3 cameraDiff = (cameraRotation * cameraPosition.Multiply(cameraScale)) - cameraSize;
+  Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -209,21 +208,15 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       // Gotta progress this somehow
       ++it;
       
-      // Get position, rotation, scale, and size
+      // Get transforms in local and world space.
+      Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
+      Matrix33 finalTransform = viewMatrix * modelTransform;
+      
       Vector3 position = transform->GetPosition();
-      Matrix33 rotation = transform->GetRotation() * cameraRotation;
       Vector3 size = transform->GetSize();
-      Vector3 scale = transform->GetScale();
       
       TextureCoordinates *texCoord = surface->GetTextureData();
       Vector4 color = surface->GetColor();
-      
-      // Camera scale
-      size *= cameraScale;
-      position *= cameraScale;
-      
-      // Camera rotation
-      position = cameraRotation * position;
 
       // Camera translation
       if(surface->GetViewMode() == VIEW_ABSOLUTE)
@@ -233,23 +226,19 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
 
       // Move object based on its alignment
       AlignmentHelper(transform, size, position);
-
-      // Local scaling
-      size *= scale;
       
       // Get the basic coordinates for the quad
-      Vector3 topLeft = Vector3(-size.x, -size.y, 0);
-      Vector3 topRight = Vector3(size.x, -size.y, 0);
-      Vector3 bottomRight = Vector3(size.x, size.y, 0);
-      Vector3 bottomLeft = Vector3(-size.x, size.y, 0);
+      Vector3 topLeft(-size.x, -size.y, 0);
+      Vector3 topRight(size.x, -size.y, 0);
+      Vector3 bottomRight(size.x, size.y, 0);
+      Vector3 bottomLeft(-size.x, size.y, 0);
       
-      // Local rotate
-      topLeft = rotation * topLeft;
-      topRight = rotation * topRight;
-      bottomLeft = rotation * bottomLeft;
-      bottomRight = rotation * bottomRight;
-
-      // Local translate
+      // Translate
+      position = finalTransform * position;
+      topLeft = finalTransform * topLeft;
+      topRight = finalTransform * topRight;
+      bottomLeft = finalTransform * bottomLeft;
+      bottomRight = finalTransform * bottomRight;
       topLeft += position;
       topRight += position;
       bottomRight += position;

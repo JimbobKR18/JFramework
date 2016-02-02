@@ -549,6 +549,20 @@ Matrix33::Matrix33(float aValues[9])
   }
 }
 
+Matrix33::Matrix33(Vector3 const &aValues)
+{
+  for (int i = 0; i < 3; ++i)
+  {
+    for (int j = 0; j < 3; ++j)
+    {
+      if (i == j)
+        values[i][j] = aValues.GetValue(i);
+      else
+        values[i][j] = 0;
+    }
+  }
+}
+
 Matrix33 Matrix33::Concatenate(Matrix33 const &rhs) const
 {
   return *this * rhs;
@@ -727,6 +741,15 @@ Vector3 Matrix33::operator*(Vector3 const &rhs) const
   ret.z = values[2][0] * rhs.x + values[2][1] * rhs.y + values[2][2] * rhs.z;
 
   return ret;
+}
+
+void Matrix33::Scale(Vector3 const &aScale)
+{
+  float values[9] = {aScale.x, 0, 0,
+                          0, aScale.y, 0,
+                          0, 0, aScale.z};
+  Matrix33 scaleMatrix = Matrix33(values);
+  (*this) *= scaleMatrix;
 }
 
 void Matrix33::RotateX(float const aAngle)
