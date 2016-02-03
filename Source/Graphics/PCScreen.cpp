@@ -210,20 +210,12 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       
       // Get transforms in local and world space.
       Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
-      Matrix33 finalTransform = viewMatrix * modelTransform;
-      
       Vector3 position = transform->GetPosition();
       Vector3 size = transform->GetSize();
       
       TextureCoordinates *texCoord = surface->GetTextureData();
       Vector4 color = surface->GetColor();
-
-      // Camera translation
-      if(surface->GetViewMode() == VIEW_ABSOLUTE)
-      {
-        position -= cameraDiff;
-      }
-
+      
       // Move object based on its alignment
       AlignmentHelper(transform, size, position);
       
@@ -234,15 +226,29 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       Vector3 bottomLeft(-size.x, size.y, 0);
       
       // Translate
-      position = finalTransform * position;
-      topLeft = finalTransform * topLeft;
-      topRight = finalTransform * topRight;
-      bottomLeft = finalTransform * bottomLeft;
-      bottomRight = finalTransform * bottomRight;
+      topLeft = modelTransform * topLeft;
+      topRight = modelTransform * topRight;
+      bottomLeft = modelTransform * bottomLeft;
+      bottomRight = modelTransform * bottomRight;
       topLeft += position;
       topRight += position;
       bottomRight += position;
       bottomLeft += position;
+      
+      // Apply camera transform
+      topLeft = viewMatrix * topLeft;
+      topRight = viewMatrix * topRight;
+      bottomLeft = viewMatrix * bottomLeft;
+      bottomRight = viewMatrix * bottomRight;
+      
+      // Camera translation
+      if(surface->GetViewMode() == VIEW_ABSOLUTE)
+      {
+        topLeft -= cameraDiff;
+        topRight -= cameraDiff;
+        bottomLeft -= cameraDiff;
+        bottomRight -= cameraDiff;
+      }
       
       // Determine whether or not to draw (If any point is on screen or box collides)
       bool draw = PointIsOnScreen(topLeft) || PointIsOnScreen(topRight) || 
