@@ -225,7 +225,7 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       Vector3 bottomRight(size.x, size.y, 0);
       Vector3 bottomLeft(-size.x, size.y, 0);
       
-      // Translate
+      // Model Transform
       topLeft = modelTransform * topLeft;
       topRight = modelTransform * topRight;
       bottomLeft = modelTransform * bottomLeft;
@@ -240,8 +240,6 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       topRight = viewMatrix * topRight;
       bottomLeft = viewMatrix * bottomLeft;
       bottomRight = viewMatrix * bottomRight;
-      
-      // Camera translation
       if(surface->GetViewMode() == VIEW_ABSOLUTE)
       {
         topLeft -= cameraDiff;

@@ -178,12 +178,11 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // TODO this is almost complete, have to pass camera and object params to shader.
   // Camera position and size
   Vector3 cameraPosition = GetView().GetPosition();
-  Vector3 cameraScale = GetView().GetScale();
   Vector3 cameraSize = GetView().GetHalfSize();
-  Matrix33 cameraRotation = GetView().GetRotation();
+  Matrix33 viewMatrix = GetView().GetFinalTransform();
   
   // Must scale, rotate, then translate camera offset
-  Vector3 cameraDiff = (cameraRotation * cameraPosition.Multiply(cameraScale)) - cameraSize;
+  Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -191,12 +190,9 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
     // Get the texture id of the surface
-    GLuint texture = (*it)->GetOwner()->GET<PCShaderSurface>()->GetTextureID();
-    GLuint program = (*it)->GetOwner()->GET<PCShaderSurface>()->GetProgramID();
-    
-    glBindTexture(GL_TEXTURE_2D, texture);
-    
-    glPushMatrix();
+    PCShaderSurface *surface = (*it)->GetOwner()->GET<PCShaderSurface>();
+    GLuint texture = surface->GetTextureID();
+    GLuint program = surface->GetProgramID();
     
     std::vector<Vector4> renderData;
     renderData.reserve(1024);
@@ -212,91 +208,85 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       // Gotta progress this somehow
       ++it;
       
-      // Get position, rotation, scale, and size
+      // Get transforms in local and world space.
+      Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
       Vector3 position = transform->GetPosition();
-      Matrix33 rotation = transform->GetRotation() * cameraRotation;
       Vector3 size = transform->GetSize();
-      Vector3 scale = transform->GetScale();
-      
       TextureCoordinates *texCoord = surface->GetTextureData();
       Vector4 color = surface->GetColor();
-      
-      // Camera scale
-      size *= cameraScale;
-      position *= cameraScale;
-      
-      // Camera rotation
-      position = cameraRotation * position;
-
-      // Camera translation
-      if(surface->GetViewMode() == VIEW_ABSOLUTE)
-      {
-        position -= cameraDiff;
-      }
+      Vector4 cameraTranslation;
 
       // Move object based on its alignment
       AlignmentHelper(transform, size, position);
-
-      // Local scaling
-      size *= scale;
       
       // Get the basic coordinates for the quad
-      Vector3 topLeft = Vector3(-size.x, -size.y, 0);
-      Vector3 topRight = Vector3(size.x, -size.y, 0);
-      Vector3 bottomRight = Vector3(size.x, size.y, 0);
-      Vector3 bottomLeft = Vector3(-size.x, size.y, 0);
+      Vector3 topLeft(-size.x, -size.y, 0);
+      Vector3 topRight(size.x, -size.y, 0);
+      Vector3 bottomRight(size.x, size.y, 0);
+      Vector3 bottomLeft(-size.x, size.y, 0);
       
-      // Local rotate
-      topLeft = rotation * topLeft;
-      topRight = rotation * topRight;
-      bottomLeft = rotation * bottomLeft;
-      bottomRight = rotation * bottomRight;
-
-      // Local translate
+      // Model transform
+      topLeft = modelTransform * topLeft;
+      topRight = modelTransform * topRight;
+      bottomLeft = modelTransform * bottomLeft;
+      bottomRight = modelTransform * bottomRight;
       topLeft += position;
       topRight += position;
       bottomRight += position;
       bottomLeft += position;
       
-      // Determine whether or not to draw (If any point is on screen or box collides)
-      bool draw = PointIsOnScreen(topLeft) || PointIsOnScreen(topRight) || 
-        PointIsOnScreen(bottomLeft) || PointIsOnScreen(bottomRight) ||
-        BoxIsOnScreen(topLeft, bottomRight);
-      if(!draw)
+      // Camera translation
+      if(surface->GetViewMode() == VIEW_ABSOLUTE)
       {
-        continue;
+        cameraTranslation.x = cameraDiff.x;
+        cameraTranslation.y = cameraDiff.y;
+        cameraTranslation.z = cameraDiff.z;
       }
       
       // Vertex points
       renderData.push_back(topLeft);
-      renderData.push_back(topRight);
-      renderData.push_back(bottomRight);
-      renderData.push_back(bottomLeft);
-      // Texture coordinates
       renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+      renderData.push_back(color);
+      renderData.push_back(cameraTranslation);
+      renderData.push_back(topRight);
       renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
+      renderData.push_back(color);
+      renderData.push_back(cameraTranslation);
+      renderData.push_back(bottomRight);
       renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+      renderData.push_back(color);
+      renderData.push_back(cameraTranslation);
+      renderData.push_back(bottomLeft);
       renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
-      // Colors (Assuming uniform color)
       renderData.push_back(color);
-      renderData.push_back(color);
-      renderData.push_back(color);
-      renderData.push_back(color);
+      renderData.push_back(cameraTranslation);
     }
     
-    // TODO. vertex shaders are in clip space (-1,1)
-    // Whereas our objects are in camera space.
+    glPushMatrix();
     glUseProgram(program);
     glBindVertexArray(mVertexArrayObjectID);
     glEnableVertexAttribArray(0);
     if (renderData.size() > 0)
     {
+      float cameraMatrix[9];
+      for(int i = 0; i < 9; ++i)
+      {
+        cameraMatrix[i] = viewMatrix.values[i/3][i%3];
+      }
+      
+      glActiveTexture(GL_TEXTURE0);
+      glBindTexture(GL_TEXTURE_2D, texture);
+      glUniform1i(glGetUniformLocation(program, "textureUnit"), 0);
+      glBindSampler(texture, 0);
+      glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
+      glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
       glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
       glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
-      glVertexAttribPointer(0, 3, GL_FLOAT, GL_TRUE, sizeof(Vector4), 0);
-      glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vector4), &renderData[1]);
-      glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vector4), &renderData[2]);
-      glDrawArrays(GL_QUADS, 0, renderData.size() / 3);
+      glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, 0);
+      glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, &renderData[1]);
+      glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, &renderData[2]);
+      glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, &renderData[3]);
+      glDrawArrays(GL_QUADS, 0, renderData.size() / 4);
     }
     glDisableVertexAttribArray(0);
     glPopMatrix();
