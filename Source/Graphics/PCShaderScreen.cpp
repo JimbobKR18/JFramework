@@ -184,6 +184,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
+  // Render data array.
+  std::vector<Vector4> renderData;
+  renderData.reserve(aObjects.size() * 4);
+  
   // Draw each object
   // NOTE: The objects are sorted by texture id
   std::vector<Surface*>::const_iterator end = aObjects.end();
@@ -193,9 +197,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     PCShaderSurface *surface = (*it)->GetOwner()->GET<PCShaderSurface>();
     GLuint texture = surface->GetTextureID();
     GLuint program = surface->GetProgramID();
-    
-    std::vector<Vector4> renderData;
-    renderData.reserve(1024);
     
     // While other texture share the same texture id, draw them
     while(it != end &&
@@ -313,6 +314,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+    renderData.clear();
   }
 }
 
