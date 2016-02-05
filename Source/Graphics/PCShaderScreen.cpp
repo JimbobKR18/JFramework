@@ -263,9 +263,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     }
     
     glPushMatrix();
-    glUseProgram(program);
-    glBindVertexArray(mVertexArrayObjectID);
-    glEnableVertexAttribArray(0);
     if (renderData.size() > 0)
     {
       float cameraMatrix[9];
@@ -274,21 +271,42 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
         cameraMatrix[i] = viewMatrix.values[i/3][i%3];
       }
       
-      glActiveTexture(GL_TEXTURE0);
+      int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
+      int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
+      int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
+      int colorPosLocation = glGetAttribLocation(program, "color");
+      int cameraDiffLocation = glGetAttribLocation(program, "cameraDiff");
+      
+      // Start using shader
+      glUseProgram(program);
+      
+      // Enable textures and set uniforms.
+      glBindVertexArray(mVertexArrayObjectID);
+      glActiveTexture(GL_TEXTURE0 + activeTexture);
       glBindTexture(GL_TEXTURE_2D, texture);
-      glUniform1i(glGetUniformLocation(program, "textureUnit"), 0);
-      glBindSampler(texture, 0);
+      glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
       glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
       glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
+      
+      // Set VBO and buffer data.
       glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
       glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
-      glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, 0);
-      glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, &renderData[1]);
-      glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, &renderData[2]);
-      glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, &renderData[3]);
+      
+      // For each attribute in a shader, we must enable Vertex Attribute Arrays.
+      glEnableVertexAttribArray(vertexPosLocation);
+      glEnableVertexAttribArray(texCoordPosLocation);
+      glEnableVertexAttribArray(colorPosLocation);
+      glEnableVertexAttribArray(cameraDiffLocation);
+      glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, 0);
+      glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, (GLvoid*)(sizeof(Vector4)));
+      glVertexAttribPointer(colorPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, (GLvoid*)(sizeof(Vector4) * 2));
+      glVertexAttribPointer(cameraDiffLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 4, (GLvoid*)(sizeof(Vector4) * 3));
       glDrawArrays(GL_QUADS, 0, renderData.size() / 4);
+      glDisableVertexAttribArray(vertexPosLocation);
+      glDisableVertexAttribArray(texCoordPosLocation);
+      glDisableVertexAttribArray(colorPosLocation);
+      glDisableVertexAttribArray(cameraDiffLocation);
     }
-    glDisableVertexAttribArray(0);
     glPopMatrix();
 
     // Reset to default texture
