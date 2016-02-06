@@ -42,6 +42,11 @@ public:
   void                SetColor(Vector4 const& aColor) { mColor = aColor; }
   void                SetFileName(std::string const& aFileName) { mFileName = aFileName; }
   
+  // Textures and Shaders
+  virtual void        LoadImage(HashString const &aName);
+  virtual Vector3     LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  virtual void        LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
+  
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;
   void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed);
@@ -63,7 +68,7 @@ public:
   virtual void        Serialize(Parser &aParser);
   virtual void        Deserialize(Parser &aParser);
   static void         SerializeLUA();
-  static int           GetUID() {return sUID;}
+  static int          GetUID() {return sUID;}
 };
 
 #endif

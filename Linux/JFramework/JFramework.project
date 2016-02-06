@@ -269,7 +269,7 @@
         <IncludePath Value="../../Source/Parsers"/>
         <IncludePath Value="../../Source/TinyXML"/>
         <IncludePath Value="../../Source/Core/Messages"/>
-        <Preprocessor Value="ASSET_DIRECTORY=../../../../Assets/"/>
+        <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/project-chang-e/Assets/"/>
       </Compiler>
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>

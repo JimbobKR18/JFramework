@@ -38,8 +38,9 @@ public:
   PCSurface(GraphicsManager *aManager);
   virtual ~PCSurface();
 
-  void                LoadImage(std::string const &aName);
-  Vector3             LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  virtual void        LoadImage(HashString const &aName);
+  virtual Vector3     LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  virtual void        LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
   
   // Getters
   unsigned            GetTextureID() const;

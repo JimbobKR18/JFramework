@@ -961,6 +961,11 @@ void Level::ParseSurface(GameObject *aObject, Root *aSurface)
   Surface* objSurface = aObject->GET<Surface>();
   objSurface->SetColor(Vector4(r, g, b, a));
   objSurface->SetAnimation(startingAnimation);
+  
+  if(aSurface->Find("VertexShader") && aSurface->Find("FragmentShader"))
+  {
+    objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
+  }
 }
 
 /**

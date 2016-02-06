@@ -41,7 +41,7 @@ PCSurface::~PCSurface()
  * @brief Load an image by file name.
  * @param aName Name of the file.
  */
-void PCSurface::LoadImage(std::string const &aName)
+void PCSurface::LoadImage(HashString const &aName)
 {
   /* If the file was already loaded,
      let's avoid assigning a new id. */
@@ -56,12 +56,12 @@ void PCSurface::LoadImage(std::string const &aName)
   {
     if ((mSurface->w & (mSurface->w - 1)) != 0 )
     {
-      DebugLogPrint("warning: width of image: %s is not a power of 2\n", aName.c_str());
+      DebugLogPrint("warning: width of image: %s is not a power of 2\n", aName.ToCharArray());
     }
 
     if ((mSurface->h & (mSurface->h - 1)) != 0 )
     {
-      DebugLogPrint("warning: height of image: %s is not a power of 2\n", aName.c_str());
+      DebugLogPrint("warning: height of image: %s is not a power of 2\n", aName.ToCharArray());
     }
     
     SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
@@ -90,15 +90,15 @@ void PCSurface::LoadImage(std::string const &aName)
     }
     else
     {
-      DebugLogPrint("warning: image %s is not truecolor...  this will probably break\n", aName.c_str());
-      DebugLogPrint("warning: bytes per pixel for image %s: %d\n", aName.c_str(), mNumberOfColors);
+      DebugLogPrint("warning: image %s is not truecolor...  this will probably break\n", aName.ToCharArray());
+      DebugLogPrint("warning: bytes per pixel for image %s: %d\n", aName.ToCharArray(), mNumberOfColors);
     }
 
     AddTexturePairing(aName);
   }
   else
   {
-    DebugLogPrint("warning: file: %s not found or incompatible format, check this out\n", aName.c_str());
+    DebugLogPrint("warning: file: %s not found or incompatible format, check this out\n", aName.ToCharArray());
   }
 }
 
@@ -112,7 +112,7 @@ void PCSurface::LoadImage(std::string const &aName)
  * @param aMaxWidth Max width of a single line (in pixels).
  * @return 
  */
-Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
+Vector3 PCSurface::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
 {
   // Endianness is important here
   Uint32 rmask, gmask, bmask, amask;
@@ -152,7 +152,7 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
     // Create text texture
     SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
     //SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
-    SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(mFont, aText.c_str(), fgColor, aMaxWidth);
+    SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(mFont, aText.ToCharArray(), fgColor, aMaxWidth);
     if(!msg)
     {
       DebugLogPrint("TTF_RenderText failed: %s", TTF_GetError());
@@ -168,6 +168,16 @@ Vector3 PCSurface::LoadText(std::string const &aFont, std::string const &aText, 
 
     return Vector3(mSurface->w, mSurface->h, 0);
   }
+}
+
+/**
+ * @brief Asserts.
+ * @param aVertexShaderFilename Not needed.
+ * @param aFragmentShaderFilename Not needed.
+ */
+void PCSurface::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
+{
+  assert(!"Not supported (PCScreen LoadShaders)");
 }
 
 /**

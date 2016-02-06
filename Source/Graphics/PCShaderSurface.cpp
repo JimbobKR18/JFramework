@@ -172,17 +172,20 @@ Vector3 PCShaderSurface::LoadText(HashString const &aFont, HashString const &aTe
 }
 
 /**
- * @brief Load vertex shader.
- * @param aFilename Name of vertex shader.
+ * @brief Load shaders.
+ * @param aVertexShaderFilename Name of vertex shader.
+ * @param aFragmentShaderFilename Name of fragment shader.
  */
 void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
 {
   mVertexShaderFileName = aVertexShaderFilename;
   mFragmentShaderFileName = aFragmentShaderFilename;
   
-  if(GetManager()->ShaderDataExists(aVertexShaderFilename) || GetManager()->ShaderDataExists(aFragmentShaderFilename))
+  HashString shaderKey = aVertexShaderFilename + aFragmentShaderFilename;
+  
+  if(GetManager()->ShaderDataExists(shaderKey))
   {
-    mProgramID = GetManager()->GetShaderData(aVertexShaderFilename).mProgramID;
+    mProgramID = GetManager()->GetShaderData(shaderKey).mProgramID;
     return;
   }
   
@@ -265,8 +268,7 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
       DebugLogPrint("GL LINK ERROR: %s\n", &infoLog[0]);
     }
     
-    GetManager()->AddShaderPairing(aVertexShaderFilename, ShaderData(program, vertexShader, vertexContents));
-    GetManager()->AddShaderPairing(aFragmentShaderFilename, ShaderData(program, fragmentShader, fragmentContents));
+    GetManager()->AddShaderPairing(shaderKey, ShaderData(program, vertexShader, fragmentShader, vertexContents, fragmentContents));
     
     mProgramID = program;
   }

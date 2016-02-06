@@ -13,17 +13,24 @@
 struct ShaderData
 {
   unsigned mProgramID;
-  unsigned mShaderID;
-  HashString mContents;
+  unsigned mVertexShaderID;
+  unsigned mFragmentShaderID;
+  HashString mVertexContents;
+  HashString mFragmentContents;
 
-  ShaderData() : mProgramID(0), mShaderID(0), mContents() {}
-  ShaderData(unsigned aProgramID, unsigned aShaderID, HashString const &aContents) :
-    mProgramID(aProgramID), mShaderID(aShaderID), mContents(aContents) {}
+  ShaderData() : mProgramID(0), mVertexShaderID(0), mFragmentShaderID(0),
+                 mVertexContents(), mFragmentContents() {}
+  ShaderData(unsigned aProgramID, unsigned aVertexShaderID, unsigned aFragmentShaderID, 
+             HashString const &aVertexContents, HashString const &aFragmentContents) :
+             mProgramID(aProgramID), mVertexShaderID(aVertexShaderID), mFragmentShaderID(aFragmentShaderID), 
+             mVertexContents(aVertexContents), mFragmentContents(aFragmentContents) {}
   void operator=(ShaderData const &aRhs)
   {
     mProgramID = aRhs.mProgramID;
-    mShaderID = aRhs.mShaderID;
-    mContents = aRhs.mContents;
+    mVertexShaderID = aRhs.mVertexShaderID;
+    mFragmentShaderID = aRhs.mFragmentShaderID;
+    mVertexContents = aRhs.mVertexContents;
+    mFragmentContents = aRhs.mFragmentContents;
   }
 };
 

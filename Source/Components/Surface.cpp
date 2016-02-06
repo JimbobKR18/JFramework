@@ -28,6 +28,40 @@ Surface::~Surface()
 }
 
 /**
+ * @brief Asserts, please implement the platform specific implementation.
+ * @param aName Nothing.
+ */
+void Surface::LoadImage(HashString const &aName)
+{
+  assert(!"Not supported (Surface LoadImage)");
+}
+
+/**
+ * @brief Asserts, please implement the platform specific implementation.
+ * @param aFont Nothing.
+ * @param aText Nothing.
+ * @param aForegroundColor Nothing.
+ * @param aBackgroundColor Nothing.
+ * @param aSize Nothing.
+ * @param aMaxWidth Nothing.
+ * @return Nothing.
+ */
+Vector3 Surface::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
+{
+  assert(!"Not supported (Surface LoadText)");
+}
+
+/**
+ * @brief Asserts, please implement the platform specific implementation.
+ * @param aVertexShaderFilename Nothing.
+ * @param aFragmentShaderFilename Nothing.
+ */
+void Surface::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
+{
+  assert(!"Not supported (Surface LoadShaders)");
+}
+
+/**
  * @brief Get texture coordinate data (animation data)
  * @return Texture coordinate data.
  */
