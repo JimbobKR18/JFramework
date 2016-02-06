@@ -632,14 +632,16 @@ void Level::ParseFile(HashString const &aFileName)
 
   HashString tempIndex = curObject + Common::IntToString(curIndex);
   Root* curRoot = parser.Find(tempIndex);
+  
+  ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
 
   // While there are objects to find.
   while(curRoot)
   {
     // Make Object to assign params to
-    ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
-    object = new GameObject(manager, curRoot->Find("File")->GetValue());
-    manager->ParseObject(object);
+    object = new GameObject(objectManager, curRoot->Find("File")->GetValue());
+    objectManager->ParseObject(object);
     mObjects.push_back(object);
     mScenarios[aFileName].push_back(object);
 
@@ -664,7 +666,7 @@ void Level::ParseFile(HashString const &aFileName)
       bool value = curRoot->Find("Focus")->Find("IsFocus")->GetValue().ToBool();
       if(value)
       {
-        mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(object);
+        graphicsManager->GetScreen()->GetView().SetTarget(object);
         mFocusTarget = object;
       }
     }
