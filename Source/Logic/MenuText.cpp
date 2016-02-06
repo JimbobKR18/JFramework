@@ -112,7 +112,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   }
 
 #if !defined(ANDROID) && !defined(IOS)
-  PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateUISurface();
+  PCShaderSurface *surface = (PCShaderSurface*)app->GET<GraphicsManager>()->CreateUISurface();
   Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
 #else
   Surface *surface = new Surface();

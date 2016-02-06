@@ -350,6 +350,8 @@ void PCShaderSurface::Serialize(Parser &aParser)
   Surface::Serialize(aParser);
   Root* surface = object->Find(SURFACE);
   surface->Place(SURFACE, "TextureName", GetFileName());
+  surface->Place(SURFACE, "VertexShader", mVertexShaderFileName);
+  surface->Place(SURFACE, "FragmentShader", mFragmentShaderFileName);
 }
 
 /**
@@ -358,9 +360,16 @@ void PCShaderSurface::Serialize(Parser &aParser)
  */
 void PCShaderSurface::Deserialize(Parser &aParser)
 {
-  HashString fileName = aParser.Find("Surface", "TextureName")->GetValue().ToString();
-  HashString vertexShader = aParser.Find("Surface", "VertexShader")->GetValue().ToString();
-  HashString fragmentShader = aParser.Find("Surface", "FragmentShader")->GetValue().ToString();
+  HashString fileName = "";
+  HashString vertexShader = Constants::GetString("DefaultVertexShaderFileName");
+  HashString fragmentShader = Constants::GetString("DefaultFragmentShaderFileName");
+  
+  if(aParser.Find("Surface", "TextureName"))
+    fileName = aParser.Find("Surface", "TextureName")->GetValue().ToString();
+  if(aParser.Find("Surface", "VertexShader"))
+    vertexShader = aParser.Find("Surface", "VertexShader")->GetValue().ToString();
+  if(aParser.Find("Surface", "FragmentShader"))
+    fragmentShader = aParser.Find("Surface", "FragmentShader")->GetValue().ToString();
 
   SetFileName(fileName);
   LoadImage(GetFileName());

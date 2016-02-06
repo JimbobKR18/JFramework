@@ -60,7 +60,7 @@ void MenuImage::ParseAdditionalData(Parser &aParser)
   if(aParser.Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)
-    PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateUISurface();
+    PCShaderSurface *surface = (PCShaderSurface*)app->GET<GraphicsManager>()->CreateUISurface();
 #else
     Surface *surface = new Surface();
 #endif

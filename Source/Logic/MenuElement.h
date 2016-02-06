@@ -12,7 +12,7 @@
 #include "GameObject.h"
 #include "TextParser.h"
 #include "Transform.h"
-#include "PCSurface.h"
+#include "PCShaderSurface.h"
 #include "ObjectManager.h"
 #include "GraphicsManager.h"
 #include "Message.h"
