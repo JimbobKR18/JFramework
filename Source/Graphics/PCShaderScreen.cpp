@@ -164,7 +164,6 @@ void PCShaderScreen::PreDraw()
  */
 void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
 {
-  // TODO this is almost complete, have to pass camera and object params to shader.
   // Camera position and size
   Vector3 &cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetHalfSize();
