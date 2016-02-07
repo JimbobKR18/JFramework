@@ -99,6 +99,7 @@ void GameApp::SetLastFrameTime(unsigned int const &aLastFrame)
  */
 void GameApp::Update(unsigned int const &aTicksSinceStart)
 {
+  bool lockedFramerate = Constants::GetBoolean("LockedFramerate");
   std::vector<Message*>::iterator messagesEnd;
   std::vector<Manager*>::iterator managersEnd = mManagers.end();
   float diff = (float)(aTicksSinceStart - mLastFrame) / 1000.0f;
@@ -107,7 +108,14 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
   
   while(mDT >= mAppStep)
   {
-    mDT -= mAppStep;
+    if(lockedFramerate)
+    {
+      mDT = mAppStep;
+    }
+    else
+    {
+      mDT -= mAppStep;
+    }
 
     for(std::vector<Manager*>::iterator it = mManagers.begin(); it != managersEnd; ++it)
     {

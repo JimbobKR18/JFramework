@@ -8,7 +8,7 @@
 #include "Constants.h"
 #include <fstream>
 
-std::map<HashString, HashString> Constants::mValues;
+Constants::ValueContainer Constants::mValues;
 
 Constants::Constants()
 {
@@ -22,9 +22,9 @@ Constants::~Constants()
  * @brief Get string from values map, asserts if nothign found.
  * @param aValue Value to find.
  */
-HashString Constants::GetString(HashString const &aValue)
+HashString const &Constants::GetString(HashString const &aValue)
 {
-  valIT it = mValues.find(aValue);
+  ValueContainerIT it = mValues.find(aValue);
 
   if(it == mValues.end())
     assert(!"Value not found!");
@@ -36,7 +36,7 @@ HashString Constants::GetString(HashString const &aValue)
  * @brief Get int from values map, asserts if nothign found.
  * @param aValue Value to find.
  */
-int Constants::GetInteger(HashString const &aValue)
+int const Constants::GetInteger(HashString const &aValue)
 {
   return GetString(aValue).ToInt();
 }
@@ -45,7 +45,7 @@ int Constants::GetInteger(HashString const &aValue)
  * @brief Get float from values map, asserts if nothign found.
  * @param aValue Value to find.
  */
-float Constants::GetFloat(HashString const &aValue)
+float const Constants::GetFloat(HashString const &aValue)
 {
   return GetString(aValue).ToFloat();
 }
@@ -54,7 +54,7 @@ float Constants::GetFloat(HashString const &aValue)
  * @brief Get bool from values map, asserts if nothign found.
  * @param aValue Value to find.
  */
-bool Constants::GetBoolean(HashString const &aValue)
+bool const Constants::GetBoolean(HashString const &aValue)
 {
   return GetString(aValue).ToBool();
 }

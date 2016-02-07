@@ -14,17 +14,18 @@
 class Constants
 {
 private:
-  typedef std::map<HashString, HashString>::iterator valIT;
-  static std::map<HashString, HashString> mValues;
+  typedef std::map<HashString, HashString> ValueContainer;
+  typedef ValueContainer::iterator ValueContainerIT;
+  static ValueContainer mValues;
 
 public:
   Constants();
   virtual ~Constants();
 
-  static HashString GetString(HashString const &aValue);
-  static int GetInteger(HashString const &aValue);
-  static float GetFloat(HashString const &aValue);
-  static bool GetBoolean(HashString const &aValue);
+  static HashString const &GetString(HashString const &aValue);
+  static int const GetInteger(HashString const &aValue);
+  static float const GetFloat(HashString const &aValue);
+  static bool const GetBoolean(HashString const &aValue);
   static void Deserialize();
 };
 
