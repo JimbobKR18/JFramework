@@ -47,7 +47,7 @@ PCShaderScreen::~PCShaderScreen()
 void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
-  Vector3 cameraPosition = GetView().GetPosition();
+  Vector3 &cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetHalfSize();
   Vector3 cameraDiff = cameraPosition - cameraSize;
   
@@ -63,16 +63,9 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       Vector3 position = transform->GetPosition();
       Vector3 broadSize = physicsObject->GetBroadSize();
 
-      // Get positions relative to the camera
-      float xPosition = position.x;
-      float yPosition = position.y;
-      float zPosition = position.z;
-
       if((*it)->GetViewMode() == VIEW_ABSOLUTE)
       {
-        xPosition -= cameraDiff.x;
-        yPosition -= cameraDiff.y;
-        zPosition -= cameraDiff.z;
+        position -= cameraDiff;
       }
 
       glLoadIdentity();
@@ -85,8 +78,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       {
         if((*it)->shape == Shape::SPHERE)
         {
-          Vector3 spherePos = Vector3(xPosition, yPosition, zPosition) +
-                              (*it)->position;
+          Vector3 spherePos = position + (*it)->position;
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           
@@ -101,8 +93,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         }
         else if((*it)->shape == Shape::CUBE)
         {
-          Vector3 cubePos = Vector3(xPosition, yPosition, zPosition) +
-                              (*it)->position;
+          Vector3 cubePos = position + (*it)->position;
           float xSize = (*it)->GetSize(0);
           float ySize = (*it)->GetSize(1);
           
@@ -119,8 +110,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         else if((*it)->shape == Shape::TRIANGLE)
         {
           Triangle* triangle = (Triangle*)(*it);
-          Vector3 triPos = Vector3(xPosition, yPosition, zPosition) +
-                              (*it)->position;
+          Vector3 triPos = position + (*it)->position;
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           for(int i = 0; i < 3; ++i)
@@ -135,8 +125,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         else if((*it)->shape == Shape::LINE)
         {
           Line *line = (Line*)(*it);
-          Vector3 linePos = Vector3(xPosition, yPosition, zPosition) +
-                            (*it)->position;
+          Vector3 linePos = position + (*it)->position;
           Vector3 lineEnd = linePos + (line->direction * line->length);
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
@@ -149,11 +138,11 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       // Broad Size Line
       glBegin(GL_LINE_STRIP);
       glColor3f(1.0f, 1.0f, 0.0f);
-      glVertex3f(xPosition - broadSize.x, yPosition - broadSize.y, zPosition);
-      glVertex3f(xPosition + broadSize.x, yPosition - broadSize.y, zPosition);
-      glVertex3f(xPosition + broadSize.x, yPosition + broadSize.y, zPosition);
-      glVertex3f(xPosition - broadSize.x, yPosition + broadSize.y, zPosition);
-      glVertex3f(xPosition - broadSize.x, yPosition - broadSize.y, zPosition);
+      glVertex3f(position.x - broadSize.x, position.y - broadSize.y, position.z);
+      glVertex3f(position.x + broadSize.x, position.y - broadSize.y, position.z);
+      glVertex3f(position.x + broadSize.x, position.y + broadSize.y, position.z);
+      glVertex3f(position.x - broadSize.x, position.y + broadSize.y, position.z);
+      glVertex3f(position.x - broadSize.x, position.y - broadSize.y, position.z);
       glEnd();
       glPopMatrix();
     }
