@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=06/02/16
+Date                   :=09/02/16
 CodeLitePath           :="/home/jimmy/.codelite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -36,7 +36,7 @@ ObjectsFileList        :="JFramework.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Core/Messages 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Logic/StateMachine $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Core/Messages 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
@@ -67,7 +67,7 @@ Objects0=$(IntermediateDirectory)/LUA_lua.c$(ObjectSuffix) $(IntermediateDirecto
 	$(IntermediateDirectory)/Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_PotentialPair.cpp$(ObjectSuffix) 
 
 Objects1=$(IntermediateDirectory)/Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix) 
 
 
 
@@ -532,6 +532,30 @@ $(IntermediateDirectory)/Graphics_Screen.cpp$(DependSuffix): ../../Source/Graphi
 
 $(IntermediateDirectory)/Graphics_Screen.cpp$(PreprocessSuffix): ../../Source/Graphics/Screen.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Graphics_Screen.cpp$(PreprocessSuffix) "../../Source/Graphics/Screen.cpp"
+
+$(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix): ../../Source/Logic/StateMachine/StateMachine.cpp $(IntermediateDirectory)/StateMachine_StateMachine.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/StateMachine/StateMachine.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/StateMachine_StateMachine.cpp$(DependSuffix): ../../Source/Logic/StateMachine/StateMachine.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/StateMachine_StateMachine.cpp$(DependSuffix) -MM "../../Source/Logic/StateMachine/StateMachine.cpp"
+
+$(IntermediateDirectory)/StateMachine_StateMachine.cpp$(PreprocessSuffix): ../../Source/Logic/StateMachine/StateMachine.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/StateMachine_StateMachine.cpp$(PreprocessSuffix) "../../Source/Logic/StateMachine/StateMachine.cpp"
+
+$(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix): ../../Source/Logic/StateMachine/State.cpp $(IntermediateDirectory)/StateMachine_State.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/StateMachine/State.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/StateMachine_State.cpp$(DependSuffix): ../../Source/Logic/StateMachine/State.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/StateMachine_State.cpp$(DependSuffix) -MM "../../Source/Logic/StateMachine/State.cpp"
+
+$(IntermediateDirectory)/StateMachine_State.cpp$(PreprocessSuffix): ../../Source/Logic/StateMachine/State.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/StateMachine_State.cpp$(PreprocessSuffix) "../../Source/Logic/StateMachine/State.cpp"
+
+$(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix): ../../Source/Logic/StateMachine/StateLink.cpp $(IntermediateDirectory)/StateMachine_StateLink.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/StateMachine/StateLink.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/StateMachine_StateLink.cpp$(DependSuffix): ../../Source/Logic/StateMachine/StateLink.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/StateMachine_StateLink.cpp$(DependSuffix) -MM "../../Source/Logic/StateMachine/StateLink.cpp"
+
+$(IntermediateDirectory)/StateMachine_StateLink.cpp$(PreprocessSuffix): ../../Source/Logic/StateMachine/StateLink.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/StateMachine_StateLink.cpp$(PreprocessSuffix) "../../Source/Logic/StateMachine/StateLink.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

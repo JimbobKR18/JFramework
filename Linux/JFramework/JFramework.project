@@ -129,6 +129,14 @@
     <File Name="../../Source/Logic/TileMapGenerator.cpp"/>
     <File Name="../../Source/Logic/MenuButton.h"/>
     <File Name="../../Source/Logic/MenuButton.cpp"/>
+    <VirtualDirectory Name="StateMachine">
+      <File Name="../../Source/Logic/StateMachine/StateMachine.cpp"/>
+      <File Name="../../Source/Logic/StateMachine/StateMachine.h"/>
+      <File Name="../../Source/Logic/StateMachine/State.h"/>
+      <File Name="../../Source/Logic/StateMachine/State.cpp"/>
+      <File Name="../../Source/Logic/StateMachine/StateLink.h"/>
+      <File Name="../../Source/Logic/StateMachine/StateLink.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="Managers">
     <File Name="../../Source/Managers/InputManager.h"/>
@@ -203,6 +211,7 @@
         <IncludePath Value="../../Source"/>
         <IncludePath Value="../../Source/Core"/>
         <IncludePath Value="../../Source/Logic"/>
+        <IncludePath Value="../../Source/Logic/StateMachine"/>
         <IncludePath Value="../../Source/Components"/>
         <IncludePath Value="../../Source/Physics"/>
         <IncludePath Value="../../Source/Sound"/>
@@ -260,6 +269,7 @@
         <IncludePath Value="../../Source"/>
         <IncludePath Value="../../Source/Core"/>
         <IncludePath Value="../../Source/Logic"/>
+        <IncludePath Value="../../Source/Logic/StateMachine"/>
         <IncludePath Value="../../Source/Components"/>
         <IncludePath Value="../../Source/Physics"/>
         <IncludePath Value="../../Source/Sound"/>
