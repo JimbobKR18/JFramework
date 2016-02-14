@@ -296,10 +296,10 @@ void Level::DeleteObject(GameObject *aObject)
  * @param aFileName
  * @return The newly created object.
  */
-GameObject* Level::CreateObjectDelayed(HashString const &aFileName)
+GameObject* Level::CreateObjectDelayed(HashString const &aFileName, HashString const &aFolder)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  GameObject *object = objectManager->CreateObjectNoAdd(aFileName);
+  GameObject *object = objectManager->CreateObjectNoAdd(aFileName, aFolder);
   ObjectCreateMessage *msg = new ObjectCreateMessage(object);
   objectManager->ProcessDelayedMessage(msg);
   AddObject(object);

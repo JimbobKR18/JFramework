@@ -8,6 +8,7 @@
 
 #include "MenuImage.h"
 #include "LUATypes.h"
+#include "GraphicsManager.h"
 
 MenuImage::MenuImage(std::string const &aFilename) : MenuElement(aFilename)
 {
@@ -60,12 +61,10 @@ void MenuImage::ParseAdditionalData(Parser &aParser)
   if(aParser.Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)
-    PCShaderSurface *surface = (PCShaderSurface*)app->GET<GraphicsManager>()->CreateUISurface();
+    PCShaderSurface *surface = (PCShaderSurface*)mObject->GET<Surface>();
 #else
-    Surface *surface = new Surface();
+    Surface *surface = mObject->GET<Surface>();
 #endif
     surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
-    surface->Deserialize(aParser);
-    mObject->AddComponent(surface);
   }
 }

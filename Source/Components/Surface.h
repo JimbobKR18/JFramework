@@ -7,22 +7,40 @@
 
 class GraphicsManager;
 
+enum ScrollType
+{
+  VERTICAL = 0,
+  HORIZONTAL
+};
+
 enum Viewspace
 {
   VIEW_RELATIVE_TO_CAMERA = 0,
   VIEW_ABSOLUTE
 };
 
+struct ScrollInfo
+{
+  ScrollType mType;
+  Vector3 mGoalSize;
+};
+
 class Surface : public Component
 {
+public:
+  typedef std::vector<ScrollInfo> ScrollInfoContainer;
+  typedef ScrollInfoContainer::const_iterator ScrollInfoIT;
+  
 private:
   TextureCoordinates* mTexCoord;
   GraphicsManager*    mManager;
   Viewspace           mViewmode;
   Vector3             mTextureSize;
   Vector4             mColor;
-  std::string         mFileName;
+  HashString          mFileName;
   bool                mNoRender;
+  
+  ScrollInfoContainer mScrollInfo;
   
   static int const sUID;
 public:
@@ -34,13 +52,13 @@ public:
   GraphicsManager*    GetManager() const { return mManager; }
   Viewspace           GetViewMode() const { return mViewmode; }
   Vector4&            GetColor() { return mColor; }
-  std::string         GetFileName() { return mFileName; }
+  HashString          GetFileName() { return mFileName; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
   void                SetTextureSize(Vector3 const& aTextureSize) { mTextureSize = aTextureSize; }
   void                SetColor(Vector4 const& aColor) { mColor = aColor; }
-  void                SetFileName(std::string const& aFileName) { mFileName = aFileName; }
+  void                SetFileName(HashString const& aFileName) { mFileName = aFileName; }
   
   // Textures and Shaders
   virtual void        LoadImage(HashString const &aName);
@@ -60,6 +78,9 @@ public:
   
   // Batching
   virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); return 0; }
+  
+  // Scrolling
+  void                CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& aGoalSize);
   
   // Derived from Component
   virtual void        Update();

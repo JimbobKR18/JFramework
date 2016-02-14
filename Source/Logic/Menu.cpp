@@ -81,8 +81,15 @@ Menu::ElementContainer Menu::GetElements() const
  */
 void Menu::AddObject(MenuElement *aElement)
 {
+  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  {
+    if(aElement == *it)
+    {
+      return;
+    }
+  }
+  
   mMenuElements.push_back(aElement);
-  mOwner->AddObject(aElement->GetObject());
 }
 
 /**
@@ -98,10 +105,10 @@ void Menu::DeleteObject(MenuElement *aElement)
     {
       mMenuElements.erase(it);
       mOwner->DeleteObjectDelayed(aElement->GetObject());
+      delete aElement;
       break;
     }
   }
-  delete aElement;
 }
 
 /**
@@ -170,8 +177,7 @@ void Menu::ParseFile()
     else
       assert(!"Invalid MenuElement passed into menu");
 
-    if(element)
-      AddObject(element);
+    AddObject(element);
 
     ++curIndex;
     curObject = object + Common::IntToString(curIndex);

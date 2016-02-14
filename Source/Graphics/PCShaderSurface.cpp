@@ -129,7 +129,8 @@ Vector3 PCShaderSurface::LoadText(HashString const &aFont, HashString const &aTe
       amask = 0xff000000;
   #endif
 
-  TextureData const& data = GetManager()->GetTextureData(aText);
+  HashString const textureDataHash = aFont + aText + Common::IntToString(aSize);
+  TextureData const& data = GetManager()->GetTextureData(textureDataHash);
   if(data.mTextureID != (unsigned)-1)
   {
     Vector3 size = Vector3(data.mWidth, data.mHeight, 0);
@@ -165,7 +166,7 @@ Vector3 PCShaderSurface::LoadText(HashString const &aFont, HashString const &aTe
     SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
     SDL_BlitSurface(msg, NULL, mSurface, NULL);
 
-    AddTexturePairing(aText);
+    AddTexturePairing(textureDataHash);
 
     return Vector3(mSurface->w, mSurface->h, 0);
   }

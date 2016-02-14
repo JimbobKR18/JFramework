@@ -2,20 +2,21 @@
 #include "LUATypes.h"
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
+#include "Transform.h"
 
 #define DT (1.0f/60.0f)
 
 int const Surface::sUID = Common::StringHashFunction("Surface");
 
 Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
-                     mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender("false")
+                     mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender(false), mScrollInfo()
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
-                                              mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender("false")
+                                              mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender(false), mScrollInfo()
 {
   
 }
@@ -159,6 +160,19 @@ bool Surface::CurrentAnimationCompleted()
 }
 
 /**
+ * @brief Create scrolling reveal effect.
+ * @param aScrollType HORIZONTAL or VERTICAL.
+ * @param aGoalSize Goal size of the object (in world space).
+ */
+void Surface::CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& aGoalSize)
+{
+  ScrollInfo scrollInfo;
+  scrollInfo.mType = aScrollType;
+  scrollInfo.mGoalSize = aGoalSize;
+  mScrollInfo.push_back(scrollInfo);
+}
+
+/**
  * @brief Simple update loop.
  */
 void Surface::Update()
@@ -167,6 +181,28 @@ void Surface::Update()
 
   if(mTexCoord)
     mTexCoord->Update(dt);
+    
+  if(!mScrollInfo.empty())
+  {
+    Transform *transform = GetOwner()->GET<Transform>();
+    
+    ScrollInfoIT end = mScrollInfo.end();
+    for(ScrollInfoIT it = mScrollInfo.begin(); it != end; ++it)
+    {
+      if(it->mType == HORIZONTAL)
+      {
+        transform->GetSize().x = GetTextureData()->GetXValue(1) * it->mGoalSize.x;
+      }
+      else if(it->mType == VERTICAL)
+      {
+        transform->GetSize().y = GetTextureData()->GetYValue(1) * it->mGoalSize.y;
+      }
+      else
+      {
+        assert(!"Invalid type for scrolling.");
+      }
+    }
+  }
 }
 
 /**

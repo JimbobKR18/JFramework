@@ -174,7 +174,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   
   // Render data array.
   std::vector<Vector4> renderData;
-  renderData.reserve(aObjects.size() * 5);
+  renderData.reserve(aObjects.size() * 20);
   
   // Draw each object
   // NOTE: The objects are sorted by texture id

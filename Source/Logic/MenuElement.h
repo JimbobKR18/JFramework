@@ -14,13 +14,13 @@
 #include "Transform.h"
 #include "PCShaderSurface.h"
 #include "ObjectManager.h"
-#include "GraphicsManager.h"
+#include "LevelManager.h"
 #include "Message.h"
 
 class MenuElement
 {
 protected:
-  ObjectManager* mManager;
+  LevelManager* mManager;
   GameObject* mObject;
   int         mLayer;
   

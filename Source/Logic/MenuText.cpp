@@ -8,6 +8,7 @@
 #include "MenuText.h"
 #include "LUATypes.h"
 #include "Transform.h"
+#include "GraphicsManager.h"
 
 // TODO platform specifics
 
@@ -39,10 +40,6 @@ void MenuText::Draw()
  */
 void MenuText::Update()
 {
-  Transform *transform = mObject->GET<Transform>();
-  Surface *surface = mObject->GET<Surface>();
-  surface->Update();
-  transform->GetSize().x = surface->GetTextureData()->GetXValue(1) * mOriginalSize.x;
 }
 
 /**
@@ -79,7 +76,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   GameApp* app = LUABind::StaticGameApp::GetApp();
   if(aParser.Find("Font"))
   {
-    mFont = aParser.Find("Font", "Name")->GetValue().ToString();
+    mFont = aParser.Find("Font", "FontName")->GetValue().ToString();
     mSize = Common::StringToInt(aParser.Find("Font", "Size")->GetValue());
   }
   if(aParser.Find("ForegroundColor"))
@@ -115,7 +112,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   PCShaderSurface *surface = (PCShaderSurface*)app->GET<GraphicsManager>()->CreateUISurface();
   Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
 #else
-  Surface *surface = new Surface();
+  Surface *surface = app->GET<GraphicsManager>()->CreateUISurface();
 #endif
   surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
   surface->Deserialize(aParser);
@@ -142,6 +139,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
       numFrames.push_back(mText.length());
     }
 
+    surface->CreateScrollEffect(ScrollType::HORIZONTAL, mOriginalSize);
     surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
     surface->GetTextureData()->SetXGain(0, 0);
     surface->SetAnimation(0, true);

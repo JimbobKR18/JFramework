@@ -7,18 +7,18 @@
 
 #include "MenuElement.h"
 #include "LUATypes.h"
+#include "LevelManager.h"
 #include "ObjectManager.h"
 
 MenuElement::MenuElement(std::string const &aFileName)
 {
-  mManager = LUABind::StaticGameApp::GetApp()->GET<ObjectManager>();
-  mObject = new GameObject(mManager, aFileName);
+  mManager = LUABind::StaticGameApp::GetApp()->GET<LevelManager>();
+  mObject = mManager->GetActiveLevel()->CreateObjectDelayed(aFileName, "Menus");
   mLayer = 0;
 }
 
 MenuElement::~MenuElement()
 {
-  delete mObject;
 }
 
 /**
@@ -57,10 +57,9 @@ void MenuElement::ParseFile(Parser &aParser)
   if(aParser.Find("Transform"))
   {
     // Get Position, Scale, and Size
-    Transform *transform = new Transform();
+    Transform *transform = mObject->GET<Transform>();
     transform->Deserialize(aParser);
     transform->GetPosition().z = 0.99f;
-    mObject->AddComponent(transform);
   }
   ParseAdditionalData(aParser);
 }

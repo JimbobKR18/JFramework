@@ -30,9 +30,9 @@ ObjectManager::~ObjectManager()
 void ObjectManager::Update()
 {
   ObjectIT objectEnd = mObjects.end();
-	for(ObjectIT it = mObjects.begin(); it != objectEnd; ++it)
+  for(ObjectIT it = mObjects.begin(); it != objectEnd; ++it)
   {
-		(*it)->Update();
+    (*it)->Update();
   }
 
   MessageIT msgEnd = mDelayedMessages.end();
@@ -63,7 +63,7 @@ void ObjectManager::SendMessage(Message const &aMsg)
   // Can't cache the end because objects can be deleted during message handling.
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
-		(*it)->ReceiveMessage(aMsg);
+    (*it)->ReceiveMessage(aMsg);
   }
 }
 
@@ -81,9 +81,9 @@ void ObjectManager::ProcessDelayedMessage(Message *aMessage)
  * @param aFilename
  * @return The newly created object.
  */
-GameObject *ObjectManager::CreateObject(std::string const &aFilename)
+GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString const &aFolder)
 {
-  TextParser parser(Common::RelativePath("Game", aFilename));
+  TextParser parser(Common::RelativePath(aFolder, aFilename));
   GameObject *object = new GameObject(this, aFilename);
   AddObject(object);
   ParseDictionary(object, parser);
@@ -95,9 +95,9 @@ GameObject *ObjectManager::CreateObject(std::string const &aFilename)
  * @param aFilename
  * @return The newly created object.
  */
-GameObject *ObjectManager::CreateObjectNoAdd(std::string const &aFilename)
+GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder)
 {
-  TextParser parser(Common::RelativePath("Game", aFilename));
+  TextParser parser(Common::RelativePath(aFolder, aFilename));
   GameObject *object = new GameObject(this, aFilename);
   ParseDictionary(object, parser);
   return object;
@@ -109,8 +109,8 @@ GameObject *ObjectManager::CreateObjectNoAdd(std::string const &aFilename)
  */
 void ObjectManager::ParseObject(GameObject *aObject)
 {
-	TextParser parser(Common::RelativePath("Game", aObject->GetFileName()));
-	ParseDictionary(aObject, parser);
+  TextParser parser(Common::RelativePath("Game", aObject->GetFileName()));
+  ParseDictionary(aObject, parser);
 }
 
 /**
@@ -119,7 +119,7 @@ void ObjectManager::ParseObject(GameObject *aObject)
  */
 void ObjectManager::DeleteObject(GameObject *aObj)
 {
-	RemoveObject(aObj, true);
+  RemoveObject(aObj, true);
 }
 
 /**
@@ -129,15 +129,20 @@ void ObjectManager::DeleteObject(GameObject *aObj)
  */
 void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
 {
+  if(aObj == nullptr)
+  {
+    DebugLogPrint("Not sure why, but a null object was created. (ObjectManager AddObject)");
+  }
+  
   // Check to see if object is in our list
   ObjectIT objectsEnd = mObjects.end();
   for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
-	{
-		if(*it == aObj)
-		{
+  {
+    if(*it == aObj)
+    {
       return;
-		}
-	}
+    }
+  }
   ObjectIT staticObjectsEnd = mStaticObjects.end();
   for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
   {
@@ -221,10 +226,27 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
   if(aParser.Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)
-    PCSurface *surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+    PCSurface *surface = nullptr;
 #else
-    Surface *surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+    Surface *surface = nullptr;
 #endif
+    if(aParser.Find("Surface", "UIElement") && aParser.Find("Surface", "UIElement")->GetValue().ToBool())
+    {
+#if !defined(ANDROID) && !defined(IOS)
+        surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
+#else
+        surface = GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
+#endif
+    }
+    else
+    {
+#if !defined(ANDROID) && !defined(IOS)
+        surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+#else
+        surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+#endif
+    }
+
     surface->Deserialize(aParser);
     aObject->AddComponent(surface);
   }
