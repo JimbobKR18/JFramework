@@ -23,6 +23,7 @@
 #include <sstream>
 #include <iostream>
 #include <iterator>
+#include <cfloat>
 #include "HashString.h"
 #include "SmartPointer.h"
 

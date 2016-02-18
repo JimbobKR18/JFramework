@@ -397,15 +397,18 @@ bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSpher
  */
 bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, Shape* aShape)
 {
-  /*// http://bit.ly/1p1SX3G
+  // TODO MAY BE BROKEN!
+  // http://bit.ly/1p1SX3G
   const int RIGHT = 0;
   const int LEFT = 1;
   const int CENTER = 2;
+  const float MINIMUM_SIZE = 0.001f;
   bool inside = true;
   int quadrant[3];
   int whichPlane;
   float maxT[3];
   float candidatePlane[3];
+  float dimensions = 3;
   Vector3 position = aSegment.position;
   Vector3 direction = aSegment.direction;
   Vector3 min = Vector3(aCube->GetPosition().x + aShape->position.x - aShape->GetSize(0),
@@ -415,10 +418,15 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
                         aCube->GetPosition().y + aShape->position.y + aShape->GetSize(1),
                         aCube->GetPosition().z + aShape->position.z + aShape->GetSize(2));
   Vector3 collision;
+  
+  if(fabs(aShape->GetSize(2)) <= MINIMUM_SIZE)
+  {
+    dimensions = 2;
+  }
 
   /* Find candidate planes; this loop can be avoided if
       rays cast all from the eye(assume perspective view) */
-  /*for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < dimensions; ++i)
   {
     if(position[i] < min[i])
     {
@@ -446,7 +454,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Calculate T distances to candidate planes */
-  /*for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < dimensions; ++i)
   {
     if(quadrant[i] != CENTER && direction[i] != 0)
     {
@@ -459,8 +467,8 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Get largest of the maxT's for final choice of intersection */
-  /*whichPlane = 0;
-  for(int i = 1; i < 3; ++i)
+  whichPlane = 0;
+  for(int i = 1; i < dimensions; ++i)
   {
     if(maxT[whichPlane] < maxT[i])
     {
@@ -469,8 +477,8 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Check final candidate actually inside box */
-  /*if(maxT[whichPlane] < 0) return false;
-  for(int i = 0; i < 3; ++i)
+  if(maxT[whichPlane] < 0) return false;
+  for(int i = 0; i < dimensions; ++i)
   {
     if(whichPlane != i)
     {
@@ -482,15 +490,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
     }
     else
     {
-        collision[i] = candidatePlane[i];
-    }
-  }
-
-  return true; false;
-    }
-    else
-    {
-      quadrant[i] = CENTER;
+      collision[i] = candidatePlane[i];
     }
   }
 
@@ -502,7 +502,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Calculate T distances to candidate planes */
-  /*for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < dimensions; ++i)
   {
     if(quadrant[i] != CENTER && direction[i] != 0)
     {
@@ -515,8 +515,8 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Get largest of the maxT's for final choice of intersection */
-  /*whichPlane = 0;
-  for(int i = 1; i < 3; ++i)
+  whichPlane = 0;
+  for(int i = 1; i < dimensions; ++i)
   {
     if(maxT[whichPlane] < maxT[i])
     {
@@ -525,8 +525,8 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   }
 
   /* Check final candidate actually inside box */
-  /*if(maxT[whichPlane] < 0) return false;
-  for(int i = 0; i < 3; ++i)
+  if(maxT[whichPlane] < 0) return false;
+  for(int i = 0; i < dimensions; ++i)
   {
     if(whichPlane != i)
     {
@@ -542,9 +542,6 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
     }
   }
 
-  return true;*/
-  
-  // TODO broken
-  return false;
+  return true;
 }
 

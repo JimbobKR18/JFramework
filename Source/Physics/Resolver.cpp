@@ -503,8 +503,58 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
  */
 void Resolver::CalculateLineToCube(CollisionPair &aPair)
 {
-  // TODO
-  //assert(!"TODO");
+  // TODO this doesn't work, but I'll leave it in so at least something happens.
+  if(aPair.mShapes[0]->shape == Shape::CUBE)
+  {
+    aPair.Switch();
+  }
+  
+  // Basic set up
+  Line *line = (Line*)aPair.mShapes[0];
+  Cube *cube = (Cube*)aPair.mShapes[1];
+  Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  // This is a bit slow since it makes a new line every time.
+  // Move line into world space.
+  Line tempLine = (*line);
+  tempLine.position += lineTransform->GetPosition();
+  
+  // Find closest point on line to sphere pos and calculate penetration
+  // based on radius.
+  Vector3 cubePos = cubeTransform->GetPosition() + cube->position;
+  Vector3 closestPoint = tempLine.ClosestPointToPoint(cubePos);
+  Vector3 dist = closestPoint - cubePos;
+  
+  // Push out on smallest axis
+  aPair.mPenetration = FLT_MAX;
+  for(int i = 0; i < 3; ++i)
+  {
+    float size = cube->GetSize(i);
+    float diff = size - dist.length();
+    if(aPair.mPenetration > fabs(diff))
+    {
+      aPair.mPenetration = diff;
+      aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
+      aPair.mRestitution = 1.0f;
+      
+      switch(i)
+      {
+      case 0:
+        aPair.mNormal = Vector3(1,0,0);
+        break;
+      case 1:
+        aPair.mNormal = Vector3(0,1,0);
+        break;
+      case 2:
+        aPair.mNormal = Vector3(0,0,1);
+        break;
+      default:
+        assert(!"How did you even get here?");
+        break;
+      }
+    }
+  }
 }
 
 /**
