@@ -192,14 +192,14 @@ void LevelManager::AddLevel(Level *aLevel)
 {
   // Check to see if object is in our list
   for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
-	{
-		if(*it == aLevel || (*it)->GetFileName() == aLevel->GetFileName())
-		{
+  {
+    if(*it == aLevel || (*it)->GetFileName() == aLevel->GetFileName())
+    {
       return;
-		}
-	}
+    }
+  }
   
-	mLevels.push_back(aLevel);
+  mLevels.push_back(aLevel);
 }
 
 /**
@@ -208,12 +208,12 @@ void LevelManager::AddLevel(Level *aLevel)
  */
 void LevelManager::RemoveLevel(Level *aLevel)
 {
-	for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
-	{
-		if(*it == aLevel)
-		{
-			mLevels.erase(it);
-			break;
-		}
-	}
+  for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
+  {
+    if(*it == aLevel)
+    {
+      mLevels.erase(it);
+      break;
+    }
+  }
 }

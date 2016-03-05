@@ -195,7 +195,11 @@ void ObjectManager::RemoveObject(GameObject *aObj, bool const aDelete)
 void ObjectManager::SerializeLUA()
 {
   SLB::Class<ObjectManager>("ObjectManager").inherits<Manager>()
-          .set("CreateObject", &ObjectManager::CreateObject);
+          .set("CreateObject", &ObjectManager::CreateObject)
+          .set("DeleteObject", &ObjectManager::DeleteObject)
+          .set("AddObject", &ObjectManager::AddObject)
+          .set("RemoveObject", &ObjectManager::RemoveObject)
+          .set("ClearObjects", &ObjectManager::ClearObjects);
 }
 
 /**
