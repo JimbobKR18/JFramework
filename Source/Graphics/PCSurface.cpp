@@ -32,9 +32,15 @@ PCSurface::PCSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(nu
 PCSurface::~PCSurface()
 {
   if(mFont)
+  {
     TTF_CloseFont(mFont);
+    mFont = nullptr;
+  }
   if(mSurface)
+  {
     SDL_FreeSurface(mSurface);
+    mSurface = nullptr;
+  }
 }
 
 /**

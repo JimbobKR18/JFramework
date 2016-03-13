@@ -35,6 +35,7 @@ PhysicsObject::~PhysicsObject()
   mShapes.clear();
   
   mWorld->RemoveObject(this);
+  mWorld = nullptr;
 }
 
 /**
