@@ -1,7 +1,7 @@
 #ifndef __JFramework_MathExt_h_
 #define __JFramework_MathExt_h_
 
-#include <math.h>
+#include <cmath>
 #include "Common.h"
 
 #define DEGREE_TO_RADS (3.141592f / 180.0f)

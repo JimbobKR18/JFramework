@@ -2,7 +2,10 @@
 #include "GraphicsManager.h"
 #include "ObjectDeleteMessage.h"
 
-#if !defined(IOS) && !defined(ANDROID)
+#if defined(__APPLE__)
+  #include "PCScreen.h"
+  #include "PCSurface.h"
+#elif !defined(IOS) && !defined(ANDROID)
   #include "PCShaderScreen.h"
   #include "PCShaderSurface.h"
 #endif
@@ -15,7 +18,9 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manag
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
-#if !defined(IOS) && !defined(ANDROID)
+#if defined(__APPLE__)
+  mScreen = new PCScreen(aWidth, aHeight);
+#elif !defined(IOS) && !defined(ANDROID)
   mScreen = new PCShaderScreen(aWidth, aHeight);
 #else
 #endif
@@ -74,7 +79,9 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
  */
 Surface *GraphicsManager::CreateSurface()
 {
-#if !defined(ANDROID) && !defined(IOS)
+#if defined(__APPLE__)
+  Surface *surface = new PCSurface(this);
+#elif !defined(ANDROID) && !defined(IOS)
 	Surface *surface = new PCShaderSurface(this);
 #else
 	Surface *surface = new Surface(this);
@@ -90,7 +97,9 @@ Surface *GraphicsManager::CreateSurface()
  */
 Surface *GraphicsManager::CreateUISurface()
 {
-#if !defined(ANDROID) && !defined(IOS)
+#if defined(__APPLE__)
+  Surface *surface = new PCSurface(this);
+#elif !defined(ANDROID) && !defined(IOS)
   Surface *surface = new PCShaderSurface(this);
 #else
   Surface *surface = new Surface(this);
