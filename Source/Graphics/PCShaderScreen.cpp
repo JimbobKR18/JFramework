@@ -11,9 +11,6 @@
   #undef SendMessage
   #undef GetYValue
   #undef PlaySound
-#elif defined(__APPLE__)
-  #define glBindVertexArray glBindVertexArrayAPPLE
-  #define glGenVertexArrays glGenVertexArraysAPPLE
 #endif
 
 PCShaderScreen::PCShaderScreen() : Screen()
@@ -21,23 +18,19 @@ PCShaderScreen::PCShaderScreen() : Screen()
   assert(!"Do not use this");
 }
 
-PCShaderScreen::PCShaderScreen(int aW, int aH) : Screen(aW, aH)
+PCShaderScreen::PCShaderScreen(int aW, int aH) : Screen(aW, aH), mWindow(nullptr), mGLContext(), mVertexArrayObjectID(0), mVertexBufferID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
 
-#ifndef __APPLE__
   GLenum glError = glewInit();
   if(glError != GLEW_OK)
   {
     DebugLogPrint("Error: %s\n", glewGetErrorString(glError));
     assert(!"GLEW failed to init.");
   }
-#else
-  // TODO something for apple bs
-#endif
   
   ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
 }

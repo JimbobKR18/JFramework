@@ -6,8 +6,9 @@
 #if defined(_WIN32)
   #include "SDL.h"
 #elif defined(__APPLE__)
-  #include <OpenGL/gl.h>
-  #include <OpenGL/glext.h>
+  #include <GL/glew.h>
+  #include <OpenGL/gl3.h>
+  #include <OpenGL/gl3ext.h>
   #include <SDL2/SDL.h>
 #else
   #include <GL/glew.h>
