@@ -159,12 +159,13 @@ std::string TextParser::InsertIndents()
 std::string TextParser::ParseLiteral(std::string const &aLiteral)
 {
   std::string ret;
-  if(aLiteral.find("Literal") == std::string::npos)
+  int literalLocation = aLiteral.find("Literal");
+  if(literalLocation == std::string::npos)
     ret = ParseNegative(aLiteral);
   else
   {
     // Getting the full string
-    unsigned pos = aLiteral.find("Literal") + 8;
+    unsigned pos = literalLocation + 8;
     char next;
     bool earlyout = false;
     // Literal(blah) is one whole word, extract
