@@ -27,6 +27,9 @@ public:
   static float const GetFloat(HashString const &aValue);
   static bool const GetBoolean(HashString const &aValue);
   static void Deserialize();
+  
+private:
+  static std::string ParseLiteral(std::ifstream *infile, std::string const &aLiteral);
 };
 
 #endif /* CONSTANTS_H_ */

@@ -154,7 +154,7 @@ std::string TextParser::InsertIndents()
 
 /**
  * @brief If find "Literal(" keep forming string until find ")"
- * @param aLiteral
+ * @param aLiteral Literal to parse through.
  */
 std::string TextParser::ParseLiteral(std::string const &aLiteral)
 {
