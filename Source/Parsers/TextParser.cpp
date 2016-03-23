@@ -71,7 +71,7 @@ void TextParser::Parse()
     {
       std::string value;
       mInput >> value;
-      node->SetValue(ParseLiteral(value));
+      node->SetValue(Common::ParseLiteral(&mInput, value));
       node->SetParent(mCurNode);
       mCurNode->Insert(node);
     }
@@ -148,47 +148,6 @@ std::string TextParser::InsertIndents()
   for(int i = 0; i < mCurrentIndent; ++i)
   {
     ret.push_back('\t');
-  }
-  return ret;
-}
-
-/**
- * @brief If find "Literal(" keep forming string until find ")"
- * @param aLiteral Literal to parse through.
- */
-std::string TextParser::ParseLiteral(std::string const &aLiteral)
-{
-  std::string ret;
-  int literalLocation = aLiteral.find("Literal");
-  if(literalLocation == std::string::npos)
-    ret = ParseNegative(aLiteral);
-  else
-  {
-    // Getting the full string
-    unsigned pos = literalLocation + 8;
-    char next;
-    bool earlyout = false;
-    // Literal(blah) is one whole word, extract
-    while(pos < aLiteral.length())
-    {
-      char next = aLiteral[pos];
-      if(next == '\n')
-      {
-        earlyout = true;
-        break;
-      }
-      if(next != ')' && next != '(')
-        ret.push_back(next);
-      ++pos;
-    }
-    // Didn't hit newline, get rest of sentence
-    while(!earlyout && mInput.get(next))
-    {
-      if(next == '\n')
-        break;
-      if(next != ')' && next != '(')
-        ret.push_back(next);
-    }
   }
   return ret;
 }

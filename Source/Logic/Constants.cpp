@@ -72,48 +72,7 @@ void Constants::Deserialize()
     infile >> key;
     infile >> empty;
     infile >> value;
-    mValues[key] = ParseLiteral(&infile, value);
+    mValues[key] = Common::ParseLiteral(&infile, value);
   }
   infile.close();
-}
-
-/**
- * @brief If find "Literal(" keep forming string until find ")"
- * @param aLiteral Literal to parse through.
- */
-std::string Constants::ParseLiteral(std::ifstream *infile, std::string const &aLiteral)
-{
-  std::string ret;
-  int literalLocation = aLiteral.find("Literal");
-  if(literalLocation == std::string::npos)
-    return aLiteral;
-  else
-  {
-    // Getting the full string
-    unsigned pos = literalLocation + 8;
-    char next;
-    bool earlyout = false;
-    // Literal(blah) is one whole word, extract
-    while(pos < aLiteral.length())
-    {
-      char next = aLiteral[pos];
-      if(next == '\n')
-      {
-        earlyout = true;
-        break;
-      }
-      if(next != ')' && next != '(')
-        ret.push_back(next);
-      ++pos;
-    }
-    // Didn't hit newline, get rest of sentence
-    while(!earlyout && infile->get(next))
-    {
-      if(next == '\n')
-        break;
-      if(next != ')' && next != '(')
-        ret.push_back(next);
-    }
-  }
-  return ret;
 }

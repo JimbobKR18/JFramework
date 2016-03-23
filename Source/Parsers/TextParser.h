@@ -29,7 +29,6 @@ class TextParser : public Parser
   private:
     void          WriteRoot(Root *aRoot);
     std::string   InsertIndents();
-    std::string   ParseLiteral(std::string const &aLiteral);
     std::string   ParseNegative(std::string const &aValue);
 };
 
