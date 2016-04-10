@@ -189,13 +189,14 @@ void View::Update()
   }
 
   // Boundary check
-  if(position.x - mHalfSize.x < mMinBoundary.x)
-    position.x = mMinBoundary.x + mHalfSize.x;
-  else if(position.x + mHalfSize.x > mMaxBoundary.x)
-    position.x = mMaxBoundary.x - mHalfSize.x;
+  Vector3 scaledSize = mHalfSize.Divide(mTransform.GetScale());
+  if(position.x - scaledSize.x < mMinBoundary.x)
+    position.x = mMinBoundary.x + scaledSize.x;
+  else if(position.x + scaledSize.x > mMaxBoundary.x)
+    position.x = mMaxBoundary.x - scaledSize.x;
 
-  if(position.y - mHalfSize.y < mMinBoundary.y)
-    position.y = mMinBoundary.y + mHalfSize.y;
-  else if(position.y + mHalfSize.y > mMaxBoundary.y)
-    position.y = mMaxBoundary.y - mHalfSize.y;
+  if(position.y - scaledSize.y < mMinBoundary.y)
+    position.y = mMinBoundary.y + scaledSize.y;
+  else if(position.y + scaledSize.y > mMaxBoundary.y)
+    position.y = mMaxBoundary.y - scaledSize.y;
 }
