@@ -23,6 +23,7 @@ public:
   virtual ~View();
 
   // Getters
+  Transform& GetTransform();
   Vector3&  GetPosition();
   Vector3&  GetSize();
   Matrix33& GetRotation();

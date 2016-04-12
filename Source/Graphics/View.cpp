@@ -16,6 +16,15 @@ View::~View()
 }
 
 /**
+ * @brief Get transform of view
+ * @return transform
+ */
+Transform& View::GetTransform()
+{
+  return mTransform;
+}
+
+/**
  * @brief Get position of view
  * @return position
  */
