@@ -20,7 +20,6 @@ private:
   int                         mTotalFrames;
   int                         mXSize;
   int                         mYSize;
-  float                       mSpeed;
   float                       mCurTime;
   float                       mXGain[2];
   float                       mYGain[2];
@@ -30,13 +29,17 @@ private:
   bool                        mCompleted;
   bool                        mRunOnce;
   
+  // <currentAnimation, speed>
+  std::map<int, float>        mSpeeds;
+  typedef std::pair<int,float> AnimationSpeed;
+  
   // <currentAnimation, numberofFrames>
   std::map<int, int>          mAnimations;
   typedef std::pair<int,int>  AnimationData;
   
 public:
   TextureCoordinates();
-  TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, std::vector<int> const aNumFrames, float aAnimationSpeed);
+  TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, std::vector<int> const &aNumFrames, std::vector<float> const &aAnimationSpeeds);
   
   ~TextureCoordinates();
   
@@ -45,11 +48,12 @@ public:
   // GETTERS
   float GetXValue(int const aIndex) const;
   float GetYValue(int const aIndex) const;
-  float GetAnimationSpeed() const;
+  float GetCurrentAnimationSpeed() const;
   int   GetCurrentAnimation() const;
   int   GetNumberOfAnimations() const;
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
+  float GetAnimationSpeed(int const aAnimation) const;
   bool  GetCompleted() const;
   bool  GetAnimated() const;
 
@@ -59,7 +63,7 @@ public:
   void  SetFrameByID(int const aFrameID);
   void  SetAnimated(bool const aAnimated);
   void  SetRunOnce(bool const aRunOnce);
-  void  SetAnimationSpeed(float const aSpeed);
+  void  SetCurrentAnimationSpeed(float const aSpeed);
   void  SetXGain(int const aIndex, float const aX);
   void  SetYGain(int const aIndex, float const aY);
 

@@ -22,18 +22,24 @@ TextureCoordinates::TextureCoordinates()
 TextureCoordinates::TextureCoordinates(int const aXSize,
                                        int const aYSize, 
                                        int const aNumAnimations,
-                                       std::vector<int> const aNumFrames,
-                                       float aAnimationSpeed) : mCurFrame(0),
-                                                                mCurAnimation(0),
-                                                                mTotalFrames(0),
-                                                                mXSize(aXSize),
-                                                                mYSize(aYSize),
-                                                                mSpeed(aAnimationSpeed),
-                                                                mCurTime(0),
-                                                                mAnimated(false),
-                                                                mCompleted(false),
-                                                                mRunOnce(false)
+                                       std::vector<int> const &aNumFrames,
+                                       std::vector<float> const &aAnimationSpeeds) : mCurFrame(0),
+                                                                                     mCurAnimation(0),
+                                                                                     mTotalFrames(0),
+                                                                                     mXSize(aXSize),
+                                                                                     mYSize(aYSize),
+                                                                                     mCurTime(0),
+                                                                                     mAnimated(false),
+                                                                                     mCompleted(false),
+                                                                                     mRunOnce(false),
+                                                                                     mSpeeds(),
+                                                                                     mAnimations()
 {
+  if(aNumAnimations != aNumFrames.size() || aNumAnimations != aAnimationSpeeds.size())
+  {
+    assert(!"Number of animations vs the number of frames or animations speeds does not match.");
+  }
+  
   int maxFrames = 0;
   
   // Push back all frame data
@@ -41,6 +47,7 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
   {
     mTotalFrames += aNumFrames[i];
     mAnimations.insert(AnimationData(i, aNumFrames[i]));
+    mSpeeds.insert(AnimationSpeed(i, aAnimationSpeeds[i]));
     
     // Need to figure out each frame size
     if(aNumFrames[i] > maxFrames)
@@ -59,7 +66,6 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
 
 TextureCoordinates::~TextureCoordinates()
 {
-  
 }
 
 /**
@@ -75,12 +81,13 @@ void TextureCoordinates::Update(float aDT)
     return;
   }
   
+  float speed = mSpeeds.find(mCurAnimation)->second;
   mCurTime += aDT;
   
   // If it's time to change a frame
-  while(mCurTime >= mSpeed)
+  while(mCurTime >= speed)
   {
-    mCurTime -= mSpeed;
+    mCurTime -= speed;
     
     // Increase the frame
     ++mCurFrame;
@@ -129,9 +136,9 @@ float TextureCoordinates::GetYValue(int const aIndex) const
  * @brief Get animation speed.
  * @return 
  */
-float TextureCoordinates::GetAnimationSpeed() const
+float TextureCoordinates::GetCurrentAnimationSpeed() const
 {
-  return mSpeed;
+  return mSpeeds.find(mCurAnimation)->second;
 }
 
 /**
@@ -169,6 +176,16 @@ int TextureCoordinates::GetTotalFrames() const
 int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
 {
   return mAnimations.find(aAnimation)->second;
+}
+
+/**
+ * @brief Get speed for animation
+ * @param aAnimation The animation index.
+ * @return 
+ */
+float TextureCoordinates::GetAnimationSpeed(int const aAnimation) const
+{
+  return mSpeeds.find(aAnimation)->second;
 }
 
 /**
@@ -279,9 +296,9 @@ void TextureCoordinates::SetRunOnce(bool const aRunOnce)
  * @brief Set time before next frame (in seconds).
  * @param aSpeed
  */
-void TextureCoordinates::SetAnimationSpeed(float const aSpeed)
+void TextureCoordinates::SetCurrentAnimationSpeed(float const aSpeed)
 {
-  mSpeed = aSpeed;
+  mSpeeds[mCurAnimation] = aSpeed;
 }
 
 /**

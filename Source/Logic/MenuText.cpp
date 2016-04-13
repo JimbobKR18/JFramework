@@ -126,7 +126,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   if(aParser.Find("Animation"))
   {
     Root* animation = aParser.Find("Animation");
-    float animationSpeed = animation->Find("AnimationSpeed")->GetValue().ToFloat();
+    std::vector<float> animationSpeed = animation->Find("AnimationSpeeds")->GetValue().ToFloatVector();
     std::vector<int> numFrames;
     
     // Manually set the number of frames, or auto jump a character at a time.
