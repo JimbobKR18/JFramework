@@ -11,7 +11,6 @@ struct CollisionPair
   PhysicsObject*  mBodies[2];
   Shape*          mShapes[2];
   float           mPenetration;
-  float           mRestitution;
   Vector3         mRelativeVelocity;
   Vector3         mNormal;
 

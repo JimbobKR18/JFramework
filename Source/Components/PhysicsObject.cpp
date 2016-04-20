@@ -21,7 +21,8 @@ int const PhysicsObject::sUID = Common::StringHashFunction("PhysicsObject");
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sUID), mWorld(aWorld),
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
                   mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
-                  mDamping(0.01f), mStatic(false), mGravity(true), mPassable(false)
+                  mDamping(0.01f), mRestitution(0.0f), mStatic(false),
+                  mGravity(true), mPassable(false)
 {
 }
 
@@ -115,6 +116,7 @@ void PhysicsObject::Serialize(Parser &aParser)
   object->Place(PHYSICS_OBJECT, "Passable", Common::BoolToString(mPassable));
   object->Place(PHYSICS_OBJECT, "Mass", Common::FloatToString(mMass));
   object->Place(PHYSICS_OBJECT, "Damping", Common::FloatToString(mDamping));
+  object->Place(PHYSICS_OBJECT, "Restitution", Common::FloatToString(mRestitution));
   
   // Serialize each shape
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
@@ -187,6 +189,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
   bool isPassable = aParser.Find("PhysicsObject", "Passable")->GetValue().ToBool();
   SetMass(aParser.Find("PhysicsObject", "Mass")->GetValue().ToInt());
   mDamping = aParser.Find("PhysicsObject", "Damping")->GetValue().ToFloat();
+  mRestitution = aParser.Find("PhysicsObject", "Restitution")->GetValue().ToFloat();
 
   //TODO serialize ignore list for collisions
 
@@ -375,7 +378,7 @@ float PhysicsObject::GetMass() const
  * @brief Set mass of this object
  * @param aMass Mass to set to
  */
-void PhysicsObject::SetMass(float aMass)
+void PhysicsObject::SetMass(float const aMass)
 {
 	mMass = aMass;
 	mInverseMass = 1.0f / mMass;
@@ -394,9 +397,27 @@ float PhysicsObject::GetDamping() const
  * @brief Set damping for this object
  * @param aDamping Damping to set to
  */
-void PhysicsObject::SetDamping(float aDamping)
+void PhysicsObject::SetDamping(float const aDamping)
 {
   mDamping = aDamping;
+}
+
+/**
+ * @brief Get restitution for this object
+ * @return Restitution
+ */
+float PhysicsObject::GetRestitution() const
+{
+  return mRestitution;
+}
+
+/**
+ * @brief Set restitution for this object
+ * @param aRestitution Restitution to set to
+ */
+void PhysicsObject::SetRestiution(float const aRestitution)
+{
+  mRestitution = aRestitution;
 }
 
 /**
@@ -412,7 +433,7 @@ bool PhysicsObject::IsStatic() const
  * @brief Set whether this object is static or not
  * @param aStatic Static
  */
-void PhysicsObject::SetStatic(bool aStatic)
+void PhysicsObject::SetStatic(bool const aStatic)
 {
   mStatic = aStatic;
 }
@@ -430,7 +451,7 @@ bool PhysicsObject::IsAffectedByGravity() const
  * @brief Set if this object is affected by gravity
  * @param aGravity Gravity set.
  */
-void PhysicsObject::SetAffectedByGravity(bool aGravity)
+void PhysicsObject::SetAffectedByGravity(bool const aGravity)
 {
   mGravity = aGravity;
 }
@@ -448,7 +469,7 @@ bool PhysicsObject::IsPassable() const
  * @brief Set if obejct is passable
  * @param aPassable Passable
  */
-void PhysicsObject::SetPassable(bool aPassable)
+void PhysicsObject::SetPassable(bool const aPassable)
 {
   mPassable = aPassable;
 }

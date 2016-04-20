@@ -221,7 +221,8 @@
         <IncludePath Value="../../Source/Parsers"/>
         <IncludePath Value="../../Source/TinyXML"/>
         <IncludePath Value="../../Source/Core/Messages"/>
-        <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/project-chang-e/Assets/"/>
+        <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/ZombieStealth/Assets/"/>
+        <Preprocessor Value="ASSET_DIRECTORY_TEMP=/home/jimmy/Documents/project-chang-e/Assets/"/>
         <Preprocessor Value="_DEBUG"/>
         <Preprocessor Value="_DEBUG_DRAW"/>
         <Preprocessor Value="SLB_USE_EXCEPTIONS"/>

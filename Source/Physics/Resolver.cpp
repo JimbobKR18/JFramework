@@ -129,7 +129,10 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   if(separatingVelocity > 0)
     return;
   
-  float newSeparatingVelocity = -separatingVelocity * aPair.mRestitution;
+  float restitution1 = aPair.mBodies[0]->GetRestitution();
+  float restitution2 = aPair.mBodies[1]->GetRestitution();
+  float newSeparatingVelocity1 = -separatingVelocity * restitution1;
+  float newSeparatingVelocity2 = -separatingVelocity * restitution2;
   
   Vector3 accCausedVelocity = aPair.mBodies[0]->GetAcceleration();
   if(aPair.mBodies[1])
@@ -139,12 +142,16 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   
   if(accCausedSepVelocity < 0)
   {
-    newSeparatingVelocity += aPair.mRestitution * accCausedSepVelocity;
-    if(newSeparatingVelocity < 0)
-      newSeparatingVelocity = 0;
+    newSeparatingVelocity1 += restitution1 * accCausedSepVelocity;
+    newSeparatingVelocity2 += restitution2 * accCausedSepVelocity;
+    if(newSeparatingVelocity1 < 0)
+      newSeparatingVelocity1 = 0;
+    if(newSeparatingVelocity2 < 0)
+      newSeparatingVelocity2 = 0;
   }
   
-  float deltaVelocity = newSeparatingVelocity - separatingVelocity;
+  float deltaVelocity1 = newSeparatingVelocity1 - separatingVelocity;
+  float deltaVelocity2 = newSeparatingVelocity2 - separatingVelocity;
   float totalInverseMass = 0.0f;
   if(aPair.mBodies[0])
     totalInverseMass += 1.0f / aPair.mBodies[0]->GetMass();
@@ -153,12 +160,14 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   
   if(totalInverseMass <= 0) return;
   
-  float impulse = deltaVelocity / totalInverseMass;
-  Vector3 impulsePerIMass = aPair.mNormal * impulse;
+  float impulse1 = deltaVelocity1 / totalInverseMass;
+  float impulse2 = deltaVelocity2 / totalInverseMass;
+  Vector3 impulsePerIMass1 = aPair.mNormal * impulse1;
+  Vector3 impulsePerIMass2 = aPair.mNormal * impulse2;
   
-  Vector3 b1Movement = (impulsePerIMass * (1.0f / aPair.mBodies[0]->GetMass()));// *
+  Vector3 b1Movement = (impulsePerIMass1 * (1.0f / aPair.mBodies[0]->GetMass()));// *
                         //(aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f);
-  Vector3 b2Movement = (impulsePerIMass * (1.0f / aPair.mBodies[1]->GetMass()));// *
+  Vector3 b2Movement = (impulsePerIMass2 * (1.0f / aPair.mBodies[1]->GetMass()));// *
                         //(aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f);
   
   if(aPair.mBodies[0] && !aPair.mBodies[0]->IsStatic())
@@ -291,7 +300,6 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(0)));
   aPair.mNormal = (b1Pos - b2Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mRestitution = 1.0f;
 }
 
 /**
@@ -338,7 +346,6 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
                         (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mRestitution = 1.0f;
 }
 
 /**
@@ -385,7 +392,6 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
                         (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mRestitution = 1.0f;
 }
 
 /**
@@ -416,7 +422,6 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
       aPair.mPenetration = radius - dist.length();
       aPair.mNormal = dist.normalize();
       aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-      aPair.mRestitution = 1.0f;
       return;
     }
     
@@ -434,7 +439,6 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
       aPair.mPenetration = radius - dist.length();
       aPair.mNormal = dist.normalize();
       aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-      aPair.mRestitution = 1.0f;
     }
     
     // TODO Check if sphere inside of triangle
@@ -493,7 +497,6 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
     aPair.mPenetration = radius - dist.length();
     aPair.mNormal = dist.normalize();
     aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-    aPair.mRestitution = 1.0f;
   }
 }
 
@@ -536,7 +539,6 @@ void Resolver::CalculateLineToCube(CollisionPair &aPair)
     {
       aPair.mPenetration = diff;
       aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-      aPair.mRestitution = 1.0f;
       
       switch(i)
       {
