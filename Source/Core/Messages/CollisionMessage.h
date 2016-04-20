@@ -12,6 +12,7 @@
 
 #include "Message.h"
 #include "MathExt.h"
+#include "Shape.h"
 #include "GameObject.h"
 
 HashString const COLLISION = "Collision";
