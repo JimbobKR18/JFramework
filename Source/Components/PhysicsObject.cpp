@@ -65,7 +65,7 @@ void PhysicsObject::Update()
   ClearForces();
 
   // Update the size for broadphasing
-  mBroadSize = transform->GetSize() * 1.5f;
+  mBroadSize = transform->GetSize().Multiply(transform->GetScale()) * 1.5f;
 }
 
 /**
