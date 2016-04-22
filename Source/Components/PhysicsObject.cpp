@@ -22,7 +22,7 @@ PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sU
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
                   mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
                   mDamping(0.01f), mRestitution(0.0f), mStatic(false),
-                  mGravity(true), mPassable(false)
+                  mGravity(true), mPassable(false), mActive(true), mIgnoreList(), mShapes()
 {
 }
 
@@ -89,7 +89,7 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
   CollisionMessage *message = (CollisionMessage*)&aMessage;
   GameObject *otherBody = message->GetObject(0) != GetOwner() ?
                           message->GetObject(0) : message->GetObject(1);
-  std::string objectName = GetOwner()->GetFileName().substr(0, GetOwner()->GetFileName().length() - 4);
+  HashString objectName = GetOwner()->GetFileName().SubString(0, GetOwner()->GetFileName().Length() - 4);
   
   if(!LUABind::LoadFunction<GameObject*>("CollisionMessages.LUA",
                                      objectName + "_CollisionReceive",
@@ -106,7 +106,7 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
  */
 void PhysicsObject::Serialize(Parser &aParser)
 {
-  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const PHYSICS_OBJECT = "PhysicsObject";
   Root* object = aParser.Find(objectName);
   
@@ -308,9 +308,9 @@ void PhysicsObject::ClearForces()
  * @brief Add object to ignore list
  * @param aObjectName Name of object to ignore
  */
-void PhysicsObject::AddIgnore(std::string const &aObjectName)
+void PhysicsObject::AddIgnore(HashString const &aObjectName)
 {
-  mIgnoreList.push_back(aObjectName);
+  mIgnoreList[aObjectName.ToHash()] = aObjectName;
 }
 
 /**
@@ -318,15 +318,9 @@ void PhysicsObject::AddIgnore(std::string const &aObjectName)
  * @param aObjectName The name of the object to maybe ignore
  * @return Whether or not to ignore collision with this object
  */
-bool PhysicsObject::IgnoreObject(std::string const &aObjectName)
+bool PhysicsObject::IgnoreObject(HashString const &aObjectName)
 {
-  std::vector<std::string>::iterator end = mIgnoreList.end();
-  for(std::vector<std::string>::iterator it = mIgnoreList.begin(); it != end; ++it)
-  {
-    if(aObjectName == *it)
-      return true;
-  }
-  return false;
+  return mIgnoreList.find(aObjectName.ToHash()) != mIgnoreList.end();
 }
 
 /**
@@ -415,7 +409,7 @@ float PhysicsObject::GetRestitution() const
  * @brief Set restitution for this object
  * @param aRestitution Restitution to set to
  */
-void PhysicsObject::SetRestiution(float const aRestitution)
+void PhysicsObject::SetRestitution(float const aRestitution)
 {
   mRestitution = aRestitution;
 }
@@ -472,6 +466,24 @@ bool PhysicsObject::IsPassable() const
 void PhysicsObject::SetPassable(bool const aPassable)
 {
   mPassable = aPassable;
+}
+
+/**
+ * @brief Get if object is active (able to register collision)
+ * @return Whether or not the object is active.
+ */
+bool PhysicsObject::IsActive() const
+{
+  return mActive;
+}
+
+/**
+ * @brief Set if object is active (able to register collision)
+ * @param aActive Whether or not the object is active.
+ */
+void PhysicsObject::SetActive(bool const aActive)
+{
+  mActive = aActive;
 }
 
 /**

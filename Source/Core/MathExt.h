@@ -76,7 +76,7 @@ struct Vector3
   bool    validate() const;
 
   static void SerializeLUA();
-  static std::string GetName();
+  static HashString GetName();
 };
 
 struct Vector4
@@ -124,7 +124,7 @@ struct Vector4
   bool validate() const;
 
   static void SerializeLUA();
-  static std::string GetName();
+  static HashString GetName();
 };
 
 struct Matrix33
@@ -159,7 +159,7 @@ struct Matrix33
   bool validate() const;
   
   static void SerializeLUA();
-  static std::string GetName();
+  static HashString GetName();
 };
 
 template<typename T>

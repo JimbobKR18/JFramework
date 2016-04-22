@@ -8,6 +8,7 @@ struct PotentialPair
 {
   PhysicsObject* mBodies[2];
   
+  PotentialPair();
   PotentialPair(PhysicsObject* mBody1, PhysicsObject* mBody2);
   
   void operator=(PotentialPair const &rhs);

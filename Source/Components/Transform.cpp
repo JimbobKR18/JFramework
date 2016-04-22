@@ -145,7 +145,7 @@ void Transform::SetZAlignment(Z_ALIGNMENT const &aAlign)
  */
 void Transform::Serialize(Parser &aParser)
 {
-  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const TRANSFORM = "Transform";
   Root* object = aParser.Find(objectName);
   char const *values[9] = {"PositionX",

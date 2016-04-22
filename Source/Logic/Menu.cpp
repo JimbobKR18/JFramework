@@ -11,7 +11,7 @@
 #include "ObjectManager.h"
 #include "LevelManager.h"
 
-Menu::Menu(Level *aLevel, std::string const &aFileName) : mOwner(aLevel), mFileName(aFileName)
+Menu::Menu(Level *aLevel, HashString const &aFileName) : mOwner(aLevel), mFileName(aFileName)
 {
   mName = Common::RetrieveNameFromFileName(aFileName);
   

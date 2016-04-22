@@ -9,7 +9,7 @@ class Resolver
 {
 private:
   std::list<CollisionPair> mCollidedPairs;
-  std::list<PotentialPair> mPotentialPairs;
+  std::unordered_map<size_t, PotentialPair> mPotentialPairs;
 
 public:
   Resolver();
@@ -39,6 +39,9 @@ private:
   void  CalculateLineToCube(CollisionPair &aPair);
   void  CalculateLineToTriangle(CollisionPair &aPair);
   void  CalculateLineToLine(CollisionPair &aPair);
+  
+  // Hash calculations
+  size_t CalculateHash(PhysicsObject *aObject1, PhysicsObject *aObject2);
 };
 
 #endif

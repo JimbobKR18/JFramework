@@ -19,31 +19,31 @@ class ObjectManager;
 class GameObject
 {
 private:
-  std::string             mFileName;
-  std::string             mName;
+  HashString              mFileName;
+  HashString              mName;
   std::vector<Component*> mComponents;
   ObjectManager*          mManager;
   
   typedef std::vector<Component*>::iterator ComponentIT;
 public:
   GameObject();
-  GameObject(ObjectManager *aManager, std::string const &aFileName);
+  GameObject(ObjectManager *aManager, HashString const &aFileName);
   GameObject(GameObject const &aGameObject);
   virtual ~GameObject();
 
-  std::string             GetName();
-  std::string             GetFileName();
+  HashString              GetName();
+  HashString              GetFileName();
   ObjectManager*          GetManager();
 
-  void                    SetName(std::string const &aName);
+  void                    SetName(HashString const &aName);
 
   void                    AddComponent(Component *aComponent);
   void                    RemoveComponent(Component *aComponent, bool aDelete);
   void                    RemoveComponent(int const &aUID, bool aDelete);
   Component*              GetComponent(int const &aUID);
-  Component*              GetComponentByName(std::string const &aName);
+  Component*              GetComponentByName(HashString const &aName);
   bool                    HasComponent(int const &aUID);
-  bool                    HasComponentByName(std::string const &aName);
+  bool                    HasComponentByName(HashString const &aName);
 
   template<typename T> T* GET()
   {

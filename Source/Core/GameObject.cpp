@@ -18,16 +18,15 @@ GameObject::GameObject()
   assert(!"GameObject instantiated without a file!");
 }
 
-GameObject::GameObject(ObjectManager *aManager, std::string const &aFileName) :
+GameObject::GameObject(ObjectManager *aManager, HashString const &aFileName) :
                        mFileName(aFileName), mName(""), mComponents(), mManager(aManager)
 {
-  for(int i = static_cast<int>(aFileName.size()) - 1;
-      i >= 0 && aFileName[i] != '/'; --i)
+  for(int i = aFileName.Length() - 1; i >= 0 && aFileName[i] != '/'; --i)
   {
-    mName.push_back(aFileName[i]);
+    mName.Push(aFileName[i]);
   }
-  std::reverse(mName.begin(), mName.end());
-  mName = mName.substr(0, mName.size() - 4);
+  mName.Reverse();
+  mName = mName.SubString(0, mName.Size() - 4);
 }
 
 // Sounds like a bad idea right now...
@@ -53,7 +52,7 @@ GameObject::~GameObject()
  * @brief Get name of game object
  * @return Name of object
  */
-std::string GameObject::GetName()
+HashString GameObject::GetName()
 {
   return mName;
 }
@@ -62,7 +61,7 @@ std::string GameObject::GetName()
  * @brief  Get file name of object
  * @return Object's file name
  */
-std::string GameObject::GetFileName()
+HashString GameObject::GetFileName()
 {
 	return mFileName;
 }
@@ -80,7 +79,7 @@ ObjectManager *GameObject::GetManager()
  * @brief Set name of object
  * @param aName New name of object
  */
-void GameObject::SetName(std::string const &aName)
+void GameObject::SetName(HashString const &aName)
 {
   mName = aName;
 }
@@ -161,10 +160,9 @@ Component *GameObject::GetComponent(int const &aUID)
  * @param aName Name of component
  * @return Component or nullptr
  */
-Component* GameObject::GetComponentByName(std::string const &aName)
+Component* GameObject::GetComponentByName(HashString const &aName)
 {
-  int uid = Common::StringHashFunction(aName);
-  return GetComponent(uid);
+  return GetComponent(aName.ToHash());
 }
 
 /**
@@ -188,10 +186,9 @@ bool GameObject::HasComponent(int const &aUID)
  * @param aName Name of component
  * @return True if object has component
  */
-bool GameObject::HasComponentByName(std::string const &aName)
+bool GameObject::HasComponentByName(HashString const &aName)
 {
-  int uid = Common::StringHashFunction(aName);
-  return HasComponent(uid);
+  return HasComponent(aName.ToHash());
 }
 
 /**
@@ -225,9 +222,9 @@ void GameObject::ReceiveMessage(Message const &aMessage)
  */
 void GameObject::Serialize(Parser &aParser)
 {
-  std::string object = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString object = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   aParser.Place(object, "File", mFileName);
-  aParser.Place(object, "Name", std::string("Literal(") + mName + std::string(")"));
+  aParser.Place(object, "Name", HashString("Literal(") + mName + HashString(")"));
 
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
@@ -255,5 +252,5 @@ void GameObject::SerializeLUA()
  */
 void GameObject::Interact(GameObject *aObject) 
 { 
-  DebugLogPrint("%s collided into %s\n", mName.c_str(), aObject->GetName().c_str()); 
+  DebugLogPrint("%s collided into %s\n", mName.ToCharArray(), aObject->GetName().ToCharArray()); 
 }

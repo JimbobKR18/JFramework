@@ -1,6 +1,12 @@
 #include "PotentialPair.h"
 #include "PhysicsObject.h"
 
+PotentialPair::PotentialPair()
+{
+  mBodies[0] = nullptr;
+  mBodies[1] = nullptr;
+}
+
 PotentialPair::PotentialPair(PhysicsObject* mBody1, PhysicsObject* mBody2)
 {
   mBodies[0] = mBody1;

@@ -24,6 +24,7 @@
 #include <iostream>
 #include <iterator>
 #include <cfloat>
+#include <unordered_map>
 #include "HashString.h"
 #include "SmartPointer.h"
 

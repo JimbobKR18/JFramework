@@ -369,7 +369,7 @@ int HashString::ToInt() const
 
 /**
  * @brief Convert to Float
- * @return String as an int, "0.0" is 0.0, "1.1" is 1.1 etc.
+ * @return String as an float, "0.0" is 0.0, "1.1" is 1.1 etc.
  */
 float HashString::ToFloat() const
 {
@@ -378,11 +378,20 @@ float HashString::ToFloat() const
 
 /**
  * @brief Convert to Bool
- * @return String as an int, "true" is true, anything else is false
+ * @return String as an bool, "true" is true, anything else is false
  */
 bool HashString::ToBool() const
 {
   return Common::StringToBool(ToLower().ToString());
+}
+
+/**
+ * @brief Convert to Hash
+ * @return Hash value of string
+ */
+int HashString::ToHash() const
+{
+  return mHash;
 }
 
 /**
@@ -496,4 +505,14 @@ void HashString::SerializeLUA()
     .set("ToLower", &HashString::ToLower)
     .set("ToUpper", &HashString::ToUpper)
     .set("ToLiteral", &HashString::ToLiteral);
+}
+
+/**
+ * @brief Helpful function to let HashString be used in unordered_map implementations.
+ * @param hashString String to get hash from.
+ * @return String hash.
+ */
+size_t HashString::HashStringHashFunction(HashString const &hashString)
+{
+  return hashString.ToHash();
 }

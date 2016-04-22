@@ -264,7 +264,7 @@ void Vector3::SerializeLUA()
       .set("Invert", &Vector3::Invert);
 }
 
-std::string Vector3::GetName()
+HashString Vector3::GetName()
 {
   return "Vector3";
 }
@@ -504,7 +504,7 @@ void Vector4::SerializeLUA()
       .set("Invert", &Vector4::Invert);
 }
 
-std::string Vector4::GetName()
+HashString Vector4::GetName()
 {
   return "Vector4";
 }
@@ -801,7 +801,7 @@ void Matrix33::SerializeLUA()
       .set("Invert", &Matrix33::Invert);
 }
 
-std::string Matrix33::GetName()
+HashString Matrix33::GetName()
 {
   return "Matrix33";
 }

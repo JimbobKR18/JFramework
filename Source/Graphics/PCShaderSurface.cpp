@@ -353,7 +353,7 @@ void PCShaderSurface::ReceiveMessage(Message const &aMessage)
  */
 void PCShaderSurface::Serialize(Parser &aParser)
 {
-  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const SURFACE = "Surface";
   Root* object = aParser.Find(objectName);
   Surface::Serialize(aParser);

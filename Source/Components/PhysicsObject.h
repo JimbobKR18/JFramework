@@ -17,20 +17,23 @@
 class PhysicsObject : public Component
 {
 private:
-  PhysicsWorld*             mWorld;
-  Vector3                   mVelocity,
-                            mAcceleration,
-                            mForces,
-                            mBroadSize;
-  float                     mMass,
-                            mInverseMass;
-  float                     mDamping,
-                            mRestitution;
-  bool                      mStatic,
-                            mGravity,
-                            mPassable;
-  std::vector<std::string>  mIgnoreList;
-  std::vector<Shape*>       mShapes;
+  typedef std::unordered_map<int, HashString> IgnoreContainer;
+
+  PhysicsWorld*       mWorld;
+  Vector3             mVelocity,
+                      mAcceleration,
+                      mForces,
+                      mBroadSize;
+  float               mMass,
+                      mInverseMass;
+  float               mDamping,
+                      mRestitution;
+  bool                mStatic,
+                      mGravity,
+                      mPassable,
+                      mActive;
+  IgnoreContainer     mIgnoreList;
+  std::vector<Shape*> mShapes;
   
   static int const sUID;
 
@@ -53,8 +56,8 @@ public:
   void                 AddShape(Shape* aShape);
   void                 AddForce(Vector3 const &aForce);
   void                 ClearForces();
-  void                 AddIgnore(std::string const &aObjectName);
-  bool                 IgnoreObject(std::string const &aObjectName);
+  void                 AddIgnore(HashString const &aObjectName);
+  bool                 IgnoreObject(HashString const &aObjectName);
 
   // Getters and setters
   Vector3              GetVelocity() const;
@@ -69,7 +72,7 @@ public:
   void                 SetDamping(float const aDamping);
   
   float                GetRestitution() const;
-  void                 SetRestiution(float const aRestitution); 
+  void                 SetRestitution(float const aRestitution); 
 
   bool                 IsStatic() const;
   void                 SetStatic(bool const aStatic);
@@ -79,6 +82,9 @@ public:
   
   bool                 IsPassable() const;
   void                 SetPassable(bool const aPassable);
+  
+  bool                 IsActive() const;
+  void                 SetActive(bool const aActive);
 
   Vector3              GetBroadSize() const;
   void                 SetBroadSize(Vector3 const &aSize);

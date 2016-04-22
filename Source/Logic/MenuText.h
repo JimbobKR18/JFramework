@@ -13,8 +13,8 @@
 class MenuText : public MenuElement
 {
 private:
-  std::string   mText;
-  std::string   mFont;
+  HashString   mText;
+  HashString   mFont;
   int           mSize;
   int           mMaxWidth;
   Vector4       mForegroundColor;
@@ -22,8 +22,8 @@ private:
   Vector3       mOriginalSize;
 
 public:
-  MenuText(std::string const &aFilename);
-  MenuText(std::string const &aSettingsFilename, std::string const &aText);
+  MenuText(HashString const &aFilename);
+  MenuText(HashString const &aSettingsFilename, HashString const &aText);
   virtual ~MenuText();
 
   virtual void Draw();

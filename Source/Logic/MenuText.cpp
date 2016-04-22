@@ -12,13 +12,13 @@
 
 // TODO platform specifics
 
-MenuText::MenuText(std::string const& aFilename) : MenuElement(aFilename)
+MenuText::MenuText(HashString const& aFilename) : MenuElement(aFilename)
 {
   TextParser parser(Common::RelativePath("Menus", aFilename));
   ParseFile(parser);
 }
 
-MenuText::MenuText(std::string const &aSettingsFilename, std::string const &aText) : MenuElement(aSettingsFilename), mText(aText)
+MenuText::MenuText(HashString const &aSettingsFilename, HashString const &aText) : MenuElement(aSettingsFilename), mText(aText)
 {
   TextParser parser(Common::RelativePath("Menus", aSettingsFilename));
   ParseFile(parser);
@@ -136,7 +136,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
     }
     else
     {
-      numFrames.push_back(mText.length());
+      numFrames.push_back(mText.Length());
     }
 
     surface->CreateScrollEffect(ScrollType::HORIZONTAL, mOriginalSize);

@@ -221,14 +221,22 @@ void PhysicsWorld::SweepAndPrune()
   for(PhysicsIT it = mObjects.begin(); it != end; ++it)
   {
     PhysicsObject *itObject = *it;
-    std::string itName = itObject->GetOwner()->GetName();
+    
+    if(!itObject->IsActive())
+      continue;
+    
+    HashString itName = itObject->GetOwner()->GetName();
     Transform *itTransform = itObject->GetOwner()->GET<Transform>();
 
     for(PhysicsIT it2 = it; it2 != end; ++it2)
     {
       PhysicsObject *it2Object = *it2;
-      std::string it2Name = it2Object->GetOwner()->GetName();
-      bool ignore = false;//itObject->IgnoreObject(it2Name) || it2Object->IgnoreObject(itName);
+      
+      if(!it2Object->IsActive())
+        continue;
+      
+      HashString it2Name = it2Object->GetOwner()->GetName();
+      bool ignore = itObject->IgnoreObject(it2Name) || it2Object->IgnoreObject(itName);
 
       if(itObject != it2Object && !ignore)
       {

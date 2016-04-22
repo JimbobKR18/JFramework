@@ -226,7 +226,7 @@ void PCSurface::ReceiveMessage(Message const &aMessage)
  */
 void PCSurface::Serialize(Parser &aParser)
 {
-  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const SURFACE = "Surface";
   Root* object = aParser.Find(objectName);
   Surface::Serialize(aParser);
@@ -241,9 +241,9 @@ void PCSurface::Serialize(Parser &aParser)
 void PCSurface::Deserialize(Parser &aParser)
 {
   // Get file name if specified
-  std::string fileName = "";
+  HashString fileName = "";
   if(aParser.Find("Surface", "TextureName"))
-    fileName = aParser.Find("Surface", "TextureName")->GetValue().ToString();
+    fileName = aParser.Find("Surface", "TextureName")->GetValue();
 
   SetFileName(fileName);
   LoadImage(GetFileName());

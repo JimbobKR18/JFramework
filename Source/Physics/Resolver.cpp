@@ -18,9 +18,9 @@ Resolver::~Resolver()
  */
 void Resolver::Update(float aDuration)
 {
-  for(std::list<PotentialPair>::iterator it = mPotentialPairs.begin(); it != mPotentialPairs.end(); ++it)
+  for(std::unordered_map<size_t, PotentialPair>::iterator it = mPotentialPairs.begin(); it != mPotentialPairs.end(); ++it)
   {
-    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(*it);
+    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(it->second);
     for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairs.end(); ++it2)
     {
       AddCollidedPair(*it2);
@@ -41,7 +41,7 @@ void Resolver::Update(float aDuration)
  */
 void Resolver::AddPrelimPair(PotentialPair const &aPair)
 {
-  mPotentialPairs.push_back(aPair);
+  mPotentialPairs[CalculateHash(aPair.mBodies[0], aPair.mBodies[1])] = aPair;
 }
 
 /**
@@ -61,16 +61,7 @@ void Resolver::AddCollidedPair(CollisionPair const &aPair)
  */
 bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
 {
-  PotentialPair temp(aObject1, aObject2);
-
-  for(std::list<PotentialPair>::iterator it = mPotentialPairs.begin(); it != mPotentialPairs.end(); ++it)
-  {
-    if(*it == temp)
-    {
-      return true;
-    }
-  }
-  return false;
+  return mPotentialPairs.find(CalculateHash(aObject1, aObject2)) != mPotentialPairs.end();
 }
 
 /**
@@ -577,4 +568,16 @@ void Resolver::CalculateLineToLine(CollisionPair &aPair)
 {
   // TODO
   //assert(!"TODO");
+}
+
+/**
+ * @brief Calculate hash between two bodies.
+ * @param aObject1 Body 1
+ * @param aObject2 Body 2
+ * @return Hash value.
+ */
+size_t Resolver::CalculateHash(PhysicsObject *aObject1, PhysicsObject *aObject2)
+{
+  return (size_t)aObject1 + (size_t)aObject2 + 
+    aObject1->GetOwner()->GetName().ToHash() + aObject2->GetOwner()->GetName().ToHash();
 }

@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 // Basically an extension of std::string, now with hashing.
 class HashString
@@ -70,6 +71,7 @@ public:
   int ToInt() const;
   float ToFloat() const;
   bool ToBool() const;
+  int ToHash() const;
   std::vector<std::string> ToStringVector() const;
   std::vector<int> ToIntVector() const;
   std::vector<float> ToFloatVector() const;
@@ -79,6 +81,7 @@ public:
   bool ComesBefore(HashString const &aRhs) const;
 
   static void SerializeLUA();
+  static size_t HashStringHashFunction(HashString const &hashString);
 private:
   void Hash();
 };

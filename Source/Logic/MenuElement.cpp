@@ -10,7 +10,7 @@
 #include "LevelManager.h"
 #include "ObjectManager.h"
 
-MenuElement::MenuElement(std::string const &aFileName)
+MenuElement::MenuElement(HashString const &aFileName)
 {
   mManager = LUABind::StaticGameApp::GetApp()->GET<LevelManager>();
   mObject = mManager->GetActiveLevel()->CreateObjectDelayed(aFileName, "Menus");

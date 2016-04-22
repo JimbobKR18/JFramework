@@ -25,7 +25,7 @@ protected:
   int         mLayer;
   
 public:
-  MenuElement(std::string const &aFileName);
+  MenuElement(HashString const &aFileName);
   
   virtual ~MenuElement();
   

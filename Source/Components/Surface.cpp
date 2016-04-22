@@ -232,7 +232,7 @@ void Surface::ReceiveMessage(Message const &aMessage)
  */
 void Surface::Serialize(Parser &aParser)
 {
-  HashString const objectName = std::string("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
+  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const SURFACE = "Surface";
   Root* object = aParser.Find(objectName);
   TextureCoordinates *coords = GetTextureData();

@@ -25,7 +25,7 @@ private:
   ElementContainer  mMenuElements;
 
 public:
-  Menu(Level* aLevel, std::string const &aFileName);
+  Menu(Level* aLevel, HashString const &aFileName);
   virtual ~Menu();
 
   HashString    GetName() const;
