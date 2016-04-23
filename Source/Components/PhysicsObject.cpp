@@ -118,9 +118,19 @@ void PhysicsObject::Serialize(Parser &aParser)
   object->Place(PHYSICS_OBJECT, "Damping", Common::FloatToString(mDamping));
   object->Place(PHYSICS_OBJECT, "Restitution", Common::FloatToString(mRestitution));
   
+  if(!mIgnoreList.empty())
+  {
+    std::vector<std::string> ignoreList;
+    for(IgnoreContainer::iterator it = mIgnoreList.begin(); it != mIgnoreList.end(); ++it)
+    {
+      ignoreList.push_back(it->second);
+    }
+    object->Place(PHYSICS_OBJECT, "IgnoreList", Common::StringVectorToString(ignoreList));
+  }
+  
   // Serialize each shape
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
-  Root* physicsObject = object->Find("PhysicsObject");
+  Root* physicsObject = object->Find(PHYSICS_OBJECT);
   HashString const SHAPE = "Shape_";
   int curIndex = 0;
   for(shapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
@@ -184,14 +194,23 @@ void PhysicsObject::Deserialize(Parser &aParser)
 {
   // Is our object affected by gravity?
   // What is the object's mass? Is it static?
-  bool gravity = aParser.Find("PhysicsObject", "Gravity")->GetValue().ToBool();
-  bool isStatic = aParser.Find("PhysicsObject", "Static")->GetValue().ToBool();
-  bool isPassable = aParser.Find("PhysicsObject", "Passable")->GetValue().ToBool();
-  SetMass(aParser.Find("PhysicsObject", "Mass")->GetValue().ToInt());
-  mDamping = aParser.Find("PhysicsObject", "Damping")->GetValue().ToFloat();
-  mRestitution = aParser.Find("PhysicsObject", "Restitution")->GetValue().ToFloat();
+  HashString const PHYSICS_OBJECT = "PhysicsObject";
+  bool gravity = aParser.Find(PHYSICS_OBJECT, "Gravity")->GetValue().ToBool();
+  bool isStatic = aParser.Find(PHYSICS_OBJECT, "Static")->GetValue().ToBool();
+  bool isPassable = aParser.Find(PHYSICS_OBJECT, "Passable")->GetValue().ToBool();
+  SetMass(aParser.Find(PHYSICS_OBJECT, "Mass")->GetValue().ToInt());
+  mDamping = aParser.Find(PHYSICS_OBJECT, "Damping")->GetValue().ToFloat();
+  mRestitution = aParser.Find(PHYSICS_OBJECT, "Restitution")->GetValue().ToFloat();
 
-  //TODO serialize ignore list for collisions
+  if(aParser.Find(PHYSICS_OBJECT, "IgnoreList"))
+  {
+    std::vector<std::string> ignoreList = aParser.Find(PHYSICS_OBJECT, "IgnoreList")->GetValue().ToStringVector();
+    
+    for(std::vector<std::string>::iterator it = ignoreList.begin(); it != ignoreList.end(); ++it)
+    {
+      mIgnoreList[Common::StringHashFunction(*it)] = *it;
+    }
+  }
 
   // default true
   if(!gravity)
@@ -209,9 +228,9 @@ void PhysicsObject::Deserialize(Parser &aParser)
   
   // Adding shapes
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
-  while(aParser.Find("PhysicsObject", curShape))
+  while(aParser.Find(PHYSICS_OBJECT, curShape))
   {
-    Root* tempShape = aParser.Find("PhysicsObject", curShape);
+    Root* tempShape = aParser.Find(PHYSICS_OBJECT, curShape);
     Shape* newShape = nullptr;
     
     HashString type = tempShape->Find("Type")->GetValue();
