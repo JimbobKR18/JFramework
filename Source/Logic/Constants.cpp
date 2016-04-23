@@ -65,6 +65,7 @@ bool const Constants::GetBoolean(HashString const &aValue)
 void Constants::Deserialize()
 {
   // Read line by line, much easier
+  mValues.clear();
   std::ifstream infile(Common::RelativePath("Game", "Constants.txt"));
   while(infile.good() && !infile.eof())
   {
