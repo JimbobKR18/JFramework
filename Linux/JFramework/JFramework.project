@@ -50,6 +50,7 @@
       <File Name="../../Source/Core/Messages/ClickMessage.h"/>
       <File Name="../../Source/Core/Messages/ObjectCreateMessage.h"/>
       <File Name="../../Source/Core/Messages/ResetLevelMessage.h"/>
+      <File Name="../../Source/Core/Messages/NetworkMessage.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Core/MathExt.cpp"/>
     <File Name="../../Source/Core/SmartPointer.h"/>
@@ -156,6 +157,8 @@
     <File Name="../../Source/Managers/GraphicsManager.cpp"/>
     <File Name="../../Source/Managers/InputManager.cpp"/>
     <File Name="../../Source/Managers/DebugManager.h"/>
+    <File Name="../../Source/Managers/NetworkManager.h"/>
+    <File Name="../../Source/Managers/NetworkManager.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Parsers">
     <File Name="../../Source/Parsers/TextParser.h"/>
@@ -219,6 +222,7 @@
         <IncludePath Value="../../Source/Graphics"/>
         <IncludePath Value="../../Source/LUA"/>
         <IncludePath Value="../../Source/Parsers"/>
+        <IncludePath Value="../../Source/Network"/>
         <IncludePath Value="../../Source/TinyXML"/>
         <IncludePath Value="../../Source/Core/Messages"/>
         <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/ZombieStealth/Assets/"/>
@@ -317,4 +321,10 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="Network">
+    <File Name="../../Source/Network/PCNetworkPort.cpp"/>
+    <File Name="../../Source/Network/NetworkPort.h"/>
+    <File Name="../../Source/Network/PCNetworkPort.h"/>
+    <File Name="../../Source/Network/NetworkPort.cpp"/>
+  </VirtualDirectory>
 </CodeLite_Project>

@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=19/04/16
+Date                   :=24/04/16
 CodeLitePath           :="/home/jimmy/.codelite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -36,7 +36,7 @@ ObjectsFileList        :="JFramework.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Logic/StateMachine $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Core/Messages 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Logic/StateMachine $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/Network $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Core/Messages 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
@@ -63,11 +63,12 @@ CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/LUA_lua.c$(ObjectSuffix) $(IntermediateDirectory)/LUA_SLB.cpp$(ObjectSuffix) $(IntermediateDirectory)/LUA_LUATypes.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_MathExt.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_AutoCrit.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_Common.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_GameObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_HashString.cpp$(ObjectSuffix) $(IntermediateDirectory)/Core_Shape.cpp$(ObjectSuffix) $(IntermediateDirectory)/Source_main.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Source_GameApp.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Controller.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_Transform.cpp$(ObjectSuffix) $(IntermediateDirectory)/Components_PhysicsObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_View.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_TextureCoordinates.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_ZRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_BatchRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_Constants.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/Logic_Level.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuImage.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_Menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuText.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_TileMapGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Logic_MenuButton.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_LevelManager.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_XMLParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_GravityGenerator.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_PotentialPair.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Managers_NetworkManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/Parsers_XMLParser.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_PotentialPair.cpp$(ObjectSuffix) 
 
-Objects1=$(IntermediateDirectory)/Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix) 
+Objects1=$(IntermediateDirectory)/Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix) \
+	
 
 
 
@@ -381,6 +382,14 @@ $(IntermediateDirectory)/Managers_InputManager.cpp$(DependSuffix): ../../Source/
 $(IntermediateDirectory)/Managers_InputManager.cpp$(PreprocessSuffix): ../../Source/Managers/InputManager.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Managers_InputManager.cpp$(PreprocessSuffix) "../../Source/Managers/InputManager.cpp"
 
+$(IntermediateDirectory)/Managers_NetworkManager.cpp$(ObjectSuffix): ../../Source/Managers/NetworkManager.cpp $(IntermediateDirectory)/Managers_NetworkManager.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/NetworkManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Managers_NetworkManager.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Managers_NetworkManager.cpp$(DependSuffix): ../../Source/Managers/NetworkManager.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Managers_NetworkManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Managers_NetworkManager.cpp$(DependSuffix) -MM "../../Source/Managers/NetworkManager.cpp"
+
+$(IntermediateDirectory)/Managers_NetworkManager.cpp$(PreprocessSuffix): ../../Source/Managers/NetworkManager.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Managers_NetworkManager.cpp$(PreprocessSuffix) "../../Source/Managers/NetworkManager.cpp"
+
 $(IntermediateDirectory)/Parsers_Parser.cpp$(ObjectSuffix): ../../Source/Parsers/Parser.cpp $(IntermediateDirectory)/Parsers_Parser.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Parsers/Parser.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Parsers_Parser.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Parsers_Parser.cpp$(DependSuffix): ../../Source/Parsers/Parser.cpp
@@ -492,6 +501,22 @@ $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(DependSuffix): ../../Source/TinyX
 
 $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(PreprocessSuffix): ../../Source/TinyXML/tinyxml2.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(PreprocessSuffix) "../../Source/TinyXML/tinyxml2.cpp"
+
+$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(ObjectSuffix): ../../Source/Network/PCNetworkPort.cpp $(IntermediateDirectory)/Network_PCNetworkPort.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Network/PCNetworkPort.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(DependSuffix): ../../Source/Network/PCNetworkPort.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(DependSuffix) -MM "../../Source/Network/PCNetworkPort.cpp"
+
+$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(PreprocessSuffix): ../../Source/Network/PCNetworkPort.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Network_PCNetworkPort.cpp$(PreprocessSuffix) "../../Source/Network/PCNetworkPort.cpp"
+
+$(IntermediateDirectory)/Network_NetworkPort.cpp$(ObjectSuffix): ../../Source/Network/NetworkPort.cpp $(IntermediateDirectory)/Network_NetworkPort.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Network/NetworkPort.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Network_NetworkPort.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Network_NetworkPort.cpp$(DependSuffix): ../../Source/Network/NetworkPort.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Network_NetworkPort.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Network_NetworkPort.cpp$(DependSuffix) -MM "../../Source/Network/NetworkPort.cpp"
+
+$(IntermediateDirectory)/Network_NetworkPort.cpp$(PreprocessSuffix): ../../Source/Network/NetworkPort.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Network_NetworkPort.cpp$(PreprocessSuffix) "../../Source/Network/NetworkPort.cpp"
 
 $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix): ../../Source/Graphics/PCSurface.cpp $(IntermediateDirectory)/Graphics_PCSurface.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/PCSurface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) $(IncludePath)
