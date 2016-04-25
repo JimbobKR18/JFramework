@@ -16,8 +16,9 @@ struct InputInfo
 {
   HashString  mInput;
   Vector3     mLocation;
+  int         mId;
 
-  InputInfo(HashString const &aInput, Vector3 const &aLocation) : mInput(aInput), mLocation(aLocation) {}
+  InputInfo(HashString const &aInput, Vector3 const &aLocation, int const aId) : mInput(aInput), mLocation(aLocation), mId(aId) {}
   bool operator<(InputInfo const &aRhs) const {return mInput < aRhs.mInput;}
 };
 
@@ -32,8 +33,8 @@ public:
   InputManager(GameApp *aApp);
   ~InputManager();
   
-  void                AddInput(HashString const &aInput, Vector3 const &aLocation);
-  void                RemoveInput(HashString const &aInput);
+  void                AddInput(HashString const &aInput, Vector3 const &aLocation, int const aId = 0);
+  void                RemoveInput(HashString const &aInput, int const aId = 0);
   void                ClearInputs();
   
   void                AcceptInputs();
@@ -42,9 +43,9 @@ public:
 
   // Derived from Manager
   virtual void        Update();
-	virtual void        SendMessage(Message const &aMessage);
+  virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
-	static std::string  GetName() {return "InputManager";}
+  static std::string  GetName() {return "InputManager";}
   static unsigned     GetUID() {return sUID;}
   
 public:

@@ -23,7 +23,7 @@ private:
   InputMessage(InputMessage const &aMessage) : Message(), mLocation(aMessage.mLocation), mId(aMessage.mId) {}
   
 public:
-  InputMessage(HashString const &aContent, Vector3 const &aLocation, int const aId = 0) : Message(), mLocation(aLocation), mId(aId)
+  InputMessage(HashString const &aContent, Vector3 const &aLocation, int const aId) : Message(), mLocation(aLocation), mId(aId)
   {
     SetDescription("Input");
     SetContent(aContent);

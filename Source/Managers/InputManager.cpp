@@ -25,7 +25,7 @@ InputManager::~InputManager()
  * @param aInput Input type
  * @param aLocation Lcoation in screen space where input happened.
  */
-void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation)
+void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation, int const aId)
 {
   if(!mAcceptInput)
     return;
@@ -39,15 +39,15 @@ void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation)
     }
   }
   
-  mInputs.insert(InputInfo(aInput, aLocation));
-  GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Down"), aLocation));
+  mInputs.insert(InputInfo(aInput, aLocation, aId));
+  GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Down"), aLocation, aId));
 }
 
 /**
  * @brief Removes input
  * @param aInput Input type
  */
-void InputManager::RemoveInput(HashString const &aInput)
+void InputManager::RemoveInput(HashString const &aInput, int const aId)
 {
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
@@ -57,7 +57,7 @@ void InputManager::RemoveInput(HashString const &aInput)
       break;
     }
   }
-  GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Up"), Vector3()));
+  GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Up"), Vector3(), aId));
 }
 
 /**
@@ -101,7 +101,7 @@ void InputManager::Update()
 {
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
-    GetOwningApp()->SendMessageDelayed(new InputMessage(it->mInput, it->mLocation));
+    GetOwningApp()->SendMessageDelayed(new InputMessage(it->mInput, it->mLocation, it->mId));
   }
 }
 
