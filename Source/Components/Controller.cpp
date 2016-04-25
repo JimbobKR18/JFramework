@@ -19,6 +19,7 @@ Controller::Controller(int const &aUID) : Component(aUID), mPaused(false)
 
 Controller::Controller() : Component(Controller::sUID), mPaused(false)
 {
+  assert(!"Default Controller constructor called, are you sure you meant to do this?");
 }
 
 Controller::~Controller()
