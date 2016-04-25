@@ -3,16 +3,19 @@
 
 #include "Common.h"
 #include "Manager.h" // Base class: Manager
-#include "NetworkBase.h"
+#include "NetworkPort.h"
 
 class NetworkManager : public Manager
 {
 private:
-  NetworkBase *mBase;
+  std::map<HashString,NetworkPort*> mPorts;
   
 public:
   NetworkManager();
   virtual ~NetworkManager();
+  
+  void SendNetworkMessage(HashString const &aIPAddress, HashString const &aMessage);
+  HashString const ReceiveNetworkMessage(HashString const &aIPAddress);
 
   virtual void Update();
   virtual void SendMessage(Message const& aMessage);
