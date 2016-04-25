@@ -9,6 +9,11 @@ NetworkManager::~NetworkManager()
 {
 }
 
+/**
+ * @brief Send message across network.
+ * @param aIPAddress IP address to send to.
+ * @param aMessage Message to send.
+ */
 void NetworkManager::SendNetworkMessage(HashString const &aIPAddress, HashString const &aMessage)
 {
   std::map<HashString,NetworkPort*>::iterator port = mPorts.find(aIPAddress);
@@ -23,6 +28,11 @@ void NetworkManager::SendNetworkMessage(HashString const &aIPAddress, HashString
   port->second->Send(aMessage);
 }
 
+/**
+ * @brief Receive message from IP address
+ * @param aIPAddress IP address to receive from
+ * @return Message as string
+ */
 HashString const NetworkManager::ReceiveNetworkMessage(HashString const &aIPAddress)
 {
   std::map<HashString,NetworkPort*>::iterator port = mPorts.find(aIPAddress);
@@ -37,6 +47,9 @@ HashString const NetworkManager::ReceiveNetworkMessage(HashString const &aIPAddr
   return port->second->Receive();
 }
 
+/**
+ * @brief Update loop
+ */
 void NetworkManager::Update()
 {
   std::map<HashString,NetworkPort*>::iterator end = mPorts.end();
@@ -54,10 +67,18 @@ void NetworkManager::Update()
   }
 }
 
+/**
+ * @brief Does nothing
+ * @param aMessage Message to do nothing with
+ */
 void NetworkManager::SendMessage(Message const& aMessage)
 {
 }
 
+/**
+ * @brief Send message across network
+ * @param aMessage Message to send
+ */
 void NetworkManager::ProcessDelayedMessage(Message* aMessage)
 {
   SendNetworkMessage(aMessage->GetDescription(), aMessage->GetContent());
