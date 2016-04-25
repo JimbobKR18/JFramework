@@ -64,8 +64,17 @@ void PhysicsObject::Update()
   // Nullify all forces
   ClearForces();
 
-  // Update the size for broadphasing
-  mBroadSize = transform->GetSize().Multiply(transform->GetScale()) * 1.5f;
+  // Update the size for broadphasing, may be a bit slow, though
+  Vector3 maxRange = transform->GetSize();
+  shapeIT end = mShapes.end();
+  for(shapeIT it = mShapes.begin(); it != end; ++it)
+  {
+    Shape *shape = *it;
+    maxRange.x = Greater<float>(maxRange.x, shape->GetSize(0));
+    maxRange.y = Greater<float>(maxRange.y, shape->GetSize(1));
+    maxRange.z = Greater<float>(maxRange.z, shape->GetSize(1));
+  }
+  mBroadSize = maxRange.Multiply(transform->GetScale()) * 1.5f;
 }
 
 /**
