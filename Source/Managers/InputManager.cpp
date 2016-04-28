@@ -23,6 +23,7 @@ InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager", InputM
 InputManager::~InputManager()
 {
   mInputs.clear();
+  delete mHandler;
 }
 
 /**
