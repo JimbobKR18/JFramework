@@ -20,6 +20,8 @@ public:
   virtual ~PCInputHandler();
 
   virtual void Update();
+  
+  SDL_Joystick* GetJoystick(int const index) const;
 };
 
 #endif

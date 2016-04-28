@@ -42,6 +42,8 @@ public:
   void                AcceptInputs();
   void                DeclineInputs();
   bool                AcceptingInputs();
+  
+  InputHandler*       GetInputHandler() const;
 
   // Derived from Manager
   virtual void        Update();

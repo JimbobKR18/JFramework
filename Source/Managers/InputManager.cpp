@@ -100,6 +100,15 @@ bool InputManager::AcceptingInputs()
 }
 
 /**
+ * @brief Get input handler
+ * @return Input handler
+ */
+InputHandler* InputManager::GetInputHandler() const
+{
+  return mHandler;
+}
+
+/**
  * @brief Update loop
  */
 void InputManager::Update()

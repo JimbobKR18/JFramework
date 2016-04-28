@@ -9,6 +9,9 @@ PCInputHandler::~PCInputHandler()
 {
 }
 
+/**
+ * @brief Keeps track of joysticks and removes / adds joysticks as necessary.
+ */
 void PCInputHandler::Update()
 {
   unsigned numJoysticks = SDL_NumJoysticks();
@@ -36,4 +39,19 @@ void PCInputHandler::Update()
     for(unsigned i = 0; i < numJoysticks; ++i)
       mJoysticks.push_back(SDL_JoystickOpen(i));
   }
+}
+
+/**
+ * @brief Get a particular joystick.
+ * @param index Index of joystick.
+ * @return nullptr if out of range. Otherwise, joystick at index.
+ */
+SDL_Joystick* PCInputHandler::GetJoystick(int const index) const
+{
+  if(index < 0 || index >= mJoysticks.size())
+  {
+    return nullptr;
+  }
+  
+  return mJoysticks[index];
 }
