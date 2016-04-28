@@ -198,6 +198,18 @@
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
+  <VirtualDirectory Name="Network">
+    <File Name="../../Source/Network/PCNetworkPort.cpp"/>
+    <File Name="../../Source/Network/NetworkPort.h"/>
+    <File Name="../../Source/Network/PCNetworkPort.h"/>
+    <File Name="../../Source/Network/NetworkPort.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Input">
+    <File Name="../../Source/Input/InputHandler.cpp"/>
+    <File Name="../../Source/Input/InputHandler.h"/>
+    <File Name="../../Source/Input/PCInputHandler.h"/>
+    <File Name="../../Source/Input/PCInputHandler.cpp"/>
+  </VirtualDirectory>
   <Settings Type="Static Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -224,6 +236,7 @@
         <IncludePath Value="../../Source/Parsers"/>
         <IncludePath Value="../../Source/Network"/>
         <IncludePath Value="../../Source/TinyXML"/>
+        <IncludePath Value="../../Source/Input"/>
         <IncludePath Value="../../Source/Core/Messages"/>
         <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/ZombieStealth/Assets/"/>
         <Preprocessor Value="ASSET_DIRECTORY_TEMP=/home/jimmy/Documents/project-chang-e/Assets/"/>
@@ -321,10 +334,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="Network">
-    <File Name="../../Source/Network/PCNetworkPort.cpp"/>
-    <File Name="../../Source/Network/NetworkPort.h"/>
-    <File Name="../../Source/Network/PCNetworkPort.h"/>
-    <File Name="../../Source/Network/NetworkPort.cpp"/>
-  </VirtualDirectory>
 </CodeLite_Project>

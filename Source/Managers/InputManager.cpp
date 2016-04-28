@@ -8,11 +8,16 @@
 
 #include "InputManager.h"
 #include "InputMessage.h"
+#include "PCInputHandler.h"
 
 unsigned const InputManager::sUID = Common::StringHashFunction("InputManager");
 
 InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager", InputManager::sUID), mAcceptInput(true)
 {
+  #if !defined(IOS) && !defined(ANDROID)
+    mHandler = new PCInputHandler();
+  #else
+  #endif
 }
 
 InputManager::~InputManager()
@@ -99,6 +104,7 @@ bool InputManager::AcceptingInputs()
  */
 void InputManager::Update()
 {
+  mHandler->Update();
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
     GetOwningApp()->SendMessageDelayed(new InputMessage(it->mInput, it->mLocation, it->mId));

@@ -11,6 +11,7 @@
 
 #include "Manager.h"
 #include "MathExt.h"
+#include "InputHandler.h"
 
 struct InputInfo
 {
@@ -25,6 +26,7 @@ struct InputInfo
 class InputManager : public Manager
 {
 private:
+  InputHandler*       mHandler;
   std::set<InputInfo> mInputs;
   bool                mAcceptInput;
 

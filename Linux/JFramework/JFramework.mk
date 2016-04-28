@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=24/04/16
+Date                   :=27/04/16
 CodeLitePath           :="/home/jimmy/.codelite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -36,7 +36,7 @@ ObjectsFileList        :="JFramework.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Logic/StateMachine $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/Network $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Core/Messages 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Logic/StateMachine $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/Network $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Input $(IncludeSwitch)../../Source/Core/Messages 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
@@ -67,8 +67,8 @@ Objects0=$(IntermediateDirectory)/LUA_lua.c$(ObjectSuffix) $(IntermediateDirecto
 	$(IntermediateDirectory)/Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/Physics_PotentialPair.cpp$(ObjectSuffix) 
 
 Objects1=$(IntermediateDirectory)/Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/TinyXML_tinyxml2.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix) \
-	
+	$(IntermediateDirectory)/Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/Input_PCInputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateMachine.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/StateMachine_StateLink.cpp$(ObjectSuffix) 
 
 
 
@@ -517,6 +517,22 @@ $(IntermediateDirectory)/Network_NetworkPort.cpp$(DependSuffix): ../../Source/Ne
 
 $(IntermediateDirectory)/Network_NetworkPort.cpp$(PreprocessSuffix): ../../Source/Network/NetworkPort.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Network_NetworkPort.cpp$(PreprocessSuffix) "../../Source/Network/NetworkPort.cpp"
+
+$(IntermediateDirectory)/Input_InputHandler.cpp$(ObjectSuffix): ../../Source/Input/InputHandler.cpp $(IntermediateDirectory)/Input_InputHandler.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Input/InputHandler.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Input_InputHandler.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Input_InputHandler.cpp$(DependSuffix): ../../Source/Input/InputHandler.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Input_InputHandler.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Input_InputHandler.cpp$(DependSuffix) -MM "../../Source/Input/InputHandler.cpp"
+
+$(IntermediateDirectory)/Input_InputHandler.cpp$(PreprocessSuffix): ../../Source/Input/InputHandler.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Input_InputHandler.cpp$(PreprocessSuffix) "../../Source/Input/InputHandler.cpp"
+
+$(IntermediateDirectory)/Input_PCInputHandler.cpp$(ObjectSuffix): ../../Source/Input/PCInputHandler.cpp $(IntermediateDirectory)/Input_PCInputHandler.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Input/PCInputHandler.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Input_PCInputHandler.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Input_PCInputHandler.cpp$(DependSuffix): ../../Source/Input/PCInputHandler.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Input_PCInputHandler.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Input_PCInputHandler.cpp$(DependSuffix) -MM "../../Source/Input/PCInputHandler.cpp"
+
+$(IntermediateDirectory)/Input_PCInputHandler.cpp$(PreprocessSuffix): ../../Source/Input/PCInputHandler.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Input_PCInputHandler.cpp$(PreprocessSuffix) "../../Source/Input/PCInputHandler.cpp"
 
 $(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix): ../../Source/Graphics/PCSurface.cpp $(IntermediateDirectory)/Graphics_PCSurface.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/PCSurface.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Graphics_PCSurface.cpp$(ObjectSuffix) $(IncludePath)
