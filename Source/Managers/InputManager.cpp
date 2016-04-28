@@ -30,7 +30,7 @@ InputManager::~InputManager()
  * @param aInput Input type
  * @param aLocation Lcoation in screen space where input happened.
  */
-void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation, int const aId)
+void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation, int const aId, bool const aSingleFrame)
 {
   if(!mAcceptInput)
     return;
@@ -44,7 +44,7 @@ void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation, 
     }
   }
   
-  mInputs.insert(InputInfo(aInput, aLocation, aId));
+  mInputs.insert(InputInfo(aInput, aLocation, aId, aSingleFrame));
   GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Down"), aLocation, aId));
 }
 
@@ -114,9 +114,13 @@ InputHandler* InputManager::GetInputHandler() const
 void InputManager::Update()
 {
   mHandler->Update();
-  for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
+  for(InputIT it = mInputs.begin(); it != mInputs.end();)
   {
     GetOwningApp()->SendMessageDelayed(new InputMessage(it->mInput, it->mLocation, it->mId));
+    if(it->mSingleFrame)
+      it = mInputs.erase(it);
+    else
+      ++it;
   }
 }
 

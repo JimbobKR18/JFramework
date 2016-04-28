@@ -16,10 +16,8 @@ void PCInputHandler::Update()
 {
   unsigned numJoysticks = SDL_NumJoysticks();
   
-  std::vector<SDL_Joystick*>::iterator end = mJoysticks.end();
-  
   // Removal
-  for(std::vector<SDL_Joystick*>::iterator it = mJoysticks.begin(); it != end;)
+  for(std::vector<SDL_Joystick*>::iterator it = mJoysticks.begin(); it != mJoysticks.end();)
   {
     char const* joystickName = SDL_JoystickName(*it);
     
@@ -39,6 +37,15 @@ void PCInputHandler::Update()
     for(unsigned i = 0; i < numJoysticks; ++i)
       mJoysticks.push_back(SDL_JoystickOpen(i));
   }
+}
+
+/**
+ * @brief Get total number of input devices.
+ * @return Number of input devices.
+ */
+int PCInputHandler::GetInputCount()
+{
+  return mJoysticks.size();
 }
 
 /**

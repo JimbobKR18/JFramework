@@ -10,6 +10,7 @@ public:
   virtual ~InputHandler();
   
   virtual void Update() = 0;
+  virtual int GetInputCount() = 0;
 };
 
 #endif

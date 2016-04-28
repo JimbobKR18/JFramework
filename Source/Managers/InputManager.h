@@ -18,8 +18,10 @@ struct InputInfo
   HashString  mInput;
   Vector3     mLocation;
   int         mId;
+  bool        mSingleFrame;
 
-  InputInfo(HashString const &aInput, Vector3 const &aLocation, int const aId) : mInput(aInput), mLocation(aLocation), mId(aId) {}
+  InputInfo(HashString const &aInput, Vector3 const &aLocation, int const aId, bool const aSingleFrame) : 
+    mInput(aInput), mLocation(aLocation), mId(aId), mSingleFrame(aSingleFrame) {}
   bool operator<(InputInfo const &aRhs) const {return mInput < aRhs.mInput;}
 };
 
@@ -35,7 +37,7 @@ public:
   InputManager(GameApp *aApp);
   ~InputManager();
   
-  void                AddInput(HashString const &aInput, Vector3 const &aLocation, int const aId = 0);
+  void                AddInput(HashString const &aInput, Vector3 const &aLocation, int const aId = 0, bool const aSingleFrame = false);
   void                RemoveInput(HashString const &aInput, int const aId = 0);
   void                ClearInputs();
   
