@@ -22,8 +22,8 @@ private:
   Vector3       mOriginalSize;
 
 public:
-  MenuText(HashString const &aFilename);
-  MenuText(HashString const &aSettingsFilename, HashString const &aText);
+  MenuText(Menu *aOwner, HashString const &aFilename);
+  MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText);
   virtual ~MenuText();
 
   virtual void Draw();

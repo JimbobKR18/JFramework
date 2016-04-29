@@ -12,13 +12,13 @@
 
 // TODO platform specifics
 
-MenuText::MenuText(HashString const& aFilename) : MenuElement(aFilename)
+MenuText::MenuText(Menu *aOwner, HashString const& aFilename) : MenuElement(aOwner, aFilename)
 {
   TextParser parser(Common::RelativePath("Menus", aFilename));
   ParseFile(parser);
 }
 
-MenuText::MenuText(HashString const &aSettingsFilename, HashString const &aText) : MenuElement(aSettingsFilename), mText(aText)
+MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText) : MenuElement(aOwner, aSettingsFilename), mText(aText)
 {
   TextParser parser(Common::RelativePath("Menus", aSettingsFilename));
   ParseFile(parser);

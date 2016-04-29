@@ -10,7 +10,7 @@
 #include "LUATypes.h"
 #include "GraphicsManager.h"
 
-MenuImage::MenuImage(HashString const &aFilename) : MenuElement(aFilename)
+MenuImage::MenuImage(Menu *aOwner, HashString const &aFilename) : MenuElement(aOwner, aFilename)
 {
   TextParser parser(Common::RelativePath("Menus", aFilename));
   ParseFile(parser);

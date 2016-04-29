@@ -20,15 +20,16 @@
 class MenuElement
 {
 protected:
-  LevelManager* mManager;
+  Menu*       mOwner;
   GameObject* mObject;
   int         mLayer;
   
 public:
-  MenuElement(HashString const &aFileName);
+  MenuElement(Menu *aOwner, HashString const &aFileName);
   
   virtual ~MenuElement();
   
+  Menu*         GetOwner();
   GameObject*   GetObject();
   int           GetLayer();
   void          SetLayer(int const aLayer);

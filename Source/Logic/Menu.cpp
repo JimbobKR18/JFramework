@@ -171,9 +171,9 @@ void Menu::ParseFile()
   {
     Root* newElement = parser.Find(curObject.ToString());
     if(newElement->Find("Type")->GetValue().ToString() == "Image")
-      element = new MenuImage(newElement->Find("Name")->GetValue().ToString());
+      element = new MenuImage(this, newElement->Find("Name")->GetValue().ToString());
     else if(newElement->Find("Type")->GetValue().ToString() == "Text")
-      element = new MenuText(newElement->Find("Name")->GetValue().ToString());
+      element = new MenuText(this, newElement->Find("Name")->GetValue().ToString());
     else
       assert(!"Invalid MenuElement passed into menu");
 

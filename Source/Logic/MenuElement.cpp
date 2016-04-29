@@ -9,11 +9,11 @@
 #include "LUATypes.h"
 #include "LevelManager.h"
 #include "ObjectManager.h"
+#include "Menu.h"
 
-MenuElement::MenuElement(HashString const &aFileName)
+MenuElement::MenuElement(Menu *aOwner, HashString const &aFileName) : mOwner(aOwner)
 {
-  mManager = LUABind::StaticGameApp::GetApp()->GET<LevelManager>();
-  mObject = mManager->GetActiveLevel()->CreateObjectDelayed(aFileName, "Menus");
+  mObject = mOwner->GetLevel()->CreateObjectDelayed(aFileName, "Menus");
   mLayer = 0;
 }
 
@@ -22,8 +22,17 @@ MenuElement::~MenuElement()
 }
 
 /**
+ * @brief Get owner of element.
+ * @return Owner.
+ */
+Menu* MenuElement::GetOwner()
+{
+  return mOwner;
+}
+
+/**
  * @brief Get object associated with element.
- * @return 
+ * @return Object
  */
 GameObject* MenuElement::GetObject()
 {
@@ -32,7 +41,7 @@ GameObject* MenuElement::GetObject()
 
 /**
  * @brief Get view layer associated with this element
- * @return 
+ * @return Layer
  */
 int MenuElement::GetLayer()
 {
@@ -62,4 +71,5 @@ void MenuElement::ParseFile(Parser &aParser)
     transform->GetPosition().z = 0.99f;
   }
   ParseAdditionalData(aParser);
+  mOwner->AddObject(this);
 }

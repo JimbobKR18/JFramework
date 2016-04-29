@@ -14,7 +14,7 @@
 class MenuImage: public MenuElement
 {
 public:
-  MenuImage(HashString const &aFilename);
+  MenuImage(Menu *aOwner, HashString const &aFilename);
   ~MenuImage();
   
   virtual void Draw();

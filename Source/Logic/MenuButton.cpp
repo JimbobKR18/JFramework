@@ -2,7 +2,7 @@
 #include "ClickMessage.h"
 #include "Transform.h"
 
-MenuButton::MenuButton(HashString const &aFilename) : MenuImage(aFilename), mClickableArea()
+MenuButton::MenuButton(Menu *aOwner, HashString const &aFilename) : MenuImage(aOwner, aFilename), mClickableArea()
 {
   // MenuImage base hasn't initialized yet.
   TextParser parser(Common::RelativePath("Menus", aFilename));

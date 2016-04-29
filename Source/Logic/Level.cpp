@@ -712,6 +712,11 @@ void Level::ParseFile(HashString const &aFileName)
     y = parser.Find("Bounds")->Find("MinY")->GetValue().ToInt();
     mMinBoundary = Vector3(x, y, 0);
   }
+  if(parser.Find("Menu"))
+  {
+    // Menu adds itself to level.
+    new Menu(this, parser.Find("Menu")->Find("MenuName")->GetValue());
+  }
 
   RootContainer untouched = parser.GetBaseRoot()->GetUntouchedRoots();
   for(rootIT it = untouched.begin(); it != untouched.end(); ++it)

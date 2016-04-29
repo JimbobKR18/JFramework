@@ -11,7 +11,7 @@ private:
   Cube mClickableArea;
   
 public:
-  MenuButton(HashString const &aFilename);
+  MenuButton(Menu *aOwner, HashString const &aFilename);
   virtual ~MenuButton();
 
   virtual void Draw();
