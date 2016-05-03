@@ -29,7 +29,7 @@ class InputManager : public Manager
 {
 private:
   InputHandler*       mHandler;
-  std::set<InputInfo> mInputs;
+  std::vector<InputInfo> mInputs;
   bool                mAcceptInput;
 
   static unsigned const sUID;
@@ -58,7 +58,7 @@ public:
   static void         SerializeLUA();
   
 public:
-  typedef std::set<InputInfo>::iterator InputIT;
+  typedef std::vector<InputInfo>::iterator InputIT;
 };
 
 #endif /* defined(__JFramework__InputManager__) */

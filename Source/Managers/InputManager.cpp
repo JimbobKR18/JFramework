@@ -46,7 +46,7 @@ void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation, 
     }
   }
   
-  mInputs.insert(InputInfo(aInput, aLocation, aId, aSingleFrame));
+  mInputs.push_back(InputInfo(aInput, aLocation, aId, aSingleFrame));
   GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Down"), aLocation, aId));
 }
 
