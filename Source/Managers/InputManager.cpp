@@ -40,7 +40,7 @@ void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation, 
   // Check to see if object is in our list
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
-    if(it->mInput == aInput)
+    if(it->mInput == aInput && it->mId == aId)
     {
       return;
     }
@@ -58,7 +58,7 @@ void InputManager::RemoveInput(HashString const &aInput, int const aId)
 {
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
-    if(it->mInput == aInput)
+    if(it->mInput == aInput && it->mId == aId)
     {
       mInputs.erase(it);
       break;
