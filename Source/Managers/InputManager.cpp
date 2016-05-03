@@ -18,6 +18,7 @@ InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager", InputM
     mHandler = new PCInputHandler();
   #else
   #endif
+  mHandler->Update();
 }
 
 InputManager::~InputManager()
