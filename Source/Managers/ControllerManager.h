@@ -35,6 +35,8 @@ public:
   static std::string  GetName() {return "ControllerManager";}
   static unsigned     GetUID() {return sUID;}
   
+  static void         SerializeLUA();
+  
 public:
   typedef std::vector<Controller*>::iterator ControllerIT;
 };

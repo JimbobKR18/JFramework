@@ -152,6 +152,14 @@ void PhysicsWorld::ProcessDelayedMessage(Message *aMessage)
 }
 
 /**
+ * @brief Make this manager visible in LUA.
+ */
+void PhysicsWorld::SerializeLUA()
+{
+  SLB::Class<PhysicsWorld>("PhysicsWorld").inherits<Manager>();
+}
+
+/**
  * @brief Register force on object (will apply every frame automatically)
  * @param aObject Object to enact force upon every frame.
  * @param aGenerator Force generator.

@@ -12,6 +12,10 @@
 #include "Components/PhysicsObject.h"
 #include "Core/GameObject.h"
 #include "Managers/SoundManager.h"
+#include "Managers/InputManager.h"
+#include "Managers/ControllerManager.h"
+#include "Managers/GraphicsManager.h"
+#include "Managers/PhysicsWorld.h"
 #include "Core/MathExt.h"
 #include "Logic/Level.h"
 #include "Core/Interpolation.h"
@@ -78,6 +82,10 @@ namespace LUABind
     LevelManager::SerializeLUA();
     ObjectManager::SerializeLUA();
     SoundManager::SerializeLUA();
+    ControllerManager::SerializeLUA();
+    InputManager::SerializeLUA();
+    GraphicsManager::SerializeLUA();
+    PhysicsWorld::SerializeLUA();
     
     // GameApp
     GameApp::SerializeLUA();

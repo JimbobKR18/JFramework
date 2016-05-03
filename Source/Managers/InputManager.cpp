@@ -110,6 +110,15 @@ InputHandler* InputManager::GetInputHandler() const
 }
 
 /**
+ * @brief Get total input device count
+ * @return Device count
+ */
+int InputManager::GetInputCount() const
+{
+  return mHandler->GetInputCount();
+}
+
+/**
  * @brief Update loop
  */
 void InputManager::Update()
@@ -139,4 +148,13 @@ void InputManager::SendMessage(Message const &aMessage)
  */
 void InputManager::ProcessDelayedMessage(Message *aMessage)
 {
+}
+
+/**
+ * @brief Make this manager visible in LUA.
+ */
+void InputManager::SerializeLUA()
+{
+  SLB::Class<InputManager>("InputManager").inherits<Manager>()
+    .set("GetInputCount", &InputManager::GetInputCount);
 }

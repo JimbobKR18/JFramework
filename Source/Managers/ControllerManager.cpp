@@ -119,3 +119,11 @@ void ControllerManager::ProcessDelayedMessage(Message *aMessage)
 {
   mDelayedMessages.push_back(aMessage);
 }
+
+/**
+ * @brief Make this manager visible in LUA.
+ */
+void ControllerManager::SerializeLUA()
+{
+  SLB::Class<ControllerManager>("ControllerManager").inherits<Manager>();
+}

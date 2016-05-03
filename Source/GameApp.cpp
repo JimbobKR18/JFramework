@@ -235,5 +235,9 @@ void GameApp::SerializeLUA()
           .set("GetLevelManager", &GameApp::GET<LevelManager>)
           .set("GetObjectManager", &GameApp::GET<ObjectManager>)
           .set("GetSoundManager", &GameApp::GET<SoundManager>)
+          .set("GetControllerManager", &GameApp::GET<ControllerManager>)
+          .set("GetGraphicsManager", &GameApp::GET<GraphicsManager>)
+          .set("GetInputManager", &GameApp::GET<InputManager>)
+          .set("GetPhysicsManager", &GameApp::GET<PhysicsWorld>)
           .set("GetAppStep", &GameApp::GetAppStep);
 }

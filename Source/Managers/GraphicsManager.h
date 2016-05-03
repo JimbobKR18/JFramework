@@ -29,6 +29,8 @@ public:
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "GraphicsManager";}
   static unsigned     GetUID() {return sUID;}
+  
+  static void         SerializeLUA();
 
   // Manager stuff
   Surface*            CreateSurface();

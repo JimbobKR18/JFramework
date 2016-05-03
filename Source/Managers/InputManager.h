@@ -46,6 +46,7 @@ public:
   bool                AcceptingInputs();
   
   InputHandler*       GetInputHandler() const;
+  int                 GetInputCount() const;
 
   // Derived from Manager
   virtual void        Update();
@@ -53,6 +54,8 @@ public:
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "InputManager";}
   static unsigned     GetUID() {return sUID;}
+  
+  static void         SerializeLUA();
   
 public:
   typedef std::set<InputInfo>::iterator InputIT;

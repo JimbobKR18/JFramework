@@ -75,6 +75,14 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
 }
 
 /**
+ * @brief Make this manager visible in LUA.
+ */
+void GraphicsManager::SerializeLUA()
+{
+  SLB::Class<GraphicsManager>("GraphicsManager").inherits<Manager>();
+}
+
+/**
  * @brief Create a new surface with owner this.
  */
 Surface *GraphicsManager::CreateSurface()

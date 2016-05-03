@@ -44,6 +44,7 @@ public:
   virtual void                  ProcessDelayedMessage(Message *aMessage);
   static std::string            GetName() {return "PhysicsWorld";}
   static unsigned               GetUID() {return sUID;}
+  static void                   SerializeLUA();
   // Forces
   void                          RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void                          UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
