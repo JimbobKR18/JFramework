@@ -361,21 +361,21 @@ Vector3 PhysicsObject::GetVelocity() const
 }
 
 /**
- * @brief Get acceleration
- * @return Current acceleration
- */
-Vector3 PhysicsObject::GetAcceleration() const
-{
-  return mAcceleration;
-}
-
-/**
  * @brief Set velocity for this object
  * @param aVel Velocity to set to
  */
 void PhysicsObject::SetVelocity(Vector3 const &aVel)
 {
   mVelocity = aVel;
+}
+
+/**
+ * @brief Get acceleration
+ * @return Current acceleration
+ */
+Vector3 PhysicsObject::GetAcceleration() const
+{
+  return mAcceleration;
 }
 
 /**
@@ -393,7 +393,16 @@ void PhysicsObject::SetAcceleration(Vector3 const &aAccel)
  */
 float PhysicsObject::GetMass() const
 {
-	return mMass;
+  return mMass;
+}
+
+/**
+ * @brief Get inverse mass of this object
+ * @return Mass
+ */
+float PhysicsObject::GetInverseMass() const
+{
+  return mInverseMass;
 }
 
 /**
@@ -402,8 +411,8 @@ float PhysicsObject::GetMass() const
  */
 void PhysicsObject::SetMass(float const aMass)
 {
-	mMass = aMass;
-	mInverseMass = 1.0f / mMass;
+  mMass = aMass;
+  mInverseMass = 1.0f / mMass;
 }
 
 /**
@@ -520,7 +529,7 @@ void PhysicsObject::SetActive(bool const aActive)
  */
 Vector3 PhysicsObject::GetBroadSize() const
 {
-	return mBroadSize;
+  return mBroadSize;
 }
 
 /**

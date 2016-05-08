@@ -61,11 +61,12 @@ public:
 
   // Getters and setters
   Vector3              GetVelocity() const;
-  Vector3              GetAcceleration() const;
   void                 SetVelocity(Vector3 const &aVel);
+  Vector3              GetAcceleration() const;
   void                 SetAcceleration(Vector3 const &aAccel);
 
   float                GetMass() const;
+  float                GetInverseMass() const;
   void                 SetMass(float const aMass);
   
   float                GetDamping() const;

@@ -18,16 +18,20 @@ Resolver::~Resolver()
  */
 void Resolver::Update(float aDuration)
 {
-  for(std::unordered_map<size_t, PotentialPair>::iterator it = mPotentialPairs.begin(); it != mPotentialPairs.end(); ++it)
+  std::unordered_map<size_t, PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
+  for(std::unordered_map<size_t, PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
   {
     std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(it->second);
-    for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairs.end(); ++it2)
+    std::vector<CollisionPair>::iterator pairsEnd = pairs.end();
+    for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairsEnd; ++it2)
     {
       AddCollidedPair(*it2);
       SendCollisionMessages(*it2);
     }
   }
-  for(std::list<CollisionPair>::iterator it = mCollidedPairs.begin(); it != mCollidedPairs.end(); ++it)
+  
+  std::list<CollisionPair>::iterator collidedEnd = mCollidedPairs.end();
+  for(std::list<CollisionPair>::iterator it = mCollidedPairs.begin(); it != collidedEnd; ++it)
   {
     Resolve(*it, aDuration);
   }
@@ -81,31 +85,27 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
 {
   if(aPair.mPenetration <= 0)
     return;
+    
+  PhysicsObject *body1 = aPair.mBodies[0];
+  PhysicsObject *body2 = aPair.mBodies[1];
+  Transform *transform1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *transform2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  float totalInverseMass = (1.0f / aPair.mBodies[0]->GetMass()) + 
-                           (1.0f / aPair.mBodies[1]->GetMass());
+  float totalInverseMass = body1->GetInverseMass() + body2->GetInverseMass();
 
   if(totalInverseMass <= 0)
     return;
 
   // Find the rate in which each object must move
   Vector3 movePerIMass = aPair.mNormal * (aPair.mPenetration / totalInverseMass);
-  Vector3 b1Pos = aPair.mBodies[0]->GetOwner()->GET<Transform>()->GetPosition();
-  Vector3 b2Pos = aPair.mBodies[1]->GetOwner()->GET<Transform>()->GetPosition();
-  Vector3 b1Movement = (movePerIMass * (1.0f / aPair.mBodies[0]->GetMass())) /**
-                        (aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f)*/;
-  Vector3 b2Movement = (movePerIMass * (1.0f / aPair.mBodies[1]->GetMass())) /**
-                          (aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f)*/;
+  Vector3 b1Movement = movePerIMass * body1->GetInverseMass();
+  Vector3 b2Movement = movePerIMass * body2->GetInverseMass();
 
   // Must check if objects can be moved
-  if(!aPair.mBodies[0]->IsStatic())
-  {
-    aPair.mBodies[0]->GetOwner()->GET<Transform>()->SetPosition(b1Pos + b1Movement);
-  }
-  if(!aPair.mBodies[1]->IsStatic())
-  {
-    aPair.mBodies[1]->GetOwner()->GET<Transform>()->SetPosition(b2Pos - b2Movement);
-  }
+  if(!body1->IsStatic())
+    transform1->SetPosition(transform1->GetPosition() + b1Movement);
+  if(!body2->IsStatic())
+    transform2->SetPosition(transform2->GetPosition() - b2Movement);
 }
 
 /**
@@ -119,15 +119,18 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   
   if(separatingVelocity > 0)
     return;
+    
+  PhysicsObject *body1 = aPair.mBodies[0];
+  PhysicsObject *body2 = aPair.mBodies[1];
   
-  float restitution1 = aPair.mBodies[0]->GetRestitution();
-  float restitution2 = aPair.mBodies[1]->GetRestitution();
+  float restitution1 = body1->GetRestitution();
+  float restitution2 = body2->GetRestitution();
   float newSeparatingVelocity1 = -separatingVelocity * restitution1;
   float newSeparatingVelocity2 = -separatingVelocity * restitution2;
   
-  Vector3 accCausedVelocity = aPair.mBodies[0]->GetAcceleration();
-  if(aPair.mBodies[1])
-    accCausedVelocity -= aPair.mBodies[1]->GetAcceleration();
+  Vector3 accCausedVelocity = body1->GetAcceleration();
+  if(body2)
+    accCausedVelocity -= body2->GetAcceleration();
   
   float accCausedSepVelocity = accCausedVelocity * aPair.mNormal * aDuration;
   
@@ -144,10 +147,10 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   float deltaVelocity1 = newSeparatingVelocity1 - separatingVelocity;
   float deltaVelocity2 = newSeparatingVelocity2 - separatingVelocity;
   float totalInverseMass = 0.0f;
-  if(aPair.mBodies[0])
-    totalInverseMass += 1.0f / aPair.mBodies[0]->GetMass();
+  if(body1)
+    totalInverseMass += body1->GetInverseMass();
   if(aPair.mBodies[1])
-    totalInverseMass += 1.0f / aPair.mBodies[1]->GetMass();
+    totalInverseMass += body2->GetInverseMass();
   
   if(totalInverseMass <= 0) return;
   
@@ -156,16 +159,14 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   Vector3 impulsePerIMass1 = aPair.mNormal * impulse1;
   Vector3 impulsePerIMass2 = aPair.mNormal * impulse2;
   
-  Vector3 b1Movement = (impulsePerIMass1 * (1.0f / aPair.mBodies[0]->GetMass()));// *
-                        //(aPair.mBodies[1]->IsStatic() ? 2.0f : 1.0f);
-  Vector3 b2Movement = (impulsePerIMass2 * (1.0f / aPair.mBodies[1]->GetMass()));// *
-                        //(aPair.mBodies[0]->IsStatic() ? 2.0f : 1.0f);
+  Vector3 b1Movement = impulsePerIMass1 * body1->GetInverseMass();
+  Vector3 b2Movement = impulsePerIMass2 * body2->GetInverseMass();
   
-  if(aPair.mBodies[0] && !aPair.mBodies[0]->IsStatic())
-    aPair.mBodies[0]->SetVelocity(aPair.mBodies[0]->GetVelocity() + b1Movement);
+  if(body1 && !body1->IsStatic())
+    body1->SetVelocity(body1->GetVelocity() + b1Movement);
   
-  if(aPair.mBodies[1] && !aPair.mBodies[1]->IsStatic())
-    aPair.mBodies[1]->SetVelocity(aPair.mBodies[1]->GetVelocity() - b2Movement);
+  if(body2 && !body2->IsStatic())
+    body2->SetVelocity(body2->GetVelocity() - b2Movement);
 }
 
 /**
