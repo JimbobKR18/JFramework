@@ -944,6 +944,29 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
   rotation = rotation.Rotate(Vector3(0,1,0), rotateY);
   rotation = rotation.Rotate(Vector3(0,0,1), rotateZ);
   objTransform->SetRotation(rotation);
+  
+  // Axis lock
+  Root* axisLockRoot = aTransform->Find("LockedAxes");
+  if(axisLockRoot)
+  {
+    AxisLock axisLock = NO_AXIS;
+    HashString axisLockString = axisLockRoot->GetValue();
+    if(axisLockString == "X_AXIS")
+      axisLock = X_AXIS;
+    else if(axisLockString == "Y_AXIS")
+      axisLock = Y_AXIS;
+    else if(axisLockString == "Z_AXIS")
+      axisLock = Z_AXIS;
+    else if(axisLockString == "XY_AXIS")
+      axisLock = XY_AXIS;
+    else if(axisLockString == "YZ_AXIS")
+      axisLock = YZ_AXIS;
+    else if(axisLockString == "XZ_AXIS")
+      axisLock = XZ_AXIS;
+    else if(axisLockString == "ALL_AXES")
+      axisLock = ALL_AXES;
+    objTransform->SetLockedAxis(axisLock);
+  }
 
   // Auto set camera bounds based on objects in environment
   mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);

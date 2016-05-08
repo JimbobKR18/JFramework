@@ -5,7 +5,7 @@
 int const Transform::sUID = Common::StringHashFunction("Transform");
 
 Transform::Transform() : Component(Transform::sUID), mPosition(), mScale(1, 1, 1), mSize(), mRotation(),
-                         mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER)
+                         mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER), mLockedAxes(NO_AXIS)
 {
 }
 
@@ -28,7 +28,38 @@ Vector3& Transform::GetPosition()
  */
 void Transform::SetPosition(Vector3 const &aPos)
 {
-  mPosition = aPos;
+  switch(mLockedAxes)
+  {
+    case NO_AXIS:
+      mPosition = aPos;
+      break;
+    case X_AXIS:
+      mPosition.y = aPos.y;
+      mPosition.z = aPos.z;
+      break;
+    case Y_AXIS:
+      mPosition.x = aPos.x;
+      mPosition.z = aPos.z;
+      break;
+    case Z_AXIS:
+      mPosition.x = aPos.x;
+      mPosition.y = aPos.y;
+      break;
+    case XY_AXIS:
+      mPosition.z = aPos.z;
+      break;
+    case YZ_AXIS:
+      mPosition.x = aPos.x;
+      break;
+    case XZ_AXIS:
+      mPosition.y = aPos.y;
+      break;
+    case ALL_AXES:
+      break;
+    default:
+      assert(!"How did you even get here?");
+      break;
+  }
 }
 
 /**
@@ -140,6 +171,24 @@ void Transform::SetZAlignment(Z_ALIGNMENT const &aAlign)
 }
 
 /**
+ * @brief Get currently locked axes.
+ * @return Currently locked axes.
+ */
+AxisLock Transform::GetLockedAxes() const
+{
+  return mLockedAxes;
+}
+
+/**
+ * @brief Set currently locked axes.
+ * @param aLockedAxes Locked axes.
+ */
+void Transform::SetLockedAxis(AxisLock const &aLockedAxes)
+{
+  mLockedAxes = aLockedAxes;
+}
+
+/**
  * @brief Serialize to file (cannot handle rotations)
  * @param aParser File to serialize to
  */
@@ -192,6 +241,23 @@ void Transform::Serialize(Parser &aParser)
     transform->Place(TRANSFORM, "AlignZ", "CENTER");
   else if(mZAlign == Z_ALIGN_BACK)
     transform->Place(TRANSFORM, "AlignZ", "BACK");
+    
+  if(mLockedAxes == NO_AXIS)
+    transform->Place(TRANSFORM, "LockedAxes", "NO_AXIS");
+  else if(mLockedAxes == X_AXIS)
+    transform->Place(TRANSFORM, "LockedAxes", "X_AXIS");
+  else if(mLockedAxes == Y_AXIS)
+    transform->Place(TRANSFORM, "LockedAxes", "Y_AXIS");
+  else if(mLockedAxes == Z_AXIS)
+    transform->Place(TRANSFORM, "LockedAxes", "Z_AXIS");
+  else if(mLockedAxes == XY_AXIS)
+    transform->Place(TRANSFORM, "LockedAxes", "XY_AXIS");
+  else if(mLockedAxes == YZ_AXIS)
+    transform->Place(TRANSFORM, "LockedAxes", "YZ_AXIS");
+  else if(mLockedAxes == XZ_AXIS)
+    transform->Place(TRANSFORM, "LockedAxes", "XZ_AXIS");
+  else if(mLockedAxes == ALL_AXES)
+    transform->Place(TRANSFORM, "LockedAxes", "ALL_AXES");
     
   // Rotations are a little TOO complicated, so set them to 0
   transform->Place(TRANSFORM, "RotationX", Common::IntToString(0));
@@ -264,6 +330,27 @@ void Transform::Deserialize(Parser &aParser)
   {
     mRotation = mRotation.Rotate(Vector3(0,0,1), zRotation.ToFloat());
   }
+  
+  // Axis lock
+  Root* axisLockNode = aParser.Find("Transform", "LockedAxes");
+  if(axisLockNode)
+  {
+    HashString axisLock = axisLockNode->GetValue();
+    if(axisLock == "X_AXIS")
+      mLockedAxes = X_AXIS;
+    else if(axisLock == "Y_AXIS")
+      mLockedAxes = Y_AXIS;
+    else if(axisLock == "Z_AXIS")
+      mLockedAxes = Z_AXIS;
+    else if(axisLock == "XY_AXIS")
+      mLockedAxes = XY_AXIS;
+    else if(axisLock == "YZ_AXIS")
+      mLockedAxes = YZ_AXIS;
+    else if(axisLock == "XZ_AXIS")
+      mLockedAxes = XZ_AXIS;
+    else if(axisLock == "ALL_AXES")
+      mLockedAxes = ALL_AXES;
+  }
 }
 
 /**
@@ -273,9 +360,11 @@ void Transform::SerializeLUA()
 {
   SLB::Class<Transform>("Transform").constructor()
           .set("GetPosition", &Transform::GetPosition)
+          .set("GetRotation", &Transform::GetRotation)
           .set("GetScale", &Transform::GetScale)
           .set("GetSize", &Transform::GetSize)
           .set("SetPosition", &Transform::SetPosition)
+          .set("SetRotation", &Transform::SetRotation)
           .set("SetScale", &Transform::SetScale)
           .set("SetSize", &Transform::SetSize);
 }
