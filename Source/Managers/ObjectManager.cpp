@@ -51,7 +51,7 @@ void ObjectManager::Update()
       delete *it;
     }
   }
-	mDelayedMessages.clear();
+  mDelayedMessages.clear();
 }
 
 /**
@@ -237,17 +237,17 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
     if(aParser.Find("Surface", "UIElement") && aParser.Find("Surface", "UIElement")->GetValue().ToBool())
     {
 #if !defined(ANDROID) && !defined(IOS)
-        surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
+      surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
 #else
-        surface = GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
+      surface = GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
 #endif
     }
     else
     {
 #if !defined(ANDROID) && !defined(IOS)
-        surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+      surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #else
-        surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+      surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #endif
     }
 
@@ -270,7 +270,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
  */
 void ObjectManager::ClearObjects()
 {
-	mObjects.clear();
-	mStaticObjects.clear();
+  mObjects.clear();
+  mStaticObjects.clear();
 }
 
