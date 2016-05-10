@@ -36,7 +36,7 @@ void ObjectManager::Update()
   }
 
   MessageIT msgEnd = mDelayedMessages.end();
-	for(MessageIT it = mDelayedMessages.begin(); it != msgEnd; ++it)
+  for(MessageIT it = mDelayedMessages.begin(); it != msgEnd; ++it)
   {
     if((*it)->GetDescription() == OBJECT_DELETE.ToCharArray()) 
     {
@@ -177,7 +177,7 @@ void ObjectManager::RemoveObject(GameObject *aObj, bool const aDelete)
     }
   }
   ObjectIT staticObjectsEnd = mStaticObjects.end();
-	for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
+  for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
   {
     if(*it == aObj)
     {
@@ -260,7 +260,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 
     if(isTarget)
     {
-        GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
+      GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
     }
   }
 }

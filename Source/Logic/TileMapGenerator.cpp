@@ -321,6 +321,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     // Make GameObject to place
     GameObject *obj = new GameObject(aObjectManager, mImageName);
     aObjectManager->ParseObject(obj);
+    aObjectManager->AddObject(obj, true);
     
     // Set name of tile, for collision reasons
     obj->SetName(std::string("Tile_") + Common::IntToString(mCollisionData[i]));

@@ -264,6 +264,13 @@ void Level::DeleteObject(GameObject *aObject)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
+  
+  // Unassociate object from view target if need be
+  if(graphicsManager->GetScreen()->GetView().GetTarget() == aObject)
+  {
+    graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
+  }
+  
   for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     if(aObject == *it)
@@ -271,7 +278,7 @@ void Level::DeleteObject(GameObject *aObject)
       RemoveObjectFromScenarios(*it);
       mObjects.erase(it);
       objectManager->DeleteObject(aObject);
-      break;
+      return;
     }
   }
   for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
@@ -280,14 +287,8 @@ void Level::DeleteObject(GameObject *aObject)
     {
       mStaticObjects.erase(it);
       objectManager->DeleteObject(aObject);
-      break;
+      return;
     }
-  }
-  
-  // Unassociate object from view target if need be
-  if(graphicsManager->GetScreen()->GetView().GetTarget() == aObject)
-  {
-    graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   }
 }
 
@@ -350,18 +351,20 @@ void Level::DeleteObjects()
     RemoveObjectFromScenarios(*it);
     manager->DeleteObject(*it);
   }
+  mObjects.clear();
+  
   for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
   {
     manager->DeleteObject(*it);
   }
+  mStaticObjects.clear();
+  manager->ClearObjects();
+  
   for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
   {
     delete *it;
   }
   mMenus.clear();
-  mObjects.clear();
-  mStaticObjects.clear();
-  manager->ClearObjects();
   manager->GetOwningApp()->ClearDelayedMessages();
 }
 
@@ -487,7 +490,7 @@ void Level::LoadObjects(ObjectContainer const &aObjects, bool const aStatic)
 }
 
 /**
- * @brief Unload all objects in the list from view, they will still exist in then level file.
+ * @brief Unload all objects in the list from view, they will still exist in the level file.
  * @param aObjects Objects to unload.
  */
 void Level::UnloadObjects(ObjectContainer const &aObjects)

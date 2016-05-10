@@ -196,8 +196,6 @@
     <File Name="../../Source/TinyXML/tinyxml2.h"/>
     <File Name="../../Source/TinyXML/tinyxml2.cpp"/>
   </VirtualDirectory>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
   <VirtualDirectory Name="Network">
     <File Name="../../Source/Network/PCNetworkPort.cpp"/>
     <File Name="../../Source/Network/NetworkPort.h"/>
@@ -334,4 +332,6 @@
       </Completion>
     </Configuration>
   </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>
