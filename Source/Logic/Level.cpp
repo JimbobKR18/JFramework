@@ -948,7 +948,39 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
   rotation = rotation.Rotate(Vector3(0,0,1), rotateZ);
   objTransform->SetRotation(rotation);
   
-  // Axis lock
+  // Alignment (optional)
+  if(aTransform->Find("AlignX"))
+  {
+    objTransform->SetXAlignment(X_ALIGN_CENTER);
+    if(aTransform->Find("AlignX")->GetValue() == "LEFT")
+      objTransform->SetXAlignment(X_ALIGN_LEFT);
+    else if(aTransform->Find("AlignX")->GetValue() == "RIGHT")
+      objTransform->SetXAlignment(X_ALIGN_RIGHT);
+    else if(aTransform->Find("AlignX")->GetValue() != "CENTER")
+      assert(!"Invalid value passed into XAlign");
+  }
+  if(aTransform->Find("AlignY"))
+  {
+    objTransform->SetYAlignment(Y_ALIGN_CENTER);
+    if(aTransform->Find("AlignY")->GetValue() == "TOP")
+      objTransform->SetYAlignment(Y_ALIGN_TOP);
+    else if(aTransform->Find("AlignY")->GetValue() == "BOTTOM")
+      objTransform->SetYAlignment(Y_ALIGN_BOTTOM);
+    else if(aTransform->Find("AlignY")->GetValue() != "CENTER")
+      assert(!"Invalid value passed into YAlign");
+  }
+  if(aTransform->Find("AlignZ"))
+  {
+    objTransform->SetZAlignment(Z_ALIGN_CENTER);
+    if(aTransform->Find("AlignZ")->GetValue() == "FRONT")
+      objTransform->SetZAlignment(Z_ALIGN_FRONT);
+    else if(aTransform->Find("AlignZ")->GetValue() == "BACK")
+      objTransform->SetZAlignment(Z_ALIGN_BACK);
+    else if(aTransform->Find("AlignZ")->GetValue() != "CENTER")
+      assert(!"Invalid value passed into ZAlign");
+  }
+  
+  // Axis lock (optional)
   Root* axisLockRoot = aTransform->Find("LockedAxes");
   if(axisLockRoot)
   {

@@ -12,13 +12,15 @@
 
 // TODO platform specifics
 
-MenuText::MenuText(Menu *aOwner, HashString const& aFilename) : MenuElement(aOwner, aFilename)
+MenuText::MenuText(Menu *aOwner, HashString const& aFilename) : MenuElement(aOwner, aFilename), mText(), 
+  mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
 {
   TextParser parser(Common::RelativePath("Menus", aFilename));
   ParseFile(parser);
 }
 
-MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText) : MenuElement(aOwner, aSettingsFilename), mText(aText)
+MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText) : MenuElement(aOwner, aSettingsFilename), mText(aText),
+  mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
 {
   TextParser parser(Common::RelativePath("Menus", aSettingsFilename));
   ParseFile(parser);
@@ -93,7 +95,9 @@ void MenuText::ParseAdditionalData(Parser &aParser)
     mBackgroundColor.z = aParser.Find("BackgroundColor", "b")->GetValue().ToInt();
     mBackgroundColor.w = aParser.Find("BackgroundColor", "a")->GetValue().ToInt();
   }
-  if(aParser.Find("Text"))
+  
+  // Text can be overwritten in Menu file.
+  if(aParser.Find("Text") && mText.Empty())
   {
     mText = aParser.Find("Text", "Value")->GetValue().ToString();
   }

@@ -13,8 +13,8 @@
 class MenuText : public MenuElement
 {
 private:
-  HashString   mText;
-  HashString   mFont;
+  HashString    mText;
+  HashString    mFont;
   int           mSize;
   int           mMaxWidth;
   Vector4       mForegroundColor;

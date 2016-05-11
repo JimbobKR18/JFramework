@@ -44,6 +44,7 @@ public:
   
 private:
   void          ParseFile();
+  void          ParseTransform(GameObject *aObject, Root *aTransform);
 };
 
 #endif /* MENU_H_ */
