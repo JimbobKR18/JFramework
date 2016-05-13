@@ -27,10 +27,10 @@ Level *LevelManager::CreateLevel(std::string const &aFilename)
   if(!ret)
   {
     ret = new Level(this, aFilename, true);
-	  AddLevel(ret);
+    AddLevel(ret);
   }
 
-	return ret;
+  return ret;
 }
 
 /**
@@ -40,14 +40,14 @@ Level *LevelManager::CreateLevel(std::string const &aFilename)
  */
 Level *LevelManager::GetLevel(std::string const &aLevelName)
 {
-	for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
-	{
-		if((*it)->GetFileName() == aLevelName)
-		{
-			return *it;
-		}
-	}
-	return NULL;
+  for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
+  {
+    if((*it)->GetFileName() == aLevelName)
+    {
+      return *it;
+    }
+  }
+  return nullptr;
 }
 
 /**

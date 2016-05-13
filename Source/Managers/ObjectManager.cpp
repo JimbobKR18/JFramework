@@ -119,7 +119,8 @@ void ObjectManager::ParseObject(GameObject *aObject)
  */
 void ObjectManager::DeleteObject(GameObject *aObj)
 {
-  RemoveObject(aObj, true);
+  RemoveObject(aObj);
+  delete aObj;
 }
 
 /**
@@ -163,7 +164,7 @@ void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
  * @param aObj Object to remove
  * @param aDelete Set to true to delete object on the way out.
  */
-void ObjectManager::RemoveObject(GameObject *aObj, bool const aDelete)
+void ObjectManager::RemoveObject(GameObject *aObj)
 {
   ObjectIT objectsEnd = mObjects.end();
   for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
@@ -171,9 +172,7 @@ void ObjectManager::RemoveObject(GameObject *aObj, bool const aDelete)
     if(*it == aObj)
     {
       mObjects.erase(it);
-      if(aDelete)
-        delete aObj;
-      break;
+      return;
     }
   }
   ObjectIT staticObjectsEnd = mStaticObjects.end();
@@ -182,9 +181,7 @@ void ObjectManager::RemoveObject(GameObject *aObj, bool const aDelete)
     if(*it == aObj)
     {
       mStaticObjects.erase(it);
-      if(aDelete)
-        delete aObj;
-      break;
+      return;
     }
   }
 }

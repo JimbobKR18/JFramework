@@ -455,12 +455,12 @@ void Level::Load(Level* const aPrevLevel)
  */
 void Level::Unload(Level* const aNextLevel)
 {
-  // Remove menus because they are not level files.
-  RemoveMenus();
-  
   // Unload all objects
   UnloadObjects(mObjects);
   UnloadObjects(mStaticObjects);
+  
+  // Remove menus because they are not level files.
+  RemoveMenus();
 
   if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
