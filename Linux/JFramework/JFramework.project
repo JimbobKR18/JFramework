@@ -138,6 +138,8 @@
       <File Name="../../Source/Logic/StateMachine/StateLink.h"/>
       <File Name="../../Source/Logic/StateMachine/StateLink.cpp"/>
     </VirtualDirectory>
+    <File Name="../../Source/Logic/SystemProperties.h"/>
+    <File Name="../../Source/Logic/SystemProperties.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Managers">
     <File Name="../../Source/Managers/InputManager.h"/>
@@ -208,6 +210,8 @@
     <File Name="../../Source/Input/PCInputHandler.h"/>
     <File Name="../../Source/Input/PCInputHandler.cpp"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Static Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -293,9 +297,12 @@
         <IncludePath Value="../../Source/Graphics"/>
         <IncludePath Value="../../Source/LUA"/>
         <IncludePath Value="../../Source/Parsers"/>
+        <IncludePath Value="../../Source/Network"/>
         <IncludePath Value="../../Source/TinyXML"/>
+        <IncludePath Value="../../Source/Input"/>
         <IncludePath Value="../../Source/Core/Messages"/>
-        <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/project-chang-e/Assets/"/>
+        <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/ZombieStealth/Assets/"/>
+        <Preprocessor Value="ASSET_DIRECTORY_TEMP=/home/jimmy/Documents/project-chang-e/Assets/"/>
       </Compiler>
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
@@ -332,6 +339,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>

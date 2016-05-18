@@ -10,9 +10,13 @@
 #include "DebugManager.h"
 #include "LUATypes.h"
 #include "Constants.h"
+#include "SystemProperties.h"
 
 GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAppStep(0), mActive(true)
 {
+  // AutoParses ./SystemProperties.ini
+  SystemProperties::Deserialize();
+  
   // Autoparses Game/Constants.txt
   Constants::Deserialize();
   

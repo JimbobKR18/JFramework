@@ -7,6 +7,7 @@
 //
 
 #include "Common.h"
+#include "SystemProperties.h"
 
 // Two macros ensures the macro passed will
 // be expanded before being converted to a string.
@@ -16,8 +17,7 @@
 namespace Common
 {
   /**
-   * @brief Gets relative path for asset files, can be either set by macro ASSET_DIRECTORY
-   *        or automatically.
+   * @brief Gets relative path for asset files, set by system properties.
    * @param aSubFolder Sub folder to search inside of asset directory.
    * @param aFileName File to find (extension included)
    */
@@ -25,15 +25,7 @@ namespace Common
   {
     // Manually setting the asset directory
     // Or use defaults based on OS
-  #ifdef ASSET_DIRECTORY
-    std::string ret = STRINGIZE(ASSET_DIRECTORY);
-  #elif defined(_WIN32)
-    std::string ret = "../../../Assets/";
-  #elif defined(__APPLE__)
-    std::string ret = "/Users/jimmyspencer/Documents/project-chang-e/Assets/";
-  #else // Linux
-    std::string ret = "../Assets/";
-  #endif
+    std::string ret = SystemProperties::GetAssetsDirectory();
     ret.append(aSubFolder);
     ret.append("/");
     ret.append(aFileName);
