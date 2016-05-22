@@ -53,7 +53,7 @@ namespace Common
   std::string               FloatVectorToString(std::vector<float> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   
-  std::string               ParseLiteral(std::istream *infile, std::string const &aLiteral);
+  std::string               ParseString(std::istream *infile, std::string const &aString);
   
   HashString                RetrieveNameFromFileName(HashString const &aFileName);
   int                       StringHashFunction(std::string const &aString);

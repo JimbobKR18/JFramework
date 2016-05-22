@@ -73,7 +73,7 @@ void Constants::Deserialize()
     infile >> key;
     infile >> empty;
     infile >> value;
-    mValues[key] = Common::ParseLiteral(&infile, value);
+    mValues[key] = Common::ParseString(&infile, value);
   }
   infile.close();
 }

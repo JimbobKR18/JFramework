@@ -8,6 +8,7 @@
 
 #include "Common.h"
 #include "SystemProperties.h"
+#include "Constants.h"
 
 // Two macros ensures the macro passed will
 // be expanded before being converted to a string.
@@ -222,25 +223,28 @@ namespace Common
   }
   
   /**
-   * @brief If find "Literal(" keep forming string until find ")"
+   * @brief If find "Literal(" keep forming string until find ")", or Constant( "etc." )
    * @param aLiteral Literal to parse through.
    */
-  std::string ParseLiteral(std::istream *infile, std::string const &aLiteral)
+  std::string ParseString(std::istream *infile, std::string const &aString)
   {
     std::string ret;
-    int literalLocation = aLiteral.find("Literal");
-    if(literalLocation == std::string::npos)
-      return aLiteral;
+    int literalLocation = aString.find("Literal");
+    int constantLocation = aString.find("Constant");
+    if(literalLocation == std::string::npos && constantLocation == std::string::npos)
+      return aString;
     else
     {
       // Getting the full string
-      unsigned pos = literalLocation + 8;
+      int offset = (literalLocation != std::string::npos) ? literalLocation : constantLocation;
+      int extraOffset = (literalLocation != std::string::npos) ? 8 : 9;
+      unsigned pos = offset + extraOffset;
       char next;
       bool earlyout = false;
       // Literal(blah) is one whole word, extract
-      while(pos < aLiteral.length())
+      while(pos < aString.length())
       {
-        char next = aLiteral[pos];
+        char next = aString[pos];
         if(next == '\n')
         {
           earlyout = true;
@@ -259,6 +263,9 @@ namespace Common
           ret.push_back(next);
       }
     }
+    
+    if(constantLocation != std::string::npos)
+      return Constants::GetString(ret);
     return ret;
   }
   

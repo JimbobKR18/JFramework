@@ -70,7 +70,7 @@ void TextParser::Parse()
     {
       std::string value;
       mInput >> value;
-      node->SetValue(Common::ParseLiteral(&mInput, value));
+      node->SetValue(Common::ParseString(&mInput, value));
       node->SetParent(mCurNode);
       mCurNode->Insert(node);
     }
