@@ -10,6 +10,11 @@ FileCache::~FileCache()
 {
 }
 
+/**
+ * @brief Retrieve file from cache, else load it from disk.
+ * @param aFilename Name of file to load (full directory and all)
+ * @return File contents.
+ */
 HashString FileCache::GetFile(HashString const &aFilename)
 {
   // Keep an eye on this hash function.
