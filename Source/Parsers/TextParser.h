@@ -1,7 +1,7 @@
 #ifndef __JFramework_TextParser_h_
 #define __JFramework_TextParser_h_
 
-#include <fstream>
+#include "Common.h"
 #include "Parser.h"
 
 enum TextMode
@@ -13,11 +13,11 @@ enum TextMode
 class TextParser : public Parser
 {
   private:
-    std::ifstream mInput;
-    std::ofstream mOutput;
-    bool          mWrittenOut;
-    TextMode      mMode;
-    int           mCurrentIndent;
+    std::stringstream mInput;
+    std::ofstream     mOutput;
+    bool              mWrittenOut;
+    TextMode          mMode;
+    int               mCurrentIndent;
   public:
     TextParser(std::string const &aFilename, TextMode const &aMode = MODE_INPUT);
     ~TextParser();

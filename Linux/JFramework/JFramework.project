@@ -68,6 +68,8 @@
     <File Name="../../Source/Core/Interpolation.h"/>
     <File Name="../../Source/Core/Shape.h"/>
     <File Name="../../Source/Core/Shape.cpp"/>
+    <File Name="../../Source/Core/FileCache.cpp"/>
+    <File Name="../../Source/Core/FileCache.h"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>

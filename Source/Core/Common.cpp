@@ -225,7 +225,7 @@ namespace Common
    * @brief If find "Literal(" keep forming string until find ")"
    * @param aLiteral Literal to parse through.
    */
-  std::string ParseLiteral(std::ifstream *infile, std::string const &aLiteral)
+  std::string ParseLiteral(std::istream *infile, std::string const &aLiteral)
   {
     std::string ret;
     int literalLocation = aLiteral.find("Literal");
@@ -291,10 +291,21 @@ namespace Common
     int len = strlen(key);
     for(unsigned i = 0; i < aString.length(); ++i)
     {
-      if(hashValue % 2 == 0)
+      switch(i % 6)
+      {
+      case 0:
         hashValue += (static_cast<int>(aString[i]) + i) ^ key[i % len];
-      else
+      case 1:
         hashValue += (static_cast<int>(aString[i]) + i) & key[i % len];
+      case 2:
+        hashValue += (static_cast<int>(aString[i]) + i) - key[i % len];
+      case 3:
+        hashValue += (static_cast<int>(aString[i]) + i) + key[i % len];
+      case 4:
+        hashValue += (static_cast<int>(aString[i]) + i) * key[i % len];
+      case 5:
+        hashValue += (static_cast<int>(aString[i]) + i) / key[i % len];
+      }
     }
     return hashValue;
   }

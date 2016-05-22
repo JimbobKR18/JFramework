@@ -1,5 +1,5 @@
 #include "TextParser.h"
-#include "Common.h"
+#include "FileCache.h"
 
 bool RootSortPredicate(Root* aRoot1, Root* aRoot2)
 {
@@ -7,16 +7,18 @@ bool RootSortPredicate(Root* aRoot1, Root* aRoot2)
 }
 
 TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Parser(aFilename),
+                                                                              mInput(),
+                                                                              mOutput(),
                                                                               mWrittenOut(false),
                                                                               mMode(aMode),
                                                                               mCurrentIndent(0)
 {
   if(aMode == MODE_INPUT)
-    mInput.open(aFilename.c_str());
+    mInput.str(FileCache::GetFile(aFilename));
   else
     mOutput.open(aFilename.c_str());
 
-  if(aMode == MODE_INPUT && mInput.good())
+  if(aMode == MODE_INPUT)
   {
     Parse();
   }
@@ -30,9 +32,6 @@ TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Pa
     std::cout << "Input file: " << aFilename << " not found!" << std::endl;
     assert(!"Input file not found, check the logs");
   }
-  
-  if(aMode == MODE_INPUT)
-    mInput.close();
 }
 TextParser::~TextParser()
 {

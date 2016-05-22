@@ -25,6 +25,7 @@
 #include <iterator>
 #include <cfloat>
 #include <unordered_map>
+#include <sstream>
 #include "HashString.h"
 #include "SmartPointer.h"
 
@@ -52,7 +53,7 @@ namespace Common
   std::string               FloatVectorToString(std::vector<float> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   
-  std::string               ParseLiteral(std::ifstream *infile, std::string const &aLiteral);
+  std::string               ParseLiteral(std::istream *infile, std::string const &aLiteral);
   
   HashString                RetrieveNameFromFileName(HashString const &aFileName);
   int                       StringHashFunction(std::string const &aString);
