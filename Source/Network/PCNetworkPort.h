@@ -2,7 +2,12 @@
 #define __JFramework_PCNetworkPort_h_
 
 #include "NetworkPort.h" // Base class: NetworkPort
+
+#if defined(__APPLE__)
+#include <SDL2_net/SDL_net.h>
+#else
 #include <SDL2/SDL_net.h>
+#endif
 
 class PCNetworkPort : public NetworkPort
 {
