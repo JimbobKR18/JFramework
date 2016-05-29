@@ -89,6 +89,7 @@ struct Triangle : public Shape
   Triangle(std::vector<Vector3> const &aPoints);
   virtual ~Triangle();
   
+  Vector3 GetClosestPointToTriangle(Vector3 const &aTrianglePosition, Vector3 const &aPoint);
   Vector3 GetPoint(int index);
   virtual float GetSize(int index);
 };
