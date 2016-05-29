@@ -10,7 +10,7 @@
 #include <SDL2_image/SDL_image.h>
 #else
 #include "Windows.h"
-#include <gl/gl.h>
+#include <GL\glew.h>
 #include "SDL_image.h"
 #undef LoadImage
 #undef SendMessage

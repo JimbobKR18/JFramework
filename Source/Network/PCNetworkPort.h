@@ -2,7 +2,12 @@
 #define __JFramework_PCNetworkPort_h_
 
 #include "NetworkPort.h" // Base class: NetworkPort
-#include <SDL2/SDL_net.h>
+
+#if defined(_WIN32)
+  #include <SDL_net.h>
+#else
+  #include <SDL2/SDL_net.h>
+#endif
 
 class PCNetworkPort : public NetworkPort
 {

@@ -4,6 +4,7 @@
 #include "Screen.h"
 #include "Transform.h"
 #if defined(_WIN32)
+  #include <GL\glew.h>
   #include "SDL.h"
 #elif defined(__APPLE__)
   #include <GL/glew.h>

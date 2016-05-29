@@ -54,6 +54,7 @@ void Surface::LoadImage(HashString const &aName)
 Vector3 Surface::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
 {
   assert(!"Not supported (Surface LoadText)");
+  return Vector3();
 }
 
 /**
