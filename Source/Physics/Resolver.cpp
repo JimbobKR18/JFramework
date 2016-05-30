@@ -403,37 +403,14 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 spherePos = sphere->position + sphereTransform->GetPosition();
-  for(int i = 0; i < 3; ++i)
+  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), spherePos);
+  
+  Vector3 dist = closestPoint - spherePos;
+  if(dist.length() < sphere->GetSize(0))
   {
-    // Trivial intersection of vertices test
-    Vector3 vecPos = triTransform->GetPosition() + triangle->points[i];
-    Vector3 dist = vecPos - spherePos;
-    float radius = sphere->GetSize(0);
-    if(dist.length() < radius)
-    {
-      aPair.mPenetration = radius - dist.length();
-      aPair.mNormal = dist.normalize();
-      aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-      return;
-    }
-    
-    // Line segment test
-    int j = i + 1;
-    if (j > 2)
-      j = 0;
-    
-    Line line(vecPos, triTransform->GetPosition() + triangle->points[j]);
-    
-    Vector3 closestPoint = line.ClosestPointToPoint(spherePos);
-    dist = closestPoint - spherePos;
-    if(dist.length() < radius)
-    {
-      aPair.mPenetration = radius - dist.length();
-      aPair.mNormal = dist.normalize();
-      aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-    }
-    
-    // TODO Check if sphere inside of triangle
+    aPair.mPenetration = sphere->GetSize(0) - dist.length();
+    aPair.mNormal = dist.normalize();
+    aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   }
 }
 
@@ -443,8 +420,50 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
  */
 void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
 {
-  // TODO
-  //assert(!"TODO");
+  // Ordering is important
+  if(aPair.mShapes[0]->shape != Shape::TRIANGLE)
+  {
+    aPair.Switch();
+  }
+  
+  // TODO doesn't work check orange collision book
+  Triangle* triangle = (Triangle*)aPair.mShapes[0];
+  Cube* cube = (Cube*)aPair.mShapes[1];
+  Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 cubePos = cube->position + cubeTransform->GetPosition();
+  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), cubePos);
+  Vector3 dist = closestPoint - cubePos;
+  int axis = 0;
+  float minDistance = 0xffffff;
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    if(fabs(dist[i]) - cube->GetSize(i) < minDistance)
+    {
+      axis = i;
+      minDistance = fabs(dist[i]) - cube->GetSize(i);
+    }
+  }
+  
+  Vector3 normal;
+  // Figure out the normal
+  switch(axis)
+  {
+    case 0:
+      normal = Vector3(minDistance,0,0).normalize();
+      break;
+    case 1:
+      normal = Vector3(0,minDistance,0).normalize();
+      break;
+    case 2:
+      normal = Vector3(0,0,minDistance).normalize();
+      break;
+  }
+  
+  aPair.mPenetration = minDistance;
+  aPair.mNormal = normal;
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
 }
 
 /**

@@ -232,29 +232,12 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 spherePos = sphere->position + sphereTransform->GetPosition();
-  for(int i = 0; i < 3; ++i)
-  {
-    // Trivial intersection of vertices test
-    Vector3 vecPos = triTransform->GetPosition() + triangle->points[i];
-    Vector3 dist = vecPos - spherePos;
-    if(dist.length() < sphere->GetSize(0))
-    {
-      return true;
-    }
-    
-    // Line segment test
-    int j = i + 1;
-    if (j > 2)
-      j = 0;
-    
-    Line line(vecPos, triTransform->GetPosition() + triangle->points[j]);
-    if(CheckLineToSphere(line, sphereTransform, sphere))
-    {
-      return true;
-    }
-    
-    // TODO Check if sphere inside of triangle
-  }
+  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), spherePos);
+  
+  Vector3 dist = closestPoint - spherePos;
+  if(dist.length() < sphere->GetSize(0))
+    return true;
+  
   return false;
 }
 
@@ -272,36 +255,17 @@ bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 cubePos = cube->position + cubeTransform->GetPosition();
+  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), cubePos);
+  Vector3 dist = closestPoint - cubePos;
   
+  // TODO doesn't work. Check orange collision book.
   for(int i = 0; i < 3; ++i)
   {
-    // Trivial intersection of vertices test
-    Vector3 vecPos = triTransform->GetPosition() + triangle->points[i];
-    Vector3 dist = vecPos - cubePos;
-    
-    // Separating axis test
-    bool xCheck = fabs(dist.x) <= aPair.mShapes[1]->GetSize(0);
-    bool yCheck = fabs(dist.y) <= aPair.mShapes[1]->GetSize(1);
-    bool zCheck = fabs(dist.z) <= aPair.mShapes[1]->GetSize(2);
-
-    if(xCheck && yCheck && zCheck)
-      return true;
-    
-    // Line segment test
-    int j = i + 1;
-    if (j > 2)
-      j = 0;
-    
-    Line line(vecPos, triTransform->GetPosition() + triangle->points[j]);
-    if(CheckLineToCube(line, cubeTransform, cube))
-    {
-      return true;
-    }
-    
-    // TODO Check if cube inside of triangle
+    if(fabs(dist[i]) > cube->GetSize(i))
+      return false;
   }
     
-  return false;
+  return true;
 }
 
 /**
