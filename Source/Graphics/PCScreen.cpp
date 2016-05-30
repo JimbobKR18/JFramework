@@ -40,7 +40,7 @@ PCScreen::~PCScreen()
 void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
-  Vector3 cameraPosition = GetView().GetPosition();
+  Vector3 &cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetHalfSize();
   Vector3 cameraDiff = cameraPosition - cameraSize;
   
@@ -54,18 +54,12 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       Transform *transform = obj->GET<Transform>();
       PhysicsObject *physicsObject = obj->GET<PhysicsObject>();
       Vector3 position = transform->GetPosition();
+      Vector3 scale = transform->GetScale();
       Vector3 broadSize = physicsObject->GetBroadSize();
-
-      // Get positions relative to the camera
-      float xPosition = position.x;
-      float yPosition = position.y;
-      float zPosition = position.z;
 
       if((*it)->GetViewMode() == VIEW_ABSOLUTE)
       {
-        xPosition -= cameraDiff.x;
-        yPosition -= cameraDiff.y;
-        zPosition -= cameraDiff.z;
+        position -= cameraDiff;
       }
 
       glLoadIdentity();
@@ -78,8 +72,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       {
         if((*it)->shape == Shape::SPHERE)
         {
-          Vector3 spherePos = Vector3(xPosition, yPosition, zPosition) +
-                              (*it)->position;
+          Vector3 spherePos = position + (*it)->position.Multiply(scale);
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           
@@ -87,17 +80,17 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           for(int i = 0; i < 360; ++i)
           {
             float radians = i * DEGREE_TO_RADS;
-            glVertex3f(spherePos.x + ((*it)->GetSize(0) * cos(radians)),
-                spherePos.y + ((*it)->GetSize(1) * sin(radians)), spherePos.z);
+            float x = (*it)->GetSize(0) * cos(radians) * scale.x;
+            float y = (*it)->GetSize(1) * sin(radians) * scale.y;
+            glVertex3f(spherePos.x + x, spherePos.y + y, spherePos.z);
           }
           glEnd();
         }
         else if((*it)->shape == Shape::CUBE)
         {
-          Vector3 cubePos = Vector3(xPosition, yPosition, zPosition) +
-                              (*it)->position;
-          float xSize = (*it)->GetSize(0);
-          float ySize = (*it)->GetSize(1);
+          Vector3 cubePos = position + (*it)->position.Multiply(scale);
+          float xSize = (*it)->GetSize(0) * scale.x;
+          float ySize = (*it)->GetSize(1) * scale.y;
           
           // Physics Box Line
           glBegin(GL_LINE_STRIP);
@@ -112,25 +105,23 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         else if((*it)->shape == Shape::TRIANGLE)
         {
           Triangle* triangle = (Triangle*)(*it);
-          Vector3 triPos = Vector3(xPosition, yPosition, zPosition) +
-                              (*it)->position;
+          Vector3 triPos = position + (*it)->position.Multiply(scale);
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           for(int i = 0; i < 3; ++i)
           {
-            Vector3 point = triPos + triangle->GetPoint(i);
+            Vector3 point = triPos + triangle->GetPoint(i).Multiply(scale);
             glVertex3f(point.x, point.y, point.z);
           }
-          Vector3 point = triPos + triangle->GetPoint(0);
+          Vector3 point = triPos + triangle->GetPoint(0).Multiply(scale);
           glVertex3f(point.x, point.y, point.z);
           glEnd();
         }
         else if((*it)->shape == Shape::LINE)
         {
           Line *line = (Line*)(*it);
-          Vector3 linePos = Vector3(xPosition, yPosition, zPosition) +
-                            (*it)->position;
-          Vector3 lineEnd = linePos + (line->direction * line->length);
+          Vector3 linePos = position + (*it)->position.Multiply(scale);
+          Vector3 lineEnd = linePos + line->direction.Multiply(scale) * line->length;
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           glVertex3f(linePos.x, linePos.y, linePos.z);
@@ -142,11 +133,11 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       // Broad Size Line
       glBegin(GL_LINE_STRIP);
       glColor3f(1.0f, 1.0f, 0.0f);
-      glVertex3f(xPosition - broadSize.x, yPosition - broadSize.y, zPosition);
-      glVertex3f(xPosition + broadSize.x, yPosition - broadSize.y, zPosition);
-      glVertex3f(xPosition + broadSize.x, yPosition + broadSize.y, zPosition);
-      glVertex3f(xPosition - broadSize.x, yPosition + broadSize.y, zPosition);
-      glVertex3f(xPosition - broadSize.x, yPosition - broadSize.y, zPosition);
+      glVertex3f(position.x - broadSize.x, position.y - broadSize.y, position.z);
+      glVertex3f(position.x + broadSize.x, position.y - broadSize.y, position.z);
+      glVertex3f(position.x + broadSize.x, position.y + broadSize.y, position.z);
+      glVertex3f(position.x - broadSize.x, position.y + broadSize.y, position.z);
+      glVertex3f(position.x - broadSize.x, position.y - broadSize.y, position.z);
       glEnd();
       glPopMatrix();
     }

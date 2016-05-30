@@ -18,7 +18,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
   assert(!"Do not use this");
 }
 
-PCShaderScreen::PCShaderScreen(int aW, int aH) : Screen(aW, aH), mWindow(nullptr), mGLContext(), mVertexArrayObjectID(0), mVertexBufferID(0)
+PCShaderScreen::PCShaderScreen(int aW, int aH) : Screen(aW, aH), mWindow(nullptr), mGLContext(), mVertexBufferID(0), mVertexArrayObjectID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
@@ -62,6 +62,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       Transform *transform = obj->GET<Transform>();
       PhysicsObject *physicsObject = obj->GET<PhysicsObject>();
       Vector3 position = transform->GetPosition();
+      Vector3 scale = transform->GetScale();
       Vector3 broadSize = physicsObject->GetBroadSize();
 
       if((*it)->GetViewMode() == VIEW_ABSOLUTE)
@@ -79,7 +80,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       {
         if((*it)->shape == Shape::SPHERE)
         {
-          Vector3 spherePos = position + (*it)->position;
+          Vector3 spherePos = position + (*it)->position.Multiply(scale);
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           
@@ -87,16 +88,17 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           for(int i = 0; i < 360; ++i)
           {
             float radians = i * DEGREE_TO_RADS;
-            glVertex3f(spherePos.x + ((*it)->GetSize(0) * cos(radians)),
-                spherePos.y + ((*it)->GetSize(1) * sin(radians)), spherePos.z);
+            float x = (*it)->GetSize(0) * cos(radians) * scale.x;
+            float y = (*it)->GetSize(1) * sin(radians) * scale.y;
+            glVertex3f(spherePos.x + x, spherePos.y + y, spherePos.z);
           }
           glEnd();
         }
         else if((*it)->shape == Shape::CUBE)
         {
-          Vector3 cubePos = position + (*it)->position;
-          float xSize = (*it)->GetSize(0);
-          float ySize = (*it)->GetSize(1);
+          Vector3 cubePos = position + (*it)->position.Multiply(scale);
+          float xSize = (*it)->GetSize(0) * scale.x;
+          float ySize = (*it)->GetSize(1) * scale.y;
           
           // Physics Box Line
           glBegin(GL_LINE_STRIP);
@@ -111,23 +113,23 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         else if((*it)->shape == Shape::TRIANGLE)
         {
           Triangle* triangle = (Triangle*)(*it);
-          Vector3 triPos = position + (*it)->position;
+          Vector3 triPos = position + (*it)->position.Multiply(scale);
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           for(int i = 0; i < 3; ++i)
           {
-            Vector3 point = triPos + triangle->GetPoint(i);
+            Vector3 point = triPos + triangle->GetPoint(i).Multiply(scale);
             glVertex3f(point.x, point.y, point.z);
           }
-          Vector3 point = triPos + triangle->GetPoint(0);
+          Vector3 point = triPos + triangle->GetPoint(0).Multiply(scale);
           glVertex3f(point.x, point.y, point.z);
           glEnd();
         }
         else if((*it)->shape == Shape::LINE)
         {
           Line *line = (Line*)(*it);
-          Vector3 linePos = position + (*it)->position;
-          Vector3 lineEnd = linePos + (line->direction * line->length);
+          Vector3 linePos = position + (*it)->position.Multiply(scale);
+          Vector3 lineEnd = linePos + line->direction.Multiply(scale) * line->length;
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           glVertex3f(linePos.x, linePos.y, linePos.z);

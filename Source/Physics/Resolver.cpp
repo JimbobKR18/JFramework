@@ -286,10 +286,11 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position;
-  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position;
+  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position.Multiply(b1Transform->GetScale());
+  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position.Multiply(b1Transform->GetScale());
 
-  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - (aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(0)));
+  aPair.mPenetration = fabs((b1Pos - b2Pos).length() - 
+    (aPair.mShapes[0]->GetSize(0) * b1Transform->GetScale().x + aPair.mShapes[1]->GetSize(0) * b2Transform->GetScale().x));
   aPair.mNormal = (b1Pos - b2Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
 }
@@ -302,8 +303,8 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position;
-  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position;
+  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position.Multiply(b1Transform->GetScale());
+  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position.Multiply(b2Transform->GetScale());
  
   int axis = 0;
   float shortestDistance = 0xffffff;
@@ -311,7 +312,8 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - 
-                      (aPair.mShapes[0]->GetSize(i) + aPair.mShapes[1]->GetSize(i)));
+                      (aPair.mShapes[0]->GetSize(i) * b1Transform->GetScale().GetValue(i) + 
+                      aPair.mShapes[1]->GetSize(i) * b2Transform->GetScale().GetValue(i)));
     if(distance < shortestDistance)
     {
       axis = i;
@@ -335,7 +337,8 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
   }
 
   aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
-                        (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
+                        (aPair.mShapes[0]->GetSize(axis) * b1Transform->GetScale().GetValue(axis) + 
+                        aPair.mShapes[1]->GetSize(axis) * b2Transform->GetScale().GetValue(axis)));
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
 }
@@ -348,8 +351,8 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position;
-  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position;
+  Vector3 b1Pos = b1Transform->GetPosition() + aPair.mShapes[0]->position.Multiply(b1Transform->GetScale());
+  Vector3 b2Pos = b2Transform->GetPosition() + aPair.mShapes[1]->position.Multiply(b2Transform->GetScale());
   
   int axis = 0;
   float shortestDistance = 0xffffff;
@@ -357,7 +360,8 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - 
-                      (aPair.mShapes[0]->GetSize(i) + aPair.mShapes[1]->GetSize(i)));
+                      (aPair.mShapes[0]->GetSize(i) * b1Transform->GetScale().GetValue(i) + 
+                      aPair.mShapes[1]->GetSize(i) * b2Transform->GetScale().GetValue(i)));
     if(distance < shortestDistance)
     {
       axis = i;
@@ -381,7 +385,8 @@ void Resolver::CalculateCubeToCube(CollisionPair &aPair)
   }
   
   aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
-                        (aPair.mShapes[0]->GetSize(axis) + aPair.mShapes[1]->GetSize(axis)));
+                        (aPair.mShapes[0]->GetSize(axis) * b1Transform->GetScale().GetValue(axis) + 
+                        aPair.mShapes[1]->GetSize(axis) * b2Transform->GetScale().GetValue(axis)));
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
 }
@@ -402,13 +407,14 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
   Sphere* sphere = (Sphere*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 spherePos = sphere->position + sphereTransform->GetPosition();
+  Vector3 spherePos = sphere->position.Multiply(sphereTransform->GetScale()) + sphereTransform->GetPosition();
   Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), spherePos);
   
   Vector3 dist = closestPoint - spherePos;
-  if(dist.length() < sphere->GetSize(0))
+  float size = sphere->GetSize(0) * sphereTransform->GetScale().x;
+  if(dist.length() < size)
   {
-    aPair.mPenetration = sphere->GetSize(0) - dist.length();
+    aPair.mPenetration = size - dist.length();
     aPair.mNormal = dist.normalize();
     aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   }
@@ -431,7 +437,7 @@ void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
   Cube* cube = (Cube*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 cubePos = cube->position + cubeTransform->GetPosition();
+  Vector3 cubePos = cube->position.Multiply(cubeTransform->GetScale()) + cubeTransform->GetPosition();
   Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), cubePos);
   Vector3 dist = closestPoint - cubePos;
   int axis = 0;
@@ -495,14 +501,16 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
   // This is a bit slow since it makes a new line every time.
   // Move line into world space.
   Line tempLine = (*line);
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetScale());
+  tempLine.position = tempLine.position.Multiply(lineTransform->GetScale());
   tempLine.position += lineTransform->GetPosition();
   
   // Find closest point on line to sphere pos and calculate penetration
   // based on radius.
-  Vector3 spherePos = sphereTransform->GetPosition() + sphere->position;
+  Vector3 spherePos = sphereTransform->GetPosition() + sphere->position.Multiply(sphereTransform->GetScale());
   Vector3 closestPoint = tempLine.ClosestPointToPoint(spherePos);
   Vector3 dist = closestPoint - spherePos;
-  float radius = sphere->GetSize(0);
+  float radius = sphere->GetSize(0) * sphereTransform->GetScale().x;
   if(dist.length() < radius)
   {
     aPair.mPenetration = radius - dist.length();
@@ -532,11 +540,13 @@ void Resolver::CalculateLineToCube(CollisionPair &aPair)
   // This is a bit slow since it makes a new line every time.
   // Move line into world space.
   Line tempLine = (*line);
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetScale());
+  tempLine.position = tempLine.position.Multiply(lineTransform->GetScale());
   tempLine.position += lineTransform->GetPosition();
   
   // Find closest point on line to sphere pos and calculate penetration
   // based on radius.
-  Vector3 cubePos = cubeTransform->GetPosition() + cube->position;
+  Vector3 cubePos = cubeTransform->GetPosition() + cube->position.Multiply(cubeTransform->GetScale());
   Vector3 closestPoint = tempLine.ClosestPointToPoint(cubePos);
   Vector3 dist = closestPoint - cubePos;
   
@@ -544,13 +554,14 @@ void Resolver::CalculateLineToCube(CollisionPair &aPair)
   aPair.mPenetration = FLT_MAX;
   for(int i = 0; i < 3; ++i)
   {
-    float size = cube->GetSize(i);
+    float size = cube->GetSize(i) * cubeTransform->GetScale().GetValue(i);
     float diff = size - dist.length();
     if(aPair.mPenetration > fabs(diff))
     {
       aPair.mPenetration = diff;
       aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
       
+      // TODO get the correct normal
       switch(i)
       {
       case 0:

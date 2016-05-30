@@ -145,10 +145,10 @@ bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position;
-  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position;
-  float t1Size = aPair.mShapes[0]->GetSize(0);
-  float t2Size = aPair.mShapes[1]->GetSize(0);
+  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position.Multiply(t1->GetScale());
+  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position.Multiply(t2->GetScale());
+  float t1Size = aPair.mShapes[0]->GetSize(0) * t1->GetScale().x;
+  float t2Size = aPair.mShapes[1]->GetSize(0) * t2->GetScale().x;
 
   if(t1Size + t2Size > (t1Pos - t2Pos).length())
   {
@@ -170,15 +170,15 @@ bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
   Transform *sphere = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *cube = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 spherePos = sphere->GetPosition() + aPair.mShapes[0]->position;
-  Vector3 cubePos = cube->GetPosition() + aPair.mShapes[1]->position;
+  Vector3 spherePos = sphere->GetPosition() + aPair.mShapes[0]->position.Multiply(sphere->GetScale());
+  Vector3 cubePos = cube->GetPosition() + aPair.mShapes[1]->position.Multiply(cube->GetScale());
   Vector3 relPos = spherePos - cubePos;
   
   Vector3 closestPoint;
 
   for(int i = 0; i < 3; ++i)
   {
-    float cubeSize = aPair.mShapes[1]->GetSize(i);
+    float cubeSize = aPair.mShapes[1]->GetSize(i) * cube->GetScale().GetValue(i);
     
     if(relPos[i] < -cubeSize)
     {
@@ -195,7 +195,8 @@ bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
   }
 
   Vector3 dist = relPos - closestPoint;
-  return dist.x*dist.x + dist.y*dist.y + dist.z*dist.z < aPair.mShapes[0]->GetSize(0)*aPair.mShapes[0]->GetSize(0);
+  float size = aPair.mShapes[0]->GetSize(0) * sphere->GetScale().x;
+  return dist.x*dist.x + dist.y*dist.y + dist.z*dist.z < size*size;
 }
 
 /**
@@ -207,12 +208,12 @@ bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position;
-  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position;
+  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position.Multiply(t1->GetScale());
+  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position.Multiply(t2->GetScale());
 
-  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= aPair.mShapes[0]->GetSize(0) + aPair.mShapes[1]->GetSize(0);
-  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= aPair.mShapes[0]->GetSize(1) + aPair.mShapes[1]->GetSize(1);
-  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= aPair.mShapes[0]->GetSize(2) + aPair.mShapes[1]->GetSize(2);
+  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= aPair.mShapes[0]->GetSize(0) * t1->GetScale().x + aPair.mShapes[1]->GetSize(0) * t2->GetScale().x;
+  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= aPair.mShapes[0]->GetSize(1) * t1->GetScale().y + aPair.mShapes[1]->GetSize(1) * t2->GetScale().y;
+  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= aPair.mShapes[0]->GetSize(2) * t1->GetScale().z + aPair.mShapes[1]->GetSize(2) * t2->GetScale().z;
 
   return xCheck && yCheck && zCheck;
 }
@@ -231,11 +232,11 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   Sphere* sphere = (Sphere*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 spherePos = sphere->position + sphereTransform->GetPosition();
+  Vector3 spherePos = sphere->position.Multiply(sphereTransform->GetScale()) + sphereTransform->GetPosition();
   Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), spherePos);
   
   Vector3 dist = closestPoint - spherePos;
-  if(dist.length() < sphere->GetSize(0))
+  if(dist.length() < sphere->GetSize(0) * sphereTransform->GetScale().x)
     return true;
   
   return false;
@@ -249,7 +250,8 @@ bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::CUBE)
     aPair.Switch();
-    
+  
+  // TODO take scale into account.
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
   Cube* cube = (Cube*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
@@ -293,6 +295,8 @@ bool CollisionChecker::CheckLineToSphere(CollisionPair &aPair)
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Line* line = (Line*)(aPair.mShapes[0]);
   Line tempLine = (*line);
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetScale());
+  tempLine.position = tempLine.position.Multiply(lineTransform->GetScale());
   tempLine.position += lineTransform->GetPosition();
     
   return CheckLineToSphere(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
@@ -313,6 +317,8 @@ bool CollisionChecker::CheckLineToCube(CollisionPair &aPair)
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Line* line = (Line*)(aPair.mShapes[0]);
   Line tempLine = (*line);
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetScale());
+  tempLine.position = tempLine.position.Multiply(lineTransform->GetScale());
   tempLine.position += lineTransform->GetPosition();
     
   return CheckLineToCube(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
@@ -348,9 +354,10 @@ bool CollisionChecker::CheckLineToLine(CollisionPair &aPair)
  */
 bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape)
 {
-  float radius = aShape->GetSize(0);
-  Vector3 closestPoint = aSegment.ClosestPointToPoint(aSphere->GetPosition() + aShape->position);
-  return (closestPoint - (aSphere->GetPosition() + aShape->position)).length() < radius;
+  float radius = aShape->GetSize(0) * aSphere->GetScale().x;
+  Vector3 scaledSpherePos = aSphere->GetPosition() + aShape->position.Multiply(aSphere->GetScale());
+  Vector3 closestPoint = aSegment.ClosestPointToPoint(scaledSpherePos);
+  return (closestPoint - scaledSpherePos).length() < radius;
 }
 
 /**
@@ -375,15 +382,18 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   float dimensions = 3;
   Vector3 position = aSegment.position;
   Vector3 direction = aSegment.direction;
-  Vector3 min = Vector3(aCube->GetPosition().x + aShape->position.x - aShape->GetSize(0),
-                        aCube->GetPosition().y + aShape->position.y - aShape->GetSize(1),
-                        aCube->GetPosition().z + aShape->position.z - aShape->GetSize(2));
-  Vector3 max = Vector3(aCube->GetPosition().x + aShape->position.x + aShape->GetSize(0),
-                        aCube->GetPosition().y + aShape->position.y + aShape->GetSize(1),
-                        aCube->GetPosition().z + aShape->position.z + aShape->GetSize(2));
+  Vector3 min = Vector3(aShape->position.x - aShape->GetSize(0),
+                        aShape->position.y - aShape->GetSize(1),
+                        aShape->position.z - aShape->GetSize(2)).Multiply(aCube->GetScale());
+  Vector3 max = Vector3(aShape->position.x + aShape->GetSize(0),
+                        aShape->position.y + aShape->GetSize(1),
+                        aShape->position.z + aShape->GetSize(2)).Multiply(aCube->GetScale());
+                        
+  min += aCube->GetPosition();
+  max += aCube->GetPosition();
   Vector3 collision;
   
-  if(fabs(aShape->GetSize(2)) <= MINIMUM_SIZE)
+  if(fabs(aShape->GetSize(2) * aCube->GetScale().GetValue(2)) <= MINIMUM_SIZE)
   {
     dimensions = 2;
   }
