@@ -2,12 +2,16 @@
 #include "GraphicsManager.h"
 #include "ObjectDeleteMessage.h"
 
-#if defined(__APPLE__)
-  #include "PCScreen.h"
-  #include "PCSurface.h"
-#elif !defined(IOS) && !defined(ANDROID)
+#if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
+  #define SHADER_COMPATIBLE
+#endif
+
+#ifdef SHADER_COMPATIBLE
   #include "PCShaderScreen.h"
   #include "PCShaderSurface.h"
+#else
+  #include "PCScreen.h"
+  #include "PCSurface.h"
 #endif
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
@@ -18,11 +22,10 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manag
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
-#if defined(__APPLE__)
+#ifndef SHADER_COMPATIBLE
   mScreen = new PCScreen(aWidth, aHeight);
-#elif !defined(IOS) && !defined(ANDROID)
-  mScreen = new PCShaderScreen(aWidth, aHeight);
 #else
+  mScreen = new PCShaderScreen(aWidth, aHeight);
 #endif
 }
 
@@ -87,12 +90,10 @@ void GraphicsManager::SerializeLUA()
  */
 Surface *GraphicsManager::CreateSurface()
 {
-#if defined(__APPLE__)
+#ifndef SHADER_COMPATIBLE
   Surface *surface = new PCSurface(this);
-#elif !defined(ANDROID) && !defined(IOS)
-	Surface *surface = new PCShaderSurface(this);
 #else
-	Surface *surface = new Surface(this);
+	Surface *surface = new PCShaderSurface(this);
 #endif
 
 	AddSurface(surface);
@@ -105,12 +106,10 @@ Surface *GraphicsManager::CreateSurface()
  */
 Surface *GraphicsManager::CreateUISurface()
 {
-#if defined(__APPLE__)
+#ifndef SHADER_COMPATIBLE
   Surface *surface = new PCSurface(this);
-#elif !defined(ANDROID) && !defined(IOS)
-  Surface *surface = new PCShaderSurface(this);
 #else
-  Surface *surface = new Surface(this);
+  Surface *surface = new PCShaderSurface(this);
 #endif
 
   AddUISurface(surface);
