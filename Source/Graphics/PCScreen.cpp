@@ -21,7 +21,7 @@ PCScreen::PCScreen() : Screen()
 PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
-  mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, aW, aH, 
+  mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH, 
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
   ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
