@@ -23,6 +23,7 @@ class PCShaderScreen : public Screen
 private:
   SDL_Window*   mWindow;
   SDL_GLContext mGLContext;
+  SDL_DisplayMode mDisplayMode;
   GLuint        mVertexBufferID;
   GLuint        mVertexArrayObjectID;
 

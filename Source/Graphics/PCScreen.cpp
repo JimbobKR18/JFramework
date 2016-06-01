@@ -24,6 +24,7 @@ PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH, 
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
+  SDL_GetDesktopDisplayMode(0, &mDisplayMode);
   ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
 }
 
@@ -311,7 +312,7 @@ void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   // Set full screen or not
   int fullScreen = 0;
   if(aFullScreen)
-    fullScreen = SDL_WINDOW_FULLSCREEN;
+    fullScreen = SDL_WINDOW_FULLSCREEN_DESKTOP;
   SDL_SetWindowFullscreen(mWindow, fullScreen);
   
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,        1);
@@ -334,8 +335,11 @@ void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClearDepth(1.0f);
-
-  glViewport(0, 0, aW, aH);
+  
+  if(aFullScreen)
+    glViewport((mDisplayMode.w - aW)/2, (mDisplayMode.h - aH)/2, aW, aH);
+  else
+    glViewport(0, 0, aW, aH);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
