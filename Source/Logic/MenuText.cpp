@@ -10,17 +10,8 @@
 #include "Transform.h"
 #include "GraphicsManager.h"
 
-// TODO platform specifics
-
-MenuText::MenuText(Menu *aOwner, HashString const& aFilename) : MenuElement(aOwner, aFilename), mText(), 
-  mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
-{
-  TextParser parser(Common::RelativePath("Menus", aFilename));
-  ParseFile(parser);
-}
-
-MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText) : MenuElement(aOwner, aSettingsFilename), mText(aText),
-  mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
+MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText, bool const aReplaceable) : 
+  MenuElement(aOwner, aSettingsFilename, aReplaceable), mText(aText), mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
 {
   TextParser parser(Common::RelativePath("Menus", aSettingsFilename));
   ParseFile(parser);

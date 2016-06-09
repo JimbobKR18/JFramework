@@ -23,6 +23,7 @@ private:
   HashString        mName;
   HashString        mFileName;
   ElementContainer  mMenuElements;
+  ElementContainer  mReplaceableElements;
 
 public:
   Menu(Level* aLevel, HashString const &aFileName);
@@ -35,6 +36,7 @@ public:
   ElementContainer GetElements() const;
 
   void          AddObject(MenuElement *aElement);
+  void          AddReplaceableObject(MenuElement *aElement);
   void          DeleteObject(MenuElement *aElement);
   void          DeleteObjects();
   void          Update();

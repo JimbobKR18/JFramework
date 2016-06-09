@@ -22,17 +22,17 @@ class MenuElement
 protected:
   Menu*       mOwner;
   GameObject* mObject;
-  int         mLayer;
+  bool        mReplaceable;
   
 public:
-  MenuElement(Menu *aOwner, HashString const &aFileName);
+  MenuElement(Menu *aOwner, HashString const &aFileName, bool const aReplaceable);
   
   virtual ~MenuElement();
   
   Menu*         GetOwner();
   GameObject*   GetObject();
-  int           GetLayer();
-  void          SetLayer(int const aLayer);
+  
+  void          SetOwner(Menu* aOwner);
   
   virtual void  Draw() = 0;
   virtual void  Update() = 0;

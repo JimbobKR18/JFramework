@@ -11,10 +11,9 @@
 #include "ObjectManager.h"
 #include "Menu.h"
 
-MenuElement::MenuElement(Menu *aOwner, HashString const &aFileName) : mOwner(aOwner)
+MenuElement::MenuElement(Menu *aOwner, HashString const &aFileName, bool const aReplaceable) : mOwner(aOwner), mReplaceable(aReplaceable)
 {
   mObject = mOwner->GetLevel()->CreateObjectDelayed(aFileName, "Menus");
-  mLayer = 0;
 }
 
 MenuElement::~MenuElement()
@@ -31,30 +30,21 @@ Menu* MenuElement::GetOwner()
 }
 
 /**
+ * @brief Get owner of element.
+ * @param aOwner Owner
+ */
+void MenuElement::SetOwner(Menu* aOwner)
+{
+  mOwner = aOwner;
+}
+
+/**
  * @brief Get object associated with element.
  * @return Object
  */
 GameObject* MenuElement::GetObject()
 {
   return mObject;
-}
-
-/**
- * @brief Get view layer associated with this element
- * @return Layer
- */
-int MenuElement::GetLayer()
-{
-  return mLayer;
-}
-
-/**
- * @brief Set view layer.
- * @param aLayer
- */
-void MenuElement::SetLayer(int const aLayer)
-{
-  mLayer = aLayer;
 }
 
 /**
@@ -71,5 +61,9 @@ void MenuElement::ParseFile(Parser &aParser)
     transform->GetPosition().z = 0.99f;
   }
   ParseAdditionalData(aParser);
-  mOwner->AddObject(this);
+  
+  if(!mReplaceable)
+    mOwner->AddObject(this);
+  else
+    mOwner->AddReplaceableObject(this);
 }

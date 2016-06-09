@@ -11,7 +11,7 @@
 #include "ObjectManager.h"
 #include "LevelManager.h"
 
-Menu::Menu(Level *aLevel, HashString const &aFileName) : mOwner(aLevel), mFileName(aFileName)
+Menu::Menu(Level *aLevel, HashString const &aFileName) : mOwner(aLevel), mFileName(aFileName), mMenuElements(), mReplaceableElements()
 {
   mName = Common::RetrieveNameFromFileName(aFileName);
   
@@ -90,6 +90,25 @@ void Menu::AddObject(MenuElement *aElement)
   }
   
   mMenuElements.push_back(aElement);
+  aElement->SetOwner(this);
+}
+
+/**
+ * @brief Adds an element to our menu. To be deleted next frame.
+ * @param aElement
+ */
+void Menu::AddReplaceableObject(MenuElement *aElement)
+{
+  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+  {
+    if(aElement == *it)
+    {
+      return;
+    }
+  }
+  
+  mReplaceableElements.push_back(aElement);
+  aElement->SetOwner(this);
 }
 
 /**
@@ -106,7 +125,17 @@ void Menu::DeleteObject(MenuElement *aElement)
       mMenuElements.erase(it);
       mOwner->DeleteObjectDelayed(aElement->GetObject());
       delete aElement;
-      break;
+      return;
+    }
+  }
+  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+  {
+    if(aElement == *it)
+    {
+      mReplaceableElements.erase(it);
+      mOwner->DeleteObjectDelayed(aElement->GetObject());
+      delete aElement;
+      return;
     }
   }
 }
@@ -121,7 +150,13 @@ void Menu::DeleteObjects()
     DeleteObject(*it);
     it = mMenuElements.begin();
   }
+  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end();)
+  {
+    DeleteObject(*it);
+    it = mMenuElements.begin();
+  }
   mMenuElements.clear();
+  mReplaceableElements.clear();
 }
 
 /**
@@ -129,6 +164,12 @@ void Menu::DeleteObjects()
  */
 void Menu::Update()
 {
+  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end();)
+  {
+    DeleteObject(*it);
+    it = mReplaceableElements.begin();
+  }
+  mReplaceableElements.clear();
   for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     (*it)->Update();
@@ -171,13 +212,13 @@ void Menu::ParseFile()
   {
     Root* newElement = parser.Find(curObject.ToString());
     if(newElement->Find("Type")->GetValue().ToString() == "Image")
-      element = new MenuImage(this, newElement->Find("Name")->GetValue());
+      element = new MenuImage(this, newElement->Find("Name")->GetValue(), false);
     else if(newElement->Find("Type")->GetValue().ToString() == "Text")
     {
       if(newElement->Find("Text"))
-        element = new MenuText(this, newElement->Find("Name")->GetValue(), newElement->Find("Text")->GetValue());
+        element = new MenuText(this, newElement->Find("Name")->GetValue(), newElement->Find("Text")->GetValue(), false);
       else
-        element = new MenuText(this, newElement->Find("Name")->GetValue());
+        element = new MenuText(this, newElement->Find("Name")->GetValue(), "", false);
     }
     else
       assert(!"Invalid MenuElement passed into menu");
