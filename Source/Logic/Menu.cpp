@@ -81,6 +81,9 @@ Menu::ElementContainer Menu::GetElements() const
  */
 void Menu::AddObject(MenuElement *aElement)
 {
+  if(aElement && aElement->IsReplaceable())
+    assert(!"Replaceable element placed in regular elements, will cause error.");
+  
   for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     if(aElement == *it)
@@ -99,6 +102,9 @@ void Menu::AddObject(MenuElement *aElement)
  */
 void Menu::AddReplaceableObject(MenuElement *aElement)
 {
+  if(aElement && !aElement->IsReplaceable())
+    assert(!"Regular element placed in replaceable elements, will cause error.");
+  
   for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
   {
     if(aElement == *it)
@@ -138,6 +144,7 @@ void Menu::DeleteObject(MenuElement *aElement)
       return;
     }
   }
+  assert(!"MenuElement not found.");
 }
 
 /**

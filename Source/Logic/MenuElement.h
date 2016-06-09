@@ -31,6 +31,7 @@ public:
   
   Menu*         GetOwner();
   GameObject*   GetObject();
+  bool          IsReplaceable() const;
   
   void          SetOwner(Menu* aOwner);
   

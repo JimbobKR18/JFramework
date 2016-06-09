@@ -48,6 +48,15 @@ GameObject* MenuElement::GetObject()
 }
 
 /**
+ * @brief Get whether or not object is replaceable (delete on next frame)
+ * @return True is replaceable.
+ */
+bool MenuElement::IsReplaceable() const
+{
+  return mReplaceable;
+}
+
+/**
  * @brief Helper to create an element.
  * @param aParser
  */
