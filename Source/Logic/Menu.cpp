@@ -153,7 +153,7 @@ void Menu::DeleteObjects()
   for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end();)
   {
     DeleteObject(*it);
-    it = mMenuElements.begin();
+    it = mReplaceableElements.begin();
   }
   mMenuElements.clear();
   mReplaceableElements.clear();
