@@ -234,6 +234,10 @@ void Menu::ParseFile()
     {
       ParseTransform(element->GetObject(), newElement->Find("Transform"));
     }
+    if(newElement->Find("Surface"))
+    {
+      ParseSurface(element->GetObject(), newElement->Find("Surface"));
+    }
 
     AddObject(element);
 
@@ -309,5 +313,29 @@ void Menu::ParseTransform(GameObject *aObject, Root *aTransform)
       objTransform->SetZAlignment(Z_ALIGN_BACK);
     else if(aTransform->Find("AlignZ")->GetValue() != "CENTER")
       assert(!"Invalid value passed into ZAlign");
+  }
+}
+
+/**
+ * @brief Get surface data from a root.
+ * @param aSurface
+ */
+void Menu::ParseSurface(GameObject *aObject, Root *aSurface)
+{
+  int startingAnimation = 0;
+  float r, g, b, a;
+  r = aSurface->Find("ColorR")->GetValue().ToFloat();
+  g = aSurface->Find("ColorG")->GetValue().ToFloat();
+  b = aSurface->Find("ColorB")->GetValue().ToFloat();
+  a = aSurface->Find("ColorA")->GetValue().ToFloat();
+  startingAnimation = aSurface->Find("StartingAnimation")->GetValue().ToInt();
+
+  Surface* objSurface = aObject->GET<Surface>();
+  objSurface->SetColor(Vector4(r, g, b, a));
+  objSurface->SetAnimation(startingAnimation);
+  
+  if(aSurface->Find("VertexShader") && aSurface->Find("FragmentShader"))
+  {
+    objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
   }
 }

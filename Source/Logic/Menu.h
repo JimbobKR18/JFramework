@@ -47,6 +47,7 @@ public:
 private:
   void          ParseFile();
   void          ParseTransform(GameObject *aObject, Root *aTransform);
+  void          ParseSurface(GameObject *aObject, Root *aSurface);
 };
 
 #endif /* MENU_H_ */
