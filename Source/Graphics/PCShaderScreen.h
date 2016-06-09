@@ -29,7 +29,7 @@ private:
 
 public:
   PCShaderScreen();
-  PCShaderScreen(int aW, int aH);
+  PCShaderScreen(int aW, int aH, bool aFullScreen);
   virtual ~PCShaderScreen();
 
   virtual void PreDraw();

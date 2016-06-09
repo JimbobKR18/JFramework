@@ -3,11 +3,11 @@
 #include "ZRenderSorter.h"
 #include "BatchRenderSorter.h"
 
-Screen::Screen() : mWidth(0), mHeight(0), mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr)
+Screen::Screen() : mWidth(0), mHeight(0), mFullScreen(false), mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr)
 {
 }
 
-Screen::Screen(int aW, int aH) : mWidth(aW), mHeight(aH), mView()
+Screen::Screen(int aW, int aH, bool aFullScreen) : mWidth(aW), mHeight(aH), mFullScreen(aFullScreen), mView()
 {
   mView.SetSize(Vector3(aW, aH, 0));
   mDepthRenderSorter = new ZRenderSorter();
@@ -25,9 +25,29 @@ int Screen::GetWidth() const
   return mWidth;
 }
 
+void Screen::SetWidth(int const aWidth)
+{
+  mWidth = aWidth;
+}
+
 int Screen::GetHeight() const
 {
   return mHeight;
+}
+
+void Screen::SetHeight(int const aHeight)
+{
+  mHeight = aHeight;
+}
+
+bool Screen::IsFullScreen() const
+{
+  return mFullScreen;
+}
+
+void Screen::SetFullScreen(bool const aFullScreen)
+{
+  mFullScreen = aFullScreen;
 }
 
 View &Screen::GetView()

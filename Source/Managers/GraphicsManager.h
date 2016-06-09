@@ -20,7 +20,7 @@ private:
 public:
   typedef std::vector<Surface*>::iterator SurfaceIT;
 
-  GraphicsManager(GameApp *aApp, int aWidth, int aHeight);
+  GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen);
   ~GraphicsManager();
 
   // Derived from Manager

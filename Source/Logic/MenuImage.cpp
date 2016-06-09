@@ -56,8 +56,6 @@ void MenuImage::ReceiveMessage(Message const &aMessage)
  */
 void MenuImage::ParseAdditionalData(Parser &aParser)
 {
-  // Borrowing the static game app from our LUA stuff
-  GameApp* app = LUABind::StaticGameApp::GetApp();
   if(aParser.Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)

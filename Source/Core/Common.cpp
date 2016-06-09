@@ -313,6 +313,13 @@ namespace Common
       case 5:
         hashValue += (static_cast<int>(aString[i]) + i) / key[i % len];
       }
+      switch(i % 2)
+      {
+      case 0:
+        hashValue += aString[i] - aString[aString.size() - 1 - i];
+      case 1:
+        hashValue -= aString[i] + aString[aString.size() - 1 - i];
+      }
     }
     return hashValue;
   }

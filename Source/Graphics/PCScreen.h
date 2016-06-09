@@ -24,7 +24,7 @@ private:
 
 public:
   PCScreen();
-  PCScreen(int aW, int aH);
+  PCScreen(int aW, int aH, bool aFullScreen);
   virtual ~PCScreen();
 
   virtual void PreDraw();

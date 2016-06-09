@@ -18,7 +18,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
   assert(!"Do not use this");
 }
 
-PCShaderScreen::PCShaderScreen(int aW, int aH) : Screen(aW, aH), mWindow(nullptr), mGLContext(), mDisplayMode(), mVertexBufferID(0), mVertexArrayObjectID(0)
+PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), mGLContext(), mDisplayMode(), mVertexBufferID(0), mVertexArrayObjectID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH,
@@ -33,7 +33,7 @@ PCShaderScreen::PCShaderScreen(int aW, int aH) : Screen(aW, aH), mWindow(nullptr
     assert(!"GLEW failed to init.");
   }
   
-  ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
+  ChangeSize(aW, aH, aFullScreen);
 }
 
 PCShaderScreen::~PCShaderScreen()
@@ -338,6 +338,9 @@ void PCShaderScreen::SwapBuffers()
 void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 {
   // Set full screen or not
+  SetWidth(aW);
+  SetHeight(aH);
+  SetFullScreen(aFullScreen);
   int fullScreen = 0;
   if(aFullScreen)
     fullScreen = SDL_WINDOW_FULLSCREEN_DESKTOP;

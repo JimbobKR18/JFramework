@@ -18,14 +18,14 @@ PCScreen::PCScreen() : Screen()
   SDL_Init(SDL_INIT_EVERYTHING);
 }
 
-PCScreen::PCScreen(int aW, int aH) : Screen(aW, aH)
+PCScreen::PCScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH, 
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
   SDL_GetDesktopDisplayMode(0, &mDisplayMode);
-  ChangeSize(aW, aH, Constants::GetBoolean("FullScreen"));
+  ChangeSize(aW, aH, aFullScreen);
 }
 
 PCScreen::~PCScreen()
@@ -310,6 +310,9 @@ void PCScreen::SwapBuffers()
 void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 {
   // Set full screen or not
+  SetWidth(aW);
+  SetHeight(aH);
+  SetFullScreen(aFullScreen);
   int fullScreen = 0;
   if(aFullScreen)
     fullScreen = SDL_WINDOW_FULLSCREEN_DESKTOP;

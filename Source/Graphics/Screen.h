@@ -10,18 +10,23 @@ class Screen
 private:
   int                 mWidth;
   int                 mHeight;
+  bool                mFullScreen;
   View                mView;
   ScreenRenderSorter* mBatchRenderSorter;
   ScreenRenderSorter* mDepthRenderSorter;
 
 public:
   Screen();
-  Screen(int aW, int aH);
+  Screen(int aW, int aH, bool aFullScreen);
   virtual ~Screen();
 
   // Width and Height
   int                     GetWidth() const;
+  void                    SetWidth(int const aWidth);
   int                     GetHeight() const;
+  void                    SetHeight(int const aHeight);
+  bool                    IsFullScreen() const;
+  void                    SetFullScreen(bool const aFullScreen);
   // Get viewable space
   View&                   GetView();
   // Get batch render sorting method

@@ -27,7 +27,7 @@ GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAp
   // You can add your own manager in your derived class from GameApp.
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
-  AddManager(new GraphicsManager(this, Constants::GetFloat("ScreenWidth"), Constants::GetFloat("ScreenHeight")));
+  AddManager(new GraphicsManager(this, Constants::GetFloat("ScreenWidth"), Constants::GetFloat("ScreenHeight"), Constants::GetBoolean("FullScreen")));
   AddManager(new LevelManager(this));
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));

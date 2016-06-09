@@ -17,15 +17,15 @@
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
 
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
-GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
+GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
                                                                            mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr)
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
 #ifndef SHADER_COMPATIBLE
-  mScreen = new PCScreen(aWidth, aHeight);
+  mScreen = new PCScreen(aWidth, aHeight, aFullScreen);
 #else
-  mScreen = new PCShaderScreen(aWidth, aHeight);
+  mScreen = new PCShaderScreen(aWidth, aHeight, aFullScreen);
 #endif
 }
 
