@@ -5,12 +5,23 @@
  *      Author: jimmy
  */
 
+#if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
+#define SHADER_COMPATIBLE
+#endif
+
 #include "MenuText.h"
 #include "LUATypes.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
 
-MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText, bool const aReplaceable) : 
+#ifdef SHADER_COMPATIBLE
+  #include "PCShaderSurface.h"
+#elif defined(__APPLE__)
+  #include "PCSurface.h"
+#else
+#endif
+
+MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText, bool const aReplaceable) :
   MenuElement(aOwner, aSettingsFilename, aReplaceable), mText(aText), mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
 {
   TextParser parser(Common::RelativePath("Menus", aSettingsFilename));
@@ -103,8 +114,11 @@ void MenuText::ParseAdditionalData(Parser &aParser)
     mMaxWidth = app->GET<GraphicsManager>()->GetScreen()->GetWidth();
   }
 
-#if !defined(ANDROID) && !defined(IOS)
+#ifdef SHADER_COMPATIBLE
   PCShaderSurface *surface = (PCShaderSurface*)app->GET<GraphicsManager>()->CreateUISurface();
+  Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
+#elif defined(__APPLE__)
+  PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateUISurface();
   Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
 #else
   Surface *surface = app->GET<GraphicsManager>()->CreateUISurface();

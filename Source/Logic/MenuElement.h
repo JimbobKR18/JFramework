@@ -12,7 +12,6 @@
 #include "GameObject.h"
 #include "TextParser.h"
 #include "Transform.h"
-#include "PCShaderSurface.h"
 #include "ObjectManager.h"
 #include "LevelManager.h"
 #include "Message.h"

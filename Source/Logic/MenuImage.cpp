@@ -6,9 +6,20 @@
 //
 //
 
+#if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
+#define SHADER_COMPATIBLE
+#endif
+
 #include "MenuImage.h"
 #include "LUATypes.h"
 #include "GraphicsManager.h"
+
+#ifdef SHADER_COMPATIBLE
+  #include "PCShaderSurface.h"
+#elif defined(__APPLE__)
+  #include "PCSurface.h"
+#else
+#endif
 
 MenuImage::MenuImage(Menu *aOwner, HashString const &aFilename, bool const aReplaceable) : MenuElement(aOwner, aFilename, aReplaceable)
 {
@@ -58,8 +69,10 @@ void MenuImage::ParseAdditionalData(Parser &aParser)
 {
   if(aParser.Find("Surface"))
   {
-#if !defined(ANDROID) && !defined(IOS)
+#ifdef SHADER_COMPATIBLE
     PCShaderSurface *surface = (PCShaderSurface*)mObject->GET<Surface>();
+#elif defined(__APPLE__)
+    PCSurface *surface = (PCSurface*)mObject->GET<Surface>();
 #else
     Surface *surface = mObject->GET<Surface>();
 #endif
