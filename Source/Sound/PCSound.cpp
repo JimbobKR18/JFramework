@@ -19,7 +19,9 @@ PCSound::PCSound(std::string const &aFilename) : Sound(aFilename), mChannel(-1)
   if(!mChunk)
   {
     DebugLogPrint("Mix_QuickLoad_WAV: %s\n", Mix_GetError());
+#ifdef _DEBUG
     assert(!"Mix_Quickload_WAV failed, aborting.");
+#endif
   }
 }
 
@@ -36,7 +38,9 @@ void PCSound::Play(int const aNumLoops)
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_PlayChannel: %s\n", Mix_GetError());
+#ifdef _DEBUG
     assert(!"Mix_PlayChannel failed, aborting.");
+#endif
   }
 }
 
@@ -50,7 +54,9 @@ void PCSound::Play(int const aNumLoops, int const aTime)
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_PlayChannelTimed: %s\n", Mix_GetError());
+#ifdef _DEBUG
     assert(!"Mix_PlayChannelTimed failed, aborting.");
+#endif
   }
 }
 
@@ -64,7 +70,9 @@ void PCSound::FadeIn(int const aNumLoops, int const aTime)
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_FadeInChannel: %s\n", Mix_GetError());
+#ifdef _DEBUG
     assert(!"Mix_FadeInChannel failed, aborting.");
+#endif
   }
 }
 
@@ -78,7 +86,9 @@ void PCSound::FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTi
   if(mChannel == -1)
   {
     DebugLogPrint("Mix_FadeInChannelTimed: %s\n", Mix_GetError());
+#ifdef _DEBUG
     assert(!"Mix_FadeInChannelTimed failed, aborting.");
+#endif
   }
 }
 
