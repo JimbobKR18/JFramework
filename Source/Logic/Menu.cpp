@@ -50,15 +50,49 @@ Level* Menu::GetLevel() const
 }
 
 /**
- * @brief Retrieve an element if available.
+ * @brief Retrieve an element if available. Uses file name if ".txt" or ".xml" is in name.
  * @param aFileName
  * @return The element specified, else nullptr.
  */
-MenuElement* Menu::GetElement(HashString const &aFileName) const
+MenuElement* Menu::GetElement(HashString const &aName) const
+{
+  if(aName.Find(".txt") || aName.Find(".xml"))
+  {
+    return GetElementByFileName(aName);
+  }
+  else
+  {
+    return GetElementByObjectName(aName);
+  }
+}
+
+/**
+ * @brief Retrieve an element by object name if available.
+ * @param aFileName
+ * @return The element specified, else nullptr.
+ */
+MenuElement* Menu::GetElementByObjectName(HashString const &aObjectName) const
 {
   for(ConstElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
-    if((*it)->GetObject()->GetFileName() == aFileName.ToString())
+    if((*it)->GetObject()->GetName() == aObjectName)
+    {
+      return *it;
+    }
+  }
+  return nullptr;
+}
+
+/**
+ * @brief Retrieve an element by file name if available.
+ * @param aFileName
+ * @return The element specified, else nullptr.
+ */
+MenuElement* Menu::GetElementByFileName(HashString const &aFileName) const
+{
+  for(ConstElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  {
+    if((*it)->GetObject()->GetFileName() == aFileName)
     {
       return *it;
     }

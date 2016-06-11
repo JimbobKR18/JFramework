@@ -32,7 +32,9 @@ public:
   HashString    GetName() const;
   HashString    GetFileName() const;
   Level*        GetLevel() const;
-  MenuElement*  GetElement(HashString const &aFileName) const;
+  MenuElement*  GetElement(HashString const &aName) const;
+  MenuElement*  GetElementByObjectName(HashString const &aObjectName) const;
+  MenuElement*  GetElementByFileName(HashString const &aFileName) const;
   ElementContainer GetElements() const;
 
   void          AddObject(MenuElement *aElement);
