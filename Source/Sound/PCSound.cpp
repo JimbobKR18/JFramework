@@ -13,9 +13,9 @@ PCSound::PCSound() : Sound(), mChannel(-1)
 {
 }
 
-PCSound::PCSound(std::string const &aFilename) : Sound(aFilename), mChannel(-1)
+PCSound::PCSound(HashString const &aFilename) : Sound(aFilename), mChannel(-1)
 {
-  mChunk = Mix_LoadWAV(aFilename.c_str());
+  mChunk = Mix_LoadWAV(aFilename.ToCharArray());
   if(!mChunk)
   {
     DebugLogPrint("Mix_QuickLoad_WAV: %s\n", Mix_GetError());

@@ -30,7 +30,7 @@ public:
   static int const MAX_VOLUME = 128;
 
   PCSound();
-  PCSound(std::string const &aFilename);
+  PCSound(HashString const &aFilename);
   virtual ~PCSound();
   
   virtual void Play(int const aNumLoops);
