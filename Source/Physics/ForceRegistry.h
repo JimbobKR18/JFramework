@@ -13,26 +13,26 @@
 
 struct ForceRegistration
 {
-	PhysicsObject*  mObject;
-	ForceGenerator* mGenerator;
+  PhysicsObject*  mObject;
+  ForceGenerator* mGenerator;
 
-	ForceRegistration(PhysicsObject *aObject, ForceGenerator *aGenerator) : mObject(aObject), mGenerator(aGenerator) {}
+  ForceRegistration(PhysicsObject *aObject, ForceGenerator *aGenerator) : mObject(aObject), mGenerator(aGenerator) {}
 };
 
 class ForceRegistry
 {
 private:
-	std::vector<ForceRegistration> mRegistry;
+  std::vector<ForceRegistration> mRegistry;
 public:
-	ForceRegistry();
-	~ForceRegistry();
+  ForceRegistry();
+  ~ForceRegistry();
 
-	void Update();
+  void Update();
 
-	void Add(PhysicsObject *aObject, ForceGenerator *aGenerator);
-	void Remove(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void Add(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void Remove(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void RemoveForcesForObject(PhysicsObject *aObject);
-	void Clear();
+  void Clear();
 };
 
 #endif /* FORCEREGISTRY_H_ */

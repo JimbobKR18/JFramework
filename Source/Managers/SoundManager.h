@@ -10,15 +10,16 @@
 #ifndef __JFramework_SoundManager_h_
 #define __JFramework_SoundManager_h_
 
+#include "Common.h"
 #include "Manager.h"
 #include "Sound.h"
 
 class SoundManager : public Manager
 {
 private:
-  typedef std::pair<std::string, Sound*>            SoundPair;
-  typedef std::map<std::string, Sound*>::iterator   SoundIt;
-  std::map<std::string, Sound*>                     mSounds;
+  typedef std::unordered_map<int, Sound*>           SoundContainer;
+  typedef SoundContainer::iterator                  SoundIt;
+  SoundContainer                                    mSounds;
 
   static unsigned const sUID;
 
@@ -26,17 +27,17 @@ public:
   SoundManager(GameApp *aApp);
   ~SoundManager();
 
-  Sound*              CreateSound(std::string const &aFilename);
+  Sound*              CreateSound(HashString const &aFilename);
   void                DeleteSound(Sound* aSound);
   void                AddSound(Sound *aSound);
   void                RemoveSound(Sound *aSound);
-  void                PlaySound(std::string const &aFilename, int const aNumLoops);
-  void                PlaySoundTimed(std::string const &aFilename, int const aNumLoops, int const aMillis);
-  void                StopSound(std::string const &aFilename);
-  void                StopSoundTimed(std::string const &aFilename, int const aMillis);
-  void                SetSoundVolume(std::string const &aFilename, int const aVolume);
-  void                ResumeSound(std::string const &aFilename);
-  void                PauseSound(std::string const &aFilename);
+  void                PlaySound(HashString const &aFilename, int const aNumLoops);
+  void                PlaySoundTimed(HashString const &aFilename, int const aNumLoops, int const aMillis);
+  void                StopSound(HashString const &aFilename);
+  void                StopSoundTimed(HashString const &aFilename, int const aMillis);
+  void                SetSoundVolume(HashString const &aFilename, int const aVolume);
+  void                ResumeSound(HashString const &aFilename);
+  void                PauseSound(HashString const &aFilename);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);

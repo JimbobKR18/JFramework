@@ -20,12 +20,12 @@ SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundM
   int initted = Mix_Init(flags);
   if((initted & flags) != flags)
   {
-      DebugLogPrint("Mix_Init: %s\n", Mix_GetError());
+    DebugLogPrint("Mix_Init: %s\n", Mix_GetError());
   }
-  if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1)
+  if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1)
   {
-      DebugLogPrint("Mix_OpenAudio: %s\n", Mix_GetError());
-      assert(!"Could not open SDL_Mix OpenAudio, aborting.");
+    DebugLogPrint("Mix_OpenAudio: %s\n", Mix_GetError());
+    assert(!"Could not open SDL_Mix OpenAudio, aborting.");
   }
 #endif
 }
@@ -43,7 +43,7 @@ SoundManager::~SoundManager()
  * @param aFilename
  * @return The newly created sound.
  */
-Sound* SoundManager::CreateSound(std::string const &aFilename)
+Sound* SoundManager::CreateSound(HashString const &aFilename)
 {
 #if !defined(ANDROID) && !defined(IOS)
   Sound *newSound = new PCSound(Common::RelativePath("Sounds", aFilename));
@@ -70,7 +70,7 @@ void SoundManager::DeleteSound(Sound* aSound)
  */
 void SoundManager::AddSound(Sound *aSound)
 {
-  mSounds.insert(SoundPair(aSound->mName, aSound));
+  mSounds[aSound->mName.ToHash()] = aSound;
 }
 
 /**
@@ -79,16 +79,16 @@ void SoundManager::AddSound(Sound *aSound)
  */
 void SoundManager::RemoveSound(Sound *aSound)
 {
-  mSounds.erase(aSound->mName);
+  mSounds.erase(aSound->mName.ToHash());
 }
 
 /**
  * @brief Play a sound until it finishes.
  * @param aFilename
  */
-void SoundManager::PlaySound(std::string const &aFilename, int const aNumLoops)
+void SoundManager::PlaySound(HashString const &aFilename, int const aNumLoops)
 {
-  mSounds[aFilename]->Play(aNumLoops);
+  mSounds[aFilename.ToHash()]->Play(aNumLoops);
 }
 
 /**
@@ -96,18 +96,18 @@ void SoundManager::PlaySound(std::string const &aFilename, int const aNumLoops)
  * @param aFilename
  * @param aMillis Time in millis.
  */
-void SoundManager::PlaySoundTimed(std::string const &aFilename, int const aNumLoops, int const aMillis)
+void SoundManager::PlaySoundTimed(HashString const &aFilename, int const aNumLoops, int const aMillis)
 {
-  mSounds[aFilename]->Play(aNumLoops, aMillis);
+  mSounds[aFilename.ToHash()]->Play(aNumLoops, aMillis);
 }
 
 /**
  * @brief Stop a sound.
  * @param aFilename
  */
-void SoundManager::StopSound(std::string const &aFilename)
+void SoundManager::StopSound(HashString const &aFilename)
 {
-  mSounds[aFilename]->Stop();
+  mSounds[aFilename.ToHash()]->Stop();
 }
 
 /**
@@ -115,9 +115,9 @@ void SoundManager::StopSound(std::string const &aFilename)
  * @param aFilename
  * @param aMillis Time in millis
  */
-void SoundManager::StopSoundTimed(std::string const &aFilename, int const aMillis)
+void SoundManager::StopSoundTimed(HashString const &aFilename, int const aMillis)
 {
-  mSounds[aFilename]->FadeOut(aMillis);
+  mSounds[aFilename.ToHash()]->FadeOut(aMillis);
 }
 
 /**
@@ -125,27 +125,27 @@ void SoundManager::StopSoundTimed(std::string const &aFilename, int const aMilli
  * @param aFilename
  * @param aVolume The volume to set the sound to.
  */
-void SoundManager::SetSoundVolume(std::string const &aFilename, int const aVolume)
+void SoundManager::SetSoundVolume(HashString const &aFilename, int const aVolume)
 {
-  mSounds[aFilename]->SetVolume(aVolume);
+  mSounds[aFilename.ToHash()]->SetVolume(aVolume);
 }
 
 /**
  * @brief Resume a sound from pause.
  * @param aFilename
  */
-void SoundManager::ResumeSound(std::string const &aFilename)
+void SoundManager::ResumeSound(HashString const &aFilename)
 {
-  mSounds[aFilename]->Resume();
+  mSounds[aFilename.ToHash()]->Resume();
 }
 
 /**
  * @brief Pause a sound.
  * @param aFilename
  */
-void SoundManager::PauseSound(std::string const &aFilename)
+void SoundManager::PauseSound(HashString const &aFilename)
 {
-  mSounds[aFilename]->Pause();
+  mSounds[aFilename.ToHash()]->Pause();
 }
 
 /**

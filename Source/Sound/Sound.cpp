@@ -7,23 +7,16 @@
 //
 
 #include "Sound.h"
-#include "Common.h"
 
 Sound::Sound()
 {
   assert(!"Sound initialized without a name!");
 }
-Sound::Sound(std::string const &aFilename)
+Sound::Sound(HashString const &aFilename)
 {
-  // Get file name
-  for(int i = static_cast<int>(aFilename.size()) - 1;
-      aFilename[i] != '/' && i >= 0; --i)
-  {
-    mName.push_back(aFilename[i]);
-  }
-  std::reverse(mName.begin(), mName.end());
+  mName = Common::RetrieveNameFromFileName(aFilename);
 
-  std::ifstream infile(aFilename, std::ifstream::binary);
+  std::ifstream infile(aFilename.ToString(), std::ifstream::binary);
   infile.seekg(0, infile.end);
   mLength = infile.tellg();
   infile.seekg(0);

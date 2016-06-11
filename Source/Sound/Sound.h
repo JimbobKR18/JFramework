@@ -9,20 +9,20 @@
 #ifndef __JFramework__Sound_H_
 #define __JFramework__Sound_H_
 
-#include <string>
+#include "Common.h"
 
 struct Sound
 {
   static int const INFINITE_LOOPS = -1;
   static int const ONE_LOOP = 0;
   
-  std::string     mName;
+  HashString      mName;
   unsigned char*  mData;
   unsigned int    mPos;
   unsigned int    mLength;
   
   Sound();
-  Sound(std::string const &aFilename);
+  Sound(HashString const &aFilename);
   virtual ~Sound();
   
   virtual void Play(int const aNumLoops) = 0;
