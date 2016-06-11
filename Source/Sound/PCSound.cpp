@@ -27,6 +27,8 @@ PCSound::PCSound(HashString const &aFilename) : Sound(aFilename), mChannel(-1)
 
 PCSound::~PCSound()
 {
+  Mix_FreeChunk(mChunk);
+  mChunk = nullptr;
 }
 
 /**

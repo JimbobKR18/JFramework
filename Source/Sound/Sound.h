@@ -11,19 +11,23 @@
 
 #include "Common.h"
 
-struct Sound
+class Sound
 {
-  static int const INFINITE_LOOPS = -1;
-  static int const ONE_LOOP = 0;
-  
+private:
   HashString      mName;
   unsigned char*  mData;
   unsigned int    mPos;
   unsigned int    mLength;
   
+public:
+  static int const INFINITE_LOOPS = -1;
+  static int const ONE_LOOP = 0;
+  
   Sound();
   Sound(HashString const &aFilename);
   virtual ~Sound();
+  
+  HashString GetName() const;
   
   virtual void Play(int const aNumLoops) = 0;
   virtual void Play(int const aNumLoops, int const aTime) = 0;

@@ -12,6 +12,7 @@ Sound::Sound()
 {
   assert(!"Sound initialized without a name!");
 }
+
 Sound::Sound(HashString const &aFilename)
 {
   mName = Common::RetrieveNameFromFileName(aFilename);
@@ -25,7 +26,13 @@ Sound::Sound(HashString const &aFilename)
   infile.read((char*)mData, mLength);
   infile.close();
 }
+
 Sound::~Sound()
 {
   delete mData;
+}
+
+HashString Sound::GetName() const
+{
+  return mName;
 }

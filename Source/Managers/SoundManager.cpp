@@ -70,7 +70,7 @@ void SoundManager::DeleteSound(Sound* aSound)
  */
 void SoundManager::AddSound(Sound *aSound)
 {
-  mSounds[aSound->mName.ToHash()] = aSound;
+  mSounds[aSound->GetName().ToHash()] = aSound;
 }
 
 /**
@@ -79,7 +79,7 @@ void SoundManager::AddSound(Sound *aSound)
  */
 void SoundManager::RemoveSound(Sound *aSound)
 {
-  mSounds.erase(aSound->mName.ToHash());
+  mSounds.erase(aSound->GetName().ToHash());
 }
 
 /**
