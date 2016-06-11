@@ -238,6 +238,10 @@ void Menu::ParseFile()
     {
       ParseSurface(element->GetObject(), newElement->Find("Surface"));
     }
+    if(newElement->Find("ObjectName"))
+    {
+      element->GetObject()->SetName(newElement->Find("ObjectName")->GetValue());
+    }
 
     AddObject(element);
 
