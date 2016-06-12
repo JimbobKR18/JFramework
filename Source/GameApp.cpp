@@ -70,7 +70,7 @@ void GameApp::SetAppStep(float const aAppStep)
   mAppStep = aAppStep;
 }
 
-/**
+/** 
  * @brief Get speed of app.
  * @return Speed for app.
  */
