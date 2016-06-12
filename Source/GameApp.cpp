@@ -12,7 +12,7 @@
 #include "Constants.h"
 #include "SystemProperties.h"
 
-GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAppStep(0), mActive(true)
+GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
 {
   // AutoParses ./SystemProperties.ini
   SystemProperties::Deserialize();
@@ -58,7 +58,7 @@ GameApp::~GameApp()
  */
 float GameApp::GetAppStep() const
 {
-  return mAppStep;
+  return mAppStep * mAppSpeed;
 }
 
 /**
@@ -68,6 +68,24 @@ float GameApp::GetAppStep() const
 void GameApp::SetAppStep(float const aAppStep)
 {
   mAppStep = aAppStep;
+}
+
+/**
+ * @brief Get speed of app.
+ * @return Speed for app.
+ */
+float GameApp::GetAppSpeed() const
+{
+  return mAppSpeed;
+}
+
+/**
+ * @brief Set speed of app.
+ * @param aAppSpeed Speed for app.
+ */
+void GameApp::SetAppSpeed(float const aAppSpeed)
+{
+  mAppSpeed = aAppSpeed;
 }
 
 /**

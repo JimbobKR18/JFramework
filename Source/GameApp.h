@@ -15,6 +15,7 @@ private:
   unsigned int          mLastFrame;
   float                 mDT;
   float                 mAppStep;
+  float                 mAppSpeed;
   bool                  mActive;
 public:
   GameApp();
@@ -22,6 +23,8 @@ public:
 
   float             GetAppStep() const;
   void              SetAppStep(float const aAppStep);
+  float             GetAppSpeed() const;
+  void              SetAppSpeed(float const aAppSpeed);
   bool              GetActive() const;
   void              SetActive(bool const aActive);
   void              SetLastFrameTime(unsigned int const &aLastFrame);
