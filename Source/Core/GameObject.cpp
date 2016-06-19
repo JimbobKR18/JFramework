@@ -43,7 +43,7 @@ GameObject::~GameObject()
 {
   for(ComponentIT it = mComponents.begin(); it != mComponents.end(); ++it)
   {
-    delete *it;
+    delete it->second;
   }
   mComponents.clear();
 }
@@ -63,7 +63,7 @@ HashString GameObject::GetName()
  */
 HashString GameObject::GetFileName()
 {
-	return mFileName;
+  return mFileName;
 }
 
 /**
@@ -91,7 +91,7 @@ void GameObject::SetName(HashString const &aName)
 void GameObject::AddComponent(Component *aComponent)
 {
   aComponent->SetOwner(this);
-  mComponents.push_back(aComponent);
+  mComponents.insert(std::pair<int, Component*>(aComponent->GetDefinedUID(), aComponent));
 }
 
 /**
@@ -101,19 +101,7 @@ void GameObject::AddComponent(Component *aComponent)
  */
 void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
 {
-  ComponentIT end = mComponents.end();
-  for(ComponentIT it = mComponents.begin(); it != end; ++it)
-  {
-    if(aComponent == *it)
-    {
-      (*it)->SetOwner(nullptr);
-      if(aDelete)
-        delete *it;
-      mComponents.erase(it);
-      end = mComponents.end();
-      break;
-    }
-  }
+  RemoveComponent(aComponent->GetDefinedUID(), aDelete);
 }
 
 /**
@@ -123,19 +111,13 @@ void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
  */
 void GameObject::RemoveComponent(int const &aUID, bool aDelete)
 {
-  ComponentIT end = mComponents.end();
-  for(ComponentIT it = mComponents.begin(); it != end;)
+  ComponentIT component = mComponents.find(aUID);
+  if(component != mComponents.end())
   {
-    if(aUID == (*it)->GetUID())
-    {
-      (*it)->SetOwner(nullptr);
-      if(aDelete)
-        delete *it;
-      it = mComponents.erase(it);
-      end = mComponents.end();
-    }
-    else
-      ++it;
+    component->second->SetOwner(nullptr);
+    if(aDelete)
+      delete component->second;
+    mComponents.erase(component);
   }
 }
 
@@ -146,11 +128,10 @@ void GameObject::RemoveComponent(int const &aUID, bool aDelete)
  */
 Component *GameObject::GetComponent(int const &aUID)
 {
-  ComponentIT end = mComponents.end();
-  for(ComponentIT it = mComponents.begin(); it != end; ++it)
+  ComponentIT component = mComponents.find(aUID);
+  if(component != mComponents.end())
   {
-    if((*it)->GetDefinedUID() == aUID)
-      return *it;
+    return component->second;
   }
   return nullptr;
 }
@@ -172,11 +153,10 @@ Component* GameObject::GetComponentByName(HashString const &aName)
  */
 bool GameObject::HasComponent(int const &aUID)
 {
-  ComponentIT end = mComponents.end();
-  for(ComponentIT it = mComponents.begin(); it != end; ++it)
+  ComponentIT component = mComponents.find(aUID);
+  if(component != mComponents.end())
   {
-    if((*it)->GetDefinedUID() == aUID)
-      return true;
+    return true;
   }
   return false;
 }
@@ -199,7 +179,7 @@ void GameObject::Update()
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
-    (*it)->Update();
+    it->second->Update();
   }
 }
 
@@ -212,7 +192,7 @@ void GameObject::ReceiveMessage(Message const &aMessage)
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
-    (*it)->ReceiveMessage(aMessage);
+    it->second->ReceiveMessage(aMessage);
   }
 }
 
@@ -229,7 +209,7 @@ void GameObject::Serialize(Parser &aParser)
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
-    (*it)->Serialize(aParser);
+    it->second->Serialize(aParser);
   }
 }
 

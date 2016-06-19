@@ -19,12 +19,12 @@ class ObjectManager;
 class GameObject
 {
 private:
-  HashString              mFileName;
-  HashString              mName;
-  std::vector<Component*> mComponents;
-  ObjectManager*          mManager;
+  HashString                          mFileName;
+  HashString                          mName;
+  std::unordered_map<int, Component*> mComponents;
+  ObjectManager*                      mManager;
   
-  typedef std::vector<Component*>::iterator ComponentIT;
+  typedef std::unordered_map<int, Component*>::iterator ComponentIT;
 public:
   GameObject();
   GameObject(ObjectManager *aManager, HashString const &aFileName);

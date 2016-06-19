@@ -70,6 +70,7 @@
     <File Name="../../Source/Core/Shape.cpp"/>
     <File Name="../../Source/Core/FileCache.cpp"/>
     <File Name="../../Source/Core/FileCache.h"/>
+    <File Name="../../Source/Core/PlatformIncludes.h"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
