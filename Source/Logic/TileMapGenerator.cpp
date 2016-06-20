@@ -371,6 +371,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       float triZ = -zPos;
       if(mCollisionShapes.size() < collisionDataVectorSize ||
          mCollisionShapes[i] == CollisionShapes::CUBE ||
+         mCollisionShapes[i] == CollisionShapes::CUBE_PASSABLE ||
          mCollisionShapes[i] >= CollisionShapes::ALL_COLLISION_SHAPES)
       {
         shape = new Cube(zeroVector, transform->GetSize());
@@ -380,60 +381,70 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
           mCollisionShapes.push_back(CollisionShapes::CUBE);
         }
       }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPLEFT)
+      else if(mCollisionShapes[i] == CollisionShapes::TOPLEFT ||
+              mCollisionShapes[i] == CollisionShapes::TOPLEFT_PASSABLE)
       {
         Vector3 point1(-triSize, -triSize, triZ);
         Vector3 point2(triSize, -triSize, triZ);
         Vector3 point3(-triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT)
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT ||
+              mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT_PASSABLE)
       {
         Vector3 point1(-triSize, -triSize, triZ);
         Vector3 point2(triSize, triSize, triZ);
         Vector3 point3(-triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPRIGHT)
+      else if(mCollisionShapes[i] == CollisionShapes::TOPRIGHT ||
+              mCollisionShapes[i] == CollisionShapes::TOPRIGHT_PASSABLE)
       {
         Vector3 point1(-triSize, -triSize, triZ);
         Vector3 point2(triSize, -triSize, triZ);
         Vector3 point3(triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT)
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT ||
+              mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT_PASSABLE)
       {
         Vector3 point1(triSize, -triSize, triZ);
         Vector3 point2(triSize, triSize, triZ);
         Vector3 point3(-triSize, triSize, triZ);
         shape = new Triangle(point1, point2, point3);
       }
-      else if(mCollisionShapes[i] == CollisionShapes::BACKSLASH)
+      else if(mCollisionShapes[i] == CollisionShapes::BACKSLASH ||
+              mCollisionShapes[i] == CollisionShapes::BACKSLASH_PASSABLE)
       {
         shape = new Line(Vector3(-triSize, -triSize, triZ), 
                          Vector3(triSize, triSize, triZ));
       }
-      else if(mCollisionShapes[i] == CollisionShapes::FORWARDSLASH)
+      else if(mCollisionShapes[i] == CollisionShapes::FORWARDSLASH ||
+              mCollisionShapes[i] == CollisionShapes::FORWARDSLASH_PASSABLE)
       {
         shape = new Line(Vector3(-triSize, triSize, triZ), 
                          Vector3(triSize, -triSize, triZ));
       }
-      else if(mCollisionShapes[i] == CollisionShapes::LEFTSIDE)
+      else if(mCollisionShapes[i] == CollisionShapes::LEFTSIDE ||
+              mCollisionShapes[i] == CollisionShapes::LEFTSIDE_PASSABLE)
       {
         shape = new Line(Vector3(-triSize, -triSize, triZ), 
                          Vector3(-triSize, triSize, triZ));
       }
-      else if(mCollisionShapes[i] == CollisionShapes::RIGHTSIDE)
+      else if(mCollisionShapes[i] == CollisionShapes::RIGHTSIDE ||
+              mCollisionShapes[i] == CollisionShapes::RIGHTSIDE_PASSABLE)
       {
         shape = new Line(Vector3(triSize, triSize, triZ), 
                          Vector3(triSize, -triSize, triZ));
       }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPSIDE)
+      else if(mCollisionShapes[i] == CollisionShapes::TOPSIDE ||
+              mCollisionShapes[i] == CollisionShapes::TOPSIDE_PASSABLE)
       {
         shape = new Line(Vector3(-triSize, -triSize, triZ), 
                          Vector3(triSize, -triSize, triZ));
       }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMSIDE)
+      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMSIDE ||
+              mCollisionShapes[i] == CollisionShapes::BOTTOMSIDE_PASSABLE)
       {
         shape = new Line(Vector3(-triSize, triSize, triZ), 
                          Vector3(triSize, triSize, triZ));
@@ -441,6 +452,12 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       else
       {
         assert(!"Invalid value handed into TileMapGenerator.");
+      }
+      
+      if(mCollisionShapes[i] >= CollisionShapes::CUBE_PASSABLE && 
+         mCollisionShapes[i] < CollisionShapes::ALL_COLLISION_SHAPES)
+      {
+        physics->SetPassable(true);
       }
       
       // Finally, add shape to our physicsobject
