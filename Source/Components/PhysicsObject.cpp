@@ -542,6 +542,24 @@ void PhysicsObject::SetBroadSize(Vector3 const &aSize)
 }
 
 /**
+ * @brief Get list of ignorable objects
+ * @return List of ignorable objects
+ */
+PhysicsObject::IgnoreContainer PhysicsObject::GetIgnoreList() const
+{
+  return mIgnoreList;
+}
+
+/**
+ * @brief Set list of objects to ignore
+ * @param aIgnoreList List of ignorable objects
+ */
+void PhysicsObject::SetIgnoreList(PhysicsObject::IgnoreContainer const &aIgnoreList)
+{
+  mIgnoreList = aIgnoreList;
+}
+
+/**
  * @brief Get all shapes
  * @return Shapes belonging to this object.
  */

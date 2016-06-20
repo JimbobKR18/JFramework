@@ -308,6 +308,14 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   unsigned const collisionDataVectorSize = mCollisionData.size();
   unsigned const tileDataVectorSize = mTiles.size();
   std::map<int, float>::const_iterator tileHeightsEnd = mTileHeights.end();
+  PhysicsObject::IgnoreContainer ignoreContainer;
+  
+  // Make tiles ignore other tiles for collision
+  for(int i = 0; i < 99; ++i)
+  {
+    HashString value = "Tile_" + Common::IntToString(i);
+    ignoreContainer.insert(std::pair<int, HashString>(value.ToHash(), value));
+  }
   
   // Get the position of the starting index.
   while(xPos >= mWidth)
@@ -454,6 +462,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
         assert(!"Invalid value handed into TileMapGenerator.");
       }
       
+      // Set passable if marked passable
       if(mCollisionShapes[i] >= CollisionShapes::CUBE_PASSABLE && 
          mCollisionShapes[i] < CollisionShapes::ALL_COLLISION_SHAPES)
       {
@@ -462,14 +471,8 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       
       // Finally, add shape to our physicsobject
       physics->AddShape(shape);
-      
-      // Make tiles ignore other tiles for collision
-      for(int i = 0; i < 99; ++i)
-      {
-        char buffer[33];
-        sprintf(buffer, "Tile_%d", i);
-        physics->AddIgnore(std::string(buffer));
-      }
+      // Set ignore list for physics
+      physics->SetIgnoreList(ignoreContainer);
 
       obj->AddComponent(physics);
     }

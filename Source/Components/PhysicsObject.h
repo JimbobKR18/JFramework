@@ -16,9 +16,12 @@
 
 class PhysicsObject : public Component
 {
-private:
+public:
   typedef std::unordered_map<int, HashString> IgnoreContainer;
-
+  typedef std::vector<Shape*>::iterator shapeIT;
+  typedef std::vector<Shape*>::const_iterator constShapeIT;
+  
+private:
   PhysicsWorld*       mWorld;
   Vector3             mVelocity,
                       mAcceleration,
@@ -38,9 +41,6 @@ private:
   static int const sUID;
 
 public:
-  typedef std::vector<Shape*>::iterator shapeIT;
-  typedef std::vector<Shape*>::const_iterator constShapeIT;
-
   PhysicsObject(PhysicsWorld *aWorld);
   virtual ~PhysicsObject();
 
@@ -89,6 +89,9 @@ public:
 
   Vector3              GetBroadSize() const;
   void                 SetBroadSize(Vector3 const &aSize);
+  
+  IgnoreContainer      GetIgnoreList() const;
+  void                 SetIgnoreList(IgnoreContainer const &aIgnoreList);
   
   std::vector<Shape*>& GetShapes();
 };
