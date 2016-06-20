@@ -21,8 +21,8 @@ TileMapGenerator::TileMapGenerator()
 }
 
 TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
-                                   std::string const &aImageName,
-                                   std::string const &aDataName,
+                                   HashString const &aImageName,
+                                   HashString const &aDataName,
                                    std::vector<int> const &aTiles,
                                    std::vector<int> const &aCollisionData,
                                    std::vector<int> const &aCollisionShapes,
@@ -126,7 +126,7 @@ int TileMapGenerator::GetTileSize() const
  * @brief Get source image name
  * @return Name of source image
  */
-std::string TileMapGenerator::GetImageName() const
+HashString TileMapGenerator::GetImageName() const
 {
   return mImageName;
 }
@@ -135,7 +135,7 @@ std::string TileMapGenerator::GetImageName() const
  * @brief Get data file name
  * @return Data file name
  */
-std::string TileMapGenerator::GetDataName() const
+HashString TileMapGenerator::GetDataName() const
 {
   return mDataName;
 }
@@ -332,7 +332,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     aObjectManager->AddObject(obj, true);
     
     // Set name of tile, for collision reasons
-    obj->SetName(std::string("Tile_") + Common::IntToString(mCollisionData[i]));
+    obj->SetName(HashString("Tile_") + Common::IntToString(mCollisionData[i]));
 
     // Get Transform of new object
     float zPos = defaultZPos;

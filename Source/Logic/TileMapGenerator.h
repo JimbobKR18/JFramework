@@ -70,8 +70,8 @@ private:
   int                             mWidth;
   int                             mHeight;
   int                             mTileSize;
-  std::string                     mImageName;
-  std::string                     mDataName;
+  HashString                      mImageName;
+  HashString                      mDataName;
   std::vector<int>                mTiles;
   std::vector<int>                mCollisionData;
   std::vector<int>                mCollisionShapes;
@@ -91,8 +91,8 @@ private:
 public:
   TileMapGenerator();
   TileMapGenerator(int aWidth, int aHeight, int aTileSize,
-                   std::string const &aImageName,
-                   std::string const &aDataName,
+                   HashString const &aImageName,
+                   HashString const &aDataName,
                    std::vector<int> const &aTiles,
                    std::vector<int> const &aCollisionData, 
                    std::vector<int> const &aCollisionShapes,
@@ -106,8 +106,8 @@ public:
   int               GetWidth() const;
   int               GetHeight() const;
   int               GetTileSize() const;
-  std::string       GetImageName() const;
-  std::string       GetDataName() const;
+  HashString        GetImageName() const;
+  HashString        GetDataName() const;
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
   std::vector<int>& GetCollisionShapes();
