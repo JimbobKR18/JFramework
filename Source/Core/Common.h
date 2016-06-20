@@ -44,6 +44,7 @@ namespace Common
   bool                      StringToBool(std::string const &aValue);
   std::vector<int>          StringToIntVector(std::string const &aValue);
   std::vector<float>        StringToFloatVector(std::string const &aValue);
+  std::vector<bool>         StringToBoolVector(std::string const &aValue);
   std::vector<std::string>  StringToStringVector(std::string const &aValue);
 
   std::string               IntToString(int const aValue);
@@ -51,6 +52,7 @@ namespace Common
   std::string               BoolToString(bool const aValue);
   std::string               IntVectorToString(std::vector<int> &aValue);
   std::string               FloatVectorToString(std::vector<float> &aValue);
+  std::string               BoolVectorToString(std::vector<bool> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   
   std::string               ParseString(std::istream *infile, std::string const &aString);

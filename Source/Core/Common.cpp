@@ -104,6 +104,27 @@ namespace Common
     
     return ret;
   }
+  
+  /**
+   * @brief Converts String to Bool Vector
+   * @param aValue
+   */
+  std::vector<bool> StringToBoolVector(std::string const &aValue)
+  {
+    std::vector<bool> ret;
+    std::istringstream stream(aValue);
+    
+    std::string value;
+    
+    while(!stream.eof())
+    {
+      stream >> value;
+      ret.push_back((value == "true" ? true : false));
+      stream.ignore();
+    }
+    
+    return ret;
+  }
 
   /**
    * @brief Converts String to String Vector
@@ -196,6 +217,24 @@ namespace Common
       std::ostringstream stream;
       stream << *it;
       ret += stream.str();
+      ret += ",";
+    }
+    ret = ret.substr(0, ret.size() - 1);
+
+    return ret;
+  }
+  
+  /**
+   * @brief Converts Bool Vector to String (comma separated)
+   * @param aValue
+   */
+  std::string BoolVectorToString(std::vector<bool> &aValue)
+  {
+    std::string ret;
+    std::vector<bool>::iterator end = aValue.end();
+    for(std::vector<bool>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      ret += (*it ? "true" : "false");
       ret += ",";
     }
     ret = ret.substr(0, ret.size() - 1);
