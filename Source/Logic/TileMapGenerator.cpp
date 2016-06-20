@@ -457,6 +457,46 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
         shape = new Line(Vector3(-triSize, triSize, triZ), 
                          Vector3(triSize, triSize, triZ));
       }
+      else if(mCollisionShapes[i] == CollisionShapes::HALFLEFT ||
+              mCollisionShapes[i] == CollisionShapes::HALFLEFT_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::HALFRIGHT ||
+              mCollisionShapes[i] == CollisionShapes::HALFRIGHT_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::HALFTOP ||
+              mCollisionShapes[i] == CollisionShapes::HALFTOP_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::HALFBOTTOM ||
+              mCollisionShapes[i] == CollisionShapes::HALFBOTTOM_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::QUARTERTOPLEFT ||
+              mCollisionShapes[i] == CollisionShapes::QUARTERTOPLEFT_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::QUARTERTOPRIGHT ||
+              mCollisionShapes[i] == CollisionShapes::QUARTERTOPRIGHT_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMLEFT ||
+              mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMLEFT_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
+      else if(mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMRIGHT ||
+              mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMRIGHT_PASSABLE)
+      {
+        assert(!"Not supported");
+      }
       else
       {
         assert(!"Invalid value handed into TileMapGenerator.");
