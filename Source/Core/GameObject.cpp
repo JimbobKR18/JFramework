@@ -95,12 +95,15 @@ void GameObject::AddComponent(Component *aComponent)
 }
 
 /**
- * @brief Remove a component from gameobject
+ * @brief Remove a component from game object
  * @param aComponent Component to remove
  * @param aDelete True to delete component while you are at it
  */
 void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
 {
+  // If component is nullptr, skip.
+  if(!aComponent)
+    return;
   RemoveComponent(aComponent->GetDefinedUID(), aDelete);
 }
 
