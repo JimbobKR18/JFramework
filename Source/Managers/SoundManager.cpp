@@ -121,11 +121,23 @@ void SoundManager::StopSoundTimed(HashString const &aFilename, int const aMillis
 }
 
 /**
+ * @brief Set volume of all sounds.
+ * @param aVolume Volume value from 0 to 1.
+ */
+void SoundManager::SetVolume(float const aVolume)
+{
+  for(SoundIt it = mSounds.begin(); it != mSounds.end(); ++it)
+  {
+    it->second->SetVolume(aVolume);
+  }
+}
+
+/**
  * @brief Set the volume of a sound.
  * @param aFilename
  * @param aVolume The volume to set the sound to.
  */
-void SoundManager::SetSoundVolume(HashString const &aFilename, int const aVolume)
+void SoundManager::SetSoundVolume(HashString const &aFilename, float const aVolume)
 {
   mSounds[aFilename.ToHash()]->SetVolume(aVolume);
 }

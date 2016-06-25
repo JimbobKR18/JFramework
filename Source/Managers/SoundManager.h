@@ -35,7 +35,8 @@ public:
   void                PlaySoundTimed(HashString const &aFilename, int const aNumLoops, int const aMillis);
   void                StopSound(HashString const &aFilename);
   void                StopSoundTimed(HashString const &aFilename, int const aMillis);
-  void                SetSoundVolume(HashString const &aFilename, int const aVolume);
+  void                SetVolume(float const aVolume);
+  void                SetSoundVolume(HashString const &aFilename, float const aVolume);
   void                ResumeSound(HashString const &aFilename);
   void                PauseSound(HashString const &aFilename);
 

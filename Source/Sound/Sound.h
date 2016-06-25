@@ -34,7 +34,7 @@ public:
   virtual void FadeIn(int const aNumLoops, int const aTime) = 0;
   virtual void FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTime) = 0;
   
-  virtual void SetVolume(int const aVolume) = 0;
+  virtual void SetVolume(float const aVolume) = 0;
   
   virtual void Resume() = 0;
   virtual void Pause() = 0;

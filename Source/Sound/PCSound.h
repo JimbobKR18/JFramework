@@ -24,10 +24,11 @@
 class PCSound : public Sound
 {
 private:
+  static int const MAX_VOLUME = 128;
+  
   Mix_Chunk*  mChunk;
   int         mChannel;
 public:
-  static int const MAX_VOLUME = 128;
 
   PCSound();
   PCSound(HashString const &aFilename);
@@ -38,7 +39,7 @@ public:
   virtual void FadeIn(int const aNumLoops, int const aTime);
   virtual void FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTime);
   
-  virtual void SetVolume(int const aVolume);
+  virtual void SetVolume(float const aVolume);
   
   virtual void Resume();
   virtual void Pause();

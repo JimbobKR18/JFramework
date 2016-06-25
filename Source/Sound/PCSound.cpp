@@ -96,13 +96,13 @@ void PCSound::FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTi
 
 /**
  * @brief Set volume for this sound.
- * @param aVolume The volume, from 0 to MAX_VOLUME(128)
+ * @param aVolume The volume, from 0 to 1.
  */
-void PCSound::SetVolume(int const aVolume)
+void PCSound::SetVolume(float const aVolume)
 {
   if(mChannel != -1)
   {
-    Mix_Volume(mChannel, aVolume);
+    Mix_Volume(mChannel, aVolume * MAX_VOLUME);
   }
 }
 
