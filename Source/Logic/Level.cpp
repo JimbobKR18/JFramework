@@ -16,6 +16,10 @@
 #include "ObjectCreateMessage.h"
 #include "ResetLevelMessage.h"
 
+#if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
+  #define SHADER_COMPATIBLE
+#endif
+
 bool SortPredicate(GameObject *aLhs, GameObject *aRhs)
 {
   return aLhs->GET<Transform>()->GetPosition().z <= aRhs->GET<Transform>()->GetPosition().z;
@@ -1028,10 +1032,12 @@ void Level::ParseSurface(GameObject *aObject, Root *aSurface)
   objSurface->SetColor(Vector4(r, g, b, a));
   objSurface->SetAnimation(startingAnimation);
   
+#ifdef SHADER_COMPATIBLE
   if(aSurface->Find("VertexShader") && aSurface->Find("FragmentShader"))
   {
     objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
   }
+#endif
 }
 
 /**
