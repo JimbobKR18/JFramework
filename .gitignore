@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 Windows/JFramework/Debug
 Windows/JFramework/JFramework/Debug
 Source/.DS_Store
@@ -18,3 +19,25 @@ Linux/JFramework/obj
 Windows/.DS_Store
 
 *.DS_Store
+=======
+Windows/JFramework/Debug
+Windows/JFramework/JFramework/Debug
+Source/.DS_Store
+
+JFramework/.DS_Store
+
+Android/.DS_Store
+
+*.swp
+
+Linux/.DS_Store
+Linux/Debug
+Linux/Release
+Linux/JFramework/Debug
+Linux/JFramework/Release
+Linux/JFramework/obj
+
+Windows/.DS_Store
+
+.DS_Store
+>>>>>>> Stashed changes
