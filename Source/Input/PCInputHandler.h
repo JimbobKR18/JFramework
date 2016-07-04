@@ -23,6 +23,7 @@ public:
   virtual int GetInputCount();
   
   SDL_Joystick* GetJoystick(int const index) const;
+  int GetJoystickInstanceId(int const index) const;
 };
 
 #endif

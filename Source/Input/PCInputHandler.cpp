@@ -62,3 +62,14 @@ SDL_Joystick* PCInputHandler::GetJoystick(int const index) const
   
   return mJoysticks[index];
 }
+
+/**
+ * @brief Get instance id of joystick.
+ * @param index Index of joystick in mapping.
+ * @return Actual joystick instance id.
+ */
+int PCInputHandler::GetJoystickInstanceId(int const index) const
+{
+  SDL_Joystick* joystick = GetJoystick(index);
+  return SDL_JoystickInstanceID(joystick);
+}
