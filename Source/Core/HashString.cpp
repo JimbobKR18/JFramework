@@ -90,6 +90,15 @@ HashString HashString::SubString(int aStart, int aLength) const
 }
 
 /**
+ * @brief Get string without whitespace.
+ * @return Trimmed string.
+ */
+HashString HashString::Trim() const
+{
+  return Common::TrimString(mString);
+}
+
+/**
  * @brief Split a string based on delimiter
  * @param aDelimiter String to split by.
  * @return Vector of hashstrings.

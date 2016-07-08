@@ -313,21 +313,22 @@ namespace Common
    * @param aString String to trim.
    * @return Trimmed string.
    */
-  std::string TrimString(std::string &aString)
+  std::string TrimString(std::string const &aString)
   {
-    for(std::string::iterator it = aString.begin(); it != aString.end();)
+    std::string ret;
+    for(std::string::const_iterator it = aString.begin(); it != aString.end(); ++it)
     {
       char letter = *it;
       if(letter == ' ' || letter == '\r' || letter == '\t' || letter == '\n')
       {
-        it = aString.erase(it);
+        continue;
       }
       else
       {
-        ++it;
+        ret.push_back(letter);
       }
     }
-    return aString;
+    return ret;
   }
   
   /**

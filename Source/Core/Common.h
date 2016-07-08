@@ -56,7 +56,7 @@ namespace Common
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   
   std::string               ParseString(std::istream *infile, std::string const &aString);
-  std::string               TrimString(std::string &aString);
+  std::string               TrimString(std::string const &aString);
   
   HashString                RetrieveNameFromFileName(HashString const &aFileName);
   int                       StringHashFunction(std::string const &aString);
