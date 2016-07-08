@@ -304,8 +304,30 @@ namespace Common
     }
     
     if(constantLocation != std::string::npos)
-      return Constants::GetString(ret);
+      return Constants::GetString(TrimString(ret));
     return ret;
+  }
+  
+  /**
+   * @brief Trim whitespace from a string.
+   * @param aString String to trim.
+   * @return Trimmed string.
+   */
+  std::string TrimString(std::string &aString)
+  {
+    for(std::string::iterator it = aString.begin(); it != aString.end();)
+    {
+      char letter = *it;
+      if(letter == ' ' || letter == '\r' || letter == '\t' || letter == '\n')
+      {
+        it = aString.erase(it);
+      }
+      else
+      {
+        ++it;
+      }
+    }
+    return aString;
   }
   
   /**
