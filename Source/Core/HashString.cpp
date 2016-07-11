@@ -147,6 +147,15 @@ void HashString::Push(char aChar)
   Hash();
 }
 
+/**
+ * @brief Clears out string.
+ */
+void HashString::Clear()
+{
+  mString.clear();
+  Hash();
+}
+
 // Operators
 /**
  * @brief Set string equal to another.

@@ -40,6 +40,7 @@ public:
   // Non-Const Operations
   void Reverse();
   void Push(char aChar);
+  void Clear();
 
   // Operators
   // Equality
