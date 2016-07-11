@@ -8,13 +8,13 @@
 
 #include "Controller.h"
 #include "ControllerManager.h"
-#include "ObjectManager.h"
 
 int const Controller::sUID = Common::StringHashFunction("Controller");
 
 // PROTECTED
-Controller::Controller(int const &aUID) : Component(aUID), mPaused(false)
+Controller::Controller(ControllerManager *aManager, int const &aUID) : Component(aUID), mManager(aManager), mPaused(false)
 {
+  aManager->AddController(this);
 }
 
 Controller::Controller() : Component(Controller::sUID), mPaused(false)
@@ -24,7 +24,16 @@ Controller::Controller() : Component(Controller::sUID), mPaused(false)
 
 Controller::~Controller()
 {
-  GetOwner()->GetManager()->GetOwningApp()->GET<ControllerManager>()->RemoveController(this);
+  mManager->RemoveController(this);
+}
+
+/**
+ * @brief Get manager.
+ * @return Manager.
+ */
+ControllerManager* Controller::GetManager() const
+{
+  return mManager;
 }
 
 /**

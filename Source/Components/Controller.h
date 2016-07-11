@@ -15,17 +15,21 @@
 #include "Component.h"
 #include "MathExt.h"
 
+class ControllerManager;
+
 class Controller : public Component
 {
 private:
+  ControllerManager *mManager;
   static int const sUID;
   bool mPaused;
 protected:
-  Controller(int const &aUID);
+  Controller(ControllerManager *aManager, int const &aUID);
 public:
   Controller();
   virtual ~Controller();
   
+  ControllerManager*    GetManager() const;
   void                  SetPaused(bool const aPaused);
   bool                  GetPaused() const;
   
