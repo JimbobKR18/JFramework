@@ -20,9 +20,7 @@ HashString::HashString(HashString  const &aRhs) : mString(aRhs.mString), mHash(a
 
 HashString::HashString(char const* aString, unsigned aStart, unsigned aEnd)
 {
-  if(aEnd > strlen(aString))
-    assert(!"HashString constructor will run off the end!");
-  else if(aEnd == 0)
+  if(aEnd >= strlen(aString))
     mString = aString;
   else
   {
