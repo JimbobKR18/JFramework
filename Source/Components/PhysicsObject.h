@@ -45,11 +45,12 @@ public:
   virtual ~PhysicsObject();
 
   // Methods from Component
-  void                 Update();
-  void                 SendMessage(Message const &aMessage);
-  void                 ReceiveMessage(Message const &aMessage);
-  void                 Serialize(Parser &aParser);
-  void                 Deserialize(Parser &aParser);
+  virtual void         Update();
+  virtual void         SendMessage(Message const &aMessage);
+  virtual void         ReceiveMessage(Message const &aMessage);
+  virtual void         Serialize(Parser &aParser);
+  virtual void         Deserialize(Parser &aParser);
+  static void          SerializeLUA();
   static int           GetUID() {return sUID;}
 
   // Methods - Misc.

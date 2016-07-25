@@ -307,6 +307,31 @@ void PhysicsObject::Deserialize(Parser &aParser)
 }
 
 /**
+ * @brief Make this object usable in LUA
+ */
+void PhysicsObject::SerializeLUA()
+{
+  SLB::Class<PhysicsObject>("PhysicsObject")
+    .set("GetVelocity", &PhysicsObject::GetVelocity)
+    .set("SetVelocity", &PhysicsObject::SetVelocity)
+    .set("GetAcceleration", &PhysicsObject::GetAcceleration)
+    .set("SetAcceleration", &PhysicsObject::SetAcceleration)
+    .set("GetMass", &PhysicsObject::GetMass)
+    .set("SetMass", &PhysicsObject::SetMass)
+    .set("GetDamping", &PhysicsObject::GetDamping)
+    .set("SetDamping", &PhysicsObject::SetDamping)
+    .set("GetRestitution", &PhysicsObject::GetRestitution)
+    .set("SetRestitution", &PhysicsObject::SetRestitution)
+    .set("IsStatic", &PhysicsObject::IsStatic)
+    .set("SetStatic", &PhysicsObject::SetStatic)
+    .set("IsPassable", &PhysicsObject::IsPassable)
+    .set("SetPassable", &PhysicsObject::SetPassable)
+    .set("IsActive", &PhysicsObject::IsActive)
+    .set("SetActive", &PhysicsObject::SetActive)
+    .set("AddForce", &PhysicsObject::AddForce);
+}
+
+/**
  * @brief Add shape to list
  * @param aShape Shape to add
  */

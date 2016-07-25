@@ -70,6 +70,9 @@ namespace LUABind
     // Surface
     Surface::SerializeLUA();
     PCSurface::SerializeLUA();
+    
+    // Physics
+    PhysicsObject::SerializeLUA();
 
     // GameObject
     GameObject::SerializeLUA();
