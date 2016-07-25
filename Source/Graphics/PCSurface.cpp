@@ -34,13 +34,13 @@ PCSurface::~PCSurface()
   if(mFont)
   {
     TTF_CloseFont(mFont);
-    mFont = nullptr;
   }
   if(mSurface)
   {
     SDL_FreeSurface(mSurface);
-    mSurface = nullptr;
   }
+  mFont = nullptr;
+  mSurface = nullptr;
 }
 
 /**
