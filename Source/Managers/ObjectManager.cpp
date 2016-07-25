@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "GraphicsManager.h"
 #include "ControllerManager.h"
+#include "DebugManager.h"
 #include "LuaIncludes.h"
 #include "ObjectDeleteMessage.h"
 #include "ObjectCreateMessage.h"
@@ -41,12 +42,18 @@ void ObjectManager::Update()
     if((*it)->GetDescription() == OBJECT_DELETE.ToCharArray()) 
     {
       ObjectDeleteMessage *msg = (ObjectDeleteMessage*)*it;
+#ifdef _DEBUG
+      GetOwningApp()->GET<DebugManager>()->HandleDelete(msg);
+#endif
       DeleteObject(msg->mObject);
       delete *it;
     }
     else if((*it)->GetDescription() == OBJECT_CREATE.ToCharArray())
     {
       ObjectCreateMessage *msg = (ObjectCreateMessage*)*it;
+#ifdef _DEBUG
+      GetOwningApp()->GET<DebugManager>()->HandleCreate(msg);
+#endif
       AddObject(msg->mObject);
       delete *it;
     }

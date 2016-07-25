@@ -10,6 +10,8 @@
 
 #include "Manager.h"
 #include "Common.h"
+#include "ObjectDeleteMessage.h"
+#include "ObjectCreateMessage.h"
 
 #if defined(_WIN32)
   #include "SDL.h"
@@ -23,11 +25,14 @@ class DebugManager : public Manager
 {
 private:
   static unsigned const sUID;
+  std::map<size_t, int> mInvalidMemory;
 public:
   DebugManager(GameApp *aApp);
   ~DebugManager();
 
   int                 HandleEvent(SDL_Event &event);
+  void                HandleCreate(ObjectCreateMessage *aMsg);
+  void                HandleDelete(ObjectDeleteMessage *aMsg);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);
