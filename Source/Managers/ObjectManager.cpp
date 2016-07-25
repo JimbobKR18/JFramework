@@ -42,18 +42,12 @@ void ObjectManager::Update()
     if((*it)->GetDescription() == OBJECT_DELETE.ToCharArray()) 
     {
       ObjectDeleteMessage *msg = (ObjectDeleteMessage*)*it;
-#ifdef _DEBUG
-      GetOwningApp()->GET<DebugManager>()->HandleDelete(msg);
-#endif
       DeleteObject(msg->mObject);
       delete *it;
     }
     else if((*it)->GetDescription() == OBJECT_CREATE.ToCharArray())
     {
       ObjectCreateMessage *msg = (ObjectCreateMessage*)*it;
-#ifdef _DEBUG
-      GetOwningApp()->GET<DebugManager>()->HandleCreate(msg);
-#endif
       AddObject(msg->mObject);
       delete *it;
     }
@@ -81,6 +75,19 @@ void ObjectManager::SendMessage(Message const &aMsg)
 void ObjectManager::ProcessDelayedMessage(Message *aMessage)
 {
   mDelayedMessages.push_back(aMessage);
+
+#ifdef _DEBUG
+  if(aMessage->GetDescription() == OBJECT_DELETE.ToCharArray()) 
+  {
+    ObjectDeleteMessage *msg = (ObjectDeleteMessage*)aMessage;
+    GetOwningApp()->GET<DebugManager>()->HandleDelete(msg);
+  }
+  else if(aMessage->GetDescription() == OBJECT_CREATE.ToCharArray()) 
+  {
+    ObjectCreateMessage *msg = (ObjectCreateMessage*)aMessage;
+    GetOwningApp()->GET<DebugManager>()->HandleCreate(msg);
+  }
+#endif
 }
 
 /**
