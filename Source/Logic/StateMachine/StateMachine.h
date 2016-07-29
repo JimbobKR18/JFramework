@@ -11,6 +11,13 @@ public:
   typedef std::set<State*> StateContainer;
   typedef StateContainer::const_iterator StateIT;
   
+  enum LinkType
+  {
+    LEFT_RIGHT,
+    RIGHT_LEFT,
+    BIDIRECTIONAL
+  };
+  
 private:
   LinkContainer mLinks;
   StateContainer mStates;
@@ -24,6 +31,7 @@ public:
   
   void SetCurrentState(HashString const &aName);
   void AddLink(StateLink *aLink);
+  void AddLink(State *aState1, State *aState2, LinkType const &aLinkType);
 };
 
 #endif // STATEMACHINE_H

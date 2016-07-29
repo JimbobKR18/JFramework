@@ -62,3 +62,41 @@ void StateMachine::AddLink(StateLink *aLink)
   mStates.insert(aLink->GetStart());
   mStates.insert(aLink->GetEnd());
 }
+
+/**
+ * @brief Add link to state machine.
+ * @param aState1 State 1
+ * @param aState2 State 2
+ * @param aLinkType How these should be linked.
+ *      State1 -> State2 (LEFT_RIGHT)
+ *      State2 -> State1 (RIGHT_LEFT)
+ *      State1 <-> State2 (BIDIRECTIONAL)
+ */
+void StateMachine::AddLink(State *aState1, State *aState2, LinkType const &aLinkType)
+{
+  mStates.insert(aState1);
+  mStates.insert(aState2);
+  
+  switch(aLinkType)
+  {
+    case LEFT_RIGHT:
+    {
+      mLinks.push_back(new StateLink(aState1, aState2));
+      break;
+    }
+    case RIGHT_LEFT:
+    {
+      mLinks.push_back(new StateLink(aState2, aState1));
+      break;
+    }
+    case BIDIRECTIONAL:
+    {
+      mLinks.push_back(new StateLink(aState1, aState2));
+      mLinks.push_back(new StateLink(aState2, aState1));
+      break;
+    }
+    default:
+      assert(!"How did you even get here?");
+      break;
+  }
+}
