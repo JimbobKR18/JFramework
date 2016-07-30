@@ -22,14 +22,18 @@ private:
   LinkContainer mLinks;
   StateContainer mStates;
   State* mCurrentState;
+  float mCurrentTime;
   
 public:
   StateMachine();
   virtual ~StateMachine();
   
-  State* GetCurrentState() const;
+  void Update(float const aDT);
+  bool IsCurrentStateExpired() const;
   
+  State* GetCurrentState() const;
   void SetCurrentState(HashString const &aName);
+  
   void AddLink(StateLink *aLink);
   void AddLink(State *aState1, State *aState2, LinkType const &aLinkType);
 };

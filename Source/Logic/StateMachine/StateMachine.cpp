@@ -1,7 +1,7 @@
 #include "Common.h"
 #include "StateMachine.h"
 
-StateMachine::StateMachine() : mLinks(), mStates(), mCurrentState(nullptr)
+StateMachine::StateMachine() : mLinks(), mStates(), mCurrentState(nullptr), mCurrentTime(0)
 {
 }
 
@@ -15,6 +15,27 @@ StateMachine::~StateMachine()
   {
     delete *it;
   }
+}
+
+/**
+ * @brief Update state machine.
+ * @param aDT Amount of time that has passed.
+ */
+void StateMachine::Update(float const aDT)
+{
+  mCurrentTime += aDT;
+}
+
+/**
+ * @brief Check if current state is expired.
+ * @return True if expired.
+ */
+bool StateMachine::IsCurrentStateExpired() const
+{
+  if(!mCurrentState || mCurrentState->GetTimeAlive() <= 0.0f)
+    return false;
+    
+  return mCurrentState->GetTimeAlive() <= mCurrentTime;
 }
 
 /**
@@ -36,6 +57,7 @@ void StateMachine::SetCurrentState(HashString const &aName)
   if(mCurrentState && mCurrentState->GetName() == aName)
     return;
     
+  mCurrentTime = 0;
   for(LinkIT it = mLinks.begin(); it != mLinks.end(); ++it)
   {
     State *start = (*it)->GetStart();
