@@ -14,6 +14,7 @@
 #include "MathExt.h"
 #include "Shape.h"
 #include "GameObject.h"
+#include "Core/LuaIncludes.h"
 
 HashString const COLLISION = "Collision";
 
@@ -25,14 +26,15 @@ private:
   Shape*        mShape1;
   Shape*        mShape2;
 
+public:
   CollisionMessage() : Message()
   {
+    assert(!"Do not create collision messages this way.");
   }
   CollisionMessage(CollisionMessage const &aMessage) : Message()
   {
+    assert(!"Do not create collision messages this way.");
   }
-
-public:
   CollisionMessage(HashString const &aContent,
                    GameObject *aObject1,
                    GameObject *aObject2,
@@ -70,6 +72,12 @@ public:
       return mShape1;
     else
       return mShape2;
+  }
+  
+  static void SerializeLUA() 
+  {
+    SLB::Class<CollisionMessage>("CollisionMessage")
+      .set("GetObject", &CollisionMessage::GetObject);
   }
 };
 

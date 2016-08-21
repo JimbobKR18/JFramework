@@ -100,9 +100,9 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
                           message->GetObject(0) : message->GetObject(1);
   HashString objectName = GetOwner()->GetFileName().SubString(0, GetOwner()->GetFileName().Length() - 4);
   
-  if(!LUABind::LoadFunction<GameObject*>("CollisionMessages.LUA",
+  if(!LUABind::LoadFunction<CollisionMessage*>("CollisionMessages.LUA",
                                      objectName + "_CollisionReceive",
-                                     otherBody))
+                                     message))
   {
     // Do some fallback logic here
     otherBody->Interact(GetOwner());

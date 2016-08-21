@@ -19,6 +19,7 @@
 #include "Core/MathExt.h"
 #include "Logic/Level.h"
 #include "Core/Interpolation.h"
+#include "Messages/CollisionMessage.h"
 
 #ifdef PC
 #include "Graphics/PCSurface.h"
@@ -56,6 +57,9 @@ namespace LUABind
     Vector3::SerializeLUA();
     Vector4::SerializeLUA();
     Matrix33::SerializeLUA();
+    
+    // Messages
+    CollisionMessage::SerializeLUA();
 
     // HashString
     HashString::SerializeLUA();
