@@ -283,6 +283,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
       
       // Set shader properties. Due to batching, done on a per surface / shader basis.
+      // Shader uniforms are reset upon relinking.
       SetShaderProperties(surface);
       
       // Set VBO and buffer data.
