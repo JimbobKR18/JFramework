@@ -3,6 +3,7 @@
 
 #include "Screen.h"
 #include "Transform.h"
+#include "PCShaderSurface.h"
 #if defined(_WIN32)
   #include <GL\glew.h>
   #include "SDL.h"
@@ -38,11 +39,13 @@ public:
   virtual void DebugDraw(std::vector<Surface*> const &aObjects);
   virtual void SwapBuffers();
   virtual void ChangeSize(int aW, int aH, bool aFullScreen);
+  virtual void AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue);
 
 private:
   void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
+  void SetShaderProperties(PCShaderSurface *aSurface);
 };
 
 #endif

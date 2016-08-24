@@ -33,6 +33,7 @@ public:
   virtual void DebugDraw(std::vector<Surface*> const &aObjects);
   virtual void SwapBuffers();
   virtual void ChangeSize(int aW, int aH, bool aFullScreen);
+  virtual void AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue);
 
 private:
   void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);

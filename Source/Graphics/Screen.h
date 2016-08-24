@@ -4,9 +4,16 @@
 #include "Surface.h"
 #include "View.h"
 #include "ScreenRenderSorter.h"
+#include "SurfaceProperty.h"
 
 class Screen
 {
+public:
+  typedef std::vector<SurfaceProperty*> PropertyContainer;
+  typedef std::unordered_map<int, PropertyContainer> PropertyMap;
+  typedef PropertyContainer::iterator PropertyContainerIt;
+  typedef PropertyMap::iterator PropertyMapIt;
+  
 private:
   int                 mWidth;
   int                 mHeight;
@@ -14,13 +21,14 @@ private:
   View                mView;
   ScreenRenderSorter* mBatchRenderSorter;
   ScreenRenderSorter* mDepthRenderSorter;
+  PropertyMap         mProperties;
 
 public:
   Screen();
   Screen(int aW, int aH, bool aFullScreen);
   virtual ~Screen();
 
-  // Width and Height
+  // Width, Height, and Fullscreen
   int                     GetWidth() const;
   void                    SetWidth(int const aWidth);
   int                     GetHeight() const;
@@ -39,6 +47,8 @@ public:
   void                    SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter);
   // Batching
   void                    SortObjects(std::vector<Surface*> &aObjects);
+  // Properties
+  PropertyMap&            GetPropertyMap();
 
   virtual void            ChangeSize(int aW, int aH, bool aFullScreen) = 0;
   virtual void            PreDraw() = 0;
@@ -46,6 +56,7 @@ public:
   virtual void            DrawUI(std::vector<Surface*> const &aObjects) = 0;
   virtual void            DebugDraw(std::vector<Surface*> const &aObjects) = 0;
   virtual void            SwapBuffers() = 0;
+  virtual void            AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue) = 0;
 };
 
 #endif

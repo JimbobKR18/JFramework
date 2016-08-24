@@ -280,6 +280,9 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
       glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
       
+      // Set shader properties. Due to batching, done on a per program basis.
+      SetShaderProperties(surface);
+      
       // Set VBO and buffer data.
       glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
       glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
@@ -393,6 +396,29 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 }
 
 /**
+ * @brief Edit property if there, otherwise add.
+ * @param aName Name of property
+ * @param aType Type of property
+ * @param aValue Value of property
+ */
+void PCShaderScreen::AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue)
+{
+  int id = ((PCShaderSurface*)aSurface)->GetProgramID();
+  PropertyContainer &properties = GetPropertyMap()[id];
+  PropertyContainerIt propertyEnd = properties.end();
+  for(PropertyContainerIt it = properties.begin(); it != propertyEnd; ++it)
+  {
+    if((*it)->GetName() == aName)
+    {
+      (*it)->SetType(aType);
+      (*it)->SetValue(aValue);
+      return;
+    }
+  }
+  properties.push_back(new SurfaceProperty(aName, aType, aValue));
+}
+
+/**
  * @brief Align objects
  * @param aTransform Transform of object
  * @param aSize Object size
@@ -472,4 +498,46 @@ bool PCShaderScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
     return false;
   }
   return true;
+}
+
+/**
+ * @brief Set shader properties based on surface.
+ * @param aSurface Surface to set properties for.
+ */
+void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface)
+{
+  // Set properties for shader. Separated by program id.
+  GLuint program = aSurface->GetProgramID();
+  PropertyContainer &properties = GetPropertyMap()[aSurface->GetProgramID()];
+  PropertyContainerIt propertyEnd = properties.end();
+  for(PropertyContainerIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
+  {
+    SurfaceProperty *property = *propertyIt;
+    switch(property->GetType())
+    {
+      case PropertyType::INT1:
+      {
+        glUniform1i(glGetUniformLocation(program, property->GetName()), property->GetValue().ToInt());
+      }
+      case PropertyType::INT3:
+      {
+        std::vector<int> intVector = property->GetValue().ToIntVector();
+        glUniform3i(glGetUniformLocation(program, property->GetName()), intVector[0], intVector[1], intVector[2]);
+      }
+      case PropertyType::FLOAT1:
+      {
+        glUniform1f(glGetUniformLocation(program, property->GetName()), property->GetValue().ToFloat());
+      }
+      case PropertyType::FLOAT3:
+      {
+        std::vector<float> floatVector = property->GetValue().ToFloatVector();
+        glUniform3f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1], floatVector[2]);
+      }
+      default:
+      {
+        assert(!"Invalid property type.");
+        break;
+      }
+    }
+  }
 }

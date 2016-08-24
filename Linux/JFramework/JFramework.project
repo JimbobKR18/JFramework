@@ -115,6 +115,8 @@
       <File Name="../../Source/Graphics/Screen.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Graphics/ShaderData.h"/>
+    <File Name="../../Source/Graphics/SurfaceProperty.h"/>
+    <File Name="../../Source/Graphics/SurfaceProperty.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Logic">
     <File Name="../../Source/Logic/MenuElement.h"/>

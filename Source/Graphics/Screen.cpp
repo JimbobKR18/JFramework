@@ -3,11 +3,11 @@
 #include "ZRenderSorter.h"
 #include "BatchRenderSorter.h"
 
-Screen::Screen() : mWidth(0), mHeight(0), mFullScreen(false), mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr)
+Screen::Screen() : mWidth(0), mHeight(0), mFullScreen(false), mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr), mProperties()
 {
 }
 
-Screen::Screen(int aW, int aH, bool aFullScreen) : mWidth(aW), mHeight(aH), mFullScreen(aFullScreen), mView()
+Screen::Screen(int aW, int aH, bool aFullScreen) : mWidth(aW), mHeight(aH), mFullScreen(aFullScreen), mView(), mProperties()
 {
   mView.SetSize(Vector3(aW, aH, 0));
   mDepthRenderSorter = new ZRenderSorter();
@@ -18,6 +18,15 @@ Screen::~Screen()
 {
   delete mDepthRenderSorter;
   delete mBatchRenderSorter;
+  
+  for(PropertyMapIt it = mProperties.begin(); it != mProperties.end(); ++it)
+  {
+    for(PropertyContainerIt it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+    {
+      delete *it2;
+    }
+  }
+  mProperties.clear();
 }
 
 int Screen::GetWidth() const
@@ -97,4 +106,9 @@ void Screen::SortObjects(std::vector<Surface*> &aObjects)
 {
   mBatchRenderSorter->SortPredicate(aObjects);
   mDepthRenderSorter->SortPredicate(aObjects);
+}
+
+Screen::PropertyMap& Screen::GetPropertyMap()
+{
+  return mProperties;
 }

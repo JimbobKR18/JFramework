@@ -361,6 +361,17 @@ void PCScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 }
 
 /**
+ * @brief Edit property if there, otherwise add.
+ * @param aName Name of property
+ * @param aType Type of property
+ * @param aValue Value of property
+ */
+void PCScreen::AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue)
+{
+  // Does nothing.
+}
+
+/**
  * @brief Align objects
  * @param aTransform Transform of object
  * @param aSize Object size
