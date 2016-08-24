@@ -2,6 +2,8 @@
 #include "PhysicsObject.h"
 #include "PCShaderSurface.h"
 #include "Constants.h"
+#include "SurfaceProperty.h"
+#include "GraphicsManager.h"
 
 #define VERTEX_ARRAYS
 
@@ -280,7 +282,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
       glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
       
-      // Set shader properties. Due to batching, done on a per program basis.
+      // Set shader properties. Due to batching, done on a per surface / shader basis.
       SetShaderProperties(surface);
       
       // Set VBO and buffer data.
@@ -396,29 +398,6 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 }
 
 /**
- * @brief Edit property if there, otherwise add.
- * @param aName Name of property
- * @param aType Type of property
- * @param aValue Value of property
- */
-void PCShaderScreen::AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue)
-{
-  int id = ((PCShaderSurface*)aSurface)->GetProgramID();
-  PropertyContainer &properties = GetPropertyMap()[id];
-  PropertyContainerIt propertyEnd = properties.end();
-  for(PropertyContainerIt it = properties.begin(); it != propertyEnd; ++it)
-  {
-    if((*it)->GetName() == aName)
-    {
-      (*it)->SetType(aType);
-      (*it)->SetValue(aValue);
-      return;
-    }
-  }
-  properties.push_back(new SurfaceProperty(aName, aType, aValue));
-}
-
-/**
  * @brief Align objects
  * @param aTransform Transform of object
  * @param aSize Object size
@@ -508,9 +487,9 @@ void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface)
 {
   // Set properties for shader. Separated by program id.
   GLuint program = aSurface->GetProgramID();
-  PropertyContainer &properties = GetPropertyMap()[aSurface->GetProgramID()];
-  PropertyContainerIt propertyEnd = properties.end();
-  for(PropertyContainerIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
+  GraphicsManager::PropertyContainer &properties = aSurface->GetManager()->GetPropertyMap()[(size_t)aSurface];
+  GraphicsManager::PropertyContainerIt propertyEnd = properties.end();
+  for(GraphicsManager::PropertyContainerIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
   {
     SurfaceProperty *property = *propertyIt;
     switch(property->GetType())
