@@ -62,7 +62,7 @@ public:
   
   // Properties
   PropertyMap&        GetPropertyMap();
-  void                AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue);
+  void                AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
   void                ClearProperties(Surface *aSurface);
 
   // Misc.

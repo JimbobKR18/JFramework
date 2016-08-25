@@ -308,9 +308,10 @@ GraphicsManager::PropertyMap& GraphicsManager::GetPropertyMap()
  * @brief Edit property if there, otherwise add.
  * @param aName Name of property
  * @param aType Type of property
- * @param aValue Value of property
+ * @param aTargetValue Target value of property
+ * @param aDefaultValue Default value of property
  */
-void GraphicsManager::AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aValue)
+void GraphicsManager::AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)
 {
   size_t id = (size_t)aSurface;
   PropertyContainer &properties = mProperties[id];
@@ -320,11 +321,12 @@ void GraphicsManager::AddOrEditProperty(Surface *aSurface, HashString const &aNa
     if((*it)->GetName() == aName)
     {
       (*it)->SetType(aType);
-      (*it)->SetValue(aValue);
+      (*it)->SetTargetValue(aTargetValue);
+      (*it)->SetDefaultValue(aDefaultValue);
       return;
     }
   }
-  properties.push_back(new SurfaceProperty(aName, aType, aValue));
+  properties.push_back(new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue));
 }
 
 /**

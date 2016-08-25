@@ -1,7 +1,8 @@
 #include "Common.h"
 #include "SurfaceProperty.h"
 
-SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aValue) : mName(aName), mType(aType), mValue(aValue) 
+SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue) : 
+  mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue) 
 {
 }
 
@@ -28,12 +29,21 @@ PropertyType SurfaceProperty::GetType() const
 }
 
 /**
- * @brief Get value of property
- * @return Value
+ * @brief Get target value of property
+ * @return Target value
  */
-HashString SurfaceProperty::GetValue() const
+HashString SurfaceProperty::GetTargetValue() const
 {
-  return mValue;
+  return mTargetValue;
+}
+
+/**
+ * @brief Get default value of property
+ * @return Default value
+ */
+HashString SurfaceProperty::GetDefaultValue() const
+{
+  return mDefaultValue;
 }
 
 /**
@@ -55,10 +65,19 @@ void SurfaceProperty::SetType(PropertyType const &aType)
 }
 
 /**
- * @brief Set value of property
- * @param aValue Value
+ * @brief Set target value of property
+ * @param aValue Target Value
  */
-void SurfaceProperty::SetValue(HashString const &aValue)
+void SurfaceProperty::SetTargetValue(HashString const &aTargetValue)
 {
-  mValue = aValue;
+  mTargetValue = aTargetValue;
+}
+
+/**
+ * @brief Set default value of property
+ * @param aValue Default Value
+ */
+void SurfaceProperty::SetDefaultValue(HashString const &aDefaultValue)
+{
+  mDefaultValue = aDefaultValue;
 }

@@ -7,8 +7,10 @@ enum PropertyType
 {
   INT1,
   INT3,
+  INT4,
   FLOAT1,
-  FLOAT3
+  FLOAT3,
+  FLOAT4
 };
 
 class SurfaceProperty
@@ -16,21 +18,24 @@ class SurfaceProperty
 private:
   HashString mName;
   PropertyType mType;
-  HashString mValue;
+  HashString mTargetValue;
+  HashString mDefaultValue;
   
 public:
-  SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aValue);
+  SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
   virtual ~SurfaceProperty();
   
   // Getters
   HashString GetName() const;
   PropertyType GetType() const;
-  HashString GetValue() const;
+  HashString GetTargetValue() const;
+  HashString GetDefaultValue() const;
   
   // Setters
   void SetName(HashString const &aName);
   void SetType(PropertyType const &aType);
-  void SetValue(HashString const &aValue);
+  void SetTargetValue(HashString const &aTargetValue);
+  void SetDefaultValue(HashString const &aTargetValue);
 };
 
 #endif

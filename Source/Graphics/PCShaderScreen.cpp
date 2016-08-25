@@ -185,129 +185,121 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Draw each object
   // NOTE: The objects are sorted by texture id
   std::vector<Surface*>::const_iterator end = aObjects.end();
-  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
+  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end; ++it)
   {
     // Get the texture id of the surface
     PCShaderSurface *surface = (*it)->GetOwner()->GET<PCShaderSurface>();
     GLuint texture = surface->GetTextureID();
     GLuint program = surface->GetProgramID();
     
-    // While other texture share the same texture id, draw them
-    while(it != end &&
-          (*it)->GetOwner()->GET<PCShaderSurface>()->GetTextureID() == texture)
-    {
-      GameObject *owner = (*it)->GetOwner();
-      PCShaderSurface *surface = (PCShaderSurface*)(*it);
-      Transform *transform = owner->GET<Transform>();
-      
-      // Gotta progress this somehow
-      ++it;
-      
-      // Get transforms in local and world space.
-      Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
-      Vector3 position = transform->GetPosition();
-      TextureCoordinates *texCoord = surface->GetTextureData();
-      Vector3 &size = transform->GetSize();
-      Vector4 &color = surface->GetColor();
-      Vector4 cameraTranslation;
+    GameObject *owner = (*it)->GetOwner();
+    Transform *transform = owner->GET<Transform>();
+    
+    // Get transforms in local and world space.
+    Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
+    Vector3 position = transform->GetPosition();
+    TextureCoordinates *texCoord = surface->GetTextureData();
+    Vector3 &size = transform->GetSize();
+    Vector4 &color = surface->GetColor();
+    Vector4 cameraTranslation;
 
-      // Move object based on its alignment
-      AlignmentHelper(transform, size, position);
-      
-      // Get the basic coordinates for the quad
-      Vector3 topLeft(-size.x, -size.y, 0);
-      Vector3 topRight(size.x, -size.y, 0);
-      Vector3 bottomRight(size.x, size.y, 0);
-      Vector3 bottomLeft(-size.x, size.y, 0);
-      
-      // Model transform
-      topLeft = modelTransform * topLeft;
-      topRight = modelTransform * topRight;
-      bottomLeft = modelTransform * bottomLeft;
-      bottomRight = modelTransform * bottomRight;
-      
-      // Camera translation
-      if(surface->GetViewMode() == VIEW_ABSOLUTE)
-      {
-        cameraTranslation = cameraDiff;
-      }
-      
-      // Vertex points
-      renderData.push_back(topLeft);
-      renderData.push_back(position);
-      renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
-      renderData.push_back(color);
-      renderData.push_back(cameraTranslation);
-      renderData.push_back(topRight);
-      renderData.push_back(position);
-      renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
-      renderData.push_back(color);
-      renderData.push_back(cameraTranslation);
-      renderData.push_back(bottomRight);
-      renderData.push_back(position);
-      renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
-      renderData.push_back(color);
-      renderData.push_back(cameraTranslation);
-      renderData.push_back(bottomLeft);
-      renderData.push_back(position);
-      renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
-      renderData.push_back(color);
-      renderData.push_back(cameraTranslation);
+    // Move object based on its alignment
+    AlignmentHelper(transform, size, position);
+    
+    // Get the basic coordinates for the quad
+    Vector3 topLeft(-size.x, -size.y, 0);
+    Vector3 topRight(size.x, -size.y, 0);
+    Vector3 bottomRight(size.x, size.y, 0);
+    Vector3 bottomLeft(-size.x, size.y, 0);
+    
+    // Model transform
+    topLeft = modelTransform * topLeft;
+    topRight = modelTransform * topRight;
+    bottomLeft = modelTransform * bottomLeft;
+    bottomRight = modelTransform * bottomRight;
+    
+    // Camera translation
+    if(surface->GetViewMode() == VIEW_ABSOLUTE)
+    {
+      cameraTranslation = cameraDiff;
     }
     
+    // Vertex points
+    renderData.push_back(topLeft);
+    renderData.push_back(position);
+    renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+    renderData.push_back(color);
+    renderData.push_back(cameraTranslation);
+    renderData.push_back(topRight);
+    renderData.push_back(position);
+    renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
+    renderData.push_back(color);
+    renderData.push_back(cameraTranslation);
+    renderData.push_back(bottomRight);
+    renderData.push_back(position);
+    renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+    renderData.push_back(color);
+    renderData.push_back(cameraTranslation);
+    renderData.push_back(bottomLeft);
+    renderData.push_back(position);
+    renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
+    renderData.push_back(color);
+    renderData.push_back(cameraTranslation);
+    
     glPushMatrix();
-    if (renderData.size() > 0)
+    float cameraMatrix[9];
+    for(int i = 0; i < 9; ++i)
     {
-      float cameraMatrix[9];
-      for(int i = 0; i < 9; ++i)
-      {
-        cameraMatrix[i] = viewMatrix.values[i/3][i%3];
-      }
-      
-      int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
-      int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
-      int objectPosLocation = glGetAttribLocation(program, "objectPos");
-      int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
-      int colorPosLocation = glGetAttribLocation(program, "color");
-      int cameraDiffLocation = glGetAttribLocation(program, "cameraDiff");
-      
-      // Start using shader
-      glUseProgram(program);
-      
-      // Enable textures and set uniforms.
-      glBindVertexArray(mVertexArrayObjectID);
-      glActiveTexture(GL_TEXTURE0 + activeTexture);
-      glBindTexture(GL_TEXTURE_2D, texture);
-      glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
-      glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
-      glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
-      
-      // Set shader properties. Due to batching, done on a per surface / shader basis.
-      // Shader uniforms are reset upon relinking.
-      SetShaderProperties(surface);
-      
-      // Set VBO and buffer data.
-      glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
-      glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
-      
-      // For each attribute in a shader, we must enable Vertex Attribute Arrays.
-      glEnableVertexAttribArray(vertexPosLocation);
-      glEnableVertexAttribArray(objectPosLocation);
-      glEnableVertexAttribArray(texCoordPosLocation);
-      glEnableVertexAttribArray(colorPosLocation);
-      glEnableVertexAttribArray(cameraDiffLocation);
-      glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, 0);
-      glVertexAttribPointer(objectPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4)));
-      glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 2));
-      glVertexAttribPointer(colorPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 3));
-      glVertexAttribPointer(cameraDiffLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 4));
-      glDrawArrays(GL_QUADS, 0, renderData.size() / 5);
-      glDisableVertexAttribArray(vertexPosLocation);
-      glDisableVertexAttribArray(objectPosLocation);
-      glDisableVertexAttribArray(texCoordPosLocation);
-      glDisableVertexAttribArray(colorPosLocation);
-      glDisableVertexAttribArray(cameraDiffLocation);
+      cameraMatrix[i] = viewMatrix.values[i/3][i%3];
     }
+    
+    int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
+    int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
+    int objectPosLocation = glGetAttribLocation(program, "objectPos");
+    int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
+    int colorPosLocation = glGetAttribLocation(program, "color");
+    int cameraDiffLocation = glGetAttribLocation(program, "cameraDiff");
+    
+    // Start using shader
+    glUseProgram(program);
+    
+    // Enable textures and set uniforms.
+    glBindVertexArray(mVertexArrayObjectID);
+    glActiveTexture(GL_TEXTURE0 + activeTexture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
+    glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
+    glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
+    
+    // Set shader properties. Due to batching, done on a per surface / shader basis.
+    // Shader uniforms are reset upon relinking.
+    SetShaderProperties(surface, true);
+    
+    // Set VBO and buffer data.
+    glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
+    
+    // For each attribute in a shader, we must enable Vertex Attribute Arrays.
+    glEnableVertexAttribArray(vertexPosLocation);
+    glEnableVertexAttribArray(objectPosLocation);
+    glEnableVertexAttribArray(texCoordPosLocation);
+    glEnableVertexAttribArray(colorPosLocation);
+    glEnableVertexAttribArray(cameraDiffLocation);
+    glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, 0);
+    glVertexAttribPointer(objectPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4)));
+    glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 2));
+    glVertexAttribPointer(colorPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 3));
+    glVertexAttribPointer(cameraDiffLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 4));
+    glDrawArrays(GL_QUADS, 0, renderData.size() / 5);
+    glDisableVertexAttribArray(vertexPosLocation);
+    glDisableVertexAttribArray(objectPosLocation);
+    glDisableVertexAttribArray(texCoordPosLocation);
+    glDisableVertexAttribArray(colorPosLocation);
+    glDisableVertexAttribArray(cameraDiffLocation);
+    
+    // Reset shader property values.
+    SetShaderProperties(surface, false);
+    
     glPopMatrix();
 
     // Reset to default texture
@@ -483,8 +475,9 @@ bool PCShaderScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
 /**
  * @brief Set shader properties based on surface.
  * @param aSurface Surface to set properties for.
+ * @param aActive Decide whether or not to set values or reset.
  */
-void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface)
+void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface, bool aActive)
 {
   // Set properties for shader. Separated by program id.
   GLuint program = aSurface->GetProgramID();
@@ -493,28 +486,45 @@ void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface)
   for(GraphicsManager::PropertyContainerIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
   {
     SurfaceProperty *property = *propertyIt;
+    HashString value = property->GetTargetValue();
+    
+    if(!aActive)
+      value = property->GetDefaultValue();
+    
     switch(property->GetType())
     {
       case PropertyType::INT1:
       {
-        glUniform1i(glGetUniformLocation(program, property->GetName()), property->GetValue().ToInt());
+        glUniform1i(glGetUniformLocation(program, property->GetName()), value.ToInt());
         break;
       }
       case PropertyType::INT3:
       {
-        std::vector<int> intVector = property->GetValue().ToIntVector();
+        std::vector<int> intVector = value.ToIntVector();
         glUniform3i(glGetUniformLocation(program, property->GetName()), intVector[0], intVector[1], intVector[2]);
+        break;
+      }
+      case PropertyType::INT4:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform4i(glGetUniformLocation(program, property->GetName()), intVector[0], intVector[1], intVector[2], intVector[3]);
         break;
       }
       case PropertyType::FLOAT1:
       {
-        glUniform1f(glGetUniformLocation(program, property->GetName()), property->GetValue().ToFloat());
+        glUniform1f(glGetUniformLocation(program, property->GetName()), value.ToFloat());
         break;
       }
       case PropertyType::FLOAT3:
       {
-        std::vector<float> floatVector = property->GetValue().ToFloatVector();
+        std::vector<float> floatVector = value.ToFloatVector();
         glUniform3f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1], floatVector[2]);
+        break;
+      }
+      case PropertyType::FLOAT4:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform4f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
         break;
       }
       default:

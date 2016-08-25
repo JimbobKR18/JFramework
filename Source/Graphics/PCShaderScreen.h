@@ -44,7 +44,7 @@ private:
   void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
-  void SetShaderProperties(PCShaderSurface *aSurface);
+  void SetShaderProperties(PCShaderSurface *aSurface, bool aActive);
 };
 
 #endif
