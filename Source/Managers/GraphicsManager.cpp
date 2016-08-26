@@ -90,7 +90,9 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
  */
 void GraphicsManager::SerializeLUA()
 {
-  SLB::Class<GraphicsManager>("GraphicsManager").inherits<Manager>();
+  SLB::Class<GraphicsManager>("GraphicsManager").inherits<Manager>()
+          .set("AddOrEditProperty", &GraphicsManager::AddOrEditProperty)
+          .set("ClearProperties", &GraphicsManager::ClearProperties);
 }
 
 /**
