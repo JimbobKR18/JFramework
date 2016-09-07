@@ -8,6 +8,7 @@
   typedef unsigned int GLuint;
   typedef unsigned int GLenum;
 #elif defined(__APPLE__)
+  #include <GL/glew.h>
   #include <OpenGL/gl.h>
   #include <OpenGL/glext.h>
   #include <SDL2/SDL.h>
