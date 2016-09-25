@@ -19,6 +19,7 @@
 #include "Core/MathExt.h"
 #include "Logic/Level.h"
 #include "Core/Interpolation.h"
+#include "Core/QuadraticInterpolation.h"
 #include "Messages/CollisionMessage.h"
 
 #ifdef PC
@@ -67,6 +68,8 @@ namespace LUABind
     // Interpolation
     Interpolation<Vector3>::SerializeLUA();
     Interpolation<Vector4>::SerializeLUA();
+    QuadraticInterpolation<Vector3>::SerializeLUA();
+    QuadraticInterpolation<Vector4>::SerializeLUA();
 
     // Transform
     Transform::SerializeLUA();

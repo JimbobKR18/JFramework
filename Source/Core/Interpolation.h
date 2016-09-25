@@ -7,7 +7,7 @@
 template<typename T>
 class Interpolation
 {
-private:
+protected:
   T*      mCurrent;
   T       mStart;
   T       mFinish;
@@ -26,7 +26,7 @@ public:
    * @brief Updates interpolation, marks finished if complete.
    * @param aDT Change in millis
    */
-  void Update(float aDT)
+  virtual void Update(float aDT)
   {
     mCurrentTime += aDT;
     
@@ -42,7 +42,7 @@ public:
    * @brief Get value of current value in interpolation
    * @return Current value in interpolation
    */
-  T GetCurrent() const
+  virtual T GetCurrent() const
   {
     return *mCurrent;
   }
@@ -51,7 +51,7 @@ public:
    * @brief Get start value.
    * @return Where our interpolation started.
    */
-  T GetStart() const
+  virtual T GetStart() const
   {
     return mStart;
   }
@@ -60,7 +60,7 @@ public:
    * @brief Get end value.
    * @return Where the interpolation ends.
    */
-  T GetFinish() const
+  virtual T GetFinish() const
   {
     return mFinish;
   }
@@ -69,7 +69,7 @@ public:
    * @brief Get rate of change.
    * @return Rate of change.
    */
-  T GetRate() const
+  virtual T GetRate() const
   {
     return mRate;
   }
