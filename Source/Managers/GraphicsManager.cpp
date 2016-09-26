@@ -355,7 +355,7 @@ Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
 {
   Vector3 ret = mScreen->GetView().GetPosition().Multiply(mScreen->GetView().GetScale());
 
-  ret -= mScreen->GetView().GetSize()/2;
+  ret -= mScreen->GetView().GetSize() / 2.0f;
   ret += aPosition;
 
   return ret;
