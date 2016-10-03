@@ -149,6 +149,30 @@ namespace Common
     ret.push_back(value);
     return ret;
   }
+  
+  /**
+   * @brief Converts String to HashString Vector
+   * @param aValue
+   */
+  std::vector<HashString> StringToHashStringVector(std::string const &aValue)
+  {
+    std::vector<HashString> ret;
+    std::string value;
+    for(unsigned i = 0; i < aValue.length(); ++i)
+    {
+      if(aValue[i] == ',')
+      {
+        ret.push_back(value);
+        value.clear();
+      }
+      else
+      {
+        value.push_back(aValue[i]);
+      }
+    }
+    ret.push_back(value);
+    return ret;
+  }
 
   /**
    * @brief Converts Int to String
@@ -253,6 +277,25 @@ namespace Common
     for(std::vector<std::string>::iterator it = aValue.begin(); it != end; ++it)
     {
       ret += *it;
+      ret += ",";
+    }
+    
+    // Remove last comma
+    ret = ret.substr(0, ret.size() - 1);
+    return ret;
+  }
+  
+  /**
+   * @brief Converts HashString Vector to String (comma separated)
+   * @param aValue
+   */
+  std::string HashStringVectorToString(std::vector<HashString> &aValue)
+  {
+    std::string ret;
+    std::vector<HashString>::iterator end = aValue.end();
+    for(std::vector<HashString>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      ret += (*it).ToString();
       ret += ",";
     }
     
