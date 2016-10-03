@@ -411,6 +411,15 @@ int HashString::ToHash() const
 }
 
 /**
+ * @brief Convert to hashstring vector, split by ","
+ * @return String as hashstring vector
+ */
+std::vector<HashString> HashString::ToHashStringVector() const
+{
+  return Common::StringToHashStringVector(mString);
+}
+
+/**
  * @brief Convert to string vector, split by ","
  * @return String as string vector
  */

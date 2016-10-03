@@ -74,6 +74,7 @@ public:
   float ToFloat() const;
   bool ToBool() const;
   int ToHash() const;
+  std::vector<HashString> ToHashStringVector() const;
   std::vector<std::string> ToStringVector() const;
   std::vector<int> ToIntVector() const;
   std::vector<float> ToFloatVector() const;
