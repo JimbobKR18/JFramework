@@ -31,6 +31,7 @@ public:
   void Update(float const aDT);
   bool IsCurrentStateExpired() const;
   
+  float GetCurrentStateTimeLeft() const;
   State* GetCurrentState() const;
   void SetCurrentState(HashString const &aName);
   

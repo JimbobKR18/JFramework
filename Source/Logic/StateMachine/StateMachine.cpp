@@ -27,6 +27,18 @@ void StateMachine::Update(float const aDT)
 }
 
 /**
+ * @brief Get time left in current state.
+ * @return Time left as float.
+ */
+float StateMachine::GetCurrentStateTimeLeft() const
+{
+  if(!mCurrentState || mCurrentState->GetTimeAlive() <= 0.0f)
+    return 0;
+    
+  return mCurrentState->GetTimeAlive() - mCurrentTime;
+}
+
+/**
  * @brief Check if current state is expired.
  * @return True if expired.
  */
