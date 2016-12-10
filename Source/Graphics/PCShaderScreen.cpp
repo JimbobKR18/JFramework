@@ -174,6 +174,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   Vector3 &cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetHalfSize();
   Matrix33 viewMatrix = GetView().GetFinalTransform();
+  Matrix33 identityMatrix = Matrix33();
   
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
@@ -219,9 +220,22 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     bottomRight = modelTransform * bottomRight;
     
     // Camera translation
+    float cameraMatrix[9];
     if(surface->GetViewMode() == VIEW_ABSOLUTE)
     {
       cameraTranslation = cameraDiff;
+      
+      for(int i = 0; i < 9; ++i)
+      {
+        cameraMatrix[i] = viewMatrix.values[i/3][i%3];
+      }
+    }
+    else // Menu objects do not rotate.
+    {
+      for(int i = 0; i < 9; ++i)
+      {
+        cameraMatrix[i] = identityMatrix.values[i/3][i%3];
+      }
     }
     
     // Vertex points
@@ -247,11 +261,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     renderData.push_back(cameraTranslation);
     
     glPushMatrix();
-    float cameraMatrix[9];
-    for(int i = 0; i < 9; ++i)
-    {
-      cameraMatrix[i] = viewMatrix.values[i/3][i%3];
-    }
+    
     
     int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
     int vertexPosLocation = glGetAttribLocation(program, "vertexPos");

@@ -228,12 +228,12 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       bottomLeft += position;
       
       // Apply camera transform
-      topLeft = viewMatrix * topLeft;
-      topRight = viewMatrix * topRight;
-      bottomLeft = viewMatrix * bottomLeft;
-      bottomRight = viewMatrix * bottomRight;
       if(surface->GetViewMode() == VIEW_ABSOLUTE)
       {
+        topLeft = viewMatrix * topLeft;
+        topRight = viewMatrix * topRight;
+        bottomLeft = viewMatrix * bottomLeft;
+        bottomRight = viewMatrix * bottomRight;
         topLeft -= cameraDiff;
         topRight -= cameraDiff;
         bottomLeft -= cameraDiff;

@@ -353,10 +353,11 @@ void GraphicsManager::ClearProperties(Surface *aSurface)
  */
 Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
 {
-  Vector3 ret = mScreen->GetView().GetPosition().Multiply(mScreen->GetView().GetScale());
+  Vector3 ret = mScreen->GetView().GetFinalTransform() * mScreen->GetView().GetPosition();
 
-  ret -= mScreen->GetView().GetSize() / 2.0f;
+  ret -= mScreen->GetView().GetHalfSize();
   ret += aPosition;
+  ret = mScreen->GetView().GetFinalTransform().Invert() * ret;
 
   return ret;
 }
@@ -367,10 +368,10 @@ Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
  */
 Vector3 GraphicsManager::RelToAbs(Vector3 const &aPosition) const
 {
-  Vector3 ret = aPosition;
+  Vector3 ret = mScreen->GetView().GetFinalTransform() * aPosition;
 
-  ret += mScreen->GetView().GetSize() / 2.0f;
-  ret -= mScreen->GetView().GetPosition().Multiply(mScreen->GetView().GetScale());
+  ret += mScreen->GetView().GetHalfSize();
+  ret -= mScreen->GetView().GetFinalTransform() * mScreen->GetView().GetPosition();
 
   return ret;
 }
