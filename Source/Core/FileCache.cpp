@@ -23,9 +23,12 @@ HashString FileCache::GetFile(HashString const &aFilename)
   if(file != mFiles.end())
   {
 #ifdef _DEBUG
-    DebugLogPrint("Hash %d clashed with %d, keep an eye out. \n(%s)\n(%s)", hash, file->first, aFilename.ToCharArray(), file->second.ToCharArray());
+    if(aFilename != file->second->GetFileName())
+    {
+      DebugLogPrint("File %s clashed with %s.\n", aFilename.ToCharArray(), file->second->GetFileName().ToCharArray());
+    }
 #endif
-    return file->second;
+    return file->second->GetFileContents();
   }
   
   std::ifstream fileFromDisk(aFilename.ToCharArray());
@@ -37,7 +40,7 @@ HashString FileCache::GetFile(HashString const &aFilename)
   }
   
   HashString fileContents = std::string((std::istreambuf_iterator<char>(fileFromDisk)), std::istreambuf_iterator<char>());
-  mFiles[hash] = fileContents;
+  mFiles[hash] = new FileCacheData(aFilename, fileContents);
   fileFromDisk.close();
   return fileContents;
 }

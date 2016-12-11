@@ -3,10 +3,25 @@
 
 #include "Common.h"
 
+class FileCacheData
+{
+private:
+  HashString mFileName;
+  HashString mFileContents;
+  
+public:
+  FileCacheData(HashString const &aFileName, HashString const &aFileContents) : mFileName(aFileName), mFileContents(aFileContents)
+  {
+  }
+  
+  HashString const &GetFileName() { return mFileName; }
+  HashString const &GetFileContents() { return mFileContents; }
+};
+
 class FileCache
 {
 private:
-  typedef std::unordered_map<int, HashString> FileContainer;
+  typedef std::unordered_map<int, FileCacheData*> FileContainer;
   static FileContainer mFiles;
 public:
   FileCache();
