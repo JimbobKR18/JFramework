@@ -680,7 +680,15 @@ void Level::ParseFile(HashString const &aFileName)
     }
     if(curRoot->Find("Name"))
     {
-      object->SetName(curRoot->Find("Name")->GetValue());
+      // Accept either the object file or level file version.
+      if(curRoot->Find("Name")->Find("Value"))
+      {
+        object->SetName(curRoot->Find("Name")->Find("Value")->GetValue());
+      }
+      else
+      {
+        object->SetName(curRoot->Find("Name")->GetValue());
+      }
     }
 
     RootContainer untouched = curRoot->GetUntouchedRoots();
