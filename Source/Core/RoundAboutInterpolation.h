@@ -32,7 +32,7 @@ public:
     if(percentage > 0.5f)
       usablePercentage = invertPercentage;
     
-    (*Interpolation<T>::mCurrent) = mStart + (mRate * usablePercentage);
+    (*Interpolation<T>::mCurrent) = Interpolation<T>::mStart + (Interpolation<T>::mRate * usablePercentage);
   }
   
   /**
