@@ -25,6 +25,9 @@ private:
   GameObject*   mObject2;
   Shape*        mShape1;
   Shape*        mShape2;
+  Vector3       mNormal;
+  Vector3       mRelativeVelocity;
+  float         mPenetration;
 
 public:
   CollisionMessage() : Message()
@@ -39,11 +42,17 @@ public:
                    GameObject *aObject1,
                    GameObject *aObject2,
                    Shape *aShape1,
-                   Shape *aShape2) : Message(),
+                   Shape *aShape2,
+                   Vector3 const &aNormal,
+                   Vector3 const &aRelativeVelocity,
+                   float const aPenetration) : Message(),
                                      mObject1(aObject1),
                                      mObject2(aObject2),
                                      mShape1(aShape1),
-                                     mShape2(aShape2)
+                                     mShape2(aShape2),
+                                     mNormal(aNormal),
+                                     mRelativeVelocity(aRelativeVelocity),
+                                     mPenetration(aPenetration)
   {
     SetDescription(COLLISION);
     SetContent(aContent);
@@ -52,7 +61,7 @@ public:
   {
   }
 
-  GameObject *GetObject(int index)
+  GameObject *GetObject(int index) const
   {
     // Stay in bounds
     assert(index < 2);
@@ -63,7 +72,7 @@ public:
       return mObject2;
   }
   
-  Shape *GetShape(int index)
+  Shape *GetShape(int index) const
   {
     // Stay in bounds
     assert(index < 2);
@@ -74,10 +83,29 @@ public:
       return mShape2;
   }
   
+  Vector3 const &GetNormal() const
+  {
+    return mNormal;
+  }
+  
+  Vector3 const &GetRelativeVelocity() const
+  {
+    return mRelativeVelocity;
+  }
+  
+  float const GetPenetration() const
+  {
+    return mPenetration;
+  }
+  
   static void SerializeLUA() 
   {
     SLB::Class<CollisionMessage>("CollisionMessage")
-      .set("GetObject", &CollisionMessage::GetObject);
+      .set("GetObject", &CollisionMessage::GetObject)
+      .set("GetShape", &CollisionMessage::GetShape)
+      .set("GetNormal", &CollisionMessage::GetNormal)
+      .set("GetRelativeVelocity", &CollisionMessage::GetRelativeVelocity)
+      .set("GetPenetration", &CollisionMessage::GetPenetration);
   }
 };
 
