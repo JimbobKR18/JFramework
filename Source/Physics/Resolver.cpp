@@ -26,7 +26,6 @@ void Resolver::Update(float aDuration)
     for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairsEnd; ++it2)
     {
       AddCollidedPair(*it2);
-      SendCollisionMessages(*it2);
     }
   }
   
@@ -34,6 +33,7 @@ void Resolver::Update(float aDuration)
   for(std::list<CollisionPair>::iterator it = mCollidedPairs.begin(); it != collidedEnd; ++it)
   {
     Resolve(*it, aDuration);
+    SendCollisionMessages(*it);
   }
   mCollidedPairs.clear();
   mPotentialPairs.clear();
@@ -189,11 +189,7 @@ void Resolver::SendCollisionMessages(CollisionPair &aPair) const
  */
 void Resolver::Resolve(CollisionPair &aPair, float aDuration)
 {
-  // Skip resolving if either object is passable.
-  if(aPair.mBodies[0]->IsPassable() || aPair.mBodies[1]->IsPassable() ||
-     aPair.mShapes[0]->passable || aPair.mShapes[1]->passable)
-    return;
-    
+  // Need to calculate physics params before resolution.
   switch(aPair.mShapes[0]->shape)
   {
   case Shape::SPHERE:
@@ -275,6 +271,12 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
   default:
     break;
   }
+  
+  // Skip resolving if either object is passable.
+  if(aPair.mBodies[0]->IsPassable() || aPair.mBodies[1]->IsPassable() ||
+     aPair.mShapes[0]->passable || aPair.mShapes[1]->passable)
+    return;
+  
   ResolveVelocity(aPair, aDuration);
   ResolvePenetration(aPair);
 }
