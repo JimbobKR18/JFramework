@@ -30,7 +30,8 @@ private:
   float               mMass,
                       mInverseMass;
   float               mDamping,
-                      mRestitution;
+                      mRestitution,
+                      mMaximumVelocity;
   bool                mStatic,
                       mGravity,
                       mPassable,
@@ -74,7 +75,10 @@ public:
   void                 SetDamping(float const aDamping);
   
   float                GetRestitution() const;
-  void                 SetRestitution(float const aRestitution); 
+  void                 SetRestitution(float const aRestitution);
+  
+  float                GetMaxVelocity() const;
+  void                 SetMaxVelocity(float const aMaximumVelocity); 
 
   bool                 IsStatic() const;
   void                 SetStatic(bool const aStatic);

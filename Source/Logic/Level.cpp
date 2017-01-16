@@ -1081,7 +1081,24 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
   physicsObject->SetMass(aPhysicsObject->Find("Mass")->GetValue().ToInt());
   physicsObject->SetDamping(aPhysicsObject->Find("Damping")->GetValue().ToFloat());
   
-  // default true
+  // Optional
+  if(aPhysicsObject->Find("IgnoreList"))
+  {
+    std::vector<std::string> ignoreList = aPhysicsObject->Find("IgnoreList")->GetValue().ToStringVector();
+    PhysicsObject::IgnoreContainer ignoreContainer;
+    
+    for(std::vector<std::string>::iterator it = ignoreList.begin(); it != ignoreList.end(); ++it)
+    {
+      ignoreContainer[Common::StringHashFunction(*it)] = *it;
+    }
+    physicsObject->SetIgnoreList(ignoreContainer);
+  }
+  if(aPhysicsObject->Find("MaxVelocity"))
+  {
+    physicsObject->SetMaxVelocity(aPhysicsObject->Find("MaxVelocity")->GetValue().ToFloat());
+  }
+  
+  // Default true
   if(!gravity)
   {
     GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(physicsObject);

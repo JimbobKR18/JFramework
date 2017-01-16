@@ -21,7 +21,7 @@ int const PhysicsObject::sUID = Common::StringHashFunction("PhysicsObject");
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sUID), mWorld(aWorld),
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
                   mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
-                  mDamping(0.01f), mRestitution(0.0f), mStatic(false),
+                  mDamping(0.01f), mRestitution(0.0f), mMaximumVelocity(-1.0f), mStatic(false),
                   mGravity(true), mPassable(false), mActive(true), mIgnoreList(), mShapes()
 {
 }
@@ -57,6 +57,12 @@ void PhysicsObject::Update()
   finalAcceleration += mForces * mInverseMass;
   mVelocity += finalAcceleration * dt;
   mVelocity *= powf(mDamping, dt);
+  
+  // Cap velocity
+  if(mMaximumVelocity > 0.0f && mVelocity.length() > mMaximumVelocity)
+  {
+    mVelocity = mVelocity.normalize() * mMaximumVelocity;
+  }
 
   // Set position
   transform->SetPosition(position);
@@ -126,6 +132,7 @@ void PhysicsObject::Serialize(Parser &aParser)
   object->Place(PHYSICS_OBJECT, "Mass", Common::FloatToString(mMass));
   object->Place(PHYSICS_OBJECT, "Damping", Common::FloatToString(mDamping));
   object->Place(PHYSICS_OBJECT, "Restitution", Common::FloatToString(mRestitution));
+  object->Place(PHYSICS_OBJECT, "MaxVelocity", Common::FloatToString(mMaximumVelocity));
   
   if(!mIgnoreList.empty())
   {
@@ -211,6 +218,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
   mDamping = aParser.Find(PHYSICS_OBJECT, "Damping")->GetValue().ToFloat();
   mRestitution = aParser.Find(PHYSICS_OBJECT, "Restitution")->GetValue().ToFloat();
 
+  // Optional
   if(aParser.Find(PHYSICS_OBJECT, "IgnoreList"))
   {
     std::vector<std::string> ignoreList = aParser.Find(PHYSICS_OBJECT, "IgnoreList")->GetValue().ToStringVector();
@@ -220,8 +228,12 @@ void PhysicsObject::Deserialize(Parser &aParser)
       mIgnoreList[Common::StringHashFunction(*it)] = *it;
     }
   }
+  if(aParser.Find(PHYSICS_OBJECT, "MaxVelocity"))
+  {
+    mMaximumVelocity = aParser.Find(PHYSICS_OBJECT, "MaxVelocity")->GetValue().ToFloat();
+  }
 
-  // default true
+  // Default true
   if(!gravity)
   {
     GetOwner()->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(this);
@@ -322,6 +334,8 @@ void PhysicsObject::SerializeLUA()
     .set("SetDamping", &PhysicsObject::SetDamping)
     .set("GetRestitution", &PhysicsObject::GetRestitution)
     .set("SetRestitution", &PhysicsObject::SetRestitution)
+    .set("GetMaxVelocity", &PhysicsObject::GetMaxVelocity)
+    .set("SetMaxVelocity", &PhysicsObject::SetMaxVelocity)
     .set("IsStatic", &PhysicsObject::IsStatic)
     .set("SetStatic", &PhysicsObject::SetStatic)
     .set("IsPassable", &PhysicsObject::IsPassable)
@@ -474,6 +488,24 @@ float PhysicsObject::GetRestitution() const
 void PhysicsObject::SetRestitution(float const aRestitution)
 {
   mRestitution = aRestitution;
+}
+
+/**
+ * @brief Get max velocity for this object
+ * @return Max velocity
+ */
+float PhysicsObject::GetMaxVelocity() const
+{
+  return mMaximumVelocity;
+}
+
+/**
+ * @brief Set max velocity for this object
+ * @param aMaximumVelocity Velocity to set to
+ */
+void PhysicsObject::SetMaxVelocity(float const aMaximumVelocity)
+{
+  mMaximumVelocity = aMaximumVelocity;
 }
 
 /**
