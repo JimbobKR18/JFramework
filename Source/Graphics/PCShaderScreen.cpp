@@ -140,6 +140,13 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           glEnd();
         }
       }
+      
+      // Get the texture id of the surface
+      PCShaderSurface *surface = obj->GET<PCShaderSurface>();
+      GLuint program = surface->GetProgramID();
+      
+      // Start using shader
+      glUseProgram(program);
 
       // Broad Size Line
       glBegin(GL_LINE_STRIP);
