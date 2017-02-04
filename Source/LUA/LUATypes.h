@@ -27,57 +27,128 @@ namespace LUABind
     static GameApp *GetApp() { return mApp; }
   };
   
-  void          Initialize();
-  void          RegisterClasses();
-  void          LoadScriptFromFile(std::string const &aFilename);
-  void          LoadScriptFromString(std::string const &aString);
-  std::string   GetScript(std::string const &aFilename);
+  void                  Initialize();
+  void                  RegisterClasses();
+  void                  LoadScriptFromFile(std::string const &aFilename);
+  void                  LoadScriptFromString(std::string const &aString);
+  HashString const&     GetScript(HashString const &aFilename);
   
   struct FunctionCaller : public SLB::Script
   {
-    // Returns true if function called successfully
-    template<typename T>
-    bool LoadFunction1p(std::string const &aFilename, std::string const &aFunctionName, T param)
+    bool LoadFile(HashString const &aFilename, HashString const &aFunctionName)
     {
       // Load the file up
-      std::string contents = GetScript(aFilename);
+      HashString const& contents = GetScript(aFilename);
       
-      if(contents.empty())
+      if(contents.Empty())
       {
-        DebugLogPrint("LUA File: %s not found!\n", aFilename.c_str());
+        DebugLogPrint("LUA File: %s not found!\n", aFilename.ToCharArray());
         return false;
       }
-      else if(contents.find(aFunctionName) == std::string::npos)
+      else if(!contents.Find(aFunctionName))
       {
         DebugLogPrint("LUA function: %s in file: %s not found!\n",
-                      aFunctionName.c_str(), aFilename.c_str());
+                      aFunctionName.ToCharArray(), aFilename.ToCharArray());
         return false;
       }
       
       // Try catch in case anything happens
-      doString(contents.c_str());
+      doString(contents.ToCharArray());
+      return true;
+    }
+    
+    // Returns true if function called successfully
+    template<typename T>
+    bool LoadFunction1p(HashString const &aFilename, HashString const &aFunctionName, T param)
+    {
+      bool result = LoadFile(aFilename, aFunctionName);
+      if(!result)
+        return false;
     
       // Get the state and call the function
       lua_State *state = getState();
-      SLB::LuaCall<void(T)> call(state, aFunctionName.c_str());
+      SLB::LuaCall<void(T)> call(state, aFunctionName.ToCharArray());
       call(param);
+      
+      // Return on success
+      return true;
+    }
+    
+    template<typename T, typename U>
+    bool LoadFunction2p(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2)
+    {
+      bool result = LoadFile(aFilename, aFunctionName);
+      if(!result)
+        return false;
+    
+      // Get the state and call the function
+      lua_State *state = getState();
+      SLB::LuaCall<void(T,U)> call(state, aFunctionName.ToCharArray());
+      call(param1, param2);
+      
+      // Return on success
+      return true;
+    }
+    
+    template<typename T, typename U, typename V>
+    bool LoadFunction3p(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2, V param3)
+    {
+      bool result = LoadFile(aFilename, aFunctionName);
+      if(!result)
+        return false;
+    
+      // Get the state and call the function
+      lua_State *state = getState();
+      SLB::LuaCall<void(T,U,V)> call(state, aFunctionName.ToCharArray());
+      call(param1, param2, param3);
+      
+      // Return on success
+      return true;
+    }
+    
+    template<typename T, typename U, typename V, typename W>
+    bool LoadFunction4p(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2, V param3, W param4)
+    {
+      bool result = LoadFile(aFilename, aFunctionName);
+      if(!result)
+        return false;
+    
+      // Get the state and call the function
+      lua_State *state = getState();
+      SLB::LuaCall<void(T,U,V,W)> call(state, aFunctionName.ToCharArray());
+      call(param1, param2, param3, param4);
       
       // Return on success
       return true;
     }
   };
   
-  /*void LoadFunction(std::string const &aFilename, std::string const &aFunctionName)
-  {
-    FunctionCaller caller;
-    caller.LoadFunction1p<std::string>(aFilename, aFunctionName, "");
-  }*/
-  
   template<typename T>
-  bool LoadFunction(std::string const &aFilename, std::string const &aFunctionName, T param)
+  bool LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param)
   {
     FunctionCaller caller;
     return caller.LoadFunction1p<T>(aFilename, aFunctionName, param);
+  }
+  
+  template<typename T, typename U>
+  bool LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2)
+  {
+    FunctionCaller caller;
+    return caller.LoadFunction2p<T,U>(aFilename, aFunctionName, param1, param2);
+  }
+  
+  template<typename T, typename U, typename V>
+  bool LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2, V param3)
+  {
+    FunctionCaller caller;
+    return caller.LoadFunction3p<T,U,V>(aFilename, aFunctionName, param1, param2, param3);
+  }
+  
+  template<typename T, typename U, typename V, typename W>
+  bool LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2, V param3, W param4)
+  {
+    FunctionCaller caller;
+    return caller.LoadFunction4p<T,U,V,W>(aFilename, aFunctionName, param1, param2, param3, param4);
   }
 };
 

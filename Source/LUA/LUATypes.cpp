@@ -26,25 +26,26 @@
 #include "Graphics/PCSurface.h"
 #endif
 
-#define LUAFILECHECK()  if(mScripts.find(aFilename) == mScripts.end()) \
+#define LUAFILECHECK()  if(mScripts.find(aFilename.ToHash()) == mScripts.end()) \
                         { \
-                          std::ifstream file(Common::RelativePath("Game", aFilename.c_str()).c_str()); \
+                          std::ifstream file(Common::RelativePath("Game", aFilename.ToString()).c_str()); \
                           if(file.is_open()) \
                           { \
                             std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()); \
-                            mScripts.insert(ScriptPair(aFilename, contents)); \
+                            HashString convertedContents(contents); \
+                            mScripts.insert(ScriptPair(aFilename.ToHash(), convertedContents)); \
                           } \
                           else \
                           { \
-                            mScripts.insert(ScriptPair(aFilename, "")); \
+                            mScripts.insert(ScriptPair(aFilename.ToHash(), "")); \
                           } \
                         }
 
 namespace LUABind
 {
   // Our manager and scripts
-  std::map<std::string,std::string> mScripts;
-  typedef std::pair<std::string,std::string> ScriptPair;
+  std::map<int,HashString> mScripts;
+  typedef std::pair<int,HashString> ScriptPair;
   
   GameApp* StaticGameApp::mApp = NULL; 
   
@@ -109,23 +110,23 @@ namespace LUABind
 #endif
   }
 
-  void LoadScriptFromFile(std::string const &aFilename)
+  void LoadScriptFromFile(HashString const &aFilename)
   {
     SLB::Script script;
     LUAFILECHECK()
 
-    script.doString(mScripts.find(aFilename)->second.c_str());
+    script.doString(mScripts.find(aFilename.ToHash())->second.ToCharArray());
   }
 
-  void LoadScriptFromString(std::string const &aString)
+  void LoadScriptFromString(HashString const &aString)
   {
     SLB::Script script;
-    script.doString(aString.c_str());
+    script.doString(aString.ToCharArray());
   }
   
-  std::string GetScript(std::string const &aFilename)
+  HashString const& GetScript(HashString const &aFilename)
   {
     LUAFILECHECK()
-    return mScripts.find(aFilename)->second;
+    return mScripts.find(aFilename.ToHash())->second;
   }
 };
