@@ -360,20 +360,27 @@ void Menu::ParseTransform(GameObject *aObject, Root *aTransform)
  */
 void Menu::ParseSurface(GameObject *aObject, Root *aSurface)
 {
+  Surface* objSurface = aObject->GET<Surface>();
   int startingAnimation = 0;
   float r, g, b, a;
-  r = aSurface->Find("ColorR")->GetValue().ToFloat();
-  g = aSurface->Find("ColorG")->GetValue().ToFloat();
-  b = aSurface->Find("ColorB")->GetValue().ToFloat();
-  a = aSurface->Find("ColorA")->GetValue().ToFloat();
-  startingAnimation = aSurface->Find("StartingAnimation")->GetValue().ToInt();
-
-  Surface* objSurface = aObject->GET<Surface>();
-  objSurface->SetColor(Vector4(r, g, b, a));
-  objSurface->SetAnimation(startingAnimation);
   
+  if(aSurface->Find("ColorR"))
+  {
+    r = aSurface->Find("ColorR")->GetValue().ToFloat();
+    g = aSurface->Find("ColorG")->GetValue().ToFloat();
+    b = aSurface->Find("ColorB")->GetValue().ToFloat();
+    a = aSurface->Find("ColorA")->GetValue().ToFloat();
+    objSurface->SetColor(Vector4(r, g, b, a));
+  }
+  if(aSurface->Find("StartingAnimation"))
+  {
+    startingAnimation = aSurface->Find("StartingAnimation")->GetValue().ToInt();
+    objSurface->SetAnimation(startingAnimation);
+  }
+#ifdef SHADER_COMPATIBLE
   if(aSurface->Find("VertexShader") && aSurface->Find("FragmentShader"))
   {
     objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
   }
+#endif
 }
