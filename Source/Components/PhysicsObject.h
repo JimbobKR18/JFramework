@@ -59,6 +59,7 @@ public:
   void                 AddForce(Vector3 const &aForce);
   void                 ClearForces();
   void                 AddIgnore(HashString const &aObjectName);
+  void                 RemoveIgnore(HashString const &aObjectName);
   bool                 IgnoreObject(HashString const &aObjectName);
 
   // Getters and setters

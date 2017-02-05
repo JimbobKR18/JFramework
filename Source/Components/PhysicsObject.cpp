@@ -381,6 +381,15 @@ void PhysicsObject::AddIgnore(HashString const &aObjectName)
 }
 
 /**
+ * @brief Remove object to ignore list
+ * @param aObjectName Name of object to unignore
+ */
+void PhysicsObject::RemoveIgnore(HashString const &aObjectName)
+{
+  mIgnoreList.erase(aObjectName.ToHash());
+}
+
+/**
  * @brief Check if we should ignore the object in question
  * @param aObjectName The name of the object to maybe ignore
  * @return Whether or not to ignore collision with this object
