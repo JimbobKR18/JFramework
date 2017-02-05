@@ -254,6 +254,7 @@ void Menu::ParseFile()
     Root* newElement = parser.Find(curObject.ToString());
     HashString name;
     
+    // Compatibility layer
     if(newElement->Find("Name"))
       name = newElement->Find("Name")->GetValue();
     else
