@@ -498,9 +498,9 @@ void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface, bool aActive
 {
   // Set properties for shader. Separated by program id.
   GLuint program = aSurface->GetProgramID();
-  GraphicsManager::PropertyContainer &properties = aSurface->GetManager()->GetPropertyMap()[(size_t)aSurface];
-  GraphicsManager::PropertyContainerIt propertyEnd = properties.end();
-  for(GraphicsManager::PropertyContainerIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
+  Surface::PropertyContainer const &properties = aSurface->GetProperties();
+  Surface::PropertyContainerConstIt propertyEnd = properties.end();
+  for(Surface::PropertyContainerConstIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
   {
     SurfaceProperty *property = *propertyIt;
     HashString value = property->GetTargetValue();

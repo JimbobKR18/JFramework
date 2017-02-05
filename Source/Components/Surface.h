@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "TextureCoordinates.h"
 #include "MathExt.h"
+#include "SurfaceProperty.h"
 
 class GraphicsManager;
 
@@ -30,6 +31,9 @@ class Surface : public Component
 public:
   typedef std::vector<ScrollInfo> ScrollInfoContainer;
   typedef ScrollInfoContainer::const_iterator ScrollInfoIT;
+  typedef std::vector<SurfaceProperty*> PropertyContainer;
+  typedef PropertyContainer::iterator PropertyContainerIt;
+  typedef PropertyContainer::const_iterator PropertyContainerConstIt;
   
 private:
   TextureCoordinates* mTexCoord;
@@ -41,6 +45,7 @@ private:
   bool                mNoRender;
   
   ScrollInfoContainer mScrollInfo;
+  PropertyContainer   mProperties;
   
   static int const sUID;
 public:
@@ -81,6 +86,11 @@ public:
   
   // Scrolling
   void                CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& aGoalSize);
+  
+  // Properties
+  PropertyContainer const&  GetProperties() const;
+  void                      AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
+  void                      ClearProperties();
   
   // Derived from Component
   virtual void        Update();

@@ -6,16 +6,11 @@
 #include "Screen.h"
 #include "TextureData.h"
 #include "ShaderData.h"
-#include "SurfaceProperty.h"
 
 class GraphicsManager : public Manager
 {
 public:
   typedef std::vector<Surface*>::iterator SurfaceIT;
-  typedef std::vector<SurfaceProperty*> PropertyContainer;
-  typedef std::unordered_map<size_t, PropertyContainer> PropertyMap;
-  typedef PropertyContainer::iterator PropertyContainerIt;
-  typedef PropertyMap::iterator PropertyMapIt;
   
 private:
   std::vector<Surface*>               mSurfaces;
@@ -23,7 +18,6 @@ private:
   std::map<HashString, TextureData>   mTextures;
   std::map<HashString, ShaderData>    mShaders;
   Screen*                             mScreen;
-  PropertyMap                         mProperties;
 
   static unsigned const sUID;
 public:
@@ -59,11 +53,6 @@ public:
   void                AddShaderPairing(HashString const &aFilename, ShaderData const &aData);
   ShaderData const&   GetShaderData(HashString const &aFilename) const;
   bool                ShaderDataExists(HashString const &aFilename) const;
-  
-  // Properties
-  PropertyMap&        GetPropertyMap();
-  void                AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
-  void                ClearProperties(Surface *aSurface);
 
   // Misc.
   Vector3             AbsToRel(Vector3 const &aPosition) const;

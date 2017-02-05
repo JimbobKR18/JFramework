@@ -18,7 +18,7 @@
 
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
-                                                                           mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr), mProperties()
+                                                                           mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr)
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
@@ -31,14 +31,6 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
 
 GraphicsManager::~GraphicsManager()
 {
-  for(PropertyMapIt it = mProperties.begin(); it != mProperties.end(); ++it)
-  {
-    for(PropertyContainerIt it2 = it->second.begin(); it2 != it->second.end(); ++it2)
-    {
-      delete *it2;
-    }
-  }
-  mProperties.clear();
 }
 
 /**
@@ -90,9 +82,7 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
  */
 void GraphicsManager::SerializeLUA()
 {
-  SLB::Class<GraphicsManager>("GraphicsManager").inherits<Manager>()
-          .set("AddOrEditProperty", &GraphicsManager::AddOrEditProperty)
-          .set("ClearProperties", &GraphicsManager::ClearProperties);
+  SLB::Class<GraphicsManager>("GraphicsManager").inherits<Manager>();
 }
 
 /**
@@ -134,7 +124,6 @@ Surface *GraphicsManager::CreateUISurface()
 void GraphicsManager::DeleteSurface(Surface *aSurface)
 {
   RemoveSurface(aSurface);
-  ClearProperties(aSurface);
   delete aSurface;
 }
 
@@ -295,56 +284,6 @@ bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
   }
 
   return true;
-}
-
-/**
- * @brief Get property map.
- * @return Properties.
- */
-GraphicsManager::PropertyMap& GraphicsManager::GetPropertyMap()
-{
-  return mProperties;
-}
-
-/**
- * @brief Edit property if there, otherwise add.
- * @param aName Name of property
- * @param aType Type of property
- * @param aTargetValue Target value of property
- * @param aDefaultValue Default value of property
- */
-void GraphicsManager::AddOrEditProperty(Surface *aSurface, HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)
-{
-  size_t id = (size_t)aSurface;
-  PropertyContainer &properties = mProperties[id];
-  PropertyContainerIt propertyEnd = properties.end();
-  for(PropertyContainerIt it = properties.begin(); it != propertyEnd; ++it)
-  {
-    if((*it)->GetName() == aName)
-    {
-      (*it)->SetType(aType);
-      (*it)->SetTargetValue(aTargetValue);
-      (*it)->SetDefaultValue(aDefaultValue);
-      return;
-    }
-  }
-  properties.push_back(new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue));
-}
-
-/**
- * @brief Clear properties for a surface.
- * @param aSurface Surface to clear.
- */
-void GraphicsManager::ClearProperties(Surface *aSurface)
-{
-  size_t id = (size_t)aSurface;
-  PropertyContainer &properties = mProperties[id];
-  PropertyContainerIt propertyEnd = properties.end();
-  for(PropertyContainerIt it = properties.begin(); it != propertyEnd; ++it)
-  {
-    delete *it;
-  }
-  properties.clear();
 }
 
 /**

@@ -9,20 +9,22 @@
 int const Surface::sUID = Common::StringHashFunction("Surface");
 
 Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
-                     mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender(false), mScrollInfo()
+                     mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender(false), mScrollInfo(),
+                     mProperties()
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
-                                              mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender(false), mScrollInfo()
+                                              mTextureSize(), mColor(1,1,1,1), mFileName(""), 
+                                              mNoRender(false), mScrollInfo(), mProperties()
 {
-  
 }
 
 Surface::~Surface()
 {
+  ClearProperties();
   mManager->RemoveSurface(this);
   mManager = nullptr;
   if(mTexCoord)
@@ -175,6 +177,51 @@ void Surface::CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& a
   scrollInfo.mType = aScrollType;
   scrollInfo.mGoalSize = aGoalSize;
   mScrollInfo.push_back(scrollInfo);
+}
+
+/**
+ * @brief Get properties container
+ * @return Container of properties
+ */
+Surface::PropertyContainer const& Surface::GetProperties() const
+{
+  return mProperties;
+}
+
+/**
+ * @brief Edit property if there, otherwise add.
+ * @param aName Name of property
+ * @param aType Type of property
+ * @param aTargetValue Target value of property
+ * @param aDefaultValue Default value of property
+ */
+void Surface::AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)
+{
+  PropertyContainerIt propertyEnd = mProperties.end();
+  for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
+  {
+    if((*it)->GetName() == aName)
+    {
+      (*it)->SetType(aType);
+      (*it)->SetTargetValue(aTargetValue);
+      (*it)->SetDefaultValue(aDefaultValue);
+      return;
+    }
+  }
+  mProperties.push_back(new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue));
+}
+
+/**
+ * @brief Clear properties for a surface.
+ */
+void Surface::ClearProperties()
+{
+  PropertyContainerIt propertyEnd = mProperties.end();
+  for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
+  {
+    delete *it;
+  }
+  mProperties.clear();
 }
 
 /**
@@ -369,5 +416,7 @@ void Surface::SerializeLUA()
     .set("SetCurrentFrame", &Surface::SetCurrentFrame)
     .set("SetAnimationSpeed", &Surface::SetAnimationSpeed)
     .set("CurrentAnimatedCompleted", &Surface::CurrentAnimationCompleted)
-    .set("SetColor", &Surface::SetColor);
+    .set("SetColor", &Surface::SetColor)
+    .set("AddOrEditProperty", &Surface::AddOrEditProperty)
+    .set("ClearProperties", &Surface::ClearProperties);
 }
