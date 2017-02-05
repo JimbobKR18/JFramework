@@ -252,14 +252,21 @@ void Menu::ParseFile()
   while(parser.Find(curObject.ToString()))
   {
     Root* newElement = parser.Find(curObject.ToString());
+    HashString name;
+    
+    if(newElement->Find("Name"))
+      name = newElement->Find("Name")->GetValue();
+    else
+      name = newElement->Find("File")->GetValue();
+    
     if(newElement->Find("Type")->GetValue().ToString() == "Image")
-      element = new MenuImage(this, newElement->Find("Name")->GetValue(), false);
+      element = new MenuImage(this, name, false);
     else if(newElement->Find("Type")->GetValue().ToString() == "Text")
     {
       if(newElement->Find("Text"))
-        element = new MenuText(this, newElement->Find("Name")->GetValue(), newElement->Find("Text")->GetValue(), false);
+        element = new MenuText(this, name, newElement->Find("Text")->GetValue(), false);
       else
-        element = new MenuText(this, newElement->Find("Name")->GetValue(), "", false);
+        element = new MenuText(this, name, "", false);
     }
     else
       assert(!"Invalid MenuElement passed into menu");
