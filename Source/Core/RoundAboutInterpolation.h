@@ -43,6 +43,7 @@ public:
     HashString name = HashString("RoundAboutInterpolation_") + T::GetName();
     SLB::Class<RoundAboutInterpolation<T>>(name.ToCharArray())
       .set("Update", &RoundAboutInterpolation<T>::Update)
+      .set("Complete", &RoundAboutInterpolation<T>::Complete)
       .set("GetCurrent", &RoundAboutInterpolation<T>::GetCurrent)
       .set("GetStart", &RoundAboutInterpolation<T>::GetStart)
       .set("GetFinish", &RoundAboutInterpolation<T>::GetFinish)

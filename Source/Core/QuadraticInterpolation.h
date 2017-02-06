@@ -45,6 +45,7 @@ public:
     HashString name = HashString("QuadraticInterpolation_") + T::GetName();
     SLB::Class<QuadraticInterpolation<T>>(name.ToCharArray())
       .set("Update", &QuadraticInterpolation<T>::Update)
+      .set("Complete", &QuadraticInterpolation<T>::Complete)
       .set("GetCurrent", &QuadraticInterpolation<T>::GetCurrent)
       .set("GetStart", &QuadraticInterpolation<T>::GetStart)
       .set("GetFinish", &QuadraticInterpolation<T>::GetFinish)

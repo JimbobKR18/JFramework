@@ -39,6 +39,15 @@ public:
   }
   
   /**
+   * @brief Force early completion
+   */
+  virtual void Complete()
+  {
+    mCurrentTime = mTime;
+    (*mCurrent) = mFinish;
+  }
+  
+  /**
    * @brief Get value of current value in interpolation
    * @return Current value in interpolation
    */
@@ -91,6 +100,7 @@ public:
     HashString name = HashString("Interpolation_") + T::GetName();
     SLB::Class<Interpolation<T>>(name.ToCharArray())
       .set("Update", &Interpolation<T>::Update)
+      .set("Complete", &Interpolation<T>::Complete)
       .set("GetCurrent", &Interpolation<T>::GetCurrent)
       .set("GetStart", &Interpolation<T>::GetStart)
       .set("GetFinish", &Interpolation<T>::GetFinish)
