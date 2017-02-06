@@ -149,7 +149,3 @@ void EffectsManager::Update(float const aDT)
     }
   }
 }
-
-
-
-
