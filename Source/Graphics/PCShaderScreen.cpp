@@ -23,11 +23,19 @@ PCShaderScreen::PCShaderScreen() : Screen()
 PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), mGLContext(), mDisplayMode(), mVertexBufferID(0), mVertexArrayObjectID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
+  
+#if defined(__APPLE__)
+  glewExperimental = true;
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+#endif
+  
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH,
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
   SDL_GetDesktopDisplayMode(0, &mDisplayMode);
-
+  
   GLenum glError = glewInit();
   if(glError != GLEW_OK)
   {
