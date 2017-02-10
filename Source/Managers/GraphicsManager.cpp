@@ -2,7 +2,7 @@
 #include "GraphicsManager.h"
 #include "ObjectDeleteMessage.h"
 
-#if !defined(IOS) && !defined(ANDROID)
+#if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
 #endif
 
