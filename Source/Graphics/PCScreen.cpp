@@ -24,6 +24,7 @@ PCScreen::PCScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScree
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH, 
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
+  SDL_GL_MakeCurrent(mWindow, mGLContext);
   SDL_GetDesktopDisplayMode(0, &mDisplayMode);
   ChangeSize(aW, aH, aFullScreen);
 }
