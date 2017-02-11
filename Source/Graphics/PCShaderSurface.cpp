@@ -45,6 +45,7 @@ PCShaderSurface::~PCShaderSurface()
   }
   mFont = nullptr;
   mSurface = nullptr;
+  glDeleteVertexArrays(1, &mVertexArrayObjectID);
 }
 
 /**
