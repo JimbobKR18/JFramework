@@ -205,7 +205,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   vertexData.reserve(4);
   textureData.reserve(4);
   
-  GLuint indices[4] = {0,1,2,3};
+  GLuint indices[4] = {0,3,2,1};
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -399,6 +399,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
+  glEnable(GL_CULL_FACE);
   glDisable(GL_DEPTH_TEST);
 
   glShadeModel(GL_SMOOTH);
