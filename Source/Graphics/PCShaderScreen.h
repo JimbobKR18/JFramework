@@ -26,7 +26,8 @@ private:
   SDL_GLContext mGLContext;
   SDL_DisplayMode mDisplayMode;
   GLuint        mVertexBufferID;
-  GLuint        mVertexArrayObjectID;
+  GLuint        mTextureBufferID;
+  GLuint        mIndexBufferID;
 
 public:
   PCShaderScreen();
@@ -48,6 +49,7 @@ private:
   void EnableVertexAttribArray(int aVertexAttrib);
   void DisableVertexAttribArray(int aVertexAttrib);
   void PushRenderData(std::vector<Vector4> &aRenderData, int aAttribLocation, Vector4 const &aAttribute);
+  void PrintGLError(int const aLineNumber);
 };
 
 #endif

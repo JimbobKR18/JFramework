@@ -21,7 +21,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
 }
 
 PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), 
-  mGLContext(), mDisplayMode(), mVertexBufferID(0), mVertexArrayObjectID(0)
+  mGLContext(), mDisplayMode(), mVertexBufferID(0), mTextureBufferID(0), mIndexBufferID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -85,6 +85,17 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 
       glLoadIdentity();
       glPushMatrix();
+      
+      // Get the texture id of the surface
+      PCShaderSurface *surface = obj->GET<PCShaderSurface>();
+      GLuint program = surface->GetProgramID();
+      
+      // Start using shader
+      glUseProgram(program);
+      glUniform1i(glGetUniformLocation(program, "textureUnit"), 0);
+      glUniform3f(glGetUniformLocation(program, "objectPos"), 0, 0, 0);
+      glUniform4f(glGetUniformLocation(program, "primaryColor"), 0, 0, 0, 1);
+      glUniform3f(glGetUniformLocation(program, "cameraDiff"), 0, 0, 0);
 
       // For each shape, draw the outline
       std::vector<Shape*> const& shapes = physicsObject->GetShapes();
@@ -150,13 +161,6 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           glEnd();
         }
       }
-      
-      // Get the texture id of the surface
-      PCShaderSurface *surface = obj->GET<PCShaderSurface>();
-      GLuint program = surface->GetProgramID();
-      
-      // Start using shader
-      glUseProgram(program);
 
       // Broad Size Line
       glBegin(GL_LINE_STRIP);
@@ -197,8 +201,11 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
   // Render data array.
-  std::vector<Vector4> renderData;
-  renderData.reserve(8);
+  std::vector<Vector4> vertexData, textureData;
+  vertexData.reserve(4);
+  textureData.reserve(4);
+  
+  GLuint indices[4] = {0,1,2,3};
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -261,22 +268,20 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     glUseProgram(program);
     int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
     int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
-    printf("zjshs: %i,%i\n", vertexPosLocation, glGetError());
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
-    printf("zjshs: %i,%i\n", texCoordPosLocation, glGetError());
     
     // Vertex points
-    PushRenderData(renderData, vertexPosLocation, topLeft);
-    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
-    PushRenderData(renderData, vertexPosLocation, topRight);
-    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
-    PushRenderData(renderData, vertexPosLocation, bottomRight);
-    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
-    PushRenderData(renderData, vertexPosLocation, bottomLeft);
-    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
+    PushRenderData(vertexData, vertexPosLocation, topLeft);
+    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+    PushRenderData(vertexData, vertexPosLocation, topRight);
+    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
+    PushRenderData(vertexData, vertexPosLocation, bottomRight);
+    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+    PushRenderData(vertexData, vertexPosLocation, bottomLeft);
+    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
     
     // Enable textures and set uniforms.
-    glBindVertexArray(mVertexArrayObjectID);
+    glBindVertexArray(surface->GetVertexArrayObjectID());
     glActiveTexture(GL_TEXTURE0 + activeTexture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
@@ -291,17 +296,23 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     SetShaderProperties(surface, true);
     
     // Set VBO and buffer data.
-    glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
-    
-    // For each attribute in a shader, we must enable Vertex Attribute Arrays.
+    glEnableClientState(GL_VERTEX_ARRAY);
     EnableVertexAttribArray(vertexPosLocation);
     EnableVertexAttribArray(texCoordPosLocation);
-    glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 2, 0);
-    glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 2, (GLvoid*)(sizeof(Vector4)));
-    glDrawArrays(GL_QUADS, 0, static_cast<int>(renderData.size()) / 2);
+    glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * vertexData.size(), &vertexData[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    glBindBuffer(GL_ARRAY_BUFFER, mTextureBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * textureData.size(), &textureData[0], GL_STATIC_DRAW);
+    glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * vertexData.size(), indices, GL_STATIC_DRAW);
+    
+    // Draw and disable
+    glDrawElements(GL_TRIANGLE_FAN, vertexData.size(), GL_UNSIGNED_INT, 0);
     DisableVertexAttribArray(vertexPosLocation);
     DisableVertexAttribArray(texCoordPosLocation);
+    glDisableClientState(GL_VERTEX_ARRAY);
     
     // Reset shader property values.
     SetShaderProperties(surface, false);
@@ -311,8 +322,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    renderData.clear();
+    vertexData.clear();
+    textureData.clear();
   }
 }
 
@@ -392,9 +405,9 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 
   glLoadIdentity();
   
-  glGenVertexArrays(1, &mVertexArrayObjectID);
   glGenBuffers(1, &mVertexBufferID);
-  glBindVertexArray(mVertexArrayObjectID);
+  glGenBuffers(1, &mTextureBufferID);
+  glGenBuffers(1, &mIndexBufferID);
 }
 
 /**
@@ -543,6 +556,10 @@ void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface, bool aActive
   }
 }
 
+/**
+ * @brief Enable attribute array
+ * @param aVertexAttrib Index of attribute
+ */
 void PCShaderScreen::EnableVertexAttribArray(int aVertexAttrib)
 {
   // -1 is error state
@@ -552,6 +569,10 @@ void PCShaderScreen::EnableVertexAttribArray(int aVertexAttrib)
   }
 }
 
+/**
+ * @brief Disable attribute array
+ * @param aVertexAttrib Index of attribute
+ */
 void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
 {
   // -1 is error state
@@ -561,6 +582,12 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
   }
 }
 
+/**
+ * @brief Push render data if attribute exists in shader.
+ * @param aRenderData Vector to push onto
+ * @param aAttribLocation Attribute in shader
+ * @param aAttribute Value of attribute
+ */
 void PCShaderScreen::PushRenderData(std::vector<Vector4> &aRenderData, int aAttribLocation, Vector4 const &aAttribute)
 {
   // -1 is error state
@@ -568,4 +595,15 @@ void PCShaderScreen::PushRenderData(std::vector<Vector4> &aRenderData, int aAttr
   {
     aRenderData.push_back(aAttribute);
   }
+}
+
+/**
+ * @brief Prints GL error info.
+ * @param aLineNumber Use __LINE__ wherever you use this.
+ */
+void PCShaderScreen::PrintGLError(int const aLineNumber)
+{
+  GLenum errorCode = glGetError();
+  if(errorCode != 0)
+    DebugLogPrint("(%i) %i: %s\n", aLineNumber, errorCode, gluErrorString(errorCode));
 }

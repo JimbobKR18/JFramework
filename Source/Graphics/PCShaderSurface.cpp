@@ -21,14 +21,17 @@
 
 int const PCShaderSurface::sUID = Common::StringHashFunction("Surface");
 
-PCShaderSurface::PCShaderSurface() : Surface(), mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr),
-                                     mVertexShaderFileName(), mFragmentShaderFileName()
+PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), mSurface(nullptr), 
+                                     mTextureFormat(), mNumberOfColors(0), mFont(nullptr), mVertexShaderFileName(), 
+                                     mFragmentShaderFileName()
 {
+  glGenVertexArrays(1, &mVertexArrayObjectID);
 }
-PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mSurface(nullptr), mTextureFormat(), 
-                                                              mNumberOfColors(0), mFont(nullptr),
+PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), 
+                                                              mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr),
                                                               mVertexShaderFileName(), mFragmentShaderFileName()
 {
+  glGenVertexArrays(1, &mVertexArrayObjectID);
 }
 PCShaderSurface::~PCShaderSurface()
 {
@@ -302,6 +305,15 @@ unsigned PCShaderSurface::GetTextureID() const
 unsigned PCShaderSurface::GetProgramID() const
 {
   return mProgramID;
+}
+
+/**
+ * @brief Get GL specified vertex array object value.
+ * @return Vertex array object ID.
+ */
+unsigned PCShaderSurface::GetVertexArrayObjectID() const
+{
+  return mVertexArrayObjectID;
 }
 
 /**
