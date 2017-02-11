@@ -182,7 +182,6 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 void PCShaderScreen::PreDraw()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glLoadIdentity();
 }
 
 /**
@@ -262,8 +261,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       }
     }
     
-    glPushMatrix();
-    
     // Start using shader
     glUseProgram(program);
     int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
@@ -296,7 +293,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     SetShaderProperties(surface, true);
     
     // Set VBO and buffer data.
-    glEnableClientState(GL_VERTEX_ARRAY);
     EnableVertexAttribArray(vertexPosLocation);
     EnableVertexAttribArray(texCoordPosLocation);
     glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
@@ -306,18 +302,15 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * textureData.size(), &textureData[0], GL_STATIC_DRAW);
     glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * vertexData.size(), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 4, indices, GL_STATIC_DRAW);
     
     // Draw and disable
-    glDrawElements(GL_TRIANGLE_FAN, vertexData.size(), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLE_FAN, static_cast<unsigned>(vertexData.size()), GL_UNSIGNED_INT, 0);
     DisableVertexAttribArray(vertexPosLocation);
     DisableVertexAttribArray(texCoordPosLocation);
-    glDisableClientState(GL_VERTEX_ARRAY);
     
     // Reset shader property values.
     SetShaderProperties(surface, false);
-    
-    glPopMatrix();
 
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -607,6 +600,6 @@ void PCShaderScreen::PrintGLError(int const aLineNumber)
 #ifndef _WIN32
   GLenum errorCode = glGetError();
   if(errorCode != 0)
-    DebugLogPrint("(%i) %i: %s\n", aLineNumber, errorCode, gluErrorString(errorCode));
+    DebugLogPrint("(%s) (%i) %i: %s\n", __FILE__, aLineNumber, errorCode, gluErrorString(errorCode));
 #endif
 }

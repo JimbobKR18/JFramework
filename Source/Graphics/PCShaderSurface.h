@@ -65,6 +65,7 @@ public:
   
 private:
   void                AddTexturePairing(HashString const &aName);
+  void                PrintGLError(int const aLineNumber);
 };
 
 #endif

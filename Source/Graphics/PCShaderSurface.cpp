@@ -447,3 +447,16 @@ void PCShaderSurface::AddTexturePairing(HashString const &aName)
 
   GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
 }
+
+/**
+ * @brief Prints GL error info.
+ * @param aLineNumber Use __LINE__ wherever you use this.
+ */
+void PCShaderSurface::PrintGLError(int const aLineNumber)
+{
+#ifndef _WIN32
+  GLenum errorCode = glGetError();
+  if(errorCode != 0)
+    DebugLogPrint("(%s) (%i) %i: %s\n", __FILE__, aLineNumber, errorCode, gluErrorString(errorCode));
+#endif
+}
