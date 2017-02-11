@@ -93,12 +93,12 @@ Surface *GraphicsManager::CreateSurface()
 #ifndef SHADER_COMPATIBLE
   Surface *surface = new PCSurface(this);
 #else
-	Surface *surface = new PCShaderSurface(this);
+  Surface *surface = new PCShaderSurface(this);
 #endif
 
-	AddSurface(surface);
+  AddSurface(surface);
 
-	return surface;
+  return surface;
 }
 
 /**
