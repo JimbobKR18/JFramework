@@ -603,7 +603,9 @@ void PCShaderScreen::PushRenderData(std::vector<Vector4> &aRenderData, int aAttr
  */
 void PCShaderScreen::PrintGLError(int const aLineNumber)
 {
+#ifndef _WIN32
   GLenum errorCode = glGetError();
   if(errorCode != 0)
     DebugLogPrint("(%i) %i: %s\n", aLineNumber, errorCode, gluErrorString(errorCode));
+#endif
 }
