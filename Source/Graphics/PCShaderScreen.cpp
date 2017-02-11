@@ -20,16 +20,17 @@ PCShaderScreen::PCShaderScreen() : Screen()
   assert(!"Do not use this");
 }
 
-PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), mGLContext(), mDisplayMode(), mVertexBufferID(0), mVertexArrayObjectID(0)
+PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), 
+  mGLContext(), mDisplayMode(), mVertexBufferID(0), mVertexArrayObjectID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
-#if defined(__APPLE__)
-  glewExperimental = GL_TRUE;
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-#endif
+//#if defined(__APPLE__)
+  //glewExperimental = GL_TRUE;
+  //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+  //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+  //SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+//#endif
   
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH,
                              SDL_WINDOW_OPENGL);
@@ -197,7 +198,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   
   // Render data array.
   std::vector<Vector4> renderData;
-  renderData.reserve(aObjects.size() * 20);
+  renderData.reserve(8);
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -254,46 +255,34 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       }
     }
     
-    // Vertex points
-    renderData.push_back(topLeft);
-    renderData.push_back(position);
-    renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
-    renderData.push_back(color);
-    renderData.push_back(cameraTranslation);
-    renderData.push_back(topRight);
-    renderData.push_back(position);
-    renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
-    renderData.push_back(color);
-    renderData.push_back(cameraTranslation);
-    renderData.push_back(bottomRight);
-    renderData.push_back(position);
-    renderData.push_back(Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
-    renderData.push_back(color);
-    renderData.push_back(cameraTranslation);
-    renderData.push_back(bottomLeft);
-    renderData.push_back(position);
-    renderData.push_back(Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
-    renderData.push_back(color);
-    renderData.push_back(cameraTranslation);
-    
     glPushMatrix();
-    
-    
-    int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
-    int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
-    int objectPosLocation = glGetAttribLocation(program, "objectPos");
-    int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
-    int colorPosLocation = glGetAttribLocation(program, "color");
-    int cameraDiffLocation = glGetAttribLocation(program, "cameraDiff");
     
     // Start using shader
     glUseProgram(program);
+    int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
+    int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
+    printf("zjshs: %i,%i\n", vertexPosLocation, glGetError());
+    int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
+    printf("zjshs: %i,%i\n", texCoordPosLocation, glGetError());
+    
+    // Vertex points
+    PushRenderData(renderData, vertexPosLocation, topLeft);
+    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+    PushRenderData(renderData, vertexPosLocation, topRight);
+    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
+    PushRenderData(renderData, vertexPosLocation, bottomRight);
+    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+    PushRenderData(renderData, vertexPosLocation, bottomLeft);
+    PushRenderData(renderData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
     
     // Enable textures and set uniforms.
     glBindVertexArray(mVertexArrayObjectID);
     glActiveTexture(GL_TEXTURE0 + activeTexture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
+    glUniform3f(glGetUniformLocation(program, "objectPos"), position.x, position.y, position.z);
+    glUniform4f(glGetUniformLocation(program, "primaryColor"), color.x, color.y, color.z, color.w);
+    glUniform3f(glGetUniformLocation(program, "cameraDiff"), cameraTranslation.x, cameraTranslation.y, cameraTranslation.z);
     glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
     glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
     
@@ -306,22 +295,13 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * renderData.size(), &renderData[0], GL_STATIC_DRAW);
     
     // For each attribute in a shader, we must enable Vertex Attribute Arrays.
-    glEnableVertexAttribArray(vertexPosLocation);
-    glEnableVertexAttribArray(objectPosLocation);
-    glEnableVertexAttribArray(texCoordPosLocation);
-    glEnableVertexAttribArray(colorPosLocation);
-    glEnableVertexAttribArray(cameraDiffLocation);
-    glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, 0);
-    glVertexAttribPointer(objectPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4)));
-    glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 2));
-    glVertexAttribPointer(colorPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 3));
-    glVertexAttribPointer(cameraDiffLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 5, (GLvoid*)(sizeof(Vector4) * 4));
-    glDrawArrays(GL_QUADS, 0, renderData.size() / 5);
-    glDisableVertexAttribArray(vertexPosLocation);
-    glDisableVertexAttribArray(objectPosLocation);
-    glDisableVertexAttribArray(texCoordPosLocation);
-    glDisableVertexAttribArray(colorPosLocation);
-    glDisableVertexAttribArray(cameraDiffLocation);
+    EnableVertexAttribArray(vertexPosLocation);
+    EnableVertexAttribArray(texCoordPosLocation);
+    glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 2, 0);
+    glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4) * 2, (GLvoid*)(sizeof(Vector4)));
+    glDrawArrays(GL_QUADS, 0, static_cast<int>(renderData.size()) / 2);
+    DisableVertexAttribArray(vertexPosLocation);
+    DisableVertexAttribArray(texCoordPosLocation);
     
     // Reset shader property values.
     SetShaderProperties(surface, false);
@@ -406,6 +386,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
+  glDisable(GL_DEPTH_TEST);
 
   glShadeModel(GL_SMOOTH);
 
@@ -559,5 +540,32 @@ void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface, bool aActive
         break;
       }
     }
+  }
+}
+
+void PCShaderScreen::EnableVertexAttribArray(int aVertexAttrib)
+{
+  // -1 is error state
+  if(aVertexAttrib > -1)
+  {
+    glEnableVertexAttribArray(aVertexAttrib);
+  }
+}
+
+void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
+{
+  // -1 is error state
+  if(aVertexAttrib > -1)
+  {
+    glDisableVertexAttribArray(aVertexAttrib);
+  }
+}
+
+void PCShaderScreen::PushRenderData(std::vector<Vector4> &aRenderData, int aAttribLocation, Vector4 const &aAttribute)
+{
+  // -1 is error state
+  if(aAttribLocation > -1)
+  {
+    aRenderData.push_back(aAttribute);
   }
 }
