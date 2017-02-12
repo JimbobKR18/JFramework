@@ -382,8 +382,8 @@ void PCShaderSurface::LoadAttributesToVBO()
   glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * NUM_INDICES, mVertexData, GL_DYNAMIC_DRAW);
   glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-  glBindBuffer(GL_TEXTURE_BUFFER, mTextureBufferID);
-  glBufferData(GL_TEXTURE_BUFFER, sizeof(Vector4) * NUM_INDICES, mTextureData, GL_DYNAMIC_DRAW);
+  glBindBuffer(GL_ARRAY_BUFFER, mTextureBufferID);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * NUM_INDICES, mTextureData, GL_DYNAMIC_DRAW);
   glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
 }
 
