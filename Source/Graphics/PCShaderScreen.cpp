@@ -206,6 +206,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
+#ifdef _DEBUG_DRAW
+  int numCalls = 0;
+#endif
+  
   // Draw each object
   // NOTE: The objects are sorted by texture id
   std::vector<Surface*>::const_iterator end = aObjects.end();
@@ -225,6 +229,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     int objectPosLocation = glGetAttribLocation(program, "objectPos");
     int colorPosLocation = glGetAttribLocation(program, "primaryColor");
+    
+#ifdef _DEBUG_DRAW
+    ++numCalls;
+#endif
     
     // Camera translation
     float cameraMatrix[9];
@@ -386,6 +394,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindVertexArray(0);
   }
+  
+#ifdef _DEBUG_DRAW
+  DebugLogPrint("Number of draw calls this frame: %d\n", numCalls);
+#endif
 }
 
 /**
