@@ -13,6 +13,10 @@ bool BatchSortPredicate(Surface *object1, Surface *object2)
   {
     return true;
   }
+  else if(object1->GetTextureID() == object2->GetTextureID() && object1->GetProgramID() < object2->GetProgramID())
+  {
+    return true;
+  }
 
   return false;
 }

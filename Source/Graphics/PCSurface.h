@@ -44,6 +44,7 @@ public:
   
   // Getters
   unsigned            GetTextureID() const;
+  unsigned            GetProgramID() const;
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);

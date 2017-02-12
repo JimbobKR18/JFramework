@@ -196,6 +196,15 @@ unsigned PCSurface::GetTextureID() const
 }
 
 /**
+ * @brief Get GL specified program value.
+ * @return Program ID.
+ */
+unsigned PCSurface::GetProgramID() const
+{
+  return 0;
+}
+
+/**
  * @brief Simple update loop.
  */
 void PCSurface::Update()

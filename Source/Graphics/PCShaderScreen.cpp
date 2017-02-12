@@ -560,9 +560,11 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
 }
 
 /**
- * @brief Push render data if attribute exists in shader.
- * @param aRenderData Vector to push onto
- * @param aAttribLocation Attribute in shader
+ * @brief Push render data to shader if applicable
+ * @param aSurface Surface to push render data to
+ * @param aIndexName Name of index (VERTEX, TEXTURE, etc.)
+ * @param aAttribLocation Locaiton of attribute name in shader
+ * @param aIndex Index of attribute in object
  * @param aAttribute Value of attribute
  */
 void PCShaderScreen::PushRenderData(PCShaderSurface* aSurface, PCShaderSurface::ShaderIndexName aIndexName, int aAttribLocation, int aIndex, Vector4 const &aAttribute)

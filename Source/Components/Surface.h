@@ -83,6 +83,7 @@ public:
   
   // Batching
   virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); return 0; }
+  virtual unsigned    GetProgramID() const { assert(!"Cannot call GetProgramID() on a raw Surface."); return 0; }
   
   // Scrolling
   void                CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& aGoalSize);

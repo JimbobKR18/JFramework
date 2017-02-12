@@ -14,16 +14,20 @@ bool ZSortPredicate(Surface *object1, Surface *object2)
   float z2 = -0.9999f;
   int id1 = 0;
   int id2 = 0;
+  int p1 = 0;
+  int p2 = 0;
   
   if(object1->GetOwner())
   {
     z1 = object1->GetOwner()->GET<Transform>()->GetPosition().z;
     id1 = object1->GetTextureID();
+    p1 = object1->GetProgramID();
   }
   if(object2->GetOwner())
   {
     z2 = object2->GetOwner()->GET<Transform>()->GetPosition().z;
     id2 = object2->GetTextureID();
+    p2 = object2->GetProgramID();
   }
 
   // Right hand rule
@@ -32,6 +36,10 @@ bool ZSortPredicate(Surface *object1, Surface *object2)
     return true;
   }
   else if(z1 == z2 && id1 < id2)
+  {
+    return true;
+  }
+  else if(z1 == z2 && id1 == id2 && p1 < p2)
   {
     return true;
   }
