@@ -21,7 +21,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
 }
 
 PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), 
-  mGLContext(), mDisplayMode(), mVertexBufferID(0), mTextureBufferID(0)
+  mGLContext(), mDisplayMode()
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -199,11 +199,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
-  // Render data array.
-  std::vector<Vector4> vertexData, textureData;
-  vertexData.reserve(4);
-  textureData.reserve(4);
-  
   // Draw each object
   // NOTE: The objects are sorted by texture id
   std::vector<Surface*>::const_iterator end = aObjects.end();
@@ -266,14 +261,15 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     
     // Vertex points
-    PushRenderData(vertexData, vertexPosLocation, topLeft);
-    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
-    PushRenderData(vertexData, vertexPosLocation, topRight);
-    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
-    PushRenderData(vertexData, vertexPosLocation, bottomRight);
-    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
-    PushRenderData(vertexData, vertexPosLocation, bottomLeft);
-    PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 0, topLeft);
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 0, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 1, topRight);
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 1, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 2, bottomRight);
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 2, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 3, bottomLeft);
+    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 3, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
+    surface->LoadAttributesToVBO();
     
     // Enable textures and set uniforms.
     glBindVertexArray(surface->GetVertexArrayObjectID());
@@ -293,15 +289,14 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     // Set VBO and buffer data.
     EnableVertexAttribArray(vertexPosLocation);
     EnableVertexAttribArray(texCoordPosLocation);
-    glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * vertexData.size(), &vertexData[0], GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, surface->GetVertexBufferID());
     glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, mTextureBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * textureData.size(), &textureData[0], GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, surface->GetTextureBufferID());
     glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, surface->GetIndexBufferID());
     
     // Draw and disable
-    glDrawElements(GL_TRIANGLE_FAN, static_cast<unsigned>(vertexData.size()), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, 0);
     DisableVertexAttribArray(vertexPosLocation);
     DisableVertexAttribArray(texCoordPosLocation);
     
@@ -310,10 +305,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
 
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    vertexData.clear();
-    textureData.clear();
   }
 }
 
@@ -393,9 +385,6 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glShadeModel(GL_SMOOTH);
 
   glLoadIdentity();
-  
-  glGenBuffers(1, &mVertexBufferID);
-  glGenBuffers(1, &mTextureBufferID);
 }
 
 /**
@@ -576,12 +565,12 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
  * @param aAttribLocation Attribute in shader
  * @param aAttribute Value of attribute
  */
-void PCShaderScreen::PushRenderData(std::vector<Vector4> &aRenderData, int aAttribLocation, Vector4 const &aAttribute)
+void PCShaderScreen::PushRenderData(PCShaderSurface* aSurface, PCShaderSurface::ShaderIndexName aIndexName, int aAttribLocation, int aIndex, Vector4 const &aAttribute)
 {
   // -1 is error state
   if(aAttribLocation > -1)
   {
-    aRenderData.push_back(aAttribute);
+    aSurface->SetShaderAttribute(aIndexName, aIndex, aAttribute);
   }
 }
 

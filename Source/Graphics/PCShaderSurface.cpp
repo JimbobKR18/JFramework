@@ -19,6 +19,8 @@
 #endif
 #endif
 
+#define NUM_INDICES 4
+
 int const PCShaderSurface::sUID = Common::StringHashFunction("Surface");
 
 PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), mIndexBufferID(0),
@@ -29,9 +31,8 @@ PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0), mV
 }
 PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), mIndexBufferID(0),
                                                               mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr),
-                                                              mVertexShaderFileName(), mFragmentShaderFileName()
+                                                              mVertexShaderFileName(), mFragmentShaderFileName(), mVertexData(), mTextureData(), mIndices(nullptr)
 {
-  AllocateBuffers();
 }
 
 PCShaderSurface::~PCShaderSurface()
@@ -47,7 +48,12 @@ PCShaderSurface::~PCShaderSurface()
   mFont = nullptr;
   mSurface = nullptr;
   glDeleteVertexArrays(1, &mVertexArrayObjectID);
+  glDeleteBuffers(1, &mVertexBufferID);
+  glDeleteBuffers(1, &mTextureBufferID);
   glDeleteBuffers(1, &mIndexBufferID);
+  delete mVertexData;
+  delete mTextureData;
+  delete mIndices;
 }
 
 /**
@@ -319,6 +325,21 @@ unsigned PCShaderSurface::GetVertexArrayObjectID() const
   return mVertexArrayObjectID;
 }
 
+unsigned PCShaderSurface::GetVertexBufferID() const
+{
+  return mVertexBufferID;
+}
+
+unsigned PCShaderSurface::GetTextureBufferID() const
+{
+  return mTextureBufferID;
+}
+
+unsigned PCShaderSurface::GetIndexBufferID() const
+{
+  return mIndexBufferID;
+}
+
 /**
  * @brief Get vertex shader file name.
  * @return File name.
@@ -335,6 +356,35 @@ HashString const& PCShaderSurface::GetVertexShaderFilename() const
 HashString const& PCShaderSurface::GetFragmentShaderFilename() const
 {
   return mFragmentShaderFileName;
+}
+
+void PCShaderSurface::SetShaderAttribute(ShaderIndexName aName, int aIndex, PCShaderSurface::ShaderAttribute const &aAttribute)
+{
+  switch(aName)
+  {
+    case VERTEX:
+      mVertexData[aIndex] = aAttribute;
+      break;
+    case TEXTURE:
+      mTextureData[aIndex] = aAttribute;
+      break;
+    default:
+      assert(!"Invalid shader index passed.");
+      break;
+  }
+}
+
+void PCShaderSurface::LoadAttributesToVBO()
+{
+  int vertexPosLocation = glGetAttribLocation(mProgramID, "vertexPos");
+  int texCoordPosLocation = glGetAttribLocation(mProgramID, "texCoord");
+  glBindVertexArray(mVertexArrayObjectID);
+  glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * NUM_INDICES, mVertexData, GL_DYNAMIC_DRAW);
+  glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+  glBindBuffer(GL_TEXTURE_BUFFER, mTextureBufferID);
+  glBufferData(GL_TEXTURE_BUFFER, sizeof(Vector4) * NUM_INDICES, mTextureData, GL_DYNAMIC_DRAW);
+  glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
 }
 
 /**
@@ -398,6 +448,7 @@ void PCShaderSurface::Deserialize(Parser &aParser)
   SetFileName(fileName);
   LoadImage(GetFileName());
   LoadShaders(vertexShader, fragmentShader);
+  AllocateBuffers();
   
   Surface::Deserialize(aParser);
 }
@@ -468,11 +519,21 @@ void PCShaderSurface::PrintGLError(int const aLineNumber)
  */
 void PCShaderSurface::AllocateBuffers()
 {
-  GLuint indices[4] = {0,3,2,1};
+  mIndices = new GLuint[NUM_INDICES];
+  mIndices[0] = 0;
+  mIndices[1] = 3;
+  mIndices[2] = 2;
+  mIndices[3] = 1;
+  
+  mVertexData = new ShaderAttribute[NUM_INDICES];
+  mTextureData = new ShaderAttribute[NUM_INDICES];
+  
   glGenVertexArrays(1, &mVertexArrayObjectID);
+  glGenBuffers(1, &mVertexBufferID);
+  glGenBuffers(1, &mTextureBufferID);
   glGenBuffers(1, &mIndexBufferID);
   
   glBindVertexArray(mVertexArrayObjectID);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 4, indices, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * NUM_INDICES, mIndices, GL_STATIC_DRAW);
 }

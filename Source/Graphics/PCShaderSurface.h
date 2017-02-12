@@ -26,10 +26,21 @@
 
 class PCShaderSurface : public Surface
 {
+public:
+  enum ShaderIndexName
+  {
+    VERTEX,
+    TEXTURE
+  };
+  typedef Vector4 ShaderAttribute;
+  typedef ShaderAttribute* ShaderAttributeContainer;
+  
 private:
   GLuint        mTextureID;
   GLuint        mProgramID;
   GLuint        mVertexArrayObjectID;
+  GLuint        mVertexBufferID;
+  GLuint        mTextureBufferID;
   GLuint        mIndexBufferID;
   SDL_Surface*  mSurface;
   GLenum        mTextureFormat;
@@ -37,6 +48,9 @@ private:
   TTF_Font*     mFont;
   HashString    mVertexShaderFileName;
   HashString    mFragmentShaderFileName;
+  
+  ShaderAttributeContainer mVertexData, mTextureData;
+  GLuint* mIndices;
   
   static int const sUID;
 
@@ -53,9 +67,19 @@ public:
   unsigned            GetTextureID() const;
   unsigned            GetProgramID() const;
   unsigned            GetVertexArrayObjectID() const;
+  unsigned            GetVertexBufferID() const;
+  unsigned            GetTextureBufferID() const;
+  unsigned            GetIndexBufferID() const;
   HashString const&   GetVertexShaderFilename() const;
   HashString const&   GetFragmentShaderFilename() const;
+  
+  // Setters
+  void                SetShaderAttribute(ShaderIndexName aName, int aIndex, ShaderAttribute const &aAttribute);
+  
+  // Misc.
+  void                LoadAttributesToVBO();
 
+  // Derived from Component
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ReceiveMessage(Message const &aMessage);
