@@ -21,7 +21,8 @@ PCShaderScreen::PCShaderScreen() : Screen()
 }
 
 PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), 
-  mGLContext(), mDisplayMode()
+  mGLContext(), mDisplayMode(), mVertexArrayObjectID(0), mVertexBufferID(0), mTextureBufferID(0),
+  mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -50,6 +51,12 @@ PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH
 
 PCShaderScreen::~PCShaderScreen()
 {
+  glDeleteBuffers(1, &mVertexBufferID);
+  glDeleteBuffers(1, &mTextureBufferID);
+  glDeleteBuffers(1, &mPositionBufferID);
+  glDeleteBuffers(1, &mColorBufferID);
+  glDeleteBuffers(1, &mIndexBufferID);
+  glDeleteVertexArrays(1, &mVertexArrayObjectID);
   SDL_GL_DeleteContext(mGLContext);
   SDL_Quit();
 }
@@ -202,38 +209,22 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Draw each object
   // NOTE: The objects are sorted by texture id
   std::vector<Surface*>::const_iterator end = aObjects.end();
-  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end; ++it)
+  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
     // Get the texture id of the surface
     PCShaderSurface *surface = (*it)->GetOwner()->GET<PCShaderSurface>();
     GLuint texture = surface->GetTextureID();
     GLuint program = surface->GetProgramID();
-    
-    GameObject *owner = (*it)->GetOwner();
-    Transform *transform = owner->GET<Transform>();
-    
-    // Get transforms in local and world space.
-    Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
-    Vector3 position = transform->GetPosition();
-    TextureCoordinates *texCoord = surface->GetTextureData();
-    Vector3 &size = transform->GetSize();
-    Vector4 &color = surface->GetColor();
+    Viewspace viewSpace = surface->GetViewMode();
     Vector4 cameraTranslation;
-
-    // Move object based on its alignment
-    AlignmentHelper(transform, size, position);
     
-    // Get the basic coordinates for the quad
-    Vector3 topLeft(-size.x, -size.y, 0);
-    Vector3 topRight(size.x, -size.y, 0);
-    Vector3 bottomRight(size.x, size.y, 0);
-    Vector3 bottomLeft(-size.x, size.y, 0);
-    
-    // Model transform
-    topLeft = modelTransform * topLeft;
-    topRight = modelTransform * topRight;
-    bottomLeft = modelTransform * bottomLeft;
-    bottomRight = modelTransform * bottomRight;
+    // Start using shader
+    glUseProgram(program);
+    int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
+    int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
+    int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
+    int objectPosLocation = glGetAttribLocation(program, "objectPos");
+    int colorPosLocation = glGetAttribLocation(program, "primaryColor");
     
     // Camera translation
     float cameraMatrix[9];
@@ -254,30 +245,97 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       }
     }
     
-    // Start using shader
-    glUseProgram(program);
-    int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
-    int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
-    int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
+    std::vector<Vector4> vertexData, textureData, colorData, positionData;
+    std::vector<GLuint> indices;
     
-    // Vertex points
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 0, topLeft);
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 0, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 1, topRight);
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 1, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 2, bottomRight);
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 2, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::VERTEX, vertexPosLocation, 3, bottomLeft);
-    PushRenderData(surface, PCShaderSurface::ShaderIndexName::TEXTURE, texCoordPosLocation, 3, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
-    surface->LoadAttributesToVBO();
+    vertexData.reserve(1024);
+    textureData.reserve(1024);
+    colorData.reserve(1024);
+    positionData.reserve(1024);
+    indices.reserve(1024);
+    int iteration = 0;
+    
+    while(it != end && (*it)->GetProgramID() == program &&
+          (*it)->GetTextureID() == texture && (*it)->GetViewMode() == viewSpace)
+    {
+      GameObject *owner = (*it)->GetOwner();
+      PCShaderSurface *surface = owner->GET<PCShaderSurface>();
+      Transform *transform = owner->GET<Transform>();
+    
+      // Get transforms in local and world space.
+      Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
+      Vector3 position = transform->GetPosition();
+      TextureCoordinates *texCoord = surface->GetTextureData();
+      Vector3 &size = transform->GetSize();
+      Vector4 &color = surface->GetColor();
+
+      // Move object based on its alignment
+      AlignmentHelper(transform, size, position);
+      
+      // Get the basic coordinates for the quad
+      Vector3 topLeft(-size.x, -size.y, 0);
+      Vector3 topRight(size.x, -size.y, 0);
+      Vector3 bottomRight(size.x, size.y, 0);
+      Vector3 bottomLeft(-size.x, size.y, 0);
+      
+      // Model transform
+      topLeft = modelTransform * topLeft;
+      topRight = modelTransform * topRight;
+      bottomLeft = modelTransform * bottomLeft;
+      bottomRight = modelTransform * bottomRight;
+      
+      // Vertex points
+      PushRenderData(vertexData, vertexPosLocation, topLeft);
+      PushRenderData(vertexData, vertexPosLocation, bottomLeft);
+      PushRenderData(vertexData, vertexPosLocation, bottomRight);
+      PushRenderData(vertexData, vertexPosLocation, bottomRight);
+      PushRenderData(vertexData, vertexPosLocation, topRight);
+      PushRenderData(vertexData, vertexPosLocation, topLeft);
+      
+      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
+      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
+      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
+      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+      
+      PushRenderData(colorData, colorPosLocation, color);
+      PushRenderData(colorData, colorPosLocation, color);
+      PushRenderData(colorData, colorPosLocation, color);
+      PushRenderData(colorData, colorPosLocation, color);
+      PushRenderData(colorData, colorPosLocation, color);
+      PushRenderData(colorData, colorPosLocation, color);
+      
+      PushRenderData(positionData, objectPosLocation, position);
+      PushRenderData(positionData, objectPosLocation, position);
+      PushRenderData(positionData, objectPosLocation, position);
+      PushRenderData(positionData, objectPosLocation, position);
+      PushRenderData(positionData, objectPosLocation, position);
+      PushRenderData(positionData, objectPosLocation, position);
+      
+      for(int i = 0; i < 6; ++i)
+      {
+        indices.push_back(i + (iteration * 6));
+      }
+      
+      if((*it)->GetProperties().size() != 0)
+      {
+        ++it;
+        break;
+      }
+      else
+      {
+        ++it;
+      }
+      
+      ++iteration;
+    }
     
     // Enable textures and set uniforms.
-    glBindVertexArray(surface->GetVertexArrayObjectID());
+    glBindVertexArray(mVertexArrayObjectID);
     glActiveTexture(GL_TEXTURE0 + activeTexture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
-    glUniform3f(glGetUniformLocation(program, "objectPos"), position.x, position.y, position.z);
-    glUniform4f(glGetUniformLocation(program, "primaryColor"), color.x, color.y, color.z, color.w);
     glUniform3f(glGetUniformLocation(program, "cameraDiff"), cameraTranslation.x, cameraTranslation.y, cameraTranslation.z);
     glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
     glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
@@ -289,16 +347,31 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     // Set VBO and buffer data.
     EnableVertexAttribArray(vertexPosLocation);
     EnableVertexAttribArray(texCoordPosLocation);
-    glBindBuffer(GL_ARRAY_BUFFER, surface->GetVertexBufferID());
+    EnableVertexAttribArray(objectPosLocation);
+    EnableVertexAttribArray(colorPosLocation);
+    
+    glBindVertexArray(mVertexArrayObjectID);
+    glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * vertexData.size(), &vertexData[0], GL_DYNAMIC_DRAW);
     glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, surface->GetTextureBufferID());
+    glBindBuffer(GL_ARRAY_BUFFER, mTextureBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * textureData.size(), &textureData[0], GL_DYNAMIC_DRAW);
     glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, surface->GetIndexBufferID());
+    glBindBuffer(GL_ARRAY_BUFFER, mColorBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * colorData.size(), &colorData[0], GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(colorPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    glBindBuffer(GL_ARRAY_BUFFER, mPositionBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * positionData.size(), &positionData[0], GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(objectPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices.size(), &indices[0], GL_DYNAMIC_DRAW);
     
     // Draw and disable
-    glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, static_cast<unsigned>(vertexData.size()), GL_UNSIGNED_INT, 0);
     DisableVertexAttribArray(vertexPosLocation);
     DisableVertexAttribArray(texCoordPosLocation);
+    DisableVertexAttribArray(objectPosLocation);
+    DisableVertexAttribArray(colorPosLocation);
     
     // Reset shader property values.
     SetShaderProperties(surface, false);
@@ -385,6 +458,13 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glShadeModel(GL_SMOOTH);
 
   glLoadIdentity();
+  
+  glGenVertexArrays(1, &mVertexArrayObjectID);
+  glGenBuffers(1, &mVertexBufferID);
+  glGenBuffers(1, &mTextureBufferID);
+  glGenBuffers(1, &mPositionBufferID);
+  glGenBuffers(1, &mColorBufferID);
+  glGenBuffers(1, &mIndexBufferID);
 }
 
 /**
@@ -560,19 +640,17 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
 }
 
 /**
- * @brief Push render data to shader if applicable
- * @param aSurface Surface to push render data to
- * @param aIndexName Name of index (VERTEX, TEXTURE, etc.)
- * @param aAttribLocation Locaiton of attribute name in shader
- * @param aIndex Index of attribute in object
+ * @brief Push render data onto vector if applicable.
+ * @param aData Vector to push onto
+ * @param aAttribLocation Location of attribute in shader
  * @param aAttribute Value of attribute
  */
-void PCShaderScreen::PushRenderData(PCShaderSurface* aSurface, PCShaderSurface::ShaderIndexName aIndexName, int aAttribLocation, int aIndex, Vector4 const &aAttribute)
+void PCShaderScreen::PushRenderData(std::vector<Vector4> &aData, int aAttribLocation, Vector4 const &aAttribute)
 {
   // -1 is error state
   if(aAttribLocation > -1)
   {
-    aSurface->SetShaderAttribute(aIndexName, aIndex, aAttribute);
+    aData.push_back(aAttribute);
   }
 }
 

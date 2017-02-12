@@ -25,6 +25,12 @@ private:
   SDL_Window*   mWindow;
   SDL_GLContext mGLContext;
   SDL_DisplayMode mDisplayMode;
+  GLuint        mVertexArrayObjectID;
+  GLuint        mVertexBufferID;
+  GLuint        mTextureBufferID;
+  GLuint        mPositionBufferID;
+  GLuint        mColorBufferID;
+  GLuint        mIndexBufferID;
 
 public:
   PCShaderScreen();
@@ -45,7 +51,7 @@ private:
   void SetShaderProperties(PCShaderSurface *aSurface, bool aActive);
   void EnableVertexAttribArray(int aVertexAttrib);
   void DisableVertexAttribArray(int aVertexAttrib);
-  void PushRenderData(PCShaderSurface* aSurface, PCShaderSurface::ShaderIndexName aIndexName, int aAttribLocation, int aIndex, Vector4 const &aAttribute);
+  void PushRenderData(std::vector<Vector4> &aData, int aAttribLocation, Vector4 const &aAttribute);
   void PrintGLError(int const aLineNumber);
 };
 
