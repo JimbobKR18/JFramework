@@ -68,9 +68,16 @@ PCShaderScreen::~PCShaderScreen()
 void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
+  Matrix33 viewMatrix = GetView().GetFinalTransform();
   Vector3 &cameraPosition = GetView().GetPosition();
   Vector3 cameraSize = GetView().GetHalfSize();
   Vector3 cameraDiff = cameraPosition - cameraSize;
+  
+  float cameraMatrix[9];
+  for(int i = 0; i < 9; ++i)
+  {
+    cameraMatrix[i] = viewMatrix.values[i/3][i%3];
+  }
   
   std::vector<Surface*>::const_iterator end = aObjects.end();
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end; ++it)
@@ -93,16 +100,9 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       glLoadIdentity();
       glPushMatrix();
       
-      // Get the texture id of the surface
-      PCShaderSurface *surface = obj->GET<PCShaderSurface>();
-      GLuint program = surface->GetProgramID();
-      
-      // Start using shader
-      glUseProgram(program);
-      glUniform1i(glGetUniformLocation(program, "textureUnit"), 0);
-      glUniform3f(glGetUniformLocation(program, "objectPos"), 0, 0, 0);
-      glUniform4f(glGetUniformLocation(program, "primaryColor"), 0, 0, 0, 1);
-      glUniform3f(glGetUniformLocation(program, "cameraDiff"), 0, 0, 0);
+      // Stop using shaders
+      glUseProgram(0);
+      glBindTexture(GL_TEXTURE_2D, 0);
 
       // For each shape, draw the outline
       std::vector<Shape*> const& shapes = physicsObject->GetShapes();
