@@ -21,7 +21,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
 }
 
 PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), 
-  mGLContext(), mDisplayMode(), mVertexBufferID(0), mTextureBufferID(0), mIndexBufferID(0)
+  mGLContext(), mDisplayMode(), mVertexBufferID(0), mTextureBufferID(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -204,8 +204,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   vertexData.reserve(4);
   textureData.reserve(4);
   
-  GLuint indices[4] = {0,3,2,1};
-  
   // Draw each object
   // NOTE: The objects are sorted by texture id
   std::vector<Surface*>::const_iterator end = aObjects.end();
@@ -296,13 +294,11 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     EnableVertexAttribArray(vertexPosLocation);
     EnableVertexAttribArray(texCoordPosLocation);
     glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * vertexData.size(), &vertexData[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * vertexData.size(), &vertexData[0], GL_DYNAMIC_DRAW);
     glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
     glBindBuffer(GL_ARRAY_BUFFER, mTextureBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * textureData.size(), &textureData[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * textureData.size(), &textureData[0], GL_DYNAMIC_DRAW);
     glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 4, indices, GL_STATIC_DRAW);
     
     // Draw and disable
     glDrawElements(GL_TRIANGLE_FAN, static_cast<unsigned>(vertexData.size()), GL_UNSIGNED_INT, 0);
@@ -315,7 +311,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     vertexData.clear();
     textureData.clear();
@@ -401,7 +396,6 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   
   glGenBuffers(1, &mVertexBufferID);
   glGenBuffers(1, &mTextureBufferID);
-  glGenBuffers(1, &mIndexBufferID);
 }
 
 /**

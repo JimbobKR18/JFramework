@@ -27,7 +27,6 @@ private:
   SDL_DisplayMode mDisplayMode;
   GLuint        mVertexBufferID;
   GLuint        mTextureBufferID;
-  GLuint        mIndexBufferID;
 
 public:
   PCShaderScreen();

@@ -21,18 +21,19 @@
 
 int const PCShaderSurface::sUID = Common::StringHashFunction("Surface");
 
-PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), mSurface(nullptr), 
-                                     mTextureFormat(), mNumberOfColors(0), mFont(nullptr), mVertexShaderFileName(), 
+PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), mIndexBufferID(0),
+                                     mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr), mVertexShaderFileName(),
                                      mFragmentShaderFileName()
 {
-  glGenVertexArrays(1, &mVertexArrayObjectID);
+  assert(!"Do not use");
 }
-PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), 
+PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(0), mProgramID(0), mVertexArrayObjectID(0), mIndexBufferID(0),
                                                               mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr),
                                                               mVertexShaderFileName(), mFragmentShaderFileName()
 {
-  glGenVertexArrays(1, &mVertexArrayObjectID);
+  AllocateBuffers();
 }
+
 PCShaderSurface::~PCShaderSurface()
 {
   if(mFont)
@@ -46,6 +47,7 @@ PCShaderSurface::~PCShaderSurface()
   mFont = nullptr;
   mSurface = nullptr;
   glDeleteVertexArrays(1, &mVertexArrayObjectID);
+  glDeleteBuffers(1, &mIndexBufferID);
 }
 
 /**
@@ -459,4 +461,18 @@ void PCShaderSurface::PrintGLError(int const aLineNumber)
   if(errorCode != 0)
     DebugLogPrint("(%s) (%i) %i: %s\n", __FILE__, aLineNumber, errorCode, gluErrorString(errorCode));
 #endif
+}
+
+/**
+ * @brief Create GL buffers for optimization
+ */
+void PCShaderSurface::AllocateBuffers()
+{
+  GLuint indices[4] = {0,3,2,1};
+  glGenVertexArrays(1, &mVertexArrayObjectID);
+  glGenBuffers(1, &mIndexBufferID);
+  
+  glBindVertexArray(mVertexArrayObjectID);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 4, indices, GL_STATIC_DRAW);
 }

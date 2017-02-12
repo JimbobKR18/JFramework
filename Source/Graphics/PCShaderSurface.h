@@ -30,6 +30,7 @@ private:
   GLuint        mTextureID;
   GLuint        mProgramID;
   GLuint        mVertexArrayObjectID;
+  GLuint        mIndexBufferID;
   SDL_Surface*  mSurface;
   GLenum        mTextureFormat;
   GLint         mNumberOfColors;
@@ -66,6 +67,7 @@ public:
 private:
   void                AddTexturePairing(HashString const &aName);
   void                PrintGLError(int const aLineNumber);
+  void                AllocateBuffers();
 };
 
 #endif
