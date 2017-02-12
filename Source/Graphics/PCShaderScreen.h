@@ -52,6 +52,7 @@ private:
   void EnableVertexAttribArray(int aVertexAttrib);
   void DisableVertexAttribArray(int aVertexAttrib);
   void PushRenderData(std::vector<Vector4> &aData, int aAttribLocation, Vector4 const &aAttribute);
+  void BindAttribute(int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData);
   void PrintGLError(int const aLineNumber);
 };
 

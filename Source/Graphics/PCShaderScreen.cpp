@@ -365,18 +365,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     EnableVertexAttribArray(colorPosLocation);
     
     glBindVertexArray(mVertexArrayObjectID);
-    glBindBuffer(GL_ARRAY_BUFFER, mVertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * vertexData.size(), &vertexData[0], GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(vertexPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, mTextureBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * textureData.size(), &textureData[0], GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(texCoordPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, mColorBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * colorData.size(), &colorData[0], GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(colorPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, mPositionBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * positionData.size(), &positionData[0], GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(objectPosLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    BindAttribute(mVertexBufferID, vertexPosLocation, vertexData);
+    BindAttribute(mTextureBufferID, texCoordPosLocation, textureData);
+    BindAttribute(mColorBufferID, colorPosLocation, colorData);
+    BindAttribute(mPositionBufferID, objectPosLocation, positionData);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices.size(), &indices[0], GL_DYNAMIC_DRAW);
     
@@ -669,6 +661,22 @@ void PCShaderScreen::PushRenderData(std::vector<Vector4> &aData, int aAttribLoca
   if(aAttribLocation > -1)
   {
     aData.push_back(aAttribute);
+  }
+}
+
+/**
+ * @brief Bind render data if applicable
+ * @param aAttributeID Id of buffer
+ * @param aAttribLocation Location of attribute in shader
+ * @param aData Vector to bind from
+ */
+void PCShaderScreen::BindAttribute(int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData)
+{
+  if(aAttributeLocation != -1)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, aBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(aAttributeLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
   }
 }
 
