@@ -19,8 +19,6 @@
 #endif
 #endif
 
-#define NUM_INDICES 4
-
 int const PCShaderSurface::sUID = Common::StringHashFunction("Surface");
 
 PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0),
