@@ -7,6 +7,7 @@
 
 #include "MenuElement.h"
 #include "LUATypes.h"
+#include "GraphicsManager.h"
 #include "LevelManager.h"
 #include "ObjectManager.h"
 #include "Menu.h"
@@ -70,6 +71,15 @@ void MenuElement::ParseFile(Parser &aParser)
     transform->GetPosition().z = 0.99f;
   }
   ParseAdditionalData(aParser);
+  
+  // Automatically add surface to UI.
+  if(mObject->HAS<Surface>())
+  {
+    Surface *surface = mObject->GET<Surface>();
+    GraphicsManager *manager = surface->GetManager();
+    manager->RemoveSurface(surface);
+    manager->AddUISurface(surface);
+  }
   
   if(!mReplaceable)
     mOwner->AddObject(this);
