@@ -577,6 +577,10 @@ void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface, bool aActive
     
     if(!aActive)
       value = property->GetDefaultValue();
+      
+    #ifdef _DEBUG_DRAW
+      DebugLogPrint("Setting uniform %s to %s\n", property->GetName().ToCharArray(), value.ToCharArray());
+    #endif
     
     switch(property->GetType())
     {
