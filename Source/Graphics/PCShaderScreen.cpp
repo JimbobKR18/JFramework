@@ -207,7 +207,8 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
-  std::vector<Vector4> vertexData, textureData, colorData, positionData;
+  std::vector<Vector3> vertexData, textureData, positionData;
+  std::vector<Vector4> colorData;
   std::vector<GLuint> indices;
   
   vertexData.reserve(1024);
@@ -294,33 +295,33 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       bottomRight = modelTransform * bottomRight;
       
       // Vertex points
-      PushRenderData(vertexData, vertexPosLocation, topLeft);
-      PushRenderData(vertexData, vertexPosLocation, bottomLeft);
-      PushRenderData(vertexData, vertexPosLocation, bottomRight);
-      PushRenderData(vertexData, vertexPosLocation, bottomRight);
-      PushRenderData(vertexData, vertexPosLocation, topRight);
-      PushRenderData(vertexData, vertexPosLocation, topLeft);
+      PushRenderDataV3(vertexData, vertexPosLocation, topLeft);
+      PushRenderDataV3(vertexData, vertexPosLocation, bottomLeft);
+      PushRenderDataV3(vertexData, vertexPosLocation, bottomRight);
+      PushRenderDataV3(vertexData, vertexPosLocation, bottomRight);
+      PushRenderDataV3(vertexData, vertexPosLocation, topRight);
+      PushRenderDataV3(vertexData, vertexPosLocation, topLeft);
       
-      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
-      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(1), 0, 1));
-      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
-      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(1), 0, 1));
-      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(1), texCoord->GetYValue(0), 0, 1));
-      PushRenderData(textureData, texCoordPosLocation, Vector4(texCoord->GetXValue(0), texCoord->GetYValue(0), 0, 1));
+      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(0), texCoord->GetYValue(0), 0));
+      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(0), texCoord->GetYValue(1), 0));
+      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(1), texCoord->GetYValue(1), 0));
+      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(1), texCoord->GetYValue(1), 0));
+      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(1), texCoord->GetYValue(0), 0));
+      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(0), texCoord->GetYValue(0), 0));
       
-      PushRenderData(colorData, colorPosLocation, color);
-      PushRenderData(colorData, colorPosLocation, color);
-      PushRenderData(colorData, colorPosLocation, color);
-      PushRenderData(colorData, colorPosLocation, color);
-      PushRenderData(colorData, colorPosLocation, color);
-      PushRenderData(colorData, colorPosLocation, color);
+      PushRenderDataV3(positionData, objectPosLocation, position);
+      PushRenderDataV3(positionData, objectPosLocation, position);
+      PushRenderDataV3(positionData, objectPosLocation, position);
+      PushRenderDataV3(positionData, objectPosLocation, position);
+      PushRenderDataV3(positionData, objectPosLocation, position);
+      PushRenderDataV3(positionData, objectPosLocation, position);
       
-      PushRenderData(positionData, objectPosLocation, position);
-      PushRenderData(positionData, objectPosLocation, position);
-      PushRenderData(positionData, objectPosLocation, position);
-      PushRenderData(positionData, objectPosLocation, position);
-      PushRenderData(positionData, objectPosLocation, position);
-      PushRenderData(positionData, objectPosLocation, position);
+      PushRenderDataV4(colorData, colorPosLocation, color);
+      PushRenderDataV4(colorData, colorPosLocation, color);
+      PushRenderDataV4(colorData, colorPosLocation, color);
+      PushRenderDataV4(colorData, colorPosLocation, color);
+      PushRenderDataV4(colorData, colorPosLocation, color);
+      PushRenderDataV4(colorData, colorPosLocation, color);
       
       for(int i = 0; i < 6; ++i)
       {
@@ -361,10 +362,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     
     // Set VBO and buffer data.
     glBindVertexArray(mVertexArrayObjectID);
-    BindAttribute(mVertexBufferID, vertexPosLocation, vertexData);
-    BindAttribute(mTextureBufferID, texCoordPosLocation, textureData);
-    BindAttribute(mColorBufferID, colorPosLocation, colorData);
-    BindAttribute(mPositionBufferID, objectPosLocation, positionData);
+    BindAttributeV3(mVertexBufferID, vertexPosLocation, vertexData);
+    BindAttributeV3(mTextureBufferID, texCoordPosLocation, textureData);
+    BindAttributeV3(mPositionBufferID, objectPosLocation, positionData);
+    BindAttributeV4(mColorBufferID, colorPosLocation, colorData);
     
     // Set index data
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
@@ -653,7 +654,22 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
  * @param aAttribLocation Location of attribute in shader
  * @param aAttribute Value of attribute
  */
-void PCShaderScreen::PushRenderData(std::vector<Vector4> &aData, int aAttribLocation, Vector4 const &aAttribute)
+void PCShaderScreen::PushRenderDataV3(std::vector<Vector3> &aData, int aAttribLocation, Vector3 const &aAttribute)
+{
+  // -1 is error state
+  if(aAttribLocation != -1)
+  {
+    aData.push_back(aAttribute);
+  }
+}
+
+/**
+ * @brief Push render data onto vector if applicable.
+ * @param aData Vector to push onto
+ * @param aAttribLocation Location of attribute in shader
+ * @param aAttribute Value of attribute
+ */
+void PCShaderScreen::PushRenderDataV4(std::vector<Vector4> &aData, int aAttribLocation, Vector4 const &aAttribute)
 {
   // -1 is error state
   if(aAttribLocation != -1)
@@ -668,7 +684,25 @@ void PCShaderScreen::PushRenderData(std::vector<Vector4> &aData, int aAttribLoca
  * @param aAttribLocation Location of attribute in shader
  * @param aData Vector to bind from
  */
-void PCShaderScreen::BindAttribute(int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData)
+void PCShaderScreen::BindAttributeV3(int const aBufferID, int const aAttributeLocation, std::vector<Vector3> &aData)
+{
+  if(aAttributeLocation != -1)
+  {
+    glEnableVertexAttribArray(aAttributeLocation);
+    glBindBuffer(GL_ARRAY_BUFFER, aBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector3) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(aAttributeLocation, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+  }
+}
+
+/**
+ * @brief Bind render data if applicable
+ * @param aAttributeID Id of buffer
+ * @param aAttribLocation Location of attribute in shader
+ * @param aData Vector to bind from
+ */
+void PCShaderScreen::BindAttributeV4(int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData)
 {
   if(aAttributeLocation != -1)
   {
