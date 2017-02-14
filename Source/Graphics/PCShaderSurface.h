@@ -29,6 +29,8 @@ class PCShaderSurface : public Surface
 private:
   GLuint        mTextureID;
   GLuint        mProgramID;
+  GLuint        mVertexShaderID;
+  GLuint        mFragmentShaderID;
   SDL_Surface*  mSurface;
   GLenum        mTextureFormat;
   GLint         mNumberOfColors;
@@ -50,6 +52,8 @@ public:
   // Getters
   unsigned            GetTextureID() const;
   unsigned            GetProgramID() const;
+  unsigned            GetVertexShaderID() const;
+  unsigned            GetFragmentShaderID() const;
   HashString const&   GetVertexShaderFilename() const;
   HashString const&   GetFragmentShaderFilename() const;
 

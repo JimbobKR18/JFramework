@@ -21,15 +21,15 @@
 
 int const PCShaderSurface::sUID = Common::StringHashFunction("Surface");
 
-PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0),
+PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0), mVertexShaderID(0), mFragmentShaderID(0),
                                      mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr), mVertexShaderFileName(),
                                      mFragmentShaderFileName()
 {
   assert(!"Do not use");
 }
-PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(0), mProgramID(0),
-                                                              mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr),
-                                                              mVertexShaderFileName(), mFragmentShaderFileName()
+PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(0), mProgramID(0), mVertexShaderID(0),
+                                                              mFragmentShaderID(0), mSurface(nullptr), mTextureFormat(), mNumberOfColors(0),
+                                                              mFont(nullptr), mVertexShaderFileName(), mFragmentShaderFileName()
 {
 }
 
@@ -203,9 +203,9 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
   std::ifstream fragmentFile(Common::RelativePath("Shaders", aFragmentShaderFilename.ToCharArray()).c_str());
   if(vertexFile.is_open() && fragmentFile.is_open())
   {
-    GLenum program = glCreateProgram();
-    GLenum vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    GLenum fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    GLuint program = glCreateProgram();
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     GLint didCompile = 0;
     GLint isLinked = 0;
     
@@ -281,6 +281,8 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
     GetManager()->AddShaderPairing(shaderKey, ShaderData(program, vertexShader, fragmentShader, vertexContents, fragmentContents));
     
     mProgramID = program;
+    mVertexShaderID = vertexShader;
+    mFragmentShaderID = fragmentShader;
   }
   else
   {
@@ -305,6 +307,24 @@ unsigned PCShaderSurface::GetTextureID() const
 unsigned PCShaderSurface::GetProgramID() const
 {
   return mProgramID;
+}
+
+/**
+ * @brief Get GL specified vertex shader ID.
+ * @return Vertex shader ID.
+ */
+unsigned PCShaderSurface::GetVertexShaderID() const
+{
+  return mVertexShaderID;
+}
+
+/**
+ * @brief Get GL specified fragment shader ID.
+ * @return Fragment shader ID.
+ */
+unsigned PCShaderSurface::GetFragmentShaderID() const
+{
+  return mFragmentShaderID;
 }
 
 /**

@@ -31,6 +31,7 @@ PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+  SDL_GL_SetSwapInterval(1);
 #endif
   
   mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH,
@@ -206,6 +207,15 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
+  std::vector<Vector4> vertexData, textureData, colorData, positionData;
+  std::vector<GLuint> indices;
+  
+  vertexData.reserve(1024);
+  textureData.reserve(1024);
+  colorData.reserve(1024);
+  positionData.reserve(1024);
+  indices.reserve(1024);
+  
 #ifdef _DEBUG_DRAW
   int numCalls = 0;
 #endif
@@ -253,16 +263,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       }
     }
     
-    std::vector<Vector4> vertexData, textureData, colorData, positionData;
-    std::vector<GLuint> indices;
-    
-    vertexData.reserve(1024);
-    textureData.reserve(1024);
-    colorData.reserve(1024);
-    positionData.reserve(1024);
-    indices.reserve(1024);
     int iteration = 0;
-    
     while(it != end && (*it)->GetProgramID() == program &&
           (*it)->GetTextureID() == texture && (*it)->GetViewMode() == viewSpace)
     {
@@ -359,16 +360,13 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     SetShaderProperties(surface, true);
     
     // Set VBO and buffer data.
-    EnableVertexAttribArray(vertexPosLocation);
-    EnableVertexAttribArray(texCoordPosLocation);
-    EnableVertexAttribArray(objectPosLocation);
-    EnableVertexAttribArray(colorPosLocation);
-    
     glBindVertexArray(mVertexArrayObjectID);
     BindAttribute(mVertexBufferID, vertexPosLocation, vertexData);
     BindAttribute(mTextureBufferID, texCoordPosLocation, textureData);
     BindAttribute(mColorBufferID, colorPosLocation, colorData);
     BindAttribute(mPositionBufferID, objectPosLocation, positionData);
+    
+    // Set index data
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices.size(), &indices[0], GL_DYNAMIC_DRAW);
     
@@ -384,7 +382,16 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
 
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+    glUseProgram(0);
+    
+    vertexData.clear();
+    textureData.clear();
+    colorData.clear();
+    positionData.clear();
+    indices.clear();
   }
   
 #ifdef _DEBUG_DRAW
@@ -628,26 +635,13 @@ void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface, bool aActive
 }
 
 /**
- * @brief Enable attribute array
- * @param aVertexAttrib Index of attribute
- */
-void PCShaderScreen::EnableVertexAttribArray(int aVertexAttrib)
-{
-  // -1 is error state
-  if(aVertexAttrib > -1)
-  {
-    glEnableVertexAttribArray(aVertexAttrib);
-  }
-}
-
-/**
  * @brief Disable attribute array
  * @param aVertexAttrib Index of attribute
  */
 void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
 {
   // -1 is error state
-  if(aVertexAttrib > -1)
+  if(aVertexAttrib != -1)
   {
     glDisableVertexAttribArray(aVertexAttrib);
   }
@@ -662,7 +656,7 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
 void PCShaderScreen::PushRenderData(std::vector<Vector4> &aData, int aAttribLocation, Vector4 const &aAttribute)
 {
   // -1 is error state
-  if(aAttribLocation > -1)
+  if(aAttribLocation != -1)
   {
     aData.push_back(aAttribute);
   }
@@ -678,9 +672,11 @@ void PCShaderScreen::BindAttribute(int const aBufferID, int const aAttributeLoca
 {
   if(aAttributeLocation != -1)
   {
+    glEnableVertexAttribArray(aAttributeLocation);
     glBindBuffer(GL_ARRAY_BUFFER, aBufferID);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
     glVertexAttribPointer(aAttributeLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
   }
 }
 
