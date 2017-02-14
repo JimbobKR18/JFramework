@@ -22,7 +22,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
 
 PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), 
   mGLContext(), mDisplayMode(), mVertexArrayObjectID(0), mVertexBufferID(0), mTextureBufferID(0),
-  mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0)
+  mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0), mMaxTextures(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -235,7 +235,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     
     // Start using shader
     glUseProgram(program);
-    int activeTexture = texture % GL_MAX_TEXTURE_UNITS;
+    int activeTexture = texture % mMaxTextures;
     int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     int objectPosLocation = glGetAttribLocation(program, "objectPos");
@@ -362,10 +362,10 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     
     // Set VBO and buffer data.
     glBindVertexArray(mVertexArrayObjectID);
-    BindAttributeV3(mVertexBufferID, vertexPosLocation, vertexData);
-    BindAttributeV3(mTextureBufferID, texCoordPosLocation, textureData);
-    BindAttributeV3(mPositionBufferID, objectPosLocation, positionData);
-    BindAttributeV4(mColorBufferID, colorPosLocation, colorData);
+    BindAttributeV3(GL_ARRAY_BUFFER, mVertexBufferID, vertexPosLocation, vertexData);
+    BindAttributeV3(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, textureData);
+    BindAttributeV3(GL_ARRAY_BUFFER, mPositionBufferID, objectPosLocation, positionData);
+    BindAttributeV4(GL_ARRAY_BUFFER, mColorBufferID, colorPosLocation, colorData);
     
     // Set index data
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
@@ -483,6 +483,8 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glGenBuffers(1, &mPositionBufferID);
   glGenBuffers(1, &mColorBufferID);
   glGenBuffers(1, &mIndexBufferID);
+  
+  glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &mMaxTextures);
 }
 
 /**
@@ -684,15 +686,15 @@ void PCShaderScreen::PushRenderDataV4(std::vector<Vector4> &aData, int aAttribLo
  * @param aAttribLocation Location of attribute in shader
  * @param aData Vector to bind from
  */
-void PCShaderScreen::BindAttributeV3(int const aBufferID, int const aAttributeLocation, std::vector<Vector3> &aData)
+void PCShaderScreen::BindAttributeV3(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector3> &aData)
 {
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
-    glBindBuffer(GL_ARRAY_BUFFER, aBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector3) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    glBindBuffer(aTarget, aBufferID);
+    glBufferData(aTarget, sizeof(Vector3) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
     glVertexAttribPointer(aAttributeLocation, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(aTarget, 0);
   }
 }
 
@@ -702,15 +704,15 @@ void PCShaderScreen::BindAttributeV3(int const aBufferID, int const aAttributeLo
  * @param aAttribLocation Location of attribute in shader
  * @param aData Vector to bind from
  */
-void PCShaderScreen::BindAttributeV4(int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData)
+void PCShaderScreen::BindAttributeV4(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData)
 {
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
-    glBindBuffer(GL_ARRAY_BUFFER, aBufferID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vector4) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    glBindBuffer(aTarget, aBufferID);
+    glBufferData(aTarget, sizeof(Vector4) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
     glVertexAttribPointer(aAttributeLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(aTarget, 0);
   }
 }
 
