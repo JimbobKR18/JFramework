@@ -450,4 +450,43 @@ namespace Common
     diff *= (static_cast<float>(rand()) / static_cast<float>(RAND_MAX));
     return aX + diff;
   }
+  
+  /**
+   * @brief Get current year.
+   * @return Current year.
+   */
+  int GetCurrentYear()
+  {
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    struct tm *parts = std::localtime(&now_c);
+    
+    return 1900 + parts->tm_year;
+  }
+  
+  /**
+   * @brief Get current month.
+   * @return Current month.
+   */
+  int GetCurrentMonth()
+  {
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    struct tm *parts = std::localtime(&now_c);
+    
+    return 1 + parts->tm_mon;
+  }
+  
+  /**
+   * @brief Get current day of the month.
+   * @return Current day of month.
+   */
+  int GetCurrentDayOfMonth()
+  {
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    struct tm *parts = std::localtime(&now_c);
+    
+    return parts->tm_mday;
+  }
 }

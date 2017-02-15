@@ -26,6 +26,8 @@
 #include <cfloat>
 #include <unordered_map>
 #include <sstream>
+#include <chrono>
+#include <ctime>
 #include "HashString.h"
 #include "SmartPointer.h"
 
@@ -65,6 +67,10 @@ namespace Common
 
   int                       RandomIntInRange(int const aX, int const bX);
   float                     RandomFloatInRange(float const aX, float const bX);
+  
+  int                       GetCurrentYear();
+  int                       GetCurrentMonth();
+  int                       GetCurrentDayOfMonth();
 }
 
 #endif
