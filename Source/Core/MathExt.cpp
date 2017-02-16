@@ -25,6 +25,232 @@ void print_vector(Vector3 const &_point)
 }
 
 //--------------------------------
+// Vector2
+//--------------------------------
+Vector2::Vector2() : x(0), y(0)
+{
+}
+Vector2::Vector2(float aX, float aY) : x(aX), y(aY)
+{
+}
+
+float Vector2::length() const
+{
+  return sqrt((x * x) + (y * y));
+}
+
+float& Vector2::operator[](int const aValue)
+{
+  switch (aValue)
+  {
+    case 0:
+      return x;
+    case 1:
+      return y;
+    default:
+      assert(!"Invalid value passed into Vector2 value retrieval");
+  }
+}
+
+float Vector2::GetValue(int const aValue) const
+{
+  switch (aValue)
+  {
+    case 0:
+      return x;
+    case 1:
+      return y;
+    default:
+      assert(!"Invalid value passed into Vector2 value retrieval");
+  }
+}
+
+Vector2 Vector2::normalize() const
+{
+  Vector2 ret = *this;
+  float const len = length();
+  
+  // Catch case if length is 0
+  if (len == 0)
+    return Vector2(1, 0);
+  
+  ret.x /= len;
+  ret.y /= len;
+  
+  return ret;
+}
+
+// Equivalence
+void Vector2::operator=(Vector2 const &rhs)
+{
+  x = rhs.x;
+  y = rhs.y;
+}
+bool Vector2::operator==(Vector2 const &rhs) const
+{
+  return ((int) x == (int) rhs.x && (int) y == (int) rhs.y);
+}
+
+// Scaling
+Vector2 Vector2::operator*(float const aMultiplier) const
+{
+  Vector2 temp = *this;
+  
+  temp.x *= aMultiplier;
+  temp.y *= aMultiplier;
+  
+  return temp;
+}
+Vector2 Vector2::operator/(float const aMultiplier) const
+{
+  Vector2 temp = *this;
+  
+  temp.x /= aMultiplier;
+  temp.y /= aMultiplier;
+  
+  return temp;
+}
+
+// Operators with other vectors
+float Vector2::operator*(Vector2 const &rhs) const
+{
+  return (x * rhs.x + y * rhs.y);
+}
+Vector2 Vector2::operator^(Vector2 const &rhs) const
+{
+  Vector2 temp = *this;
+  
+  temp.x = x * rhs.y - y * rhs.x;
+  temp.y = y * rhs.x - x * rhs.y;
+  
+  return temp;
+}
+Vector2 Vector2::operator+(Vector2 const &rhs) const
+{
+  Vector2 temp = *this;
+  
+  temp.x += rhs.x;
+  temp.y += rhs.y;
+  
+  return temp;
+}
+Vector2 Vector2::operator-(Vector2 const &rhs) const
+{
+  Vector2 temp = *this;
+  
+  temp.x -= rhs.x;
+  temp.y -= rhs.y;
+  
+  return temp;
+}
+Vector2 Vector2::operator%(Vector2 const &rhs) const
+{
+  return rhs * ((*this * rhs) / (rhs * rhs));
+}
+Vector2 Vector2::operator-() const
+{
+  return (*this * -1.0f);
+}
+
+float Vector2::Dot(Vector2 const &rhs) const
+{
+  return *this * rhs;
+}
+Vector2 Vector2::Cross(Vector2 const &rhs) const
+{
+  return *this ^ rhs;
+}
+Vector2 Vector2::Add(Vector2 const &rhs) const
+{
+  return *this + rhs;
+}
+Vector2 Vector2::Subtract(Vector2 const &rhs) const
+{
+  return *this - rhs;
+}
+Vector2 Vector2::Multiply(Vector2 const &rhs) const
+{
+  Vector2 ret = *this;
+  ret *= rhs;
+  return ret;
+}
+Vector2 Vector2::Divide(Vector2 const &rhs) const
+{
+  Vector2 ret = *this;
+  ret /= rhs;
+  return ret;
+}
+Vector2 Vector2::Project(Vector2 const &rhs) const
+{
+  return *this % rhs;
+}
+Vector2 Vector2::Invert() const
+{
+  return -(*this);
+}
+
+void Vector2::operator+=(Vector2 const &rhs)
+{
+  x += rhs.x;
+  y += rhs.y;
+}
+void Vector2::operator-=(Vector2 const &rhs)
+{
+  x -= rhs.x;
+  y -= rhs.y;
+}
+void Vector2::operator*=(Vector2 const &rhs)
+{
+  x *= rhs.x;
+  y *= rhs.y;
+}
+void Vector2::operator/=(Vector2 const &rhs)
+{
+  x /= rhs.x;
+  y /= rhs.y;
+}
+void Vector2::operator*=(float const aMultiplier)
+{
+  x *= aMultiplier;
+  y *= aMultiplier;
+}
+void Vector2::operator/=(float const aMultiplier)
+{
+  x /= aMultiplier;
+  y /= aMultiplier;
+}
+
+bool Vector2::validate() const
+{
+  if(std::isnan(x) || std::isnan(y))
+    assert(!"Vector2 has failed validation");
+  return true;
+}
+
+void Vector2::SerializeLUA()
+{
+  SLB::Class<Vector2>("Vector2").constructor<float, float>()
+  .set("x", &Vector2::x)
+  .set("y", &Vector2::y)
+  .set("length", &Vector2::length)
+  .set("SetEqual", &Vector2::operator=)
+  .set("IsEqual", &Vector2::operator==)
+  .set("Add", &Vector2::Add)
+  .set("Subtract", &Vector2::Subtract)
+  .set("Multiply", &Vector2::Multiply)
+  .set("Divide", &Vector2::Divide)
+  .set("Dot", &Vector2::Dot)
+  .set("Cross", &Vector2::Cross)
+  .set("Project", &Vector2::Project)
+  .set("Invert", &Vector2::Invert);
+}
+
+HashString Vector2::GetName()
+{
+  return "Vector2";
+}
+
+//--------------------------------
 // VECTOR3
 //--------------------------------
 Vector3::Vector3() : x(0), y(0), z(0)

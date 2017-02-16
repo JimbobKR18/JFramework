@@ -51,8 +51,10 @@ private:
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
   void SetShaderProperties(PCShaderSurface *aSurface, bool aActive);
   void DisableVertexAttribArray(int aVertexAttrib);
+  void PushRenderDataV2(std::vector<Vector2> &aData, int aAttribLocation, Vector2 const &aAttribute);
   void PushRenderDataV3(std::vector<Vector3> &aData, int aAttribLocation, Vector3 const &aAttribute);
   void PushRenderDataV4(std::vector<Vector4> &aData, int aAttribLocation, Vector4 const &aAttribute);
+  void BindAttributeV2(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector2> &aData);
   void BindAttributeV3(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector3> &aData);
   void BindAttributeV4(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData);
   void PrintGLError(int const aLineNumber);

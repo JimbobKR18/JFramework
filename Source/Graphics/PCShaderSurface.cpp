@@ -170,7 +170,12 @@ Vector3 PCShaderSurface::LoadText(HashString const &aFont, HashString const &aTe
       assert(msg);
     }
 
+#ifdef __APPLE__
+    mTextureFormat = GL_BGRA;
+#else
     mTextureFormat = GL_RGBA;
+#endif
+    
     mSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
     SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
     SDL_BlitSurface(msg, NULL, mSurface, NULL);
@@ -453,7 +458,13 @@ void PCShaderSurface::AddTexturePairing(HashString const &aName)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapT);
+#ifdef __APPLE__
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_CACHED_APPLE);
+  glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, GL_TRUE);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, mTextureFormat, GL_UNSIGNED_INT_8_8_8_8_REV, mSurface->pixels);
+#else
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
+#endif
 
   GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
 }

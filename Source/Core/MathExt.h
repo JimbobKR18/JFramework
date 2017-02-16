@@ -28,10 +28,61 @@ enum Z_ALIGNMENT
   Z_ALIGN_BACK
 };
 
+struct Vector2
+{
+  float x, y;
+  
+  Vector2();
+  Vector2(float aX, float aY);
+  
+  float   length() const;
+  float&  operator[](int const aValue);
+  float   GetValue(int const aValue) const;
+  Vector2 normalize() const;
+  
+  // Equivalence
+  void    operator=(Vector2 const &rhs);
+  bool    operator==(Vector2 const &rhs) const;
+  
+  // Scaling
+  Vector2 operator*(float const aMultiplier) const;
+  Vector2 operator/(float const aMultiplier) const;
+  
+  // Operator involving other vectors
+  float   operator*(Vector2 const &rhs) const;
+  Vector2 operator^(Vector2 const &rhs) const;
+  Vector2 operator+(Vector2 const &rhs) const;
+  Vector2 operator-(Vector2 const &rhs) const;
+  Vector2 operator%(Vector2 const &rhs) const;
+  Vector2 operator-() const;
+  
+  float   Dot(Vector2 const &rhs) const;
+  Vector2 Cross(Vector2 const &rhs) const;
+  Vector2 Add(Vector2 const &rhs) const;
+  Vector2 Subtract(Vector2 const &rhs) const;
+  Vector2 Multiply(Vector2 const &rhs) const;
+  Vector2 Divide(Vector2 const &rhs) const;
+  Vector2 Project(Vector2 const &rhs) const;
+  Vector2 Invert() const;
+  
+  void    operator+=(Vector2 const &rhs);
+  void    operator-=(Vector2 const &rhs);
+  void    operator*=(Vector2 const &rhs);
+  void    operator/=(Vector2 const &rhs);
+  void    operator*=(float const aMultiplier);
+  void    operator/=(float const aMultiplier);
+  
+  // Helpful debugging
+  bool    validate() const;
+  
+  static void SerializeLUA();
+  static HashString GetName();
+};
+
 struct Vector3
 {
   float x, y, z;
-
+  
   Vector3();
   Vector3(float aX, float aY, float aZ);
 

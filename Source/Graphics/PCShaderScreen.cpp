@@ -207,7 +207,8 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
-  std::vector<Vector3> vertexData, textureData, positionData;
+  std::vector<Vector3> vertexData, positionData;
+  std::vector<Vector2> textureData;
   std::vector<Vector4> colorData;
   std::vector<GLuint> indices;
   
@@ -235,7 +236,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     
     // Start using shader
     glUseProgram(program);
-    int activeTexture = texture % mMaxTextures;
+    int activeTexture = 0;
     int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     int objectPosLocation = glGetAttribLocation(program, "objectPos");
@@ -302,12 +303,12 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       PushRenderDataV3(vertexData, vertexPosLocation, topRight);
       PushRenderDataV3(vertexData, vertexPosLocation, topLeft);
       
-      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(0), texCoord->GetYValue(0), 0));
-      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(0), texCoord->GetYValue(1), 0));
-      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(1), texCoord->GetYValue(1), 0));
-      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(1), texCoord->GetYValue(1), 0));
-      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(1), texCoord->GetYValue(0), 0));
-      PushRenderDataV3(textureData, texCoordPosLocation, Vector3(texCoord->GetXValue(0), texCoord->GetYValue(0), 0));
+      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(0)));
+      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(1)));
+      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(1)));
+      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(1)));
+      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(0)));
+      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(0)));
       
       PushRenderDataV3(positionData, objectPosLocation, position);
       PushRenderDataV3(positionData, objectPosLocation, position);
@@ -363,7 +364,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     // Set VBO and buffer data.
     glBindVertexArray(mVertexArrayObjectID);
     BindAttributeV3(GL_ARRAY_BUFFER, mVertexBufferID, vertexPosLocation, vertexData);
-    BindAttributeV3(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, textureData);
+    BindAttributeV2(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, textureData);
     BindAttributeV3(GL_ARRAY_BUFFER, mPositionBufferID, objectPosLocation, positionData);
     BindAttributeV4(GL_ARRAY_BUFFER, mColorBufferID, colorPosLocation, colorData);
     
@@ -656,6 +657,21 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
  * @param aAttribLocation Location of attribute in shader
  * @param aAttribute Value of attribute
  */
+void PCShaderScreen::PushRenderDataV2(std::vector<Vector2> &aData, int aAttribLocation, Vector2 const &aAttribute)
+{
+  // -1 is error state
+  if(aAttribLocation != -1)
+  {
+    aData.push_back(aAttribute);
+  }
+}
+
+/**
+ * @brief Push render data onto vector if applicable.
+ * @param aData Vector to push onto
+ * @param aAttribLocation Location of attribute in shader
+ * @param aAttribute Value of attribute
+ */
 void PCShaderScreen::PushRenderDataV3(std::vector<Vector3> &aData, int aAttribLocation, Vector3 const &aAttribute)
 {
   // -1 is error state
@@ -677,6 +693,24 @@ void PCShaderScreen::PushRenderDataV4(std::vector<Vector4> &aData, int aAttribLo
   if(aAttribLocation != -1)
   {
     aData.push_back(aAttribute);
+  }
+}
+
+/**
+ * @brief Bind render data if applicable
+ * @param aAttributeID Id of buffer
+ * @param aAttribLocation Location of attribute in shader
+ * @param aData Vector to bind from
+ */
+void PCShaderScreen::BindAttributeV2(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector2> &aData)
+{
+  if(aAttributeLocation != -1)
+  {
+    glEnableVertexAttribArray(aAttributeLocation);
+    glBindBuffer(aTarget, aBufferID);
+    glBufferData(aTarget, sizeof(Vector2) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(aAttributeLocation, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
+    glBindBuffer(aTarget, 0);
   }
 }
 
