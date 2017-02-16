@@ -45,7 +45,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
 
   ObjectManager *objectManager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
   PhysicsWorld *physicsWorld = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>();
-  Vector3 tileSize = Vector3(mTileSize, mTileSize, 0);
+  Vector3 tileSize = Vector3(mTileSize, mTileSize, mTileSize);
   
   // Reserve total tiles ahead of time to avoid reallocs
   mObjects.reserve(mTiles.size());
