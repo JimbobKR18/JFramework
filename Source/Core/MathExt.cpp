@@ -230,19 +230,19 @@ bool Vector2::validate() const
 void Vector2::SerializeLUA()
 {
   SLB::Class<Vector2>("Vector2").constructor<float, float>()
-  .set("x", &Vector2::x)
-  .set("y", &Vector2::y)
-  .set("length", &Vector2::length)
-  .set("SetEqual", &Vector2::operator=)
-  .set("IsEqual", &Vector2::operator==)
-  .set("Add", &Vector2::Add)
-  .set("Subtract", &Vector2::Subtract)
-  .set("Multiply", &Vector2::Multiply)
-  .set("Divide", &Vector2::Divide)
-  .set("Dot", &Vector2::Dot)
-  .set("Cross", &Vector2::Cross)
-  .set("Project", &Vector2::Project)
-  .set("Invert", &Vector2::Invert);
+      .set("x", &Vector2::x)
+      .set("y", &Vector2::y)
+      .set("length", &Vector2::length)
+      .set("SetEqual", &Vector2::operator=)
+      .set("IsEqual", &Vector2::operator==)
+      .set("Add", &Vector2::Add)
+      .set("Subtract", &Vector2::Subtract)
+      .set("Multiply", &Vector2::Multiply)
+      .set("Divide", &Vector2::Divide)
+      .set("Dot", &Vector2::Dot)
+      .set("Cross", &Vector2::Cross)
+      .set("Project", &Vector2::Project)
+      .set("Invert", &Vector2::Invert);
 }
 
 HashString Vector2::GetName()
