@@ -41,7 +41,7 @@ public:
   virtual void        ReceiveMessage(Message const &aMessage) = 0;
   virtual void        Serialize(Parser &aParser) = 0;
   virtual void        Deserialize(Parser &aParser) = 0;
-  static int           GetUID() {return sUID;}
+  static int          GetUID() {return sUID;}
 };
 
 #endif /* defined(__JFramework__Controller__) */
