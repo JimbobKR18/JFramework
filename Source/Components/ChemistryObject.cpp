@@ -18,6 +18,7 @@ ChemistryObject::~ChemistryObject()
  */
 void ChemistryObject::Update()
 {
+  assert(!"This class should be derived from.");
 }
 
 /**
