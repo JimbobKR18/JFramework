@@ -4,6 +4,11 @@
 
 int const ChemistryObject::sUID = Common::StringHashFunction("ChemistryObject");
 
+ChemistryObject::ChemistryObject() : Component(ChemistryObject::sUID),
+  mName(), mType(MATERIAL), mProperties()
+{
+}
+
 ChemistryObject::ChemistryObject(HashString const &aName, ChemistryType const &aType) : Component(ChemistryObject::sUID),
   mName(aName), mType(aType), mProperties()
 {
@@ -11,6 +16,7 @@ ChemistryObject::ChemistryObject(HashString const &aName, ChemistryType const &a
 
 ChemistryObject::~ChemistryObject()
 {
+  DropAllProperties();
 }
 
 /**
@@ -45,6 +51,56 @@ ChemistryObject::ChemicalPropertyContainer const ChemistryObject::GetPropertiesB
     }
   }
   return ret;
+}
+
+/**
+ * @brief Set name of chemistry object.
+ * @param aName Name.
+ */
+void ChemistryObject::SetName(HashString const &aName)
+{
+  mName = aName;
+}
+
+/**
+ * @brief Set type of chemistry object.
+ * @param aType Type.
+ */
+void ChemistryObject::SetType(ChemistryType const &aType)
+{
+  mType = aType;
+}
+
+/**
+ * @brief Drop properties by name.
+ * @param aName Name of properties to drop.
+ */
+void ChemistryObject::DropProperties(HashString const &aName)
+{
+  for(ChemicalPropertyIT it = mProperties.begin(); it != mProperties.end();)
+  {
+    if((*it)->mName == aName)
+    {
+      delete *it;
+      it = mProperties.erase(it);
+    }
+    else
+    {
+      ++it;
+    }
+  }
+}
+
+/**
+ * @brief Drop all properties
+ */
+void ChemistryObject::DropAllProperties()
+{
+  for(ChemicalPropertyIT it = mProperties.begin(); it != mProperties.end(); ++it)
+  {
+    delete *it;
+  }
+  mProperties.clear();
 }
 
 /**

@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
+#include "ChemistryObject.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
 #include "ControllerManager.h"
@@ -228,6 +229,12 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
   if(aParser.Find("PhysicsObject"))
   {
     PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
+    aObject->AddComponent(object);
+    object->Deserialize(aParser);
+  }
+  if(aParser.Find("ChemistryObject"))
+  {
+    ChemistryObject *object = new ChemistryObject();
     aObject->AddComponent(object);
     object->Deserialize(aParser);
   }

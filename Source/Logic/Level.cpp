@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include "MathExt.h"
 #include "Transform.h"
+#include "ChemistryObject.h"
 #include "GraphicsManager.h"
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
@@ -664,9 +665,15 @@ void Level::ParseFile(HashString const &aFileName)
     {
       ParseSurface(object, curRoot->Find("Surface"));
     }
+    // Get physics information
     if(curRoot->Find("PhysicsObject"))
     {
       ParsePhysicsObject(object, curRoot->Find("PhysicsObject"));
+    }
+    // Get chemistry information
+    if(curRoot->Find("ChemistryObject"))
+    {
+      ParseChemistryObject(object, curRoot->Find("ChemistryObject"));
     }
     // Who is the focus of this level?
     if(curRoot->Find("Focus"))
@@ -928,7 +935,6 @@ void Level::RemoveObjectFromScenarios(GameObject *aObject)
 
 /**
  * @brief Get transform data for an object from a root.
- * @param aTransform
  */
 void Level::ParseTransform(GameObject *aObject, Root *aTransform)
 {
@@ -1024,7 +1030,6 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
 
 /**
  * @brief Get surface data from a root.
- * @param aSurface
  */
 void Level::ParseSurface(GameObject *aObject, Root *aSurface)
 {
@@ -1054,7 +1059,6 @@ void Level::ParseSurface(GameObject *aObject, Root *aSurface)
 
 /**
  * @brief Get physics object data from a root.
- * @param aPhysicsObject
  */
 void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
 {
@@ -1180,6 +1184,38 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
     
     ++curIndex;
     curShape = SHAPE + Common::IntToString(curIndex);
+  }
+}
+
+/**
+ * @brief Get chemistry data from root.
+ */
+void Level::ParseChemistryObject(GameObject *aObject, Root* aChemistryObject)
+{
+  // If object doesn't have chemistryObject, it does now.
+  ChemistryObject* chemistryObject = aObject->GET<ChemistryObject>();
+  if(!chemistryObject)
+  {
+    chemistryObject = new ChemistryObject();
+    aObject->AddComponent(chemistryObject);
+  }
+  
+  // Serialize the chemistryObject
+  HashString name = aChemistryObject->Find("Name")->GetValue();
+  HashString type = aChemistryObject->Find("Type")->GetValue();
+  
+  chemistryObject->SetName(name);
+  if(type == "MATERIAL")
+  {
+    chemistryObject->SetType(ChemistryObject::ChemistryType::MATERIAL);
+  }
+  else if(type == "ELEMENT")
+  {
+    chemistryObject->SetType(ChemistryObject::ChemistryType::ELEMENT);
+  }
+  else
+  {
+    assert(!"Incorrect chemistry type assigned.");
   }
 }
 

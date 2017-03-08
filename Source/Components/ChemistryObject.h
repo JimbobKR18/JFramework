@@ -37,6 +37,7 @@ private:
   static int const          sUID;
   
 public:
+  ChemistryObject();
   ChemistryObject(HashString const &aName, ChemistryType const &aType);
   virtual ~ChemistryObject();
   
@@ -44,6 +45,14 @@ public:
   HashString const GetName() const;
   ChemistryType const GetType() const;
   ChemicalPropertyContainer const GetPropertiesByName(HashString const &aName) const;
+  
+  // Setters
+  void SetName(HashString const &aName);
+  void SetType(ChemistryType const &aType);
+  
+  // Methods
+  void DropProperties(HashString const &aName);
+  void DropAllProperties();
 
   // Virtuals derived from Component
   virtual void Update();
