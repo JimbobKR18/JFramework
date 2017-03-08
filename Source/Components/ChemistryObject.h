@@ -13,7 +13,7 @@ public:
     ELEMENT
   };
   
-private:
+protected:
   // Helper struct to store information.
   struct ChemicalInformation
   {
@@ -28,7 +28,8 @@ private:
   typedef std::vector<ChemicalInformation*> ChemicalPropertyContainer;
   typedef ChemicalPropertyContainer::iterator ChemicalPropertyIT;
   typedef ChemicalPropertyContainer::const_iterator ChemicalPropertyConstIT;
-
+  
+private:
   HashString                mName;
   ChemistryType             mType;
   ChemicalPropertyContainer mProperties;
@@ -42,6 +43,7 @@ public:
   // Getters
   HashString const GetName() const;
   ChemistryType const GetType() const;
+  ChemicalPropertyContainer const GetPropertiesByName(HashString const &aName) const;
 
   // Virtuals derived from Component
   virtual void Update();

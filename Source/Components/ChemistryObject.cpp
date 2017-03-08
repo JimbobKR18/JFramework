@@ -14,6 +14,40 @@ ChemistryObject::~ChemistryObject()
 }
 
 /**
+ * @return Name of chemical.
+ */
+HashString const ChemistryObject::GetName() const
+{
+  return mName;
+}
+
+/**
+ * @return Chemical type.
+ */
+ChemistryObject::ChemistryType const ChemistryObject::GetType() const
+{
+  return mType;
+}
+
+/**
+ * @brief Get all chemical properties that match the name specified.
+ * @param aName Name of property.
+ * @return Container of chemical properties.
+ */
+ChemistryObject::ChemicalPropertyContainer const ChemistryObject::GetPropertiesByName(HashString const &aName) const
+{
+  ChemicalPropertyContainer ret;
+  for(ChemicalPropertyConstIT it = mProperties.begin(); it != mProperties.end(); ++it)
+  {
+    if((*it)->mName == aName)
+    {
+      ret.push_back(*it);
+    }
+  }
+  return ret;
+}
+
+/**
  * @brief Update loop
  */
 void ChemistryObject::Update()
