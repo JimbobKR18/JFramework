@@ -70,8 +70,8 @@ void PhysicsWorld::DeleteObject(PhysicsObject *aObject)
 void PhysicsWorld::AddObject(PhysicsObject *aObject)
 {
   // Check to see if object is in our list
-  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
-  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != objectEnd; ++it)
+  PhysicsIT objectEnd = mObjects.end();
+  for(PhysicsIT it = mObjects.begin(); it != objectEnd; ++it)
   {
     if(*it == aObject)
     {
@@ -79,7 +79,7 @@ void PhysicsWorld::AddObject(PhysicsObject *aObject)
     }
   }
   
-	mObjects.push_back(aObject);
+  mObjects.push_back(aObject);
   
   // Check if the object needs gravity to be applied
   if(aObject->IsAffectedByGravity() && !aObject->IsStatic())
@@ -92,8 +92,8 @@ void PhysicsWorld::AddObject(PhysicsObject *aObject)
  */
 void PhysicsWorld::RemoveObject(PhysicsObject *aObject)
 {
-  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
-  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != objectEnd; ++it)
+  PhysicsIT objectEnd = mObjects.end();
+  for(PhysicsIT it = mObjects.begin(); it != objectEnd; ++it)
   {
     if(*it == aObject)
     {
@@ -110,7 +110,7 @@ void PhysicsWorld::RemoveObject(PhysicsObject *aObject)
  */
 void PhysicsWorld::ClearObjects()
 {
-  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
+  PhysicsIT objectEnd = mObjects.end();
   for(PhysicsIT it = mObjects.begin(); it != objectEnd; ++it)
   {
     delete *it;

@@ -1,6 +1,7 @@
 #include "GameApp.h"
 #include "Manager.h"
 #include "PhysicsWorld.h"
+#include "ChemistryManager.h"
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
 #include "LevelManager.h"
@@ -32,6 +33,7 @@ GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAp
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));
   AddManager(new SoundManager(this));
+  AddManager(new ChemistryManager(this, Constants::GetFloat("DefaultTemperature")));
 #ifdef _DEBUG
   AddManager(new DebugManager(this));
 #endif

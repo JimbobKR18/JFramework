@@ -3,8 +3,10 @@
 #include "ObjectManager.h"
 #include "MathExt.h"
 #include "Transform.h"
-#include "ChemistryObject.h"
+#include "ChemistryMaterial.h"
+#include "ChemistryElement.h"
 #include "GraphicsManager.h"
+#include "ChemistryManager.h"
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
 #include "ControllerManager.h"
@@ -28,7 +30,7 @@ bool SortPredicate(GameObject *aLhs, GameObject *aRhs)
 
 Level::Level()
 {
-	assert(!"Do not use the level default constructor.");
+  assert(!"Do not use the level default constructor.");
 }
 
 Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoParse) :
@@ -491,6 +493,10 @@ void Level::LoadObjects(ObjectContainer const &aObjects, bool const aStatic)
       mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
+    if((*it)->GET<ChemistryMaterial>())
+      mOwner->GetOwningApp()->GET<ChemistryManager>()->AddMaterial((*it)->GET<ChemistryMaterial>());
+    if((*it)->GET<ChemistryElement>())
+      mOwner->GetOwningApp()->GET<ChemistryManager>()->AddElement((*it)->GET<ChemistryElement>());
   }
 }
 
@@ -510,6 +516,10 @@ void Level::UnloadObjects(ObjectContainer const &aObjects)
       mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
     if((*it)->GET<Controller>())
       mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
+    if((*it)->GET<ChemistryMaterial>())
+      mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveMaterial((*it)->GET<ChemistryMaterial>());
+    if((*it)->GET<ChemistryElement>())
+      mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveElement((*it)->GET<ChemistryElement>());
   }
 }
 
@@ -671,9 +681,13 @@ void Level::ParseFile(HashString const &aFileName)
       ParsePhysicsObject(object, curRoot->Find("PhysicsObject"));
     }
     // Get chemistry information
-    if(curRoot->Find("ChemistryObject"))
+    if(curRoot->Find("ChemistryMaterial"))
     {
-      ParseChemistryObject(object, curRoot->Find("ChemistryObject"));
+      ParseChemistryMaterial(object, curRoot->Find("ChemistryMaterial"));
+    }
+    if(curRoot->Find("ChemistryElement"))
+    {
+      ParseChemistryElement(object, curRoot->Find("ChemistryElement"));
     }
     // Who is the focus of this level?
     if(curRoot->Find("Focus"))
@@ -1188,35 +1202,76 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
 }
 
 /**
- * @brief Get chemistry data from root.
+ * @brief Get chemistry material data from root.
  */
-void Level::ParseChemistryObject(GameObject *aObject, Root* aChemistryObject)
+void Level::ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial)
 {
-  // If object doesn't have chemistryObject, it does now.
-  ChemistryObject* chemistryObject = aObject->GET<ChemistryObject>();
-  if(!chemistryObject)
+  // If object doesn't have chemistryMaterial, it does now.
+  ChemistryMaterial* chemistryMaterial = aObject->GET<ChemistryMaterial>();
+  if(!chemistryMaterial)
   {
-    chemistryObject = new ChemistryObject();
-    aObject->AddComponent(chemistryObject);
+    chemistryMaterial = new ChemistryMaterial(GetManager()->GetOwningApp()->GET<ChemistryManager>());
+    aObject->AddComponent(chemistryMaterial);
   }
   
-  // Serialize the chemistryObject
-  HashString name = aChemistryObject->Find("Name")->GetValue();
-  HashString type = aChemistryObject->Find("Type")->GetValue();
+  // Serialize the chemistryMaterial
+  HashString name = aChemistryMaterial->Find("Name")->GetValue();
+  float boilingPoint = aChemistryMaterial->Find("BoilingPoint")->GetValue().ToFloat();
+  float meltingPoint = aChemistryMaterial->Find("MeltingPoint")->GetValue().ToFloat();
+  float freezingPoint = aChemistryMaterial->Find("FreezingPoint")->GetValue().ToFloat();
+  float conductivity = aChemistryMaterial->Find("Conductivity")->GetValue().ToFloat();
+  float heatTransferRate = aChemistryMaterial->Find("HeatTransferRate")->GetValue().ToFloat();
   
-  chemistryObject->SetName(name);
-  if(type == "MATERIAL")
+  chemistryMaterial->SetName(name);
+  chemistryMaterial->SetBoilingPoint(boilingPoint);
+  chemistryMaterial->SetMeltingPoint(meltingPoint);
+  chemistryMaterial->SetFreezingPoint(freezingPoint);
+  chemistryMaterial->SetConductivity(conductivity);
+  chemistryMaterial->SetHeatTransferRate(heatTransferRate);
+  
+  // Optional
+  if(aChemistryMaterial->Find("StartingTemperature"))
   {
-    chemistryObject->SetType(ChemistryObject::ChemistryType::MATERIAL);
+    float temperature = aChemistryMaterial->Find("StartingTemperature")->GetValue().ToFloat();
+    chemistryMaterial->SetCurrentTemperature(temperature);
   }
-  else if(type == "ELEMENT")
+  if(aChemistryMaterial->Find("StartingWattage"))
   {
-    chemistryObject->SetType(ChemistryObject::ChemistryType::ELEMENT);
+    float wattage = aChemistryMaterial->Find("StartingWattage")->GetValue().ToFloat();
+    chemistryMaterial->SetCurrentWattage(wattage);
   }
-  else
+}
+
+/**
+ * @brief Get chemistry element data from root.
+ */
+void Level::ParseChemistryElement(GameObject *aObject, Root* aChemistryElement)
+{
+  // If object doesn't have chemistryElement, it does now.
+  ChemistryElement* chemistryElement = aObject->GET<ChemistryElement>();
+  if(!chemistryElement)
   {
-    assert(!"Incorrect chemistry type assigned.");
+    chemistryElement = new ChemistryElement(GetManager()->GetOwningApp()->GET<ChemistryManager>());
+    aObject->AddComponent(chemistryElement);
   }
+  
+  // Serialize the chemistryElement
+  HashString name = aChemistryElement->Find("Name")->GetValue();
+  float temperature = aChemistryElement->Find("Temperature")->GetValue().ToFloat();
+  float wattage = aChemistryElement->Find("Wattage")->GetValue().ToFloat();
+  float scale = aChemistryElement->Find("Scale")->GetValue().ToFloat();
+  float falloff = aChemistryElement->Find("Falloff")->GetValue().ToFloat();
+  float directionX = aChemistryElement->Find("DirecitonX")->GetValue().ToFloat();
+  float directionY = aChemistryElement->Find("DirecitonY")->GetValue().ToFloat();
+  float directionZ = aChemistryElement->Find("DirecitonZ")->GetValue().ToFloat();
+  Vector3 direction = Vector3(directionX, directionY, directionZ);
+  
+  chemistryElement->SetName(name);
+  chemistryElement->SetTemperature(temperature);
+  chemistryElement->SetWattage(wattage);
+  chemistryElement->SetScale(scale);
+  chemistryElement->SetFalloff(falloff);
+  chemistryElement->SetDirectionality(direction);
 }
 
 /**

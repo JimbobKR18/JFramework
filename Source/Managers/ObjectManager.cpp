@@ -2,9 +2,11 @@
 #include "ObjectManager.h"
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
-#include "ChemistryObject.h"
+#include "ChemistryMaterial.h"
+#include "ChemistryElement.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
+#include "ChemistryManager.h"
 #include "ControllerManager.h"
 #include "DebugManager.h"
 #include "LuaIncludes.h"
@@ -232,9 +234,15 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
     aObject->AddComponent(object);
     object->Deserialize(aParser);
   }
-  if(aParser.Find("ChemistryObject"))
+  if(aParser.Find("ChemistryMaterial"))
   {
-    ChemistryObject *object = new ChemistryObject();
+    ChemistryMaterial *object = GetOwningApp()->GET<ChemistryManager>()->CreateMaterial();
+    aObject->AddComponent(object);
+    object->Deserialize(aParser);
+  }
+  if(aParser.Find("ChemistryElement"))
+  {
+    ChemistryElement *object = GetOwningApp()->GET<ChemistryManager>()->CreateElement();
     aObject->AddComponent(object);
     object->Deserialize(aParser);
   }
