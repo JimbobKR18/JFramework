@@ -1210,7 +1210,7 @@ void Level::ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial
   ChemistryMaterial* chemistryMaterial = aObject->GET<ChemistryMaterial>();
   if(!chemistryMaterial)
   {
-    chemistryMaterial = new ChemistryMaterial(GetManager()->GetOwningApp()->GET<ChemistryManager>());
+    chemistryMaterial = GetManager()->GetOwningApp()->GET<ChemistryManager>()->CreateMaterial(aChemistryMaterial->Find("Name")->GetValue());
     aObject->AddComponent(chemistryMaterial);
   }
   
@@ -1266,7 +1266,7 @@ void Level::ParseChemistryElement(GameObject *aObject, Root* aChemistryElement)
   ChemistryElement* chemistryElement = aObject->GET<ChemistryElement>();
   if(!chemistryElement)
   {
-    chemistryElement = new ChemistryElement(GetManager()->GetOwningApp()->GET<ChemistryManager>());
+    chemistryElement = GetManager()->GetOwningApp()->GET<ChemistryManager>()->CreateElement(aChemistryElement->Find("Name")->GetValue());
     aObject->AddComponent(chemistryElement);
   }
   
