@@ -416,6 +416,16 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   }
 }
 
+/**
+ * @brief Create physics object at index
+ * @param aIndex Index to create physics at.
+ * @param aPhysicsWorld Physics manager.
+ * @param aTransform Transform of object.
+ * @param aZeroVector Empty vector.
+ * @param aCollisionDataVectorSize Size of collision data vector.
+ * @param aZPos Z position of shape.
+ * @return new Physics object.
+ */
 PhysicsObject* TileMapGenerator::CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
   Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, float aZPos)
 {
@@ -570,9 +580,15 @@ PhysicsObject* TileMapGenerator::CreatePhysicsAtIndex(unsigned const aIndex, Phy
   return physics;
 }
 
-ChemistryMaterial* TileMapGenerator::CreateMaterialAtIndex(unsigned const aStart, ChemistryManager *aChemistryManager)
+/**
+ * @brief Create material at index.
+ * @param aIndex Index to create material for.
+ * @param aChemistryManager Chemistry manager.
+ * @return New material.
+ */
+ChemistryMaterial* TileMapGenerator::CreateMaterialAtIndex(unsigned const aIndex, ChemistryManager *aChemistryManager)
 {
-  HashString name = mMaterialNames[aStart];
+  HashString name = mMaterialNames[aIndex];
   ChemistryMaterial *material = aChemistryManager->CreateMaterial(name);
   return material;
 }

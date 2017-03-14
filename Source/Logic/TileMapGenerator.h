@@ -136,7 +136,7 @@ private:
   PhysicsObject*    CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
                       Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, 
                       float aZPos);
-  ChemistryMaterial* CreateMaterialAtIndex(unsigned const aStart, ChemistryManager *aChemistryManager);
+  ChemistryMaterial* CreateMaterialAtIndex(unsigned const aIndex, ChemistryManager *aChemistryManager);
 };
 
 #endif /* defined(__JFramework__TileMapGenerator__) */
