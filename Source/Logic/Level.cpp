@@ -1214,22 +1214,37 @@ void Level::ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial
     aObject->AddComponent(chemistryMaterial);
   }
   
-  // Serialize the chemistryMaterial
-  HashString name = aChemistryMaterial->Find("Name")->GetValue();
-  float boilingPoint = aChemistryMaterial->Find("BoilingPoint")->GetValue().ToFloat();
-  float meltingPoint = aChemistryMaterial->Find("MeltingPoint")->GetValue().ToFloat();
-  float freezingPoint = aChemistryMaterial->Find("FreezingPoint")->GetValue().ToFloat();
-  float conductivity = aChemistryMaterial->Find("Conductivity")->GetValue().ToFloat();
-  float heatTransferRate = aChemistryMaterial->Find("HeatTransferRate")->GetValue().ToFloat();
-  
-  chemistryMaterial->SetName(name);
-  chemistryMaterial->SetBoilingPoint(boilingPoint);
-  chemistryMaterial->SetMeltingPoint(meltingPoint);
-  chemistryMaterial->SetFreezingPoint(freezingPoint);
-  chemistryMaterial->SetConductivity(conductivity);
-  chemistryMaterial->SetHeatTransferRate(heatTransferRate);
-  
-  // Optional
+  // Serialize the chemistryMaterial 
+  if(aChemistryMaterial->Find("Name"))
+  {
+    HashString name = aChemistryMaterial->Find("Name")->GetValue();
+    chemistryMaterial->SetName(name);
+  }
+  if(aChemistryMaterial->Find("BoilingPoint"))
+  {
+    float boilingPoint = aChemistryMaterial->Find("BoilingPoint")->GetValue().ToFloat();
+    chemistryMaterial->SetBoilingPoint(boilingPoint);
+  }
+  if(aChemistryMaterial->Find("MeltingPoint"))
+  {
+    float meltingPoint = aChemistryMaterial->Find("MeltingPoint")->GetValue().ToFloat();
+    chemistryMaterial->SetMeltingPoint(meltingPoint);
+  }
+  if(aChemistryMaterial->Find("FreezingPoint"))
+  {
+    float freezingPoint = aChemistryMaterial->Find("FreezingPoint")->GetValue().ToFloat();
+    chemistryMaterial->SetFreezingPoint(freezingPoint);
+  }
+  if(aChemistryMaterial->Find("Conductivity"))
+  {
+    float conductivity = aChemistryMaterial->Find("Conductivity")->GetValue().ToFloat();
+    chemistryMaterial->SetConductivity(conductivity);
+  }
+  if(aChemistryMaterial->Find("HeatTransferRate"))
+  {
+    float heatTransferRate = aChemistryMaterial->Find("HeatTransferRate")->GetValue().ToFloat();
+    chemistryMaterial->SetHeatTransferRate(heatTransferRate);
+  }
   if(aChemistryMaterial->Find("StartingTemperature"))
   {
     float temperature = aChemistryMaterial->Find("StartingTemperature")->GetValue().ToFloat();
@@ -1256,22 +1271,39 @@ void Level::ParseChemistryElement(GameObject *aObject, Root* aChemistryElement)
   }
   
   // Serialize the chemistryElement
-  HashString name = aChemistryElement->Find("Name")->GetValue();
-  float temperature = aChemistryElement->Find("Temperature")->GetValue().ToFloat();
-  float wattage = aChemistryElement->Find("Wattage")->GetValue().ToFloat();
-  float scale = aChemistryElement->Find("Scale")->GetValue().ToFloat();
-  float falloff = aChemistryElement->Find("Falloff")->GetValue().ToFloat();
-  float directionX = aChemistryElement->Find("DirecitonX")->GetValue().ToFloat();
-  float directionY = aChemistryElement->Find("DirecitonY")->GetValue().ToFloat();
-  float directionZ = aChemistryElement->Find("DirecitonZ")->GetValue().ToFloat();
-  Vector3 direction = Vector3(directionX, directionY, directionZ);
-  
-  chemistryElement->SetName(name);
-  chemistryElement->SetTemperature(temperature);
-  chemistryElement->SetWattage(wattage);
-  chemistryElement->SetScale(scale);
-  chemistryElement->SetFalloff(falloff);
-  chemistryElement->SetDirectionality(direction);
+  if(aChemistryElement->Find("Name"))
+  {
+    HashString name = aChemistryElement->Find("Name")->GetValue();
+    chemistryElement->SetName(name);
+  }
+  if(aChemistryElement->Find("Temperature"))
+  {
+    float temperature = aChemistryElement->Find("Temperature")->GetValue().ToFloat();
+    chemistryElement->SetTemperature(temperature);
+  }
+  if(aChemistryElement->Find("Wattage"))
+  {
+    float wattage = aChemistryElement->Find("Wattage")->GetValue().ToFloat();
+    chemistryElement->SetWattage(wattage);
+  }
+  if(aChemistryElement->Find("Scale"))
+  {
+    float scale = aChemistryElement->Find("Scale")->GetValue().ToFloat();
+    chemistryElement->SetScale(scale);
+  }
+  if(aChemistryElement->Find("Falloff"))
+  {
+    float falloff = aChemistryElement->Find("Falloff")->GetValue().ToFloat();
+    chemistryElement->SetFalloff(falloff);
+  }
+  if(aChemistryElement->Find("DirectionX"))
+  {
+    float directionX = aChemistryElement->Find("DirectionX")->GetValue().ToFloat();
+    float directionY = aChemistryElement->Find("DirectionY")->GetValue().ToFloat();
+    float directionZ = aChemistryElement->Find("DirectionZ")->GetValue().ToFloat();
+    Vector3 direction = Vector3(directionX, directionY, directionZ);
+    chemistryElement->SetDirectionality(direction);
+  }
 }
 
 /**
@@ -1284,9 +1316,10 @@ void Level::ParseTileGenerator(TextParser &aParser)
   HashString value, empty;
   int width, height, tileSize;
   HashString file, frameDataFilename, settingsDataFileName;
-  std::vector<int> frames, collision, shapes;
+  std::vector<int> frames, collision, shapes, materials;
   std::map<int, float> heights;
   std::map<int, std::vector<int>> animations;
+  std::map<int, HashString> materialInfo;
   float tileAnimationSpeed = 0.0f;
 
   width = tileMap->Find("Width")->GetValue().ToInt();
@@ -1307,6 +1340,7 @@ void Level::ParseTileGenerator(TextParser &aParser)
   {
     HashString const height = "Height_";
     HashString const animation = "Animation_";
+    HashString const material = "Material_";
     settingsDataFileName = tileMap->Find("SettingsFile")->GetValue();
     TextParser settingsData(Common::RelativePath("Maps", settingsDataFileName));
     
@@ -1332,6 +1366,18 @@ void Level::ParseTileGenerator(TextParser &aParser)
       ++index;
       curIndex = animation + Common::IntToString(index);
     }
+    
+    // Materials
+    index = 0;
+    curIndex = material + Common::IntToString(index);
+    while(settingsData.Find(curIndex))
+    {
+      Root* base = settingsData.Find(curIndex);
+      HashString name = base->Find("Name")->GetValue();
+      materialInfo[index] = name;
+      ++index;
+      curIndex = material + Common::IntToString(index);
+    }
 
     // Animation speed
     if(settingsData.Find("AnimationSpeed"))
@@ -1348,10 +1394,14 @@ void Level::ParseTileGenerator(TextParser &aParser)
   {
     shapes = Common::StringToIntVector(tileMapData.Find("CollisionShapes")->GetValue());
   }
+  if(tileMapData.Find("Materials"))
+  {
+    materials = Common::StringToIntVector(tileMapData.Find("Materials")->GetValue());
+  }
 
   mGenerator = new TileMapGenerator(width, height, tileSize,
                                    file, frameDataFilename,
                                    frames, collision, shapes,
-                                   heights, animations, 
-                                   tileAnimationSpeed, this);
+                                   materials, heights, materialInfo,
+                                   animations, tileAnimationSpeed, this);
 }

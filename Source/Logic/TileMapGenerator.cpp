@@ -9,12 +9,16 @@
 #include "TileMapGenerator.h"
 #include "ObjectManager.h"
 #include "LevelManager.h"
+#include "ChemistryMaterial.h"
 #include "Transform.h"
 #include "Surface.h"
 #include "PhysicsObject.h"
 #include "Level.h"
 #include "AutoCrit.h"
 
+//---------------------------------------------
+// TileMapGenerator
+//---------------------------------------------
 TileMapGenerator::TileMapGenerator()
 {
   assert(0);
@@ -26,7 +30,9 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    std::vector<int> const &aTiles,
                                    std::vector<int> const &aCollisionData,
                                    std::vector<int> const &aCollisionShapes,
+                                   std::vector<int> const &aMaterials,
                                    std::map<int, float> const &aTileHeights,
+                                   std::map<int, HashString> const &aMaterialNames,
                                    std::map<int, std::vector<int>> const &aAnimations,
                                    float const aAnimationSpeed, Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight),
@@ -36,6 +42,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    mTileHeights(aTileHeights), mObjects(),
                                    mAnimationSpeed(aAnimationSpeed), mCurrentAnimationTime(0),
                                    mAnimatedObjects(), mAnimations(aAnimations), mCurrentFrames(),
+                                   mMaterials(aMaterials), mMaterialNames(aMaterialNames),
                                    mOwner(aOwner)
 {
   // mTiles and mCollisionData MUST be same size, or it's not a valid map.
@@ -45,11 +52,12 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
 
   ObjectManager *objectManager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
   PhysicsWorld *physicsWorld = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>();
+  ChemistryManager *chemistryManager = mOwner->GetManager()->GetOwningApp()->GET<ChemistryManager>();
   Vector3 tileSize = Vector3(mTileSize, mTileSize, mTileSize);
   
   // Reserve total tiles ahead of time to avoid reallocs
   mObjects.reserve(mTiles.size());
-  CreateTilesInRange(0, mTiles.size(), tileSize, objectManager, physicsWorld);
+  CreateTilesInRange(0, mTiles.size(), tileSize, objectManager, physicsWorld, chemistryManager);
 }
 
 TileMapGenerator::~TileMapGenerator()
@@ -297,8 +305,10 @@ void TileMapGenerator::Serialize(Parser &aParser)
  * @param aTileSize Size of tiles in pixels
  * @param aObjectManager Object manager to add objects to
  * @param aPhysicsWorld Physics manager to add physics objects to
+ * @param aChemistryManager Chemistry manager to create materials and such
  */
-void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld)
+void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, 
+  ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager)
 {
   int xPos = aStart, yPos = 0;
   float halfX = mWidth * mTileSize;
@@ -364,153 +374,9 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     if(mCollisionData[i] != CollisionShapes::EMPTY ||
         (mCollisionShapes.size() > i && mCollisionShapes[i] != CollisionShapes::EMPTY))
     {
-      PhysicsObject *physics = aPhysicsWorld->CreateObject();
+      PhysicsObject *physics = CreatePhysicsAtIndex(i, aPhysicsWorld, transform, 
+        zeroVector, collisionDataVectorSize, zPos);
       
-      // What shape is our object? Is it affected by gravity?
-      // What is the object's mass? Is it static?
-      aPhysicsWorld->UnregisterGravity(physics);
-      physics->SetMass(50);
-      physics->SetStatic(true);
-      physics->SetBroadSize(transform->GetSize() * 1.5f);
-      
-      // Based on the shape passed in from file
-      Shape *shape = nullptr;
-      float triSize = mTileSize;
-      float triZ = -zPos;
-      if(mCollisionShapes.size() < collisionDataVectorSize ||
-         mCollisionShapes[i] == CollisionShapes::CUBE ||
-         mCollisionShapes[i] == CollisionShapes::CUBE_PASSABLE ||
-         mCollisionShapes[i] >= CollisionShapes::ALL_COLLISION_SHAPES)
-      {
-        shape = new Cube(zeroVector, transform->GetSize());
-        
-        if(mCollisionShapes.size() < collisionDataVectorSize)
-        {
-          mCollisionShapes.push_back(CollisionShapes::CUBE);
-        }
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPLEFT ||
-              mCollisionShapes[i] == CollisionShapes::TOPLEFT_PASSABLE)
-      {
-        Vector3 point1(-triSize, -triSize, triZ);
-        Vector3 point2(triSize, -triSize, triZ);
-        Vector3 point3(-triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT ||
-              mCollisionShapes[i] == CollisionShapes::BOTTOMLEFT_PASSABLE)
-      {
-        Vector3 point1(-triSize, -triSize, triZ);
-        Vector3 point2(triSize, triSize, triZ);
-        Vector3 point3(-triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPRIGHT ||
-              mCollisionShapes[i] == CollisionShapes::TOPRIGHT_PASSABLE)
-      {
-        Vector3 point1(-triSize, -triSize, triZ);
-        Vector3 point2(triSize, -triSize, triZ);
-        Vector3 point3(triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT ||
-              mCollisionShapes[i] == CollisionShapes::BOTTOMRIGHT_PASSABLE)
-      {
-        Vector3 point1(triSize, -triSize, triZ);
-        Vector3 point2(triSize, triSize, triZ);
-        Vector3 point3(-triSize, triSize, triZ);
-        shape = new Triangle(point1, point2, point3);
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::BACKSLASH ||
-              mCollisionShapes[i] == CollisionShapes::BACKSLASH_PASSABLE)
-      {
-        shape = new Line(Vector3(-triSize, -triSize, triZ), 
-                         Vector3(triSize, triSize, triZ));
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::FORWARDSLASH ||
-              mCollisionShapes[i] == CollisionShapes::FORWARDSLASH_PASSABLE)
-      {
-        shape = new Line(Vector3(-triSize, triSize, triZ), 
-                         Vector3(triSize, -triSize, triZ));
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::LEFTSIDE ||
-              mCollisionShapes[i] == CollisionShapes::LEFTSIDE_PASSABLE)
-      {
-        shape = new Line(Vector3(-triSize, -triSize, triZ), 
-                         Vector3(-triSize, triSize, triZ));
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::RIGHTSIDE ||
-              mCollisionShapes[i] == CollisionShapes::RIGHTSIDE_PASSABLE)
-      {
-        shape = new Line(Vector3(triSize, triSize, triZ), 
-                         Vector3(triSize, -triSize, triZ));
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::TOPSIDE ||
-              mCollisionShapes[i] == CollisionShapes::TOPSIDE_PASSABLE)
-      {
-        shape = new Line(Vector3(-triSize, -triSize, triZ), 
-                         Vector3(triSize, -triSize, triZ));
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::BOTTOMSIDE ||
-              mCollisionShapes[i] == CollisionShapes::BOTTOMSIDE_PASSABLE)
-      {
-        shape = new Line(Vector3(-triSize, triSize, triZ), 
-                         Vector3(triSize, triSize, triZ));
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::HALFLEFT ||
-              mCollisionShapes[i] == CollisionShapes::HALFLEFT_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::HALFRIGHT ||
-              mCollisionShapes[i] == CollisionShapes::HALFRIGHT_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::HALFTOP ||
-              mCollisionShapes[i] == CollisionShapes::HALFTOP_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::HALFBOTTOM ||
-              mCollisionShapes[i] == CollisionShapes::HALFBOTTOM_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::QUARTERTOPLEFT ||
-              mCollisionShapes[i] == CollisionShapes::QUARTERTOPLEFT_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::QUARTERTOPRIGHT ||
-              mCollisionShapes[i] == CollisionShapes::QUARTERTOPRIGHT_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMLEFT ||
-              mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMLEFT_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else if(mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMRIGHT ||
-              mCollisionShapes[i] == CollisionShapes::QUARTERBOTTOMRIGHT_PASSABLE)
-      {
-        assert(!"Not supported");
-      }
-      else
-      {
-        assert(!"Invalid value handed into TileMapGenerator.");
-      }
-      
-      // Set passable if marked passable
-      if(mCollisionShapes[i] >= CollisionShapes::CUBE_PASSABLE && 
-         mCollisionShapes[i] < CollisionShapes::ALL_COLLISION_SHAPES)
-      {
-        physics->SetPassable(true);
-      }
-      
-      // Finally, add shape to our physicsobject
-      physics->AddShape(shape);
       // Set ignore list for physics
       physics->SetIgnoreList(ignoreContainer);
 
@@ -522,10 +388,17 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     }
 
     // Animation
-    if (mAnimations.find(mTiles[i]) != mAnimations.end())
+    if(mAnimations.find(mTiles[i]) != mAnimations.end())
     {
       mAnimatedObjects[surface] = mTiles[i];
       mCurrentFrames[mTiles[i]] = 0;
+    }
+    
+    // Materials, if data is available
+    if(mMaterials.size() > 0 && mMaterialNames.find(mMaterials[i]) != mMaterialNames.end())
+    {
+      ChemistryMaterial *material = CreateMaterialAtIndex(i, aChemistryManager);
+      obj->AddComponent(material);
     }
     
     // Add object to our level for easier loading later
@@ -541,4 +414,165 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
       ++yPos;
     }
   }
+}
+
+PhysicsObject* TileMapGenerator::CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
+  Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, float aZPos)
+{
+  PhysicsObject *physics = aPhysicsWorld->CreateObject();
+      
+  // What shape is our object? Is it affected by gravity?
+  // What is the object's mass? Is it static?
+  aPhysicsWorld->UnregisterGravity(physics);
+  physics->SetMass(FLT_MAX);
+  physics->SetStatic(true);
+  physics->SetBroadSize(aTransform->GetSize() * 1.5f);
+  
+  // Based on the shape passed in from file
+  Shape *shape = nullptr;
+  float triSize = mTileSize;
+  float triZ = -aZPos;
+  if(mCollisionShapes.size() < aCollisionDataVectorSize ||
+     mCollisionShapes[aIndex] == CollisionShapes::CUBE ||
+     mCollisionShapes[aIndex] == CollisionShapes::CUBE_PASSABLE ||
+     mCollisionShapes[aIndex] >= CollisionShapes::ALL_COLLISION_SHAPES)
+  {
+    shape = new Cube(aZeroVector, aTransform->GetSize());
+    
+    if(mCollisionShapes.size() < aCollisionDataVectorSize)
+    {
+      mCollisionShapes.push_back(CollisionShapes::CUBE);
+    }
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::TOPLEFT ||
+          mCollisionShapes[aIndex] == CollisionShapes::TOPLEFT_PASSABLE)
+  {
+    Vector3 point1(-triSize, -triSize, triZ);
+    Vector3 point2(triSize, -triSize, triZ);
+    Vector3 point3(-triSize, triSize, triZ);
+    shape = new Triangle(point1, point2, point3);
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::BOTTOMLEFT ||
+          mCollisionShapes[aIndex] == CollisionShapes::BOTTOMLEFT_PASSABLE)
+  {
+    Vector3 point1(-triSize, -triSize, triZ);
+    Vector3 point2(triSize, triSize, triZ);
+    Vector3 point3(-triSize, triSize, triZ);
+    shape = new Triangle(point1, point2, point3);
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::TOPRIGHT ||
+          mCollisionShapes[aIndex] == CollisionShapes::TOPRIGHT_PASSABLE)
+  {
+    Vector3 point1(-triSize, -triSize, triZ);
+    Vector3 point2(triSize, -triSize, triZ);
+    Vector3 point3(triSize, triSize, triZ);
+    shape = new Triangle(point1, point2, point3);
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::BOTTOMRIGHT ||
+          mCollisionShapes[aIndex] == CollisionShapes::BOTTOMRIGHT_PASSABLE)
+  {
+    Vector3 point1(triSize, -triSize, triZ);
+    Vector3 point2(triSize, triSize, triZ);
+    Vector3 point3(-triSize, triSize, triZ);
+    shape = new Triangle(point1, point2, point3);
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::BACKSLASH ||
+          mCollisionShapes[aIndex] == CollisionShapes::BACKSLASH_PASSABLE)
+  {
+    shape = new Line(Vector3(-triSize, -triSize, triZ), 
+                     Vector3(triSize, triSize, triZ));
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::FORWARDSLASH ||
+          mCollisionShapes[aIndex] == CollisionShapes::FORWARDSLASH_PASSABLE)
+  {
+    shape = new Line(Vector3(-triSize, triSize, triZ), 
+                     Vector3(triSize, -triSize, triZ));
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::LEFTSIDE ||
+          mCollisionShapes[aIndex] == CollisionShapes::LEFTSIDE_PASSABLE)
+  {
+    shape = new Line(Vector3(-triSize, -triSize, triZ), 
+                     Vector3(-triSize, triSize, triZ));
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::RIGHTSIDE ||
+          mCollisionShapes[aIndex] == CollisionShapes::RIGHTSIDE_PASSABLE)
+  {
+    shape = new Line(Vector3(triSize, triSize, triZ), 
+                     Vector3(triSize, -triSize, triZ));
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::TOPSIDE ||
+          mCollisionShapes[aIndex] == CollisionShapes::TOPSIDE_PASSABLE)
+  {
+    shape = new Line(Vector3(-triSize, -triSize, triZ), 
+                     Vector3(triSize, -triSize, triZ));
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::BOTTOMSIDE ||
+          mCollisionShapes[aIndex] == CollisionShapes::BOTTOMSIDE_PASSABLE)
+  {
+    shape = new Line(Vector3(-triSize, triSize, triZ), 
+                     Vector3(triSize, triSize, triZ));
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::HALFLEFT ||
+          mCollisionShapes[aIndex] == CollisionShapes::HALFLEFT_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::HALFRIGHT ||
+          mCollisionShapes[aIndex] == CollisionShapes::HALFRIGHT_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::HALFTOP ||
+          mCollisionShapes[aIndex] == CollisionShapes::HALFTOP_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::HALFBOTTOM ||
+          mCollisionShapes[aIndex] == CollisionShapes::HALFBOTTOM_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::QUARTERTOPLEFT ||
+          mCollisionShapes[aIndex] == CollisionShapes::QUARTERTOPLEFT_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::QUARTERTOPRIGHT ||
+          mCollisionShapes[aIndex] == CollisionShapes::QUARTERTOPRIGHT_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::QUARTERBOTTOMLEFT ||
+          mCollisionShapes[aIndex] == CollisionShapes::QUARTERBOTTOMLEFT_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else if(mCollisionShapes[aIndex] == CollisionShapes::QUARTERBOTTOMRIGHT ||
+          mCollisionShapes[aIndex] == CollisionShapes::QUARTERBOTTOMRIGHT_PASSABLE)
+  {
+    assert(!"Not supported");
+  }
+  else
+  {
+    assert(!"Invalid value handed into TileMapGenerator.");
+  }
+  
+  // Set passable if marked passable
+  if(mCollisionShapes[aIndex] >= CollisionShapes::CUBE_PASSABLE && 
+     mCollisionShapes[aIndex] < CollisionShapes::ALL_COLLISION_SHAPES)
+  {
+    physics->SetPassable(true);
+  }
+  
+  // Finally, add shape to our physicsobject
+  physics->AddShape(shape);
+  
+  return physics;
+}
+
+ChemistryMaterial* TileMapGenerator::CreateMaterialAtIndex(unsigned const aStart, ChemistryManager *aChemistryManager)
+{
+  HashString name = mMaterialNames[aStart];
+  ChemistryMaterial *material = aChemistryManager->CreateMaterial(name);
+  return material;
 }

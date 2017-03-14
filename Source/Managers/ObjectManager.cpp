@@ -236,13 +236,15 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
   }
   if(aParser.Find("ChemistryMaterial"))
   {
-    ChemistryMaterial *object = GetOwningApp()->GET<ChemistryManager>()->CreateMaterial();
+    HashString name = aParser.Find("ChemistryMaterial")->Find("Name")->GetValue();
+    ChemistryMaterial *object = GetOwningApp()->GET<ChemistryManager>()->CreateMaterial(name);
     aObject->AddComponent(object);
     object->Deserialize(aParser);
   }
   if(aParser.Find("ChemistryElement"))
   {
-    ChemistryElement *object = GetOwningApp()->GET<ChemistryManager>()->CreateElement();
+    HashString name = aParser.Find("ChemistryElement")->Find("Name")->GetValue();
+    ChemistryElement *object = GetOwningApp()->GET<ChemistryManager>()->CreateElement(name);
     aObject->AddComponent(object);
     object->Deserialize(aParser);
   }

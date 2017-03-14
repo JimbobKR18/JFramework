@@ -282,14 +282,18 @@ void ChemistryMaterial::Serialize(Parser& aParser)
 void ChemistryMaterial::Deserialize(Parser& aParser)
 {
   HashString const CHEMISTRY_OBJECT = "ChemistryMaterial";
-  mName = aParser.Find(CHEMISTRY_OBJECT, "Name")->GetValue();
-  mBoilingPoint = aParser.Find(CHEMISTRY_OBJECT, "BoilingPoint")->GetValue().ToFloat();
-  mMeltingPoint = aParser.Find(CHEMISTRY_OBJECT, "MeltingPoint")->GetValue().ToFloat();
-  mFreezingPoint = aParser.Find(CHEMISTRY_OBJECT, "FreezingPoint")->GetValue().ToFloat();
-  mConductivity = aParser.Find(CHEMISTRY_OBJECT, "Conductivity")->GetValue().ToFloat();
-  mHeatTransferRate = aParser.Find(CHEMISTRY_OBJECT, "HeatTransferRate")->GetValue().ToFloat();
-  
-  // Optional
+  if(aParser.Find(CHEMISTRY_OBJECT, "Name"))
+    mName = aParser.Find(CHEMISTRY_OBJECT, "Name")->GetValue();
+  if(aParser.Find(CHEMISTRY_OBJECT, "BoilingPoint"))
+    mBoilingPoint = aParser.Find(CHEMISTRY_OBJECT, "BoilingPoint")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "MeltingPoint"))
+    mMeltingPoint = aParser.Find(CHEMISTRY_OBJECT, "MeltingPoint")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "FreezingPoint"))
+    mFreezingPoint = aParser.Find(CHEMISTRY_OBJECT, "FreezingPoint")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "Conductivity"))
+    mConductivity = aParser.Find(CHEMISTRY_OBJECT, "Conductivity")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "HeatTransferRate"))
+    mHeatTransferRate = aParser.Find(CHEMISTRY_OBJECT, "HeatTransferRate")->GetValue().ToFloat();
   if(aParser.Find(CHEMISTRY_OBJECT, "StartingTemperature"))
     mCurrentTemperature = aParser.Find(CHEMISTRY_OBJECT, "StartingTemperature")->GetValue().ToFloat();
   if(aParser.Find(CHEMISTRY_OBJECT, "StartingWattage"))

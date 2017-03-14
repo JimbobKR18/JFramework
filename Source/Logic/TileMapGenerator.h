@@ -14,8 +14,10 @@
 #include "GameObject.h"
 #include "PhysicsWorld.h"
 #include "ObjectManager.h"
+#include "ChemistryManager.h"
 #include "MathExt.h"
 #include "Surface.h"
+#include "Transform.h"
 
 class Level;
 
@@ -67,23 +69,27 @@ private:
   };
 
   // Basics
-  int                             mWidth;
-  int                             mHeight;
-  int                             mTileSize;
-  HashString                      mImageName;
-  HashString                      mDataName;
-  std::vector<int>                mTiles;
-  std::vector<int>                mCollisionData;
-  std::vector<int>                mCollisionShapes;
-  std::map<int, float>            mTileHeights;
-  std::vector<GameObject*>        mObjects;
+  int                               mWidth;
+  int                               mHeight;
+  int                               mTileSize;
+  HashString                        mImageName;
+  HashString                        mDataName;
+  std::vector<int>                  mTiles;
+  std::vector<int>                  mCollisionData;
+  std::vector<int>                  mCollisionShapes;
+  std::map<int, float>              mTileHeights;
+  std::vector<GameObject*>          mObjects;
 
   // Animated tiles
-  float                           mAnimationSpeed;
-  float                           mCurrentAnimationTime;
-  std::map<Surface*, int>         mAnimatedObjects;
-  std::map<int, std::vector<int>> mAnimations;
-  std::map<int, int>              mCurrentFrames;
+  float                             mAnimationSpeed;
+  float                             mCurrentAnimationTime;
+  std::map<Surface*, int>           mAnimatedObjects;
+  std::map<int, std::vector<int>>   mAnimations;
+  std::map<int, int>                mCurrentFrames;
+  
+  // Materials
+  std::vector<int>                  mMaterials;
+  std::map<int, HashString>         mMaterialNames;
 
   // Level owning this generator
   Level*                          mOwner;
@@ -96,7 +102,9 @@ public:
                    std::vector<int> const &aTiles,
                    std::vector<int> const &aCollisionData, 
                    std::vector<int> const &aCollisionShapes,
+                   std::vector<int> const &aMaterialData,
                    std::map<int, float> const &aTileHeights, 
+                   std::map<int, HashString> const &aMaterials, 
                    std::map<int, std::vector<int>> const &aAnimations,
                    float const aAnimationSpeed, Level *aOwner);
   ~TileMapGenerator();
@@ -123,7 +131,12 @@ public:
   void              Serialize(Parser &aParser);
   
 private:
-  void              CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld);
+  void              CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, 
+                      ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager);
+  PhysicsObject*    CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
+                      Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, 
+                      float aZPos);
+  ChemistryMaterial* CreateMaterialAtIndex(unsigned const aStart, ChemistryManager *aChemistryManager);
 };
 
 #endif /* defined(__JFramework__TileMapGenerator__) */

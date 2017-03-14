@@ -5,6 +5,7 @@
 
 class ChemistryMaterial;
 class ChemistryElement;
+class ChemicalFactory;
 
 class ChemistryManager : public Manager
 {
@@ -17,6 +18,7 @@ public:
   typedef ElementContainer::const_iterator ElementConstIT;
   
 private:
+  ChemicalFactory* mFactory;
   MaterialContainer mMaterials;
   ElementContainer mElements;
   float mCurrentTemperature;
@@ -27,14 +29,17 @@ public:
   ChemistryManager(GameApp *aApp, float const aCurrentTemperature);
   virtual ~ChemistryManager();
   
+  // Setters
+  void                          SetChemicalFactory(ChemicalFactory *aFactory);
+  
   // Object Management
-  ChemistryMaterial*            CreateMaterial();
+  ChemistryMaterial*            CreateMaterial(HashString const &aName);
   void                          DeleteMaterial(ChemistryMaterial *aObject);
   void                          AddMaterial(ChemistryMaterial *aObject);
   void                          RemoveMaterial(ChemistryMaterial *aObject);
   void                          ClearMaterials();
   
-  ChemistryElement*             CreateElement();
+  ChemistryElement*             CreateElement(HashString const &aName);
   void                          DeleteElement(ChemistryElement *aObject);
   void                          AddElement(ChemistryElement *aObject);
   void                          RemoveElement(ChemistryElement *aObject);

@@ -1,27 +1,41 @@
 #include "ChemistryManager.h"
 #include "ChemistryMaterial.h"
 #include "ChemistryElement.h"
+#include "DefaultChemicalFactory.h"
 
 unsigned const ChemistryManager::sUID = Common::StringHashFunction("ChemistryManager");
 
 ChemistryManager::ChemistryManager(GameApp *aApp, float const aCurrentTemperature) : Manager(aApp, "ChemistryManager", ChemistryManager::sUID),
-  mMaterials(), mElements(), mCurrentTemperature(aCurrentTemperature)
+  mFactory(new DefaultChemicalFactory()), mMaterials(), mElements(), mCurrentTemperature(aCurrentTemperature)
 {
 }
 
 ChemistryManager::~ChemistryManager()
 {
+  delete mFactory;
   ClearMaterials();
   ClearElements();
 }
 
 /**
+ * @brief Set new chemical factory, delete old one.
+ * @param aFactory Factory to set.
+ */
+void ChemistryManager::SetChemicalFactory(ChemicalFactory *aFactory)
+{
+  if(mFactory)
+    delete mFactory;
+  mFactory = aFactory;
+}
+
+/**
  * @brief Create new material.
+ * @param aName Name of material type.
  * @return New material.
  */
-ChemistryMaterial* ChemistryManager::CreateMaterial()
+ChemistryMaterial* ChemistryManager::CreateMaterial(HashString const &aName)
 {
-  ChemistryMaterial* material = new ChemistryMaterial(this);
+  ChemistryMaterial* material = mFactory->CreateMaterial(this, aName);
   AddMaterial(material);
   return material;
 }
@@ -87,11 +101,12 @@ void ChemistryManager::ClearMaterials()
   
 /**
  * @brief Create new element.
+ * @param aName Name of element type.
  * @return New element.
  */
-ChemistryElement* ChemistryManager::CreateElement()
+ChemistryElement* ChemistryManager::CreateElement(HashString const &aName)
 {
-  ChemistryElement* element = new ChemistryElement(this);
+  ChemistryElement* element = mFactory->CreateElement(this, aName);
   AddElement(element);
   return element;
 }

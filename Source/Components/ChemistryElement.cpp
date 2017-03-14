@@ -213,14 +213,22 @@ void ChemistryElement::Serialize(Parser& aParser)
 void ChemistryElement::Deserialize(Parser& aParser)
 {
   HashString const CHEMISTRY_OBJECT = "ChemistryElement";
-  mName = aParser.Find(CHEMISTRY_OBJECT, "Name")->GetValue();
-  mTemperature = aParser.Find(CHEMISTRY_OBJECT, "Temperature")->GetValue().ToFloat();
-  mWattage = aParser.Find(CHEMISTRY_OBJECT, "Wattage")->GetValue().ToFloat();
-  mScale = aParser.Find(CHEMISTRY_OBJECT, "Scale")->GetValue().ToFloat();
-  mFalloff = aParser.Find(CHEMISTRY_OBJECT, "Falloff")->GetValue().ToFloat();
-  mDirectionality.x = aParser.Find(CHEMISTRY_OBJECT, "DirectionX")->GetValue().ToFloat();
-  mDirectionality.y = aParser.Find(CHEMISTRY_OBJECT, "DirectionY")->GetValue().ToFloat();
-  mDirectionality.z = aParser.Find(CHEMISTRY_OBJECT, "DirectionZ")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "Name"))
+    mName = aParser.Find(CHEMISTRY_OBJECT, "Name")->GetValue();
+  if(aParser.Find(CHEMISTRY_OBJECT, "Temperature"))
+    mTemperature = aParser.Find(CHEMISTRY_OBJECT, "Temperature")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "Wattage"))
+    mWattage = aParser.Find(CHEMISTRY_OBJECT, "Wattage")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "Scale"))
+    mScale = aParser.Find(CHEMISTRY_OBJECT, "Scale")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "Falloff"))
+    mFalloff = aParser.Find(CHEMISTRY_OBJECT, "Falloff")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "DirectionX"))
+    mDirectionality.x = aParser.Find(CHEMISTRY_OBJECT, "DirectionX")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "DirectionY"))
+    mDirectionality.y = aParser.Find(CHEMISTRY_OBJECT, "DirectionY")->GetValue().ToFloat();
+  if(aParser.Find(CHEMISTRY_OBJECT, "DirectionZ"))
+    mDirectionality.z = aParser.Find(CHEMISTRY_OBJECT, "DirectionZ")->GetValue().ToFloat();
 }
 
 /**
