@@ -14,7 +14,7 @@
 #include "Surface.h"
 #include "PhysicsObject.h"
 #include "Level.h"
-#include "AutoCrit.h"
+#include "Threading.h"
 
 //---------------------------------------------
 // TileMapGenerator
