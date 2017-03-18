@@ -17,7 +17,8 @@ enum ScrollType
 enum Viewspace
 {
   VIEW_RELATIVE_TO_CAMERA = 0,
-  VIEW_ABSOLUTE
+  VIEW_ABSOLUTE,
+  VIEW_PERCENTAGE_OF_CAMERA
 };
 
 struct ScrollInfo

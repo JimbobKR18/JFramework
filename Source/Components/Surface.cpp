@@ -316,7 +316,11 @@ void Surface::Serialize(Parser &aParser)
     surface->Place("Surface", values[i], Common::IntToString(mColor[i]));
   }
   
-  HashString viewMode = (mViewmode == VIEW_ABSOLUTE) ? "Absolute" : "Relative";
+  HashString viewMode = "ABSOLUTE";
+  if(mViewmode == VIEW_RELATIVE_TO_CAMERA)
+    viewMode = "RELATIVE";
+  else if(mViewmode == VIEW_PERCENTAGE_OF_CAMERA)
+    viewMode = "PERCENTAGE";
   surface->Place(SURFACE, "ViewMode", viewMode.ToString());
 }
 
@@ -387,10 +391,12 @@ void Surface::Deserialize(Parser &aParser)
   if(aParser.Find("Surface", "ViewMode"))
   {
     HashString viewMode = aParser.Find("Surface", "ViewMode")->GetValue();
-    if(viewMode == "Absolute")
+    if(viewMode == "ABSOLUTE")
       mViewmode = VIEW_ABSOLUTE;
-    else if(viewMode == "Relative")
+    else if(viewMode == "RELATIVE")
       mViewmode = VIEW_RELATIVE_TO_CAMERA;
+    else if(viewMode == "PERCENTAGE")
+      mViewmode = VIEW_PERCENTAGE_OF_CAMERA;
     else
       assert(!"Invalid value passed into ViewMode for Surface. (Surface.cpp)");  
   }

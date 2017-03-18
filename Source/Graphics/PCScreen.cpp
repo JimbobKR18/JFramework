@@ -63,6 +63,11 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       {
         position -= cameraDiff;
       }
+      else if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
+      {
+        position.x = GetWidth() * position.x;
+        position.y = GetHeight() * position.y;
+      }
 
       glLoadIdentity();
       glPushMatrix();
@@ -208,6 +213,13 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       
       TextureCoordinates *texCoord = surface->GetTextureData();
       Vector4 color = surface->GetColor();
+      
+      // If transform is a percentage of screen, convert.
+      if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
+      {
+        position.x = GetWidth() * position.x;
+        position.y = GetHeight() * position.y;
+      }
       
       // Move object based on its alignment
       AlignmentHelper(transform, size, position);

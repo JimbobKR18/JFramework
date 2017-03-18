@@ -97,6 +97,11 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       {
         position -= cameraDiff;
       }
+      else if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
+      {
+        position.x = GetWidth() * position.x;
+        position.y = GetHeight() * position.y;
+      }
 
       glLoadIdentity();
       glPushMatrix();
@@ -257,7 +262,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
         cameraMatrix[i] = viewMatrix.values[i/3][i%3];
       }
     }
-    else // Menu objects do not rotate.
+    else // Menu objects do not rotate with camera.
     {
       for(int i = 0; i < 9; ++i)
       {
@@ -279,6 +284,13 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       TextureCoordinates *texCoord = surface->GetTextureData();
       Vector3 &size = transform->GetSize();
       Vector4 &color = surface->GetColor();
+      
+      // If transform is a percentage of screen, convert.
+      if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
+      {
+        position.x = GetWidth() * position.x;
+        position.y = GetHeight() * position.y;
+      }
 
       // Move object based on its alignment
       AlignmentHelper(transform, size, position);

@@ -385,6 +385,18 @@ void Menu::ParseSurface(GameObject *aObject, Root *aSurface)
     startingAnimation = aSurface->Find("StartingAnimation")->GetValue().ToInt();
     objSurface->SetAnimation(startingAnimation);
   }
+  if(aSurface->Find("ViewMode"))
+  {
+    HashString viewMode = aSurface->Find("ViewMode")->GetValue();
+    if(viewMode == "ABSOLUTE")
+      objSurface->SetViewMode(VIEW_ABSOLUTE);
+    else if(viewMode == "RELATIVE")
+      objSurface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
+    else if(viewMode == "PERCENTAGE")
+      objSurface->SetViewMode(VIEW_PERCENTAGE_OF_CAMERA);
+    else
+      assert(!"Invalid value passed into ViewMode for Surface. (Menu.cpp)");  
+  }
 #ifdef SHADER_COMPATIBLE
   if(aSurface->Find("VertexShader") && aSurface->Find("FragmentShader"))
   {

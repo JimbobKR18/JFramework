@@ -55,10 +55,8 @@
     <File Name="../../Source/Core/MathExt.cpp"/>
     <File Name="../../Source/Core/SmartPointer.h"/>
     <File Name="../../Source/Core/MathExt.h"/>
-    <File Name="../../Source/Core/AutoCrit.cpp"/>
     <File Name="../../Source/Core/Common.cpp"/>
     <File Name="../../Source/Core/Component.h"/>
-    <File Name="../../Source/Core/AutoCrit.h"/>
     <File Name="../../Source/Core/LuaIncludes.h"/>
     <File Name="../../Source/Core/GameObject.h"/>
     <File Name="../../Source/Core/GameObject.cpp"/>
@@ -73,6 +71,7 @@
     <File Name="../../Source/Core/PlatformIncludes.h"/>
     <File Name="../../Source/Core/QuadraticInterpolation.h"/>
     <File Name="../../Source/Core/RoundAboutInterpolation.h"/>
+    <File Name="../../Source/Core/Threading.h"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
