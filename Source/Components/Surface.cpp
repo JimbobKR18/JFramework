@@ -84,7 +84,8 @@ TextureCoordinates *Surface::GetTextureData() const
  * @param aNumFrames Number of frames per animation
  * @param aAnimationSpeed Time between frames
  */
-void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const &aNumFrames, std::vector<float> const &aAnimationSpeeds)
+void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const &aNumFrames, 
+                                       std::vector<std::vector<float>> const &aAnimationSpeeds)
 {
   if(mTexCoord)
     delete mTexCoord;
@@ -287,7 +288,7 @@ void Surface::Serialize(Parser &aParser)
   std::vector<int> animations;
   bool animated = coords->GetAnimated();
   int numanimations = coords->GetNumberOfAnimations();
-  std::vector<float> animationSpeeds;
+  std::vector<std::vector<float>> animationSpeeds;
   int currentAnimation = coords->GetCurrentAnimation();
   char const* values[4] = { "ColorR",
                             "ColorG",
@@ -300,15 +301,33 @@ void Surface::Serialize(Parser &aParser)
   for(int i = 0; i < numanimations; ++i)
   {
     animations.push_back(coords->GetAnimationFrameCounts(i));
-    animationSpeeds.push_back(coords->GetAnimationSpeed(i));
+    
+    animationSpeeds.push_back(std::vector<float>());
+    TextureCoordinates::SpeedContainer speedForAnimation = coords->GetAnimationHolds(i);
+    for(TextureCoordinates::SpeedConstIT it = speedForAnimation.begin(); it != speedForAnimation.end(); ++it)
+    {
+      animationSpeeds[i].push_back(*it);
+    }
   }
 
   if(animated)
   {
     surface->Place(SURFACE, "FrameNumbers", Common::IntVectorToString(animations));
   }
+  
+  // Animation speeds
+  surface->Place(SURFACE, "AnimationSpeeds", "");
+  HashString const ANIMATION = "Animation_";
+  int curIndex = 0;
+  Root* animationSpeedsNode = surface->Find("AnimationSpeeds");
+  for(std::vector<std::vector<float>>::iterator it = animationSpeeds.begin(); it != animationSpeeds.end(); ++it, ++curIndex)
+  {
+    HashString curNode = ANIMATION + Common::IntToString(curIndex);
+    animationSpeedsNode->Place("AnimationSpeeds", curNode, Common::FloatVectorToString(*it));
+  }
+  
+  // Everything else animation related
   surface->Place(SURFACE, "Animated", Common::BoolToString(animated));
-  surface->Place(SURFACE, "AnimationSpeeds", Common::FloatVectorToString(animationSpeeds));
   surface->Place(SURFACE, "NoRender", Common::BoolToString(mNoRender));
   surface->Place(SURFACE, "StartingAnimation", Common::IntToString(currentAnimation));
   for(int i = 0; i < 4; ++i)
@@ -316,6 +335,7 @@ void Surface::Serialize(Parser &aParser)
     surface->Place("Surface", values[i], Common::IntToString(mColor[i]));
   }
   
+  // View mode
   HashString viewMode = "ABSOLUTE";
   if(mViewmode == VIEW_RELATIVE_TO_CAMERA)
     viewMode = "RELATIVE";
@@ -333,7 +353,7 @@ void Surface::Deserialize(Parser &aParser)
   bool animated = false;
   int numAnimations = 1;
   int startingAnimation = 0;
-  std::vector<float> animationSpeed;
+  std::vector<std::vector<float>> animationSpeed;
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
@@ -349,12 +369,39 @@ void Surface::Deserialize(Parser &aParser)
     if(isAnimated)
       animated = true;
   }
-  // Supports compatibility mode with old files, support single animation speed or multiple.
-  if(aParser.Find("Surface", "AnimationSpeeds"))
+  // Supports compatibility mode with old and really old files, support single animation speed or multiple.
+  if(aParser.Find("Surface", "AnimationSpeeds") && aParser.Find("Surface", "AnimationSpeeds")->Find("Animation_0"))
+  {
+    // Optional parameter to change the animation speeds.
+    HashString nodeName = "Animation_";
+    int index = 0;
+    HashString curIndex = nodeName + Common::IntToString(index);
+    Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
+    
+    while(animationSpeedNode->Find(curIndex))
+    {
+      Root* curNode = animationSpeedNode->Find(curIndex);
+      std::vector<float> singleSpeeds = curNode->GetValue().ToFloatVector();
+      animationSpeed.push_back(singleSpeeds);
+      ++index;
+      curIndex = nodeName + Common::IntToString(index);
+    }
+  }
+  else if(aParser.Find("Surface", "AnimationSpeeds"))
   {
     // Optional parameter to change the animation speeds.
     Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
-    animationSpeed = animationSpeedNode->GetValue().ToFloatVector();
+    std::vector<float> singleSpeeds = animationSpeedNode->GetValue().ToFloatVector();
+    
+    for(unsigned i = 0; i < singleSpeeds.size(); ++i)
+    {
+      std::vector<float> speedVector;
+      for(int j = 0; j < numFrames[i]; ++j)
+      {
+        speedVector.push_back(singleSpeeds[i]);
+      }
+      animationSpeed.push_back(speedVector);
+    }
   }
   else if(aParser.Find("Surface", "AnimationSpeed"))
   {
@@ -362,7 +409,11 @@ void Surface::Deserialize(Parser &aParser)
     Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeed");
     for(int i = 0; i < numAnimations; ++i)
     {
-      animationSpeed.push_back(animationSpeedNode->GetValue().ToFloat());
+      animationSpeed.push_back(std::vector<float>());
+      for(int j = 0; j < numFrames[i]; ++j)
+      {
+        animationSpeed[i].push_back(animationSpeedNode->GetValue().ToFloat());
+      }
     }
   }
   else
@@ -370,7 +421,11 @@ void Surface::Deserialize(Parser &aParser)
     // Default to DT
     for(int i = 0; i < numAnimations; ++i)
     {
-      animationSpeed.push_back(DT);
+      animationSpeed.push_back(std::vector<float>());
+      for(int j = 0; j < numFrames[i]; ++j)
+      {
+        animationSpeed[i].push_back(DT);
+      }
     }
   }
   if(aParser.Find("Surface", "NoRender"))

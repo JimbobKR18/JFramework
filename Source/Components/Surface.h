@@ -73,7 +73,7 @@ public:
   
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;
-  void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const &aNumFrames, std::vector<float> const &aAnimationSpeeds);
+  void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const &aNumFrames, std::vector<std::vector<float>> const &aAnimationSpeeds);
   void                SetAnimated(bool aAnimated);
   void                SetAnimation(int aAnimation, bool aRunOnce = false);
   void                SetCurrentFrame(int aFrame);

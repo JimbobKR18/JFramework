@@ -14,6 +14,10 @@
 
 class TextureCoordinates
 {
+public:
+  typedef std::vector<float> SpeedContainer;
+  typedef SpeedContainer::const_iterator SpeedConstIT;
+  
 private:
   int                         mCurFrame;
   int                         mCurAnimation;
@@ -29,17 +33,20 @@ private:
   bool                        mCompleted;
   bool                        mRunOnce;
   
-  // <currentAnimation, speed>
-  std::map<int, float>        mSpeeds;
-  typedef std::pair<int,float> AnimationSpeed;
+  // <currentAnimation, speeds>
+  std::map<int, float>                   mSpeedModifiers;
+  typedef std::pair<int, float>          SpeedModifier;
+  std::map<int, SpeedContainer>          mSpeeds;
+  typedef std::pair<int, SpeedContainer> AnimationSpeed;
   
   // <currentAnimation, numberofFrames>
   std::map<int, int>          mAnimations;
-  typedef std::pair<int,int>  AnimationData;
+  typedef std::pair<int, int> AnimationData;
   
 public:
   TextureCoordinates();
-  TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, std::vector<int> const &aNumFrames, std::vector<float> const &aAnimationSpeeds);
+  TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, 
+                     std::vector<int> const &aNumFrames, std::vector<std::vector<float>> const &aAnimationSpeeds);
   
   ~TextureCoordinates();
   
@@ -54,6 +61,7 @@ public:
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
   float GetAnimationSpeed(int const aAnimation) const;
+  SpeedContainer const GetAnimationHolds(int const aAnimation) const;
   bool  GetCompleted() const;
   bool  GetAnimated() const;
 

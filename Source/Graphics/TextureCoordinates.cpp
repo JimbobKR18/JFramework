@@ -23,17 +23,18 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
                                        int const aYSize, 
                                        int const aNumAnimations,
                                        std::vector<int> const &aNumFrames,
-                                       std::vector<float> const &aAnimationSpeeds) : mCurFrame(0),
-                                                                                     mCurAnimation(0),
-                                                                                     mTotalFrames(0),
-                                                                                     mXSize(aXSize),
-                                                                                     mYSize(aYSize),
-                                                                                     mCurTime(0),
-                                                                                     mAnimated(false),
-                                                                                     mCompleted(false),
-                                                                                     mRunOnce(false),
-                                                                                     mSpeeds(),
-                                                                                     mAnimations()
+                                       std::vector<std::vector<float>> const &aAnimationSpeeds) : mCurFrame(0),
+                                                                                                  mCurAnimation(0),
+                                                                                                  mTotalFrames(0),
+                                                                                                  mXSize(aXSize),
+                                                                                                  mYSize(aYSize),
+                                                                                                  mCurTime(0),
+                                                                                                  mAnimated(false),
+                                                                                                  mCompleted(false),
+                                                                                                  mRunOnce(false),
+                                                                                                  mSpeedModifiers(),
+                                                                                                  mSpeeds(),
+                                                                                                  mAnimations()
 {
   if(aNumAnimations != aNumFrames.size() || aNumAnimations != aAnimationSpeeds.size())
   {
@@ -48,6 +49,7 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
     mTotalFrames += aNumFrames[i];
     mAnimations.insert(AnimationData(i, aNumFrames[i]));
     mSpeeds.insert(AnimationSpeed(i, aAnimationSpeeds[i]));
+    mSpeedModifiers.insert(SpeedModifier(i, 1.0f));
     
     // Need to figure out each frame size
     if(aNumFrames[i] > maxFrames)
@@ -81,13 +83,12 @@ void TextureCoordinates::Update(float aDT)
     return;
   }
   
-  float speed = mSpeeds.find(mCurAnimation)->second;
-  mCurTime += aDT;
+  mCurTime += aDT * mSpeedModifiers.find(mCurAnimation)->second;
   
   // If it's time to change a frame
-  while(mCurTime >= speed)
+  while(mCurTime >= mSpeeds.find(mCurAnimation)->second[mCurFrame])
   {
-    mCurTime -= speed;
+    mCurTime -= mSpeeds.find(mCurAnimation)->second[mCurFrame];
     
     // Increase the frame
     ++mCurFrame;
@@ -138,7 +139,7 @@ float TextureCoordinates::GetYValue(int const aIndex) const
  */
 float TextureCoordinates::GetCurrentAnimationSpeed() const
 {
-  return mSpeeds.find(mCurAnimation)->second;
+  return mSpeeds.find(mCurAnimation)->second[mCurFrame];
 }
 
 /**
@@ -184,6 +185,16 @@ int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
  * @return 
  */
 float TextureCoordinates::GetAnimationSpeed(int const aAnimation) const
+{
+  return mSpeedModifiers.find(aAnimation)->second;
+}
+
+/**
+ * @brief Get holds for animation.
+ * @param aAnimation Animation to get holds for.
+ * @return 
+ */
+TextureCoordinates::SpeedContainer const TextureCoordinates::GetAnimationHolds(int const aAnimation) const
 {
   return mSpeeds.find(aAnimation)->second;
 }
@@ -298,7 +309,7 @@ void TextureCoordinates::SetRunOnce(bool const aRunOnce)
  */
 void TextureCoordinates::SetCurrentAnimationSpeed(float const aSpeed)
 {
-  mSpeeds[mCurAnimation] = aSpeed;
+  mSpeedModifiers[mCurAnimation] = aSpeed;
 }
 
 /**

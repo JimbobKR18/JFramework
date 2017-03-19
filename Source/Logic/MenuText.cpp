@@ -135,8 +135,12 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   if(aParser.Find("Animation"))
   {
     Root* animation = aParser.Find("Animation");
-    std::vector<float> animationSpeed = animation->Find("AnimationSpeeds")->GetValue().ToFloatVector();
+    std::vector<std::vector<float>> animationSpeeds;
+    std::vector<float> animationSpeed, speedFromFile;
     std::vector<int> numFrames;
+    
+    // Get speed from file.
+    speedFromFile = animation->Find("AnimationSpeeds")->GetValue().ToFloatVector();
     
     // Manually set the number of frames, or auto jump a character at a time.
     if(animation->Find("NumFrames"))
@@ -148,8 +152,22 @@ void MenuText::ParseAdditionalData(Parser &aParser)
       numFrames.push_back(mText.Length());
     }
 
+    // Set frames in animation system.
+    for(int i = 0; i < numFrames[0]; ++i)
+    {
+      if(i >= speedFromFile.size())
+      {
+        animationSpeed.push_back(speedFromFile[speedFromFile.size() - 1]);
+      }
+      else
+      {
+        animationSpeed.push_back(speedFromFile[i]);
+      }
+    }
+    animationSpeeds.push_back(animationSpeed);
+
     surface->CreateScrollEffect(ScrollType::HORIZONTAL, mOriginalSize);
-    surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
+    surface->SetTextureCoordinateData(1, numFrames, animationSpeeds);
     surface->GetTextureData()->SetXGain(0, 0);
     surface->SetAnimation(0, true);
     surface->SetAnimated(true);
