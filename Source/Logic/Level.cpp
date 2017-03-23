@@ -36,8 +36,8 @@ Level::Level()
 Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoParse) :
              mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
              mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
-             mFocusTarget(NULL), mActive(false), mMaxBoundary(0,0,0), mMinBoundary(0,0,0),
-             mScenarios()
+             mFocusTarget(NULL), mActive(false), mClearColor(0, 0, 0, 1), mMaxBoundary(0,0,0), 
+             mMinBoundary(0,0,0), mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
       i >= 0 && aFileName[i] != '/'; --i)
@@ -450,6 +450,7 @@ void Level::Load(Level* const aPrevLevel)
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
   mActive = true;
 
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMaxBoundary(mMaxBoundary);
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMinBoundary(mMinBoundary);
   
@@ -580,8 +581,16 @@ void Level::Serialize(Parser &aParser)
   SerializeObjects(aParser, mScenarios[mFileName], menuObjects);
   SerializeScenarios(aParser, menuObjects);
   
+  // Music
   aParser.Place("Music", "");
   aParser.Place("Music", "Song", mMusicName);
+  
+  // Clear color
+  aParser.Place("ClearColor", "");
+  aParser.Place("ClearColor", "ColorR", Common::FloatToString(mClearColor.x));
+  aParser.Place("ClearColor", "ColorG", Common::FloatToString(mClearColor.y));
+  aParser.Place("ClearColor", "ColorB", Common::FloatToString(mClearColor.z));
+  aParser.Place("ClearColor", "ColorA", Common::FloatToString(mClearColor.w));
 }
 
 /**
@@ -752,6 +761,15 @@ void Level::ParseFile(HashString const &aFileName)
   {
     // Menu adds itself to level.
     new Menu(this, parser.Find("Menu")->Find("MenuName")->GetValue());
+  }
+  if(parser.Find("ClearColor"))
+  {
+    float r, g, b, a;
+    r = parser.Find("ClearColor")->Find("ColorR")->GetValue().ToFloat();
+    g = parser.Find("ClearColor")->Find("ColorG")->GetValue().ToFloat();
+    b = parser.Find("ClearColor")->Find("ColorB")->GetValue().ToFloat();
+    a = parser.Find("ClearColor")->Find("ColorA")->GetValue().ToFloat();
+    mClearColor = Vector4(r, g, b, a);
   }
 
   RootContainer untouched = parser.GetBaseRoot()->GetUntouchedRoots();

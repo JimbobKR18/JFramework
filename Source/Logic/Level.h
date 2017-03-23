@@ -35,6 +35,7 @@ private:
   TileMapGenerator* mGenerator;
   GameObject*       mFocusTarget;
   bool              mActive;
+  Vector4           mClearColor;
 
   Vector3           mMaxBoundary;
   Vector3           mMinBoundary;

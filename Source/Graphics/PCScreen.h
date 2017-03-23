@@ -32,6 +32,7 @@ public:
   virtual void DrawUI(std::vector<Surface*> const &aObjects);
   virtual void DebugDraw(std::vector<Surface*> const &aObjects);
   virtual void SwapBuffers();
+  virtual void SetClearColor(Vector4 const &aClearColor);
   virtual void ChangeSize(int aW, int aH, bool aFullScreen);
 
 private:

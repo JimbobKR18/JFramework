@@ -40,6 +40,7 @@ public:
   // Batching
   void                    SortObjects(std::vector<Surface*> &aObjects);
 
+  virtual void            SetClearColor(Vector4 const &aClearColor) = 0;
   virtual void            ChangeSize(int aW, int aH, bool aFullScreen) = 0;
   virtual void            PreDraw() = 0;
   virtual void            Draw(std::vector<Surface*> const &aObjects) = 0;

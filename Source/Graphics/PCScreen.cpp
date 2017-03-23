@@ -315,6 +315,15 @@ void PCScreen::SwapBuffers()
 }
 
 /**
+ * @brief Set clear color.
+ * @param aClearColor Color.
+ */
+void PCScreen::SetClearColor(Vector4 const &aClearColor)
+{
+  glClearColor(aClearColor.x, aClearColor.y, aClearColor.z, aClearColor.w);
+}
+
+/**
  * @brief Change window size
  * @param aW Width
  * @param aH Height
