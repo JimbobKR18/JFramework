@@ -20,7 +20,8 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(ObjectManager *aManager, HashString const &aFileName) :
-                       mFileName(aFileName), mName(""), mComponents(), mManager(aManager)
+                       mFileName(aFileName), mName(""), mComponents(), mManager(aManager),
+                       mParent(nullptr), mChildren()
 {
   for(int i = aFileName.Length() - 1; i >= 0 && aFileName[i] != '/'; --i)
   {
@@ -35,7 +36,9 @@ GameObject::GameObject(GameObject const &aGameObject) :
                               mFileName(aGameObject.mFileName),
                               mName(aGameObject.mName),
                               mComponents(aGameObject.mComponents),
-                              mManager(NULL)
+                              mManager(nullptr),
+                              mParent(nullptr), 
+                              mChildren()
 {
   assert(!"Copying GameObjects is not supported!");
 }
@@ -47,13 +50,32 @@ GameObject::~GameObject()
     delete it->second;
   }
   mComponents.clear();
+  
+  for(GameObjectIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  {
+    if(mParent)
+      it->second->SetParent(mParent);
+    else
+      it->second->SetParent(nullptr);
+  }
+  mParent = nullptr;
+  mChildren.clear();
+}
+
+/**
+ * @brief Get parent of this object.
+ * @return Parent.
+ */
+GameObject* GameObject::GetParent() const
+{
+  return mParent;
 }
 
 /**
  * @brief Get name of game object
  * @return Name of object
  */
-HashString GameObject::GetName()
+HashString GameObject::GetName() const
 {
   return mName;
 }
@@ -62,7 +84,7 @@ HashString GameObject::GetName()
  * @brief  Get file name of object
  * @return Object's file name
  */
-HashString GameObject::GetFileName()
+HashString GameObject::GetFileName() const
 {
   return mFileName;
 }
@@ -71,7 +93,7 @@ HashString GameObject::GetFileName()
  * @brief Get objectmanager for object
  * @return ObjectManager
  */
-ObjectManager *GameObject::GetManager()
+ObjectManager *GameObject::GetManager() const
 {
   return mManager;
 }
@@ -86,13 +108,22 @@ void GameObject::SetName(HashString const &aName)
 }
 
 /**
+ * @brief Set parent of object.
+ * @param aParent Parent.
+ */
+void GameObject::SetParent(GameObject *aParent)
+{
+  mParent = aParent;
+}
+
+/**
  * @brief Add a component to game object
  * @param aComponent Component to add
  */
 void GameObject::AddComponent(Component *aComponent)
 {
   aComponent->SetOwner(this);
-  mComponents.insert(std::pair<int, Component*>(aComponent->GetDefinedUID(), aComponent));
+  mComponents[aComponent->GetDefinedUID()] = aComponent;
 }
 
 /**
@@ -218,6 +249,15 @@ void GameObject::Serialize(Parser &aParser)
 }
 
 /**
+ * @brief Interact with another game object
+ * @param aObject Object to interact with
+ */
+void GameObject::Interact(GameObject *aObject) 
+{ 
+  DebugLogPrint("%s collided into %s\n", mName.ToCharArray(), aObject->GetName().ToCharArray()); 
+}
+
+/**
  * @brief Make object usable in LUA
  */
 void GameObject::SerializeLUA()
@@ -229,13 +269,4 @@ void GameObject::SerializeLUA()
           .set("GetSurface", &GameObject::GET<Surface>)
           .set("GetPhysicsObject", &GameObject::GET<PhysicsObject>)
           .set("GetName", &GameObject::GetName);
-}
-
-/**
- * @brief Interact with another game object
- * @param aObject Object to interact with
- */
-void GameObject::Interact(GameObject *aObject) 
-{ 
-  DebugLogPrint("%s collided into %s\n", mName.ToCharArray(), aObject->GetName().ToCharArray()); 
 }

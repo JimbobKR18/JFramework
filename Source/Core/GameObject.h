@@ -19,25 +19,39 @@ class ObjectManager;
 class GameObject
 {
 private:
-  HashString                          mFileName;
-  HashString                          mName;
-  std::unordered_map<int, Component*> mComponents;
-  ObjectManager*                      mManager;
+  typedef std::unordered_map<int, Component*> ComponentContainer;
+  typedef ComponentContainer::iterator ComponentIT;
+  typedef ComponentContainer::const_iterator ComponentConstIT;
   
-  typedef std::unordered_map<int, Component*>::iterator ComponentIT;
-  typedef std::unordered_map<int, Component*>::const_iterator ComponentConstIT;
+  typedef std::unordered_map<int, GameObject*> GameObjectContainer;
+  typedef GameObjectContainer::iterator GameObjectIT;
+  typedef GameObjectContainer::const_iterator GameObjectConstIT;
+
+  HashString          mFileName;
+  HashString          mName;
+  ComponentContainer  mComponents;
+  ObjectManager*      mManager;
+  
+  GameObject*         mParent;
+  GameObjectContainer mChildren;
+  
 public:
   GameObject();
   GameObject(ObjectManager *aManager, HashString const &aFileName);
   GameObject(GameObject const &aGameObject);
   virtual ~GameObject();
 
-  HashString              GetName();
-  HashString              GetFileName();
-  ObjectManager*          GetManager();
-
+  // GETTERS
+  HashString              GetName() const;
+  HashString              GetFileName() const;
+  ObjectManager*          GetManager() const;
+  GameObject*             GetParent() const;
+  
+  // SETTERS
   void                    SetName(HashString const &aName);
-
+  void                    SetParent(GameObject *aParent);
+  
+  // OPERATIONS
   void                    AddComponent(Component *aComponent);
   void                    RemoveComponent(Component *aComponent, bool aDelete);
   void                    RemoveComponent(int const &aUID, bool aDelete);
@@ -46,6 +60,14 @@ public:
   bool                    HasComponent(int const &aUID) const;
   bool                    HasComponentByName(HashString const &aName) const;
 
+  // VIRTUALS / STATICS
+  virtual void            Update();
+  virtual void            ReceiveMessage(Message const &aMessage);
+  virtual void            Serialize(Parser &aParser);
+  virtual void            Interact(GameObject *aObject);
+  static void             SerializeLUA();
+  
+  // TEMPLATES
   template<typename T> T* GET() const
   {
     return (T*)GetComponent(T::GetUID());
@@ -55,14 +77,6 @@ public:
   {
     return HasComponent(T::GetUID());
   }
-
-  void                    Update();
-  void                    ReceiveMessage(Message const &aMessage);
-  void                    Serialize(Parser &aParser);
-  static void             SerializeLUA();
-
-  // Fallback logic for collisions
-  virtual void            Interact(GameObject *aObject);
 };
 
 #endif /* defined(__JFramework__GameObject__) */
