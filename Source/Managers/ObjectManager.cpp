@@ -5,6 +5,7 @@
 #include "ChemistryMaterial.h"
 #include "ChemistryElement.h"
 #include "Transform.h"
+#include "StateObject.h"
 #include "GraphicsManager.h"
 #include "ChemistryManager.h"
 #include "ControllerManager.h"
@@ -254,6 +255,13 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
     Transform *transform = new Transform();
     transform->Deserialize(aParser);
     aObject->AddComponent(transform);
+  }
+  if(aParser.Find("StateObject"))
+  {
+    // Get Position, Scale, and Size
+    StateObject *stateObject = new StateObject();
+    stateObject->Deserialize(aParser);
+    aObject->AddComponent(stateObject);
   }
   if(aParser.Find("Surface"))
   {

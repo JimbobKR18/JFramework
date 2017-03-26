@@ -93,6 +93,8 @@
     <File Name="../../Source/Components/ChemistryMaterial.cpp"/>
     <File Name="../../Source/Components/ChemistryElement.h"/>
     <File Name="../../Source/Components/ChemistryElement.cpp"/>
+    <File Name="../../Source/Components/StateObject.h"/>
+    <File Name="../../Source/Components/StateObject.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>

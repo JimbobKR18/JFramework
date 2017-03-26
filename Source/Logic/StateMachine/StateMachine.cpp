@@ -74,7 +74,8 @@ void StateMachine::SetCurrentState(HashString const &aName)
   {
     State *start = (*it)->GetStart();
     State *end = (*it)->GetEnd();
-    if(end->GetName() == aName)
+    if(end->GetName() == aName && 
+      ((*it)->GetType() == StateLink::LinkType::LEFT_RIGHT || (*it)->GetType() == StateLink::LinkType::BIDIRECTIONAL))
     {
       if(mCurrentState == nullptr || mCurrentState == start)
       {
@@ -82,8 +83,35 @@ void StateMachine::SetCurrentState(HashString const &aName)
         return;
       }
     }
+    else if(start->GetName() == aName && 
+      ((*it)->GetType() == StateLink::LinkType::RIGHT_LEFT || (*it)->GetType() == StateLink::LinkType::BIDIRECTIONAL))
+    {
+      if(mCurrentState == nullptr || mCurrentState == end)
+      {
+        mCurrentState = start;
+        return;
+      }
+    }
   }
   assert(!"No state transfer found.");
+}
+
+/**
+ * @brief Get states. Unmutable.
+ * @return States.
+ */
+StateMachine::StateContainer const& StateMachine::GetStates() const
+{
+  return mStates;
+}
+
+/**
+ * @brief Get links. Unmutable.
+ * @return Links.
+ */
+StateMachine::LinkContainer const& StateMachine::GetLinks() const
+{
+  return mLinks;
 }
 
 /**
@@ -106,29 +134,22 @@ void StateMachine::AddLink(StateLink *aLink)
  *      State2 -> State1 (RIGHT_LEFT)
  *      State1 <-> State2 (BIDIRECTIONAL)
  */
-void StateMachine::AddLink(State *aState1, State *aState2, LinkType const &aLinkType)
+void StateMachine::AddLink(State *aState1, State *aState2, StateLink::LinkType const &aLinkType)
 {
   mStates.insert(aState1);
   mStates.insert(aState2);
   
   switch(aLinkType)
   {
-    case LEFT_RIGHT:
-    {
-      mLinks.push_back(new StateLink(aState1, aState2));
+    case StateLink::LEFT_RIGHT:
+      mLinks.push_back(new StateLink(aState1, aState2, aLinkType));
       break;
-    }
-    case RIGHT_LEFT:
-    {
-      mLinks.push_back(new StateLink(aState2, aState1));
+    case StateLink::RIGHT_LEFT:
+      mLinks.push_back(new StateLink(aState2, aState1, aLinkType));
       break;
-    }
-    case BIDIRECTIONAL:
-    {
-      mLinks.push_back(new StateLink(aState1, aState2));
-      mLinks.push_back(new StateLink(aState2, aState1));
+    case StateLink::BIDIRECTIONAL:
+      mLinks.push_back(new StateLink(aState1, aState2, aLinkType));
       break;
-    }
     default:
       assert(!"How did you even get here?");
       break;
