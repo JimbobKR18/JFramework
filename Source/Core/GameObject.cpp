@@ -130,9 +130,9 @@ void GameObject::RemoveComponent(int const &aUID, bool aDelete)
  * @param aUID uid of component
  * @return Component or nullptr
  */
-Component *GameObject::GetComponent(int const &aUID)
+Component *GameObject::GetComponent(int const &aUID) const
 {
-  ComponentIT component = mComponents.find(aUID);
+  ComponentConstIT component = mComponents.find(aUID);
   if(component != mComponents.end())
   {
     return component->second;
@@ -145,7 +145,7 @@ Component *GameObject::GetComponent(int const &aUID)
  * @param aName Name of component
  * @return Component or nullptr
  */
-Component* GameObject::GetComponentByName(HashString const &aName)
+Component* GameObject::GetComponentByName(HashString const &aName) const
 {
   return GetComponent(aName.ToHash());
 }
@@ -155,9 +155,9 @@ Component* GameObject::GetComponentByName(HashString const &aName)
  * @param aUID uid of component
  * @return True if object has component
  */
-bool GameObject::HasComponent(int const &aUID)
+bool GameObject::HasComponent(int const &aUID) const
 {
-  ComponentIT component = mComponents.find(aUID);
+  ComponentConstIT component = mComponents.find(aUID);
   if(component != mComponents.end())
   {
     return true;
@@ -170,7 +170,7 @@ bool GameObject::HasComponent(int const &aUID)
  * @param aName Name of component
  * @return True if object has component
  */
-bool GameObject::HasComponentByName(HashString const &aName)
+bool GameObject::HasComponentByName(HashString const &aName) const
 {
   return HasComponent(aName.ToHash());
 }

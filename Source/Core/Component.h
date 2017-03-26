@@ -29,7 +29,7 @@ public:
   Component(Component const &aComponent) : mOwner(aComponent.mOwner) {}
   virtual ~Component() {}
 
-  GameObject*         GetOwner() {return mOwner;}
+  GameObject*         GetOwner() const {return mOwner;}
   void                SetOwner(GameObject *aOwner) {OWNER_CHECK(); mOwner = aOwner;}
   int                 GetDefinedUID() {return mUID;}
 
