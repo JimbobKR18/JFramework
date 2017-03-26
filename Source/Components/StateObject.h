@@ -15,13 +15,15 @@ public:
   StateObject();
   virtual ~StateObject();
   
-  StateMachine *GetStateMachine();
+  StateMachine *GetStateMachine() const;
 
   virtual void SendMessage(Message const& aMessage);
   virtual void ReceiveMessage(Message const& aMessage);
   virtual void Serialize(Parser& aParser);
   virtual void Deserialize(Parser& aParser);
   virtual void Update();
+  static void  SerializeLUA();
+  static int   GetUID() {return sUID;}
 };
 
 #endif // __JFramework_StateObject_h_

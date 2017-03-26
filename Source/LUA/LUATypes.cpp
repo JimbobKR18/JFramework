@@ -12,6 +12,7 @@
 #include "Components/PhysicsObject.h"
 #include "Components/ChemistryElement.h"
 #include "Components/ChemistryMaterial.h"
+#include "Components/StateObject.h"
 #include "Core/GameObject.h"
 #include "Managers/SoundManager.h"
 #include "Managers/InputManager.h"
@@ -87,6 +88,9 @@ namespace LUABind
     // Chemistry
     ChemistryMaterial::SerializeLUA();
     ChemistryElement::SerializeLUA();
+    
+    // States
+    StateObject::SerializeLUA();
 
     // GameObject
     GameObject::SerializeLUA();

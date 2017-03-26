@@ -14,6 +14,15 @@ StateObject::~StateObject()
 }
 
 /**
+ * @brief Get state machine.
+ * @return State machine.
+ */
+StateMachine *StateObject::GetStateMachine() const
+{
+  return mStateMachine;
+}
+
+/**
  * @brief Update loop.
  */
 void StateObject::Update()
@@ -151,4 +160,12 @@ void StateObject::Deserialize(Parser& aParser)
     ++curIndex;
     curName = HashString("Link_") + Common::IntToString(curIndex);
   }
+}
+
+/**
+ * @brief Make this object usable in LUA
+ */
+void StateObject::SerializeLUA()
+{
+  SLB::Class<StateObject>("StateObject");
 }
