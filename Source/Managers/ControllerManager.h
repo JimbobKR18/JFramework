@@ -12,19 +12,27 @@
 #include "Manager.h"
 #include "Controller.h"
 
+class ControllerFactory;
+
 class ControllerManager : public Manager
 {
 private:
   std::vector<Controller*> mControllers;
+  ControllerFactory *mFactory;
   
   static unsigned const sUID;
 public:
   ControllerManager(GameApp* aApp);
   ~ControllerManager();
   
+  // Setters
+  void                SetControllerFactory(ControllerFactory* aFactory);
+  
+  // Management
+  Controller*         CreateController(HashString const &aName, Root* const aData);
+  void                DeleteController(Controller *aController);
   void                AddController(Controller *aController);
   void                RemoveController(Controller *aController);
-  void                DeleteController(Controller *aController);
   void                SetControllersPauseState(bool const aPaused);
   void                ClearControllers();
   

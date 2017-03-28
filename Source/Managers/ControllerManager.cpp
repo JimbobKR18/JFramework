@@ -8,15 +8,51 @@
 
 #include "Common.h"
 #include "ControllerManager.h"
+#include "ControllerFactory.h"
 #include "ControllerChangeMessage.h"
 
 unsigned const ControllerManager::sUID = Common::StringHashFunction("ControllerManager");
-ControllerManager::ControllerManager(GameApp* aApp) : Manager(aApp, "ControllerManager", ControllerManager::sUID)
+ControllerManager::ControllerManager(GameApp* aApp) : Manager(aApp, "ControllerManager", ControllerManager::sUID),
+  mControllers(), mFactory(nullptr)
 {
 }
 ControllerManager::~ControllerManager()
 {
   ClearControllers();
+}
+
+/**
+ * @brief Set controller generation factory.
+ * @param aFactory Factory to generate controllers.
+ */
+void ControllerManager::SetControllerFactory(ControllerFactory* aFactory)
+{
+  if(mFactory)
+    delete mFactory;
+  
+  mFactory = aFactory;
+}
+
+/**
+ * @brief Create controller using factory.
+ * @param aName Name of controller type.
+ * @return New controller.
+ */
+Controller* ControllerManager::CreateController(HashString const &aName, Root* const aData)
+{
+  Controller* controller = mFactory->CreateController(this, aName, aData);
+  AddController(controller);
+  return controller;
+}
+
+/**
+ * @brief Delete Controller
+ * @param aController
+ */
+void ControllerManager::DeleteController(Controller *aController)
+{
+  RemoveController(aController);
+  delete aController;
 }
 
 /**
@@ -51,16 +87,6 @@ void ControllerManager::RemoveController(Controller *aController)
       break;
     }
   }
-}
-
-/**
- * @brief Delete Controller
- * @param aController
- */
-void ControllerManager::DeleteController(Controller *aController)
-{
-  RemoveController(aController);
-  delete aController;
 }
 
 /**
