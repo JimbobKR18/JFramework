@@ -189,6 +189,13 @@ void Transform::SetLockedAxis(AxisLock const &aLockedAxes)
 }
 
 /**
+ * @brief Update loop
+ */
+void Transform::Update()
+{
+}
+
+/**
  * @brief Serialize to file (cannot handle rotations)
  * @param aParser File to serialize to
  */

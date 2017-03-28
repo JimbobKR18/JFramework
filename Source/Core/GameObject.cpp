@@ -53,10 +53,7 @@ GameObject::~GameObject()
   
   for(GameObjectIT it = mChildren.begin(); it != mChildren.end(); ++it)
   {
-    if(mParent)
-      it->second->SetParent(mParent);
-    else
-      it->second->SetParent(nullptr);
+    it->second->SetParent(mParent);
   }
   mParent = nullptr;
   mChildren.clear();
@@ -117,6 +114,15 @@ void GameObject::SetParent(GameObject *aParent)
 }
 
 /**
+ * @brief Get all children for this object.
+ * @return Children.
+ */
+GameObject::GameObjectContainer const& GameObject::GetChildren() const
+{
+  return mChildren;
+}
+
+/**
  * @brief Add a component to game object
  * @param aComponent Component to add
  */
@@ -154,6 +160,29 @@ void GameObject::RemoveComponent(int const &aUID, bool aDelete)
       delete component->second;
     mComponents.erase(component);
   }
+}
+
+/**
+ * @brief Add child to map.
+ * @param aObject Child.
+ */
+void GameObject::AddChild(GameObject* aObject)
+{
+  if(aObject->GetParent())
+    aObject->GetParent()->RemoveChild(aObject);
+    
+  aObject->SetParent(this);
+  mChildren[aObject->GetName().ToHash()] = aObject;
+}
+
+/**
+ * @brief Remove child from map.
+ * @param aObject Child.
+ */
+void GameObject::RemoveChild(GameObject *aObject)
+{
+  aObject->SetParent(nullptr);
+  mChildren.erase(aObject->GetName().ToHash());
 }
 
 /**
@@ -240,6 +269,9 @@ void GameObject::Serialize(Parser &aParser)
   HashString object = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   aParser.Place(object, "File", mFileName);
   aParser.Place(object, "Name", HashString("Literal(") + mName + HashString(")"));
+  
+  if(mParent)
+    aParser.Place(object, "Parent", mParent->GetName());
 
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)

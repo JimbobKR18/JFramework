@@ -720,6 +720,17 @@ void Level::ParseFile(HashString const &aFileName)
         object->SetName(curRoot->Find("Name")->GetValue());
       }
     }
+    if(curRoot->Find("Parent"))
+    {
+      HashString parentName = curRoot->Find("Parent")->GetValue();
+      GameObject *parent = FindObject(parentName);
+      
+      if(!parent)
+        assert(!"Parent not found.");
+      
+      parent->AddChild(object);
+      object->SetParent(parent);
+    }
 
     RootContainer untouched = curRoot->GetUntouchedRoots();
     for(rootIT it = untouched.begin(); it != untouched.end(); ++it)

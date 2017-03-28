@@ -284,6 +284,17 @@ void Menu::ParseFile()
     {
       element->GetObject()->SetName(newElement->Find("ObjectName")->GetValue());
     }
+    if(newElement->Find("Parent"))
+    {
+      HashString parentName = newElement->Find("Parent")->GetValue();
+      MenuElement *parent = GetElement(parentName);
+      
+      if(!parent)
+        assert(!"Parent not found.");
+      
+      parent->GetObject()->AddChild(element->GetObject());
+      element->GetObject()->SetParent(parent->GetObject());
+    }
 
     AddObject(element);
 

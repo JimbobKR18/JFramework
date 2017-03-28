@@ -58,7 +58,7 @@ public:
   AxisLock            GetLockedAxes() const;
   void                SetLockedAxis(AxisLock const &aLockedAxes);
 
-  void                Update() {}
+  void                Update();
   void                SendMessage(Message const &aMessage) {}
   void                ReceiveMessage(Message const &aMessage) {}
   void                Serialize(Parser &aParser);
