@@ -155,6 +155,10 @@ void StateObject::Deserialize(Parser& aParser)
     else if(typeName == "BIDIRECTIONAL")
       type = StateLink::LinkType::BIDIRECTIONAL;
       
+    if(states.find(state1Name.ToHash()) == states.end())
+      assert(!"State 0 not found.");
+    else if(states.find(state2Name.ToHash()) == states.end())
+      assert(!"State 1 not found.");
     mStateMachine->AddLink(states[state1Name.ToHash()], states[state2Name.ToHash()], type);
     
     ++curIndex;
