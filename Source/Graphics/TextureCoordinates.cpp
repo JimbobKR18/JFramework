@@ -47,9 +47,9 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
   for(int i = 0; i < aNumAnimations; ++i)
   {
     mTotalFrames += aNumFrames[i];
-    mAnimations.insert(AnimationData(i, aNumFrames[i]));
-    mSpeeds.insert(AnimationSpeed(i, aAnimationSpeeds[i]));
-    mSpeedModifiers.insert(SpeedModifier(i, 1.0f));
+    mAnimations.push_back(aNumFrames[i]);
+    mSpeeds.push_back(aAnimationSpeeds[i]);
+    mSpeedModifiers.push_back(1.0f);
     
     // Need to figure out each frame size
     if(aNumFrames[i] > maxFrames)
@@ -83,18 +83,18 @@ void TextureCoordinates::Update(float aDT)
     return;
   }
   
-  mCurTime += aDT * mSpeedModifiers.find(mCurAnimation)->second;
+  mCurTime += aDT * mSpeedModifiers[mCurAnimation];
   
   // If it's time to change a frame
-  while(mCurTime >= mSpeeds.find(mCurAnimation)->second[mCurFrame])
+  while(mCurTime >= mSpeeds[mCurAnimation][mCurFrame])
   {
-    mCurTime -= mSpeeds.find(mCurAnimation)->second[mCurFrame];
+    mCurTime -= mSpeeds[mCurAnimation][mCurFrame];
     
     // Increase the frame
     ++mCurFrame;
     
     // Make sure we're within bounds
-    if(mCurFrame >= mAnimations.find(mCurAnimation)->second)
+    if(mCurFrame >= mAnimations[mCurAnimation])
     {
       mCompleted = true;
       // If only run once, do not reset the frames.
@@ -104,7 +104,7 @@ void TextureCoordinates::Update(float aDT)
       }
       else
       {
-        return;
+        mCurFrame = mAnimations[mCurAnimation] - 1;
       }
     }
     
@@ -139,7 +139,7 @@ float TextureCoordinates::GetYValue(int const aIndex) const
  */
 float TextureCoordinates::GetCurrentAnimationSpeed() const
 {
-  return mSpeeds.find(mCurAnimation)->second[mCurFrame];
+  return mSpeeds[mCurAnimation][mCurFrame];
 }
 
 /**
@@ -176,7 +176,7 @@ int TextureCoordinates::GetTotalFrames() const
  */
 int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
 {
-  return mAnimations.find(aAnimation)->second;
+  return mAnimations[aAnimation];
 }
 
 /**
@@ -186,7 +186,7 @@ int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
  */
 float TextureCoordinates::GetAnimationSpeed(int const aAnimation) const
 {
-  return mSpeedModifiers.find(aAnimation)->second;
+  return mSpeedModifiers[aAnimation];
 }
 
 /**
@@ -196,7 +196,7 @@ float TextureCoordinates::GetAnimationSpeed(int const aAnimation) const
  */
 TextureCoordinates::SpeedContainer const TextureCoordinates::GetAnimationHolds(int const aAnimation) const
 {
-  return mSpeeds.find(aAnimation)->second;
+  return mSpeeds[mCurAnimation];
 }
 
 /**
@@ -248,7 +248,7 @@ void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
  */
 void TextureCoordinates::SetCurrentFrame(int const aFrame)
 {
-  if(mCurFrame > mAnimations.find(mCurAnimation)->second)
+  if(mCurFrame > mAnimations[mCurAnimation])
   {
     assert(!"SetCurrentFrame: aFrame is larger than number of frames in animation");
   }
@@ -275,9 +275,9 @@ void TextureCoordinates::SetFrameByID(int const aFrameID)
   mCurAnimation = 0;
   mCurFrame = aFrameID;
 
-  while(mCurFrame >= mAnimations.find(mCurAnimation)->second)
+  while(mCurFrame >= mAnimations[mCurAnimation])
   {
-    mCurFrame -= mAnimations.find(mCurAnimation)->second;
+    mCurFrame -= mAnimations[mCurAnimation];
     ++mCurAnimation;
   }
 
@@ -338,7 +338,7 @@ void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
 void TextureCoordinates::Finish()
 {
   // Set to last frame.
-  mCurFrame = mAnimations.find(mCurAnimation)->second - 1;
+  mCurFrame = mAnimations[mCurAnimation] - 1;
   // Set positions of coordinates
   SETFRAMES();
 }

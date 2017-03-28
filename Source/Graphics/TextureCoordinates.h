@@ -33,15 +33,12 @@ private:
   bool                        mCompleted;
   bool                        mRunOnce;
   
-  // <currentAnimation, speeds>
-  std::map<int, float>                   mSpeedModifiers;
-  typedef std::pair<int, float>          SpeedModifier;
-  std::map<int, SpeedContainer>          mSpeeds;
-  typedef std::pair<int, SpeedContainer> AnimationSpeed;
+  // <speeds>
+  std::vector<float>            mSpeedModifiers;
+  std::vector<SpeedContainer>   mSpeeds;
   
-  // <currentAnimation, numberofFrames>
-  std::map<int, int>          mAnimations;
-  typedef std::pair<int, int> AnimationData;
+  // <numberofFrames>
+  std::vector<int>              mAnimations;
   
 public:
   TextureCoordinates();
