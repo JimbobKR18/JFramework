@@ -64,9 +64,9 @@ public:
 
   void              AddObject(GameObject *aObject);
   void              AddStaticObject(GameObject *aObject);
-  void              DeleteObject(GameObject *aObject);
+  void              DeleteObject(GameObject *aObject, bool aDeleteChildren = false);
   GameObject*       CreateObjectDelayed(HashString const &aFileName, HashString const &aFolder = "Game");
-  void              DeleteObjectDelayed(GameObject *aObject);
+  void              DeleteObjectDelayed(GameObject *aObject, bool aDeleteChildren = false);
   void              DeleteObjects();
   void              Reset();
   void              ResetLevel();
@@ -102,6 +102,8 @@ protected:
   ObjectContainer&  GetObjects();
   ObjectContainer&  GetStaticObjects();
 private:
+  void              DeleteObjectChildren(GameObject *aObject);
+  void              DeleteObjectChildrenDelayed(GameObject *aObject);
   void              SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects);
   void              SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects);
   bool              ObjectNotInScenario(GameObject *aObject);

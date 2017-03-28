@@ -265,9 +265,10 @@ void Level::AddStaticObject(GameObject *aObject)
 
 /**
  * @brief Delete object and remove from our objects vector.
- * @param aObject
+ * @param aObject Object to delete.
+ * @param aDeleteChildren Denote to delete children as well.
  */
-void Level::DeleteObject(GameObject *aObject)
+void Level::DeleteObject(GameObject *aObject, bool aDeleteChildren)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
@@ -284,6 +285,10 @@ void Level::DeleteObject(GameObject *aObject)
     {
       RemoveObjectFromScenarios(*it);
       mObjects.erase(it);
+      
+      if(aDeleteChildren)
+        DeleteObjectChildren(aObject);
+        
       objectManager->DeleteObject(aObject);
       return;
     }
@@ -316,9 +321,10 @@ GameObject* Level::CreateObjectDelayed(HashString const &aFileName, HashString c
 
 /**
  * @brief Marks an object for deletion next frame.
- * @param aObject
+ * @param aObject Object to delete.
+ * @param aDeleteChildren Denote to delete children as well.
  */
-void Level::DeleteObjectDelayed(GameObject *aObject)
+void Level::DeleteObjectDelayed(GameObject *aObject, bool aDeleteChildren)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
@@ -328,6 +334,10 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
     {
       RemoveObjectFromScenarios(*it);
       mObjects.erase(it);
+      
+      if(aDeleteChildren)
+        DeleteObjectChildrenDelayed(aObject);
+      
       ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
       objectManager->ProcessDelayedMessage(msg);
       break;
@@ -880,6 +890,32 @@ Level::ObjectContainer& Level::GetObjects()
 Level::ObjectContainer& Level::GetStaticObjects()
 {
   return mStaticObjects;
+}
+
+/**
+ * @brief Remove object's children
+ * @param aObject
+ */
+void Level::DeleteObjectChildren(GameObject *aObject)
+{
+  GameObject::GameObjectContainer children = aObject->GetChildren();
+  for(GameObject::GameObjectIT it = children.begin(); it != children.end(); ++it)
+  {
+    DeleteObject(it->second, true);
+  }
+}
+
+/**
+ * @brief Remove object's children
+ * @param aObject
+ */
+void Level::DeleteObjectChildrenDelayed(GameObject *aObject)
+{
+  GameObject::GameObjectContainer children = aObject->GetChildren();
+  for(GameObject::GameObjectIT it = children.begin(); it != children.end(); ++it)
+  {
+    DeleteObjectDelayed(it->second, true);
+  }
 }
 
 /**
