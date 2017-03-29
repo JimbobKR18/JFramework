@@ -33,9 +33,9 @@ public:
   Root();
   virtual ~Root();
 
-  Root const*    Search(std::string const &aValue) const;
-  Root*          Find(std::string const &aValue);
-  void           Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
+  Root const*    Search(HashString const &aValue) const;
+  Root*          Find(HashString const &aValue);
+  void           Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue);
   void           Insert(Root* root);
 
   // GETTERS

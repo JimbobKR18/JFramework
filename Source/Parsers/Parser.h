@@ -8,35 +8,36 @@ class Parser
 {
   private:
     int         mCurrentObjectIndex;
-    std::string mFilename;
+    HashString  mFilename;
 
   protected:
     Root* mDictionary;
 
   public:
-    Parser(std::string const &aFilename);
+    Parser(HashString const &aFilename);
     virtual ~Parser();
 
     // Getters
-    int           GetCurrentObjectIndex() const;
-    std::string   GetFilename() const;
-    Root*         GetBaseRoot() const;
+    int             GetCurrentObjectIndex() const;
+    std::string     GetFilename() const;
+    Root*           GetBaseRoot() const;
 
     // Setters
-    void          SetCurrentObjectIndex(int const aIndex);
+    void            SetCurrentObjectIndex(int const aIndex);
 
     // Reading
-    Root*         Find(std::string const &aElement);
-    Root*         Find(std::string const &aRoot, std::string const &aElement);
-    virtual void  Parse() = 0;
+    Root*           Find(HashString const &aElement);
+    Root*           Find(HashString const &aRoot, HashString const &aElement);
+    std::set<Root*> FindAll(HashString const &aElement);
+    virtual void    Parse() = 0;
 
     // Writing
-    void          Place(std::string const &aElement, std::string const &aValue);
-    void          Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue);
-    virtual void  Write() = 0;
+    void            Place(HashString const &aElement, HashString const &aValue);
+    void            Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue);
+    virtual void    Write() = 0;
     
   private:
-    Root*         SetUpTree(Root* aBase, std::vector<HashString> const &aStringHierarchy); 
+    Root*           SetUpTree(Root* aBase, std::vector<HashString> const &aStringHierarchy); 
 };
 
 #endif

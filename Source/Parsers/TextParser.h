@@ -19,7 +19,7 @@ class TextParser : public Parser
     TextMode          mMode;
     int               mCurrentIndent;
   public:
-    TextParser(std::string const &aFilename, TextMode const &aMode = MODE_INPUT);
+    TextParser(HashString const &aFilename, TextMode const &aMode = MODE_INPUT);
     ~TextParser();
 
     // Read
@@ -29,7 +29,6 @@ class TextParser : public Parser
   private:
     void          WriteRoot(Root *aRoot);
     std::string   InsertIndents();
-    std::string   ParseNegative(std::string const &aValue);
 };
 
 #endif

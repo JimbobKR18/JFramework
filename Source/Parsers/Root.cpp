@@ -20,12 +20,12 @@ Root::~Root()
 }
 
 /**
- * @brief Search for node whose name matches value.
+ * @brief Search for node whose name matches value. Does not mark nodes as touched.
  * @param aValue
  */
-Root const *Root::Search(std::string const &aValue) const
+Root const *Root::Search(HashString const &aValue) const
 {
-  if(mName.ToString() == aValue)
+  if(mName == aValue)
     return this;
   else
   {
@@ -44,7 +44,7 @@ Root const *Root::Search(std::string const &aValue) const
       Root const *ret = (*it)->Search(aValue);
       if(ret)
       {
-        if(ret->mName.ToString() == aValue)
+        if(ret->mName == aValue)
         {
           return ret;
         }
@@ -59,7 +59,7 @@ Root const *Root::Search(std::string const &aValue) const
  * @brief Find node whose name matches value.
  * @param aValue
  */
-Root *Root::Find(std::string const &aValue)
+Root *Root::Find(HashString const &aValue)
 {
   // Found our node
   if(mName == aValue)
@@ -103,7 +103,7 @@ Root *Root::Find(std::string const &aValue)
  * @param aElement
  * @param aValue
  */
-void Root::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
+void Root::Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)
 {
   if(mName == aRoot)
   {
@@ -121,7 +121,7 @@ void Root::Place(std::string const &aRoot, std::string const &aElement, std::str
   else if(mName == aElement)
   {
     DebugLogPrint("info: Value %s found in %s, old value: %s new value: %s\n", 
-      aElement.c_str(), aRoot.c_str(), mValue.ToCharArray(), aValue.c_str());
+      aElement.ToCharArray(), aRoot.ToCharArray(), mValue.ToCharArray(), aValue.ToCharArray());
     mValue = aValue;
   }
   else

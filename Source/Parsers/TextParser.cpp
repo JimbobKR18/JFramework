@@ -6,7 +6,7 @@ bool RootSortPredicate(Root* aRoot1, Root* aRoot2)
   return (*aRoot1) < (*aRoot2);
 }
 
-TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Parser(aFilename),
+TextParser::TextParser(HashString const &aFilename, TextMode const &aMode) : Parser(aFilename),
                                                                               mInput(),
                                                                               mOutput(),
                                                                               mWrittenOut(false),
@@ -16,7 +16,7 @@ TextParser::TextParser(std::string const &aFilename, TextMode const &aMode) : Pa
   if(aMode == MODE_INPUT)
     mInput.str(FileCache::GetFile(aFilename));
   else
-    mOutput.open(aFilename.c_str());
+    mOutput.open(aFilename.ToCharArray());
 
   if(aMode == MODE_INPUT)
   {
@@ -114,7 +114,7 @@ void TextParser::Write()
  */
 void TextParser::WriteRoot(Root *aRoot)
 {
-  if(aRoot->GetValue().ToString() == "")
+  if(aRoot->GetValue() == "")
   {
     // Sorting for cleanliness
     std::vector<Root*> roots;
@@ -148,15 +148,5 @@ std::string TextParser::InsertIndents()
   {
     ret.push_back('\t');
   }
-  return ret;
-}
-
-/**
- * @brief Negative parse helper
- */
-std::string TextParser::ParseNegative(std::string const &aValue)
-{
-  std::string ret;
-  ret = aValue;
   return ret;
 }

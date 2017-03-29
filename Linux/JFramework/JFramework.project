@@ -158,6 +158,7 @@
       <File Name="../../Source/Logic/Effects/EffectsManager.cpp"/>
       <File Name="../../Source/Logic/Effects/EffectsManager.h"/>
     </VirtualDirectory>
+    <File Name="../../Source/Logic/ControllerFactory.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Managers">
     <File Name="../../Source/Managers/InputManager.h"/>
@@ -188,9 +189,7 @@
     <File Name="../../Source/Parsers/TextParser.cpp"/>
     <File Name="../../Source/Parsers/Parser.h"/>
     <File Name="../../Source/Parsers/Root.h"/>
-    <File Name="../../Source/Parsers/XMLParser.h"/>
     <File Name="../../Source/Parsers/Root.cpp"/>
-    <File Name="../../Source/Parsers/XMLParser.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Physics">
     <File Name="../../Source/Physics/GravityGenerator.cpp"/>
@@ -213,10 +212,6 @@
     <File Name="../../Source/Sound/PCSound.h"/>
     <File Name="../../Source/Sound/Sound.cpp"/>
     <File Name="../../Source/Sound/PCSound.cpp"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="TinyXML">
-    <File Name="../../Source/TinyXML/tinyxml2.h"/>
-    <File Name="../../Source/TinyXML/tinyxml2.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Network">
     <File Name="../../Source/Network/PCNetworkPort.cpp"/>

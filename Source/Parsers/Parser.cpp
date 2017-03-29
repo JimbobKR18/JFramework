@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-Parser::Parser(std::string const &aFilename) : mCurrentObjectIndex(0),
+Parser::Parser(HashString const &aFilename) : mCurrentObjectIndex(0),
                                                mFilename(aFilename), mDictionary(nullptr)
 {
 }
@@ -46,7 +46,7 @@ void Parser::SetCurrentObjectIndex(int const aIndex)
  * @brief Find element by name (first occurrence)
  * @param aElement Element string to find
  */
-Root* Parser::Find(std::string const &aElement)
+Root* Parser::Find(HashString const &aElement)
 {
   // Search inside roots to find value
   Root *value = mDictionary->Find(aElement);
@@ -58,10 +58,10 @@ Root* Parser::Find(std::string const &aElement)
  * @param aRoot
  * @param aElement
  */
-Root* Parser::Find(std::string const &aRoot, std::string const &aElement)
+Root* Parser::Find(HashString const &aRoot, HashString const &aElement)
 {
   // Find node and search it for an element
-  std::vector<HashString> splitString = HashString(aRoot).Split("/");
+  std::vector<HashString> splitString = aRoot.Split("/");
   Root *node = mDictionary->Find(splitString[0]);
 
   if(!node)
@@ -83,9 +83,9 @@ Root* Parser::Find(std::string const &aRoot, std::string const &aElement)
  * @param aElement
  * @param aValue
  */
-void Parser::Place(std::string const &aElement, std::string const &aValue)
+void Parser::Place(HashString const &aElement, HashString const &aValue)
 {
-  Root* newRoot = SetUpTree(mDictionary, HashString(aElement).Split("/"));
+  Root* newRoot = SetUpTree(mDictionary, aElement.Split("/"));
   newRoot->SetValue(aValue);
 }
 
@@ -95,10 +95,10 @@ void Parser::Place(std::string const &aElement, std::string const &aValue)
  * @param aElement
  * @param aValue
  */
-void Parser::Place(std::string const &aRoot, std::string const &aElement, std::string const &aValue)
+void Parser::Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)
 {
-  Root* newNodes = SetUpTree(mDictionary, HashString(aRoot).Split("/"));
-  Root* newRoot = SetUpTree(newNodes, HashString(aElement).Split("/"));
+  Root* newNodes = SetUpTree(mDictionary, aRoot.Split("/"));
+  Root* newRoot = SetUpTree(newNodes, aElement.Split("/"));
   newRoot->SetValue(aValue);
 }
 
