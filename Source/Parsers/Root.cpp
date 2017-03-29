@@ -98,6 +98,29 @@ Root *Root::Find(HashString const &aValue)
 }
 
 /**
+ * @brief Find all roots at current level among children.
+ * @param aValue Name of value to find.
+ * @return Set of values amongst children.
+ */
+std::set<Root*> Root::FindAll(HashString const &aValue)
+{
+  std::set<Root*> allRoots;
+  
+  // Search for node of same name first, early out
+  for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  {
+    Root *ret = *it;
+    if(ret->mName == aValue)
+    {
+      ret->mTouched = true;
+      allRoots.insert(ret);
+    }
+  }
+  
+  return allRoots;
+}
+
+/**
  * @brief Place node under this node with root and element name, with value.
  * @param aRoot
  * @param aElement

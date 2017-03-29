@@ -33,10 +33,11 @@ public:
   Root();
   virtual ~Root();
 
-  Root const*    Search(HashString const &aValue) const;
-  Root*          Find(HashString const &aValue);
-  void           Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue);
-  void           Insert(Root* root);
+  Root const*     Search(HashString const &aValue) const;
+  Root*           Find(HashString const &aValue);
+  std::set<Root*> FindAll(HashString const &aValue);
+  void            Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue);
+  void            Insert(Root* root);
 
   // GETTERS
   HashString     GetName() const;

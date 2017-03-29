@@ -79,6 +79,18 @@ Root* Parser::Find(HashString const &aRoot, HashString const &aElement)
 }
 
 /**
+ * @brief Find all nodes with matching name.
+ * @param aElement Name of element.
+ * @return All elements matching name.
+ */
+std::set<Root*> Parser::FindAll(HashString const &aElement)
+{
+  // Find node and search it for an element
+  Root *node = mDictionary->Find(aElement);
+  return node->FindAll(aElement);
+}
+
+/**
  * @brief Write value to element
  * @param aElement
  * @param aValue
