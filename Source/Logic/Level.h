@@ -64,9 +64,9 @@ public:
 
   void              AddObject(GameObject *aObject);
   void              AddStaticObject(GameObject *aObject);
-  void              DeleteObject(GameObject *aObject, bool aDeleteChildren = false);
+  void              DeleteObject(GameObject *aObject);
   GameObject*       CreateObjectDelayed(HashString const &aFileName, HashString const &aFolder = "Game");
-  void              DeleteObjectDelayed(GameObject *aObject, bool aDeleteChildren = false);
+  void              DeleteObjectDelayed(GameObject *aObject);
   void              DeleteObjects();
   void              Reset();
   void              ResetLevel();
