@@ -1,0 +1,221 @@
+\hypertarget{classSLB_1_1ErrorHandler}{}\section{S\+LB\+:\+:Error\+Handler Class Reference}
+\label{classSLB_1_1ErrorHandler}\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Error\+Handler\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1ErrorHandler_a0ad571b23d26e47847b9445cef2a7783}{Error\+Handler} ()
+\item 
+virtual \hyperlink{classSLB_1_1ErrorHandler_a9b4650d3414c4bb52b005e0159515f2e}{$\sim$\+Error\+Handler} ()
+\item 
+int \hyperlink{classSLB_1_1ErrorHandler_ad2aa3aa61e67d5789bbe5da4fa0cc39d}{call} (lua\+\_\+\+State $\ast$L, int nargs, int nresults)
+\item 
+virtual void \hyperlink{classSLB_1_1ErrorHandler_a3bb48f944dd1f37b4f8308f8dd2db3b8}{begin} (const char $\ast$)
+\begin{DoxyCompactList}\small\item\em first function to be called with the main error \end{DoxyCompactList}\item 
+virtual const char $\ast$ \hyperlink{classSLB_1_1ErrorHandler_a039030d861249644ab496d0d23e66bce}{end} ()=0
+\item 
+virtual void \hyperlink{classSLB_1_1ErrorHandler_a81782d504556ac90780ac40d89cbad9a}{stack\+Element} (int)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{classSLB_1_1ErrorHandler_aa3f338107ee43be8294e11fb0ea6e207}{S\+E\+\_\+name} ()
+\item 
+const char $\ast$ \hyperlink{classSLB_1_1ErrorHandler_afa522eeaeffb0908d022be51d8f8258d}{S\+E\+\_\+name\+What} ()
+\item 
+const char $\ast$ \hyperlink{classSLB_1_1ErrorHandler_a3bdf56691d5ec9fdd0d323b80a478fbc}{S\+E\+\_\+what} ()
+\item 
+const char $\ast$ \hyperlink{classSLB_1_1ErrorHandler_a110faeb3ce24122ba6c64fd6dae023f8}{S\+E\+\_\+source} ()
+\item 
+const char $\ast$ \hyperlink{classSLB_1_1ErrorHandler_a8cddf55c3a685560b7b9ad1ee2fa8bfe}{S\+E\+\_\+short\+Source} ()
+\item 
+int \hyperlink{classSLB_1_1ErrorHandler_afc4935f3cf365a9f202efc6b0de482b1}{S\+E\+\_\+current\+Line} ()
+\item 
+int \hyperlink{classSLB_1_1ErrorHandler_ace78a5fa80a2ff645d1c1fc62672b85b}{S\+E\+\_\+number\+Of\+Upvalues} ()
+\item 
+int \hyperlink{classSLB_1_1ErrorHandler_aa95537fa320f5ea906bce156ea85ac6a}{S\+E\+\_\+line\+Defined} ()
+\item 
+int \hyperlink{classSLB_1_1ErrorHandler_acaf6c28628cf7186680a6b6f7ff1a656}{S\+E\+\_\+last\+Line\+Defined} ()
+\item 
+virtual void \hyperlink{classSLB_1_1ErrorHandler_a320773f98386e81f2a5fc123e3c8285a}{process} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classSLB_1_1ErrorHandler_a331ee2d938082c05b58273d7d4fe3682}{\+\_\+slb\+\_\+stack\+Handler} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+lua\+\_\+\+Debug \hyperlink{classSLB_1_1ErrorHandler_a3d11337c53985082e82ba2da7e125d45}{\+\_\+debug}
+\item 
+lua\+\_\+\+State $\ast$ \hyperlink{classSLB_1_1ErrorHandler_ad6be26137f8e4b6094608fdb09095af9}{\+\_\+lua\+\_\+state}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class handles any error raised while lua is working. You can subclass it and set it as default on S\+L\+B\+::\+Manager\+::set\+Error\+Handler 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!Error\+Handler@{Error\+Handler}}
+\index{Error\+Handler@{Error\+Handler}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{Error\+Handler()}{ErrorHandler()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Error\+Handler\+::\+Error\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1ErrorHandler_a0ad571b23d26e47847b9445cef2a7783}{}\label{classSLB_1_1ErrorHandler_a0ad571b23d26e47847b9445cef2a7783}
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!````~Error\+Handler@{$\sim$\+Error\+Handler}}
+\index{````~Error\+Handler@{$\sim$\+Error\+Handler}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{$\sim$\+Error\+Handler()}{~ErrorHandler()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual S\+L\+B\+::\+Error\+Handler\+::$\sim$\+Error\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1ErrorHandler_a9b4650d3414c4bb52b005e0159515f2e}{}\label{classSLB_1_1ErrorHandler_a9b4650d3414c4bb52b005e0159515f2e}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!\+\_\+slb\+\_\+stack\+Handler@{\+\_\+slb\+\_\+stack\+Handler}}
+\index{\+\_\+slb\+\_\+stack\+Handler@{\+\_\+slb\+\_\+stack\+Handler}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{\+\_\+slb\+\_\+stack\+Handler(lua\+\_\+\+State $\ast$\+L)}{_slb_stackHandler(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Error\+Handler\+::\+\_\+slb\+\_\+stack\+Handler (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1ErrorHandler_a331ee2d938082c05b58273d7d4fe3682}{}\label{classSLB_1_1ErrorHandler_a331ee2d938082c05b58273d7d4fe3682}
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!begin@{begin}}
+\index{begin@{begin}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{begin(const char $\ast$)}{begin(const char *)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void S\+L\+B\+::\+Error\+Handler\+::begin (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1ErrorHandler_a3bb48f944dd1f37b4f8308f8dd2db3b8}{}\label{classSLB_1_1ErrorHandler_a3bb48f944dd1f37b4f8308f8dd2db3b8}
+
+
+first function to be called with the main error 
+
+
+
+Reimplemented in \hyperlink{classSLB_1_1DefaultErrorHandler_ae9a3f37002f6b5b3cd785cb200e08b35}{S\+L\+B\+::\+Default\+Error\+Handler}.
+
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!call@{call}}
+\index{call@{call}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{call(lua\+\_\+\+State $\ast$\+L, int nargs, int nresults)}{call(lua_State *L, int nargs, int nresults)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Error\+Handler\+::call (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L, }
+\item[{int}]{nargs, }
+\item[{int}]{nresults}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1ErrorHandler_ad2aa3aa61e67d5789bbe5da4fa0cc39d}{}\label{classSLB_1_1ErrorHandler_ad2aa3aa61e67d5789bbe5da4fa0cc39d}
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!end@{end}}
+\index{end@{end}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{end()=0}{end()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual const char$\ast$ S\+L\+B\+::\+Error\+Handler\+::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSLB_1_1ErrorHandler_a039030d861249644ab496d0d23e66bce}{}\label{classSLB_1_1ErrorHandler_a039030d861249644ab496d0d23e66bce}
+Last function that will be called at the end, should return the string of the computed error. 
+
+Implemented in \hyperlink{classSLB_1_1DefaultErrorHandler_ade69f2daa1ab65b5626cd1059a7af229}{S\+L\+B\+::\+Default\+Error\+Handler}.
+
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!process@{process}}
+\index{process@{process}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{process(lua\+\_\+\+State $\ast$\+L)}{process(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Error\+Handler\+::process (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1ErrorHandler_a320773f98386e81f2a5fc123e3c8285a}{}\label{classSLB_1_1ErrorHandler_a320773f98386e81f2a5fc123e3c8285a}
+This function will be called by the handler to start the process of retrieving info from the lua failure. If you reinterpret this function Call to the parent\textquotesingle{}s implementation. \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+current\+Line@{S\+E\+\_\+current\+Line}}
+\index{S\+E\+\_\+current\+Line@{S\+E\+\_\+current\+Line}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+current\+Line()}{SE_currentLine()}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+current\+Line (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_afc4935f3cf365a9f202efc6b0de482b1}{}\label{classSLB_1_1ErrorHandler_afc4935f3cf365a9f202efc6b0de482b1}
+Stack\+Element function number of line, or -\/1 if there is no info available \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+last\+Line\+Defined@{S\+E\+\_\+last\+Line\+Defined}}
+\index{S\+E\+\_\+last\+Line\+Defined@{S\+E\+\_\+last\+Line\+Defined}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+last\+Line\+Defined()}{SE_lastLineDefined()}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+last\+Line\+Defined (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_acaf6c28628cf7186680a6b6f7ff1a656}{}\label{classSLB_1_1ErrorHandler_acaf6c28628cf7186680a6b6f7ff1a656}
+Stack\+Element function the last line where the definition of the function ends \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+line\+Defined@{S\+E\+\_\+line\+Defined}}
+\index{S\+E\+\_\+line\+Defined@{S\+E\+\_\+line\+Defined}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+line\+Defined()}{SE_lineDefined()}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+line\+Defined (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_aa95537fa320f5ea906bce156ea85ac6a}{}\label{classSLB_1_1ErrorHandler_aa95537fa320f5ea906bce156ea85ac6a}
+Stack\+Element function the line number where the definition of the funciton starts \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+name@{S\+E\+\_\+name}}
+\index{S\+E\+\_\+name@{S\+E\+\_\+name}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+name()}{SE_name()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_aa3f338107ee43be8294e11fb0ea6e207}{}\label{classSLB_1_1ErrorHandler_aa3f338107ee43be8294e11fb0ea6e207}
+Stack\+Element function returns the possible name of the function (can be null) \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+name\+What@{S\+E\+\_\+name\+What}}
+\index{S\+E\+\_\+name\+What@{S\+E\+\_\+name\+What}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+name\+What()}{SE_nameWhat()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+name\+What (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_afa522eeaeffb0908d022be51d8f8258d}{}\label{classSLB_1_1ErrorHandler_afa522eeaeffb0908d022be51d8f8258d}
+Stack\+Element function returns the \char`\"{}global\char`\"{}, \char`\"{}local\char`\"{}, \char`\"{}method\char`\"{}, \char`\"{}field\char`\"{}, \char`\"{}upvalue\char`\"{}, or \char`\"{}\char`\"{} \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+number\+Of\+Upvalues@{S\+E\+\_\+number\+Of\+Upvalues}}
+\index{S\+E\+\_\+number\+Of\+Upvalues@{S\+E\+\_\+number\+Of\+Upvalues}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+number\+Of\+Upvalues()}{SE_numberOfUpvalues()}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+number\+Of\+Upvalues (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_ace78a5fa80a2ff645d1c1fc62672b85b}{}\label{classSLB_1_1ErrorHandler_ace78a5fa80a2ff645d1c1fc62672b85b}
+Stack\+Element function number of upvalues of the function \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+short\+Source@{S\+E\+\_\+short\+Source}}
+\index{S\+E\+\_\+short\+Source@{S\+E\+\_\+short\+Source}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+short\+Source()}{SE_shortSource()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+short\+Source (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_a8cddf55c3a685560b7b9ad1ee2fa8bfe}{}\label{classSLB_1_1ErrorHandler_a8cddf55c3a685560b7b9ad1ee2fa8bfe}
+Stack\+Element function shorten version of source \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+source@{S\+E\+\_\+source}}
+\index{S\+E\+\_\+source@{S\+E\+\_\+source}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+source()}{SE_source()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+source (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_a110faeb3ce24122ba6c64fd6dae023f8}{}\label{classSLB_1_1ErrorHandler_a110faeb3ce24122ba6c64fd6dae023f8}
+Stack\+Element function returns If the function was defined in a string, then source is that string. If the function was defined in a file, then source starts with a \textquotesingle{}@\textquotesingle{} followed by the file name \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!S\+E\+\_\+what@{S\+E\+\_\+what}}
+\index{S\+E\+\_\+what@{S\+E\+\_\+what}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{S\+E\+\_\+what()}{SE_what()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ S\+L\+B\+::\+Error\+Handler\+::\+S\+E\+\_\+what (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1ErrorHandler_a3bdf56691d5ec9fdd0d323b80a478fbc}{}\label{classSLB_1_1ErrorHandler_a3bdf56691d5ec9fdd0d323b80a478fbc}
+Stack\+Element function returns \char`\"{}\+Lua\char`\"{}, \char`\"{}\+C\char`\"{}, \char`\"{}main\char`\"{}, \char`\"{}tail\char`\"{} \index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!stack\+Element@{stack\+Element}}
+\index{stack\+Element@{stack\+Element}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{stack\+Element(int)}{stackElement(int)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void S\+L\+B\+::\+Error\+Handler\+::stack\+Element (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1ErrorHandler_a81782d504556ac90780ac40d89cbad9a}{}\label{classSLB_1_1ErrorHandler_a81782d504556ac90780ac40d89cbad9a}
+Called on each stack element, here you can call S\+E\+\_\+$\ast$ functions. 
+
+Reimplemented in \hyperlink{classSLB_1_1DefaultErrorHandler_a5edd0ac3f13251639a912b212e1d51c0}{S\+L\+B\+::\+Default\+Error\+Handler}.
+
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!\+\_\+debug@{\+\_\+debug}}
+\index{\+\_\+debug@{\+\_\+debug}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{\+\_\+debug}{_debug}}]{\setlength{\rightskip}{0pt plus 5cm}lua\+\_\+\+Debug S\+L\+B\+::\+Error\+Handler\+::\+\_\+debug\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1ErrorHandler_a3d11337c53985082e82ba2da7e125d45}{}\label{classSLB_1_1ErrorHandler_a3d11337c53985082e82ba2da7e125d45}
+\index{S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}!\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}}
+\index{\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}!S\+L\+B\+::\+Error\+Handler@{S\+L\+B\+::\+Error\+Handler}}
+\subsubsection[{\texorpdfstring{\+\_\+lua\+\_\+state}{_lua_state}}]{\setlength{\rightskip}{0pt plus 5cm}lua\+\_\+\+State$\ast$ S\+L\+B\+::\+Error\+Handler\+::\+\_\+lua\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1ErrorHandler_ad6be26137f8e4b6094608fdb09095af9}{}\label{classSLB_1_1ErrorHandler_ad6be26137f8e4b6094608fdb09095af9}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

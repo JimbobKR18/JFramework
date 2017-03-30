@@ -1,0 +1,251 @@
+\hypertarget{classSLB_1_1HybridBase}{}\section{S\+LB\+:\+:Hybrid\+Base Class Reference}
+\label{classSLB_1_1HybridBase}\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Hybrid\+Base\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Hybrid\+Base\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual lua\+\_\+\+State $\ast$ \hyperlink{classSLB_1_1HybridBase_adec9d4333cdd875f60666ef592685ad9}{get\+Lua\+State} () const 
+\item 
+virtual void \hyperlink{classSLB_1_1HybridBase_aae78e1a31c9417a2af355de11d7ac145}{attach} (lua\+\_\+\+State $\ast$)
+\item 
+virtual bool \hyperlink{classSLB_1_1HybridBase_adc23d6cdac6debf7a5981fef426c69d2}{is\+Attached} () const 
+\item 
+void \hyperlink{classSLB_1_1HybridBase_a7992f9a56badf6373cc9e32eec63cbc9}{un\+Attach} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classSLB_1_1HybridBase_ad41d04e125bfbd1bbc0f685f45ff7671}{register\+As\+Hybrid} (\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ci)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classSLB_1_1HybridBase_a13c9e4f1948e197d9efc05292df8eae3}{S\+L\+B\+\_\+\+Map} (\hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String}, \hyperlink{classSLB_1_1LuaCallBase}{Lua\+Call\+Base} $\ast$) Method\+Map
+\item 
+\hyperlink{classSLB_1_1HybridBase_a16559130fd99772d21562b9d2a609084}{Hybrid\+Base} ()
+\item 
+virtual \hyperlink{classSLB_1_1HybridBase_ad2fe12eb6cbc98354f09455e6a0881e0}{$\sim$\+Hybrid\+Base} ()
+\item 
+bool \hyperlink{classSLB_1_1HybridBase_a62ce6256989bb7407f90b3171bf59dd6}{get\+Method} (const char $\ast$name) const 
+\item 
+virtual \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1HybridBase_a2418a2bc2b0965c7215f9face34845b9}{get\+Class\+Info} () const =0
+\item 
+void \hyperlink{classSLB_1_1HybridBase_ad5b819ae5cc1becd191bda707b85954a}{clear\+Method\+Map} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Method\+Map \hyperlink{classSLB_1_1HybridBase_af7527f38ec958cd7b54593442197b0ca}{\+\_\+methods}
+\item 
+\hyperlink{classSLB_1_1ref__ptr}{ref\+\_\+ptr}$<$ \hyperlink{classSLB_1_1Table}{Table} $>$ \hyperlink{classSLB_1_1HybridBase_a600895808a766860632acb471dd09f3c}{\+\_\+subclass\+Methods}
+\item 
+\hyperlink{structSLB_1_1Mutex}{Mutex} \hyperlink{classSLB_1_1HybridBase_a276d33834335774a86f6b05bf377c457}{\+\_\+mutex}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classSLB_1_1HybridBase_a10fedce6ebbda8be79099a09a771437f}{set\+Method} (lua\+\_\+\+State $\ast$L, \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ci)
+\item 
+static int \hyperlink{classSLB_1_1HybridBase_af3933c24aa75e74eaef71a6f4b63a859}{call\+\_\+lua\+\_\+method} (lua\+\_\+\+State $\ast$L)
+\item 
+static int \hyperlink{classSLB_1_1HybridBase_ae30481d79fbbaccba0ff11b0fdd0f1a0}{class\+\_\+\+\_\+newindex} (lua\+\_\+\+State $\ast$)
+\item 
+static int \hyperlink{classSLB_1_1HybridBase_a32893051c2d332f7a7a7eb43f94226e2}{class\+\_\+\+\_\+index} (lua\+\_\+\+State $\ast$)
+\item 
+static int \hyperlink{classSLB_1_1HybridBase_af52187418360673588858c61c1b997dc}{object\+\_\+\+\_\+index} (lua\+\_\+\+State $\ast$)
+\item 
+static int \hyperlink{classSLB_1_1HybridBase_af8569d54aef3c92d54063f0fea928a60}{object\+\_\+\+\_\+newindex} (lua\+\_\+\+State $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+lua\+\_\+\+State $\ast$ \hyperlink{classSLB_1_1HybridBase_a86452ea4289e8da0396c5c6f64802992}{\+\_\+lua\+\_\+state}
+\item 
+int \hyperlink{classSLB_1_1HybridBase_aa7f3e7eaffd58ae3e0ef28d63d5904e2}{\+\_\+data}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{classSLB_1_1HybridBase_ace3fe1e57cde7a60668d3ded677e2139}{Internal\+Hybrid\+Subclass}
+\item 
+struct \hyperlink{classSLB_1_1HybridBase_a5581d5e6b6740a0b5fd5e4ab5a5980c0}{Invalid\+Method}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!Hybrid\+Base@{Hybrid\+Base}}
+\index{Hybrid\+Base@{Hybrid\+Base}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{Hybrid\+Base()}{HybridBase()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Hybrid\+Base\+::\+Hybrid\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1HybridBase_a16559130fd99772d21562b9d2a609084}{}\label{classSLB_1_1HybridBase_a16559130fd99772d21562b9d2a609084}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!````~Hybrid\+Base@{$\sim$\+Hybrid\+Base}}
+\index{````~Hybrid\+Base@{$\sim$\+Hybrid\+Base}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{$\sim$\+Hybrid\+Base()}{~HybridBase()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Hybrid\+Base\+::$\sim$\+Hybrid\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1HybridBase_ad2fe12eb6cbc98354f09455e6a0881e0}{}\label{classSLB_1_1HybridBase_ad2fe12eb6cbc98354f09455e6a0881e0}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!attach@{attach}}
+\index{attach@{attach}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{attach(lua\+\_\+\+State $\ast$)}{attach(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Hybrid\+Base\+::attach (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSLB_1_1HybridBase_aae78e1a31c9417a2af355de11d7ac145}{}\label{classSLB_1_1HybridBase_aae78e1a31c9417a2af355de11d7ac145}
+Indicates where this instance will look for its hybrid methods; If you reimplement this method remember to call the parent (\hyperlink{classSLB_1_1HybridBase}{Hybrid\+Base}) to set \+\_\+lua\+\_\+state properly and register itself there. \index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!call\+\_\+lua\+\_\+method@{call\+\_\+lua\+\_\+method}}
+\index{call\+\_\+lua\+\_\+method@{call\+\_\+lua\+\_\+method}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{call\+\_\+lua\+\_\+method(lua\+\_\+\+State $\ast$\+L)}{call_lua_method(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Hybrid\+Base\+::call\+\_\+lua\+\_\+method (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_af3933c24aa75e74eaef71a6f4b63a859}{}\label{classSLB_1_1HybridBase_af3933c24aa75e74eaef71a6f4b63a859}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}}
+\index{class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+index(lua\+\_\+\+State $\ast$)}{class__index(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Hybrid\+Base\+::class\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_a32893051c2d332f7a7a7eb43f94226e2}{}\label{classSLB_1_1HybridBase_a32893051c2d332f7a7a7eb43f94226e2}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}}
+\index{class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+newindex(lua\+\_\+\+State $\ast$)}{class__newindex(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Hybrid\+Base\+::class\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_ae30481d79fbbaccba0ff11b0fdd0f1a0}{}\label{classSLB_1_1HybridBase_ae30481d79fbbaccba0ff11b0fdd0f1a0}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!clear\+Method\+Map@{clear\+Method\+Map}}
+\index{clear\+Method\+Map@{clear\+Method\+Map}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{clear\+Method\+Map()}{clearMethodMap()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Hybrid\+Base\+::clear\+Method\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1HybridBase_ad5b819ae5cc1becd191bda707b85954a}{}\label{classSLB_1_1HybridBase_ad5b819ae5cc1becd191bda707b85954a}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!get\+Class\+Info@{get\+Class\+Info}}
+\index{get\+Class\+Info@{get\+Class\+Info}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{get\+Class\+Info() const =0}{getClassInfo() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Class\+Info}$\ast$ S\+L\+B\+::\+Hybrid\+Base\+::get\+Class\+Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classSLB_1_1HybridBase_a2418a2bc2b0965c7215f9face34845b9}{}\label{classSLB_1_1HybridBase_a2418a2bc2b0965c7215f9face34845b9}
+
+
+Implemented in \hyperlink{classSLB_1_1Hybrid_a8b1b05a6fe71cd8545bcf1172e343ee4}{S\+L\+B\+::\+Hybrid$<$ Base\+Class, T\+\_\+\+Critical\+Section $>$}, and \hyperlink{classSLB_1_1Hybrid_a8b1b05a6fe71cd8545bcf1172e343ee4}{S\+L\+B\+::\+Hybrid$<$ T $>$}.
+
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!get\+Lua\+State@{get\+Lua\+State}}
+\index{get\+Lua\+State@{get\+Lua\+State}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{get\+Lua\+State() const }{getLuaState() const }}]{\setlength{\rightskip}{0pt plus 5cm}virtual lua\+\_\+\+State$\ast$ S\+L\+B\+::\+Hybrid\+Base\+::get\+Lua\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1HybridBase_adec9d4333cdd875f60666ef592685ad9}{}\label{classSLB_1_1HybridBase_adec9d4333cdd875f60666ef592685ad9}
+Returns the lua\+\_\+\+State, this function will be valid if the object is attached, otherwise will return 0 \index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!get\+Method@{get\+Method}}
+\index{get\+Method@{get\+Method}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{get\+Method(const char $\ast$name) const }{getMethod(const char *name) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Hybrid\+Base\+::get\+Method (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1HybridBase_a62ce6256989bb7407f90b3171bf59dd6}{}\label{classSLB_1_1HybridBase_a62ce6256989bb7407f90b3171bf59dd6}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!is\+Attached@{is\+Attached}}
+\index{is\+Attached@{is\+Attached}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{is\+Attached() const }{isAttached() const }}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool S\+L\+B\+::\+Hybrid\+Base\+::is\+Attached (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1HybridBase_adc23d6cdac6debf7a5981fef426c69d2}{}\label{classSLB_1_1HybridBase_adc23d6cdac6debf7a5981fef426c69d2}
+
+
+Reimplemented in \hyperlink{classSLB_1_1StatefulHybrid_aac044f80a0ebec91f6f917475ff14269}{S\+L\+B\+::\+Stateful\+Hybrid$<$ T, S $>$}.
+
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}}
+\index{object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+index(lua\+\_\+\+State $\ast$)}{object__index(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Hybrid\+Base\+::object\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_af52187418360673588858c61c1b997dc}{}\label{classSLB_1_1HybridBase_af52187418360673588858c61c1b997dc}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}}
+\index{object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+newindex(lua\+\_\+\+State $\ast$)}{object__newindex(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Hybrid\+Base\+::object\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_af8569d54aef3c92d54063f0fea928a60}{}\label{classSLB_1_1HybridBase_af8569d54aef3c92d54063f0fea928a60}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!register\+As\+Hybrid@{register\+As\+Hybrid}}
+\index{register\+As\+Hybrid@{register\+As\+Hybrid}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{register\+As\+Hybrid(\+Class\+Info $\ast$ci)}{registerAsHybrid(ClassInfo *ci)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Hybrid\+Base\+::register\+As\+Hybrid (
+\begin{DoxyParamCaption}
+\item[{{\bf Class\+Info} $\ast$}]{ci}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSLB_1_1HybridBase_ad41d04e125bfbd1bbc0f685f45ff7671}{}\label{classSLB_1_1HybridBase_ad41d04e125bfbd1bbc0f685f45ff7671}
+Use this function to register this class as hybrid, it will override \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} metamethods of class\+\_\+\+\_\+index, class\+\_\+\+\_\+newindex, object\+\_\+\+\_\+index and object\+\_\+\+\_\+newindex. Note\+: if your class requires those methods contact me to see if it is possible to do it, by the moment this is the only way this works \index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!set\+Method@{set\+Method}}
+\index{set\+Method@{set\+Method}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{set\+Method(lua\+\_\+\+State $\ast$\+L, Class\+Info $\ast$ci)}{setMethod(lua_State *L, ClassInfo *ci)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Hybrid\+Base\+::set\+Method (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L, }
+\item[{{\bf Class\+Info} $\ast$}]{ci}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_a10fedce6ebbda8be79099a09a771437f}{}\label{classSLB_1_1HybridBase_a10fedce6ebbda8be79099a09a771437f}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}}
+\index{S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+Map(\+String, Lua\+Call\+Base $\ast$) Method\+Map}{SLB_Map(String, LuaCallBase *) MethodMap}}]{\setlength{\rightskip}{0pt plus 5cm}typedef S\+L\+B\+::\+Hybrid\+Base\+::\+S\+L\+B\+\_\+\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf String}}]{, }
+\item[{{\bf Lua\+Call\+Base} $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1HybridBase_a13c9e4f1948e197d9efc05292df8eae3}{}\label{classSLB_1_1HybridBase_a13c9e4f1948e197d9efc05292df8eae3}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!un\+Attach@{un\+Attach}}
+\index{un\+Attach@{un\+Attach}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{un\+Attach()}{unAttach()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Hybrid\+Base\+::un\+Attach (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1HybridBase_a7992f9a56badf6373cc9e32eec63cbc9}{}\label{classSLB_1_1HybridBase_a7992f9a56badf6373cc9e32eec63cbc9}
+use this to release memory allocated by the hybrid object, inside the lua\+\_\+\+State. 
+
+\subsection{Friends And Related Function Documentation}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!Internal\+Hybrid\+Subclass@{Internal\+Hybrid\+Subclass}}
+\index{Internal\+Hybrid\+Subclass@{Internal\+Hybrid\+Subclass}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{Internal\+Hybrid\+Subclass}{InternalHybridSubclass}}]{\setlength{\rightskip}{0pt plus 5cm}friend struct {\bf Internal\+Hybrid\+Subclass}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classSLB_1_1HybridBase_ace3fe1e57cde7a60668d3ded677e2139}{}\label{classSLB_1_1HybridBase_ace3fe1e57cde7a60668d3ded677e2139}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!Invalid\+Method@{Invalid\+Method}}
+\index{Invalid\+Method@{Invalid\+Method}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{Invalid\+Method}{InvalidMethod}}]{\setlength{\rightskip}{0pt plus 5cm}friend struct {\bf Invalid\+Method}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classSLB_1_1HybridBase_a5581d5e6b6740a0b5fd5e4ab5a5980c0}{}\label{classSLB_1_1HybridBase_a5581d5e6b6740a0b5fd5e4ab5a5980c0}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!\+\_\+data@{\+\_\+data}}
+\index{\+\_\+data@{\+\_\+data}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+data}{_data}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Hybrid\+Base\+::\+\_\+data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_aa7f3e7eaffd58ae3e0ef28d63d5904e2}{}\label{classSLB_1_1HybridBase_aa7f3e7eaffd58ae3e0ef28d63d5904e2}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}}
+\index{\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+lua\+\_\+state}{_lua_state}}]{\setlength{\rightskip}{0pt plus 5cm}lua\+\_\+\+State$\ast$ S\+L\+B\+::\+Hybrid\+Base\+::\+\_\+lua\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1HybridBase_a86452ea4289e8da0396c5c6f64802992}{}\label{classSLB_1_1HybridBase_a86452ea4289e8da0396c5c6f64802992}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!\+\_\+methods@{\+\_\+methods}}
+\index{\+\_\+methods@{\+\_\+methods}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+methods}{_methods}}]{\setlength{\rightskip}{0pt plus 5cm}Method\+Map S\+L\+B\+::\+Hybrid\+Base\+::\+\_\+methods\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1HybridBase_af7527f38ec958cd7b54593442197b0ca}{}\label{classSLB_1_1HybridBase_af7527f38ec958cd7b54593442197b0ca}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!\+\_\+mutex@{\+\_\+mutex}}
+\index{\+\_\+mutex@{\+\_\+mutex}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+mutex}{_mutex}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mutex} S\+L\+B\+::\+Hybrid\+Base\+::\+\_\+mutex\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1HybridBase_a276d33834335774a86f6b05bf377c457}{}\label{classSLB_1_1HybridBase_a276d33834335774a86f6b05bf377c457}
+\index{S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}!\+\_\+subclass\+Methods@{\+\_\+subclass\+Methods}}
+\index{\+\_\+subclass\+Methods@{\+\_\+subclass\+Methods}!S\+L\+B\+::\+Hybrid\+Base@{S\+L\+B\+::\+Hybrid\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+subclass\+Methods}{_subclassMethods}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ref\+\_\+ptr}$<${\bf Table}$>$ S\+L\+B\+::\+Hybrid\+Base\+::\+\_\+subclass\+Methods\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1HybridBase_a600895808a766860632acb471dd09f3c}{}\label{classSLB_1_1HybridBase_a600895808a766860632acb471dd09f3c}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

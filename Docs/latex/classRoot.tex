@@ -1,0 +1,331 @@
+\hypertarget{classRoot}{}\section{Root Class Reference}
+\label{classRoot}\index{Root@{Root}}
+
+
+{\ttfamily \#include $<$Root.\+h$>$}
+
+
+
+Collaboration diagram for Root\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRoot_ae30f3c6144d2d9df894b392ee45d051f}{Root} ()
+\item 
+virtual \hyperlink{classRoot_ae3b9dd56ac40d582a92b904f8480be7b}{$\sim$\+Root} ()
+\item 
+\hyperlink{classRoot}{Root} const $\ast$ \hyperlink{classRoot_a47a028763d0583b91ec52e580f406548}{Search} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value) const 
+\begin{DoxyCompactList}\small\item\em Search for node whose name matches value. Does not mark nodes as touched. \end{DoxyCompactList}\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classRoot_a3a960a09ba20ccf27233a22a63d863ec}{Find} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Find node whose name matches value. \end{DoxyCompactList}\item 
+std\+::set$<$ \hyperlink{classRoot}{Root} $\ast$ $>$ \hyperlink{classRoot_ade779f92135be7c3661fa7dee8c9b91c}{Find\+All} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Find all roots at current level among children. \end{DoxyCompactList}\item 
+void \hyperlink{classRoot_a0fe1c3f27c24117015025a191d4055e6}{Place} (\hyperlink{classHashString}{Hash\+String} const \&a\+Root, \hyperlink{classHashString}{Hash\+String} const \&a\+Element, \hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Place node under this node with root and element name, with value. \end{DoxyCompactList}\item 
+void \hyperlink{classRoot_a60275ee59c14bae93b173067a9186dab}{Insert} (\hyperlink{classRoot}{Root} $\ast$root)
+\begin{DoxyCompactList}\small\item\em Insert root into children. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classRoot_a97bcc25c8b962a681cb53096b0585a28}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get name of node. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classRoot_ab1c77a4b9fbc54ace8ec611fdc5b150d}{Get\+Value} () const 
+\begin{DoxyCompactList}\small\item\em Get value of node. \end{DoxyCompactList}\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classRoot_a3e976ce215650faeda13959b75764108}{Get\+Parent} () const 
+\begin{DoxyCompactList}\small\item\em Get node parent. \end{DoxyCompactList}\item 
+\hyperlink{Root_8h_aba37b6ece0d9fb5495482ccd0e0f272e}{Root\+Container} \& \hyperlink{classRoot_a02a74cccccdd6627072949b64551e58a}{Get\+Children} ()
+\begin{DoxyCompactList}\small\item\em Get children for node. \end{DoxyCompactList}\item 
+\hyperlink{Root_8h_aba37b6ece0d9fb5495482ccd0e0f272e}{Root\+Container} \hyperlink{classRoot_a79e5805c907dbf98b466bc2044f7496b}{Get\+Untouched\+Roots} () const 
+\begin{DoxyCompactList}\small\item\em Get untouched roots of node (unsearched) \end{DoxyCompactList}\item 
+void \hyperlink{classRoot_a990736feccfa4b7f409e2bbf7203ea58}{Set\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Set node name. \end{DoxyCompactList}\item 
+void \hyperlink{classRoot_aa5207f1e090f6d1dc6f01dbe14719142}{Set\+Value} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Set node value. \end{DoxyCompactList}\item 
+void \hyperlink{classRoot_a49bbcc48492c04d814ea2a89c35e861f}{Set\+Parent} (\hyperlink{classRoot}{Root} $\ast$a\+Parent)
+\begin{DoxyCompactList}\small\item\em Set node parent. \end{DoxyCompactList}\item 
+void \hyperlink{classRoot_a45147d14cfd657da6d34d0a05826c7fc}{operator=} (\hyperlink{classRoot}{Root} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Set root equal to another. \end{DoxyCompactList}\item 
+bool \hyperlink{classRoot_a5f52ecd89f4db33d293d02eb5548bc95}{operator$<$} (\hyperlink{classRoot}{Root} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Simple alphabetical ordering helper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classRoot_a02e28eb3c3fac3185f408446b30b5b77}{m\+Value}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classRoot_adc6338ef170b1c0e07c6e50bd0571515}{m\+Name}
+\item 
+\hyperlink{Root_8h_aba37b6ece0d9fb5495482ccd0e0f272e}{Root\+Container} \hyperlink{classRoot_aface52589cb6e6e464ab70d90d3dc807}{m\+Children}
+\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classRoot_af38e126b7b80124a9ca0d0c1f3076f2d}{m\+Parent}
+\item 
+bool \hyperlink{classRoot_ad85ad4d959d7808ce715802dbaea51e8}{m\+Touched}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Root@{Root}!Root@{Root}}
+\index{Root@{Root}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Root()}{Root()}}]{\setlength{\rightskip}{0pt plus 5cm}Root\+::\+Root (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_ae30f3c6144d2d9df894b392ee45d051f}{}\label{classRoot_ae30f3c6144d2d9df894b392ee45d051f}
+\index{Root@{Root}!````~Root@{$\sim$\+Root}}
+\index{````~Root@{$\sim$\+Root}!Root@{Root}}
+\subsubsection[{\texorpdfstring{$\sim$\+Root()}{~Root()}}]{\setlength{\rightskip}{0pt plus 5cm}Root\+::$\sim$\+Root (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classRoot_ae3b9dd56ac40d582a92b904f8480be7b}{}\label{classRoot_ae3b9dd56ac40d582a92b904f8480be7b}
+
+
+\subsection{Member Function Documentation}
+\index{Root@{Root}!Find@{Find}}
+\index{Find@{Find}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Find(\+Hash\+String const \&a\+Value)}{Find(HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root} $\ast$ Root\+::\+Find (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a3a960a09ba20ccf27233a22a63d863ec}{}\label{classRoot_a3a960a09ba20ccf27233a22a63d863ec}
+
+
+Find node whose name matches value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Root@{Root}!Find\+All@{Find\+All}}
+\index{Find\+All@{Find\+All}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Find\+All(\+Hash\+String const \&a\+Value)}{FindAll(HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::set$<$ {\bf Root} $\ast$ $>$ Root\+::\+Find\+All (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_ade779f92135be7c3661fa7dee8c9b91c}{}\label{classRoot_ade779f92135be7c3661fa7dee8c9b91c}
+
+
+Find all roots at current level among children. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & Name of value to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Set of values amongst children. 
+\end{DoxyReturn}
+\index{Root@{Root}!Get\+Children@{Get\+Children}}
+\index{Get\+Children@{Get\+Children}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Get\+Children()}{GetChildren()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root\+Container} \& Root\+::\+Get\+Children (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a02a74cccccdd6627072949b64551e58a}{}\label{classRoot_a02a74cccccdd6627072949b64551e58a}
+
+
+Get children for node. 
+
+\index{Root@{Root}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Root\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classRoot_a97bcc25c8b962a681cb53096b0585a28}{}\label{classRoot_a97bcc25c8b962a681cb53096b0585a28}
+
+
+Get name of node. 
+
+\index{Root@{Root}!Get\+Parent@{Get\+Parent}}
+\index{Get\+Parent@{Get\+Parent}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Get\+Parent() const }{GetParent() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root} $\ast$ Root\+::\+Get\+Parent (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classRoot_a3e976ce215650faeda13959b75764108}{}\label{classRoot_a3e976ce215650faeda13959b75764108}
+
+
+Get node parent. 
+
+\index{Root@{Root}!Get\+Untouched\+Roots@{Get\+Untouched\+Roots}}
+\index{Get\+Untouched\+Roots@{Get\+Untouched\+Roots}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Get\+Untouched\+Roots() const }{GetUntouchedRoots() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root\+Container} Root\+::\+Get\+Untouched\+Roots (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classRoot_a79e5805c907dbf98b466bc2044f7496b}{}\label{classRoot_a79e5805c907dbf98b466bc2044f7496b}
+
+
+Get untouched roots of node (unsearched) 
+
+\index{Root@{Root}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Get\+Value() const }{GetValue() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Root\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classRoot_ab1c77a4b9fbc54ace8ec611fdc5b150d}{}\label{classRoot_ab1c77a4b9fbc54ace8ec611fdc5b150d}
+
+
+Get value of node. 
+
+\index{Root@{Root}!Insert@{Insert}}
+\index{Insert@{Insert}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Insert(\+Root $\ast$root)}{Insert(Root *root)}}]{\setlength{\rightskip}{0pt plus 5cm}void Root\+::\+Insert (
+\begin{DoxyParamCaption}
+\item[{{\bf Root} $\ast$}]{root}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a60275ee59c14bae93b173067a9186dab}{}\label{classRoot_a60275ee59c14bae93b173067a9186dab}
+
+
+Insert root into children. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & \\
+\hline
+\end{DoxyParams}
+\index{Root@{Root}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Root@{Root}}
+\subsubsection[{\texorpdfstring{operator$<$(\+Root const \&rhs)}{operator<(Root const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Root\+::operator$<$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Root} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a5f52ecd89f4db33d293d02eb5548bc95}{}\label{classRoot_a5f52ecd89f4db33d293d02eb5548bc95}
+
+
+Simple alphabetical ordering helper. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & \hyperlink{classRoot}{Root} to check against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if comes before. 
+\end{DoxyReturn}
+\index{Root@{Root}!operator=@{operator=}}
+\index{operator=@{operator=}!Root@{Root}}
+\subsubsection[{\texorpdfstring{operator=(\+Root const \&rhs)}{operator=(Root const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Root\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Root} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a45147d14cfd657da6d34d0a05826c7fc}{}\label{classRoot_a45147d14cfd657da6d34d0a05826c7fc}
+
+
+Set root equal to another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & \hyperlink{classRoot}{Root} to set this equal to. \\
+\hline
+\end{DoxyParams}
+\index{Root@{Root}!Place@{Place}}
+\index{Place@{Place}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Place(\+Hash\+String const \&a\+Root, Hash\+String const \&a\+Element, Hash\+String const \&a\+Value)}{Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Root\+::\+Place (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Root, }
+\item[{{\bf Hash\+String} const \&}]{a\+Element, }
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a0fe1c3f27c24117015025a191d4055e6}{}\label{classRoot_a0fe1c3f27c24117015025a191d4055e6}
+
+
+Place node under this node with root and element name, with value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Root} & \\
+\hline
+{\em a\+Element} & \\
+\hline
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Root@{Root}!Search@{Search}}
+\index{Search@{Search}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Search(\+Hash\+String const \&a\+Value) const }{Search(HashString const &aValue) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root} const $\ast$ Root\+::\+Search (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+) const}\hypertarget{classRoot_a47a028763d0583b91ec52e580f406548}{}\label{classRoot_a47a028763d0583b91ec52e580f406548}
+
+
+Search for node whose name matches value. Does not mark nodes as touched. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Root@{Root}!Set\+Name@{Set\+Name}}
+\index{Set\+Name@{Set\+Name}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Set\+Name(\+Hash\+String const \&a\+Name)}{SetName(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Root\+::\+Set\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a990736feccfa4b7f409e2bbf7203ea58}{}\label{classRoot_a990736feccfa4b7f409e2bbf7203ea58}
+
+
+Set node name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & \\
+\hline
+\end{DoxyParams}
+\index{Root@{Root}!Set\+Parent@{Set\+Parent}}
+\index{Set\+Parent@{Set\+Parent}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Set\+Parent(\+Root $\ast$a\+Parent)}{SetParent(Root *aParent)}}]{\setlength{\rightskip}{0pt plus 5cm}void Root\+::\+Set\+Parent (
+\begin{DoxyParamCaption}
+\item[{{\bf Root} $\ast$}]{a\+Parent}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_a49bbcc48492c04d814ea2a89c35e861f}{}\label{classRoot_a49bbcc48492c04d814ea2a89c35e861f}
+
+
+Set node parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parent} & \\
+\hline
+\end{DoxyParams}
+\index{Root@{Root}!Set\+Value@{Set\+Value}}
+\index{Set\+Value@{Set\+Value}!Root@{Root}}
+\subsubsection[{\texorpdfstring{Set\+Value(\+Hash\+String const \&a\+Value)}{SetValue(HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Root\+::\+Set\+Value (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classRoot_aa5207f1e090f6d1dc6f01dbe14719142}{}\label{classRoot_aa5207f1e090f6d1dc6f01dbe14719142}
+
+
+Set node value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Root@{Root}!m\+Children@{m\+Children}}
+\index{m\+Children@{m\+Children}!Root@{Root}}
+\subsubsection[{\texorpdfstring{m\+Children}{mChildren}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root\+Container} Root\+::m\+Children\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classRoot_aface52589cb6e6e464ab70d90d3dc807}{}\label{classRoot_aface52589cb6e6e464ab70d90d3dc807}
+\index{Root@{Root}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Root@{Root}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Root\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classRoot_adc6338ef170b1c0e07c6e50bd0571515}{}\label{classRoot_adc6338ef170b1c0e07c6e50bd0571515}
+\index{Root@{Root}!m\+Parent@{m\+Parent}}
+\index{m\+Parent@{m\+Parent}!Root@{Root}}
+\subsubsection[{\texorpdfstring{m\+Parent}{mParent}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root}$\ast$ Root\+::m\+Parent\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classRoot_af38e126b7b80124a9ca0d0c1f3076f2d}{}\label{classRoot_af38e126b7b80124a9ca0d0c1f3076f2d}
+\index{Root@{Root}!m\+Touched@{m\+Touched}}
+\index{m\+Touched@{m\+Touched}!Root@{Root}}
+\subsubsection[{\texorpdfstring{m\+Touched}{mTouched}}]{\setlength{\rightskip}{0pt plus 5cm}bool Root\+::m\+Touched\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classRoot_ad85ad4d959d7808ce715802dbaea51e8}{}\label{classRoot_ad85ad4d959d7808ce715802dbaea51e8}
+\index{Root@{Root}!m\+Value@{m\+Value}}
+\index{m\+Value@{m\+Value}!Root@{Root}}
+\subsubsection[{\texorpdfstring{m\+Value}{mValue}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Root\+::m\+Value\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classRoot_a02e28eb3c3fac3185f408446b30b5b77}{}\label{classRoot_a02e28eb3c3fac3185f408446b30b5b77}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Parsers/\hyperlink{Root_8h}{Root.\+h}\item 
+Parsers/\hyperlink{Root_8cpp}{Root.\+cpp}\end{DoxyCompactItemize}

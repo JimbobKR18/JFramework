@@ -1,0 +1,99 @@
+\hypertarget{structCollisionPair}{}\section{Collision\+Pair Struct Reference}
+\label{structCollisionPair}\index{Collision\+Pair@{Collision\+Pair}}
+
+
+{\ttfamily \#include $<$Collision\+Pair.\+h$>$}
+
+
+
+Collaboration diagram for Collision\+Pair\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structCollisionPair_a05d5fb49e2b17348dd83b1139d1c5be5}{Collision\+Pair} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Body1, \hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Body2, \hyperlink{structShape}{Shape} $\ast$a\+Shape1, \hyperlink{structShape}{Shape} $\ast$a\+Shape2)
+\item 
+void \hyperlink{structCollisionPair_ada57982d0749264b5fff1d5a977932d2}{operator=} (\hyperlink{structCollisionPair}{Collision\+Pair} const \&rhs)
+\item 
+bool \hyperlink{structCollisionPair_ac481c2f34b99b9e3a218d44c66610d41}{operator==} (\hyperlink{structCollisionPair}{Collision\+Pair} const \&rhs)
+\item 
+void \hyperlink{structCollisionPair_aa92191244a6c5bbc3b4fd2d1bbef350b}{Switch} ()
+\begin{DoxyCompactList}\small\item\em Switch sides for objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$ \hyperlink{structCollisionPair_a8cd94df2e37f03c3646624187f0019ba}{m\+Bodies} \mbox{[}2\mbox{]}
+\item 
+\hyperlink{structShape}{Shape} $\ast$ \hyperlink{structCollisionPair_ac6db0c6dd34e89f672736c776c6fc648}{m\+Shapes} \mbox{[}2\mbox{]}
+\item 
+float \hyperlink{structCollisionPair_ac83cb38a76dbbfae67c49e5e1da010b4}{m\+Penetration}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structCollisionPair_a65c270e50cdf60e279a4f4a0ece62900}{m\+Relative\+Velocity}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structCollisionPair_ab5a7d924e1c82a966638e5b8471ff086}{m\+Normal}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Collision\+Pair@{Collision\+Pair}!Collision\+Pair@{Collision\+Pair}}
+\index{Collision\+Pair@{Collision\+Pair}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{Collision\+Pair(\+Physics\+Object $\ast$a\+Body1, Physics\+Object $\ast$a\+Body2, Shape $\ast$a\+Shape1, Shape $\ast$a\+Shape2)}{CollisionPair(PhysicsObject *aBody1, PhysicsObject *aBody2, Shape *aShape1, Shape *aShape2)}}]{\setlength{\rightskip}{0pt plus 5cm}Collision\+Pair\+::\+Collision\+Pair (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Body1, }
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Body2, }
+\item[{{\bf Shape} $\ast$}]{a\+Shape1, }
+\item[{{\bf Shape} $\ast$}]{a\+Shape2}
+\end{DoxyParamCaption}
+)}\hypertarget{structCollisionPair_a05d5fb49e2b17348dd83b1139d1c5be5}{}\label{structCollisionPair_a05d5fb49e2b17348dd83b1139d1c5be5}
+
+
+\subsection{Member Function Documentation}
+\index{Collision\+Pair@{Collision\+Pair}!operator=@{operator=}}
+\index{operator=@{operator=}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{operator=(\+Collision\+Pair const \&rhs)}{operator=(CollisionPair const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\+Pair\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structCollisionPair_ada57982d0749264b5fff1d5a977932d2}{}\label{structCollisionPair_ada57982d0749264b5fff1d5a977932d2}
+\index{Collision\+Pair@{Collision\+Pair}!operator==@{operator==}}
+\index{operator==@{operator==}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{operator==(\+Collision\+Pair const \&rhs)}{operator==(CollisionPair const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Pair\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structCollisionPair_ac481c2f34b99b9e3a218d44c66610d41}{}\label{structCollisionPair_ac481c2f34b99b9e3a218d44c66610d41}
+\index{Collision\+Pair@{Collision\+Pair}!Switch@{Switch}}
+\index{Switch@{Switch}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{Switch()}{Switch()}}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\+Pair\+::\+Switch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structCollisionPair_aa92191244a6c5bbc3b4fd2d1bbef350b}{}\label{structCollisionPair_aa92191244a6c5bbc3b4fd2d1bbef350b}
+
+
+Switch sides for objects. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Collision\+Pair@{Collision\+Pair}!m\+Bodies@{m\+Bodies}}
+\index{m\+Bodies@{m\+Bodies}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{m\+Bodies}{mBodies}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physics\+Object}$\ast$ Collision\+Pair\+::m\+Bodies\mbox{[}2\mbox{]}}\hypertarget{structCollisionPair_a8cd94df2e37f03c3646624187f0019ba}{}\label{structCollisionPair_a8cd94df2e37f03c3646624187f0019ba}
+\index{Collision\+Pair@{Collision\+Pair}!m\+Normal@{m\+Normal}}
+\index{m\+Normal@{m\+Normal}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{m\+Normal}{mNormal}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Collision\+Pair\+::m\+Normal}\hypertarget{structCollisionPair_ab5a7d924e1c82a966638e5b8471ff086}{}\label{structCollisionPair_ab5a7d924e1c82a966638e5b8471ff086}
+\index{Collision\+Pair@{Collision\+Pair}!m\+Penetration@{m\+Penetration}}
+\index{m\+Penetration@{m\+Penetration}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{m\+Penetration}{mPenetration}}]{\setlength{\rightskip}{0pt plus 5cm}float Collision\+Pair\+::m\+Penetration}\hypertarget{structCollisionPair_ac83cb38a76dbbfae67c49e5e1da010b4}{}\label{structCollisionPair_ac83cb38a76dbbfae67c49e5e1da010b4}
+\index{Collision\+Pair@{Collision\+Pair}!m\+Relative\+Velocity@{m\+Relative\+Velocity}}
+\index{m\+Relative\+Velocity@{m\+Relative\+Velocity}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{m\+Relative\+Velocity}{mRelativeVelocity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Collision\+Pair\+::m\+Relative\+Velocity}\hypertarget{structCollisionPair_a65c270e50cdf60e279a4f4a0ece62900}{}\label{structCollisionPair_a65c270e50cdf60e279a4f4a0ece62900}
+\index{Collision\+Pair@{Collision\+Pair}!m\+Shapes@{m\+Shapes}}
+\index{m\+Shapes@{m\+Shapes}!Collision\+Pair@{Collision\+Pair}}
+\subsubsection[{\texorpdfstring{m\+Shapes}{mShapes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shape}$\ast$ Collision\+Pair\+::m\+Shapes\mbox{[}2\mbox{]}}\hypertarget{structCollisionPair_ac6db0c6dd34e89f672736c776c6fc648}{}\label{structCollisionPair_ac6db0c6dd34e89f672736c776c6fc648}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physics/\hyperlink{CollisionPair_8h}{Collision\+Pair.\+h}\item 
+Physics/\hyperlink{CollisionPair_8cpp}{Collision\+Pair.\+cpp}\end{DoxyCompactItemize}

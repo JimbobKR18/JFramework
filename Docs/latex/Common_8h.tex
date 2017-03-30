@@ -1,0 +1,97 @@
+\hypertarget{Common_8h}{}\section{Core/\+Common.h File Reference}
+\label{Common_8h}\index{Core/\+Common.\+h@{Core/\+Common.\+h}}
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$cctype$>$}\\*
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$set$>$}\\*
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$iterator$>$}\\*
+{\ttfamily \#include $<$cfloat$>$}\\*
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\\*
+{\ttfamily \#include $<$chrono$>$}\\*
+{\ttfamily \#include $<$ctime$>$}\\*
+{\ttfamily \#include \char`\"{}Hash\+String.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Smart\+Pointer.\+h\char`\"{}}\\*
+Include dependency graph for Common.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceCommon}{Common}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Common_8h_ab7dacb1c334f508a3a755d79b6b77899}{Debug\+Log\+Print}~std\+::printf
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string const \hyperlink{namespaceCommon_a5e31a3c13642f991a5b3e7b17c97e0c8}{Common\+::\+Relative\+Path} (std\+::string const \&a\+Sub\+Folder, std\+::string const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Gets relative path for asset files, set by system properties. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a489a6fbbf79abd5e4e7a691630d55d8c}{Common\+::\+String\+To\+Int} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Int. \end{DoxyCompactList}\item 
+float \hyperlink{namespaceCommon_aeac816fd13590f4ad6640aff60414ec7}{Common\+::\+String\+To\+Float} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Float. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceCommon_a112a898515a1a04458234ef28ba8525b}{Common\+::\+String\+To\+Bool} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Boolean, hard set to look for \char`\"{}true\char`\"{}. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{namespaceCommon_a2911fcaab26e270ccb09d14d88356972}{Common\+::\+String\+To\+Int\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Int Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \hyperlink{namespaceCommon_a084ca9932c59120f59c770fffa18ac60}{Common\+::\+String\+To\+Float\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Float Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ bool $>$ \hyperlink{namespaceCommon_ac079fde773cfeac7b049a58cda7b5d94}{Common\+::\+String\+To\+Bool\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Bool Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{namespaceCommon_aa857ec2f8590997d38a962106e00a665}{Common\+::\+String\+To\+String\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to String Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{namespaceCommon_a75c4ca78dc57b61f2716fa790b60aedd}{Common\+::\+String\+To\+Hash\+String\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to \hyperlink{classHashString}{Hash\+String} Vector. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a4f4719858903c264a76f1f6835dc223b}{Common\+::\+Int\+To\+String} (int const a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Int to String. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_ab0bd4076a5c4cd7fdf2a0692b5510abd}{Common\+::\+Float\+To\+String} (float const a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Float to String. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a0f38dc478fcdf11cc930463152633056}{Common\+::\+Bool\+To\+String} (bool const a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Boolean to String. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a4ef73200227be129d5b2349ab9d35b8f}{Common\+::\+Int\+Vector\+To\+String} (std\+::vector$<$ int $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Int Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a091ad44f4b1fe6dc8bed8a51d05a66e0}{Common\+::\+Float\+Vector\+To\+String} (std\+::vector$<$ float $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Float Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_aec7d97bf1dfeed7008f0a6ddb7f5bff9}{Common\+::\+Bool\+Vector\+To\+String} (std\+::vector$<$ bool $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Bool Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a3c3ce096acc73170b49d3a86e0e07a86}{Common\+::\+String\+Vector\+To\+String} (std\+::vector$<$ std\+::string $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a869bf03747ab50ba14b50147fb4d406e}{Common\+::\+Hash\+String\+Vector\+To\+String} (std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts \hyperlink{classHashString}{Hash\+String} Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a1858a26280ca754d36e9ff57f85ca5a7}{Common\+::\+Parse\+String} (std\+::istream $\ast$infile, std\+::string const \&a\+String)
+\begin{DoxyCompactList}\small\item\em If find \char`\"{}\+Literal(\char`\"{} keep forming string until find \char`\"{})\char`\"{}, or Constant( \char`\"{}etc.\char`\"{} ) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_aead0f844190b0b20cfb5e2dd50d7d622}{Common\+::\+Trim\+String} (std\+::string const \&a\+String)
+\begin{DoxyCompactList}\small\item\em Trim whitespace from a string. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{namespaceCommon_a51874188abdc26c800f2da6840e4a5eb}{Common\+::\+Retrieve\+Name\+From\+File\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Get bottom level filename (last sequence after last /) \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function} (std\+::string const \&a\+String)
+\begin{DoxyCompactList}\small\item\em String hash function, good enough default. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_acbc024bbc4c442c690c150c3c846d22a}{Common\+::\+Random\+Int\+In\+Range} (int const aX, int const bX)
+\begin{DoxyCompactList}\small\item\em Get random Int within a range. \end{DoxyCompactList}\item 
+float \hyperlink{namespaceCommon_a6bb24acf07012e8a715ec182891a852d}{Common\+::\+Random\+Float\+In\+Range} (float const aX, float const bX)
+\begin{DoxyCompactList}\small\item\em Get random Float within a range. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a376a1d79a10be75c3acc3cc69c151ec9}{Common\+::\+Get\+Current\+Year} ()
+\begin{DoxyCompactList}\small\item\em Get current year. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a9f2091ed3dcff65d0382a1089a9aae87}{Common\+::\+Get\+Current\+Month} ()
+\begin{DoxyCompactList}\small\item\em Get current month. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_ab8783ce3b9fc2ab21ea67c688d3ad404}{Common\+::\+Get\+Current\+Day\+Of\+Month} ()
+\begin{DoxyCompactList}\small\item\em Get current day of the month. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Common.\+h@{Common.\+h}!Debug\+Log\+Print@{Debug\+Log\+Print}}
+\index{Debug\+Log\+Print@{Debug\+Log\+Print}!Common.\+h@{Common.\+h}}
+\subsubsection[{\texorpdfstring{Debug\+Log\+Print}{DebugLogPrint}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Debug\+Log\+Print~std\+::printf}\hypertarget{Common_8h_ab7dacb1c334f508a3a755d79b6b77899}{}\label{Common_8h_ab7dacb1c334f508a3a755d79b6b77899}

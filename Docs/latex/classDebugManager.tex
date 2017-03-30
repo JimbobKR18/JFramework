@@ -1,0 +1,154 @@
+\hypertarget{classDebugManager}{}\section{Debug\+Manager Class Reference}
+\label{classDebugManager}\index{Debug\+Manager@{Debug\+Manager}}
+
+
+{\ttfamily \#include $<$Debug\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Debug\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Debug\+Manager\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDebugManager_ae54ad99eb4a750a811de2268e4e126d2}{Debug\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App)
+\item 
+\hyperlink{classDebugManager_acc6abe356ece9ec1a3f78b9161dd4e3e}{$\sim$\+Debug\+Manager} ()
+\item 
+int \hyperlink{classDebugManager_ae3936b1e73ba65ee4a7c9930b56f8ec4}{Handle\+Event} (S\+D\+L\+\_\+\+Event \&event)
+\item 
+void \hyperlink{classDebugManager_ab72b08cee02c75870ab6e26aa7cc7f82}{Handle\+Create} (\hyperlink{classObjectCreateMessage}{Object\+Create\+Message} $\ast$a\+Msg)
+\item 
+void \hyperlink{classDebugManager_a3ebe379f0a35108252f81cf7a385198e}{Handle\+Delete} (\hyperlink{classObjectDeleteMessage}{Object\+Delete\+Message} $\ast$a\+Msg)
+\item 
+virtual void \hyperlink{classDebugManager_ac38c481d6098016147998e4600d1fbbf}{Update} ()
+\item 
+virtual void \hyperlink{classDebugManager_a75c0d45e3ad7eb78e39c70176be8b49c}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\item 
+virtual void \hyperlink{classDebugManager_ade321538ddc51cadbbd9624ce6c0628d}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classDebugManager_a0c4d82216d587db620c4ae46fd138ca3}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classDebugManager_a99c1d8e25153ba19a1b841fc37cbc665}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ size\+\_\+t, int $>$ \hyperlink{classDebugManager_aa13278bb4f19a3ff85455556c003bef3}{m\+Invalid\+Memory}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classDebugManager_a8eb62360ecdb95fbd935c214f264ffa2}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Debug\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Debug\+Manager@{Debug\+Manager}!Debug\+Manager@{Debug\+Manager}}
+\index{Debug\+Manager@{Debug\+Manager}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Debug\+Manager(\+Game\+App $\ast$a\+App)}{DebugManager(GameApp *aApp)}}]{\setlength{\rightskip}{0pt plus 5cm}Debug\+Manager\+::\+Debug\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App}
+\end{DoxyParamCaption}
+)}\hypertarget{classDebugManager_ae54ad99eb4a750a811de2268e4e126d2}{}\label{classDebugManager_ae54ad99eb4a750a811de2268e4e126d2}
+\index{Debug\+Manager@{Debug\+Manager}!````~Debug\+Manager@{$\sim$\+Debug\+Manager}}
+\index{````~Debug\+Manager@{$\sim$\+Debug\+Manager}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Debug\+Manager()}{~DebugManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Debug\+Manager\+::$\sim$\+Debug\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDebugManager_acc6abe356ece9ec1a3f78b9161dd4e3e}{}\label{classDebugManager_acc6abe356ece9ec1a3f78b9161dd4e3e}
+
+
+\subsection{Member Function Documentation}
+\index{Debug\+Manager@{Debug\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Debug\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classDebugManager_a0c4d82216d587db620c4ae46fd138ca3}{}\label{classDebugManager_a0c4d82216d587db620c4ae46fd138ca3}
+\index{Debug\+Manager@{Debug\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Debug\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classDebugManager_a99c1d8e25153ba19a1b841fc37cbc665}{}\label{classDebugManager_a99c1d8e25153ba19a1b841fc37cbc665}
+\index{Debug\+Manager@{Debug\+Manager}!Handle\+Create@{Handle\+Create}}
+\index{Handle\+Create@{Handle\+Create}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Handle\+Create(\+Object\+Create\+Message $\ast$a\+Msg)}{HandleCreate(ObjectCreateMessage *aMsg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Debug\+Manager\+::\+Handle\+Create (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\+Create\+Message} $\ast$}]{a\+Msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classDebugManager_ab72b08cee02c75870ab6e26aa7cc7f82}{}\label{classDebugManager_ab72b08cee02c75870ab6e26aa7cc7f82}
+\index{Debug\+Manager@{Debug\+Manager}!Handle\+Delete@{Handle\+Delete}}
+\index{Handle\+Delete@{Handle\+Delete}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Handle\+Delete(\+Object\+Delete\+Message $\ast$a\+Msg)}{HandleDelete(ObjectDeleteMessage *aMsg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Debug\+Manager\+::\+Handle\+Delete (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\+Delete\+Message} $\ast$}]{a\+Msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classDebugManager_a3ebe379f0a35108252f81cf7a385198e}{}\label{classDebugManager_a3ebe379f0a35108252f81cf7a385198e}
+\index{Debug\+Manager@{Debug\+Manager}!Handle\+Event@{Handle\+Event}}
+\index{Handle\+Event@{Handle\+Event}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Handle\+Event(\+S\+D\+L\+\_\+\+Event \&event)}{HandleEvent(SDL_Event &event)}}]{\setlength{\rightskip}{0pt plus 5cm}int Debug\+Manager\+::\+Handle\+Event (
+\begin{DoxyParamCaption}
+\item[{S\+D\+L\+\_\+\+Event \&}]{event}
+\end{DoxyParamCaption}
+)}\hypertarget{classDebugManager_ae3936b1e73ba65ee4a7c9930b56f8ec4}{}\label{classDebugManager_ae3936b1e73ba65ee4a7c9930b56f8ec4}
+\index{Debug\+Manager@{Debug\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Debug\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDebugManager_ade321538ddc51cadbbd9624ce6c0628d}{}\label{classDebugManager_ade321538ddc51cadbbd9624ce6c0628d}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Debug\+Manager@{Debug\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Debug\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDebugManager_a75c0d45e3ad7eb78e39c70176be8b49c}{}\label{classDebugManager_a75c0d45e3ad7eb78e39c70176be8b49c}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Debug\+Manager@{Debug\+Manager}!Update@{Update}}
+\index{Update@{Update}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Debug\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDebugManager_ac38c481d6098016147998e4600d1fbbf}{}\label{classDebugManager_ac38c481d6098016147998e4600d1fbbf}
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Debug\+Manager@{Debug\+Manager}!m\+Invalid\+Memory@{m\+Invalid\+Memory}}
+\index{m\+Invalid\+Memory@{m\+Invalid\+Memory}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Invalid\+Memory}{mInvalidMemory}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$size\+\_\+t, int$>$ Debug\+Manager\+::m\+Invalid\+Memory\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classDebugManager_aa13278bb4f19a3ff85455556c003bef3}{}\label{classDebugManager_aa13278bb4f19a3ff85455556c003bef3}
+\index{Debug\+Manager@{Debug\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Debug\+Manager@{Debug\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Debug\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Debug\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classDebugManager_a8eb62360ecdb95fbd935c214f264ffa2}{}\label{classDebugManager_a8eb62360ecdb95fbd935c214f264ffa2}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{DebugManager_8h}{Debug\+Manager.\+h}\item 
+Managers/\hyperlink{DebugManager_8cpp}{Debug\+Manager.\+cpp}\end{DoxyCompactItemize}

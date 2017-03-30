@@ -1,0 +1,108 @@
+\hypertarget{classForceGenerator}{}\section{Force\+Generator Class Reference}
+\label{classForceGenerator}\index{Force\+Generator@{Force\+Generator}}
+
+
+{\ttfamily \#include $<$Force\+Generator.\+h$>$}
+
+
+
+Inheritance diagram for Force\+Generator\+:
+% FIG 0
+
+
+Collaboration diagram for Force\+Generator\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classForceGenerator_ac683944191a985d6032bf4f2c73c809f}{Force\+Generator} (\hyperlink{structVector3}{Vector3} const \&a\+Force)
+\item 
+virtual \hyperlink{classForceGenerator_a8bcdb8b6f176e8d292b45524119cf77e}{$\sim$\+Force\+Generator} ()
+\item 
+virtual void \hyperlink{classForceGenerator_a7a5187e0514efee10d248cdb741fdb01}{Update} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object, float a\+Duration)=0
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classForceGenerator_a19ea7c53449a930a94d67bd0fe677cdd}{Get\+Force} () const 
+\begin{DoxyCompactList}\small\item\em Get force. \end{DoxyCompactList}\item 
+void \hyperlink{classForceGenerator_a1083f1a2a161487c2ed748e8c10e2123}{Set\+Active} (bool a\+Active)
+\begin{DoxyCompactList}\small\item\em Set whether of not this generator is active. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classForceGenerator_ad9aa4f065b885c07b4e3fc3ee4a5b5a3}{m\+Force}
+\item 
+bool \hyperlink{classForceGenerator_ac4f487f43bf862af793ebda2477fe85f}{m\+Active}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Force\+Generator@{Force\+Generator}!Force\+Generator@{Force\+Generator}}
+\index{Force\+Generator@{Force\+Generator}!Force\+Generator@{Force\+Generator}}
+\subsubsection[{\texorpdfstring{Force\+Generator(\+Vector3 const \&a\+Force)}{ForceGenerator(Vector3 const &aForce)}}]{\setlength{\rightskip}{0pt plus 5cm}Force\+Generator\+::\+Force\+Generator (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Force}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceGenerator_ac683944191a985d6032bf4f2c73c809f}{}\label{classForceGenerator_ac683944191a985d6032bf4f2c73c809f}
+\index{Force\+Generator@{Force\+Generator}!````~Force\+Generator@{$\sim$\+Force\+Generator}}
+\index{````~Force\+Generator@{$\sim$\+Force\+Generator}!Force\+Generator@{Force\+Generator}}
+\subsubsection[{\texorpdfstring{$\sim$\+Force\+Generator()}{~ForceGenerator()}}]{\setlength{\rightskip}{0pt plus 5cm}Force\+Generator\+::$\sim$\+Force\+Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classForceGenerator_a8bcdb8b6f176e8d292b45524119cf77e}{}\label{classForceGenerator_a8bcdb8b6f176e8d292b45524119cf77e}
+
+
+\subsection{Member Function Documentation}
+\index{Force\+Generator@{Force\+Generator}!Get\+Force@{Get\+Force}}
+\index{Get\+Force@{Get\+Force}!Force\+Generator@{Force\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Force() const }{GetForce() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Force\+Generator\+::\+Get\+Force (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classForceGenerator_a19ea7c53449a930a94d67bd0fe677cdd}{}\label{classForceGenerator_a19ea7c53449a930a94d67bd0fe677cdd}
+
+
+Get force. 
+
+\index{Force\+Generator@{Force\+Generator}!Set\+Active@{Set\+Active}}
+\index{Set\+Active@{Set\+Active}!Force\+Generator@{Force\+Generator}}
+\subsubsection[{\texorpdfstring{Set\+Active(bool a\+Active)}{SetActive(bool aActive)}}]{\setlength{\rightskip}{0pt plus 5cm}void Force\+Generator\+::\+Set\+Active (
+\begin{DoxyParamCaption}
+\item[{bool}]{a\+Active}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceGenerator_a1083f1a2a161487c2ed748e8c10e2123}{}\label{classForceGenerator_a1083f1a2a161487c2ed748e8c10e2123}
+
+
+Set whether of not this generator is active. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Active} & \\
+\hline
+\end{DoxyParams}
+\index{Force\+Generator@{Force\+Generator}!Update@{Update}}
+\index{Update@{Update}!Force\+Generator@{Force\+Generator}}
+\subsubsection[{\texorpdfstring{Update(\+Physics\+Object $\ast$a\+Object, float a\+Duration)=0}{Update(PhysicsObject *aObject, float aDuration)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Force\+Generator\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object, }
+\item[{float}]{a\+Duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classForceGenerator_a7a5187e0514efee10d248cdb741fdb01}{}\label{classForceGenerator_a7a5187e0514efee10d248cdb741fdb01}
+
+
+Implemented in \hyperlink{classGravityGenerator_abd675c20711c69006968e9e400296ae1}{Gravity\+Generator}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Force\+Generator@{Force\+Generator}!m\+Active@{m\+Active}}
+\index{m\+Active@{m\+Active}!Force\+Generator@{Force\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Active}{mActive}}]{\setlength{\rightskip}{0pt plus 5cm}bool Force\+Generator\+::m\+Active\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classForceGenerator_ac4f487f43bf862af793ebda2477fe85f}{}\label{classForceGenerator_ac4f487f43bf862af793ebda2477fe85f}
+\index{Force\+Generator@{Force\+Generator}!m\+Force@{m\+Force}}
+\index{m\+Force@{m\+Force}!Force\+Generator@{Force\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Force}{mForce}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Force\+Generator\+::m\+Force\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classForceGenerator_ad9aa4f065b885c07b4e3fc3ee4a5b5a3}{}\label{classForceGenerator_ad9aa4f065b885c07b4e3fc3ee4a5b5a3}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physics/\hyperlink{ForceGenerator_8h}{Force\+Generator.\+h}\item 
+Physics/\hyperlink{ForceGenerator_8cpp}{Force\+Generator.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,283 @@
+\hypertarget{classParser}{}\section{Parser Class Reference}
+\label{classParser}\index{Parser@{Parser}}
+
+
+{\ttfamily \#include $<$Parser.\+h$>$}
+
+
+
+Inheritance diagram for Parser\+:
+% FIG 0
+
+
+Collaboration diagram for Parser\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classParser_aa83a3c8c6536591ed22ee8352e903f88}{Parser} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+virtual \hyperlink{classParser_a3e658b5917a93a3ef648050d060e3a93}{$\sim$\+Parser} ()
+\item 
+int \hyperlink{classParser_aa95b132e2875cb6c816740a5b6efb7ed}{Get\+Current\+Object\+Index} () const 
+\begin{DoxyCompactList}\small\item\em Get current object index (which object are we looking at? \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classParser_aae90f9344fac5f47ec4d04e0a0e80be7}{Get\+Filename} () const 
+\begin{DoxyCompactList}\small\item\em Get name of file. \end{DoxyCompactList}\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classParser_a0db07cea3d0fe45e8172c43fb48ed751}{Get\+Base\+Root} () const 
+\begin{DoxyCompactList}\small\item\em Get top level root node. \end{DoxyCompactList}\item 
+void \hyperlink{classParser_a8669bde3f52d54908dcf48f61aee0944}{Set\+Current\+Object\+Index} (int const a\+Index)
+\begin{DoxyCompactList}\small\item\em Set object index. \end{DoxyCompactList}\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classParser_aab398982018413441cb67d384f9a60ff}{Find} (\hyperlink{classHashString}{Hash\+String} const \&a\+Element)
+\begin{DoxyCompactList}\small\item\em Find element by name (first occurrence) \end{DoxyCompactList}\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classParser_a1db926622d78bc47b41c5c1a81325368}{Find} (\hyperlink{classHashString}{Hash\+String} const \&a\+Root, \hyperlink{classHashString}{Hash\+String} const \&a\+Element)
+\begin{DoxyCompactList}\small\item\em Find node by name two levels deep (first parent, then element) \end{DoxyCompactList}\item 
+std\+::set$<$ \hyperlink{classRoot}{Root} $\ast$ $>$ \hyperlink{classParser_ae97696a8252b3b1bc11fcafb6b83b545}{Find\+All} (\hyperlink{classHashString}{Hash\+String} const \&a\+Element)
+\begin{DoxyCompactList}\small\item\em Find all nodes with matching name. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classParser_ac4a951ef940a816dde511d7f5c173ab9}{Parse} ()=0
+\item 
+void \hyperlink{classParser_ac1a64b61a7db025e676b2101b988f358}{Place} (\hyperlink{classHashString}{Hash\+String} const \&a\+Element, \hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Write value to element. \end{DoxyCompactList}\item 
+void \hyperlink{classParser_a3854ac813a7208b97558048eca223368}{Place} (\hyperlink{classHashString}{Hash\+String} const \&a\+Root, \hyperlink{classHashString}{Hash\+String} const \&a\+Element, \hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Write value to element under parent node. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classParser_a925ea4ac32e6a4feb78fe83d81a8ac84}{Write} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classParser_a5325951c7bcc206bcf0d4d2c573b7366}{m\+Dictionary}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRoot}{Root} $\ast$ \hyperlink{classParser_a2eae7f966b781c3fcb3963d3b7baf71b}{Set\+Up\+Tree} (\hyperlink{classRoot}{Root} $\ast$a\+Base, std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ const \&a\+String\+Hierarchy)
+\begin{DoxyCompactList}\small\item\em From root, build tree, return lowest level node creating. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classParser_a0e3580b63a2f778a137f1708bc8e12b4}{m\+Current\+Object\+Index}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classParser_a2df037b8d7a6216b4fc88c17408c30e3}{m\+Filename}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Parser@{Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Parser(\+Hash\+String const \&a\+Filename)}{Parser(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}Parser\+::\+Parser (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classParser_aa83a3c8c6536591ed22ee8352e903f88}{}\label{classParser_aa83a3c8c6536591ed22ee8352e903f88}
+\index{Parser@{Parser}!````~Parser@{$\sim$\+Parser}}
+\index{````~Parser@{$\sim$\+Parser}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{$\sim$\+Parser()}{~Parser()}}]{\setlength{\rightskip}{0pt plus 5cm}Parser\+::$\sim$\+Parser (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classParser_a3e658b5917a93a3ef648050d060e3a93}{}\label{classParser_a3e658b5917a93a3ef648050d060e3a93}
+
+
+\subsection{Member Function Documentation}
+\index{Parser@{Parser}!Find@{Find}}
+\index{Find@{Find}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Find(\+Hash\+String const \&a\+Element)}{Find(HashString const &aElement)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root} $\ast$ Parser\+::\+Find (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classParser_aab398982018413441cb67d384f9a60ff}{}\label{classParser_aab398982018413441cb67d384f9a60ff}
+
+
+Find element by name (first occurrence) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & Element string to find \\
+\hline
+\end{DoxyParams}
+\index{Parser@{Parser}!Find@{Find}}
+\index{Find@{Find}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Find(\+Hash\+String const \&a\+Root, Hash\+String const \&a\+Element)}{Find(HashString const &aRoot, HashString const &aElement)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root} $\ast$ Parser\+::\+Find (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Root, }
+\item[{{\bf Hash\+String} const \&}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classParser_a1db926622d78bc47b41c5c1a81325368}{}\label{classParser_a1db926622d78bc47b41c5c1a81325368}
+
+
+Find node by name two levels deep (first parent, then element) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Root} & \\
+\hline
+{\em a\+Element} & \\
+\hline
+\end{DoxyParams}
+\index{Parser@{Parser}!Find\+All@{Find\+All}}
+\index{Find\+All@{Find\+All}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Find\+All(\+Hash\+String const \&a\+Element)}{FindAll(HashString const &aElement)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::set$<$ {\bf Root} $\ast$ $>$ Parser\+::\+Find\+All (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classParser_ae97696a8252b3b1bc11fcafb6b83b545}{}\label{classParser_ae97696a8252b3b1bc11fcafb6b83b545}
+
+
+Find all nodes with matching name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & Name of element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+All elements matching name. 
+\end{DoxyReturn}
+\index{Parser@{Parser}!Get\+Base\+Root@{Get\+Base\+Root}}
+\index{Get\+Base\+Root@{Get\+Base\+Root}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Get\+Base\+Root() const }{GetBaseRoot() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root} $\ast$ Parser\+::\+Get\+Base\+Root (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classParser_a0db07cea3d0fe45e8172c43fb48ed751}{}\label{classParser_a0db07cea3d0fe45e8172c43fb48ed751}
+
+
+Get top level root node. 
+
+\index{Parser@{Parser}!Get\+Current\+Object\+Index@{Get\+Current\+Object\+Index}}
+\index{Get\+Current\+Object\+Index@{Get\+Current\+Object\+Index}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Object\+Index() const }{GetCurrentObjectIndex() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Parser\+::\+Get\+Current\+Object\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classParser_aa95b132e2875cb6c816740a5b6efb7ed}{}\label{classParser_aa95b132e2875cb6c816740a5b6efb7ed}
+
+
+Get current object index (which object are we looking at? 
+
+\index{Parser@{Parser}!Get\+Filename@{Get\+Filename}}
+\index{Get\+Filename@{Get\+Filename}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Get\+Filename() const }{GetFilename() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Parser\+::\+Get\+Filename (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classParser_aae90f9344fac5f47ec4d04e0a0e80be7}{}\label{classParser_aae90f9344fac5f47ec4d04e0a0e80be7}
+
+
+Get name of file. 
+
+\index{Parser@{Parser}!Parse@{Parse}}
+\index{Parse@{Parse}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Parse()=0}{Parse()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Parser\+::\+Parse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classParser_ac4a951ef940a816dde511d7f5c173ab9}{}\label{classParser_ac4a951ef940a816dde511d7f5c173ab9}
+
+
+Implemented in \hyperlink{classTextParser_a0e46d85aa94313099411cef24c0fd164}{Text\+Parser}.
+
+\index{Parser@{Parser}!Place@{Place}}
+\index{Place@{Place}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Place(\+Hash\+String const \&a\+Element, Hash\+String const \&a\+Value)}{Place(HashString const &aElement, HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Parser\+::\+Place (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Element, }
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classParser_ac1a64b61a7db025e676b2101b988f358}{}\label{classParser_ac1a64b61a7db025e676b2101b988f358}
+
+
+Write value to element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & \\
+\hline
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Parser@{Parser}!Place@{Place}}
+\index{Place@{Place}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Place(\+Hash\+String const \&a\+Root, Hash\+String const \&a\+Element, Hash\+String const \&a\+Value)}{Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Parser\+::\+Place (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Root, }
+\item[{{\bf Hash\+String} const \&}]{a\+Element, }
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classParser_a3854ac813a7208b97558048eca223368}{}\label{classParser_a3854ac813a7208b97558048eca223368}
+
+
+Write value to element under parent node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Root} & \\
+\hline
+{\em a\+Element} & \\
+\hline
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Parser@{Parser}!Set\+Current\+Object\+Index@{Set\+Current\+Object\+Index}}
+\index{Set\+Current\+Object\+Index@{Set\+Current\+Object\+Index}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Set\+Current\+Object\+Index(int const a\+Index)}{SetCurrentObjectIndex(int const aIndex)}}]{\setlength{\rightskip}{0pt plus 5cm}void Parser\+::\+Set\+Current\+Object\+Index (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Index}
+\end{DoxyParamCaption}
+)}\hypertarget{classParser_a8669bde3f52d54908dcf48f61aee0944}{}\label{classParser_a8669bde3f52d54908dcf48f61aee0944}
+
+
+Set object index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & \\
+\hline
+\end{DoxyParams}
+\index{Parser@{Parser}!Set\+Up\+Tree@{Set\+Up\+Tree}}
+\index{Set\+Up\+Tree@{Set\+Up\+Tree}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Set\+Up\+Tree(\+Root $\ast$a\+Base, std\+::vector$<$ Hash\+String $>$ const \&a\+String\+Hierarchy)}{SetUpTree(Root *aBase, std::vector< HashString > const &aStringHierarchy)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root} $\ast$ Parser\+::\+Set\+Up\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Root} $\ast$}]{a\+Base, }
+\item[{std\+::vector$<$ {\bf Hash\+String} $>$ const \&}]{a\+String\+Hierarchy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classParser_a2eae7f966b781c3fcb3963d3b7baf71b}{}\label{classParser_a2eae7f966b781c3fcb3963d3b7baf71b}
+
+
+From root, build tree, return lowest level node creating. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Base} & Where to start building from. \\
+\hline
+{\em a\+String\+Hierarchy} & \\
+\hline
+\end{DoxyParams}
+\index{Parser@{Parser}!Write@{Write}}
+\index{Write@{Write}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{Write()=0}{Write()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Parser\+::\+Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classParser_a925ea4ac32e6a4feb78fe83d81a8ac84}{}\label{classParser_a925ea4ac32e6a4feb78fe83d81a8ac84}
+
+
+Implemented in \hyperlink{classTextParser_a3565eef49bd6e0a41910a1f115e04ed4}{Text\+Parser}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Parser@{Parser}!m\+Current\+Object\+Index@{m\+Current\+Object\+Index}}
+\index{m\+Current\+Object\+Index@{m\+Current\+Object\+Index}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{m\+Current\+Object\+Index}{mCurrentObjectIndex}}]{\setlength{\rightskip}{0pt plus 5cm}int Parser\+::m\+Current\+Object\+Index\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classParser_a0e3580b63a2f778a137f1708bc8e12b4}{}\label{classParser_a0e3580b63a2f778a137f1708bc8e12b4}
+\index{Parser@{Parser}!m\+Dictionary@{m\+Dictionary}}
+\index{m\+Dictionary@{m\+Dictionary}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{m\+Dictionary}{mDictionary}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Root}$\ast$ Parser\+::m\+Dictionary\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classParser_a5325951c7bcc206bcf0d4d2c573b7366}{}\label{classParser_a5325951c7bcc206bcf0d4d2c573b7366}
+\index{Parser@{Parser}!m\+Filename@{m\+Filename}}
+\index{m\+Filename@{m\+Filename}!Parser@{Parser}}
+\subsubsection[{\texorpdfstring{m\+Filename}{mFilename}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Parser\+::m\+Filename\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classParser_a2df037b8d7a6216b4fc88c17408c30e3}{}\label{classParser_a2df037b8d7a6216b4fc88c17408c30e3}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Parsers/\hyperlink{Parser_8h}{Parser.\+h}\item 
+Parsers/\hyperlink{Parser_8cpp}{Parser.\+cpp}\end{DoxyCompactItemize}

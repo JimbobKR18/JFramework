@@ -1,0 +1,8 @@
+digraph "Input" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_e540aa96518235b344e655c4cbbe7889 [shape=box, label="Input", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_e540aa96518235b344e655c4cbbe7889.html"];
+  dir_c6310732a22f63c0c2fc5595561e68f1 [shape=box label="Core" fillcolor="white" style="filled" color="red" URL="dir_c6310732a22f63c0c2fc5595561e68f1.html"];
+  dir_e540aa96518235b344e655c4cbbe7889->dir_c6310732a22f63c0c2fc5595561e68f1 [headlabel="2", labeldistance=1.5 headhref="dir_000005_000002.html"];
+}

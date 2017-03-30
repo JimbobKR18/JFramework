@@ -1,0 +1,365 @@
+\hypertarget{classView}{}\section{View Class Reference}
+\label{classView}\index{View@{View}}
+
+
+{\ttfamily \#include $<$View.\+h$>$}
+
+
+
+Collaboration diagram for View\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classView_a68bebba994b428bae3bcf2327687dd25}{View} (float a\+Time=0.\+0f)
+\item 
+virtual \hyperlink{classView_ad0dc854db9aabbea98a334dec89f785c}{$\sim$\+View} ()
+\item 
+\hyperlink{classTransform}{Transform} \& \hyperlink{classView_afda848b1506718346d0ed8ec20d2d3a7}{Get\+Transform} ()
+\begin{DoxyCompactList}\small\item\em Get transform of view. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \& \hyperlink{classView_ab93f0dc7010f378841d3f621b38b9809}{Get\+Position} ()
+\begin{DoxyCompactList}\small\item\em Get position of view. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \& \hyperlink{classView_a613df09b5105deac34c1de42f75dbac6}{Get\+Size} ()
+\begin{DoxyCompactList}\small\item\em Get size of view. \end{DoxyCompactList}\item 
+\hyperlink{structMatrix33}{Matrix33} \& \hyperlink{classView_ace4ba80de1b29dfb5eb12720b2879f99}{Get\+Rotation} ()
+\begin{DoxyCompactList}\small\item\em Get rotation of view. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \& \hyperlink{classView_a585a51263a834f63f663e1a9ba40c5ef}{Get\+Scale} ()
+\begin{DoxyCompactList}\small\item\em Get scale of view. \end{DoxyCompactList}\item 
+\hyperlink{structMatrix33}{Matrix33} \hyperlink{classView_a100d422b3ed969d3405a3c1bcbe6f99d}{Get\+Final\+Transform} ()
+\begin{DoxyCompactList}\small\item\em Helper method to combine matrices together. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classView_acbc3b948338603042b7d0600d13b7ed4}{Get\+Half\+Size} () const 
+\begin{DoxyCompactList}\small\item\em Get half size of view. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classView_a28a048bc7efee4bbf31c3f70e46744aa}{Get\+Max\+Boundary} () const 
+\begin{DoxyCompactList}\small\item\em Get maximum boundary of view. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classView_ac992dd57295b2abc2fdf5a01716a5028}{Get\+Min\+Boundary} () const 
+\begin{DoxyCompactList}\small\item\em Get minimum boundary of view. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classView_ac60fd3c0991ad9d78d5d1df2ac7b12c6}{Get\+Target} ()
+\begin{DoxyCompactList}\small\item\em Get target for view. \end{DoxyCompactList}\item 
+void \hyperlink{classView_a000cf3940bdffe6e72dd64f94ddc0cbf}{Set\+Size} (\hyperlink{structVector3}{Vector3} const \&a\+Size)
+\begin{DoxyCompactList}\small\item\em Set size of view. \end{DoxyCompactList}\item 
+void \hyperlink{classView_aa04523df15cad5eaed9b05d219a0757b}{Set\+Position} (\hyperlink{structVector3}{Vector3} const \&a\+Pos)
+\begin{DoxyCompactList}\small\item\em Set position of view. \end{DoxyCompactList}\item 
+void \hyperlink{classView_a7dd425ca7734d703adeb2d70f15358be}{Set\+Target} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Obj)
+\begin{DoxyCompactList}\small\item\em Set view target (who to follow), clears interpolator. \end{DoxyCompactList}\item 
+void \hyperlink{classView_a7658c93b38082640acb8cab5910963fd}{Set\+Time} (float a\+Time)
+\begin{DoxyCompactList}\small\item\em Set travel time of motion. \end{DoxyCompactList}\item 
+void \hyperlink{classView_a8df97a7b467a3bb0256e31428d04dafd}{Set\+Max\+Boundary} (\hyperlink{structVector3}{Vector3} const \&a\+Max\+Boundary)
+\begin{DoxyCompactList}\small\item\em Set max boundary of view. \end{DoxyCompactList}\item 
+void \hyperlink{classView_a68644e92d6752ab8119e5ec8277853be}{Set\+Min\+Boundary} (\hyperlink{structVector3}{Vector3} const \&a\+Min\+Boundary)
+\begin{DoxyCompactList}\small\item\em Set min boundary of view. \end{DoxyCompactList}\item 
+void \hyperlink{classView_a04753454b8a9c533469a24d7c202b994}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTransform}{Transform} \hyperlink{classView_a0d6ae028e18a181c998c8f04be9b8b4f}{m\+Transform}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classView_aa2b272158437993a873cf93d934f3d4c}{m\+Half\+Size}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classView_afe0ac455a31422c43d5fa3dcd2e51fc4}{m\+Max\+Boundary}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classView_a3581943c539feca7e21be9990cbe9de0}{m\+Min\+Boundary}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classView_a7c296061a47055cda78fcf06550d71ce}{m\+Target}
+\item 
+float \hyperlink{classView_ac9f619992f8bbfcc829ec316bde2ca8f}{m\+Time}
+\item 
+\hyperlink{classInterpolation}{Interpolation}$<$ \hyperlink{structVector3}{Vector3} $>$ $\ast$ \hyperlink{classView_a673bc4569d721610d26180bbc14813dc}{m\+Interpolator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{View@{View}!View@{View}}
+\index{View@{View}!View@{View}}
+\subsubsection[{\texorpdfstring{View(float a\+Time=0.\+0f)}{View(float aTime=0.0f)}}]{\setlength{\rightskip}{0pt plus 5cm}View\+::\+View (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+Time = {\ttfamily 0.0f}}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a68bebba994b428bae3bcf2327687dd25}{}\label{classView_a68bebba994b428bae3bcf2327687dd25}
+\index{View@{View}!````~View@{$\sim$\+View}}
+\index{````~View@{$\sim$\+View}!View@{View}}
+\subsubsection[{\texorpdfstring{$\sim$\+View()}{~View()}}]{\setlength{\rightskip}{0pt plus 5cm}View\+::$\sim$\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classView_ad0dc854db9aabbea98a334dec89f785c}{}\label{classView_ad0dc854db9aabbea98a334dec89f785c}
+
+
+\subsection{Member Function Documentation}
+\index{View@{View}!Get\+Final\+Transform@{Get\+Final\+Transform}}
+\index{Get\+Final\+Transform@{Get\+Final\+Transform}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Final\+Transform()}{GetFinalTransform()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} View\+::\+Get\+Final\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a100d422b3ed969d3405a3c1bcbe6f99d}{}\label{classView_a100d422b3ed969d3405a3c1bcbe6f99d}
+
+
+Helper method to combine matrices together. 
+
+\begin{DoxyReturn}{Returns}
+Combined matrices. 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Half\+Size@{Get\+Half\+Size}}
+\index{Get\+Half\+Size@{Get\+Half\+Size}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Half\+Size() const }{GetHalfSize() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} View\+::\+Get\+Half\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classView_acbc3b948338603042b7d0600d13b7ed4}{}\label{classView_acbc3b948338603042b7d0600d13b7ed4}
+
+
+Get half size of view. 
+
+\begin{DoxyReturn}{Returns}
+half size 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Max\+Boundary@{Get\+Max\+Boundary}}
+\index{Get\+Max\+Boundary@{Get\+Max\+Boundary}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Max\+Boundary() const }{GetMaxBoundary() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} View\+::\+Get\+Max\+Boundary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classView_a28a048bc7efee4bbf31c3f70e46744aa}{}\label{classView_a28a048bc7efee4bbf31c3f70e46744aa}
+
+
+Get maximum boundary of view. 
+
+\begin{DoxyReturn}{Returns}
+max boundary 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Min\+Boundary@{Get\+Min\+Boundary}}
+\index{Get\+Min\+Boundary@{Get\+Min\+Boundary}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Min\+Boundary() const }{GetMinBoundary() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} View\+::\+Get\+Min\+Boundary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classView_ac992dd57295b2abc2fdf5a01716a5028}{}\label{classView_ac992dd57295b2abc2fdf5a01716a5028}
+
+
+Get minimum boundary of view. 
+
+\begin{DoxyReturn}{Returns}
+min boundary 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Position@{Get\+Position}}
+\index{Get\+Position@{Get\+Position}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Position()}{GetPosition()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} \& View\+::\+Get\+Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_ab93f0dc7010f378841d3f621b38b9809}{}\label{classView_ab93f0dc7010f378841d3f621b38b9809}
+
+
+Get position of view. 
+
+\begin{DoxyReturn}{Returns}
+position 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Rotation@{Get\+Rotation}}
+\index{Get\+Rotation@{Get\+Rotation}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Rotation()}{GetRotation()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} \& View\+::\+Get\+Rotation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_ace4ba80de1b29dfb5eb12720b2879f99}{}\label{classView_ace4ba80de1b29dfb5eb12720b2879f99}
+
+
+Get rotation of view. 
+
+\begin{DoxyReturn}{Returns}
+rotation 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Scale@{Get\+Scale}}
+\index{Get\+Scale@{Get\+Scale}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Scale()}{GetScale()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} \& View\+::\+Get\+Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a585a51263a834f63f663e1a9ba40c5ef}{}\label{classView_a585a51263a834f63f663e1a9ba40c5ef}
+
+
+Get scale of view. 
+
+\begin{DoxyReturn}{Returns}
+scale 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Size()}{GetSize()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} \& View\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a613df09b5105deac34c1de42f75dbac6}{}\label{classView_a613df09b5105deac34c1de42f75dbac6}
+
+
+Get size of view. 
+
+\begin{DoxyReturn}{Returns}
+size 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Target@{Get\+Target}}
+\index{Get\+Target@{Get\+Target}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Target()}{GetTarget()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ View\+::\+Get\+Target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_ac60fd3c0991ad9d78d5d1df2ac7b12c6}{}\label{classView_ac60fd3c0991ad9d78d5d1df2ac7b12c6}
+
+
+Get target for view. 
+
+\begin{DoxyReturn}{Returns}
+Target 
+\end{DoxyReturn}
+\index{View@{View}!Get\+Transform@{Get\+Transform}}
+\index{Get\+Transform@{Get\+Transform}!View@{View}}
+\subsubsection[{\texorpdfstring{Get\+Transform()}{GetTransform()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Transform} \& View\+::\+Get\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_afda848b1506718346d0ed8ec20d2d3a7}{}\label{classView_afda848b1506718346d0ed8ec20d2d3a7}
+
+
+Get transform of view. 
+
+\begin{DoxyReturn}{Returns}
+transform 
+\end{DoxyReturn}
+\index{View@{View}!Set\+Max\+Boundary@{Set\+Max\+Boundary}}
+\index{Set\+Max\+Boundary@{Set\+Max\+Boundary}!View@{View}}
+\subsubsection[{\texorpdfstring{Set\+Max\+Boundary(\+Vector3 const \&a\+Max\+Boundary)}{SetMaxBoundary(Vector3 const &aMaxBoundary)}}]{\setlength{\rightskip}{0pt plus 5cm}void View\+::\+Set\+Max\+Boundary (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Max\+Boundary}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a8df97a7b467a3bb0256e31428d04dafd}{}\label{classView_a8df97a7b467a3bb0256e31428d04dafd}
+
+
+Set max boundary of view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Max\+Boundary} & max boundary \\
+\hline
+\end{DoxyParams}
+\index{View@{View}!Set\+Min\+Boundary@{Set\+Min\+Boundary}}
+\index{Set\+Min\+Boundary@{Set\+Min\+Boundary}!View@{View}}
+\subsubsection[{\texorpdfstring{Set\+Min\+Boundary(\+Vector3 const \&a\+Min\+Boundary)}{SetMinBoundary(Vector3 const &aMinBoundary)}}]{\setlength{\rightskip}{0pt plus 5cm}void View\+::\+Set\+Min\+Boundary (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Min\+Boundary}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a68644e92d6752ab8119e5ec8277853be}{}\label{classView_a68644e92d6752ab8119e5ec8277853be}
+
+
+Set min boundary of view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Min\+Boundary} & min boundary \\
+\hline
+\end{DoxyParams}
+\index{View@{View}!Set\+Position@{Set\+Position}}
+\index{Set\+Position@{Set\+Position}!View@{View}}
+\subsubsection[{\texorpdfstring{Set\+Position(\+Vector3 const \&a\+Pos)}{SetPosition(Vector3 const &aPos)}}]{\setlength{\rightskip}{0pt plus 5cm}void View\+::\+Set\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Pos}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_aa04523df15cad5eaed9b05d219a0757b}{}\label{classView_aa04523df15cad5eaed9b05d219a0757b}
+
+
+Set position of view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pos} & position \\
+\hline
+\end{DoxyParams}
+\index{View@{View}!Set\+Size@{Set\+Size}}
+\index{Set\+Size@{Set\+Size}!View@{View}}
+\subsubsection[{\texorpdfstring{Set\+Size(\+Vector3 const \&a\+Size)}{SetSize(Vector3 const &aSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void View\+::\+Set\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a000cf3940bdffe6e72dd64f94ddc0cbf}{}\label{classView_a000cf3940bdffe6e72dd64f94ddc0cbf}
+
+
+Set size of view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Size} & size \\
+\hline
+\end{DoxyParams}
+\index{View@{View}!Set\+Target@{Set\+Target}}
+\index{Set\+Target@{Set\+Target}!View@{View}}
+\subsubsection[{\texorpdfstring{Set\+Target(\+Game\+Object $\ast$a\+Obj)}{SetTarget(GameObject *aObj)}}]{\setlength{\rightskip}{0pt plus 5cm}void View\+::\+Set\+Target (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Obj}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a7dd425ca7734d703adeb2d70f15358be}{}\label{classView_a7dd425ca7734d703adeb2d70f15358be}
+
+
+Set view target (who to follow), clears interpolator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Obj} & target \\
+\hline
+\end{DoxyParams}
+\index{View@{View}!Set\+Time@{Set\+Time}}
+\index{Set\+Time@{Set\+Time}!View@{View}}
+\subsubsection[{\texorpdfstring{Set\+Time(float a\+Time)}{SetTime(float aTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void View\+::\+Set\+Time (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+Time}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a7658c93b38082640acb8cab5910963fd}{}\label{classView_a7658c93b38082640acb8cab5910963fd}
+
+
+Set travel time of motion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Time} & time \\
+\hline
+\end{DoxyParams}
+\index{View@{View}!Update@{Update}}
+\index{Update@{Update}!View@{View}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void View\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classView_a04753454b8a9c533469a24d7c202b994}{}\label{classView_a04753454b8a9c533469a24d7c202b994}
+
+
+Update loop. 
+
+
+
+\subsection{Member Data Documentation}
+\index{View@{View}!m\+Half\+Size@{m\+Half\+Size}}
+\index{m\+Half\+Size@{m\+Half\+Size}!View@{View}}
+\subsubsection[{\texorpdfstring{m\+Half\+Size}{mHalfSize}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} View\+::m\+Half\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classView_aa2b272158437993a873cf93d934f3d4c}{}\label{classView_aa2b272158437993a873cf93d934f3d4c}
+\index{View@{View}!m\+Interpolator@{m\+Interpolator}}
+\index{m\+Interpolator@{m\+Interpolator}!View@{View}}
+\subsubsection[{\texorpdfstring{m\+Interpolator}{mInterpolator}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Interpolation}$<${\bf Vector3}$>$$\ast$ View\+::m\+Interpolator\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classView_a673bc4569d721610d26180bbc14813dc}{}\label{classView_a673bc4569d721610d26180bbc14813dc}
+\index{View@{View}!m\+Max\+Boundary@{m\+Max\+Boundary}}
+\index{m\+Max\+Boundary@{m\+Max\+Boundary}!View@{View}}
+\subsubsection[{\texorpdfstring{m\+Max\+Boundary}{mMaxBoundary}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} View\+::m\+Max\+Boundary\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classView_afe0ac455a31422c43d5fa3dcd2e51fc4}{}\label{classView_afe0ac455a31422c43d5fa3dcd2e51fc4}
+\index{View@{View}!m\+Min\+Boundary@{m\+Min\+Boundary}}
+\index{m\+Min\+Boundary@{m\+Min\+Boundary}!View@{View}}
+\subsubsection[{\texorpdfstring{m\+Min\+Boundary}{mMinBoundary}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} View\+::m\+Min\+Boundary\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classView_a3581943c539feca7e21be9990cbe9de0}{}\label{classView_a3581943c539feca7e21be9990cbe9de0}
+\index{View@{View}!m\+Target@{m\+Target}}
+\index{m\+Target@{m\+Target}!View@{View}}
+\subsubsection[{\texorpdfstring{m\+Target}{mTarget}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ View\+::m\+Target\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classView_a7c296061a47055cda78fcf06550d71ce}{}\label{classView_a7c296061a47055cda78fcf06550d71ce}
+\index{View@{View}!m\+Time@{m\+Time}}
+\index{m\+Time@{m\+Time}!View@{View}}
+\subsubsection[{\texorpdfstring{m\+Time}{mTime}}]{\setlength{\rightskip}{0pt plus 5cm}float View\+::m\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classView_ac9f619992f8bbfcc829ec316bde2ca8f}{}\label{classView_ac9f619992f8bbfcc829ec316bde2ca8f}
+\index{View@{View}!m\+Transform@{m\+Transform}}
+\index{m\+Transform@{m\+Transform}!View@{View}}
+\subsubsection[{\texorpdfstring{m\+Transform}{mTransform}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Transform} View\+::m\+Transform\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classView_a0d6ae028e18a181c998c8f04be9b8b4f}{}\label{classView_a0d6ae028e18a181c998c8f04be9b8b4f}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graphics/\hyperlink{View_8h}{View.\+h}\item 
+Graphics/\hyperlink{View_8cpp}{View.\+cpp}\end{DoxyCompactItemize}

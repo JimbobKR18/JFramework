@@ -1,0 +1,1124 @@
+\hypertarget{classLevel}{}\section{Level Class Reference}
+\label{classLevel}\index{Level@{Level}}
+
+
+{\ttfamily \#include $<$Level.\+h$>$}
+
+
+
+Collaboration diagram for Level\+:
+% FIG 0
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classGameObject}{Game\+Object} $\ast$ $>$ \hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container}
+\item 
+typedef std\+::vector$<$ \hyperlink{classMenu}{Menu} $\ast$ $>$ \hyperlink{classLevel_a8ca95fd4c2a029af4f4df92c24556314}{Menu\+Container}
+\item 
+typedef std\+::map$<$ \hyperlink{classHashString}{Hash\+String}, \hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} $>$ \hyperlink{classLevel_ace1da2e0393bc7528301ad2220c7f136}{File\+Container}
+\item 
+typedef Object\+Container\+::iterator \hyperlink{classLevel_a9a28b71fee93442a0a6e38075e96b0a3}{Object\+IT}
+\item 
+typedef Object\+Container\+::const\+\_\+iterator \hyperlink{classLevel_ae641436b16729449987f49a008240df2}{Const\+Object\+IT}
+\item 
+typedef Menu\+Container\+::iterator \hyperlink{classLevel_a89febf236e700e1be35f55d5d79776b0}{Menu\+IT}
+\item 
+typedef Menu\+Container\+::const\+\_\+iterator \hyperlink{classLevel_a9a6ea1b9ae75b0a1ccaa086d6409a68d}{Const\+Menu\+IT}
+\item 
+typedef File\+Container\+::iterator \hyperlink{classLevel_a224d56acc904d825c861cfad99447ff5}{File\+Container\+IT}
+\item 
+typedef File\+Container\+::const\+\_\+iterator \hyperlink{classLevel_a4159ff1339674f9e5b849654f0f8eff5}{Const\+File\+Container\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLevel_a7a696c928ca5d5354db6e50e46d0f67d}{Level} ()
+\item 
+\hyperlink{classLevel_a737831b7717488b3155c177960d66ff7}{Level} (\hyperlink{classLevelManager}{Level\+Manager} $\ast$a\+Manager, \hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name, bool a\+Auto\+Parse)
+\item 
+virtual \hyperlink{classLevel_a249eac1e8f19ff44134efa5e986feaca}{$\sim$\+Level} ()
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classLevel_a8ab40ea8bcff19d951aa28d67150f539}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the level name. Not the file name. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classLevel_ac344c48b047885b7f24e79332e0dfeab}{Get\+File\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the file name, not the level name. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classLevel_adba67967a31ee5fc6d0885e2547424d0}{Get\+Music\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the music name. \end{DoxyCompactList}\item 
+\hyperlink{classLevelManager}{Level\+Manager} $\ast$ \hyperlink{classLevel_a2353095571549c1b11dae5d9b8c29d11}{Get\+Manager} () const 
+\begin{DoxyCompactList}\small\item\em Get the level manager. \end{DoxyCompactList}\item 
+\hyperlink{classTileMapGenerator}{Tile\+Map\+Generator} $\ast$ \hyperlink{classLevel_a05fd91502d2caefafe3d8be814773484}{Get\+Tile\+Map} () const 
+\begin{DoxyCompactList}\small\item\em Get the tile map generator. You can get individual tiles and other helperful things here. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classLevel_a2ad4ee076cc4ebf9a349fdc3af493af7}{Get\+Focus\+Target} () const 
+\begin{DoxyCompactList}\small\item\em Get the camera\textquotesingle{}s focus target for the level. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classLevel_a8c58a8e52809a6dba6e698f12df3b4b5}{Find\+Object} (\hyperlink{classHashString}{Hash\+String} const \&a\+Object\+Name)
+\begin{DoxyCompactList}\small\item\em Find an object by name. \end{DoxyCompactList}\item 
+\hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \hyperlink{classLevel_a7d03525a6fe7635d2260097907c0707c}{Find\+Objects} (\hyperlink{structVector3}{Vector3} const \&a\+Position) const 
+\begin{DoxyCompactList}\small\item\em Find all objects touching a position. \end{DoxyCompactList}\item 
+\hyperlink{classMenu}{Menu} $\ast$ \hyperlink{classLevel_a94fee75209377d73e1ffee8b975ca447}{Find\+Menu} (\hyperlink{classHashString}{Hash\+String} const \&a\+Menu\+Name)
+\begin{DoxyCompactList}\small\item\em Find a menu by name. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_aa7d5306d7e7e44abbe377e9d4f76ec23}{Add\+Menu} (\hyperlink{classMenu}{Menu} $\ast$a\+Menu)
+\begin{DoxyCompactList}\small\item\em Add a menu to our level. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_ac0d5c2f55beca4aa790e628ab54d57aa}{Remove\+Menu} (\hyperlink{classMenu}{Menu} $\ast$a\+Menu)
+\begin{DoxyCompactList}\small\item\em Remove a menu from our level. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a6215db30022670f866047ee7a4c449bb}{Remove\+Menus} ()
+\begin{DoxyCompactList}\small\item\em Remove all menus, the right way. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a776b738e16c5f9d1fd02107261404142}{Add\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Add object to our vector of objects. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a49a6d952c3d2cc6b9394fb55bf7af800}{Add\+Static\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Add an object that\textquotesingle{}s not meant to be updated. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a47ce3a6b9f0510d04cb62a470d6c724f}{Delete\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Delete object and remove from our objects vector. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classLevel_a00c1353e785e71c20cc6f6470fc3a53f}{Create\+Object\+Delayed} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name, \hyperlink{classHashString}{Hash\+String} const \&a\+Folder=\char`\"{}Game\char`\"{})
+\begin{DoxyCompactList}\small\item\em Create an object to be added next frame. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a5cc40ab9523c3383f828c5b8b637116a}{Delete\+Object\+Delayed} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Marks an object for deletion next frame. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_ac0e88b911fb1039eb74f237022487356}{Delete\+Objects} ()
+\begin{DoxyCompactList}\small\item\em Delete all objects in level. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_abd143fd02f8959207315bdafd0be05ab}{Reset} ()
+\begin{DoxyCompactList}\small\item\em Delete objects and start level over. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a101bb0a4de534608fdae6a854f531298}{Reset\+Level} ()
+\begin{DoxyCompactList}\small\item\em Reset level helper. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a1515066519ebd636a28f9ac50a4b1047}{Set\+Max\+Boundary} (\hyperlink{structVector3}{Vector3} const \&a\+Max\+Boundary)
+\begin{DoxyCompactList}\small\item\em Set max area for camera view. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_afd583490b92f38e4e5c00c949f6f19c1}{Set\+Min\+Boundary} (\hyperlink{structVector3}{Vector3} const \&a\+Min\+Boundary)
+\begin{DoxyCompactList}\small\item\em Set min area for camera view. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classLevel_ae4288c0441424f647ccb37050d46cec4}{Get\+Max\+Boundary} () const 
+\begin{DoxyCompactList}\small\item\em Get the max boundary of the level. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classLevel_abcbd61df967a743d7aa49bbe8c27ecb7}{Get\+Min\+Boundary} () const 
+\begin{DoxyCompactList}\small\item\em Get the min boundary of the level. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_ad274e8fe0e9d4598988011729b4f864a}{Load} (\hyperlink{classLevel}{Level} $\ast$const a\+Prev\+Level)
+\begin{DoxyCompactList}\small\item\em Place all objects to be rendered / updated. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a38d35739cb91337abb22f8591203e4cc}{Unload} (\hyperlink{classLevel}{Level} $\ast$const a\+Next\+Level)
+\begin{DoxyCompactList}\small\item\em Specify all objects to be be displayed / updated. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_ad6072eee49feb20e61bd2265d16d8264}{Load\+Objects} (\hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} const \&a\+Objects, bool const a\+Static)
+\begin{DoxyCompactList}\small\item\em Load all objects in list into view. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_afb99f2699061e9a982dc53a41f66265c}{Unload\+Objects} (\hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} const \&a\+Objects)
+\begin{DoxyCompactList}\small\item\em Unload all objects in the list from view, they will still exist in the level file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevel_acec48e8d28ea7af94ced6163d82ad246}{Pre\+Reset} ()
+\item 
+virtual void \hyperlink{classLevel_a1c411621a9bed5f44d3bad827ab8d859}{Post\+Reset} ()
+\item 
+virtual void \hyperlink{classLevel_a348ad48f5fe0a4158751778735d88230}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop for levels. \hyperlink{classLevelManager}{Level\+Manager} will call this for you. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevel_a5888bd09a0e57efc371076aed2f4dc0e}{Parse\+Additional\+Data} (\hyperlink{classRoot}{Root} $\ast$a\+Root, \hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Any extra nodes inside of a level file need to be parsed, but if we reach here then you are autoparsing a level file that derives from level. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevel_a0a4c263cafc00090250f17045a2d23a2}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize level to file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevel_aee4d59380ea3bac3dcf70b4514bae30e}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive message loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevel_af364fce2cd7b5c7b626aba5add5e7ca4}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to manager. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a027cb9c4148fa186b074ab41f0f07478}{Serialize\+Tile\+Map} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize the tile map portion of level to another file. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_af03cc2b88deb2b473c9096538bb15aee}{Parse\+File} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Parse file to create our level. Include game object component overrides. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a639a4d91ecd7995a534d254c4c5b3c64}{Load\+Scenario} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Load a scenario by file name. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_ab3adef99549de6359db3f7db858890b3}{Unload\+Scenario} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Unload scenario by filename. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a2c946ce8a4005fd87e6e9ab751a1d20b}{Unload\+Scenarios} ()
+\begin{DoxyCompactList}\small\item\em Unload all scenarios. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classLevel_ab98f9b8b299ed04baf8416a2c2664e66}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this object viewable in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLevel_abd967e5cb5aaf80e35d3b5b2a1038468}{Parse\+Base\+File} ()
+\begin{DoxyCompactList}\small\item\em Helper function to parse self. \end{DoxyCompactList}\item 
+\hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \& \hyperlink{classLevel_afffae2c1f9f3cf545ec226f5d012910e}{Get\+Objects} ()
+\begin{DoxyCompactList}\small\item\em Get all objects in level. \end{DoxyCompactList}\item 
+\hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \& \hyperlink{classLevel_a7e34c8805f1c019216fe8810a0811652}{Get\+Static\+Objects} ()
+\begin{DoxyCompactList}\small\item\em Get all static objects in level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLevel_a72b7ed47a05862f51571aa9c89d26b28}{Delete\+Object\+Children} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove object\textquotesingle{}s children. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a5fbd1c5322dcbdd0abb5387afac57a27}{Delete\+Object\+Children\+Delayed} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove object\textquotesingle{}s children. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_adeba76a68f04c29606cde4f9f7b4fd6d}{Serialize\+Objects} (\hyperlink{classParser}{Parser} \&a\+Parser, \hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \&a\+Objects, \hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \&a\+Menu\+Objects)
+\begin{DoxyCompactList}\small\item\em Serialize out objects. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a8ee3f3906d5a03dd7da6e07db4147d47}{Serialize\+Scenarios} (\hyperlink{classParser}{Parser} \&a\+Parser, \hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \&a\+Menu\+Objects)
+\begin{DoxyCompactList}\small\item\em Serialize all scenario files into separate chunks. \end{DoxyCompactList}\item 
+bool \hyperlink{classLevel_a4bad55a8d12b5ce6648c7e0f291f830b}{Object\+Not\+In\+Scenario} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Helper to find lingering objects. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a741752f2e050d0c439d1cf068bd8df99}{Remove\+Object\+From\+Scenarios} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove object from all scenarios. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a90b6c18c5869a4a7325f1b2bf9939f77}{Parse\+Transform} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classRoot}{Root} $\ast$a\+Transform)
+\begin{DoxyCompactList}\small\item\em Get transform data for an object from a root. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_af3c53f396a15fa70375aed02d973d71c}{Parse\+Surface} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classRoot}{Root} $\ast$a\+Surface)
+\begin{DoxyCompactList}\small\item\em Get surface data from a root. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_a3b8c326fe2311aa2db22aab9ae702ef5}{Parse\+Physics\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classRoot}{Root} $\ast$a\+Physics\+Object)
+\begin{DoxyCompactList}\small\item\em Get physics object data from a root. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_aef7b18107236b48c1428c8fbefb4bba7}{Parse\+Chemistry\+Material} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classRoot}{Root} $\ast$a\+Chemistry\+Material)
+\begin{DoxyCompactList}\small\item\em Get chemistry material data from root. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_ad28f0d6a4c323efff6bceca6179222e8}{Parse\+Chemistry\+Element} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classRoot}{Root} $\ast$a\+Chemistry\+Element)
+\begin{DoxyCompactList}\small\item\em Get chemistry element data from root. \end{DoxyCompactList}\item 
+void \hyperlink{classLevel_af19785d964f2abd088835f6fc6f916d9}{Parse\+Tile\+Generator} (\hyperlink{classTextParser}{Text\+Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Create tile generator helper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classLevel_ae33d8a4a8a50bf09ce19ff784509e77b}{m\+Name}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classLevel_af1e1923aba1e95e5a8e895f840460407}{m\+File\+Name}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classLevel_af2e193876cae73a475abbe27a1a9f972}{m\+Music\+Name}
+\item 
+\hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \hyperlink{classLevel_a66c3ffb86f6e61570f833046e7994d43}{m\+Objects}
+\item 
+\hyperlink{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{Object\+Container} \hyperlink{classLevel_afce9aca707faf2694e54e50f41feb035}{m\+Static\+Objects}
+\item 
+\hyperlink{classLevel_a8ca95fd4c2a029af4f4df92c24556314}{Menu\+Container} \hyperlink{classLevel_a42a19fd951df82d14d6848a09ea93d57}{m\+Menus}
+\item 
+\hyperlink{classLevelManager}{Level\+Manager} $\ast$ \hyperlink{classLevel_a577a9c893ac40f3b612f1d672d244338}{m\+Owner}
+\item 
+\hyperlink{classTileMapGenerator}{Tile\+Map\+Generator} $\ast$ \hyperlink{classLevel_abb613b8abaa789ca6a8ca7d9dd0630e8}{m\+Generator}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classLevel_a1bd8599f3ce15a8ae505fc84715e94c7}{m\+Focus\+Target}
+\item 
+bool \hyperlink{classLevel_a67463484bfba4f2bd5e9ea906a267f4a}{m\+Active}
+\item 
+\hyperlink{structVector4}{Vector4} \hyperlink{classLevel_a1138365d28ebc6c318fecb9bea2e4e26}{m\+Clear\+Color}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classLevel_a7b30c9977eaba0ad2672f4f1a8880d7a}{m\+Max\+Boundary}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classLevel_aa4c203935f8b10c2afca708cf4f79e4a}{m\+Min\+Boundary}
+\item 
+\hyperlink{classLevel_ace1da2e0393bc7528301ad2220c7f136}{File\+Container} \hyperlink{classLevel_a97db6fa7099a710cf9c953f41ea3f478}{m\+Scenarios}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Level@{Level}!Const\+File\+Container\+IT@{Const\+File\+Container\+IT}}
+\index{Const\+File\+Container\+IT@{Const\+File\+Container\+IT}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Const\+File\+Container\+IT}{ConstFileContainerIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef File\+Container\+::const\+\_\+iterator {\bf Level\+::\+Const\+File\+Container\+IT}}\hypertarget{classLevel_a4159ff1339674f9e5b849654f0f8eff5}{}\label{classLevel_a4159ff1339674f9e5b849654f0f8eff5}
+\index{Level@{Level}!Const\+Menu\+IT@{Const\+Menu\+IT}}
+\index{Const\+Menu\+IT@{Const\+Menu\+IT}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Const\+Menu\+IT}{ConstMenuIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Menu\+Container\+::const\+\_\+iterator {\bf Level\+::\+Const\+Menu\+IT}}\hypertarget{classLevel_a9a6ea1b9ae75b0a1ccaa086d6409a68d}{}\label{classLevel_a9a6ea1b9ae75b0a1ccaa086d6409a68d}
+\index{Level@{Level}!Const\+Object\+IT@{Const\+Object\+IT}}
+\index{Const\+Object\+IT@{Const\+Object\+IT}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Const\+Object\+IT}{ConstObjectIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Object\+Container\+::const\+\_\+iterator {\bf Level\+::\+Const\+Object\+IT}}\hypertarget{classLevel_ae641436b16729449987f49a008240df2}{}\label{classLevel_ae641436b16729449987f49a008240df2}
+\index{Level@{Level}!File\+Container@{File\+Container}}
+\index{File\+Container@{File\+Container}!Level@{Level}}
+\subsubsection[{\texorpdfstring{File\+Container}{FileContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::map$<${\bf Hash\+String}, {\bf Object\+Container}$>$ {\bf Level\+::\+File\+Container}}\hypertarget{classLevel_ace1da2e0393bc7528301ad2220c7f136}{}\label{classLevel_ace1da2e0393bc7528301ad2220c7f136}
+\index{Level@{Level}!File\+Container\+IT@{File\+Container\+IT}}
+\index{File\+Container\+IT@{File\+Container\+IT}!Level@{Level}}
+\subsubsection[{\texorpdfstring{File\+Container\+IT}{FileContainerIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef File\+Container\+::iterator {\bf Level\+::\+File\+Container\+IT}}\hypertarget{classLevel_a224d56acc904d825c861cfad99447ff5}{}\label{classLevel_a224d56acc904d825c861cfad99447ff5}
+\index{Level@{Level}!Menu\+Container@{Menu\+Container}}
+\index{Menu\+Container@{Menu\+Container}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Menu\+Container}{MenuContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Menu}$\ast$$>$ {\bf Level\+::\+Menu\+Container}}\hypertarget{classLevel_a8ca95fd4c2a029af4f4df92c24556314}{}\label{classLevel_a8ca95fd4c2a029af4f4df92c24556314}
+\index{Level@{Level}!Menu\+IT@{Menu\+IT}}
+\index{Menu\+IT@{Menu\+IT}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Menu\+IT}{MenuIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Menu\+Container\+::iterator {\bf Level\+::\+Menu\+IT}}\hypertarget{classLevel_a89febf236e700e1be35f55d5d79776b0}{}\label{classLevel_a89febf236e700e1be35f55d5d79776b0}
+\index{Level@{Level}!Object\+Container@{Object\+Container}}
+\index{Object\+Container@{Object\+Container}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Object\+Container}{ObjectContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Game\+Object}$\ast$$>$ {\bf Level\+::\+Object\+Container}}\hypertarget{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}{}\label{classLevel_afd39ad8a5d9272ab8e14853e0fb18a48}
+\index{Level@{Level}!Object\+IT@{Object\+IT}}
+\index{Object\+IT@{Object\+IT}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Object\+IT}{ObjectIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Object\+Container\+::iterator {\bf Level\+::\+Object\+IT}}\hypertarget{classLevel_a9a28b71fee93442a0a6e38075e96b0a3}{}\label{classLevel_a9a28b71fee93442a0a6e38075e96b0a3}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Level@{Level}!Level@{Level}}
+\index{Level@{Level}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Level()}{Level()}}]{\setlength{\rightskip}{0pt plus 5cm}Level\+::\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a7a696c928ca5d5354db6e50e46d0f67d}{}\label{classLevel_a7a696c928ca5d5354db6e50e46d0f67d}
+\index{Level@{Level}!Level@{Level}}
+\index{Level@{Level}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Level(\+Level\+Manager $\ast$a\+Manager, Hash\+String const \&a\+File\+Name, bool a\+Auto\+Parse)}{Level(LevelManager *aManager, HashString const &aFileName, bool aAutoParse)}}]{\setlength{\rightskip}{0pt plus 5cm}Level\+::\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Level\+Manager} $\ast$}]{a\+Manager, }
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name, }
+\item[{bool}]{a\+Auto\+Parse}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a737831b7717488b3155c177960d66ff7}{}\label{classLevel_a737831b7717488b3155c177960d66ff7}
+\index{Level@{Level}!````~Level@{$\sim$\+Level}}
+\index{````~Level@{$\sim$\+Level}!Level@{Level}}
+\subsubsection[{\texorpdfstring{$\sim$\+Level()}{~Level()}}]{\setlength{\rightskip}{0pt plus 5cm}Level\+::$\sim$\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevel_a249eac1e8f19ff44134efa5e986feaca}{}\label{classLevel_a249eac1e8f19ff44134efa5e986feaca}
+
+
+\subsection{Member Function Documentation}
+\index{Level@{Level}!Add\+Menu@{Add\+Menu}}
+\index{Add\+Menu@{Add\+Menu}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Add\+Menu(\+Menu $\ast$a\+Menu)}{AddMenu(Menu *aMenu)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Add\+Menu (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu} $\ast$}]{a\+Menu}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_aa7d5306d7e7e44abbe377e9d4f76ec23}{}\label{classLevel_aa7d5306d7e7e44abbe377e9d4f76ec23}
+
+
+Add a menu to our level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Menu} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Add\+Object@{Add\+Object}}
+\index{Add\+Object@{Add\+Object}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Add\+Object(\+Game\+Object $\ast$a\+Object)}{AddObject(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Add\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a776b738e16c5f9d1fd02107261404142}{}\label{classLevel_a776b738e16c5f9d1fd02107261404142}
+
+
+Add object to our vector of objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Add\+Static\+Object@{Add\+Static\+Object}}
+\index{Add\+Static\+Object@{Add\+Static\+Object}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Add\+Static\+Object(\+Game\+Object $\ast$a\+Object)}{AddStaticObject(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Add\+Static\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a49a6d952c3d2cc6b9394fb55bf7af800}{}\label{classLevel_a49a6d952c3d2cc6b9394fb55bf7af800}
+
+
+Add an object that\textquotesingle{}s not meant to be updated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Create\+Object\+Delayed@{Create\+Object\+Delayed}}
+\index{Create\+Object\+Delayed@{Create\+Object\+Delayed}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Create\+Object\+Delayed(\+Hash\+String const \&a\+File\+Name, Hash\+String const \&a\+Folder=""Game"")}{CreateObjectDelayed(HashString const &aFileName, HashString const &aFolder="Game")}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Level\+::\+Create\+Object\+Delayed (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name, }
+\item[{{\bf Hash\+String} const \&}]{a\+Folder = {\ttfamily \char`\"{}Game\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a00c1353e785e71c20cc6f6470fc3a53f}{}\label{classLevel_a00c1353e785e71c20cc6f6470fc3a53f}
+
+
+Create an object to be added next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+File\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The newly created object. 
+\end{DoxyReturn}
+\index{Level@{Level}!Delete\+Object@{Delete\+Object}}
+\index{Delete\+Object@{Delete\+Object}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Delete\+Object(\+Game\+Object $\ast$a\+Object)}{DeleteObject(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Delete\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a47ce3a6b9f0510d04cb62a470d6c724f}{}\label{classLevel_a47ce3a6b9f0510d04cb62a470d6c724f}
+
+
+Delete object and remove from our objects vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to delete. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Delete\+Object\+Children@{Delete\+Object\+Children}}
+\index{Delete\+Object\+Children@{Delete\+Object\+Children}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Delete\+Object\+Children(\+Game\+Object $\ast$a\+Object)}{DeleteObjectChildren(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Delete\+Object\+Children (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a72b7ed47a05862f51571aa9c89d26b28}{}\label{classLevel_a72b7ed47a05862f51571aa9c89d26b28}
+
+
+Remove object\textquotesingle{}s children. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Delete\+Object\+Children\+Delayed@{Delete\+Object\+Children\+Delayed}}
+\index{Delete\+Object\+Children\+Delayed@{Delete\+Object\+Children\+Delayed}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Delete\+Object\+Children\+Delayed(\+Game\+Object $\ast$a\+Object)}{DeleteObjectChildrenDelayed(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Delete\+Object\+Children\+Delayed (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a5fbd1c5322dcbdd0abb5387afac57a27}{}\label{classLevel_a5fbd1c5322dcbdd0abb5387afac57a27}
+
+
+Remove object\textquotesingle{}s children. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Delete\+Object\+Delayed@{Delete\+Object\+Delayed}}
+\index{Delete\+Object\+Delayed@{Delete\+Object\+Delayed}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Delete\+Object\+Delayed(\+Game\+Object $\ast$a\+Object)}{DeleteObjectDelayed(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Delete\+Object\+Delayed (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a5cc40ab9523c3383f828c5b8b637116a}{}\label{classLevel_a5cc40ab9523c3383f828c5b8b637116a}
+
+
+Marks an object for deletion next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to delete. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Delete\+Objects@{Delete\+Objects}}
+\index{Delete\+Objects@{Delete\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Delete\+Objects()}{DeleteObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Delete\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_ac0e88b911fb1039eb74f237022487356}{}\label{classLevel_ac0e88b911fb1039eb74f237022487356}
+
+
+Delete all objects in level. 
+
+\index{Level@{Level}!Find\+Menu@{Find\+Menu}}
+\index{Find\+Menu@{Find\+Menu}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Find\+Menu(\+Hash\+String const \&a\+Menu\+Name)}{FindMenu(HashString const &aMenuName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu} $\ast$ Level\+::\+Find\+Menu (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Menu\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a94fee75209377d73e1ffee8b975ca447}{}\label{classLevel_a94fee75209377d73e1ffee8b975ca447}
+
+
+Find a menu by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Menu\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The menu, or nullptr. 
+\end{DoxyReturn}
+\index{Level@{Level}!Find\+Object@{Find\+Object}}
+\index{Find\+Object@{Find\+Object}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Find\+Object(\+Hash\+String const \&a\+Object\+Name)}{FindObject(HashString const &aObjectName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Level\+::\+Find\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Object\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a8c58a8e52809a6dba6e698f12df3b4b5}{}\label{classLevel_a8c58a8e52809a6dba6e698f12df3b4b5}
+
+
+Find an object by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The object, or nullptr. 
+\end{DoxyReturn}
+\index{Level@{Level}!Find\+Objects@{Find\+Objects}}
+\index{Find\+Objects@{Find\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Find\+Objects(\+Vector3 const \&a\+Position) const }{FindObjects(Vector3 const &aPosition) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level\+::\+Object\+Container} Level\+::\+Find\+Objects (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_a7d03525a6fe7635d2260097907c0707c}{}\label{classLevel_a7d03525a6fe7635d2260097907c0707c}
+
+
+Find all objects touching a position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Position} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of objects touching the location, can be empty. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+File\+Name@{Get\+File\+Name}}
+\index{Get\+File\+Name@{Get\+File\+Name}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+File\+Name() const }{GetFileName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Level\+::\+Get\+File\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_ac344c48b047885b7f24e79332e0dfeab}{}\label{classLevel_ac344c48b047885b7f24e79332e0dfeab}
+
+
+Get the file name, not the level name. 
+
+\begin{DoxyReturn}{Returns}
+The file name. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Focus\+Target@{Get\+Focus\+Target}}
+\index{Get\+Focus\+Target@{Get\+Focus\+Target}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Focus\+Target() const }{GetFocusTarget() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Level\+::\+Get\+Focus\+Target (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_a2ad4ee076cc4ebf9a349fdc3af493af7}{}\label{classLevel_a2ad4ee076cc4ebf9a349fdc3af493af7}
+
+
+Get the camera\textquotesingle{}s focus target for the level. 
+
+\begin{DoxyReturn}{Returns}
+The camera target. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Manager@{Get\+Manager}}
+\index{Get\+Manager@{Get\+Manager}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Manager() const }{GetManager() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level\+Manager} $\ast$ Level\+::\+Get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_a2353095571549c1b11dae5d9b8c29d11}{}\label{classLevel_a2353095571549c1b11dae5d9b8c29d11}
+
+
+Get the level manager. 
+
+\begin{DoxyReturn}{Returns}
+The level manager. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Max\+Boundary@{Get\+Max\+Boundary}}
+\index{Get\+Max\+Boundary@{Get\+Max\+Boundary}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Max\+Boundary() const }{GetMaxBoundary() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Level\+::\+Get\+Max\+Boundary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_ae4288c0441424f647ccb37050d46cec4}{}\label{classLevel_ae4288c0441424f647ccb37050d46cec4}
+
+
+Get the max boundary of the level. 
+
+\begin{DoxyReturn}{Returns}
+The max boundary of the level. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Min\+Boundary@{Get\+Min\+Boundary}}
+\index{Get\+Min\+Boundary@{Get\+Min\+Boundary}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Min\+Boundary() const }{GetMinBoundary() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Level\+::\+Get\+Min\+Boundary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_abcbd61df967a743d7aa49bbe8c27ecb7}{}\label{classLevel_abcbd61df967a743d7aa49bbe8c27ecb7}
+
+
+Get the min boundary of the level. 
+
+\begin{DoxyReturn}{Returns}
+The min boundary of the level. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Music\+Name@{Get\+Music\+Name}}
+\index{Get\+Music\+Name@{Get\+Music\+Name}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Music\+Name() const }{GetMusicName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Level\+::\+Get\+Music\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_adba67967a31ee5fc6d0885e2547424d0}{}\label{classLevel_adba67967a31ee5fc6d0885e2547424d0}
+
+
+Get the music name. 
+
+\begin{DoxyReturn}{Returns}
+The music name. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Level\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_a8ab40ea8bcff19d951aa28d67150f539}{}\label{classLevel_a8ab40ea8bcff19d951aa28d67150f539}
+
+
+Get the level name. Not the file name. 
+
+\begin{DoxyReturn}{Returns}
+The level name. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Objects@{Get\+Objects}}
+\index{Get\+Objects@{Get\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Objects()}{GetObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level\+::\+Object\+Container} \& Level\+::\+Get\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classLevel_afffae2c1f9f3cf545ec226f5d012910e}{}\label{classLevel_afffae2c1f9f3cf545ec226f5d012910e}
+
+
+Get all objects in level. 
+
+\begin{DoxyReturn}{Returns}
+All objects. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Static\+Objects@{Get\+Static\+Objects}}
+\index{Get\+Static\+Objects@{Get\+Static\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Static\+Objects()}{GetStaticObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level\+::\+Object\+Container} \& Level\+::\+Get\+Static\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classLevel_a7e34c8805f1c019216fe8810a0811652}{}\label{classLevel_a7e34c8805f1c019216fe8810a0811652}
+
+
+Get all static objects in level. 
+
+\begin{DoxyReturn}{Returns}
+All static objects. 
+\end{DoxyReturn}
+\index{Level@{Level}!Get\+Tile\+Map@{Get\+Tile\+Map}}
+\index{Get\+Tile\+Map@{Get\+Tile\+Map}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Get\+Tile\+Map() const }{GetTileMap() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tile\+Map\+Generator} $\ast$ Level\+::\+Get\+Tile\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classLevel_a05fd91502d2caefafe3d8be814773484}{}\label{classLevel_a05fd91502d2caefafe3d8be814773484}
+
+
+Get the tile map generator. You can get individual tiles and other helperful things here. 
+
+\begin{DoxyReturn}{Returns}
+The tile map generator. 
+\end{DoxyReturn}
+\index{Level@{Level}!Load@{Load}}
+\index{Load@{Load}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Load(\+Level $\ast$const a\+Prev\+Level)}{Load(Level *const aPrevLevel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Load (
+\begin{DoxyParamCaption}
+\item[{{\bf Level} $\ast$const}]{a\+Prev\+Level}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_ad274e8fe0e9d4598988011729b4f864a}{}\label{classLevel_ad274e8fe0e9d4598988011729b4f864a}
+
+
+Place all objects to be rendered / updated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Prev\+Level} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Load\+Objects@{Load\+Objects}}
+\index{Load\+Objects@{Load\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Load\+Objects(\+Object\+Container const \&a\+Objects, bool const a\+Static)}{LoadObjects(ObjectContainer const &aObjects, bool const aStatic)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Load\+Objects (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\+Container} const \&}]{a\+Objects, }
+\item[{bool const}]{a\+Static}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_ad6072eee49feb20e61bd2265d16d8264}{}\label{classLevel_ad6072eee49feb20e61bd2265d16d8264}
+
+
+Load all objects in list into view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Objects} & Objects to add. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Load\+Scenario@{Load\+Scenario}}
+\index{Load\+Scenario@{Load\+Scenario}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Load\+Scenario(\+Hash\+String const \&a\+File\+Name)}{LoadScenario(HashString const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Load\+Scenario (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a639a4d91ecd7995a534d254c4c5b3c64}{}\label{classLevel_a639a4d91ecd7995a534d254c4c5b3c64}
+
+
+Load a scenario by file name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+File\+Name} & Name of file to load. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Object\+Not\+In\+Scenario@{Object\+Not\+In\+Scenario}}
+\index{Object\+Not\+In\+Scenario@{Object\+Not\+In\+Scenario}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Object\+Not\+In\+Scenario(\+Game\+Object $\ast$a\+Object)}{ObjectNotInScenario(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Level\+::\+Object\+Not\+In\+Scenario (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a4bad55a8d12b5ce6648c7e0f291f830b}{}\label{classLevel_a4bad55a8d12b5ce6648c7e0f291f830b}
+
+
+Helper to find lingering objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to search for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether file is in a scenario or not. 
+\end{DoxyReturn}
+\index{Level@{Level}!Parse\+Additional\+Data@{Parse\+Additional\+Data}}
+\index{Parse\+Additional\+Data@{Parse\+Additional\+Data}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Additional\+Data(\+Root $\ast$a\+Root, Game\+Object $\ast$a\+Object)}{ParseAdditionalData(Root *aRoot, GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Additional\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Root} $\ast$}]{a\+Root, }
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevel_a5888bd09a0e57efc371076aed2f4dc0e}{}\label{classLevel_a5888bd09a0e57efc371076aed2f4dc0e}
+
+
+Any extra nodes inside of a level file need to be parsed, but if we reach here then you are autoparsing a level file that derives from level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Root} & \hyperlink{classRoot}{Root} node to read from. \\
+\hline
+{\em a\+Object} & Object to apply data to. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Parse\+Base\+File@{Parse\+Base\+File}}
+\index{Parse\+Base\+File@{Parse\+Base\+File}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Base\+File()}{ParseBaseFile()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Base\+File (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classLevel_abd967e5cb5aaf80e35d3b5b2a1038468}{}\label{classLevel_abd967e5cb5aaf80e35d3b5b2a1038468}
+
+
+Helper function to parse self. 
+
+\index{Level@{Level}!Parse\+Chemistry\+Element@{Parse\+Chemistry\+Element}}
+\index{Parse\+Chemistry\+Element@{Parse\+Chemistry\+Element}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Chemistry\+Element(\+Game\+Object $\ast$a\+Object, Root $\ast$a\+Chemistry\+Element)}{ParseChemistryElement(GameObject *aObject, Root *aChemistryElement)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Chemistry\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Root} $\ast$}]{a\+Chemistry\+Element}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_ad28f0d6a4c323efff6bceca6179222e8}{}\label{classLevel_ad28f0d6a4c323efff6bceca6179222e8}
+
+
+Get chemistry element data from root. 
+
+\index{Level@{Level}!Parse\+Chemistry\+Material@{Parse\+Chemistry\+Material}}
+\index{Parse\+Chemistry\+Material@{Parse\+Chemistry\+Material}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Chemistry\+Material(\+Game\+Object $\ast$a\+Object, Root $\ast$a\+Chemistry\+Material)}{ParseChemistryMaterial(GameObject *aObject, Root *aChemistryMaterial)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Chemistry\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Root} $\ast$}]{a\+Chemistry\+Material}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_aef7b18107236b48c1428c8fbefb4bba7}{}\label{classLevel_aef7b18107236b48c1428c8fbefb4bba7}
+
+
+Get chemistry material data from root. 
+
+\index{Level@{Level}!Parse\+File@{Parse\+File}}
+\index{Parse\+File@{Parse\+File}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+File(\+Hash\+String const \&a\+File\+Name)}{ParseFile(HashString const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+File (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_af03cc2b88deb2b473c9096538bb15aee}{}\label{classLevel_af03cc2b88deb2b473c9096538bb15aee}
+
+
+Parse file to create our level. Include game object component overrides. 
+
+\index{Level@{Level}!Parse\+Physics\+Object@{Parse\+Physics\+Object}}
+\index{Parse\+Physics\+Object@{Parse\+Physics\+Object}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Physics\+Object(\+Game\+Object $\ast$a\+Object, Root $\ast$a\+Physics\+Object)}{ParsePhysicsObject(GameObject *aObject, Root *aPhysicsObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Physics\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Root} $\ast$}]{a\+Physics\+Object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a3b8c326fe2311aa2db22aab9ae702ef5}{}\label{classLevel_a3b8c326fe2311aa2db22aab9ae702ef5}
+
+
+Get physics object data from a root. 
+
+\index{Level@{Level}!Parse\+Surface@{Parse\+Surface}}
+\index{Parse\+Surface@{Parse\+Surface}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Surface(\+Game\+Object $\ast$a\+Object, Root $\ast$a\+Surface)}{ParseSurface(GameObject *aObject, Root *aSurface)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Root} $\ast$}]{a\+Surface}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_af3c53f396a15fa70375aed02d973d71c}{}\label{classLevel_af3c53f396a15fa70375aed02d973d71c}
+
+
+Get surface data from a root. 
+
+\index{Level@{Level}!Parse\+Tile\+Generator@{Parse\+Tile\+Generator}}
+\index{Parse\+Tile\+Generator@{Parse\+Tile\+Generator}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Tile\+Generator(\+Text\+Parser \&a\+Parser)}{ParseTileGenerator(TextParser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Tile\+Generator (
+\begin{DoxyParamCaption}
+\item[{{\bf Text\+Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_af19785d964f2abd088835f6fc6f916d9}{}\label{classLevel_af19785d964f2abd088835f6fc6f916d9}
+
+
+Create tile generator helper. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Parse\+Transform@{Parse\+Transform}}
+\index{Parse\+Transform@{Parse\+Transform}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Parse\+Transform(\+Game\+Object $\ast$a\+Object, Root $\ast$a\+Transform)}{ParseTransform(GameObject *aObject, Root *aTransform)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Parse\+Transform (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Root} $\ast$}]{a\+Transform}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a90b6c18c5869a4a7325f1b2bf9939f77}{}\label{classLevel_a90b6c18c5869a4a7325f1b2bf9939f77}
+
+
+Get transform data for an object from a root. 
+
+\index{Level@{Level}!Post\+Reset@{Post\+Reset}}
+\index{Post\+Reset@{Post\+Reset}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Post\+Reset()}{PostReset()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Level\+::\+Post\+Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classLevel_a1c411621a9bed5f44d3bad827ab8d859}{}\label{classLevel_a1c411621a9bed5f44d3bad827ab8d859}
+\index{Level@{Level}!Pre\+Reset@{Pre\+Reset}}
+\index{Pre\+Reset@{Pre\+Reset}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Pre\+Reset()}{PreReset()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Level\+::\+Pre\+Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classLevel_acec48e8d28ea7af94ced6163d82ad246}{}\label{classLevel_acec48e8d28ea7af94ced6163d82ad246}
+\index{Level@{Level}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevel_aee4d59380ea3bac3dcf70b4514bae30e}{}\label{classLevel_aee4d59380ea3bac3dcf70b4514bae30e}
+
+
+Receive message loop. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & message to receive \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Remove\+Menu@{Remove\+Menu}}
+\index{Remove\+Menu@{Remove\+Menu}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Remove\+Menu(\+Menu $\ast$a\+Menu)}{RemoveMenu(Menu *aMenu)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Remove\+Menu (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu} $\ast$}]{a\+Menu}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_ac0d5c2f55beca4aa790e628ab54d57aa}{}\label{classLevel_ac0d5c2f55beca4aa790e628ab54d57aa}
+
+
+Remove a menu from our level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Menu} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Remove\+Menus@{Remove\+Menus}}
+\index{Remove\+Menus@{Remove\+Menus}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Remove\+Menus()}{RemoveMenus()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Remove\+Menus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a6215db30022670f866047ee7a4c449bb}{}\label{classLevel_a6215db30022670f866047ee7a4c449bb}
+
+
+Remove all menus, the right way. 
+
+\index{Level@{Level}!Remove\+Object\+From\+Scenarios@{Remove\+Object\+From\+Scenarios}}
+\index{Remove\+Object\+From\+Scenarios@{Remove\+Object\+From\+Scenarios}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Remove\+Object\+From\+Scenarios(\+Game\+Object $\ast$a\+Object)}{RemoveObjectFromScenarios(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Remove\+Object\+From\+Scenarios (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a741752f2e050d0c439d1cf068bd8df99}{}\label{classLevel_a741752f2e050d0c439d1cf068bd8df99}
+
+
+Remove object from all scenarios. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to remove. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Reset@{Reset}}
+\index{Reset@{Reset}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Reset()}{Reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_abd143fd02f8959207315bdafd0be05ab}{}\label{classLevel_abd143fd02f8959207315bdafd0be05ab}
+
+
+Delete objects and start level over. 
+
+\index{Level@{Level}!Reset\+Level@{Reset\+Level}}
+\index{Reset\+Level@{Reset\+Level}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Reset\+Level()}{ResetLevel()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Reset\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a101bb0a4de534608fdae6a854f531298}{}\label{classLevel_a101bb0a4de534608fdae6a854f531298}
+
+
+Reset level helper. 
+
+\index{Level@{Level}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevel_af364fce2cd7b5c7b626aba5add5e7ca4}{}\label{classLevel_af364fce2cd7b5c7b626aba5add5e7ca4}
+
+
+Send message to manager. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevel_a0a4c263cafc00090250f17045a2d23a2}{}\label{classLevel_a0a4c263cafc00090250f17045a2d23a2}
+
+
+Serialize level to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLevel_ab98f9b8b299ed04baf8416a2c2664e66}{}\label{classLevel_ab98f9b8b299ed04baf8416a2c2664e66}
+
+
+Make this object viewable in L\+UA. 
+
+\index{Level@{Level}!Serialize\+Objects@{Serialize\+Objects}}
+\index{Serialize\+Objects@{Serialize\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Serialize\+Objects(\+Parser \&a\+Parser, Object\+Container \&a\+Objects, Object\+Container \&a\+Menu\+Objects)}{SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Serialize\+Objects (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser, }
+\item[{{\bf Object\+Container} \&}]{a\+Objects, }
+\item[{{\bf Object\+Container} \&}]{a\+Menu\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_adeba76a68f04c29606cde4f9f7b4fd6d}{}\label{classLevel_adeba76a68f04c29606cde4f9f7b4fd6d}
+
+
+Serialize out objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to write objects to \\
+\hline
+{\em a\+Objects} & Objects to write \\
+\hline
+{\em a\+Menu\+Objects} & Objects to avoid writing \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Serialize\+Scenarios@{Serialize\+Scenarios}}
+\index{Serialize\+Scenarios@{Serialize\+Scenarios}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Serialize\+Scenarios(\+Parser \&a\+Parser, Object\+Container \&a\+Menu\+Objects)}{SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Serialize\+Scenarios (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser, }
+\item[{{\bf Object\+Container} \&}]{a\+Menu\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a8ee3f3906d5a03dd7da6e07db4147d47}{}\label{classLevel_a8ee3f3906d5a03dd7da6e07db4147d47}
+
+
+Serialize all scenario files into separate chunks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to get filename and directory from. (To be in same place as main level file.) \\
+\hline
+{\em a\+Menu\+Objects} & Objects to avoid writing \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Serialize\+Tile\+Map@{Serialize\+Tile\+Map}}
+\index{Serialize\+Tile\+Map@{Serialize\+Tile\+Map}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Serialize\+Tile\+Map(\+Parser \&a\+Parser)}{SerializeTileMap(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Serialize\+Tile\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a027cb9c4148fa186b074ab41f0f07478}{}\label{classLevel_a027cb9c4148fa186b074ab41f0f07478}
+
+
+Serialize the tile map portion of level to another file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Set\+Max\+Boundary@{Set\+Max\+Boundary}}
+\index{Set\+Max\+Boundary@{Set\+Max\+Boundary}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Set\+Max\+Boundary(\+Vector3 const \&a\+Max\+Boundary)}{SetMaxBoundary(Vector3 const &aMaxBoundary)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Set\+Max\+Boundary (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Max\+Boundary}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a1515066519ebd636a28f9ac50a4b1047}{}\label{classLevel_a1515066519ebd636a28f9ac50a4b1047}
+
+
+Set max area for camera view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Max\+Boundary} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Set\+Min\+Boundary@{Set\+Min\+Boundary}}
+\index{Set\+Min\+Boundary@{Set\+Min\+Boundary}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Set\+Min\+Boundary(\+Vector3 const \&a\+Min\+Boundary)}{SetMinBoundary(Vector3 const &aMinBoundary)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Set\+Min\+Boundary (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Min\+Boundary}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_afd583490b92f38e4e5c00c949f6f19c1}{}\label{classLevel_afd583490b92f38e4e5c00c949f6f19c1}
+
+
+Set min area for camera view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Min\+Boundary} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Unload@{Unload}}
+\index{Unload@{Unload}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Unload(\+Level $\ast$const a\+Next\+Level)}{Unload(Level *const aNextLevel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Unload (
+\begin{DoxyParamCaption}
+\item[{{\bf Level} $\ast$const}]{a\+Next\+Level}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a38d35739cb91337abb22f8591203e4cc}{}\label{classLevel_a38d35739cb91337abb22f8591203e4cc}
+
+
+Specify all objects to be be displayed / updated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Next\+Level} & \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Unload\+Objects@{Unload\+Objects}}
+\index{Unload\+Objects@{Unload\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Unload\+Objects(\+Object\+Container const \&a\+Objects)}{UnloadObjects(ObjectContainer const &aObjects)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Unload\+Objects (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\+Container} const \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_afb99f2699061e9a982dc53a41f66265c}{}\label{classLevel_afb99f2699061e9a982dc53a41f66265c}
+
+
+Unload all objects in the list from view, they will still exist in the level file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Objects} & Objects to unload. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Unload\+Scenario@{Unload\+Scenario}}
+\index{Unload\+Scenario@{Unload\+Scenario}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Unload\+Scenario(\+Hash\+String const \&a\+File\+Name)}{UnloadScenario(HashString const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Unload\+Scenario (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_ab3adef99549de6359db3f7db858890b3}{}\label{classLevel_ab3adef99549de6359db3f7db858890b3}
+
+
+Unload scenario by filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+File\+Name} & Name of file to unload scenario objects from. \\
+\hline
+\end{DoxyParams}
+\index{Level@{Level}!Unload\+Scenarios@{Unload\+Scenarios}}
+\index{Unload\+Scenarios@{Unload\+Scenarios}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Unload\+Scenarios()}{UnloadScenarios()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Unload\+Scenarios (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevel_a2c946ce8a4005fd87e6e9ab751a1d20b}{}\label{classLevel_a2c946ce8a4005fd87e6e9ab751a1d20b}
+
+
+Unload all scenarios. 
+
+\index{Level@{Level}!Update@{Update}}
+\index{Update@{Update}!Level@{Level}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevel_a348ad48f5fe0a4158751778735d88230}{}\label{classLevel_a348ad48f5fe0a4158751778735d88230}
+
+
+Update loop for levels. \hyperlink{classLevelManager}{Level\+Manager} will call this for you. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Level@{Level}!m\+Active@{m\+Active}}
+\index{m\+Active@{m\+Active}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Active}{mActive}}]{\setlength{\rightskip}{0pt plus 5cm}bool Level\+::m\+Active\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a67463484bfba4f2bd5e9ea906a267f4a}{}\label{classLevel_a67463484bfba4f2bd5e9ea906a267f4a}
+\index{Level@{Level}!m\+Clear\+Color@{m\+Clear\+Color}}
+\index{m\+Clear\+Color@{m\+Clear\+Color}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Clear\+Color}{mClearColor}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector4} Level\+::m\+Clear\+Color\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a1138365d28ebc6c318fecb9bea2e4e26}{}\label{classLevel_a1138365d28ebc6c318fecb9bea2e4e26}
+\index{Level@{Level}!m\+File\+Name@{m\+File\+Name}}
+\index{m\+File\+Name@{m\+File\+Name}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+File\+Name}{mFileName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Level\+::m\+File\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_af1e1923aba1e95e5a8e895f840460407}{}\label{classLevel_af1e1923aba1e95e5a8e895f840460407}
+\index{Level@{Level}!m\+Focus\+Target@{m\+Focus\+Target}}
+\index{m\+Focus\+Target@{m\+Focus\+Target}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Focus\+Target}{mFocusTarget}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Level\+::m\+Focus\+Target\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a1bd8599f3ce15a8ae505fc84715e94c7}{}\label{classLevel_a1bd8599f3ce15a8ae505fc84715e94c7}
+\index{Level@{Level}!m\+Generator@{m\+Generator}}
+\index{m\+Generator@{m\+Generator}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Generator}{mGenerator}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tile\+Map\+Generator}$\ast$ Level\+::m\+Generator\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_abb613b8abaa789ca6a8ca7d9dd0630e8}{}\label{classLevel_abb613b8abaa789ca6a8ca7d9dd0630e8}
+\index{Level@{Level}!m\+Max\+Boundary@{m\+Max\+Boundary}}
+\index{m\+Max\+Boundary@{m\+Max\+Boundary}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Max\+Boundary}{mMaxBoundary}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Level\+::m\+Max\+Boundary\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a7b30c9977eaba0ad2672f4f1a8880d7a}{}\label{classLevel_a7b30c9977eaba0ad2672f4f1a8880d7a}
+\index{Level@{Level}!m\+Menus@{m\+Menus}}
+\index{m\+Menus@{m\+Menus}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Menus}{mMenus}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu\+Container} Level\+::m\+Menus\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a42a19fd951df82d14d6848a09ea93d57}{}\label{classLevel_a42a19fd951df82d14d6848a09ea93d57}
+\index{Level@{Level}!m\+Min\+Boundary@{m\+Min\+Boundary}}
+\index{m\+Min\+Boundary@{m\+Min\+Boundary}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Min\+Boundary}{mMinBoundary}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Level\+::m\+Min\+Boundary\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_aa4c203935f8b10c2afca708cf4f79e4a}{}\label{classLevel_aa4c203935f8b10c2afca708cf4f79e4a}
+\index{Level@{Level}!m\+Music\+Name@{m\+Music\+Name}}
+\index{m\+Music\+Name@{m\+Music\+Name}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Music\+Name}{mMusicName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Level\+::m\+Music\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_af2e193876cae73a475abbe27a1a9f972}{}\label{classLevel_af2e193876cae73a475abbe27a1a9f972}
+\index{Level@{Level}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Level\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_ae33d8a4a8a50bf09ce19ff784509e77b}{}\label{classLevel_ae33d8a4a8a50bf09ce19ff784509e77b}
+\index{Level@{Level}!m\+Objects@{m\+Objects}}
+\index{m\+Objects@{m\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Objects}{mObjects}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Container} Level\+::m\+Objects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a66c3ffb86f6e61570f833046e7994d43}{}\label{classLevel_a66c3ffb86f6e61570f833046e7994d43}
+\index{Level@{Level}!m\+Owner@{m\+Owner}}
+\index{m\+Owner@{m\+Owner}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Owner}{mOwner}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level\+Manager}$\ast$ Level\+::m\+Owner\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a577a9c893ac40f3b612f1d672d244338}{}\label{classLevel_a577a9c893ac40f3b612f1d672d244338}
+\index{Level@{Level}!m\+Scenarios@{m\+Scenarios}}
+\index{m\+Scenarios@{m\+Scenarios}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Scenarios}{mScenarios}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf File\+Container} Level\+::m\+Scenarios\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_a97db6fa7099a710cf9c953f41ea3f478}{}\label{classLevel_a97db6fa7099a710cf9c953f41ea3f478}
+\index{Level@{Level}!m\+Static\+Objects@{m\+Static\+Objects}}
+\index{m\+Static\+Objects@{m\+Static\+Objects}!Level@{Level}}
+\subsubsection[{\texorpdfstring{m\+Static\+Objects}{mStaticObjects}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Container} Level\+::m\+Static\+Objects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevel_afce9aca707faf2694e54e50f41feb035}{}\label{classLevel_afce9aca707faf2694e54e50f41feb035}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{Level_8h}{Level.\+h}\item 
+Logic/\hyperlink{Level_8cpp}{Level.\+cpp}\end{DoxyCompactItemize}

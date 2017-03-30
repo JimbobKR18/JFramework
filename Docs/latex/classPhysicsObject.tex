@@ -1,0 +1,838 @@
+\hypertarget{classPhysicsObject}{}\section{Physics\+Object Class Reference}
+\label{classPhysicsObject}\index{Physics\+Object@{Physics\+Object}}
+
+
+{\ttfamily \#include $<$Physics\+Object.\+h$>$}
+
+
+
+Inheritance diagram for Physics\+Object\+:
+% FIG 0
+
+
+Collaboration diagram for Physics\+Object\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unordered\+\_\+map$<$ int, \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{classPhysicsObject_a5ab17c11089e18df5c34651dbad8903a}{Ignore\+Container}
+\item 
+typedef std\+::vector$<$ \hyperlink{structShape}{Shape} $\ast$ $>$\+::iterator \hyperlink{classPhysicsObject_aafe647b799f851abde90d86fd19385a2}{shape\+IT}
+\item 
+typedef std\+::vector$<$ \hyperlink{structShape}{Shape} $\ast$ $>$\+::const\+\_\+iterator \hyperlink{classPhysicsObject_a8e53564bc32ea9ba2d306d6113dab6e7}{const\+Shape\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsObject_a79bd3aba4411227e44f2361b4cc77864}{Physics\+Object} (\hyperlink{classPhysicsWorld}{Physics\+World} $\ast$a\+World)
+\item 
+virtual \hyperlink{classPhysicsObject_a2172e8b71176e3a54d6a8f5ff15d4178}{$\sim$\+Physics\+Object} ()
+\item 
+virtual void \hyperlink{classPhysicsObject_a8da7c2b9a0d491633dc8057b6d95de11}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPhysicsObject_a922c9aca3c8a8bada45a69a09d4231e9}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to other objects. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPhysicsObject_ac3b6b5e359c343a36da1564bfe4a9337}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive message from other objects or managers. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPhysicsObject_a145770d38d3469a5bf77e2c0318fc1fb}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize to file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPhysicsObject_a131cc28cad0335509d0372543ebcd513}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Read from file. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a6977665c22a33f7384d6640c1658be4d}{Add\+Shape} (\hyperlink{structShape}{Shape} $\ast$a\+Shape)
+\begin{DoxyCompactList}\small\item\em Add shape to list. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a277ca93d4df1335280937a3b9f2a4fb5}{Add\+Force} (\hyperlink{structVector3}{Vector3} const \&a\+Force)
+\begin{DoxyCompactList}\small\item\em Add force to list. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a2b597c7e65767767d069daa2fc9406f0}{Clear\+Forces} ()
+\begin{DoxyCompactList}\small\item\em Clear all forces for object. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_abc72c35ca692d673a1184954878b0eba}{Add\+Ignore} (\hyperlink{classHashString}{Hash\+String} const \&a\+Object\+Name)
+\begin{DoxyCompactList}\small\item\em Add object to ignore list. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_addc05243ec1db94498a53eacc0584b4b}{Remove\+Ignore} (\hyperlink{classHashString}{Hash\+String} const \&a\+Object\+Name)
+\begin{DoxyCompactList}\small\item\em Remove object to ignore list. \end{DoxyCompactList}\item 
+bool \hyperlink{classPhysicsObject_ad6268b62e3d4168ff151ee546665a827}{Ignore\+Object} (\hyperlink{classHashString}{Hash\+String} const \&a\+Object\+Name)
+\begin{DoxyCompactList}\small\item\em Check if we should ignore the object in question. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classPhysicsObject_aa1a7310ac309d4855355d8752e021c06}{Get\+Velocity} () const 
+\begin{DoxyCompactList}\small\item\em Get velocity. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_aaa5ec6a00a68a6a170c149b6a9b40af1}{Set\+Velocity} (\hyperlink{structVector3}{Vector3} const \&a\+Vel)
+\begin{DoxyCompactList}\small\item\em Set velocity for this object. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classPhysicsObject_a1fbc66747331914e3bb528a8dba7e1de}{Get\+Acceleration} () const 
+\begin{DoxyCompactList}\small\item\em Get acceleration. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_aa8aa775eb80a567441853b6522f934fe}{Set\+Acceleration} (\hyperlink{structVector3}{Vector3} const \&a\+Accel)
+\begin{DoxyCompactList}\small\item\em Set acceleration for this object. \end{DoxyCompactList}\item 
+float \hyperlink{classPhysicsObject_a7da622e50716e5448c1c5a164a2fbd1d}{Get\+Mass} () const 
+\begin{DoxyCompactList}\small\item\em Get mass of this object. \end{DoxyCompactList}\item 
+float \hyperlink{classPhysicsObject_aba6ab4d7b6fdcd6796f502be5cbe0e8e}{Get\+Inverse\+Mass} () const 
+\begin{DoxyCompactList}\small\item\em Get inverse mass of this object. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a72af82678d346cbb4e1d64e68292cd08}{Set\+Mass} (float const a\+Mass)
+\begin{DoxyCompactList}\small\item\em Set mass of this object. \end{DoxyCompactList}\item 
+float \hyperlink{classPhysicsObject_a69aae2f424db9d0b6250b36a24984704}{Get\+Damping} () const 
+\begin{DoxyCompactList}\small\item\em Get damping for this object. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a540fc51c166b2e7d21c10f53c6f92768}{Set\+Damping} (float const a\+Damping)
+\begin{DoxyCompactList}\small\item\em Set damping for this object. \end{DoxyCompactList}\item 
+float \hyperlink{classPhysicsObject_a5f61945008b6ec0d80faef109aefdde6}{Get\+Restitution} () const 
+\begin{DoxyCompactList}\small\item\em Get restitution for this object. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a5ab4b3ea8cca7bdaf1d92a4e04b67d49}{Set\+Restitution} (float const a\+Restitution)
+\begin{DoxyCompactList}\small\item\em Set restitution for this object. \end{DoxyCompactList}\item 
+float \hyperlink{classPhysicsObject_ab6e2523846b8e97fc85767de23cc7987}{Get\+Max\+Velocity} () const 
+\begin{DoxyCompactList}\small\item\em Get max velocity for this object. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a7b68828e71de3b13ef2bf874debdc468}{Set\+Max\+Velocity} (float const a\+Maximum\+Velocity)
+\begin{DoxyCompactList}\small\item\em Set max velocity for this object. \end{DoxyCompactList}\item 
+bool \hyperlink{classPhysicsObject_a216dd134b23e61f76cc0253e35e49427}{Is\+Static} () const 
+\begin{DoxyCompactList}\small\item\em Is this object static? (i.\+e. doesn\textquotesingle{}t move) \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a2499ecef8cde9cce4a2a501e8585b339}{Set\+Static} (bool const a\+Static)
+\begin{DoxyCompactList}\small\item\em Set whether this object is static or not. \end{DoxyCompactList}\item 
+bool \hyperlink{classPhysicsObject_a1d6e4007ed301df275d912bee9889df4}{Is\+Affected\+By\+Gravity} () const 
+\begin{DoxyCompactList}\small\item\em Is this object affected by gravity force? \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a8593d870fbbb5cc25d759eaf4acd847b}{Set\+Affected\+By\+Gravity} (bool const a\+Gravity)
+\begin{DoxyCompactList}\small\item\em Set if this object is affected by gravity. \end{DoxyCompactList}\item 
+bool \hyperlink{classPhysicsObject_ab9863bdf8badc7ae67fc841320dba5ae}{Is\+Passable} () const 
+\begin{DoxyCompactList}\small\item\em Is this object passable? Can things walk through it? \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a573ecf16903078e9085408000bc6ed1e}{Set\+Passable} (bool const a\+Passable)
+\begin{DoxyCompactList}\small\item\em Set if obejct is passable. \end{DoxyCompactList}\item 
+bool \hyperlink{classPhysicsObject_a7ef659e83d2d3605a22fd4a0d9c6ebe9}{Is\+Active} () const 
+\begin{DoxyCompactList}\small\item\em Get if object is active (able to register collision) \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a11af11559e117d6e2998105e460bb405}{Set\+Active} (bool const a\+Active)
+\begin{DoxyCompactList}\small\item\em Set if object is active (able to register collision) \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classPhysicsObject_a37f669f2c77bc0b014b8476288b856fa}{Get\+Broad\+Size} () const 
+\begin{DoxyCompactList}\small\item\em Set size for broadphasing (bigger than normal box) \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_aeeae8ada03b8826e4ce3e972ac4f77e0}{Set\+Broad\+Size} (\hyperlink{structVector3}{Vector3} const \&a\+Size)
+\begin{DoxyCompactList}\small\item\em Set broadphasing box size (bigger than normal box) \end{DoxyCompactList}\item 
+\hyperlink{classPhysicsObject_a5ab17c11089e18df5c34651dbad8903a}{Ignore\+Container} \hyperlink{classPhysicsObject_ab1e13bde9854d4da86bc2831cc2804f0}{Get\+Ignore\+List} () const 
+\begin{DoxyCompactList}\small\item\em Get list of ignorable objects. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsObject_a7836f03fa0341de1abfedd82bd62d128}{Set\+Ignore\+List} (\hyperlink{classPhysicsObject_a5ab17c11089e18df5c34651dbad8903a}{Ignore\+Container} const \&a\+Ignore\+List)
+\begin{DoxyCompactList}\small\item\em Set list of objects to ignore. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{structShape}{Shape} $\ast$ $>$ \& \hyperlink{classPhysicsObject_a9953e6d2a78302734c0e0b22543d4a4a}{Get\+Shapes} ()
+\begin{DoxyCompactList}\small\item\em Get all shapes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classPhysicsObject_a33873073fb457338962a359b1fa3553e}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this object usable in L\+UA. \end{DoxyCompactList}\item 
+static int \hyperlink{classPhysicsObject_abde6a95513ac96a6057fff842365e365}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsWorld}{Physics\+World} $\ast$ \hyperlink{classPhysicsObject_a020b80e399784584c4d698c2f1cbd73b}{m\+World}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classPhysicsObject_a1465f4ecf33500797facd00672ddb2b8}{m\+Velocity}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classPhysicsObject_a9ac61c4302d4baf019ca2764f34e6493}{m\+Acceleration}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classPhysicsObject_a530940066b7c62217575e8fa71ebce51}{m\+Forces}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classPhysicsObject_ad4d4fefcb37be640f28f17cef046c0ed}{m\+Broad\+Size}
+\item 
+float \hyperlink{classPhysicsObject_a996b10a905c08ba1dd93dd4cff5c0158}{m\+Mass}
+\item 
+float \hyperlink{classPhysicsObject_ae28c1c3be39dd036b5163d7a92488f06}{m\+Inverse\+Mass}
+\item 
+float \hyperlink{classPhysicsObject_a74fc2ce33342515768f9a60505993eae}{m\+Damping}
+\item 
+float \hyperlink{classPhysicsObject_a7e9c3cda294db87d0eb0138eaa90c270}{m\+Restitution}
+\item 
+float \hyperlink{classPhysicsObject_a028e935d71516b93e565eab1f9a272da}{m\+Maximum\+Velocity}
+\item 
+bool \hyperlink{classPhysicsObject_a293534176610812f9f6b54a7619d9ab8}{m\+Static}
+\item 
+bool \hyperlink{classPhysicsObject_a67801f870ad67d0a4845f5a95c196de4}{m\+Gravity}
+\item 
+bool \hyperlink{classPhysicsObject_a3d3fbea708e07f5c6c6bd19fe5504692}{m\+Passable}
+\item 
+bool \hyperlink{classPhysicsObject_a0fc8e4a8f154c41f61a1e1fea88cee27}{m\+Active}
+\item 
+\hyperlink{classPhysicsObject_a5ab17c11089e18df5c34651dbad8903a}{Ignore\+Container} \hyperlink{classPhysicsObject_a5247997669f7885886a966f99079d758}{m\+Ignore\+List}
+\item 
+std\+::vector$<$ \hyperlink{structShape}{Shape} $\ast$ $>$ \hyperlink{classPhysicsObject_abb2b870bf15b8eca1a7f543324dccaee}{m\+Shapes}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classPhysicsObject_ae53856b261838ff637770c08450305b1}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Physics\+Object\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Physics\+Object@{Physics\+Object}!const\+Shape\+IT@{const\+Shape\+IT}}
+\index{const\+Shape\+IT@{const\+Shape\+IT}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{const\+Shape\+IT}{constShapeIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Shape}$\ast$$>$\+::const\+\_\+iterator {\bf Physics\+Object\+::const\+Shape\+IT}}\hypertarget{classPhysicsObject_a8e53564bc32ea9ba2d306d6113dab6e7}{}\label{classPhysicsObject_a8e53564bc32ea9ba2d306d6113dab6e7}
+\index{Physics\+Object@{Physics\+Object}!Ignore\+Container@{Ignore\+Container}}
+\index{Ignore\+Container@{Ignore\+Container}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Ignore\+Container}{IgnoreContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::unordered\+\_\+map$<$int, {\bf Hash\+String}$>$ {\bf Physics\+Object\+::\+Ignore\+Container}}\hypertarget{classPhysicsObject_a5ab17c11089e18df5c34651dbad8903a}{}\label{classPhysicsObject_a5ab17c11089e18df5c34651dbad8903a}
+\index{Physics\+Object@{Physics\+Object}!shape\+IT@{shape\+IT}}
+\index{shape\+IT@{shape\+IT}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{shape\+IT}{shapeIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Shape}$\ast$$>$\+::iterator {\bf Physics\+Object\+::shape\+IT}}\hypertarget{classPhysicsObject_aafe647b799f851abde90d86fd19385a2}{}\label{classPhysicsObject_aafe647b799f851abde90d86fd19385a2}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Physics\+Object@{Physics\+Object}!Physics\+Object@{Physics\+Object}}
+\index{Physics\+Object@{Physics\+Object}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Physics\+Object(\+Physics\+World $\ast$a\+World)}{PhysicsObject(PhysicsWorld *aWorld)}}]{\setlength{\rightskip}{0pt plus 5cm}Physics\+Object\+::\+Physics\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+World} $\ast$}]{a\+World}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a79bd3aba4411227e44f2361b4cc77864}{}\label{classPhysicsObject_a79bd3aba4411227e44f2361b4cc77864}
+\index{Physics\+Object@{Physics\+Object}!````~Physics\+Object@{$\sim$\+Physics\+Object}}
+\index{````~Physics\+Object@{$\sim$\+Physics\+Object}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{$\sim$\+Physics\+Object()}{~PhysicsObject()}}]{\setlength{\rightskip}{0pt plus 5cm}Physics\+Object\+::$\sim$\+Physics\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsObject_a2172e8b71176e3a54d6a8f5ff15d4178}{}\label{classPhysicsObject_a2172e8b71176e3a54d6a8f5ff15d4178}
+
+
+\subsection{Member Function Documentation}
+\index{Physics\+Object@{Physics\+Object}!Add\+Force@{Add\+Force}}
+\index{Add\+Force@{Add\+Force}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Add\+Force(\+Vector3 const \&a\+Force)}{AddForce(Vector3 const &aForce)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Add\+Force (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Force}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a277ca93d4df1335280937a3b9f2a4fb5}{}\label{classPhysicsObject_a277ca93d4df1335280937a3b9f2a4fb5}
+
+
+Add force to list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Force} & Force to add \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Add\+Ignore@{Add\+Ignore}}
+\index{Add\+Ignore@{Add\+Ignore}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Add\+Ignore(\+Hash\+String const \&a\+Object\+Name)}{AddIgnore(HashString const &aObjectName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Add\+Ignore (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Object\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_abc72c35ca692d673a1184954878b0eba}{}\label{classPhysicsObject_abc72c35ca692d673a1184954878b0eba}
+
+
+Add object to ignore list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object\+Name} & Name of object to ignore \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Add\+Shape@{Add\+Shape}}
+\index{Add\+Shape@{Add\+Shape}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Add\+Shape(\+Shape $\ast$a\+Shape)}{AddShape(Shape *aShape)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Add\+Shape (
+\begin{DoxyParamCaption}
+\item[{{\bf Shape} $\ast$}]{a\+Shape}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a6977665c22a33f7384d6640c1658be4d}{}\label{classPhysicsObject_a6977665c22a33f7384d6640c1658be4d}
+
+
+Add shape to list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Shape} & \hyperlink{structShape}{Shape} to add \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Clear\+Forces@{Clear\+Forces}}
+\index{Clear\+Forces@{Clear\+Forces}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Clear\+Forces()}{ClearForces()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Clear\+Forces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a2b597c7e65767767d069daa2fc9406f0}{}\label{classPhysicsObject_a2b597c7e65767767d069daa2fc9406f0}
+
+
+Clear all forces for object. 
+
+\index{Physics\+Object@{Physics\+Object}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)}{Deserialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsObject_a131cc28cad0335509d0372543ebcd513}{}\label{classPhysicsObject_a131cc28cad0335509d0372543ebcd513}
+
+
+Read from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File to read from. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Component}.
+
+\index{Physics\+Object@{Physics\+Object}!Get\+Acceleration@{Get\+Acceleration}}
+\index{Get\+Acceleration@{Get\+Acceleration}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Acceleration() const }{GetAcceleration() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Physics\+Object\+::\+Get\+Acceleration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a1fbc66747331914e3bb528a8dba7e1de}{}\label{classPhysicsObject_a1fbc66747331914e3bb528a8dba7e1de}
+
+
+Get acceleration. 
+
+\begin{DoxyReturn}{Returns}
+Current acceleration 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Broad\+Size@{Get\+Broad\+Size}}
+\index{Get\+Broad\+Size@{Get\+Broad\+Size}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Broad\+Size() const }{GetBroadSize() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Physics\+Object\+::\+Get\+Broad\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a37f669f2c77bc0b014b8476288b856fa}{}\label{classPhysicsObject_a37f669f2c77bc0b014b8476288b856fa}
+
+
+Set size for broadphasing (bigger than normal box) 
+
+\begin{DoxyReturn}{Returns}
+Size for broadphasing 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Damping@{Get\+Damping}}
+\index{Get\+Damping@{Get\+Damping}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Damping() const }{GetDamping() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::\+Get\+Damping (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a69aae2f424db9d0b6250b36a24984704}{}\label{classPhysicsObject_a69aae2f424db9d0b6250b36a24984704}
+
+
+Get damping for this object. 
+
+\begin{DoxyReturn}{Returns}
+Damping 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Ignore\+List@{Get\+Ignore\+List}}
+\index{Get\+Ignore\+List@{Get\+Ignore\+List}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Ignore\+List() const }{GetIgnoreList() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physics\+Object\+::\+Ignore\+Container} Physics\+Object\+::\+Get\+Ignore\+List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_ab1e13bde9854d4da86bc2831cc2804f0}{}\label{classPhysicsObject_ab1e13bde9854d4da86bc2831cc2804f0}
+
+
+Get list of ignorable objects. 
+
+\begin{DoxyReturn}{Returns}
+List of ignorable objects 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Inverse\+Mass@{Get\+Inverse\+Mass}}
+\index{Get\+Inverse\+Mass@{Get\+Inverse\+Mass}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Inverse\+Mass() const }{GetInverseMass() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::\+Get\+Inverse\+Mass (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_aba6ab4d7b6fdcd6796f502be5cbe0e8e}{}\label{classPhysicsObject_aba6ab4d7b6fdcd6796f502be5cbe0e8e}
+
+
+Get inverse mass of this object. 
+
+\begin{DoxyReturn}{Returns}
+Mass 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Mass@{Get\+Mass}}
+\index{Get\+Mass@{Get\+Mass}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Mass() const }{GetMass() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::\+Get\+Mass (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a7da622e50716e5448c1c5a164a2fbd1d}{}\label{classPhysicsObject_a7da622e50716e5448c1c5a164a2fbd1d}
+
+
+Get mass of this object. 
+
+\begin{DoxyReturn}{Returns}
+Mass 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Max\+Velocity@{Get\+Max\+Velocity}}
+\index{Get\+Max\+Velocity@{Get\+Max\+Velocity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Max\+Velocity() const }{GetMaxVelocity() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::\+Get\+Max\+Velocity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_ab6e2523846b8e97fc85767de23cc7987}{}\label{classPhysicsObject_ab6e2523846b8e97fc85767de23cc7987}
+
+
+Get max velocity for this object. 
+
+\begin{DoxyReturn}{Returns}
+Max velocity 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Restitution@{Get\+Restitution}}
+\index{Get\+Restitution@{Get\+Restitution}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Restitution() const }{GetRestitution() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::\+Get\+Restitution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a5f61945008b6ec0d80faef109aefdde6}{}\label{classPhysicsObject_a5f61945008b6ec0d80faef109aefdde6}
+
+
+Get restitution for this object. 
+
+\begin{DoxyReturn}{Returns}
+Restitution 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+Shapes@{Get\+Shapes}}
+\index{Get\+Shapes@{Get\+Shapes}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Shapes()}{GetShapes()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Shape} $\ast$ $>$ \& Physics\+Object\+::\+Get\+Shapes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a9953e6d2a78302734c0e0b22543d4a4a}{}\label{classPhysicsObject_a9953e6d2a78302734c0e0b22543d4a4a}
+
+
+Get all shapes. 
+
+\begin{DoxyReturn}{Returns}
+Shapes belonging to this object. 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int Physics\+Object\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classPhysicsObject_abde6a95513ac96a6057fff842365e365}{}\label{classPhysicsObject_abde6a95513ac96a6057fff842365e365}
+\index{Physics\+Object@{Physics\+Object}!Get\+Velocity@{Get\+Velocity}}
+\index{Get\+Velocity@{Get\+Velocity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Velocity() const }{GetVelocity() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Physics\+Object\+::\+Get\+Velocity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_aa1a7310ac309d4855355d8752e021c06}{}\label{classPhysicsObject_aa1a7310ac309d4855355d8752e021c06}
+
+
+Get velocity. 
+
+\begin{DoxyReturn}{Returns}
+Current velocity 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Ignore\+Object@{Ignore\+Object}}
+\index{Ignore\+Object@{Ignore\+Object}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Ignore\+Object(\+Hash\+String const \&a\+Object\+Name)}{IgnoreObject(HashString const &aObjectName)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::\+Ignore\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Object\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_ad6268b62e3d4168ff151ee546665a827}{}\label{classPhysicsObject_ad6268b62e3d4168ff151ee546665a827}
+
+
+Check if we should ignore the object in question. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object\+Name} & The name of the object to maybe ignore \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not to ignore collision with this object 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Is\+Active@{Is\+Active}}
+\index{Is\+Active@{Is\+Active}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Is\+Active() const }{IsActive() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::\+Is\+Active (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a7ef659e83d2d3605a22fd4a0d9c6ebe9}{}\label{classPhysicsObject_a7ef659e83d2d3605a22fd4a0d9c6ebe9}
+
+
+Get if object is active (able to register collision) 
+
+\begin{DoxyReturn}{Returns}
+Whether or not the object is active. 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Is\+Affected\+By\+Gravity@{Is\+Affected\+By\+Gravity}}
+\index{Is\+Affected\+By\+Gravity@{Is\+Affected\+By\+Gravity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Is\+Affected\+By\+Gravity() const }{IsAffectedByGravity() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::\+Is\+Affected\+By\+Gravity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a1d6e4007ed301df275d912bee9889df4}{}\label{classPhysicsObject_a1d6e4007ed301df275d912bee9889df4}
+
+
+Is this object affected by gravity force? 
+
+\begin{DoxyReturn}{Returns}
+Is it? 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Is\+Passable@{Is\+Passable}}
+\index{Is\+Passable@{Is\+Passable}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Is\+Passable() const }{IsPassable() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::\+Is\+Passable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_ab9863bdf8badc7ae67fc841320dba5ae}{}\label{classPhysicsObject_ab9863bdf8badc7ae67fc841320dba5ae}
+
+
+Is this object passable? Can things walk through it? 
+
+\begin{DoxyReturn}{Returns}
+Whether or not the object is passable. 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Is\+Static@{Is\+Static}}
+\index{Is\+Static@{Is\+Static}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Is\+Static() const }{IsStatic() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::\+Is\+Static (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPhysicsObject_a216dd134b23e61f76cc0253e35e49427}{}\label{classPhysicsObject_a216dd134b23e61f76cc0253e35e49427}
+
+
+Is this object static? (i.\+e. doesn\textquotesingle{}t move) 
+
+\begin{DoxyReturn}{Returns}
+If this object is static or not 
+\end{DoxyReturn}
+\index{Physics\+Object@{Physics\+Object}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsObject_ac3b6b5e359c343a36da1564bfe4a9337}{}\label{classPhysicsObject_ac3b6b5e359c343a36da1564bfe4a9337}
+
+
+Receive message from other objects or managers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to receive. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Component}.
+
+\index{Physics\+Object@{Physics\+Object}!Remove\+Ignore@{Remove\+Ignore}}
+\index{Remove\+Ignore@{Remove\+Ignore}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Remove\+Ignore(\+Hash\+String const \&a\+Object\+Name)}{RemoveIgnore(HashString const &aObjectName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Remove\+Ignore (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Object\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_addc05243ec1db94498a53eacc0584b4b}{}\label{classPhysicsObject_addc05243ec1db94498a53eacc0584b4b}
+
+
+Remove object to ignore list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object\+Name} & Name of object to unignore \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsObject_a922c9aca3c8a8bada45a69a09d4231e9}{}\label{classPhysicsObject_a922c9aca3c8a8bada45a69a09d4231e9}
+
+
+Send message to other objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Component}.
+
+\index{Physics\+Object@{Physics\+Object}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsObject_a145770d38d3469a5bf77e2c0318fc1fb}{}\label{classPhysicsObject_a145770d38d3469a5bf77e2c0318fc1fb}
+
+
+Serialize to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & The file to serialize to. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Component}.
+
+\index{Physics\+Object@{Physics\+Object}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classPhysicsObject_a33873073fb457338962a359b1fa3553e}{}\label{classPhysicsObject_a33873073fb457338962a359b1fa3553e}
+
+
+Make this object usable in L\+UA. 
+
+\index{Physics\+Object@{Physics\+Object}!Set\+Acceleration@{Set\+Acceleration}}
+\index{Set\+Acceleration@{Set\+Acceleration}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Acceleration(\+Vector3 const \&a\+Accel)}{SetAcceleration(Vector3 const &aAccel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Acceleration (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Accel}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_aa8aa775eb80a567441853b6522f934fe}{}\label{classPhysicsObject_aa8aa775eb80a567441853b6522f934fe}
+
+
+Set acceleration for this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Accel} & Acceleration to set to \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Active@{Set\+Active}}
+\index{Set\+Active@{Set\+Active}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Active(bool const a\+Active)}{SetActive(bool const aActive)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Active (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Active}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a11af11559e117d6e2998105e460bb405}{}\label{classPhysicsObject_a11af11559e117d6e2998105e460bb405}
+
+
+Set if object is active (able to register collision) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Active} & Whether or not the object is active. \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Affected\+By\+Gravity@{Set\+Affected\+By\+Gravity}}
+\index{Set\+Affected\+By\+Gravity@{Set\+Affected\+By\+Gravity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Affected\+By\+Gravity(bool const a\+Gravity)}{SetAffectedByGravity(bool const aGravity)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Affected\+By\+Gravity (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Gravity}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a8593d870fbbb5cc25d759eaf4acd847b}{}\label{classPhysicsObject_a8593d870fbbb5cc25d759eaf4acd847b}
+
+
+Set if this object is affected by gravity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Gravity} & Gravity set. \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Broad\+Size@{Set\+Broad\+Size}}
+\index{Set\+Broad\+Size@{Set\+Broad\+Size}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Broad\+Size(\+Vector3 const \&a\+Size)}{SetBroadSize(Vector3 const &aSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Broad\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_aeeae8ada03b8826e4ce3e972ac4f77e0}{}\label{classPhysicsObject_aeeae8ada03b8826e4ce3e972ac4f77e0}
+
+
+Set broadphasing box size (bigger than normal box) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Size} & Size for broadphasing \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Damping@{Set\+Damping}}
+\index{Set\+Damping@{Set\+Damping}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Damping(float const a\+Damping)}{SetDamping(float const aDamping)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Damping (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Damping}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a540fc51c166b2e7d21c10f53c6f92768}{}\label{classPhysicsObject_a540fc51c166b2e7d21c10f53c6f92768}
+
+
+Set damping for this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Damping} & Damping to set to \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Ignore\+List@{Set\+Ignore\+List}}
+\index{Set\+Ignore\+List@{Set\+Ignore\+List}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Ignore\+List(\+Ignore\+Container const \&a\+Ignore\+List)}{SetIgnoreList(IgnoreContainer const &aIgnoreList)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Ignore\+List (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object\+::\+Ignore\+Container} const \&}]{a\+Ignore\+List}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a7836f03fa0341de1abfedd82bd62d128}{}\label{classPhysicsObject_a7836f03fa0341de1abfedd82bd62d128}
+
+
+Set list of objects to ignore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Ignore\+List} & List of ignorable objects \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Mass@{Set\+Mass}}
+\index{Set\+Mass@{Set\+Mass}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Mass(float const a\+Mass)}{SetMass(float const aMass)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Mass (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Mass}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a72af82678d346cbb4e1d64e68292cd08}{}\label{classPhysicsObject_a72af82678d346cbb4e1d64e68292cd08}
+
+
+Set mass of this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Mass} & Mass to set to \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Max\+Velocity@{Set\+Max\+Velocity}}
+\index{Set\+Max\+Velocity@{Set\+Max\+Velocity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Max\+Velocity(float const a\+Maximum\+Velocity)}{SetMaxVelocity(float const aMaximumVelocity)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Max\+Velocity (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Maximum\+Velocity}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a7b68828e71de3b13ef2bf874debdc468}{}\label{classPhysicsObject_a7b68828e71de3b13ef2bf874debdc468}
+
+
+Set max velocity for this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Maximum\+Velocity} & Velocity to set to \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Passable@{Set\+Passable}}
+\index{Set\+Passable@{Set\+Passable}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Passable(bool const a\+Passable)}{SetPassable(bool const aPassable)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Passable (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Passable}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a573ecf16903078e9085408000bc6ed1e}{}\label{classPhysicsObject_a573ecf16903078e9085408000bc6ed1e}
+
+
+Set if obejct is passable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Passable} & Passable \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Restitution@{Set\+Restitution}}
+\index{Set\+Restitution@{Set\+Restitution}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Restitution(float const a\+Restitution)}{SetRestitution(float const aRestitution)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Restitution (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Restitution}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a5ab4b3ea8cca7bdaf1d92a4e04b67d49}{}\label{classPhysicsObject_a5ab4b3ea8cca7bdaf1d92a4e04b67d49}
+
+
+Set restitution for this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Restitution} & Restitution to set to \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Static@{Set\+Static}}
+\index{Set\+Static@{Set\+Static}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Static(bool const a\+Static)}{SetStatic(bool const aStatic)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Static (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Static}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_a2499ecef8cde9cce4a2a501e8585b339}{}\label{classPhysicsObject_a2499ecef8cde9cce4a2a501e8585b339}
+
+
+Set whether this object is static or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Static} & Static \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Set\+Velocity@{Set\+Velocity}}
+\index{Set\+Velocity@{Set\+Velocity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Velocity(\+Vector3 const \&a\+Vel)}{SetVelocity(Vector3 const &aVel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Set\+Velocity (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Vel}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsObject_aaa5ec6a00a68a6a170c149b6a9b40af1}{}\label{classPhysicsObject_aaa5ec6a00a68a6a170c149b6a9b40af1}
+
+
+Set velocity for this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Vel} & Velocity to set to \\
+\hline
+\end{DoxyParams}
+\index{Physics\+Object@{Physics\+Object}!Update@{Update}}
+\index{Update@{Update}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+Object\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsObject_a8da7c2b9a0d491633dc8057b6d95de11}{}\label{classPhysicsObject_a8da7c2b9a0d491633dc8057b6d95de11}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Component}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Physics\+Object@{Physics\+Object}!m\+Acceleration@{m\+Acceleration}}
+\index{m\+Acceleration@{m\+Acceleration}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Acceleration}{mAcceleration}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Physics\+Object\+::m\+Acceleration\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a9ac61c4302d4baf019ca2764f34e6493}{}\label{classPhysicsObject_a9ac61c4302d4baf019ca2764f34e6493}
+\index{Physics\+Object@{Physics\+Object}!m\+Active@{m\+Active}}
+\index{m\+Active@{m\+Active}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Active}{mActive}}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::m\+Active\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a0fc8e4a8f154c41f61a1e1fea88cee27}{}\label{classPhysicsObject_a0fc8e4a8f154c41f61a1e1fea88cee27}
+\index{Physics\+Object@{Physics\+Object}!m\+Broad\+Size@{m\+Broad\+Size}}
+\index{m\+Broad\+Size@{m\+Broad\+Size}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Broad\+Size}{mBroadSize}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Physics\+Object\+::m\+Broad\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_ad4d4fefcb37be640f28f17cef046c0ed}{}\label{classPhysicsObject_ad4d4fefcb37be640f28f17cef046c0ed}
+\index{Physics\+Object@{Physics\+Object}!m\+Damping@{m\+Damping}}
+\index{m\+Damping@{m\+Damping}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Damping}{mDamping}}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::m\+Damping\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a74fc2ce33342515768f9a60505993eae}{}\label{classPhysicsObject_a74fc2ce33342515768f9a60505993eae}
+\index{Physics\+Object@{Physics\+Object}!m\+Forces@{m\+Forces}}
+\index{m\+Forces@{m\+Forces}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Forces}{mForces}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Physics\+Object\+::m\+Forces\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a530940066b7c62217575e8fa71ebce51}{}\label{classPhysicsObject_a530940066b7c62217575e8fa71ebce51}
+\index{Physics\+Object@{Physics\+Object}!m\+Gravity@{m\+Gravity}}
+\index{m\+Gravity@{m\+Gravity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Gravity}{mGravity}}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::m\+Gravity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a67801f870ad67d0a4845f5a95c196de4}{}\label{classPhysicsObject_a67801f870ad67d0a4845f5a95c196de4}
+\index{Physics\+Object@{Physics\+Object}!m\+Ignore\+List@{m\+Ignore\+List}}
+\index{m\+Ignore\+List@{m\+Ignore\+List}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Ignore\+List}{mIgnoreList}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ignore\+Container} Physics\+Object\+::m\+Ignore\+List\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a5247997669f7885886a966f99079d758}{}\label{classPhysicsObject_a5247997669f7885886a966f99079d758}
+\index{Physics\+Object@{Physics\+Object}!m\+Inverse\+Mass@{m\+Inverse\+Mass}}
+\index{m\+Inverse\+Mass@{m\+Inverse\+Mass}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Inverse\+Mass}{mInverseMass}}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::m\+Inverse\+Mass\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_ae28c1c3be39dd036b5163d7a92488f06}{}\label{classPhysicsObject_ae28c1c3be39dd036b5163d7a92488f06}
+\index{Physics\+Object@{Physics\+Object}!m\+Mass@{m\+Mass}}
+\index{m\+Mass@{m\+Mass}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Mass}{mMass}}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::m\+Mass\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a996b10a905c08ba1dd93dd4cff5c0158}{}\label{classPhysicsObject_a996b10a905c08ba1dd93dd4cff5c0158}
+\index{Physics\+Object@{Physics\+Object}!m\+Maximum\+Velocity@{m\+Maximum\+Velocity}}
+\index{m\+Maximum\+Velocity@{m\+Maximum\+Velocity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Maximum\+Velocity}{mMaximumVelocity}}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::m\+Maximum\+Velocity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a028e935d71516b93e565eab1f9a272da}{}\label{classPhysicsObject_a028e935d71516b93e565eab1f9a272da}
+\index{Physics\+Object@{Physics\+Object}!m\+Passable@{m\+Passable}}
+\index{m\+Passable@{m\+Passable}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Passable}{mPassable}}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::m\+Passable\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a3d3fbea708e07f5c6c6bd19fe5504692}{}\label{classPhysicsObject_a3d3fbea708e07f5c6c6bd19fe5504692}
+\index{Physics\+Object@{Physics\+Object}!m\+Restitution@{m\+Restitution}}
+\index{m\+Restitution@{m\+Restitution}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Restitution}{mRestitution}}]{\setlength{\rightskip}{0pt plus 5cm}float Physics\+Object\+::m\+Restitution\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a7e9c3cda294db87d0eb0138eaa90c270}{}\label{classPhysicsObject_a7e9c3cda294db87d0eb0138eaa90c270}
+\index{Physics\+Object@{Physics\+Object}!m\+Shapes@{m\+Shapes}}
+\index{m\+Shapes@{m\+Shapes}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Shapes}{mShapes}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Shape}$\ast$$>$ Physics\+Object\+::m\+Shapes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_abb2b870bf15b8eca1a7f543324dccaee}{}\label{classPhysicsObject_abb2b870bf15b8eca1a7f543324dccaee}
+\index{Physics\+Object@{Physics\+Object}!m\+Static@{m\+Static}}
+\index{m\+Static@{m\+Static}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Static}{mStatic}}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+Object\+::m\+Static\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a293534176610812f9f6b54a7619d9ab8}{}\label{classPhysicsObject_a293534176610812f9f6b54a7619d9ab8}
+\index{Physics\+Object@{Physics\+Object}!m\+Velocity@{m\+Velocity}}
+\index{m\+Velocity@{m\+Velocity}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+Velocity}{mVelocity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Physics\+Object\+::m\+Velocity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a1465f4ecf33500797facd00672ddb2b8}{}\label{classPhysicsObject_a1465f4ecf33500797facd00672ddb2b8}
+\index{Physics\+Object@{Physics\+Object}!m\+World@{m\+World}}
+\index{m\+World@{m\+World}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{m\+World}{mWorld}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physics\+World}$\ast$ Physics\+Object\+::m\+World\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsObject_a020b80e399784584c4d698c2f1cbd73b}{}\label{classPhysicsObject_a020b80e399784584c4d698c2f1cbd73b}
+\index{Physics\+Object@{Physics\+Object}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Physics\+Object@{Physics\+Object}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const Physics\+Object\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Physics\+Object\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classPhysicsObject_ae53856b261838ff637770c08450305b1}{}\label{classPhysicsObject_ae53856b261838ff637770c08450305b1}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Components/\hyperlink{PhysicsObject_8h}{Physics\+Object.\+h}\item 
+Components/\hyperlink{PhysicsObject_8cpp}{Physics\+Object.\+cpp}\end{DoxyCompactItemize}

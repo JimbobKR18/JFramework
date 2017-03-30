@@ -1,0 +1,303 @@
+\hypertarget{classControllerManager}{}\section{Controller\+Manager Class Reference}
+\label{classControllerManager}\index{Controller\+Manager@{Controller\+Manager}}
+
+
+{\ttfamily \#include $<$Controller\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Controller\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Controller\+Manager\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classController}{Controller} $\ast$ $>$\+::iterator \hyperlink{classControllerManager_a0f09bc96bcff03cab101dabf6a661959}{Controller\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classControllerManager_afbcc4b48ba1c60d6a45f1c60872fbb5a}{Controller\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App)
+\item 
+\hyperlink{classControllerManager_a2907bd660f1a870b6d50aa07fdf745d9}{$\sim$\+Controller\+Manager} ()
+\item 
+void \hyperlink{classControllerManager_a17a74c217d781daa8918c8e03a918972}{Set\+Controller\+Factory} (\hyperlink{classControllerFactory}{Controller\+Factory} $\ast$a\+Factory)
+\begin{DoxyCompactList}\small\item\em Set controller generation factory. \end{DoxyCompactList}\item 
+\hyperlink{classController}{Controller} $\ast$ \hyperlink{classControllerManager_aa7d5ca87284281477e176fc900419555}{Create\+Controller} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name, \hyperlink{classRoot}{Root} $\ast$const a\+Data)
+\begin{DoxyCompactList}\small\item\em Create controller using factory. \end{DoxyCompactList}\item 
+void \hyperlink{classControllerManager_acc350f0f5a4fad8f9a66ad0517021569}{Delete\+Controller} (\hyperlink{classController}{Controller} $\ast$a\+Controller)
+\begin{DoxyCompactList}\small\item\em Delete \hyperlink{classController}{Controller}. \end{DoxyCompactList}\item 
+void \hyperlink{classControllerManager_a67315a3c6e3987dd2c05fcdcbaaf40d2}{Add\+Controller} (\hyperlink{classController}{Controller} $\ast$a\+Controller)
+\begin{DoxyCompactList}\small\item\em Add controller to list. \end{DoxyCompactList}\item 
+void \hyperlink{classControllerManager_a2e79608055b7faae43fc67fe3e52dd98}{Remove\+Controller} (\hyperlink{classController}{Controller} $\ast$a\+Controller)
+\begin{DoxyCompactList}\small\item\em Remove controller to list. \end{DoxyCompactList}\item 
+void \hyperlink{classControllerManager_a776ad50ea2321e61156fe21975cc46c5}{Set\+Controllers\+Pause\+State} (bool const a\+Paused)
+\begin{DoxyCompactList}\small\item\em Set pause state for all controllers. \end{DoxyCompactList}\item 
+void \hyperlink{classControllerManager_ad5770469404986fb3146bd73fbbe2a56}{Clear\+Controllers} ()
+\begin{DoxyCompactList}\small\item\em Clear all controllers (deletes them too) \end{DoxyCompactList}\item 
+virtual void \hyperlink{classControllerManager_a8f59b1425c2dc17c1fd93875230f714c}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classControllerManager_a51d581f556f5dc1df44dd9bf52bf654b}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send out message. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classControllerManager_a33a4e3b271d5d38304d3e22197d719dd}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classControllerManager_aef2fe02d5bee7cb33e91dbd3d0e79eb6}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classControllerManager_a5a580ca9cbe304828b1b126030cecb36}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classControllerManager_ab921691cf68923ded98c62ec39ad7807}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this manager visible in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classController}{Controller} $\ast$ $>$ \hyperlink{classControllerManager_a6cf26f1ec8e699d09946f64035e7a799}{m\+Controllers}
+\item 
+\hyperlink{classControllerFactory}{Controller\+Factory} $\ast$ \hyperlink{classControllerManager_aaa89dac535e0fd52035040f2c7ab3e11}{m\+Factory}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classControllerManager_a3071df05318f3aac6047e98df59fdbf4}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Controller\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Controller\+Manager@{Controller\+Manager}!Controller\+IT@{Controller\+IT}}
+\index{Controller\+IT@{Controller\+IT}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Controller\+IT}{ControllerIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Controller}$\ast$$>$\+::iterator {\bf Controller\+Manager\+::\+Controller\+IT}}\hypertarget{classControllerManager_a0f09bc96bcff03cab101dabf6a661959}{}\label{classControllerManager_a0f09bc96bcff03cab101dabf6a661959}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Controller\+Manager@{Controller\+Manager}!Controller\+Manager@{Controller\+Manager}}
+\index{Controller\+Manager@{Controller\+Manager}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Controller\+Manager(\+Game\+App $\ast$a\+App)}{ControllerManager(GameApp *aApp)}}]{\setlength{\rightskip}{0pt plus 5cm}Controller\+Manager\+::\+Controller\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_afbcc4b48ba1c60d6a45f1c60872fbb5a}{}\label{classControllerManager_afbcc4b48ba1c60d6a45f1c60872fbb5a}
+\index{Controller\+Manager@{Controller\+Manager}!````~Controller\+Manager@{$\sim$\+Controller\+Manager}}
+\index{````~Controller\+Manager@{$\sim$\+Controller\+Manager}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Controller\+Manager()}{~ControllerManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Controller\+Manager\+::$\sim$\+Controller\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_a2907bd660f1a870b6d50aa07fdf745d9}{}\label{classControllerManager_a2907bd660f1a870b6d50aa07fdf745d9}
+
+
+\subsection{Member Function Documentation}
+\index{Controller\+Manager@{Controller\+Manager}!Add\+Controller@{Add\+Controller}}
+\index{Add\+Controller@{Add\+Controller}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Controller(\+Controller $\ast$a\+Controller)}{AddController(Controller *aController)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Add\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Controller} $\ast$}]{a\+Controller}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_a67315a3c6e3987dd2c05fcdcbaaf40d2}{}\label{classControllerManager_a67315a3c6e3987dd2c05fcdcbaaf40d2}
+
+
+Add controller to list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Controller} & \\
+\hline
+\end{DoxyParams}
+\index{Controller\+Manager@{Controller\+Manager}!Clear\+Controllers@{Clear\+Controllers}}
+\index{Clear\+Controllers@{Clear\+Controllers}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Clear\+Controllers()}{ClearControllers()}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Clear\+Controllers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_ad5770469404986fb3146bd73fbbe2a56}{}\label{classControllerManager_ad5770469404986fb3146bd73fbbe2a56}
+
+
+Clear all controllers (deletes them too) 
+
+\index{Controller\+Manager@{Controller\+Manager}!Create\+Controller@{Create\+Controller}}
+\index{Create\+Controller@{Create\+Controller}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Controller(\+Hash\+String const \&a\+Name, Root $\ast$const a\+Data)}{CreateController(HashString const &aName, Root *const aData)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Controller} $\ast$ Controller\+Manager\+::\+Create\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name, }
+\item[{{\bf Root} $\ast$const}]{a\+Data}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_aa7d5ca87284281477e176fc900419555}{}\label{classControllerManager_aa7d5ca87284281477e176fc900419555}
+
+
+Create controller using factory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of controller type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New controller. 
+\end{DoxyReturn}
+\index{Controller\+Manager@{Controller\+Manager}!Delete\+Controller@{Delete\+Controller}}
+\index{Delete\+Controller@{Delete\+Controller}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Controller(\+Controller $\ast$a\+Controller)}{DeleteController(Controller *aController)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Delete\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Controller} $\ast$}]{a\+Controller}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_acc350f0f5a4fad8f9a66ad0517021569}{}\label{classControllerManager_acc350f0f5a4fad8f9a66ad0517021569}
+
+
+Delete \hyperlink{classController}{Controller}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Controller} & \\
+\hline
+\end{DoxyParams}
+\index{Controller\+Manager@{Controller\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Controller\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classControllerManager_aef2fe02d5bee7cb33e91dbd3d0e79eb6}{}\label{classControllerManager_aef2fe02d5bee7cb33e91dbd3d0e79eb6}
+\index{Controller\+Manager@{Controller\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Controller\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classControllerManager_a5a580ca9cbe304828b1b126030cecb36}{}\label{classControllerManager_a5a580ca9cbe304828b1b126030cecb36}
+\index{Controller\+Manager@{Controller\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classControllerManager_a33a4e3b271d5d38304d3e22197d719dd}{}\label{classControllerManager_a33a4e3b271d5d38304d3e22197d719dd}
+
+
+Receive messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Controller\+Manager@{Controller\+Manager}!Remove\+Controller@{Remove\+Controller}}
+\index{Remove\+Controller@{Remove\+Controller}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Controller(\+Controller $\ast$a\+Controller)}{RemoveController(Controller *aController)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Remove\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Controller} $\ast$}]{a\+Controller}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_a2e79608055b7faae43fc67fe3e52dd98}{}\label{classControllerManager_a2e79608055b7faae43fc67fe3e52dd98}
+
+
+Remove controller to list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Controller} & \\
+\hline
+\end{DoxyParams}
+\index{Controller\+Manager@{Controller\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classControllerManager_a51d581f556f5dc1df44dd9bf52bf654b}{}\label{classControllerManager_a51d581f556f5dc1df44dd9bf52bf654b}
+
+
+Send out message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Controller\+Manager@{Controller\+Manager}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classControllerManager_ab921691cf68923ded98c62ec39ad7807}{}\label{classControllerManager_ab921691cf68923ded98c62ec39ad7807}
+
+
+Make this manager visible in L\+UA. 
+
+\index{Controller\+Manager@{Controller\+Manager}!Set\+Controller\+Factory@{Set\+Controller\+Factory}}
+\index{Set\+Controller\+Factory@{Set\+Controller\+Factory}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Set\+Controller\+Factory(\+Controller\+Factory $\ast$a\+Factory)}{SetControllerFactory(ControllerFactory *aFactory)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Set\+Controller\+Factory (
+\begin{DoxyParamCaption}
+\item[{{\bf Controller\+Factory} $\ast$}]{a\+Factory}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_a17a74c217d781daa8918c8e03a918972}{}\label{classControllerManager_a17a74c217d781daa8918c8e03a918972}
+
+
+Set controller generation factory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Factory} & Factory to generate controllers. \\
+\hline
+\end{DoxyParams}
+\index{Controller\+Manager@{Controller\+Manager}!Set\+Controllers\+Pause\+State@{Set\+Controllers\+Pause\+State}}
+\index{Set\+Controllers\+Pause\+State@{Set\+Controllers\+Pause\+State}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Set\+Controllers\+Pause\+State(bool const a\+Paused)}{SetControllersPauseState(bool const aPaused)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Set\+Controllers\+Pause\+State (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Paused}
+\end{DoxyParamCaption}
+)}\hypertarget{classControllerManager_a776ad50ea2321e61156fe21975cc46c5}{}\label{classControllerManager_a776ad50ea2321e61156fe21975cc46c5}
+
+
+Set pause state for all controllers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Paused} & \\
+\hline
+\end{DoxyParams}
+\index{Controller\+Manager@{Controller\+Manager}!Update@{Update}}
+\index{Update@{Update}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classControllerManager_a8f59b1425c2dc17c1fd93875230f714c}{}\label{classControllerManager_a8f59b1425c2dc17c1fd93875230f714c}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Controller\+Manager@{Controller\+Manager}!m\+Controllers@{m\+Controllers}}
+\index{m\+Controllers@{m\+Controllers}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Controllers}{mControllers}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Controller}$\ast$$>$ Controller\+Manager\+::m\+Controllers\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classControllerManager_a6cf26f1ec8e699d09946f64035e7a799}{}\label{classControllerManager_a6cf26f1ec8e699d09946f64035e7a799}
+\index{Controller\+Manager@{Controller\+Manager}!m\+Factory@{m\+Factory}}
+\index{m\+Factory@{m\+Factory}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Factory}{mFactory}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Controller\+Factory}$\ast$ Controller\+Manager\+::m\+Factory\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classControllerManager_aaa89dac535e0fd52035040f2c7ab3e11}{}\label{classControllerManager_aaa89dac535e0fd52035040f2c7ab3e11}
+\index{Controller\+Manager@{Controller\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Controller\+Manager@{Controller\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Controller\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Controller\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classControllerManager_a3071df05318f3aac6047e98df59fdbf4}{}\label{classControllerManager_a3071df05318f3aac6047e98df59fdbf4}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{ControllerManager_8h}{Controller\+Manager.\+h}\item 
+Managers/\hyperlink{ControllerManager_8cpp}{Controller\+Manager.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,90 @@
+\hypertarget{structSLB_1_1InstanceFactory}{}\section{S\+LB\+:\+:Instance\+Factory Struct Reference}
+\label{structSLB_1_1InstanceFactory}\index{S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Instance\+Factory\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classSLB_1_1InstanceBase}{Instance\+Base} $\ast$ \hyperlink{structSLB_1_1InstanceFactory_af914a384d41374c19188c581619c71ce}{create\+\_\+ref} (\hyperlink{classSLB_1_1Manager}{Manager} $\ast$m, void $\ast$ref)=0
+\item 
+virtual \hyperlink{classSLB_1_1InstanceBase}{Instance\+Base} $\ast$ \hyperlink{structSLB_1_1InstanceFactory_a976ce6eb76b08502f18fb398dcaf86f3}{create\+\_\+ptr} (\hyperlink{classSLB_1_1Manager}{Manager} $\ast$m, void $\ast$ptr)=0
+\item 
+virtual \hyperlink{classSLB_1_1InstanceBase}{Instance\+Base} $\ast$ \hyperlink{structSLB_1_1InstanceFactory_ad6ea783b37bb1d9dec5f1f0607cd4eff}{create\+\_\+const\+\_\+ptr} (\hyperlink{classSLB_1_1Manager}{Manager} $\ast$m, const void $\ast$const\+\_\+ptr)=0
+\item 
+virtual \hyperlink{classSLB_1_1InstanceBase}{Instance\+Base} $\ast$ \hyperlink{structSLB_1_1InstanceFactory_a78319c400603105ea9869fb1bb4a2803}{create\+\_\+copy} (\hyperlink{classSLB_1_1Manager}{Manager} $\ast$m, const void $\ast$ptr)=0
+\item 
+virtual \hyperlink{structSLB_1_1InstanceFactory_aa5ca50f0a85a31a73d25e4378fca59e5}{$\sim$\+Instance\+Factory} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}!````~Instance\+Factory@{$\sim$\+Instance\+Factory}}
+\index{````~Instance\+Factory@{$\sim$\+Instance\+Factory}!S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}}
+\subsubsection[{\texorpdfstring{$\sim$\+Instance\+Factory()}{~InstanceFactory()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Instance\+Factory\+::$\sim$\+Instance\+Factory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structSLB_1_1InstanceFactory_aa5ca50f0a85a31a73d25e4378fca59e5}{}\label{structSLB_1_1InstanceFactory_aa5ca50f0a85a31a73d25e4378fca59e5}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}!create\+\_\+const\+\_\+ptr@{create\+\_\+const\+\_\+ptr}}
+\index{create\+\_\+const\+\_\+ptr@{create\+\_\+const\+\_\+ptr}!S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+const\+\_\+ptr(\+Manager $\ast$m, const void $\ast$const\+\_\+ptr)=0}{create_const_ptr(Manager *m, const void *const_ptr)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Instance\+Base}$\ast$ S\+L\+B\+::\+Instance\+Factory\+::create\+\_\+const\+\_\+ptr (
+\begin{DoxyParamCaption}
+\item[{{\bf Manager} $\ast$}]{m, }
+\item[{const void $\ast$}]{const\+\_\+ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{structSLB_1_1InstanceFactory_ad6ea783b37bb1d9dec5f1f0607cd4eff}{}\label{structSLB_1_1InstanceFactory_ad6ea783b37bb1d9dec5f1f0607cd4eff}
+
+
+Implemented in \hyperlink{structSLB_1_1InstanceFactoryAdapter_a1a8b23ab0d6f5a11c76b34c2ee3358f5}{S\+L\+B\+::\+Instance\+Factory\+Adapter$<$ T, T\+Instance $>$}.
+
+\index{S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}!create\+\_\+copy@{create\+\_\+copy}}
+\index{create\+\_\+copy@{create\+\_\+copy}!S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+copy(\+Manager $\ast$m, const void $\ast$ptr)=0}{create_copy(Manager *m, const void *ptr)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Instance\+Base}$\ast$ S\+L\+B\+::\+Instance\+Factory\+::create\+\_\+copy (
+\begin{DoxyParamCaption}
+\item[{{\bf Manager} $\ast$}]{m, }
+\item[{const void $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{structSLB_1_1InstanceFactory_a78319c400603105ea9869fb1bb4a2803}{}\label{structSLB_1_1InstanceFactory_a78319c400603105ea9869fb1bb4a2803}
+
+
+Implemented in \hyperlink{structSLB_1_1InstanceFactoryAdapter_a388ae8c9f9a3ee8834391c113b375755}{S\+L\+B\+::\+Instance\+Factory\+Adapter$<$ T, T\+Instance $>$}.
+
+\index{S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}!create\+\_\+ptr@{create\+\_\+ptr}}
+\index{create\+\_\+ptr@{create\+\_\+ptr}!S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+ptr(\+Manager $\ast$m, void $\ast$ptr)=0}{create_ptr(Manager *m, void *ptr)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Instance\+Base}$\ast$ S\+L\+B\+::\+Instance\+Factory\+::create\+\_\+ptr (
+\begin{DoxyParamCaption}
+\item[{{\bf Manager} $\ast$}]{m, }
+\item[{void $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{structSLB_1_1InstanceFactory_a976ce6eb76b08502f18fb398dcaf86f3}{}\label{structSLB_1_1InstanceFactory_a976ce6eb76b08502f18fb398dcaf86f3}
+
+
+Implemented in \hyperlink{structSLB_1_1InstanceFactoryAdapter_afaede2914bac91dc46be444fa0532c10}{S\+L\+B\+::\+Instance\+Factory\+Adapter$<$ T, T\+Instance $>$}.
+
+\index{S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}!create\+\_\+ref@{create\+\_\+ref}}
+\index{create\+\_\+ref@{create\+\_\+ref}!S\+L\+B\+::\+Instance\+Factory@{S\+L\+B\+::\+Instance\+Factory}}
+\subsubsection[{\texorpdfstring{create\+\_\+ref(\+Manager $\ast$m, void $\ast$ref)=0}{create_ref(Manager *m, void *ref)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Instance\+Base}$\ast$ S\+L\+B\+::\+Instance\+Factory\+::create\+\_\+ref (
+\begin{DoxyParamCaption}
+\item[{{\bf Manager} $\ast$}]{m, }
+\item[{void $\ast$}]{ref}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{structSLB_1_1InstanceFactory_af914a384d41374c19188c581619c71ce}{}\label{structSLB_1_1InstanceFactory_af914a384d41374c19188c581619c71ce}
+
+
+Implemented in \hyperlink{structSLB_1_1InstanceFactoryAdapter_a176b77923c0bdc1ed3bc26b085b9446d}{S\+L\+B\+::\+Instance\+Factory\+Adapter$<$ T, T\+Instance $>$}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

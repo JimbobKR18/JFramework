@@ -1,0 +1,178 @@
+\hypertarget{classNetworkPort}{}\section{Network\+Port Class Reference}
+\label{classNetworkPort}\index{Network\+Port@{Network\+Port}}
+
+
+{\ttfamily \#include $<$Network\+Port.\+h$>$}
+
+
+
+Inheritance diagram for Network\+Port\+:
+% FIG 0
+
+
+Collaboration diagram for Network\+Port\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classNetworkPort_a11fdeae6be4ad423a578dcbf31426327}{Network\+Port} ()
+\item 
+virtual \hyperlink{classNetworkPort_a68e0bc74ffb6a7394132d24dc24204d0}{$\sim$\+Network\+Port} ()
+\item 
+\hyperlink{classHashString}{Hash\+String} const \& \hyperlink{classNetworkPort_a7f2d06742bb33abbab27f4b4ee6d73a3}{Get\+I\+P\+Address} () const 
+\begin{DoxyCompactList}\small\item\em Get IP address of port. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classNetworkPort_a8a2a377fe0d6aaadf27504c29c9809ca}{Open} ()=0
+\item 
+virtual void \hyperlink{classNetworkPort_afefdf2ab817dfda929aa0af2cf8363a9}{Close} ()=0
+\item 
+virtual void \hyperlink{classNetworkPort_ae773c0c3c51185b2391fa263b9f65ff4}{Bind} (\hyperlink{classHashString}{Hash\+String} const \&a\+I\+P\+Address)=0
+\item 
+virtual void \hyperlink{classNetworkPort_ab8f76e087b0d1c0a4e509c056306810a}{Unbind} ()=0
+\item 
+virtual void \hyperlink{classNetworkPort_a95fd698a221ce5170ab2a875b27efc94}{Send} (\hyperlink{classHashString}{Hash\+String} const \&a\+Message)=0
+\item 
+virtual \hyperlink{classHashString}{Hash\+String} \hyperlink{classNetworkPort_a0e831c922af9283aa07f3a598312c99f}{Receive} ()=0
+\item 
+virtual void \hyperlink{classNetworkPort_ab3549cb547fa823c0b52e1f5cf38d601}{Send\+Many} (std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ const \&a\+Messages)=0
+\item 
+virtual std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{classNetworkPort_a54c68c6b9b9bc195486d9fcb5e49d9c7}{Receive\+Many} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classNetworkPort_a57022ce09dc3684d725caeb42cbe8914}{m\+I\+P\+Address}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Network\+Port@{Network\+Port}!Network\+Port@{Network\+Port}}
+\index{Network\+Port@{Network\+Port}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Network\+Port()}{NetworkPort()}}]{\setlength{\rightskip}{0pt plus 5cm}Network\+Port\+::\+Network\+Port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classNetworkPort_a11fdeae6be4ad423a578dcbf31426327}{}\label{classNetworkPort_a11fdeae6be4ad423a578dcbf31426327}
+\index{Network\+Port@{Network\+Port}!````~Network\+Port@{$\sim$\+Network\+Port}}
+\index{````~Network\+Port@{$\sim$\+Network\+Port}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{$\sim$\+Network\+Port()}{~NetworkPort()}}]{\setlength{\rightskip}{0pt plus 5cm}Network\+Port\+::$\sim$\+Network\+Port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkPort_a68e0bc74ffb6a7394132d24dc24204d0}{}\label{classNetworkPort_a68e0bc74ffb6a7394132d24dc24204d0}
+
+
+\subsection{Member Function Documentation}
+\index{Network\+Port@{Network\+Port}!Bind@{Bind}}
+\index{Bind@{Bind}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Bind(\+Hash\+String const \&a\+I\+P\+Address)=0}{Bind(HashString const &aIPAddress)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Network\+Port\+::\+Bind (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+I\+P\+Address}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_ae773c0c3c51185b2391fa263b9f65ff4}{}\label{classNetworkPort_ae773c0c3c51185b2391fa263b9f65ff4}
+
+
+Implemented in \hyperlink{classPCNetworkPort_a03252967e3b101a36e45940b326c2d72}{P\+C\+Network\+Port}.
+
+\index{Network\+Port@{Network\+Port}!Close@{Close}}
+\index{Close@{Close}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Close()=0}{Close()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Network\+Port\+::\+Close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_afefdf2ab817dfda929aa0af2cf8363a9}{}\label{classNetworkPort_afefdf2ab817dfda929aa0af2cf8363a9}
+
+
+Implemented in \hyperlink{classPCNetworkPort_a40366f6ee2bceac82911bad11d276102}{P\+C\+Network\+Port}.
+
+\index{Network\+Port@{Network\+Port}!Get\+I\+P\+Address@{Get\+I\+P\+Address}}
+\index{Get\+I\+P\+Address@{Get\+I\+P\+Address}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Get\+I\+P\+Address() const }{GetIPAddress() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const \& Network\+Port\+::\+Get\+I\+P\+Address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNetworkPort_a7f2d06742bb33abbab27f4b4ee6d73a3}{}\label{classNetworkPort_a7f2d06742bb33abbab27f4b4ee6d73a3}
+
+
+Get IP address of port. 
+
+\begin{DoxyReturn}{Returns}
+IP address 
+\end{DoxyReturn}
+\index{Network\+Port@{Network\+Port}!Open@{Open}}
+\index{Open@{Open}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Open()=0}{Open()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Network\+Port\+::\+Open (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_a8a2a377fe0d6aaadf27504c29c9809ca}{}\label{classNetworkPort_a8a2a377fe0d6aaadf27504c29c9809ca}
+
+
+Implemented in \hyperlink{classPCNetworkPort_aa8e6ce9f58cd5e724d0c22c307de41fb}{P\+C\+Network\+Port}.
+
+\index{Network\+Port@{Network\+Port}!Receive@{Receive}}
+\index{Receive@{Receive}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Receive()=0}{Receive()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Hash\+String} Network\+Port\+::\+Receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_a0e831c922af9283aa07f3a598312c99f}{}\label{classNetworkPort_a0e831c922af9283aa07f3a598312c99f}
+
+
+Implemented in \hyperlink{classPCNetworkPort_ae59210858f503ac6d29a42701d9a1cd4}{P\+C\+Network\+Port}.
+
+\index{Network\+Port@{Network\+Port}!Receive\+Many@{Receive\+Many}}
+\index{Receive\+Many@{Receive\+Many}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Receive\+Many()=0}{ReceiveMany()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::vector$<${\bf Hash\+String}$>$ Network\+Port\+::\+Receive\+Many (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_a54c68c6b9b9bc195486d9fcb5e49d9c7}{}\label{classNetworkPort_a54c68c6b9b9bc195486d9fcb5e49d9c7}
+
+
+Implemented in \hyperlink{classPCNetworkPort_a438f452caa350c05d3ac5f51b22bbda9}{P\+C\+Network\+Port}.
+
+\index{Network\+Port@{Network\+Port}!Send@{Send}}
+\index{Send@{Send}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Send(\+Hash\+String const \&a\+Message)=0}{Send(HashString const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Network\+Port\+::\+Send (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_a95fd698a221ce5170ab2a875b27efc94}{}\label{classNetworkPort_a95fd698a221ce5170ab2a875b27efc94}
+
+
+Implemented in \hyperlink{classPCNetworkPort_a32ce04a7a338d847cf3d11b8df6be1c1}{P\+C\+Network\+Port}.
+
+\index{Network\+Port@{Network\+Port}!Send\+Many@{Send\+Many}}
+\index{Send\+Many@{Send\+Many}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Send\+Many(std\+::vector$<$ Hash\+String $>$ const \&a\+Messages)=0}{SendMany(std::vector< HashString > const &aMessages)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Network\+Port\+::\+Send\+Many (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Hash\+String} $>$ const \&}]{a\+Messages}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_ab3549cb547fa823c0b52e1f5cf38d601}{}\label{classNetworkPort_ab3549cb547fa823c0b52e1f5cf38d601}
+
+
+Implemented in \hyperlink{classPCNetworkPort_ae85220e128193367e0f9da4f9690986c}{P\+C\+Network\+Port}.
+
+\index{Network\+Port@{Network\+Port}!Unbind@{Unbind}}
+\index{Unbind@{Unbind}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{Unbind()=0}{Unbind()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Network\+Port\+::\+Unbind (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classNetworkPort_ab8f76e087b0d1c0a4e509c056306810a}{}\label{classNetworkPort_ab8f76e087b0d1c0a4e509c056306810a}
+
+
+Implemented in \hyperlink{classPCNetworkPort_aa696d4f119110e976ac791931b1a187a}{P\+C\+Network\+Port}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Network\+Port@{Network\+Port}!m\+I\+P\+Address@{m\+I\+P\+Address}}
+\index{m\+I\+P\+Address@{m\+I\+P\+Address}!Network\+Port@{Network\+Port}}
+\subsubsection[{\texorpdfstring{m\+I\+P\+Address}{mIPAddress}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Network\+Port\+::m\+I\+P\+Address\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classNetworkPort_a57022ce09dc3684d725caeb42cbe8914}{}\label{classNetworkPort_a57022ce09dc3684d725caeb42cbe8914}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Network/\hyperlink{NetworkPort_8h}{Network\+Port.\+h}\item 
+Network/\hyperlink{NetworkPort_8cpp}{Network\+Port.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,383 @@
+\hypertarget{classPhysicsWorld}{}\section{Physics\+World Class Reference}
+\label{classPhysicsWorld}\index{Physics\+World@{Physics\+World}}
+
+
+{\ttfamily \#include $<$Physics\+World.\+h$>$}
+
+
+
+Inheritance diagram for Physics\+World\+:
+% FIG 0
+
+
+Collaboration diagram for Physics\+World\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classPhysicsObject}{Physics\+Object} $\ast$ $>$\+::iterator \hyperlink{classPhysicsWorld_ada3fdb31fba17f91c9390b6ac0d62f8b}{Physics\+IT}
+\item 
+typedef std\+::vector$<$ \hyperlink{classPhysicsObject}{Physics\+Object} $\ast$ $>$\+::const\+\_\+iterator \hyperlink{classPhysicsWorld_ab3617a37c62ed3fcb77f1851a26f2001}{Physics\+Const\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPhysicsWorld_ac833ac7fe8d99dccf56d432c60c38340}{Physics\+World} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App)
+\item 
+virtual \hyperlink{classPhysicsWorld_abf1573b008b52b60a83a8f36cbdd51bc}{$\sim$\+Physics\+World} ()
+\item 
+\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$ \hyperlink{classPhysicsWorld_ac20c840fa36bf8a8751b05756bd5d1cb}{Create\+Object} ()
+\begin{DoxyCompactList}\small\item\em Create \hyperlink{classPhysicsObject}{Physics\+Object}, set manager to this. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_a7f86f0395b7b8cfd3468513f30dfbe04}{Delete\+Object} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove and delete \hyperlink{classPhysicsObject}{Physics\+Object}. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_a2f6b141cb8b1cff4918a59e0270408c0}{Add\+Object} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Track object. (Start colliding) \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_a8d8e7e9ad80a1724a07a41ff829d39b7}{Remove\+Object} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Removes object from being tracked. (Will no longer collide) \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_a3b55fe1717a16ad1946c9fbf00d8f39b}{Clear\+Objects} ()
+\begin{DoxyCompactList}\small\item\em Clear (delete) all Physics\+Objects. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPhysicsWorld_a8cb6d48d4de75cabc4e3943b16666200}{Update} ()
+\begin{DoxyCompactList}\small\item\em Basic update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPhysicsWorld_a44d25e8d9d2e75e993e5bd0a550cc3aa}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to all objects. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPhysicsWorld_a5ac21fa96d9b36b4c63ac9d2a9c64777}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Store message to be read next frame. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_aac961ecf80d1367d5bb72089a5586e07}{Register\+Force} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object, \hyperlink{classForceGenerator}{Force\+Generator} $\ast$a\+Generator)
+\begin{DoxyCompactList}\small\item\em Register force on object (will apply every frame automatically) \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_abd1338674f3c5e92ea473cc090beb72e}{Unregister\+Force} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object, \hyperlink{classForceGenerator}{Force\+Generator} $\ast$a\+Generator)
+\begin{DoxyCompactList}\small\item\em Stop applying a force to an object every frame. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_a75ae093ba230367aeba6f8221ae06ae0}{Unregister\+Gravity} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Helper method to remove gravity on object. \end{DoxyCompactList}\item 
+bool \hyperlink{classPhysicsWorld_a7dfdf9dbd3b5ceeb42c530fb9a5b04a5}{Line\+Collides\+With\+Anything} (\hyperlink{structLine}{Line} const \&a\+Line, std\+::vector$<$ \hyperlink{classPhysicsObject}{Physics\+Object} $\ast$ $>$ const \&a\+Ignore\+List)
+\begin{DoxyCompactList}\small\item\em Checks if line collides with anything in our objects list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classPhysicsWorld_ad8e22d79e5c497532398f3105a8e282b}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classPhysicsWorld_ac164056a7f501bb5bbe9fd2af9219d3e}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classPhysicsWorld_a001da62cbab0d0f86e9cdfa9203dcf95}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this manager visible in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPhysicsWorld_ab35218ebc1aa5a92433a3f0d36220104}{Sort\+On\+Axis} ()
+\begin{DoxyCompactList}\small\item\em Helper method to sort objects on axis. \end{DoxyCompactList}\item 
+void \hyperlink{classPhysicsWorld_aa8f2d8b3feed23d90b81cb2993e26ddf}{Sweep\+And\+Prune} ()
+\begin{DoxyCompactList}\small\item\em Helper method to enact sweep and prune broadphase method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classPhysicsObject}{Physics\+Object} $\ast$ $>$ \hyperlink{classPhysicsWorld_a02dd8c3fe190a2da79a84d5b284f2765}{m\+Objects}
+\item 
+\hyperlink{classForceRegistry}{Force\+Registry} \hyperlink{classPhysicsWorld_ab40b28469589a03eaf2a98c9fc2b66ed}{m\+Registry}
+\item 
+\hyperlink{classGravityGenerator}{Gravity\+Generator} \hyperlink{classPhysicsWorld_a39c48d32a5426bbbbfa3a7e08c01b053}{m\+Gravity}
+\item 
+\hyperlink{classResolver}{Resolver} \hyperlink{classPhysicsWorld_a4552553bfba7d42255493b036893c0c5}{m\+Resolver}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classPhysicsWorld_ac6079c51e7409d83a44c61cd346c7917}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Physics\+World\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Physics\+World@{Physics\+World}!Physics\+Const\+IT@{Physics\+Const\+IT}}
+\index{Physics\+Const\+IT@{Physics\+Const\+IT}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Physics\+Const\+IT}{PhysicsConstIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Physics\+Object}$\ast$$>$\+::const\+\_\+iterator {\bf Physics\+World\+::\+Physics\+Const\+IT}}\hypertarget{classPhysicsWorld_ab3617a37c62ed3fcb77f1851a26f2001}{}\label{classPhysicsWorld_ab3617a37c62ed3fcb77f1851a26f2001}
+\index{Physics\+World@{Physics\+World}!Physics\+IT@{Physics\+IT}}
+\index{Physics\+IT@{Physics\+IT}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Physics\+IT}{PhysicsIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Physics\+Object}$\ast$$>$\+::iterator {\bf Physics\+World\+::\+Physics\+IT}}\hypertarget{classPhysicsWorld_ada3fdb31fba17f91c9390b6ac0d62f8b}{}\label{classPhysicsWorld_ada3fdb31fba17f91c9390b6ac0d62f8b}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Physics\+World@{Physics\+World}!Physics\+World@{Physics\+World}}
+\index{Physics\+World@{Physics\+World}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Physics\+World(\+Game\+App $\ast$a\+App)}{PhysicsWorld(GameApp *aApp)}}]{\setlength{\rightskip}{0pt plus 5cm}Physics\+World\+::\+Physics\+World (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_ac833ac7fe8d99dccf56d432c60c38340}{}\label{classPhysicsWorld_ac833ac7fe8d99dccf56d432c60c38340}
+\index{Physics\+World@{Physics\+World}!````~Physics\+World@{$\sim$\+Physics\+World}}
+\index{````~Physics\+World@{$\sim$\+Physics\+World}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{$\sim$\+Physics\+World()}{~PhysicsWorld()}}]{\setlength{\rightskip}{0pt plus 5cm}Physics\+World\+::$\sim$\+Physics\+World (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsWorld_abf1573b008b52b60a83a8f36cbdd51bc}{}\label{classPhysicsWorld_abf1573b008b52b60a83a8f36cbdd51bc}
+
+
+\subsection{Member Function Documentation}
+\index{Physics\+World@{Physics\+World}!Add\+Object@{Add\+Object}}
+\index{Add\+Object@{Add\+Object}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Add\+Object(\+Physics\+Object $\ast$a\+Object)}{AddObject(PhysicsObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Add\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_a2f6b141cb8b1cff4918a59e0270408c0}{}\label{classPhysicsWorld_a2f6b141cb8b1cff4918a59e0270408c0}
+
+
+Track object. (Start colliding) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Physics\+World@{Physics\+World}!Clear\+Objects@{Clear\+Objects}}
+\index{Clear\+Objects@{Clear\+Objects}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Clear\+Objects()}{ClearObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Clear\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_a3b55fe1717a16ad1946c9fbf00d8f39b}{}\label{classPhysicsWorld_a3b55fe1717a16ad1946c9fbf00d8f39b}
+
+
+Clear (delete) all Physics\+Objects. 
+
+\index{Physics\+World@{Physics\+World}!Create\+Object@{Create\+Object}}
+\index{Create\+Object@{Create\+Object}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Create\+Object()}{CreateObject()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physics\+Object} $\ast$ Physics\+World\+::\+Create\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_ac20c840fa36bf8a8751b05756bd5d1cb}{}\label{classPhysicsWorld_ac20c840fa36bf8a8751b05756bd5d1cb}
+
+
+Create \hyperlink{classPhysicsObject}{Physics\+Object}, set manager to this. 
+
+\index{Physics\+World@{Physics\+World}!Delete\+Object@{Delete\+Object}}
+\index{Delete\+Object@{Delete\+Object}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Delete\+Object(\+Physics\+Object $\ast$a\+Object)}{DeleteObject(PhysicsObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Delete\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_a7f86f0395b7b8cfd3468513f30dfbe04}{}\label{classPhysicsWorld_a7f86f0395b7b8cfd3468513f30dfbe04}
+
+
+Remove and delete \hyperlink{classPhysicsObject}{Physics\+Object}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Physics\+World@{Physics\+World}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Physics\+World\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classPhysicsWorld_ad8e22d79e5c497532398f3105a8e282b}{}\label{classPhysicsWorld_ad8e22d79e5c497532398f3105a8e282b}
+\index{Physics\+World@{Physics\+World}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Physics\+World\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classPhysicsWorld_ac164056a7f501bb5bbe9fd2af9219d3e}{}\label{classPhysicsWorld_ac164056a7f501bb5bbe9fd2af9219d3e}
+\index{Physics\+World@{Physics\+World}!Line\+Collides\+With\+Anything@{Line\+Collides\+With\+Anything}}
+\index{Line\+Collides\+With\+Anything@{Line\+Collides\+With\+Anything}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Line\+Collides\+With\+Anything(\+Line const \&a\+Line, std\+::vector$<$ Physics\+Object $\ast$ $>$ const \&a\+Ignore\+List)}{LineCollidesWithAnything(Line const &aLine, std::vector< PhysicsObject * > const &aIgnoreList)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Physics\+World\+::\+Line\+Collides\+With\+Anything (
+\begin{DoxyParamCaption}
+\item[{{\bf Line} const \&}]{a\+Line, }
+\item[{std\+::vector$<$ {\bf Physics\+Object} $\ast$ $>$ const \&}]{a\+Ignore\+List}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_a7dfdf9dbd3b5ceeb42c530fb9a5b04a5}{}\label{classPhysicsWorld_a7dfdf9dbd3b5ceeb42c530fb9a5b04a5}
+
+
+Checks if line collides with anything in our objects list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Line} & \hyperlink{structLine}{Line} to check collision with \\
+\hline
+{\em a\+Ignore\+List} & Objects to ignore. \\
+\hline
+\end{DoxyParams}
+\index{Physics\+World@{Physics\+World}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsWorld_a5ac21fa96d9b36b4c63ac9d2a9c64777}{}\label{classPhysicsWorld_a5ac21fa96d9b36b4c63ac9d2a9c64777}
+
+
+Store message to be read next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Physics\+World@{Physics\+World}!Register\+Force@{Register\+Force}}
+\index{Register\+Force@{Register\+Force}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Register\+Force(\+Physics\+Object $\ast$a\+Object, Force\+Generator $\ast$a\+Generator)}{RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Register\+Force (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Force\+Generator} $\ast$}]{a\+Generator}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_aac961ecf80d1367d5bb72089a5586e07}{}\label{classPhysicsWorld_aac961ecf80d1367d5bb72089a5586e07}
+
+
+Register force on object (will apply every frame automatically) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to enact force upon every frame. \\
+\hline
+{\em a\+Generator} & Force generator. \\
+\hline
+\end{DoxyParams}
+\index{Physics\+World@{Physics\+World}!Remove\+Object@{Remove\+Object}}
+\index{Remove\+Object@{Remove\+Object}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Remove\+Object(\+Physics\+Object $\ast$a\+Object)}{RemoveObject(PhysicsObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Remove\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_a8d8e7e9ad80a1724a07a41ff829d39b7}{}\label{classPhysicsWorld_a8d8e7e9ad80a1724a07a41ff829d39b7}
+
+
+Removes object from being tracked. (Will no longer collide) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Physics\+World@{Physics\+World}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsWorld_a44d25e8d9d2e75e993e5bd0a550cc3aa}{}\label{classPhysicsWorld_a44d25e8d9d2e75e993e5bd0a550cc3aa}
+
+
+Send message to all objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Physics\+World@{Physics\+World}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classPhysicsWorld_a001da62cbab0d0f86e9cdfa9203dcf95}{}\label{classPhysicsWorld_a001da62cbab0d0f86e9cdfa9203dcf95}
+
+
+Make this manager visible in L\+UA. 
+
+\index{Physics\+World@{Physics\+World}!Sort\+On\+Axis@{Sort\+On\+Axis}}
+\index{Sort\+On\+Axis@{Sort\+On\+Axis}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Sort\+On\+Axis()}{SortOnAxis()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Sort\+On\+Axis (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsWorld_ab35218ebc1aa5a92433a3f0d36220104}{}\label{classPhysicsWorld_ab35218ebc1aa5a92433a3f0d36220104}
+
+
+Helper method to sort objects on axis. 
+
+\index{Physics\+World@{Physics\+World}!Sweep\+And\+Prune@{Sweep\+And\+Prune}}
+\index{Sweep\+And\+Prune@{Sweep\+And\+Prune}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Sweep\+And\+Prune()}{SweepAndPrune()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Sweep\+And\+Prune (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsWorld_aa8f2d8b3feed23d90b81cb2993e26ddf}{}\label{classPhysicsWorld_aa8f2d8b3feed23d90b81cb2993e26ddf}
+
+
+Helper method to enact sweep and prune broadphase method. 
+
+\index{Physics\+World@{Physics\+World}!Unregister\+Force@{Unregister\+Force}}
+\index{Unregister\+Force@{Unregister\+Force}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Unregister\+Force(\+Physics\+Object $\ast$a\+Object, Force\+Generator $\ast$a\+Generator)}{UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Unregister\+Force (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Force\+Generator} $\ast$}]{a\+Generator}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_abd1338674f3c5e92ea473cc090beb72e}{}\label{classPhysicsWorld_abd1338674f3c5e92ea473cc090beb72e}
+
+
+Stop applying a force to an object every frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to stop force from affecting. \\
+\hline
+{\em a\+Generator} & Force generator. \\
+\hline
+\end{DoxyParams}
+\index{Physics\+World@{Physics\+World}!Unregister\+Gravity@{Unregister\+Gravity}}
+\index{Unregister\+Gravity@{Unregister\+Gravity}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Unregister\+Gravity(\+Physics\+Object $\ast$a\+Object)}{UnregisterGravity(PhysicsObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Unregister\+Gravity (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classPhysicsWorld_a75ae093ba230367aeba6f8221ae06ae0}{}\label{classPhysicsWorld_a75ae093ba230367aeba6f8221ae06ae0}
+
+
+Helper method to remove gravity on object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Physics\+World@{Physics\+World}!Update@{Update}}
+\index{Update@{Update}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Physics\+World\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPhysicsWorld_a8cb6d48d4de75cabc4e3943b16666200}{}\label{classPhysicsWorld_a8cb6d48d4de75cabc4e3943b16666200}
+
+
+Basic update loop. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Physics\+World@{Physics\+World}!m\+Gravity@{m\+Gravity}}
+\index{m\+Gravity@{m\+Gravity}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{m\+Gravity}{mGravity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Gravity\+Generator} Physics\+World\+::m\+Gravity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsWorld_a39c48d32a5426bbbbfa3a7e08c01b053}{}\label{classPhysicsWorld_a39c48d32a5426bbbbfa3a7e08c01b053}
+\index{Physics\+World@{Physics\+World}!m\+Objects@{m\+Objects}}
+\index{m\+Objects@{m\+Objects}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{m\+Objects}{mObjects}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Physics\+Object}$\ast$$>$ Physics\+World\+::m\+Objects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsWorld_a02dd8c3fe190a2da79a84d5b284f2765}{}\label{classPhysicsWorld_a02dd8c3fe190a2da79a84d5b284f2765}
+\index{Physics\+World@{Physics\+World}!m\+Registry@{m\+Registry}}
+\index{m\+Registry@{m\+Registry}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{m\+Registry}{mRegistry}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Force\+Registry} Physics\+World\+::m\+Registry\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsWorld_ab40b28469589a03eaf2a98c9fc2b66ed}{}\label{classPhysicsWorld_ab40b28469589a03eaf2a98c9fc2b66ed}
+\index{Physics\+World@{Physics\+World}!m\+Resolver@{m\+Resolver}}
+\index{m\+Resolver@{m\+Resolver}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{m\+Resolver}{mResolver}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Resolver} Physics\+World\+::m\+Resolver\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPhysicsWorld_a4552553bfba7d42255493b036893c0c5}{}\label{classPhysicsWorld_a4552553bfba7d42255493b036893c0c5}
+\index{Physics\+World@{Physics\+World}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Physics\+World@{Physics\+World}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Physics\+World\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Physics\+World\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classPhysicsWorld_ac6079c51e7409d83a44c61cd346c7917}{}\label{classPhysicsWorld_ac6079c51e7409d83a44c61cd346c7917}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{PhysicsWorld_8h}{Physics\+World.\+h}\item 
+Managers/\hyperlink{PhysicsWorld_8cpp}{Physics\+World.\+cpp}\end{DoxyCompactItemize}

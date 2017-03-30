@@ -1,0 +1,322 @@
+\hypertarget{classScreen}{}\section{Screen Class Reference}
+\label{classScreen}\index{Screen@{Screen}}
+
+
+{\ttfamily \#include $<$Screen.\+h$>$}
+
+
+
+Inheritance diagram for Screen\+:
+% FIG 0
+
+
+Collaboration diagram for Screen\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classScreen_ae7576476fc6e6a6eaa66389fdc41fe72}{Screen} ()
+\item 
+\hyperlink{classScreen_ae83c264422248fb301d7571c319298f6}{Screen} (int aW, int aH, bool a\+Full\+Screen)
+\item 
+virtual \hyperlink{classScreen_a4243bc17596af96415b09ac48205676d}{$\sim$\+Screen} ()
+\item 
+int \hyperlink{classScreen_a125072d815aefe2debfd5d6e7da1baf8}{Get\+Width} () const 
+\item 
+void \hyperlink{classScreen_a72810fa8cd0db6bc2ddde6a172790f41}{Set\+Width} (int const a\+Width)
+\item 
+int \hyperlink{classScreen_a0bacb2d30942fb7acfd4bcb52ccdb2f9}{Get\+Height} () const 
+\item 
+void \hyperlink{classScreen_a08c25c229d22dab7954812012c0d6249}{Set\+Height} (int const a\+Height)
+\item 
+bool \hyperlink{classScreen_af73f43cca23323b9d96804d547cad3a4}{Is\+Full\+Screen} () const 
+\item 
+void \hyperlink{classScreen_a920cd9ef8dbc743a13502b94f93c6c25}{Set\+Full\+Screen} (bool const a\+Full\+Screen)
+\item 
+\hyperlink{classView}{View} \& \hyperlink{classScreen_a1e3891893800bf04a602c2489c2f11b9}{Get\+View} ()
+\item 
+\hyperlink{classScreenRenderSorter}{Screen\+Render\+Sorter} $\ast$ \hyperlink{classScreen_a8185957db56fd6dd23938afd3c5c24a8}{Get\+Batch\+Render\+Sorter} ()
+\item 
+void \hyperlink{classScreen_af91def02d2d29633583deaffefc9f286}{Set\+Batch\+Render\+Sorter} (\hyperlink{classScreenRenderSorter}{Screen\+Render\+Sorter} $\ast$a\+Batch\+Render\+Sorter)
+\begin{DoxyCompactList}\small\item\em Redefine behavior of how objects should be rendered. \end{DoxyCompactList}\item 
+\hyperlink{classScreenRenderSorter}{Screen\+Render\+Sorter} $\ast$ \hyperlink{classScreen_ae119aa0a7af1afb95c09efbba620cea5}{Get\+Depth\+Render\+Sorter} ()
+\item 
+void \hyperlink{classScreen_a9723784c5457461d70b6e8e3d09069e5}{Set\+Depth\+Render\+Sorter} (\hyperlink{classScreenRenderSorter}{Screen\+Render\+Sorter} $\ast$a\+Depth\+Render\+Sorter)
+\begin{DoxyCompactList}\small\item\em Redefine behavior of how objects should be rendered. \end{DoxyCompactList}\item 
+void \hyperlink{classScreen_a663b77342cfa137b4890cd3d00678553}{Sort\+Objects} (std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ \&a\+Objects)
+\begin{DoxyCompactList}\small\item\em Sorts objects to be rendered. (Assumes that objects of same texture ID are at the same z depth.) \end{DoxyCompactList}\item 
+virtual void \hyperlink{classScreen_a537a5e1ddfbc6d3f048b8195ad80cad9}{Set\+Clear\+Color} (\hyperlink{structVector4}{Vector4} const \&a\+Clear\+Color)=0
+\item 
+virtual void \hyperlink{classScreen_aed3484ce6f522cb199fd5bb6667b174f}{Change\+Size} (int aW, int aH, bool a\+Full\+Screen)=0
+\item 
+virtual void \hyperlink{classScreen_a995cbb84408dff20ee0e1e6f02a09a8e}{Pre\+Draw} ()=0
+\item 
+virtual void \hyperlink{classScreen_af48f435562280536539eafad048f1d1c}{Draw} (std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ const \&a\+Objects)=0
+\item 
+virtual void \hyperlink{classScreen_a56bbfbc23e9eae04061c367f29356617}{Draw\+UI} (std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ const \&a\+Objects)=0
+\item 
+virtual void \hyperlink{classScreen_a51a0752968332d9d69ddab055a8e6b39}{Debug\+Draw} (std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ const \&a\+Objects)=0
+\item 
+virtual void \hyperlink{classScreen_ac4828d7dba6fd883d96175b00d2f856b}{Swap\+Buffers} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classScreen_ade5c870bad695a69038aea57a9872462}{m\+Width}
+\item 
+int \hyperlink{classScreen_aaaf507d2c2684413f6803f99b9681de0}{m\+Height}
+\item 
+bool \hyperlink{classScreen_a21b347af76f1a4e771f6ccf9bc4ad211}{m\+Full\+Screen}
+\item 
+\hyperlink{classView}{View} \hyperlink{classScreen_a7951477ad349b52b4d58efbc4f86d439}{m\+View}
+\item 
+\hyperlink{classScreenRenderSorter}{Screen\+Render\+Sorter} $\ast$ \hyperlink{classScreen_a42407b811400203cb4b4d187e4a4a575}{m\+Batch\+Render\+Sorter}
+\item 
+\hyperlink{classScreenRenderSorter}{Screen\+Render\+Sorter} $\ast$ \hyperlink{classScreen_a261d4ba007cb0e20a17b3d835a6b702f}{m\+Depth\+Render\+Sorter}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Screen@{Screen}!Screen@{Screen}}
+\index{Screen@{Screen}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Screen()}{Screen()}}]{\setlength{\rightskip}{0pt plus 5cm}Screen\+::\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_ae7576476fc6e6a6eaa66389fdc41fe72}{}\label{classScreen_ae7576476fc6e6a6eaa66389fdc41fe72}
+\index{Screen@{Screen}!Screen@{Screen}}
+\index{Screen@{Screen}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Screen(int a\+W, int a\+H, bool a\+Full\+Screen)}{Screen(int aW, int aH, bool aFullScreen)}}]{\setlength{\rightskip}{0pt plus 5cm}Screen\+::\+Screen (
+\begin{DoxyParamCaption}
+\item[{int}]{aW, }
+\item[{int}]{aH, }
+\item[{bool}]{a\+Full\+Screen}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_ae83c264422248fb301d7571c319298f6}{}\label{classScreen_ae83c264422248fb301d7571c319298f6}
+\index{Screen@{Screen}!````~Screen@{$\sim$\+Screen}}
+\index{````~Screen@{$\sim$\+Screen}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{$\sim$\+Screen()}{~Screen()}}]{\setlength{\rightskip}{0pt plus 5cm}Screen\+::$\sim$\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classScreen_a4243bc17596af96415b09ac48205676d}{}\label{classScreen_a4243bc17596af96415b09ac48205676d}
+
+
+\subsection{Member Function Documentation}
+\index{Screen@{Screen}!Change\+Size@{Change\+Size}}
+\index{Change\+Size@{Change\+Size}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Change\+Size(int a\+W, int a\+H, bool a\+Full\+Screen)=0}{ChangeSize(int aW, int aH, bool aFullScreen)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Screen\+::\+Change\+Size (
+\begin{DoxyParamCaption}
+\item[{int}]{aW, }
+\item[{int}]{aH, }
+\item[{bool}]{a\+Full\+Screen}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classScreen_aed3484ce6f522cb199fd5bb6667b174f}{}\label{classScreen_aed3484ce6f522cb199fd5bb6667b174f}
+
+
+Implemented in \hyperlink{classPCShaderScreen_aab52b03029fa67c43406b3e0af1ad16a}{P\+C\+Shader\+Screen}, and \hyperlink{classPCScreen_ad70639e4f6e01e14274733a9172bba9e}{P\+C\+Screen}.
+
+\index{Screen@{Screen}!Debug\+Draw@{Debug\+Draw}}
+\index{Debug\+Draw@{Debug\+Draw}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Debug\+Draw(std\+::vector$<$ Surface $\ast$ $>$ const \&a\+Objects)=0}{DebugDraw(std::vector< Surface * > const &aObjects)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Screen\+::\+Debug\+Draw (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Surface} $\ast$ $>$ const \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classScreen_a51a0752968332d9d69ddab055a8e6b39}{}\label{classScreen_a51a0752968332d9d69ddab055a8e6b39}
+
+
+Implemented in \hyperlink{classPCShaderScreen_affdddd22ec40502de7512ba0466f5310}{P\+C\+Shader\+Screen}, and \hyperlink{classPCScreen_ad9bfecd782f10a5bc0d8da32a8de357a}{P\+C\+Screen}.
+
+\index{Screen@{Screen}!Draw@{Draw}}
+\index{Draw@{Draw}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Draw(std\+::vector$<$ Surface $\ast$ $>$ const \&a\+Objects)=0}{Draw(std::vector< Surface * > const &aObjects)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Screen\+::\+Draw (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Surface} $\ast$ $>$ const \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classScreen_af48f435562280536539eafad048f1d1c}{}\label{classScreen_af48f435562280536539eafad048f1d1c}
+
+
+Implemented in \hyperlink{classPCShaderScreen_a93f1b26c49c24dd055a6ac2af866c367}{P\+C\+Shader\+Screen}, and \hyperlink{classPCScreen_aaaf488147e0324d69f5e4d833594b1b4}{P\+C\+Screen}.
+
+\index{Screen@{Screen}!Draw\+UI@{Draw\+UI}}
+\index{Draw\+UI@{Draw\+UI}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Draw\+U\+I(std\+::vector$<$ Surface $\ast$ $>$ const \&a\+Objects)=0}{DrawUI(std::vector< Surface * > const &aObjects)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Screen\+::\+Draw\+UI (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Surface} $\ast$ $>$ const \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classScreen_a56bbfbc23e9eae04061c367f29356617}{}\label{classScreen_a56bbfbc23e9eae04061c367f29356617}
+
+
+Implemented in \hyperlink{classPCShaderScreen_a4ce134f7cd81f8923a131705ae3536d7}{P\+C\+Shader\+Screen}, and \hyperlink{classPCScreen_a39d140fd1852dd76e2bd26b82e7a7ee5}{P\+C\+Screen}.
+
+\index{Screen@{Screen}!Get\+Batch\+Render\+Sorter@{Get\+Batch\+Render\+Sorter}}
+\index{Get\+Batch\+Render\+Sorter@{Get\+Batch\+Render\+Sorter}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Get\+Batch\+Render\+Sorter()}{GetBatchRenderSorter()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen\+Render\+Sorter} $\ast$ Screen\+::\+Get\+Batch\+Render\+Sorter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_a8185957db56fd6dd23938afd3c5c24a8}{}\label{classScreen_a8185957db56fd6dd23938afd3c5c24a8}
+\index{Screen@{Screen}!Get\+Depth\+Render\+Sorter@{Get\+Depth\+Render\+Sorter}}
+\index{Get\+Depth\+Render\+Sorter@{Get\+Depth\+Render\+Sorter}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Get\+Depth\+Render\+Sorter()}{GetDepthRenderSorter()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen\+Render\+Sorter} $\ast$ Screen\+::\+Get\+Depth\+Render\+Sorter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_ae119aa0a7af1afb95c09efbba620cea5}{}\label{classScreen_ae119aa0a7af1afb95c09efbba620cea5}
+\index{Screen@{Screen}!Get\+Height@{Get\+Height}}
+\index{Get\+Height@{Get\+Height}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Get\+Height() const }{GetHeight() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Screen\+::\+Get\+Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classScreen_a0bacb2d30942fb7acfd4bcb52ccdb2f9}{}\label{classScreen_a0bacb2d30942fb7acfd4bcb52ccdb2f9}
+\index{Screen@{Screen}!Get\+View@{Get\+View}}
+\index{Get\+View@{Get\+View}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Get\+View()}{GetView()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf View} \& Screen\+::\+Get\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_a1e3891893800bf04a602c2489c2f11b9}{}\label{classScreen_a1e3891893800bf04a602c2489c2f11b9}
+\index{Screen@{Screen}!Get\+Width@{Get\+Width}}
+\index{Get\+Width@{Get\+Width}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Get\+Width() const }{GetWidth() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Screen\+::\+Get\+Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classScreen_a125072d815aefe2debfd5d6e7da1baf8}{}\label{classScreen_a125072d815aefe2debfd5d6e7da1baf8}
+\index{Screen@{Screen}!Is\+Full\+Screen@{Is\+Full\+Screen}}
+\index{Is\+Full\+Screen@{Is\+Full\+Screen}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Is\+Full\+Screen() const }{IsFullScreen() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Screen\+::\+Is\+Full\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classScreen_af73f43cca23323b9d96804d547cad3a4}{}\label{classScreen_af73f43cca23323b9d96804d547cad3a4}
+\index{Screen@{Screen}!Pre\+Draw@{Pre\+Draw}}
+\index{Pre\+Draw@{Pre\+Draw}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Pre\+Draw()=0}{PreDraw()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Screen\+::\+Pre\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classScreen_a995cbb84408dff20ee0e1e6f02a09a8e}{}\label{classScreen_a995cbb84408dff20ee0e1e6f02a09a8e}
+
+
+Implemented in \hyperlink{classPCShaderScreen_a4b103d2af283e955678b41b759d51822}{P\+C\+Shader\+Screen}, and \hyperlink{classPCScreen_a5e66ab84ff926d7023f46d0c46a0b66c}{P\+C\+Screen}.
+
+\index{Screen@{Screen}!Set\+Batch\+Render\+Sorter@{Set\+Batch\+Render\+Sorter}}
+\index{Set\+Batch\+Render\+Sorter@{Set\+Batch\+Render\+Sorter}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Set\+Batch\+Render\+Sorter(\+Screen\+Render\+Sorter $\ast$a\+Batch\+Render\+Sorter)}{SetBatchRenderSorter(ScreenRenderSorter *aBatchRenderSorter)}}]{\setlength{\rightskip}{0pt plus 5cm}void Screen\+::\+Set\+Batch\+Render\+Sorter (
+\begin{DoxyParamCaption}
+\item[{{\bf Screen\+Render\+Sorter} $\ast$}]{a\+Batch\+Render\+Sorter}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_af91def02d2d29633583deaffefc9f286}{}\label{classScreen_af91def02d2d29633583deaffefc9f286}
+
+
+Redefine behavior of how objects should be rendered. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Render\+Sorter} & \\
+\hline
+\end{DoxyParams}
+\index{Screen@{Screen}!Set\+Clear\+Color@{Set\+Clear\+Color}}
+\index{Set\+Clear\+Color@{Set\+Clear\+Color}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Set\+Clear\+Color(\+Vector4 const \&a\+Clear\+Color)=0}{SetClearColor(Vector4 const &aClearColor)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Screen\+::\+Set\+Clear\+Color (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector4} const \&}]{a\+Clear\+Color}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classScreen_a537a5e1ddfbc6d3f048b8195ad80cad9}{}\label{classScreen_a537a5e1ddfbc6d3f048b8195ad80cad9}
+
+
+Implemented in \hyperlink{classPCShaderScreen_ac1b9a286f7b8d6e3d6e37fe1f0f6a5a7}{P\+C\+Shader\+Screen}, and \hyperlink{classPCScreen_af9866ba56f6c7dabe28daf1eceed4f8b}{P\+C\+Screen}.
+
+\index{Screen@{Screen}!Set\+Depth\+Render\+Sorter@{Set\+Depth\+Render\+Sorter}}
+\index{Set\+Depth\+Render\+Sorter@{Set\+Depth\+Render\+Sorter}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Set\+Depth\+Render\+Sorter(\+Screen\+Render\+Sorter $\ast$a\+Depth\+Render\+Sorter)}{SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter)}}]{\setlength{\rightskip}{0pt plus 5cm}void Screen\+::\+Set\+Depth\+Render\+Sorter (
+\begin{DoxyParamCaption}
+\item[{{\bf Screen\+Render\+Sorter} $\ast$}]{a\+Depth\+Render\+Sorter}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_a9723784c5457461d70b6e8e3d09069e5}{}\label{classScreen_a9723784c5457461d70b6e8e3d09069e5}
+
+
+Redefine behavior of how objects should be rendered. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Render\+Sorter} & \\
+\hline
+\end{DoxyParams}
+\index{Screen@{Screen}!Set\+Full\+Screen@{Set\+Full\+Screen}}
+\index{Set\+Full\+Screen@{Set\+Full\+Screen}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Set\+Full\+Screen(bool const a\+Full\+Screen)}{SetFullScreen(bool const aFullScreen)}}]{\setlength{\rightskip}{0pt plus 5cm}void Screen\+::\+Set\+Full\+Screen (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Full\+Screen}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_a920cd9ef8dbc743a13502b94f93c6c25}{}\label{classScreen_a920cd9ef8dbc743a13502b94f93c6c25}
+\index{Screen@{Screen}!Set\+Height@{Set\+Height}}
+\index{Set\+Height@{Set\+Height}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Set\+Height(int const a\+Height)}{SetHeight(int const aHeight)}}]{\setlength{\rightskip}{0pt plus 5cm}void Screen\+::\+Set\+Height (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Height}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_a08c25c229d22dab7954812012c0d6249}{}\label{classScreen_a08c25c229d22dab7954812012c0d6249}
+\index{Screen@{Screen}!Set\+Width@{Set\+Width}}
+\index{Set\+Width@{Set\+Width}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Set\+Width(int const a\+Width)}{SetWidth(int const aWidth)}}]{\setlength{\rightskip}{0pt plus 5cm}void Screen\+::\+Set\+Width (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Width}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_a72810fa8cd0db6bc2ddde6a172790f41}{}\label{classScreen_a72810fa8cd0db6bc2ddde6a172790f41}
+\index{Screen@{Screen}!Sort\+Objects@{Sort\+Objects}}
+\index{Sort\+Objects@{Sort\+Objects}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Sort\+Objects(std\+::vector$<$ Surface $\ast$ $>$ \&a\+Objects)}{SortObjects(std::vector< Surface * > &aObjects)}}]{\setlength{\rightskip}{0pt plus 5cm}void Screen\+::\+Sort\+Objects (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Surface} $\ast$ $>$ \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)}\hypertarget{classScreen_a663b77342cfa137b4890cd3d00678553}{}\label{classScreen_a663b77342cfa137b4890cd3d00678553}
+
+
+Sorts objects to be rendered. (Assumes that objects of same texture ID are at the same z depth.) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Objects} & \\
+\hline
+\end{DoxyParams}
+\index{Screen@{Screen}!Swap\+Buffers@{Swap\+Buffers}}
+\index{Swap\+Buffers@{Swap\+Buffers}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{Swap\+Buffers()=0}{SwapBuffers()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Screen\+::\+Swap\+Buffers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classScreen_ac4828d7dba6fd883d96175b00d2f856b}{}\label{classScreen_ac4828d7dba6fd883d96175b00d2f856b}
+
+
+Implemented in \hyperlink{classPCShaderScreen_a32d9adc0a0af5c3e22f5d06005e427a6}{P\+C\+Shader\+Screen}, and \hyperlink{classPCScreen_a982ec5cebedc26b5c66130ffb54512a4}{P\+C\+Screen}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Screen@{Screen}!m\+Batch\+Render\+Sorter@{m\+Batch\+Render\+Sorter}}
+\index{m\+Batch\+Render\+Sorter@{m\+Batch\+Render\+Sorter}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{m\+Batch\+Render\+Sorter}{mBatchRenderSorter}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen\+Render\+Sorter}$\ast$ Screen\+::m\+Batch\+Render\+Sorter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classScreen_a42407b811400203cb4b4d187e4a4a575}{}\label{classScreen_a42407b811400203cb4b4d187e4a4a575}
+\index{Screen@{Screen}!m\+Depth\+Render\+Sorter@{m\+Depth\+Render\+Sorter}}
+\index{m\+Depth\+Render\+Sorter@{m\+Depth\+Render\+Sorter}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{m\+Depth\+Render\+Sorter}{mDepthRenderSorter}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen\+Render\+Sorter}$\ast$ Screen\+::m\+Depth\+Render\+Sorter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classScreen_a261d4ba007cb0e20a17b3d835a6b702f}{}\label{classScreen_a261d4ba007cb0e20a17b3d835a6b702f}
+\index{Screen@{Screen}!m\+Full\+Screen@{m\+Full\+Screen}}
+\index{m\+Full\+Screen@{m\+Full\+Screen}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{m\+Full\+Screen}{mFullScreen}}]{\setlength{\rightskip}{0pt plus 5cm}bool Screen\+::m\+Full\+Screen\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classScreen_a21b347af76f1a4e771f6ccf9bc4ad211}{}\label{classScreen_a21b347af76f1a4e771f6ccf9bc4ad211}
+\index{Screen@{Screen}!m\+Height@{m\+Height}}
+\index{m\+Height@{m\+Height}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{m\+Height}{mHeight}}]{\setlength{\rightskip}{0pt plus 5cm}int Screen\+::m\+Height\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classScreen_aaaf507d2c2684413f6803f99b9681de0}{}\label{classScreen_aaaf507d2c2684413f6803f99b9681de0}
+\index{Screen@{Screen}!m\+View@{m\+View}}
+\index{m\+View@{m\+View}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{m\+View}{mView}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf View} Screen\+::m\+View\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classScreen_a7951477ad349b52b4d58efbc4f86d439}{}\label{classScreen_a7951477ad349b52b4d58efbc4f86d439}
+\index{Screen@{Screen}!m\+Width@{m\+Width}}
+\index{m\+Width@{m\+Width}!Screen@{Screen}}
+\subsubsection[{\texorpdfstring{m\+Width}{mWidth}}]{\setlength{\rightskip}{0pt plus 5cm}int Screen\+::m\+Width\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classScreen_ade5c870bad695a69038aea57a9872462}{}\label{classScreen_ade5c870bad695a69038aea57a9872462}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graphics/\hyperlink{Screen_8h}{Screen.\+h}\item 
+Graphics/\hyperlink{Screen_8cpp}{Screen.\+cpp}\end{DoxyCompactItemize}

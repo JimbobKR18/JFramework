@@ -1,0 +1,58 @@
+\hypertarget{Surface_8h}{}\section{Components/\+Surface.h File Reference}
+\label{Surface_8h}\index{Components/\+Surface.\+h@{Components/\+Surface.\+h}}
+{\ttfamily \#include \char`\"{}Component.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Texture\+Coordinates.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Math\+Ext.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Surface\+Property.\+h\char`\"{}}\\*
+Include dependency graph for Surface.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structScrollInfo}{Scroll\+Info}
+\item 
+class \hyperlink{classSurface}{Surface}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4d}{Scroll\+Type} \{ \hyperlink{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4da1a88641fcd39f2ed3e58a18526e97138}{V\+E\+R\+T\+I\+C\+AL} = 0, 
+\hyperlink{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4da4dd51ad73508d6fc83a502966779e48e}{H\+O\+R\+I\+Z\+O\+N\+T\+AL}
+ \}
+\item 
+enum \hyperlink{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fe}{Viewspace} \{ \hyperlink{Surface_8h_a4fa0651be6bee50d62c7c9166114f6feaa436b46069d5b21d33d71d2e5903e2d1}{V\+I\+E\+W\+\_\+\+R\+E\+L\+A\+T\+I\+V\+E\+\_\+\+T\+O\+\_\+\+C\+A\+M\+E\+RA} = 0, 
+\hyperlink{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fea2ea5aea39d9f8f118eb1ccd8d986bd2b}{V\+I\+E\+W\+\_\+\+A\+B\+S\+O\+L\+U\+TE}, 
+\hyperlink{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fea592d79fc948dbcdc0e59e1ae068ae952}{V\+I\+E\+W\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E\+\_\+\+O\+F\+\_\+\+C\+A\+M\+E\+RA}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\index{Surface.\+h@{Surface.\+h}!Scroll\+Type@{Scroll\+Type}}
+\index{Scroll\+Type@{Scroll\+Type}!Surface.\+h@{Surface.\+h}}
+\subsubsection[{\texorpdfstring{Scroll\+Type}{ScrollType}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Scroll\+Type}}\hypertarget{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4d}{}\label{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4d}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{V\+E\+R\+T\+I\+C\+AL@{V\+E\+R\+T\+I\+C\+AL}!Surface.\+h@{Surface.\+h}}\index{Surface.\+h@{Surface.\+h}!V\+E\+R\+T\+I\+C\+AL@{V\+E\+R\+T\+I\+C\+AL}}\item[{\em 
+V\+E\+R\+T\+I\+C\+AL\hypertarget{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4da1a88641fcd39f2ed3e58a18526e97138}{}\label{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4da1a88641fcd39f2ed3e58a18526e97138}
+}]\index{H\+O\+R\+I\+Z\+O\+N\+T\+AL@{H\+O\+R\+I\+Z\+O\+N\+T\+AL}!Surface.\+h@{Surface.\+h}}\index{Surface.\+h@{Surface.\+h}!H\+O\+R\+I\+Z\+O\+N\+T\+AL@{H\+O\+R\+I\+Z\+O\+N\+T\+AL}}\item[{\em 
+H\+O\+R\+I\+Z\+O\+N\+T\+AL\hypertarget{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4da4dd51ad73508d6fc83a502966779e48e}{}\label{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4da4dd51ad73508d6fc83a502966779e48e}
+}]\end{description}
+\end{Desc}
+\index{Surface.\+h@{Surface.\+h}!Viewspace@{Viewspace}}
+\index{Viewspace@{Viewspace}!Surface.\+h@{Surface.\+h}}
+\subsubsection[{\texorpdfstring{Viewspace}{Viewspace}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Viewspace}}\hypertarget{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fe}{}\label{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fe}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{V\+I\+E\+W\+\_\+\+R\+E\+L\+A\+T\+I\+V\+E\+\_\+\+T\+O\+\_\+\+C\+A\+M\+E\+RA@{V\+I\+E\+W\+\_\+\+R\+E\+L\+A\+T\+I\+V\+E\+\_\+\+T\+O\+\_\+\+C\+A\+M\+E\+RA}!Surface.\+h@{Surface.\+h}}\index{Surface.\+h@{Surface.\+h}!V\+I\+E\+W\+\_\+\+R\+E\+L\+A\+T\+I\+V\+E\+\_\+\+T\+O\+\_\+\+C\+A\+M\+E\+RA@{V\+I\+E\+W\+\_\+\+R\+E\+L\+A\+T\+I\+V\+E\+\_\+\+T\+O\+\_\+\+C\+A\+M\+E\+RA}}\item[{\em 
+V\+I\+E\+W\+\_\+\+R\+E\+L\+A\+T\+I\+V\+E\+\_\+\+T\+O\+\_\+\+C\+A\+M\+E\+RA\hypertarget{Surface_8h_a4fa0651be6bee50d62c7c9166114f6feaa436b46069d5b21d33d71d2e5903e2d1}{}\label{Surface_8h_a4fa0651be6bee50d62c7c9166114f6feaa436b46069d5b21d33d71d2e5903e2d1}
+}]\index{V\+I\+E\+W\+\_\+\+A\+B\+S\+O\+L\+U\+TE@{V\+I\+E\+W\+\_\+\+A\+B\+S\+O\+L\+U\+TE}!Surface.\+h@{Surface.\+h}}\index{Surface.\+h@{Surface.\+h}!V\+I\+E\+W\+\_\+\+A\+B\+S\+O\+L\+U\+TE@{V\+I\+E\+W\+\_\+\+A\+B\+S\+O\+L\+U\+TE}}\item[{\em 
+V\+I\+E\+W\+\_\+\+A\+B\+S\+O\+L\+U\+TE\hypertarget{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fea2ea5aea39d9f8f118eb1ccd8d986bd2b}{}\label{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fea2ea5aea39d9f8f118eb1ccd8d986bd2b}
+}]\index{V\+I\+E\+W\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E\+\_\+\+O\+F\+\_\+\+C\+A\+M\+E\+RA@{V\+I\+E\+W\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E\+\_\+\+O\+F\+\_\+\+C\+A\+M\+E\+RA}!Surface.\+h@{Surface.\+h}}\index{Surface.\+h@{Surface.\+h}!V\+I\+E\+W\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E\+\_\+\+O\+F\+\_\+\+C\+A\+M\+E\+RA@{V\+I\+E\+W\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E\+\_\+\+O\+F\+\_\+\+C\+A\+M\+E\+RA}}\item[{\em 
+V\+I\+E\+W\+\_\+\+P\+E\+R\+C\+E\+N\+T\+A\+G\+E\+\_\+\+O\+F\+\_\+\+C\+A\+M\+E\+RA\hypertarget{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fea592d79fc948dbcdc0e59e1ae068ae952}{}\label{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fea592d79fc948dbcdc0e59e1ae068ae952}
+}]\end{description}
+\end{Desc}

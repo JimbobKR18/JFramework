@@ -1,0 +1,371 @@
+\hypertarget{classLevelManager}{}\section{Level\+Manager Class Reference}
+\label{classLevelManager}\index{Level\+Manager@{Level\+Manager}}
+
+
+{\ttfamily \#include $<$Level\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Level\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Level\+Manager\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classLevel}{Level} $\ast$ $>$\+::iterator \hyperlink{classLevelManager_a6fddbbcd58d96c3b1748eb4d2a801f35}{Levels\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLevelManager_ad67dc90f18b26a9d379d4b3705fc0c1f}{Level\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App)
+\item 
+\hyperlink{classLevelManager_a72ca9c27cc6b85143e20f83c520d1215}{$\sim$\+Level\+Manager} ()
+\item 
+\hyperlink{classLevel}{Level} $\ast$ \hyperlink{classLevelManager_ae236f997f3b98e08b6a2305677b25563}{Create\+Level} (std\+::string const \&a\+Filename)
+\begin{DoxyCompactList}\small\item\em Create a level from a filename. \end{DoxyCompactList}\item 
+\hyperlink{classLevel}{Level} $\ast$ \hyperlink{classLevelManager_a671a1a5313fa924864baeeb58bcd9351}{Get\+Level} (std\+::string const \&a\+Level\+Name)
+\begin{DoxyCompactList}\small\item\em Get a level by its name. \end{DoxyCompactList}\item 
+void \hyperlink{classLevelManager_a369449df47c27e3bd45e4ef8ecb253c6}{Delete\+Level} (\hyperlink{classLevel}{Level} $\ast$a\+Level)
+\begin{DoxyCompactList}\small\item\em Delete a level, the right way. \end{DoxyCompactList}\item 
+void \hyperlink{classLevelManager_a8de41542a17518b575c70875c2bed60e}{Load\+Level\+Delayed} (std\+::string const \&a\+Level\+Name, bool a\+Reset=false)
+\begin{DoxyCompactList}\small\item\em Push back loading a level to the next frame. \end{DoxyCompactList}\item 
+void \hyperlink{classLevelManager_a5493be95283eea28441ea91979fa4706}{Load\+Level} (std\+::string const \&a\+Level\+Name, bool a\+Reset=false)
+\begin{DoxyCompactList}\small\item\em Load a level immediately. \end{DoxyCompactList}\item 
+\hyperlink{classLevel}{Level} $\ast$ \hyperlink{classLevelManager_a84027aa3e60d2a76455413611ac9498e}{Get\+Active\+Level} ()
+\begin{DoxyCompactList}\small\item\em Get currently running level. \end{DoxyCompactList}\item 
+void \hyperlink{classLevelManager_a0c563fcfa58c49b835d7d81a6191219f}{Set\+Active\+Level} (\hyperlink{classLevel}{Level} $\ast$a\+Level)
+\begin{DoxyCompactList}\small\item\em Set current active level. \end{DoxyCompactList}\item 
+void \hyperlink{classLevelManager_aa3a9f9538af307f77a66f61d6e4d2954}{Save\+Active\+Level\+As} (std\+::string const \&a\+Folder, std\+::string const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Write out current active level to a file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevelManager_a7800611361e7c2ae99102e69429456fc}{Update} ()
+\begin{DoxyCompactList}\small\item\em Basic update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevelManager_a4cc512a6416f28ea8bfee08ed780e876}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Relays a message to current active level. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classLevelManager_a375d01bd082ee3fd3981925f0b6a5640}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Post a message to the delay queue. \end{DoxyCompactList}\item 
+void \hyperlink{classLevelManager_a35d809424a4acca73b44458d7c2a69f5}{Add\+Level} (\hyperlink{classLevel}{Level} $\ast$a\+Level)
+\begin{DoxyCompactList}\small\item\em Add a level to our levels vector. \end{DoxyCompactList}\item 
+void \hyperlink{classLevelManager_a4458b0e93958d9b53513335b7fe862a1}{Remove\+Level} (\hyperlink{classLevel}{Level} $\ast$a\+Level)
+\begin{DoxyCompactList}\small\item\em Remove a level from our levels vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classLevelManager_a7c509ce59ebbac264aceba1a4e4fbc78}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classLevelManager_a363e924dbbe0d6111b01839d2bc13ceb}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classLevelManager_a7c3b0c1cf3d973247aca9bf01a12fb4a}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this manager visible in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLevel}{Level} $\ast$ \hyperlink{classLevelManager_ac3b8e6bc21cba75b517910e5961883ea}{m\+Active\+Level}
+\item 
+std\+::vector$<$ \hyperlink{classLevel}{Level} $\ast$ $>$ \hyperlink{classLevelManager_a93a04b188e6300894590b7fd92c75750}{m\+Levels}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classLevelManager_a8273c8c0d95b17552ba0ddeff863195e}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Level\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Level\+Manager@{Level\+Manager}!Levels\+IT@{Levels\+IT}}
+\index{Levels\+IT@{Levels\+IT}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Levels\+IT}{LevelsIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Level}$\ast$$>$\+::iterator {\bf Level\+Manager\+::\+Levels\+IT}}\hypertarget{classLevelManager_a6fddbbcd58d96c3b1748eb4d2a801f35}{}\label{classLevelManager_a6fddbbcd58d96c3b1748eb4d2a801f35}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Level\+Manager@{Level\+Manager}!Level\+Manager@{Level\+Manager}}
+\index{Level\+Manager@{Level\+Manager}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Level\+Manager(\+Game\+App $\ast$a\+App)}{LevelManager(GameApp *aApp)}}]{\setlength{\rightskip}{0pt plus 5cm}Level\+Manager\+::\+Level\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_ad67dc90f18b26a9d379d4b3705fc0c1f}{}\label{classLevelManager_ad67dc90f18b26a9d379d4b3705fc0c1f}
+\index{Level\+Manager@{Level\+Manager}!````~Level\+Manager@{$\sim$\+Level\+Manager}}
+\index{````~Level\+Manager@{$\sim$\+Level\+Manager}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Level\+Manager()}{~LevelManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Level\+Manager\+::$\sim$\+Level\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a72ca9c27cc6b85143e20f83c520d1215}{}\label{classLevelManager_a72ca9c27cc6b85143e20f83c520d1215}
+
+
+\subsection{Member Function Documentation}
+\index{Level\+Manager@{Level\+Manager}!Add\+Level@{Add\+Level}}
+\index{Add\+Level@{Add\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Level(\+Level $\ast$a\+Level)}{AddLevel(Level *aLevel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Add\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Level} $\ast$}]{a\+Level}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a35d809424a4acca73b44458d7c2a69f5}{}\label{classLevelManager_a35d809424a4acca73b44458d7c2a69f5}
+
+
+Add a level to our levels vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Level} & \\
+\hline
+\end{DoxyParams}
+\index{Level\+Manager@{Level\+Manager}!Create\+Level@{Create\+Level}}
+\index{Create\+Level@{Create\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Level(std\+::string const \&a\+Filename)}{CreateLevel(std::string const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level} $\ast$ Level\+Manager\+::\+Create\+Level (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_ae236f997f3b98e08b6a2305677b25563}{}\label{classLevelManager_ae236f997f3b98e08b6a2305677b25563}
+
+
+Create a level from a filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Level\+Manager@{Level\+Manager}!Delete\+Level@{Delete\+Level}}
+\index{Delete\+Level@{Delete\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Level(\+Level $\ast$a\+Level)}{DeleteLevel(Level *aLevel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Delete\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Level} $\ast$}]{a\+Level}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a369449df47c27e3bd45e4ef8ecb253c6}{}\label{classLevelManager_a369449df47c27e3bd45e4ef8ecb253c6}
+
+
+Delete a level, the right way. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Level} & \\
+\hline
+\end{DoxyParams}
+\index{Level\+Manager@{Level\+Manager}!Get\+Active\+Level@{Get\+Active\+Level}}
+\index{Get\+Active\+Level@{Get\+Active\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Active\+Level()}{GetActiveLevel()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level} $\ast$ Level\+Manager\+::\+Get\+Active\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a84027aa3e60d2a76455413611ac9498e}{}\label{classLevelManager_a84027aa3e60d2a76455413611ac9498e}
+
+
+Get currently running level. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Level\+Manager@{Level\+Manager}!Get\+Level@{Get\+Level}}
+\index{Get\+Level@{Get\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Level(std\+::string const \&a\+Level\+Name)}{GetLevel(std::string const &aLevelName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level} $\ast$ Level\+Manager\+::\+Get\+Level (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Level\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a671a1a5313fa924864baeeb58bcd9351}{}\label{classLevelManager_a671a1a5313fa924864baeeb58bcd9351}
+
+
+Get a level by its name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Level\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Level\+Manager@{Level\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Level\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classLevelManager_a7c509ce59ebbac264aceba1a4e4fbc78}{}\label{classLevelManager_a7c509ce59ebbac264aceba1a4e4fbc78}
+\index{Level\+Manager@{Level\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Level\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classLevelManager_a363e924dbbe0d6111b01839d2bc13ceb}{}\label{classLevelManager_a363e924dbbe0d6111b01839d2bc13ceb}
+\index{Level\+Manager@{Level\+Manager}!Load\+Level@{Load\+Level}}
+\index{Load\+Level@{Load\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Load\+Level(std\+::string const \&a\+Level\+Name, bool a\+Reset=false)}{LoadLevel(std::string const &aLevelName, bool aReset=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Load\+Level (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Level\+Name, }
+\item[{bool}]{a\+Reset = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a5493be95283eea28441ea91979fa4706}{}\label{classLevelManager_a5493be95283eea28441ea91979fa4706}
+
+
+Load a level immediately. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Level\+Name} & \\
+\hline
+{\em a\+Reset} & \\
+\hline
+\end{DoxyParams}
+\index{Level\+Manager@{Level\+Manager}!Load\+Level\+Delayed@{Load\+Level\+Delayed}}
+\index{Load\+Level\+Delayed@{Load\+Level\+Delayed}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Load\+Level\+Delayed(std\+::string const \&a\+Level\+Name, bool a\+Reset=false)}{LoadLevelDelayed(std::string const &aLevelName, bool aReset=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Load\+Level\+Delayed (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Level\+Name, }
+\item[{bool}]{a\+Reset = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a8de41542a17518b575c70875c2bed60e}{}\label{classLevelManager_a8de41542a17518b575c70875c2bed60e}
+
+
+Push back loading a level to the next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Level\+Name} & \\
+\hline
+{\em a\+Reset} & \\
+\hline
+\end{DoxyParams}
+\index{Level\+Manager@{Level\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevelManager_a375d01bd082ee3fd3981925f0b6a5640}{}\label{classLevelManager_a375d01bd082ee3fd3981925f0b6a5640}
+
+
+Post a message to the delay queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Level\+Manager@{Level\+Manager}!Remove\+Level@{Remove\+Level}}
+\index{Remove\+Level@{Remove\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Level(\+Level $\ast$a\+Level)}{RemoveLevel(Level *aLevel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Remove\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Level} $\ast$}]{a\+Level}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a4458b0e93958d9b53513335b7fe862a1}{}\label{classLevelManager_a4458b0e93958d9b53513335b7fe862a1}
+
+
+Remove a level from our levels vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Level} & \\
+\hline
+\end{DoxyParams}
+\index{Level\+Manager@{Level\+Manager}!Save\+Active\+Level\+As@{Save\+Active\+Level\+As}}
+\index{Save\+Active\+Level\+As@{Save\+Active\+Level\+As}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Save\+Active\+Level\+As(std\+::string const \&a\+Folder, std\+::string const \&a\+File\+Name)}{SaveActiveLevelAs(std::string const &aFolder, std::string const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Save\+Active\+Level\+As (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Folder, }
+\item[{std\+::string const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_aa3a9f9538af307f77a66f61d6e4d2954}{}\label{classLevelManager_aa3a9f9538af307f77a66f61d6e4d2954}
+
+
+Write out current active level to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Folder} & \\
+\hline
+{\em a\+File\+Name} & \\
+\hline
+\end{DoxyParams}
+\index{Level\+Manager@{Level\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevelManager_a4cc512a6416f28ea8bfee08ed780e876}{}\label{classLevelManager_a4cc512a6416f28ea8bfee08ed780e876}
+
+
+Relays a message to current active level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Level\+Manager@{Level\+Manager}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classLevelManager_a7c3b0c1cf3d973247aca9bf01a12fb4a}{}\label{classLevelManager_a7c3b0c1cf3d973247aca9bf01a12fb4a}
+
+
+Make this manager visible in L\+UA. 
+
+\index{Level\+Manager@{Level\+Manager}!Set\+Active\+Level@{Set\+Active\+Level}}
+\index{Set\+Active\+Level@{Set\+Active\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Set\+Active\+Level(\+Level $\ast$a\+Level)}{SetActiveLevel(Level *aLevel)}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Set\+Active\+Level (
+\begin{DoxyParamCaption}
+\item[{{\bf Level} $\ast$}]{a\+Level}
+\end{DoxyParamCaption}
+)}\hypertarget{classLevelManager_a0c563fcfa58c49b835d7d81a6191219f}{}\label{classLevelManager_a0c563fcfa58c49b835d7d81a6191219f}
+
+
+Set current active level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Level} & \\
+\hline
+\end{DoxyParams}
+\index{Level\+Manager@{Level\+Manager}!Update@{Update}}
+\index{Update@{Update}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Level\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLevelManager_a7800611361e7c2ae99102e69429456fc}{}\label{classLevelManager_a7800611361e7c2ae99102e69429456fc}
+
+
+Basic update loop. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Level\+Manager@{Level\+Manager}!m\+Active\+Level@{m\+Active\+Level}}
+\index{m\+Active\+Level@{m\+Active\+Level}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Active\+Level}{mActiveLevel}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level}$\ast$ Level\+Manager\+::m\+Active\+Level\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevelManager_ac3b8e6bc21cba75b517910e5961883ea}{}\label{classLevelManager_ac3b8e6bc21cba75b517910e5961883ea}
+\index{Level\+Manager@{Level\+Manager}!m\+Levels@{m\+Levels}}
+\index{m\+Levels@{m\+Levels}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Levels}{mLevels}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Level}$\ast$$>$ Level\+Manager\+::m\+Levels\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classLevelManager_a93a04b188e6300894590b7fd92c75750}{}\label{classLevelManager_a93a04b188e6300894590b7fd92c75750}
+\index{Level\+Manager@{Level\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Level\+Manager@{Level\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Level\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Level\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classLevelManager_a8273c8c0d95b17552ba0ddeff863195e}{}\label{classLevelManager_a8273c8c0d95b17552ba0ddeff863195e}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{LevelManager_8h}{Level\+Manager.\+h}\item 
+Managers/\hyperlink{LevelManager_8cpp}{Level\+Manager.\+cpp}\end{DoxyCompactItemize}

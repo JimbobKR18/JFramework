@@ -1,0 +1,246 @@
+\hypertarget{structMatrix33}{}\section{Matrix33 Struct Reference}
+\label{structMatrix33}\index{Matrix33@{Matrix33}}
+
+
+{\ttfamily \#include $<$Math\+Ext.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structMatrix33_a70acb6647b172d017cc4265a29a7d263}{Matrix33} ()
+\item 
+\hyperlink{structMatrix33_a925961737f602cf5c46a14b48f6c15af}{Matrix33} (float a\+Values\mbox{[}3\mbox{]}\mbox{[}3\mbox{]})
+\item 
+\hyperlink{structMatrix33_a3b036f1b40d42fbc1062a64ae257f51b}{Matrix33} (float a\+Values\mbox{[}9\mbox{]})
+\item 
+\hyperlink{structMatrix33_a81963918bedee0fc17a2f79dd323843e}{Matrix33} (\hyperlink{structVector3}{Vector3} const \&a\+Values)
+\item 
+\hyperlink{structMatrix33}{Matrix33} \hyperlink{structMatrix33_a2e55b6023d5164e1ac00c82f3fce11b0}{Concatenate} (\hyperlink{structMatrix33}{Matrix33} const \&rhs) const 
+\item 
+\hyperlink{structMatrix33}{Matrix33} \hyperlink{structMatrix33_aae5ec715f643ccf3144c50dc03d5eebe}{Rotate} (\hyperlink{structVector3}{Vector3} const \&a\+Axis, float const a\+Angle) const 
+\item 
+\hyperlink{structMatrix33}{Matrix33} \hyperlink{structMatrix33_a8684734a4e99ee09c164e27fa8ac3826}{Invert} () const 
+\item 
+float \hyperlink{structMatrix33_a8aa376f85ca88ab3ed2c63bf3d27507d}{Determinant} () const 
+\item 
+float \hyperlink{structMatrix33_a7b2da68ab75077b2a4b4be83edfeda77}{Determinant} (float const aA, float const aB, float const aC, float const aD) const 
+\item 
+void \hyperlink{structMatrix33_a1bafdfc46dbafa7615e28d99f1ebe08b}{operator=} (\hyperlink{structMatrix33}{Matrix33} const \&a\+Matrix)
+\item 
+bool \hyperlink{structMatrix33_a97612596778d55abfa22e9f07c59a1ed}{operator==} (\hyperlink{structMatrix33}{Matrix33} const \&a\+Matrix) const 
+\item 
+\hyperlink{structMatrix33}{Matrix33} \hyperlink{structMatrix33_a59de5040d8aeb65e9c2172c9fc052fc1}{operator$\ast$} (\hyperlink{structMatrix33}{Matrix33} const \&rhs) const 
+\item 
+\hyperlink{structMatrix33}{Matrix33} \hyperlink{structMatrix33_a5991d9a0748acbb67f64255b7d559ec2}{operator$\ast$} (float const a\+Value) const 
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structMatrix33_a4c2d43f4b02383789b246cc3d8a6183c}{operator$\ast$} (\hyperlink{structVector3}{Vector3} const \&rhs) const 
+\item 
+void \hyperlink{structMatrix33_a699b89d96c7681113cd68e08e3c34081}{Scale} (\hyperlink{structVector3}{Vector3} const \&a\+Scale)
+\item 
+void \hyperlink{structMatrix33_a7050ba70b3b20fcd50e94123e8ebf215}{RotateX} (float const a\+Angle)
+\item 
+void \hyperlink{structMatrix33_acd3b966f8e6380db043c0de1fec37623}{RotateY} (float const a\+Angle)
+\item 
+void \hyperlink{structMatrix33_ad2d03a77b65ddd29d708e34efa5059e8}{RotateZ} (float const a\+Angle)
+\item 
+void \hyperlink{structMatrix33_a79e54810f659584577c49a311505a42a}{operator$\ast$=} (\hyperlink{structMatrix33}{Matrix33} const \&rhs)
+\item 
+void \hyperlink{structMatrix33_acb666d5ec913392a2d50c5587d63c69c}{operator$\ast$=} (float const a\+Value)
+\item 
+bool \hyperlink{structMatrix33_a4057dfaa9c2edf8d3abe23873a491cd1}{validate} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{structMatrix33_a2733264500f4d19860ca6718337c2d37}{Serialize\+L\+UA} ()
+\item 
+static \hyperlink{classHashString}{Hash\+String} \hyperlink{structMatrix33_acc56ce2dbc4840b2fcb86191b6f56d53}{Get\+Name} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{structMatrix33_a2844bb64a3b8e9b3ac3357c41c05f56d}{values} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Matrix33()}{Matrix33()}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix33\+::\+Matrix33 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a70acb6647b172d017cc4265a29a7d263}{}\label{structMatrix33_a70acb6647b172d017cc4265a29a7d263}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Matrix33(float a\+Values[3][3])}{Matrix33(float aValues[3][3])}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix33\+::\+Matrix33 (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+Values\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a925961737f602cf5c46a14b48f6c15af}{}\label{structMatrix33_a925961737f602cf5c46a14b48f6c15af}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Matrix33(float a\+Values[9])}{Matrix33(float aValues[9])}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix33\+::\+Matrix33 (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+Values\mbox{[}9\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a3b036f1b40d42fbc1062a64ae257f51b}{}\label{structMatrix33_a3b036f1b40d42fbc1062a64ae257f51b}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\index{Matrix33@{Matrix33}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Matrix33(\+Vector3 const \&a\+Values)}{Matrix33(Vector3 const &aValues)}}]{\setlength{\rightskip}{0pt plus 5cm}Matrix33\+::\+Matrix33 (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Values}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a81963918bedee0fc17a2f79dd323843e}{}\label{structMatrix33_a81963918bedee0fc17a2f79dd323843e}
+
+
+\subsection{Member Function Documentation}
+\index{Matrix33@{Matrix33}!Concatenate@{Concatenate}}
+\index{Concatenate@{Concatenate}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Concatenate(\+Matrix33 const \&rhs) const }{Concatenate(Matrix33 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} Matrix33\+::\+Concatenate (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix33} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a2e55b6023d5164e1ac00c82f3fce11b0}{}\label{structMatrix33_a2e55b6023d5164e1ac00c82f3fce11b0}
+\index{Matrix33@{Matrix33}!Determinant@{Determinant}}
+\index{Determinant@{Determinant}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Determinant() const }{Determinant() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Matrix33\+::\+Determinant (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a8aa376f85ca88ab3ed2c63bf3d27507d}{}\label{structMatrix33_a8aa376f85ca88ab3ed2c63bf3d27507d}
+\index{Matrix33@{Matrix33}!Determinant@{Determinant}}
+\index{Determinant@{Determinant}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Determinant(float const a\+A, float const a\+B, float const a\+C, float const a\+D) const }{Determinant(float const aA, float const aB, float const aC, float const aD) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Matrix33\+::\+Determinant (
+\begin{DoxyParamCaption}
+\item[{float const}]{aA, }
+\item[{float const}]{aB, }
+\item[{float const}]{aC, }
+\item[{float const}]{aD}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a7b2da68ab75077b2a4b4be83edfeda77}{}\label{structMatrix33_a7b2da68ab75077b2a4b4be83edfeda77}
+\index{Matrix33@{Matrix33}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Matrix33\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structMatrix33_acc56ce2dbc4840b2fcb86191b6f56d53}{}\label{structMatrix33_acc56ce2dbc4840b2fcb86191b6f56d53}
+\index{Matrix33@{Matrix33}!Invert@{Invert}}
+\index{Invert@{Invert}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Invert() const }{Invert() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} Matrix33\+::\+Invert (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a8684734a4e99ee09c164e27fa8ac3826}{}\label{structMatrix33_a8684734a4e99ee09c164e27fa8ac3826}
+\index{Matrix33@{Matrix33}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{operator$\ast$(\+Matrix33 const \&rhs) const }{operator*(Matrix33 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} Matrix33\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix33} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a59de5040d8aeb65e9c2172c9fc052fc1}{}\label{structMatrix33_a59de5040d8aeb65e9c2172c9fc052fc1}
+\index{Matrix33@{Matrix33}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{operator$\ast$(float const a\+Value) const }{operator*(float const aValue) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} Matrix33\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Value}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a5991d9a0748acbb67f64255b7d559ec2}{}\label{structMatrix33_a5991d9a0748acbb67f64255b7d559ec2}
+\index{Matrix33@{Matrix33}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{operator$\ast$(\+Vector3 const \&rhs) const }{operator*(Vector3 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Matrix33\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a4c2d43f4b02383789b246cc3d8a6183c}{}\label{structMatrix33_a4c2d43f4b02383789b246cc3d8a6183c}
+\index{Matrix33@{Matrix33}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{operator$\ast$=(\+Matrix33 const \&rhs)}{operator*=(Matrix33 const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix33} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a79e54810f659584577c49a311505a42a}{}\label{structMatrix33_a79e54810f659584577c49a311505a42a}
+\index{Matrix33@{Matrix33}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{operator$\ast$=(float const a\+Value)}{operator*=(float const aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_acb666d5ec913392a2d50c5587d63c69c}{}\label{structMatrix33_acb666d5ec913392a2d50c5587d63c69c}
+\index{Matrix33@{Matrix33}!operator=@{operator=}}
+\index{operator=@{operator=}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{operator=(\+Matrix33 const \&a\+Matrix)}{operator=(Matrix33 const &aMatrix)}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix33} const \&}]{a\+Matrix}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a1bafdfc46dbafa7615e28d99f1ebe08b}{}\label{structMatrix33_a1bafdfc46dbafa7615e28d99f1ebe08b}
+\index{Matrix33@{Matrix33}!operator==@{operator==}}
+\index{operator==@{operator==}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{operator==(\+Matrix33 const \&a\+Matrix) const }{operator==(Matrix33 const &aMatrix) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Matrix33\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix33} const \&}]{a\+Matrix}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a97612596778d55abfa22e9f07c59a1ed}{}\label{structMatrix33_a97612596778d55abfa22e9f07c59a1ed}
+\index{Matrix33@{Matrix33}!Rotate@{Rotate}}
+\index{Rotate@{Rotate}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Rotate(\+Vector3 const \&a\+Axis, float const a\+Angle) const }{Rotate(Vector3 const &aAxis, float const aAngle) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} Matrix33\+::\+Rotate (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Axis, }
+\item[{float const}]{a\+Angle}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_aae5ec715f643ccf3144c50dc03d5eebe}{}\label{structMatrix33_aae5ec715f643ccf3144c50dc03d5eebe}
+\index{Matrix33@{Matrix33}!RotateX@{RotateX}}
+\index{RotateX@{RotateX}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Rotate\+X(float const a\+Angle)}{RotateX(float const aAngle)}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::\+RotateX (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Angle}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a7050ba70b3b20fcd50e94123e8ebf215}{}\label{structMatrix33_a7050ba70b3b20fcd50e94123e8ebf215}
+\index{Matrix33@{Matrix33}!RotateY@{RotateY}}
+\index{RotateY@{RotateY}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Rotate\+Y(float const a\+Angle)}{RotateY(float const aAngle)}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::\+RotateY (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Angle}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_acd3b966f8e6380db043c0de1fec37623}{}\label{structMatrix33_acd3b966f8e6380db043c0de1fec37623}
+\index{Matrix33@{Matrix33}!RotateZ@{RotateZ}}
+\index{RotateZ@{RotateZ}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Rotate\+Z(float const a\+Angle)}{RotateZ(float const aAngle)}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::\+RotateZ (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Angle}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_ad2d03a77b65ddd29d708e34efa5059e8}{}\label{structMatrix33_ad2d03a77b65ddd29d708e34efa5059e8}
+\index{Matrix33@{Matrix33}!Scale@{Scale}}
+\index{Scale@{Scale}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Scale(\+Vector3 const \&a\+Scale)}{Scale(Vector3 const &aScale)}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::\+Scale (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Scale}
+\end{DoxyParamCaption}
+)}\hypertarget{structMatrix33_a699b89d96c7681113cd68e08e3c34081}{}\label{structMatrix33_a699b89d96c7681113cd68e08e3c34081}
+\index{Matrix33@{Matrix33}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix33\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structMatrix33_a2733264500f4d19860ca6718337c2d37}{}\label{structMatrix33_a2733264500f4d19860ca6718337c2d37}
+\index{Matrix33@{Matrix33}!validate@{validate}}
+\index{validate@{validate}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{validate() const }{validate() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Matrix33\+::validate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structMatrix33_a4057dfaa9c2edf8d3abe23873a491cd1}{}\label{structMatrix33_a4057dfaa9c2edf8d3abe23873a491cd1}
+
+
+\subsection{Member Data Documentation}
+\index{Matrix33@{Matrix33}!values@{values}}
+\index{values@{values}!Matrix33@{Matrix33}}
+\subsubsection[{\texorpdfstring{values}{values}}]{\setlength{\rightskip}{0pt plus 5cm}float Matrix33\+::values\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}}\hypertarget{structMatrix33_a2844bb64a3b8e9b3ac3357c41c05f56d}{}\label{structMatrix33_a2844bb64a3b8e9b3ac3357c41c05f56d}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{MathExt_8h}{Math\+Ext.\+h}\item 
+Core/\hyperlink{MathExt_8cpp}{Math\+Ext.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,169 @@
+\hypertarget{classSmartPointer}{}\section{Smart\+Pointer$<$ T $>$ Class Template Reference}
+\label{classSmartPointer}\index{Smart\+Pointer$<$ T $>$@{Smart\+Pointer$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Smart\+Pointer.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSmartPointer_a3fa3ec3cd42af91d449ee93657320a0d}{Smart\+Pointer} ()
+\item 
+\hyperlink{classSmartPointer_a03902e681eaf94fbf83effe8150fe726}{Smart\+Pointer} (T $\ast$a\+Pointer)
+\item 
+\hyperlink{classSmartPointer_ab873257d1345384ce08cc10f13632d6e}{Smart\+Pointer} (\hyperlink{classSmartPointer}{Smart\+Pointer}$<$ T $>$ \&a\+Pointer)
+\item 
+\hyperlink{classSmartPointer_a5cadb135f452564cdca23b6e5483adea}{$\sim$\+Smart\+Pointer} ()
+\item 
+T \& \hyperlink{classSmartPointer_abd4fd046847a9173e73985c17a7b128e}{operator$\ast$} ()
+\item 
+T $\ast$ \hyperlink{classSmartPointer_ad8cd7e0dee80d34e56611d2973940130}{operator-\/$>$} ()
+\item 
+\hyperlink{classSmartPointer_a38024dbc38e3cd1cc2a0b4f02087b310}{operator T $\ast$} ()
+\item 
+\hyperlink{classSmartPointer_ae786c268c7c2529bd452b3659ca05837}{operator bool} ()
+\item 
+bool \hyperlink{classSmartPointer_a6ca44009783c589e6fce8f9ede80abeb}{is\+N\+U\+LL} () const 
+\item 
+void \hyperlink{classSmartPointer_a4a602d362f4b8670c7751057dfba78a6}{operator=} (T $\ast$a\+Ptr)
+\item 
+void \hyperlink{classSmartPointer_ad68eef06b98859b1fa093f35ebb116a9}{operator=} (\hyperlink{classSmartPointer}{Smart\+Pointer}$<$ T $>$ \&a\+Ptr)
+\item 
+bool \hyperlink{classSmartPointer_a4442e51cefdce95924c4b13783c59602}{operator==} (T $\ast$a\+Ptr)
+\item 
+bool \hyperlink{classSmartPointer_ae1134ad18bd14ac4074148bfaf08c469}{operator==} (\hyperlink{classSmartPointer}{Smart\+Pointer}$<$ T $>$ \&a\+Ptr)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSmartPointer_acedbba3ce849fd9d3a70771a6b97adab}{Reassign\+Value} (T $\ast$a\+Ptr)
+\item 
+bool \hyperlink{classSmartPointer_a9c83c3efd621f43d5feda481087570cb}{is\+Equal} (T $\ast$a\+Ptr)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \hyperlink{classSmartPointer_a60e9c1027c474fd7275605808e5876d9}{m\+Pointer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Smart\+Pointer@{Smart\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\index{Smart\+Pointer@{Smart\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{Smart\+Pointer()}{SmartPointer()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Smart\+Pointer}$<$ T $>$\+::{\bf Smart\+Pointer} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_a3fa3ec3cd42af91d449ee93657320a0d}{}\label{classSmartPointer_a3fa3ec3cd42af91d449ee93657320a0d}
+\index{Smart\+Pointer@{Smart\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\index{Smart\+Pointer@{Smart\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{Smart\+Pointer(\+T $\ast$a\+Pointer)}{SmartPointer(T *aPointer)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Smart\+Pointer}$<$ T $>$\+::{\bf Smart\+Pointer} (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{a\+Pointer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_a03902e681eaf94fbf83effe8150fe726}{}\label{classSmartPointer_a03902e681eaf94fbf83effe8150fe726}
+\index{Smart\+Pointer@{Smart\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\index{Smart\+Pointer@{Smart\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{Smart\+Pointer(\+Smart\+Pointer$<$ T $>$ \&a\+Pointer)}{SmartPointer(SmartPointer< T > &aPointer)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Smart\+Pointer}$<$ T $>$\+::{\bf Smart\+Pointer} (
+\begin{DoxyParamCaption}
+\item[{{\bf Smart\+Pointer}$<$ T $>$ \&}]{a\+Pointer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_ab873257d1345384ce08cc10f13632d6e}{}\label{classSmartPointer_ab873257d1345384ce08cc10f13632d6e}
+\index{Smart\+Pointer@{Smart\+Pointer}!````~Smart\+Pointer@{$\sim$\+Smart\+Pointer}}
+\index{````~Smart\+Pointer@{$\sim$\+Smart\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{$\sim$\+Smart\+Pointer()}{~SmartPointer()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Smart\+Pointer}$<$ T $>$\+::$\sim${\bf Smart\+Pointer} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_a5cadb135f452564cdca23b6e5483adea}{}\label{classSmartPointer_a5cadb135f452564cdca23b6e5483adea}
+
+
+\subsection{Member Function Documentation}
+\index{Smart\+Pointer@{Smart\+Pointer}!is\+Equal@{is\+Equal}}
+\index{is\+Equal@{is\+Equal}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{is\+Equal(\+T $\ast$a\+Ptr)}{isEqual(T *aPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ bool {\bf Smart\+Pointer}$<$ T $>$\+::is\+Equal (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{a\+Ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classSmartPointer_a9c83c3efd621f43d5feda481087570cb}{}\label{classSmartPointer_a9c83c3efd621f43d5feda481087570cb}
+\index{Smart\+Pointer@{Smart\+Pointer}!is\+N\+U\+LL@{is\+N\+U\+LL}}
+\index{is\+N\+U\+LL@{is\+N\+U\+LL}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{is\+N\+U\+L\+L() const }{isNULL() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ bool {\bf Smart\+Pointer}$<$ T $>$\+::is\+N\+U\+LL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_a6ca44009783c589e6fce8f9ede80abeb}{}\label{classSmartPointer_a6ca44009783c589e6fce8f9ede80abeb}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator bool()}{operator bool()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Smart\+Pointer}$<$ T $>$\+::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_ae786c268c7c2529bd452b3659ca05837}{}\label{classSmartPointer_ae786c268c7c2529bd452b3659ca05837}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator T $\ast$@{operator T $\ast$}}
+\index{operator T $\ast$@{operator T $\ast$}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator T $\ast$()}{operator T *()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Smart\+Pointer}$<$ T $>$\+::operator T $\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_a38024dbc38e3cd1cc2a0b4f02087b310}{}\label{classSmartPointer_a38024dbc38e3cd1cc2a0b4f02087b310}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator$\ast$()}{operator*()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T\& {\bf Smart\+Pointer}$<$ T $>$\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_abd4fd046847a9173e73985c17a7b128e}{}\label{classSmartPointer_abd4fd046847a9173e73985c17a7b128e}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator-\/$>$()}{operator->()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T$\ast$ {\bf Smart\+Pointer}$<$ T $>$\+::operator-\/$>$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_ad8cd7e0dee80d34e56611d2973940130}{}\label{classSmartPointer_ad8cd7e0dee80d34e56611d2973940130}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator=@{operator=}}
+\index{operator=@{operator=}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator=(\+T $\ast$a\+Ptr)}{operator=(T *aPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ void {\bf Smart\+Pointer}$<$ T $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{a\+Ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_a4a602d362f4b8670c7751057dfba78a6}{}\label{classSmartPointer_a4a602d362f4b8670c7751057dfba78a6}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator=@{operator=}}
+\index{operator=@{operator=}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator=(\+Smart\+Pointer$<$ T $>$ \&a\+Ptr)}{operator=(SmartPointer< T > &aPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ void {\bf Smart\+Pointer}$<$ T $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Smart\+Pointer}$<$ T $>$ \&}]{a\+Ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_ad68eef06b98859b1fa093f35ebb116a9}{}\label{classSmartPointer_ad68eef06b98859b1fa093f35ebb116a9}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator==@{operator==}}
+\index{operator==@{operator==}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator==(\+T $\ast$a\+Ptr)}{operator==(T *aPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ bool {\bf Smart\+Pointer}$<$ T $>$\+::operator== (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{a\+Ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_a4442e51cefdce95924c4b13783c59602}{}\label{classSmartPointer_a4442e51cefdce95924c4b13783c59602}
+\index{Smart\+Pointer@{Smart\+Pointer}!operator==@{operator==}}
+\index{operator==@{operator==}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{operator==(\+Smart\+Pointer$<$ T $>$ \&a\+Ptr)}{operator==(SmartPointer< T > &aPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ bool {\bf Smart\+Pointer}$<$ T $>$\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Smart\+Pointer}$<$ T $>$ \&}]{a\+Ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSmartPointer_ae1134ad18bd14ac4074148bfaf08c469}{}\label{classSmartPointer_ae1134ad18bd14ac4074148bfaf08c469}
+\index{Smart\+Pointer@{Smart\+Pointer}!Reassign\+Value@{Reassign\+Value}}
+\index{Reassign\+Value@{Reassign\+Value}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{Reassign\+Value(\+T $\ast$a\+Ptr)}{ReassignValue(T *aPtr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ void {\bf Smart\+Pointer}$<$ T $>$\+::Reassign\+Value (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{a\+Ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classSmartPointer_acedbba3ce849fd9d3a70771a6b97adab}{}\label{classSmartPointer_acedbba3ce849fd9d3a70771a6b97adab}
+
+
+\subsection{Member Data Documentation}
+\index{Smart\+Pointer@{Smart\+Pointer}!m\+Pointer@{m\+Pointer}}
+\index{m\+Pointer@{m\+Pointer}!Smart\+Pointer@{Smart\+Pointer}}
+\subsubsection[{\texorpdfstring{m\+Pointer}{mPointer}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T$\ast$ {\bf Smart\+Pointer}$<$ T $>$\+::m\+Pointer\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSmartPointer_a60e9c1027c474fd7275605808e5876d9}{}\label{classSmartPointer_a60e9c1027c474fd7275605808e5876d9}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{SmartPointer_8h}{Smart\+Pointer.\+h}\end{DoxyCompactItemize}

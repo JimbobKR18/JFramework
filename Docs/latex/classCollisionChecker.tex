@@ -1,0 +1,303 @@
+\hypertarget{classCollisionChecker}{}\section{Collision\+Checker Class Reference}
+\label{classCollisionChecker}\index{Collision\+Checker@{Collision\+Checker}}
+
+
+{\ttfamily \#include $<$Collision\+Checker.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \hyperlink{structCollisionPair}{Collision\+Pair} $>$ \hyperlink{classCollisionChecker_a75a7fc27a2c34c60debd7f29bf55cd8e}{Check\+Shape\+Collision} (\hyperlink{structPotentialPair}{Potential\+Pair} const \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em General catch all shape collision caller. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_ac89a35e9658cb6b5aca5a1a7ef33b64a}{Check\+Line\+Collision} (\hyperlink{structLine}{Line} const \&a\+Segment, \hyperlink{classTransform}{Transform} $\ast$a\+Transform, \hyperlink{structShape}{Shape} $\ast$a\+Shape)
+\begin{DoxyCompactList}\small\item\em General catch all line collision caller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classCollisionChecker_acffb7d0c6289f3501963a0d0f916a12d}{Check\+Sphere\+To\+Sphere} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structSphere}{Sphere} to sphere check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_af86ad91c8fc9577ec94b043f25f77926}{Check\+Sphere\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structSphere}{Sphere} to cube check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a3bf445fea8305994d48b952d71531d79}{Check\+Cube\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structCube}{Cube} to cube check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a4d215a94768abed49f79fc828c93d588}{Check\+Triangle\+To\+Sphere} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structTriangle}{Triangle} to sphere check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a671ef87dcaac1fdebfc375eab1bc9f37}{Check\+Triangle\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structTriangle}{Triangle} to \hyperlink{structCube}{Cube} check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a7b1b831b8ca78b3d84ae0431011af1d2}{Check\+Triangle\+To\+Triangle} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structTriangle}{Triangle} to \hyperlink{structTriangle}{Triangle} check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_acefac1aee27cb4bdb27fc1593956e1c2}{Check\+Line\+To\+Sphere} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structLine}{Line} to \hyperlink{structSphere}{Sphere} check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_ac0b570164b6bad0d85413eaeda1943b4}{Check\+Line\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structLine}{Line} to \hyperlink{structCube}{Cube} check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a8eec9b61fc47fa08928a9060b5e3eb13}{Check\+Line\+To\+Triangle} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structLine}{Line} to \hyperlink{structTriangle}{Triangle} check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a47c7a27c3a099cc75c03ac48d6618fab}{Check\+Line\+To\+Line} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structLine}{Line} to \hyperlink{structLine}{Line} check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a377bd5becf8f04d6b66dc0d25c0f898a}{Check\+Line\+To\+Sphere} (\hyperlink{structLine}{Line} const \&a\+Segment, \hyperlink{classTransform}{Transform} $\ast$a\+Sphere, \hyperlink{structShape}{Shape} $\ast$a\+Shape)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structLine}{Line} to sphere check. \end{DoxyCompactList}\item 
+static bool \hyperlink{classCollisionChecker_a8108838f3855f31658bf7508754af9d7}{Check\+Line\+To\+Cube} (\hyperlink{structLine}{Line} const \&a\+Segment, \hyperlink{classTransform}{Transform} $\ast$a\+Cube, \hyperlink{structShape}{Shape} $\ast$a\+Shape)
+\begin{DoxyCompactList}\small\item\em \hyperlink{structLine}{Line} to cube check. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Cube\+To\+Cube@{Check\+Cube\+To\+Cube}}
+\index{Check\+Cube\+To\+Cube@{Check\+Cube\+To\+Cube}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Cube\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CheckCubeToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Cube\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a3bf445fea8305994d48b952d71531d79}{}\label{classCollisionChecker_a3bf445fea8305994d48b952d71531d79}
+
+
+\hyperlink{structCube}{Cube} to cube check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Line\+Collision@{Check\+Line\+Collision}}
+\index{Check\+Line\+Collision@{Check\+Line\+Collision}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Line\+Collision(\+Line const \&a\+Segment, Transform $\ast$a\+Transform, Shape $\ast$a\+Shape)}{CheckLineCollision(Line const &aSegment, Transform *aTransform, Shape *aShape)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Line\+Collision (
+\begin{DoxyParamCaption}
+\item[{{\bf Line} const \&}]{a\+Segment, }
+\item[{{\bf Transform} $\ast$}]{a\+Transform, }
+\item[{{\bf Shape} $\ast$}]{a\+Shape}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCollisionChecker_ac89a35e9658cb6b5aca5a1a7ef33b64a}{}\label{classCollisionChecker_ac89a35e9658cb6b5aca5a1a7ef33b64a}
+
+
+General catch all line collision caller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Segment} & \hyperlink{structLine}{Line} \\
+\hline
+{\em a\+Transform} & Object \hyperlink{classTransform}{Transform} \\
+\hline
+{\em a\+Shape} & \hyperlink{structShape}{Shape} to check collision with \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Line\+To\+Cube@{Check\+Line\+To\+Cube}}
+\index{Check\+Line\+To\+Cube@{Check\+Line\+To\+Cube}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Line\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CheckLineToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Line\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_ac0b570164b6bad0d85413eaeda1943b4}{}\label{classCollisionChecker_ac0b570164b6bad0d85413eaeda1943b4}
+
+
+\hyperlink{structLine}{Line} to \hyperlink{structCube}{Cube} check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if collided 
+\end{DoxyReturn}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Line\+To\+Cube@{Check\+Line\+To\+Cube}}
+\index{Check\+Line\+To\+Cube@{Check\+Line\+To\+Cube}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Line\+To\+Cube(\+Line const \&a\+Segment, Transform $\ast$a\+Cube, Shape $\ast$a\+Shape)}{CheckLineToCube(Line const &aSegment, Transform *aCube, Shape *aShape)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Line\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Line} const \&}]{a\+Segment, }
+\item[{{\bf Transform} $\ast$}]{a\+Cube, }
+\item[{{\bf Shape} $\ast$}]{a\+Shape}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a8108838f3855f31658bf7508754af9d7}{}\label{classCollisionChecker_a8108838f3855f31658bf7508754af9d7}
+
+
+\hyperlink{structLine}{Line} to cube check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Segment} & \hyperlink{structLine}{Line} \\
+\hline
+{\em a\+Sphere} & \hyperlink{structCube}{Cube} transform \\
+\hline
+{\em a\+Shape} & \hyperlink{structCube}{Cube} shape \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Line\+To\+Line@{Check\+Line\+To\+Line}}
+\index{Check\+Line\+To\+Line@{Check\+Line\+To\+Line}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Line\+To\+Line(\+Collision\+Pair \&a\+Pair)}{CheckLineToLine(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Line\+To\+Line (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a47c7a27c3a099cc75c03ac48d6618fab}{}\label{classCollisionChecker_a47c7a27c3a099cc75c03ac48d6618fab}
+
+
+\hyperlink{structLine}{Line} to \hyperlink{structLine}{Line} check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if collided 
+\end{DoxyReturn}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Line\+To\+Sphere@{Check\+Line\+To\+Sphere}}
+\index{Check\+Line\+To\+Sphere@{Check\+Line\+To\+Sphere}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Line\+To\+Sphere(\+Collision\+Pair \&a\+Pair)}{CheckLineToSphere(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Line\+To\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_acefac1aee27cb4bdb27fc1593956e1c2}{}\label{classCollisionChecker_acefac1aee27cb4bdb27fc1593956e1c2}
+
+
+\hyperlink{structLine}{Line} to \hyperlink{structSphere}{Sphere} check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if collided 
+\end{DoxyReturn}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Line\+To\+Sphere@{Check\+Line\+To\+Sphere}}
+\index{Check\+Line\+To\+Sphere@{Check\+Line\+To\+Sphere}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Line\+To\+Sphere(\+Line const \&a\+Segment, Transform $\ast$a\+Sphere, Shape $\ast$a\+Shape)}{CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape *aShape)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Line\+To\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Line} const \&}]{a\+Segment, }
+\item[{{\bf Transform} $\ast$}]{a\+Sphere, }
+\item[{{\bf Shape} $\ast$}]{a\+Shape}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a377bd5becf8f04d6b66dc0d25c0f898a}{}\label{classCollisionChecker_a377bd5becf8f04d6b66dc0d25c0f898a}
+
+
+\hyperlink{structLine}{Line} to sphere check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Segment} & \hyperlink{structLine}{Line} \\
+\hline
+{\em a\+Sphere} & \hyperlink{structSphere}{Sphere} transform \\
+\hline
+{\em a\+Shape} & \hyperlink{structSphere}{Sphere} shape \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Line\+To\+Triangle@{Check\+Line\+To\+Triangle}}
+\index{Check\+Line\+To\+Triangle@{Check\+Line\+To\+Triangle}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Line\+To\+Triangle(\+Collision\+Pair \&a\+Pair)}{CheckLineToTriangle(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Line\+To\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a8eec9b61fc47fa08928a9060b5e3eb13}{}\label{classCollisionChecker_a8eec9b61fc47fa08928a9060b5e3eb13}
+
+
+\hyperlink{structLine}{Line} to \hyperlink{structTriangle}{Triangle} check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if collided 
+\end{DoxyReturn}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Shape\+Collision@{Check\+Shape\+Collision}}
+\index{Check\+Shape\+Collision@{Check\+Shape\+Collision}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Shape\+Collision(\+Potential\+Pair const \&a\+Pair)}{CheckShapeCollision(PotentialPair const &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Collision\+Pair} $>$ Collision\+Checker\+::\+Check\+Shape\+Collision (
+\begin{DoxyParamCaption}
+\item[{{\bf Potential\+Pair} const \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classCollisionChecker_a75a7fc27a2c34c60debd7f29bf55cd8e}{}\label{classCollisionChecker_a75a7fc27a2c34c60debd7f29bf55cd8e}
+
+
+General catch all shape collision caller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Sphere\+To\+Cube@{Check\+Sphere\+To\+Cube}}
+\index{Check\+Sphere\+To\+Cube@{Check\+Sphere\+To\+Cube}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Sphere\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CheckSphereToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Sphere\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_af86ad91c8fc9577ec94b043f25f77926}{}\label{classCollisionChecker_af86ad91c8fc9577ec94b043f25f77926}
+
+
+\hyperlink{structSphere}{Sphere} to cube check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Sphere\+To\+Sphere@{Check\+Sphere\+To\+Sphere}}
+\index{Check\+Sphere\+To\+Sphere@{Check\+Sphere\+To\+Sphere}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Sphere\+To\+Sphere(\+Collision\+Pair \&a\+Pair)}{CheckSphereToSphere(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Sphere\+To\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_acffb7d0c6289f3501963a0d0f916a12d}{}\label{classCollisionChecker_acffb7d0c6289f3501963a0d0f916a12d}
+
+
+\hyperlink{structSphere}{Sphere} to sphere check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Triangle\+To\+Cube@{Check\+Triangle\+To\+Cube}}
+\index{Check\+Triangle\+To\+Cube@{Check\+Triangle\+To\+Cube}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Triangle\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CheckTriangleToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Triangle\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a671ef87dcaac1fdebfc375eab1bc9f37}{}\label{classCollisionChecker_a671ef87dcaac1fdebfc375eab1bc9f37}
+
+
+\hyperlink{structTriangle}{Triangle} to \hyperlink{structCube}{Cube} check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Triangle\+To\+Sphere@{Check\+Triangle\+To\+Sphere}}
+\index{Check\+Triangle\+To\+Sphere@{Check\+Triangle\+To\+Sphere}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Triangle\+To\+Sphere(\+Collision\+Pair \&a\+Pair)}{CheckTriangleToSphere(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Triangle\+To\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a4d215a94768abed49f79fc828c93d588}{}\label{classCollisionChecker_a4d215a94768abed49f79fc828c93d588}
+
+
+\hyperlink{structTriangle}{Triangle} to sphere check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+\index{Collision\+Checker@{Collision\+Checker}!Check\+Triangle\+To\+Triangle@{Check\+Triangle\+To\+Triangle}}
+\index{Check\+Triangle\+To\+Triangle@{Check\+Triangle\+To\+Triangle}!Collision\+Checker@{Collision\+Checker}}
+\subsubsection[{\texorpdfstring{Check\+Triangle\+To\+Triangle(\+Collision\+Pair \&a\+Pair)}{CheckTriangleToTriangle(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\+Checker\+::\+Check\+Triangle\+To\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classCollisionChecker_a7b1b831b8ca78b3d84ae0431011af1d2}{}\label{classCollisionChecker_a7b1b831b8ca78b3d84ae0431011af1d2}
+
+
+\hyperlink{structTriangle}{Triangle} to \hyperlink{structTriangle}{Triangle} check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physics/\hyperlink{CollisionChecker_8h}{Collision\+Checker.\+h}\item 
+Physics/\hyperlink{CollisionChecker_8cpp}{Collision\+Checker.\+cpp}\end{DoxyCompactItemize}

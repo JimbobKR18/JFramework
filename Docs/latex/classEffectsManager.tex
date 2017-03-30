@@ -1,0 +1,206 @@
+\hypertarget{classEffectsManager}{}\section{Effects\+Manager Class Reference}
+\label{classEffectsManager}\index{Effects\+Manager@{Effects\+Manager}}
+
+
+{\ttfamily \#include $<$Effects\+Manager.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classEffect}{Effect} $\ast$ $>$ \hyperlink{classEffectsManager_ab5464241f128db0e6c30d77039f4f9ab}{Effect\+Container}
+\item 
+typedef std\+::vector$<$ \hyperlink{classEffect}{Effect} $\ast$ $>$\+::iterator \hyperlink{classEffectsManager_aca5fdb13fe650580299bec19f6ec6c99}{Effect\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEffectsManager_abc2a88f49c90f47d16a22b6d3b37151b}{Effects\+Manager} ()
+\item 
+\hyperlink{classEffectsManager_ac0832cdc3046c0cbe3253643df5f5b56}{$\sim$\+Effects\+Manager} ()
+\item 
+void \hyperlink{classEffectsManager_adc9f3466f289c48171a3d7a6e22b743b}{Add\+Effect} (\hyperlink{classEffect}{Effect} $\ast$a\+Effect)
+\begin{DoxyCompactList}\small\item\em Add \hyperlink{classEffect}{Effect}. \end{DoxyCompactList}\item 
+void \hyperlink{classEffectsManager_a4335ea58e9793d87a676e9dc585da29b}{Remove\+Effect} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Remove effect, completes effect before deletion. \end{DoxyCompactList}\item 
+void \hyperlink{classEffectsManager_ad1be372f8b9f615033686cbc75d7a07c}{Remove\+Matching\+Effects} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Remove all effects with name, completes effects before deletion. \end{DoxyCompactList}\item 
+void \hyperlink{classEffectsManager_a97968ddb5ff4e580cb56dc7672cc5735}{Remove\+Effects\+For\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove all effects with object, completes effects before deletion. \end{DoxyCompactList}\item 
+\hyperlink{classEffect}{Effect} $\ast$ \hyperlink{classEffectsManager_a1dbbdeef1bb873ee2ac8e6b28ae53020}{Get\+Effect} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Get effect by name. \end{DoxyCompactList}\item 
+bool \hyperlink{classEffectsManager_a3e112de2cfedc049867c72a7e123324c}{Empty} ()
+\begin{DoxyCompactList}\small\item\em Checks if empty. \end{DoxyCompactList}\item 
+void \hyperlink{classEffectsManager_ab747c4f5bc0d311e638842f3832e65d5}{Remove\+Effects} ()
+\begin{DoxyCompactList}\small\item\em Removes all effects, does not complete effects. \end{DoxyCompactList}\item 
+void \hyperlink{classEffectsManager_a1a709e1f5ce50ffea1daeb0564147d37}{Update} (float const a\+DT)
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEffectsManager_ab5464241f128db0e6c30d77039f4f9ab}{Effect\+Container} \hyperlink{classEffectsManager_ad770a9f398b7261149c3ee7dcfbd08b9}{m\+Effects}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Effects\+Manager@{Effects\+Manager}!Effect\+Container@{Effect\+Container}}
+\index{Effect\+Container@{Effect\+Container}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Effect\+Container}{EffectContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Effect}$\ast$$>$ {\bf Effects\+Manager\+::\+Effect\+Container}}\hypertarget{classEffectsManager_ab5464241f128db0e6c30d77039f4f9ab}{}\label{classEffectsManager_ab5464241f128db0e6c30d77039f4f9ab}
+\index{Effects\+Manager@{Effects\+Manager}!Effect\+IT@{Effect\+IT}}
+\index{Effect\+IT@{Effect\+IT}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Effect\+IT}{EffectIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Effect}$\ast$$>$\+::iterator {\bf Effects\+Manager\+::\+Effect\+IT}}\hypertarget{classEffectsManager_aca5fdb13fe650580299bec19f6ec6c99}{}\label{classEffectsManager_aca5fdb13fe650580299bec19f6ec6c99}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Effects\+Manager@{Effects\+Manager}!Effects\+Manager@{Effects\+Manager}}
+\index{Effects\+Manager@{Effects\+Manager}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Effects\+Manager()}{EffectsManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Effects\+Manager\+::\+Effects\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_abc2a88f49c90f47d16a22b6d3b37151b}{}\label{classEffectsManager_abc2a88f49c90f47d16a22b6d3b37151b}
+\index{Effects\+Manager@{Effects\+Manager}!````~Effects\+Manager@{$\sim$\+Effects\+Manager}}
+\index{````~Effects\+Manager@{$\sim$\+Effects\+Manager}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Effects\+Manager()}{~EffectsManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Effects\+Manager\+::$\sim$\+Effects\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_ac0832cdc3046c0cbe3253643df5f5b56}{}\label{classEffectsManager_ac0832cdc3046c0cbe3253643df5f5b56}
+
+
+\subsection{Member Function Documentation}
+\index{Effects\+Manager@{Effects\+Manager}!Add\+Effect@{Add\+Effect}}
+\index{Add\+Effect@{Add\+Effect}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Effect(\+Effect $\ast$a\+Effect)}{AddEffect(Effect *aEffect)}}]{\setlength{\rightskip}{0pt plus 5cm}void Effects\+Manager\+::\+Add\+Effect (
+\begin{DoxyParamCaption}
+\item[{{\bf Effect} $\ast$}]{a\+Effect}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_adc9f3466f289c48171a3d7a6e22b743b}{}\label{classEffectsManager_adc9f3466f289c48171a3d7a6e22b743b}
+
+
+Add \hyperlink{classEffect}{Effect}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Effect} & \hyperlink{classEffect}{Effect} to add \\
+\hline
+\end{DoxyParams}
+\index{Effects\+Manager@{Effects\+Manager}!Empty@{Empty}}
+\index{Empty@{Empty}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Empty()}{Empty()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Effects\+Manager\+::\+Empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_a3e112de2cfedc049867c72a7e123324c}{}\label{classEffectsManager_a3e112de2cfedc049867c72a7e123324c}
+
+
+Checks if empty. 
+
+\begin{DoxyReturn}{Returns}
+True if yes, false if no 
+\end{DoxyReturn}
+\index{Effects\+Manager@{Effects\+Manager}!Get\+Effect@{Get\+Effect}}
+\index{Get\+Effect@{Get\+Effect}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Effect(\+Hash\+String const \&a\+Name)}{GetEffect(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Effect} $\ast$ Effects\+Manager\+::\+Get\+Effect (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_a1dbbdeef1bb873ee2ac8e6b28ae53020}{}\label{classEffectsManager_a1dbbdeef1bb873ee2ac8e6b28ae53020}
+
+
+Get effect by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of effect to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classEffect}{Effect} if found, nullptr otherwise 
+\end{DoxyReturn}
+\index{Effects\+Manager@{Effects\+Manager}!Remove\+Effect@{Remove\+Effect}}
+\index{Remove\+Effect@{Remove\+Effect}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Effect(\+Hash\+String const \&a\+Name)}{RemoveEffect(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Effects\+Manager\+::\+Remove\+Effect (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_a4335ea58e9793d87a676e9dc585da29b}{}\label{classEffectsManager_a4335ea58e9793d87a676e9dc585da29b}
+
+
+Remove effect, completes effect before deletion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of effect to delete \\
+\hline
+\end{DoxyParams}
+\index{Effects\+Manager@{Effects\+Manager}!Remove\+Effects@{Remove\+Effects}}
+\index{Remove\+Effects@{Remove\+Effects}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Effects()}{RemoveEffects()}}]{\setlength{\rightskip}{0pt plus 5cm}void Effects\+Manager\+::\+Remove\+Effects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_ab747c4f5bc0d311e638842f3832e65d5}{}\label{classEffectsManager_ab747c4f5bc0d311e638842f3832e65d5}
+
+
+Removes all effects, does not complete effects. 
+
+\index{Effects\+Manager@{Effects\+Manager}!Remove\+Effects\+For\+Object@{Remove\+Effects\+For\+Object}}
+\index{Remove\+Effects\+For\+Object@{Remove\+Effects\+For\+Object}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Effects\+For\+Object(\+Game\+Object $\ast$a\+Object)}{RemoveEffectsForObject(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Effects\+Manager\+::\+Remove\+Effects\+For\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_a97968ddb5ff4e580cb56dc7672cc5735}{}\label{classEffectsManager_a97968ddb5ff4e580cb56dc7672cc5735}
+
+
+Remove all effects with object, completes effects before deletion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to remove \\
+\hline
+\end{DoxyParams}
+\index{Effects\+Manager@{Effects\+Manager}!Remove\+Matching\+Effects@{Remove\+Matching\+Effects}}
+\index{Remove\+Matching\+Effects@{Remove\+Matching\+Effects}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Matching\+Effects(\+Hash\+String const \&a\+Name)}{RemoveMatchingEffects(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Effects\+Manager\+::\+Remove\+Matching\+Effects (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_ad1be372f8b9f615033686cbc75d7a07c}{}\label{classEffectsManager_ad1be372f8b9f615033686cbc75d7a07c}
+
+
+Remove all effects with name, completes effects before deletion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name to remove \\
+\hline
+\end{DoxyParams}
+\index{Effects\+Manager@{Effects\+Manager}!Update@{Update}}
+\index{Update@{Update}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{Update(float const a\+D\+T)}{Update(float const aDT)}}]{\setlength{\rightskip}{0pt plus 5cm}void Effects\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+DT}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffectsManager_a1a709e1f5ce50ffea1daeb0564147d37}{}\label{classEffectsManager_a1a709e1f5ce50ffea1daeb0564147d37}
+
+
+Update loop. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+DT} & Time passage, in seconds. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Effects\+Manager@{Effects\+Manager}!m\+Effects@{m\+Effects}}
+\index{m\+Effects@{m\+Effects}!Effects\+Manager@{Effects\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Effects}{mEffects}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Effect\+Container} Effects\+Manager\+::m\+Effects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classEffectsManager_ad770a9f398b7261149c3ee7dcfbd08b9}{}\label{classEffectsManager_ad770a9f398b7261149c3ee7dcfbd08b9}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\+Effects/\hyperlink{EffectsManager_8h}{Effects\+Manager.\+h}\item 
+Logic/\+Effects/\hyperlink{EffectsManager_8cpp}{Effects\+Manager.\+cpp}\end{DoxyCompactItemize}

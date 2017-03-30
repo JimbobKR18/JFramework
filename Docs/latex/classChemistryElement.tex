@@ -1,0 +1,418 @@
+\hypertarget{classChemistryElement}{}\section{Chemistry\+Element Class Reference}
+\label{classChemistryElement}\index{Chemistry\+Element@{Chemistry\+Element}}
+
+
+{\ttfamily \#include $<$Chemistry\+Element.\+h$>$}
+
+
+
+Inheritance diagram for Chemistry\+Element\+:
+% FIG 0
+
+
+Collaboration diagram for Chemistry\+Element\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classChemistryElement_acffde8c7c4a58291da337482ecaee9b2}{Chemistry\+Element} (\hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$a\+Manager)
+\item 
+virtual \hyperlink{classChemistryElement_a5ab42d67c3fa09fcc0afb38e0cfc3b09}{$\sim$\+Chemistry\+Element} ()
+\item 
+\hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$ \hyperlink{classChemistryElement_a9735b1678d85c2ef70ba2f37d4ba4372}{Get\+Manager} () const 
+\item 
+\hyperlink{classHashString}{Hash\+String} const \hyperlink{classChemistryElement_a9f37057282d657de961006e93a1c45b2}{Get\+Name} () const 
+\item 
+float const \hyperlink{classChemistryElement_ada597bb0ff0df1d9f8e32b0da58eb910}{Get\+Temperature} () const 
+\item 
+float const \hyperlink{classChemistryElement_a6f83315c7bb37feb9456fca43c5ef32d}{Get\+Wattage} () const 
+\item 
+float const \hyperlink{classChemistryElement_ad5e4ba4665172ad742d8fe33b24f7bf9}{Get\+Scale} () const 
+\item 
+float const \hyperlink{classChemistryElement_a671cd2e83d5c315efb52928c4ba0faf8}{Get\+Falloff} () const 
+\item 
+\hyperlink{structVector3}{Vector3} const \& \hyperlink{classChemistryElement_aadf0e4a8827c0e125a99690d002ff233}{Get\+Directionality} () const 
+\item 
+void \hyperlink{classChemistryElement_ac87f1ffccc3b68f3e61dace72cd4d839}{Set\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Set name of element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryElement_ac2a55f91d14f07a86ee10f6aaa8802ed}{Set\+Temperature} (float const a\+Temperature)
+\begin{DoxyCompactList}\small\item\em Set temperature of element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryElement_a90356bbc254d51e80e79c2ceb19ccf9a}{Set\+Wattage} (float const a\+Wattage)
+\begin{DoxyCompactList}\small\item\em Set wattage of element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryElement_a7bdc6818f12b9eed6c6d14bc2afa32b6}{Set\+Scale} (float const a\+Scale)
+\begin{DoxyCompactList}\small\item\em Set scale of element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryElement_a99fe699e20a6ea8a0560331ee399cc38}{Set\+Falloff} (float const a\+Falloff)
+\begin{DoxyCompactList}\small\item\em Set falloff of element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryElement_a1611a832f8a4a8e0eee05f07b632733d}{Set\+Directionality} (\hyperlink{structVector3}{Vector3} const \&a\+Directionality)
+\begin{DoxyCompactList}\small\item\em Set direction of element. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryElement_abc0f9525c2f510d61a930fbd7f27ee78}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryElement_ac16ea591ab9d999ae6bc5a9eb6599d5b}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to upper levels. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryElement_ab01661c92d69ef48b0f427ebc2cc15b8}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive message from above. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryElement_ab1f83928a5f589f0c5a8bdf0848c07cc}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize out. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryElement_a963adac4f720d945ec6a291bfaa81063}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Deserialize from parser into memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classChemistryElement_ac602fb84adabb34a1fa60456fb613933}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Serialize to L\+UA. \end{DoxyCompactList}\item 
+static int \hyperlink{classChemistryElement_a90f3faa259f360ba7f212568beef5252}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$ \hyperlink{classChemistryElement_a23129c36147a33abd7b94434779a6070}{m\+Manager}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classChemistryElement_a3d018852077a9766f570a35ea75a9e4d}{m\+Name}
+\item 
+float \hyperlink{classChemistryElement_a58ff6a2c91ca13c8b292bc92d17e94de}{m\+Temperature}
+\item 
+float \hyperlink{classChemistryElement_a757b99b78a73b23791e38116f2a3cd63}{m\+Wattage}
+\item 
+float \hyperlink{classChemistryElement_aca5017ca80f67f03cc4c38fcb67ec7c2}{m\+Scale}
+\item 
+float \hyperlink{classChemistryElement_a58062047b4f67d1c0d5d19242eff8b74}{m\+Falloff}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classChemistryElement_af7fec5dfed635def09aa9a6a9c432a68}{m\+Directionality}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classChemistryElement_a04615f0f3456f82863c710360bdd8ea1}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Chemistry\+Element\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Chemistry\+Element@{Chemistry\+Element}!Chemistry\+Element@{Chemistry\+Element}}
+\index{Chemistry\+Element@{Chemistry\+Element}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Chemistry\+Element(\+Chemistry\+Manager $\ast$a\+Manager)}{ChemistryElement(ChemistryManager *aManager)}}]{\setlength{\rightskip}{0pt plus 5cm}Chemistry\+Element\+::\+Chemistry\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Manager} $\ast$}]{a\+Manager}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryElement_acffde8c7c4a58291da337482ecaee9b2}{}\label{classChemistryElement_acffde8c7c4a58291da337482ecaee9b2}
+\index{Chemistry\+Element@{Chemistry\+Element}!````~Chemistry\+Element@{$\sim$\+Chemistry\+Element}}
+\index{````~Chemistry\+Element@{$\sim$\+Chemistry\+Element}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{$\sim$\+Chemistry\+Element()}{~ChemistryElement()}}]{\setlength{\rightskip}{0pt plus 5cm}Chemistry\+Element\+::$\sim$\+Chemistry\+Element (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryElement_a5ab42d67c3fa09fcc0afb38e0cfc3b09}{}\label{classChemistryElement_a5ab42d67c3fa09fcc0afb38e0cfc3b09}
+
+
+\subsection{Member Function Documentation}
+\index{Chemistry\+Element@{Chemistry\+Element}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)}{Deserialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryElement_a963adac4f720d945ec6a291bfaa81063}{}\label{classChemistryElement_a963adac4f720d945ec6a291bfaa81063}
+
+
+Deserialize from parser into memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to gather data from. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Component}.
+
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+Directionality@{Get\+Directionality}}
+\index{Get\+Directionality@{Get\+Directionality}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Directionality() const }{GetDirectionality() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} const \& Chemistry\+Element\+::\+Get\+Directionality (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryElement_aadf0e4a8827c0e125a99690d002ff233}{}\label{classChemistryElement_aadf0e4a8827c0e125a99690d002ff233}
+\begin{DoxyReturn}{Returns}
+Direction of element. 
+\end{DoxyReturn}
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+Falloff@{Get\+Falloff}}
+\index{Get\+Falloff@{Get\+Falloff}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Falloff() const }{GetFalloff() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Element\+::\+Get\+Falloff (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryElement_a671cd2e83d5c315efb52928c4ba0faf8}{}\label{classChemistryElement_a671cd2e83d5c315efb52928c4ba0faf8}
+\begin{DoxyReturn}{Returns}
+Falloff rate of effect. 
+\end{DoxyReturn}
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+Manager@{Get\+Manager}}
+\index{Get\+Manager@{Get\+Manager}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Manager() const }{GetManager() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemistry\+Manager} $\ast$ Chemistry\+Element\+::\+Get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryElement_a9735b1678d85c2ef70ba2f37d4ba4372}{}\label{classChemistryElement_a9735b1678d85c2ef70ba2f37d4ba4372}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classManager}{Manager} 
+\end{DoxyReturn}
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const Chemistry\+Element\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryElement_a9f37057282d657de961006e93a1c45b2}{}\label{classChemistryElement_a9f37057282d657de961006e93a1c45b2}
+\begin{DoxyReturn}{Returns}
+Name 
+\end{DoxyReturn}
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+Scale@{Get\+Scale}}
+\index{Get\+Scale@{Get\+Scale}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Scale() const }{GetScale() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Element\+::\+Get\+Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryElement_ad5e4ba4665172ad742d8fe33b24f7bf9}{}\label{classChemistryElement_ad5e4ba4665172ad742d8fe33b24f7bf9}
+\begin{DoxyReturn}{Returns}
+Scaling. 
+\end{DoxyReturn}
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+Temperature@{Get\+Temperature}}
+\index{Get\+Temperature@{Get\+Temperature}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Temperature() const }{GetTemperature() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Element\+::\+Get\+Temperature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryElement_ada597bb0ff0df1d9f8e32b0da58eb910}{}\label{classChemistryElement_ada597bb0ff0df1d9f8e32b0da58eb910}
+\begin{DoxyReturn}{Returns}
+Temperature. 
+\end{DoxyReturn}
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int Chemistry\+Element\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classChemistryElement_a90f3faa259f360ba7f212568beef5252}{}\label{classChemistryElement_a90f3faa259f360ba7f212568beef5252}
+\index{Chemistry\+Element@{Chemistry\+Element}!Get\+Wattage@{Get\+Wattage}}
+\index{Get\+Wattage@{Get\+Wattage}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Wattage() const }{GetWattage() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Element\+::\+Get\+Wattage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryElement_a6f83315c7bb37feb9456fca43c5ef32d}{}\label{classChemistryElement_a6f83315c7bb37feb9456fca43c5ef32d}
+\begin{DoxyReturn}{Returns}
+Wattage. 
+\end{DoxyReturn}
+\index{Chemistry\+Element@{Chemistry\+Element}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryElement_ab01661c92d69ef48b0f427ebc2cc15b8}{}\label{classChemistryElement_ab01661c92d69ef48b0f427ebc2cc15b8}
+
+
+Receive message from above. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to receive. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Component}.
+
+\index{Chemistry\+Element@{Chemistry\+Element}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryElement_ac16ea591ab9d999ae6bc5a9eb6599d5b}{}\label{classChemistryElement_ac16ea591ab9d999ae6bc5a9eb6599d5b}
+
+
+Send message to upper levels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Component}.
+
+\index{Chemistry\+Element@{Chemistry\+Element}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryElement_ab1f83928a5f589f0c5a8bdf0848c07cc}{}\label{classChemistryElement_ab1f83928a5f589f0c5a8bdf0848c07cc}
+
+
+Serialize out. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to write to. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Component}.
+
+\index{Chemistry\+Element@{Chemistry\+Element}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classChemistryElement_ac602fb84adabb34a1fa60456fb613933}{}\label{classChemistryElement_ac602fb84adabb34a1fa60456fb613933}
+
+
+Serialize to L\+UA. 
+
+\index{Chemistry\+Element@{Chemistry\+Element}!Set\+Directionality@{Set\+Directionality}}
+\index{Set\+Directionality@{Set\+Directionality}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Set\+Directionality(\+Vector3 const \&a\+Directionality)}{SetDirectionality(Vector3 const &aDirectionality)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Set\+Directionality (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Directionality}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryElement_a1611a832f8a4a8e0eee05f07b632733d}{}\label{classChemistryElement_a1611a832f8a4a8e0eee05f07b632733d}
+
+
+Set direction of element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Directionality} & Direction. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Element@{Chemistry\+Element}!Set\+Falloff@{Set\+Falloff}}
+\index{Set\+Falloff@{Set\+Falloff}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Set\+Falloff(float const a\+Falloff)}{SetFalloff(float const aFalloff)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Set\+Falloff (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Falloff}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryElement_a99fe699e20a6ea8a0560331ee399cc38}{}\label{classChemistryElement_a99fe699e20a6ea8a0560331ee399cc38}
+
+
+Set falloff of element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Falloff} & Falloff. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Element@{Chemistry\+Element}!Set\+Name@{Set\+Name}}
+\index{Set\+Name@{Set\+Name}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Set\+Name(\+Hash\+String const \&a\+Name)}{SetName(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Set\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryElement_ac87f1ffccc3b68f3e61dace72cd4d839}{}\label{classChemistryElement_ac87f1ffccc3b68f3e61dace72cd4d839}
+
+
+Set name of element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Element@{Chemistry\+Element}!Set\+Scale@{Set\+Scale}}
+\index{Set\+Scale@{Set\+Scale}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Set\+Scale(float const a\+Scale)}{SetScale(float const aScale)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Set\+Scale (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Scale}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryElement_a7bdc6818f12b9eed6c6d14bc2afa32b6}{}\label{classChemistryElement_a7bdc6818f12b9eed6c6d14bc2afa32b6}
+
+
+Set scale of element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Scale} & Scale. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Element@{Chemistry\+Element}!Set\+Temperature@{Set\+Temperature}}
+\index{Set\+Temperature@{Set\+Temperature}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Set\+Temperature(float const a\+Temperature)}{SetTemperature(float const aTemperature)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Set\+Temperature (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Temperature}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryElement_ac2a55f91d14f07a86ee10f6aaa8802ed}{}\label{classChemistryElement_ac2a55f91d14f07a86ee10f6aaa8802ed}
+
+
+Set temperature of element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Temperature} & Temperature. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Element@{Chemistry\+Element}!Set\+Wattage@{Set\+Wattage}}
+\index{Set\+Wattage@{Set\+Wattage}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Set\+Wattage(float const a\+Wattage)}{SetWattage(float const aWattage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Set\+Wattage (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Wattage}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryElement_a90356bbc254d51e80e79c2ceb19ccf9a}{}\label{classChemistryElement_a90356bbc254d51e80e79c2ceb19ccf9a}
+
+
+Set wattage of element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Wattage} & Wattage. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Element@{Chemistry\+Element}!Update@{Update}}
+\index{Update@{Update}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Element\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryElement_abc0f9525c2f510d61a930fbd7f27ee78}{}\label{classChemistryElement_abc0f9525c2f510d61a930fbd7f27ee78}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Component}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Chemistry\+Element@{Chemistry\+Element}!m\+Directionality@{m\+Directionality}}
+\index{m\+Directionality@{m\+Directionality}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{m\+Directionality}{mDirectionality}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Chemistry\+Element\+::m\+Directionality\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryElement_af7fec5dfed635def09aa9a6a9c432a68}{}\label{classChemistryElement_af7fec5dfed635def09aa9a6a9c432a68}
+\index{Chemistry\+Element@{Chemistry\+Element}!m\+Falloff@{m\+Falloff}}
+\index{m\+Falloff@{m\+Falloff}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{m\+Falloff}{mFalloff}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Element\+::m\+Falloff\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryElement_a58062047b4f67d1c0d5d19242eff8b74}{}\label{classChemistryElement_a58062047b4f67d1c0d5d19242eff8b74}
+\index{Chemistry\+Element@{Chemistry\+Element}!m\+Manager@{m\+Manager}}
+\index{m\+Manager@{m\+Manager}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{m\+Manager}{mManager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemistry\+Manager}$\ast$ Chemistry\+Element\+::m\+Manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryElement_a23129c36147a33abd7b94434779a6070}{}\label{classChemistryElement_a23129c36147a33abd7b94434779a6070}
+\index{Chemistry\+Element@{Chemistry\+Element}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Chemistry\+Element\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryElement_a3d018852077a9766f570a35ea75a9e4d}{}\label{classChemistryElement_a3d018852077a9766f570a35ea75a9e4d}
+\index{Chemistry\+Element@{Chemistry\+Element}!m\+Scale@{m\+Scale}}
+\index{m\+Scale@{m\+Scale}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{m\+Scale}{mScale}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Element\+::m\+Scale\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryElement_aca5017ca80f67f03cc4c38fcb67ec7c2}{}\label{classChemistryElement_aca5017ca80f67f03cc4c38fcb67ec7c2}
+\index{Chemistry\+Element@{Chemistry\+Element}!m\+Temperature@{m\+Temperature}}
+\index{m\+Temperature@{m\+Temperature}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{m\+Temperature}{mTemperature}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Element\+::m\+Temperature\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryElement_a58ff6a2c91ca13c8b292bc92d17e94de}{}\label{classChemistryElement_a58ff6a2c91ca13c8b292bc92d17e94de}
+\index{Chemistry\+Element@{Chemistry\+Element}!m\+Wattage@{m\+Wattage}}
+\index{m\+Wattage@{m\+Wattage}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{m\+Wattage}{mWattage}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Element\+::m\+Wattage\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryElement_a757b99b78a73b23791e38116f2a3cd63}{}\label{classChemistryElement_a757b99b78a73b23791e38116f2a3cd63}
+\index{Chemistry\+Element@{Chemistry\+Element}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Chemistry\+Element@{Chemistry\+Element}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const Chemistry\+Element\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Chemistry\+Element\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classChemistryElement_a04615f0f3456f82863c710360bdd8ea1}{}\label{classChemistryElement_a04615f0f3456f82863c710360bdd8ea1}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Components/\hyperlink{ChemistryElement_8h}{Chemistry\+Element.\+h}\item 
+Components/\hyperlink{ChemistryElement_8cpp}{Chemistry\+Element.\+cpp}\end{DoxyCompactItemize}

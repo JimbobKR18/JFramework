@@ -1,0 +1,35 @@
+digraph "SLB::Class&lt; T, W &gt;"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="SLB::Class\< T, W \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="SLB::ClassBase",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSLB_1_1ClassBase.html"];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _class" ,fontname="Helvetica"];
+  Node3 [label="SLB::ClassInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ClassInfo.html"];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="SLB::Namespace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Namespace.html"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="SLB::Table",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Table.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="SLB::Object",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Object.html"];
+  Node7 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" __TIW" ,fontname="Helvetica"];
+  Node7 [label="SLB::TypeInfoWrapper",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1TypeInfoWrapper.html"];
+  Node8 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _manager" ,fontname="Helvetica"];
+  Node8 [label="SLB::Manager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Manager.html"];
+  Node9 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _global" ,fontname="Helvetica"];
+  Node9 [label="SLB::ref_ptr\< SLB::\lNamespace \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ref__ptr.html"];
+  Node4 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _ptr" ,fontname="Helvetica"];
+  Node8 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _default" ,fontname="Helvetica"];
+  Node10 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _meta__index\n_meta__newindex\n_meta__eq\n_constructor" ,fontname="Helvetica"];
+  Node10 [label="SLB::ref_ptr\< SLB::\lFuncCall \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ref__ptr.html"];
+  Node11 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _ptr" ,fontname="Helvetica"];
+  Node11 [label="SLB::FuncCall",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1FuncCall.html"];
+  Node6 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _Treturn" ,fontname="Helvetica"];
+  Node12 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _instanceFactory" ,fontname="Helvetica"];
+  Node12 [label="SLB::InstanceFactory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSLB_1_1InstanceFactory.html"];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _mgr" ,fontname="Helvetica"];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _lastObj" ,fontname="Helvetica"];
+}

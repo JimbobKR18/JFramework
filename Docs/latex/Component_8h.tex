@@ -1,0 +1,35 @@
+\hypertarget{Component_8h}{}\section{Core/\+Component.h File Reference}
+\label{Component_8h}\index{Core/\+Component.\+h@{Core/\+Component.\+h}}
+{\ttfamily \#include \char`\"{}Game\+Object.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Message.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Parser.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+Include dependency graph for Component.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classComponent}{Component}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Component_8h_aa9400565649090d027b1bb52ab2b7ef1}{O\+W\+N\+E\+R\+\_\+\+C\+H\+E\+CK}()~if(m\+Owner \&\& a\+Owner != nullptr) assert(!\char`\"{}This component already has an owner.\char`\"{})
+\item 
+\#define \hyperlink{Component_8h_ac8a0a482aed8768ba11be2360df09d11}{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+U\+ID}~0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Component.\+h@{Component.\+h}!D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+U\+ID@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+U\+ID}}
+\index{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+U\+ID@{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+U\+ID}!Component.\+h@{Component.\+h}}
+\subsubsection[{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+U\+ID}{DEFAULT_COMPONENT_UID}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+F\+A\+U\+L\+T\+\_\+\+C\+O\+M\+P\+O\+N\+E\+N\+T\+\_\+\+U\+ID~0}\hypertarget{Component_8h_ac8a0a482aed8768ba11be2360df09d11}{}\label{Component_8h_ac8a0a482aed8768ba11be2360df09d11}
+\index{Component.\+h@{Component.\+h}!O\+W\+N\+E\+R\+\_\+\+C\+H\+E\+CK@{O\+W\+N\+E\+R\+\_\+\+C\+H\+E\+CK}}
+\index{O\+W\+N\+E\+R\+\_\+\+C\+H\+E\+CK@{O\+W\+N\+E\+R\+\_\+\+C\+H\+E\+CK}!Component.\+h@{Component.\+h}}
+\subsubsection[{\texorpdfstring{O\+W\+N\+E\+R\+\_\+\+C\+H\+E\+CK}{OWNER_CHECK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+W\+N\+E\+R\+\_\+\+C\+H\+E\+CK(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~if(m\+Owner \&\& a\+Owner != nullptr) assert(!\char`\"{}This component already has an owner.\char`\"{})}\hypertarget{Component_8h_aa9400565649090d027b1bb52ab2b7ef1}{}\label{Component_8h_aa9400565649090d027b1bb52ab2b7ef1}

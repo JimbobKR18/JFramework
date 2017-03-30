@@ -1,0 +1,170 @@
+\hypertarget{classCollisionMessage}{}\section{Collision\+Message Class Reference}
+\label{classCollisionMessage}\index{Collision\+Message@{Collision\+Message}}
+
+
+{\ttfamily \#include $<$Collision\+Message.\+h$>$}
+
+
+
+Inheritance diagram for Collision\+Message\+:
+% FIG 0
+
+
+Collaboration diagram for Collision\+Message\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCollisionMessage_abfa0423a36d516fbf86872e87f17c20b}{Collision\+Message} ()
+\item 
+\hyperlink{classCollisionMessage_a6ecc2bf03b275172789f819a9c98bd25}{Collision\+Message} (\hyperlink{classCollisionMessage}{Collision\+Message} const \&a\+Message)
+\item 
+\hyperlink{classCollisionMessage_aa8a20391e57b0b3af0ba2b48ca329e74}{Collision\+Message} (\hyperlink{classHashString}{Hash\+String} const \&a\+Content, \hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object1, \hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object2, \hyperlink{structShape}{Shape} $\ast$a\+Shape1, \hyperlink{structShape}{Shape} $\ast$a\+Shape2, \hyperlink{structVector3}{Vector3} const \&a\+Normal, \hyperlink{structVector3}{Vector3} const \&a\+Relative\+Velocity, float const a\+Penetration)
+\item 
+virtual \hyperlink{classCollisionMessage_a47fb43ae308de8eba656568be0fbccc8}{$\sim$\+Collision\+Message} ()
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classCollisionMessage_a3a075d325c46a2b6769484511be0a95f}{Get\+Object} (int index) const 
+\item 
+\hyperlink{structShape}{Shape} $\ast$ \hyperlink{classCollisionMessage_a711eead88191d927d001c83121e9c4d9}{Get\+Shape} (int index) const 
+\item 
+\hyperlink{structVector3}{Vector3} const \& \hyperlink{classCollisionMessage_a58f0aaad60a94261e991550416e5a639}{Get\+Normal} () const 
+\item 
+\hyperlink{structVector3}{Vector3} const \& \hyperlink{classCollisionMessage_a50edffb94a926dee9e67faf2a014fd72}{Get\+Relative\+Velocity} () const 
+\item 
+float const \hyperlink{classCollisionMessage_a926e4ee177a0ea2b897bef005a40e91b}{Get\+Penetration} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classCollisionMessage_a788f95d84bbd1cd56100b98ec452a9a8}{Serialize\+L\+UA} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classCollisionMessage_af022490e09dc84e9a03291d23f97c6c0}{m\+Object1}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classCollisionMessage_a86e0b0e8033d5826979af9a44006500f}{m\+Object2}
+\item 
+\hyperlink{structShape}{Shape} $\ast$ \hyperlink{classCollisionMessage_ab5cd196f62b1e8931e02190f1548965a}{m\+Shape1}
+\item 
+\hyperlink{structShape}{Shape} $\ast$ \hyperlink{classCollisionMessage_add423f7b16d07fe364a5bb0198276264}{m\+Shape2}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classCollisionMessage_ab4c66faa8cba67ac834c9a17aa8cbf37}{m\+Normal}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classCollisionMessage_a382a90fbeb1efa6b78c040b6f6eead27}{m\+Relative\+Velocity}
+\item 
+float \hyperlink{classCollisionMessage_a20771768b31377e76a3f05594abf5593}{m\+Penetration}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Collision\+Message@{Collision\+Message}!Collision\+Message@{Collision\+Message}}
+\index{Collision\+Message@{Collision\+Message}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Collision\+Message()}{CollisionMessage()}}]{\setlength{\rightskip}{0pt plus 5cm}Collision\+Message\+::\+Collision\+Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_abfa0423a36d516fbf86872e87f17c20b}{}\label{classCollisionMessage_abfa0423a36d516fbf86872e87f17c20b}
+\index{Collision\+Message@{Collision\+Message}!Collision\+Message@{Collision\+Message}}
+\index{Collision\+Message@{Collision\+Message}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Collision\+Message(\+Collision\+Message const \&a\+Message)}{CollisionMessage(CollisionMessage const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}Collision\+Message\+::\+Collision\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_a6ecc2bf03b275172789f819a9c98bd25}{}\label{classCollisionMessage_a6ecc2bf03b275172789f819a9c98bd25}
+\index{Collision\+Message@{Collision\+Message}!Collision\+Message@{Collision\+Message}}
+\index{Collision\+Message@{Collision\+Message}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Collision\+Message(\+Hash\+String const \&a\+Content, Game\+Object $\ast$a\+Object1, Game\+Object $\ast$a\+Object2, Shape $\ast$a\+Shape1, Shape $\ast$a\+Shape2, Vector3 const \&a\+Normal, Vector3 const \&a\+Relative\+Velocity, float const a\+Penetration)}{CollisionMessage(HashString const &aContent, GameObject *aObject1, GameObject *aObject2, Shape *aShape1, Shape *aShape2, Vector3 const &aNormal, Vector3 const &aRelativeVelocity, float const aPenetration)}}]{\setlength{\rightskip}{0pt plus 5cm}Collision\+Message\+::\+Collision\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Content, }
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object1, }
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object2, }
+\item[{{\bf Shape} $\ast$}]{a\+Shape1, }
+\item[{{\bf Shape} $\ast$}]{a\+Shape2, }
+\item[{{\bf Vector3} const \&}]{a\+Normal, }
+\item[{{\bf Vector3} const \&}]{a\+Relative\+Velocity, }
+\item[{float const}]{a\+Penetration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_aa8a20391e57b0b3af0ba2b48ca329e74}{}\label{classCollisionMessage_aa8a20391e57b0b3af0ba2b48ca329e74}
+\index{Collision\+Message@{Collision\+Message}!````~Collision\+Message@{$\sim$\+Collision\+Message}}
+\index{````~Collision\+Message@{$\sim$\+Collision\+Message}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{$\sim$\+Collision\+Message()}{~CollisionMessage()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Collision\+Message\+::$\sim$\+Collision\+Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classCollisionMessage_a47fb43ae308de8eba656568be0fbccc8}{}\label{classCollisionMessage_a47fb43ae308de8eba656568be0fbccc8}
+
+
+\subsection{Member Function Documentation}
+\index{Collision\+Message@{Collision\+Message}!Get\+Normal@{Get\+Normal}}
+\index{Get\+Normal@{Get\+Normal}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Get\+Normal() const }{GetNormal() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} const\& Collision\+Message\+::\+Get\+Normal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_a58f0aaad60a94261e991550416e5a639}{}\label{classCollisionMessage_a58f0aaad60a94261e991550416e5a639}
+\index{Collision\+Message@{Collision\+Message}!Get\+Object@{Get\+Object}}
+\index{Get\+Object@{Get\+Object}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Get\+Object(int index) const }{GetObject(int index) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Collision\+Message\+::\+Get\+Object (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_a3a075d325c46a2b6769484511be0a95f}{}\label{classCollisionMessage_a3a075d325c46a2b6769484511be0a95f}
+\index{Collision\+Message@{Collision\+Message}!Get\+Penetration@{Get\+Penetration}}
+\index{Get\+Penetration@{Get\+Penetration}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Get\+Penetration() const }{GetPenetration() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Collision\+Message\+::\+Get\+Penetration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_a926e4ee177a0ea2b897bef005a40e91b}{}\label{classCollisionMessage_a926e4ee177a0ea2b897bef005a40e91b}
+\index{Collision\+Message@{Collision\+Message}!Get\+Relative\+Velocity@{Get\+Relative\+Velocity}}
+\index{Get\+Relative\+Velocity@{Get\+Relative\+Velocity}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Get\+Relative\+Velocity() const }{GetRelativeVelocity() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} const\& Collision\+Message\+::\+Get\+Relative\+Velocity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_a50edffb94a926dee9e67faf2a014fd72}{}\label{classCollisionMessage_a50edffb94a926dee9e67faf2a014fd72}
+\index{Collision\+Message@{Collision\+Message}!Get\+Shape@{Get\+Shape}}
+\index{Get\+Shape@{Get\+Shape}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Get\+Shape(int index) const }{GetShape(int index) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shape}$\ast$ Collision\+Message\+::\+Get\+Shape (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classCollisionMessage_a711eead88191d927d001c83121e9c4d9}{}\label{classCollisionMessage_a711eead88191d927d001c83121e9c4d9}
+\index{Collision\+Message@{Collision\+Message}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}static void Collision\+Message\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classCollisionMessage_a788f95d84bbd1cd56100b98ec452a9a8}{}\label{classCollisionMessage_a788f95d84bbd1cd56100b98ec452a9a8}
+
+
+\subsection{Member Data Documentation}
+\index{Collision\+Message@{Collision\+Message}!m\+Normal@{m\+Normal}}
+\index{m\+Normal@{m\+Normal}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{m\+Normal}{mNormal}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Collision\+Message\+::m\+Normal\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionMessage_ab4c66faa8cba67ac834c9a17aa8cbf37}{}\label{classCollisionMessage_ab4c66faa8cba67ac834c9a17aa8cbf37}
+\index{Collision\+Message@{Collision\+Message}!m\+Object1@{m\+Object1}}
+\index{m\+Object1@{m\+Object1}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{m\+Object1}{mObject1}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Collision\+Message\+::m\+Object1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionMessage_af022490e09dc84e9a03291d23f97c6c0}{}\label{classCollisionMessage_af022490e09dc84e9a03291d23f97c6c0}
+\index{Collision\+Message@{Collision\+Message}!m\+Object2@{m\+Object2}}
+\index{m\+Object2@{m\+Object2}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{m\+Object2}{mObject2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Collision\+Message\+::m\+Object2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionMessage_a86e0b0e8033d5826979af9a44006500f}{}\label{classCollisionMessage_a86e0b0e8033d5826979af9a44006500f}
+\index{Collision\+Message@{Collision\+Message}!m\+Penetration@{m\+Penetration}}
+\index{m\+Penetration@{m\+Penetration}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{m\+Penetration}{mPenetration}}]{\setlength{\rightskip}{0pt plus 5cm}float Collision\+Message\+::m\+Penetration\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionMessage_a20771768b31377e76a3f05594abf5593}{}\label{classCollisionMessage_a20771768b31377e76a3f05594abf5593}
+\index{Collision\+Message@{Collision\+Message}!m\+Relative\+Velocity@{m\+Relative\+Velocity}}
+\index{m\+Relative\+Velocity@{m\+Relative\+Velocity}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{m\+Relative\+Velocity}{mRelativeVelocity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Collision\+Message\+::m\+Relative\+Velocity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionMessage_a382a90fbeb1efa6b78c040b6f6eead27}{}\label{classCollisionMessage_a382a90fbeb1efa6b78c040b6f6eead27}
+\index{Collision\+Message@{Collision\+Message}!m\+Shape1@{m\+Shape1}}
+\index{m\+Shape1@{m\+Shape1}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{m\+Shape1}{mShape1}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shape}$\ast$ Collision\+Message\+::m\+Shape1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionMessage_ab5cd196f62b1e8931e02190f1548965a}{}\label{classCollisionMessage_ab5cd196f62b1e8931e02190f1548965a}
+\index{Collision\+Message@{Collision\+Message}!m\+Shape2@{m\+Shape2}}
+\index{m\+Shape2@{m\+Shape2}!Collision\+Message@{Collision\+Message}}
+\subsubsection[{\texorpdfstring{m\+Shape2}{mShape2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shape}$\ast$ Collision\+Message\+::m\+Shape2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCollisionMessage_add423f7b16d07fe364a5bb0198276264}{}\label{classCollisionMessage_add423f7b16d07fe364a5bb0198276264}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\+Messages/\hyperlink{CollisionMessage_8h}{Collision\+Message.\+h}\end{DoxyCompactItemize}

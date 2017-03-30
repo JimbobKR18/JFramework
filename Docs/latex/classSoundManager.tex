@@ -1,0 +1,408 @@
+\hypertarget{classSoundManager}{}\section{Sound\+Manager Class Reference}
+\label{classSoundManager}\index{Sound\+Manager@{Sound\+Manager}}
+
+
+{\ttfamily \#include $<$Sound\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Sound\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Sound\+Manager\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSoundManager_ac95690478a472eae74da4e39907be0dd}{Sound\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App)
+\item 
+\hyperlink{classSoundManager_ad5dbf8eab22db48ff8f3db51b02f8938}{$\sim$\+Sound\+Manager} ()
+\item 
+\hyperlink{classSound}{Sound} $\ast$ \hyperlink{classSoundManager_a721516d27886661cd9198c557ce92780}{Create\+Sound} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\begin{DoxyCompactList}\small\item\em Create a sound by filename. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_aadec3988edc8081e43cf603497438abe}{Delete\+Sound} (\hyperlink{classSound}{Sound} $\ast$a\+Sound)
+\begin{DoxyCompactList}\small\item\em Delete a sound. Unmanage it too. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_a3001bab42ffa43851f66d53179d3e3e1}{Add\+Sound} (\hyperlink{classSound}{Sound} $\ast$a\+Sound)
+\begin{DoxyCompactList}\small\item\em Manage a sound. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_afeff36e880342fe89ac87d29ef8b64a5}{Remove\+Sound} (\hyperlink{classSound}{Sound} $\ast$a\+Sound)
+\begin{DoxyCompactList}\small\item\em Unmanage a sound. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_a206d6c660e52a947fc625401f7fe09c5}{Play\+Sound} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, int const a\+Num\+Loops)
+\begin{DoxyCompactList}\small\item\em Play a sound until it finishes. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_accdc4f26346b6903bea77a270065f9cb}{Play\+Sound\+Timed} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, int const a\+Num\+Loops, int const a\+Millis)
+\begin{DoxyCompactList}\small\item\em Play a sound for a set amount of time. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_a57062d115ff6fa3e28dbba61d3813927}{Stop\+Sound} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\begin{DoxyCompactList}\small\item\em Stop a sound. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_a644f251bd30be671f63261a58ee40489}{Stop\+Sound\+Timed} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, int const a\+Millis)
+\begin{DoxyCompactList}\small\item\em Fade out a sound over time. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_a714cc8f96b977515ff86bbe80065ca35}{Set\+Volume} (float const a\+Volume)
+\begin{DoxyCompactList}\small\item\em Set volume of all sounds. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_a3bd5ae98d9be4d5bcdf5f9e39f2e63d6}{Set\+Sound\+Volume} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, float const a\+Volume)
+\begin{DoxyCompactList}\small\item\em Set the volume of a sound. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_af8604e7d36821d28c89cdc9b0703a7d0}{Resume\+Sound} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\begin{DoxyCompactList}\small\item\em Resume a sound from pause. \end{DoxyCompactList}\item 
+void \hyperlink{classSoundManager_a5a27939d574595107d128d740a2c53cc}{Pause\+Sound} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\begin{DoxyCompactList}\small\item\em Pause a sound. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSoundManager_aaf241621221cdbefeba78e8b6bc29240}{Update} ()
+\begin{DoxyCompactList}\small\item\em Does nothing for now. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSoundManager_a71c2d1a4f59afe4fb3c2e2d36110685e}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing for now. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSoundManager_a53d3df2614b23ff7c1b383ae7ca60330}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing for now. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classSoundManager_a96c679d213ececebfde39bb804241ca1}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classSoundManager_a8acaba3c30c9fbfcd5f126565185974a}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classSoundManager_a438bdd19b49ff2c1af7be591b2264083}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Play sounds from L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unordered\+\_\+map$<$ int, \hyperlink{classSound}{Sound} $\ast$ $>$ \hyperlink{classSoundManager_a4a8992fd3df15cb75e6da094f1e485b7}{Sound\+Container}
+\item 
+typedef Sound\+Container\+::iterator \hyperlink{classSoundManager_ad9d26dc546c029275535007b5c6aefa1}{Sound\+It}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSoundManager_a4a8992fd3df15cb75e6da094f1e485b7}{Sound\+Container} \hyperlink{classSoundManager_a34d41d8281e018dd7fd258fb0bb4cd78}{m\+Sounds}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classSoundManager_a30cb0ee6c3b0db8593a5fa863825f01a}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Sound\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Sound\+Manager@{Sound\+Manager}!Sound\+Container@{Sound\+Container}}
+\index{Sound\+Container@{Sound\+Container}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Sound\+Container}{SoundContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::unordered\+\_\+map$<$int, {\bf Sound}$\ast$$>$ {\bf Sound\+Manager\+::\+Sound\+Container}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSoundManager_a4a8992fd3df15cb75e6da094f1e485b7}{}\label{classSoundManager_a4a8992fd3df15cb75e6da094f1e485b7}
+\index{Sound\+Manager@{Sound\+Manager}!Sound\+It@{Sound\+It}}
+\index{Sound\+It@{Sound\+It}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Sound\+It}{SoundIt}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Sound\+Container\+::iterator {\bf Sound\+Manager\+::\+Sound\+It}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSoundManager_ad9d26dc546c029275535007b5c6aefa1}{}\label{classSoundManager_ad9d26dc546c029275535007b5c6aefa1}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sound\+Manager@{Sound\+Manager}!Sound\+Manager@{Sound\+Manager}}
+\index{Sound\+Manager@{Sound\+Manager}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Sound\+Manager(\+Game\+App $\ast$a\+App)}{SoundManager(GameApp *aApp)}}]{\setlength{\rightskip}{0pt plus 5cm}Sound\+Manager\+::\+Sound\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_ac95690478a472eae74da4e39907be0dd}{}\label{classSoundManager_ac95690478a472eae74da4e39907be0dd}
+\index{Sound\+Manager@{Sound\+Manager}!````~Sound\+Manager@{$\sim$\+Sound\+Manager}}
+\index{````~Sound\+Manager@{$\sim$\+Sound\+Manager}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Sound\+Manager()}{~SoundManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Sound\+Manager\+::$\sim$\+Sound\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_ad5dbf8eab22db48ff8f3db51b02f8938}{}\label{classSoundManager_ad5dbf8eab22db48ff8f3db51b02f8938}
+
+
+\subsection{Member Function Documentation}
+\index{Sound\+Manager@{Sound\+Manager}!Add\+Sound@{Add\+Sound}}
+\index{Add\+Sound@{Add\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Sound(\+Sound $\ast$a\+Sound)}{AddSound(Sound *aSound)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Add\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound} $\ast$}]{a\+Sound}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a3001bab42ffa43851f66d53179d3e3e1}{}\label{classSoundManager_a3001bab42ffa43851f66d53179d3e3e1}
+
+
+Manage a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Sound} & \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Create\+Sound@{Create\+Sound}}
+\index{Create\+Sound@{Create\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Sound(\+Hash\+String const \&a\+Filename)}{CreateSound(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound} $\ast$ Sound\+Manager\+::\+Create\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a721516d27886661cd9198c557ce92780}{}\label{classSoundManager_a721516d27886661cd9198c557ce92780}
+
+
+Create a sound by filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The newly created sound. 
+\end{DoxyReturn}
+\index{Sound\+Manager@{Sound\+Manager}!Delete\+Sound@{Delete\+Sound}}
+\index{Delete\+Sound@{Delete\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Sound(\+Sound $\ast$a\+Sound)}{DeleteSound(Sound *aSound)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Delete\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound} $\ast$}]{a\+Sound}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_aadec3988edc8081e43cf603497438abe}{}\label{classSoundManager_aadec3988edc8081e43cf603497438abe}
+
+
+Delete a sound. Unmanage it too. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Sound} & \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Sound\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classSoundManager_a96c679d213ececebfde39bb804241ca1}{}\label{classSoundManager_a96c679d213ececebfde39bb804241ca1}
+\index{Sound\+Manager@{Sound\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Sound\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classSoundManager_a8acaba3c30c9fbfcd5f126565185974a}{}\label{classSoundManager_a8acaba3c30c9fbfcd5f126565185974a}
+\index{Sound\+Manager@{Sound\+Manager}!Pause\+Sound@{Pause\+Sound}}
+\index{Pause\+Sound@{Pause\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Pause\+Sound(\+Hash\+String const \&a\+Filename)}{PauseSound(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Pause\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a5a27939d574595107d128d740a2c53cc}{}\label{classSoundManager_a5a27939d574595107d128d740a2c53cc}
+
+
+Pause a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Play\+Sound@{Play\+Sound}}
+\index{Play\+Sound@{Play\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Play\+Sound(\+Hash\+String const \&a\+Filename, int const a\+Num\+Loops)}{PlaySound(HashString const &aFilename, int const aNumLoops)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Play\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{int const}]{a\+Num\+Loops}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a206d6c660e52a947fc625401f7fe09c5}{}\label{classSoundManager_a206d6c660e52a947fc625401f7fe09c5}
+
+
+Play a sound until it finishes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Play\+Sound\+Timed@{Play\+Sound\+Timed}}
+\index{Play\+Sound\+Timed@{Play\+Sound\+Timed}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Play\+Sound\+Timed(\+Hash\+String const \&a\+Filename, int const a\+Num\+Loops, int const a\+Millis)}{PlaySoundTimed(HashString const &aFilename, int const aNumLoops, int const aMillis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Play\+Sound\+Timed (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{int const}]{a\+Num\+Loops, }
+\item[{int const}]{a\+Millis}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_accdc4f26346b6903bea77a270065f9cb}{}\label{classSoundManager_accdc4f26346b6903bea77a270065f9cb}
+
+
+Play a sound for a set amount of time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+{\em a\+Millis} & Time in millis. \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSoundManager_a53d3df2614b23ff7c1b383ae7ca60330}{}\label{classSoundManager_a53d3df2614b23ff7c1b383ae7ca60330}
+
+
+Does nothing for now. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Sound\+Manager@{Sound\+Manager}!Remove\+Sound@{Remove\+Sound}}
+\index{Remove\+Sound@{Remove\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Sound(\+Sound $\ast$a\+Sound)}{RemoveSound(Sound *aSound)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Remove\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound} $\ast$}]{a\+Sound}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_afeff36e880342fe89ac87d29ef8b64a5}{}\label{classSoundManager_afeff36e880342fe89ac87d29ef8b64a5}
+
+
+Unmanage a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Sound} & \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Resume\+Sound@{Resume\+Sound}}
+\index{Resume\+Sound@{Resume\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Resume\+Sound(\+Hash\+String const \&a\+Filename)}{ResumeSound(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Resume\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_af8604e7d36821d28c89cdc9b0703a7d0}{}\label{classSoundManager_af8604e7d36821d28c89cdc9b0703a7d0}
+
+
+Resume a sound from pause. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSoundManager_a71c2d1a4f59afe4fb3c2e2d36110685e}{}\label{classSoundManager_a71c2d1a4f59afe4fb3c2e2d36110685e}
+
+
+Does nothing for now. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Sound\+Manager@{Sound\+Manager}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSoundManager_a438bdd19b49ff2c1af7be591b2264083}{}\label{classSoundManager_a438bdd19b49ff2c1af7be591b2264083}
+
+
+Play sounds from L\+UA. 
+
+\index{Sound\+Manager@{Sound\+Manager}!Set\+Sound\+Volume@{Set\+Sound\+Volume}}
+\index{Set\+Sound\+Volume@{Set\+Sound\+Volume}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Set\+Sound\+Volume(\+Hash\+String const \&a\+Filename, float const a\+Volume)}{SetSoundVolume(HashString const &aFilename, float const aVolume)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Set\+Sound\+Volume (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{float const}]{a\+Volume}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a3bd5ae98d9be4d5bcdf5f9e39f2e63d6}{}\label{classSoundManager_a3bd5ae98d9be4d5bcdf5f9e39f2e63d6}
+
+
+Set the volume of a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+{\em a\+Volume} & The volume to set the sound to. \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Set\+Volume@{Set\+Volume}}
+\index{Set\+Volume@{Set\+Volume}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Set\+Volume(float const a\+Volume)}{SetVolume(float const aVolume)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Set\+Volume (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Volume}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a714cc8f96b977515ff86bbe80065ca35}{}\label{classSoundManager_a714cc8f96b977515ff86bbe80065ca35}
+
+
+Set volume of all sounds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Volume} & Volume value from 0 to 1. \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Stop\+Sound@{Stop\+Sound}}
+\index{Stop\+Sound@{Stop\+Sound}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Stop\+Sound(\+Hash\+String const \&a\+Filename)}{StopSound(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Stop\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a57062d115ff6fa3e28dbba61d3813927}{}\label{classSoundManager_a57062d115ff6fa3e28dbba61d3813927}
+
+
+Stop a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Stop\+Sound\+Timed@{Stop\+Sound\+Timed}}
+\index{Stop\+Sound\+Timed@{Stop\+Sound\+Timed}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Stop\+Sound\+Timed(\+Hash\+String const \&a\+Filename, int const a\+Millis)}{StopSoundTimed(HashString const &aFilename, int const aMillis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Stop\+Sound\+Timed (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{int const}]{a\+Millis}
+\end{DoxyParamCaption}
+)}\hypertarget{classSoundManager_a644f251bd30be671f63261a58ee40489}{}\label{classSoundManager_a644f251bd30be671f63261a58ee40489}
+
+
+Fade out a sound over time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+{\em a\+Millis} & Time in millis \\
+\hline
+\end{DoxyParams}
+\index{Sound\+Manager@{Sound\+Manager}!Update@{Update}}
+\index{Update@{Update}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSoundManager_aaf241621221cdbefeba78e8b6bc29240}{}\label{classSoundManager_aaf241621221cdbefeba78e8b6bc29240}
+
+
+Does nothing for now. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Sound\+Manager@{Sound\+Manager}!m\+Sounds@{m\+Sounds}}
+\index{m\+Sounds@{m\+Sounds}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Sounds}{mSounds}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\+Container} Sound\+Manager\+::m\+Sounds\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSoundManager_a34d41d8281e018dd7fd258fb0bb4cd78}{}\label{classSoundManager_a34d41d8281e018dd7fd258fb0bb4cd78}
+\index{Sound\+Manager@{Sound\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Sound\+Manager@{Sound\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Sound\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Sound\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSoundManager_a30cb0ee6c3b0db8593a5fa863825f01a}{}\label{classSoundManager_a30cb0ee6c3b0db8593a5fa863825f01a}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{SoundManager_8h}{Sound\+Manager.\+h}\item 
+Managers/\hyperlink{SoundManager_8cpp}{Sound\+Manager.\+cpp}\end{DoxyCompactItemize}

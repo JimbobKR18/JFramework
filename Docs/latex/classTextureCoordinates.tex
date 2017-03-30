@@ -1,0 +1,549 @@
+\hypertarget{classTextureCoordinates}{}\section{Texture\+Coordinates Class Reference}
+\label{classTextureCoordinates}\index{Texture\+Coordinates@{Texture\+Coordinates}}
+
+
+{\ttfamily \#include $<$Texture\+Coordinates.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ float $>$ \hyperlink{classTextureCoordinates_adc1028525067f031d0b01f61d5e54ac9}{Speed\+Container}
+\item 
+typedef Speed\+Container\+::const\+\_\+iterator \hyperlink{classTextureCoordinates_a022fb09db1f7272f8d2ab3ba9396bc3b}{Speed\+Const\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTextureCoordinates_a5691b6fe540096606a00b21441b00cfc}{Texture\+Coordinates} ()
+\item 
+\hyperlink{classTextureCoordinates_a4198cca30cd1602d2e78fb37e6cb0982}{Texture\+Coordinates} (int const a\+X\+Size, int const a\+Y\+Size, int const a\+Num\+Animations, std\+::vector$<$ int $>$ const \&a\+Num\+Frames, std\+::vector$<$ std\+::vector$<$ float $>$$>$ const \&a\+Animation\+Speeds)
+\item 
+\hyperlink{classTextureCoordinates_a6127d77ed41707d1a366c83cc66b2a54}{$\sim$\+Texture\+Coordinates} ()
+\item 
+void \hyperlink{classTextureCoordinates_a70b6aa6e408a822d6b812e88ad423d59}{Update} (float a\+DT)
+\begin{DoxyCompactList}\small\item\em Basic update loop, updates texture coordinates based on DT. \end{DoxyCompactList}\item 
+float \hyperlink{classTextureCoordinates_af8058ad5463d5c58548e5fd31b0c7112}{Get\+X\+Value} (int const a\+Index) const 
+\begin{DoxyCompactList}\small\item\em Get current x coordinate. \end{DoxyCompactList}\item 
+float \hyperlink{classTextureCoordinates_adea1a65980e4019c4d4ef3075106bb41}{Get\+Y\+Value} (int const a\+Index) const 
+\begin{DoxyCompactList}\small\item\em Get current y coordinate. \end{DoxyCompactList}\item 
+float \hyperlink{classTextureCoordinates_a12bb3e21ff33420dc571ba7a5773aa4c}{Get\+Current\+Animation\+Speed} () const 
+\begin{DoxyCompactList}\small\item\em Get animation speed. \end{DoxyCompactList}\item 
+int \hyperlink{classTextureCoordinates_a7b2e061d3f6d2ccab46408fa269a7a75}{Get\+Current\+Animation} () const 
+\begin{DoxyCompactList}\small\item\em Get current animation index. \end{DoxyCompactList}\item 
+int \hyperlink{classTextureCoordinates_a037903c287d8f1cf5c8ad793d748a4e1}{Get\+Number\+Of\+Animations} () const 
+\begin{DoxyCompactList}\small\item\em Get the total number of animations. \end{DoxyCompactList}\item 
+int \hyperlink{classTextureCoordinates_ac3eab7c182d5ef4dd7f61b16d1109298}{Get\+Total\+Frames} () const 
+\begin{DoxyCompactList}\small\item\em Get the total number of frames across all animations. \end{DoxyCompactList}\item 
+int \hyperlink{classTextureCoordinates_ab46c9acffd886694faa3cd437c90de6f}{Get\+Animation\+Frame\+Counts} (int const a\+Animation) const 
+\begin{DoxyCompactList}\small\item\em Get number of frames for an animation. \end{DoxyCompactList}\item 
+float \hyperlink{classTextureCoordinates_a3ad1deddf075f65adba8fd255cf198af}{Get\+Animation\+Speed} (int const a\+Animation) const 
+\begin{DoxyCompactList}\small\item\em Get speed for animation. \end{DoxyCompactList}\item 
+\hyperlink{classTextureCoordinates_adc1028525067f031d0b01f61d5e54ac9}{Speed\+Container} const \hyperlink{classTextureCoordinates_ad7bb2c14d29a32fa96f0ca2e7b7d1a92}{Get\+Animation\+Holds} (int const a\+Animation) const 
+\begin{DoxyCompactList}\small\item\em Get holds for animation. \end{DoxyCompactList}\item 
+bool \hyperlink{classTextureCoordinates_a49a01f8f20f13b9199de72fa433be510}{Get\+Completed} () const 
+\begin{DoxyCompactList}\small\item\em Is the current animation finished cycling through? \end{DoxyCompactList}\item 
+bool \hyperlink{classTextureCoordinates_a5e058effa2f4dd65073de021b5782219}{Get\+Animated} () const 
+\begin{DoxyCompactList}\small\item\em Are we animated at all? \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_abcef308c4feac682d3b737d091880424}{Set\+Current\+Animation} (int const a\+Animation)
+\begin{DoxyCompactList}\small\item\em Sets the current animation, starts from beginning. \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_a41992c6fed44b52a112cf015f304ae86}{Set\+Current\+Frame} (int const a\+Frame)
+\begin{DoxyCompactList}\small\item\em Set current frame in animation. \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_a9477c2fb4e17be830bb5c85b6ce2956f}{Set\+Frame\+By\+ID} (int const a\+Frame\+ID)
+\begin{DoxyCompactList}\small\item\em Across all frames, what index do you want to be in? \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_a6ab7f75f6a1d0c32cf50cc50bbf92640}{Set\+Animated} (bool const a\+Animated)
+\begin{DoxyCompactList}\small\item\em Set whether or not to animate this object. \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_a712ead4f4356e031d9b7f2d642a9e724}{Set\+Run\+Once} (bool const a\+Run\+Once)
+\begin{DoxyCompactList}\small\item\em Set whether or not to run the current animation only once. \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_aec30913d1308fd951b3b2bacf67d4618}{Set\+Current\+Animation\+Speed} (float const a\+Speed)
+\begin{DoxyCompactList}\small\item\em Set time before next frame (in seconds). \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_a60a81e1f60ed6b1a1a25bfb1606f957d}{Set\+X\+Gain} (int const a\+Index, float const aX)
+\begin{DoxyCompactList}\small\item\em Set pace in which the x coordinate should gain per frame. \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_a0f79f51498c73ba057f4e32083cd2ca5}{Set\+Y\+Gain} (int const a\+Index, float const aY)
+\begin{DoxyCompactList}\small\item\em Set pace in which the y coordinate should gain per animation. \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_ab66f14d98de0b266304c87038ec9c069}{Finish} ()
+\begin{DoxyCompactList}\small\item\em Finish current animation. \end{DoxyCompactList}\item 
+void \hyperlink{classTextureCoordinates_a1a2dcade83324600fb7838587743aa69}{Reset} ()
+\begin{DoxyCompactList}\small\item\em Start animation at the beginning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classTextureCoordinates_af29e0d73ed3545bbb9dd6d26dc066fce}{m\+Cur\+Frame}
+\item 
+int \hyperlink{classTextureCoordinates_af453ba67ea3aea6d092460912be93ba8}{m\+Cur\+Animation}
+\item 
+int \hyperlink{classTextureCoordinates_a54c70b943f6f15c0cec44083fd16e9c9}{m\+Total\+Frames}
+\item 
+int \hyperlink{classTextureCoordinates_acf2542d7962a922434b6593f10306d6c}{m\+X\+Size}
+\item 
+int \hyperlink{classTextureCoordinates_a7e4c7432174c1d2c3e7e914e16f4171b}{m\+Y\+Size}
+\item 
+float \hyperlink{classTextureCoordinates_ad57ba42126e143406ec1998b815c3548}{m\+Cur\+Time}
+\item 
+float \hyperlink{classTextureCoordinates_a611cbb70c81161901bbcab2b745f88c2}{m\+X\+Gain} \mbox{[}2\mbox{]}
+\item 
+float \hyperlink{classTextureCoordinates_a9cb838e1422e28a00af0d2e0d921f26f}{m\+Y\+Gain} \mbox{[}2\mbox{]}
+\item 
+float \hyperlink{classTextureCoordinates_ada230a3fd2448aa22c23eb20f2f947fd}{m\+X\+Values} \mbox{[}2\mbox{]}
+\item 
+float \hyperlink{classTextureCoordinates_a1857ab9e774582ad6a361070d26e89d9}{m\+Y\+Values} \mbox{[}2\mbox{]}
+\item 
+bool \hyperlink{classTextureCoordinates_a6eeded846dbc9d81e00b1655f1b9ade3}{m\+Animated}
+\item 
+bool \hyperlink{classTextureCoordinates_a8396ffb31c761b74491873dfc651dd6d}{m\+Completed}
+\item 
+bool \hyperlink{classTextureCoordinates_a9386ec329ac8d1f4bd1050dee541c84a}{m\+Run\+Once}
+\item 
+std\+::vector$<$ float $>$ \hyperlink{classTextureCoordinates_a710c4627d95401d092248edd0526700d}{m\+Speed\+Modifiers}
+\item 
+std\+::vector$<$ \hyperlink{classTextureCoordinates_adc1028525067f031d0b01f61d5e54ac9}{Speed\+Container} $>$ \hyperlink{classTextureCoordinates_a6c5228a4c97ed8520208c2931b782cd5}{m\+Speeds}
+\item 
+std\+::vector$<$ int $>$ \hyperlink{classTextureCoordinates_a382769309d5507f05ec11ee75acac1f3}{m\+Animations}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Speed\+Const\+IT@{Speed\+Const\+IT}}
+\index{Speed\+Const\+IT@{Speed\+Const\+IT}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Speed\+Const\+IT}{SpeedConstIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Speed\+Container\+::const\+\_\+iterator {\bf Texture\+Coordinates\+::\+Speed\+Const\+IT}}\hypertarget{classTextureCoordinates_a022fb09db1f7272f8d2ab3ba9396bc3b}{}\label{classTextureCoordinates_a022fb09db1f7272f8d2ab3ba9396bc3b}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Speed\+Container@{Speed\+Container}}
+\index{Speed\+Container@{Speed\+Container}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Speed\+Container}{SpeedContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<$float$>$ {\bf Texture\+Coordinates\+::\+Speed\+Container}}\hypertarget{classTextureCoordinates_adc1028525067f031d0b01f61d5e54ac9}{}\label{classTextureCoordinates_adc1028525067f031d0b01f61d5e54ac9}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Texture\+Coordinates@{Texture\+Coordinates}}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Texture\+Coordinates()}{TextureCoordinates()}}]{\setlength{\rightskip}{0pt plus 5cm}Texture\+Coordinates\+::\+Texture\+Coordinates (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a5691b6fe540096606a00b21441b00cfc}{}\label{classTextureCoordinates_a5691b6fe540096606a00b21441b00cfc}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Texture\+Coordinates@{Texture\+Coordinates}}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Texture\+Coordinates(int const a\+X\+Size, int const a\+Y\+Size, int const a\+Num\+Animations, std\+::vector$<$ int $>$ const \&a\+Num\+Frames, std\+::vector$<$ std\+::vector$<$ float $>$$>$ const \&a\+Animation\+Speeds)}{TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, std::vector< int > const &aNumFrames, std::vector< std::vector< float >> const &aAnimationSpeeds)}}]{\setlength{\rightskip}{0pt plus 5cm}Texture\+Coordinates\+::\+Texture\+Coordinates (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+X\+Size, }
+\item[{int const}]{a\+Y\+Size, }
+\item[{int const}]{a\+Num\+Animations, }
+\item[{std\+::vector$<$ int $>$ const \&}]{a\+Num\+Frames, }
+\item[{std\+::vector$<$ std\+::vector$<$ float $>$$>$ const \&}]{a\+Animation\+Speeds}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a4198cca30cd1602d2e78fb37e6cb0982}{}\label{classTextureCoordinates_a4198cca30cd1602d2e78fb37e6cb0982}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!````~Texture\+Coordinates@{$\sim$\+Texture\+Coordinates}}
+\index{````~Texture\+Coordinates@{$\sim$\+Texture\+Coordinates}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{$\sim$\+Texture\+Coordinates()}{~TextureCoordinates()}}]{\setlength{\rightskip}{0pt plus 5cm}Texture\+Coordinates\+::$\sim$\+Texture\+Coordinates (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a6127d77ed41707d1a366c83cc66b2a54}{}\label{classTextureCoordinates_a6127d77ed41707d1a366c83cc66b2a54}
+
+
+\subsection{Member Function Documentation}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Finish@{Finish}}
+\index{Finish@{Finish}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Finish()}{Finish()}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Finish (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_ab66f14d98de0b266304c87038ec9c069}{}\label{classTextureCoordinates_ab66f14d98de0b266304c87038ec9c069}
+
+
+Finish current animation. 
+
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Animated@{Get\+Animated}}
+\index{Get\+Animated@{Get\+Animated}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Animated() const }{GetAnimated() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Texture\+Coordinates\+::\+Get\+Animated (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_a5e058effa2f4dd65073de021b5782219}{}\label{classTextureCoordinates_a5e058effa2f4dd65073de021b5782219}
+
+
+Are we animated at all? 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Animation\+Frame\+Counts@{Get\+Animation\+Frame\+Counts}}
+\index{Get\+Animation\+Frame\+Counts@{Get\+Animation\+Frame\+Counts}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Frame\+Counts(int const a\+Animation) const }{GetAnimationFrameCounts(int const aAnimation) const }}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::\+Get\+Animation\+Frame\+Counts (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Animation}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_ab46c9acffd886694faa3cd437c90de6f}{}\label{classTextureCoordinates_ab46c9acffd886694faa3cd437c90de6f}
+
+
+Get number of frames for an animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animation} & The animation index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Animation\+Holds@{Get\+Animation\+Holds}}
+\index{Get\+Animation\+Holds@{Get\+Animation\+Holds}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Holds(int const a\+Animation) const }{GetAnimationHolds(int const aAnimation) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Texture\+Coordinates\+::\+Speed\+Container} const Texture\+Coordinates\+::\+Get\+Animation\+Holds (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Animation}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_ad7bb2c14d29a32fa96f0ca2e7b7d1a92}{}\label{classTextureCoordinates_ad7bb2c14d29a32fa96f0ca2e7b7d1a92}
+
+
+Get holds for animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animation} & Animation to get holds for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Animation\+Speed@{Get\+Animation\+Speed}}
+\index{Get\+Animation\+Speed@{Get\+Animation\+Speed}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Animation\+Speed(int const a\+Animation) const }{GetAnimationSpeed(int const aAnimation) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::\+Get\+Animation\+Speed (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Animation}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_a3ad1deddf075f65adba8fd255cf198af}{}\label{classTextureCoordinates_a3ad1deddf075f65adba8fd255cf198af}
+
+
+Get speed for animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animation} & The animation index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Completed@{Get\+Completed}}
+\index{Get\+Completed@{Get\+Completed}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Completed() const }{GetCompleted() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Texture\+Coordinates\+::\+Get\+Completed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_a49a01f8f20f13b9199de72fa433be510}{}\label{classTextureCoordinates_a49a01f8f20f13b9199de72fa433be510}
+
+
+Is the current animation finished cycling through? 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Current\+Animation@{Get\+Current\+Animation}}
+\index{Get\+Current\+Animation@{Get\+Current\+Animation}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Animation() const }{GetCurrentAnimation() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::\+Get\+Current\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_a7b2e061d3f6d2ccab46408fa269a7a75}{}\label{classTextureCoordinates_a7b2e061d3f6d2ccab46408fa269a7a75}
+
+
+Get current animation index. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Current\+Animation\+Speed@{Get\+Current\+Animation\+Speed}}
+\index{Get\+Current\+Animation\+Speed@{Get\+Current\+Animation\+Speed}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Animation\+Speed() const }{GetCurrentAnimationSpeed() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::\+Get\+Current\+Animation\+Speed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_a12bb3e21ff33420dc571ba7a5773aa4c}{}\label{classTextureCoordinates_a12bb3e21ff33420dc571ba7a5773aa4c}
+
+
+Get animation speed. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Number\+Of\+Animations@{Get\+Number\+Of\+Animations}}
+\index{Get\+Number\+Of\+Animations@{Get\+Number\+Of\+Animations}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Number\+Of\+Animations() const }{GetNumberOfAnimations() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::\+Get\+Number\+Of\+Animations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_a037903c287d8f1cf5c8ad793d748a4e1}{}\label{classTextureCoordinates_a037903c287d8f1cf5c8ad793d748a4e1}
+
+
+Get the total number of animations. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Total\+Frames@{Get\+Total\+Frames}}
+\index{Get\+Total\+Frames@{Get\+Total\+Frames}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Total\+Frames() const }{GetTotalFrames() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::\+Get\+Total\+Frames (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_ac3eab7c182d5ef4dd7f61b16d1109298}{}\label{classTextureCoordinates_ac3eab7c182d5ef4dd7f61b16d1109298}
+
+
+Get the total number of frames across all animations. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+X\+Value@{Get\+X\+Value}}
+\index{Get\+X\+Value@{Get\+X\+Value}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+X\+Value(int const a\+Index) const }{GetXValue(int const aIndex) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::\+Get\+X\+Value (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Index}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_af8058ad5463d5c58548e5fd31b0c7112}{}\label{classTextureCoordinates_af8058ad5463d5c58548e5fd31b0c7112}
+
+
+Get current x coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & 0 for left, 1 for right. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Get\+Y\+Value@{Get\+Y\+Value}}
+\index{Get\+Y\+Value@{Get\+Y\+Value}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Get\+Y\+Value(int const a\+Index) const }{GetYValue(int const aIndex) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::\+Get\+Y\+Value (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Index}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTextureCoordinates_adea1a65980e4019c4d4ef3075106bb41}{}\label{classTextureCoordinates_adea1a65980e4019c4d4ef3075106bb41}
+
+
+Get current y coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & 0 for top, 1 for bottom. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Reset@{Reset}}
+\index{Reset@{Reset}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Reset()}{Reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a1a2dcade83324600fb7838587743aa69}{}\label{classTextureCoordinates_a1a2dcade83324600fb7838587743aa69}
+
+
+Start animation at the beginning. 
+
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+Animated@{Set\+Animated}}
+\index{Set\+Animated@{Set\+Animated}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+Animated(bool const a\+Animated)}{SetAnimated(bool const aAnimated)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+Animated (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Animated}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a6ab7f75f6a1d0c32cf50cc50bbf92640}{}\label{classTextureCoordinates_a6ab7f75f6a1d0c32cf50cc50bbf92640}
+
+
+Set whether or not to animate this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animated} & \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+Current\+Animation@{Set\+Current\+Animation}}
+\index{Set\+Current\+Animation@{Set\+Current\+Animation}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+Current\+Animation(int const a\+Animation)}{SetCurrentAnimation(int const aAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+Current\+Animation (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_abcef308c4feac682d3b737d091880424}{}\label{classTextureCoordinates_abcef308c4feac682d3b737d091880424}
+
+
+Sets the current animation, starts from beginning. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animation} & \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+Current\+Animation\+Speed@{Set\+Current\+Animation\+Speed}}
+\index{Set\+Current\+Animation\+Speed@{Set\+Current\+Animation\+Speed}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+Current\+Animation\+Speed(float const a\+Speed)}{SetCurrentAnimationSpeed(float const aSpeed)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+Current\+Animation\+Speed (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Speed}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_aec30913d1308fd951b3b2bacf67d4618}{}\label{classTextureCoordinates_aec30913d1308fd951b3b2bacf67d4618}
+
+
+Set time before next frame (in seconds). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Speed} & \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+Current\+Frame@{Set\+Current\+Frame}}
+\index{Set\+Current\+Frame@{Set\+Current\+Frame}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+Current\+Frame(int const a\+Frame)}{SetCurrentFrame(int const aFrame)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+Current\+Frame (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Frame}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a41992c6fed44b52a112cf015f304ae86}{}\label{classTextureCoordinates_a41992c6fed44b52a112cf015f304ae86}
+
+
+Set current frame in animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Frame} & \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+Frame\+By\+ID@{Set\+Frame\+By\+ID}}
+\index{Set\+Frame\+By\+ID@{Set\+Frame\+By\+ID}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+Frame\+By\+I\+D(int const a\+Frame\+I\+D)}{SetFrameByID(int const aFrameID)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+Frame\+By\+ID (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Frame\+ID}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a9477c2fb4e17be830bb5c85b6ce2956f}{}\label{classTextureCoordinates_a9477c2fb4e17be830bb5c85b6ce2956f}
+
+
+Across all frames, what index do you want to be in? 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Frame\+ID} & \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+Run\+Once@{Set\+Run\+Once}}
+\index{Set\+Run\+Once@{Set\+Run\+Once}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+Run\+Once(bool const a\+Run\+Once)}{SetRunOnce(bool const aRunOnce)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+Run\+Once (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Run\+Once}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a712ead4f4356e031d9b7f2d642a9e724}{}\label{classTextureCoordinates_a712ead4f4356e031d9b7f2d642a9e724}
+
+
+Set whether or not to run the current animation only once. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Run\+Once} & \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+X\+Gain@{Set\+X\+Gain}}
+\index{Set\+X\+Gain@{Set\+X\+Gain}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+X\+Gain(int const a\+Index, float const a\+X)}{SetXGain(int const aIndex, float const aX)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+X\+Gain (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Index, }
+\item[{float const}]{a\+X\+Gain}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a60a81e1f60ed6b1a1a25bfb1606f957d}{}\label{classTextureCoordinates_a60a81e1f60ed6b1a1a25bfb1606f957d}
+
+
+Set pace in which the x coordinate should gain per frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & 0 for left, 1 for right. \\
+\hline
+{\em aX} & The gain. \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Set\+Y\+Gain@{Set\+Y\+Gain}}
+\index{Set\+Y\+Gain@{Set\+Y\+Gain}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Set\+Y\+Gain(int const a\+Index, float const a\+Y)}{SetYGain(int const aIndex, float const aY)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Set\+Y\+Gain (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Index, }
+\item[{float const}]{a\+Y\+Gain}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a0f79f51498c73ba057f4e32083cd2ca5}{}\label{classTextureCoordinates_a0f79f51498c73ba057f4e32083cd2ca5}
+
+
+Set pace in which the y coordinate should gain per animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & 0 for top, 1 for bottom. \\
+\hline
+{\em aY} & The gain. \\
+\hline
+\end{DoxyParams}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!Update@{Update}}
+\index{Update@{Update}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{Update(float a\+D\+T)}{Update(float aDT)}}]{\setlength{\rightskip}{0pt plus 5cm}void Texture\+Coordinates\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+DT}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextureCoordinates_a70b6aa6e408a822d6b812e88ad423d59}{}\label{classTextureCoordinates_a70b6aa6e408a822d6b812e88ad423d59}
+
+
+Basic update loop, updates texture coordinates based on DT. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+DT} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Animated@{m\+Animated}}
+\index{m\+Animated@{m\+Animated}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Animated}{mAnimated}}]{\setlength{\rightskip}{0pt plus 5cm}bool Texture\+Coordinates\+::m\+Animated\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a6eeded846dbc9d81e00b1655f1b9ade3}{}\label{classTextureCoordinates_a6eeded846dbc9d81e00b1655f1b9ade3}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Animations@{m\+Animations}}
+\index{m\+Animations@{m\+Animations}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Animations}{mAnimations}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$int$>$ Texture\+Coordinates\+::m\+Animations\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a382769309d5507f05ec11ee75acac1f3}{}\label{classTextureCoordinates_a382769309d5507f05ec11ee75acac1f3}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Completed@{m\+Completed}}
+\index{m\+Completed@{m\+Completed}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Completed}{mCompleted}}]{\setlength{\rightskip}{0pt plus 5cm}bool Texture\+Coordinates\+::m\+Completed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a8396ffb31c761b74491873dfc651dd6d}{}\label{classTextureCoordinates_a8396ffb31c761b74491873dfc651dd6d}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Cur\+Animation@{m\+Cur\+Animation}}
+\index{m\+Cur\+Animation@{m\+Cur\+Animation}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Cur\+Animation}{mCurAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::m\+Cur\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_af453ba67ea3aea6d092460912be93ba8}{}\label{classTextureCoordinates_af453ba67ea3aea6d092460912be93ba8}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Cur\+Frame@{m\+Cur\+Frame}}
+\index{m\+Cur\+Frame@{m\+Cur\+Frame}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Cur\+Frame}{mCurFrame}}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::m\+Cur\+Frame\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_af29e0d73ed3545bbb9dd6d26dc066fce}{}\label{classTextureCoordinates_af29e0d73ed3545bbb9dd6d26dc066fce}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Cur\+Time@{m\+Cur\+Time}}
+\index{m\+Cur\+Time@{m\+Cur\+Time}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Cur\+Time}{mCurTime}}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::m\+Cur\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_ad57ba42126e143406ec1998b815c3548}{}\label{classTextureCoordinates_ad57ba42126e143406ec1998b815c3548}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Run\+Once@{m\+Run\+Once}}
+\index{m\+Run\+Once@{m\+Run\+Once}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Run\+Once}{mRunOnce}}]{\setlength{\rightskip}{0pt plus 5cm}bool Texture\+Coordinates\+::m\+Run\+Once\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a9386ec329ac8d1f4bd1050dee541c84a}{}\label{classTextureCoordinates_a9386ec329ac8d1f4bd1050dee541c84a}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Speed\+Modifiers@{m\+Speed\+Modifiers}}
+\index{m\+Speed\+Modifiers@{m\+Speed\+Modifiers}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Speed\+Modifiers}{mSpeedModifiers}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$float$>$ Texture\+Coordinates\+::m\+Speed\+Modifiers\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a710c4627d95401d092248edd0526700d}{}\label{classTextureCoordinates_a710c4627d95401d092248edd0526700d}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Speeds@{m\+Speeds}}
+\index{m\+Speeds@{m\+Speeds}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Speeds}{mSpeeds}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Speed\+Container}$>$ Texture\+Coordinates\+::m\+Speeds\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a6c5228a4c97ed8520208c2931b782cd5}{}\label{classTextureCoordinates_a6c5228a4c97ed8520208c2931b782cd5}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Total\+Frames@{m\+Total\+Frames}}
+\index{m\+Total\+Frames@{m\+Total\+Frames}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Total\+Frames}{mTotalFrames}}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::m\+Total\+Frames\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a54c70b943f6f15c0cec44083fd16e9c9}{}\label{classTextureCoordinates_a54c70b943f6f15c0cec44083fd16e9c9}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+X\+Gain@{m\+X\+Gain}}
+\index{m\+X\+Gain@{m\+X\+Gain}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+X\+Gain}{mXGain}}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::m\+X\+Gain\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a611cbb70c81161901bbcab2b745f88c2}{}\label{classTextureCoordinates_a611cbb70c81161901bbcab2b745f88c2}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+X\+Size@{m\+X\+Size}}
+\index{m\+X\+Size@{m\+X\+Size}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+X\+Size}{mXSize}}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::m\+X\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_acf2542d7962a922434b6593f10306d6c}{}\label{classTextureCoordinates_acf2542d7962a922434b6593f10306d6c}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+X\+Values@{m\+X\+Values}}
+\index{m\+X\+Values@{m\+X\+Values}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+X\+Values}{mXValues}}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::m\+X\+Values\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_ada230a3fd2448aa22c23eb20f2f947fd}{}\label{classTextureCoordinates_ada230a3fd2448aa22c23eb20f2f947fd}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Y\+Gain@{m\+Y\+Gain}}
+\index{m\+Y\+Gain@{m\+Y\+Gain}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Y\+Gain}{mYGain}}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::m\+Y\+Gain\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a9cb838e1422e28a00af0d2e0d921f26f}{}\label{classTextureCoordinates_a9cb838e1422e28a00af0d2e0d921f26f}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Y\+Size@{m\+Y\+Size}}
+\index{m\+Y\+Size@{m\+Y\+Size}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Y\+Size}{mYSize}}]{\setlength{\rightskip}{0pt plus 5cm}int Texture\+Coordinates\+::m\+Y\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a7e4c7432174c1d2c3e7e914e16f4171b}{}\label{classTextureCoordinates_a7e4c7432174c1d2c3e7e914e16f4171b}
+\index{Texture\+Coordinates@{Texture\+Coordinates}!m\+Y\+Values@{m\+Y\+Values}}
+\index{m\+Y\+Values@{m\+Y\+Values}!Texture\+Coordinates@{Texture\+Coordinates}}
+\subsubsection[{\texorpdfstring{m\+Y\+Values}{mYValues}}]{\setlength{\rightskip}{0pt plus 5cm}float Texture\+Coordinates\+::m\+Y\+Values\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextureCoordinates_a1857ab9e774582ad6a361070d26e89d9}{}\label{classTextureCoordinates_a1857ab9e774582ad6a361070d26e89d9}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graphics/\hyperlink{TextureCoordinates_8h}{Texture\+Coordinates.\+h}\item 
+Graphics/\hyperlink{TextureCoordinates_8cpp}{Texture\+Coordinates.\+cpp}\end{DoxyCompactItemize}

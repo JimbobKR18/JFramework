@@ -1,0 +1,33 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="SLB::Object",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Object.html"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="SLB::AutoDeleteValue\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1AutoDeleteValue.html"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="SLB::BaseProperty",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1BaseProperty.html"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="SLB::Property\< T, M \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Property.html"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="SLB::CopyValue\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1CopyValue.html"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="SLB::FuncCall",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1FuncCall.html"];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="SLB::LuaCFunction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1LuaCFunction.html"];
+  Node6 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="SLB::Private::FC_Default\lClassConstructor\< C()\>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSLB_1_1Private_1_1FC__DefaultClassConstructor_3_01C_07_08_4.html"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="SLB::Iterator",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Iterator.html"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="SLB::RefValue\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1RefValue.html"];
+  Node1 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="SLB::Table",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Table.html"];
+  Node11 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="SLB::InternalHybridSubclass",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSLB_1_1InternalHybridSubclass.html"];
+  Node11 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="SLB::Namespace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Namespace.html"];
+  Node13 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="SLB::ClassInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ClassInfo.html"];
+}

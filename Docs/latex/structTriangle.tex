@@ -1,0 +1,158 @@
+\hypertarget{structTriangle}{}\section{Triangle Struct Reference}
+\label{structTriangle}\index{Triangle@{Triangle}}
+
+
+{\ttfamily \#include $<$Shape.\+h$>$}
+
+
+
+Inheritance diagram for Triangle\+:
+% FIG 0
+
+
+Collaboration diagram for Triangle\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structTriangle_aaefe4ed500c07918d30c6f0e286332c5}{Triangle} ()
+\item 
+\hyperlink{structTriangle_a72896d9c8eb009a2c928dd6e5a9fdb7b}{Triangle} (\hyperlink{structVector3}{Vector3} const \&a\+Point1, \hyperlink{structVector3}{Vector3} const \&a\+Point2, \hyperlink{structVector3}{Vector3} const \&a\+Point3)
+\item 
+\hyperlink{structTriangle_a42baf8fa47d2449f4e978876db52f5f2}{Triangle} (\hyperlink{structVector3}{Vector3} const a\+Points\mbox{[}3\mbox{]})
+\item 
+\hyperlink{structTriangle_a136fe10c97f213ead183411dc51b45ba}{Triangle} (std\+::vector$<$ \hyperlink{structVector3}{Vector3} $>$ const \&a\+Points)
+\item 
+virtual \hyperlink{structTriangle_a5199760a17454f4dc94c855a57e3a152}{$\sim$\+Triangle} ()
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structTriangle_adefabddaa068263e5ced8657c874b284}{Get\+Closest\+Point\+To\+Triangle} (\hyperlink{structVector3}{Vector3} const \&a\+Triangle\+Position, \hyperlink{structVector3}{Vector3} const \&a\+Point)
+\begin{DoxyCompactList}\small\item\em Get the closest point on a triangle to a particular point. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structTriangle_a63c7e102a5cf63dfb89c2c0b45894b82}{Get\+Point} (int index)
+\begin{DoxyCompactList}\small\item\em Get point by index. \end{DoxyCompactList}\item 
+virtual float \hyperlink{structTriangle_a121aa12b2557c9f523f435253258bcb0}{Get\+Size} (int index)
+\begin{DoxyCompactList}\small\item\em Get max value along axis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structTriangle_a7b7eb4c8f1bff4276ccc8a297e830767}{points} \mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{Triangle()}{Triangle()}}]{\setlength{\rightskip}{0pt plus 5cm}Triangle\+::\+Triangle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structTriangle_aaefe4ed500c07918d30c6f0e286332c5}{}\label{structTriangle_aaefe4ed500c07918d30c6f0e286332c5}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{Triangle(\+Vector3 const \&a\+Point1, Vector3 const \&a\+Point2, Vector3 const \&a\+Point3)}{Triangle(Vector3 const &aPoint1, Vector3 const &aPoint2, Vector3 const &aPoint3)}}]{\setlength{\rightskip}{0pt plus 5cm}Triangle\+::\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Point1, }
+\item[{{\bf Vector3} const \&}]{a\+Point2, }
+\item[{{\bf Vector3} const \&}]{a\+Point3}
+\end{DoxyParamCaption}
+)}\hypertarget{structTriangle_a72896d9c8eb009a2c928dd6e5a9fdb7b}{}\label{structTriangle_a72896d9c8eb009a2c928dd6e5a9fdb7b}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{Triangle(\+Vector3 const a\+Points[3])}{Triangle(Vector3 const aPoints[3])}}]{\setlength{\rightskip}{0pt plus 5cm}Triangle\+::\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const}]{a\+Points\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{structTriangle_a42baf8fa47d2449f4e978876db52f5f2}{}\label{structTriangle_a42baf8fa47d2449f4e978876db52f5f2}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{Triangle(std\+::vector$<$ Vector3 $>$ const \&a\+Points)}{Triangle(std::vector< Vector3 > const &aPoints)}}]{\setlength{\rightskip}{0pt plus 5cm}Triangle\+::\+Triangle (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Vector3} $>$ const \&}]{a\+Points}
+\end{DoxyParamCaption}
+)}\hypertarget{structTriangle_a136fe10c97f213ead183411dc51b45ba}{}\label{structTriangle_a136fe10c97f213ead183411dc51b45ba}
+\index{Triangle@{Triangle}!````~Triangle@{$\sim$\+Triangle}}
+\index{````~Triangle@{$\sim$\+Triangle}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{$\sim$\+Triangle()}{~Triangle()}}]{\setlength{\rightskip}{0pt plus 5cm}Triangle\+::$\sim$\+Triangle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structTriangle_a5199760a17454f4dc94c855a57e3a152}{}\label{structTriangle_a5199760a17454f4dc94c855a57e3a152}
+
+
+\subsection{Member Function Documentation}
+\index{Triangle@{Triangle}!Get\+Closest\+Point\+To\+Triangle@{Get\+Closest\+Point\+To\+Triangle}}
+\index{Get\+Closest\+Point\+To\+Triangle@{Get\+Closest\+Point\+To\+Triangle}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{Get\+Closest\+Point\+To\+Triangle(\+Vector3 const \&a\+Triangle\+Position, Vector3 const \&a\+Point)}{GetClosestPointToTriangle(Vector3 const &aTrianglePosition, Vector3 const &aPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Triangle\+::\+Get\+Closest\+Point\+To\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Triangle\+Position, }
+\item[{{\bf Vector3} const \&}]{a\+Point}
+\end{DoxyParamCaption}
+)}\hypertarget{structTriangle_adefabddaa068263e5ced8657c874b284}{}\label{structTriangle_adefabddaa068263e5ced8657c874b284}
+
+
+Get the closest point on a triangle to a particular point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Triangle\+Position} & Where the triangle is located. \\
+\hline
+{\em a\+Point} & Point to compare to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Closest point 
+\end{DoxyReturn}
+\index{Triangle@{Triangle}!Get\+Point@{Get\+Point}}
+\index{Get\+Point@{Get\+Point}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{Get\+Point(int index)}{GetPoint(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Triangle\+::\+Get\+Point (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{structTriangle_a63c7e102a5cf63dfb89c2c0b45894b82}{}\label{structTriangle_a63c7e102a5cf63dfb89c2c0b45894b82}
+
+
+Get point by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Point index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Point at index 
+\end{DoxyReturn}
+\index{Triangle@{Triangle}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{Get\+Size(int index)}{GetSize(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}float Triangle\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structTriangle_a121aa12b2557c9f523f435253258bcb0}{}\label{structTriangle_a121aa12b2557c9f523f435253258bcb0}
+
+
+Get max value along axis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Axis (x = 0, y = 1, z = 2) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Size along axis 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{structShape_a878528c42f14532e5fadc9ace7024f68}{Shape}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Triangle@{Triangle}!points@{points}}
+\index{points@{points}!Triangle@{Triangle}}
+\subsubsection[{\texorpdfstring{points}{points}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Triangle\+::points\mbox{[}3\mbox{]}}\hypertarget{structTriangle_a7b7eb4c8f1bff4276ccc8a297e830767}{}\label{structTriangle_a7b7eb4c8f1bff4276ccc8a297e830767}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{Shape_8h}{Shape.\+h}\item 
+Core/\hyperlink{Shape_8cpp}{Shape.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,30 @@
+digraph "ControllerChangeMessage"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="ControllerChangeMessage",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMessage.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mDesc\nmContent" ,fontname="Helvetica"];
+  Node3 [label="HashString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHashString.html"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mCurrentOwner\nmNewOwner" ,fontname="Helvetica"];
+  Node4 [label="GameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameObject.html"];
+  Node4 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mParent" ,fontname="Helvetica"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mManager" ,fontname="Helvetica"];
+  Node5 [label="ObjectManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classObjectManager.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Manager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classManager.html"];
+  Node7 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mApp" ,fontname="Helvetica"];
+  Node7 [label="GameApp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameApp.html"];
+  Node3 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mName\nmFileName" ,fontname="Helvetica"];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mController" ,fontname="Helvetica"];
+  Node8 [label="Controller",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classController.html"];
+  Node9 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Component",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classComponent.html"];
+  Node4 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mOwner" ,fontname="Helvetica"];
+  Node10 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mManager" ,fontname="Helvetica"];
+  Node10 [label="ControllerManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classControllerManager.html"];
+  Node6 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mFactory" ,fontname="Helvetica"];
+  Node11 [label="ControllerFactory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classControllerFactory.html"];
+}

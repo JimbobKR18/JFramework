@@ -1,0 +1,99 @@
+\hypertarget{classQuadraticInterpolation}{}\section{Quadratic\+Interpolation$<$ T $>$ Class Template Reference}
+\label{classQuadraticInterpolation}\index{Quadratic\+Interpolation$<$ T $>$@{Quadratic\+Interpolation$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Quadratic\+Interpolation.\+h$>$}
+
+
+
+Inheritance diagram for Quadratic\+Interpolation$<$ T $>$\+:
+% FIG 0
+
+
+Collaboration diagram for Quadratic\+Interpolation$<$ T $>$\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classQuadraticInterpolation_addd0f72b53a3a96cc3f395169c49b744}{Quadratic\+Interpolation} (T $\ast$a\+Start, T const \&a\+Finish, T const \&a\+Midpoint, float a\+Time)
+\item 
+virtual \hyperlink{classQuadraticInterpolation_a1818ab0e2b53b45f2c8a9da117ff8721}{$\sim$\+Quadratic\+Interpolation} ()
+\item 
+virtual void \hyperlink{classQuadraticInterpolation_a87b29721b198b9ff533f9808dcd08c5e}{Update} (float a\+DT)
+\begin{DoxyCompactList}\small\item\em Updates interpolation, marks finished if complete. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classQuadraticInterpolation_ac704c064043aef8cb452a6c55c793ab2}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Serialize to be usable in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \hyperlink{classQuadraticInterpolation_a18be058d9d18b98195b6a1fcb25ec1c0}{m\+Midpoint}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Quadratic\+Interpolation@{Quadratic\+Interpolation}!Quadratic\+Interpolation@{Quadratic\+Interpolation}}
+\index{Quadratic\+Interpolation@{Quadratic\+Interpolation}!Quadratic\+Interpolation@{Quadratic\+Interpolation}}
+\subsubsection[{\texorpdfstring{Quadratic\+Interpolation(\+T $\ast$a\+Start, T const \&a\+Finish, T const \&a\+Midpoint, float a\+Time)}{QuadraticInterpolation(T *aStart, T const &aFinish, T const &aMidpoint, float aTime)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Quadratic\+Interpolation}$<$ T $>$\+::{\bf Quadratic\+Interpolation} (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{a\+Start, }
+\item[{T const \&}]{a\+Finish, }
+\item[{T const \&}]{a\+Midpoint, }
+\item[{float}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classQuadraticInterpolation_addd0f72b53a3a96cc3f395169c49b744}{}\label{classQuadraticInterpolation_addd0f72b53a3a96cc3f395169c49b744}
+\index{Quadratic\+Interpolation@{Quadratic\+Interpolation}!````~Quadratic\+Interpolation@{$\sim$\+Quadratic\+Interpolation}}
+\index{````~Quadratic\+Interpolation@{$\sim$\+Quadratic\+Interpolation}!Quadratic\+Interpolation@{Quadratic\+Interpolation}}
+\subsubsection[{\texorpdfstring{$\sim$\+Quadratic\+Interpolation()}{~QuadraticInterpolation()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual {\bf Quadratic\+Interpolation}$<$ T $>$\+::$\sim${\bf Quadratic\+Interpolation} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classQuadraticInterpolation_a1818ab0e2b53b45f2c8a9da117ff8721}{}\label{classQuadraticInterpolation_a1818ab0e2b53b45f2c8a9da117ff8721}
+
+
+\subsection{Member Function Documentation}
+\index{Quadratic\+Interpolation@{Quadratic\+Interpolation}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Quadratic\+Interpolation@{Quadratic\+Interpolation}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ static void {\bf Quadratic\+Interpolation}$<$ T $>$\+::Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classQuadraticInterpolation_ac704c064043aef8cb452a6c55c793ab2}{}\label{classQuadraticInterpolation_ac704c064043aef8cb452a6c55c793ab2}
+
+
+Serialize to be usable in L\+UA. 
+
+\index{Quadratic\+Interpolation@{Quadratic\+Interpolation}!Update@{Update}}
+\index{Update@{Update}!Quadratic\+Interpolation@{Quadratic\+Interpolation}}
+\subsubsection[{\texorpdfstring{Update(float a\+D\+T)}{Update(float aDT)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ virtual void {\bf Quadratic\+Interpolation}$<$ T $>$\+::Update (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+DT}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classQuadraticInterpolation_a87b29721b198b9ff533f9808dcd08c5e}{}\label{classQuadraticInterpolation_a87b29721b198b9ff533f9808dcd08c5e}
+
+
+Updates interpolation, marks finished if complete. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+DT} & Change in millis \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classInterpolation_a5fbf76da88d318a02b47b60d04d6df4c}{Interpolation$<$ T $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Quadratic\+Interpolation@{Quadratic\+Interpolation}!m\+Midpoint@{m\+Midpoint}}
+\index{m\+Midpoint@{m\+Midpoint}!Quadratic\+Interpolation@{Quadratic\+Interpolation}}
+\subsubsection[{\texorpdfstring{m\+Midpoint}{mMidpoint}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T {\bf Quadratic\+Interpolation}$<$ T $>$\+::m\+Midpoint\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classQuadraticInterpolation_a18be058d9d18b98195b6a1fcb25ec1c0}{}\label{classQuadraticInterpolation_a18be058d9d18b98195b6a1fcb25ec1c0}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{QuadraticInterpolation_8h}{Quadratic\+Interpolation.\+h}\end{DoxyCompactItemize}

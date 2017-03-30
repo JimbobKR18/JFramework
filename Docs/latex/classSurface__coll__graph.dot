@@ -1,0 +1,46 @@
+digraph "Surface"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Surface",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="Component",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classComponent.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mOwner" ];
+  Node3 [label="GameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameObject.html"];
+  Node3 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mParent" ];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mManager" ];
+  Node4 [label="ObjectManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classObjectManager.html"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="Manager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classManager.html"];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mApp" ];
+  Node6 [label="GameApp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameApp.html"];
+  Node7 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mName\nmFileName" ];
+  Node7 [label="HashString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHashString.html"];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mManager" ];
+  Node8 [label="GraphicsManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGraphicsManager.html"];
+  Node5 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node9 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mScreen" ];
+  Node9 [label="Screen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classScreen.html"];
+  Node10 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mView" ];
+  Node10 [label="View",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classView.html"];
+  Node3 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mTarget" ];
+  Node11 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mInterpolator" ];
+  Node11 [label="Interpolation\< Vector3 \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classInterpolation.html"];
+  Node12 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mRate\nmStart\nmFinish\nmCurrent" ];
+  Node12 [label="Vector3",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVector3.html"];
+  Node12 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mMinBoundary\nmMaxBoundary\nmHalfSize" ];
+  Node13 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mTransform" ];
+  Node13 [label="Transform",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classTransform.html"];
+  Node2 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node14 -> Node13 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mRotation" ];
+  Node14 [label="Matrix33",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structMatrix33.html"];
+  Node12 -> Node13 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mSize\nmPosition\nmScale" ];
+  Node15 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mBatchRenderSorter\nmDepthRenderSorter" ];
+  Node15 [label="ScreenRenderSorter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classScreenRenderSorter.html"];
+  Node12 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mTextureSize" ];
+  Node16 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mColor" ];
+  Node16 [label="Vector4",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVector4.html"];
+  Node17 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mTexCoord" ];
+  Node17 [label="TextureCoordinates",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classTextureCoordinates.html"];
+  Node7 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mFileName" ];
+}

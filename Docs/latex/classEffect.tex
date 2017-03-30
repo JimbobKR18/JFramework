@@ -1,0 +1,141 @@
+\hypertarget{classEffect}{}\section{Effect Class Reference}
+\label{classEffect}\index{Effect@{Effect}}
+
+
+{\ttfamily \#include $<$Effect.\+h$>$}
+
+
+
+Collaboration diagram for Effect\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEffect_aeb0b5eab511175c4157d099c45414ee3}{Effect} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name, \hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, float a\+Time)
+\item 
+virtual \hyperlink{classEffect_ac26c0a394247e14c9081f875522b5b66}{$\sim$\+Effect} ()
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classEffect_aaafd0b2b2646eaeafa8759a84f05d09e}{Get\+Object} () const 
+\begin{DoxyCompactList}\small\item\em Get target object. \end{DoxyCompactList}\item 
+float const \hyperlink{classEffect_a619980c82823af0948c17eb0f9469d2f}{Get\+Time} () const 
+\begin{DoxyCompactList}\small\item\em Get time alive. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} const \hyperlink{classEffect_a2014218e0e580141475a552a9ec5f81c}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get name. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classEffect_ae146f7a956e013976673c7b1d7c648da}{Update} (float const a\+DT)=0
+\item 
+virtual void \hyperlink{classEffect_afe1ac2b345c0d969ebb332d9c4c3f9b2}{Complete} ()=0
+\item 
+virtual bool \hyperlink{classEffect_a02ca4543b018f16c8fe8dad95d183e77}{Is\+Complete} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classEffect_aa62e8f6d07f4f8ce745573887155bcdb}{m\+Object}
+\item 
+float \hyperlink{classEffect_a2b4ab5a6f40f7e05e5453bd188f2d39d}{m\+Time}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classEffect_a2df4d5e229b7fa297144f74adbd83b92}{m\+Name}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Effect@{Effect}!Effect@{Effect}}
+\index{Effect@{Effect}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{Effect(\+Hash\+String const \&a\+Name, Game\+Object $\ast$a\+Object, float a\+Time)}{Effect(HashString const &aName, GameObject *aObject, float aTime)}}]{\setlength{\rightskip}{0pt plus 5cm}Effect\+::\+Effect (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name, }
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{float}]{a\+Time}
+\end{DoxyParamCaption}
+)}\hypertarget{classEffect_aeb0b5eab511175c4157d099c45414ee3}{}\label{classEffect_aeb0b5eab511175c4157d099c45414ee3}
+\index{Effect@{Effect}!````~Effect@{$\sim$\+Effect}}
+\index{````~Effect@{$\sim$\+Effect}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{$\sim$\+Effect()}{~Effect()}}]{\setlength{\rightskip}{0pt plus 5cm}Effect\+::$\sim$\+Effect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEffect_ac26c0a394247e14c9081f875522b5b66}{}\label{classEffect_ac26c0a394247e14c9081f875522b5b66}
+
+
+\subsection{Member Function Documentation}
+\index{Effect@{Effect}!Complete@{Complete}}
+\index{Complete@{Complete}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{Complete()=0}{Complete()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Effect\+::\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classEffect_afe1ac2b345c0d969ebb332d9c4c3f9b2}{}\label{classEffect_afe1ac2b345c0d969ebb332d9c4c3f9b2}
+\index{Effect@{Effect}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const Effect\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classEffect_a2014218e0e580141475a552a9ec5f81c}{}\label{classEffect_a2014218e0e580141475a552a9ec5f81c}
+
+
+Get name. 
+
+\begin{DoxyReturn}{Returns}
+Name 
+\end{DoxyReturn}
+\index{Effect@{Effect}!Get\+Object@{Get\+Object}}
+\index{Get\+Object@{Get\+Object}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{Get\+Object() const }{GetObject() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Effect\+::\+Get\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classEffect_aaafd0b2b2646eaeafa8759a84f05d09e}{}\label{classEffect_aaafd0b2b2646eaeafa8759a84f05d09e}
+
+
+Get target object. 
+
+\begin{DoxyReturn}{Returns}
+Object 
+\end{DoxyReturn}
+\index{Effect@{Effect}!Get\+Time@{Get\+Time}}
+\index{Get\+Time@{Get\+Time}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{Get\+Time() const }{GetTime() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Effect\+::\+Get\+Time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classEffect_a619980c82823af0948c17eb0f9469d2f}{}\label{classEffect_a619980c82823af0948c17eb0f9469d2f}
+
+
+Get time alive. 
+
+\begin{DoxyReturn}{Returns}
+Time alive 
+\end{DoxyReturn}
+\index{Effect@{Effect}!Is\+Complete@{Is\+Complete}}
+\index{Is\+Complete@{Is\+Complete}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{Is\+Complete()=0}{IsComplete()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Effect\+::\+Is\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classEffect_a02ca4543b018f16c8fe8dad95d183e77}{}\label{classEffect_a02ca4543b018f16c8fe8dad95d183e77}
+\index{Effect@{Effect}!Update@{Update}}
+\index{Update@{Update}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{Update(float const a\+D\+T)=0}{Update(float const aDT)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Effect\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+DT}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classEffect_ae146f7a956e013976673c7b1d7c648da}{}\label{classEffect_ae146f7a956e013976673c7b1d7c648da}
+
+
+\subsection{Member Data Documentation}
+\index{Effect@{Effect}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Effect\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classEffect_a2df4d5e229b7fa297144f74adbd83b92}{}\label{classEffect_a2df4d5e229b7fa297144f74adbd83b92}
+\index{Effect@{Effect}!m\+Object@{m\+Object}}
+\index{m\+Object@{m\+Object}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{m\+Object}{mObject}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Effect\+::m\+Object\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classEffect_aa62e8f6d07f4f8ce745573887155bcdb}{}\label{classEffect_aa62e8f6d07f4f8ce745573887155bcdb}
+\index{Effect@{Effect}!m\+Time@{m\+Time}}
+\index{m\+Time@{m\+Time}!Effect@{Effect}}
+\subsubsection[{\texorpdfstring{m\+Time}{mTime}}]{\setlength{\rightskip}{0pt plus 5cm}float Effect\+::m\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classEffect_a2b4ab5a6f40f7e05e5453bd188f2d39d}{}\label{classEffect_a2b4ab5a6f40f7e05e5453bd188f2d39d}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\+Effects/\hyperlink{Effect_8h}{Effect.\+h}\item 
+Logic/\+Effects/\hyperlink{Effect_8cpp}{Effect.\+cpp}\end{DoxyCompactItemize}

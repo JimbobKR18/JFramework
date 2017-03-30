@@ -1,0 +1,363 @@
+\hypertarget{classSLB_1_1Table}{}\section{S\+LB\+:\+:Table Class Reference}
+\label{classSLB_1_1Table}\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Table\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Table\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classSLB_1_1Table_a81b3d3919cab27164c174b20b2e08159}{S\+L\+B\+\_\+\+Map} (\hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String}, \hyperlink{classSLB_1_1ref__ptr}{ref\+\_\+ptr}$<$ \hyperlink{classSLB_1_1Object}{Object} $>$) Elements
+\item 
+\hyperlink{classSLB_1_1Table_a9432294b70728c1bef84102a008cc7a8}{Table} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&separator=\char`\"{}\char`\"{}, bool cacheable=false)
+\item 
+void \hyperlink{classSLB_1_1Table_ab97726256ebec72474bd211bd4eca48d}{erase} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&)
+\item 
+\hyperlink{classSLB_1_1Object}{Object} $\ast$ \hyperlink{classSLB_1_1Table_af39d798ee42d25a67131463b8a0be8f9}{get} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&)
+\item 
+void \hyperlink{classSLB_1_1Table_a4cb5196754409280090ae7a833da75ff}{set} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&, \hyperlink{classSLB_1_1Object}{Object} $\ast$)
+\item 
+bool \hyperlink{classSLB_1_1Table_ad9c7d43d059da99cadfe7e25a9920666}{is\+Cacheable} ()
+\item 
+void \hyperlink{classSLB_1_1Table_a698055e7e62b57b4b327186505ed719c}{set\+Cache} (lua\+\_\+\+State $\ast$L)
+\item 
+void \hyperlink{classSLB_1_1Table_a1760fb5d87dfd381b898693eafd7a64a}{get\+Cache} (lua\+\_\+\+State $\ast$L)
+\item 
+const Elements \& \hyperlink{classSLB_1_1Table_ab07c93171d636a89f81080fd24b0abbe}{get\+Elements\+Map} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classSLB_1_1Table_a949bbb655ae00da229f77232c0b7bce4}{$\sim$\+Table} ()
+\item 
+\hyperlink{classSLB_1_1Object}{Object} $\ast$ \hyperlink{classSLB_1_1Table_a914732ee6593aef4f0629c8c718f97e9}{raw\+Get} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&)
+\item 
+void \hyperlink{classSLB_1_1Table_ad910663a91955a96a7e04e61cadced35}{raw\+Set} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&, \hyperlink{classSLB_1_1Object}{Object} $\ast$)
+\item 
+void \hyperlink{classSLB_1_1Table_afcc07b67095621f623cdb0c18ae60743}{push\+Implementation} (lua\+\_\+\+State $\ast$)
+\item 
+virtual int \hyperlink{classSLB_1_1Table_a9d7d33989f4a6087e8db437dbb0d7e6f}{\+\_\+\+\_\+index} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual int \hyperlink{classSLB_1_1Table_a591a737b21c091ddcc8b189031ac4d99}{\+\_\+\+\_\+newindex} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual int \hyperlink{classSLB_1_1Table_a5bfae69bf2935ebfcf4e3a501e6aacb3}{\+\_\+\+\_\+call} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual int \hyperlink{classSLB_1_1Table_ac71599fffec3209df55537c5caad57ff}{\+\_\+\+\_\+garbage\+Collector} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual int \hyperlink{classSLB_1_1Table_ace332f5f18bd8dad6a62a5b6e0240eab}{\+\_\+\+\_\+tostring} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual int \hyperlink{classSLB_1_1Table_ab5285befee70dfe8110b19bc72b3db7b}{\+\_\+\+\_\+eq} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classSLB_1_1Table_a46c30e007a87de06a0ca7b915affd474}{cache\+Table\+Index} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Elements \hyperlink{classSLB_1_1Table_a95ddcf8929bf42d7b3294fdc94eac87b}{\+\_\+elements}
+\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::pair$<$ \hyperlink{classSLB_1_1Table}{Table} $\ast$, const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} $>$ \hyperlink{classSLB_1_1Table_abd5bba39a3038a146461da289daf55e7}{Table\+Find}
+\item 
+typedef int(Table\+::$\ast$ \hyperlink{classSLB_1_1Table_a9517177ecd7a0bf985ff9635b0771a32}{Table\+Member}) (lua\+\_\+\+State $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classSLB_1_1Table_a77fd6ea0f4b55bde5b88192485ed98ea}{\+\_\+\+\_\+index\+Proxy} (lua\+\_\+\+State $\ast$L)
+\item 
+void \hyperlink{classSLB_1_1Table_a3b5ef978dedb67fa0aa0d6c0ec716fc0}{push\+Meta} (lua\+\_\+\+State $\ast$L, \hyperlink{classSLB_1_1Table_a9517177ecd7a0bf985ff9635b0771a32}{Table\+Member}) const 
+\item 
+\hyperlink{classSLB_1_1Table_abd5bba39a3038a146461da289daf55e7}{Table\+Find} \hyperlink{classSLB_1_1Table_a4d3c22de7a035aee476fbb7931ee38bf}{get\+Table} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&key, bool create)
+\item 
+\hyperlink{classSLB_1_1Table_af8c48e8793ed673d44b92d6466517a3b}{Table} (const \hyperlink{classSLB_1_1Table}{Table} \&)
+\item 
+\hyperlink{classSLB_1_1Table}{Table} \& \hyperlink{classSLB_1_1Table_a4ff06bde10538dc033bb4f56bf33d7d1}{operator=} (const \hyperlink{classSLB_1_1Table}{Table} \&)
+\item 
+\hyperlink{classSLB_1_1Table_a87ec8041f1452456f81babe04f5be4a9}{S\+L\+B\+\_\+\+C\+L\+A\+SS} (\hyperlink{classSLB_1_1Table}{Table}, \hyperlink{classSLB_1_1Object}{Object})
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classSLB_1_1Table_a66aeaedac830b1fcc1d0941c5804ebdc}{\+\_\+\+\_\+meta} (lua\+\_\+\+State $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classSLB_1_1Table_a89c1681219db93cc26ca2cb85ff72a6c}{\+\_\+cacheable}
+\item 
+\hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \hyperlink{classSLB_1_1Table_a45ae383146c7d53a5d52e395e926f429}{\+\_\+separator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!Table\+Find@{Table\+Find}}
+\index{Table\+Find@{Table\+Find}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{Table\+Find}{TableFind}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::pair$<${\bf Table}$\ast$,const {\bf String}$>$ {\bf S\+L\+B\+::\+Table\+::\+Table\+Find}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_abd5bba39a3038a146461da289daf55e7}{}\label{classSLB_1_1Table_abd5bba39a3038a146461da289daf55e7}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!Table\+Member@{Table\+Member}}
+\index{Table\+Member@{Table\+Member}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{Table\+Member}{TableMember}}]{\setlength{\rightskip}{0pt plus 5cm}typedef int(Table\+::$\ast$ S\+L\+B\+::\+Table\+::\+Table\+Member) (lua\+\_\+\+State $\ast$)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a9517177ecd7a0bf985ff9635b0771a32}{}\label{classSLB_1_1Table_a9517177ecd7a0bf985ff9635b0771a32}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!Table@{Table}}
+\index{Table@{Table}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{Table(const String \&separator="""", bool cacheable=false)}{Table(const String &separator="", bool cacheable=false)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Table\+::\+Table (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{separator = {\ttfamily \char`\"{}\char`\"{}}, }
+\item[{bool}]{cacheable = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Table_a9432294b70728c1bef84102a008cc7a8}{}\label{classSLB_1_1Table_a9432294b70728c1bef84102a008cc7a8}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!````~Table@{$\sim$\+Table}}
+\index{````~Table@{$\sim$\+Table}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{$\sim$\+Table()}{~Table()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Table\+::$\sim$\+Table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_a949bbb655ae00da229f77232c0b7bce4}{}\label{classSLB_1_1Table_a949bbb655ae00da229f77232c0b7bce4}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!Table@{Table}}
+\index{Table@{Table}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{Table(const Table \&)}{Table(const Table &)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Table\+::\+Table (
+\begin{DoxyParamCaption}
+\item[{const {\bf Table} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_af8c48e8793ed673d44b92d6466517a3b}{}\label{classSLB_1_1Table_af8c48e8793ed673d44b92d6466517a3b}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+call@{\+\_\+\+\_\+call}}
+\index{\+\_\+\+\_\+call@{\+\_\+\+\_\+call}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+call(lua\+\_\+\+State $\ast$\+L)}{__call(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+call (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_a5bfae69bf2935ebfcf4e3a501e6aacb3}{}\label{classSLB_1_1Table_a5bfae69bf2935ebfcf4e3a501e6aacb3}
+
+
+Reimplemented in \hyperlink{classSLB_1_1ClassInfo_a5623c7acc3ced156949d134e2b7cfae5}{S\+L\+B\+::\+Class\+Info}, and \hyperlink{structSLB_1_1InternalHybridSubclass_ac72c413da1ba6e549bf89029b0f4cf61}{S\+L\+B\+::\+Internal\+Hybrid\+Subclass}.
+
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+eq@{\+\_\+\+\_\+eq}}
+\index{\+\_\+\+\_\+eq@{\+\_\+\+\_\+eq}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+eq(lua\+\_\+\+State $\ast$\+L)}{__eq(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+eq (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_ab5285befee70dfe8110b19bc72b3db7b}{}\label{classSLB_1_1Table_ab5285befee70dfe8110b19bc72b3db7b}
+
+
+Reimplemented in \hyperlink{classSLB_1_1ClassInfo_a6ebf6dcff0d474a47c010a47223bd057}{S\+L\+B\+::\+Class\+Info}.
+
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+garbage\+Collector@{\+\_\+\+\_\+garbage\+Collector}}
+\index{\+\_\+\+\_\+garbage\+Collector@{\+\_\+\+\_\+garbage\+Collector}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+garbage\+Collector(lua\+\_\+\+State $\ast$\+L)}{__garbageCollector(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+garbage\+Collector (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_ac71599fffec3209df55537c5caad57ff}{}\label{classSLB_1_1Table_ac71599fffec3209df55537c5caad57ff}
+
+
+Reimplemented in \hyperlink{classSLB_1_1ClassInfo_ac22b7a114052a4e100ad9d1303d978bb}{S\+L\+B\+::\+Class\+Info}.
+
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+index@{\+\_\+\+\_\+index}}
+\index{\+\_\+\+\_\+index@{\+\_\+\+\_\+index}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+index(lua\+\_\+\+State $\ast$\+L)}{__index(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_a9d7d33989f4a6087e8db437dbb0d7e6f}{}\label{classSLB_1_1Table_a9d7d33989f4a6087e8db437dbb0d7e6f}
+will try to find the object, if not present will return -\/1. If this function is not overriden not finding an object will raise an error It is highly recommended to call this method in subclasses of \hyperlink{classSLB_1_1Table}{Table} first. 
+
+Reimplemented in \hyperlink{classSLB_1_1ClassInfo_a4f176572e43c2cb9632b9be20cce7287}{S\+L\+B\+::\+Class\+Info}.
+
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+index\+Proxy@{\+\_\+\+\_\+index\+Proxy}}
+\index{\+\_\+\+\_\+index\+Proxy@{\+\_\+\+\_\+index\+Proxy}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+index\+Proxy(lua\+\_\+\+State $\ast$\+L)}{__indexProxy(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+index\+Proxy (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a77fd6ea0f4b55bde5b88192485ed98ea}{}\label{classSLB_1_1Table_a77fd6ea0f4b55bde5b88192485ed98ea}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+meta@{\+\_\+\+\_\+meta}}
+\index{\+\_\+\+\_\+meta@{\+\_\+\+\_\+meta}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+meta(lua\+\_\+\+State $\ast$)}{__meta(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+meta (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a66aeaedac830b1fcc1d0941c5804ebdc}{}\label{classSLB_1_1Table_a66aeaedac830b1fcc1d0941c5804ebdc}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+newindex@{\+\_\+\+\_\+newindex}}
+\index{\+\_\+\+\_\+newindex@{\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+newindex(lua\+\_\+\+State $\ast$\+L)}{__newindex(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_a591a737b21c091ddcc8b189031ac4d99}{}\label{classSLB_1_1Table_a591a737b21c091ddcc8b189031ac4d99}
+
+
+Reimplemented in \hyperlink{classSLB_1_1ClassInfo_a9d8cda2482f6c89e027529d50407416e}{S\+L\+B\+::\+Class\+Info}, and \hyperlink{structSLB_1_1InternalHybridSubclass_ada36156e86d527456b585d107036798e}{S\+L\+B\+::\+Internal\+Hybrid\+Subclass}.
+
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+\+\_\+tostring@{\+\_\+\+\_\+tostring}}
+\index{\+\_\+\+\_\+tostring@{\+\_\+\+\_\+tostring}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+tostring(lua\+\_\+\+State $\ast$\+L)}{__tostring(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Table\+::\+\_\+\+\_\+tostring (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_ace332f5f18bd8dad6a62a5b6e0240eab}{}\label{classSLB_1_1Table_ace332f5f18bd8dad6a62a5b6e0240eab}
+
+
+Reimplemented in \hyperlink{classSLB_1_1ClassInfo_a86a70a3be08393ca1f98d26296aacc0d}{S\+L\+B\+::\+Class\+Info}.
+
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!cache\+Table\+Index@{cache\+Table\+Index}}
+\index{cache\+Table\+Index@{cache\+Table\+Index}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{cache\+Table\+Index()}{cacheTableIndex()}}]{\setlength{\rightskip}{0pt plus 5cm}static int S\+L\+B\+::\+Table\+::cache\+Table\+Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1Table_a46c30e007a87de06a0ca7b915affd474}{}\label{classSLB_1_1Table_a46c30e007a87de06a0ca7b915affd474}
+this function returns the index where to find the cache table that \+\_\+\+\_\+index method uses if \+\_\+cacheable is true. This method must N\+OT be called outside metamethod\textquotesingle{}s implementation. \index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!erase@{erase}}
+\index{erase@{erase}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{erase(const String \&)}{erase(const String &)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Table\+::erase (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Table_ab97726256ebec72474bd211bd4eca48d}{}\label{classSLB_1_1Table_ab97726256ebec72474bd211bd4eca48d}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!get@{get}}
+\index{get@{get}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{get(const String \&)}{get(const String &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object} $\ast$ S\+L\+B\+::\+Table\+::get (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Table_af39d798ee42d25a67131463b8a0be8f9}{}\label{classSLB_1_1Table_af39d798ee42d25a67131463b8a0be8f9}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!get\+Cache@{get\+Cache}}
+\index{get\+Cache@{get\+Cache}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{get\+Cache(lua\+\_\+\+State $\ast$\+L)}{getCache(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Table\+::get\+Cache (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Table_a1760fb5d87dfd381b898693eafd7a64a}{}\label{classSLB_1_1Table_a1760fb5d87dfd381b898693eafd7a64a}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!get\+Elements\+Map@{get\+Elements\+Map}}
+\index{get\+Elements\+Map@{get\+Elements\+Map}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{get\+Elements\+Map() const }{getElementsMap() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Elements\& S\+L\+B\+::\+Table\+::get\+Elements\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Table_ab07c93171d636a89f81080fd24b0abbe}{}\label{classSLB_1_1Table_ab07c93171d636a89f81080fd24b0abbe}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!get\+Table@{get\+Table}}
+\index{get\+Table@{get\+Table}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{get\+Table(const String \&key, bool create)}{getTable(const String &key, bool create)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Table\+::\+Table\+Find} S\+L\+B\+::\+Table\+::get\+Table (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{key, }
+\item[{bool}]{create}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a4d3c22de7a035aee476fbb7931ee38bf}{}\label{classSLB_1_1Table_a4d3c22de7a035aee476fbb7931ee38bf}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!is\+Cacheable@{is\+Cacheable}}
+\index{is\+Cacheable@{is\+Cacheable}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{is\+Cacheable()}{isCacheable()}}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Table\+::is\+Cacheable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Table_ad9c7d43d059da99cadfe7e25a9920666}{}\label{classSLB_1_1Table_ad9c7d43d059da99cadfe7e25a9920666}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!operator=@{operator=}}
+\index{operator=@{operator=}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{operator=(const Table \&)}{operator=(const Table &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Table}\& S\+L\+B\+::\+Table\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Table} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a4ff06bde10538dc033bb4f56bf33d7d1}{}\label{classSLB_1_1Table_a4ff06bde10538dc033bb4f56bf33d7d1}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!push\+Implementation@{push\+Implementation}}
+\index{push\+Implementation@{push\+Implementation}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{push\+Implementation(lua\+\_\+\+State $\ast$)}{pushImplementation(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Table\+::push\+Implementation (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Table_afcc07b67095621f623cdb0c18ae60743}{}\label{classSLB_1_1Table_afcc07b67095621f623cdb0c18ae60743}
+
+
+Implements \hyperlink{classSLB_1_1Object_a3dddf6a764c19ed37f6af797f0b0b453}{S\+L\+B\+::\+Object}.
+
+
+
+Reimplemented in \hyperlink{classSLB_1_1ClassInfo_a1d54e506c709d4c1b61b542682da4731}{S\+L\+B\+::\+Class\+Info}.
+
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!push\+Meta@{push\+Meta}}
+\index{push\+Meta@{push\+Meta}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{push\+Meta(lua\+\_\+\+State $\ast$\+L, Table\+Member) const }{pushMeta(lua_State *L, TableMember) const }}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Table\+::push\+Meta (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L, }
+\item[{{\bf Table\+::\+Table\+Member}}]{member}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a3b5ef978dedb67fa0aa0d6c0ec716fc0}{}\label{classSLB_1_1Table_a3b5ef978dedb67fa0aa0d6c0ec716fc0}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!raw\+Get@{raw\+Get}}
+\index{raw\+Get@{raw\+Get}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{raw\+Get(const String \&)}{rawGet(const String &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object} $\ast$ S\+L\+B\+::\+Table\+::raw\+Get (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Table_a914732ee6593aef4f0629c8c718f97e9}{}\label{classSLB_1_1Table_a914732ee6593aef4f0629c8c718f97e9}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!raw\+Set@{raw\+Set}}
+\index{raw\+Set@{raw\+Set}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{raw\+Set(const String \&, Object $\ast$)}{rawSet(const String &, Object *)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Table\+::raw\+Set (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name, }
+\item[{{\bf Object} $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1Table_ad910663a91955a96a7e04e61cadced35}{}\label{classSLB_1_1Table_ad910663a91955a96a7e04e61cadced35}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!set@{set}}
+\index{set@{set}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{set(const String \&, Object $\ast$)}{set(const String &, Object *)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Table\+::set (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name, }
+\item[{{\bf Object} $\ast$}]{obj}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Table_a4cb5196754409280090ae7a833da75ff}{}\label{classSLB_1_1Table_a4cb5196754409280090ae7a833da75ff}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!set\+Cache@{set\+Cache}}
+\index{set\+Cache@{set\+Cache}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{set\+Cache(lua\+\_\+\+State $\ast$\+L)}{setCache(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Table\+::set\+Cache (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Table_a698055e7e62b57b4b327186505ed719c}{}\label{classSLB_1_1Table_a698055e7e62b57b4b327186505ed719c}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!S\+L\+B\+\_\+\+C\+L\+A\+SS@{S\+L\+B\+\_\+\+C\+L\+A\+SS}}
+\index{S\+L\+B\+\_\+\+C\+L\+A\+SS@{S\+L\+B\+\_\+\+C\+L\+A\+SS}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+C\+L\+A\+S\+S(\+Table, Object)}{SLB_CLASS(Table, Object)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Table\+::\+S\+L\+B\+\_\+\+C\+L\+A\+SS (
+\begin{DoxyParamCaption}
+\item[{{\bf Table}}]{, }
+\item[{{\bf Object}}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a87ec8041f1452456f81babe04f5be4a9}{}\label{classSLB_1_1Table_a87ec8041f1452456f81babe04f5be4a9}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}}
+\index{S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+Map(\+String, ref\+\_\+ptr$<$ Object $>$) Elements}{SLB_Map(String, ref_ptr< Object >) Elements}}]{\setlength{\rightskip}{0pt plus 5cm}typedef S\+L\+B\+::\+Table\+::\+S\+L\+B\+\_\+\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf String}}]{, }
+\item[{{\bf ref\+\_\+ptr}$<$ {\bf Object} $>$}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Table_a81b3d3919cab27164c174b20b2e08159}{}\label{classSLB_1_1Table_a81b3d3919cab27164c174b20b2e08159}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+cacheable@{\+\_\+cacheable}}
+\index{\+\_\+cacheable@{\+\_\+cacheable}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+cacheable}{_cacheable}}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Table\+::\+\_\+cacheable\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a89c1681219db93cc26ca2cb85ff72a6c}{}\label{classSLB_1_1Table_a89c1681219db93cc26ca2cb85ff72a6c}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+elements@{\+\_\+elements}}
+\index{\+\_\+elements@{\+\_\+elements}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+elements}{_elements}}]{\setlength{\rightskip}{0pt plus 5cm}Elements S\+L\+B\+::\+Table\+::\+\_\+elements\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Table_a95ddcf8929bf42d7b3294fdc94eac87b}{}\label{classSLB_1_1Table_a95ddcf8929bf42d7b3294fdc94eac87b}
+\index{S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}!\+\_\+separator@{\+\_\+separator}}
+\index{\+\_\+separator@{\+\_\+separator}!S\+L\+B\+::\+Table@{S\+L\+B\+::\+Table}}
+\subsubsection[{\texorpdfstring{\+\_\+separator}{_separator}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf String} S\+L\+B\+::\+Table\+::\+\_\+separator\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Table_a45ae383146c7d53a5d52e395e926f429}{}\label{classSLB_1_1Table_a45ae383146c7d53a5d52e395e926f429}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

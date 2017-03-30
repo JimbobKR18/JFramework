@@ -1,0 +1,162 @@
+\hypertarget{classNetworkManager}{}\section{Network\+Manager Class Reference}
+\label{classNetworkManager}\index{Network\+Manager@{Network\+Manager}}
+
+
+{\ttfamily \#include $<$Network\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Network\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Network\+Manager\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classNetworkManager_a5aaf71c4aa7a2efab7f1dbae02312280}{Network\+Manager} ()
+\item 
+virtual \hyperlink{classNetworkManager_a2cfe4223139cf58587a9f066b956cb23}{$\sim$\+Network\+Manager} ()
+\item 
+void \hyperlink{classNetworkManager_a025ee7c6f48d637ad8f7da5cc1214747}{Send\+Network\+Message} (\hyperlink{classHashString}{Hash\+String} const \&a\+I\+P\+Address, \hyperlink{classHashString}{Hash\+String} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message across network. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} const \hyperlink{classNetworkManager_ab30223e649c6c704eac910c3880d3931}{Receive\+Network\+Message} (\hyperlink{classHashString}{Hash\+String} const \&a\+I\+P\+Address)
+\begin{DoxyCompactList}\small\item\em Receive message from IP address. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classNetworkManager_ad71efb4104426ea7201edaff52ba9a00}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classNetworkManager_a5877be08a550014e491d6993d1fc137e}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classNetworkManager_a3bfc52f52ebcec23eacf456660f1e9a6}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message across network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \hyperlink{classHashString}{Hash\+String}, \hyperlink{classNetworkPort}{Network\+Port} $\ast$ $>$ \hyperlink{classNetworkManager_aa5827f4eed34725c94069da93f983170}{m\+Ports}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Network\+Manager@{Network\+Manager}!Network\+Manager@{Network\+Manager}}
+\index{Network\+Manager@{Network\+Manager}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{Network\+Manager()}{NetworkManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Network\+Manager\+::\+Network\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classNetworkManager_a5aaf71c4aa7a2efab7f1dbae02312280}{}\label{classNetworkManager_a5aaf71c4aa7a2efab7f1dbae02312280}
+\index{Network\+Manager@{Network\+Manager}!````~Network\+Manager@{$\sim$\+Network\+Manager}}
+\index{````~Network\+Manager@{$\sim$\+Network\+Manager}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Network\+Manager()}{~NetworkManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Network\+Manager\+::$\sim$\+Network\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkManager_a2cfe4223139cf58587a9f066b956cb23}{}\label{classNetworkManager_a2cfe4223139cf58587a9f066b956cb23}
+
+
+\subsection{Member Function Documentation}
+\index{Network\+Manager@{Network\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkManager_a3bfc52f52ebcec23eacf456660f1e9a6}{}\label{classNetworkManager_a3bfc52f52ebcec23eacf456660f1e9a6}
+
+
+Send message across network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Network\+Manager@{Network\+Manager}!Receive\+Network\+Message@{Receive\+Network\+Message}}
+\index{Receive\+Network\+Message@{Receive\+Network\+Message}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{Receive\+Network\+Message(\+Hash\+String const \&a\+I\+P\+Address)}{ReceiveNetworkMessage(HashString const &aIPAddress)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const Network\+Manager\+::\+Receive\+Network\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+I\+P\+Address}
+\end{DoxyParamCaption}
+)}\hypertarget{classNetworkManager_ab30223e649c6c704eac910c3880d3931}{}\label{classNetworkManager_ab30223e649c6c704eac910c3880d3931}
+
+
+Receive message from IP address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+I\+P\+Address} & IP address to receive from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classMessage}{Message} as string 
+\end{DoxyReturn}
+\index{Network\+Manager@{Network\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkManager_a5877be08a550014e491d6993d1fc137e}{}\label{classNetworkManager_a5877be08a550014e491d6993d1fc137e}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to do nothing with \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Network\+Manager@{Network\+Manager}!Send\+Network\+Message@{Send\+Network\+Message}}
+\index{Send\+Network\+Message@{Send\+Network\+Message}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Network\+Message(\+Hash\+String const \&a\+I\+P\+Address, Hash\+String const \&a\+Message)}{SendNetworkMessage(HashString const &aIPAddress, HashString const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+Manager\+::\+Send\+Network\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+I\+P\+Address, }
+\item[{{\bf Hash\+String} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)}\hypertarget{classNetworkManager_a025ee7c6f48d637ad8f7da5cc1214747}{}\label{classNetworkManager_a025ee7c6f48d637ad8f7da5cc1214747}
+
+
+Send message across network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+I\+P\+Address} & IP address to send to. \\
+\hline
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+\index{Network\+Manager@{Network\+Manager}!Update@{Update}}
+\index{Update@{Update}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classNetworkManager_ad71efb4104426ea7201edaff52ba9a00}{}\label{classNetworkManager_ad71efb4104426ea7201edaff52ba9a00}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Network\+Manager@{Network\+Manager}!m\+Ports@{m\+Ports}}
+\index{m\+Ports@{m\+Ports}!Network\+Manager@{Network\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Ports}{mPorts}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Hash\+String},{\bf Network\+Port}$\ast$$>$ Network\+Manager\+::m\+Ports\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classNetworkManager_aa5827f4eed34725c94069da93f983170}{}\label{classNetworkManager_aa5827f4eed34725c94069da93f983170}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{NetworkManager_8h}{Network\+Manager.\+h}\item 
+Managers/\hyperlink{NetworkManager_8cpp}{Network\+Manager.\+cpp}\end{DoxyCompactItemize}

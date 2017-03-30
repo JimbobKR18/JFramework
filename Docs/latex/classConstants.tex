@@ -1,0 +1,154 @@
+\hypertarget{classConstants}{}\section{Constants Class Reference}
+\label{classConstants}\index{Constants@{Constants}}
+
+
+{\ttfamily \#include $<$Constants.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classConstants_af395b3c1d6f0577f4880a21a257aa1db}{Constants} ()
+\item 
+virtual \hyperlink{classConstants_a2dce6c6db3f1ba4114550606fae1765a}{$\sim$\+Constants} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classHashString}{Hash\+String} const \& \hyperlink{classConstants_ad7c0dc070ec520b5342cd1c03a683ab2}{Get\+String} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Get string from values map, asserts if nothign found. \end{DoxyCompactList}\item 
+static int const \hyperlink{classConstants_a715f6423feff0f8ec1d29dfcd0f4a1d5}{Get\+Integer} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Get int from values map, asserts if nothign found. \end{DoxyCompactList}\item 
+static float const \hyperlink{classConstants_a7f6c3d9debd16948336bcd8ffdf8317e}{Get\+Float} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Get float from values map, asserts if nothign found. \end{DoxyCompactList}\item 
+static bool const \hyperlink{classConstants_a17cb93f9da17f0dd92119cc569c03628}{Get\+Boolean} (\hyperlink{classHashString}{Hash\+String} const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Get bool from values map, asserts if nothign found. \end{DoxyCompactList}\item 
+static void \hyperlink{classConstants_a64aa942f3bab48c5678cd851ac684c82}{Deserialize} ()
+\begin{DoxyCompactList}\small\item\em Read in values from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::map$<$ \hyperlink{classHashString}{Hash\+String}, \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{classConstants_a0401951e4652f084ecd5ea6bf1a252e5}{Value\+Container}
+\item 
+typedef Value\+Container\+::iterator \hyperlink{classConstants_acdb756c711b1c53b6d05f335a87a995c}{Value\+Container\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classConstants_a0401951e4652f084ecd5ea6bf1a252e5}{Value\+Container} \hyperlink{classConstants_acb61aa474aa95a8421d4bdca4d21faf7}{m\+Values}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Constants@{Constants}!Value\+Container@{Value\+Container}}
+\index{Value\+Container@{Value\+Container}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Value\+Container}{ValueContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::map$<${\bf Hash\+String}, {\bf Hash\+String}$>$ {\bf Constants\+::\+Value\+Container}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classConstants_a0401951e4652f084ecd5ea6bf1a252e5}{}\label{classConstants_a0401951e4652f084ecd5ea6bf1a252e5}
+\index{Constants@{Constants}!Value\+Container\+IT@{Value\+Container\+IT}}
+\index{Value\+Container\+IT@{Value\+Container\+IT}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Value\+Container\+IT}{ValueContainerIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Value\+Container\+::iterator {\bf Constants\+::\+Value\+Container\+IT}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classConstants_acdb756c711b1c53b6d05f335a87a995c}{}\label{classConstants_acdb756c711b1c53b6d05f335a87a995c}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Constants@{Constants}!Constants@{Constants}}
+\index{Constants@{Constants}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Constants()}{Constants()}}]{\setlength{\rightskip}{0pt plus 5cm}Constants\+::\+Constants (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classConstants_af395b3c1d6f0577f4880a21a257aa1db}{}\label{classConstants_af395b3c1d6f0577f4880a21a257aa1db}
+\index{Constants@{Constants}!````~Constants@{$\sim$\+Constants}}
+\index{````~Constants@{$\sim$\+Constants}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{$\sim$\+Constants()}{~Constants()}}]{\setlength{\rightskip}{0pt plus 5cm}Constants\+::$\sim$\+Constants (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classConstants_a2dce6c6db3f1ba4114550606fae1765a}{}\label{classConstants_a2dce6c6db3f1ba4114550606fae1765a}
+
+
+\subsection{Member Function Documentation}
+\index{Constants@{Constants}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Deserialize()}{Deserialize()}}]{\setlength{\rightskip}{0pt plus 5cm}void Constants\+::\+Deserialize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classConstants_a64aa942f3bab48c5678cd851ac684c82}{}\label{classConstants_a64aa942f3bab48c5678cd851ac684c82}
+
+
+Read in values from file. 
+
+\index{Constants@{Constants}!Get\+Boolean@{Get\+Boolean}}
+\index{Get\+Boolean@{Get\+Boolean}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Get\+Boolean(\+Hash\+String const \&a\+Value)}{GetBoolean(HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}bool const Constants\+::\+Get\+Boolean (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classConstants_a17cb93f9da17f0dd92119cc569c03628}{}\label{classConstants_a17cb93f9da17f0dd92119cc569c03628}
+
+
+Get bool from values map, asserts if nothign found. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & Value to find. \\
+\hline
+\end{DoxyParams}
+\index{Constants@{Constants}!Get\+Float@{Get\+Float}}
+\index{Get\+Float@{Get\+Float}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Get\+Float(\+Hash\+String const \&a\+Value)}{GetFloat(HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}float const Constants\+::\+Get\+Float (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classConstants_a7f6c3d9debd16948336bcd8ffdf8317e}{}\label{classConstants_a7f6c3d9debd16948336bcd8ffdf8317e}
+
+
+Get float from values map, asserts if nothign found. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & Value to find. \\
+\hline
+\end{DoxyParams}
+\index{Constants@{Constants}!Get\+Integer@{Get\+Integer}}
+\index{Get\+Integer@{Get\+Integer}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Get\+Integer(\+Hash\+String const \&a\+Value)}{GetInteger(HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}int const Constants\+::\+Get\+Integer (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classConstants_a715f6423feff0f8ec1d29dfcd0f4a1d5}{}\label{classConstants_a715f6423feff0f8ec1d29dfcd0f4a1d5}
+
+
+Get int from values map, asserts if nothign found. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & Value to find. \\
+\hline
+\end{DoxyParams}
+\index{Constants@{Constants}!Get\+String@{Get\+String}}
+\index{Get\+String@{Get\+String}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{Get\+String(\+Hash\+String const \&a\+Value)}{GetString(HashString const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const \& Constants\+::\+Get\+String (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classConstants_ad7c0dc070ec520b5342cd1c03a683ab2}{}\label{classConstants_ad7c0dc070ec520b5342cd1c03a683ab2}
+
+
+Get string from values map, asserts if nothign found. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & Value to find. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Constants@{Constants}!m\+Values@{m\+Values}}
+\index{m\+Values@{m\+Values}!Constants@{Constants}}
+\subsubsection[{\texorpdfstring{m\+Values}{mValues}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Constants\+::\+Value\+Container} Constants\+::m\+Values\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classConstants_acb61aa474aa95a8421d4bdca4d21faf7}{}\label{classConstants_acb61aa474aa95a8421d4bdca4d21faf7}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{Constants_8h}{Constants.\+h}\item 
+Logic/\hyperlink{Constants_8cpp}{Constants.\+cpp}\end{DoxyCompactItemize}

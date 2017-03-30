@@ -1,0 +1,148 @@
+\hypertarget{classTextParser}{}\section{Text\+Parser Class Reference}
+\label{classTextParser}\index{Text\+Parser@{Text\+Parser}}
+
+
+{\ttfamily \#include $<$Text\+Parser.\+h$>$}
+
+
+
+Inheritance diagram for Text\+Parser\+:
+% FIG 0
+
+
+Collaboration diagram for Text\+Parser\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTextParser_a9978373f77f9a5ba676158999d57c1ed}{Text\+Parser} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{TextParser_8h_a55362bc0aeda7fca6f18d4be3d0d1c06}{Text\+Mode} const \&a\+Mode=\hyperlink{TextParser_8h_a55362bc0aeda7fca6f18d4be3d0d1c06a4f139294c29235db806091c9383a3ba1}{M\+O\+D\+E\+\_\+\+I\+N\+P\+UT})
+\item 
+\hyperlink{classTextParser_ae1b0a1ef43e3bcf731a179ad48738643}{$\sim$\+Text\+Parser} ()
+\item 
+void \hyperlink{classTextParser_a0e46d85aa94313099411cef24c0fd164}{Parse} ()
+\begin{DoxyCompactList}\small\item\em Parse text file. \end{DoxyCompactList}\item 
+void \hyperlink{classTextParser_a3565eef49bd6e0a41910a1f115e04ed4}{Write} ()
+\begin{DoxyCompactList}\small\item\em Write out to text file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTextParser_ac246535a926ca63118b093ef21ae97ed}{Write\+Root} (\hyperlink{classRoot}{Root} $\ast$a\+Root)
+\begin{DoxyCompactList}\small\item\em Write out root and all children below it. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classTextParser_ad269ababd03345aa37c897a42caa408d}{Insert\+Indents} ()
+\begin{DoxyCompactList}\small\item\em Indentation helper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::stringstream \hyperlink{classTextParser_aa18a207bceefbfe78e70dab14e2af6e7}{m\+Input}
+\item 
+std\+::ofstream \hyperlink{classTextParser_a32aec422aa1445456603e8ea7f34aa4d}{m\+Output}
+\item 
+bool \hyperlink{classTextParser_aa8f0a8b2c17891006c1d6cf1041053ef}{m\+Written\+Out}
+\item 
+\hyperlink{TextParser_8h_a55362bc0aeda7fca6f18d4be3d0d1c06}{Text\+Mode} \hyperlink{classTextParser_a4402e5628f927e1e7078d211bc0ac35c}{m\+Mode}
+\item 
+int \hyperlink{classTextParser_a5509f1d47c88fe55f24b43f826643af4}{m\+Current\+Indent}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Text\+Parser@{Text\+Parser}!Text\+Parser@{Text\+Parser}}
+\index{Text\+Parser@{Text\+Parser}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{Text\+Parser(\+Hash\+String const \&a\+Filename, Text\+Mode const \&a\+Mode=\+M\+O\+D\+E\+\_\+\+I\+N\+P\+U\+T)}{TextParser(HashString const &aFilename, TextMode const &aMode=MODE_INPUT)}}]{\setlength{\rightskip}{0pt plus 5cm}Text\+Parser\+::\+Text\+Parser (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Text\+Mode} const \&}]{a\+Mode = {\ttfamily {\bf M\+O\+D\+E\+\_\+\+I\+N\+P\+UT}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextParser_a9978373f77f9a5ba676158999d57c1ed}{}\label{classTextParser_a9978373f77f9a5ba676158999d57c1ed}
+\index{Text\+Parser@{Text\+Parser}!````~Text\+Parser@{$\sim$\+Text\+Parser}}
+\index{````~Text\+Parser@{$\sim$\+Text\+Parser}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{$\sim$\+Text\+Parser()}{~TextParser()}}]{\setlength{\rightskip}{0pt plus 5cm}Text\+Parser\+::$\sim$\+Text\+Parser (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTextParser_ae1b0a1ef43e3bcf731a179ad48738643}{}\label{classTextParser_ae1b0a1ef43e3bcf731a179ad48738643}
+
+
+\subsection{Member Function Documentation}
+\index{Text\+Parser@{Text\+Parser}!Insert\+Indents@{Insert\+Indents}}
+\index{Insert\+Indents@{Insert\+Indents}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{Insert\+Indents()}{InsertIndents()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Text\+Parser\+::\+Insert\+Indents (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextParser_ad269ababd03345aa37c897a42caa408d}{}\label{classTextParser_ad269ababd03345aa37c897a42caa408d}
+
+
+Indentation helper. 
+
+\index{Text\+Parser@{Text\+Parser}!Parse@{Parse}}
+\index{Parse@{Parse}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{Parse()}{Parse()}}]{\setlength{\rightskip}{0pt plus 5cm}void Text\+Parser\+::\+Parse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTextParser_a0e46d85aa94313099411cef24c0fd164}{}\label{classTextParser_a0e46d85aa94313099411cef24c0fd164}
+
+
+Parse text file. 
+
+
+
+Implements \hyperlink{classParser_ac4a951ef940a816dde511d7f5c173ab9}{Parser}.
+
+\index{Text\+Parser@{Text\+Parser}!Write@{Write}}
+\index{Write@{Write}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{Write()}{Write()}}]{\setlength{\rightskip}{0pt plus 5cm}void Text\+Parser\+::\+Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTextParser_a3565eef49bd6e0a41910a1f115e04ed4}{}\label{classTextParser_a3565eef49bd6e0a41910a1f115e04ed4}
+
+
+Write out to text file. 
+
+
+
+Implements \hyperlink{classParser_a925ea4ac32e6a4feb78fe83d81a8ac84}{Parser}.
+
+\index{Text\+Parser@{Text\+Parser}!Write\+Root@{Write\+Root}}
+\index{Write\+Root@{Write\+Root}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{Write\+Root(\+Root $\ast$a\+Root)}{WriteRoot(Root *aRoot)}}]{\setlength{\rightskip}{0pt plus 5cm}void Text\+Parser\+::\+Write\+Root (
+\begin{DoxyParamCaption}
+\item[{{\bf Root} $\ast$}]{a\+Root}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextParser_ac246535a926ca63118b093ef21ae97ed}{}\label{classTextParser_ac246535a926ca63118b093ef21ae97ed}
+
+
+Write out root and all children below it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Root} & \hyperlink{classRoot}{Root} to write \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Text\+Parser@{Text\+Parser}!m\+Current\+Indent@{m\+Current\+Indent}}
+\index{m\+Current\+Indent@{m\+Current\+Indent}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{m\+Current\+Indent}{mCurrentIndent}}]{\setlength{\rightskip}{0pt plus 5cm}int Text\+Parser\+::m\+Current\+Indent\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextParser_a5509f1d47c88fe55f24b43f826643af4}{}\label{classTextParser_a5509f1d47c88fe55f24b43f826643af4}
+\index{Text\+Parser@{Text\+Parser}!m\+Input@{m\+Input}}
+\index{m\+Input@{m\+Input}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{m\+Input}{mInput}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::stringstream Text\+Parser\+::m\+Input\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextParser_aa18a207bceefbfe78e70dab14e2af6e7}{}\label{classTextParser_aa18a207bceefbfe78e70dab14e2af6e7}
+\index{Text\+Parser@{Text\+Parser}!m\+Mode@{m\+Mode}}
+\index{m\+Mode@{m\+Mode}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{m\+Mode}{mMode}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Text\+Mode} Text\+Parser\+::m\+Mode\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextParser_a4402e5628f927e1e7078d211bc0ac35c}{}\label{classTextParser_a4402e5628f927e1e7078d211bc0ac35c}
+\index{Text\+Parser@{Text\+Parser}!m\+Output@{m\+Output}}
+\index{m\+Output@{m\+Output}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{m\+Output}{mOutput}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ofstream Text\+Parser\+::m\+Output\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextParser_a32aec422aa1445456603e8ea7f34aa4d}{}\label{classTextParser_a32aec422aa1445456603e8ea7f34aa4d}
+\index{Text\+Parser@{Text\+Parser}!m\+Written\+Out@{m\+Written\+Out}}
+\index{m\+Written\+Out@{m\+Written\+Out}!Text\+Parser@{Text\+Parser}}
+\subsubsection[{\texorpdfstring{m\+Written\+Out}{mWrittenOut}}]{\setlength{\rightskip}{0pt plus 5cm}bool Text\+Parser\+::m\+Written\+Out\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTextParser_aa8f0a8b2c17891006c1d6cf1041053ef}{}\label{classTextParser_aa8f0a8b2c17891006c1d6cf1041053ef}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Parsers/\hyperlink{TextParser_8h}{Text\+Parser.\+h}\item 
+Parsers/\hyperlink{TextParser_8cpp}{Text\+Parser.\+cpp}\end{DoxyCompactItemize}

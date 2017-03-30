@@ -1,0 +1,68 @@
+\hypertarget{SLB_8cpp}{}\section{L\+U\+A/\+S\+LB.cpp File Reference}
+\label{SLB_8cpp}\index{L\+U\+A/\+S\+L\+B.\+cpp@{L\+U\+A/\+S\+L\+B.\+cpp}}
+{\ttfamily \#include \char`\"{}S\+L\+B.\+hpp\char`\"{}}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$cassert$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+Include dependency graph for S\+L\+B.\+cpp\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSLB_1_1LuaCFunction}{S\+L\+B\+::\+Lua\+C\+Function}
+\item 
+struct \hyperlink{structSLB_1_1InternalHybridSubclass}{S\+L\+B\+::\+Internal\+Hybrid\+Subclass}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceSLB}{S\+LB}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{SLB_8hpp_a97cc3bccffa16becf8dfd517dbb6bd88}{S\+L\+B\+\_\+\+E\+X\+P\+O\+RT} void \hyperlink{namespaceSLB_a77db498530d3d864ae836d813adb16e0}{S\+L\+B\+::\+Set\+Memory\+Management} (Malloc\+Fn malloc\+Fn, Free\+Fn free\+Fn)
+\item 
+\hyperlink{SLB_8hpp_a97cc3bccffa16becf8dfd517dbb6bd88}{S\+L\+B\+\_\+\+E\+X\+P\+O\+RT} void $\ast$ \hyperlink{namespaceSLB_aac4d15a823dfe7d83f5b615521c50cea}{S\+L\+B\+::\+Malloc} (size\+\_\+t sz)
+\item 
+\hyperlink{SLB_8hpp_a97cc3bccffa16becf8dfd517dbb6bd88}{S\+L\+B\+\_\+\+E\+X\+P\+O\+RT} void \hyperlink{namespaceSLB_a0fcdafc8b7518480af90c3022436fdc2}{S\+L\+B\+::\+Free} (void $\ast$ptr)
+\item 
+const Hybrid\+Base $\ast$ \hyperlink{namespaceSLB_a9dbcc8be5046ed4e4a9e51adcdf8f2fa}{S\+L\+B\+::get\+\_\+hybrid} (lua\+\_\+\+State $\ast$L, int pos)
+\item 
+int \hyperlink{namespaceSLB_afbfd289a5aadb332beb05a99118e1760}{S\+L\+B\+::\+S\+L\+B\+\_\+type} (lua\+\_\+\+State $\ast$L)
+\item 
+int \hyperlink{namespaceSLB_a7d63bcc58a8531a65fdf7ba41a8ef16b}{S\+L\+B\+::\+S\+L\+B\+\_\+rawptr} (lua\+\_\+\+State $\ast$L)
+\item 
+int \hyperlink{namespaceSLB_a2aab8e64bdc00b0c67be7b479b91ca8c}{S\+L\+B\+::\+S\+L\+B\+\_\+copy} (lua\+\_\+\+State $\ast$L)
+\item 
+int \hyperlink{namespaceSLB_a71d363d0bda64e01b45dfc897c831a1c}{S\+L\+B\+::\+S\+L\+B\+\_\+using\+\_\+index} (lua\+\_\+\+State $\ast$L)
+\item 
+int \hyperlink{namespaceSLB_ac5fea559cc4c82ecb598bd043fabef2f}{S\+L\+B\+::\+S\+L\+B\+\_\+using} (lua\+\_\+\+State $\ast$L)
+\item 
+int \hyperlink{namespaceSLB_a4c3fea270a926c28617e37ad715e6f96}{S\+L\+B\+::\+S\+L\+B\+\_\+isA} (lua\+\_\+\+State $\ast$L)
+\item 
+int \hyperlink{namespaceSLB_a9c31adf36851032622757edc18f7e588}{S\+L\+B\+::\+S\+L\+B\+\_\+all\+Types} (lua\+\_\+\+State $\ast$L)
+\item 
+static void \hyperlink{namespaceSLB_a49dddc52a5da5382ebe06ca5fa5aad0b}{S\+L\+B\+::\+Default\+Print\+Callback} (Script $\ast$s, const char $\ast$str, size\+\_\+t length)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{SLB_8cpp_a297d359b0b79200b15bc071fc4b83171}{S\+L\+B\+\_\+\+D\+E\+B\+U\+G\+\_\+\+L\+E\+V\+E\+L\+\_\+\+T\+AB} = 0
+\item 
+\hyperlink{Threading_8h_a2cdb1fa98da4079d3a6c4ad3e2afe4af}{Mutex} \hyperlink{namespaceSLB_a55c5c9ee31bece3a7a46f0a0bb07ce4e}{S\+L\+B\+::manager\+Mutex}
+\item 
+static const lua\+L\+\_\+\+Reg \hyperlink{namespaceSLB_a24890659ebf4f33957ac8063262c08f5}{S\+L\+B\+::\+S\+L\+B\+\_\+funcs} \mbox{[}$\,$\mbox{]}
+\item 
+const char $\ast$ \hyperlink{namespaceSLB_ae45ca5473089acb030141c1d089fbfaf}{S\+L\+B\+::objects\+Table\+\_\+name} = \char`\"{}S\+L\+B\+\_\+\+Objects\char`\"{}
+\item 
+const char $\ast$ \hyperlink{namespaceSLB_ac54699c98c017e6330ffbee3bff3f99a}{S\+L\+B\+::ref\+Table\+\_\+name} = \char`\"{}S\+L\+B\+\_\+\+References\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\index{S\+L\+B.\+cpp@{S\+L\+B.\+cpp}!S\+L\+B\+\_\+\+D\+E\+B\+U\+G\+\_\+\+L\+E\+V\+E\+L\+\_\+\+T\+AB@{S\+L\+B\+\_\+\+D\+E\+B\+U\+G\+\_\+\+L\+E\+V\+E\+L\+\_\+\+T\+AB}}
+\index{S\+L\+B\+\_\+\+D\+E\+B\+U\+G\+\_\+\+L\+E\+V\+E\+L\+\_\+\+T\+AB@{S\+L\+B\+\_\+\+D\+E\+B\+U\+G\+\_\+\+L\+E\+V\+E\+L\+\_\+\+T\+AB}!S\+L\+B.\+cpp@{S\+L\+B.\+cpp}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+D\+E\+B\+U\+G\+\_\+\+L\+E\+V\+E\+L\+\_\+\+T\+AB}{SLB_DEBUG_LEVEL_TAB}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+\_\+\+D\+E\+B\+U\+G\+\_\+\+L\+E\+V\+E\+L\+\_\+\+T\+AB = 0}\hypertarget{SLB_8cpp_a297d359b0b79200b15bc071fc4b83171}{}\label{SLB_8cpp_a297d359b0b79200b15bc071fc4b83171}

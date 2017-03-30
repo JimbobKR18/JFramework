@@ -1,0 +1,331 @@
+\hypertarget{classSLB_1_1Script}{}\section{S\+LB\+:\+:Script Class Reference}
+\label{classSLB_1_1Script}\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Script\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Script\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \hyperlink{classSLB_1_1Script_a2d7bd6aeb062fbf4ee45a73b693f389f}{Print\+Callback}) (\hyperlink{classSLB_1_1Script}{Script} $\ast$, const char $\ast$, size\+\_\+t)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1Script_a8b811ec9a4b93babdfa34b82a9aa0b01}{Script} (\hyperlink{classSLB_1_1Manager}{Manager} $\ast$m=\hyperlink{classSLB_1_1Manager_a174e4612520c3412d10a68e659651677}{Manager\+::default\+Manager}())
+\item 
+virtual \hyperlink{classSLB_1_1Script_a3bb825498c578e69efc20a7ba36c9028}{$\sim$\+Script} ()
+\item 
+void \hyperlink{classSLB_1_1Script_a7e79e36eddef21eece679374f485d68a}{load\+Default\+Libs} (bool b)
+\item 
+void \hyperlink{classSLB_1_1Script_ad8b393a0d488b3239b624f19dd98678b}{reset\+State} ()
+\item 
+void \hyperlink{classSLB_1_1Script_a145124c72a2d02aeefcd2372358ba8b0}{call\+GC} ()
+\item 
+size\+\_\+t \hyperlink{classSLB_1_1Script_aad6fceba4dcfbf0cd56b0540e52c0f20}{mem\+Usage} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of Kb of memory used by the script. \end{DoxyCompactList}\item 
+void \hyperlink{classSLB_1_1Script_ad69eabd420cf37d757c0d15c2d0df90d}{set\+Error\+Handler} (\hyperlink{classSLB_1_1ErrorHandler}{Error\+Handler} $\ast$h)
+\item 
+\hyperlink{classSLB_1_1Manager}{Manager} $\ast$ \hyperlink{classSLB_1_1Script_a9affefabf2b1f247f47bceffa544840b}{get\+Manager} ()
+\begin{DoxyCompactList}\small\item\em Returns the manager that this \hyperlink{classSLB_1_1Script}{Script} is using. \end{DoxyCompactList}\item 
+const \hyperlink{classSLB_1_1Manager}{Manager} $\ast$ \hyperlink{classSLB_1_1Script_a89b243428a8899fa3fe0773c85d7aaf0}{get\+Manager} () const 
+\item 
+{\footnotesize template$<$class T $>$ }\\void \hyperlink{classSLB_1_1Script_a8dccd38e45c6020be6c5cb0bbb9013a0}{set} (const char $\ast$name, T value)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \hyperlink{classSLB_1_1Script_abbff8802bd8f6b94cb50c976126ae2ab}{get} (const char $\ast$name)
+\item 
+const char $\ast$ \hyperlink{classSLB_1_1Script_acad3b571031620024e74320ca25e0108}{get\+Last\+Error} () const 
+\item 
+void \hyperlink{classSLB_1_1Script_a276f322240b070b8d8f3495f67343910}{set\+Print\+Callback} (\hyperlink{classSLB_1_1Script_a2d7bd6aeb062fbf4ee45a73b693f389f}{Print\+Callback})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void $\ast$ \hyperlink{classSLB_1_1Script_a7e26074d7437d72c2d6c4008a972ee17}{allocator} (void $\ast$ud, void $\ast$ptr, size\+\_\+t osize, size\+\_\+t nsize)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void do\+File(const char $\ast$filename) \hyperlink{SLB_8hpp_a26bfc413cbc785925c2a46cfbab5d398}{S\+L\+B\+\_\+\+T\+H\+R\+OW}((std boo \hyperlink{classSLB_1_1Script_a98df15c9ceb5740e79b6ba3246265125}{safe\+Do\+File} )(const char $\ast$filename)
+\item 
+void do\+String(const char $\ast$code\+Chunk, const char $\ast$where\+\_\+hint=\char`\"{} \hyperlink{classSLB_1_1Script_a7ee7f0a0a77753eea4705df0ff3ec23c}{safe\+Do\+String} \mbox{[}S\+LB\mbox{]}\char`\"{}) S\+L\+B\+\_\+\+T\+H\+R\+OW((std bool(const char $\ast$code\+Chunk, const char $\ast$where\+\_\+hint=\char`\"{}\mbox{[}S\+LB\mbox{]}\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classSLB_1_1Script_a47ad9f9311e7c811bbbd0b2ae52ff053}{on\+New\+State} (lua\+\_\+\+State $\ast$)
+\item 
+virtual void \hyperlink{classSLB_1_1Script_ad35568c29c745f12da9905e4707e411a}{on\+Close\+State} (lua\+\_\+\+State $\ast$)
+\item 
+virtual void \hyperlink{classSLB_1_1Script_a5be6d5e78407aea5c9bc2256d1dac220}{on\+GC} (lua\+\_\+\+State $\ast$)
+\item 
+void \hyperlink{classSLB_1_1Script_acb29012f949e24af2345f78e83dc7a1a}{set\+Allocator} (lua\+\_\+\+Alloc f, void $\ast$ud=0)
+\item 
+lua\+\_\+\+State $\ast$ \hyperlink{classSLB_1_1Script_a11dc0b4f0c09d22558d1a5abdb184cbb}{get\+State} ()
+\item 
+void \hyperlink{classSLB_1_1Script_ab78ccc9cee734a099a166a1a4dd38d72}{close} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1Script_a3a9ac825f6732610f447fb9f9fabe709}{Script} (const \hyperlink{classSLB_1_1Script}{Script} \&s)
+\item 
+\hyperlink{classSLB_1_1Script}{Script} \& \hyperlink{classSLB_1_1Script_adffe870c40a0cb5835a15617c607bfe1}{operator=} (const \hyperlink{classSLB_1_1Script}{Script} \&)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classSLB_1_1Script_a65e64bf8902548fd6359cb5ea1b0ac9c}{Print\+Hook} (lua\+\_\+\+State $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1Manager}{Manager} $\ast$ \hyperlink{classSLB_1_1Script_a0d7ceb9274c1020d7c30ccb36d9375f4}{\+\_\+manager}
+\item 
+lua\+\_\+\+State $\ast$ \hyperlink{classSLB_1_1Script_af8ce3649196c31e3d0c4ad3dcb7d7322}{\+\_\+lua\+\_\+state}
+\item 
+\hyperlink{classSLB_1_1Script_a2d7bd6aeb062fbf4ee45a73b693f389f}{Print\+Callback} \hyperlink{classSLB_1_1Script_ae6e01149454d32d41e22a595d5f05837}{\+\_\+print\+Callback}
+\item 
+lua\+\_\+\+Alloc \hyperlink{classSLB_1_1Script_ab7ca953cf90c89b26f06cf2832eaf4c8}{\+\_\+allocator}
+\item 
+void $\ast$ \hyperlink{classSLB_1_1Script_a0313b2a8ca1d0d200d4dfa0ac6d0edfd}{\+\_\+allocator\+\_\+ud}
+\item 
+std\+::string \hyperlink{classSLB_1_1Script_a4b5f819243c5b043146c1df07098962d}{\+\_\+last\+Error}
+\item 
+\hyperlink{classSLB_1_1ErrorHandler}{Error\+Handler} $\ast$ \hyperlink{classSLB_1_1Script_aefc5042a29d6834ea1b788013eda4fe9}{\+\_\+error\+Handler}
+\item 
+bool \hyperlink{classSLB_1_1Script_ac8bf6199c25e1d522576de18baf46be3}{\+\_\+load\+Default\+Libs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!Print\+Callback@{Print\+Callback}}
+\index{Print\+Callback@{Print\+Callback}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{Print\+Callback}{PrintCallback}}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ S\+L\+B\+::\+Script\+::\+Print\+Callback) ({\bf Script} $\ast$,const char $\ast$,size\+\_\+t)}\hypertarget{classSLB_1_1Script_a2d7bd6aeb062fbf4ee45a73b693f389f}{}\label{classSLB_1_1Script_a2d7bd6aeb062fbf4ee45a73b693f389f}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!Script@{Script}}
+\index{Script@{Script}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{Script(\+Manager $\ast$m=\+Manager\+::default\+Manager())}{Script(Manager *m=Manager::defaultManager())}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Script\+::\+Script (
+\begin{DoxyParamCaption}
+\item[{{\bf Manager} $\ast$}]{m = {\ttfamily {\bf Manager\+::default\+Manager}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classSLB_1_1Script_a8b811ec9a4b93babdfa34b82a9aa0b01}{}\label{classSLB_1_1Script_a8b811ec9a4b93babdfa34b82a9aa0b01}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!````~Script@{$\sim$\+Script}}
+\index{````~Script@{$\sim$\+Script}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{$\sim$\+Script()}{~Script()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Script\+::$\sim$\+Script (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSLB_1_1Script_a3bb825498c578e69efc20a7ba36c9028}{}\label{classSLB_1_1Script_a3bb825498c578e69efc20a7ba36c9028}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!Script@{Script}}
+\index{Script@{Script}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{Script(const Script \&s)}{Script(const Script &s)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Script\+::\+Script (
+\begin{DoxyParamCaption}
+\item[{const {\bf Script} \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_a3a9ac825f6732610f447fb9f9fabe709}{}\label{classSLB_1_1Script_a3a9ac825f6732610f447fb9f9fabe709}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!allocator@{allocator}}
+\index{allocator@{allocator}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{allocator(void $\ast$ud, void $\ast$ptr, size\+\_\+t osize, size\+\_\+t nsize)}{allocator(void *ud, void *ptr, size_t osize, size_t nsize)}}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ S\+L\+B\+::\+Script\+::allocator (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ud, }
+\item[{void $\ast$}]{ptr, }
+\item[{size\+\_\+t}]{osize, }
+\item[{size\+\_\+t}]{nsize}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSLB_1_1Script_a7e26074d7437d72c2d6c4008a972ee17}{}\label{classSLB_1_1Script_a7e26074d7437d72c2d6c4008a972ee17}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!call\+GC@{call\+GC}}
+\index{call\+GC@{call\+GC}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{call\+G\+C()}{callGC()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Script\+::call\+GC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Script_a145124c72a2d02aeefcd2372358ba8b0}{}\label{classSLB_1_1Script_a145124c72a2d02aeefcd2372358ba8b0}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!close@{close}}
+\index{close@{close}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{close()}{close()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Script\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Script_ab78ccc9cee734a099a166a1a4dd38d72}{}\label{classSLB_1_1Script_ab78ccc9cee734a099a166a1a4dd38d72}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!get@{get}}
+\index{get@{get}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{get(const char $\ast$name)}{get(const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T S\+L\+B\+::\+Script\+::get (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Script_abbff8802bd8f6b94cb50c976126ae2ab}{}\label{classSLB_1_1Script_abbff8802bd8f6b94cb50c976126ae2ab}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!get\+Last\+Error@{get\+Last\+Error}}
+\index{get\+Last\+Error@{get\+Last\+Error}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{get\+Last\+Error() const }{getLastError() const }}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ S\+L\+B\+::\+Script\+::get\+Last\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Script_acad3b571031620024e74320ca25e0108}{}\label{classSLB_1_1Script_acad3b571031620024e74320ca25e0108}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!get\+Manager@{get\+Manager}}
+\index{get\+Manager@{get\+Manager}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{get\+Manager()}{getManager()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager}$\ast$ S\+L\+B\+::\+Script\+::get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Script_a9affefabf2b1f247f47bceffa544840b}{}\label{classSLB_1_1Script_a9affefabf2b1f247f47bceffa544840b}
+
+
+Returns the manager that this \hyperlink{classSLB_1_1Script}{Script} is using. 
+
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!get\+Manager@{get\+Manager}}
+\index{get\+Manager@{get\+Manager}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{get\+Manager() const }{getManager() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Manager}$\ast$ S\+L\+B\+::\+Script\+::get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Script_a89b243428a8899fa3fe0773c85d7aaf0}{}\label{classSLB_1_1Script_a89b243428a8899fa3fe0773c85d7aaf0}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!get\+State@{get\+State}}
+\index{get\+State@{get\+State}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{get\+State()}{getState()}}]{\setlength{\rightskip}{0pt plus 5cm}lua\+\_\+\+State $\ast$ S\+L\+B\+::\+Script\+::get\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Script_a11dc0b4f0c09d22558d1a5abdb184cbb}{}\label{classSLB_1_1Script_a11dc0b4f0c09d22558d1a5abdb184cbb}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!load\+Default\+Libs@{load\+Default\+Libs}}
+\index{load\+Default\+Libs@{load\+Default\+Libs}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{load\+Default\+Libs(bool b)}{loadDefaultLibs(bool b)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Script\+::load\+Default\+Libs (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Script_a7e79e36eddef21eece679374f485d68a}{}\label{classSLB_1_1Script_a7e79e36eddef21eece679374f485d68a}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!mem\+Usage@{mem\+Usage}}
+\index{mem\+Usage@{mem\+Usage}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{mem\+Usage()}{memUsage()}}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t S\+L\+B\+::\+Script\+::mem\+Usage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Script_aad6fceba4dcfbf0cd56b0540e52c0f20}{}\label{classSLB_1_1Script_aad6fceba4dcfbf0cd56b0540e52c0f20}
+
+
+Returns the number of Kb of memory used by the script. 
+
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!on\+Close\+State@{on\+Close\+State}}
+\index{on\+Close\+State@{on\+Close\+State}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{on\+Close\+State(lua\+\_\+\+State $\ast$)}{onCloseState(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void S\+L\+B\+::\+Script\+::on\+Close\+State (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Script_ad35568c29c745f12da9905e4707e411a}{}\label{classSLB_1_1Script_ad35568c29c745f12da9905e4707e411a}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!on\+GC@{on\+GC}}
+\index{on\+GC@{on\+GC}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{on\+G\+C(lua\+\_\+\+State $\ast$)}{onGC(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void S\+L\+B\+::\+Script\+::on\+GC (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Script_a5be6d5e78407aea5c9bc2256d1dac220}{}\label{classSLB_1_1Script_a5be6d5e78407aea5c9bc2256d1dac220}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!on\+New\+State@{on\+New\+State}}
+\index{on\+New\+State@{on\+New\+State}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{on\+New\+State(lua\+\_\+\+State $\ast$)}{onNewState(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void S\+L\+B\+::\+Script\+::on\+New\+State (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Script_a47ad9f9311e7c811bbbd0b2ae52ff053}{}\label{classSLB_1_1Script_a47ad9f9311e7c811bbbd0b2ae52ff053}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!operator=@{operator=}}
+\index{operator=@{operator=}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{operator=(const Script \&)}{operator=(const Script &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Script}\& S\+L\+B\+::\+Script\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Script} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_adffe870c40a0cb5835a15617c607bfe1}{}\label{classSLB_1_1Script_adffe870c40a0cb5835a15617c607bfe1}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!Print\+Hook@{Print\+Hook}}
+\index{Print\+Hook@{Print\+Hook}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{Print\+Hook(lua\+\_\+\+State $\ast$)}{PrintHook(lua_State *)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Script\+::\+Print\+Hook (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1Script_a65e64bf8902548fd6359cb5ea1b0ac9c}{}\label{classSLB_1_1Script_a65e64bf8902548fd6359cb5ea1b0ac9c}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!reset\+State@{reset\+State}}
+\index{reset\+State@{reset\+State}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{reset\+State()}{resetState()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Script\+::reset\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Script_ad8b393a0d488b3239b624f19dd98678b}{}\label{classSLB_1_1Script_ad8b393a0d488b3239b624f19dd98678b}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!set@{set}}
+\index{set@{set}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{set(const char $\ast$name, T value)}{set(const char *name, T value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void S\+L\+B\+::\+Script\+::set (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{T}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Script_a8dccd38e45c6020be6c5cb0bbb9013a0}{}\label{classSLB_1_1Script_a8dccd38e45c6020be6c5cb0bbb9013a0}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!set\+Allocator@{set\+Allocator}}
+\index{set\+Allocator@{set\+Allocator}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{set\+Allocator(lua\+\_\+\+Alloc f, void $\ast$ud=0)}{setAllocator(lua_Alloc f, void *ud=0)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Script\+::set\+Allocator (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+Alloc}]{f, }
+\item[{void $\ast$}]{ud = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Script_acb29012f949e24af2345f78e83dc7a1a}{}\label{classSLB_1_1Script_acb29012f949e24af2345f78e83dc7a1a}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!set\+Error\+Handler@{set\+Error\+Handler}}
+\index{set\+Error\+Handler@{set\+Error\+Handler}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{set\+Error\+Handler(\+Error\+Handler $\ast$h)}{setErrorHandler(ErrorHandler *h)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Script\+::set\+Error\+Handler (
+\begin{DoxyParamCaption}
+\item[{{\bf Error\+Handler} $\ast$}]{h}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Script_ad69eabd420cf37d757c0d15c2d0df90d}{}\label{classSLB_1_1Script_ad69eabd420cf37d757c0d15c2d0df90d}
+Pass a new \hyperlink{classSLB_1_1ErrorHandler}{Error\+Handler}, the error handler will be part of the object and it will be destroyed when the object is destroyed. \index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!set\+Print\+Callback@{set\+Print\+Callback}}
+\index{set\+Print\+Callback@{set\+Print\+Callback}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{set\+Print\+Callback(\+Print\+Callback)}{setPrintCallback(PrintCallback)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Script\+::set\+Print\+Callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Print\+Callback}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Script_a276f322240b070b8d8f3495f67343910}{}\label{classSLB_1_1Script_a276f322240b070b8d8f3495f67343910}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+allocator@{\+\_\+allocator}}
+\index{\+\_\+allocator@{\+\_\+allocator}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+allocator}{_allocator}}]{\setlength{\rightskip}{0pt plus 5cm}lua\+\_\+\+Alloc S\+L\+B\+::\+Script\+::\+\_\+allocator\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_ab7ca953cf90c89b26f06cf2832eaf4c8}{}\label{classSLB_1_1Script_ab7ca953cf90c89b26f06cf2832eaf4c8}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+allocator\+\_\+ud@{\+\_\+allocator\+\_\+ud}}
+\index{\+\_\+allocator\+\_\+ud@{\+\_\+allocator\+\_\+ud}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+allocator\+\_\+ud}{_allocator_ud}}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ S\+L\+B\+::\+Script\+::\+\_\+allocator\+\_\+ud\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_a0313b2a8ca1d0d200d4dfa0ac6d0edfd}{}\label{classSLB_1_1Script_a0313b2a8ca1d0d200d4dfa0ac6d0edfd}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+error\+Handler@{\+\_\+error\+Handler}}
+\index{\+\_\+error\+Handler@{\+\_\+error\+Handler}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+error\+Handler}{_errorHandler}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Error\+Handler}$\ast$ S\+L\+B\+::\+Script\+::\+\_\+error\+Handler\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_aefc5042a29d6834ea1b788013eda4fe9}{}\label{classSLB_1_1Script_aefc5042a29d6834ea1b788013eda4fe9}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+last\+Error@{\+\_\+last\+Error}}
+\index{\+\_\+last\+Error@{\+\_\+last\+Error}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+last\+Error}{_lastError}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string S\+L\+B\+::\+Script\+::\+\_\+last\+Error\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_a4b5f819243c5b043146c1df07098962d}{}\label{classSLB_1_1Script_a4b5f819243c5b043146c1df07098962d}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+load\+Default\+Libs@{\+\_\+load\+Default\+Libs}}
+\index{\+\_\+load\+Default\+Libs@{\+\_\+load\+Default\+Libs}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+load\+Default\+Libs}{_loadDefaultLibs}}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Script\+::\+\_\+load\+Default\+Libs\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_ac8bf6199c25e1d522576de18baf46be3}{}\label{classSLB_1_1Script_ac8bf6199c25e1d522576de18baf46be3}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}}
+\index{\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+lua\+\_\+state}{_lua_state}}]{\setlength{\rightskip}{0pt plus 5cm}lua\+\_\+\+State$\ast$ S\+L\+B\+::\+Script\+::\+\_\+lua\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_af8ce3649196c31e3d0c4ad3dcb7d7322}{}\label{classSLB_1_1Script_af8ce3649196c31e3d0c4ad3dcb7d7322}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+manager@{\+\_\+manager}}
+\index{\+\_\+manager@{\+\_\+manager}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+manager}{_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager}$\ast$ S\+L\+B\+::\+Script\+::\+\_\+manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_a0d7ceb9274c1020d7c30ccb36d9375f4}{}\label{classSLB_1_1Script_a0d7ceb9274c1020d7c30ccb36d9375f4}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!\+\_\+print\+Callback@{\+\_\+print\+Callback}}
+\index{\+\_\+print\+Callback@{\+\_\+print\+Callback}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{\+\_\+print\+Callback}{_printCallback}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Print\+Callback} S\+L\+B\+::\+Script\+::\+\_\+print\+Callback\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Script_ae6e01149454d32d41e22a595d5f05837}{}\label{classSLB_1_1Script_ae6e01149454d32d41e22a595d5f05837}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!safe\+Do\+File@{safe\+Do\+File}}
+\index{safe\+Do\+File@{safe\+Do\+File}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{safe\+Do\+File}{safeDoFile}}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Script\+::safe\+Do\+File}\hypertarget{classSLB_1_1Script_a98df15c9ceb5740e79b6ba3246265125}{}\label{classSLB_1_1Script_a98df15c9ceb5740e79b6ba3246265125}
+\index{S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}!safe\+Do\+String@{safe\+Do\+String}}
+\index{safe\+Do\+String@{safe\+Do\+String}!S\+L\+B\+::\+Script@{S\+L\+B\+::\+Script}}
+\subsubsection[{\texorpdfstring{safe\+Do\+String}{safeDoString}}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Script\+::safe\+Do\+String}\hypertarget{classSLB_1_1Script_a7ee7f0a0a77753eea4705df0ff3ec23c}{}\label{classSLB_1_1Script_a7ee7f0a0a77753eea4705df0ff3ec23c}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

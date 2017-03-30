@@ -1,0 +1,83 @@
+\hypertarget{structSLB_1_1Mutex}{}\section{S\+LB\+:\+:Mutex Struct Reference}
+\label{structSLB_1_1Mutex}\index{S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Collaboration diagram for S\+LB\+:\+:Mutex\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structSLB_1_1Mutex_a1099a5828eb4c3fdce6cb5cc908fc133}{Mutex} ()
+\item 
+\hyperlink{structSLB_1_1Mutex_aa89d80f84b709aa374bab886cc1cf91e}{$\sim$\+Mutex} ()
+\item 
+void \hyperlink{structSLB_1_1Mutex_ada93deda839003f2847e4be4c6171494}{lock} ()
+\item 
+void \hyperlink{structSLB_1_1Mutex_adf47de629b85eeb9bdeaa510fe9b32e1}{unlock} ()
+\item 
+bool \hyperlink{structSLB_1_1Mutex_ad5d2c735aacc0ca670d3730fb494803d}{trylock} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structSLB_1_1MutexData}{Mutex\+Data} \hyperlink{structSLB_1_1Mutex_a1db7e024cf2ed1ef3c37278b6689fa96}{\+\_\+m}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Multiplatform \hyperlink{structSLB_1_1Mutex}{Mutex} abstraction, needed to ensure thread safety of some algorithms. You can turn on Mutexes by compileing \hyperlink{namespaceSLB}{S\+LB} with S\+L\+B\+\_\+\+T\+H\+R\+E\+A\+D\+\_\+\+S\+A\+FE 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}!Mutex@{Mutex}}
+\index{Mutex@{Mutex}!S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}}
+\subsubsection[{\texorpdfstring{Mutex()}{Mutex()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Mutex\+::\+Mutex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structSLB_1_1Mutex_a1099a5828eb4c3fdce6cb5cc908fc133}{}\label{structSLB_1_1Mutex_a1099a5828eb4c3fdce6cb5cc908fc133}
+\index{S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}!````~Mutex@{$\sim$\+Mutex}}
+\index{````~Mutex@{$\sim$\+Mutex}!S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}}
+\subsubsection[{\texorpdfstring{$\sim$\+Mutex()}{~Mutex()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Mutex\+::$\sim$\+Mutex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structSLB_1_1Mutex_aa89d80f84b709aa374bab886cc1cf91e}{}\label{structSLB_1_1Mutex_aa89d80f84b709aa374bab886cc1cf91e}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}!lock@{lock}}
+\index{lock@{lock}!S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}}
+\subsubsection[{\texorpdfstring{lock()}{lock()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Mutex\+::lock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structSLB_1_1Mutex_ada93deda839003f2847e4be4c6171494}{}\label{structSLB_1_1Mutex_ada93deda839003f2847e4be4c6171494}
+\index{S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}!trylock@{trylock}}
+\index{trylock@{trylock}!S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}}
+\subsubsection[{\texorpdfstring{trylock()}{trylock()}}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Mutex\+::trylock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structSLB_1_1Mutex_ad5d2c735aacc0ca670d3730fb494803d}{}\label{structSLB_1_1Mutex_ad5d2c735aacc0ca670d3730fb494803d}
+\index{S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}!unlock@{unlock}}
+\index{unlock@{unlock}!S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}}
+\subsubsection[{\texorpdfstring{unlock()}{unlock()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Mutex\+::unlock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structSLB_1_1Mutex_adf47de629b85eeb9bdeaa510fe9b32e1}{}\label{structSLB_1_1Mutex_adf47de629b85eeb9bdeaa510fe9b32e1}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}!\+\_\+m@{\+\_\+m}}
+\index{\+\_\+m@{\+\_\+m}!S\+L\+B\+::\+Mutex@{S\+L\+B\+::\+Mutex}}
+\subsubsection[{\texorpdfstring{\+\_\+m}{_m}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mutex\+Data} S\+L\+B\+::\+Mutex\+::\+\_\+m\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{structSLB_1_1Mutex_a1db7e024cf2ed1ef3c37278b6689fa96}{}\label{structSLB_1_1Mutex_a1db7e024cf2ed1ef3c37278b6689fa96}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\end{DoxyCompactItemize}

@@ -1,0 +1,222 @@
+\hypertarget{classMenuElement}{}\section{Menu\+Element Class Reference}
+\label{classMenuElement}\index{Menu\+Element@{Menu\+Element}}
+
+
+{\ttfamily \#include $<$Menu\+Element.\+h$>$}
+
+
+
+Inheritance diagram for Menu\+Element\+:
+% FIG 0
+
+
+Collaboration diagram for Menu\+Element\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenuElement_aa408d5d51fc2bf88a66ed8a726e65f55}{Menu\+Element} (\hyperlink{classMenu}{Menu} $\ast$a\+Owner, \hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name, bool const a\+Replaceable)
+\item 
+virtual \hyperlink{classMenuElement_a3c21f82d271e0435d3103d7847142f5c}{$\sim$\+Menu\+Element} ()
+\item 
+\hyperlink{classMenu}{Menu} $\ast$ \hyperlink{classMenuElement_ad0c3352889ac86890bde46863fefa613}{Get\+Owner} ()
+\begin{DoxyCompactList}\small\item\em Get owner of element. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classMenuElement_a50c4a8076298eb91c476bc83bc949aaf}{Get\+Object} ()
+\begin{DoxyCompactList}\small\item\em Get object associated with element. \end{DoxyCompactList}\item 
+bool \hyperlink{classMenuElement_a2dfe46adfee0edef93099d980385dce9}{Is\+Replaceable} () const 
+\begin{DoxyCompactList}\small\item\em Get whether or not object is replaceable (delete on next frame) \end{DoxyCompactList}\item 
+void \hyperlink{classMenuElement_a77774363bb53277062d4c45065d499f0}{Set\+Owner} (\hyperlink{classMenu}{Menu} $\ast$a\+Owner)
+\begin{DoxyCompactList}\small\item\em Get owner of element. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuElement_a64a401777d1f8f9bb668d4b134bb13f7}{Draw} ()=0
+\item 
+virtual void \hyperlink{classMenuElement_a025aeb7bf41cf9ca7069dba7dbf07f47}{Update} ()=0
+\item 
+virtual void \hyperlink{classMenuElement_a1b341775acf0ec3d3a064dccd78af2cd}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)=0
+\item 
+virtual void \hyperlink{classMenuElement_a9efc98212994476526bc0b314e18b950}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)=0
+\item 
+virtual void \hyperlink{classMenuElement_abd61bb2ffffd877dd39a0079512a8dbc}{Parse\+Additional\+Data} (\hyperlink{classParser}{Parser} \&a\+Parser)=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMenuElement_a594ed711907de7ee09943a702a74aac9}{Parse\+File} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Helper to create an element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenu}{Menu} $\ast$ \hyperlink{classMenuElement_aceef1dcd8e34c8ec8738a566e1bc3c3f}{m\+Owner}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classMenuElement_af1999a2fe9a63ebc78cd513b66cc8249}{m\+Object}
+\item 
+bool \hyperlink{classMenuElement_aa7757133db57bcc40c04d80278aa6b43}{m\+Replaceable}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Menu\+Element@{Menu\+Element}!Menu\+Element@{Menu\+Element}}
+\index{Menu\+Element@{Menu\+Element}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Menu\+Element(\+Menu $\ast$a\+Owner, Hash\+String const \&a\+File\+Name, bool const a\+Replaceable)}{MenuElement(Menu *aOwner, HashString const &aFileName, bool const aReplaceable)}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Element\+::\+Menu\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu} $\ast$}]{a\+Owner, }
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name, }
+\item[{bool const}]{a\+Replaceable}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuElement_aa408d5d51fc2bf88a66ed8a726e65f55}{}\label{classMenuElement_aa408d5d51fc2bf88a66ed8a726e65f55}
+\index{Menu\+Element@{Menu\+Element}!````~Menu\+Element@{$\sim$\+Menu\+Element}}
+\index{````~Menu\+Element@{$\sim$\+Menu\+Element}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{$\sim$\+Menu\+Element()}{~MenuElement()}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Element\+::$\sim$\+Menu\+Element (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuElement_a3c21f82d271e0435d3103d7847142f5c}{}\label{classMenuElement_a3c21f82d271e0435d3103d7847142f5c}
+
+
+\subsection{Member Function Documentation}
+\index{Menu\+Element@{Menu\+Element}!Draw@{Draw}}
+\index{Draw@{Draw}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Draw()=0}{Draw()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Menu\+Element\+::\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMenuElement_a64a401777d1f8f9bb668d4b134bb13f7}{}\label{classMenuElement_a64a401777d1f8f9bb668d4b134bb13f7}
+
+
+Implemented in \hyperlink{classMenuText_a945413780140cb8e4a87062df94790c7}{Menu\+Text}, \hyperlink{classMenuImage_afc629a2bde05705f00d26e71319390a8}{Menu\+Image}, and \hyperlink{classMenuButton_aac414152e785dbc256aa307b23792143}{Menu\+Button}.
+
+\index{Menu\+Element@{Menu\+Element}!Get\+Object@{Get\+Object}}
+\index{Get\+Object@{Get\+Object}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Object()}{GetObject()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Menu\+Element\+::\+Get\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuElement_a50c4a8076298eb91c476bc83bc949aaf}{}\label{classMenuElement_a50c4a8076298eb91c476bc83bc949aaf}
+
+
+Get object associated with element. 
+
+\begin{DoxyReturn}{Returns}
+Object 
+\end{DoxyReturn}
+\index{Menu\+Element@{Menu\+Element}!Get\+Owner@{Get\+Owner}}
+\index{Get\+Owner@{Get\+Owner}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Get\+Owner()}{GetOwner()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu} $\ast$ Menu\+Element\+::\+Get\+Owner (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuElement_ad0c3352889ac86890bde46863fefa613}{}\label{classMenuElement_ad0c3352889ac86890bde46863fefa613}
+
+
+Get owner of element. 
+
+\begin{DoxyReturn}{Returns}
+Owner. 
+\end{DoxyReturn}
+\index{Menu\+Element@{Menu\+Element}!Is\+Replaceable@{Is\+Replaceable}}
+\index{Is\+Replaceable@{Is\+Replaceable}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Is\+Replaceable() const }{IsReplaceable() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Menu\+Element\+::\+Is\+Replaceable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenuElement_a2dfe46adfee0edef93099d980385dce9}{}\label{classMenuElement_a2dfe46adfee0edef93099d980385dce9}
+
+
+Get whether or not object is replaceable (delete on next frame) 
+
+\begin{DoxyReturn}{Returns}
+True is replaceable. 
+\end{DoxyReturn}
+\index{Menu\+Element@{Menu\+Element}!Parse\+Additional\+Data@{Parse\+Additional\+Data}}
+\index{Parse\+Additional\+Data@{Parse\+Additional\+Data}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Parse\+Additional\+Data(\+Parser \&a\+Parser)=0}{ParseAdditionalData(Parser &aParser)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Menu\+Element\+::\+Parse\+Additional\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMenuElement_abd61bb2ffffd877dd39a0079512a8dbc}{}\label{classMenuElement_abd61bb2ffffd877dd39a0079512a8dbc}
+
+
+Implemented in \hyperlink{classMenuText_a525952bf85ab278fa87e61a1d99ebe46}{Menu\+Text}, \hyperlink{classMenuImage_ac5ecd63269a18b3a6c2e1c113616122e}{Menu\+Image}, and \hyperlink{classMenuButton_a2e8ea938dfbfda31407f7aa672f1a607}{Menu\+Button}.
+
+\index{Menu\+Element@{Menu\+Element}!Parse\+File@{Parse\+File}}
+\index{Parse\+File@{Parse\+File}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Parse\+File(\+Parser \&a\+Parser)}{ParseFile(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Element\+::\+Parse\+File (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classMenuElement_a594ed711907de7ee09943a702a74aac9}{}\label{classMenuElement_a594ed711907de7ee09943a702a74aac9}
+
+
+Helper to create an element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+\index{Menu\+Element@{Menu\+Element}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)=0}{ReceiveMessage(Message const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Menu\+Element\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMenuElement_a9efc98212994476526bc0b314e18b950}{}\label{classMenuElement_a9efc98212994476526bc0b314e18b950}
+
+
+Implemented in \hyperlink{classMenuText_af4c888676ab8157c074818b6a72e0d79}{Menu\+Text}, \hyperlink{classMenuImage_a9162c043b69171720f75b80717583919}{Menu\+Image}, and \hyperlink{classMenuButton_a6d4ea5866ebba20ea57d6c48a0c6fa20}{Menu\+Button}.
+
+\index{Menu\+Element@{Menu\+Element}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)=0}{SendMessage(Message const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Menu\+Element\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMenuElement_a1b341775acf0ec3d3a064dccd78af2cd}{}\label{classMenuElement_a1b341775acf0ec3d3a064dccd78af2cd}
+
+
+Implemented in \hyperlink{classMenuText_aa4534efb2d3a10cd1e198a46f44e5889}{Menu\+Text}, \hyperlink{classMenuImage_a595a3402404b28d0fbe9793a3364ffbb}{Menu\+Image}, and \hyperlink{classMenuButton_ae3f1300dc3e55be8b2609e7fcb71e0fc}{Menu\+Button}.
+
+\index{Menu\+Element@{Menu\+Element}!Set\+Owner@{Set\+Owner}}
+\index{Set\+Owner@{Set\+Owner}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Set\+Owner(\+Menu $\ast$a\+Owner)}{SetOwner(Menu *aOwner)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Element\+::\+Set\+Owner (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu} $\ast$}]{a\+Owner}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuElement_a77774363bb53277062d4c45065d499f0}{}\label{classMenuElement_a77774363bb53277062d4c45065d499f0}
+
+
+Get owner of element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Owner} & Owner \\
+\hline
+\end{DoxyParams}
+\index{Menu\+Element@{Menu\+Element}!Update@{Update}}
+\index{Update@{Update}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{Update()=0}{Update()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Menu\+Element\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMenuElement_a025aeb7bf41cf9ca7069dba7dbf07f47}{}\label{classMenuElement_a025aeb7bf41cf9ca7069dba7dbf07f47}
+
+
+Implemented in \hyperlink{classMenuText_a701fec41c17d3f3fb03a4a0dad97322c}{Menu\+Text}, \hyperlink{classMenuImage_a1c54191212d06d40c596f09ec428f361}{Menu\+Image}, and \hyperlink{classMenuButton_a929dfef7a69a776f4b1da3d151236dcb}{Menu\+Button}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Menu\+Element@{Menu\+Element}!m\+Object@{m\+Object}}
+\index{m\+Object@{m\+Object}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{m\+Object}{mObject}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Menu\+Element\+::m\+Object\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classMenuElement_af1999a2fe9a63ebc78cd513b66cc8249}{}\label{classMenuElement_af1999a2fe9a63ebc78cd513b66cc8249}
+\index{Menu\+Element@{Menu\+Element}!m\+Owner@{m\+Owner}}
+\index{m\+Owner@{m\+Owner}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{m\+Owner}{mOwner}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu}$\ast$ Menu\+Element\+::m\+Owner\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classMenuElement_aceef1dcd8e34c8ec8738a566e1bc3c3f}{}\label{classMenuElement_aceef1dcd8e34c8ec8738a566e1bc3c3f}
+\index{Menu\+Element@{Menu\+Element}!m\+Replaceable@{m\+Replaceable}}
+\index{m\+Replaceable@{m\+Replaceable}!Menu\+Element@{Menu\+Element}}
+\subsubsection[{\texorpdfstring{m\+Replaceable}{mReplaceable}}]{\setlength{\rightskip}{0pt plus 5cm}bool Menu\+Element\+::m\+Replaceable\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classMenuElement_aa7757133db57bcc40c04d80278aa6b43}{}\label{classMenuElement_aa7757133db57bcc40c04d80278aa6b43}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{MenuElement_8h}{Menu\+Element.\+h}\item 
+Logic/\hyperlink{MenuElement_8cpp}{Menu\+Element.\+cpp}\end{DoxyCompactItemize}

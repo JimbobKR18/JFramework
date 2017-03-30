@@ -1,0 +1,263 @@
+\hypertarget{classPCSound}{}\section{P\+C\+Sound Class Reference}
+\label{classPCSound}\index{P\+C\+Sound@{P\+C\+Sound}}
+
+
+{\ttfamily \#include $<$P\+C\+Sound.\+h$>$}
+
+
+
+Inheritance diagram for P\+C\+Sound\+:
+% FIG 0
+
+
+Collaboration diagram for P\+C\+Sound\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPCSound_aec80bc46b433182ba59600aa5412d21d}{P\+C\+Sound} ()
+\item 
+\hyperlink{classPCSound_a4468ad0fdfaa965542d56016ab0d6784}{P\+C\+Sound} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+virtual \hyperlink{classPCSound_a1b42285b7c5611925e3462234a3dabd1}{$\sim$\+P\+C\+Sound} ()
+\item 
+virtual void \hyperlink{classPCSound_a0c41046ec72c3b0e45c25afee8f2587b}{Play} (int const a\+Num\+Loops)
+\begin{DoxyCompactList}\small\item\em Plays sound all the way through. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_a3c5e2bb0f92fe66f0f16c3faacb3e5fe}{Play} (int const a\+Num\+Loops, int const a\+Time)
+\begin{DoxyCompactList}\small\item\em Play sound for a set amount of time. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_a2cdcbe269162e7ff0acaa471f07ceec6}{Fade\+In} (int const a\+Num\+Loops, int const a\+Time)
+\begin{DoxyCompactList}\small\item\em Fade in a sound. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_a65cc536a88f6b49ffd4ab6c2c85bd38b}{Fade\+In} (int const a\+Num\+Loops, int const a\+Fade\+Time, int const a\+Play\+Time)
+\begin{DoxyCompactList}\small\item\em Fade in a sound. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_adc92d40c216b0b71b61c8c0166b99208}{Set\+Volume} (float const a\+Volume)
+\begin{DoxyCompactList}\small\item\em Set volume for this sound. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_ae7955f15d57a21e7631569ba8216332e}{Resume} ()
+\begin{DoxyCompactList}\small\item\em Resumes a sound. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_a8014ffd1aa852e744cb2388b889ae9de}{Pause} ()
+\begin{DoxyCompactList}\small\item\em Pauses a sound. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_a9e7787c4a29f570250d79f4d41fea651}{Stop} ()
+\begin{DoxyCompactList}\small\item\em Stop a sound. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCSound_ab8014c5286bf495ee6d57bee683a633a}{Fade\+Out} (int const a\+Time)
+\begin{DoxyCompactList}\small\item\em Fade out a sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Mix\+\_\+\+Chunk $\ast$ \hyperlink{classPCSound_a83c8c539e699f4e9b4ff97e11a411f4c}{m\+Chunk}
+\item 
+int \hyperlink{classPCSound_a77ac270d52beadac024b677bd566b2b7}{m\+Channel}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classPCSound_a7f6381192fc1f185fe6e77ff567cfcfa}{M\+A\+X\+\_\+\+V\+O\+L\+U\+ME} = 128
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{P\+C\+Sound@{P\+C\+Sound}!P\+C\+Sound@{P\+C\+Sound}}
+\index{P\+C\+Sound@{P\+C\+Sound}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{P\+C\+Sound()}{PCSound()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Sound\+::\+P\+C\+Sound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPCSound_aec80bc46b433182ba59600aa5412d21d}{}\label{classPCSound_aec80bc46b433182ba59600aa5412d21d}
+\index{P\+C\+Sound@{P\+C\+Sound}!P\+C\+Sound@{P\+C\+Sound}}
+\index{P\+C\+Sound@{P\+C\+Sound}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{P\+C\+Sound(\+Hash\+String const \&a\+Filename)}{PCSound(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Sound\+::\+P\+C\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classPCSound_a4468ad0fdfaa965542d56016ab0d6784}{}\label{classPCSound_a4468ad0fdfaa965542d56016ab0d6784}
+\index{P\+C\+Sound@{P\+C\+Sound}!````~P\+C\+Sound@{$\sim$\+P\+C\+Sound}}
+\index{````~P\+C\+Sound@{$\sim$\+P\+C\+Sound}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{$\sim$\+P\+C\+Sound()}{~PCSound()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Sound\+::$\sim$\+P\+C\+Sound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_a1b42285b7c5611925e3462234a3dabd1}{}\label{classPCSound_a1b42285b7c5611925e3462234a3dabd1}
+
+
+\subsection{Member Function Documentation}
+\index{P\+C\+Sound@{P\+C\+Sound}!Fade\+In@{Fade\+In}}
+\index{Fade\+In@{Fade\+In}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Fade\+In(int const a\+Num\+Loops, int const a\+Time)}{FadeIn(int const aNumLoops, int const aTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Fade\+In (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops, }
+\item[{int const}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_a2cdcbe269162e7ff0acaa471f07ceec6}{}\label{classPCSound_a2cdcbe269162e7ff0acaa471f07ceec6}
+
+
+Fade in a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Time} & Time in millis. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSound_a8d7717ebd87d045f4c52f042c0efb327}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Fade\+In@{Fade\+In}}
+\index{Fade\+In@{Fade\+In}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Fade\+In(int const a\+Num\+Loops, int const a\+Fade\+Time, int const a\+Play\+Time)}{FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Fade\+In (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops, }
+\item[{int const}]{a\+Fade\+Time, }
+\item[{int const}]{a\+Play\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_a65cc536a88f6b49ffd4ab6c2c85bd38b}{}\label{classPCSound_a65cc536a88f6b49ffd4ab6c2c85bd38b}
+
+
+Fade in a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Time} & Time in millis. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSound_af9a7823b629a12c2b7eae07a0710185b}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Fade\+Out@{Fade\+Out}}
+\index{Fade\+Out@{Fade\+Out}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Fade\+Out(int const a\+Time)}{FadeOut(int const aTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Fade\+Out (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_ab8014c5286bf495ee6d57bee683a633a}{}\label{classPCSound_ab8014c5286bf495ee6d57bee683a633a}
+
+
+Fade out a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Time} & Time in millis. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSound_a03bc004f545746a7bdd294d15305d44a}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Pause@{Pause}}
+\index{Pause@{Pause}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Pause()}{Pause()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Pause (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_a8014ffd1aa852e744cb2388b889ae9de}{}\label{classPCSound_a8014ffd1aa852e744cb2388b889ae9de}
+
+
+Pauses a sound. 
+
+
+
+Implements \hyperlink{classSound_ad895dba3c3772b435d3d37f8460bc426}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Play@{Play}}
+\index{Play@{Play}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Play(int const a\+Num\+Loops)}{Play(int const aNumLoops)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Play (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_a0c41046ec72c3b0e45c25afee8f2587b}{}\label{classPCSound_a0c41046ec72c3b0e45c25afee8f2587b}
+
+
+Plays sound all the way through. 
+
+
+
+Implements \hyperlink{classSound_a3e5b7d409008b46c519cca2a3f0cec0f}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Play@{Play}}
+\index{Play@{Play}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Play(int const a\+Num\+Loops, int const a\+Time)}{Play(int const aNumLoops, int const aTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Play (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops, }
+\item[{int const}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_a3c5e2bb0f92fe66f0f16c3faacb3e5fe}{}\label{classPCSound_a3c5e2bb0f92fe66f0f16c3faacb3e5fe}
+
+
+Play sound for a set amount of time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Time} & Time in millis. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSound_adc03627f456e7d3a547a2049d9a4b0e2}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Resume@{Resume}}
+\index{Resume@{Resume}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Resume()}{Resume()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Resume (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_ae7955f15d57a21e7631569ba8216332e}{}\label{classPCSound_ae7955f15d57a21e7631569ba8216332e}
+
+
+Resumes a sound. 
+
+
+
+Implements \hyperlink{classSound_ac5329f4a5db0fd806b97cace31ed09fc}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Set\+Volume@{Set\+Volume}}
+\index{Set\+Volume@{Set\+Volume}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Set\+Volume(float const a\+Volume)}{SetVolume(float const aVolume)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Set\+Volume (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Volume}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_adc92d40c216b0b71b61c8c0166b99208}{}\label{classPCSound_adc92d40c216b0b71b61c8c0166b99208}
+
+
+Set volume for this sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Volume} & The volume, from 0 to 1. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSound_a04a6510dfdf83a6bcc7e9b954e3ef3f1}{Sound}.
+
+\index{P\+C\+Sound@{P\+C\+Sound}!Stop@{Stop}}
+\index{Stop@{Stop}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{Stop()}{Stop()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Sound\+::\+Stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCSound_a9e7787c4a29f570250d79f4d41fea651}{}\label{classPCSound_a9e7787c4a29f570250d79f4d41fea651}
+
+
+Stop a sound. 
+
+
+
+Implements \hyperlink{classSound_a4a3ed0b6117f79c60584ef93d5b7b94b}{Sound}.
+
+
+
+\subsection{Member Data Documentation}
+\index{P\+C\+Sound@{P\+C\+Sound}!M\+A\+X\+\_\+\+V\+O\+L\+U\+ME@{M\+A\+X\+\_\+\+V\+O\+L\+U\+ME}}
+\index{M\+A\+X\+\_\+\+V\+O\+L\+U\+ME@{M\+A\+X\+\_\+\+V\+O\+L\+U\+ME}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+V\+O\+L\+U\+ME}{MAX_VOLUME}}]{\setlength{\rightskip}{0pt plus 5cm}int const P\+C\+Sound\+::\+M\+A\+X\+\_\+\+V\+O\+L\+U\+ME = 128\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classPCSound_a7f6381192fc1f185fe6e77ff567cfcfa}{}\label{classPCSound_a7f6381192fc1f185fe6e77ff567cfcfa}
+\index{P\+C\+Sound@{P\+C\+Sound}!m\+Channel@{m\+Channel}}
+\index{m\+Channel@{m\+Channel}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{m\+Channel}{mChannel}}]{\setlength{\rightskip}{0pt plus 5cm}int P\+C\+Sound\+::m\+Channel\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCSound_a77ac270d52beadac024b677bd566b2b7}{}\label{classPCSound_a77ac270d52beadac024b677bd566b2b7}
+\index{P\+C\+Sound@{P\+C\+Sound}!m\+Chunk@{m\+Chunk}}
+\index{m\+Chunk@{m\+Chunk}!P\+C\+Sound@{P\+C\+Sound}}
+\subsubsection[{\texorpdfstring{m\+Chunk}{mChunk}}]{\setlength{\rightskip}{0pt plus 5cm}Mix\+\_\+\+Chunk$\ast$ P\+C\+Sound\+::m\+Chunk\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCSound_a83c8c539e699f4e9b4ff97e11a411f4c}{}\label{classPCSound_a83c8c539e699f4e9b4ff97e11a411f4c}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Sound/\hyperlink{PCSound_8h}{P\+C\+Sound.\+h}\item 
+Sound/\hyperlink{PCSound_8cpp}{P\+C\+Sound.\+cpp}\end{DoxyCompactItemize}

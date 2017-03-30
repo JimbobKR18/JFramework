@@ -1,0 +1,534 @@
+\hypertarget{classPCShaderScreen}{}\section{P\+C\+Shader\+Screen Class Reference}
+\label{classPCShaderScreen}\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+
+
+{\ttfamily \#include $<$P\+C\+Shader\+Screen.\+h$>$}
+
+
+
+Inheritance diagram for P\+C\+Shader\+Screen\+:
+% FIG 0
+
+
+Collaboration diagram for P\+C\+Shader\+Screen\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPCShaderScreen_a8fd040b6530f215e6bcecdfc0a19fdad}{P\+C\+Shader\+Screen} ()
+\item 
+\hyperlink{classPCShaderScreen_a4d676589a85a619e93937a48adaec28c}{P\+C\+Shader\+Screen} (int aW, int aH, bool a\+Full\+Screen)
+\item 
+virtual \hyperlink{classPCShaderScreen_a9e16199f48e225a0ab91e41b928ec65f}{$\sim$\+P\+C\+Shader\+Screen} ()
+\item 
+virtual void \hyperlink{classPCShaderScreen_a4b103d2af283e955678b41b759d51822}{Pre\+Draw} ()
+\begin{DoxyCompactList}\small\item\em Operations to run before draw phase. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderScreen_a93f1b26c49c24dd055a6ac2af866c367}{Draw} (std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ const \&a\+Objects)
+\begin{DoxyCompactList}\small\item\em Draw objects. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderScreen_a4ce134f7cd81f8923a131705ae3536d7}{Draw\+UI} (std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ const \&a\+Objects)
+\begin{DoxyCompactList}\small\item\em Draw UI objects. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderScreen_affdddd22ec40502de7512ba0466f5310}{Debug\+Draw} (std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ const \&a\+Objects)
+\begin{DoxyCompactList}\small\item\em Draw debug lines around objects, physics boxes only. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderScreen_a32d9adc0a0af5c3e22f5d06005e427a6}{Swap\+Buffers} ()
+\begin{DoxyCompactList}\small\item\em Swap buffers. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderScreen_ac1b9a286f7b8d6e3d6e37fe1f0f6a5a7}{Set\+Clear\+Color} (\hyperlink{structVector4}{Vector4} const \&a\+Clear\+Color)
+\begin{DoxyCompactList}\small\item\em Set clear color. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderScreen_aab52b03029fa67c43406b3e0af1ad16a}{Change\+Size} (int aW, int aH, bool a\+Full\+Screen)
+\begin{DoxyCompactList}\small\item\em Change window size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPCShaderScreen_a65ff04e1bb49cc64cd97c93097f49965}{Alignment\+Helper} (\hyperlink{classTransform}{Transform} $\ast$a\+Transform, \hyperlink{structVector3}{Vector3} const \&a\+Size, \hyperlink{structVector3}{Vector3} \&a\+Position)
+\begin{DoxyCompactList}\small\item\em Align objects. \end{DoxyCompactList}\item 
+bool \hyperlink{classPCShaderScreen_a720903cbc3a327cc9c80649214500933}{Point\+Is\+On\+Screen} (\hyperlink{structVector3}{Vector3} const \&a\+Point)
+\begin{DoxyCompactList}\small\item\em Check if point is on screen. \end{DoxyCompactList}\item 
+bool \hyperlink{classPCShaderScreen_a5ac67fe5e24bc752e4a13e8adadae4b4}{Box\+Is\+On\+Screen} (\hyperlink{structVector3}{Vector3} const \&a\+Start, \hyperlink{structVector3}{Vector3} const \&a\+End)
+\begin{DoxyCompactList}\small\item\em Check if box is on screen. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_a8b255847bf1959fff9fa5c61eb3803d6}{Set\+Shader\+Properties} (\hyperlink{classPCShaderSurface}{P\+C\+Shader\+Surface} $\ast$a\+Surface, bool a\+Active)
+\begin{DoxyCompactList}\small\item\em Set shader properties based on surface. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_a07368c32e77b17dbefe6192780df466a}{Disable\+Vertex\+Attrib\+Array} (int a\+Vertex\+Attrib)
+\begin{DoxyCompactList}\small\item\em Disable attribute array. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_ae6b398de132aea3477dec9b068c911e8}{Push\+Render\+Data\+V2} (std\+::vector$<$ \hyperlink{structVector2}{Vector2} $>$ \&a\+Data, int a\+Attrib\+Location, \hyperlink{structVector2}{Vector2} const \&a\+Attribute)
+\begin{DoxyCompactList}\small\item\em Push render data onto vector if applicable. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_aa23f04df99385a9872993f790a585bf3}{Push\+Render\+Data\+V3} (std\+::vector$<$ \hyperlink{structVector3}{Vector3} $>$ \&a\+Data, int a\+Attrib\+Location, \hyperlink{structVector3}{Vector3} const \&a\+Attribute)
+\begin{DoxyCompactList}\small\item\em Push render data onto vector if applicable. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_a6f5bc2d7e28d2fe56891672d3863963d}{Push\+Render\+Data\+V4} (std\+::vector$<$ \hyperlink{structVector4}{Vector4} $>$ \&a\+Data, int a\+Attrib\+Location, \hyperlink{structVector4}{Vector4} const \&a\+Attribute)
+\begin{DoxyCompactList}\small\item\em Push render data onto vector if applicable. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_ad04e129dc52b0f9fcddc26ef3c6b32d7}{Bind\+Attribute\+V2} (G\+Lenum a\+Target, int const a\+Buffer\+ID, int const a\+Attribute\+Location, std\+::vector$<$ \hyperlink{structVector2}{Vector2} $>$ \&a\+Data)
+\begin{DoxyCompactList}\small\item\em Bind render data if applicable. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_ab761c013600361fc2c5cc503826d3946}{Bind\+Attribute\+V3} (G\+Lenum a\+Target, int const a\+Buffer\+ID, int const a\+Attribute\+Location, std\+::vector$<$ \hyperlink{structVector3}{Vector3} $>$ \&a\+Data)
+\begin{DoxyCompactList}\small\item\em Bind render data if applicable. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_a87cc5e3d194128d691adbc4306efb986}{Bind\+Attribute\+V4} (G\+Lenum a\+Target, int const a\+Buffer\+ID, int const a\+Attribute\+Location, std\+::vector$<$ \hyperlink{structVector4}{Vector4} $>$ \&a\+Data)
+\begin{DoxyCompactList}\small\item\em Bind render data if applicable. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderScreen_a61dd7766256d89a02749af86ef92f284}{Print\+G\+L\+Error} (int const a\+Line\+Number)
+\begin{DoxyCompactList}\small\item\em Prints GL error info. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+S\+D\+L\+\_\+\+Window $\ast$ \hyperlink{classPCShaderScreen_a0edede4203082cd3891b3178c3bc0def}{m\+Window}
+\item 
+S\+D\+L\+\_\+\+G\+L\+Context \hyperlink{classPCShaderScreen_a708681cd9aafb810245f66c77f3b5302}{m\+G\+L\+Context}
+\item 
+S\+D\+L\+\_\+\+Display\+Mode \hyperlink{classPCShaderScreen_a649b06c37c9ee7e63a4a76a4a344803d}{m\+Display\+Mode}
+\item 
+G\+Luint \hyperlink{classPCShaderScreen_a3b4261546ea335e52da92f01db58ad4f}{m\+Vertex\+Array\+Object\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderScreen_aab7c077141f13b13027c0e798e4457c2}{m\+Vertex\+Buffer\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderScreen_acf3e257c02af0ec073df40c26f08cab7}{m\+Texture\+Buffer\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderScreen_aaa5c101008eebd160cd4ff7ef04349de}{m\+Position\+Buffer\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderScreen_a7e68dc336931bcdc050f36392935525c}{m\+Color\+Buffer\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderScreen_a3aa2686bd54a0dc74f6720a5495cad3c}{m\+Index\+Buffer\+ID}
+\item 
+G\+Lint \hyperlink{classPCShaderScreen_af93565de5fcea3a0c5dc465f0610a1d4}{m\+Max\+Textures}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{P\+C\+Shader\+Screen()}{PCShaderScreen()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Shader\+Screen\+::\+P\+C\+Shader\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPCShaderScreen_a8fd040b6530f215e6bcecdfc0a19fdad}{}\label{classPCShaderScreen_a8fd040b6530f215e6bcecdfc0a19fdad}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{P\+C\+Shader\+Screen(int a\+W, int a\+H, bool a\+Full\+Screen)}{PCShaderScreen(int aW, int aH, bool aFullScreen)}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Shader\+Screen\+::\+P\+C\+Shader\+Screen (
+\begin{DoxyParamCaption}
+\item[{int}]{aW, }
+\item[{int}]{aH, }
+\item[{bool}]{a\+Full\+Screen}
+\end{DoxyParamCaption}
+)}\hypertarget{classPCShaderScreen_a4d676589a85a619e93937a48adaec28c}{}\label{classPCShaderScreen_a4d676589a85a619e93937a48adaec28c}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!````~P\+C\+Shader\+Screen@{$\sim$\+P\+C\+Shader\+Screen}}
+\index{````~P\+C\+Shader\+Screen@{$\sim$\+P\+C\+Shader\+Screen}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{$\sim$\+P\+C\+Shader\+Screen()}{~PCShaderScreen()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Shader\+Screen\+::$\sim$\+P\+C\+Shader\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_a9e16199f48e225a0ab91e41b928ec65f}{}\label{classPCShaderScreen_a9e16199f48e225a0ab91e41b928ec65f}
+
+
+\subsection{Member Function Documentation}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Alignment\+Helper@{Alignment\+Helper}}
+\index{Alignment\+Helper@{Alignment\+Helper}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Alignment\+Helper(\+Transform $\ast$a\+Transform, Vector3 const \&a\+Size, Vector3 \&a\+Position)}{AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Alignment\+Helper (
+\begin{DoxyParamCaption}
+\item[{{\bf Transform} $\ast$}]{a\+Transform, }
+\item[{{\bf Vector3} const \&}]{a\+Size, }
+\item[{{\bf Vector3} \&}]{a\+Position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a65ff04e1bb49cc64cd97c93097f49965}{}\label{classPCShaderScreen_a65ff04e1bb49cc64cd97c93097f49965}
+
+
+Align objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Transform} & \hyperlink{classTransform}{Transform} of object \\
+\hline
+{\em a\+Size} & Object size \\
+\hline
+{\em a\+Position} & Object position \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Bind\+Attribute\+V2@{Bind\+Attribute\+V2}}
+\index{Bind\+Attribute\+V2@{Bind\+Attribute\+V2}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Bind\+Attribute\+V2(\+G\+Lenum a\+Target, int const a\+Buffer\+I\+D, int const a\+Attribute\+Location, std\+::vector$<$ Vector2 $>$ \&a\+Data)}{BindAttributeV2(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector< Vector2 > &aData)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Bind\+Attribute\+V2 (
+\begin{DoxyParamCaption}
+\item[{G\+Lenum}]{a\+Target, }
+\item[{int const}]{a\+Buffer\+ID, }
+\item[{int const}]{a\+Attribute\+Location, }
+\item[{std\+::vector$<$ {\bf Vector2} $>$ \&}]{a\+Data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_ad04e129dc52b0f9fcddc26ef3c6b32d7}{}\label{classPCShaderScreen_ad04e129dc52b0f9fcddc26ef3c6b32d7}
+
+
+Bind render data if applicable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Attribute\+ID} & Id of buffer \\
+\hline
+{\em a\+Attrib\+Location} & Location of attribute in shader \\
+\hline
+{\em a\+Data} & Vector to bind from \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Bind\+Attribute\+V3@{Bind\+Attribute\+V3}}
+\index{Bind\+Attribute\+V3@{Bind\+Attribute\+V3}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Bind\+Attribute\+V3(\+G\+Lenum a\+Target, int const a\+Buffer\+I\+D, int const a\+Attribute\+Location, std\+::vector$<$ Vector3 $>$ \&a\+Data)}{BindAttributeV3(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector< Vector3 > &aData)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Bind\+Attribute\+V3 (
+\begin{DoxyParamCaption}
+\item[{G\+Lenum}]{a\+Target, }
+\item[{int const}]{a\+Buffer\+ID, }
+\item[{int const}]{a\+Attribute\+Location, }
+\item[{std\+::vector$<$ {\bf Vector3} $>$ \&}]{a\+Data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_ab761c013600361fc2c5cc503826d3946}{}\label{classPCShaderScreen_ab761c013600361fc2c5cc503826d3946}
+
+
+Bind render data if applicable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Attribute\+ID} & Id of buffer \\
+\hline
+{\em a\+Attrib\+Location} & Location of attribute in shader \\
+\hline
+{\em a\+Data} & Vector to bind from \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Bind\+Attribute\+V4@{Bind\+Attribute\+V4}}
+\index{Bind\+Attribute\+V4@{Bind\+Attribute\+V4}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Bind\+Attribute\+V4(\+G\+Lenum a\+Target, int const a\+Buffer\+I\+D, int const a\+Attribute\+Location, std\+::vector$<$ Vector4 $>$ \&a\+Data)}{BindAttributeV4(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector< Vector4 > &aData)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Bind\+Attribute\+V4 (
+\begin{DoxyParamCaption}
+\item[{G\+Lenum}]{a\+Target, }
+\item[{int const}]{a\+Buffer\+ID, }
+\item[{int const}]{a\+Attribute\+Location, }
+\item[{std\+::vector$<$ {\bf Vector4} $>$ \&}]{a\+Data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a87cc5e3d194128d691adbc4306efb986}{}\label{classPCShaderScreen_a87cc5e3d194128d691adbc4306efb986}
+
+
+Bind render data if applicable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Attribute\+ID} & Id of buffer \\
+\hline
+{\em a\+Attrib\+Location} & Location of attribute in shader \\
+\hline
+{\em a\+Data} & Vector to bind from \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Box\+Is\+On\+Screen@{Box\+Is\+On\+Screen}}
+\index{Box\+Is\+On\+Screen@{Box\+Is\+On\+Screen}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Box\+Is\+On\+Screen(\+Vector3 const \&a\+Start, Vector3 const \&a\+End)}{BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)}}]{\setlength{\rightskip}{0pt plus 5cm}bool P\+C\+Shader\+Screen\+::\+Box\+Is\+On\+Screen (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Start, }
+\item[{{\bf Vector3} const \&}]{a\+End}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a5ac67fe5e24bc752e4a13e8adadae4b4}{}\label{classPCShaderScreen_a5ac67fe5e24bc752e4a13e8adadae4b4}
+
+
+Check if box is on screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Start} & Top left of box \\
+\hline
+{\em a\+End} & Bottom right of box \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Change\+Size@{Change\+Size}}
+\index{Change\+Size@{Change\+Size}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Change\+Size(int a\+W, int a\+H, bool a\+Full\+Screen)}{ChangeSize(int aW, int aH, bool aFullScreen)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Change\+Size (
+\begin{DoxyParamCaption}
+\item[{int}]{aW, }
+\item[{int}]{aH, }
+\item[{bool}]{a\+Full\+Screen}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_aab52b03029fa67c43406b3e0af1ad16a}{}\label{classPCShaderScreen_aab52b03029fa67c43406b3e0af1ad16a}
+
+
+Change window size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aW} & Width \\
+\hline
+{\em aH} & Height \\
+\hline
+{\em a\+Full\+Screen} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classScreen_aed3484ce6f522cb199fd5bb6667b174f}{Screen}.
+
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Debug\+Draw@{Debug\+Draw}}
+\index{Debug\+Draw@{Debug\+Draw}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Debug\+Draw(std\+::vector$<$ Surface $\ast$ $>$ const \&a\+Objects)}{DebugDraw(std::vector< Surface * > const &aObjects)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Debug\+Draw (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Surface} $\ast$ $>$ const \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_affdddd22ec40502de7512ba0466f5310}{}\label{classPCShaderScreen_affdddd22ec40502de7512ba0466f5310}
+
+
+Draw debug lines around objects, physics boxes only. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Objects} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classScreen_a51a0752968332d9d69ddab055a8e6b39}{Screen}.
+
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Disable\+Vertex\+Attrib\+Array@{Disable\+Vertex\+Attrib\+Array}}
+\index{Disable\+Vertex\+Attrib\+Array@{Disable\+Vertex\+Attrib\+Array}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Disable\+Vertex\+Attrib\+Array(int a\+Vertex\+Attrib)}{DisableVertexAttribArray(int aVertexAttrib)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Disable\+Vertex\+Attrib\+Array (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+Vertex\+Attrib}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a07368c32e77b17dbefe6192780df466a}{}\label{classPCShaderScreen_a07368c32e77b17dbefe6192780df466a}
+
+
+Disable attribute array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Vertex\+Attrib} & Index of attribute \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Draw@{Draw}}
+\index{Draw@{Draw}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Draw(std\+::vector$<$ Surface $\ast$ $>$ const \&a\+Objects)}{Draw(std::vector< Surface * > const &aObjects)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Draw (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Surface} $\ast$ $>$ const \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_a93f1b26c49c24dd055a6ac2af866c367}{}\label{classPCShaderScreen_a93f1b26c49c24dd055a6ac2af866c367}
+
+
+Draw objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Objects} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classScreen_af48f435562280536539eafad048f1d1c}{Screen}.
+
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Draw\+UI@{Draw\+UI}}
+\index{Draw\+UI@{Draw\+UI}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Draw\+U\+I(std\+::vector$<$ Surface $\ast$ $>$ const \&a\+Objects)}{DrawUI(std::vector< Surface * > const &aObjects)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Draw\+UI (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Surface} $\ast$ $>$ const \&}]{a\+Objects}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_a4ce134f7cd81f8923a131705ae3536d7}{}\label{classPCShaderScreen_a4ce134f7cd81f8923a131705ae3536d7}
+
+
+Draw UI objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Objects} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classScreen_a56bbfbc23e9eae04061c367f29356617}{Screen}.
+
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Point\+Is\+On\+Screen@{Point\+Is\+On\+Screen}}
+\index{Point\+Is\+On\+Screen@{Point\+Is\+On\+Screen}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Point\+Is\+On\+Screen(\+Vector3 const \&a\+Point)}{PointIsOnScreen(Vector3 const &aPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}bool P\+C\+Shader\+Screen\+::\+Point\+Is\+On\+Screen (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Point}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a720903cbc3a327cc9c80649214500933}{}\label{classPCShaderScreen_a720903cbc3a327cc9c80649214500933}
+
+
+Check if point is on screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Point} & Point to check \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Pre\+Draw@{Pre\+Draw}}
+\index{Pre\+Draw@{Pre\+Draw}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Pre\+Draw()}{PreDraw()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Pre\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_a4b103d2af283e955678b41b759d51822}{}\label{classPCShaderScreen_a4b103d2af283e955678b41b759d51822}
+
+
+Operations to run before draw phase. 
+
+
+
+Implements \hyperlink{classScreen_a995cbb84408dff20ee0e1e6f02a09a8e}{Screen}.
+
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Print\+G\+L\+Error@{Print\+G\+L\+Error}}
+\index{Print\+G\+L\+Error@{Print\+G\+L\+Error}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Print\+G\+L\+Error(int const a\+Line\+Number)}{PrintGLError(int const aLineNumber)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Print\+G\+L\+Error (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Line\+Number}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a61dd7766256d89a02749af86ef92f284}{}\label{classPCShaderScreen_a61dd7766256d89a02749af86ef92f284}
+
+
+Prints GL error info. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Line\+Number} & Use {\bfseries L\+I\+NE} wherever you use this. \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Push\+Render\+Data\+V2@{Push\+Render\+Data\+V2}}
+\index{Push\+Render\+Data\+V2@{Push\+Render\+Data\+V2}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Push\+Render\+Data\+V2(std\+::vector$<$ Vector2 $>$ \&a\+Data, int a\+Attrib\+Location, Vector2 const \&a\+Attribute)}{PushRenderDataV2(std::vector< Vector2 > &aData, int aAttribLocation, Vector2 const &aAttribute)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Push\+Render\+Data\+V2 (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Vector2} $>$ \&}]{a\+Data, }
+\item[{int}]{a\+Attrib\+Location, }
+\item[{{\bf Vector2} const \&}]{a\+Attribute}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_ae6b398de132aea3477dec9b068c911e8}{}\label{classPCShaderScreen_ae6b398de132aea3477dec9b068c911e8}
+
+
+Push render data onto vector if applicable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Data} & Vector to push onto \\
+\hline
+{\em a\+Attrib\+Location} & Location of attribute in shader \\
+\hline
+{\em a\+Attribute} & Value of attribute \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Push\+Render\+Data\+V3@{Push\+Render\+Data\+V3}}
+\index{Push\+Render\+Data\+V3@{Push\+Render\+Data\+V3}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Push\+Render\+Data\+V3(std\+::vector$<$ Vector3 $>$ \&a\+Data, int a\+Attrib\+Location, Vector3 const \&a\+Attribute)}{PushRenderDataV3(std::vector< Vector3 > &aData, int aAttribLocation, Vector3 const &aAttribute)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Push\+Render\+Data\+V3 (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Vector3} $>$ \&}]{a\+Data, }
+\item[{int}]{a\+Attrib\+Location, }
+\item[{{\bf Vector3} const \&}]{a\+Attribute}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_aa23f04df99385a9872993f790a585bf3}{}\label{classPCShaderScreen_aa23f04df99385a9872993f790a585bf3}
+
+
+Push render data onto vector if applicable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Data} & Vector to push onto \\
+\hline
+{\em a\+Attrib\+Location} & Location of attribute in shader \\
+\hline
+{\em a\+Attribute} & Value of attribute \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Push\+Render\+Data\+V4@{Push\+Render\+Data\+V4}}
+\index{Push\+Render\+Data\+V4@{Push\+Render\+Data\+V4}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Push\+Render\+Data\+V4(std\+::vector$<$ Vector4 $>$ \&a\+Data, int a\+Attrib\+Location, Vector4 const \&a\+Attribute)}{PushRenderDataV4(std::vector< Vector4 > &aData, int aAttribLocation, Vector4 const &aAttribute)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Push\+Render\+Data\+V4 (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Vector4} $>$ \&}]{a\+Data, }
+\item[{int}]{a\+Attrib\+Location, }
+\item[{{\bf Vector4} const \&}]{a\+Attribute}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a6f5bc2d7e28d2fe56891672d3863963d}{}\label{classPCShaderScreen_a6f5bc2d7e28d2fe56891672d3863963d}
+
+
+Push render data onto vector if applicable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Data} & Vector to push onto \\
+\hline
+{\em a\+Attrib\+Location} & Location of attribute in shader \\
+\hline
+{\em a\+Attribute} & Value of attribute \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Set\+Clear\+Color@{Set\+Clear\+Color}}
+\index{Set\+Clear\+Color@{Set\+Clear\+Color}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Set\+Clear\+Color(\+Vector4 const \&a\+Clear\+Color)}{SetClearColor(Vector4 const &aClearColor)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Set\+Clear\+Color (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector4} const \&}]{a\+Clear\+Color}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_ac1b9a286f7b8d6e3d6e37fe1f0f6a5a7}{}\label{classPCShaderScreen_ac1b9a286f7b8d6e3d6e37fe1f0f6a5a7}
+
+
+Set clear color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Clear\+Color} & Color. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classScreen_a537a5e1ddfbc6d3f048b8195ad80cad9}{Screen}.
+
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Set\+Shader\+Properties@{Set\+Shader\+Properties}}
+\index{Set\+Shader\+Properties@{Set\+Shader\+Properties}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Set\+Shader\+Properties(\+P\+C\+Shader\+Surface $\ast$a\+Surface, bool a\+Active)}{SetShaderProperties(PCShaderSurface *aSurface, bool aActive)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Set\+Shader\+Properties (
+\begin{DoxyParamCaption}
+\item[{{\bf P\+C\+Shader\+Surface} $\ast$}]{a\+Surface, }
+\item[{bool}]{a\+Active}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a8b255847bf1959fff9fa5c61eb3803d6}{}\label{classPCShaderScreen_a8b255847bf1959fff9fa5c61eb3803d6}
+
+
+Set shader properties based on surface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Surface} & \hyperlink{classSurface}{Surface} to set properties for. \\
+\hline
+{\em a\+Active} & Decide whether or not to set values or reset. \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!Swap\+Buffers@{Swap\+Buffers}}
+\index{Swap\+Buffers@{Swap\+Buffers}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{Swap\+Buffers()}{SwapBuffers()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Screen\+::\+Swap\+Buffers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderScreen_a32d9adc0a0af5c3e22f5d06005e427a6}{}\label{classPCShaderScreen_a32d9adc0a0af5c3e22f5d06005e427a6}
+
+
+Swap buffers. 
+
+
+
+Implements \hyperlink{classScreen_ac4828d7dba6fd883d96175b00d2f856b}{Screen}.
+
+
+
+\subsection{Member Data Documentation}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Color\+Buffer\+ID@{m\+Color\+Buffer\+ID}}
+\index{m\+Color\+Buffer\+ID@{m\+Color\+Buffer\+ID}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Color\+Buffer\+ID}{mColorBufferID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Screen\+::m\+Color\+Buffer\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a7e68dc336931bcdc050f36392935525c}{}\label{classPCShaderScreen_a7e68dc336931bcdc050f36392935525c}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Display\+Mode@{m\+Display\+Mode}}
+\index{m\+Display\+Mode@{m\+Display\+Mode}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Display\+Mode}{mDisplayMode}}]{\setlength{\rightskip}{0pt plus 5cm}S\+D\+L\+\_\+\+Display\+Mode P\+C\+Shader\+Screen\+::m\+Display\+Mode\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a649b06c37c9ee7e63a4a76a4a344803d}{}\label{classPCShaderScreen_a649b06c37c9ee7e63a4a76a4a344803d}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+G\+L\+Context@{m\+G\+L\+Context}}
+\index{m\+G\+L\+Context@{m\+G\+L\+Context}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+G\+L\+Context}{mGLContext}}]{\setlength{\rightskip}{0pt plus 5cm}S\+D\+L\+\_\+\+G\+L\+Context P\+C\+Shader\+Screen\+::m\+G\+L\+Context\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a708681cd9aafb810245f66c77f3b5302}{}\label{classPCShaderScreen_a708681cd9aafb810245f66c77f3b5302}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Index\+Buffer\+ID@{m\+Index\+Buffer\+ID}}
+\index{m\+Index\+Buffer\+ID@{m\+Index\+Buffer\+ID}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Index\+Buffer\+ID}{mIndexBufferID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Screen\+::m\+Index\+Buffer\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a3aa2686bd54a0dc74f6720a5495cad3c}{}\label{classPCShaderScreen_a3aa2686bd54a0dc74f6720a5495cad3c}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Max\+Textures@{m\+Max\+Textures}}
+\index{m\+Max\+Textures@{m\+Max\+Textures}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Max\+Textures}{mMaxTextures}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lint P\+C\+Shader\+Screen\+::m\+Max\+Textures\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_af93565de5fcea3a0c5dc465f0610a1d4}{}\label{classPCShaderScreen_af93565de5fcea3a0c5dc465f0610a1d4}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Position\+Buffer\+ID@{m\+Position\+Buffer\+ID}}
+\index{m\+Position\+Buffer\+ID@{m\+Position\+Buffer\+ID}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Position\+Buffer\+ID}{mPositionBufferID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Screen\+::m\+Position\+Buffer\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_aaa5c101008eebd160cd4ff7ef04349de}{}\label{classPCShaderScreen_aaa5c101008eebd160cd4ff7ef04349de}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Texture\+Buffer\+ID@{m\+Texture\+Buffer\+ID}}
+\index{m\+Texture\+Buffer\+ID@{m\+Texture\+Buffer\+ID}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Texture\+Buffer\+ID}{mTextureBufferID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Screen\+::m\+Texture\+Buffer\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_acf3e257c02af0ec073df40c26f08cab7}{}\label{classPCShaderScreen_acf3e257c02af0ec073df40c26f08cab7}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Vertex\+Array\+Object\+ID@{m\+Vertex\+Array\+Object\+ID}}
+\index{m\+Vertex\+Array\+Object\+ID@{m\+Vertex\+Array\+Object\+ID}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Vertex\+Array\+Object\+ID}{mVertexArrayObjectID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Screen\+::m\+Vertex\+Array\+Object\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a3b4261546ea335e52da92f01db58ad4f}{}\label{classPCShaderScreen_a3b4261546ea335e52da92f01db58ad4f}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Vertex\+Buffer\+ID@{m\+Vertex\+Buffer\+ID}}
+\index{m\+Vertex\+Buffer\+ID@{m\+Vertex\+Buffer\+ID}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Vertex\+Buffer\+ID}{mVertexBufferID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Screen\+::m\+Vertex\+Buffer\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_aab7c077141f13b13027c0e798e4457c2}{}\label{classPCShaderScreen_aab7c077141f13b13027c0e798e4457c2}
+\index{P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}!m\+Window@{m\+Window}}
+\index{m\+Window@{m\+Window}!P\+C\+Shader\+Screen@{P\+C\+Shader\+Screen}}
+\subsubsection[{\texorpdfstring{m\+Window}{mWindow}}]{\setlength{\rightskip}{0pt plus 5cm}S\+D\+L\+\_\+\+Window$\ast$ P\+C\+Shader\+Screen\+::m\+Window\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderScreen_a0edede4203082cd3891b3178c3bc0def}{}\label{classPCShaderScreen_a0edede4203082cd3891b3178c3bc0def}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graphics/\hyperlink{PCShaderScreen_8h}{P\+C\+Shader\+Screen.\+h}\item 
+Graphics/\hyperlink{PCShaderScreen_8cpp}{P\+C\+Shader\+Screen.\+cpp}\end{DoxyCompactItemize}

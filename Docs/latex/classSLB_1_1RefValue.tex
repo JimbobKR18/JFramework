@@ -1,0 +1,115 @@
+\hypertarget{classSLB_1_1RefValue}{}\section{S\+LB\+:\+:Ref\+Value$<$ T $>$ Class Template Reference}
+\label{classSLB_1_1RefValue}\index{S\+L\+B\+::\+Ref\+Value$<$ T $>$@{S\+L\+B\+::\+Ref\+Value$<$ T $>$}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Ref\+Value$<$ T $>$\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Ref\+Value$<$ T $>$\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1RefValue_aebb602f3014b70a80c080f58c9936976}{Ref\+Value} (T \&obj)
+\item 
+\hyperlink{classSLB_1_1RefValue_a462428b392dfb84af9c2734fd074dfa9}{Ref\+Value} (const T \&obj)
+\item 
+\hyperlink{classSLB_1_1RefValue_ac6a7865494a2ce8c0743221a00a9d089}{Ref\+Value} (T $\ast$obj)
+\item 
+\hyperlink{classSLB_1_1RefValue_a08dc0dc94c2e924c39ceda454ab9ede0}{Ref\+Value} (const T $\ast$obj)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSLB_1_1RefValue_a73c6c1745d94ef32c9d15ebf00e33697}{push\+Implementation} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual \hyperlink{classSLB_1_1RefValue_a022bb18c819792c0537036767f3be65b}{$\sim$\+Ref\+Value} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>T $\ast$ \hyperlink{classSLB_1_1RefValue_ad2d7be8cda83586403d85e69e30e036f}{\_obj}\\
+\>const T $\ast$ \hyperlink{classSLB_1_1RefValue_a941262995dc0684ac8b66bdcaace44c1}{\_constObj}\\
+\}; \\
+
+\end{tabbing}\item 
+bool \hyperlink{classSLB_1_1RefValue_ab2962578f1a0c8d9a5941ec6f05fc31c}{\+\_\+is\+Const}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!Ref\+Value@{Ref\+Value}}
+\index{Ref\+Value@{Ref\+Value}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{Ref\+Value(\+T \&obj)}{RefValue(T &obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::{\bf Ref\+Value} (
+\begin{DoxyParamCaption}
+\item[{T \&}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1RefValue_aebb602f3014b70a80c080f58c9936976}{}\label{classSLB_1_1RefValue_aebb602f3014b70a80c080f58c9936976}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!Ref\+Value@{Ref\+Value}}
+\index{Ref\+Value@{Ref\+Value}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{Ref\+Value(const T \&obj)}{RefValue(const T &obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::{\bf Ref\+Value} (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1RefValue_a462428b392dfb84af9c2734fd074dfa9}{}\label{classSLB_1_1RefValue_a462428b392dfb84af9c2734fd074dfa9}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!Ref\+Value@{Ref\+Value}}
+\index{Ref\+Value@{Ref\+Value}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{Ref\+Value(\+T $\ast$obj)}{RefValue(T *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::{\bf Ref\+Value} (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1RefValue_ac6a7865494a2ce8c0743221a00a9d089}{}\label{classSLB_1_1RefValue_ac6a7865494a2ce8c0743221a00a9d089}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!Ref\+Value@{Ref\+Value}}
+\index{Ref\+Value@{Ref\+Value}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{Ref\+Value(const T $\ast$obj)}{RefValue(const T *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::{\bf Ref\+Value} (
+\begin{DoxyParamCaption}
+\item[{const T $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1RefValue_a08dc0dc94c2e924c39ceda454ab9ede0}{}\label{classSLB_1_1RefValue_a08dc0dc94c2e924c39ceda454ab9ede0}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!````~Ref\+Value@{$\sim$\+Ref\+Value}}
+\index{````~Ref\+Value@{$\sim$\+Ref\+Value}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{$\sim$\+Ref\+Value()}{~RefValue()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::$\sim${\bf Ref\+Value} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1RefValue_a022bb18c819792c0537036767f3be65b}{}\label{classSLB_1_1RefValue_a022bb18c819792c0537036767f3be65b}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!push\+Implementation@{push\+Implementation}}
+\index{push\+Implementation@{push\+Implementation}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{push\+Implementation(lua\+\_\+\+State $\ast$\+L)}{pushImplementation(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::push\+Implementation (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1RefValue_a73c6c1745d94ef32c9d15ebf00e33697}{}\label{classSLB_1_1RefValue_a73c6c1745d94ef32c9d15ebf00e33697}
+
+
+Implements \hyperlink{classSLB_1_1Object_a3dddf6a764c19ed37f6af797f0b0b453}{S\+L\+B\+::\+Object}.
+
+
+
+\subsection{Member Data Documentation}
+\subsubsection[{\texorpdfstring{"@1}{@1}}]{\setlength{\rightskip}{0pt plus 5cm}union \{ ... \} \hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1RefValue_a19c062a6c761c92eb631b373bf2d509e}{}\label{classSLB_1_1RefValue_a19c062a6c761c92eb631b373bf2d509e}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!\+\_\+const\+Obj@{\+\_\+const\+Obj}}
+\index{\+\_\+const\+Obj@{\+\_\+const\+Obj}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{\+\_\+const\+Obj}{_constObj}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::\+\_\+const\+Obj}\hypertarget{classSLB_1_1RefValue_a941262995dc0684ac8b66bdcaace44c1}{}\label{classSLB_1_1RefValue_a941262995dc0684ac8b66bdcaace44c1}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!\+\_\+is\+Const@{\+\_\+is\+Const}}
+\index{\+\_\+is\+Const@{\+\_\+is\+Const}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{\+\_\+is\+Const}{_isConst}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ bool {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::\+\_\+is\+Const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1RefValue_ab2962578f1a0c8d9a5941ec6f05fc31c}{}\label{classSLB_1_1RefValue_ab2962578f1a0c8d9a5941ec6f05fc31c}
+\index{S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}!\+\_\+obj@{\+\_\+obj}}
+\index{\+\_\+obj@{\+\_\+obj}!S\+L\+B\+::\+Ref\+Value@{S\+L\+B\+::\+Ref\+Value}}
+\subsubsection[{\texorpdfstring{\+\_\+obj}{_obj}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ {\bf S\+L\+B\+::\+Ref\+Value}$<$ T $>$\+::\+\_\+obj}\hypertarget{classSLB_1_1RefValue_ad2d7be8cda83586403d85e69e30e036f}{}\label{classSLB_1_1RefValue_ad2d7be8cda83586403d85e69e30e036f}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\end{DoxyCompactItemize}

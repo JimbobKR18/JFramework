@@ -1,0 +1,393 @@
+\hypertarget{classMenu}{}\section{Menu Class Reference}
+\label{classMenu}\index{Menu@{Menu}}
+
+
+{\ttfamily \#include $<$Menu.\+h$>$}
+
+
+
+Collaboration diagram for Menu\+:
+% FIG 0
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classMenuElement}{Menu\+Element} $\ast$ $>$ \hyperlink{classMenu_af1e1ac12e9eab661af646964b15edf54}{Element\+Container}
+\item 
+typedef Element\+Container\+::iterator \hyperlink{classMenu_a9c09c2ca104d7a3cb725d140d3f752f2}{Element\+IT}
+\item 
+typedef Element\+Container\+::const\+\_\+iterator \hyperlink{classMenu_a5dc61431574d6de0558ba3e6c33fcfb8}{Const\+Element\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenu_a0f665254cb96f98732580ab6ebbda900}{Menu} (\hyperlink{classLevel}{Level} $\ast$a\+Level, \hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\item 
+virtual \hyperlink{classMenu_a831387f51358cfb88cd018e1777bc980}{$\sim$\+Menu} ()
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classMenu_a6cd6518c67b474e3cdee81b49e1c8780}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get name of menu. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classMenu_a6774ae79d40b4eb11173ead85972ed41}{Get\+File\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get file name for menu. \end{DoxyCompactList}\item 
+\hyperlink{classLevel}{Level} $\ast$ \hyperlink{classMenu_a74e17d8865e1db6e8b357d7846c9b262}{Get\+Level} () const 
+\begin{DoxyCompactList}\small\item\em Get level of menu. \end{DoxyCompactList}\item 
+\hyperlink{classMenuElement}{Menu\+Element} $\ast$ \hyperlink{classMenu_a311fbd891529029744d8f5e3c2685f5f}{Get\+Element} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name) const 
+\begin{DoxyCompactList}\small\item\em Retrieve an element if available. Uses file name if \char`\"{}.\+txt\char`\"{} or \char`\"{}.\+xml\char`\"{} is in name. \end{DoxyCompactList}\item 
+\hyperlink{classMenuElement}{Menu\+Element} $\ast$ \hyperlink{classMenu_acb708b02b682adef1a8ca6947097c7d7}{Get\+Element\+By\+Object\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Object\+Name) const 
+\begin{DoxyCompactList}\small\item\em Retrieve an element by object name if available. \end{DoxyCompactList}\item 
+\hyperlink{classMenuElement}{Menu\+Element} $\ast$ \hyperlink{classMenu_ac295be5c0476f3618793cdd122457ca3}{Get\+Element\+By\+File\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name) const 
+\begin{DoxyCompactList}\small\item\em Retrieve an element by file name if available. \end{DoxyCompactList}\item 
+\hyperlink{classMenu_af1e1ac12e9eab661af646964b15edf54}{Element\+Container} \hyperlink{classMenu_a05f16b98a943adbe9a554013faa9b4bd}{Get\+Elements} () const 
+\begin{DoxyCompactList}\small\item\em Get all elements in menu. \end{DoxyCompactList}\item 
+void \hyperlink{classMenu_a1ed1a69cbb40c0886c7e9c1ed86de956}{Add\+Object} (\hyperlink{classMenuElement}{Menu\+Element} $\ast$a\+Element)
+\begin{DoxyCompactList}\small\item\em Adds an element to our menu. \end{DoxyCompactList}\item 
+void \hyperlink{classMenu_a2c7f8f61cec125bc31e9fc46999e4a4b}{Add\+Replaceable\+Object} (\hyperlink{classMenuElement}{Menu\+Element} $\ast$a\+Element)
+\begin{DoxyCompactList}\small\item\em Adds an element to our menu. To be deleted next frame. \end{DoxyCompactList}\item 
+void \hyperlink{classMenu_a771ca8f1966314a8d8f28c1479c5c9c7}{Delete\+Object} (\hyperlink{classMenuElement}{Menu\+Element} $\ast$a\+Element)
+\begin{DoxyCompactList}\small\item\em Deletes and removes an element. \end{DoxyCompactList}\item 
+void \hyperlink{classMenu_a2f4d80db5a03120666992e3d8e73cb2a}{Delete\+Objects} ()
+\begin{DoxyCompactList}\small\item\em Delete all objects, the right way. \end{DoxyCompactList}\item 
+void \hyperlink{classMenu_af29d71473a414e31e914bc637840cb3e}{Update} ()
+\begin{DoxyCompactList}\small\item\em Updates menu elements if need be. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenu_a82445f44555111a9c15e47d59a82d045}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Sends a message to all menu elements. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenu_abb686c47e73879f919001dbc94078cbb}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing for now. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMenu_a81e9ea0f86510401f9033dffc7381899}{Parse\+File} ()
+\begin{DoxyCompactList}\small\item\em Helper function to parse a text or xml (or whatever) file. \end{DoxyCompactList}\item 
+void \hyperlink{classMenu_afd6207275d9a0008990eb15be2ae63c3}{Parse\+Transform} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classRoot}{Root} $\ast$a\+Transform)
+\begin{DoxyCompactList}\small\item\em Get transform data for an object from a root. \end{DoxyCompactList}\item 
+void \hyperlink{classMenu_aeaabed196b2b18d4123cb89662578528}{Parse\+Surface} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classRoot}{Root} $\ast$a\+Surface)
+\begin{DoxyCompactList}\small\item\em Get surface data from a root. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLevel}{Level} $\ast$ \hyperlink{classMenu_a36358711e2674ecda672dc659aaf0473}{m\+Owner}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classMenu_a9e454ad9bc527d746ccbb27de87d1181}{m\+Name}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classMenu_abab37e282704993641ee4acd9f6fa30d}{m\+File\+Name}
+\item 
+\hyperlink{classMenu_af1e1ac12e9eab661af646964b15edf54}{Element\+Container} \hyperlink{classMenu_a971cf9e8a9251bc7d758b7822659a022}{m\+Menu\+Elements}
+\item 
+\hyperlink{classMenu_af1e1ac12e9eab661af646964b15edf54}{Element\+Container} \hyperlink{classMenu_a1ff659d527f6648207ae7045a9b58ab6}{m\+Replaceable\+Elements}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Menu@{Menu}!Const\+Element\+IT@{Const\+Element\+IT}}
+\index{Const\+Element\+IT@{Const\+Element\+IT}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Const\+Element\+IT}{ConstElementIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Element\+Container\+::const\+\_\+iterator {\bf Menu\+::\+Const\+Element\+IT}}\hypertarget{classMenu_a5dc61431574d6de0558ba3e6c33fcfb8}{}\label{classMenu_a5dc61431574d6de0558ba3e6c33fcfb8}
+\index{Menu@{Menu}!Element\+Container@{Element\+Container}}
+\index{Element\+Container@{Element\+Container}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Element\+Container}{ElementContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Menu\+Element}$\ast$$>$ {\bf Menu\+::\+Element\+Container}}\hypertarget{classMenu_af1e1ac12e9eab661af646964b15edf54}{}\label{classMenu_af1e1ac12e9eab661af646964b15edf54}
+\index{Menu@{Menu}!Element\+IT@{Element\+IT}}
+\index{Element\+IT@{Element\+IT}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Element\+IT}{ElementIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Element\+Container\+::iterator {\bf Menu\+::\+Element\+IT}}\hypertarget{classMenu_a9c09c2ca104d7a3cb725d140d3f752f2}{}\label{classMenu_a9c09c2ca104d7a3cb725d140d3f752f2}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Menu@{Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Menu(\+Level $\ast$a\+Level, Hash\+String const \&a\+File\+Name)}{Menu(Level *aLevel, HashString const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+::\+Menu (
+\begin{DoxyParamCaption}
+\item[{{\bf Level} $\ast$}]{a\+Level, }
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenu_a0f665254cb96f98732580ab6ebbda900}{}\label{classMenu_a0f665254cb96f98732580ab6ebbda900}
+\index{Menu@{Menu}!````~Menu@{$\sim$\+Menu}}
+\index{````~Menu@{$\sim$\+Menu}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{$\sim$\+Menu()}{~Menu()}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+::$\sim$\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenu_a831387f51358cfb88cd018e1777bc980}{}\label{classMenu_a831387f51358cfb88cd018e1777bc980}
+
+
+\subsection{Member Function Documentation}
+\index{Menu@{Menu}!Add\+Object@{Add\+Object}}
+\index{Add\+Object@{Add\+Object}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Add\+Object(\+Menu\+Element $\ast$a\+Element)}{AddObject(MenuElement *aElement)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Add\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu\+Element} $\ast$}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenu_a1ed1a69cbb40c0886c7e9c1ed86de956}{}\label{classMenu_a1ed1a69cbb40c0886c7e9c1ed86de956}
+
+
+Adds an element to our menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & \\
+\hline
+\end{DoxyParams}
+\index{Menu@{Menu}!Add\+Replaceable\+Object@{Add\+Replaceable\+Object}}
+\index{Add\+Replaceable\+Object@{Add\+Replaceable\+Object}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Add\+Replaceable\+Object(\+Menu\+Element $\ast$a\+Element)}{AddReplaceableObject(MenuElement *aElement)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Add\+Replaceable\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu\+Element} $\ast$}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenu_a2c7f8f61cec125bc31e9fc46999e4a4b}{}\label{classMenu_a2c7f8f61cec125bc31e9fc46999e4a4b}
+
+
+Adds an element to our menu. To be deleted next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & \\
+\hline
+\end{DoxyParams}
+\index{Menu@{Menu}!Delete\+Object@{Delete\+Object}}
+\index{Delete\+Object@{Delete\+Object}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Delete\+Object(\+Menu\+Element $\ast$a\+Element)}{DeleteObject(MenuElement *aElement)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Delete\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu\+Element} $\ast$}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenu_a771ca8f1966314a8d8f28c1479c5c9c7}{}\label{classMenu_a771ca8f1966314a8d8f28c1479c5c9c7}
+
+
+Deletes and removes an element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & \\
+\hline
+\end{DoxyParams}
+\index{Menu@{Menu}!Delete\+Objects@{Delete\+Objects}}
+\index{Delete\+Objects@{Delete\+Objects}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Delete\+Objects()}{DeleteObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Delete\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenu_a2f4d80db5a03120666992e3d8e73cb2a}{}\label{classMenu_a2f4d80db5a03120666992e3d8e73cb2a}
+
+
+Delete all objects, the right way. 
+
+\index{Menu@{Menu}!Get\+Element@{Get\+Element}}
+\index{Get\+Element@{Get\+Element}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Get\+Element(\+Hash\+String const \&a\+Name) const }{GetElement(HashString const &aName) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu\+Element} $\ast$ Menu\+::\+Get\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenu_a311fbd891529029744d8f5e3c2685f5f}{}\label{classMenu_a311fbd891529029744d8f5e3c2685f5f}
+
+
+Retrieve an element if available. Uses file name if \char`\"{}.\+txt\char`\"{} or \char`\"{}.\+xml\char`\"{} is in name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+File\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The element specified, else nullptr. 
+\end{DoxyReturn}
+\index{Menu@{Menu}!Get\+Element\+By\+File\+Name@{Get\+Element\+By\+File\+Name}}
+\index{Get\+Element\+By\+File\+Name@{Get\+Element\+By\+File\+Name}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Get\+Element\+By\+File\+Name(\+Hash\+String const \&a\+File\+Name) const }{GetElementByFileName(HashString const &aFileName) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu\+Element} $\ast$ Menu\+::\+Get\+Element\+By\+File\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenu_ac295be5c0476f3618793cdd122457ca3}{}\label{classMenu_ac295be5c0476f3618793cdd122457ca3}
+
+
+Retrieve an element by file name if available. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+File\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The element specified, else nullptr. 
+\end{DoxyReturn}
+\index{Menu@{Menu}!Get\+Element\+By\+Object\+Name@{Get\+Element\+By\+Object\+Name}}
+\index{Get\+Element\+By\+Object\+Name@{Get\+Element\+By\+Object\+Name}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Get\+Element\+By\+Object\+Name(\+Hash\+String const \&a\+Object\+Name) const }{GetElementByObjectName(HashString const &aObjectName) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu\+Element} $\ast$ Menu\+::\+Get\+Element\+By\+Object\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Object\+Name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenu_acb708b02b682adef1a8ca6947097c7d7}{}\label{classMenu_acb708b02b682adef1a8ca6947097c7d7}
+
+
+Retrieve an element by object name if available. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+File\+Name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The element specified, else nullptr. 
+\end{DoxyReturn}
+\index{Menu@{Menu}!Get\+Elements@{Get\+Elements}}
+\index{Get\+Elements@{Get\+Elements}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Get\+Elements() const }{GetElements() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu\+::\+Element\+Container} Menu\+::\+Get\+Elements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenu_a05f16b98a943adbe9a554013faa9b4bd}{}\label{classMenu_a05f16b98a943adbe9a554013faa9b4bd}
+
+
+Get all elements in menu. 
+
+\begin{DoxyReturn}{Returns}
+All elements in menu. 
+\end{DoxyReturn}
+\index{Menu@{Menu}!Get\+File\+Name@{Get\+File\+Name}}
+\index{Get\+File\+Name@{Get\+File\+Name}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Get\+File\+Name() const }{GetFileName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Menu\+::\+Get\+File\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenu_a6774ae79d40b4eb11173ead85972ed41}{}\label{classMenu_a6774ae79d40b4eb11173ead85972ed41}
+
+
+Get file name for menu. 
+
+\begin{DoxyReturn}{Returns}
+File name for menu 
+\end{DoxyReturn}
+\index{Menu@{Menu}!Get\+Level@{Get\+Level}}
+\index{Get\+Level@{Get\+Level}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Get\+Level() const }{GetLevel() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level} $\ast$ Menu\+::\+Get\+Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenu_a74e17d8865e1db6e8b357d7846c9b262}{}\label{classMenu_a74e17d8865e1db6e8b357d7846c9b262}
+
+
+Get level of menu. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classLevel}{Level} of menu 
+\end{DoxyReturn}
+\index{Menu@{Menu}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Menu\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classMenu_a6cd6518c67b474e3cdee81b49e1c8780}{}\label{classMenu_a6cd6518c67b474e3cdee81b49e1c8780}
+
+
+Get name of menu. 
+
+\begin{DoxyReturn}{Returns}
+Name of menu 
+\end{DoxyReturn}
+\index{Menu@{Menu}!Parse\+File@{Parse\+File}}
+\index{Parse\+File@{Parse\+File}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Parse\+File()}{ParseFile()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Parse\+File (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_a81e9ea0f86510401f9033dffc7381899}{}\label{classMenu_a81e9ea0f86510401f9033dffc7381899}
+
+
+Helper function to parse a text or xml (or whatever) file. 
+
+\index{Menu@{Menu}!Parse\+Surface@{Parse\+Surface}}
+\index{Parse\+Surface@{Parse\+Surface}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Parse\+Surface(\+Game\+Object $\ast$a\+Object, Root $\ast$a\+Surface)}{ParseSurface(GameObject *aObject, Root *aSurface)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Parse\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Root} $\ast$}]{a\+Surface}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_aeaabed196b2b18d4123cb89662578528}{}\label{classMenu_aeaabed196b2b18d4123cb89662578528}
+
+
+Get surface data from a root. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Surface} & \\
+\hline
+\end{DoxyParams}
+\index{Menu@{Menu}!Parse\+Transform@{Parse\+Transform}}
+\index{Parse\+Transform@{Parse\+Transform}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Parse\+Transform(\+Game\+Object $\ast$a\+Object, Root $\ast$a\+Transform)}{ParseTransform(GameObject *aObject, Root *aTransform)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Parse\+Transform (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Root} $\ast$}]{a\+Transform}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_afd6207275d9a0008990eb15be2ae63c3}{}\label{classMenu_afd6207275d9a0008990eb15be2ae63c3}
+
+
+Get transform data for an object from a root. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Transform} & \\
+\hline
+\end{DoxyParams}
+\index{Menu@{Menu}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenu_a82445f44555111a9c15e47d59a82d045}{}\label{classMenu_a82445f44555111a9c15e47d59a82d045}
+
+
+Sends a message to all menu elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+\index{Menu@{Menu}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenu_abb686c47e73879f919001dbc94078cbb}{}\label{classMenu_abb686c47e73879f919001dbc94078cbb}
+
+
+Does nothing for now. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+\index{Menu@{Menu}!Update@{Update}}
+\index{Update@{Update}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenu_af29d71473a414e31e914bc637840cb3e}{}\label{classMenu_af29d71473a414e31e914bc637840cb3e}
+
+
+Updates menu elements if need be. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Menu@{Menu}!m\+File\+Name@{m\+File\+Name}}
+\index{m\+File\+Name@{m\+File\+Name}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{m\+File\+Name}{mFileName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Menu\+::m\+File\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_abab37e282704993641ee4acd9f6fa30d}{}\label{classMenu_abab37e282704993641ee4acd9f6fa30d}
+\index{Menu@{Menu}!m\+Menu\+Elements@{m\+Menu\+Elements}}
+\index{m\+Menu\+Elements@{m\+Menu\+Elements}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{m\+Menu\+Elements}{mMenuElements}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element\+Container} Menu\+::m\+Menu\+Elements\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_a971cf9e8a9251bc7d758b7822659a022}{}\label{classMenu_a971cf9e8a9251bc7d758b7822659a022}
+\index{Menu@{Menu}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Menu\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_a9e454ad9bc527d746ccbb27de87d1181}{}\label{classMenu_a9e454ad9bc527d746ccbb27de87d1181}
+\index{Menu@{Menu}!m\+Owner@{m\+Owner}}
+\index{m\+Owner@{m\+Owner}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{m\+Owner}{mOwner}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level}$\ast$ Menu\+::m\+Owner\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_a36358711e2674ecda672dc659aaf0473}{}\label{classMenu_a36358711e2674ecda672dc659aaf0473}
+\index{Menu@{Menu}!m\+Replaceable\+Elements@{m\+Replaceable\+Elements}}
+\index{m\+Replaceable\+Elements@{m\+Replaceable\+Elements}!Menu@{Menu}}
+\subsubsection[{\texorpdfstring{m\+Replaceable\+Elements}{mReplaceableElements}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element\+Container} Menu\+::m\+Replaceable\+Elements\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenu_a1ff659d527f6648207ae7045a9b58ab6}{}\label{classMenu_a1ff659d527f6648207ae7045a9b58ab6}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{Menu_8h}{Menu.\+h}\item 
+Logic/\hyperlink{Menu_8cpp}{Menu.\+cpp}\end{DoxyCompactItemize}

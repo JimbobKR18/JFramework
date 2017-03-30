@@ -1,0 +1,202 @@
+\hypertarget{classSLB_1_1FuncCall}{}\section{S\+LB\+:\+:Func\+Call Class Reference}
+\label{classSLB_1_1FuncCall}\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Func\+Call\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Func\+Call\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \hyperlink{classSLB_1_1FuncCall_ab784a9ccd4080145a51d5cdf267013a3}{get\+Num\+Arguments} () const 
+\item 
+const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \& \hyperlink{classSLB_1_1FuncCall_a1cf9a34ed158130aa4228b0abb6bbcb1}{get\+Arg\+Type} (size\+\_\+t p) const 
+\item 
+const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \& \hyperlink{classSLB_1_1FuncCall_af3b947ba525eb548d8b5df33cfb2ad10}{get\+Arg\+Comment} (size\+\_\+t p) const 
+\item 
+const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \& \hyperlink{classSLB_1_1FuncCall_acd20114490194bc7d5803f9c3f519fec}{get\+Returned\+Type} () const 
+\item 
+void \hyperlink{classSLB_1_1FuncCall_aca4ce0049ef72e0e478250e91c290beb}{set\+Arg\+Comment} (size\+\_\+t p, const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&c)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classSLB_1_1FuncCall}{Func\+Call} $\ast$ \hyperlink{classSLB_1_1FuncCall_a5a413ea283322660faab78fae41a9f53}{create} (lua\+\_\+\+C\+Function f)
+\end{DoxyCompactItemize}
+\subsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::pair$<$ \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper}, \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{S\+L\+B\+::\+String} $>$ \hyperlink{classSLB_1_1FuncCall_a29ced3919d9548581c8d6893b2af305b}{Type\+Info\+String\+Pair}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1FuncCall_a9630c6f24bb0f40037674b1d76471f2a}{Func\+Call} ()
+\item 
+virtual \hyperlink{classSLB_1_1FuncCall_a85626ff3e34bdfca7140850c481281d6}{$\sim$\+Func\+Call} ()
+\item 
+void \hyperlink{classSLB_1_1FuncCall_a8929e16bd0efb7e8fb94b36fc0570f04}{push\+Implementation} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual int \hyperlink{classSLB_1_1FuncCall_add5a4f72225cf4a190f66fc7bceac1b8}{call} (lua\+\_\+\+State $\ast$L)=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classSLB_1_1FuncCall_a29ced3919d9548581c8d6893b2af305b}{Type\+Info\+String\+Pair}, \hyperlink{classSLB_1_1Allocator}{Allocator}$<$ \hyperlink{classSLB_1_1FuncCall_a29ced3919d9548581c8d6893b2af305b}{Type\+Info\+String\+Pair} $>$ $>$ \hyperlink{classSLB_1_1FuncCall_ad9bc8105dc36a15d4575fecfaf6095ce}{\+\_\+\+Targs}
+\item 
+\hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \hyperlink{classSLB_1_1FuncCall_a95da897833858c42336b06ef321966e4}{\+\_\+\+Treturn}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1FuncCall_ac37c4100267780f1adaeb3bb34c9ca12}{S\+L\+B\+\_\+\+C\+L\+A\+SS} (\hyperlink{classSLB_1_1FuncCall}{Func\+Call}, \hyperlink{classSLB_1_1Object}{Object})
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classSLB_1_1FuncCall_a7bbaa75b5e03b699024b6e1f27ca11b5}{\+\_\+call} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSLB_1_1FuncCall_adddd5c43ff870a047aa66db4edf82a7e}{Manager}
+\item 
+class \hyperlink{classSLB_1_1FuncCall_ae6eaadf7953b7fe283a68d411b7b65b7}{Class\+Info}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!Type\+Info\+String\+Pair@{Type\+Info\+String\+Pair}}
+\index{Type\+Info\+String\+Pair@{Type\+Info\+String\+Pair}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{Type\+Info\+String\+Pair}{TypeInfoStringPair}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::pair$<${\bf Type\+Info\+Wrapper}, {\bf S\+L\+B\+::\+String}$>$ {\bf S\+L\+B\+::\+Func\+Call\+::\+Type\+Info\+String\+Pair}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1FuncCall_a29ced3919d9548581c8d6893b2af305b}{}\label{classSLB_1_1FuncCall_a29ced3919d9548581c8d6893b2af305b}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!Func\+Call@{Func\+Call}}
+\index{Func\+Call@{Func\+Call}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{Func\+Call()}{FuncCall()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Func\+Call\+::\+Func\+Call (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1FuncCall_a9630c6f24bb0f40037674b1d76471f2a}{}\label{classSLB_1_1FuncCall_a9630c6f24bb0f40037674b1d76471f2a}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!````~Func\+Call@{$\sim$\+Func\+Call}}
+\index{````~Func\+Call@{$\sim$\+Func\+Call}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{$\sim$\+Func\+Call()}{~FuncCall()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Func\+Call\+::$\sim$\+Func\+Call (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1FuncCall_a85626ff3e34bdfca7140850c481281d6}{}\label{classSLB_1_1FuncCall_a85626ff3e34bdfca7140850c481281d6}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!\+\_\+call@{\+\_\+call}}
+\index{\+\_\+call@{\+\_\+call}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{\+\_\+call(lua\+\_\+\+State $\ast$\+L)}{_call(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Func\+Call\+::\+\_\+call (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1FuncCall_a7bbaa75b5e03b699024b6e1f27ca11b5}{}\label{classSLB_1_1FuncCall_a7bbaa75b5e03b699024b6e1f27ca11b5}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!call@{call}}
+\index{call@{call}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{call(lua\+\_\+\+State $\ast$\+L)=0}{call(lua_State *L)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual int S\+L\+B\+::\+Func\+Call\+::call (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classSLB_1_1FuncCall_add5a4f72225cf4a190f66fc7bceac1b8}{}\label{classSLB_1_1FuncCall_add5a4f72225cf4a190f66fc7bceac1b8}
+
+
+Implemented in \hyperlink{structSLB_1_1Private_1_1FC__DefaultClassConstructor_3_01C_07_08_4_af0351f7618de41b36d9c1ebe60e8cee8}{S\+L\+B\+::\+Private\+::\+F\+C\+\_\+\+Default\+Class\+Constructor$<$ C()$>$}, and \hyperlink{classSLB_1_1LuaCFunction_a44a124fe323f52b0d4c861c51d62328e}{S\+L\+B\+::\+Lua\+C\+Function}.
+
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!create@{create}}
+\index{create@{create}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{create(lua\+\_\+\+C\+Function f)}{create(lua_CFunction f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Func\+Call} $\ast$ S\+L\+B\+::\+Func\+Call\+::create (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+C\+Function}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSLB_1_1FuncCall_a5a413ea283322660faab78fae41a9f53}{}\label{classSLB_1_1FuncCall_a5a413ea283322660faab78fae41a9f53}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!get\+Arg\+Comment@{get\+Arg\+Comment}}
+\index{get\+Arg\+Comment@{get\+Arg\+Comment}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{get\+Arg\+Comment(size\+\_\+t p) const }{getArgComment(size_t p) const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf String}\& S\+L\+B\+::\+Func\+Call\+::get\+Arg\+Comment (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{p}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1FuncCall_af3b947ba525eb548d8b5df33cfb2ad10}{}\label{classSLB_1_1FuncCall_af3b947ba525eb548d8b5df33cfb2ad10}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!get\+Arg\+Type@{get\+Arg\+Type}}
+\index{get\+Arg\+Type@{get\+Arg\+Type}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{get\+Arg\+Type(size\+\_\+t p) const }{getArgType(size_t p) const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Type\+Info\+Wrapper}\& S\+L\+B\+::\+Func\+Call\+::get\+Arg\+Type (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{p}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1FuncCall_a1cf9a34ed158130aa4228b0abb6bbcb1}{}\label{classSLB_1_1FuncCall_a1cf9a34ed158130aa4228b0abb6bbcb1}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!get\+Num\+Arguments@{get\+Num\+Arguments}}
+\index{get\+Num\+Arguments@{get\+Num\+Arguments}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{get\+Num\+Arguments() const }{getNumArguments() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t S\+L\+B\+::\+Func\+Call\+::get\+Num\+Arguments (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1FuncCall_ab784a9ccd4080145a51d5cdf267013a3}{}\label{classSLB_1_1FuncCall_ab784a9ccd4080145a51d5cdf267013a3}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!get\+Returned\+Type@{get\+Returned\+Type}}
+\index{get\+Returned\+Type@{get\+Returned\+Type}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{get\+Returned\+Type() const }{getReturnedType() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Type\+Info\+Wrapper}\& S\+L\+B\+::\+Func\+Call\+::get\+Returned\+Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1FuncCall_acd20114490194bc7d5803f9c3f519fec}{}\label{classSLB_1_1FuncCall_acd20114490194bc7d5803f9c3f519fec}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!push\+Implementation@{push\+Implementation}}
+\index{push\+Implementation@{push\+Implementation}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{push\+Implementation(lua\+\_\+\+State $\ast$\+L)}{pushImplementation(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Func\+Call\+::push\+Implementation (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1FuncCall_a8929e16bd0efb7e8fb94b36fc0570f04}{}\label{classSLB_1_1FuncCall_a8929e16bd0efb7e8fb94b36fc0570f04}
+
+
+Implements \hyperlink{classSLB_1_1Object_a3dddf6a764c19ed37f6af797f0b0b453}{S\+L\+B\+::\+Object}.
+
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!set\+Arg\+Comment@{set\+Arg\+Comment}}
+\index{set\+Arg\+Comment@{set\+Arg\+Comment}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{set\+Arg\+Comment(size\+\_\+t p, const String \&c)}{setArgComment(size_t p, const String &c)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Func\+Call\+::set\+Arg\+Comment (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{p, }
+\item[{const {\bf String} \&}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1FuncCall_aca4ce0049ef72e0e478250e91c290beb}{}\label{classSLB_1_1FuncCall_aca4ce0049ef72e0e478250e91c290beb}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!S\+L\+B\+\_\+\+C\+L\+A\+SS@{S\+L\+B\+\_\+\+C\+L\+A\+SS}}
+\index{S\+L\+B\+\_\+\+C\+L\+A\+SS@{S\+L\+B\+\_\+\+C\+L\+A\+SS}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+C\+L\+A\+S\+S(\+Func\+Call, Object)}{SLB_CLASS(FuncCall, Object)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Func\+Call\+::\+S\+L\+B\+\_\+\+C\+L\+A\+SS (
+\begin{DoxyParamCaption}
+\item[{{\bf Func\+Call}}]{, }
+\item[{{\bf Object}}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1FuncCall_ac37c4100267780f1adaeb3bb34c9ca12}{}\label{classSLB_1_1FuncCall_ac37c4100267780f1adaeb3bb34c9ca12}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!Class\+Info@{Class\+Info}}
+\index{Class\+Info@{Class\+Info}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{Class\+Info}{ClassInfo}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Class\+Info}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classSLB_1_1FuncCall_ae6eaadf7953b7fe283a68d411b7b65b7}{}\label{classSLB_1_1FuncCall_ae6eaadf7953b7fe283a68d411b7b65b7}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!Manager@{Manager}}
+\index{Manager@{Manager}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{Manager}{Manager}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Manager}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classSLB_1_1FuncCall_adddd5c43ff870a047aa66db4edf82a7e}{}\label{classSLB_1_1FuncCall_adddd5c43ff870a047aa66db4edf82a7e}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!\+\_\+\+Targs@{\+\_\+\+Targs}}
+\index{\+\_\+\+Targs@{\+\_\+\+Targs}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{\+\_\+\+Targs}{_Targs}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Type\+Info\+String\+Pair}, {\bf Allocator}$<${\bf Type\+Info\+String\+Pair}$>$ $>$ S\+L\+B\+::\+Func\+Call\+::\+\_\+\+Targs\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1FuncCall_ad9bc8105dc36a15d4575fecfaf6095ce}{}\label{classSLB_1_1FuncCall_ad9bc8105dc36a15d4575fecfaf6095ce}
+\index{S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}!\+\_\+\+Treturn@{\+\_\+\+Treturn}}
+\index{\+\_\+\+Treturn@{\+\_\+\+Treturn}!S\+L\+B\+::\+Func\+Call@{S\+L\+B\+::\+Func\+Call}}
+\subsubsection[{\texorpdfstring{\+\_\+\+Treturn}{_Treturn}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type\+Info\+Wrapper} S\+L\+B\+::\+Func\+Call\+::\+\_\+\+Treturn\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1FuncCall_a95da897833858c42336b06ef321966e4}{}\label{classSLB_1_1FuncCall_a95da897833858c42336b06ef321966e4}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

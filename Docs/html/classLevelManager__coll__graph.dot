@@ -1,0 +1,30 @@
+digraph "LevelManager"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="LevelManager",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Manager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classManager.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mApp" ,fontname="Helvetica"];
+  Node3 [label="GameApp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameApp.html"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mActiveLevel" ,fontname="Helvetica"];
+  Node4 [label="Level",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classLevel.html"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mFocusTarget" ,fontname="Helvetica"];
+  Node5 [label="GameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameObject.html"];
+  Node5 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mParent" ,fontname="Helvetica"];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mManager" ,fontname="Helvetica"];
+  Node6 [label="ObjectManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classObjectManager.html"];
+  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mName\nmFileName" ,fontname="Helvetica"];
+  Node7 [label="HashString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHashString.html"];
+  Node1 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mOwner" ,fontname="Helvetica"];
+  Node8 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mMinBoundary\nmMaxBoundary" ,fontname="Helvetica"];
+  Node8 [label="Vector3",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVector3.html"];
+  Node9 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mClearColor" ,fontname="Helvetica"];
+  Node9 [label="Vector4",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVector4.html"];
+  Node10 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mGenerator" ,fontname="Helvetica"];
+  Node10 [label="TileMapGenerator",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classTileMapGenerator.html"];
+  Node7 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mDataName\nmImageName" ,fontname="Helvetica"];
+  Node4 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mOwner" ,fontname="Helvetica"];
+  Node7 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mMusicName\nmName\nmFileName" ,fontname="Helvetica"];
+}

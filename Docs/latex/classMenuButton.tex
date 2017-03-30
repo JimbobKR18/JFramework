@@ -1,0 +1,178 @@
+\hypertarget{classMenuButton}{}\section{Menu\+Button Class Reference}
+\label{classMenuButton}\index{Menu\+Button@{Menu\+Button}}
+
+
+{\ttfamily \#include $<$Menu\+Button.\+h$>$}
+
+
+
+Inheritance diagram for Menu\+Button\+:
+% FIG 0
+
+
+Collaboration diagram for Menu\+Button\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenuButton_a7fc26440d71fbb39142abc55dee93ca7}{Menu\+Button} (\hyperlink{classMenu}{Menu} $\ast$a\+Owner, \hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+virtual \hyperlink{classMenuButton_a2cf52c32c95ed42bd06117a30eefc5e0}{$\sim$\+Menu\+Button} ()
+\item 
+virtual void \hyperlink{classMenuButton_aac414152e785dbc256aa307b23792143}{Draw} ()
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuButton_a929dfef7a69a776f4b1da3d151236dcb}{Update} ()
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuButton_a2e8ea938dfbfda31407f7aa672f1a607}{Parse\+Additional\+Data} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Gather additional data from deserialized file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuButton_a6d4ea5866ebba20ea57d6c48a0c6fa20}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive click messages. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuButton_ae3f1300dc3e55be8b2609e7fcb71e0fc}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing (yet) \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuButton_aecc8d40cee571b49b0844e48ecf5019b}{On\+Down\+Click} ()=0
+\item 
+virtual void \hyperlink{classMenuButton_a480da8ccd850ae04338b43d034ae172f}{On\+Up\+Click} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structCube}{Cube} \hyperlink{classMenuButton_afe071c8fd0b4bf7cd91e7e027f42c3a4}{m\+Clickable\+Area}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Menu\+Button@{Menu\+Button}!Menu\+Button@{Menu\+Button}}
+\index{Menu\+Button@{Menu\+Button}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{Menu\+Button(\+Menu $\ast$a\+Owner, Hash\+String const \&a\+Filename)}{MenuButton(Menu *aOwner, HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Button\+::\+Menu\+Button (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu} $\ast$}]{a\+Owner, }
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuButton_a7fc26440d71fbb39142abc55dee93ca7}{}\label{classMenuButton_a7fc26440d71fbb39142abc55dee93ca7}
+\index{Menu\+Button@{Menu\+Button}!````~Menu\+Button@{$\sim$\+Menu\+Button}}
+\index{````~Menu\+Button@{$\sim$\+Menu\+Button}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{$\sim$\+Menu\+Button()}{~MenuButton()}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Button\+::$\sim$\+Menu\+Button (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuButton_a2cf52c32c95ed42bd06117a30eefc5e0}{}\label{classMenuButton_a2cf52c32c95ed42bd06117a30eefc5e0}
+
+
+\subsection{Member Function Documentation}
+\index{Menu\+Button@{Menu\+Button}!Draw@{Draw}}
+\index{Draw@{Draw}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{Draw()}{Draw()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Button\+::\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuButton_aac414152e785dbc256aa307b23792143}{}\label{classMenuButton_aac414152e785dbc256aa307b23792143}
+
+
+Does nothing. 
+
+
+
+Reimplemented from \hyperlink{classMenuImage_afc629a2bde05705f00d26e71319390a8}{Menu\+Image}.
+
+\index{Menu\+Button@{Menu\+Button}!On\+Down\+Click@{On\+Down\+Click}}
+\index{On\+Down\+Click@{On\+Down\+Click}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{On\+Down\+Click()=0}{OnDownClick()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Menu\+Button\+::\+On\+Down\+Click (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMenuButton_aecc8d40cee571b49b0844e48ecf5019b}{}\label{classMenuButton_aecc8d40cee571b49b0844e48ecf5019b}
+\index{Menu\+Button@{Menu\+Button}!On\+Up\+Click@{On\+Up\+Click}}
+\index{On\+Up\+Click@{On\+Up\+Click}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{On\+Up\+Click()=0}{OnUpClick()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Menu\+Button\+::\+On\+Up\+Click (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classMenuButton_a480da8ccd850ae04338b43d034ae172f}{}\label{classMenuButton_a480da8ccd850ae04338b43d034ae172f}
+\index{Menu\+Button@{Menu\+Button}!Parse\+Additional\+Data@{Parse\+Additional\+Data}}
+\index{Parse\+Additional\+Data@{Parse\+Additional\+Data}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{Parse\+Additional\+Data(\+Parser \&a\+Parser)}{ParseAdditionalData(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Button\+::\+Parse\+Additional\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuButton_a2e8ea938dfbfda31407f7aa672f1a607}{}\label{classMenuButton_a2e8ea938dfbfda31407f7aa672f1a607}
+
+
+Gather additional data from deserialized file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classMenuImage_ac5ecd63269a18b3a6c2e1c113616122e}{Menu\+Image}.
+
+\index{Menu\+Button@{Menu\+Button}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Button\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuButton_a6d4ea5866ebba20ea57d6c48a0c6fa20}{}\label{classMenuButton_a6d4ea5866ebba20ea57d6c48a0c6fa20}
+
+
+Receive click messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classMenuImage_a9162c043b69171720f75b80717583919}{Menu\+Image}.
+
+\index{Menu\+Button@{Menu\+Button}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Button\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuButton_ae3f1300dc3e55be8b2609e7fcb71e0fc}{}\label{classMenuButton_ae3f1300dc3e55be8b2609e7fcb71e0fc}
+
+
+Does nothing (yet) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classMenuImage_a595a3402404b28d0fbe9793a3364ffbb}{Menu\+Image}.
+
+\index{Menu\+Button@{Menu\+Button}!Update@{Update}}
+\index{Update@{Update}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Button\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuButton_a929dfef7a69a776f4b1da3d151236dcb}{}\label{classMenuButton_a929dfef7a69a776f4b1da3d151236dcb}
+
+
+Does nothing. 
+
+
+
+Reimplemented from \hyperlink{classMenuImage_a1c54191212d06d40c596f09ec428f361}{Menu\+Image}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Menu\+Button@{Menu\+Button}!m\+Clickable\+Area@{m\+Clickable\+Area}}
+\index{m\+Clickable\+Area@{m\+Clickable\+Area}!Menu\+Button@{Menu\+Button}}
+\subsubsection[{\texorpdfstring{m\+Clickable\+Area}{mClickableArea}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cube} Menu\+Button\+::m\+Clickable\+Area\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuButton_afe071c8fd0b4bf7cd91e7e027f42c3a4}{}\label{classMenuButton_afe071c8fd0b4bf7cd91e7e027f42c3a4}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{MenuButton_8h}{Menu\+Button.\+h}\item 
+Logic/\hyperlink{MenuButton_8cpp}{Menu\+Button.\+cpp}\end{DoxyCompactItemize}

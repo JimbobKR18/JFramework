@@ -1,0 +1,25 @@
+digraph "CollisionMessage"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="CollisionMessage",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMessage.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mDesc\nmContent" ,fontname="Helvetica"];
+  Node3 [label="HashString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHashString.html"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mObject1\nmObject2" ,fontname="Helvetica"];
+  Node4 [label="GameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameObject.html"];
+  Node4 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mParent" ,fontname="Helvetica"];
+  Node5 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mManager" ,fontname="Helvetica"];
+  Node5 [label="ObjectManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classObjectManager.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Manager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classManager.html"];
+  Node7 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mApp" ,fontname="Helvetica"];
+  Node7 [label="GameApp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameApp.html"];
+  Node3 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mName\nmFileName" ,fontname="Helvetica"];
+  Node8 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mNormal\nmRelativeVelocity" ,fontname="Helvetica"];
+  Node8 [label="Vector3",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVector3.html"];
+  Node9 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mShape1\nmShape2" ,fontname="Helvetica"];
+  Node9 [label="Shape",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structShape.html"];
+  Node8 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" position" ,fontname="Helvetica"];
+}

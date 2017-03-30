@@ -1,0 +1,251 @@
+\hypertarget{classSLB_1_1InstanceBase}{}\section{S\+LB\+:\+:Instance\+Base Class Reference}
+\label{classSLB_1_1InstanceBase}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Instance\+Base\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Instance\+Base\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854ac}{Type} \{ \\*
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca919fb60d70d19909ceb6952a6325b292}{I\+\_\+\+Invalid} = 0, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca71113a89efbbe3dda0ae55f0862d5f7f}{I\+\_\+\+User\+Flag\+\_\+0} = 1$<$$<$0, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acaeeebda649a4c373dbb353d601009d242}{I\+\_\+\+User\+Flag\+\_\+1} = 1$<$$<$1, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca1b01fa4cbbc3c82f465240ce55fa8337}{I\+\_\+\+User\+Flag\+\_\+2} = 1$<$$<$2, 
+\\*
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acad54371db542b882e264f1804e68ab584}{I\+\_\+\+User\+Flag\+\_\+3} = 1$<$$<$3, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca9e867f4d974107cac8a72cbd2fbb856a}{I\+\_\+\+User\+Flag\+\_\+4} = 1$<$$<$4, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acadc864d8056efe999f43cc1ba04982fc6}{I\+\_\+\+User\+Flag\+\_\+5} = 1$<$$<$5, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acab71492524228c7d0d063452c733e7bdd}{I\+\_\+\+User\+Flag\+\_\+6} = 1$<$$<$6, 
+\\*
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acae6c66101ae8060aadf635db620abd7ec}{I\+\_\+\+User\+Flag\+\_\+7} = 1$<$$<$7, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca91399437f1cfa4bab5f4868b36addfef}{I\+\_\+\+User\+Mask} = 0x\+FF, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca5908c1f30cfe5ffa7ff2986a946bab5c}{I\+\_\+\+Must\+Free\+Mem} = 1$<$$<$17, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca0b0601d284a6700355edf5ea83b379be}{I\+\_\+\+Reference} = 1$<$$<$18, 
+\\*
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca782ba6cd08b083a6770bdb602b4f151e}{I\+\_\+\+Pointer} = 1$<$$<$19, 
+\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acaad4a6ada25d294819b89de65fdd1a465}{I\+\_\+\+Const\+\_\+\+Pointer} = 1$<$$<$20
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void $\ast$ \hyperlink{classSLB_1_1InstanceBase_aaac2eb194d9008d586ce73ba7c692ce3}{get\+\_\+ptr} ()=0
+\item 
+virtual const void $\ast$ \hyperlink{classSLB_1_1InstanceBase_a09e8065c5b0e60abd0047354a3a3f246}{get\+\_\+const\+\_\+ptr} ()=0
+\item 
+virtual const void $\ast$ \hyperlink{classSLB_1_1InstanceBase_a38f8cb000eb25905fb74b875e3e23887}{memory\+Raw\+Pointer} () const =0
+\item 
+\hyperlink{classSLB_1_1InstanceBase_a760a0b96fabc5a2d2068352db5426cbe}{Instance\+Base} (\hyperlink{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854ac}{Type}, \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$c)
+\item 
+\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1InstanceBase_a22e15156583f4032eff73f20383f0490}{get\+Class} ()
+\item 
+size\+\_\+t \hyperlink{classSLB_1_1InstanceBase_abbd98d96839b30c93f2afd5fbdd44c30}{get\+Flags} () const 
+\item 
+size\+\_\+t \hyperlink{classSLB_1_1InstanceBase_a840f726b62d5d788fc728bfdc967290b}{get\+User\+Flags} () const 
+\item 
+void \hyperlink{classSLB_1_1InstanceBase_ad69c6d043908da3c1a0802b84f3a4d2c}{add\+User\+Flags} (size\+\_\+t flags)
+\item 
+void \hyperlink{classSLB_1_1InstanceBase_ace493c6245486a261de03db20e13e65d}{set\+U\+Ser\+Flags} (size\+\_\+t flags)
+\item 
+bool \hyperlink{classSLB_1_1InstanceBase_a61c415ee34091ed67c425f7c4ac6e707}{must\+Free\+Mem} () const 
+\item 
+bool \hyperlink{classSLB_1_1InstanceBase_aacb071dea3f05c8a024160560051b734}{is\+Const} () const 
+\item 
+bool \hyperlink{classSLB_1_1InstanceBase_a2e101e0daebb0330314b11247890b0fa}{is\+Pointer} () const 
+\item 
+bool \hyperlink{classSLB_1_1InstanceBase_a72cea548129a3139e7a856c296d43411}{is\+Reference} () const 
+\item 
+virtual \hyperlink{classSLB_1_1InstanceBase_ae6bc91c17202c470a4c38ea972847ae0}{$\sim$\+Instance\+Base} ()
+\item 
+void \hyperlink{classSLB_1_1InstanceBase_ab1883f2aeb471b937e8d11ac5fa135e6}{set\+Must\+Free\+Mem\+Flag} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \hyperlink{classSLB_1_1InstanceBase_ae5ea147e7c548f9cd0f44884ed0a3c40}{\+\_\+flags}
+\item 
+\hyperlink{classSLB_1_1ref__ptr}{ref\+\_\+ptr}$<$ \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $>$ \hyperlink{classSLB_1_1InstanceBase_acb55084c9fe2f70d817f1a493fc09109}{\+\_\+class}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!Type@{Type}}
+\index{Type@{Type}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{Type}{Type}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf S\+L\+B\+::\+Instance\+Base\+::\+Type}}\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854ac}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854ac}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\+\_\+\+Invalid@{I\+\_\+\+Invalid}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+Invalid@{I\+\_\+\+Invalid}}\item[{\em 
+I\+\_\+\+Invalid\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca919fb60d70d19909ceb6952a6325b292}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca919fb60d70d19909ceb6952a6325b292}
+}]\index{I\+\_\+\+User\+Flag\+\_\+0@{I\+\_\+\+User\+Flag\+\_\+0}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+0@{I\+\_\+\+User\+Flag\+\_\+0}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+0\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca71113a89efbbe3dda0ae55f0862d5f7f}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca71113a89efbbe3dda0ae55f0862d5f7f}
+}]\index{I\+\_\+\+User\+Flag\+\_\+1@{I\+\_\+\+User\+Flag\+\_\+1}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+1@{I\+\_\+\+User\+Flag\+\_\+1}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+1\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acaeeebda649a4c373dbb353d601009d242}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acaeeebda649a4c373dbb353d601009d242}
+}]\index{I\+\_\+\+User\+Flag\+\_\+2@{I\+\_\+\+User\+Flag\+\_\+2}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+2@{I\+\_\+\+User\+Flag\+\_\+2}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+2\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca1b01fa4cbbc3c82f465240ce55fa8337}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca1b01fa4cbbc3c82f465240ce55fa8337}
+}]\index{I\+\_\+\+User\+Flag\+\_\+3@{I\+\_\+\+User\+Flag\+\_\+3}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+3@{I\+\_\+\+User\+Flag\+\_\+3}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+3\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acad54371db542b882e264f1804e68ab584}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acad54371db542b882e264f1804e68ab584}
+}]\index{I\+\_\+\+User\+Flag\+\_\+4@{I\+\_\+\+User\+Flag\+\_\+4}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+4@{I\+\_\+\+User\+Flag\+\_\+4}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+4\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca9e867f4d974107cac8a72cbd2fbb856a}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca9e867f4d974107cac8a72cbd2fbb856a}
+}]\index{I\+\_\+\+User\+Flag\+\_\+5@{I\+\_\+\+User\+Flag\+\_\+5}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+5@{I\+\_\+\+User\+Flag\+\_\+5}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+5\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acadc864d8056efe999f43cc1ba04982fc6}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acadc864d8056efe999f43cc1ba04982fc6}
+}]\index{I\+\_\+\+User\+Flag\+\_\+6@{I\+\_\+\+User\+Flag\+\_\+6}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+6@{I\+\_\+\+User\+Flag\+\_\+6}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+6\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acab71492524228c7d0d063452c733e7bdd}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acab71492524228c7d0d063452c733e7bdd}
+}]\index{I\+\_\+\+User\+Flag\+\_\+7@{I\+\_\+\+User\+Flag\+\_\+7}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Flag\+\_\+7@{I\+\_\+\+User\+Flag\+\_\+7}}\item[{\em 
+I\+\_\+\+User\+Flag\+\_\+7\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acae6c66101ae8060aadf635db620abd7ec}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acae6c66101ae8060aadf635db620abd7ec}
+}]\index{I\+\_\+\+User\+Mask@{I\+\_\+\+User\+Mask}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+User\+Mask@{I\+\_\+\+User\+Mask}}\item[{\em 
+I\+\_\+\+User\+Mask\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca91399437f1cfa4bab5f4868b36addfef}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca91399437f1cfa4bab5f4868b36addfef}
+}]\index{I\+\_\+\+Must\+Free\+Mem@{I\+\_\+\+Must\+Free\+Mem}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+Must\+Free\+Mem@{I\+\_\+\+Must\+Free\+Mem}}\item[{\em 
+I\+\_\+\+Must\+Free\+Mem\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca5908c1f30cfe5ffa7ff2986a946bab5c}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca5908c1f30cfe5ffa7ff2986a946bab5c}
+}]\index{I\+\_\+\+Reference@{I\+\_\+\+Reference}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+Reference@{I\+\_\+\+Reference}}\item[{\em 
+I\+\_\+\+Reference\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca0b0601d284a6700355edf5ea83b379be}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca0b0601d284a6700355edf5ea83b379be}
+}]\index{I\+\_\+\+Pointer@{I\+\_\+\+Pointer}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+Pointer@{I\+\_\+\+Pointer}}\item[{\em 
+I\+\_\+\+Pointer\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca782ba6cd08b083a6770bdb602b4f151e}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854aca782ba6cd08b083a6770bdb602b4f151e}
+}]\index{I\+\_\+\+Const\+\_\+\+Pointer@{I\+\_\+\+Const\+\_\+\+Pointer}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!I\+\_\+\+Const\+\_\+\+Pointer@{I\+\_\+\+Const\+\_\+\+Pointer}}\item[{\em 
+I\+\_\+\+Const\+\_\+\+Pointer\hypertarget{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acaad4a6ada25d294819b89de65fdd1a465}{}\label{classSLB_1_1InstanceBase_a041cb4dfc80fe3f13e7b8b9fa83854acaad4a6ada25d294819b89de65fdd1a465}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!Instance\+Base@{Instance\+Base}}
+\index{Instance\+Base@{Instance\+Base}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{Instance\+Base(\+Type, Class\+Info $\ast$c)}{InstanceBase(Type, ClassInfo *c)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Instance\+Base\+::\+Instance\+Base (
+\begin{DoxyParamCaption}
+\item[{{\bf Type}}]{t, }
+\item[{{\bf Class\+Info} $\ast$}]{c}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1InstanceBase_a760a0b96fabc5a2d2068352db5426cbe}{}\label{classSLB_1_1InstanceBase_a760a0b96fabc5a2d2068352db5426cbe}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!````~Instance\+Base@{$\sim$\+Instance\+Base}}
+\index{````~Instance\+Base@{$\sim$\+Instance\+Base}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{$\sim$\+Instance\+Base()}{~InstanceBase()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Instance\+Base\+::$\sim$\+Instance\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSLB_1_1InstanceBase_ae6bc91c17202c470a4c38ea972847ae0}{}\label{classSLB_1_1InstanceBase_ae6bc91c17202c470a4c38ea972847ae0}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!add\+User\+Flags@{add\+User\+Flags}}
+\index{add\+User\+Flags@{add\+User\+Flags}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{add\+User\+Flags(size\+\_\+t flags)}{addUserFlags(size_t flags)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Instance\+Base\+::add\+User\+Flags (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_ad69c6d043908da3c1a0802b84f3a4d2c}{}\label{classSLB_1_1InstanceBase_ad69c6d043908da3c1a0802b84f3a4d2c}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!get\+\_\+const\+\_\+ptr@{get\+\_\+const\+\_\+ptr}}
+\index{get\+\_\+const\+\_\+ptr@{get\+\_\+const\+\_\+ptr}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{get\+\_\+const\+\_\+ptr()=0}{get_const_ptr()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual const void$\ast$ S\+L\+B\+::\+Instance\+Base\+::get\+\_\+const\+\_\+ptr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSLB_1_1InstanceBase_a09e8065c5b0e60abd0047354a3a3f246}{}\label{classSLB_1_1InstanceBase_a09e8065c5b0e60abd0047354a3a3f246}
+
+
+Implemented in \hyperlink{classSLB_1_1Instance_1_1SmartPtrSharedCopy_1_1Implementation_a1a3ac4e795c65bd8c0748aebd65850a9}{S\+L\+B\+::\+Instance\+::\+Smart\+Ptr\+Shared\+Copy$<$ T\+\_\+\+Smart\+Ptr $>$\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1SmartPtrNoCopy_1_1Implementation_afc7aeb36aa10f5e8a91d96bf8de586a7}{S\+L\+B\+::\+Instance\+::\+Smart\+Ptr\+No\+Copy$<$ T\+\_\+\+Smart\+Ptr $>$\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1SmartPtr_1_1Implementation_a2eff1fcc2b6ea5e62d44f5307542aaca}{S\+L\+B\+::\+Instance\+::\+Smart\+Ptr$<$ T\+\_\+\+Smart\+Ptr $>$\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1NoCopyNoDestroy_1_1Implementation_ac516ee840c0c2ef51135647b0e74bc00}{S\+L\+B\+::\+Instance\+::\+No\+Copy\+No\+Destroy\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a557efe99511f6f792c66f936275a875d}{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation$<$ T $>$}, and \hyperlink{classSLB_1_1Instance_1_1Default_1_1Implementation_a1a06b9aec11368b2e28cd3b99bd270f1}{S\+L\+B\+::\+Instance\+::\+Default\+::\+Implementation$<$ T $>$}.
+
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!get\+\_\+ptr@{get\+\_\+ptr}}
+\index{get\+\_\+ptr@{get\+\_\+ptr}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{get\+\_\+ptr()=0}{get_ptr()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void$\ast$ S\+L\+B\+::\+Instance\+Base\+::get\+\_\+ptr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSLB_1_1InstanceBase_aaac2eb194d9008d586ce73ba7c692ce3}{}\label{classSLB_1_1InstanceBase_aaac2eb194d9008d586ce73ba7c692ce3}
+
+
+Implemented in \hyperlink{classSLB_1_1Instance_1_1SmartPtrSharedCopy_1_1Implementation_a57134f83316a8c34da2375f436ac8fdc}{S\+L\+B\+::\+Instance\+::\+Smart\+Ptr\+Shared\+Copy$<$ T\+\_\+\+Smart\+Ptr $>$\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1SmartPtrNoCopy_1_1Implementation_a091acecf32a9194145f5c1569bece743}{S\+L\+B\+::\+Instance\+::\+Smart\+Ptr\+No\+Copy$<$ T\+\_\+\+Smart\+Ptr $>$\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1SmartPtr_1_1Implementation_a0c3bbfcc496a499c970176a754ab24ef}{S\+L\+B\+::\+Instance\+::\+Smart\+Ptr$<$ T\+\_\+\+Smart\+Ptr $>$\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1NoCopyNoDestroy_1_1Implementation_a0229bb8610b5fdb395c34bdfeadf3e48}{S\+L\+B\+::\+Instance\+::\+No\+Copy\+No\+Destroy\+::\+Implementation$<$ T $>$}, \hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a3513e5d5942291c85348e8b48cdf9528}{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation$<$ T $>$}, and \hyperlink{classSLB_1_1Instance_1_1Default_1_1Implementation_a15447f209379cf08a88e6ec22fe00dc4}{S\+L\+B\+::\+Instance\+::\+Default\+::\+Implementation$<$ T $>$}.
+
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!get\+Class@{get\+Class}}
+\index{get\+Class@{get\+Class}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{get\+Class()}{getClass()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Class\+Info}$\ast$ S\+L\+B\+::\+Instance\+Base\+::get\+Class (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_a22e15156583f4032eff73f20383f0490}{}\label{classSLB_1_1InstanceBase_a22e15156583f4032eff73f20383f0490}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!get\+Flags@{get\+Flags}}
+\index{get\+Flags@{get\+Flags}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{get\+Flags() const }{getFlags() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t S\+L\+B\+::\+Instance\+Base\+::get\+Flags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_abbd98d96839b30c93f2afd5fbdd44c30}{}\label{classSLB_1_1InstanceBase_abbd98d96839b30c93f2afd5fbdd44c30}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!get\+User\+Flags@{get\+User\+Flags}}
+\index{get\+User\+Flags@{get\+User\+Flags}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{get\+User\+Flags() const }{getUserFlags() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t S\+L\+B\+::\+Instance\+Base\+::get\+User\+Flags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_a840f726b62d5d788fc728bfdc967290b}{}\label{classSLB_1_1InstanceBase_a840f726b62d5d788fc728bfdc967290b}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!is\+Const@{is\+Const}}
+\index{is\+Const@{is\+Const}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{is\+Const() const }{isConst() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Instance\+Base\+::is\+Const (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_aacb071dea3f05c8a024160560051b734}{}\label{classSLB_1_1InstanceBase_aacb071dea3f05c8a024160560051b734}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!is\+Pointer@{is\+Pointer}}
+\index{is\+Pointer@{is\+Pointer}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{is\+Pointer() const }{isPointer() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Instance\+Base\+::is\+Pointer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_a2e101e0daebb0330314b11247890b0fa}{}\label{classSLB_1_1InstanceBase_a2e101e0daebb0330314b11247890b0fa}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!is\+Reference@{is\+Reference}}
+\index{is\+Reference@{is\+Reference}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{is\+Reference() const }{isReference() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Instance\+Base\+::is\+Reference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_a72cea548129a3139e7a856c296d43411}{}\label{classSLB_1_1InstanceBase_a72cea548129a3139e7a856c296d43411}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!memory\+Raw\+Pointer@{memory\+Raw\+Pointer}}
+\index{memory\+Raw\+Pointer@{memory\+Raw\+Pointer}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{memory\+Raw\+Pointer() const =0}{memoryRawPointer() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual const void$\ast$ S\+L\+B\+::\+Instance\+Base\+::memory\+Raw\+Pointer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSLB_1_1InstanceBase_a38f8cb000eb25905fb74b875e3e23887}{}\label{classSLB_1_1InstanceBase_a38f8cb000eb25905fb74b875e3e23887}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!must\+Free\+Mem@{must\+Free\+Mem}}
+\index{must\+Free\+Mem@{must\+Free\+Mem}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{must\+Free\+Mem() const }{mustFreeMem() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool S\+L\+B\+::\+Instance\+Base\+::must\+Free\+Mem (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_a61c415ee34091ed67c425f7c4ac6e707}{}\label{classSLB_1_1InstanceBase_a61c415ee34091ed67c425f7c4ac6e707}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!set\+Must\+Free\+Mem\+Flag@{set\+Must\+Free\+Mem\+Flag}}
+\index{set\+Must\+Free\+Mem\+Flag@{set\+Must\+Free\+Mem\+Flag}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{set\+Must\+Free\+Mem\+Flag()}{setMustFreeMemFlag()}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Instance\+Base\+::set\+Must\+Free\+Mem\+Flag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_ab1883f2aeb471b937e8d11ac5fa135e6}{}\label{classSLB_1_1InstanceBase_ab1883f2aeb471b937e8d11ac5fa135e6}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!set\+U\+Ser\+Flags@{set\+U\+Ser\+Flags}}
+\index{set\+U\+Ser\+Flags@{set\+U\+Ser\+Flags}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{set\+U\+Ser\+Flags(size\+\_\+t flags)}{setUSerFlags(size_t flags)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Instance\+Base\+::set\+U\+Ser\+Flags (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{flags}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1InstanceBase_ace493c6245486a261de03db20e13e65d}{}\label{classSLB_1_1InstanceBase_ace493c6245486a261de03db20e13e65d}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!\+\_\+class@{\+\_\+class}}
+\index{\+\_\+class@{\+\_\+class}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+class}{_class}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ref\+\_\+ptr}$<${\bf Class\+Info}$>$ S\+L\+B\+::\+Instance\+Base\+::\+\_\+class\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1InstanceBase_acb55084c9fe2f70d817f1a493fc09109}{}\label{classSLB_1_1InstanceBase_acb55084c9fe2f70d817f1a493fc09109}
+\index{S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}!\+\_\+flags@{\+\_\+flags}}
+\index{\+\_\+flags@{\+\_\+flags}!S\+L\+B\+::\+Instance\+Base@{S\+L\+B\+::\+Instance\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+flags}{_flags}}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t S\+L\+B\+::\+Instance\+Base\+::\+\_\+flags\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1InstanceBase_ae5ea147e7c548f9cd0f44884ed0a3c40}{}\label{classSLB_1_1InstanceBase_ae5ea147e7c548f9cd0f44884ed0a3c40}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

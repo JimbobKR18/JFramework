@@ -1,0 +1,211 @@
+\hypertarget{classInterpolation}{}\section{Interpolation$<$ T $>$ Class Template Reference}
+\label{classInterpolation}\index{Interpolation$<$ T $>$@{Interpolation$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Interpolation.\+h$>$}
+
+
+
+Inheritance diagram for Interpolation$<$ T $>$\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classInterpolation_acf905e4bddd16531c032a85650e7c7a6}{Interpolation} (T $\ast$a\+Start, T const \&a\+Finish, float a\+Time)
+\item 
+virtual \hyperlink{classInterpolation_a01a98f3fc0f9f27032bace4e59ea0e15}{$\sim$\+Interpolation} ()
+\item 
+virtual void \hyperlink{classInterpolation_a5fbf76da88d318a02b47b60d04d6df4c}{Update} (float a\+DT)
+\begin{DoxyCompactList}\small\item\em Updates interpolation, marks finished if complete. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classInterpolation_a526d8fa5bb510091234749af430c9e25}{Complete} ()
+\begin{DoxyCompactList}\small\item\em Force early completion. \end{DoxyCompactList}\item 
+virtual T \hyperlink{classInterpolation_ac0443b444c67e3b2b310b7520e189b75}{Get\+Current} () const 
+\begin{DoxyCompactList}\small\item\em Get value of current value in interpolation. \end{DoxyCompactList}\item 
+virtual T \hyperlink{classInterpolation_a50bece38eff6a5a3a7032802b103a702}{Get\+Start} () const 
+\begin{DoxyCompactList}\small\item\em Get start value. \end{DoxyCompactList}\item 
+virtual T \hyperlink{classInterpolation_add0c83c3628185c9ee0f5079f2138eba}{Get\+Finish} () const 
+\begin{DoxyCompactList}\small\item\em Get end value. \end{DoxyCompactList}\item 
+virtual T \hyperlink{classInterpolation_a07e29a4079bcb45207e1bb33684228ae}{Get\+Rate} () const 
+\begin{DoxyCompactList}\small\item\em Get rate of change. \end{DoxyCompactList}\item 
+bool \hyperlink{classInterpolation_a54d7e7163300b1a9302d35d20c3feee1}{Is\+Complete} () const 
+\begin{DoxyCompactList}\small\item\em Is our interpolation complete? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classInterpolation_a644ac6b64645e6389519132f048d0a73}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Serialize to be usable in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ \hyperlink{classInterpolation_a02987437e1cc17297e06ac1911a6a774}{m\+Current}
+\item 
+T \hyperlink{classInterpolation_a9bba635b064dd3e0611b0facc4a01170}{m\+Start}
+\item 
+T \hyperlink{classInterpolation_a96f311853963b74a2337287590ceb909}{m\+Finish}
+\item 
+T \hyperlink{classInterpolation_a24a6681cfb8052d9c4db1c75b3849918}{m\+Rate}
+\item 
+float \hyperlink{classInterpolation_a3ea4f26ef55bebf383e816fe60b5e967}{m\+Time}
+\item 
+float \hyperlink{classInterpolation_add1dd727ba837d544442bfd7b240bd3b}{m\+Current\+Time}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Interpolation@{Interpolation}!Interpolation@{Interpolation}}
+\index{Interpolation@{Interpolation}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Interpolation(\+T $\ast$a\+Start, T const \&a\+Finish, float a\+Time)}{Interpolation(T *aStart, T const &aFinish, float aTime)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Interpolation}$<$ T $>$\+::{\bf Interpolation} (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{a\+Start, }
+\item[{T const \&}]{a\+Finish, }
+\item[{float}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classInterpolation_acf905e4bddd16531c032a85650e7c7a6}{}\label{classInterpolation_acf905e4bddd16531c032a85650e7c7a6}
+\index{Interpolation@{Interpolation}!````~Interpolation@{$\sim$\+Interpolation}}
+\index{````~Interpolation@{$\sim$\+Interpolation}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{$\sim$\+Interpolation()}{~Interpolation()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual {\bf Interpolation}$<$ T $>$\+::$\sim${\bf Interpolation} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classInterpolation_a01a98f3fc0f9f27032bace4e59ea0e15}{}\label{classInterpolation_a01a98f3fc0f9f27032bace4e59ea0e15}
+
+
+\subsection{Member Function Documentation}
+\index{Interpolation@{Interpolation}!Complete@{Complete}}
+\index{Complete@{Complete}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Complete()}{Complete()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual void {\bf Interpolation}$<$ T $>$\+::Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classInterpolation_a526d8fa5bb510091234749af430c9e25}{}\label{classInterpolation_a526d8fa5bb510091234749af430c9e25}
+
+
+Force early completion. 
+
+\index{Interpolation@{Interpolation}!Get\+Current@{Get\+Current}}
+\index{Get\+Current@{Get\+Current}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Get\+Current() const }{GetCurrent() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual T {\bf Interpolation}$<$ T $>$\+::Get\+Current (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classInterpolation_ac0443b444c67e3b2b310b7520e189b75}{}\label{classInterpolation_ac0443b444c67e3b2b310b7520e189b75}
+
+
+Get value of current value in interpolation. 
+
+\begin{DoxyReturn}{Returns}
+Current value in interpolation 
+\end{DoxyReturn}
+\index{Interpolation@{Interpolation}!Get\+Finish@{Get\+Finish}}
+\index{Get\+Finish@{Get\+Finish}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Get\+Finish() const }{GetFinish() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual T {\bf Interpolation}$<$ T $>$\+::Get\+Finish (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classInterpolation_add0c83c3628185c9ee0f5079f2138eba}{}\label{classInterpolation_add0c83c3628185c9ee0f5079f2138eba}
+
+
+Get end value. 
+
+\begin{DoxyReturn}{Returns}
+Where the interpolation ends. 
+\end{DoxyReturn}
+\index{Interpolation@{Interpolation}!Get\+Rate@{Get\+Rate}}
+\index{Get\+Rate@{Get\+Rate}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Get\+Rate() const }{GetRate() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual T {\bf Interpolation}$<$ T $>$\+::Get\+Rate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classInterpolation_a07e29a4079bcb45207e1bb33684228ae}{}\label{classInterpolation_a07e29a4079bcb45207e1bb33684228ae}
+
+
+Get rate of change. 
+
+\begin{DoxyReturn}{Returns}
+Rate of change. 
+\end{DoxyReturn}
+\index{Interpolation@{Interpolation}!Get\+Start@{Get\+Start}}
+\index{Get\+Start@{Get\+Start}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Get\+Start() const }{GetStart() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual T {\bf Interpolation}$<$ T $>$\+::Get\+Start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classInterpolation_a50bece38eff6a5a3a7032802b103a702}{}\label{classInterpolation_a50bece38eff6a5a3a7032802b103a702}
+
+
+Get start value. 
+
+\begin{DoxyReturn}{Returns}
+Where our interpolation started. 
+\end{DoxyReturn}
+\index{Interpolation@{Interpolation}!Is\+Complete@{Is\+Complete}}
+\index{Is\+Complete@{Is\+Complete}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Is\+Complete() const }{IsComplete() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ bool {\bf Interpolation}$<$ T $>$\+::Is\+Complete (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classInterpolation_a54d7e7163300b1a9302d35d20c3feee1}{}\label{classInterpolation_a54d7e7163300b1a9302d35d20c3feee1}
+
+
+Is our interpolation complete? 
+
+\begin{DoxyReturn}{Returns}
+True if complete, false otherwise. 
+\end{DoxyReturn}
+\index{Interpolation@{Interpolation}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ static void {\bf Interpolation}$<$ T $>$\+::Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classInterpolation_a644ac6b64645e6389519132f048d0a73}{}\label{classInterpolation_a644ac6b64645e6389519132f048d0a73}
+
+
+Serialize to be usable in L\+UA. 
+
+\index{Interpolation@{Interpolation}!Update@{Update}}
+\index{Update@{Update}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{Update(float a\+D\+T)}{Update(float aDT)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ virtual void {\bf Interpolation}$<$ T $>$\+::Update (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+DT}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classInterpolation_a5fbf76da88d318a02b47b60d04d6df4c}{}\label{classInterpolation_a5fbf76da88d318a02b47b60d04d6df4c}
+
+
+Updates interpolation, marks finished if complete. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+DT} & Change in millis \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classQuadraticInterpolation_a87b29721b198b9ff533f9808dcd08c5e}{Quadratic\+Interpolation$<$ T $>$}, and \hyperlink{classRoundAboutInterpolation_a136325b1ca228189f58dfc1d0d3ff8ce}{Round\+About\+Interpolation$<$ T $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Interpolation@{Interpolation}!m\+Current@{m\+Current}}
+\index{m\+Current@{m\+Current}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{m\+Current}{mCurrent}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T$\ast$ {\bf Interpolation}$<$ T $>$\+::m\+Current\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classInterpolation_a02987437e1cc17297e06ac1911a6a774}{}\label{classInterpolation_a02987437e1cc17297e06ac1911a6a774}
+\index{Interpolation@{Interpolation}!m\+Current\+Time@{m\+Current\+Time}}
+\index{m\+Current\+Time@{m\+Current\+Time}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{m\+Current\+Time}{mCurrentTime}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ float {\bf Interpolation}$<$ T $>$\+::m\+Current\+Time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classInterpolation_add1dd727ba837d544442bfd7b240bd3b}{}\label{classInterpolation_add1dd727ba837d544442bfd7b240bd3b}
+\index{Interpolation@{Interpolation}!m\+Finish@{m\+Finish}}
+\index{m\+Finish@{m\+Finish}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{m\+Finish}{mFinish}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T {\bf Interpolation}$<$ T $>$\+::m\+Finish\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classInterpolation_a96f311853963b74a2337287590ceb909}{}\label{classInterpolation_a96f311853963b74a2337287590ceb909}
+\index{Interpolation@{Interpolation}!m\+Rate@{m\+Rate}}
+\index{m\+Rate@{m\+Rate}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{m\+Rate}{mRate}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T {\bf Interpolation}$<$ T $>$\+::m\+Rate\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classInterpolation_a24a6681cfb8052d9c4db1c75b3849918}{}\label{classInterpolation_a24a6681cfb8052d9c4db1c75b3849918}
+\index{Interpolation@{Interpolation}!m\+Start@{m\+Start}}
+\index{m\+Start@{m\+Start}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{m\+Start}{mStart}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ T {\bf Interpolation}$<$ T $>$\+::m\+Start\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classInterpolation_a9bba635b064dd3e0611b0facc4a01170}{}\label{classInterpolation_a9bba635b064dd3e0611b0facc4a01170}
+\index{Interpolation@{Interpolation}!m\+Time@{m\+Time}}
+\index{m\+Time@{m\+Time}!Interpolation@{Interpolation}}
+\subsubsection[{\texorpdfstring{m\+Time}{mTime}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ float {\bf Interpolation}$<$ T $>$\+::m\+Time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classInterpolation_a3ea4f26ef55bebf383e816fe60b5e967}{}\label{classInterpolation_a3ea4f26ef55bebf383e816fe60b5e967}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{Interpolation_8h}{Interpolation.\+h}\end{DoxyCompactItemize}

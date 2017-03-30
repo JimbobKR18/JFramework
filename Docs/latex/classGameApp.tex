@@ -1,0 +1,378 @@
+\hypertarget{classGameApp}{}\section{Game\+App Class Reference}
+\label{classGameApp}\index{Game\+App@{Game\+App}}
+
+
+{\ttfamily \#include $<$Game\+App.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGameApp_a60fa14c5e72ac86d85257732494210ce}{Game\+App} ()
+\item 
+virtual \hyperlink{classGameApp_ae23ced12f4a79184b3719b3905c58170}{$\sim$\+Game\+App} ()
+\item 
+float \hyperlink{classGameApp_ae7921d33aa0f1a8ca6ffb1bd8e2090ab}{Get\+App\+Step} () const 
+\begin{DoxyCompactList}\small\item\em Get refresh time for app. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_ad2b4b7e8bb12b5f8736d78ff3698b913}{Set\+App\+Step} (float const a\+App\+Step)
+\begin{DoxyCompactList}\small\item\em Set refresh time for app. \end{DoxyCompactList}\item 
+float \hyperlink{classGameApp_a76e72ba141cd96cd84e56d65a0ee007f}{Get\+App\+Speed} () const 
+\begin{DoxyCompactList}\small\item\em Get speed of app. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_ad475a1923e4a450e2a292b1f7eff85f0}{Set\+App\+Speed} (float const a\+App\+Speed)
+\begin{DoxyCompactList}\small\item\em Set speed of app. \end{DoxyCompactList}\item 
+bool \hyperlink{classGameApp_a008397467507c441e2ff4be6164dfb15}{Get\+Active} () const 
+\begin{DoxyCompactList}\small\item\em Get if app is active. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_a011807f70bdd3da9ae9f7c5fe7558236}{Set\+Active} (bool const a\+Active)
+\begin{DoxyCompactList}\small\item\em Set if app is active. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_a3fc7a9b9f0cb06c27f61e4c255220cc4}{Set\+Last\+Frame\+Time} (unsigned int const \&a\+Last\+Frame)
+\begin{DoxyCompactList}\small\item\em Set last frame time, in millis since app start. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGameApp_ac92066eb567bd93cda45500c43fe443b}{Update} (unsigned int const \&a\+Ticks\+Since\+Start)
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_a2d894e3842f0c7206ab0d9ac9eada6d6}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to managers, right now. Delete or add object calls are not advised in this manner. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_a22213d4b9d1d314c73e05a0f49603fe1}{Send\+Message\+Delayed} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to managers next frame. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_a63d22bcd9b7a0f89c5bd030c4e1d3e4d}{Clear\+Delayed\+Messages} ()
+\begin{DoxyCompactList}\small\item\em Clear out delayed messages queue. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_a0d047368e7c4c34da9f60c0fb3ce18de}{Start} ()
+\begin{DoxyCompactList}\small\item\em Start the app. \end{DoxyCompactList}\item 
+void \hyperlink{classGameApp_a713266a89e75cf9ae404669e3b1a7b90}{Add\+Manager} (\hyperlink{classManager}{Manager} $\ast$a\+Manager)
+\begin{DoxyCompactList}\small\item\em Add a manager to our app. \end{DoxyCompactList}\item 
+\hyperlink{classManager}{Manager} $\ast$ \hyperlink{classGameApp_ab949b77027e277a50e24fa89012c2caa}{Get\+Manager\+By\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Get manager by name. \end{DoxyCompactList}\item 
+\hyperlink{classManager}{Manager} $\ast$ \hyperlink{classGameApp_ab808fc74577a4587a4f6ee73c3c69be3}{Get\+Manager\+By\+U\+ID} (unsigned const a\+U\+ID)
+\begin{DoxyCompactList}\small\item\em Get manager by U\+ID. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGameApp_ab1e4eaff4d945208d165200548d14701}{Between\+Frame\+Update} ()
+\begin{DoxyCompactList}\small\item\em Empty method, is virtual to be overwritten. Mainly used to accept input. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \hyperlink{classGameApp_ae1ccb8e195c635111307a01e34dc1b52}{G\+ET} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classGameApp_afe3bacc27a9604d9ed7c213b45d501c8}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Set up for L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classManager}{Manager} $\ast$ $>$ \hyperlink{classGameApp_a05eea8d694f5a44959b372acca074986}{m\+Managers}
+\item 
+std\+::vector$<$ \hyperlink{classMessage}{Message} $\ast$ $>$ \hyperlink{classGameApp_aa0fbe9d81547577ebdc8086b7a8ddcbb}{m\+Delayed\+Messages}
+\item 
+unsigned int \hyperlink{classGameApp_a565825c1e33d2dd2f0a4139a8329d218}{m\+Last\+Frame}
+\item 
+float \hyperlink{classGameApp_acdb5789618f2ba3205207cdff535a887}{m\+DT}
+\item 
+float \hyperlink{classGameApp_ada884378414e66671636d6b6f8c4d20f}{m\+App\+Step}
+\item 
+float \hyperlink{classGameApp_a8fe3b47ac85fb2b50b9f227794ca582f}{m\+App\+Speed}
+\item 
+bool \hyperlink{classGameApp_aa0289a415343048baa1fe5976322b8f7}{m\+Active}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Game\+App@{Game\+App}!Game\+App@{Game\+App}}
+\index{Game\+App@{Game\+App}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Game\+App()}{GameApp()}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+App\+::\+Game\+App (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a60fa14c5e72ac86d85257732494210ce}{}\label{classGameApp_a60fa14c5e72ac86d85257732494210ce}
+\index{Game\+App@{Game\+App}!````~Game\+App@{$\sim$\+Game\+App}}
+\index{````~Game\+App@{$\sim$\+Game\+App}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{$\sim$\+Game\+App()}{~GameApp()}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+App\+::$\sim$\+Game\+App (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameApp_ae23ced12f4a79184b3719b3905c58170}{}\label{classGameApp_ae23ced12f4a79184b3719b3905c58170}
+
+
+\subsection{Member Function Documentation}
+\index{Game\+App@{Game\+App}!Add\+Manager@{Add\+Manager}}
+\index{Add\+Manager@{Add\+Manager}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Add\+Manager(\+Manager $\ast$a\+Manager)}{AddManager(Manager *aManager)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Add\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Manager} $\ast$}]{a\+Manager}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a713266a89e75cf9ae404669e3b1a7b90}{}\label{classGameApp_a713266a89e75cf9ae404669e3b1a7b90}
+
+
+Add a manager to our app. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Manager} & \hyperlink{classManager}{Manager} to add \\
+\hline
+\end{DoxyParams}
+\index{Game\+App@{Game\+App}!Between\+Frame\+Update@{Between\+Frame\+Update}}
+\index{Between\+Frame\+Update@{Between\+Frame\+Update}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Between\+Frame\+Update()}{BetweenFrameUpdate()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Between\+Frame\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameApp_ab1e4eaff4d945208d165200548d14701}{}\label{classGameApp_ab1e4eaff4d945208d165200548d14701}
+
+
+Empty method, is virtual to be overwritten. Mainly used to accept input. 
+
+\index{Game\+App@{Game\+App}!Clear\+Delayed\+Messages@{Clear\+Delayed\+Messages}}
+\index{Clear\+Delayed\+Messages@{Clear\+Delayed\+Messages}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Clear\+Delayed\+Messages()}{ClearDelayedMessages()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Clear\+Delayed\+Messages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a63d22bcd9b7a0f89c5bd030c4e1d3e4d}{}\label{classGameApp_a63d22bcd9b7a0f89c5bd030c4e1d3e4d}
+
+
+Clear out delayed messages queue. 
+
+\index{Game\+App@{Game\+App}!G\+ET@{G\+ET}}
+\index{G\+ET@{G\+ET}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{G\+E\+T()}{GET()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T$\ast$ Game\+App\+::\+G\+ET (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classGameApp_ae1ccb8e195c635111307a01e34dc1b52}{}\label{classGameApp_ae1ccb8e195c635111307a01e34dc1b52}
+\index{Game\+App@{Game\+App}!Get\+Active@{Get\+Active}}
+\index{Get\+Active@{Get\+Active}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Get\+Active() const }{GetActive() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\+App\+::\+Get\+Active (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameApp_a008397467507c441e2ff4be6164dfb15}{}\label{classGameApp_a008397467507c441e2ff4be6164dfb15}
+
+
+Get if app is active. 
+
+\begin{DoxyReturn}{Returns}
+App is active 
+\end{DoxyReturn}
+\index{Game\+App@{Game\+App}!Get\+App\+Speed@{Get\+App\+Speed}}
+\index{Get\+App\+Speed@{Get\+App\+Speed}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Get\+App\+Speed() const }{GetAppSpeed() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Game\+App\+::\+Get\+App\+Speed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameApp_a76e72ba141cd96cd84e56d65a0ee007f}{}\label{classGameApp_a76e72ba141cd96cd84e56d65a0ee007f}
+
+
+Get speed of app. 
+
+\begin{DoxyReturn}{Returns}
+Speed for app. 
+\end{DoxyReturn}
+\index{Game\+App@{Game\+App}!Get\+App\+Step@{Get\+App\+Step}}
+\index{Get\+App\+Step@{Get\+App\+Step}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Get\+App\+Step() const }{GetAppStep() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Game\+App\+::\+Get\+App\+Step (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameApp_ae7921d33aa0f1a8ca6ffb1bd8e2090ab}{}\label{classGameApp_ae7921d33aa0f1a8ca6ffb1bd8e2090ab}
+
+
+Get refresh time for app. 
+
+\begin{DoxyReturn}{Returns}
+Refresh time for app. 
+\end{DoxyReturn}
+\index{Game\+App@{Game\+App}!Get\+Manager\+By\+Name@{Get\+Manager\+By\+Name}}
+\index{Get\+Manager\+By\+Name@{Get\+Manager\+By\+Name}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Get\+Manager\+By\+Name(\+Hash\+String const \&a\+Name)}{GetManagerByName(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager} $\ast$ Game\+App\+::\+Get\+Manager\+By\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_ab949b77027e277a50e24fa89012c2caa}{}\label{classGameApp_ab949b77027e277a50e24fa89012c2caa}
+
+
+Get manager by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of manager \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classManager}{Manager}, or nullptr 
+\end{DoxyReturn}
+\index{Game\+App@{Game\+App}!Get\+Manager\+By\+U\+ID@{Get\+Manager\+By\+U\+ID}}
+\index{Get\+Manager\+By\+U\+ID@{Get\+Manager\+By\+U\+ID}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Get\+Manager\+By\+U\+I\+D(unsigned const a\+U\+I\+D)}{GetManagerByUID(unsigned const aUID)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager} $\ast$ Game\+App\+::\+Get\+Manager\+By\+U\+ID (
+\begin{DoxyParamCaption}
+\item[{unsigned const}]{a\+U\+ID}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_ab808fc74577a4587a4f6ee73c3c69be3}{}\label{classGameApp_ab808fc74577a4587a4f6ee73c3c69be3}
+
+
+Get manager by U\+ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+U\+ID} & U\+ID of manager \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classManager}{Manager}, or nullptr 
+\end{DoxyReturn}
+\index{Game\+App@{Game\+App}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a2d894e3842f0c7206ab0d9ac9eada6d6}{}\label{classGameApp_a2d894e3842f0c7206ab0d9ac9eada6d6}
+
+
+Send message to managers, right now. Delete or add object calls are not advised in this manner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send \\
+\hline
+\end{DoxyParams}
+\index{Game\+App@{Game\+App}!Send\+Message\+Delayed@{Send\+Message\+Delayed}}
+\index{Send\+Message\+Delayed@{Send\+Message\+Delayed}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Send\+Message\+Delayed(\+Message $\ast$a\+Message)}{SendMessageDelayed(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Send\+Message\+Delayed (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a22213d4b9d1d314c73e05a0f49603fe1}{}\label{classGameApp_a22213d4b9d1d314c73e05a0f49603fe1}
+
+
+Send message to managers next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to process next frame \\
+\hline
+\end{DoxyParams}
+\index{Game\+App@{Game\+App}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classGameApp_afe3bacc27a9604d9ed7c213b45d501c8}{}\label{classGameApp_afe3bacc27a9604d9ed7c213b45d501c8}
+
+
+Set up for L\+UA. 
+
+\index{Game\+App@{Game\+App}!Set\+Active@{Set\+Active}}
+\index{Set\+Active@{Set\+Active}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Set\+Active(bool const a\+Active)}{SetActive(bool const aActive)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Set\+Active (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Active}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a011807f70bdd3da9ae9f7c5fe7558236}{}\label{classGameApp_a011807f70bdd3da9ae9f7c5fe7558236}
+
+
+Set if app is active. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Active} & Active state \\
+\hline
+\end{DoxyParams}
+\index{Game\+App@{Game\+App}!Set\+App\+Speed@{Set\+App\+Speed}}
+\index{Set\+App\+Speed@{Set\+App\+Speed}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Set\+App\+Speed(float const a\+App\+Speed)}{SetAppSpeed(float const aAppSpeed)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Set\+App\+Speed (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+App\+Speed}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_ad475a1923e4a450e2a292b1f7eff85f0}{}\label{classGameApp_ad475a1923e4a450e2a292b1f7eff85f0}
+
+
+Set speed of app. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+App\+Speed} & Speed for app. \\
+\hline
+\end{DoxyParams}
+\index{Game\+App@{Game\+App}!Set\+App\+Step@{Set\+App\+Step}}
+\index{Set\+App\+Step@{Set\+App\+Step}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Set\+App\+Step(float const a\+App\+Step)}{SetAppStep(float const aAppStep)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Set\+App\+Step (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+App\+Step}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_ad2b4b7e8bb12b5f8736d78ff3698b913}{}\label{classGameApp_ad2b4b7e8bb12b5f8736d78ff3698b913}
+
+
+Set refresh time for app. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+App\+Step} & Refresh time for app. \\
+\hline
+\end{DoxyParams}
+\index{Game\+App@{Game\+App}!Set\+Last\+Frame\+Time@{Set\+Last\+Frame\+Time}}
+\index{Set\+Last\+Frame\+Time@{Set\+Last\+Frame\+Time}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Set\+Last\+Frame\+Time(unsigned int const \&a\+Last\+Frame)}{SetLastFrameTime(unsigned int const &aLastFrame)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Set\+Last\+Frame\+Time (
+\begin{DoxyParamCaption}
+\item[{unsigned int const \&}]{a\+Last\+Frame}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a3fc7a9b9f0cb06c27f61e4c255220cc4}{}\label{classGameApp_a3fc7a9b9f0cb06c27f61e4c255220cc4}
+
+
+Set last frame time, in millis since app start. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Last\+Frame} & Time, in millis. \\
+\hline
+\end{DoxyParams}
+\index{Game\+App@{Game\+App}!Start@{Start}}
+\index{Start@{Start}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Start()}{Start()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameApp_a0d047368e7c4c34da9f60c0fb3ce18de}{}\label{classGameApp_a0d047368e7c4c34da9f60c0fb3ce18de}
+
+
+Start the app. 
+
+\index{Game\+App@{Game\+App}!Update@{Update}}
+\index{Update@{Update}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{Update(unsigned int const \&a\+Ticks\+Since\+Start)}{Update(unsigned int const &aTicksSinceStart)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+App\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{unsigned int const \&}]{a\+Ticks\+Since\+Start}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameApp_ac92066eb567bd93cda45500c43fe443b}{}\label{classGameApp_ac92066eb567bd93cda45500c43fe443b}
+
+
+Update loop. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Ticks\+Since\+Start} & Time, in millis, since the app started. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Game\+App@{Game\+App}!m\+Active@{m\+Active}}
+\index{m\+Active@{m\+Active}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{m\+Active}{mActive}}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\+App\+::m\+Active\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameApp_aa0289a415343048baa1fe5976322b8f7}{}\label{classGameApp_aa0289a415343048baa1fe5976322b8f7}
+\index{Game\+App@{Game\+App}!m\+App\+Speed@{m\+App\+Speed}}
+\index{m\+App\+Speed@{m\+App\+Speed}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{m\+App\+Speed}{mAppSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}float Game\+App\+::m\+App\+Speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameApp_a8fe3b47ac85fb2b50b9f227794ca582f}{}\label{classGameApp_a8fe3b47ac85fb2b50b9f227794ca582f}
+\index{Game\+App@{Game\+App}!m\+App\+Step@{m\+App\+Step}}
+\index{m\+App\+Step@{m\+App\+Step}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{m\+App\+Step}{mAppStep}}]{\setlength{\rightskip}{0pt plus 5cm}float Game\+App\+::m\+App\+Step\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameApp_ada884378414e66671636d6b6f8c4d20f}{}\label{classGameApp_ada884378414e66671636d6b6f8c4d20f}
+\index{Game\+App@{Game\+App}!m\+Delayed\+Messages@{m\+Delayed\+Messages}}
+\index{m\+Delayed\+Messages@{m\+Delayed\+Messages}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{m\+Delayed\+Messages}{mDelayedMessages}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Message}$\ast$$>$ Game\+App\+::m\+Delayed\+Messages\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameApp_aa0fbe9d81547577ebdc8086b7a8ddcbb}{}\label{classGameApp_aa0fbe9d81547577ebdc8086b7a8ddcbb}
+\index{Game\+App@{Game\+App}!m\+DT@{m\+DT}}
+\index{m\+DT@{m\+DT}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{m\+DT}{mDT}}]{\setlength{\rightskip}{0pt plus 5cm}float Game\+App\+::m\+DT\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameApp_acdb5789618f2ba3205207cdff535a887}{}\label{classGameApp_acdb5789618f2ba3205207cdff535a887}
+\index{Game\+App@{Game\+App}!m\+Last\+Frame@{m\+Last\+Frame}}
+\index{m\+Last\+Frame@{m\+Last\+Frame}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{m\+Last\+Frame}{mLastFrame}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Game\+App\+::m\+Last\+Frame\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameApp_a565825c1e33d2dd2f0a4139a8329d218}{}\label{classGameApp_a565825c1e33d2dd2f0a4139a8329d218}
+\index{Game\+App@{Game\+App}!m\+Managers@{m\+Managers}}
+\index{m\+Managers@{m\+Managers}!Game\+App@{Game\+App}}
+\subsubsection[{\texorpdfstring{m\+Managers}{mManagers}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Manager}$\ast$$>$ Game\+App\+::m\+Managers\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameApp_a05eea8d694f5a44959b372acca074986}{}\label{classGameApp_a05eea8d694f5a44959b372acca074986}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{GameApp_8h}{Game\+App.\+h}\item 
+\hyperlink{GameApp_8cpp}{Game\+App.\+cpp}\end{DoxyCompactItemize}

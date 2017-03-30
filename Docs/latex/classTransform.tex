@@ -1,0 +1,485 @@
+\hypertarget{classTransform}{}\section{Transform Class Reference}
+\label{classTransform}\index{Transform@{Transform}}
+
+
+{\ttfamily \#include $<$Transform.\+h$>$}
+
+
+
+Inheritance diagram for Transform\+:
+% FIG 0
+
+
+Collaboration diagram for Transform\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTransform_aa08ca4266efabc768973cdeea51945ab}{Transform} ()
+\item 
+virtual \hyperlink{classTransform_aa72e286c069850db80927b0e6554cd3e}{$\sim$\+Transform} ()
+\item 
+\hyperlink{structVector3}{Vector3} \& \hyperlink{classTransform_a6f7c1d76bb7d9088637ed9b051d5d3a9}{Get\+Position} ()
+\begin{DoxyCompactList}\small\item\em Get position of transform. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_a51fcdcaeb8fe967992f1251d1ac27d73}{Set\+Position} (\hyperlink{structVector3}{Vector3} const \&a\+Pos)
+\begin{DoxyCompactList}\small\item\em Set position of transform. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \& \hyperlink{classTransform_a8226e7e405220b9afc1f7594a563ef09}{Get\+Scale} ()
+\begin{DoxyCompactList}\small\item\em Get scale of transform. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_a14675ce0b8d06a75317b777fe7c4deed}{Set\+Scale} (\hyperlink{structVector3}{Vector3} const \&a\+Scale)
+\begin{DoxyCompactList}\small\item\em Set scale of transform (scalar) \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \& \hyperlink{classTransform_a4964c6e758a687de093a285da8a65fdb}{Get\+Size} ()
+\begin{DoxyCompactList}\small\item\em Get size of transform (linear) \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_a7f6af0730c1500ba97d7730ea39d4742}{Set\+Size} (\hyperlink{structVector3}{Vector3} const \&a\+Size)
+\begin{DoxyCompactList}\small\item\em Set size of transform. \end{DoxyCompactList}\item 
+\hyperlink{structMatrix33}{Matrix33} \& \hyperlink{classTransform_aa56be2b3f8898381b7ddbeedac4c03c2}{Get\+Rotation} ()
+\begin{DoxyCompactList}\small\item\em Get rotation of transform. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_ada048b0e3e27e0a4eae841e7511b4319}{Set\+Rotation} (\hyperlink{structMatrix33}{Matrix33} const \&a\+Rotation)
+\begin{DoxyCompactList}\small\item\em Set rotation of transform. \end{DoxyCompactList}\item 
+\hyperlink{MathExt_8h_a0792b703e89c99d4c39f13e093992576}{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \hyperlink{classTransform_ab1e4769dc68b8b4d6f4637b63c7340bb}{Get\+X\+Alignment} () const 
+\begin{DoxyCompactList}\small\item\em Get x alignment of transform. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_abc18e8fa2582d91c918e7c8fa3ed80b3}{Set\+X\+Alignment} (\hyperlink{MathExt_8h_a0792b703e89c99d4c39f13e093992576}{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} const \&a\+Align)
+\begin{DoxyCompactList}\small\item\em Set x alignment of transform. \end{DoxyCompactList}\item 
+\hyperlink{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4}{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \hyperlink{classTransform_a629ab06a9aac92c784e57919f8ec1abb}{Get\+Y\+Alignment} () const 
+\begin{DoxyCompactList}\small\item\em Get y alignment of transform. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_ab752d08242feb5de9d8d09c28a4c839e}{Set\+Y\+Alignment} (\hyperlink{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4}{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} const \&a\+Align)
+\begin{DoxyCompactList}\small\item\em Set y alignment of transform. \end{DoxyCompactList}\item 
+\hyperlink{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568}{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \hyperlink{classTransform_a7384900a4415d472fbe45ac5e77be2af}{Get\+Z\+Alignment} () const 
+\begin{DoxyCompactList}\small\item\em Get z alignment of transform. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_a4b0a31a524c1288b40afb9101c1cc008}{Set\+Z\+Alignment} (\hyperlink{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568}{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} const \&a\+Align)
+\begin{DoxyCompactList}\small\item\em Set z alignment of transform. \end{DoxyCompactList}\item 
+\hyperlink{Transform_8h_a8e6f13c41567abc23d55b0843251a8d8}{Axis\+Lock} \hyperlink{classTransform_a8208c878244879a3a0d9dd0e0d66b99a}{Get\+Locked\+Axes} () const 
+\begin{DoxyCompactList}\small\item\em Get currently locked axes. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_ab777edfdad41940e45968e50b56e5941}{Set\+Locked\+Axis} (\hyperlink{Transform_8h_a8e6f13c41567abc23d55b0843251a8d8}{Axis\+Lock} const \&a\+Locked\+Axes)
+\begin{DoxyCompactList}\small\item\em Set currently locked axes. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_a3256c0fb53d0b341ad8d80fe61e5fb2d}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_aeea708beadcc8a67261a9dacb8151900}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\item 
+void \hyperlink{classTransform_aecbe05756c579fb4e36cbf6b2e36e58c}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\item 
+void \hyperlink{classTransform_a2fe5546a59d933a11316966b9ec49e19}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize to file (cannot handle rotations) \end{DoxyCompactList}\item 
+void \hyperlink{classTransform_a4bc75f2d8356608ffdbc1ec56cd86a27}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Read from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classTransform_a0a99fa2a6f920195d46410e0c453384d}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classTransform_aa992b0ff5f9e9ab334b3142b6727754e}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make readable in L\+UA (should already be called for you) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classTransform_a975e3ed410b66254086da111e258886c}{m\+Position}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classTransform_a102176b78b2592b281d66788c39433b7}{m\+Scale}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classTransform_ad52265c4e89c167205c72dcd7cd5d696}{m\+Size}
+\item 
+\hyperlink{structMatrix33}{Matrix33} \hyperlink{classTransform_af3d53ed29845812548669e5b52a47086}{m\+Rotation}
+\item 
+\hyperlink{MathExt_8h_a0792b703e89c99d4c39f13e093992576}{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \hyperlink{classTransform_a28f4dc98598dd8f150b26a7542c25c33}{m\+X\+Align}
+\item 
+\hyperlink{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4}{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \hyperlink{classTransform_a72a2c6c9b517604089a3d8f23ccde296}{m\+Y\+Align}
+\item 
+\hyperlink{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568}{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \hyperlink{classTransform_a758b797e43f61a2c01820782ff1705f0}{m\+Z\+Align}
+\item 
+\hyperlink{Transform_8h_a8e6f13c41567abc23d55b0843251a8d8}{Axis\+Lock} \hyperlink{classTransform_ac8c97858398bf06f822728693374d301}{m\+Locked\+Axes}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classTransform_aa46d87cf37253c77a12a722501c7077c}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Transform\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Transform@{Transform}!Transform@{Transform}}
+\index{Transform@{Transform}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Transform()}{Transform()}}]{\setlength{\rightskip}{0pt plus 5cm}Transform\+::\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_aa08ca4266efabc768973cdeea51945ab}{}\label{classTransform_aa08ca4266efabc768973cdeea51945ab}
+\index{Transform@{Transform}!````~Transform@{$\sim$\+Transform}}
+\index{````~Transform@{$\sim$\+Transform}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{$\sim$\+Transform()}{~Transform()}}]{\setlength{\rightskip}{0pt plus 5cm}Transform\+::$\sim$\+Transform (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTransform_aa72e286c069850db80927b0e6554cd3e}{}\label{classTransform_aa72e286c069850db80927b0e6554cd3e}
+
+
+\subsection{Member Function Documentation}
+\index{Transform@{Transform}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)}{Deserialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTransform_a4bc75f2d8356608ffdbc1ec56cd86a27}{}\label{classTransform_a4bc75f2d8356608ffdbc1ec56cd86a27}
+
+
+Read from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File to read from \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Component}.
+
+\index{Transform@{Transform}!Get\+Locked\+Axes@{Get\+Locked\+Axes}}
+\index{Get\+Locked\+Axes@{Get\+Locked\+Axes}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+Locked\+Axes() const }{GetLockedAxes() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Axis\+Lock} Transform\+::\+Get\+Locked\+Axes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTransform_a8208c878244879a3a0d9dd0e0d66b99a}{}\label{classTransform_a8208c878244879a3a0d9dd0e0d66b99a}
+
+
+Get currently locked axes. 
+
+\begin{DoxyReturn}{Returns}
+Currently locked axes. 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Get\+Position@{Get\+Position}}
+\index{Get\+Position@{Get\+Position}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+Position()}{GetPosition()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} \& Transform\+::\+Get\+Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_a6f7c1d76bb7d9088637ed9b051d5d3a9}{}\label{classTransform_a6f7c1d76bb7d9088637ed9b051d5d3a9}
+
+
+Get position of transform. 
+
+\begin{DoxyReturn}{Returns}
+position 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Get\+Rotation@{Get\+Rotation}}
+\index{Get\+Rotation@{Get\+Rotation}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+Rotation()}{GetRotation()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} \& Transform\+::\+Get\+Rotation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_aa56be2b3f8898381b7ddbeedac4c03c2}{}\label{classTransform_aa56be2b3f8898381b7ddbeedac4c03c2}
+
+
+Get rotation of transform. 
+
+\begin{DoxyReturn}{Returns}
+rotation 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Get\+Scale@{Get\+Scale}}
+\index{Get\+Scale@{Get\+Scale}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+Scale()}{GetScale()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} \& Transform\+::\+Get\+Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_a8226e7e405220b9afc1f7594a563ef09}{}\label{classTransform_a8226e7e405220b9afc1f7594a563ef09}
+
+
+Get scale of transform. 
+
+\begin{DoxyReturn}{Returns}
+scale 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+Size()}{GetSize()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} \& Transform\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_a4964c6e758a687de093a285da8a65fdb}{}\label{classTransform_a4964c6e758a687de093a285da8a65fdb}
+
+
+Get size of transform (linear) 
+
+\begin{DoxyReturn}{Returns}
+size 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int Transform\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classTransform_a0a99fa2a6f920195d46410e0c453384d}{}\label{classTransform_a0a99fa2a6f920195d46410e0c453384d}
+\index{Transform@{Transform}!Get\+X\+Alignment@{Get\+X\+Alignment}}
+\index{Get\+X\+Alignment@{Get\+X\+Alignment}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+X\+Alignment() const }{GetXAlignment() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} Transform\+::\+Get\+X\+Alignment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTransform_ab1e4769dc68b8b4d6f4637b63c7340bb}{}\label{classTransform_ab1e4769dc68b8b4d6f4637b63c7340bb}
+
+
+Get x alignment of transform. 
+
+\begin{DoxyReturn}{Returns}
+alignment 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Get\+Y\+Alignment@{Get\+Y\+Alignment}}
+\index{Get\+Y\+Alignment@{Get\+Y\+Alignment}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+Y\+Alignment() const }{GetYAlignment() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} Transform\+::\+Get\+Y\+Alignment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTransform_a629ab06a9aac92c784e57919f8ec1abb}{}\label{classTransform_a629ab06a9aac92c784e57919f8ec1abb}
+
+
+Get y alignment of transform. 
+
+\begin{DoxyReturn}{Returns}
+alignment 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Get\+Z\+Alignment@{Get\+Z\+Alignment}}
+\index{Get\+Z\+Alignment@{Get\+Z\+Alignment}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Get\+Z\+Alignment() const }{GetZAlignment() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} Transform\+::\+Get\+Z\+Alignment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTransform_a7384900a4415d472fbe45ac5e77be2af}{}\label{classTransform_a7384900a4415d472fbe45ac5e77be2af}
+
+
+Get z alignment of transform. 
+
+\begin{DoxyReturn}{Returns}
+alignment 
+\end{DoxyReturn}
+\index{Transform@{Transform}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTransform_aecbe05756c579fb4e36cbf6b2e36e58c}{}\label{classTransform_aecbe05756c579fb4e36cbf6b2e36e58c}
+
+
+Implements \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Component}.
+
+\index{Transform@{Transform}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTransform_aeea708beadcc8a67261a9dacb8151900}{}\label{classTransform_aeea708beadcc8a67261a9dacb8151900}
+
+
+Implements \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Component}.
+
+\index{Transform@{Transform}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTransform_a2fe5546a59d933a11316966b9ec49e19}{}\label{classTransform_a2fe5546a59d933a11316966b9ec49e19}
+
+
+Serialize to file (cannot handle rotations) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File to serialize to \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Component}.
+
+\index{Transform@{Transform}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classTransform_aa992b0ff5f9e9ab334b3142b6727754e}{}\label{classTransform_aa992b0ff5f9e9ab334b3142b6727754e}
+
+
+Make readable in L\+UA (should already be called for you) 
+
+\index{Transform@{Transform}!Set\+Locked\+Axis@{Set\+Locked\+Axis}}
+\index{Set\+Locked\+Axis@{Set\+Locked\+Axis}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+Locked\+Axis(\+Axis\+Lock const \&a\+Locked\+Axes)}{SetLockedAxis(AxisLock const &aLockedAxes)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+Locked\+Axis (
+\begin{DoxyParamCaption}
+\item[{{\bf Axis\+Lock} const \&}]{a\+Locked\+Axes}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_ab777edfdad41940e45968e50b56e5941}{}\label{classTransform_ab777edfdad41940e45968e50b56e5941}
+
+
+Set currently locked axes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Locked\+Axes} & Locked axes. \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Set\+Position@{Set\+Position}}
+\index{Set\+Position@{Set\+Position}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+Position(\+Vector3 const \&a\+Pos)}{SetPosition(Vector3 const &aPos)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Pos}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_a51fcdcaeb8fe967992f1251d1ac27d73}{}\label{classTransform_a51fcdcaeb8fe967992f1251d1ac27d73}
+
+
+Set position of transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pos} & position \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Set\+Rotation@{Set\+Rotation}}
+\index{Set\+Rotation@{Set\+Rotation}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+Rotation(\+Matrix33 const \&a\+Rotation)}{SetRotation(Matrix33 const &aRotation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+Rotation (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix33} const \&}]{a\+Rotation}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_ada048b0e3e27e0a4eae841e7511b4319}{}\label{classTransform_ada048b0e3e27e0a4eae841e7511b4319}
+
+
+Set rotation of transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rotation} & transform \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Set\+Scale@{Set\+Scale}}
+\index{Set\+Scale@{Set\+Scale}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+Scale(\+Vector3 const \&a\+Scale)}{SetScale(Vector3 const &aScale)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+Scale (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Scale}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_a14675ce0b8d06a75317b777fe7c4deed}{}\label{classTransform_a14675ce0b8d06a75317b777fe7c4deed}
+
+
+Set scale of transform (scalar) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Scale} & scale \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Set\+Size@{Set\+Size}}
+\index{Set\+Size@{Set\+Size}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+Size(\+Vector3 const \&a\+Size)}{SetSize(Vector3 const &aSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_a7f6af0730c1500ba97d7730ea39d4742}{}\label{classTransform_a7f6af0730c1500ba97d7730ea39d4742}
+
+
+Set size of transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Size} & size \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Set\+X\+Alignment@{Set\+X\+Alignment}}
+\index{Set\+X\+Alignment@{Set\+X\+Alignment}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+X\+Alignment(\+X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+N\+T const \&a\+Align)}{SetXAlignment(X_ALIGNMENT const &aAlign)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+X\+Alignment (
+\begin{DoxyParamCaption}
+\item[{{\bf X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} const \&}]{a\+Align}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_abc18e8fa2582d91c918e7c8fa3ed80b3}{}\label{classTransform_abc18e8fa2582d91c918e7c8fa3ed80b3}
+
+
+Set x alignment of transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Align} & alignment \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Set\+Y\+Alignment@{Set\+Y\+Alignment}}
+\index{Set\+Y\+Alignment@{Set\+Y\+Alignment}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+Y\+Alignment(\+Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+N\+T const \&a\+Align)}{SetYAlignment(Y_ALIGNMENT const &aAlign)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+Y\+Alignment (
+\begin{DoxyParamCaption}
+\item[{{\bf Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} const \&}]{a\+Align}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_ab752d08242feb5de9d8d09c28a4c839e}{}\label{classTransform_ab752d08242feb5de9d8d09c28a4c839e}
+
+
+Set y alignment of transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Align} & alignment \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Set\+Z\+Alignment@{Set\+Z\+Alignment}}
+\index{Set\+Z\+Alignment@{Set\+Z\+Alignment}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Set\+Z\+Alignment(\+Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+N\+T const \&a\+Align)}{SetZAlignment(Z_ALIGNMENT const &aAlign)}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Set\+Z\+Alignment (
+\begin{DoxyParamCaption}
+\item[{{\bf Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} const \&}]{a\+Align}
+\end{DoxyParamCaption}
+)}\hypertarget{classTransform_a4b0a31a524c1288b40afb9101c1cc008}{}\label{classTransform_a4b0a31a524c1288b40afb9101c1cc008}
+
+
+Set z alignment of transform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Align} & alignment \\
+\hline
+\end{DoxyParams}
+\index{Transform@{Transform}!Update@{Update}}
+\index{Update@{Update}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Transform\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTransform_a3256c0fb53d0b341ad8d80fe61e5fb2d}{}\label{classTransform_a3256c0fb53d0b341ad8d80fe61e5fb2d}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Component}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Transform@{Transform}!m\+Locked\+Axes@{m\+Locked\+Axes}}
+\index{m\+Locked\+Axes@{m\+Locked\+Axes}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+Locked\+Axes}{mLockedAxes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Axis\+Lock} Transform\+::m\+Locked\+Axes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_ac8c97858398bf06f822728693374d301}{}\label{classTransform_ac8c97858398bf06f822728693374d301}
+\index{Transform@{Transform}!m\+Position@{m\+Position}}
+\index{m\+Position@{m\+Position}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+Position}{mPosition}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Transform\+::m\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_a975e3ed410b66254086da111e258886c}{}\label{classTransform_a975e3ed410b66254086da111e258886c}
+\index{Transform@{Transform}!m\+Rotation@{m\+Rotation}}
+\index{m\+Rotation@{m\+Rotation}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+Rotation}{mRotation}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix33} Transform\+::m\+Rotation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_af3d53ed29845812548669e5b52a47086}{}\label{classTransform_af3d53ed29845812548669e5b52a47086}
+\index{Transform@{Transform}!m\+Scale@{m\+Scale}}
+\index{m\+Scale@{m\+Scale}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+Scale}{mScale}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Transform\+::m\+Scale\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_a102176b78b2592b281d66788c39433b7}{}\label{classTransform_a102176b78b2592b281d66788c39433b7}
+\index{Transform@{Transform}!m\+Size@{m\+Size}}
+\index{m\+Size@{m\+Size}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+Size}{mSize}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Transform\+::m\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_ad52265c4e89c167205c72dcd7cd5d696}{}\label{classTransform_ad52265c4e89c167205c72dcd7cd5d696}
+\index{Transform@{Transform}!m\+X\+Align@{m\+X\+Align}}
+\index{m\+X\+Align@{m\+X\+Align}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+X\+Align}{mXAlign}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} Transform\+::m\+X\+Align\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_a28f4dc98598dd8f150b26a7542c25c33}{}\label{classTransform_a28f4dc98598dd8f150b26a7542c25c33}
+\index{Transform@{Transform}!m\+Y\+Align@{m\+Y\+Align}}
+\index{m\+Y\+Align@{m\+Y\+Align}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+Y\+Align}{mYAlign}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} Transform\+::m\+Y\+Align\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_a72a2c6c9b517604089a3d8f23ccde296}{}\label{classTransform_a72a2c6c9b517604089a3d8f23ccde296}
+\index{Transform@{Transform}!m\+Z\+Align@{m\+Z\+Align}}
+\index{m\+Z\+Align@{m\+Z\+Align}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{m\+Z\+Align}{mZAlign}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} Transform\+::m\+Z\+Align\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTransform_a758b797e43f61a2c01820782ff1705f0}{}\label{classTransform_a758b797e43f61a2c01820782ff1705f0}
+\index{Transform@{Transform}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Transform@{Transform}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const Transform\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Transform\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classTransform_aa46d87cf37253c77a12a722501c7077c}{}\label{classTransform_aa46d87cf37253c77a12a722501c7077c}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Components/\hyperlink{Transform_8h}{Transform.\+h}\item 
+Components/\hyperlink{Transform_8cpp}{Transform.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,309 @@
+\hypertarget{classInputManager}{}\section{Input\+Manager Class Reference}
+\label{classInputManager}\index{Input\+Manager@{Input\+Manager}}
+
+
+{\ttfamily \#include $<$Input\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Input\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Input\+Manager\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{structInputInfo}{Input\+Info} $>$\+::iterator \hyperlink{classInputManager_a97ddfabc7a35e32edf633e568a728879}{Input\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classInputManager_ae356d129e163107dac792ff3b11e8d21}{Input\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App)
+\item 
+\hyperlink{classInputManager_af518290877dd183606709d5852db5491}{$\sim$\+Input\+Manager} ()
+\item 
+void \hyperlink{classInputManager_abb91636f4847e680c93899da9cf357d2}{Add\+Input} (\hyperlink{classHashString}{Hash\+String} const \&a\+Input, \hyperlink{structVector3}{Vector3} const \&a\+Location, int const a\+Id=0, bool const a\+Single\+Frame=false)
+\begin{DoxyCompactList}\small\item\em Keeps track of input. \end{DoxyCompactList}\item 
+void \hyperlink{classInputManager_a31b15c04ca41dce08f3438ac4a00c51d}{Remove\+Input} (\hyperlink{classHashString}{Hash\+String} const \&a\+Input, int const a\+Id=0)
+\begin{DoxyCompactList}\small\item\em Removes input. \end{DoxyCompactList}\item 
+void \hyperlink{classInputManager_a1c1f27ef674682cc2e8fc2230fb6e123}{Clear\+Inputs} ()
+\begin{DoxyCompactList}\small\item\em Clear all inputs. \end{DoxyCompactList}\item 
+void \hyperlink{classInputManager_a62c46df41bf4620e5007cce6a1392b55}{Accept\+Inputs} ()
+\begin{DoxyCompactList}\small\item\em Method to start accepting inputs. \end{DoxyCompactList}\item 
+void \hyperlink{classInputManager_adb7f0e18632ca0a29f9c0d96d90cbab1}{Decline\+Inputs} ()
+\begin{DoxyCompactList}\small\item\em Method to start declining inputs. \end{DoxyCompactList}\item 
+bool \hyperlink{classInputManager_a741e1da7192fa3120bd70c737b20d761}{Accepting\+Inputs} ()
+\begin{DoxyCompactList}\small\item\em Check to see if accepting input. \end{DoxyCompactList}\item 
+\hyperlink{classInputHandler}{Input\+Handler} $\ast$ \hyperlink{classInputManager_ac49964a46da475543ec679df91ca7945}{Get\+Input\+Handler} () const 
+\begin{DoxyCompactList}\small\item\em Get input handler. \end{DoxyCompactList}\item 
+int \hyperlink{classInputManager_a4abd16e7e3d9dbee7533f7a3f32a8dc2}{Get\+Input\+Count} () const 
+\begin{DoxyCompactList}\small\item\em Get total input device count. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classInputManager_aa5480931dba2720e7d80dd00a53adae0}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classInputManager_a24bf2c54661a42d3af837b6165f0890b}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message out. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classInputManager_a2bd2dff85a3a9b51eae02d5e3826885e}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classInputManager_a98660c994c4c623a2b229fa0528c6c31}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classInputManager_ade204f853d96fe85e4bdb8183c2a5b10}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classInputManager_ae47978379f8008ccb1e1837d9a3375a3}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this manager visible in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classInputHandler}{Input\+Handler} $\ast$ \hyperlink{classInputManager_ab291f66f6227aa05357165ffedd2f634}{m\+Handler}
+\item 
+std\+::vector$<$ \hyperlink{structInputInfo}{Input\+Info} $>$ \hyperlink{classInputManager_a639dfcc7c198f880217f667a48d99804}{m\+Inputs}
+\item 
+bool \hyperlink{classInputManager_acd38734c7f9faa6538868dff713a4bf6}{m\+Accept\+Input}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classInputManager_a0615dfbe325cf0af3708b9f8bdf22669}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Input\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Input\+Manager@{Input\+Manager}!Input\+IT@{Input\+IT}}
+\index{Input\+IT@{Input\+IT}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Input\+IT}{InputIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Input\+Info}$>$\+::iterator {\bf Input\+Manager\+::\+Input\+IT}}\hypertarget{classInputManager_a97ddfabc7a35e32edf633e568a728879}{}\label{classInputManager_a97ddfabc7a35e32edf633e568a728879}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Input\+Manager@{Input\+Manager}!Input\+Manager@{Input\+Manager}}
+\index{Input\+Manager@{Input\+Manager}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Input\+Manager(\+Game\+App $\ast$a\+App)}{InputManager(GameApp *aApp)}}]{\setlength{\rightskip}{0pt plus 5cm}Input\+Manager\+::\+Input\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_ae356d129e163107dac792ff3b11e8d21}{}\label{classInputManager_ae356d129e163107dac792ff3b11e8d21}
+\index{Input\+Manager@{Input\+Manager}!````~Input\+Manager@{$\sim$\+Input\+Manager}}
+\index{````~Input\+Manager@{$\sim$\+Input\+Manager}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Input\+Manager()}{~InputManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Input\+Manager\+::$\sim$\+Input\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_af518290877dd183606709d5852db5491}{}\label{classInputManager_af518290877dd183606709d5852db5491}
+
+
+\subsection{Member Function Documentation}
+\index{Input\+Manager@{Input\+Manager}!Accepting\+Inputs@{Accepting\+Inputs}}
+\index{Accepting\+Inputs@{Accepting\+Inputs}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Accepting\+Inputs()}{AcceptingInputs()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::\+Accepting\+Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_a741e1da7192fa3120bd70c737b20d761}{}\label{classInputManager_a741e1da7192fa3120bd70c737b20d761}
+
+
+Check to see if accepting input. 
+
+\index{Input\+Manager@{Input\+Manager}!Accept\+Inputs@{Accept\+Inputs}}
+\index{Accept\+Inputs@{Accept\+Inputs}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Accept\+Inputs()}{AcceptInputs()}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Accept\+Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_a62c46df41bf4620e5007cce6a1392b55}{}\label{classInputManager_a62c46df41bf4620e5007cce6a1392b55}
+
+
+Method to start accepting inputs. 
+
+\index{Input\+Manager@{Input\+Manager}!Add\+Input@{Add\+Input}}
+\index{Add\+Input@{Add\+Input}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Input(\+Hash\+String const \&a\+Input, Vector3 const \&a\+Location, int const a\+Id=0, bool const a\+Single\+Frame=false)}{AddInput(HashString const &aInput, Vector3 const &aLocation, int const aId=0, bool const aSingleFrame=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Add\+Input (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Input, }
+\item[{{\bf Vector3} const \&}]{a\+Location, }
+\item[{int const}]{a\+Id = {\ttfamily 0}, }
+\item[{bool const}]{a\+Single\+Frame = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_abb91636f4847e680c93899da9cf357d2}{}\label{classInputManager_abb91636f4847e680c93899da9cf357d2}
+
+
+Keeps track of input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Input} & Input type \\
+\hline
+{\em a\+Location} & Lcoation in screen space where input happened. \\
+\hline
+\end{DoxyParams}
+\index{Input\+Manager@{Input\+Manager}!Clear\+Inputs@{Clear\+Inputs}}
+\index{Clear\+Inputs@{Clear\+Inputs}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Clear\+Inputs()}{ClearInputs()}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Clear\+Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_a1c1f27ef674682cc2e8fc2230fb6e123}{}\label{classInputManager_a1c1f27ef674682cc2e8fc2230fb6e123}
+
+
+Clear all inputs. 
+
+\index{Input\+Manager@{Input\+Manager}!Decline\+Inputs@{Decline\+Inputs}}
+\index{Decline\+Inputs@{Decline\+Inputs}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Decline\+Inputs()}{DeclineInputs()}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Decline\+Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_adb7f0e18632ca0a29f9c0d96d90cbab1}{}\label{classInputManager_adb7f0e18632ca0a29f9c0d96d90cbab1}
+
+
+Method to start declining inputs. 
+
+\index{Input\+Manager@{Input\+Manager}!Get\+Input\+Count@{Get\+Input\+Count}}
+\index{Get\+Input\+Count@{Get\+Input\+Count}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Input\+Count() const }{GetInputCount() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Input\+Manager\+::\+Get\+Input\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classInputManager_a4abd16e7e3d9dbee7533f7a3f32a8dc2}{}\label{classInputManager_a4abd16e7e3d9dbee7533f7a3f32a8dc2}
+
+
+Get total input device count. 
+
+\begin{DoxyReturn}{Returns}
+Device count 
+\end{DoxyReturn}
+\index{Input\+Manager@{Input\+Manager}!Get\+Input\+Handler@{Get\+Input\+Handler}}
+\index{Get\+Input\+Handler@{Get\+Input\+Handler}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Input\+Handler() const }{GetInputHandler() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Input\+Handler} $\ast$ Input\+Manager\+::\+Get\+Input\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classInputManager_ac49964a46da475543ec679df91ca7945}{}\label{classInputManager_ac49964a46da475543ec679df91ca7945}
+
+
+Get input handler. 
+
+\begin{DoxyReturn}{Returns}
+Input handler 
+\end{DoxyReturn}
+\index{Input\+Manager@{Input\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Input\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classInputManager_a98660c994c4c623a2b229fa0528c6c31}{}\label{classInputManager_a98660c994c4c623a2b229fa0528c6c31}
+\index{Input\+Manager@{Input\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Input\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classInputManager_ade204f853d96fe85e4bdb8183c2a5b10}{}\label{classInputManager_ade204f853d96fe85e4bdb8183c2a5b10}
+\index{Input\+Manager@{Input\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classInputManager_a2bd2dff85a3a9b51eae02d5e3826885e}{}\label{classInputManager_a2bd2dff85a3a9b51eae02d5e3826885e}
+
+
+Receive message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to read. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Input\+Manager@{Input\+Manager}!Remove\+Input@{Remove\+Input}}
+\index{Remove\+Input@{Remove\+Input}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Input(\+Hash\+String const \&a\+Input, int const a\+Id=0)}{RemoveInput(HashString const &aInput, int const aId=0)}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Remove\+Input (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Input, }
+\item[{int const}]{a\+Id = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classInputManager_a31b15c04ca41dce08f3438ac4a00c51d}{}\label{classInputManager_a31b15c04ca41dce08f3438ac4a00c51d}
+
+
+Removes input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Input} & Input type \\
+\hline
+\end{DoxyParams}
+\index{Input\+Manager@{Input\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classInputManager_a24bf2c54661a42d3af837b6165f0890b}{}\label{classInputManager_a24bf2c54661a42d3af837b6165f0890b}
+
+
+Send message out. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Input\+Manager@{Input\+Manager}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classInputManager_ae47978379f8008ccb1e1837d9a3375a3}{}\label{classInputManager_ae47978379f8008ccb1e1837d9a3375a3}
+
+
+Make this manager visible in L\+UA. 
+
+\index{Input\+Manager@{Input\+Manager}!Update@{Update}}
+\index{Update@{Update}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Input\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classInputManager_aa5480931dba2720e7d80dd00a53adae0}{}\label{classInputManager_aa5480931dba2720e7d80dd00a53adae0}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Input\+Manager@{Input\+Manager}!m\+Accept\+Input@{m\+Accept\+Input}}
+\index{m\+Accept\+Input@{m\+Accept\+Input}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Accept\+Input}{mAcceptInput}}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\+Manager\+::m\+Accept\+Input\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInputManager_acd38734c7f9faa6538868dff713a4bf6}{}\label{classInputManager_acd38734c7f9faa6538868dff713a4bf6}
+\index{Input\+Manager@{Input\+Manager}!m\+Handler@{m\+Handler}}
+\index{m\+Handler@{m\+Handler}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Handler}{mHandler}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Input\+Handler}$\ast$ Input\+Manager\+::m\+Handler\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInputManager_ab291f66f6227aa05357165ffedd2f634}{}\label{classInputManager_ab291f66f6227aa05357165ffedd2f634}
+\index{Input\+Manager@{Input\+Manager}!m\+Inputs@{m\+Inputs}}
+\index{m\+Inputs@{m\+Inputs}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Inputs}{mInputs}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Input\+Info}$>$ Input\+Manager\+::m\+Inputs\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classInputManager_a639dfcc7c198f880217f667a48d99804}{}\label{classInputManager_a639dfcc7c198f880217f667a48d99804}
+\index{Input\+Manager@{Input\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Input\+Manager@{Input\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Input\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Input\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classInputManager_a0615dfbe325cf0af3708b9f8bdf22669}{}\label{classInputManager_a0615dfbe325cf0af3708b9f8bdf22669}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{InputManager_8h}{Input\+Manager.\+h}\item 
+Managers/\hyperlink{InputManager_8cpp}{Input\+Manager.\+cpp}\end{DoxyCompactItemize}

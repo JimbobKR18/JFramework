@@ -1,0 +1,483 @@
+\hypertarget{namespaceCommon}{}\section{Common Namespace Reference}
+\label{namespaceCommon}\index{Common@{Common}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string const \hyperlink{namespaceCommon_a5e31a3c13642f991a5b3e7b17c97e0c8}{Relative\+Path} (std\+::string const \&a\+Sub\+Folder, std\+::string const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Gets relative path for asset files, set by system properties. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a489a6fbbf79abd5e4e7a691630d55d8c}{String\+To\+Int} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Int. \end{DoxyCompactList}\item 
+float \hyperlink{namespaceCommon_aeac816fd13590f4ad6640aff60414ec7}{String\+To\+Float} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Float. \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceCommon_a112a898515a1a04458234ef28ba8525b}{String\+To\+Bool} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Boolean, hard set to look for \char`\"{}true\char`\"{}. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{namespaceCommon_a2911fcaab26e270ccb09d14d88356972}{String\+To\+Int\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Int Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \hyperlink{namespaceCommon_a084ca9932c59120f59c770fffa18ac60}{String\+To\+Float\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Float Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ bool $>$ \hyperlink{namespaceCommon_ac079fde773cfeac7b049a58cda7b5d94}{String\+To\+Bool\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to Bool Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{namespaceCommon_aa857ec2f8590997d38a962106e00a665}{String\+To\+String\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to String Vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{namespaceCommon_a75c4ca78dc57b61f2716fa790b60aedd}{String\+To\+Hash\+String\+Vector} (std\+::string const \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String to \hyperlink{classHashString}{Hash\+String} Vector. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a4f4719858903c264a76f1f6835dc223b}{Int\+To\+String} (int const a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Int to String. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_ab0bd4076a5c4cd7fdf2a0692b5510abd}{Float\+To\+String} (float const a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Float to String. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a0f38dc478fcdf11cc930463152633056}{Bool\+To\+String} (bool const a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Boolean to String. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a4ef73200227be129d5b2349ab9d35b8f}{Int\+Vector\+To\+String} (std\+::vector$<$ int $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Int Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a091ad44f4b1fe6dc8bed8a51d05a66e0}{Float\+Vector\+To\+String} (std\+::vector$<$ float $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Float Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_aec7d97bf1dfeed7008f0a6ddb7f5bff9}{Bool\+Vector\+To\+String} (std\+::vector$<$ bool $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts Bool Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a3c3ce096acc73170b49d3a86e0e07a86}{String\+Vector\+To\+String} (std\+::vector$<$ std\+::string $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts String Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a869bf03747ab50ba14b50147fb4d406e}{Hash\+String\+Vector\+To\+String} (std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ \&a\+Value)
+\begin{DoxyCompactList}\small\item\em Converts \hyperlink{classHashString}{Hash\+String} Vector to String (comma separated) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_a1858a26280ca754d36e9ff57f85ca5a7}{Parse\+String} (std\+::istream $\ast$infile, std\+::string const \&a\+String)
+\begin{DoxyCompactList}\small\item\em If find \char`\"{}\+Literal(\char`\"{} keep forming string until find \char`\"{})\char`\"{}, or Constant( \char`\"{}etc.\char`\"{} ) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{namespaceCommon_aead0f844190b0b20cfb5e2dd50d7d622}{Trim\+String} (std\+::string const \&a\+String)
+\begin{DoxyCompactList}\small\item\em Trim whitespace from a string. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{namespaceCommon_a51874188abdc26c800f2da6840e4a5eb}{Retrieve\+Name\+From\+File\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Get bottom level filename (last sequence after last /) \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{String\+Hash\+Function} (std\+::string const \&a\+String)
+\begin{DoxyCompactList}\small\item\em String hash function, good enough default. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_acbc024bbc4c442c690c150c3c846d22a}{Random\+Int\+In\+Range} (int const aX, int const bX)
+\begin{DoxyCompactList}\small\item\em Get random Int within a range. \end{DoxyCompactList}\item 
+float \hyperlink{namespaceCommon_a6bb24acf07012e8a715ec182891a852d}{Random\+Float\+In\+Range} (float const aX, float const bX)
+\begin{DoxyCompactList}\small\item\em Get random Float within a range. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a376a1d79a10be75c3acc3cc69c151ec9}{Get\+Current\+Year} ()
+\begin{DoxyCompactList}\small\item\em Get current year. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_a9f2091ed3dcff65d0382a1089a9aae87}{Get\+Current\+Month} ()
+\begin{DoxyCompactList}\small\item\em Get current month. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceCommon_ab8783ce3b9fc2ab21ea67c688d3ad404}{Get\+Current\+Day\+Of\+Month} ()
+\begin{DoxyCompactList}\small\item\em Get current day of the month. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Common@{Common}!Bool\+To\+String@{Bool\+To\+String}}
+\index{Bool\+To\+String@{Bool\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Bool\+To\+String(bool const a\+Value)}{BoolToString(bool const aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Bool\+To\+String (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a0f38dc478fcdf11cc930463152633056}{}\label{namespaceCommon_a0f38dc478fcdf11cc930463152633056}
+
+
+Converts Boolean to String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Bool\+Vector\+To\+String@{Bool\+Vector\+To\+String}}
+\index{Bool\+Vector\+To\+String@{Bool\+Vector\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Bool\+Vector\+To\+String(std\+::vector$<$ bool $>$ \&a\+Value)}{BoolVectorToString(std::vector< bool > &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Bool\+Vector\+To\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ bool $>$ \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_aec7d97bf1dfeed7008f0a6ddb7f5bff9}{}\label{namespaceCommon_aec7d97bf1dfeed7008f0a6ddb7f5bff9}
+
+
+Converts Bool Vector to String (comma separated) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Float\+To\+String@{Float\+To\+String}}
+\index{Float\+To\+String@{Float\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Float\+To\+String(float const a\+Value)}{FloatToString(float const aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Float\+To\+String (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_ab0bd4076a5c4cd7fdf2a0692b5510abd}{}\label{namespaceCommon_ab0bd4076a5c4cd7fdf2a0692b5510abd}
+
+
+Converts Float to String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Float\+Vector\+To\+String@{Float\+Vector\+To\+String}}
+\index{Float\+Vector\+To\+String@{Float\+Vector\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Float\+Vector\+To\+String(std\+::vector$<$ float $>$ \&a\+Value)}{FloatVectorToString(std::vector< float > &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Float\+Vector\+To\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ float $>$ \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a091ad44f4b1fe6dc8bed8a51d05a66e0}{}\label{namespaceCommon_a091ad44f4b1fe6dc8bed8a51d05a66e0}
+
+
+Converts Float Vector to String (comma separated) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Get\+Current\+Day\+Of\+Month@{Get\+Current\+Day\+Of\+Month}}
+\index{Get\+Current\+Day\+Of\+Month@{Get\+Current\+Day\+Of\+Month}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Day\+Of\+Month()}{GetCurrentDayOfMonth()}}]{\setlength{\rightskip}{0pt plus 5cm}int Common\+::\+Get\+Current\+Day\+Of\+Month (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_ab8783ce3b9fc2ab21ea67c688d3ad404}{}\label{namespaceCommon_ab8783ce3b9fc2ab21ea67c688d3ad404}
+
+
+Get current day of the month. 
+
+\begin{DoxyReturn}{Returns}
+Current day of month. 
+\end{DoxyReturn}
+\index{Common@{Common}!Get\+Current\+Month@{Get\+Current\+Month}}
+\index{Get\+Current\+Month@{Get\+Current\+Month}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Month()}{GetCurrentMonth()}}]{\setlength{\rightskip}{0pt plus 5cm}int Common\+::\+Get\+Current\+Month (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a9f2091ed3dcff65d0382a1089a9aae87}{}\label{namespaceCommon_a9f2091ed3dcff65d0382a1089a9aae87}
+
+
+Get current month. 
+
+\begin{DoxyReturn}{Returns}
+Current month. 
+\end{DoxyReturn}
+\index{Common@{Common}!Get\+Current\+Year@{Get\+Current\+Year}}
+\index{Get\+Current\+Year@{Get\+Current\+Year}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Year()}{GetCurrentYear()}}]{\setlength{\rightskip}{0pt plus 5cm}int Common\+::\+Get\+Current\+Year (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a376a1d79a10be75c3acc3cc69c151ec9}{}\label{namespaceCommon_a376a1d79a10be75c3acc3cc69c151ec9}
+
+
+Get current year. 
+
+\begin{DoxyReturn}{Returns}
+Current year. 
+\end{DoxyReturn}
+\index{Common@{Common}!Hash\+String\+Vector\+To\+String@{Hash\+String\+Vector\+To\+String}}
+\index{Hash\+String\+Vector\+To\+String@{Hash\+String\+Vector\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Hash\+String\+Vector\+To\+String(std\+::vector$<$ Hash\+String $>$ \&a\+Value)}{HashStringVectorToString(std::vector< HashString > &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Hash\+String\+Vector\+To\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Hash\+String} $>$ \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a869bf03747ab50ba14b50147fb4d406e}{}\label{namespaceCommon_a869bf03747ab50ba14b50147fb4d406e}
+
+
+Converts \hyperlink{classHashString}{Hash\+String} Vector to String (comma separated) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Int\+To\+String@{Int\+To\+String}}
+\index{Int\+To\+String@{Int\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Int\+To\+String(int const a\+Value)}{IntToString(int const aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Int\+To\+String (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a4f4719858903c264a76f1f6835dc223b}{}\label{namespaceCommon_a4f4719858903c264a76f1f6835dc223b}
+
+
+Converts Int to String. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Int\+Vector\+To\+String@{Int\+Vector\+To\+String}}
+\index{Int\+Vector\+To\+String@{Int\+Vector\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Int\+Vector\+To\+String(std\+::vector$<$ int $>$ \&a\+Value)}{IntVectorToString(std::vector< int > &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Int\+Vector\+To\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ int $>$ \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a4ef73200227be129d5b2349ab9d35b8f}{}\label{namespaceCommon_a4ef73200227be129d5b2349ab9d35b8f}
+
+
+Converts Int Vector to String (comma separated) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Parse\+String@{Parse\+String}}
+\index{Parse\+String@{Parse\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Parse\+String(std\+::istream $\ast$infile, std\+::string const \&a\+String)}{ParseString(std::istream *infile, std::string const &aString)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Parse\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::istream $\ast$}]{infile, }
+\item[{std\+::string const \&}]{a\+String}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a1858a26280ca754d36e9ff57f85ca5a7}{}\label{namespaceCommon_a1858a26280ca754d36e9ff57f85ca5a7}
+
+
+If find \char`\"{}\+Literal(\char`\"{} keep forming string until find \char`\"{})\char`\"{}, or Constant( \char`\"{}etc.\char`\"{} ) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Literal} & Literal to parse through. \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Random\+Float\+In\+Range@{Random\+Float\+In\+Range}}
+\index{Random\+Float\+In\+Range@{Random\+Float\+In\+Range}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Random\+Float\+In\+Range(float const a\+X, float const b\+X)}{RandomFloatInRange(float const aX, float const bX)}}]{\setlength{\rightskip}{0pt plus 5cm}float Common\+::\+Random\+Float\+In\+Range (
+\begin{DoxyParamCaption}
+\item[{float const}]{aX, }
+\item[{float const}]{bX}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a6bb24acf07012e8a715ec182891a852d}{}\label{namespaceCommon_a6bb24acf07012e8a715ec182891a852d}
+
+
+Get random Float within a range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aX} & Minimum (inclusive) \\
+\hline
+{\em bX} & Maximum (exclusive) \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Random\+Int\+In\+Range@{Random\+Int\+In\+Range}}
+\index{Random\+Int\+In\+Range@{Random\+Int\+In\+Range}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Random\+Int\+In\+Range(int const a\+X, int const b\+X)}{RandomIntInRange(int const aX, int const bX)}}]{\setlength{\rightskip}{0pt plus 5cm}int Common\+::\+Random\+Int\+In\+Range (
+\begin{DoxyParamCaption}
+\item[{int const}]{aX, }
+\item[{int const}]{bX}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_acbc024bbc4c442c690c150c3c846d22a}{}\label{namespaceCommon_acbc024bbc4c442c690c150c3c846d22a}
+
+
+Get random Int within a range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aX} & Minimum (inclusive) \\
+\hline
+{\em bX} & Maximum (exclusive) \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Relative\+Path@{Relative\+Path}}
+\index{Relative\+Path@{Relative\+Path}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Relative\+Path(std\+::string const \&a\+Sub\+Folder, std\+::string const \&a\+File\+Name)}{RelativePath(std::string const &aSubFolder, std::string const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string const Common\+::\+Relative\+Path (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Sub\+Folder, }
+\item[{std\+::string const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a5e31a3c13642f991a5b3e7b17c97e0c8}{}\label{namespaceCommon_a5e31a3c13642f991a5b3e7b17c97e0c8}
+
+
+Gets relative path for asset files, set by system properties. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Sub\+Folder} & Sub folder to search inside of asset directory. \\
+\hline
+{\em a\+File\+Name} & File to find (extension included) \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Retrieve\+Name\+From\+File\+Name@{Retrieve\+Name\+From\+File\+Name}}
+\index{Retrieve\+Name\+From\+File\+Name@{Retrieve\+Name\+From\+File\+Name}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Retrieve\+Name\+From\+File\+Name(\+Hash\+String const \&a\+File\+Name)}{RetrieveNameFromFileName(HashString const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Common\+::\+Retrieve\+Name\+From\+File\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a51874188abdc26c800f2da6840e4a5eb}{}\label{namespaceCommon_a51874188abdc26c800f2da6840e4a5eb}
+
+
+Get bottom level filename (last sequence after last /) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+File\+Name} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+Hash\+Function@{String\+Hash\+Function}}
+\index{String\+Hash\+Function@{String\+Hash\+Function}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+Hash\+Function(std\+::string const \&a\+String)}{StringHashFunction(std::string const &aString)}}]{\setlength{\rightskip}{0pt plus 5cm}int Common\+::\+String\+Hash\+Function (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+String}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{}\label{namespaceCommon_a994c43a8ea7b03968186a635687a6521}
+
+
+String hash function, good enough default. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+String} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+Bool@{String\+To\+Bool}}
+\index{String\+To\+Bool@{String\+To\+Bool}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+Bool(std\+::string const \&a\+Value)}{StringToBool(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Common\+::\+String\+To\+Bool (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a112a898515a1a04458234ef28ba8525b}{}\label{namespaceCommon_a112a898515a1a04458234ef28ba8525b}
+
+
+Converts String to Boolean, hard set to look for \char`\"{}true\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+Bool\+Vector@{String\+To\+Bool\+Vector}}
+\index{String\+To\+Bool\+Vector@{String\+To\+Bool\+Vector}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+Bool\+Vector(std\+::string const \&a\+Value)}{StringToBoolVector(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ bool $>$ Common\+::\+String\+To\+Bool\+Vector (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_ac079fde773cfeac7b049a58cda7b5d94}{}\label{namespaceCommon_ac079fde773cfeac7b049a58cda7b5d94}
+
+
+Converts String to Bool Vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+Float@{String\+To\+Float}}
+\index{String\+To\+Float@{String\+To\+Float}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+Float(std\+::string const \&a\+Value)}{StringToFloat(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}float Common\+::\+String\+To\+Float (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_aeac816fd13590f4ad6640aff60414ec7}{}\label{namespaceCommon_aeac816fd13590f4ad6640aff60414ec7}
+
+
+Converts String to Float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+Float\+Vector@{String\+To\+Float\+Vector}}
+\index{String\+To\+Float\+Vector@{String\+To\+Float\+Vector}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+Float\+Vector(std\+::string const \&a\+Value)}{StringToFloatVector(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ float $>$ Common\+::\+String\+To\+Float\+Vector (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a084ca9932c59120f59c770fffa18ac60}{}\label{namespaceCommon_a084ca9932c59120f59c770fffa18ac60}
+
+
+Converts String to Float Vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+Hash\+String\+Vector@{String\+To\+Hash\+String\+Vector}}
+\index{String\+To\+Hash\+String\+Vector@{String\+To\+Hash\+String\+Vector}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+Hash\+String\+Vector(std\+::string const \&a\+Value)}{StringToHashStringVector(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Hash\+String} $>$ Common\+::\+String\+To\+Hash\+String\+Vector (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a75c4ca78dc57b61f2716fa790b60aedd}{}\label{namespaceCommon_a75c4ca78dc57b61f2716fa790b60aedd}
+
+
+Converts String to \hyperlink{classHashString}{Hash\+String} Vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+Int@{String\+To\+Int}}
+\index{String\+To\+Int@{String\+To\+Int}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+Int(std\+::string const \&a\+Value)}{StringToInt(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}int Common\+::\+String\+To\+Int (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a489a6fbbf79abd5e4e7a691630d55d8c}{}\label{namespaceCommon_a489a6fbbf79abd5e4e7a691630d55d8c}
+
+
+Converts String to Int. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+Int\+Vector@{String\+To\+Int\+Vector}}
+\index{String\+To\+Int\+Vector@{String\+To\+Int\+Vector}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+Int\+Vector(std\+::string const \&a\+Value)}{StringToIntVector(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ Common\+::\+String\+To\+Int\+Vector (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a2911fcaab26e270ccb09d14d88356972}{}\label{namespaceCommon_a2911fcaab26e270ccb09d14d88356972}
+
+
+Converts String to Int Vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+To\+String\+Vector@{String\+To\+String\+Vector}}
+\index{String\+To\+String\+Vector@{String\+To\+String\+Vector}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+To\+String\+Vector(std\+::string const \&a\+Value)}{StringToStringVector(std::string const &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::string $>$ Common\+::\+String\+To\+String\+Vector (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_aa857ec2f8590997d38a962106e00a665}{}\label{namespaceCommon_aa857ec2f8590997d38a962106e00a665}
+
+
+Converts String to String Vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!String\+Vector\+To\+String@{String\+Vector\+To\+String}}
+\index{String\+Vector\+To\+String@{String\+Vector\+To\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{String\+Vector\+To\+String(std\+::vector$<$ std\+::string $>$ \&a\+Value)}{StringVectorToString(std::vector< std::string > &aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+String\+Vector\+To\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::string $>$ \&}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_a3c3ce096acc73170b49d3a86e0e07a86}{}\label{namespaceCommon_a3c3ce096acc73170b49d3a86e0e07a86}
+
+
+Converts String Vector to String (comma separated) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & \\
+\hline
+\end{DoxyParams}
+\index{Common@{Common}!Trim\+String@{Trim\+String}}
+\index{Trim\+String@{Trim\+String}!Common@{Common}}
+\subsubsection[{\texorpdfstring{Trim\+String(std\+::string const \&a\+String)}{TrimString(std::string const &aString)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Common\+::\+Trim\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+String}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceCommon_aead0f844190b0b20cfb5e2dd50d7d622}{}\label{namespaceCommon_aead0f844190b0b20cfb5e2dd50d7d622}
+
+
+Trim whitespace from a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+String} & String to trim. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Trimmed string. 
+\end{DoxyReturn}

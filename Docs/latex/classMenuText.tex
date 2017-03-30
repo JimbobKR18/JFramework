@@ -1,0 +1,192 @@
+\hypertarget{classMenuText}{}\section{Menu\+Text Class Reference}
+\label{classMenuText}\index{Menu\+Text@{Menu\+Text}}
+
+
+{\ttfamily \#include $<$Menu\+Text.\+h$>$}
+
+
+
+Inheritance diagram for Menu\+Text\+:
+% FIG 0
+
+
+Collaboration diagram for Menu\+Text\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenuText_af5eaf7e9c7995cb396068a3cb959b312}{Menu\+Text} (\hyperlink{classMenu}{Menu} $\ast$a\+Owner, \hyperlink{classHashString}{Hash\+String} const \&a\+Settings\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Text, bool const a\+Replaceable)
+\item 
+virtual \hyperlink{classMenuText_a9579d3b71d3ceb48dd1b775e87e94650}{$\sim$\+Menu\+Text} ()
+\item 
+virtual void \hyperlink{classMenuText_a945413780140cb8e4a87062df94790c7}{Draw} ()
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuText_a701fec41c17d3f3fb03a4a0dad97322c}{Update} ()
+\begin{DoxyCompactList}\small\item\em Updates image size and texture corrdinates. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuText_aa4534efb2d3a10cd1e198a46f44e5889}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuText_af4c888676ab8157c074818b6a72e0d79}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuText_a525952bf85ab278fa87e61a1d99ebe46}{Parse\+Additional\+Data} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Gathers additional data from deserialized file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classMenuText_ad6915b206bf3f3763f65856176073a1d}{m\+Text}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classMenuText_ad4f721fcb729053f20891811ce56242c}{m\+Font}
+\item 
+int \hyperlink{classMenuText_ad0dbcb6a2dcae145e0ada8ec5be5794a}{m\+Size}
+\item 
+int \hyperlink{classMenuText_a011e48b009e1a8c5ae43d287ddfb6c5e}{m\+Max\+Width}
+\item 
+\hyperlink{structVector4}{Vector4} \hyperlink{classMenuText_ae8ff29e9a39b2a4da11842f4a95179ca}{m\+Foreground\+Color}
+\item 
+\hyperlink{structVector4}{Vector4} \hyperlink{classMenuText_a74d2ef49aa7c2e62807fd30d02d396a2}{m\+Background\+Color}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classMenuText_ab91095e7135b4e9e85998a135ab9790a}{m\+Original\+Size}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Menu\+Text@{Menu\+Text}!Menu\+Text@{Menu\+Text}}
+\index{Menu\+Text@{Menu\+Text}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{Menu\+Text(\+Menu $\ast$a\+Owner, Hash\+String const \&a\+Settings\+Filename, Hash\+String const \&a\+Text, bool const a\+Replaceable)}{MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText, bool const aReplaceable)}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Text\+::\+Menu\+Text (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu} $\ast$}]{a\+Owner, }
+\item[{{\bf Hash\+String} const \&}]{a\+Settings\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Text, }
+\item[{bool const}]{a\+Replaceable}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuText_af5eaf7e9c7995cb396068a3cb959b312}{}\label{classMenuText_af5eaf7e9c7995cb396068a3cb959b312}
+\index{Menu\+Text@{Menu\+Text}!````~Menu\+Text@{$\sim$\+Menu\+Text}}
+\index{````~Menu\+Text@{$\sim$\+Menu\+Text}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{$\sim$\+Menu\+Text()}{~MenuText()}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Text\+::$\sim$\+Menu\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuText_a9579d3b71d3ceb48dd1b775e87e94650}{}\label{classMenuText_a9579d3b71d3ceb48dd1b775e87e94650}
+
+
+\subsection{Member Function Documentation}
+\index{Menu\+Text@{Menu\+Text}!Draw@{Draw}}
+\index{Draw@{Draw}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{Draw()}{Draw()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Text\+::\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuText_a945413780140cb8e4a87062df94790c7}{}\label{classMenuText_a945413780140cb8e4a87062df94790c7}
+
+
+Does nothing. 
+
+
+
+Implements \hyperlink{classMenuElement_a64a401777d1f8f9bb668d4b134bb13f7}{Menu\+Element}.
+
+\index{Menu\+Text@{Menu\+Text}!Parse\+Additional\+Data@{Parse\+Additional\+Data}}
+\index{Parse\+Additional\+Data@{Parse\+Additional\+Data}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{Parse\+Additional\+Data(\+Parser \&a\+Parser)}{ParseAdditionalData(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Text\+::\+Parse\+Additional\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuText_a525952bf85ab278fa87e61a1d99ebe46}{}\label{classMenuText_a525952bf85ab278fa87e61a1d99ebe46}
+
+
+Gathers additional data from deserialized file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classMenuElement_abd61bb2ffffd877dd39a0079512a8dbc}{Menu\+Element}.
+
+\index{Menu\+Text@{Menu\+Text}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Text\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuText_af4c888676ab8157c074818b6a72e0d79}{}\label{classMenuText_af4c888676ab8157c074818b6a72e0d79}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classMenuElement_a9efc98212994476526bc0b314e18b950}{Menu\+Element}.
+
+\index{Menu\+Text@{Menu\+Text}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Text\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuText_aa4534efb2d3a10cd1e198a46f44e5889}{}\label{classMenuText_aa4534efb2d3a10cd1e198a46f44e5889}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classMenuElement_a1b341775acf0ec3d3a064dccd78af2cd}{Menu\+Element}.
+
+\index{Menu\+Text@{Menu\+Text}!Update@{Update}}
+\index{Update@{Update}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Text\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuText_a701fec41c17d3f3fb03a4a0dad97322c}{}\label{classMenuText_a701fec41c17d3f3fb03a4a0dad97322c}
+
+
+Updates image size and texture corrdinates. 
+
+
+
+Implements \hyperlink{classMenuElement_a025aeb7bf41cf9ca7069dba7dbf07f47}{Menu\+Element}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Menu\+Text@{Menu\+Text}!m\+Background\+Color@{m\+Background\+Color}}
+\index{m\+Background\+Color@{m\+Background\+Color}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{m\+Background\+Color}{mBackgroundColor}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector4} Menu\+Text\+::m\+Background\+Color\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuText_a74d2ef49aa7c2e62807fd30d02d396a2}{}\label{classMenuText_a74d2ef49aa7c2e62807fd30d02d396a2}
+\index{Menu\+Text@{Menu\+Text}!m\+Font@{m\+Font}}
+\index{m\+Font@{m\+Font}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{m\+Font}{mFont}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Menu\+Text\+::m\+Font\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuText_ad4f721fcb729053f20891811ce56242c}{}\label{classMenuText_ad4f721fcb729053f20891811ce56242c}
+\index{Menu\+Text@{Menu\+Text}!m\+Foreground\+Color@{m\+Foreground\+Color}}
+\index{m\+Foreground\+Color@{m\+Foreground\+Color}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{m\+Foreground\+Color}{mForegroundColor}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector4} Menu\+Text\+::m\+Foreground\+Color\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuText_ae8ff29e9a39b2a4da11842f4a95179ca}{}\label{classMenuText_ae8ff29e9a39b2a4da11842f4a95179ca}
+\index{Menu\+Text@{Menu\+Text}!m\+Max\+Width@{m\+Max\+Width}}
+\index{m\+Max\+Width@{m\+Max\+Width}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{m\+Max\+Width}{mMaxWidth}}]{\setlength{\rightskip}{0pt plus 5cm}int Menu\+Text\+::m\+Max\+Width\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuText_a011e48b009e1a8c5ae43d287ddfb6c5e}{}\label{classMenuText_a011e48b009e1a8c5ae43d287ddfb6c5e}
+\index{Menu\+Text@{Menu\+Text}!m\+Original\+Size@{m\+Original\+Size}}
+\index{m\+Original\+Size@{m\+Original\+Size}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{m\+Original\+Size}{mOriginalSize}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Menu\+Text\+::m\+Original\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuText_ab91095e7135b4e9e85998a135ab9790a}{}\label{classMenuText_ab91095e7135b4e9e85998a135ab9790a}
+\index{Menu\+Text@{Menu\+Text}!m\+Size@{m\+Size}}
+\index{m\+Size@{m\+Size}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{m\+Size}{mSize}}]{\setlength{\rightskip}{0pt plus 5cm}int Menu\+Text\+::m\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuText_ad0dbcb6a2dcae145e0ada8ec5be5794a}{}\label{classMenuText_ad0dbcb6a2dcae145e0ada8ec5be5794a}
+\index{Menu\+Text@{Menu\+Text}!m\+Text@{m\+Text}}
+\index{m\+Text@{m\+Text}!Menu\+Text@{Menu\+Text}}
+\subsubsection[{\texorpdfstring{m\+Text}{mText}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Menu\+Text\+::m\+Text\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMenuText_ad6915b206bf3f3763f65856176073a1d}{}\label{classMenuText_ad6915b206bf3f3763f65856176073a1d}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{MenuText_8h}{Menu\+Text.\+h}\item 
+Logic/\hyperlink{MenuText_8cpp}{Menu\+Text.\+cpp}\end{DoxyCompactItemize}

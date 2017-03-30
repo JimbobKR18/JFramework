@@ -1,0 +1,225 @@
+\hypertarget{classSound}{}\section{Sound Class Reference}
+\label{classSound}\index{Sound@{Sound}}
+
+
+{\ttfamily \#include $<$Sound.\+h$>$}
+
+
+
+Inheritance diagram for Sound\+:
+% FIG 0
+
+
+Collaboration diagram for Sound\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSound_a539c205cdf06fe2c621fd77c37bcfac9}{Sound} ()
+\item 
+\hyperlink{classSound_ab38dc8250e7f9560478813bb6ae13937}{Sound} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+virtual \hyperlink{classSound_a0907389078bf740be2a5763366ad3376}{$\sim$\+Sound} ()
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classSound_a5c8fe18c589ea28d68db6be0426b011b}{Get\+Name} () const 
+\item 
+virtual void \hyperlink{classSound_a3e5b7d409008b46c519cca2a3f0cec0f}{Play} (int const a\+Num\+Loops)=0
+\item 
+virtual void \hyperlink{classSound_adc03627f456e7d3a547a2049d9a4b0e2}{Play} (int const a\+Num\+Loops, int const a\+Time)=0
+\item 
+virtual void \hyperlink{classSound_a8d7717ebd87d045f4c52f042c0efb327}{Fade\+In} (int const a\+Num\+Loops, int const a\+Time)=0
+\item 
+virtual void \hyperlink{classSound_af9a7823b629a12c2b7eae07a0710185b}{Fade\+In} (int const a\+Num\+Loops, int const a\+Fade\+Time, int const a\+Play\+Time)=0
+\item 
+virtual void \hyperlink{classSound_a04a6510dfdf83a6bcc7e9b954e3ef3f1}{Set\+Volume} (float const a\+Volume)=0
+\item 
+virtual void \hyperlink{classSound_ac5329f4a5db0fd806b97cace31ed09fc}{Resume} ()=0
+\item 
+virtual void \hyperlink{classSound_ad895dba3c3772b435d3d37f8460bc426}{Pause} ()=0
+\item 
+virtual void \hyperlink{classSound_a4a3ed0b6117f79c60584ef93d5b7b94b}{Stop} ()=0
+\item 
+virtual void \hyperlink{classSound_a03bc004f545746a7bdd294d15305d44a}{Fade\+Out} (int const a\+Time)=0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classSound_aa7aefb9f9b15c57787d19b8fa7972ab6}{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+L\+O\+O\+PS} = -\/1
+\item 
+static int const \hyperlink{classSound_a60e713429c43fbaeb5cef8953ca2ee69}{O\+N\+E\+\_\+\+L\+O\+OP} = 0
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classSound_a8da7970829ae8e108dfb0e730e71a0ab}{m\+Name}
+\item 
+unsigned char $\ast$ \hyperlink{classSound_a14bb7e5b58b94200f127ba3d36177faa}{m\+Data}
+\item 
+unsigned int \hyperlink{classSound_ae82c1f3012ef1ea0cdbb95b2a1c315c8}{m\+Pos}
+\item 
+unsigned int \hyperlink{classSound_a9fd54151c48085f675c399f60c58b88c}{m\+Length}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sound@{Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Sound()}{Sound()}}]{\setlength{\rightskip}{0pt plus 5cm}Sound\+::\+Sound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSound_a539c205cdf06fe2c621fd77c37bcfac9}{}\label{classSound_a539c205cdf06fe2c621fd77c37bcfac9}
+\index{Sound@{Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Sound(\+Hash\+String const \&a\+Filename)}{Sound(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}Sound\+::\+Sound (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{classSound_ab38dc8250e7f9560478813bb6ae13937}{}\label{classSound_ab38dc8250e7f9560478813bb6ae13937}
+\index{Sound@{Sound}!````~Sound@{$\sim$\+Sound}}
+\index{````~Sound@{$\sim$\+Sound}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{$\sim$\+Sound()}{~Sound()}}]{\setlength{\rightskip}{0pt plus 5cm}Sound\+::$\sim$\+Sound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSound_a0907389078bf740be2a5763366ad3376}{}\label{classSound_a0907389078bf740be2a5763366ad3376}
+
+
+\subsection{Member Function Documentation}
+\index{Sound@{Sound}!Fade\+In@{Fade\+In}}
+\index{Fade\+In@{Fade\+In}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Fade\+In(int const a\+Num\+Loops, int const a\+Time)=0}{FadeIn(int const aNumLoops, int const aTime)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Fade\+In (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops, }
+\item[{int const}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_a8d7717ebd87d045f4c52f042c0efb327}{}\label{classSound_a8d7717ebd87d045f4c52f042c0efb327}
+
+
+Implemented in \hyperlink{classPCSound_a2cdcbe269162e7ff0acaa471f07ceec6}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Fade\+In@{Fade\+In}}
+\index{Fade\+In@{Fade\+In}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Fade\+In(int const a\+Num\+Loops, int const a\+Fade\+Time, int const a\+Play\+Time)=0}{FadeIn(int const aNumLoops, int const aFadeTime, int const aPlayTime)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Fade\+In (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops, }
+\item[{int const}]{a\+Fade\+Time, }
+\item[{int const}]{a\+Play\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_af9a7823b629a12c2b7eae07a0710185b}{}\label{classSound_af9a7823b629a12c2b7eae07a0710185b}
+
+
+Implemented in \hyperlink{classPCSound_a65cc536a88f6b49ffd4ab6c2c85bd38b}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Fade\+Out@{Fade\+Out}}
+\index{Fade\+Out@{Fade\+Out}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Fade\+Out(int const a\+Time)=0}{FadeOut(int const aTime)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Fade\+Out (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_a03bc004f545746a7bdd294d15305d44a}{}\label{classSound_a03bc004f545746a7bdd294d15305d44a}
+
+
+Implemented in \hyperlink{classPCSound_ab8014c5286bf495ee6d57bee683a633a}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Sound\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classSound_a5c8fe18c589ea28d68db6be0426b011b}{}\label{classSound_a5c8fe18c589ea28d68db6be0426b011b}
+\index{Sound@{Sound}!Pause@{Pause}}
+\index{Pause@{Pause}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Pause()=0}{Pause()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Pause (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_ad895dba3c3772b435d3d37f8460bc426}{}\label{classSound_ad895dba3c3772b435d3d37f8460bc426}
+
+
+Implemented in \hyperlink{classPCSound_a8014ffd1aa852e744cb2388b889ae9de}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Play@{Play}}
+\index{Play@{Play}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Play(int const a\+Num\+Loops)=0}{Play(int const aNumLoops)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Play (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_a3e5b7d409008b46c519cca2a3f0cec0f}{}\label{classSound_a3e5b7d409008b46c519cca2a3f0cec0f}
+
+
+Implemented in \hyperlink{classPCSound_a0c41046ec72c3b0e45c25afee8f2587b}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Play@{Play}}
+\index{Play@{Play}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Play(int const a\+Num\+Loops, int const a\+Time)=0}{Play(int const aNumLoops, int const aTime)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Play (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Loops, }
+\item[{int const}]{a\+Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_adc03627f456e7d3a547a2049d9a4b0e2}{}\label{classSound_adc03627f456e7d3a547a2049d9a4b0e2}
+
+
+Implemented in \hyperlink{classPCSound_a3c5e2bb0f92fe66f0f16c3faacb3e5fe}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Resume@{Resume}}
+\index{Resume@{Resume}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Resume()=0}{Resume()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Resume (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_ac5329f4a5db0fd806b97cace31ed09fc}{}\label{classSound_ac5329f4a5db0fd806b97cace31ed09fc}
+
+
+Implemented in \hyperlink{classPCSound_ae7955f15d57a21e7631569ba8216332e}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Set\+Volume@{Set\+Volume}}
+\index{Set\+Volume@{Set\+Volume}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Set\+Volume(float const a\+Volume)=0}{SetVolume(float const aVolume)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Set\+Volume (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Volume}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_a04a6510dfdf83a6bcc7e9b954e3ef3f1}{}\label{classSound_a04a6510dfdf83a6bcc7e9b954e3ef3f1}
+
+
+Implemented in \hyperlink{classPCSound_adc92d40c216b0b71b61c8c0166b99208}{P\+C\+Sound}.
+
+\index{Sound@{Sound}!Stop@{Stop}}
+\index{Stop@{Stop}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{Stop()=0}{Stop()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Sound\+::\+Stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSound_a4a3ed0b6117f79c60584ef93d5b7b94b}{}\label{classSound_a4a3ed0b6117f79c60584ef93d5b7b94b}
+
+
+Implemented in \hyperlink{classPCSound_a9e7787c4a29f570250d79f4d41fea651}{P\+C\+Sound}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Sound@{Sound}!I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+L\+O\+O\+PS@{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+L\+O\+O\+PS}}
+\index{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+L\+O\+O\+PS@{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+L\+O\+O\+PS}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+L\+O\+O\+PS}{INFINITE_LOOPS}}]{\setlength{\rightskip}{0pt plus 5cm}int const Sound\+::\+I\+N\+F\+I\+N\+I\+T\+E\+\_\+\+L\+O\+O\+PS = -\/1\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSound_aa7aefb9f9b15c57787d19b8fa7972ab6}{}\label{classSound_aa7aefb9f9b15c57787d19b8fa7972ab6}
+\index{Sound@{Sound}!m\+Data@{m\+Data}}
+\index{m\+Data@{m\+Data}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{m\+Data}{mData}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char$\ast$ Sound\+::m\+Data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSound_a14bb7e5b58b94200f127ba3d36177faa}{}\label{classSound_a14bb7e5b58b94200f127ba3d36177faa}
+\index{Sound@{Sound}!m\+Length@{m\+Length}}
+\index{m\+Length@{m\+Length}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{m\+Length}{mLength}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sound\+::m\+Length\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSound_a9fd54151c48085f675c399f60c58b88c}{}\label{classSound_a9fd54151c48085f675c399f60c58b88c}
+\index{Sound@{Sound}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Sound\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSound_a8da7970829ae8e108dfb0e730e71a0ab}{}\label{classSound_a8da7970829ae8e108dfb0e730e71a0ab}
+\index{Sound@{Sound}!m\+Pos@{m\+Pos}}
+\index{m\+Pos@{m\+Pos}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{m\+Pos}{mPos}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Sound\+::m\+Pos\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSound_ae82c1f3012ef1ea0cdbb95b2a1c315c8}{}\label{classSound_ae82c1f3012ef1ea0cdbb95b2a1c315c8}
+\index{Sound@{Sound}!O\+N\+E\+\_\+\+L\+O\+OP@{O\+N\+E\+\_\+\+L\+O\+OP}}
+\index{O\+N\+E\+\_\+\+L\+O\+OP@{O\+N\+E\+\_\+\+L\+O\+OP}!Sound@{Sound}}
+\subsubsection[{\texorpdfstring{O\+N\+E\+\_\+\+L\+O\+OP}{ONE_LOOP}}]{\setlength{\rightskip}{0pt plus 5cm}int const Sound\+::\+O\+N\+E\+\_\+\+L\+O\+OP = 0\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSound_a60e713429c43fbaeb5cef8953ca2ee69}{}\label{classSound_a60e713429c43fbaeb5cef8953ca2ee69}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Sound/\hyperlink{Sound_8h}{Sound.\+h}\item 
+Sound/\hyperlink{Sound_8cpp}{Sound.\+cpp}\end{DoxyCompactItemize}

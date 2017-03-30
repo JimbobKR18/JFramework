@@ -1,0 +1,35 @@
+digraph "SLB::Instance::NoCopyNoDestroy::Implementation&lt; T &gt;"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="SLB::Instance::NoCopyNoDestroy\l::Implementation\< T \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="SLB::InstanceBase",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1InstanceBase.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _class" ];
+  Node3 [label="SLB::ref_ptr\< SLB::\lClassInfo \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ref__ptr.html"];
+  Node4 -> Node3 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _ptr" ];
+  Node4 [label="SLB::ClassInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ClassInfo.html"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="SLB::Namespace",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Namespace.html"];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="SLB::Table",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Table.html"];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="SLB::Object",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Object.html"];
+  Node8 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" __TIW" ];
+  Node8 [label="SLB::TypeInfoWrapper",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1TypeInfoWrapper.html"];
+  Node9 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _manager" ];
+  Node9 [label="SLB::Manager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1Manager.html"];
+  Node10 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _global" ];
+  Node10 [label="SLB::ref_ptr\< SLB::\lNamespace \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ref__ptr.html"];
+  Node5 -> Node10 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _ptr" ];
+  Node9 -> Node9 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _default" ];
+  Node11 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _meta__index\n_meta__newindex\n_meta__eq\n_constructor" ];
+  Node11 [label="SLB::ref_ptr\< SLB::\lFuncCall \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1ref__ptr.html"];
+  Node12 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _ptr" ];
+  Node12 [label="SLB::FuncCall",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSLB_1_1FuncCall.html"];
+  Node7 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 -> Node12 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _Treturn" ];
+  Node13 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" _instanceFactory" ];
+  Node13 [label="SLB::InstanceFactory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structSLB_1_1InstanceFactory.html"];
+}

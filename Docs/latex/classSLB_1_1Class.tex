@@ -1,0 +1,458 @@
+\hypertarget{classSLB_1_1Class}{}\section{S\+LB\+:\+:Class$<$ T, W $>$ Class Template Reference}
+\label{classSLB_1_1Class}\index{S\+L\+B\+::\+Class$<$ T, W $>$@{S\+L\+B\+::\+Class$<$ T, W $>$}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Class$<$ T, W $>$\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Class$<$ T, W $>$\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classSLB_1_1Class}{Class}$<$ T, W $>$ \hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1Class_aaa5ceaef19f102e4e54b20ee451c4d5d}{Class} (const char $\ast$name, \hyperlink{classSLB_1_1Manager}{Manager} $\ast$m=\hyperlink{classSLB_1_1Manager_a174e4612520c3412d10a68e659651677}{Manager\+::default\+Manager}())
+\item 
+\hyperlink{classSLB_1_1Class_a237e3615bade19b4afcb1455d2b3f899}{Class} (const \hyperlink{classSLB_1_1Class}{Class} \&)
+\item 
+\hyperlink{classSLB_1_1Class}{Class} \& \hyperlink{classSLB_1_1Class_a064a5f8835ffc99ea6f95bcaaf5298f3}{operator=} (const \hyperlink{classSLB_1_1Class}{Class} \&)
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a485eab29b6906b018a5c312005aa6970}{raw\+Set} (const char $\ast$name, \hyperlink{classSLB_1_1Object}{Object} $\ast$obj)
+\item 
+{\footnotesize template$<$typename T\+Value $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a3d4e9924785cbc368715f984fa9df7ef}{set} (const char $\ast$name, const T\+Value \&obj)
+\item 
+{\footnotesize template$<$typename T\+Value $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_afb73ed90fad9a334832cbc8c27414cc1}{set\+\_\+ref} (const char $\ast$name, T\+Value \&obj)
+\item 
+{\footnotesize template$<$typename T\+Value $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a6a85c08a1da74997de21cc77716748c1}{set\+\_\+auto\+Delete} (const char $\ast$name, T\+Value $\ast$obj)
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a62c675232ff3b4166307826ae0ac8aa0}{set} (const char $\ast$name, lua\+\_\+\+C\+Function func)
+\item 
+{\footnotesize template$<$typename T\+Enum $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a2ab1fd051a15ef64b0182d4841cf3378}{enum\+Value} (const char $\ast$name, T\+Enum obj)
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_aa30352fcb850b69611a2188779f82d76}{constructor} ()
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_af06d53e4579ac5409a08d86412d5908b}{hybrid} ()
+\item 
+{\footnotesize template$<$typename T\+Base $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_afca6cbe756ccfa38277e0d37d620a5bd}{dynamic\+\_\+inherits} ()
+\item 
+{\footnotesize template$<$typename T\+Base $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a8abd51b84c21e5d9aea2967298e36de5}{static\+\_\+inherits} ()
+\item 
+{\footnotesize template$<$typename T\+Base $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_aa8fafcb3685ec668951a94725b6560ca}{inherits} ()
+\item 
+{\footnotesize template$<$typename T\+\_\+to $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_aa483780abd2c3ef34a14ad247d991690}{convertible\+To} (T\+\_\+to $\ast$($\ast$func)(T $\ast$)=\&(\hyperlink{structSLB_1_1ClassConversor}{Class\+Conversor}$<$ T, T\+\_\+to $>$\+::default\+Convert))
+\item 
+{\footnotesize template$<$typename M $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a03e0b7e1b13f3e559381296260260ced}{property} (const char $\ast$name, M T\+::$\ast$member)
+\item 
+{\footnotesize template$<$class C , class R , class P $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_ab443c6dcd3320e5cb866fb4364e94622}{class\+\_\+\+\_\+index} (R(C\+::$\ast$func)(P))
+\item 
+{\footnotesize template$<$class C , class R , class P $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_aa8a552a153eeb97250cd1d2a3433df65}{class\+\_\+\+\_\+index} (R(C\+::$\ast$func)(P) const )
+\item 
+{\footnotesize template$<$class R , class P $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a69d6492c044c23f6392c0cc5b1029726}{class\+\_\+\+\_\+index} (R($\ast$func)(P))
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a7832865a7909a0c46d75939955ad2062}{class\+\_\+\+\_\+index} (lua\+\_\+\+C\+Function func)
+\item 
+{\footnotesize template$<$class C , class R , class K , class V $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a0911a2857ca63b7bcbcdbddbf0510365}{class\+\_\+\+\_\+newindex} (R(C\+::$\ast$func)(K, V))
+\item 
+{\footnotesize template$<$class C , class R , class K , class V $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a9cbfa8c392023f44cdca7f9e0ed81eec}{class\+\_\+\+\_\+newindex} (R(C\+::$\ast$func)(K, V) const )
+\item 
+{\footnotesize template$<$class R , class K , class V $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a30339ccdeecf6c6e65f57b73e623ff37}{class\+\_\+\+\_\+newindex} (R($\ast$func)(K, V))
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a2bcdc34f048f9fcf6a19bf6f78f320c7}{class\+\_\+\+\_\+newindex} (lua\+\_\+\+C\+Function func)
+\item 
+{\footnotesize template$<$class C , class R , class P $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a498c6e1f00bba874e44e150e4669c0fe}{object\+\_\+\+\_\+index} (R(C\+::$\ast$func)(P))
+\item 
+{\footnotesize template$<$class C , class R , class P $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a04906be0fd1c49d6836960869e53d2c1}{object\+\_\+\+\_\+index} (R(C\+::$\ast$func)(P) const )
+\item 
+{\footnotesize template$<$class R , class P $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a05a6368e8a55613f4185b38deece7f31}{object\+\_\+\+\_\+index} (R($\ast$func)(P))
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a1957f69399a6653b188d006744fa605d}{object\+\_\+\+\_\+index} (lua\+\_\+\+C\+Function func)
+\item 
+{\footnotesize template$<$class C , class R , class K , class V $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_afdb8a4975205acde5afe0f6b73328837}{object\+\_\+\+\_\+newindex} (R(C\+::$\ast$func)(K, V))
+\item 
+{\footnotesize template$<$class C , class R , class K , class V $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a16f337a1414c6d64e22840ba404fe828}{object\+\_\+\+\_\+newindex} (R(C\+::$\ast$func)(K, V) const )
+\item 
+{\footnotesize template$<$class R , class K , class V $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a8bc6a000bd1cb5ff2f31dd2cc9947fb7}{object\+\_\+\+\_\+newindex} (R($\ast$func)(K, V))
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a2915fbd909590100450f847df7d11122}{object\+\_\+\+\_\+newindex} (lua\+\_\+\+C\+Function func)
+\item 
+{\footnotesize template$<$class T1 , class T2 $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a492dc3ce63a4a01470c65be5b402019c}{\+\_\+\+\_\+eq} (bool($\ast$func)(T1, T2))
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a5bd847347ab3834d80d7eee85120767f}{\+\_\+\+\_\+eq} (lua\+\_\+\+C\+Function func)
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a8a58ed8fb718d00323b14b4ce5dee3d4}{\+\_\+\+\_\+add} ()
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a44ac413ee19c8266018ed7bf7909b68b}{\+\_\+\+\_\+mult} ()
+\item 
+{\footnotesize template$<$class IT $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_ab05f52bee9d746009e35de1e86103c0d}{custom\+Iterator} (const char $\ast$name, typename I\+T\+::\+Get\+Iterator\+Member first, typename I\+T\+::\+Get\+Iterator\+Member end)
+\item 
+{\footnotesize template$<$typename C , typename T\+\_\+\+Iterator $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a565d027072f2df91a30b965a43d27ed0}{iterator} (const char $\ast$name, T\+\_\+\+Iterator(C\+::$\ast$first)(), T\+\_\+\+Iterator(C\+::$\ast$end)())
+\item 
+{\footnotesize template$<$typename C , typename T\+\_\+\+Iterator $>$ }\\\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_aa9677ffc2710abb570c70af8929fa027}{const\+\_\+iterator} (const char $\ast$name, T\+\_\+\+Iterator(C\+::$\ast$first)() const, T\+\_\+\+Iterator(C\+::$\ast$end)() const )
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_a60cedfead3b3fa8af93ee2f607692d9d}{comment} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&)
+\item 
+\hyperlink{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{\+\_\+\+\_\+\+Self} \& \hyperlink{classSLB_1_1Class_afbbf575f9569e266000c5cd734cba7f0}{param} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&)
+\item 
+{\footnotesize template$<$typename T\+Enum $>$ }\\\hyperlink{classSLB_1_1Class}{Class}$<$ T, W $>$ \& \hyperlink{classSLB_1_1Class_ae158d149b620419df5eb0974e86c10d8}{enum\+Value} (const char $\ast$name, T\+Enum obj)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1Class_a5ae85558a02bdbc796fc8ebf7a9cca2b}{\+\_\+class}
+\item 
+\hyperlink{classSLB_1_1Object}{Object} $\ast$ \hyperlink{classSLB_1_1Class_adbba74b40f432641cffacd452b1b13de}{\+\_\+last\+Obj}
+\item 
+size\+\_\+t \hyperlink{classSLB_1_1Class_a4c8587ec0639601fd49f15d65eba2a63}{\+\_\+param}
+\item 
+\hyperlink{classSLB_1_1Manager}{Manager} $\ast$ \hyperlink{classSLB_1_1Class_a96cb9cefa58fc5b76221d227b74151e2}{\+\_\+mgr}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+\+\_\+\+Self@{\+\_\+\+\_\+\+Self}}
+\index{\+\_\+\+\_\+\+Self@{\+\_\+\+\_\+\+Self}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+\+Self}{__Self}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ typedef {\bf Class}$<$T,W$>$ {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::{\bf \+\_\+\+\_\+\+Self}}\hypertarget{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}{}\label{classSLB_1_1Class_aef6fc94f5e50c96268e669ab6946ad8b}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!Class@{Class}}
+\index{Class@{Class}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{Class(const char $\ast$name, Manager $\ast$m=\+Manager\+::default\+Manager())}{Class(const char *name, Manager *m=Manager::defaultManager())}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W $>$ {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::{\bf Class} (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{{\bf Manager} $\ast$}]{m = {\ttfamily {\bf Manager\+::default\+Manager}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_aaa5ceaef19f102e4e54b20ee451c4d5d}{}\label{classSLB_1_1Class_aaa5ceaef19f102e4e54b20ee451c4d5d}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!Class@{Class}}
+\index{Class@{Class}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{Class(const Class \&)}{Class(const Class &)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W $>$ {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::{\bf Class} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Class}$<$ T, W $>$ \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a237e3615bade19b4afcb1455d2b3f899}{}\label{classSLB_1_1Class_a237e3615bade19b4afcb1455d2b3f899}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+\+\_\+add@{\+\_\+\+\_\+add}}
+\index{\+\_\+\+\_\+add@{\+\_\+\+\_\+add}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+add()}{__add()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+\+\_\+add (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a8a58ed8fb718d00323b14b4ce5dee3d4}{}\label{classSLB_1_1Class_a8a58ed8fb718d00323b14b4ce5dee3d4}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+\+\_\+eq@{\+\_\+\+\_\+eq}}
+\index{\+\_\+\+\_\+eq@{\+\_\+\+\_\+eq}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+eq(bool($\ast$func)(\+T1, T2))}{__eq(bool(*func)(T1, T2))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class T1 , class T2 $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+\+\_\+eq (
+\begin{DoxyParamCaption}
+\item[{bool($\ast$)(T1, T2)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a492dc3ce63a4a01470c65be5b402019c}{}\label{classSLB_1_1Class_a492dc3ce63a4a01470c65be5b402019c}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+\+\_\+eq@{\+\_\+\+\_\+eq}}
+\index{\+\_\+\+\_\+eq@{\+\_\+\+\_\+eq}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+eq(lua\+\_\+\+C\+Function func)}{__eq(lua_CFunction func)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+\+\_\+eq (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+C\+Function}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a5bd847347ab3834d80d7eee85120767f}{}\label{classSLB_1_1Class_a5bd847347ab3834d80d7eee85120767f}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+\+\_\+mult@{\+\_\+\+\_\+mult}}
+\index{\+\_\+\+\_\+mult@{\+\_\+\+\_\+mult}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+mult()}{__mult()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+\+\_\+mult (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a44ac413ee19c8266018ed7bf7909b68b}{}\label{classSLB_1_1Class_a44ac413ee19c8266018ed7bf7909b68b}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}}
+\index{class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+index(\+R(\+C\+::$\ast$func)(\+P))}{class__index(R(C::*func)(P))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class P $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(P)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_ab443c6dcd3320e5cb866fb4364e94622}{}\label{classSLB_1_1Class_ab443c6dcd3320e5cb866fb4364e94622}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}}
+\index{class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+index(\+R(\+C\+::$\ast$func)(\+P) const )}{class__index(R(C::*func)(P) const )}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class P $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(P) const}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_aa8a552a153eeb97250cd1d2a3433df65}{}\label{classSLB_1_1Class_aa8a552a153eeb97250cd1d2a3433df65}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}}
+\index{class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+index(\+R($\ast$func)(\+P))}{class__index(R(*func)(P))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class R , class P $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{R($\ast$)(P)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a69d6492c044c23f6392c0cc5b1029726}{}\label{classSLB_1_1Class_a69d6492c044c23f6392c0cc5b1029726}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}}
+\index{class\+\_\+\+\_\+index@{class\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+index(lua\+\_\+\+C\+Function func)}{class__index(lua_CFunction func)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+C\+Function}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a7832865a7909a0c46d75939955ad2062}{}\label{classSLB_1_1Class_a7832865a7909a0c46d75939955ad2062}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}}
+\index{class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+newindex(\+R(\+C\+::$\ast$func)(\+K, V))}{class__newindex(R(C::*func)(K, V))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class K , class V $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(K, V)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a0911a2857ca63b7bcbcdbddbf0510365}{}\label{classSLB_1_1Class_a0911a2857ca63b7bcbcdbddbf0510365}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}}
+\index{class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+newindex(\+R(\+C\+::$\ast$func)(\+K, V) const )}{class__newindex(R(C::*func)(K, V) const )}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class K , class V $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(K, V) const}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a9cbfa8c392023f44cdca7f9e0ed81eec}{}\label{classSLB_1_1Class_a9cbfa8c392023f44cdca7f9e0ed81eec}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}}
+\index{class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+newindex(\+R($\ast$func)(\+K, V))}{class__newindex(R(*func)(K, V))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class R , class K , class V $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{R($\ast$)(K, V)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a30339ccdeecf6c6e65f57b73e623ff37}{}\label{classSLB_1_1Class_a30339ccdeecf6c6e65f57b73e623ff37}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}}
+\index{class\+\_\+\+\_\+newindex@{class\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{class\+\_\+\+\_\+newindex(lua\+\_\+\+C\+Function func)}{class__newindex(lua_CFunction func)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::class\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+C\+Function}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a2bcdc34f048f9fcf6a19bf6f78f320c7}{}\label{classSLB_1_1Class_a2bcdc34f048f9fcf6a19bf6f78f320c7}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!comment@{comment}}
+\index{comment@{comment}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{comment(const String \&)}{comment(const String &)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W $>$ {\bf Class}$<$ T, W $>$ \& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::comment (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a60cedfead3b3fa8af93ee2f607692d9d}{}\label{classSLB_1_1Class_a60cedfead3b3fa8af93ee2f607692d9d}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!const\+\_\+iterator@{const\+\_\+iterator}}
+\index{const\+\_\+iterator@{const\+\_\+iterator}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{const\+\_\+iterator(const char $\ast$name, T\+\_\+\+Iterator(\+C\+::$\ast$first)() const, T\+\_\+\+Iterator(\+C\+::$\ast$end)() const )}{const_iterator(const char *name, T_Iterator(C::*first)() const, T_Iterator(C::*end)() const )}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename C , typename T\+\_\+\+Iterator $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::const\+\_\+iterator (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{T\+\_\+\+Iterator(C\+::$\ast$)() const}]{first, }
+\item[{T\+\_\+\+Iterator(C\+::$\ast$)() const}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_aa9677ffc2710abb570c70af8929fa027}{}\label{classSLB_1_1Class_aa9677ffc2710abb570c70af8929fa027}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!constructor@{constructor}}
+\index{constructor@{constructor}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{constructor()}{constructor()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W $>$ {\bf Class}$<$ T, W $>$ \& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::constructor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_aa30352fcb850b69611a2188779f82d76}{}\label{classSLB_1_1Class_aa30352fcb850b69611a2188779f82d76}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!convertible\+To@{convertible\+To}}
+\index{convertible\+To@{convertible\+To}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{convertible\+To(\+T\+\_\+to $\ast$($\ast$func)(\+T $\ast$)=\&(\+Class\+Conversor$<$ T, T\+\_\+to $>$\+::default\+Convert))}{convertibleTo(T_to *(*func)(T *)=&(ClassConversor< T, T_to >::defaultConvert))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+\_\+to $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::convertible\+To (
+\begin{DoxyParamCaption}
+\item[{T\+\_\+to $\ast$($\ast$)(T $\ast$)}]{func = {\ttfamily \&({\bf Class\+Conversor}$<$T,T\+\_\+to$>$\+:\+:defaultConvert)}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_aa483780abd2c3ef34a14ad247d991690}{}\label{classSLB_1_1Class_aa483780abd2c3ef34a14ad247d991690}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!custom\+Iterator@{custom\+Iterator}}
+\index{custom\+Iterator@{custom\+Iterator}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{custom\+Iterator(const char $\ast$name, typename I\+T\+::\+Get\+Iterator\+Member first, typename I\+T\+::\+Get\+Iterator\+Member end)}{customIterator(const char *name, typename IT::GetIteratorMember first, typename IT::GetIteratorMember end)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class IT $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::custom\+Iterator (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{typename I\+T\+::\+Get\+Iterator\+Member}]{first, }
+\item[{typename I\+T\+::\+Get\+Iterator\+Member}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_ab05f52bee9d746009e35de1e86103c0d}{}\label{classSLB_1_1Class_ab05f52bee9d746009e35de1e86103c0d}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!dynamic\+\_\+inherits@{dynamic\+\_\+inherits}}
+\index{dynamic\+\_\+inherits@{dynamic\+\_\+inherits}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{dynamic\+\_\+inherits()}{dynamic_inherits()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Base $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::dynamic\+\_\+inherits (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_afca6cbe756ccfa38277e0d37d620a5bd}{}\label{classSLB_1_1Class_afca6cbe756ccfa38277e0d37d620a5bd}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!enum\+Value@{enum\+Value}}
+\index{enum\+Value@{enum\+Value}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{enum\+Value(const char $\ast$name, T\+Enum obj)}{enumValue(const char *name, TEnum obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Enum $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::enum\+Value (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{T\+Enum}]{obj}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Class_a2ab1fd051a15ef64b0182d4841cf3378}{}\label{classSLB_1_1Class_a2ab1fd051a15ef64b0182d4841cf3378}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!enum\+Value@{enum\+Value}}
+\index{enum\+Value@{enum\+Value}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{enum\+Value(const char $\ast$name, T\+Enum obj)}{enumValue(const char *name, TEnum obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Enum $>$ {\bf Class}$<$T,W$>$\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::enum\+Value (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{T\+Enum}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_ae158d149b620419df5eb0974e86c10d8}{}\label{classSLB_1_1Class_ae158d149b620419df5eb0974e86c10d8}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!hybrid@{hybrid}}
+\index{hybrid@{hybrid}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{hybrid()}{hybrid()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::hybrid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_af06d53e4579ac5409a08d86412d5908b}{}\label{classSLB_1_1Class_af06d53e4579ac5409a08d86412d5908b}
+Declares a class as hybrid, this will imply that the \+\_\+\+\_\+index and \+\_\+\+\_\+newindex methods will be overriden, see \hyperlink{classSLB_1_1HybridBase_ad41d04e125bfbd1bbc0f685f45ff7671}{Hybrid\+::register\+As\+Hybrid} \index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!inherits@{inherits}}
+\index{inherits@{inherits}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{inherits()}{inherits()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Base $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::inherits (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_aa8fafcb3685ec668951a94725b6560ca}{}\label{classSLB_1_1Class_aa8fafcb3685ec668951a94725b6560ca}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!iterator@{iterator}}
+\index{iterator@{iterator}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{iterator(const char $\ast$name, T\+\_\+\+Iterator(\+C\+::$\ast$first)(), T\+\_\+\+Iterator(\+C\+::$\ast$end)())}{iterator(const char *name, T_Iterator(C::*first)(), T_Iterator(C::*end)())}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename C , typename T\+\_\+\+Iterator $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::iterator (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{T\+\_\+\+Iterator(C\+::$\ast$)()}]{first, }
+\item[{T\+\_\+\+Iterator(C\+::$\ast$)()}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a565d027072f2df91a30b965a43d27ed0}{}\label{classSLB_1_1Class_a565d027072f2df91a30b965a43d27ed0}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}}
+\index{object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+index(\+R(\+C\+::$\ast$func)(\+P))}{object__index(R(C::*func)(P))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class P $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(P)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a498c6e1f00bba874e44e150e4669c0fe}{}\label{classSLB_1_1Class_a498c6e1f00bba874e44e150e4669c0fe}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}}
+\index{object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+index(\+R(\+C\+::$\ast$func)(\+P) const )}{object__index(R(C::*func)(P) const )}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class P $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(P) const}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a04906be0fd1c49d6836960869e53d2c1}{}\label{classSLB_1_1Class_a04906be0fd1c49d6836960869e53d2c1}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}}
+\index{object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+index(\+R($\ast$func)(\+P))}{object__index(R(*func)(P))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class R , class P $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{R($\ast$)(P)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a05a6368e8a55613f4185b38deece7f31}{}\label{classSLB_1_1Class_a05a6368e8a55613f4185b38deece7f31}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}}
+\index{object\+\_\+\+\_\+index@{object\+\_\+\+\_\+index}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+index(lua\+\_\+\+C\+Function func)}{object__index(lua_CFunction func)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+index (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+C\+Function}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a1957f69399a6653b188d006744fa605d}{}\label{classSLB_1_1Class_a1957f69399a6653b188d006744fa605d}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}}
+\index{object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+newindex(\+R(\+C\+::$\ast$func)(\+K, V))}{object__newindex(R(C::*func)(K, V))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class K , class V $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(K, V)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_afdb8a4975205acde5afe0f6b73328837}{}\label{classSLB_1_1Class_afdb8a4975205acde5afe0f6b73328837}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}}
+\index{object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+newindex(\+R(\+C\+::$\ast$func)(\+K, V) const )}{object__newindex(R(C::*func)(K, V) const )}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class C , class R , class K , class V $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{R(C\+::$\ast$)(K, V) const}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a16f337a1414c6d64e22840ba404fe828}{}\label{classSLB_1_1Class_a16f337a1414c6d64e22840ba404fe828}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}}
+\index{object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+newindex(\+R($\ast$func)(\+K, V))}{object__newindex(R(*func)(K, V))}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$class R , class K , class V $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{R($\ast$)(K, V)}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a8bc6a000bd1cb5ff2f31dd2cc9947fb7}{}\label{classSLB_1_1Class_a8bc6a000bd1cb5ff2f31dd2cc9947fb7}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}}
+\index{object\+\_\+\+\_\+newindex@{object\+\_\+\+\_\+newindex}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{object\+\_\+\+\_\+newindex(lua\+\_\+\+C\+Function func)}{object__newindex(lua_CFunction func)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::object\+\_\+\+\_\+newindex (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+C\+Function}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a2915fbd909590100450f847df7d11122}{}\label{classSLB_1_1Class_a2915fbd909590100450f847df7d11122}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!operator=@{operator=}}
+\index{operator=@{operator=}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{operator=(const Class \&)}{operator=(const Class &)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W $>$ {\bf Class}$<$ T, W $>$ \& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Class}$<$ T, W $>$ \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a064a5f8835ffc99ea6f95bcaaf5298f3}{}\label{classSLB_1_1Class_a064a5f8835ffc99ea6f95bcaaf5298f3}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!param@{param}}
+\index{param@{param}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{param(const String \&)}{param(const String &)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W $>$ {\bf Class}$<$ T, W $>$ \& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::param (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_afbbf575f9569e266000c5cd734cba7f0}{}\label{classSLB_1_1Class_afbbf575f9569e266000c5cd734cba7f0}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!property@{property}}
+\index{property@{property}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{property(const char $\ast$name, M T\+::$\ast$member)}{property(const char *name, M T::*member)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename M $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::property (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{M T\+::$\ast$}]{member}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a03e0b7e1b13f3e559381296260260ced}{}\label{classSLB_1_1Class_a03e0b7e1b13f3e559381296260260ced}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!raw\+Set@{raw\+Set}}
+\index{raw\+Set@{raw\+Set}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{raw\+Set(const char $\ast$name, Object $\ast$obj)}{rawSet(const char *name, Object *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W $>$ {\bf Class}$<$ T, W $>$ \& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::raw\+Set (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{{\bf Object} $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a485eab29b6906b018a5c312005aa6970}{}\label{classSLB_1_1Class_a485eab29b6906b018a5c312005aa6970}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!set@{set}}
+\index{set@{set}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{set(const char $\ast$name, const T\+Value \&obj)}{set(const char *name, const TValue &obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Value $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::set (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{const T\+Value \&}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a3d4e9924785cbc368715f984fa9df7ef}{}\label{classSLB_1_1Class_a3d4e9924785cbc368715f984fa9df7ef}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!set@{set}}
+\index{set@{set}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{set(const char $\ast$name, lua\+\_\+\+C\+Function func)}{set(const char *name, lua_CFunction func)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::set (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{lua\+\_\+\+C\+Function}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a62c675232ff3b4166307826ae0ac8aa0}{}\label{classSLB_1_1Class_a62c675232ff3b4166307826ae0ac8aa0}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!set\+\_\+auto\+Delete@{set\+\_\+auto\+Delete}}
+\index{set\+\_\+auto\+Delete@{set\+\_\+auto\+Delete}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{set\+\_\+auto\+Delete(const char $\ast$name, T\+Value $\ast$obj)}{set_autoDelete(const char *name, TValue *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Value $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::set\+\_\+auto\+Delete (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{T\+Value $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a6a85c08a1da74997de21cc77716748c1}{}\label{classSLB_1_1Class_a6a85c08a1da74997de21cc77716748c1}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!set\+\_\+ref@{set\+\_\+ref}}
+\index{set\+\_\+ref@{set\+\_\+ref}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{set\+\_\+ref(const char $\ast$name, T\+Value \&obj)}{set_ref(const char *name, TValue &obj)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Value $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::set\+\_\+ref (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name, }
+\item[{T\+Value \&}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_afb73ed90fad9a334832cbc8c27414cc1}{}\label{classSLB_1_1Class_afb73ed90fad9a334832cbc8c27414cc1}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!static\+\_\+inherits@{static\+\_\+inherits}}
+\index{static\+\_\+inherits@{static\+\_\+inherits}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{static\+\_\+inherits()}{static_inherits()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ template$<$typename T\+Base $>$ {\bf \+\_\+\+\_\+\+Self}\& {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::static\+\_\+inherits (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Class_a8abd51b84c21e5d9aea2967298e36de5}{}\label{classSLB_1_1Class_a8abd51b84c21e5d9aea2967298e36de5}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+class@{\+\_\+class}}
+\index{\+\_\+class@{\+\_\+class}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+class}{_class}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf Class\+Info}$\ast$ {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+class\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Class_a5ae85558a02bdbc796fc8ebf7a9cca2b}{}\label{classSLB_1_1Class_a5ae85558a02bdbc796fc8ebf7a9cca2b}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+last\+Obj@{\+\_\+last\+Obj}}
+\index{\+\_\+last\+Obj@{\+\_\+last\+Obj}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+last\+Obj}{_lastObj}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf Object}$\ast$ {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+last\+Obj\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Class_adbba74b40f432641cffacd452b1b13de}{}\label{classSLB_1_1Class_adbba74b40f432641cffacd452b1b13de}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+mgr@{\+\_\+mgr}}
+\index{\+\_\+mgr@{\+\_\+mgr}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+mgr}{_mgr}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ {\bf Manager}$\ast$ {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+mgr\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Class_a96cb9cefa58fc5b76221d227b74151e2}{}\label{classSLB_1_1Class_a96cb9cefa58fc5b76221d227b74151e2}
+\index{S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}!\+\_\+param@{\+\_\+param}}
+\index{\+\_\+param@{\+\_\+param}!S\+L\+B\+::\+Class@{S\+L\+B\+::\+Class}}
+\subsubsection[{\texorpdfstring{\+\_\+param}{_param}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename W  = Instance\+::\+Default$>$ size\+\_\+t {\bf S\+L\+B\+::\+Class}$<$ T, W $>$\+::\+\_\+param\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Class_a4c8587ec0639601fd49f15d65eba2a63}{}\label{classSLB_1_1Class_a4c8587ec0639601fd49f15d65eba2a63}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\end{DoxyCompactItemize}

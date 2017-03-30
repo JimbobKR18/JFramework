@@ -1,0 +1,29 @@
+\hypertarget{TextureCoordinates_8cpp}{}\section{Graphics/\+Texture\+Coordinates.cpp File Reference}
+\label{TextureCoordinates_8cpp}\index{Graphics/\+Texture\+Coordinates.\+cpp@{Graphics/\+Texture\+Coordinates.\+cpp}}
+{\ttfamily \#include \char`\"{}Texture\+Coordinates.\+h\char`\"{}}\\*
+Include dependency graph for Texture\+Coordinates.\+cpp\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{TextureCoordinates_8cpp_ab10c71bf53ffd932bc7159479d97069f}{S\+E\+T\+F\+R\+A\+M\+ES}()
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Texture\+Coordinates.\+cpp@{Texture\+Coordinates.\+cpp}!S\+E\+T\+F\+R\+A\+M\+ES@{S\+E\+T\+F\+R\+A\+M\+ES}}
+\index{S\+E\+T\+F\+R\+A\+M\+ES@{S\+E\+T\+F\+R\+A\+M\+ES}!Texture\+Coordinates.\+cpp@{Texture\+Coordinates.\+cpp}}
+\subsubsection[{\texorpdfstring{S\+E\+T\+F\+R\+A\+M\+ES}{SETFRAMES}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+E\+T\+F\+R\+A\+M\+ES(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{TextureCoordinates_8cpp_ab10c71bf53ffd932bc7159479d97069f}{}\label{TextureCoordinates_8cpp_ab10c71bf53ffd932bc7159479d97069f}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordtype}{float} xBias = (0.5f / (float)mXSize); \(\backslash\)
+                    float yBias = (0.5f / (float)mYSize); \(\backslash\)
+                    mXValues[0] = mCurFrame * mXGain[0] + xBias; \(\backslash\)
+                    mXValues[1] = (mCurFrame + 1) * mXGain[1] - xBias; \(\backslash\)
+                    mYValues[0] = mCurAnimation * mYGain[0] + yBias; \(\backslash\)
+                    mYValues[1] = (mCurAnimation + 1) * mYGain[1] - yBias
+\end{DoxyCode}

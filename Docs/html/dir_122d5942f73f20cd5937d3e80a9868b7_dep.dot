@@ -1,0 +1,13 @@
+digraph "Chemistry" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_122d5942f73f20cd5937d3e80a9868b7 [shape=box, label="Chemistry", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_122d5942f73f20cd5937d3e80a9868b7.html"];
+  dir_08f45fe6822aeb4ce2bc268e3b1361be [shape=box label="Components" URL="dir_08f45fe6822aeb4ce2bc268e3b1361be.html"];
+  dir_15a9ab385fae7ab291477cfa29e43ded [shape=box label="Managers" URL="dir_15a9ab385fae7ab291477cfa29e43ded.html"];
+  dir_08f45fe6822aeb4ce2bc268e3b1361be->dir_15a9ab385fae7ab291477cfa29e43ded [headlabel="10", labeldistance=1.5 headhref="dir_000001_000010.html"];
+  dir_15a9ab385fae7ab291477cfa29e43ded->dir_08f45fe6822aeb4ce2bc268e3b1361be [headlabel="11", labeldistance=1.5 headhref="dir_000010_000001.html"];
+  dir_15a9ab385fae7ab291477cfa29e43ded->dir_122d5942f73f20cd5937d3e80a9868b7 [headlabel="1", labeldistance=1.5 headhref="dir_000010_000000.html"];
+  dir_122d5942f73f20cd5937d3e80a9868b7->dir_08f45fe6822aeb4ce2bc268e3b1361be [headlabel="2", labeldistance=1.5 headhref="dir_000000_000001.html"];
+  dir_122d5942f73f20cd5937d3e80a9868b7->dir_15a9ab385fae7ab291477cfa29e43ded [headlabel="2", labeldistance=1.5 headhref="dir_000000_000010.html"];
+}

@@ -1,0 +1,221 @@
+\hypertarget{classController}{}\section{Controller Class Reference}
+\label{classController}\index{Controller@{Controller}}
+
+
+{\ttfamily \#include $<$Controller.\+h$>$}
+
+
+
+Inheritance diagram for Controller\+:
+% FIG 0
+
+
+Collaboration diagram for Controller\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classController_a95c56822d667e94b031451729ce069a9}{Controller} ()
+\item 
+virtual \hyperlink{classController_a0ab87934c4f7a266cfdb86e0f36bc1b5}{$\sim$\+Controller} ()
+\item 
+\hyperlink{classControllerManager}{Controller\+Manager} $\ast$ \hyperlink{classController_a3bcbbf8e0a754251d2626a00e2aaca13}{Get\+Manager} () const 
+\begin{DoxyCompactList}\small\item\em Get manager. \end{DoxyCompactList}\item 
+void \hyperlink{classController_a042a6ec3615ab50d406daf4dd76275af}{Set\+Paused} (bool const a\+Paused)
+\begin{DoxyCompactList}\small\item\em Set pause state (if true, controller cannot move, is the idea) \end{DoxyCompactList}\item 
+bool \hyperlink{classController_a281db88cdf920b89178c6d952a563263}{Get\+Paused} () const 
+\begin{DoxyCompactList}\small\item\em Get pause state. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classController_acd2ebbeb5634f165c6c59db178d2e609}{Do\+Action} (\hyperlink{classHashString}{Hash\+String} const \&a\+Action, \hyperlink{structVector3}{Vector3} const \&a\+Location)=0
+\item 
+virtual void \hyperlink{classController_aa6a687ad1d55632cc531ca1dc0c66efa}{Update} ()=0
+\item 
+virtual void \hyperlink{classController_a4f1e140db32aa50927565e22b1abe8cd}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)=0
+\item 
+virtual void \hyperlink{classController_a9ac0b86e4b71abdafb61f542165d3e87}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)=0
+\item 
+virtual void \hyperlink{classController_ac5ce7c4254d4b565f9630f710e7f8de5}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)=0
+\item 
+virtual void \hyperlink{classController_acf414fa790e19413ac4f83c5dc0f1744}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)=0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classController_a60cc51045e8f09c77c1ab6a565b06ca7}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classController_a923bf71b7815ec077e7201e847e9a318}{Controller} (\hyperlink{classControllerManager}{Controller\+Manager} $\ast$a\+Manager, int const \&a\+U\+ID)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classControllerManager}{Controller\+Manager} $\ast$ \hyperlink{classController_a5c056702c6a5955ba8a042b3ac073976}{m\+Manager}
+\item 
+bool \hyperlink{classController_ad10c68360c0064b3c6231b4a7e86845f}{m\+Paused}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classController_a21bfc63815a3008d5e4f095a3494bf18}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Controller\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Controller@{Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Controller(\+Controller\+Manager $\ast$a\+Manager, int const \&a\+U\+I\+D)}{Controller(ControllerManager *aManager, int const &aUID)}}]{\setlength{\rightskip}{0pt plus 5cm}Controller\+::\+Controller (
+\begin{DoxyParamCaption}
+\item[{{\bf Controller\+Manager} $\ast$}]{a\+Manager, }
+\item[{int const \&}]{a\+U\+ID}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classController_a923bf71b7815ec077e7201e847e9a318}{}\label{classController_a923bf71b7815ec077e7201e847e9a318}
+\index{Controller@{Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Controller()}{Controller()}}]{\setlength{\rightskip}{0pt plus 5cm}Controller\+::\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classController_a95c56822d667e94b031451729ce069a9}{}\label{classController_a95c56822d667e94b031451729ce069a9}
+\index{Controller@{Controller}!````~Controller@{$\sim$\+Controller}}
+\index{````~Controller@{$\sim$\+Controller}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{$\sim$\+Controller()}{~Controller()}}]{\setlength{\rightskip}{0pt plus 5cm}Controller\+::$\sim$\+Controller (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classController_a0ab87934c4f7a266cfdb86e0f36bc1b5}{}\label{classController_a0ab87934c4f7a266cfdb86e0f36bc1b5}
+
+
+\subsection{Member Function Documentation}
+\index{Controller@{Controller}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)=0}{Deserialize(Parser &aParser)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Controller\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classController_acf414fa790e19413ac4f83c5dc0f1744}{}\label{classController_acf414fa790e19413ac4f83c5dc0f1744}
+
+
+Implements \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Component}.
+
+\index{Controller@{Controller}!Do\+Action@{Do\+Action}}
+\index{Do\+Action@{Do\+Action}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Do\+Action(\+Hash\+String const \&a\+Action, Vector3 const \&a\+Location)=0}{DoAction(HashString const &aAction, Vector3 const &aLocation)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Controller\+::\+Do\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Action, }
+\item[{{\bf Vector3} const \&}]{a\+Location}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classController_acd2ebbeb5634f165c6c59db178d2e609}{}\label{classController_acd2ebbeb5634f165c6c59db178d2e609}
+\index{Controller@{Controller}!Get\+Manager@{Get\+Manager}}
+\index{Get\+Manager@{Get\+Manager}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Get\+Manager() const }{GetManager() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Controller\+Manager} $\ast$ Controller\+::\+Get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classController_a3bcbbf8e0a754251d2626a00e2aaca13}{}\label{classController_a3bcbbf8e0a754251d2626a00e2aaca13}
+
+
+Get manager. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classManager}{Manager}. 
+\end{DoxyReturn}
+\index{Controller@{Controller}!Get\+Paused@{Get\+Paused}}
+\index{Get\+Paused@{Get\+Paused}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Get\+Paused() const }{GetPaused() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Controller\+::\+Get\+Paused (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classController_a281db88cdf920b89178c6d952a563263}{}\label{classController_a281db88cdf920b89178c6d952a563263}
+
+
+Get pause state. 
+
+\begin{DoxyReturn}{Returns}
+Pause state 
+\end{DoxyReturn}
+\index{Controller@{Controller}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int Controller\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classController_a60cc51045e8f09c77c1ab6a565b06ca7}{}\label{classController_a60cc51045e8f09c77c1ab6a565b06ca7}
+\index{Controller@{Controller}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)=0}{ReceiveMessage(Message const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Controller\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classController_a9ac0b86e4b71abdafb61f542165d3e87}{}\label{classController_a9ac0b86e4b71abdafb61f542165d3e87}
+
+
+Implements \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Component}.
+
+\index{Controller@{Controller}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)=0}{SendMessage(Message const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Controller\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classController_a4f1e140db32aa50927565e22b1abe8cd}{}\label{classController_a4f1e140db32aa50927565e22b1abe8cd}
+
+
+Implements \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Component}.
+
+\index{Controller@{Controller}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)=0}{Serialize(Parser &aParser)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Controller\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classController_ac5ce7c4254d4b565f9630f710e7f8de5}{}\label{classController_ac5ce7c4254d4b565f9630f710e7f8de5}
+
+
+Implements \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Component}.
+
+\index{Controller@{Controller}!Set\+Paused@{Set\+Paused}}
+\index{Set\+Paused@{Set\+Paused}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Set\+Paused(bool const a\+Paused)}{SetPaused(bool const aPaused)}}]{\setlength{\rightskip}{0pt plus 5cm}void Controller\+::\+Set\+Paused (
+\begin{DoxyParamCaption}
+\item[{bool const}]{a\+Paused}
+\end{DoxyParamCaption}
+)}\hypertarget{classController_a042a6ec3615ab50d406daf4dd76275af}{}\label{classController_a042a6ec3615ab50d406daf4dd76275af}
+
+
+Set pause state (if true, controller cannot move, is the idea) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Paused} & Pause state \\
+\hline
+\end{DoxyParams}
+\index{Controller@{Controller}!Update@{Update}}
+\index{Update@{Update}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{Update()=0}{Update()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Controller\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classController_aa6a687ad1d55632cc531ca1dc0c66efa}{}\label{classController_aa6a687ad1d55632cc531ca1dc0c66efa}
+
+
+Implements \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Component}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Controller@{Controller}!m\+Manager@{m\+Manager}}
+\index{m\+Manager@{m\+Manager}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{m\+Manager}{mManager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Controller\+Manager}$\ast$ Controller\+::m\+Manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classController_a5c056702c6a5955ba8a042b3ac073976}{}\label{classController_a5c056702c6a5955ba8a042b3ac073976}
+\index{Controller@{Controller}!m\+Paused@{m\+Paused}}
+\index{m\+Paused@{m\+Paused}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{m\+Paused}{mPaused}}]{\setlength{\rightskip}{0pt plus 5cm}bool Controller\+::m\+Paused\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classController_ad10c68360c0064b3c6231b4a7e86845f}{}\label{classController_ad10c68360c0064b3c6231b4a7e86845f}
+\index{Controller@{Controller}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Controller@{Controller}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const Controller\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Controller\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classController_a21bfc63815a3008d5e4f095a3494bf18}{}\label{classController_a21bfc63815a3008d5e4f095a3494bf18}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Components/\hyperlink{Controller_8h}{Controller.\+h}\item 
+Components/\hyperlink{Controller_8cpp}{Controller.\+cpp}\end{DoxyCompactItemize}

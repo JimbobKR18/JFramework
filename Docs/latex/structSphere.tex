@@ -1,0 +1,115 @@
+\hypertarget{structSphere}{}\section{Sphere Struct Reference}
+\label{structSphere}\index{Sphere@{Sphere}}
+
+
+{\ttfamily \#include $<$Shape.\+h$>$}
+
+
+
+Inheritance diagram for Sphere\+:
+% FIG 0
+
+
+Collaboration diagram for Sphere\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structSphere_a890a63ff583cb88e7ec4e840b4ef5eb9}{Sphere} ()
+\item 
+\hyperlink{structSphere_ae7934d10defda06aa1813c67c3eeb575}{Sphere} (\hyperlink{structVector3}{Vector3} const \&a\+Position, float const a\+Radius)
+\item 
+virtual \hyperlink{structSphere_a569c071e50a3e11f678630ee1a17737e}{$\sim$\+Sphere} ()
+\item 
+bool \hyperlink{structSphere_a66bc9b3327babf9b9363ef0d7ed02138}{Get\+Collision} (\hyperlink{structVector3}{Vector3} const \&a\+Position)
+\begin{DoxyCompactList}\small\item\em See if point collides with box. 3D space. \end{DoxyCompactList}\item 
+virtual float \hyperlink{structSphere_a310ace56647ecd875fb8801a26aa7f25}{Get\+Size} (int index)
+\begin{DoxyCompactList}\small\item\em Get size of sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{structSphere_ae6f42f0da6679a2f0b4a22681ccccf38}{radius}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sphere@{Sphere}!Sphere@{Sphere}}
+\index{Sphere@{Sphere}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{Sphere()}{Sphere()}}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+::\+Sphere (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structSphere_a890a63ff583cb88e7ec4e840b4ef5eb9}{}\label{structSphere_a890a63ff583cb88e7ec4e840b4ef5eb9}
+\index{Sphere@{Sphere}!Sphere@{Sphere}}
+\index{Sphere@{Sphere}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{Sphere(\+Vector3 const \&a\+Position, float const a\+Radius)}{Sphere(Vector3 const &aPosition, float const aRadius)}}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+::\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position, }
+\item[{float const}]{a\+Radius}
+\end{DoxyParamCaption}
+)}\hypertarget{structSphere_ae7934d10defda06aa1813c67c3eeb575}{}\label{structSphere_ae7934d10defda06aa1813c67c3eeb575}
+\index{Sphere@{Sphere}!````~Sphere@{$\sim$\+Sphere}}
+\index{````~Sphere@{$\sim$\+Sphere}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{$\sim$\+Sphere()}{~Sphere()}}]{\setlength{\rightskip}{0pt plus 5cm}Sphere\+::$\sim$\+Sphere (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structSphere_a569c071e50a3e11f678630ee1a17737e}{}\label{structSphere_a569c071e50a3e11f678630ee1a17737e}
+
+
+\subsection{Member Function Documentation}
+\index{Sphere@{Sphere}!Get\+Collision@{Get\+Collision}}
+\index{Get\+Collision@{Get\+Collision}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{Get\+Collision(\+Vector3 const \&a\+Position)}{GetCollision(Vector3 const &aPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Sphere\+::\+Get\+Collision (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position}
+\end{DoxyParamCaption}
+)}\hypertarget{structSphere_a66bc9b3327babf9b9363ef0d7ed02138}{}\label{structSphere_a66bc9b3327babf9b9363ef0d7ed02138}
+
+
+See if point collides with box. 3D space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Position} & Point to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if collided. 
+\end{DoxyReturn}
+\index{Sphere@{Sphere}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{Get\+Size(int index)}{GetSize(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}float Sphere\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structSphere_a310ace56647ecd875fb8801a26aa7f25}{}\label{structSphere_a310ace56647ecd875fb8801a26aa7f25}
+
+
+Get size of sphere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Does nothing \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Size of sphere (radius) 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{structShape_a878528c42f14532e5fadc9ace7024f68}{Shape}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Sphere@{Sphere}!radius@{radius}}
+\index{radius@{radius}!Sphere@{Sphere}}
+\subsubsection[{\texorpdfstring{radius}{radius}}]{\setlength{\rightskip}{0pt plus 5cm}float Sphere\+::radius}\hypertarget{structSphere_ae6f42f0da6679a2f0b4a22681ccccf38}{}\label{structSphere_ae6f42f0da6679a2f0b4a22681ccccf38}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{Shape_8h}{Shape.\+h}\item 
+Core/\hyperlink{Shape_8cpp}{Shape.\+cpp}\end{DoxyCompactItemize}

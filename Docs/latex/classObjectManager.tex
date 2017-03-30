@@ -1,0 +1,336 @@
+\hypertarget{classObjectManager}{}\section{Object\+Manager Class Reference}
+\label{classObjectManager}\index{Object\+Manager@{Object\+Manager}}
+
+
+{\ttfamily \#include $<$Object\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Object\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Object\+Manager\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classObjectManager_add2889e2ebd9118e71180a4c88a3f346}{Object\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App)
+\item 
+virtual \hyperlink{classObjectManager_a25b057e6d1e60c9cbeb29d41923d8c2c}{$\sim$\+Object\+Manager} ()
+\item 
+virtual void \hyperlink{classObjectManager_ac6035906749a40ec3a1d685ebed11c89}{Update} ()
+\begin{DoxyCompactList}\small\item\em Basic loop for object management. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classObjectManager_a4d6aa33b172cd0d15575702fe4ef2e5d}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to all objects in vector. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classObjectManager_ab5d8bbac1f3e7e907ca8a8be2928e593}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Prepare message for reading next frame. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classObjectManager_ad1678826504d7847d8712e454f5675e5}{Create\+Object} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Folder=\char`\"{}Game\char`\"{})
+\begin{DoxyCompactList}\small\item\em Create an object and add to objects vector, used for initializing. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classObjectManager_af6c1f7608fba42cdff20582cb83c52e2}{Create\+Object\+No\+Add} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Folder=\char`\"{}Game\char`\"{})
+\begin{DoxyCompactList}\small\item\em Create an object B\+UT DO N\+OT A\+DD to objects vector, used for messages. \end{DoxyCompactList}\item 
+void \hyperlink{classObjectManager_a20aed1603ed0b8c8260f51d3b499433a}{Parse\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Parse object from file, create components. \end{DoxyCompactList}\item 
+void \hyperlink{classObjectManager_a2e6cb8273f3a2c2c1e0df301b80d423d}{Delete\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Obj)
+\begin{DoxyCompactList}\small\item\em Self explanatory, also removes object from object vector. \end{DoxyCompactList}\item 
+void \hyperlink{classObjectManager_a6d995f8d626cbb7e928bd8da0c96d9a8}{Clear\+Objects} ()
+\begin{DoxyCompactList}\small\item\em Clean out all vectors, no delete though, so it leaks. \end{DoxyCompactList}\item 
+void \hyperlink{classObjectManager_a9e37d55b2707d42eb4918db5927dae49}{Add\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Obj, bool a\+Static=false)
+\begin{DoxyCompactList}\small\item\em Add object to objects vector. \end{DoxyCompactList}\item 
+void \hyperlink{classObjectManager_a90d8373d9cc30126405fb6b7ed2b5c92}{Remove\+Object} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Obj)
+\begin{DoxyCompactList}\small\item\em Remove object from objects array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classObjectManager_a7e51aaaa79730b45f8f1da497d4629c0}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classObjectManager_a15f1cddde9fe4984332e5c66e92da81b}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classObjectManager_acc36c6182462f8f30ddf5aa41ecca31c}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this object readable in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classGameObject}{Game\+Object} $\ast$ $>$\+::iterator \hyperlink{classObjectManager_a30573ab19d87b43fdacf023eeca3098f}{Object\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classObjectManager_a9332ecd16f08c4e3d5c406cabcc8a0b5}{Parse\+Dictionary} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object, \hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Helper function to parse a file and make a \hyperlink{classGameObject}{Game\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classGameObject}{Game\+Object} $\ast$ $>$ \hyperlink{classObjectManager_aa40dab99ba0c0844950a2119b7e57069}{m\+Objects}
+\item 
+std\+::vector$<$ \hyperlink{classGameObject}{Game\+Object} $\ast$ $>$ \hyperlink{classObjectManager_aa32d62ceac52a5793f92fbc2ea2a62f2}{m\+Static\+Objects}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classObjectManager_a8422a172c8048e3371db75c10de611a2}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Object\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Object\+Manager@{Object\+Manager}!Object\+IT@{Object\+IT}}
+\index{Object\+IT@{Object\+IT}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Object\+IT}{ObjectIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Game\+Object}$\ast$$>$\+::iterator {\bf Object\+Manager\+::\+Object\+IT}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classObjectManager_a30573ab19d87b43fdacf023eeca3098f}{}\label{classObjectManager_a30573ab19d87b43fdacf023eeca3098f}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Object\+Manager@{Object\+Manager}!Object\+Manager@{Object\+Manager}}
+\index{Object\+Manager@{Object\+Manager}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Object\+Manager(\+Game\+App $\ast$a\+App)}{ObjectManager(GameApp *aApp)}}]{\setlength{\rightskip}{0pt plus 5cm}Object\+Manager\+::\+Object\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_add2889e2ebd9118e71180a4c88a3f346}{}\label{classObjectManager_add2889e2ebd9118e71180a4c88a3f346}
+\index{Object\+Manager@{Object\+Manager}!````~Object\+Manager@{$\sim$\+Object\+Manager}}
+\index{````~Object\+Manager@{$\sim$\+Object\+Manager}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Object\+Manager()}{~ObjectManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Object\+Manager\+::$\sim$\+Object\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classObjectManager_a25b057e6d1e60c9cbeb29d41923d8c2c}{}\label{classObjectManager_a25b057e6d1e60c9cbeb29d41923d8c2c}
+
+
+\subsection{Member Function Documentation}
+\index{Object\+Manager@{Object\+Manager}!Add\+Object@{Add\+Object}}
+\index{Add\+Object@{Add\+Object}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Object(\+Game\+Object $\ast$a\+Obj, bool a\+Static=false)}{AddObject(GameObject *aObj, bool aStatic=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Add\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Obj, }
+\item[{bool}]{a\+Static = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_a9e37d55b2707d42eb4918db5927dae49}{}\label{classObjectManager_a9e37d55b2707d42eb4918db5927dae49}
+
+
+Add object to objects vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Obj} & The object to add \\
+\hline
+{\em a\+Static} & Is this a static environment object, as in, not designed to be updated? \\
+\hline
+\end{DoxyParams}
+\index{Object\+Manager@{Object\+Manager}!Clear\+Objects@{Clear\+Objects}}
+\index{Clear\+Objects@{Clear\+Objects}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Clear\+Objects()}{ClearObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Clear\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_a6d995f8d626cbb7e928bd8da0c96d9a8}{}\label{classObjectManager_a6d995f8d626cbb7e928bd8da0c96d9a8}
+
+
+Clean out all vectors, no delete though, so it leaks. 
+
+\index{Object\+Manager@{Object\+Manager}!Create\+Object@{Create\+Object}}
+\index{Create\+Object@{Create\+Object}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Object(\+Hash\+String const \&a\+Filename, Hash\+String const \&a\+Folder=""Game"")}{CreateObject(HashString const &aFilename, HashString const &aFolder="Game")}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Object\+Manager\+::\+Create\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Folder = {\ttfamily \char`\"{}Game\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_ad1678826504d7847d8712e454f5675e5}{}\label{classObjectManager_ad1678826504d7847d8712e454f5675e5}
+
+
+Create an object and add to objects vector, used for initializing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The newly created object. 
+\end{DoxyReturn}
+\index{Object\+Manager@{Object\+Manager}!Create\+Object\+No\+Add@{Create\+Object\+No\+Add}}
+\index{Create\+Object\+No\+Add@{Create\+Object\+No\+Add}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Object\+No\+Add(\+Hash\+String const \&a\+Filename, Hash\+String const \&a\+Folder=""Game"")}{CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder="Game")}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Object\+Manager\+::\+Create\+Object\+No\+Add (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Folder = {\ttfamily \char`\"{}Game\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_af6c1f7608fba42cdff20582cb83c52e2}{}\label{classObjectManager_af6c1f7608fba42cdff20582cb83c52e2}
+
+
+Create an object B\+UT DO N\+OT A\+DD to objects vector, used for messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The newly created object. 
+\end{DoxyReturn}
+\index{Object\+Manager@{Object\+Manager}!Delete\+Object@{Delete\+Object}}
+\index{Delete\+Object@{Delete\+Object}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Object(\+Game\+Object $\ast$a\+Obj)}{DeleteObject(GameObject *aObj)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Delete\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Obj}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_a2e6cb8273f3a2c2c1e0df301b80d423d}{}\label{classObjectManager_a2e6cb8273f3a2c2c1e0df301b80d423d}
+
+
+Self explanatory, also removes object from object vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Obj} & \\
+\hline
+\end{DoxyParams}
+\index{Object\+Manager@{Object\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Object\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classObjectManager_a7e51aaaa79730b45f8f1da497d4629c0}{}\label{classObjectManager_a7e51aaaa79730b45f8f1da497d4629c0}
+\index{Object\+Manager@{Object\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Object\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classObjectManager_a15f1cddde9fe4984332e5c66e92da81b}{}\label{classObjectManager_a15f1cddde9fe4984332e5c66e92da81b}
+\index{Object\+Manager@{Object\+Manager}!Parse\+Dictionary@{Parse\+Dictionary}}
+\index{Parse\+Dictionary@{Parse\+Dictionary}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Parse\+Dictionary(\+Game\+Object $\ast$a\+Object, Parser \&a\+Parser)}{ParseDictionary(GameObject *aObject, Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Parse\+Dictionary (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classObjectManager_a9332ecd16f08c4e3d5c406cabcc8a0b5}{}\label{classObjectManager_a9332ecd16f08c4e3d5c406cabcc8a0b5}
+
+
+Helper function to parse a file and make a \hyperlink{classGameObject}{Game\+Object}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+\index{Object\+Manager@{Object\+Manager}!Parse\+Object@{Parse\+Object}}
+\index{Parse\+Object@{Parse\+Object}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Parse\+Object(\+Game\+Object $\ast$a\+Object)}{ParseObject(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Parse\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_a20aed1603ed0b8c8260f51d3b499433a}{}\label{classObjectManager_a20aed1603ed0b8c8260f51d3b499433a}
+
+
+Parse object from file, create components. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Object\+Manager@{Object\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classObjectManager_ab5d8bbac1f3e7e907ca8a8be2928e593}{}\label{classObjectManager_ab5d8bbac1f3e7e907ca8a8be2928e593}
+
+
+Prepare message for reading next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Object\+Manager@{Object\+Manager}!Remove\+Object@{Remove\+Object}}
+\index{Remove\+Object@{Remove\+Object}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Object(\+Game\+Object $\ast$a\+Obj)}{RemoveObject(GameObject *aObj)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Remove\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Obj}
+\end{DoxyParamCaption}
+)}\hypertarget{classObjectManager_a90d8373d9cc30126405fb6b7ed2b5c92}{}\label{classObjectManager_a90d8373d9cc30126405fb6b7ed2b5c92}
+
+
+Remove object from objects array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Obj} & Object to remove \\
+\hline
+{\em a\+Delete} & Set to true to delete object on the way out. \\
+\hline
+\end{DoxyParams}
+\index{Object\+Manager@{Object\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classObjectManager_a4d6aa33b172cd0d15575702fe4ef2e5d}{}\label{classObjectManager_a4d6aa33b172cd0d15575702fe4ef2e5d}
+
+
+Send message to all objects in vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Msg} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Object\+Manager@{Object\+Manager}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classObjectManager_acc36c6182462f8f30ddf5aa41ecca31c}{}\label{classObjectManager_acc36c6182462f8f30ddf5aa41ecca31c}
+
+
+Make this object readable in L\+UA. 
+
+\index{Object\+Manager@{Object\+Manager}!Update@{Update}}
+\index{Update@{Update}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Object\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classObjectManager_ac6035906749a40ec3a1d685ebed11c89}{}\label{classObjectManager_ac6035906749a40ec3a1d685ebed11c89}
+
+
+Basic loop for object management. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Object\+Manager@{Object\+Manager}!m\+Objects@{m\+Objects}}
+\index{m\+Objects@{m\+Objects}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Objects}{mObjects}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Game\+Object}$\ast$$>$ Object\+Manager\+::m\+Objects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classObjectManager_aa40dab99ba0c0844950a2119b7e57069}{}\label{classObjectManager_aa40dab99ba0c0844950a2119b7e57069}
+\index{Object\+Manager@{Object\+Manager}!m\+Static\+Objects@{m\+Static\+Objects}}
+\index{m\+Static\+Objects@{m\+Static\+Objects}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Static\+Objects}{mStaticObjects}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Game\+Object}$\ast$$>$ Object\+Manager\+::m\+Static\+Objects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classObjectManager_aa32d62ceac52a5793f92fbc2ea2a62f2}{}\label{classObjectManager_aa32d62ceac52a5793f92fbc2ea2a62f2}
+\index{Object\+Manager@{Object\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Object\+Manager@{Object\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Object\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Object\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classObjectManager_a8422a172c8048e3371db75c10de611a2}{}\label{classObjectManager_a8422a172c8048e3371db75c10de611a2}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{ObjectManager_8h}{Object\+Manager.\+h}\item 
+Managers/\hyperlink{ObjectManager_8cpp}{Object\+Manager.\+cpp}\end{DoxyCompactItemize}

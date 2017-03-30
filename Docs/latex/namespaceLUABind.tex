@@ -1,0 +1,150 @@
+\hypertarget{namespaceLUABind}{}\section{L\+U\+A\+Bind Namespace Reference}
+\label{namespaceLUABind}\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structLUABind_1_1FunctionCaller}{Function\+Caller}
+\item 
+struct \hyperlink{structLUABind_1_1StaticGameApp}{Static\+Game\+App}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::pair$<$ int, \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{namespaceLUABind_a8c953e7cbebaf43f533bf2fd4a9a32bd}{Script\+Pair}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceLUABind_aecf4fafdf19d34ea941b37f336821e72}{Initialize} ()
+\item 
+void \hyperlink{namespaceLUABind_a03661ad8570eb330634d5a5bd446f151}{Register\+Classes} ()
+\item 
+void \hyperlink{namespaceLUABind_ac3bb5a708c6471bf1fd888571141bb23}{Load\+Script\+From\+File} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+void \hyperlink{namespaceLUABind_affb461d6e5e2640f7cf334b5cf51715c}{Load\+Script\+From\+String} (\hyperlink{classHashString}{Hash\+String} const \&a\+String)
+\item 
+\hyperlink{classHashString}{Hash\+String} const \& \hyperlink{namespaceLUABind_abb3e6c7955087f9c94ef09e4226c8d1c}{Get\+Script} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+void \hyperlink{namespaceLUABind_a2ce8bef28d61033a2790902de6a38083}{Load\+Script\+From\+File} (std\+::string const \&a\+Filename)
+\item 
+void \hyperlink{namespaceLUABind_a26c005301a9c2b40b736e8769c190977}{Load\+Script\+From\+String} (std\+::string const \&a\+String)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{namespaceLUABind_a4739bb89930d4a83413ea23dbb886e34}{Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param)
+\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\bool \hyperlink{namespaceLUABind_a87bfd3ae071529a749bc37b45beeee1b}{Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param1, U param2)
+\item 
+{\footnotesize template$<$typename T , typename U , typename V $>$ }\\bool \hyperlink{namespaceLUABind_a44507ae07346bfde8db35f27b30536de}{Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param1, U param2, V param3)
+\item 
+{\footnotesize template$<$typename T , typename U , typename V , typename W $>$ }\\bool \hyperlink{namespaceLUABind_a5241633b520a8c5574856cfd5330f11f}{Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param1, U param2, V param3, W param4)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{m\+Scripts}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Script\+Pair@{Script\+Pair}}
+\index{Script\+Pair@{Script\+Pair}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Script\+Pair}{ScriptPair}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::pair$<$int,{\bf Hash\+String}$>$ {\bf L\+U\+A\+Bind\+::\+Script\+Pair}}\hypertarget{namespaceLUABind_a8c953e7cbebaf43f533bf2fd4a9a32bd}{}\label{namespaceLUABind_a8c953e7cbebaf43f533bf2fd4a9a32bd}
+
+
+\subsection{Function Documentation}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Get\+Script@{Get\+Script}}
+\index{Get\+Script@{Get\+Script}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Get\+Script(\+Hash\+String const \&a\+Filename)}{GetScript(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const \& L\+U\+A\+Bind\+::\+Get\+Script (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_abb3e6c7955087f9c94ef09e4226c8d1c}{}\label{namespaceLUABind_abb3e6c7955087f9c94ef09e4226c8d1c}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Initialize()}{Initialize()}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+U\+A\+Bind\+::\+Initialize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_aecf4fafdf19d34ea941b37f336821e72}{}\label{namespaceLUABind_aecf4fafdf19d34ea941b37f336821e72}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Function@{Load\+Function}}
+\index{Load\+Function@{Load\+Function}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Function(\+Hash\+String const \&a\+Filename, Hash\+String const \&a\+Function\+Name, T param)}{LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool L\+U\+A\+Bind\+::\+Load\+Function (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Function\+Name, }
+\item[{T}]{param}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_a4739bb89930d4a83413ea23dbb886e34}{}\label{namespaceLUABind_a4739bb89930d4a83413ea23dbb886e34}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Function@{Load\+Function}}
+\index{Load\+Function@{Load\+Function}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Function(\+Hash\+String const \&a\+Filename, Hash\+String const \&a\+Function\+Name, T param1, U param2)}{LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename U $>$ bool L\+U\+A\+Bind\+::\+Load\+Function (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Function\+Name, }
+\item[{T}]{param1, }
+\item[{U}]{param2}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_a87bfd3ae071529a749bc37b45beeee1b}{}\label{namespaceLUABind_a87bfd3ae071529a749bc37b45beeee1b}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Function@{Load\+Function}}
+\index{Load\+Function@{Load\+Function}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Function(\+Hash\+String const \&a\+Filename, Hash\+String const \&a\+Function\+Name, T param1, U param2, V param3)}{LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2, V param3)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename U , typename V $>$ bool L\+U\+A\+Bind\+::\+Load\+Function (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Function\+Name, }
+\item[{T}]{param1, }
+\item[{U}]{param2, }
+\item[{V}]{param3}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_a44507ae07346bfde8db35f27b30536de}{}\label{namespaceLUABind_a44507ae07346bfde8db35f27b30536de}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Function@{Load\+Function}}
+\index{Load\+Function@{Load\+Function}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Function(\+Hash\+String const \&a\+Filename, Hash\+String const \&a\+Function\+Name, T param1, U param2, V param3, W param4)}{LoadFunction(HashString const &aFilename, HashString const &aFunctionName, T param1, U param2, V param3, W param4)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename U , typename V , typename W $>$ bool L\+U\+A\+Bind\+::\+Load\+Function (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Function\+Name, }
+\item[{T}]{param1, }
+\item[{U}]{param2, }
+\item[{V}]{param3, }
+\item[{W}]{param4}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_a5241633b520a8c5574856cfd5330f11f}{}\label{namespaceLUABind_a5241633b520a8c5574856cfd5330f11f}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Script\+From\+File@{Load\+Script\+From\+File}}
+\index{Load\+Script\+From\+File@{Load\+Script\+From\+File}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Script\+From\+File(std\+::string const \&a\+Filename)}{LoadScriptFromFile(std::string const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+U\+A\+Bind\+::\+Load\+Script\+From\+File (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_a2ce8bef28d61033a2790902de6a38083}{}\label{namespaceLUABind_a2ce8bef28d61033a2790902de6a38083}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Script\+From\+File@{Load\+Script\+From\+File}}
+\index{Load\+Script\+From\+File@{Load\+Script\+From\+File}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Script\+From\+File(\+Hash\+String const \&a\+Filename)}{LoadScriptFromFile(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+U\+A\+Bind\+::\+Load\+Script\+From\+File (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_ac3bb5a708c6471bf1fd888571141bb23}{}\label{namespaceLUABind_ac3bb5a708c6471bf1fd888571141bb23}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Script\+From\+String@{Load\+Script\+From\+String}}
+\index{Load\+Script\+From\+String@{Load\+Script\+From\+String}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Script\+From\+String(std\+::string const \&a\+String)}{LoadScriptFromString(std::string const &aString)}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+U\+A\+Bind\+::\+Load\+Script\+From\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+String}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_a26c005301a9c2b40b736e8769c190977}{}\label{namespaceLUABind_a26c005301a9c2b40b736e8769c190977}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Load\+Script\+From\+String@{Load\+Script\+From\+String}}
+\index{Load\+Script\+From\+String@{Load\+Script\+From\+String}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Load\+Script\+From\+String(\+Hash\+String const \&a\+String)}{LoadScriptFromString(HashString const &aString)}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+U\+A\+Bind\+::\+Load\+Script\+From\+String (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+String}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_affb461d6e5e2640f7cf334b5cf51715c}{}\label{namespaceLUABind_affb461d6e5e2640f7cf334b5cf51715c}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!Register\+Classes@{Register\+Classes}}
+\index{Register\+Classes@{Register\+Classes}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{Register\+Classes()}{RegisterClasses()}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+U\+A\+Bind\+::\+Register\+Classes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceLUABind_a03661ad8570eb330634d5a5bd446f151}{}\label{namespaceLUABind_a03661ad8570eb330634d5a5bd446f151}
+
+
+\subsection{Variable Documentation}
+\index{L\+U\+A\+Bind@{L\+U\+A\+Bind}!m\+Scripts@{m\+Scripts}}
+\index{m\+Scripts@{m\+Scripts}!L\+U\+A\+Bind@{L\+U\+A\+Bind}}
+\subsubsection[{\texorpdfstring{m\+Scripts}{mScripts}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$int,{\bf Hash\+String}$>$ L\+U\+A\+Bind\+::m\+Scripts}\hypertarget{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{}\label{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}

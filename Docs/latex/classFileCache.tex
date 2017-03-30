@@ -1,0 +1,85 @@
+\hypertarget{classFileCache}{}\section{File\+Cache Class Reference}
+\label{classFileCache}\index{File\+Cache@{File\+Cache}}
+
+
+{\ttfamily \#include $<$File\+Cache.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFileCache_a1a4e307539183d00d50038cd0517c5b7}{File\+Cache} ()
+\item 
+virtual \hyperlink{classFileCache_a07c4e05a6d3d792685b48fba44142e08}{$\sim$\+File\+Cache} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classHashString}{Hash\+String} \hyperlink{classFileCache_a5faf02dd4d56bf7cbdc44f322939be25}{Get\+File} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\begin{DoxyCompactList}\small\item\em Retrieve file from cache, else load it from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unordered\+\_\+map$<$ int, \hyperlink{classFileCacheData}{File\+Cache\+Data} $\ast$ $>$ \hyperlink{classFileCache_a7055a28a780b807c669312485540f558}{File\+Container}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classFileCache_a7055a28a780b807c669312485540f558}{File\+Container} \hyperlink{classFileCache_ab0e3756eb0bd259d08f5eb0f33d77bf1}{m\+Files}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{File\+Cache@{File\+Cache}!File\+Container@{File\+Container}}
+\index{File\+Container@{File\+Container}!File\+Cache@{File\+Cache}}
+\subsubsection[{\texorpdfstring{File\+Container}{FileContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::unordered\+\_\+map$<$int, {\bf File\+Cache\+Data}$\ast$$>$ {\bf File\+Cache\+::\+File\+Container}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classFileCache_a7055a28a780b807c669312485540f558}{}\label{classFileCache_a7055a28a780b807c669312485540f558}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{File\+Cache@{File\+Cache}!File\+Cache@{File\+Cache}}
+\index{File\+Cache@{File\+Cache}!File\+Cache@{File\+Cache}}
+\subsubsection[{\texorpdfstring{File\+Cache()}{FileCache()}}]{\setlength{\rightskip}{0pt plus 5cm}File\+Cache\+::\+File\+Cache (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classFileCache_a1a4e307539183d00d50038cd0517c5b7}{}\label{classFileCache_a1a4e307539183d00d50038cd0517c5b7}
+\index{File\+Cache@{File\+Cache}!````~File\+Cache@{$\sim$\+File\+Cache}}
+\index{````~File\+Cache@{$\sim$\+File\+Cache}!File\+Cache@{File\+Cache}}
+\subsubsection[{\texorpdfstring{$\sim$\+File\+Cache()}{~FileCache()}}]{\setlength{\rightskip}{0pt plus 5cm}File\+Cache\+::$\sim$\+File\+Cache (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classFileCache_a07c4e05a6d3d792685b48fba44142e08}{}\label{classFileCache_a07c4e05a6d3d792685b48fba44142e08}
+
+
+\subsection{Member Function Documentation}
+\index{File\+Cache@{File\+Cache}!Get\+File@{Get\+File}}
+\index{Get\+File@{Get\+File}!File\+Cache@{File\+Cache}}
+\subsubsection[{\texorpdfstring{Get\+File(\+Hash\+String const \&a\+Filename)}{GetFile(HashString const &aFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} File\+Cache\+::\+Get\+File (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classFileCache_a5faf02dd4d56bf7cbdc44f322939be25}{}\label{classFileCache_a5faf02dd4d56bf7cbdc44f322939be25}
+
+
+Retrieve file from cache, else load it from disk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & Name of file to load (full directory and all) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+File contents. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{File\+Cache@{File\+Cache}!m\+Files@{m\+Files}}
+\index{m\+Files@{m\+Files}!File\+Cache@{File\+Cache}}
+\subsubsection[{\texorpdfstring{m\+Files}{mFiles}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf File\+Cache\+::\+File\+Container} File\+Cache\+::m\+Files\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classFileCache_ab0e3756eb0bd259d08f5eb0f33d77bf1}{}\label{classFileCache_ab0e3756eb0bd259d08f5eb0f33d77bf1}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{FileCache_8h}{File\+Cache.\+h}\item 
+Core/\hyperlink{FileCache_8cpp}{File\+Cache.\+cpp}\end{DoxyCompactItemize}

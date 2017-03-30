@@ -1,0 +1,338 @@
+\hypertarget{structVector2}{}\section{Vector2 Struct Reference}
+\label{structVector2}\index{Vector2@{Vector2}}
+
+
+{\ttfamily \#include $<$Math\+Ext.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structVector2_a22104d1809be26a419ef1f959e3761bf}{Vector2} ()
+\item 
+\hyperlink{structVector2_a5ca9b33926bea2d537d27626988ddd28}{Vector2} (float aX, float aY)
+\item 
+float \hyperlink{structVector2_adc8e4837830c1a4839503e1bf9f0e5b6}{length} () const 
+\item 
+float \& \hyperlink{structVector2_ac3ff249cea581cfe26c57e77db0d9c8f}{operator\mbox{[}$\,$\mbox{]}} (int const a\+Value)
+\item 
+float \hyperlink{structVector2_a185eddd4762ec2063c4c47092e34188a}{Get\+Value} (int const a\+Value) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a2c3a317411d3b9f01f8135a428235772}{normalize} () const 
+\item 
+void \hyperlink{structVector2_a4e96fb2907573bbc41a720c0753c0a9c}{operator=} (\hyperlink{structVector2}{Vector2} const \&rhs)
+\item 
+bool \hyperlink{structVector2_a3afdc2d923d1d3814ca00456537966b2}{operator==} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a75e95826c87c34c84ca98069c73f4208}{operator$\ast$} (float const a\+Multiplier) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a93e47de409ad9fd875d322b2083ba677}{operator/} (float const a\+Multiplier) const 
+\item 
+float \hyperlink{structVector2_a475eb680cea9cc63206a9d473d3211ef}{operator$\ast$} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_adbe20f63e6ec704a1df16685a6f7c32e}{operator$^\wedge$} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a7948865cb48cada5d28b32ea9c44346f}{operator+} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a47d40aebac7d2673e4e6b2b95858b240}{operator-\/} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a472c1fbf02ae95fc3f3a728343c29837}{operator\%} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a5f5eb2d81dd299366ca228963ae76fa0}{operator-\/} () const 
+\item 
+float \hyperlink{structVector2_abe020034445097a6380444dfd301100c}{Dot} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_aafa5282e1eb56853c71e788bbbf76267}{Cross} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a5c3d7b6ef2790feb63cfd8766868fa7a}{Add} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a5ee02937cd9052a7079c7850bad44112}{Subtract} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a55ccb4b078cbf892790add2e97ed256b}{Multiply} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a141d4f3e286ab0a163acc0e33745630d}{Divide} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_ad71bd6d85b1d71c3fb1a988a8b4c4693}{Project} (\hyperlink{structVector2}{Vector2} const \&rhs) const 
+\item 
+\hyperlink{structVector2}{Vector2} \hyperlink{structVector2_a8c2e5bd193e652bcf315faa19ebcd225}{Invert} () const 
+\item 
+void \hyperlink{structVector2_affdc1e6d897711ead3203eb42f5cf0bd}{operator+=} (\hyperlink{structVector2}{Vector2} const \&rhs)
+\item 
+void \hyperlink{structVector2_a54bce404c5b1a347abb8d4adaf9ecd97}{operator-\/=} (\hyperlink{structVector2}{Vector2} const \&rhs)
+\item 
+void \hyperlink{structVector2_ab4ec9a5c793b073f6adc9dced6e9aa3d}{operator$\ast$=} (\hyperlink{structVector2}{Vector2} const \&rhs)
+\item 
+void \hyperlink{structVector2_afbb19393987a8c8aca590eef8623fc70}{operator/=} (\hyperlink{structVector2}{Vector2} const \&rhs)
+\item 
+void \hyperlink{structVector2_a2095a8f7829a35f25dcf9730a68713fb}{operator$\ast$=} (float const a\+Multiplier)
+\item 
+void \hyperlink{structVector2_a97fa327e00184b8c53ffb4c0bbf54eff}{operator/=} (float const a\+Multiplier)
+\item 
+bool \hyperlink{structVector2_a34959a91e009063d8ce56ee6ca3ad0eb}{validate} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{structVector2_a72b2ab998692870d8b90326a04d267b8}{Serialize\+L\+UA} ()
+\item 
+static \hyperlink{classHashString}{Hash\+String} \hyperlink{structVector2_a5a3c63c5df2ee2d2c94644d5ff4b1edf}{Get\+Name} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{structVector2_a046bb8d17a876acc49415128dc0502f2}{x}
+\item 
+float \hyperlink{structVector2_a0e07bad05f01ed811b909a2eef97f9e2}{y}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Vector2@{Vector2}!Vector2@{Vector2}}
+\index{Vector2@{Vector2}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Vector2()}{Vector2()}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2\+::\+Vector2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_a22104d1809be26a419ef1f959e3761bf}{}\label{structVector2_a22104d1809be26a419ef1f959e3761bf}
+\index{Vector2@{Vector2}!Vector2@{Vector2}}
+\index{Vector2@{Vector2}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Vector2(float a\+X, float a\+Y)}{Vector2(float aX, float aY)}}]{\setlength{\rightskip}{0pt plus 5cm}Vector2\+::\+Vector2 (
+\begin{DoxyParamCaption}
+\item[{float}]{aX, }
+\item[{float}]{aY}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_a5ca9b33926bea2d537d27626988ddd28}{}\label{structVector2_a5ca9b33926bea2d537d27626988ddd28}
+
+
+\subsection{Member Function Documentation}
+\index{Vector2@{Vector2}!Add@{Add}}
+\index{Add@{Add}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Add(\+Vector2 const \&rhs) const }{Add(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::\+Add (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a5c3d7b6ef2790feb63cfd8766868fa7a}{}\label{structVector2_a5c3d7b6ef2790feb63cfd8766868fa7a}
+\index{Vector2@{Vector2}!Cross@{Cross}}
+\index{Cross@{Cross}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Cross(\+Vector2 const \&rhs) const }{Cross(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::\+Cross (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_aafa5282e1eb56853c71e788bbbf76267}{}\label{structVector2_aafa5282e1eb56853c71e788bbbf76267}
+\index{Vector2@{Vector2}!Divide@{Divide}}
+\index{Divide@{Divide}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Divide(\+Vector2 const \&rhs) const }{Divide(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::\+Divide (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a141d4f3e286ab0a163acc0e33745630d}{}\label{structVector2_a141d4f3e286ab0a163acc0e33745630d}
+\index{Vector2@{Vector2}!Dot@{Dot}}
+\index{Dot@{Dot}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Dot(\+Vector2 const \&rhs) const }{Dot(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Vector2\+::\+Dot (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_abe020034445097a6380444dfd301100c}{}\label{structVector2_abe020034445097a6380444dfd301100c}
+\index{Vector2@{Vector2}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Vector2\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structVector2_a5a3c63c5df2ee2d2c94644d5ff4b1edf}{}\label{structVector2_a5a3c63c5df2ee2d2c94644d5ff4b1edf}
+\index{Vector2@{Vector2}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Get\+Value(int const a\+Value) const }{GetValue(int const aValue) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Vector2\+::\+Get\+Value (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Value}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a185eddd4762ec2063c4c47092e34188a}{}\label{structVector2_a185eddd4762ec2063c4c47092e34188a}
+\index{Vector2@{Vector2}!Invert@{Invert}}
+\index{Invert@{Invert}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Invert() const }{Invert() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::\+Invert (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a8c2e5bd193e652bcf315faa19ebcd225}{}\label{structVector2_a8c2e5bd193e652bcf315faa19ebcd225}
+\index{Vector2@{Vector2}!length@{length}}
+\index{length@{length}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{length() const }{length() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Vector2\+::length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_adc8e4837830c1a4839503e1bf9f0e5b6}{}\label{structVector2_adc8e4837830c1a4839503e1bf9f0e5b6}
+\index{Vector2@{Vector2}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Multiply(\+Vector2 const \&rhs) const }{Multiply(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::\+Multiply (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a55ccb4b078cbf892790add2e97ed256b}{}\label{structVector2_a55ccb4b078cbf892790add2e97ed256b}
+\index{Vector2@{Vector2}!normalize@{normalize}}
+\index{normalize@{normalize}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{normalize() const }{normalize() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::normalize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a2c3a317411d3b9f01f8135a428235772}{}\label{structVector2_a2c3a317411d3b9f01f8135a428235772}
+\index{Vector2@{Vector2}!operator\%@{operator\%}}
+\index{operator\%@{operator\%}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator\%(\+Vector2 const \&rhs) const }{operator%(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::operator\% (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a472c1fbf02ae95fc3f3a728343c29837}{}\label{structVector2_a472c1fbf02ae95fc3f3a728343c29837}
+\index{Vector2@{Vector2}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator$\ast$(float const a\+Multiplier) const }{operator*(float const aMultiplier) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Multiplier}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a75e95826c87c34c84ca98069c73f4208}{}\label{structVector2_a75e95826c87c34c84ca98069c73f4208}
+\index{Vector2@{Vector2}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator$\ast$(\+Vector2 const \&rhs) const }{operator*(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Vector2\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a475eb680cea9cc63206a9d473d3211ef}{}\label{structVector2_a475eb680cea9cc63206a9d473d3211ef}
+\index{Vector2@{Vector2}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator$\ast$=(\+Vector2 const \&rhs)}{operator*=(Vector2 const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_ab4ec9a5c793b073f6adc9dced6e9aa3d}{}\label{structVector2_ab4ec9a5c793b073f6adc9dced6e9aa3d}
+\index{Vector2@{Vector2}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator$\ast$=(float const a\+Multiplier)}{operator*=(float const aMultiplier)}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Multiplier}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_a2095a8f7829a35f25dcf9730a68713fb}{}\label{structVector2_a2095a8f7829a35f25dcf9730a68713fb}
+\index{Vector2@{Vector2}!operator+@{operator+}}
+\index{operator+@{operator+}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator+(\+Vector2 const \&rhs) const }{operator+(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::operator+ (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a7948865cb48cada5d28b32ea9c44346f}{}\label{structVector2_a7948865cb48cada5d28b32ea9c44346f}
+\index{Vector2@{Vector2}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator+=(\+Vector2 const \&rhs)}{operator+=(Vector2 const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::operator+= (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_affdc1e6d897711ead3203eb42f5cf0bd}{}\label{structVector2_affdc1e6d897711ead3203eb42f5cf0bd}
+\index{Vector2@{Vector2}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator-\/(\+Vector2 const \&rhs) const }{operator-(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::operator-\/ (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a47d40aebac7d2673e4e6b2b95858b240}{}\label{structVector2_a47d40aebac7d2673e4e6b2b95858b240}
+\index{Vector2@{Vector2}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator-\/() const }{operator-() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::operator-\/ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a5f5eb2d81dd299366ca228963ae76fa0}{}\label{structVector2_a5f5eb2d81dd299366ca228963ae76fa0}
+\index{Vector2@{Vector2}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator-\/=(\+Vector2 const \&rhs)}{operator-=(Vector2 const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_a54bce404c5b1a347abb8d4adaf9ecd97}{}\label{structVector2_a54bce404c5b1a347abb8d4adaf9ecd97}
+\index{Vector2@{Vector2}!operator/@{operator/}}
+\index{operator/@{operator/}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator/(float const a\+Multiplier) const }{operator/(float const aMultiplier) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::operator/ (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Multiplier}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a93e47de409ad9fd875d322b2083ba677}{}\label{structVector2_a93e47de409ad9fd875d322b2083ba677}
+\index{Vector2@{Vector2}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator/=(\+Vector2 const \&rhs)}{operator/=(Vector2 const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::operator/= (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_afbb19393987a8c8aca590eef8623fc70}{}\label{structVector2_afbb19393987a8c8aca590eef8623fc70}
+\index{Vector2@{Vector2}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator/=(float const a\+Multiplier)}{operator/=(float const aMultiplier)}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::operator/= (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Multiplier}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_a97fa327e00184b8c53ffb4c0bbf54eff}{}\label{structVector2_a97fa327e00184b8c53ffb4c0bbf54eff}
+\index{Vector2@{Vector2}!operator=@{operator=}}
+\index{operator=@{operator=}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator=(\+Vector2 const \&rhs)}{operator=(Vector2 const &rhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_a4e96fb2907573bbc41a720c0753c0a9c}{}\label{structVector2_a4e96fb2907573bbc41a720c0753c0a9c}
+\index{Vector2@{Vector2}!operator==@{operator==}}
+\index{operator==@{operator==}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator==(\+Vector2 const \&rhs) const }{operator==(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Vector2\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a3afdc2d923d1d3814ca00456537966b2}{}\label{structVector2_a3afdc2d923d1d3814ca00456537966b2}
+\index{Vector2@{Vector2}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator[](int const a\+Value)}{operator[](int const aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}float \& Vector2\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{structVector2_ac3ff249cea581cfe26c57e77db0d9c8f}{}\label{structVector2_ac3ff249cea581cfe26c57e77db0d9c8f}
+\index{Vector2@{Vector2}!operator$^\wedge$@{operator$^\wedge$}}
+\index{operator$^\wedge$@{operator$^\wedge$}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{operator$^\wedge$(\+Vector2 const \&rhs) const }{operator^(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::operator$^\wedge$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_adbe20f63e6ec704a1df16685a6f7c32e}{}\label{structVector2_adbe20f63e6ec704a1df16685a6f7c32e}
+\index{Vector2@{Vector2}!Project@{Project}}
+\index{Project@{Project}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Project(\+Vector2 const \&rhs) const }{Project(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::\+Project (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_ad71bd6d85b1d71c3fb1a988a8b4c4693}{}\label{structVector2_ad71bd6d85b1d71c3fb1a988a8b4c4693}
+\index{Vector2@{Vector2}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Vector2\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{structVector2_a72b2ab998692870d8b90326a04d267b8}{}\label{structVector2_a72b2ab998692870d8b90326a04d267b8}
+\index{Vector2@{Vector2}!Subtract@{Subtract}}
+\index{Subtract@{Subtract}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{Subtract(\+Vector2 const \&rhs) const }{Subtract(Vector2 const &rhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2} Vector2\+::\+Subtract (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector2} const \&}]{rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a5ee02937cd9052a7079c7850bad44112}{}\label{structVector2_a5ee02937cd9052a7079c7850bad44112}
+\index{Vector2@{Vector2}!validate@{validate}}
+\index{validate@{validate}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{validate() const }{validate() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Vector2\+::validate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{structVector2_a34959a91e009063d8ce56ee6ca3ad0eb}{}\label{structVector2_a34959a91e009063d8ce56ee6ca3ad0eb}
+
+
+\subsection{Member Data Documentation}
+\index{Vector2@{Vector2}!x@{x}}
+\index{x@{x}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{x}{x}}]{\setlength{\rightskip}{0pt plus 5cm}float Vector2\+::x}\hypertarget{structVector2_a046bb8d17a876acc49415128dc0502f2}{}\label{structVector2_a046bb8d17a876acc49415128dc0502f2}
+\index{Vector2@{Vector2}!y@{y}}
+\index{y@{y}!Vector2@{Vector2}}
+\subsubsection[{\texorpdfstring{y}{y}}]{\setlength{\rightskip}{0pt plus 5cm}float Vector2\+::y}\hypertarget{structVector2_a0e07bad05f01ed811b909a2eef97f9e2}{}\label{structVector2_a0e07bad05f01ed811b909a2eef97f9e2}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{MathExt_8h}{Math\+Ext.\+h}\item 
+Core/\hyperlink{MathExt_8cpp}{Math\+Ext.\+cpp}\end{DoxyCompactItemize}

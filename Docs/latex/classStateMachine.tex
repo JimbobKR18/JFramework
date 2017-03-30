@@ -1,0 +1,253 @@
+\hypertarget{classStateMachine}{}\section{State\+Machine Class Reference}
+\label{classStateMachine}\index{State\+Machine@{State\+Machine}}
+
+
+{\ttfamily \#include $<$State\+Machine.\+h$>$}
+
+
+
+Collaboration diagram for State\+Machine\+:
+% FIG 0
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classStateLink}{State\+Link} $\ast$ $>$ \hyperlink{classStateMachine_a48dd36fc36aca328a1d67f17a46bdbb1}{Link\+Container}
+\item 
+typedef Link\+Container\+::const\+\_\+iterator \hyperlink{classStateMachine_a918cb45a486130c0b513cfdbeed79fce}{Link\+IT}
+\item 
+typedef std\+::set$<$ \hyperlink{classState}{State} $\ast$ $>$ \hyperlink{classStateMachine_aa74dc6c024af439e701f6d97cfa4c8b8}{State\+Container}
+\item 
+typedef State\+Container\+::const\+\_\+iterator \hyperlink{classStateMachine_ad01ce4c7148b88eee35e0598f0f3ce22}{State\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classStateMachine_a2fb07002510ea9141019559750acfab8}{State\+Machine} ()
+\item 
+virtual \hyperlink{classStateMachine_a93d66cb2a89b186789d655a08b02674e}{$\sim$\+State\+Machine} ()
+\item 
+void \hyperlink{classStateMachine_a3f4b163017814b609805c3606b4bee78}{Update} (float const a\+DT)
+\begin{DoxyCompactList}\small\item\em Update state machine. \end{DoxyCompactList}\item 
+bool \hyperlink{classStateMachine_a431367848414ebb4ef202d5a74d0b67a}{Is\+Current\+State\+Expired} () const 
+\begin{DoxyCompactList}\small\item\em Check if current state is expired. \end{DoxyCompactList}\item 
+float \hyperlink{classStateMachine_a83cdee5a9323ddb03d29ecdbceb6e423}{Get\+Current\+State\+Time\+Left} () const 
+\begin{DoxyCompactList}\small\item\em Get time left in current state. \end{DoxyCompactList}\item 
+\hyperlink{classState}{State} $\ast$ \hyperlink{classStateMachine_a10cea5411c973c0f03930fd5b04c24d0}{Get\+Current\+State} () const 
+\begin{DoxyCompactList}\small\item\em Get current state of \hyperlink{classStateMachine}{State\+Machine}. \end{DoxyCompactList}\item 
+void \hyperlink{classStateMachine_a151285f8b089fe8329dcdaabe0322781}{Set\+Current\+State} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Set current state, if no link from current state to end state is found, an assert is made. \end{DoxyCompactList}\item 
+\hyperlink{classStateMachine_aa74dc6c024af439e701f6d97cfa4c8b8}{State\+Container} const \& \hyperlink{classStateMachine_a9740b73b4e23cc9fcdc41ad34cb62d3a}{Get\+States} () const 
+\begin{DoxyCompactList}\small\item\em Get states. Unmutable. \end{DoxyCompactList}\item 
+\hyperlink{classStateMachine_a48dd36fc36aca328a1d67f17a46bdbb1}{Link\+Container} const \& \hyperlink{classStateMachine_a6e3830c54334e39f72734aaa13479a5d}{Get\+Links} () const 
+\begin{DoxyCompactList}\small\item\em Get links. Unmutable. \end{DoxyCompactList}\item 
+void \hyperlink{classStateMachine_a703247c50ccc7f2163d6af7d76609a2b}{Add\+Link} (\hyperlink{classStateLink}{State\+Link} $\ast$a\+Link)
+\begin{DoxyCompactList}\small\item\em Add link to state machine. \end{DoxyCompactList}\item 
+void \hyperlink{classStateMachine_ad5a3e3b2fe13e40c791e14a0cb591378}{Add\+Link} (\hyperlink{classState}{State} $\ast$a\+State1, \hyperlink{classState}{State} $\ast$a\+State2, \hyperlink{classStateLink_a6392f74d9c3ccb368b0e7e57fec62272}{State\+Link\+::\+Link\+Type} const \&a\+Link\+Type)
+\begin{DoxyCompactList}\small\item\em Add link to state machine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classStateMachine_a48dd36fc36aca328a1d67f17a46bdbb1}{Link\+Container} \hyperlink{classStateMachine_a4161abc2a3b5c4f5301e67fb41de1933}{m\+Links}
+\item 
+\hyperlink{classStateMachine_aa74dc6c024af439e701f6d97cfa4c8b8}{State\+Container} \hyperlink{classStateMachine_a2fe1471be5c013a4522b1f5548752172}{m\+States}
+\item 
+\hyperlink{classState}{State} $\ast$ \hyperlink{classStateMachine_ac7a212f64af4572b857db59b3bd501b1}{m\+Current\+State}
+\item 
+float \hyperlink{classStateMachine_a8f4ff52220811256dfd20daf4a23fb6b}{m\+Current\+Time}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{State\+Machine@{State\+Machine}!Link\+Container@{Link\+Container}}
+\index{Link\+Container@{Link\+Container}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Link\+Container}{LinkContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf State\+Link}$\ast$$>$ {\bf State\+Machine\+::\+Link\+Container}}\hypertarget{classStateMachine_a48dd36fc36aca328a1d67f17a46bdbb1}{}\label{classStateMachine_a48dd36fc36aca328a1d67f17a46bdbb1}
+\index{State\+Machine@{State\+Machine}!Link\+IT@{Link\+IT}}
+\index{Link\+IT@{Link\+IT}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Link\+IT}{LinkIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Link\+Container\+::const\+\_\+iterator {\bf State\+Machine\+::\+Link\+IT}}\hypertarget{classStateMachine_a918cb45a486130c0b513cfdbeed79fce}{}\label{classStateMachine_a918cb45a486130c0b513cfdbeed79fce}
+\index{State\+Machine@{State\+Machine}!State\+Container@{State\+Container}}
+\index{State\+Container@{State\+Container}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{State\+Container}{StateContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::set$<${\bf State}$\ast$$>$ {\bf State\+Machine\+::\+State\+Container}}\hypertarget{classStateMachine_aa74dc6c024af439e701f6d97cfa4c8b8}{}\label{classStateMachine_aa74dc6c024af439e701f6d97cfa4c8b8}
+\index{State\+Machine@{State\+Machine}!State\+IT@{State\+IT}}
+\index{State\+IT@{State\+IT}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{State\+IT}{StateIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef State\+Container\+::const\+\_\+iterator {\bf State\+Machine\+::\+State\+IT}}\hypertarget{classStateMachine_ad01ce4c7148b88eee35e0598f0f3ce22}{}\label{classStateMachine_ad01ce4c7148b88eee35e0598f0f3ce22}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{State\+Machine@{State\+Machine}!State\+Machine@{State\+Machine}}
+\index{State\+Machine@{State\+Machine}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{State\+Machine()}{StateMachine()}}]{\setlength{\rightskip}{0pt plus 5cm}State\+Machine\+::\+State\+Machine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classStateMachine_a2fb07002510ea9141019559750acfab8}{}\label{classStateMachine_a2fb07002510ea9141019559750acfab8}
+\index{State\+Machine@{State\+Machine}!````~State\+Machine@{$\sim$\+State\+Machine}}
+\index{````~State\+Machine@{$\sim$\+State\+Machine}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{$\sim$\+State\+Machine()}{~StateMachine()}}]{\setlength{\rightskip}{0pt plus 5cm}State\+Machine\+::$\sim$\+State\+Machine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStateMachine_a93d66cb2a89b186789d655a08b02674e}{}\label{classStateMachine_a93d66cb2a89b186789d655a08b02674e}
+
+
+\subsection{Member Function Documentation}
+\index{State\+Machine@{State\+Machine}!Add\+Link@{Add\+Link}}
+\index{Add\+Link@{Add\+Link}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Add\+Link(\+State\+Link $\ast$a\+Link)}{AddLink(StateLink *aLink)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Machine\+::\+Add\+Link (
+\begin{DoxyParamCaption}
+\item[{{\bf State\+Link} $\ast$}]{a\+Link}
+\end{DoxyParamCaption}
+)}\hypertarget{classStateMachine_a703247c50ccc7f2163d6af7d76609a2b}{}\label{classStateMachine_a703247c50ccc7f2163d6af7d76609a2b}
+
+
+Add link to state machine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Link} & Link \\
+\hline
+\end{DoxyParams}
+\index{State\+Machine@{State\+Machine}!Add\+Link@{Add\+Link}}
+\index{Add\+Link@{Add\+Link}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Add\+Link(\+State $\ast$a\+State1, State $\ast$a\+State2, State\+Link\+::\+Link\+Type const \&a\+Link\+Type)}{AddLink(State *aState1, State *aState2, StateLink::LinkType const &aLinkType)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Machine\+::\+Add\+Link (
+\begin{DoxyParamCaption}
+\item[{{\bf State} $\ast$}]{a\+State1, }
+\item[{{\bf State} $\ast$}]{a\+State2, }
+\item[{{\bf State\+Link\+::\+Link\+Type} const \&}]{a\+Link\+Type}
+\end{DoxyParamCaption}
+)}\hypertarget{classStateMachine_ad5a3e3b2fe13e40c791e14a0cb591378}{}\label{classStateMachine_ad5a3e3b2fe13e40c791e14a0cb591378}
+
+
+Add link to state machine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+State1} & \hyperlink{classState}{State} 1 \\
+\hline
+{\em a\+State2} & \hyperlink{classState}{State} 2 \\
+\hline
+{\em a\+Link\+Type} & How these should be linked. State1 -\/$>$ State2 (L\+E\+F\+T\+\_\+\+R\+I\+G\+HT) State2 -\/$>$ State1 (R\+I\+G\+H\+T\+\_\+\+L\+E\+FT) State1 $<$-\/$>$ State2 (B\+I\+D\+I\+R\+E\+C\+T\+I\+O\+N\+AL) \\
+\hline
+\end{DoxyParams}
+\index{State\+Machine@{State\+Machine}!Get\+Current\+State@{Get\+Current\+State}}
+\index{Get\+Current\+State@{Get\+Current\+State}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Get\+Current\+State() const }{GetCurrentState() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State} $\ast$ State\+Machine\+::\+Get\+Current\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classStateMachine_a10cea5411c973c0f03930fd5b04c24d0}{}\label{classStateMachine_a10cea5411c973c0f03930fd5b04c24d0}
+
+
+Get current state of \hyperlink{classStateMachine}{State\+Machine}. 
+
+\begin{DoxyReturn}{Returns}
+Current \hyperlink{classState}{State} 
+\end{DoxyReturn}
+\index{State\+Machine@{State\+Machine}!Get\+Current\+State\+Time\+Left@{Get\+Current\+State\+Time\+Left}}
+\index{Get\+Current\+State\+Time\+Left@{Get\+Current\+State\+Time\+Left}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Get\+Current\+State\+Time\+Left() const }{GetCurrentStateTimeLeft() const }}]{\setlength{\rightskip}{0pt plus 5cm}float State\+Machine\+::\+Get\+Current\+State\+Time\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classStateMachine_a83cdee5a9323ddb03d29ecdbceb6e423}{}\label{classStateMachine_a83cdee5a9323ddb03d29ecdbceb6e423}
+
+
+Get time left in current state. 
+
+\begin{DoxyReturn}{Returns}
+Time left as float. 
+\end{DoxyReturn}
+\index{State\+Machine@{State\+Machine}!Get\+Links@{Get\+Links}}
+\index{Get\+Links@{Get\+Links}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Get\+Links() const }{GetLinks() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Machine\+::\+Link\+Container} const \& State\+Machine\+::\+Get\+Links (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classStateMachine_a6e3830c54334e39f72734aaa13479a5d}{}\label{classStateMachine_a6e3830c54334e39f72734aaa13479a5d}
+
+
+Get links. Unmutable. 
+
+\begin{DoxyReturn}{Returns}
+Links. 
+\end{DoxyReturn}
+\index{State\+Machine@{State\+Machine}!Get\+States@{Get\+States}}
+\index{Get\+States@{Get\+States}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Get\+States() const }{GetStates() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Machine\+::\+State\+Container} const \& State\+Machine\+::\+Get\+States (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classStateMachine_a9740b73b4e23cc9fcdc41ad34cb62d3a}{}\label{classStateMachine_a9740b73b4e23cc9fcdc41ad34cb62d3a}
+
+
+Get states. Unmutable. 
+
+\begin{DoxyReturn}{Returns}
+States. 
+\end{DoxyReturn}
+\index{State\+Machine@{State\+Machine}!Is\+Current\+State\+Expired@{Is\+Current\+State\+Expired}}
+\index{Is\+Current\+State\+Expired@{Is\+Current\+State\+Expired}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Is\+Current\+State\+Expired() const }{IsCurrentStateExpired() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool State\+Machine\+::\+Is\+Current\+State\+Expired (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classStateMachine_a431367848414ebb4ef202d5a74d0b67a}{}\label{classStateMachine_a431367848414ebb4ef202d5a74d0b67a}
+
+
+Check if current state is expired. 
+
+\begin{DoxyReturn}{Returns}
+True if expired. 
+\end{DoxyReturn}
+\index{State\+Machine@{State\+Machine}!Set\+Current\+State@{Set\+Current\+State}}
+\index{Set\+Current\+State@{Set\+Current\+State}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Set\+Current\+State(\+Hash\+String const \&a\+Name)}{SetCurrentState(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Machine\+::\+Set\+Current\+State (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classStateMachine_a151285f8b089fe8329dcdaabe0322781}{}\label{classStateMachine_a151285f8b089fe8329dcdaabe0322781}
+
+
+Set current state, if no link from current state to end state is found, an assert is made. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of state. \\
+\hline
+\end{DoxyParams}
+\index{State\+Machine@{State\+Machine}!Update@{Update}}
+\index{Update@{Update}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{Update(float const a\+D\+T)}{Update(float const aDT)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Machine\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+DT}
+\end{DoxyParamCaption}
+)}\hypertarget{classStateMachine_a3f4b163017814b609805c3606b4bee78}{}\label{classStateMachine_a3f4b163017814b609805c3606b4bee78}
+
+
+Update state machine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+DT} & Amount of time that has passed. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{State\+Machine@{State\+Machine}!m\+Current\+State@{m\+Current\+State}}
+\index{m\+Current\+State@{m\+Current\+State}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{m\+Current\+State}{mCurrentState}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State}$\ast$ State\+Machine\+::m\+Current\+State\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStateMachine_ac7a212f64af4572b857db59b3bd501b1}{}\label{classStateMachine_ac7a212f64af4572b857db59b3bd501b1}
+\index{State\+Machine@{State\+Machine}!m\+Current\+Time@{m\+Current\+Time}}
+\index{m\+Current\+Time@{m\+Current\+Time}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{m\+Current\+Time}{mCurrentTime}}]{\setlength{\rightskip}{0pt plus 5cm}float State\+Machine\+::m\+Current\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStateMachine_a8f4ff52220811256dfd20daf4a23fb6b}{}\label{classStateMachine_a8f4ff52220811256dfd20daf4a23fb6b}
+\index{State\+Machine@{State\+Machine}!m\+Links@{m\+Links}}
+\index{m\+Links@{m\+Links}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{m\+Links}{mLinks}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Link\+Container} State\+Machine\+::m\+Links\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStateMachine_a4161abc2a3b5c4f5301e67fb41de1933}{}\label{classStateMachine_a4161abc2a3b5c4f5301e67fb41de1933}
+\index{State\+Machine@{State\+Machine}!m\+States@{m\+States}}
+\index{m\+States@{m\+States}!State\+Machine@{State\+Machine}}
+\subsubsection[{\texorpdfstring{m\+States}{mStates}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Container} State\+Machine\+::m\+States\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStateMachine_a2fe1471be5c013a4522b1f5548752172}{}\label{classStateMachine_a2fe1471be5c013a4522b1f5548752172}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\+State\+Machine/\hyperlink{StateMachine_8h}{State\+Machine.\+h}\item 
+Logic/\+State\+Machine/\hyperlink{StateMachine_8cpp}{State\+Machine.\+cpp}\end{DoxyCompactItemize}

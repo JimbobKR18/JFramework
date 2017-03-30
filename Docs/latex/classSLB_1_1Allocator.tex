@@ -1,0 +1,198 @@
+\hypertarget{classSLB_1_1Allocator}{}\section{S\+LB\+:\+:Allocator$<$ T $>$ Class Template Reference}
+\label{classSLB_1_1Allocator}\index{S\+L\+B\+::\+Allocator$<$ T $>$@{S\+L\+B\+::\+Allocator$<$ T $>$}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structSLB_1_1Allocator_1_1rebind}{rebind}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef T $\ast$ \hyperlink{classSLB_1_1Allocator_aae4ca3972f504938f16542e0eeb295ac}{pointer}
+\item 
+typedef const T $\ast$ \hyperlink{classSLB_1_1Allocator_afeaf038648f7c641b18ed9e8eac80daf}{const\+\_\+pointer}
+\item 
+typedef T \& \hyperlink{classSLB_1_1Allocator_acf01b8e7caf65e4204d91462b61d65f3}{reference}
+\item 
+typedef const T \& \hyperlink{classSLB_1_1Allocator_a3160607e8b4d40191536eeecef84b8b2}{const\+\_\+reference}
+\item 
+typedef T \hyperlink{classSLB_1_1Allocator_aa7059448157f4fb75e7609ddc0ec1f1b}{value\+\_\+type}
+\item 
+typedef size\+\_\+t \hyperlink{classSLB_1_1Allocator_ab5b27ae3bc010c6a60b3ec7f9bdbd06f}{size\+\_\+type}
+\item 
+typedef ptrdiff\+\_\+t \hyperlink{classSLB_1_1Allocator_af90331221b13541f9b95df3ae4ba03f5}{difference\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const T $\ast$ \hyperlink{classSLB_1_1Allocator_ab7102bf82e5cfc5043bed63175f1956b}{address} (const T \&s) const 
+\item 
+size\+\_\+t \hyperlink{classSLB_1_1Allocator_afe13085cb89de16cc01bd90bfe906c80}{max\+\_\+size} () const 
+\item 
+bool \hyperlink{classSLB_1_1Allocator_a1373f10269a64c68010275261614d7f1}{operator!=} (const \hyperlink{classSLB_1_1Allocator}{Allocator} \&other) const 
+\item 
+void \hyperlink{classSLB_1_1Allocator_aef81a6cff2e4fdfb7ebc842582915bd5}{construct} (T $\ast$const p, const T \&t) const 
+\item 
+void \hyperlink{classSLB_1_1Allocator_a4342af7f1e79fe79e93953563ea2227d}{destroy} (T $\ast$const p) const 
+\item 
+bool \hyperlink{classSLB_1_1Allocator_a2d5829cf4bb6c1906e77312ff0419cd8}{operator==} (const \hyperlink{classSLB_1_1Allocator}{Allocator} \&) const 
+\item 
+\hyperlink{classSLB_1_1Allocator_ab4ca47d37a07b142dd30f7c493812356}{Allocator} ()
+\item 
+\hyperlink{classSLB_1_1Allocator_a284123183110be003dd66ae78a38de0b}{Allocator} (const \hyperlink{classSLB_1_1Allocator}{Allocator} \&)
+\item 
+{\footnotesize template$<$typename U $>$ }\\\hyperlink{classSLB_1_1Allocator_aa185cf7ab9c4e5db80066e600a9b1fda}{Allocator} (const \hyperlink{classSLB_1_1Allocator}{Allocator}$<$ U $>$ \&)
+\item 
+\hyperlink{classSLB_1_1Allocator_a82355668e25cd1a67f0731d8b2fc7fd8}{$\sim$\+Allocator} ()
+\item 
+T $\ast$ \hyperlink{classSLB_1_1Allocator_a32139c6695adb0ebe7efc19fcd051028}{allocate} (const size\+\_\+t n) const 
+\item 
+void \hyperlink{classSLB_1_1Allocator_affb6e4a238f1125dbc029370a7b3f7e9}{deallocate} (T $\ast$const p, const size\+\_\+t) const 
+\item 
+{\footnotesize template$<$typename U $>$ }\\T $\ast$ \hyperlink{classSLB_1_1Allocator_aa4875dd70b320f8b72bb5fbd921998a2}{allocate} (const size\+\_\+t n, const U $\ast$) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1Allocator}{Allocator} \& \hyperlink{classSLB_1_1Allocator_a188616ae28a69c6e3131c4ecf7d49161}{operator=} (const \hyperlink{classSLB_1_1Allocator}{Allocator} \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!const\+\_\+pointer@{const\+\_\+pointer}}
+\index{const\+\_\+pointer@{const\+\_\+pointer}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{const\+\_\+pointer}{const_pointer}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ typedef const T$\ast$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf const\+\_\+pointer}}\hypertarget{classSLB_1_1Allocator_afeaf038648f7c641b18ed9e8eac80daf}{}\label{classSLB_1_1Allocator_afeaf038648f7c641b18ed9e8eac80daf}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!const\+\_\+reference@{const\+\_\+reference}}
+\index{const\+\_\+reference@{const\+\_\+reference}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{const\+\_\+reference}{const_reference}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ typedef const T\& {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf const\+\_\+reference}}\hypertarget{classSLB_1_1Allocator_a3160607e8b4d40191536eeecef84b8b2}{}\label{classSLB_1_1Allocator_a3160607e8b4d40191536eeecef84b8b2}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!difference\+\_\+type@{difference\+\_\+type}}
+\index{difference\+\_\+type@{difference\+\_\+type}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{difference\+\_\+type}{difference_type}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ typedef ptrdiff\+\_\+t {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf difference\+\_\+type}}\hypertarget{classSLB_1_1Allocator_af90331221b13541f9b95df3ae4ba03f5}{}\label{classSLB_1_1Allocator_af90331221b13541f9b95df3ae4ba03f5}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!pointer@{pointer}}
+\index{pointer@{pointer}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{pointer}{pointer}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ typedef T$\ast$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf pointer}}\hypertarget{classSLB_1_1Allocator_aae4ca3972f504938f16542e0eeb295ac}{}\label{classSLB_1_1Allocator_aae4ca3972f504938f16542e0eeb295ac}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!reference@{reference}}
+\index{reference@{reference}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{reference}{reference}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ typedef T\& {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf reference}}\hypertarget{classSLB_1_1Allocator_acf01b8e7caf65e4204d91462b61d65f3}{}\label{classSLB_1_1Allocator_acf01b8e7caf65e4204d91462b61d65f3}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!size\+\_\+type@{size\+\_\+type}}
+\index{size\+\_\+type@{size\+\_\+type}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{size\+\_\+type}{size_type}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ typedef size\+\_\+t {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf size\+\_\+type}}\hypertarget{classSLB_1_1Allocator_ab5b27ae3bc010c6a60b3ec7f9bdbd06f}{}\label{classSLB_1_1Allocator_ab5b27ae3bc010c6a60b3ec7f9bdbd06f}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!value\+\_\+type@{value\+\_\+type}}
+\index{value\+\_\+type@{value\+\_\+type}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{value\+\_\+type}{value_type}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ typedef T {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf value\+\_\+type}}\hypertarget{classSLB_1_1Allocator_aa7059448157f4fb75e7609ddc0ec1f1b}{}\label{classSLB_1_1Allocator_aa7059448157f4fb75e7609ddc0ec1f1b}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!Allocator@{Allocator}}
+\index{Allocator@{Allocator}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{Allocator()}{Allocator()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf Allocator} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_ab4ca47d37a07b142dd30f7c493812356}{}\label{classSLB_1_1Allocator_ab4ca47d37a07b142dd30f7c493812356}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!Allocator@{Allocator}}
+\index{Allocator@{Allocator}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{Allocator(const Allocator \&)}{Allocator(const Allocator &)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf Allocator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Allocator}$<$ T $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_a284123183110be003dd66ae78a38de0b}{}\label{classSLB_1_1Allocator_a284123183110be003dd66ae78a38de0b}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!Allocator@{Allocator}}
+\index{Allocator@{Allocator}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{Allocator(const Allocator$<$ U $>$ \&)}{Allocator(const Allocator< U > &)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ template$<$typename U $>$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::{\bf Allocator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Allocator}$<$ U $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_aa185cf7ab9c4e5db80066e600a9b1fda}{}\label{classSLB_1_1Allocator_aa185cf7ab9c4e5db80066e600a9b1fda}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!````~Allocator@{$\sim$\+Allocator}}
+\index{````~Allocator@{$\sim$\+Allocator}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{$\sim$\+Allocator()}{~Allocator()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::$\sim${\bf Allocator} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_a82355668e25cd1a67f0731d8b2fc7fd8}{}\label{classSLB_1_1Allocator_a82355668e25cd1a67f0731d8b2fc7fd8}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!address@{address}}
+\index{address@{address}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{address(const T \&s) const }{address(const T &s) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ const T$\ast$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::address (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{s}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_ab7102bf82e5cfc5043bed63175f1956b}{}\label{classSLB_1_1Allocator_ab7102bf82e5cfc5043bed63175f1956b}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!allocate@{allocate}}
+\index{allocate@{allocate}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{allocate(const size\+\_\+t n) const }{allocate(const size_t n) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T$\ast$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::allocate (
+\begin{DoxyParamCaption}
+\item[{const size\+\_\+t}]{n}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_a32139c6695adb0ebe7efc19fcd051028}{}\label{classSLB_1_1Allocator_a32139c6695adb0ebe7efc19fcd051028}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!allocate@{allocate}}
+\index{allocate@{allocate}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{allocate(const size\+\_\+t n, const U $\ast$) const }{allocate(const size_t n, const U *) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ template$<$typename U $>$ T$\ast$ {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::allocate (
+\begin{DoxyParamCaption}
+\item[{const size\+\_\+t}]{n, }
+\item[{const U $\ast$}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_aa4875dd70b320f8b72bb5fbd921998a2}{}\label{classSLB_1_1Allocator_aa4875dd70b320f8b72bb5fbd921998a2}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!construct@{construct}}
+\index{construct@{construct}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{construct(\+T $\ast$const p, const T \&t) const }{construct(T *const p, const T &t) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::construct (
+\begin{DoxyParamCaption}
+\item[{T $\ast$const}]{p, }
+\item[{const T \&}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_aef81a6cff2e4fdfb7ebc842582915bd5}{}\label{classSLB_1_1Allocator_aef81a6cff2e4fdfb7ebc842582915bd5}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!deallocate@{deallocate}}
+\index{deallocate@{deallocate}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{deallocate(\+T $\ast$const p, const size\+\_\+t) const }{deallocate(T *const p, const size_t) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::deallocate (
+\begin{DoxyParamCaption}
+\item[{T $\ast$const}]{p, }
+\item[{const size\+\_\+t}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_affb6e4a238f1125dbc029370a7b3f7e9}{}\label{classSLB_1_1Allocator_affb6e4a238f1125dbc029370a7b3f7e9}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!destroy@{destroy}}
+\index{destroy@{destroy}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{destroy(\+T $\ast$const p) const }{destroy(T *const p) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::destroy (
+\begin{DoxyParamCaption}
+\item[{T $\ast$const}]{p}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_a4342af7f1e79fe79e93953563ea2227d}{}\label{classSLB_1_1Allocator_a4342af7f1e79fe79e93953563ea2227d}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!max\+\_\+size@{max\+\_\+size}}
+\index{max\+\_\+size@{max\+\_\+size}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{max\+\_\+size() const }{max_size() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ size\+\_\+t {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::max\+\_\+size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_afe13085cb89de16cc01bd90bfe906c80}{}\label{classSLB_1_1Allocator_afe13085cb89de16cc01bd90bfe906c80}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{operator"!=(const Allocator \&other) const }{operator!=(const Allocator &other) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::operator!= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Allocator}$<$ T $>$ \&}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_a1373f10269a64c68010275261614d7f1}{}\label{classSLB_1_1Allocator_a1373f10269a64c68010275261614d7f1}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!operator=@{operator=}}
+\index{operator=@{operator=}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{operator=(const Allocator \&)}{operator=(const Allocator &)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Allocator}\& {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Allocator}$<$ T $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Allocator_a188616ae28a69c6e3131c4ecf7d49161}{}\label{classSLB_1_1Allocator_a188616ae28a69c6e3131c4ecf7d49161}
+\index{S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}!operator==@{operator==}}
+\index{operator==@{operator==}!S\+L\+B\+::\+Allocator@{S\+L\+B\+::\+Allocator}}
+\subsubsection[{\texorpdfstring{operator==(const Allocator \&) const }{operator==(const Allocator &) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf S\+L\+B\+::\+Allocator}$<$ T $>$\+::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf Allocator}$<$ T $>$ \&}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Allocator_a2d5829cf4bb6c1906e77312ff0419cd8}{}\label{classSLB_1_1Allocator_a2d5829cf4bb6c1906e77312ff0419cd8}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\end{DoxyCompactItemize}

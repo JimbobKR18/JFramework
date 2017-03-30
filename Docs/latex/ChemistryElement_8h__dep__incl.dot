@@ -1,0 +1,25 @@
+digraph "Components/ChemistryElement.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Components/ChemistryElement.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="Chemistry/ChemicalFactory.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ChemicalFactory_8h.html"];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="Chemistry/DefaultChemical\lFactory.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$DefaultChemicalFactory_8h.html"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="Chemistry/DefaultChemical\lFactory.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$DefaultChemicalFactory_8cpp.html"];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="Managers/ChemistryManager.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ChemistryManager_8cpp.html"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="Components/ChemistryElement.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ChemistryElement_8cpp.html"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="Components/ChemistryMaterial.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ChemistryMaterial_8cpp.html"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="Logic/Level.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Level_8cpp.html"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="LUA/LUATypes.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$LUATypes_8cpp.html"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="Managers/ObjectManager.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ObjectManager_8cpp.html"];
+}

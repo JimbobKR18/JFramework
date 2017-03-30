@@ -1,0 +1,130 @@
+\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation}{}\section{S\+LB\+:\+:Instance\+:\+:No\+Copy\+:\+:Implementation$<$ T $>$ Class Template Reference}
+\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation}\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation$<$ T $>$@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation$<$ T $>$}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Instance\+:\+:No\+Copy\+:\+:Implementation$<$ T $>$\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Instance\+:\+:No\+Copy\+:\+:Implementation$<$ T $>$\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_ac040f5fc4e0a48d847303c868b16d584}{Implementation} (\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ci, T $\ast$ptr)
+\item 
+\hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a03d4fa6e94c69196d851d6994ace2af4}{Implementation} (\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ci, const T $\ast$ptr)
+\item 
+\hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a21da3d2f652b819b9b40cf745caabb2a}{Implementation} (\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ci, T \&ref)
+\item 
+\hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a5cba45ebcb53fed8dfdad9b0a380165e}{Implementation} (\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ci, const T \&ref)
+\item 
+virtual \hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a0da49cbb83de474d11b201d5be73851d}{$\sim$\+Implementation} ()
+\item 
+void $\ast$ \hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a3513e5d5942291c85348e8b48cdf9528}{get\+\_\+ptr} ()
+\item 
+const void $\ast$ \hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a557efe99511f6f792c66f936275a875d}{get\+\_\+const\+\_\+ptr} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>T $\ast$ \hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a8db0714f819c0d16fda6fa5679c9d921}{\_ptr}\\
+\>const T $\ast$ \hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a7a53075d4991fdf7e3032d60cdfd0edf}{\_const\_ptr}\\
+\}; \\
+
+\end{tabbing}\item 
+\hyperlink{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_aece7c6c65e09643db706b01d086446c6}{S\+L\+B\+\_\+\+I\+N\+S\+T\+A\+N\+CE}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!Implementation@{Implementation}}
+\index{Implementation@{Implementation}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{Implementation(\+Class\+Info $\ast$ci, T $\ast$ptr)}{Implementation(ClassInfo *ci, T *ptr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::{\bf Implementation} (
+\begin{DoxyParamCaption}
+\item[{{\bf Class\+Info} $\ast$}]{ci, }
+\item[{T $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_ac040f5fc4e0a48d847303c868b16d584}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_ac040f5fc4e0a48d847303c868b16d584}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!Implementation@{Implementation}}
+\index{Implementation@{Implementation}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{Implementation(\+Class\+Info $\ast$ci, const T $\ast$ptr)}{Implementation(ClassInfo *ci, const T *ptr)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::{\bf Implementation} (
+\begin{DoxyParamCaption}
+\item[{{\bf Class\+Info} $\ast$}]{ci, }
+\item[{const T $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a03d4fa6e94c69196d851d6994ace2af4}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a03d4fa6e94c69196d851d6994ace2af4}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!Implementation@{Implementation}}
+\index{Implementation@{Implementation}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{Implementation(\+Class\+Info $\ast$ci, T \&ref)}{Implementation(ClassInfo *ci, T &ref)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::{\bf Implementation} (
+\begin{DoxyParamCaption}
+\item[{{\bf Class\+Info} $\ast$}]{ci, }
+\item[{T \&}]{ref}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a21da3d2f652b819b9b40cf745caabb2a}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a21da3d2f652b819b9b40cf745caabb2a}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!Implementation@{Implementation}}
+\index{Implementation@{Implementation}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{Implementation(\+Class\+Info $\ast$ci, const T \&ref)}{Implementation(ClassInfo *ci, const T &ref)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::{\bf Implementation} (
+\begin{DoxyParamCaption}
+\item[{{\bf Class\+Info} $\ast$}]{ci, }
+\item[{const T \&}]{ref}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a5cba45ebcb53fed8dfdad9b0a380165e}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a5cba45ebcb53fed8dfdad9b0a380165e}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!````~Implementation@{$\sim$\+Implementation}}
+\index{````~Implementation@{$\sim$\+Implementation}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{$\sim$\+Implementation()}{~Implementation()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ virtual {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::$\sim${\bf Implementation} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a0da49cbb83de474d11b201d5be73851d}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a0da49cbb83de474d11b201d5be73851d}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!get\+\_\+const\+\_\+ptr@{get\+\_\+const\+\_\+ptr}}
+\index{get\+\_\+const\+\_\+ptr@{get\+\_\+const\+\_\+ptr}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{get\+\_\+const\+\_\+ptr()}{get_const_ptr()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const void$\ast$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::get\+\_\+const\+\_\+ptr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a557efe99511f6f792c66f936275a875d}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a557efe99511f6f792c66f936275a875d}
+
+
+Implements \hyperlink{classSLB_1_1InstanceBase_a09e8065c5b0e60abd0047354a3a3f246}{S\+L\+B\+::\+Instance\+Base}.
+
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!get\+\_\+ptr@{get\+\_\+ptr}}
+\index{get\+\_\+ptr@{get\+\_\+ptr}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{get\+\_\+ptr()}{get_ptr()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void$\ast$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::get\+\_\+ptr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a3513e5d5942291c85348e8b48cdf9528}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a3513e5d5942291c85348e8b48cdf9528}
+
+
+Implements \hyperlink{classSLB_1_1InstanceBase_aaac2eb194d9008d586ce73ba7c692ce3}{S\+L\+B\+::\+Instance\+Base}.
+
+
+
+\subsection{Member Data Documentation}
+\subsubsection[{\texorpdfstring{"@5}{@5}}]{\setlength{\rightskip}{0pt plus 5cm}union \{ ... \} \hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a512a8e3519b26a43d49b20fb8a43eec2}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a512a8e3519b26a43d49b20fb8a43eec2}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!\+\_\+const\+\_\+ptr@{\+\_\+const\+\_\+ptr}}
+\index{\+\_\+const\+\_\+ptr@{\+\_\+const\+\_\+ptr}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{\+\_\+const\+\_\+ptr}{_const_ptr}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::\+\_\+const\+\_\+ptr}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a7a53075d4991fdf7e3032d60cdfd0edf}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a7a53075d4991fdf7e3032d60cdfd0edf}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!\+\_\+ptr@{\+\_\+ptr}}
+\index{\+\_\+ptr@{\+\_\+ptr}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{\+\_\+ptr}{_ptr}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::\+\_\+ptr}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a8db0714f819c0d16fda6fa5679c9d921}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_a8db0714f819c0d16fda6fa5679c9d921}
+\index{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}!S\+L\+B\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{S\+L\+B\+\_\+\+I\+N\+S\+T\+A\+N\+CE}}
+\index{S\+L\+B\+\_\+\+I\+N\+S\+T\+A\+N\+CE@{S\+L\+B\+\_\+\+I\+N\+S\+T\+A\+N\+CE}!S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation@{S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+I\+N\+S\+T\+A\+N\+CE}{SLB_INSTANCE}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Instance\+::\+No\+Copy\+::\+Implementation}$<$ T $>$\+::S\+L\+B\+\_\+\+I\+N\+S\+T\+A\+N\+CE\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_aece7c6c65e09643db706b01d086446c6}{}\label{classSLB_1_1Instance_1_1NoCopy_1_1Implementation_aece7c6c65e09643db706b01d086446c6}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\end{DoxyCompactItemize}

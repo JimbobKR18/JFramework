@@ -1,0 +1,155 @@
+\hypertarget{structLine}{}\section{Line Struct Reference}
+\label{structLine}\index{Line@{Line}}
+
+
+{\ttfamily \#include $<$Shape.\+h$>$}
+
+
+
+Inheritance diagram for Line\+:
+% FIG 0
+
+
+Collaboration diagram for Line\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structLine_acc11b8a429d8cdd63ba6803dff5602b3}{Line} ()
+\item 
+\hyperlink{structLine_a1aa4afb079929d362dc13c811b82c7c6}{Line} (\hyperlink{structVector3}{Vector3} const \&a\+Position, \hyperlink{structVector3}{Vector3} const \&a\+Direction, float a\+Length)
+\item 
+\hyperlink{structLine_a0b2f354dc2848f04096982d812ff7c64}{Line} (\hyperlink{structVector3}{Vector3} const \&a\+Start, \hyperlink{structVector3}{Vector3} const \&a\+End)
+\item 
+virtual \hyperlink{structLine_aabe85f48d22d92b62257091f48174fac}{$\sim$\+Line} ()
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structLine_aa7c29c7cef9f328553f174458d37a39a}{Closest\+Point\+To\+Point} (\hyperlink{structVector3}{Vector3} const \&a\+Point) const 
+\begin{DoxyCompactList}\small\item\em Get closest point on line to point. \end{DoxyCompactList}\item 
+bool \hyperlink{structLine_a24923692cdeab26f3907f392a1c57b22}{Get\+Collisions} (\hyperlink{structLine}{Line} const \&a\+Compare, \hyperlink{structCircle}{Circle} \&a\+Output)
+\begin{DoxyCompactList}\small\item\em Get all possible collisions with another line. \end{DoxyCompactList}\item 
+virtual float \hyperlink{structLine_a16918493d6a5eaa3576ebb0c1f386197}{Get\+Size} (int index)
+\begin{DoxyCompactList}\small\item\em Get length of line. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structLine_ae63ba0eae1b8a7b0a3786328bcb4992d}{direction}
+\item 
+float \hyperlink{structLine_ab7e2334c25ca3ea59df0ef559bd88143}{length}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Line@{Line}!Line@{Line}}
+\index{Line@{Line}!Line@{Line}}
+\subsubsection[{\texorpdfstring{Line()}{Line()}}]{\setlength{\rightskip}{0pt plus 5cm}Line\+::\+Line (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structLine_acc11b8a429d8cdd63ba6803dff5602b3}{}\label{structLine_acc11b8a429d8cdd63ba6803dff5602b3}
+\index{Line@{Line}!Line@{Line}}
+\index{Line@{Line}!Line@{Line}}
+\subsubsection[{\texorpdfstring{Line(\+Vector3 const \&a\+Position, Vector3 const \&a\+Direction, float a\+Length)}{Line(Vector3 const &aPosition, Vector3 const &aDirection, float aLength)}}]{\setlength{\rightskip}{0pt plus 5cm}Line\+::\+Line (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position, }
+\item[{{\bf Vector3} const \&}]{a\+Direction, }
+\item[{float}]{a\+Length}
+\end{DoxyParamCaption}
+)}\hypertarget{structLine_a1aa4afb079929d362dc13c811b82c7c6}{}\label{structLine_a1aa4afb079929d362dc13c811b82c7c6}
+\index{Line@{Line}!Line@{Line}}
+\index{Line@{Line}!Line@{Line}}
+\subsubsection[{\texorpdfstring{Line(\+Vector3 const \&a\+Start, Vector3 const \&a\+End)}{Line(Vector3 const &aStart, Vector3 const &aEnd)}}]{\setlength{\rightskip}{0pt plus 5cm}Line\+::\+Line (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Start, }
+\item[{{\bf Vector3} const \&}]{a\+End}
+\end{DoxyParamCaption}
+)}\hypertarget{structLine_a0b2f354dc2848f04096982d812ff7c64}{}\label{structLine_a0b2f354dc2848f04096982d812ff7c64}
+\index{Line@{Line}!````~Line@{$\sim$\+Line}}
+\index{````~Line@{$\sim$\+Line}!Line@{Line}}
+\subsubsection[{\texorpdfstring{$\sim$\+Line()}{~Line()}}]{\setlength{\rightskip}{0pt plus 5cm}Line\+::$\sim$\+Line (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structLine_aabe85f48d22d92b62257091f48174fac}{}\label{structLine_aabe85f48d22d92b62257091f48174fac}
+
+
+\subsection{Member Function Documentation}
+\index{Line@{Line}!Closest\+Point\+To\+Point@{Closest\+Point\+To\+Point}}
+\index{Closest\+Point\+To\+Point@{Closest\+Point\+To\+Point}!Line@{Line}}
+\subsubsection[{\texorpdfstring{Closest\+Point\+To\+Point(\+Vector3 const \&a\+Point) const }{ClosestPointToPoint(Vector3 const &aPoint) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Line\+::\+Closest\+Point\+To\+Point (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Point}
+\end{DoxyParamCaption}
+) const}\hypertarget{structLine_aa7c29c7cef9f328553f174458d37a39a}{}\label{structLine_aa7c29c7cef9f328553f174458d37a39a}
+
+
+Get closest point on line to point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Point} & Point to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Closest point on line to said point. 
+\end{DoxyReturn}
+\index{Line@{Line}!Get\+Collisions@{Get\+Collisions}}
+\index{Get\+Collisions@{Get\+Collisions}!Line@{Line}}
+\subsubsection[{\texorpdfstring{Get\+Collisions(\+Line const \&a\+Compare, Circle \&a\+Output)}{GetCollisions(Line const &aCompare, Circle &aOutput)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Line\+::\+Get\+Collisions (
+\begin{DoxyParamCaption}
+\item[{{\bf Line} const \&}]{a\+Compare, }
+\item[{{\bf Circle} \&}]{a\+Output}
+\end{DoxyParamCaption}
+)}\hypertarget{structLine_a24923692cdeab26f3907f392a1c57b22}{}\label{structLine_a24923692cdeab26f3907f392a1c57b22}
+
+
+Get all possible collisions with another line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Compare} & \hyperlink{structLine}{Line} to check \\
+\hline
+{\em a\+Output} & Output circle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If circle is found or not 
+\end{DoxyReturn}
+\index{Line@{Line}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!Line@{Line}}
+\subsubsection[{\texorpdfstring{Get\+Size(int index)}{GetSize(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}float Line\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structLine_a16918493d6a5eaa3576ebb0c1f386197}{}\label{structLine_a16918493d6a5eaa3576ebb0c1f386197}
+
+
+Get length of line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Does nothing \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Length 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{structShape_a878528c42f14532e5fadc9ace7024f68}{Shape}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Line@{Line}!direction@{direction}}
+\index{direction@{direction}!Line@{Line}}
+\subsubsection[{\texorpdfstring{direction}{direction}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Line\+::direction}\hypertarget{structLine_ae63ba0eae1b8a7b0a3786328bcb4992d}{}\label{structLine_ae63ba0eae1b8a7b0a3786328bcb4992d}
+\index{Line@{Line}!length@{length}}
+\index{length@{length}!Line@{Line}}
+\subsubsection[{\texorpdfstring{length}{length}}]{\setlength{\rightskip}{0pt plus 5cm}float Line\+::length}\hypertarget{structLine_ab7e2334c25ca3ea59df0ef559bd88143}{}\label{structLine_ab7e2334c25ca3ea59df0ef559bd88143}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{Shape_8h}{Shape.\+h}\item 
+Core/\hyperlink{Shape_8cpp}{Shape.\+cpp}\end{DoxyCompactItemize}

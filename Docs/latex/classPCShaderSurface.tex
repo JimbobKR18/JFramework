@@ -1,0 +1,481 @@
+\hypertarget{classPCShaderSurface}{}\section{P\+C\+Shader\+Surface Class Reference}
+\label{classPCShaderSurface}\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+
+
+{\ttfamily \#include $<$P\+C\+Shader\+Surface.\+h$>$}
+
+
+
+Inheritance diagram for P\+C\+Shader\+Surface\+:
+% FIG 0
+
+
+Collaboration diagram for P\+C\+Shader\+Surface\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPCShaderSurface_a3dc1eb67279811b9ac78cd3d98ce3768}{P\+C\+Shader\+Surface} ()
+\item 
+\hyperlink{classPCShaderSurface_ab20ce43690d22c9da363607d3e01b6cd}{P\+C\+Shader\+Surface} (\hyperlink{classGraphicsManager}{Graphics\+Manager} $\ast$a\+Manager)
+\item 
+virtual \hyperlink{classPCShaderSurface_aca50515bcfb2d55d8627639c36a5f920}{$\sim$\+P\+C\+Shader\+Surface} ()
+\item 
+virtual void \hyperlink{classPCShaderSurface_a174eb5f22b5502263d69f13948da226a}{Load\+Image} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Load an image by file name. \end{DoxyCompactList}\item 
+virtual \hyperlink{structVector3}{Vector3} \hyperlink{classPCShaderSurface_a199474fdbdac125b9abb8b00cd56d844}{Load\+Text} (\hyperlink{classHashString}{Hash\+String} const \&a\+Font, \hyperlink{classHashString}{Hash\+String} const \&a\+Text, \hyperlink{structVector4}{Vector4} const \&a\+Foreground\+Color, \hyperlink{structVector4}{Vector4} const \&a\+Background\+Color, int a\+Size, int a\+Max\+Width)
+\begin{DoxyCompactList}\small\item\em Loads a text surface in font. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderSurface_a89d0b3e19f210afbe3edee6be389dbe9}{Load\+Shaders} (\hyperlink{classHashString}{Hash\+String} const \&a\+Vertex\+Shader\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Fragment\+Shader\+Filename)
+\begin{DoxyCompactList}\small\item\em Load shaders. \end{DoxyCompactList}\item 
+unsigned \hyperlink{classPCShaderSurface_addbb77f1a9d6db52e97f8d9a295096e0}{Get\+Texture\+ID} () const 
+\begin{DoxyCompactList}\small\item\em Get GL specified texture value. \end{DoxyCompactList}\item 
+unsigned \hyperlink{classPCShaderSurface_aa89277538add28b391e109d375a1e397}{Get\+Program\+ID} () const 
+\begin{DoxyCompactList}\small\item\em Get GL specified program value. \end{DoxyCompactList}\item 
+unsigned \hyperlink{classPCShaderSurface_a5aae126662630703a8e96a1bfeaa826f}{Get\+Vertex\+Shader\+ID} () const 
+\begin{DoxyCompactList}\small\item\em Get GL specified vertex shader ID. \end{DoxyCompactList}\item 
+unsigned \hyperlink{classPCShaderSurface_a75148953b9251933b8e1b92bbf1a4bbd}{Get\+Fragment\+Shader\+ID} () const 
+\begin{DoxyCompactList}\small\item\em Get GL specified fragment shader ID. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} const \& \hyperlink{classPCShaderSurface_a76ddb07c2c1eaf278897ac9721af923f}{Get\+Vertex\+Shader\+Filename} () const 
+\begin{DoxyCompactList}\small\item\em Get vertex shader file name. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} const \& \hyperlink{classPCShaderSurface_a4336504cd2ae509d3b4cc4668f72e8b5}{Get\+Fragment\+Shader\+Filename} () const 
+\begin{DoxyCompactList}\small\item\em Get fragment shader file name. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderSurface_a49251c5ad3d59fc484601e3a5df7cdb5}{Update} ()
+\begin{DoxyCompactList}\small\item\em Simple update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderSurface_a080c3656b20f23493096d16325bc3005}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to owner. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderSurface_ae004f90212579a2448de1b7bc014bc1e}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderSurface_a540f9f1d910279d4f60a707a059fb0e1}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize to file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classPCShaderSurface_ae655e35c7c679f8d4de963786cc24fa5}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Read from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classPCShaderSurface_a6b1c77a2ef538e1a851440bb0c3d1170}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em L\+UA functionality. \end{DoxyCompactList}\item 
+static int \hyperlink{classPCShaderSurface_a50da8a4c0936d8c69046bdc6041eb180}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPCShaderSurface_a1456554f76a75401d2760738b171d4ea}{Add\+Texture\+Pairing} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Helper to set basic texture params via config file. \end{DoxyCompactList}\item 
+void \hyperlink{classPCShaderSurface_a552bb03ecd2e74585af0cf626f82542f}{Print\+G\+L\+Error} (int const a\+Line\+Number)
+\begin{DoxyCompactList}\small\item\em Prints GL error info. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+G\+Luint \hyperlink{classPCShaderSurface_af7a4c9392ee2ef0bf836e97648b4112e}{m\+Texture\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderSurface_a9cee47a14a865a5061ef5d486a4e604b}{m\+Program\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderSurface_a8d0fd2eafcceb4765cea47ea67190467}{m\+Vertex\+Shader\+ID}
+\item 
+G\+Luint \hyperlink{classPCShaderSurface_ac719340038040dd0f3261858b39eaf90}{m\+Fragment\+Shader\+ID}
+\item 
+S\+D\+L\+\_\+\+Surface $\ast$ \hyperlink{classPCShaderSurface_a18c859f930b006b872c7fcb01061a95e}{m\+Surface}
+\item 
+G\+Lenum \hyperlink{classPCShaderSurface_ab594b2e8b076bf2bfce19c4b63ec002a}{m\+Texture\+Format}
+\item 
+G\+Lint \hyperlink{classPCShaderSurface_a728c8c2df9e984222a81284428c3bdfa}{m\+Number\+Of\+Colors}
+\item 
+T\+T\+F\+\_\+\+Font $\ast$ \hyperlink{classPCShaderSurface_a9f29a380adefffa842169f30bb8c70a4}{m\+Font}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classPCShaderSurface_a6b0d831f9fdea915e3f0a0326e8dbf88}{m\+Vertex\+Shader\+File\+Name}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classPCShaderSurface_ad6a28307d37dd3ae978f6d9ad7871ecd}{m\+Fragment\+Shader\+File\+Name}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classPCShaderSurface_a37e06e94768cfb6413e8daa0c8d5a2a2}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Surface\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{P\+C\+Shader\+Surface()}{PCShaderSurface()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Shader\+Surface\+::\+P\+C\+Shader\+Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPCShaderSurface_a3dc1eb67279811b9ac78cd3d98ce3768}{}\label{classPCShaderSurface_a3dc1eb67279811b9ac78cd3d98ce3768}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{P\+C\+Shader\+Surface(\+Graphics\+Manager $\ast$a\+Manager)}{PCShaderSurface(GraphicsManager *aManager)}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Shader\+Surface\+::\+P\+C\+Shader\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Graphics\+Manager} $\ast$}]{a\+Manager}
+\end{DoxyParamCaption}
+)}\hypertarget{classPCShaderSurface_ab20ce43690d22c9da363607d3e01b6cd}{}\label{classPCShaderSurface_ab20ce43690d22c9da363607d3e01b6cd}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!````~P\+C\+Shader\+Surface@{$\sim$\+P\+C\+Shader\+Surface}}
+\index{````~P\+C\+Shader\+Surface@{$\sim$\+P\+C\+Shader\+Surface}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{$\sim$\+P\+C\+Shader\+Surface()}{~PCShaderSurface()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Shader\+Surface\+::$\sim$\+P\+C\+Shader\+Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_aca50515bcfb2d55d8627639c36a5f920}{}\label{classPCShaderSurface_aca50515bcfb2d55d8627639c36a5f920}
+
+
+\subsection{Member Function Documentation}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Add\+Texture\+Pairing@{Add\+Texture\+Pairing}}
+\index{Add\+Texture\+Pairing@{Add\+Texture\+Pairing}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Add\+Texture\+Pairing(\+Hash\+String const \&a\+Name)}{AddTexturePairing(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Add\+Texture\+Pairing (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a1456554f76a75401d2760738b171d4ea}{}\label{classPCShaderSurface_a1456554f76a75401d2760738b171d4ea}
+
+
+Helper to set basic texture params via config file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of object in texture pairing. \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)}{Deserialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_ae655e35c7c679f8d4de963786cc24fa5}{}\label{classPCShaderSurface_ae655e35c7c679f8d4de963786cc24fa5}
+
+
+Read from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File to read from. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSurface_a5afb925d505f53974fd5542698be9407}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Get\+Fragment\+Shader\+Filename@{Get\+Fragment\+Shader\+Filename}}
+\index{Get\+Fragment\+Shader\+Filename@{Get\+Fragment\+Shader\+Filename}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Get\+Fragment\+Shader\+Filename() const }{GetFragmentShaderFilename() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const \& P\+C\+Shader\+Surface\+::\+Get\+Fragment\+Shader\+Filename (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPCShaderSurface_a4336504cd2ae509d3b4cc4668f72e8b5}{}\label{classPCShaderSurface_a4336504cd2ae509d3b4cc4668f72e8b5}
+
+
+Get fragment shader file name. 
+
+\begin{DoxyReturn}{Returns}
+File name. 
+\end{DoxyReturn}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Get\+Fragment\+Shader\+ID@{Get\+Fragment\+Shader\+ID}}
+\index{Get\+Fragment\+Shader\+ID@{Get\+Fragment\+Shader\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Get\+Fragment\+Shader\+I\+D() const }{GetFragmentShaderID() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned P\+C\+Shader\+Surface\+::\+Get\+Fragment\+Shader\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPCShaderSurface_a75148953b9251933b8e1b92bbf1a4bbd}{}\label{classPCShaderSurface_a75148953b9251933b8e1b92bbf1a4bbd}
+
+
+Get GL specified fragment shader ID. 
+
+\begin{DoxyReturn}{Returns}
+Fragment shader ID. 
+\end{DoxyReturn}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Get\+Program\+ID@{Get\+Program\+ID}}
+\index{Get\+Program\+ID@{Get\+Program\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Get\+Program\+I\+D() const }{GetProgramID() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned P\+C\+Shader\+Surface\+::\+Get\+Program\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_aa89277538add28b391e109d375a1e397}{}\label{classPCShaderSurface_aa89277538add28b391e109d375a1e397}
+
+
+Get GL specified program value. 
+
+\begin{DoxyReturn}{Returns}
+Program ID. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSurface_a109736ab841dbd36ca58ffd45d40b315}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Get\+Texture\+ID@{Get\+Texture\+ID}}
+\index{Get\+Texture\+ID@{Get\+Texture\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Get\+Texture\+I\+D() const }{GetTextureID() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned P\+C\+Shader\+Surface\+::\+Get\+Texture\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_addbb77f1a9d6db52e97f8d9a295096e0}{}\label{classPCShaderSurface_addbb77f1a9d6db52e97f8d9a295096e0}
+
+
+Get GL specified texture value. 
+
+\begin{DoxyReturn}{Returns}
+Texture ID. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSurface_a807bafe8551b2a80b4f0aa87b6a50e77}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int P\+C\+Shader\+Surface\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classPCShaderSurface_a50da8a4c0936d8c69046bdc6041eb180}{}\label{classPCShaderSurface_a50da8a4c0936d8c69046bdc6041eb180}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Get\+Vertex\+Shader\+Filename@{Get\+Vertex\+Shader\+Filename}}
+\index{Get\+Vertex\+Shader\+Filename@{Get\+Vertex\+Shader\+Filename}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Get\+Vertex\+Shader\+Filename() const }{GetVertexShaderFilename() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const \& P\+C\+Shader\+Surface\+::\+Get\+Vertex\+Shader\+Filename (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPCShaderSurface_a76ddb07c2c1eaf278897ac9721af923f}{}\label{classPCShaderSurface_a76ddb07c2c1eaf278897ac9721af923f}
+
+
+Get vertex shader file name. 
+
+\begin{DoxyReturn}{Returns}
+File name. 
+\end{DoxyReturn}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Get\+Vertex\+Shader\+ID@{Get\+Vertex\+Shader\+ID}}
+\index{Get\+Vertex\+Shader\+ID@{Get\+Vertex\+Shader\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Get\+Vertex\+Shader\+I\+D() const }{GetVertexShaderID() const }}]{\setlength{\rightskip}{0pt plus 5cm}unsigned P\+C\+Shader\+Surface\+::\+Get\+Vertex\+Shader\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPCShaderSurface_a5aae126662630703a8e96a1bfeaa826f}{}\label{classPCShaderSurface_a5aae126662630703a8e96a1bfeaa826f}
+
+
+Get GL specified vertex shader ID. 
+
+\begin{DoxyReturn}{Returns}
+Vertex shader ID. 
+\end{DoxyReturn}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Load\+Image@{Load\+Image}}
+\index{Load\+Image@{Load\+Image}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Load\+Image(\+Hash\+String const \&a\+Name)}{LoadImage(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Load\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_a174eb5f22b5502263d69f13948da226a}{}\label{classPCShaderSurface_a174eb5f22b5502263d69f13948da226a}
+
+
+Load an image by file name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of the file. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSurface_a634f4bfe638855b7ef0cb889feebaac3}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Load\+Shaders@{Load\+Shaders}}
+\index{Load\+Shaders@{Load\+Shaders}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Load\+Shaders(\+Hash\+String const \&a\+Vertex\+Shader\+Filename, Hash\+String const \&a\+Fragment\+Shader\+Filename)}{LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Load\+Shaders (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Vertex\+Shader\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Fragment\+Shader\+Filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_a89d0b3e19f210afbe3edee6be389dbe9}{}\label{classPCShaderSurface_a89d0b3e19f210afbe3edee6be389dbe9}
+
+
+Load shaders. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Vertex\+Shader\+Filename} & Name of vertex shader. \\
+\hline
+{\em a\+Fragment\+Shader\+Filename} & Name of fragment shader. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSurface_ab01df27c2a91269a97773cb1df1c0f14}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Load\+Text@{Load\+Text}}
+\index{Load\+Text@{Load\+Text}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Load\+Text(\+Hash\+String const \&a\+Font, Hash\+String const \&a\+Text, Vector4 const \&a\+Foreground\+Color, Vector4 const \&a\+Background\+Color, int a\+Size, int a\+Max\+Width)}{LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} P\+C\+Shader\+Surface\+::\+Load\+Text (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Font, }
+\item[{{\bf Hash\+String} const \&}]{a\+Text, }
+\item[{{\bf Vector4} const \&}]{a\+Foreground\+Color, }
+\item[{{\bf Vector4} const \&}]{a\+Background\+Color, }
+\item[{int}]{a\+Size, }
+\item[{int}]{a\+Max\+Width}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_a199474fdbdac125b9abb8b00cd56d844}{}\label{classPCShaderSurface_a199474fdbdac125b9abb8b00cd56d844}
+
+
+Loads a text surface in font. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Font} & Font to use. \\
+\hline
+{\em a\+Text} & Text to render. \\
+\hline
+{\em a\+Foreground\+Color} & Color of the text. \\
+\hline
+{\em a\+Background\+Color} & Color of the background. \\
+\hline
+{\em a\+Size} & Size of font. \\
+\hline
+{\em a\+Max\+Width} & Max width of a single line (in pixels). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSurface_a1d80ab9d8946932c2ffb2788728f3263}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Print\+G\+L\+Error@{Print\+G\+L\+Error}}
+\index{Print\+G\+L\+Error@{Print\+G\+L\+Error}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Print\+G\+L\+Error(int const a\+Line\+Number)}{PrintGLError(int const aLineNumber)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Print\+G\+L\+Error (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Line\+Number}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a552bb03ecd2e74585af0cf626f82542f}{}\label{classPCShaderSurface_a552bb03ecd2e74585af0cf626f82542f}
+
+
+Prints GL error info. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Line\+Number} & Use {\bfseries L\+I\+NE} wherever you use this. \\
+\hline
+\end{DoxyParams}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_ae004f90212579a2448de1b7bc014bc1e}{}\label{classPCShaderSurface_ae004f90212579a2448de1b7bc014bc1e}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to receive. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSurface_a4bc9df15d34a240fcb62f79282054862}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_a080c3656b20f23493096d16325bc3005}{}\label{classPCShaderSurface_a080c3656b20f23493096d16325bc3005}
+
+
+Send message to owner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSurface_a05f530ec3be9c36410c193c3f7878935}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_a540f9f1d910279d4f60a707a059fb0e1}{}\label{classPCShaderSurface_a540f9f1d910279d4f60a707a059fb0e1}
+
+
+Serialize to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File to write into. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSurface_a4d98b3f6be9a39184f70796b1858c620}{Surface}.
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classPCShaderSurface_a6b1c77a2ef538e1a851440bb0c3d1170}{}\label{classPCShaderSurface_a6b1c77a2ef538e1a851440bb0c3d1170}
+
+
+L\+UA functionality. 
+
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!Update@{Update}}
+\index{Update@{Update}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Shader\+Surface\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCShaderSurface_a49251c5ad3d59fc484601e3a5df7cdb5}{}\label{classPCShaderSurface_a49251c5ad3d59fc484601e3a5df7cdb5}
+
+
+Simple update loop. 
+
+
+
+Reimplemented from \hyperlink{classSurface_a36094693997d1cd7bdc6dca831952de8}{Surface}.
+
+
+
+\subsection{Member Data Documentation}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Font@{m\+Font}}
+\index{m\+Font@{m\+Font}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Font}{mFont}}]{\setlength{\rightskip}{0pt plus 5cm}T\+T\+F\+\_\+\+Font$\ast$ P\+C\+Shader\+Surface\+::m\+Font\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a9f29a380adefffa842169f30bb8c70a4}{}\label{classPCShaderSurface_a9f29a380adefffa842169f30bb8c70a4}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Fragment\+Shader\+File\+Name@{m\+Fragment\+Shader\+File\+Name}}
+\index{m\+Fragment\+Shader\+File\+Name@{m\+Fragment\+Shader\+File\+Name}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Fragment\+Shader\+File\+Name}{mFragmentShaderFileName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} P\+C\+Shader\+Surface\+::m\+Fragment\+Shader\+File\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_ad6a28307d37dd3ae978f6d9ad7871ecd}{}\label{classPCShaderSurface_ad6a28307d37dd3ae978f6d9ad7871ecd}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Fragment\+Shader\+ID@{m\+Fragment\+Shader\+ID}}
+\index{m\+Fragment\+Shader\+ID@{m\+Fragment\+Shader\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Fragment\+Shader\+ID}{mFragmentShaderID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Surface\+::m\+Fragment\+Shader\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_ac719340038040dd0f3261858b39eaf90}{}\label{classPCShaderSurface_ac719340038040dd0f3261858b39eaf90}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Number\+Of\+Colors@{m\+Number\+Of\+Colors}}
+\index{m\+Number\+Of\+Colors@{m\+Number\+Of\+Colors}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Number\+Of\+Colors}{mNumberOfColors}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lint P\+C\+Shader\+Surface\+::m\+Number\+Of\+Colors\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a728c8c2df9e984222a81284428c3bdfa}{}\label{classPCShaderSurface_a728c8c2df9e984222a81284428c3bdfa}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Program\+ID@{m\+Program\+ID}}
+\index{m\+Program\+ID@{m\+Program\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Program\+ID}{mProgramID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Surface\+::m\+Program\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a9cee47a14a865a5061ef5d486a4e604b}{}\label{classPCShaderSurface_a9cee47a14a865a5061ef5d486a4e604b}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Surface@{m\+Surface}}
+\index{m\+Surface@{m\+Surface}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Surface}{mSurface}}]{\setlength{\rightskip}{0pt plus 5cm}S\+D\+L\+\_\+\+Surface$\ast$ P\+C\+Shader\+Surface\+::m\+Surface\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a18c859f930b006b872c7fcb01061a95e}{}\label{classPCShaderSurface_a18c859f930b006b872c7fcb01061a95e}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Texture\+Format@{m\+Texture\+Format}}
+\index{m\+Texture\+Format@{m\+Texture\+Format}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Texture\+Format}{mTextureFormat}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lenum P\+C\+Shader\+Surface\+::m\+Texture\+Format\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_ab594b2e8b076bf2bfce19c4b63ec002a}{}\label{classPCShaderSurface_ab594b2e8b076bf2bfce19c4b63ec002a}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Texture\+ID@{m\+Texture\+ID}}
+\index{m\+Texture\+ID@{m\+Texture\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Texture\+ID}{mTextureID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Surface\+::m\+Texture\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_af7a4c9392ee2ef0bf836e97648b4112e}{}\label{classPCShaderSurface_af7a4c9392ee2ef0bf836e97648b4112e}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Vertex\+Shader\+File\+Name@{m\+Vertex\+Shader\+File\+Name}}
+\index{m\+Vertex\+Shader\+File\+Name@{m\+Vertex\+Shader\+File\+Name}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Vertex\+Shader\+File\+Name}{mVertexShaderFileName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} P\+C\+Shader\+Surface\+::m\+Vertex\+Shader\+File\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a6b0d831f9fdea915e3f0a0326e8dbf88}{}\label{classPCShaderSurface_a6b0d831f9fdea915e3f0a0326e8dbf88}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!m\+Vertex\+Shader\+ID@{m\+Vertex\+Shader\+ID}}
+\index{m\+Vertex\+Shader\+ID@{m\+Vertex\+Shader\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{m\+Vertex\+Shader\+ID}{mVertexShaderID}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint P\+C\+Shader\+Surface\+::m\+Vertex\+Shader\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCShaderSurface_a8d0fd2eafcceb4765cea47ea67190467}{}\label{classPCShaderSurface_a8d0fd2eafcceb4765cea47ea67190467}
+\index{P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!P\+C\+Shader\+Surface@{P\+C\+Shader\+Surface}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const P\+C\+Shader\+Surface\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Surface\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classPCShaderSurface_a37e06e94768cfb6413e8daa0c8d5a2a2}{}\label{classPCShaderSurface_a37e06e94768cfb6413e8daa0c8d5a2a2}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graphics/\hyperlink{PCShaderSurface_8h}{P\+C\+Shader\+Surface.\+h}\item 
+Graphics/\hyperlink{PCShaderSurface_8cpp}{P\+C\+Shader\+Surface.\+cpp}\end{DoxyCompactItemize}

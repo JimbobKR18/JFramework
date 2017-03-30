@@ -1,0 +1,391 @@
+\hypertarget{classSLB_1_1Manager}{}\section{S\+LB\+:\+:Manager Class Reference}
+\label{classSLB_1_1Manager}\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Collaboration diagram for S\+LB\+:\+:Manager\+:
+% FIG 0
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$($\ast$ \hyperlink{classSLB_1_1Manager_ace7ae7e8febfd03b7a43ac5b24dabdff}{Conversor}) (void $\ast$)
+\item 
+typedef std\+::pair$<$ \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper}, \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} $>$ \hyperlink{classSLB_1_1Manager_abd34d2a3a61f567f11744e9b398debd3}{Type\+Info\+Wrapper\+Pair}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classSLB_1_1Manager_aaea14f2475937f4c0fa51845b3a10ce3}{S\+L\+B\+\_\+\+Map} (\hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper}, \hyperlink{classSLB_1_1ref__ptr}{ref\+\_\+ptr}$<$ \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $>$) Class\+Map
+\item 
+typedef \hyperlink{classSLB_1_1Manager_a98997819973ad26999847b08c975efe1}{S\+L\+B\+\_\+\+Map} (\hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String}, \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper}) Name\+Map
+\item 
+typedef \hyperlink{classSLB_1_1Manager_ad62b58fdb065f092eb84e6446c830fe3}{S\+L\+B\+\_\+\+Map} (\hyperlink{classSLB_1_1Manager_abd34d2a3a61f567f11744e9b398debd3}{Type\+Info\+Wrapper\+Pair}, \hyperlink{structSLB_1_1Conversor}{Conversor}) Conversions\+Map
+\item 
+\hyperlink{classSLB_1_1Manager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{Manager} ()
+\item 
+\hyperlink{classSLB_1_1Manager_a322cad25d7007438b3a043ad02253d29}{$\sim$\+Manager} ()
+\item 
+const \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1Manager_a84ccfa04b4659837a774e4fd68c8c39a}{get\+Class} (const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&) const 
+\item 
+const \hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1Manager_aba315e4277eae45f3aabd4289635ddf3}{get\+Class} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&) const 
+\item 
+\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1Manager_aaa0f4d0c2046b3e38b09d974f5eb2435}{get\+Class} (lua\+\_\+\+State $\ast$L, int pos) const 
+\begin{DoxyCompactList}\small\item\em Returns the class\+Info of an object, or null if it is a basic lua-\/type. \end{DoxyCompactList}\item 
+\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1Manager_a47bee0d78050efd3e7b7dc72b6e43dbd}{get\+Class} (const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&)
+\item 
+\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1Manager_addbbcefc5578801fd96723e8a065150d}{get\+Class} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&)
+\item 
+\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$ \hyperlink{classSLB_1_1Manager_adb546436a306f64284307b3e78dc0275}{get\+Or\+Create\+Class} (const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&)
+\item 
+bool \hyperlink{classSLB_1_1Manager_a0a200fc2b2402b9f097247d1b412ffe6}{copy} (lua\+\_\+\+State $\ast$from, int pos, lua\+\_\+\+State $\ast$to)
+\item 
+void \hyperlink{classSLB_1_1Manager_a411bb9c095d8ba74441d23f7f9c54863}{set} (const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&, \hyperlink{classSLB_1_1Object}{Object} $\ast$obj)
+\item 
+void \hyperlink{classSLB_1_1Manager_aa647c6678679a4cc8af4aab9715266ef}{register\+S\+LB} (lua\+\_\+\+State $\ast$L)
+\item 
+void $\ast$ \hyperlink{classSLB_1_1Manager_a124fa5f9d063cc2f336fb98653fb11fd}{convert} (const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&C1, const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&C2, void $\ast$obj)
+\item 
+const void $\ast$ \hyperlink{classSLB_1_1Manager_a1fba9d34e69f8c5941114444a1118b31}{convert} (const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&C1, const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&C2, const void $\ast$obj)
+\item 
+\hyperlink{classSLB_1_1Namespace}{Namespace} $\ast$ \hyperlink{classSLB_1_1Manager_a097b7c65408c60c5c52af92a83f4410b}{get\+Globals} ()
+\item 
+const Class\+Map \& \hyperlink{classSLB_1_1Manager_aa5b3c342dc0a998838c56be85f389fa3}{get\+Class\+Map} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classSLB_1_1Manager}{Manager} $\ast$ \hyperlink{classSLB_1_1Manager_a6ad073864d542365b5527ed3dd67f77b}{get\+Instance} (lua\+\_\+\+State $\ast$L)
+\item 
+static \hyperlink{classSLB_1_1Manager}{Manager} $\ast$ \hyperlink{classSLB_1_1Manager_a174e4612520c3412d10a68e659651677}{default\+Manager} ()
+\item 
+static void \hyperlink{classSLB_1_1Manager_abf16ecd5df555e082d8628ed388f039f}{destroy\+Default\+Manager} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSLB_1_1Manager_a0c86ec04bd480017cb4646c306012c3c}{rename} (\hyperlink{classSLB_1_1ClassInfo}{Class\+Info} $\ast$c, const \hyperlink{namespaceSLB_a6a4c36e7004d99c0535c2c91c200c9a1}{String} \&new\+\_\+name)
+\item 
+{\footnotesize template$<$class Derived , class Base $>$ }\\void \hyperlink{classSLB_1_1Manager_aa0a3da34ea7236f45b0e8cf616eeb815}{add\+Conversor} ()
+\item 
+{\footnotesize template$<$class Derived , class Base $>$ }\\void \hyperlink{classSLB_1_1Manager_a09084e0443fadcb71c44255bcc54b032}{add\+Static\+Conversor} ()
+\item 
+{\footnotesize template$<$class A , class B $>$ }\\void \hyperlink{classSLB_1_1Manager_a4cd6ab9843179045e6e334a21d6c4070}{add\+Class\+Conversor} (\hyperlink{structSLB_1_1Conversor}{Conversor})
+\item 
+Class\+Map \& \hyperlink{classSLB_1_1Manager_ad9beb2f07927dc9fd66ef838b706c3cb}{get\+Classes} ()
+\item 
+void $\ast$ \hyperlink{classSLB_1_1Manager_a1f3d3f3726c6dae275dfed6e1818065e}{recursive\+Convert} (const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&C1, const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&C2, const \hyperlink{classSLB_1_1TypeInfoWrapper}{Type\+Info\+Wrapper} \&prev, void $\ast$obj)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1Manager_ae83c7f0f565a6b664846155ffe5891b7}{Manager} (const \hyperlink{classSLB_1_1Manager}{Manager} \&)
+\item 
+\hyperlink{classSLB_1_1Manager}{Manager} \& \hyperlink{classSLB_1_1Manager_aed026dacb1ed583244a0682f9195c381}{operator=} (const \hyperlink{classSLB_1_1Manager}{Manager} \&)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Class\+Map \hyperlink{classSLB_1_1Manager_a745bd55a40147abf8ec45a116227dd4e}{\+\_\+classes}
+\item 
+Name\+Map \hyperlink{classSLB_1_1Manager_a962ea3cb7cef0e36dd972b0b47a89a38}{\+\_\+names}
+\item 
+\hyperlink{classSLB_1_1ref__ptr}{ref\+\_\+ptr}$<$ \hyperlink{classSLB_1_1Namespace}{Namespace} $>$ \hyperlink{classSLB_1_1Manager_add907d0eb61812e0bf152ab4d9d3d8f9}{\+\_\+global}
+\item 
+Conversions\+Map \hyperlink{classSLB_1_1Manager_a258002e47f95d95ad3fe090cca586132}{\+\_\+conversions}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classSLB_1_1Manager}{Manager} $\ast$ \hyperlink{classSLB_1_1Manager_a2c7ab0191389115abf8ffcf2c1dd3390}{\+\_\+default} = 0
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classSLB_1_1Manager_ae6eaadf7953b7fe283a68d411b7b65b7}{Class\+Info}
+\item 
+int \hyperlink{classSLB_1_1Manager_a1178a0abf9c1d944d10b46903a938a07}{S\+L\+B\+\_\+all\+Types} (lua\+\_\+\+State $\ast$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!Conversor@{Conversor}}
+\index{Conversor@{Conversor}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{Conversor}{Conversor}}]{\setlength{\rightskip}{0pt plus 5cm}typedef void$\ast$($\ast$ S\+L\+B\+::\+Manager\+::\+Conversor) (void $\ast$)}\hypertarget{classSLB_1_1Manager_ace7ae7e8febfd03b7a43ac5b24dabdff}{}\label{classSLB_1_1Manager_ace7ae7e8febfd03b7a43ac5b24dabdff}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!Type\+Info\+Wrapper\+Pair@{Type\+Info\+Wrapper\+Pair}}
+\index{Type\+Info\+Wrapper\+Pair@{Type\+Info\+Wrapper\+Pair}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{Type\+Info\+Wrapper\+Pair}{TypeInfoWrapperPair}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::pair$<${\bf Type\+Info\+Wrapper}, {\bf Type\+Info\+Wrapper} $>$ {\bf S\+L\+B\+::\+Manager\+::\+Type\+Info\+Wrapper\+Pair}}\hypertarget{classSLB_1_1Manager_abd34d2a3a61f567f11744e9b398debd3}{}\label{classSLB_1_1Manager_abd34d2a3a61f567f11744e9b398debd3}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{Manager()}{Manager()}}]{\setlength{\rightskip}{0pt plus 5cm}Manager\+::\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{}\label{classSLB_1_1Manager_a1658ff9f18e38ccd9cb8b0b371b9c20b}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!````~Manager@{$\sim$\+Manager}}
+\index{````~Manager@{$\sim$\+Manager}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Manager()}{~Manager()}}]{\setlength{\rightskip}{0pt plus 5cm}Manager\+::$\sim$\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_a322cad25d7007438b3a043ad02253d29}{}\label{classSLB_1_1Manager_a322cad25d7007438b3a043ad02253d29}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{Manager(const Manager \&)}{Manager(const Manager &)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Manager\+::\+Manager (
+\begin{DoxyParamCaption}
+\item[{const {\bf Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Manager_ae83c7f0f565a6b664846155ffe5891b7}{}\label{classSLB_1_1Manager_ae83c7f0f565a6b664846155ffe5891b7}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!add\+Class\+Conversor@{add\+Class\+Conversor}}
+\index{add\+Class\+Conversor@{add\+Class\+Conversor}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{add\+Class\+Conversor(\+Conversor)}{addClassConversor(Conversor)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class A , class B $>$ void Manager\+::add\+Class\+Conversor (
+\begin{DoxyParamCaption}
+\item[{{\bf Conversor}}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1Manager_a4cd6ab9843179045e6e334a21d6c4070}{}\label{classSLB_1_1Manager_a4cd6ab9843179045e6e334a21d6c4070}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!add\+Conversor@{add\+Conversor}}
+\index{add\+Conversor@{add\+Conversor}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{add\+Conversor()}{addConversor()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D , class B $>$ void Manager\+::add\+Conversor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1Manager_aa0a3da34ea7236f45b0e8cf616eeb815}{}\label{classSLB_1_1Manager_aa0a3da34ea7236f45b0e8cf616eeb815}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!add\+Static\+Conversor@{add\+Static\+Conversor}}
+\index{add\+Static\+Conversor@{add\+Static\+Conversor}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{add\+Static\+Conversor()}{addStaticConversor()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class D , class B $>$ void Manager\+::add\+Static\+Conversor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1Manager_a09084e0443fadcb71c44255bcc54b032}{}\label{classSLB_1_1Manager_a09084e0443fadcb71c44255bcc54b032}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!convert@{convert}}
+\index{convert@{convert}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{convert(const Type\+Info\+Wrapper \&\+C1, const Type\+Info\+Wrapper \&\+C2, void $\ast$obj)}{convert(const TypeInfoWrapper &C1, const TypeInfoWrapper &C2, void *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ Manager\+::convert (
+\begin{DoxyParamCaption}
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{C1, }
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{C2, }
+\item[{void $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Manager_a124fa5f9d063cc2f336fb98653fb11fd}{}\label{classSLB_1_1Manager_a124fa5f9d063cc2f336fb98653fb11fd}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!convert@{convert}}
+\index{convert@{convert}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{convert(const Type\+Info\+Wrapper \&\+C1, const Type\+Info\+Wrapper \&\+C2, const void $\ast$obj)}{convert(const TypeInfoWrapper &C1, const TypeInfoWrapper &C2, const void *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}const void $\ast$ Manager\+::convert (
+\begin{DoxyParamCaption}
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{C1, }
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{C2, }
+\item[{const void $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Manager_a1fba9d34e69f8c5941114444a1118b31}{}\label{classSLB_1_1Manager_a1fba9d34e69f8c5941114444a1118b31}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!copy@{copy}}
+\index{copy@{copy}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{copy(lua\+\_\+\+State $\ast$from, int pos, lua\+\_\+\+State $\ast$to)}{copy(lua_State *from, int pos, lua_State *to)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::copy (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{from, }
+\item[{int}]{pos, }
+\item[{lua\+\_\+\+State $\ast$}]{to}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_a0a200fc2b2402b9f097247d1b412ffe6}{}\label{classSLB_1_1Manager_a0a200fc2b2402b9f097247d1b412ffe6}
+Copy from one lua\+\_\+\+State to another\+:
+\begin{DoxyItemize}
+\item for basic types it will make a basic copy
+\item returns true if copy was made, otherwise returns false.
+\item doesn\textquotesingle{}t touch the original element
+
+W\+A\+R\+N\+I\+NG $\ast$$\ast$ copy of tables is not yet implemented... 
+\end{DoxyItemize}\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!default\+Manager@{default\+Manager}}
+\index{default\+Manager@{default\+Manager}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{default\+Manager()}{defaultManager()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager} $\ast$ Manager\+::default\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSLB_1_1Manager_a174e4612520c3412d10a68e659651677}{}\label{classSLB_1_1Manager_a174e4612520c3412d10a68e659651677}
+returns the default\+Manager, just in case you don\textquotesingle{}t need separated managers. To free the memory of the default manager call \hyperlink{classSLB_1_1Manager_abf16ecd5df555e082d8628ed388f039f}{destroy\+Default\+Manager()}, the memory is N\+OT automatically freed at the end of the program. \index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!destroy\+Default\+Manager@{destroy\+Default\+Manager}}
+\index{destroy\+Default\+Manager@{destroy\+Default\+Manager}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{destroy\+Default\+Manager()}{destroyDefaultManager()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::destroy\+Default\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSLB_1_1Manager_abf16ecd5df555e082d8628ed388f039f}{}\label{classSLB_1_1Manager_abf16ecd5df555e082d8628ed388f039f}
+removes the default manager, and resets its memory. It is safe to call default\+Manager before destruction and a new instance will be created. \index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Class@{get\+Class}}
+\index{get\+Class@{get\+Class}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Class(const Type\+Info\+Wrapper \&) const }{getClass(const TypeInfoWrapper &) const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Class\+Info} $\ast$ Manager\+::get\+Class (
+\begin{DoxyParamCaption}
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{ti}
+\end{DoxyParamCaption}
+) const}\hypertarget{classSLB_1_1Manager_a84ccfa04b4659837a774e4fd68c8c39a}{}\label{classSLB_1_1Manager_a84ccfa04b4659837a774e4fd68c8c39a}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Class@{get\+Class}}
+\index{get\+Class@{get\+Class}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Class(const String \&) const }{getClass(const String &) const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Class\+Info} $\ast$ Manager\+::get\+Class (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classSLB_1_1Manager_aba315e4277eae45f3aabd4289635ddf3}{}\label{classSLB_1_1Manager_aba315e4277eae45f3aabd4289635ddf3}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Class@{get\+Class}}
+\index{get\+Class@{get\+Class}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Class(lua\+\_\+\+State $\ast$\+L, int pos) const }{getClass(lua_State *L, int pos) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Class\+Info} $\ast$ Manager\+::get\+Class (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L, }
+\item[{int}]{pos}
+\end{DoxyParamCaption}
+) const}\hypertarget{classSLB_1_1Manager_aaa0f4d0c2046b3e38b09d974f5eb2435}{}\label{classSLB_1_1Manager_aaa0f4d0c2046b3e38b09d974f5eb2435}
+
+
+Returns the class\+Info of an object, or null if it is a basic lua-\/type. 
+
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Class@{get\+Class}}
+\index{get\+Class@{get\+Class}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Class(const Type\+Info\+Wrapper \&)}{getClass(const TypeInfoWrapper &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Class\+Info} $\ast$ Manager\+::get\+Class (
+\begin{DoxyParamCaption}
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{ti}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_a47bee0d78050efd3e7b7dc72b6e43dbd}{}\label{classSLB_1_1Manager_a47bee0d78050efd3e7b7dc72b6e43dbd}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Class@{get\+Class}}
+\index{get\+Class@{get\+Class}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Class(const String \&)}{getClass(const String &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Class\+Info} $\ast$ Manager\+::get\+Class (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_addbbcefc5578801fd96723e8a065150d}{}\label{classSLB_1_1Manager_addbbcefc5578801fd96723e8a065150d}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Classes@{get\+Classes}}
+\index{get\+Classes@{get\+Classes}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Classes()}{getClasses()}}]{\setlength{\rightskip}{0pt plus 5cm}Class\+Map\& S\+L\+B\+::\+Manager\+::get\+Classes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1Manager_ad9beb2f07927dc9fd66ef838b706c3cb}{}\label{classSLB_1_1Manager_ad9beb2f07927dc9fd66ef838b706c3cb}
+Returns the class\+Map with all defined classes \index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Class\+Map@{get\+Class\+Map}}
+\index{get\+Class\+Map@{get\+Class\+Map}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Class\+Map() const }{getClassMap() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Class\+Map\& S\+L\+B\+::\+Manager\+::get\+Class\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Manager_aa5b3c342dc0a998838c56be85f389fa3}{}\label{classSLB_1_1Manager_aa5b3c342dc0a998838c56be85f389fa3}
+Returns the class\+Map with all defined classes \index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Globals@{get\+Globals}}
+\index{get\+Globals@{get\+Globals}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Globals()}{getGlobals()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Namespace}$\ast$ S\+L\+B\+::\+Manager\+::get\+Globals (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1Manager_a097b7c65408c60c5c52af92a83f4410b}{}\label{classSLB_1_1Manager_a097b7c65408c60c5c52af92a83f4410b}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Instance(lua\+\_\+\+State $\ast$\+L)}{getInstance(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager} $\ast$ Manager\+::get\+Instance (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSLB_1_1Manager_a6ad073864d542365b5527ed3dd67f77b}{}\label{classSLB_1_1Manager_a6ad073864d542365b5527ed3dd67f77b}
+extracts the \hyperlink{classSLB_1_1Manager}{Manager} registered given a lua\+State. Returns null if in the lua\+\_\+\+State there was no registered \hyperlink{classSLB_1_1Manager}{Manager} (\hyperlink{classSLB_1_1Manager_aa647c6678679a4cc8af4aab9715266ef}{S\+L\+B\+::\+Manager\+::register\+S\+LB}). \index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!get\+Or\+Create\+Class@{get\+Or\+Create\+Class}}
+\index{get\+Or\+Create\+Class@{get\+Or\+Create\+Class}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Or\+Create\+Class(const Type\+Info\+Wrapper \&)}{getOrCreateClass(const TypeInfoWrapper &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Class\+Info} $\ast$ Manager\+::get\+Or\+Create\+Class (
+\begin{DoxyParamCaption}
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{ti}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_adb546436a306f64284307b3e78dc0275}{}\label{classSLB_1_1Manager_adb546436a306f64284307b3e78dc0275}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!operator=@{operator=}}
+\index{operator=@{operator=}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{operator=(const Manager \&)}{operator=(const Manager &)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager}\& S\+L\+B\+::\+Manager\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Manager_aed026dacb1ed583244a0682f9195c381}{}\label{classSLB_1_1Manager_aed026dacb1ed583244a0682f9195c381}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!recursive\+Convert@{recursive\+Convert}}
+\index{recursive\+Convert@{recursive\+Convert}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{recursive\+Convert(const Type\+Info\+Wrapper \&\+C1, const Type\+Info\+Wrapper \&\+C2, const Type\+Info\+Wrapper \&prev, void $\ast$obj)}{recursiveConvert(const TypeInfoWrapper &C1, const TypeInfoWrapper &C2, const TypeInfoWrapper &prev, void *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ Manager\+::recursive\+Convert (
+\begin{DoxyParamCaption}
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{C1, }
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{C2, }
+\item[{const {\bf Type\+Info\+Wrapper} \&}]{prev, }
+\item[{void $\ast$}]{obj}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Manager_a1f3d3f3726c6dae275dfed6e1818065e}{}\label{classSLB_1_1Manager_a1f3d3f3726c6dae275dfed6e1818065e}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!register\+S\+LB@{register\+S\+LB}}
+\index{register\+S\+LB@{register\+S\+LB}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{register\+S\+L\+B(lua\+\_\+\+State $\ast$\+L)}{registerSLB(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::register\+S\+LB (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_aa647c6678679a4cc8af4aab9715266ef}{}\label{classSLB_1_1Manager_aa647c6678679a4cc8af4aab9715266ef}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!rename@{rename}}
+\index{rename@{rename}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{rename(\+Class\+Info $\ast$c, const String \&new\+\_\+name)}{rename(ClassInfo *c, const String &new_name)}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::rename (
+\begin{DoxyParamCaption}
+\item[{{\bf Class\+Info} $\ast$}]{c, }
+\item[{const {\bf String} \&}]{new\+\_\+name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1Manager_a0c86ec04bd480017cb4646c306012c3c}{}\label{classSLB_1_1Manager_a0c86ec04bd480017cb4646c306012c3c}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!set@{set}}
+\index{set@{set}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{set(const String \&, Object $\ast$obj)}{set(const String &, Object *obj)}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::set (
+\begin{DoxyParamCaption}
+\item[{const {\bf String} \&}]{name, }
+\item[{{\bf Object} $\ast$}]{obj}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_a411bb9c095d8ba74441d23f7f9c54863}{}\label{classSLB_1_1Manager_a411bb9c095d8ba74441d23f7f9c54863}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}}
+\index{S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+Map(\+Type\+Info\+Wrapper, ref\+\_\+ptr$<$ Class\+Info $>$) Class\+Map}{SLB_Map(TypeInfoWrapper, ref_ptr< ClassInfo >) ClassMap}}]{\setlength{\rightskip}{0pt plus 5cm}typedef S\+L\+B\+::\+Manager\+::\+S\+L\+B\+\_\+\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf Type\+Info\+Wrapper}}]{, }
+\item[{{\bf ref\+\_\+ptr}$<$ {\bf Class\+Info} $>$}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_aaea14f2475937f4c0fa51845b3a10ce3}{}\label{classSLB_1_1Manager_aaea14f2475937f4c0fa51845b3a10ce3}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}}
+\index{S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+Map(\+String, Type\+Info\+Wrapper) Name\+Map}{SLB_Map(String, TypeInfoWrapper) NameMap}}]{\setlength{\rightskip}{0pt plus 5cm}typedef S\+L\+B\+::\+Manager\+::\+S\+L\+B\+\_\+\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf String}}]{, }
+\item[{{\bf Type\+Info\+Wrapper}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_a98997819973ad26999847b08c975efe1}{}\label{classSLB_1_1Manager_a98997819973ad26999847b08c975efe1}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}}
+\index{S\+L\+B\+\_\+\+Map@{S\+L\+B\+\_\+\+Map}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+\+Map(\+Type\+Info\+Wrapper\+Pair, Conversor) Conversions\+Map}{SLB_Map(TypeInfoWrapperPair, Conversor) ConversionsMap}}]{\setlength{\rightskip}{0pt plus 5cm}typedef S\+L\+B\+::\+Manager\+::\+S\+L\+B\+\_\+\+Map (
+\begin{DoxyParamCaption}
+\item[{{\bf Type\+Info\+Wrapper\+Pair}}]{, }
+\item[{{\bf Conversor}}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSLB_1_1Manager_ad62b58fdb065f092eb84e6446c830fe3}{}\label{classSLB_1_1Manager_ad62b58fdb065f092eb84e6446c830fe3}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!Class\+Info@{Class\+Info}}
+\index{Class\+Info@{Class\+Info}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{Class\+Info}{ClassInfo}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Class\+Info}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classSLB_1_1Manager_ae6eaadf7953b7fe283a68d411b7b65b7}{}\label{classSLB_1_1Manager_ae6eaadf7953b7fe283a68d411b7b65b7}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!S\+L\+B\+\_\+all\+Types@{S\+L\+B\+\_\+all\+Types}}
+\index{S\+L\+B\+\_\+all\+Types@{S\+L\+B\+\_\+all\+Types}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{S\+L\+B\+\_\+all\+Types}{SLB_allTypes}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+\_\+all\+Types (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classSLB_1_1Manager_a1178a0abf9c1d944d10b46903a938a07}{}\label{classSLB_1_1Manager_a1178a0abf9c1d944d10b46903a938a07}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!\+\_\+classes@{\+\_\+classes}}
+\index{\+\_\+classes@{\+\_\+classes}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{\+\_\+classes}{_classes}}]{\setlength{\rightskip}{0pt plus 5cm}Class\+Map S\+L\+B\+::\+Manager\+::\+\_\+classes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Manager_a745bd55a40147abf8ec45a116227dd4e}{}\label{classSLB_1_1Manager_a745bd55a40147abf8ec45a116227dd4e}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!\+\_\+conversions@{\+\_\+conversions}}
+\index{\+\_\+conversions@{\+\_\+conversions}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{\+\_\+conversions}{_conversions}}]{\setlength{\rightskip}{0pt plus 5cm}Conversions\+Map S\+L\+B\+::\+Manager\+::\+\_\+conversions\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Manager_a258002e47f95d95ad3fe090cca586132}{}\label{classSLB_1_1Manager_a258002e47f95d95ad3fe090cca586132}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!\+\_\+default@{\+\_\+default}}
+\index{\+\_\+default@{\+\_\+default}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{\+\_\+default}{_default}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Manager} $\ast$ Manager\+::\+\_\+default = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1Manager_a2c7ab0191389115abf8ffcf2c1dd3390}{}\label{classSLB_1_1Manager_a2c7ab0191389115abf8ffcf2c1dd3390}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!\+\_\+global@{\+\_\+global}}
+\index{\+\_\+global@{\+\_\+global}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{\+\_\+global}{_global}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ref\+\_\+ptr}$<${\bf Namespace}$>$ S\+L\+B\+::\+Manager\+::\+\_\+global\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Manager_add907d0eb61812e0bf152ab4d9d3d8f9}{}\label{classSLB_1_1Manager_add907d0eb61812e0bf152ab4d9d3d8f9}
+\index{S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}!\+\_\+names@{\+\_\+names}}
+\index{\+\_\+names@{\+\_\+names}!S\+L\+B\+::\+Manager@{S\+L\+B\+::\+Manager}}
+\subsubsection[{\texorpdfstring{\+\_\+names}{_names}}]{\setlength{\rightskip}{0pt plus 5cm}Name\+Map S\+L\+B\+::\+Manager\+::\+\_\+names\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1Manager_a962ea3cb7cef0e36dd972b0b47a89a38}{}\label{classSLB_1_1Manager_a962ea3cb7cef0e36dd972b0b47a89a38}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

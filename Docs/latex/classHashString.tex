@@ -1,0 +1,916 @@
+\hypertarget{classHashString}{}\section{Hash\+String Class Reference}
+\label{classHashString}\index{Hash\+String@{Hash\+String}}
+
+
+{\ttfamily \#include $<$Hash\+String.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHashString_aabc72be07fa8d0d419c947b570770528}{Hash\+String} ()
+\item 
+\hyperlink{classHashString_ae00cc7bf805e8dbd61bb02d9605ac196}{Hash\+String} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs)
+\item 
+\hyperlink{classHashString_aa87d98fc7dcdb74810098bff764aaab1}{Hash\+String} (char const $\ast$a\+String, unsigned a\+Start=0, unsigned a\+End=-\/1)
+\item 
+\hyperlink{classHashString_a612abda9a98521feafbd31e11bcf33f1}{Hash\+String} (std\+::string const \&a\+String, unsigned a\+Start=0, unsigned a\+End=-\/1)
+\item 
+int \hyperlink{classHashString_a5cde1f185860af294cc96d7beaf4285d}{Size} () const 
+\item 
+int \hyperlink{classHashString_a4ca38c3c88ebb56e0d107b64868419f6}{Length} () const 
+\item 
+bool \hyperlink{classHashString_ad426506e1d11e1404ba0c8ecfe514b5a}{Empty} () const 
+\item 
+bool \hyperlink{classHashString_a22f4c279695f1e7352aed59c9f7b14f2}{Find} (\hyperlink{classHashString}{Hash\+String} const \&a\+String) const 
+\begin{DoxyCompactList}\small\item\em Find a substring in our string. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classHashString_a26454dba8a21c966a1cefa1f85189ea1}{Sub\+String} (int a\+Start, int a\+Length) const 
+\begin{DoxyCompactList}\small\item\em Get a substring out of our main string. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classHashString_a3fefba6d6e64a661e745f406a93337bc}{Trim} () const 
+\begin{DoxyCompactList}\small\item\em Get string without whitespace. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{classHashString_a280b286cd77c5168087528db6c058868}{Split} (\hyperlink{classHashString}{Hash\+String} const \&a\+Delimiter) const 
+\begin{DoxyCompactList}\small\item\em Split a string based on delimiter. \end{DoxyCompactList}\item 
+void \hyperlink{classHashString_ab3dca820267c57b30a290eafcda8b69f}{Reverse} ()
+\begin{DoxyCompactList}\small\item\em Reverse the string. \end{DoxyCompactList}\item 
+void \hyperlink{classHashString_aed455d43b41c82f15fa39b8028cf2883}{Push} (char a\+Char)
+\begin{DoxyCompactList}\small\item\em Append a character to the string. \end{DoxyCompactList}\item 
+void \hyperlink{classHashString_a3ce29e7a4de6781671cca6bef5d929fd}{Clear} ()
+\begin{DoxyCompactList}\small\item\em Clears out string. \end{DoxyCompactList}\item 
+void \hyperlink{classHashString_a7785f58363aba20e3a8fe9f110334347}{operator=} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs)
+\begin{DoxyCompactList}\small\item\em Set string equal to another. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_aeb5850f42dad4711596ee5b4848eae28}{operator==} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Equality check. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a18159f327f6bfb8d576d13fcf2bbcf98}{operator==} (std\+::string const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Equality check. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_ab3545d5a8d8a4a964255fbeac1c3770d}{operator==} (char const $\ast$a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Equality check. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a4ca3592142920b9e8e071ab21a0f4b86}{operator!=} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Inequality check. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a5000bde7a2f5f4c046fbf5da5fa27909}{operator!=} (std\+::string const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Inequality check. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a4a3fe2ff601afc00aa394d5739c408df}{operator!=} (char const $\ast$a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Inequality check. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_af1465eda34d9d46afa4c0fc03f2c02be}{operator$<$} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Check if string comes before another alphabetically. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a4bd71fb56ec1b6a10d57568ae6db0dc9}{operator$<$} (std\+::string const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Check if string comes before another alphabetically. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a2d89eb1021b9e474563c005769617adb}{operator$<$} (char const $\ast$a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Check if string comes before another alphabetically. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_ab7ddccf351387db625efb4653d736558}{operator$>$} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Check if string comes after another alphabetically. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a48be5d2faf89086c2e99b3a078c43b31}{operator$>$} (std\+::string const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Check if string comes after another alphabetically. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a73c53fca70ccda361b044e452271f5ca}{operator$>$} (char const $\ast$a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Check if string comes after another alphabetically. \end{DoxyCompactList}\item 
+char \hyperlink{classHashString_a9416da948d83adcf3ca1ad67670366b8}{operator\mbox{[}$\,$\mbox{]}} (int a\+Value)
+\begin{DoxyCompactList}\small\item\em Get specific character by index. \end{DoxyCompactList}\item 
+\hyperlink{classHashString_abd20346f2111534ad014c4bbe4e8696d}{operator std\+::string} ()
+\begin{DoxyCompactList}\small\item\em Conversion operator. \end{DoxyCompactList}\item 
+\hyperlink{classHashString_a4dac36a453e5f8ee703bca1e0bcf7215}{operator char const $\ast$} ()
+\begin{DoxyCompactList}\small\item\em Conversion operator. \end{DoxyCompactList}\item 
+\hyperlink{classHashString_af6f76264223d81badcecaf15beb85d80}{operator std\+::string} () const 
+\begin{DoxyCompactList}\small\item\em Conversion operator. \end{DoxyCompactList}\item 
+\hyperlink{classHashString_a85812a7906e76833cf8a2abeb0bc9e0e}{operator char const $\ast$} () const 
+\begin{DoxyCompactList}\small\item\em Conversion operator. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classHashString_a67c6eab24e768aeb730fe5e13b2016af}{operator+} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Add one string to this. \end{DoxyCompactList}\item 
+void \hyperlink{classHashString_a78ca1b74c6e7ea0156504578d245f616}{operator+=} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs)
+\begin{DoxyCompactList}\small\item\em Add one string to this. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classHashString_ad624a2a3163ead1be937e4b39139354b}{To\+String} () const 
+\begin{DoxyCompactList}\small\item\em Convert to standard string. \end{DoxyCompactList}\item 
+char const $\ast$ \hyperlink{classHashString_abfde6c536cd2e1a55c86ea29125f9f9a}{To\+Char\+Array} () const 
+\begin{DoxyCompactList}\small\item\em Convert to Char Array. \end{DoxyCompactList}\item 
+int \hyperlink{classHashString_a42007010c73206a9315cfba5859a6d56}{To\+Int} () const 
+\begin{DoxyCompactList}\small\item\em Convert to int. \end{DoxyCompactList}\item 
+float \hyperlink{classHashString_a7a9dc6ad220446625408ced0abfb9184}{To\+Float} () const 
+\begin{DoxyCompactList}\small\item\em Convert to Float. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a2c6efc21be678b95400d39f1d7fa5e2d}{To\+Bool} () const 
+\begin{DoxyCompactList}\small\item\em Convert to Bool. \end{DoxyCompactList}\item 
+int \hyperlink{classHashString_aeab96d9a0754cd88ab236bf96475c393}{To\+Hash} () const 
+\begin{DoxyCompactList}\small\item\em Convert to Hash. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{classHashString_aa4eccfa433a7eaf8e1e4c7c1203be26f}{To\+Hash\+String\+Vector} () const 
+\begin{DoxyCompactList}\small\item\em Convert to hashstring vector, split by \char`\"{},\char`\"{}. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{classHashString_a29c4db981e55a5a50160641246a236c5}{To\+String\+Vector} () const 
+\begin{DoxyCompactList}\small\item\em Convert to string vector, split by \char`\"{},\char`\"{}. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{classHashString_a028786d3b02a7ff7acdb6b0ee8c686a6}{To\+Int\+Vector} () const 
+\begin{DoxyCompactList}\small\item\em Convert to int vector, split by \char`\"{},\char`\"{}. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \hyperlink{classHashString_a4e9614dfb532f0edcc3b0b3f957ae706}{To\+Float\+Vector} () const 
+\begin{DoxyCompactList}\small\item\em Convert to float vector, split by \char`\"{},\char`\"{}. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classHashString_a5445f120cef3f39a7316880efb7aebed}{To\+Lower} () const 
+\begin{DoxyCompactList}\small\item\em Convert to lower case. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classHashString_a57ca9f4f4c7a767ba4ec10bcdc08ba8a}{To\+Upper} () const 
+\begin{DoxyCompactList}\small\item\em Convert to upper case. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classHashString_ac5e9076923f7b3bc952c7357833ae7dc}{To\+Literal} () const 
+\begin{DoxyCompactList}\small\item\em Convert to literal for parsing files. \end{DoxyCompactList}\item 
+bool \hyperlink{classHashString_a5b6dd7dbecfdb4f6411868929dab8d8b}{Comes\+Before} (\hyperlink{classHashString}{Hash\+String} const \&a\+Rhs) const 
+\begin{DoxyCompactList}\small\item\em Helper to determine is one string comes before another alphabetically. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classHashString_a7f212fc6f9284535a00aa3a8f783eaf1}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Serialize to L\+UA. \end{DoxyCompactList}\item 
+static size\+\_\+t \hyperlink{classHashString_a1eca0930113a1553e9d88977d226830f}{Hash\+String\+Hash\+Function} (\hyperlink{classHashString}{Hash\+String} const \&hash\+String)
+\begin{DoxyCompactList}\small\item\em Helpful function to let \hyperlink{classHashString}{Hash\+String} be used in unordered\+\_\+map implementations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classHashString_ad31b4ed670e15bad02c4813e12609453}{Hash} ()
+\begin{DoxyCompactList}\small\item\em Hash generator helper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classHashString_a0465426e5a795126788f28de1464917a}{m\+String}
+\item 
+int \hyperlink{classHashString_a4f984cd8b80701eb7a44a0f32759aa3b}{m\+Hash}
+\item 
+std\+::string\+::iterator \hyperlink{classHashString_a24c3a3c5d1b20711aea59d340d3b9b77}{string\+IT}
+\item 
+std\+::string\+::const\+\_\+iterator \hyperlink{classHashString_aaac4c409194357a6c87e9b3bab96468b}{const\+String\+IT}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Hash\+String()}{HashString()}}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::\+Hash\+String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_aabc72be07fa8d0d419c947b570770528}{}\label{classHashString_aabc72be07fa8d0d419c947b570770528}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Hash\+String(\+Hash\+String const \&a\+Rhs)}{HashString(HashString const &aRhs)}}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::\+Hash\+String (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_ae00cc7bf805e8dbd61bb02d9605ac196}{}\label{classHashString_ae00cc7bf805e8dbd61bb02d9605ac196}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Hash\+String(char const $\ast$a\+String, unsigned a\+Start=0, unsigned a\+End=-\/1)}{HashString(char const *aString, unsigned aStart=0, unsigned aEnd=-1)}}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::\+Hash\+String (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{a\+String, }
+\item[{unsigned}]{a\+Start = {\ttfamily 0}, }
+\item[{unsigned}]{a\+End = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_aa87d98fc7dcdb74810098bff764aaab1}{}\label{classHashString_aa87d98fc7dcdb74810098bff764aaab1}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\index{Hash\+String@{Hash\+String}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Hash\+String(std\+::string const \&a\+String, unsigned a\+Start=0, unsigned a\+End=-\/1)}{HashString(std::string const &aString, unsigned aStart=0, unsigned aEnd=-1)}}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::\+Hash\+String (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+String, }
+\item[{unsigned}]{a\+Start = {\ttfamily 0}, }
+\item[{unsigned}]{a\+End = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_a612abda9a98521feafbd31e11bcf33f1}{}\label{classHashString_a612abda9a98521feafbd31e11bcf33f1}
+
+
+\subsection{Member Function Documentation}
+\index{Hash\+String@{Hash\+String}!Clear@{Clear}}
+\index{Clear@{Clear}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Clear()}{Clear()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hash\+String\+::\+Clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_a3ce29e7a4de6781671cca6bef5d929fd}{}\label{classHashString_a3ce29e7a4de6781671cca6bef5d929fd}
+
+
+Clears out string. 
+
+\index{Hash\+String@{Hash\+String}!Comes\+Before@{Comes\+Before}}
+\index{Comes\+Before@{Comes\+Before}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Comes\+Before(\+Hash\+String const \&a\+Rhs) const }{ComesBefore(HashString const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::\+Comes\+Before (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a5b6dd7dbecfdb4f6411868929dab8d8b}{}\label{classHashString_a5b6dd7dbecfdb4f6411868929dab8d8b}
+
+
+Helper to determine is one string comes before another alphabetically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & The string to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether this string comes before a\+Rhs. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Empty@{Empty}}
+\index{Empty@{Empty}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Empty() const }{Empty() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::\+Empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_ad426506e1d11e1404ba0c8ecfe514b5a}{}\label{classHashString_ad426506e1d11e1404ba0c8ecfe514b5a}
+\begin{DoxyReturn}{Returns}
+Is the string empty? 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Find@{Find}}
+\index{Find@{Find}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Find(\+Hash\+String const \&a\+String) const }{Find(HashString const &aString) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::\+Find (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+String}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a22f4c279695f1e7352aed59c9f7b14f2}{}\label{classHashString_a22f4c279695f1e7352aed59c9f7b14f2}
+
+
+Find a substring in our string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+String} & The substring to search for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If substring is in our string. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Hash@{Hash}}
+\index{Hash@{Hash}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Hash()}{Hash()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hash\+String\+::\+Hash (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHashString_ad31b4ed670e15bad02c4813e12609453}{}\label{classHashString_ad31b4ed670e15bad02c4813e12609453}
+
+
+Hash generator helper. 
+
+\index{Hash\+String@{Hash\+String}!Hash\+String\+Hash\+Function@{Hash\+String\+Hash\+Function}}
+\index{Hash\+String\+Hash\+Function@{Hash\+String\+Hash\+Function}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Hash\+String\+Hash\+Function(\+Hash\+String const \&hash\+String)}{HashStringHashFunction(HashString const &hashString)}}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Hash\+String\+::\+Hash\+String\+Hash\+Function (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{hash\+String}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classHashString_a1eca0930113a1553e9d88977d226830f}{}\label{classHashString_a1eca0930113a1553e9d88977d226830f}
+
+
+Helpful function to let \hyperlink{classHashString}{Hash\+String} be used in unordered\+\_\+map implementations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+String} & String to get hash from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String hash. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Length@{Length}}
+\index{Length@{Length}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Length() const }{Length() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Hash\+String\+::\+Length (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a4ca38c3c88ebb56e0d107b64868419f6}{}\label{classHashString_a4ca38c3c88ebb56e0d107b64868419f6}
+\begin{DoxyReturn}{Returns}
+The size of the string. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator char const $\ast$@{operator char const $\ast$}}
+\index{operator char const $\ast$@{operator char const $\ast$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator char const $\ast$()}{operator char const *()}}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::operator char const $\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_a4dac36a453e5f8ee703bca1e0bcf7215}{}\label{classHashString_a4dac36a453e5f8ee703bca1e0bcf7215}
+
+
+Conversion operator. 
+
+\index{Hash\+String@{Hash\+String}!operator char const $\ast$@{operator char const $\ast$}}
+\index{operator char const $\ast$@{operator char const $\ast$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator char const $\ast$() const }{operator char const *() const }}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::operator char const $\ast$ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a85812a7906e76833cf8a2abeb0bc9e0e}{}\label{classHashString_a85812a7906e76833cf8a2abeb0bc9e0e}
+
+
+Conversion operator. 
+
+\index{Hash\+String@{Hash\+String}!operator std\+::string@{operator std\+::string}}
+\index{operator std\+::string@{operator std\+::string}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator std\+::string()}{operator std::string()}}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::operator std\+::string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_abd20346f2111534ad014c4bbe4e8696d}{}\label{classHashString_abd20346f2111534ad014c4bbe4e8696d}
+
+
+Conversion operator. 
+
+\index{Hash\+String@{Hash\+String}!operator std\+::string@{operator std\+::string}}
+\index{operator std\+::string@{operator std\+::string}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator std\+::string() const }{operator std::string() const }}]{\setlength{\rightskip}{0pt plus 5cm}Hash\+String\+::operator std\+::string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_af6f76264223d81badcecaf15beb85d80}{}\label{classHashString_af6f76264223d81badcecaf15beb85d80}
+
+
+Conversion operator. 
+
+\index{Hash\+String@{Hash\+String}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator"!=(\+Hash\+String const \&a\+Rhs) const }{operator!=(HashString const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator!= (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a4ca3592142920b9e8e071ab21a0f4b86}{}\label{classHashString_a4ca3592142920b9e8e071ab21a0f4b86}
+
+
+Inequality check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to check for equality \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the strings are not equal. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator"!=(std\+::string const \&a\+Rhs) const }{operator!=(std::string const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator!= (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a5000bde7a2f5f4c046fbf5da5fa27909}{}\label{classHashString_a5000bde7a2f5f4c046fbf5da5fa27909}
+
+
+Inequality check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to check for equality \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the strings are not equal. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator"!=(char const $\ast$a\+Rhs) const }{operator!=(char const *aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator!= (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a4a3fe2ff601afc00aa394d5739c408df}{}\label{classHashString_a4a3fe2ff601afc00aa394d5739c408df}
+
+
+Inequality check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to check for equality \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the strings are not equal. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator+@{operator+}}
+\index{operator+@{operator+}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator+(\+Hash\+String const \&a\+Rhs) const }{operator+(HashString const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Hash\+String\+::operator+ (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a67c6eab24e768aeb730fe5e13b2016af}{}\label{classHashString_a67c6eab24e768aeb730fe5e13b2016af}
+
+
+Add one string to this. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & The string to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The modified string 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator+=(\+Hash\+String const \&a\+Rhs)}{operator+=(HashString const &aRhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Hash\+String\+::operator+= (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_a78ca1b74c6e7ea0156504578d245f616}{}\label{classHashString_a78ca1b74c6e7ea0156504578d245f616}
+
+
+Add one string to this. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & The string to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The modified string 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator$<$(\+Hash\+String const \&a\+Rhs) const }{operator<(HashString const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator$<$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_af1465eda34d9d46afa4c0fc03f2c02be}{}\label{classHashString_af1465eda34d9d46afa4c0fc03f2c02be}
+
+
+Check if string comes before another alphabetically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If this string should come before a\+Rhs 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator$<$(std\+::string const \&a\+Rhs) const }{operator<(std::string const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator$<$ (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a4bd71fb56ec1b6a10d57568ae6db0dc9}{}\label{classHashString_a4bd71fb56ec1b6a10d57568ae6db0dc9}
+
+
+Check if string comes before another alphabetically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If this string should come before a\+Rhs 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator$<$(char const $\ast$a\+Rhs) const }{operator<(char const *aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator$<$ (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a2d89eb1021b9e474563c005769617adb}{}\label{classHashString_a2d89eb1021b9e474563c005769617adb}
+
+
+Check if string comes before another alphabetically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If this string should come before a\+Rhs 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator=@{operator=}}
+\index{operator=@{operator=}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator=(\+Hash\+String const \&a\+Rhs)}{operator=(HashString const &aRhs)}}]{\setlength{\rightskip}{0pt plus 5cm}void Hash\+String\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_a7785f58363aba20e3a8fe9f110334347}{}\label{classHashString_a7785f58363aba20e3a8fe9f110334347}
+
+
+Set string equal to another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to set equal to. \\
+\hline
+\end{DoxyParams}
+\index{Hash\+String@{Hash\+String}!operator==@{operator==}}
+\index{operator==@{operator==}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator==(\+Hash\+String const \&a\+Rhs) const }{operator==(HashString const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_aeb5850f42dad4711596ee5b4848eae28}{}\label{classHashString_aeb5850f42dad4711596ee5b4848eae28}
+
+
+Equality check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to check for equality \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the strings are equal. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator==@{operator==}}
+\index{operator==@{operator==}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator==(std\+::string const \&a\+Rhs) const }{operator==(std::string const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator== (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a18159f327f6bfb8d576d13fcf2bbcf98}{}\label{classHashString_a18159f327f6bfb8d576d13fcf2bbcf98}
+
+
+Equality check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to check for equality \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the strings are equal. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator==@{operator==}}
+\index{operator==@{operator==}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator==(char const $\ast$a\+Rhs) const }{operator==(char const *aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator== (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_ab3545d5a8d8a4a964255fbeac1c3770d}{}\label{classHashString_ab3545d5a8d8a4a964255fbeac1c3770d}
+
+
+Equality check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to check for equality \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the strings are equal. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator$>$(\+Hash\+String const \&a\+Rhs) const }{operator>(HashString const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator$>$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_ab7ddccf351387db625efb4653d736558}{}\label{classHashString_ab7ddccf351387db625efb4653d736558}
+
+
+Check if string comes after another alphabetically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If this string should come after a\+Rhs 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator$>$(std\+::string const \&a\+Rhs) const }{operator>(std::string const &aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator$>$ (
+\begin{DoxyParamCaption}
+\item[{std\+::string const \&}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a48be5d2faf89086c2e99b3a078c43b31}{}\label{classHashString_a48be5d2faf89086c2e99b3a078c43b31}
+
+
+Check if string comes after another alphabetically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If this string should come after a\+Rhs 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator$>$(char const $\ast$a\+Rhs) const }{operator>(char const *aRhs) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::operator$>$ (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{a\+Rhs}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a73c53fca70ccda361b044e452271f5ca}{}\label{classHashString_a73c53fca70ccda361b044e452271f5ca}
+
+
+Check if string comes after another alphabetically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Rhs} & String to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If this string should come after a\+Rhs 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{operator[](int a\+Value)}{operator[](int aValue)}}]{\setlength{\rightskip}{0pt plus 5cm}char Hash\+String\+::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_a9416da948d83adcf3ca1ad67670366b8}{}\label{classHashString_a9416da948d83adcf3ca1ad67670366b8}
+
+
+Get specific character by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Value} & Index to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The character at index. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Push@{Push}}
+\index{Push@{Push}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Push(char a\+Char)}{Push(char aChar)}}]{\setlength{\rightskip}{0pt plus 5cm}void Hash\+String\+::\+Push (
+\begin{DoxyParamCaption}
+\item[{char}]{a\+Char}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_aed455d43b41c82f15fa39b8028cf2883}{}\label{classHashString_aed455d43b41c82f15fa39b8028cf2883}
+
+
+Append a character to the string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Char} & Character to append. \\
+\hline
+\end{DoxyParams}
+\index{Hash\+String@{Hash\+String}!Reverse@{Reverse}}
+\index{Reverse@{Reverse}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Reverse()}{Reverse()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hash\+String\+::\+Reverse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classHashString_ab3dca820267c57b30a290eafcda8b69f}{}\label{classHashString_ab3dca820267c57b30a290eafcda8b69f}
+
+
+Reverse the string. 
+
+\index{Hash\+String@{Hash\+String}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Hash\+String\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classHashString_a7f212fc6f9284535a00aa3a8f783eaf1}{}\label{classHashString_a7f212fc6f9284535a00aa3a8f783eaf1}
+
+
+Serialize to L\+UA. 
+
+\index{Hash\+String@{Hash\+String}!Size@{Size}}
+\index{Size@{Size}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Size() const }{Size() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Hash\+String\+::\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a5cde1f185860af294cc96d7beaf4285d}{}\label{classHashString_a5cde1f185860af294cc96d7beaf4285d}
+\begin{DoxyReturn}{Returns}
+The size of the string. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Split@{Split}}
+\index{Split@{Split}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Split(\+Hash\+String const \&a\+Delimiter) const }{Split(HashString const &aDelimiter) const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Hash\+String} $>$ Hash\+String\+::\+Split (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Delimiter}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a280b286cd77c5168087528db6c058868}{}\label{classHashString_a280b286cd77c5168087528db6c058868}
+
+
+Split a string based on delimiter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Delimiter} & String to split by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of hashstrings. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Sub\+String@{Sub\+String}}
+\index{Sub\+String@{Sub\+String}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Sub\+String(int a\+Start, int a\+Length) const }{SubString(int aStart, int aLength) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Hash\+String\+::\+Sub\+String (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+Start, }
+\item[{int}]{a\+Length}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a26454dba8a21c966a1cefa1f85189ea1}{}\label{classHashString_a26454dba8a21c966a1cefa1f85189ea1}
+
+
+Get a substring out of our main string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Start} & Where the substring begins \\
+\hline
+{\em a\+Length} & How long the substring will be \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The substring 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Bool@{To\+Bool}}
+\index{To\+Bool@{To\+Bool}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Bool() const }{ToBool() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Hash\+String\+::\+To\+Bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a2c6efc21be678b95400d39f1d7fa5e2d}{}\label{classHashString_a2c6efc21be678b95400d39f1d7fa5e2d}
+
+
+Convert to Bool. 
+
+\begin{DoxyReturn}{Returns}
+String as an bool, \char`\"{}true\char`\"{} is true, anything else is false 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Char\+Array@{To\+Char\+Array}}
+\index{To\+Char\+Array@{To\+Char\+Array}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Char\+Array() const }{ToCharArray() const }}]{\setlength{\rightskip}{0pt plus 5cm}char const $\ast$ Hash\+String\+::\+To\+Char\+Array (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_abfde6c536cd2e1a55c86ea29125f9f9a}{}\label{classHashString_abfde6c536cd2e1a55c86ea29125f9f9a}
+
+
+Convert to Char Array. 
+
+\begin{DoxyReturn}{Returns}
+Same string as Char Array 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Float@{To\+Float}}
+\index{To\+Float@{To\+Float}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Float() const }{ToFloat() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Hash\+String\+::\+To\+Float (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a7a9dc6ad220446625408ced0abfb9184}{}\label{classHashString_a7a9dc6ad220446625408ced0abfb9184}
+
+
+Convert to Float. 
+
+\begin{DoxyReturn}{Returns}
+String as an float, \char`\"{}0.\+0\char`\"{} is 0.\+0, \char`\"{}1.\+1\char`\"{} is 1.\+1 etc. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Float\+Vector@{To\+Float\+Vector}}
+\index{To\+Float\+Vector@{To\+Float\+Vector}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Float\+Vector() const }{ToFloatVector() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ float $>$ Hash\+String\+::\+To\+Float\+Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a4e9614dfb532f0edcc3b0b3f957ae706}{}\label{classHashString_a4e9614dfb532f0edcc3b0b3f957ae706}
+
+
+Convert to float vector, split by \char`\"{},\char`\"{}. 
+
+\begin{DoxyReturn}{Returns}
+String as float vector 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Hash@{To\+Hash}}
+\index{To\+Hash@{To\+Hash}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Hash() const }{ToHash() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Hash\+String\+::\+To\+Hash (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_aeab96d9a0754cd88ab236bf96475c393}{}\label{classHashString_aeab96d9a0754cd88ab236bf96475c393}
+
+
+Convert to Hash. 
+
+\begin{DoxyReturn}{Returns}
+Hash value of string 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Hash\+String\+Vector@{To\+Hash\+String\+Vector}}
+\index{To\+Hash\+String\+Vector@{To\+Hash\+String\+Vector}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Hash\+String\+Vector() const }{ToHashStringVector() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Hash\+String} $>$ Hash\+String\+::\+To\+Hash\+String\+Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_aa4eccfa433a7eaf8e1e4c7c1203be26f}{}\label{classHashString_aa4eccfa433a7eaf8e1e4c7c1203be26f}
+
+
+Convert to hashstring vector, split by \char`\"{},\char`\"{}. 
+
+\begin{DoxyReturn}{Returns}
+String as hashstring vector 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Int@{To\+Int}}
+\index{To\+Int@{To\+Int}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Int() const }{ToInt() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Hash\+String\+::\+To\+Int (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a42007010c73206a9315cfba5859a6d56}{}\label{classHashString_a42007010c73206a9315cfba5859a6d56}
+
+
+Convert to int. 
+
+\begin{DoxyReturn}{Returns}
+String as an int, \char`\"{}0\char`\"{} is 0, \char`\"{}1\char`\"{} is 1 etc. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Int\+Vector@{To\+Int\+Vector}}
+\index{To\+Int\+Vector@{To\+Int\+Vector}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Int\+Vector() const }{ToIntVector() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ Hash\+String\+::\+To\+Int\+Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a028786d3b02a7ff7acdb6b0ee8c686a6}{}\label{classHashString_a028786d3b02a7ff7acdb6b0ee8c686a6}
+
+
+Convert to int vector, split by \char`\"{},\char`\"{}. 
+
+\begin{DoxyReturn}{Returns}
+String as int vector 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Literal@{To\+Literal}}
+\index{To\+Literal@{To\+Literal}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Literal() const }{ToLiteral() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Hash\+String\+::\+To\+Literal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_ac5e9076923f7b3bc952c7357833ae7dc}{}\label{classHashString_ac5e9076923f7b3bc952c7357833ae7dc}
+
+
+Convert to literal for parsing files. 
+
+\begin{DoxyReturn}{Returns}
+Literal(\+The hash string) 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Lower@{To\+Lower}}
+\index{To\+Lower@{To\+Lower}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Lower() const }{ToLower() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Hash\+String\+::\+To\+Lower (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a5445f120cef3f39a7316880efb7aebed}{}\label{classHashString_a5445f120cef3f39a7316880efb7aebed}
+
+
+Convert to lower case. 
+
+\begin{DoxyReturn}{Returns}
+The string as lower case. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+String@{To\+String}}
+\index{To\+String@{To\+String}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+String() const }{ToString() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Hash\+String\+::\+To\+String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_ad624a2a3163ead1be937e4b39139354b}{}\label{classHashString_ad624a2a3163ead1be937e4b39139354b}
+
+
+Convert to standard string. 
+
+\begin{DoxyReturn}{Returns}
+The string as std\+::string 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+String\+Vector@{To\+String\+Vector}}
+\index{To\+String\+Vector@{To\+String\+Vector}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+String\+Vector() const }{ToStringVector() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::string $>$ Hash\+String\+::\+To\+String\+Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a29c4db981e55a5a50160641246a236c5}{}\label{classHashString_a29c4db981e55a5a50160641246a236c5}
+
+
+Convert to string vector, split by \char`\"{},\char`\"{}. 
+
+\begin{DoxyReturn}{Returns}
+String as string vector 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!To\+Upper@{To\+Upper}}
+\index{To\+Upper@{To\+Upper}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{To\+Upper() const }{ToUpper() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Hash\+String\+::\+To\+Upper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a57ca9f4f4c7a767ba4ec10bcdc08ba8a}{}\label{classHashString_a57ca9f4f4c7a767ba4ec10bcdc08ba8a}
+
+
+Convert to upper case. 
+
+\begin{DoxyReturn}{Returns}
+The string as upper case. 
+\end{DoxyReturn}
+\index{Hash\+String@{Hash\+String}!Trim@{Trim}}
+\index{Trim@{Trim}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{Trim() const }{Trim() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Hash\+String\+::\+Trim (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classHashString_a3fefba6d6e64a661e745f406a93337bc}{}\label{classHashString_a3fefba6d6e64a661e745f406a93337bc}
+
+
+Get string without whitespace. 
+
+\begin{DoxyReturn}{Returns}
+Trimmed string. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Hash\+String@{Hash\+String}!const\+String\+IT@{const\+String\+IT}}
+\index{const\+String\+IT@{const\+String\+IT}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{const\+String\+IT}{constStringIT}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string\+::const\+\_\+iterator Hash\+String\+::const\+String\+IT\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHashString_aaac4c409194357a6c87e9b3bab96468b}{}\label{classHashString_aaac4c409194357a6c87e9b3bab96468b}
+\index{Hash\+String@{Hash\+String}!m\+Hash@{m\+Hash}}
+\index{m\+Hash@{m\+Hash}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{m\+Hash}{mHash}}]{\setlength{\rightskip}{0pt plus 5cm}int Hash\+String\+::m\+Hash\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHashString_a4f984cd8b80701eb7a44a0f32759aa3b}{}\label{classHashString_a4f984cd8b80701eb7a44a0f32759aa3b}
+\index{Hash\+String@{Hash\+String}!m\+String@{m\+String}}
+\index{m\+String@{m\+String}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{m\+String}{mString}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Hash\+String\+::m\+String\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHashString_a0465426e5a795126788f28de1464917a}{}\label{classHashString_a0465426e5a795126788f28de1464917a}
+\index{Hash\+String@{Hash\+String}!string\+IT@{string\+IT}}
+\index{string\+IT@{string\+IT}!Hash\+String@{Hash\+String}}
+\subsubsection[{\texorpdfstring{string\+IT}{stringIT}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string\+::iterator Hash\+String\+::string\+IT\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classHashString_a24c3a3c5d1b20711aea59d340d3b9b77}{}\label{classHashString_a24c3a3c5d1b20711aea59d340d3b9b77}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{HashString_8h}{Hash\+String.\+h}\item 
+Core/\hyperlink{HashString_8cpp}{Hash\+String.\+cpp}\end{DoxyCompactItemize}

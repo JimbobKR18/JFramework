@@ -1,0 +1,136 @@
+\hypertarget{structCube}{}\section{Cube Struct Reference}
+\label{structCube}\index{Cube@{Cube}}
+
+
+{\ttfamily \#include $<$Shape.\+h$>$}
+
+
+
+Inheritance diagram for Cube\+:
+% FIG 0
+
+
+Collaboration diagram for Cube\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structCube_a06f3d86fb63e3aad08623610aa3c17b4}{Cube} ()
+\item 
+\hyperlink{structCube_a58c799a411212a2f63212e9b37264374}{Cube} (\hyperlink{structVector3}{Vector3} const \&a\+Position, \hyperlink{structVector3}{Vector3} const \&a\+Size)
+\item 
+virtual \hyperlink{structCube_aa814e979cecb8c451fdb332ded2cea1e}{$\sim$\+Cube} ()
+\item 
+bool \hyperlink{structCube_a5207b932fcb634dc6cf501bf672fb320}{Get3\+D\+Collision} (\hyperlink{structVector3}{Vector3} const \&a\+Position)
+\begin{DoxyCompactList}\small\item\em See if point collides with box. 3D space. \end{DoxyCompactList}\item 
+bool \hyperlink{structCube_a479cf616ed314115f48b5d971d10f72c}{Get2\+D\+Collision} (\hyperlink{structVector3}{Vector3} const \&a\+Position)
+\begin{DoxyCompactList}\small\item\em See if point collides with box. 2D space. \end{DoxyCompactList}\item 
+virtual float \hyperlink{structCube_a29ac05ab7f85061d15fe55b93c7893ea}{Get\+Size} (int index)
+\begin{DoxyCompactList}\small\item\em Get box size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{structCube_af91da7f2921064967c74866ad76abce2}{size}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Cube@{Cube}!Cube@{Cube}}
+\index{Cube@{Cube}!Cube@{Cube}}
+\subsubsection[{\texorpdfstring{Cube()}{Cube()}}]{\setlength{\rightskip}{0pt plus 5cm}Cube\+::\+Cube (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structCube_a06f3d86fb63e3aad08623610aa3c17b4}{}\label{structCube_a06f3d86fb63e3aad08623610aa3c17b4}
+\index{Cube@{Cube}!Cube@{Cube}}
+\index{Cube@{Cube}!Cube@{Cube}}
+\subsubsection[{\texorpdfstring{Cube(\+Vector3 const \&a\+Position, Vector3 const \&a\+Size)}{Cube(Vector3 const &aPosition, Vector3 const &aSize)}}]{\setlength{\rightskip}{0pt plus 5cm}Cube\+::\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position, }
+\item[{{\bf Vector3} const \&}]{a\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{structCube_a58c799a411212a2f63212e9b37264374}{}\label{structCube_a58c799a411212a2f63212e9b37264374}
+\index{Cube@{Cube}!````~Cube@{$\sim$\+Cube}}
+\index{````~Cube@{$\sim$\+Cube}!Cube@{Cube}}
+\subsubsection[{\texorpdfstring{$\sim$\+Cube()}{~Cube()}}]{\setlength{\rightskip}{0pt plus 5cm}Cube\+::$\sim$\+Cube (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structCube_aa814e979cecb8c451fdb332ded2cea1e}{}\label{structCube_aa814e979cecb8c451fdb332ded2cea1e}
+
+
+\subsection{Member Function Documentation}
+\index{Cube@{Cube}!Get2\+D\+Collision@{Get2\+D\+Collision}}
+\index{Get2\+D\+Collision@{Get2\+D\+Collision}!Cube@{Cube}}
+\subsubsection[{\texorpdfstring{Get2\+D\+Collision(\+Vector3 const \&a\+Position)}{Get2DCollision(Vector3 const &aPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Cube\+::\+Get2\+D\+Collision (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position}
+\end{DoxyParamCaption}
+)}\hypertarget{structCube_a479cf616ed314115f48b5d971d10f72c}{}\label{structCube_a479cf616ed314115f48b5d971d10f72c}
+
+
+See if point collides with box. 2D space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Position} & Point to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if collided. 
+\end{DoxyReturn}
+\index{Cube@{Cube}!Get3\+D\+Collision@{Get3\+D\+Collision}}
+\index{Get3\+D\+Collision@{Get3\+D\+Collision}!Cube@{Cube}}
+\subsubsection[{\texorpdfstring{Get3\+D\+Collision(\+Vector3 const \&a\+Position)}{Get3DCollision(Vector3 const &aPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Cube\+::\+Get3\+D\+Collision (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position}
+\end{DoxyParamCaption}
+)}\hypertarget{structCube_a5207b932fcb634dc6cf501bf672fb320}{}\label{structCube_a5207b932fcb634dc6cf501bf672fb320}
+
+
+See if point collides with box. 3D space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Position} & Point to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if collided. 
+\end{DoxyReturn}
+\index{Cube@{Cube}!Get\+Size@{Get\+Size}}
+\index{Get\+Size@{Get\+Size}!Cube@{Cube}}
+\subsubsection[{\texorpdfstring{Get\+Size(int index)}{GetSize(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}float Cube\+::\+Get\+Size (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structCube_a29ac05ab7f85061d15fe55b93c7893ea}{}\label{structCube_a29ac05ab7f85061d15fe55b93c7893ea}
+
+
+Get box size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Axis to check (x = 0, y = 1, z = 2) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Size on axis 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{structShape_a878528c42f14532e5fadc9ace7024f68}{Shape}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Cube@{Cube}!size@{size}}
+\index{size@{size}!Cube@{Cube}}
+\subsubsection[{\texorpdfstring{size}{size}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Cube\+::size}\hypertarget{structCube_af91da7f2921064967c74866ad76abce2}{}\label{structCube_af91da7f2921064967c74866ad76abce2}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{Shape_8h}{Shape.\+h}\item 
+Core/\hyperlink{Shape_8cpp}{Shape.\+cpp}\end{DoxyCompactItemize}

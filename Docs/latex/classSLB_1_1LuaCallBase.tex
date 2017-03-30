@@ -1,0 +1,104 @@
+\hypertarget{classSLB_1_1LuaCallBase}{}\section{S\+LB\+:\+:Lua\+Call\+Base Class Reference}
+\label{classSLB_1_1LuaCallBase}\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classSLB_1_1LuaCallBase_a01c63492d0246f66e2b960b1e0ebe9a3}{$\sim$\+Lua\+Call\+Base} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1LuaCallBase_a5c532d43fb99270a9b409b29fcc293c1}{Lua\+Call\+Base} (lua\+\_\+\+State $\ast$L, int index)
+\item 
+\hyperlink{classSLB_1_1LuaCallBase_a573275f0ec210342898f2065cf791bd7}{Lua\+Call\+Base} (lua\+\_\+\+State $\ast$L, const char $\ast$func)
+\item 
+void \hyperlink{classSLB_1_1LuaCallBase_a1840800ae2df97d73bd58111a6897979}{execute} (int num\+Args, int num\+Output, int top)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+lua\+\_\+\+State $\ast$ \hyperlink{classSLB_1_1LuaCallBase_aaaa717e06e31ebdbe45daa7fc80924d8}{\+\_\+lua\+\_\+state}
+\item 
+int \hyperlink{classSLB_1_1LuaCallBase_a8e4587275a3d61c64e146fd0750eee90}{\+\_\+ref}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSLB_1_1LuaCallBase_a47165b105ace1bd0c1e5bdced68e07c1}{get\+Func} (int index)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classSLB_1_1LuaCallBase_a76fd3dc841018e507018d2e3ca12e952}{error\+Handler} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!````~Lua\+Call\+Base@{$\sim$\+Lua\+Call\+Base}}
+\index{````~Lua\+Call\+Base@{$\sim$\+Lua\+Call\+Base}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{$\sim$\+Lua\+Call\+Base()}{~LuaCallBase()}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Lua\+Call\+Base\+::$\sim$\+Lua\+Call\+Base (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSLB_1_1LuaCallBase_a01c63492d0246f66e2b960b1e0ebe9a3}{}\label{classSLB_1_1LuaCallBase_a01c63492d0246f66e2b960b1e0ebe9a3}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!Lua\+Call\+Base@{Lua\+Call\+Base}}
+\index{Lua\+Call\+Base@{Lua\+Call\+Base}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{Lua\+Call\+Base(lua\+\_\+\+State $\ast$\+L, int index)}{LuaCallBase(lua_State *L, int index)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Lua\+Call\+Base\+::\+Lua\+Call\+Base (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L, }
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1LuaCallBase_a5c532d43fb99270a9b409b29fcc293c1}{}\label{classSLB_1_1LuaCallBase_a5c532d43fb99270a9b409b29fcc293c1}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!Lua\+Call\+Base@{Lua\+Call\+Base}}
+\index{Lua\+Call\+Base@{Lua\+Call\+Base}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{Lua\+Call\+Base(lua\+\_\+\+State $\ast$\+L, const char $\ast$func)}{LuaCallBase(lua_State *L, const char *func)}}]{\setlength{\rightskip}{0pt plus 5cm}S\+L\+B\+::\+Lua\+Call\+Base\+::\+Lua\+Call\+Base (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L, }
+\item[{const char $\ast$}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1LuaCallBase_a573275f0ec210342898f2065cf791bd7}{}\label{classSLB_1_1LuaCallBase_a573275f0ec210342898f2065cf791bd7}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!error\+Handler@{error\+Handler}}
+\index{error\+Handler@{error\+Handler}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{error\+Handler(lua\+\_\+\+State $\ast$\+L)}{errorHandler(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Lua\+Call\+Base\+::error\+Handler (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSLB_1_1LuaCallBase_a76fd3dc841018e507018d2e3ca12e952}{}\label{classSLB_1_1LuaCallBase_a76fd3dc841018e507018d2e3ca12e952}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!execute@{execute}}
+\index{execute@{execute}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{execute(int num\+Args, int num\+Output, int top)}{execute(int numArgs, int numOutput, int top)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Lua\+Call\+Base\+::execute (
+\begin{DoxyParamCaption}
+\item[{int}]{num\+Args, }
+\item[{int}]{num\+Output, }
+\item[{int}]{top}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1LuaCallBase_a1840800ae2df97d73bd58111a6897979}{}\label{classSLB_1_1LuaCallBase_a1840800ae2df97d73bd58111a6897979}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!get\+Func@{get\+Func}}
+\index{get\+Func@{get\+Func}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{get\+Func(int index)}{getFunc(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}void S\+L\+B\+::\+Lua\+Call\+Base\+::get\+Func (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1LuaCallBase_a47165b105ace1bd0c1e5bdced68e07c1}{}\label{classSLB_1_1LuaCallBase_a47165b105ace1bd0c1e5bdced68e07c1}
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}}
+\index{\+\_\+lua\+\_\+state@{\+\_\+lua\+\_\+state}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+lua\+\_\+state}{_lua_state}}]{\setlength{\rightskip}{0pt plus 5cm}lua\+\_\+\+State$\ast$ S\+L\+B\+::\+Lua\+Call\+Base\+::\+\_\+lua\+\_\+state\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1LuaCallBase_aaaa717e06e31ebdbe45daa7fc80924d8}{}\label{classSLB_1_1LuaCallBase_aaaa717e06e31ebdbe45daa7fc80924d8}
+\index{S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}!\+\_\+ref@{\+\_\+ref}}
+\index{\+\_\+ref@{\+\_\+ref}!S\+L\+B\+::\+Lua\+Call\+Base@{S\+L\+B\+::\+Lua\+Call\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+ref}{_ref}}]{\setlength{\rightskip}{0pt plus 5cm}int S\+L\+B\+::\+Lua\+Call\+Base\+::\+\_\+ref\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSLB_1_1LuaCallBase_a8e4587275a3d61c64e146fd0750eee90}{}\label{classSLB_1_1LuaCallBase_a8e4587275a3d61c64e146fd0750eee90}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\item 
+L\+U\+A/\hyperlink{SLB_8cpp}{S\+L\+B.\+cpp}\end{DoxyCompactItemize}

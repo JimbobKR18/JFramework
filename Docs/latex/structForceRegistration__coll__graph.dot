@@ -1,0 +1,36 @@
+digraph "ForceRegistration"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="ForceRegistration",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mGenerator" ];
+  Node2 [label="ForceGenerator",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classForceGenerator.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mForce" ];
+  Node3 [label="Vector3",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structVector3.html"];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mObject" ];
+  Node4 [label="PhysicsObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPhysicsObject.html"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="Component",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classComponent.html"];
+  Node6 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mOwner" ];
+  Node6 [label="GameObject",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameObject.html"];
+  Node6 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mParent" ];
+  Node7 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mManager" ];
+  Node7 [label="ObjectManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classObjectManager.html"];
+  Node8 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="Manager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classManager.html"];
+  Node9 -> Node8 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mApp" ];
+  Node9 [label="GameApp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGameApp.html"];
+  Node10 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mName\nmFileName" ];
+  Node10 [label="HashString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHashString.html"];
+  Node11 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mWorld" ];
+  Node11 [label="PhysicsWorld",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPhysicsWorld.html"];
+  Node8 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node12 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mRegistry" ];
+  Node12 [label="ForceRegistry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classForceRegistry.html"];
+  Node13 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mGravity" ];
+  Node13 [label="GravityGenerator",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classGravityGenerator.html"];
+  Node2 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node14 -> Node11 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mResolver" ];
+  Node14 [label="Resolver",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classResolver.html"];
+  Node3 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mVelocity\nmForces\nmBroadSize\nmAcceleration" ];
+}

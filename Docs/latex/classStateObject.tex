@@ -1,0 +1,212 @@
+\hypertarget{classStateObject}{}\section{State\+Object Class Reference}
+\label{classStateObject}\index{State\+Object@{State\+Object}}
+
+
+{\ttfamily \#include $<$State\+Object.\+h$>$}
+
+
+
+Inheritance diagram for State\+Object\+:
+% FIG 0
+
+
+Collaboration diagram for State\+Object\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classStateObject_a2a4f677241370a9650586369a7173c8b}{State\+Object} ()
+\item 
+virtual \hyperlink{classStateObject_ae4e97e7674985125e4d6889891d1f56f}{$\sim$\+State\+Object} ()
+\item 
+\hyperlink{classStateMachine}{State\+Machine} $\ast$ \hyperlink{classStateObject_a967c691955beb9a8a01f76e284c571d7}{Get\+State\+Machine} () const 
+\begin{DoxyCompactList}\small\item\em Get state machine. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classStateObject_a4093cde1756c8580067e121740396eb0}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to parent. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classStateObject_ac861388d961e1de6e57b168b5ee93b96}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive message. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classStateObject_a6f824bbb81a19e26abaa5156b29941ab}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize to file format. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classStateObject_af2cc01c2dc3583199d3a05820dde68e1}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Read from format. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classStateObject_a3fcf36666733125f1e6eae7f0f654db4}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classStateObject_a03bb2c50e82e3a8fe22ba1460cd68726}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this object usable in L\+UA. \end{DoxyCompactList}\item 
+static int \hyperlink{classStateObject_ac808ea2d8b81190c3103131f1f30e8f1}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classStateMachine}{State\+Machine} $\ast$ \hyperlink{classStateObject_aa33d984d1ab329928d9e747856493e6e}{m\+State\+Machine}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classStateObject_a13bb8cd307785ed2284f7f2a421a3be9}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}State\+Object\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{State\+Object@{State\+Object}!State\+Object@{State\+Object}}
+\index{State\+Object@{State\+Object}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{State\+Object()}{StateObject()}}]{\setlength{\rightskip}{0pt plus 5cm}State\+Object\+::\+State\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classStateObject_a2a4f677241370a9650586369a7173c8b}{}\label{classStateObject_a2a4f677241370a9650586369a7173c8b}
+\index{State\+Object@{State\+Object}!````~State\+Object@{$\sim$\+State\+Object}}
+\index{````~State\+Object@{$\sim$\+State\+Object}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{$\sim$\+State\+Object()}{~StateObject()}}]{\setlength{\rightskip}{0pt plus 5cm}State\+Object\+::$\sim$\+State\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStateObject_ae4e97e7674985125e4d6889891d1f56f}{}\label{classStateObject_ae4e97e7674985125e4d6889891d1f56f}
+
+
+\subsection{Member Function Documentation}
+\index{State\+Object@{State\+Object}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)}{Deserialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Object\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStateObject_af2cc01c2dc3583199d3a05820dde68e1}{}\label{classStateObject_af2cc01c2dc3583199d3a05820dde68e1}
+
+
+Read from format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to read from. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Component}.
+
+\index{State\+Object@{State\+Object}!Get\+State\+Machine@{Get\+State\+Machine}}
+\index{Get\+State\+Machine@{Get\+State\+Machine}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Get\+State\+Machine() const }{GetStateMachine() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Machine} $\ast$ State\+Object\+::\+Get\+State\+Machine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classStateObject_a967c691955beb9a8a01f76e284c571d7}{}\label{classStateObject_a967c691955beb9a8a01f76e284c571d7}
+
+
+Get state machine. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classState}{State} machine. 
+\end{DoxyReturn}
+\index{State\+Object@{State\+Object}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int State\+Object\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classStateObject_ac808ea2d8b81190c3103131f1f30e8f1}{}\label{classStateObject_ac808ea2d8b81190c3103131f1f30e8f1}
+\index{State\+Object@{State\+Object}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Object\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStateObject_ac861388d961e1de6e57b168b5ee93b96}{}\label{classStateObject_ac861388d961e1de6e57b168b5ee93b96}
+
+
+Receive message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to parse. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Component}.
+
+\index{State\+Object@{State\+Object}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Object\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStateObject_a4093cde1756c8580067e121740396eb0}{}\label{classStateObject_a4093cde1756c8580067e121740396eb0}
+
+
+Send message to parent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Component}.
+
+\index{State\+Object@{State\+Object}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Object\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStateObject_a6f824bbb81a19e26abaa5156b29941ab}{}\label{classStateObject_a6f824bbb81a19e26abaa5156b29941ab}
+
+
+Serialize to file format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to write to. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Component}.
+
+\index{State\+Object@{State\+Object}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Object\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classStateObject_a03bb2c50e82e3a8fe22ba1460cd68726}{}\label{classStateObject_a03bb2c50e82e3a8fe22ba1460cd68726}
+
+
+Make this object usable in L\+UA. 
+
+\index{State\+Object@{State\+Object}!Update@{Update}}
+\index{Update@{Update}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void State\+Object\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classStateObject_a3fcf36666733125f1e6eae7f0f654db4}{}\label{classStateObject_a3fcf36666733125f1e6eae7f0f654db4}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Component}.
+
+
+
+\subsection{Member Data Documentation}
+\index{State\+Object@{State\+Object}!m\+State\+Machine@{m\+State\+Machine}}
+\index{m\+State\+Machine@{m\+State\+Machine}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{m\+State\+Machine}{mStateMachine}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State\+Machine}$\ast$ State\+Object\+::m\+State\+Machine\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classStateObject_aa33d984d1ab329928d9e747856493e6e}{}\label{classStateObject_aa33d984d1ab329928d9e747856493e6e}
+\index{State\+Object@{State\+Object}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!State\+Object@{State\+Object}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const State\+Object\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}State\+Object\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classStateObject_a13bb8cd307785ed2284f7f2a421a3be9}{}\label{classStateObject_a13bb8cd307785ed2284f7f2a421a3be9}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Components/\hyperlink{StateObject_8h}{State\+Object.\+h}\item 
+Components/\hyperlink{StateObject_8cpp}{State\+Object.\+cpp}\end{DoxyCompactItemize}

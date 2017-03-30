@@ -1,0 +1,458 @@
+\hypertarget{classGraphicsManager}{}\section{Graphics\+Manager Class Reference}
+\label{classGraphicsManager}\index{Graphics\+Manager@{Graphics\+Manager}}
+
+
+{\ttfamily \#include $<$Graphics\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Graphics\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Graphics\+Manager\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$\+::iterator \hyperlink{classGraphicsManager_a066a5ed1364f54d5d52cfec0b8552969}{Surface\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGraphicsManager_a82efa13e474eb235979ec46c49bebe75}{Graphics\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App, int a\+Width, int a\+Height, bool a\+Full\+Screen)
+\item 
+\hyperlink{classGraphicsManager_ab5fdf685bbe4ae44b980ffc930ca1b6d}{$\sim$\+Graphics\+Manager} ()
+\item 
+virtual void \hyperlink{classGraphicsManager_a84004634b1d8d0435f6adfaaf6b3d4b4}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update screen, swap buffers, etc. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGraphicsManager_a1dfc5ea39106bac02b4cdaaea5e4d20b}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGraphicsManager_a7de02da0159ccdc15f865d8c9d6278fe}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Stores a message to be processed next frame. \end{DoxyCompactList}\item 
+\hyperlink{classSurface}{Surface} $\ast$ \hyperlink{classGraphicsManager_adf5d37aa192eadab1473cdaeb961262e}{Create\+Surface} ()
+\begin{DoxyCompactList}\small\item\em Create a new surface with owner this. \end{DoxyCompactList}\item 
+\hyperlink{classSurface}{Surface} $\ast$ \hyperlink{classGraphicsManager_a9d18507e39b1d25c721409c2bf352a0b}{Create\+U\+I\+Surface} ()
+\begin{DoxyCompactList}\small\item\em Create surface at UI layer, handy helper. \end{DoxyCompactList}\item 
+void \hyperlink{classGraphicsManager_a12e8318dd3ef781a994a78d33214660a}{Delete\+Surface} (\hyperlink{classSurface}{Surface} $\ast$a\+Surface)
+\begin{DoxyCompactList}\small\item\em Delete and remove surface. \end{DoxyCompactList}\item 
+void \hyperlink{classGraphicsManager_a9867778257c9814c53f5377726a67e3d}{Add\+Surface} (\hyperlink{classSurface}{Surface} $\ast$a\+Surface)
+\begin{DoxyCompactList}\small\item\em Add surface to list. \end{DoxyCompactList}\item 
+void \hyperlink{classGraphicsManager_a664d36ea0771266310e651b36bd00ac7}{Add\+U\+I\+Surface} (\hyperlink{classSurface}{Surface} $\ast$a\+Surface)
+\begin{DoxyCompactList}\small\item\em Add surface to UI list. \end{DoxyCompactList}\item 
+void \hyperlink{classGraphicsManager_a52a9e1cbf5cf1f9f77362746bd23c4ab}{Remove\+Surface} (\hyperlink{classSurface}{Surface} $\ast$a\+Surface)
+\begin{DoxyCompactList}\small\item\em Remove surface, do not delete. \end{DoxyCompactList}\item 
+void \hyperlink{classGraphicsManager_aa06713d624d1855396132f310700e94f}{Clear\+Surfaces} ()
+\begin{DoxyCompactList}\small\item\em Remove and delete all surfaces. \end{DoxyCompactList}\item 
+\hyperlink{classScreen}{Screen} $\ast$ \hyperlink{classGraphicsManager_afb9c819b4df0191b82bfdd166304ec8c}{Get\+Screen} ()
+\begin{DoxyCompactList}\small\item\em Get screen object (the renderer) \end{DoxyCompactList}\item 
+void \hyperlink{classGraphicsManager_a48a4cae271ec07dce8f827e5de935ecd}{Add\+Texture\+Pairing} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{structTextureData}{Texture\+Data} const \&a\+Data)
+\begin{DoxyCompactList}\small\item\em Add texture name and data to map. \end{DoxyCompactList}\item 
+\hyperlink{structTextureData}{Texture\+Data} const \& \hyperlink{classGraphicsManager_adb4d6fcd8639d9c6f5ae4838d2539b7f}{Get\+Texture\+Data} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename) const 
+\begin{DoxyCompactList}\small\item\em Get data for texture by filename. \end{DoxyCompactList}\item 
+void \hyperlink{classGraphicsManager_a340b71d1dc6fc096ad3f1de53de69e51}{Add\+Shader\+Pairing} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{structShaderData}{Shader\+Data} const \&a\+Data)
+\begin{DoxyCompactList}\small\item\em Add shader pairing by name and data. \end{DoxyCompactList}\item 
+\hyperlink{structShaderData}{Shader\+Data} const \& \hyperlink{classGraphicsManager_a1a8d331ed157a4f639ff78952e9c98cd}{Get\+Shader\+Data} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename) const 
+\begin{DoxyCompactList}\small\item\em Get data of shader based on file name. \end{DoxyCompactList}\item 
+bool \hyperlink{classGraphicsManager_a8ef4477bf860eb1eff8b47a3080a151e}{Shader\+Data\+Exists} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename) const 
+\begin{DoxyCompactList}\small\item\em Get if shader already exists. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classGraphicsManager_a6f672f82f52f090636599591b309b0eb}{Abs\+To\+Rel} (\hyperlink{structVector3}{Vector3} const \&a\+Position) const 
+\begin{DoxyCompactList}\small\item\em Converts absolute coordinate point to point in local screen space. \end{DoxyCompactList}\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classGraphicsManager_a83e27a43d563d47fb22a52cf842a6b9b}{Rel\+To\+Abs} (\hyperlink{structVector3}{Vector3} const \&a\+Position) const 
+\begin{DoxyCompactList}\small\item\em Converts local coordinate point to point in world space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classGraphicsManager_abe493f4e4858fe83b7a9210e827a63e1}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classGraphicsManager_ac7ac11190aa116df6d9887a794797d94}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classGraphicsManager_acc00f7182a8f93b5c2bbb1b89c0b39b6}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this manager visible in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ \hyperlink{classGraphicsManager_aa30248870f228fce54015450fd3f7726}{m\+Surfaces}
+\item 
+std\+::vector$<$ \hyperlink{classSurface}{Surface} $\ast$ $>$ \hyperlink{classGraphicsManager_ae08417bb43d000e45aa8b97b25158296}{m\+U\+I\+Elements}
+\item 
+std\+::map$<$ \hyperlink{classHashString}{Hash\+String}, \hyperlink{structTextureData}{Texture\+Data} $>$ \hyperlink{classGraphicsManager_aaa8c0e8cd3178da0462a69f78cc39ed1}{m\+Textures}
+\item 
+std\+::map$<$ \hyperlink{classHashString}{Hash\+String}, \hyperlink{structShaderData}{Shader\+Data} $>$ \hyperlink{classGraphicsManager_a36809d815578ce17cb660ac9bbed3e2f}{m\+Shaders}
+\item 
+\hyperlink{classScreen}{Screen} $\ast$ \hyperlink{classGraphicsManager_ae86dac7e0d920ed3e4edc1247eb88ec4}{m\+Screen}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classGraphicsManager_a63a569e94f0de22eebd69e5704f7aa3d}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Graphics\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Graphics\+Manager@{Graphics\+Manager}!Surface\+IT@{Surface\+IT}}
+\index{Surface\+IT@{Surface\+IT}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Surface\+IT}{SurfaceIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Surface}$\ast$$>$\+::iterator {\bf Graphics\+Manager\+::\+Surface\+IT}}\hypertarget{classGraphicsManager_a066a5ed1364f54d5d52cfec0b8552969}{}\label{classGraphicsManager_a066a5ed1364f54d5d52cfec0b8552969}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Graphics\+Manager@{Graphics\+Manager}!Graphics\+Manager@{Graphics\+Manager}}
+\index{Graphics\+Manager@{Graphics\+Manager}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Graphics\+Manager(\+Game\+App $\ast$a\+App, int a\+Width, int a\+Height, bool a\+Full\+Screen)}{GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen)}}]{\setlength{\rightskip}{0pt plus 5cm}Graphics\+Manager\+::\+Graphics\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App, }
+\item[{int}]{a\+Width, }
+\item[{int}]{a\+Height, }
+\item[{bool}]{a\+Full\+Screen}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a82efa13e474eb235979ec46c49bebe75}{}\label{classGraphicsManager_a82efa13e474eb235979ec46c49bebe75}
+\index{Graphics\+Manager@{Graphics\+Manager}!````~Graphics\+Manager@{$\sim$\+Graphics\+Manager}}
+\index{````~Graphics\+Manager@{$\sim$\+Graphics\+Manager}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Graphics\+Manager()}{~GraphicsManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Graphics\+Manager\+::$\sim$\+Graphics\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_ab5fdf685bbe4ae44b980ffc930ca1b6d}{}\label{classGraphicsManager_ab5fdf685bbe4ae44b980ffc930ca1b6d}
+
+
+\subsection{Member Function Documentation}
+\index{Graphics\+Manager@{Graphics\+Manager}!Abs\+To\+Rel@{Abs\+To\+Rel}}
+\index{Abs\+To\+Rel@{Abs\+To\+Rel}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Abs\+To\+Rel(\+Vector3 const \&a\+Position) const }{AbsToRel(Vector3 const &aPosition) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Graphics\+Manager\+::\+Abs\+To\+Rel (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGraphicsManager_a6f672f82f52f090636599591b309b0eb}{}\label{classGraphicsManager_a6f672f82f52f090636599591b309b0eb}
+
+
+Converts absolute coordinate point to point in local screen space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Position} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Add\+Shader\+Pairing@{Add\+Shader\+Pairing}}
+\index{Add\+Shader\+Pairing@{Add\+Shader\+Pairing}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Shader\+Pairing(\+Hash\+String const \&a\+Filename, Shader\+Data const \&a\+Data)}{AddShaderPairing(HashString const &aFilename, ShaderData const &aData)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Add\+Shader\+Pairing (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Shader\+Data} const \&}]{a\+Data}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a340b71d1dc6fc096ad3f1de53de69e51}{}\label{classGraphicsManager_a340b71d1dc6fc096ad3f1de53de69e51}
+
+
+Add shader pairing by name and data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & Name of shader file. \\
+\hline
+{\em a\+Data} & Data of shader file. \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Add\+Surface@{Add\+Surface}}
+\index{Add\+Surface@{Add\+Surface}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Surface(\+Surface $\ast$a\+Surface)}{AddSurface(Surface *aSurface)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Add\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Surface} $\ast$}]{a\+Surface}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a9867778257c9814c53f5377726a67e3d}{}\label{classGraphicsManager_a9867778257c9814c53f5377726a67e3d}
+
+
+Add surface to list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Surface} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Add\+Texture\+Pairing@{Add\+Texture\+Pairing}}
+\index{Add\+Texture\+Pairing@{Add\+Texture\+Pairing}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Texture\+Pairing(\+Hash\+String const \&a\+Filename, Texture\+Data const \&a\+Data)}{AddTexturePairing(HashString const &aFilename, TextureData const &aData)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Add\+Texture\+Pairing (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{{\bf Texture\+Data} const \&}]{a\+Data}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a48a4cae271ec07dce8f827e5de935ecd}{}\label{classGraphicsManager_a48a4cae271ec07dce8f827e5de935ecd}
+
+
+Add texture name and data to map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+{\em a\+Data} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Add\+U\+I\+Surface@{Add\+U\+I\+Surface}}
+\index{Add\+U\+I\+Surface@{Add\+U\+I\+Surface}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+U\+I\+Surface(\+Surface $\ast$a\+Surface)}{AddUISurface(Surface *aSurface)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Add\+U\+I\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Surface} $\ast$}]{a\+Surface}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a664d36ea0771266310e651b36bd00ac7}{}\label{classGraphicsManager_a664d36ea0771266310e651b36bd00ac7}
+
+
+Add surface to UI list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Surface} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Clear\+Surfaces@{Clear\+Surfaces}}
+\index{Clear\+Surfaces@{Clear\+Surfaces}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Clear\+Surfaces()}{ClearSurfaces()}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Clear\+Surfaces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_aa06713d624d1855396132f310700e94f}{}\label{classGraphicsManager_aa06713d624d1855396132f310700e94f}
+
+
+Remove and delete all surfaces. 
+
+\index{Graphics\+Manager@{Graphics\+Manager}!Create\+Surface@{Create\+Surface}}
+\index{Create\+Surface@{Create\+Surface}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Surface()}{CreateSurface()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Surface} $\ast$ Graphics\+Manager\+::\+Create\+Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_adf5d37aa192eadab1473cdaeb961262e}{}\label{classGraphicsManager_adf5d37aa192eadab1473cdaeb961262e}
+
+
+Create a new surface with owner this. 
+
+\index{Graphics\+Manager@{Graphics\+Manager}!Create\+U\+I\+Surface@{Create\+U\+I\+Surface}}
+\index{Create\+U\+I\+Surface@{Create\+U\+I\+Surface}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+U\+I\+Surface()}{CreateUISurface()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Surface} $\ast$ Graphics\+Manager\+::\+Create\+U\+I\+Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a9d18507e39b1d25c721409c2bf352a0b}{}\label{classGraphicsManager_a9d18507e39b1d25c721409c2bf352a0b}
+
+
+Create surface at UI layer, handy helper. 
+
+\index{Graphics\+Manager@{Graphics\+Manager}!Delete\+Surface@{Delete\+Surface}}
+\index{Delete\+Surface@{Delete\+Surface}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Surface(\+Surface $\ast$a\+Surface)}{DeleteSurface(Surface *aSurface)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Delete\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Surface} $\ast$}]{a\+Surface}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a12e8318dd3ef781a994a78d33214660a}{}\label{classGraphicsManager_a12e8318dd3ef781a994a78d33214660a}
+
+
+Delete and remove surface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Surface} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Graphics\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classGraphicsManager_abe493f4e4858fe83b7a9210e827a63e1}{}\label{classGraphicsManager_abe493f4e4858fe83b7a9210e827a63e1}
+\index{Graphics\+Manager@{Graphics\+Manager}!Get\+Screen@{Get\+Screen}}
+\index{Get\+Screen@{Get\+Screen}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Screen()}{GetScreen()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen} $\ast$ Graphics\+Manager\+::\+Get\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_afb9c819b4df0191b82bfdd166304ec8c}{}\label{classGraphicsManager_afb9c819b4df0191b82bfdd166304ec8c}
+
+
+Get screen object (the renderer) 
+
+\index{Graphics\+Manager@{Graphics\+Manager}!Get\+Shader\+Data@{Get\+Shader\+Data}}
+\index{Get\+Shader\+Data@{Get\+Shader\+Data}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Shader\+Data(\+Hash\+String const \&a\+Filename) const }{GetShaderData(HashString const &aFilename) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Shader\+Data} const \& Graphics\+Manager\+::\+Get\+Shader\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGraphicsManager_a1a8d331ed157a4f639ff78952e9c98cd}{}\label{classGraphicsManager_a1a8d331ed157a4f639ff78952e9c98cd}
+
+
+Get data of shader based on file name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & Name of shader file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Data of shader file. Will assert if file not found. 
+\end{DoxyReturn}
+\index{Graphics\+Manager@{Graphics\+Manager}!Get\+Texture\+Data@{Get\+Texture\+Data}}
+\index{Get\+Texture\+Data@{Get\+Texture\+Data}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Texture\+Data(\+Hash\+String const \&a\+Filename) const }{GetTextureData(HashString const &aFilename) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Texture\+Data} const \& Graphics\+Manager\+::\+Get\+Texture\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGraphicsManager_adb4d6fcd8639d9c6f5ae4838d2539b7f}{}\label{classGraphicsManager_adb4d6fcd8639d9c6f5ae4838d2539b7f}
+
+
+Get data for texture by filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Graphics\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classGraphicsManager_ac7ac11190aa116df6d9887a794797d94}{}\label{classGraphicsManager_ac7ac11190aa116df6d9887a794797d94}
+\index{Graphics\+Manager@{Graphics\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGraphicsManager_a7de02da0159ccdc15f865d8c9d6278fe}{}\label{classGraphicsManager_a7de02da0159ccdc15f865d8c9d6278fe}
+
+
+Stores a message to be processed next frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to store \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Graphics\+Manager@{Graphics\+Manager}!Rel\+To\+Abs@{Rel\+To\+Abs}}
+\index{Rel\+To\+Abs@{Rel\+To\+Abs}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Rel\+To\+Abs(\+Vector3 const \&a\+Position) const }{RelToAbs(Vector3 const &aPosition) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Graphics\+Manager\+::\+Rel\+To\+Abs (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Position}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGraphicsManager_a83e27a43d563d47fb22a52cf842a6b9b}{}\label{classGraphicsManager_a83e27a43d563d47fb22a52cf842a6b9b}
+
+
+Converts local coordinate point to point in world space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Position} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Remove\+Surface@{Remove\+Surface}}
+\index{Remove\+Surface@{Remove\+Surface}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Surface(\+Surface $\ast$a\+Surface)}{RemoveSurface(Surface *aSurface)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Remove\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Surface} $\ast$}]{a\+Surface}
+\end{DoxyParamCaption}
+)}\hypertarget{classGraphicsManager_a52a9e1cbf5cf1f9f77362746bd23c4ab}{}\label{classGraphicsManager_a52a9e1cbf5cf1f9f77362746bd23c4ab}
+
+
+Remove surface, do not delete. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Surface} & \\
+\hline
+\end{DoxyParams}
+\index{Graphics\+Manager@{Graphics\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGraphicsManager_a1dfc5ea39106bac02b4cdaaea5e4d20b}{}\label{classGraphicsManager_a1dfc5ea39106bac02b4cdaaea5e4d20b}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Graphics\+Manager@{Graphics\+Manager}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classGraphicsManager_acc00f7182a8f93b5c2bbb1b89c0b39b6}{}\label{classGraphicsManager_acc00f7182a8f93b5c2bbb1b89c0b39b6}
+
+
+Make this manager visible in L\+UA. 
+
+\index{Graphics\+Manager@{Graphics\+Manager}!Shader\+Data\+Exists@{Shader\+Data\+Exists}}
+\index{Shader\+Data\+Exists@{Shader\+Data\+Exists}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Shader\+Data\+Exists(\+Hash\+String const \&a\+Filename) const }{ShaderDataExists(HashString const &aFilename) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Graphics\+Manager\+::\+Shader\+Data\+Exists (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Filename}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGraphicsManager_a8ef4477bf860eb1eff8b47a3080a151e}{}\label{classGraphicsManager_a8ef4477bf860eb1eff8b47a3080a151e}
+
+
+Get if shader already exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Filename} & Name of shader file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if not found, true otherwise. 
+\end{DoxyReturn}
+\index{Graphics\+Manager@{Graphics\+Manager}!Update@{Update}}
+\index{Update@{Update}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGraphicsManager_a84004634b1d8d0435f6adfaaf6b3d4b4}{}\label{classGraphicsManager_a84004634b1d8d0435f6adfaaf6b3d4b4}
+
+
+Update screen, swap buffers, etc. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Graphics\+Manager@{Graphics\+Manager}!m\+Screen@{m\+Screen}}
+\index{m\+Screen@{m\+Screen}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Screen}{mScreen}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Screen}$\ast$ Graphics\+Manager\+::m\+Screen\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGraphicsManager_ae86dac7e0d920ed3e4edc1247eb88ec4}{}\label{classGraphicsManager_ae86dac7e0d920ed3e4edc1247eb88ec4}
+\index{Graphics\+Manager@{Graphics\+Manager}!m\+Shaders@{m\+Shaders}}
+\index{m\+Shaders@{m\+Shaders}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Shaders}{mShaders}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Hash\+String}, {\bf Shader\+Data}$>$ Graphics\+Manager\+::m\+Shaders\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGraphicsManager_a36809d815578ce17cb660ac9bbed3e2f}{}\label{classGraphicsManager_a36809d815578ce17cb660ac9bbed3e2f}
+\index{Graphics\+Manager@{Graphics\+Manager}!m\+Surfaces@{m\+Surfaces}}
+\index{m\+Surfaces@{m\+Surfaces}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Surfaces}{mSurfaces}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Surface}$\ast$$>$ Graphics\+Manager\+::m\+Surfaces\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGraphicsManager_aa30248870f228fce54015450fd3f7726}{}\label{classGraphicsManager_aa30248870f228fce54015450fd3f7726}
+\index{Graphics\+Manager@{Graphics\+Manager}!m\+Textures@{m\+Textures}}
+\index{m\+Textures@{m\+Textures}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Textures}{mTextures}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Hash\+String}, {\bf Texture\+Data}$>$ Graphics\+Manager\+::m\+Textures\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGraphicsManager_aaa8c0e8cd3178da0462a69f78cc39ed1}{}\label{classGraphicsManager_aaa8c0e8cd3178da0462a69f78cc39ed1}
+\index{Graphics\+Manager@{Graphics\+Manager}!m\+U\+I\+Elements@{m\+U\+I\+Elements}}
+\index{m\+U\+I\+Elements@{m\+U\+I\+Elements}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{m\+U\+I\+Elements}{mUIElements}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Surface}$\ast$$>$ Graphics\+Manager\+::m\+U\+I\+Elements\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGraphicsManager_ae08417bb43d000e45aa8b97b25158296}{}\label{classGraphicsManager_ae08417bb43d000e45aa8b97b25158296}
+\index{Graphics\+Manager@{Graphics\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Graphics\+Manager@{Graphics\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Graphics\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Graphics\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classGraphicsManager_a63a569e94f0de22eebd69e5704f7aa3d}{}\label{classGraphicsManager_a63a569e94f0de22eebd69e5704f7aa3d}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{GraphicsManager_8h}{Graphics\+Manager.\+h}\item 
+Managers/\hyperlink{GraphicsManager_8cpp}{Graphics\+Manager.\+cpp}\end{DoxyCompactItemize}

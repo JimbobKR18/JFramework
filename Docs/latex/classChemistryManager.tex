@@ -1,0 +1,395 @@
+\hypertarget{classChemistryManager}{}\section{Chemistry\+Manager Class Reference}
+\label{classChemistryManager}\index{Chemistry\+Manager@{Chemistry\+Manager}}
+
+
+{\ttfamily \#include $<$Chemistry\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Chemistry\+Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Chemistry\+Manager\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{classChemistryMaterial}{Chemistry\+Material} $\ast$ $>$ \hyperlink{classChemistryManager_aed6b958024dc4300fd9dfbbbcf819ac1}{Material\+Container}
+\item 
+typedef std\+::vector$<$ \hyperlink{classChemistryElement}{Chemistry\+Element} $\ast$ $>$ \hyperlink{classChemistryManager_a497405ec5c9312ef9a37298ff3b2506c}{Element\+Container}
+\item 
+typedef Material\+Container\+::iterator \hyperlink{classChemistryManager_a4fc68d271af8c4b424e06d350ecc4fb8}{Material\+IT}
+\item 
+typedef Element\+Container\+::iterator \hyperlink{classChemistryManager_adc7451eba7244ac677ffc00f9b6bd6b0}{Element\+IT}
+\item 
+typedef Material\+Container\+::const\+\_\+iterator \hyperlink{classChemistryManager_a106969fc62cbfc5b24f4e95e7fdfaef7}{Material\+Const\+IT}
+\item 
+typedef Element\+Container\+::const\+\_\+iterator \hyperlink{classChemistryManager_a9ce1f32f52966ba360c8c9d443147908}{Element\+Const\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classChemistryManager_a163b71992600516641201da0c25ae746}{Chemistry\+Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App, float const a\+Current\+Temperature)
+\item 
+virtual \hyperlink{classChemistryManager_ab45c29391f3ab6a9687c4ce118cd092d}{$\sim$\+Chemistry\+Manager} ()
+\item 
+void \hyperlink{classChemistryManager_a35d222f3cb748f47a955a969818e1639}{Set\+Chemical\+Factory} (\hyperlink{classChemicalFactory}{Chemical\+Factory} $\ast$a\+Factory)
+\begin{DoxyCompactList}\small\item\em Set new chemical factory, delete old one. \end{DoxyCompactList}\item 
+\hyperlink{classChemistryMaterial}{Chemistry\+Material} $\ast$ \hyperlink{classChemistryManager_a23023410969465d5c4ec4e23afbd2177}{Create\+Material} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Create new material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_a7902113012ab4861bb271f51053ce533}{Delete\+Material} (\hyperlink{classChemistryMaterial}{Chemistry\+Material} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Delete and remove material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_a8b11a9f62edd83a7c16e9182a2d984bb}{Add\+Material} (\hyperlink{classChemistryMaterial}{Chemistry\+Material} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Add material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_a72216de847f242a215393df85c43923d}{Remove\+Material} (\hyperlink{classChemistryMaterial}{Chemistry\+Material} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_ac7e9659c9f18f0fd40c0f63e8cf16ccd}{Clear\+Materials} ()
+\begin{DoxyCompactList}\small\item\em Clear all materials. \end{DoxyCompactList}\item 
+\hyperlink{classChemistryElement}{Chemistry\+Element} $\ast$ \hyperlink{classChemistryManager_af13665223b7d72d9416c2956b44982e1}{Create\+Element} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Create new element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_ae791e70e925985e79f0727a633772a92}{Delete\+Element} (\hyperlink{classChemistryElement}{Chemistry\+Element} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Delete and remove element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_a813a5eed385e4cd39bba2f88ec0c5ce9}{Add\+Element} (\hyperlink{classChemistryElement}{Chemistry\+Element} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Add element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_a0fda6ba4a697ed8bcdda5d0eb222f3f3}{Remove\+Element} (\hyperlink{classChemistryElement}{Chemistry\+Element} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove element. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryManager_a7045f82efe53c79fbbcb5658f58fea45}{Clear\+Elements} ()
+\begin{DoxyCompactList}\small\item\em Clear all elements. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryManager_aa65a3231440bbab7f588f136c0439fee}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryManager_a19f683fb17327d395038f411bb1a963e}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryManager_a10dbb210239f8953f2f478f903bff7cb}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to all objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{classChemistryManager_a15212234b2b9414da0a7f38fa2304118}{Get\+Name} ()
+\item 
+static unsigned \hyperlink{classChemistryManager_ac0b198780ea650928fc619e8e3ed45fc}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classChemicalFactory}{Chemical\+Factory} $\ast$ \hyperlink{classChemistryManager_aa22d3fda73de4f1c415c6d324bffd8a8}{m\+Factory}
+\item 
+\hyperlink{classChemistryManager_aed6b958024dc4300fd9dfbbbcf819ac1}{Material\+Container} \hyperlink{classChemistryManager_a74ebac5a1fad5be1176f61e53620dc01}{m\+Materials}
+\item 
+\hyperlink{classChemistryManager_a497405ec5c9312ef9a37298ff3b2506c}{Element\+Container} \hyperlink{classChemistryManager_a206bd337c1434f05f699f43e3b76ddc2}{m\+Elements}
+\item 
+float \hyperlink{classChemistryManager_a90c66730ce549536a9259aa2e5da3ee3}{m\+Current\+Temperature}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned const \hyperlink{classChemistryManager_a175125416f540c77e81629fd9d38a60a}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Chemistry\+Manager\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Typedef Documentation}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Element\+Const\+IT@{Element\+Const\+IT}}
+\index{Element\+Const\+IT@{Element\+Const\+IT}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Element\+Const\+IT}{ElementConstIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Element\+Container\+::const\+\_\+iterator {\bf Chemistry\+Manager\+::\+Element\+Const\+IT}}\hypertarget{classChemistryManager_a9ce1f32f52966ba360c8c9d443147908}{}\label{classChemistryManager_a9ce1f32f52966ba360c8c9d443147908}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Element\+Container@{Element\+Container}}
+\index{Element\+Container@{Element\+Container}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Element\+Container}{ElementContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Chemistry\+Element}$\ast$$>$ {\bf Chemistry\+Manager\+::\+Element\+Container}}\hypertarget{classChemistryManager_a497405ec5c9312ef9a37298ff3b2506c}{}\label{classChemistryManager_a497405ec5c9312ef9a37298ff3b2506c}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Element\+IT@{Element\+IT}}
+\index{Element\+IT@{Element\+IT}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Element\+IT}{ElementIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Element\+Container\+::iterator {\bf Chemistry\+Manager\+::\+Element\+IT}}\hypertarget{classChemistryManager_adc7451eba7244ac677ffc00f9b6bd6b0}{}\label{classChemistryManager_adc7451eba7244ac677ffc00f9b6bd6b0}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Material\+Const\+IT@{Material\+Const\+IT}}
+\index{Material\+Const\+IT@{Material\+Const\+IT}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Material\+Const\+IT}{MaterialConstIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Material\+Container\+::const\+\_\+iterator {\bf Chemistry\+Manager\+::\+Material\+Const\+IT}}\hypertarget{classChemistryManager_a106969fc62cbfc5b24f4e95e7fdfaef7}{}\label{classChemistryManager_a106969fc62cbfc5b24f4e95e7fdfaef7}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Material\+Container@{Material\+Container}}
+\index{Material\+Container@{Material\+Container}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Material\+Container}{MaterialContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Chemistry\+Material}$\ast$$>$ {\bf Chemistry\+Manager\+::\+Material\+Container}}\hypertarget{classChemistryManager_aed6b958024dc4300fd9dfbbbcf819ac1}{}\label{classChemistryManager_aed6b958024dc4300fd9dfbbbcf819ac1}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Material\+IT@{Material\+IT}}
+\index{Material\+IT@{Material\+IT}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Material\+IT}{MaterialIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Material\+Container\+::iterator {\bf Chemistry\+Manager\+::\+Material\+IT}}\hypertarget{classChemistryManager_a4fc68d271af8c4b424e06d350ecc4fb8}{}\label{classChemistryManager_a4fc68d271af8c4b424e06d350ecc4fb8}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Chemistry\+Manager@{Chemistry\+Manager}}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Chemistry\+Manager(\+Game\+App $\ast$a\+App, float const a\+Current\+Temperature)}{ChemistryManager(GameApp *aApp, float const aCurrentTemperature)}}]{\setlength{\rightskip}{0pt plus 5cm}Chemistry\+Manager\+::\+Chemistry\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App, }
+\item[{float const}]{a\+Current\+Temperature}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a163b71992600516641201da0c25ae746}{}\label{classChemistryManager_a163b71992600516641201da0c25ae746}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!````~Chemistry\+Manager@{$\sim$\+Chemistry\+Manager}}
+\index{````~Chemistry\+Manager@{$\sim$\+Chemistry\+Manager}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Chemistry\+Manager()}{~ChemistryManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Chemistry\+Manager\+::$\sim$\+Chemistry\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryManager_ab45c29391f3ab6a9687c4ce118cd092d}{}\label{classChemistryManager_ab45c29391f3ab6a9687c4ce118cd092d}
+
+
+\subsection{Member Function Documentation}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Add\+Element@{Add\+Element}}
+\index{Add\+Element@{Add\+Element}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Element(\+Chemistry\+Element $\ast$a\+Object)}{AddElement(ChemistryElement *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Add\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Element} $\ast$}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a813a5eed385e4cd39bba2f88ec0c5ce9}{}\label{classChemistryManager_a813a5eed385e4cd39bba2f88ec0c5ce9}
+
+
+Add element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & Element to add. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Add\+Material@{Add\+Material}}
+\index{Add\+Material@{Add\+Material}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Add\+Material(\+Chemistry\+Material $\ast$a\+Object)}{AddMaterial(ChemistryMaterial *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Add\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Material} $\ast$}]{a\+Material}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a8b11a9f62edd83a7c16e9182a2d984bb}{}\label{classChemistryManager_a8b11a9f62edd83a7c16e9182a2d984bb}
+
+
+Add material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Material} & Material to add. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Clear\+Elements@{Clear\+Elements}}
+\index{Clear\+Elements@{Clear\+Elements}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Clear\+Elements()}{ClearElements()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Clear\+Elements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a7045f82efe53c79fbbcb5658f58fea45}{}\label{classChemistryManager_a7045f82efe53c79fbbcb5658f58fea45}
+
+
+Clear all elements. 
+
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Clear\+Materials@{Clear\+Materials}}
+\index{Clear\+Materials@{Clear\+Materials}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Clear\+Materials()}{ClearMaterials()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Clear\+Materials (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_ac7e9659c9f18f0fd40c0f63e8cf16ccd}{}\label{classChemistryManager_ac7e9659c9f18f0fd40c0f63e8cf16ccd}
+
+
+Clear all materials. 
+
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Create\+Element@{Create\+Element}}
+\index{Create\+Element@{Create\+Element}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Element(\+Hash\+String const \&a\+Name)}{CreateElement(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemistry\+Element} $\ast$ Chemistry\+Manager\+::\+Create\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_af13665223b7d72d9416c2956b44982e1}{}\label{classChemistryManager_af13665223b7d72d9416c2956b44982e1}
+
+
+Create new element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of element type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New element. 
+\end{DoxyReturn}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Create\+Material@{Create\+Material}}
+\index{Create\+Material@{Create\+Material}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Create\+Material(\+Hash\+String const \&a\+Name)}{CreateMaterial(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemistry\+Material} $\ast$ Chemistry\+Manager\+::\+Create\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a23023410969465d5c4ec4e23afbd2177}{}\label{classChemistryManager_a23023410969465d5c4ec4e23afbd2177}
+
+
+Create new material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of material type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New material. 
+\end{DoxyReturn}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Delete\+Element@{Delete\+Element}}
+\index{Delete\+Element@{Delete\+Element}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Element(\+Chemistry\+Element $\ast$a\+Object)}{DeleteElement(ChemistryElement *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Delete\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Element} $\ast$}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_ae791e70e925985e79f0727a633772a92}{}\label{classChemistryManager_ae791e70e925985e79f0727a633772a92}
+
+
+Delete and remove element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & Element. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Delete\+Material@{Delete\+Material}}
+\index{Delete\+Material@{Delete\+Material}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Delete\+Material(\+Chemistry\+Material $\ast$a\+Object)}{DeleteMaterial(ChemistryMaterial *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Delete\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Material} $\ast$}]{a\+Material}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a7902113012ab4861bb271f51053ce533}{}\label{classChemistryManager_a7902113012ab4861bb271f51053ce533}
+
+
+Delete and remove material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Material} & Material. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+Name()}{GetName()}}]{\setlength{\rightskip}{0pt plus 5cm}static std\+::string Chemistry\+Manager\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classChemistryManager_a15212234b2b9414da0a7f38fa2304118}{}\label{classChemistryManager_a15212234b2b9414da0a7f38fa2304118}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Chemistry\+Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classChemistryManager_ac0b198780ea650928fc619e8e3ed45fc}{}\label{classChemistryManager_ac0b198780ea650928fc619e8e3ed45fc}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)}{ProcessDelayedMessage(Message *aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryManager_a19f683fb17327d395038f411bb1a963e}{}\label{classChemistryManager_a19f683fb17327d395038f411bb1a963e}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to do nothing with. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Manager}.
+
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Remove\+Element@{Remove\+Element}}
+\index{Remove\+Element@{Remove\+Element}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Element(\+Chemistry\+Element $\ast$a\+Object)}{RemoveElement(ChemistryElement *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Remove\+Element (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Element} $\ast$}]{a\+Element}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a0fda6ba4a697ed8bcdda5d0eb222f3f3}{}\label{classChemistryManager_a0fda6ba4a697ed8bcdda5d0eb222f3f3}
+
+
+Remove element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Element} & Element to remove. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Remove\+Material@{Remove\+Material}}
+\index{Remove\+Material@{Remove\+Material}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Remove\+Material(\+Chemistry\+Material $\ast$a\+Object)}{RemoveMaterial(ChemistryMaterial *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Remove\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Material} $\ast$}]{a\+Material}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a72216de847f242a215393df85c43923d}{}\label{classChemistryManager_a72216de847f242a215393df85c43923d}
+
+
+Remove material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Material} & Material to remove. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryManager_a10dbb210239f8953f2f478f903bff7cb}{}\label{classChemistryManager_a10dbb210239f8953f2f478f903bff7cb}
+
+
+Send message to all objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Manager}.
+
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Set\+Chemical\+Factory@{Set\+Chemical\+Factory}}
+\index{Set\+Chemical\+Factory@{Set\+Chemical\+Factory}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Set\+Chemical\+Factory(\+Chemical\+Factory $\ast$a\+Factory)}{SetChemicalFactory(ChemicalFactory *aFactory)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Set\+Chemical\+Factory (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemical\+Factory} $\ast$}]{a\+Factory}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryManager_a35d222f3cb748f47a955a969818e1639}{}\label{classChemistryManager_a35d222f3cb748f47a955a969818e1639}
+
+
+Set new chemical factory, delete old one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Factory} & Factory to set. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!Update@{Update}}
+\index{Update@{Update}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryManager_aa65a3231440bbab7f588f136c0439fee}{}\label{classChemistryManager_aa65a3231440bbab7f588f136c0439fee}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!m\+Current\+Temperature@{m\+Current\+Temperature}}
+\index{m\+Current\+Temperature@{m\+Current\+Temperature}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Current\+Temperature}{mCurrentTemperature}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Manager\+::m\+Current\+Temperature\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryManager_a90c66730ce549536a9259aa2e5da3ee3}{}\label{classChemistryManager_a90c66730ce549536a9259aa2e5da3ee3}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!m\+Elements@{m\+Elements}}
+\index{m\+Elements@{m\+Elements}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Elements}{mElements}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element\+Container} Chemistry\+Manager\+::m\+Elements\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryManager_a206bd337c1434f05f699f43e3b76ddc2}{}\label{classChemistryManager_a206bd337c1434f05f699f43e3b76ddc2}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!m\+Factory@{m\+Factory}}
+\index{m\+Factory@{m\+Factory}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Factory}{mFactory}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemical\+Factory}$\ast$ Chemistry\+Manager\+::m\+Factory\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryManager_aa22d3fda73de4f1c415c6d324bffd8a8}{}\label{classChemistryManager_aa22d3fda73de4f1c415c6d324bffd8a8}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!m\+Materials@{m\+Materials}}
+\index{m\+Materials@{m\+Materials}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{m\+Materials}{mMaterials}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Material\+Container} Chemistry\+Manager\+::m\+Materials\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryManager_a74ebac5a1fad5be1176f61e53620dc01}{}\label{classChemistryManager_a74ebac5a1fad5be1176f61e53620dc01}
+\index{Chemistry\+Manager@{Chemistry\+Manager}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Chemistry\+Manager@{Chemistry\+Manager}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned const Chemistry\+Manager\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Chemistry\+Manager\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classChemistryManager_a175125416f540c77e81629fd9d38a60a}{}\label{classChemistryManager_a175125416f540c77e81629fd9d38a60a}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{ChemistryManager_8h}{Chemistry\+Manager.\+h}\item 
+Managers/\hyperlink{ChemistryManager_8cpp}{Chemistry\+Manager.\+cpp}\end{DoxyCompactItemize}

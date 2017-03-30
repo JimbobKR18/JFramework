@@ -1,0 +1,531 @@
+\hypertarget{classGameObject}{}\section{Game\+Object Class Reference}
+\label{classGameObject}\index{Game\+Object@{Game\+Object}}
+
+
+{\ttfamily \#include $<$Game\+Object.\+h$>$}
+
+
+
+Collaboration diagram for Game\+Object\+:
+% FIG 0
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unordered\+\_\+map$<$ int, \hyperlink{classComponent}{Component} $\ast$ $>$ \hyperlink{classGameObject_a1b427560e7cbc5b2849ceec5f0780231}{Component\+Container}
+\item 
+typedef Component\+Container\+::iterator \hyperlink{classGameObject_ab17e7f4a9628567d8c1bbdb2c2cf42ae}{Component\+IT}
+\item 
+typedef Component\+Container\+::const\+\_\+iterator \hyperlink{classGameObject_a2eb725c491bcd045fc1b533f36addddf}{Component\+Const\+IT}
+\item 
+typedef std\+::unordered\+\_\+map$<$ int, \hyperlink{classGameObject}{Game\+Object} $\ast$ $>$ \hyperlink{classGameObject_aeef18cd85b020970fc7e33bb1d0f834e}{Game\+Object\+Container}
+\item 
+typedef Game\+Object\+Container\+::iterator \hyperlink{classGameObject_afd3721c500c5f9e2f502e017df75f348}{Game\+Object\+IT}
+\item 
+typedef Game\+Object\+Container\+::const\+\_\+iterator \hyperlink{classGameObject_ac7d3edce4c190f8e784d7824dbf81713}{Game\+Object\+Const\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGameObject_a0348e3ee2e83d56eafca7a3547f432c4}{Game\+Object} ()
+\item 
+\hyperlink{classGameObject_a40c2bb154101ca6885b5efd019c0167b}{Game\+Object} (\hyperlink{classObjectManager}{Object\+Manager} $\ast$a\+Manager, \hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\item 
+\hyperlink{classGameObject_a7636733e496960189f931aa9b2474c7f}{Game\+Object} (\hyperlink{classGameObject}{Game\+Object} const \&a\+Game\+Object)
+\item 
+virtual \hyperlink{classGameObject_ab82dfdb656f9051c0587e6593b2dda97}{$\sim$\+Game\+Object} ()
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classGameObject_a8736428fdc25165b44e5cbd06b3e2e6d}{Get\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get name of game object. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classGameObject_a94d0fc9225e3fa7b47cf4fd4c2c10efc}{Get\+File\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get file name of object. \end{DoxyCompactList}\item 
+\hyperlink{classObjectManager}{Object\+Manager} $\ast$ \hyperlink{classGameObject_a46633c3a227d6ef193bfe89f8d96c465}{Get\+Manager} () const 
+\begin{DoxyCompactList}\small\item\em Get objectmanager for object. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classGameObject_a0b6ff273dc4388d22d5a3fd2d40eee5c}{Get\+Parent} () const 
+\begin{DoxyCompactList}\small\item\em Get parent of this object. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject_aeef18cd85b020970fc7e33bb1d0f834e}{Game\+Object\+Container} const \& \hyperlink{classGameObject_ac0c12ac37dc026c53896906075b5d450}{Get\+Children} () const 
+\begin{DoxyCompactList}\small\item\em Get all children for this object. \end{DoxyCompactList}\item 
+void \hyperlink{classGameObject_ad3d1d7edd9c119e39e3f49fd0b55c4d9}{Set\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Set name of object. \end{DoxyCompactList}\item 
+void \hyperlink{classGameObject_aa9d3c233287adbb5d766d6c5c605793a}{Set\+Parent} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Parent)
+\begin{DoxyCompactList}\small\item\em Set parent of object. \end{DoxyCompactList}\item 
+void \hyperlink{classGameObject_a581f2ea9d145bd53fd6dac12453cc783}{Add\+Component} (\hyperlink{classComponent}{Component} $\ast$a\+Component)
+\begin{DoxyCompactList}\small\item\em Add a component to game object. \end{DoxyCompactList}\item 
+void \hyperlink{classGameObject_acd66284c95aee6e5f214a9a7761056d2}{Remove\+Component} (\hyperlink{classComponent}{Component} $\ast$a\+Component, bool a\+Delete)
+\begin{DoxyCompactList}\small\item\em Remove a component from game object. \end{DoxyCompactList}\item 
+void \hyperlink{classGameObject_adf3106a05ce632f85bd7f40f7f8d9f52}{Remove\+Component} (int const \&a\+U\+ID, bool a\+Delete)
+\begin{DoxyCompactList}\small\item\em Remove component by component\textquotesingle{}s uid. \end{DoxyCompactList}\item 
+void \hyperlink{classGameObject_af7fa13dc482e575a9c04066adfc0cd43}{Add\+Child} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Add child to map. \end{DoxyCompactList}\item 
+void \hyperlink{classGameObject_a4b36e22771bc918796ff305b644258fd}{Remove\+Child} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Remove child from map. \end{DoxyCompactList}\item 
+\hyperlink{classComponent}{Component} $\ast$ \hyperlink{classGameObject_ae0e28ffdf80791934b43541bd4622f27}{Get\+Component} (int const \&a\+U\+ID) const 
+\begin{DoxyCompactList}\small\item\em Get component by uid. \end{DoxyCompactList}\item 
+\hyperlink{classComponent}{Component} $\ast$ \hyperlink{classGameObject_ae7fa2a011397c96e04cd55254ea5f9e9}{Get\+Component\+By\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name) const 
+\begin{DoxyCompactList}\small\item\em Get component by name. \end{DoxyCompactList}\item 
+bool \hyperlink{classGameObject_adcfb2f642cc4f63bc957c9bec2739eb4}{Has\+Component} (int const \&a\+U\+ID) const 
+\begin{DoxyCompactList}\small\item\em Same as get component except returns true or false. \end{DoxyCompactList}\item 
+bool \hyperlink{classGameObject_aa39aa3d12cc4ab8da6b889f5317c402f}{Has\+Component\+By\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name) const 
+\begin{DoxyCompactList}\small\item\em Same as get component by name except returns true or false. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGameObject_a1bd14aa169f501f94f1721943d716535}{Update} ()
+\begin{DoxyCompactList}\small\item\em Updates components. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGameObject_a9e03cac680603c4166c82a9432b90ee5}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Recieve messages from other objects. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGameObject_a629e23a33e07ca8f56596f69025c6d55}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Output to file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGameObject_ad06af98844b25a28e6ede780db47a126}{Interact} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em Interact with another game object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \hyperlink{classGameObject_a31f048bff84470cbb5397c947ef6834c}{G\+ET} () const 
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{classGameObject_aee47fe8f587fc5e989475286ed17d39b}{H\+AS} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classGameObject_a2eff7f320a2cd856a5ca3a3eb108ae5d}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make object usable in L\+UA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classGameObject_ac9cf51e46f7a63be42d4b2ee88777999}{m\+File\+Name}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classGameObject_abf896795ad30b2e2a3087ca7dc54ccf0}{m\+Name}
+\item 
+\hyperlink{classGameObject_a1b427560e7cbc5b2849ceec5f0780231}{Component\+Container} \hyperlink{classGameObject_a8706053a7d9e9e16d2932ddd174d0b68}{m\+Components}
+\item 
+\hyperlink{classObjectManager}{Object\+Manager} $\ast$ \hyperlink{classGameObject_a712b44bcb5814c6924bdb3f399f43969}{m\+Manager}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classGameObject_a606e12729c1d5f4b2c72abb15d849afa}{m\+Parent}
+\item 
+\hyperlink{classGameObject_aeef18cd85b020970fc7e33bb1d0f834e}{Game\+Object\+Container} \hyperlink{classGameObject_a2f2256cb6c1402291d28595f3a83fd3b}{m\+Children}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Game\+Object@{Game\+Object}!Component\+Const\+IT@{Component\+Const\+IT}}
+\index{Component\+Const\+IT@{Component\+Const\+IT}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Component\+Const\+IT}{ComponentConstIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Component\+Container\+::const\+\_\+iterator {\bf Game\+Object\+::\+Component\+Const\+IT}}\hypertarget{classGameObject_a2eb725c491bcd045fc1b533f36addddf}{}\label{classGameObject_a2eb725c491bcd045fc1b533f36addddf}
+\index{Game\+Object@{Game\+Object}!Component\+Container@{Component\+Container}}
+\index{Component\+Container@{Component\+Container}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Component\+Container}{ComponentContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::unordered\+\_\+map$<$int, {\bf Component}$\ast$$>$ {\bf Game\+Object\+::\+Component\+Container}}\hypertarget{classGameObject_a1b427560e7cbc5b2849ceec5f0780231}{}\label{classGameObject_a1b427560e7cbc5b2849ceec5f0780231}
+\index{Game\+Object@{Game\+Object}!Component\+IT@{Component\+IT}}
+\index{Component\+IT@{Component\+IT}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Component\+IT}{ComponentIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Component\+Container\+::iterator {\bf Game\+Object\+::\+Component\+IT}}\hypertarget{classGameObject_ab17e7f4a9628567d8c1bbdb2c2cf42ae}{}\label{classGameObject_ab17e7f4a9628567d8c1bbdb2c2cf42ae}
+\index{Game\+Object@{Game\+Object}!Game\+Object\+Const\+IT@{Game\+Object\+Const\+IT}}
+\index{Game\+Object\+Const\+IT@{Game\+Object\+Const\+IT}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Game\+Object\+Const\+IT}{GameObjectConstIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Game\+Object\+Container\+::const\+\_\+iterator {\bf Game\+Object\+::\+Game\+Object\+Const\+IT}}\hypertarget{classGameObject_ac7d3edce4c190f8e784d7824dbf81713}{}\label{classGameObject_ac7d3edce4c190f8e784d7824dbf81713}
+\index{Game\+Object@{Game\+Object}!Game\+Object\+Container@{Game\+Object\+Container}}
+\index{Game\+Object\+Container@{Game\+Object\+Container}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Game\+Object\+Container}{GameObjectContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::unordered\+\_\+map$<$int, {\bf Game\+Object}$\ast$$>$ {\bf Game\+Object\+::\+Game\+Object\+Container}}\hypertarget{classGameObject_aeef18cd85b020970fc7e33bb1d0f834e}{}\label{classGameObject_aeef18cd85b020970fc7e33bb1d0f834e}
+\index{Game\+Object@{Game\+Object}!Game\+Object\+IT@{Game\+Object\+IT}}
+\index{Game\+Object\+IT@{Game\+Object\+IT}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Game\+Object\+IT}{GameObjectIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Game\+Object\+Container\+::iterator {\bf Game\+Object\+::\+Game\+Object\+IT}}\hypertarget{classGameObject_afd3721c500c5f9e2f502e017df75f348}{}\label{classGameObject_afd3721c500c5f9e2f502e017df75f348}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Game\+Object@{Game\+Object}!Game\+Object@{Game\+Object}}
+\index{Game\+Object@{Game\+Object}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Game\+Object()}{GameObject()}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+Object\+::\+Game\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_a0348e3ee2e83d56eafca7a3547f432c4}{}\label{classGameObject_a0348e3ee2e83d56eafca7a3547f432c4}
+\index{Game\+Object@{Game\+Object}!Game\+Object@{Game\+Object}}
+\index{Game\+Object@{Game\+Object}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Game\+Object(\+Object\+Manager $\ast$a\+Manager, Hash\+String const \&a\+File\+Name)}{GameObject(ObjectManager *aManager, HashString const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+Object\+::\+Game\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Object\+Manager} $\ast$}]{a\+Manager, }
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_a40c2bb154101ca6885b5efd019c0167b}{}\label{classGameObject_a40c2bb154101ca6885b5efd019c0167b}
+\index{Game\+Object@{Game\+Object}!Game\+Object@{Game\+Object}}
+\index{Game\+Object@{Game\+Object}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Game\+Object(\+Game\+Object const \&a\+Game\+Object)}{GameObject(GameObject const &aGameObject)}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+Object\+::\+Game\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} const \&}]{a\+Game\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_a7636733e496960189f931aa9b2474c7f}{}\label{classGameObject_a7636733e496960189f931aa9b2474c7f}
+\index{Game\+Object@{Game\+Object}!````~Game\+Object@{$\sim$\+Game\+Object}}
+\index{````~Game\+Object@{$\sim$\+Game\+Object}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{$\sim$\+Game\+Object()}{~GameObject()}}]{\setlength{\rightskip}{0pt plus 5cm}Game\+Object\+::$\sim$\+Game\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameObject_ab82dfdb656f9051c0587e6593b2dda97}{}\label{classGameObject_ab82dfdb656f9051c0587e6593b2dda97}
+
+
+\subsection{Member Function Documentation}
+\index{Game\+Object@{Game\+Object}!Add\+Child@{Add\+Child}}
+\index{Add\+Child@{Add\+Child}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Add\+Child(\+Game\+Object $\ast$a\+Object)}{AddChild(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Add\+Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_af7fa13dc482e575a9c04066adfc0cd43}{}\label{classGameObject_af7fa13dc482e575a9c04066adfc0cd43}
+
+
+Add child to map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Child. \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Add\+Component@{Add\+Component}}
+\index{Add\+Component@{Add\+Component}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Add\+Component(\+Component $\ast$a\+Component)}{AddComponent(Component *aComponent)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Add\+Component (
+\begin{DoxyParamCaption}
+\item[{{\bf Component} $\ast$}]{a\+Component}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_a581f2ea9d145bd53fd6dac12453cc783}{}\label{classGameObject_a581f2ea9d145bd53fd6dac12453cc783}
+
+
+Add a component to game object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Component} & \hyperlink{classComponent}{Component} to add \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!G\+ET@{G\+ET}}
+\index{G\+ET@{G\+ET}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{G\+E\+T() const }{GET() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T$\ast$ Game\+Object\+::\+G\+ET (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classGameObject_a31f048bff84470cbb5397c947ef6834c}{}\label{classGameObject_a31f048bff84470cbb5397c947ef6834c}
+\index{Game\+Object@{Game\+Object}!Get\+Children@{Get\+Children}}
+\index{Get\+Children@{Get\+Children}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Children() const }{GetChildren() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object\+::\+Game\+Object\+Container} const \& Game\+Object\+::\+Get\+Children (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_ac0c12ac37dc026c53896906075b5d450}{}\label{classGameObject_ac0c12ac37dc026c53896906075b5d450}
+
+
+Get all children for this object. 
+
+\begin{DoxyReturn}{Returns}
+Children. 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Get\+Component@{Get\+Component}}
+\index{Get\+Component@{Get\+Component}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Component(int const \&a\+U\+I\+D) const }{GetComponent(int const &aUID) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Component} $\ast$ Game\+Object\+::\+Get\+Component (
+\begin{DoxyParamCaption}
+\item[{int const \&}]{a\+U\+ID}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_ae0e28ffdf80791934b43541bd4622f27}{}\label{classGameObject_ae0e28ffdf80791934b43541bd4622f27}
+
+
+Get component by uid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+U\+ID} & uid of component \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classComponent}{Component} or nullptr 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Get\+Component\+By\+Name@{Get\+Component\+By\+Name}}
+\index{Get\+Component\+By\+Name@{Get\+Component\+By\+Name}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Component\+By\+Name(\+Hash\+String const \&a\+Name) const }{GetComponentByName(HashString const &aName) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Component} $\ast$ Game\+Object\+::\+Get\+Component\+By\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_ae7fa2a011397c96e04cd55254ea5f9e9}{}\label{classGameObject_ae7fa2a011397c96e04cd55254ea5f9e9}
+
+
+Get component by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of component \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classComponent}{Component} or nullptr 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Get\+File\+Name@{Get\+File\+Name}}
+\index{Get\+File\+Name@{Get\+File\+Name}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Get\+File\+Name() const }{GetFileName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Game\+Object\+::\+Get\+File\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_a94d0fc9225e3fa7b47cf4fd4c2c10efc}{}\label{classGameObject_a94d0fc9225e3fa7b47cf4fd4c2c10efc}
+
+
+Get file name of object. 
+
+\begin{DoxyReturn}{Returns}
+Object\textquotesingle{}s file name 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Get\+Manager@{Get\+Manager}}
+\index{Get\+Manager@{Get\+Manager}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Manager() const }{GetManager() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Manager} $\ast$ Game\+Object\+::\+Get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_a46633c3a227d6ef193bfe89f8d96c465}{}\label{classGameObject_a46633c3a227d6ef193bfe89f8d96c465}
+
+
+Get objectmanager for object. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classObjectManager}{Object\+Manager} 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Game\+Object\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_a8736428fdc25165b44e5cbd06b3e2e6d}{}\label{classGameObject_a8736428fdc25165b44e5cbd06b3e2e6d}
+
+
+Get name of game object. 
+
+\begin{DoxyReturn}{Returns}
+Name of object 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Get\+Parent@{Get\+Parent}}
+\index{Get\+Parent@{Get\+Parent}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Get\+Parent() const }{GetParent() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Game\+Object\+::\+Get\+Parent (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_a0b6ff273dc4388d22d5a3fd2d40eee5c}{}\label{classGameObject_a0b6ff273dc4388d22d5a3fd2d40eee5c}
+
+
+Get parent of this object. 
+
+\begin{DoxyReturn}{Returns}
+Parent. 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!H\+AS@{H\+AS}}
+\index{H\+AS@{H\+AS}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{H\+A\+S() const }{HAS() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool Game\+Object\+::\+H\+AS (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classGameObject_aee47fe8f587fc5e989475286ed17d39b}{}\label{classGameObject_aee47fe8f587fc5e989475286ed17d39b}
+\index{Game\+Object@{Game\+Object}!Has\+Component@{Has\+Component}}
+\index{Has\+Component@{Has\+Component}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Has\+Component(int const \&a\+U\+I\+D) const }{HasComponent(int const &aUID) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\+Object\+::\+Has\+Component (
+\begin{DoxyParamCaption}
+\item[{int const \&}]{a\+U\+ID}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_adcfb2f642cc4f63bc957c9bec2739eb4}{}\label{classGameObject_adcfb2f642cc4f63bc957c9bec2739eb4}
+
+
+Same as get component except returns true or false. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+U\+ID} & uid of component \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if object has component 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Has\+Component\+By\+Name@{Has\+Component\+By\+Name}}
+\index{Has\+Component\+By\+Name@{Has\+Component\+By\+Name}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Has\+Component\+By\+Name(\+Hash\+String const \&a\+Name) const }{HasComponentByName(HashString const &aName) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\+Object\+::\+Has\+Component\+By\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGameObject_aa39aa3d12cc4ab8da6b889f5317c402f}{}\label{classGameObject_aa39aa3d12cc4ab8da6b889f5317c402f}
+
+
+Same as get component by name except returns true or false. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of component \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if object has component 
+\end{DoxyReturn}
+\index{Game\+Object@{Game\+Object}!Interact@{Interact}}
+\index{Interact@{Interact}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Interact(\+Game\+Object $\ast$a\+Object)}{Interact(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Interact (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameObject_ad06af98844b25a28e6ede780db47a126}{}\label{classGameObject_ad06af98844b25a28e6ede780db47a126}
+
+
+Interact with another game object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Object to interact with \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameObject_a9e03cac680603c4166c82a9432b90ee5}{}\label{classGameObject_a9e03cac680603c4166c82a9432b90ee5}
+
+
+Recieve messages from other objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to process \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Remove\+Child@{Remove\+Child}}
+\index{Remove\+Child@{Remove\+Child}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Remove\+Child(\+Game\+Object $\ast$a\+Object)}{RemoveChild(GameObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Remove\+Child (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_a4b36e22771bc918796ff305b644258fd}{}\label{classGameObject_a4b36e22771bc918796ff305b644258fd}
+
+
+Remove child from map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & Child. \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Remove\+Component@{Remove\+Component}}
+\index{Remove\+Component@{Remove\+Component}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Remove\+Component(\+Component $\ast$a\+Component, bool a\+Delete)}{RemoveComponent(Component *aComponent, bool aDelete)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Remove\+Component (
+\begin{DoxyParamCaption}
+\item[{{\bf Component} $\ast$}]{a\+Component, }
+\item[{bool}]{a\+Delete}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_acd66284c95aee6e5f214a9a7761056d2}{}\label{classGameObject_acd66284c95aee6e5f214a9a7761056d2}
+
+
+Remove a component from game object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Component} & \hyperlink{classComponent}{Component} to remove \\
+\hline
+{\em a\+Delete} & True to delete component while you are at it \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Remove\+Component@{Remove\+Component}}
+\index{Remove\+Component@{Remove\+Component}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Remove\+Component(int const \&a\+U\+I\+D, bool a\+Delete)}{RemoveComponent(int const &aUID, bool aDelete)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Remove\+Component (
+\begin{DoxyParamCaption}
+\item[{int const \&}]{a\+U\+ID, }
+\item[{bool}]{a\+Delete}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_adf3106a05ce632f85bd7f40f7f8d9f52}{}\label{classGameObject_adf3106a05ce632f85bd7f40f7f8d9f52}
+
+
+Remove component by component\textquotesingle{}s uid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+U\+ID} & U\+ID of component to remove \\
+\hline
+{\em a\+Delete} & True to delete component while you are at it \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameObject_a629e23a33e07ca8f56596f69025c6d55}{}\label{classGameObject_a629e23a33e07ca8f56596f69025c6d55}
+
+
+Output to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File to output to \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classGameObject_a2eff7f320a2cd856a5ca3a3eb108ae5d}{}\label{classGameObject_a2eff7f320a2cd856a5ca3a3eb108ae5d}
+
+
+Make object usable in L\+UA. 
+
+\index{Game\+Object@{Game\+Object}!Set\+Name@{Set\+Name}}
+\index{Set\+Name@{Set\+Name}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Name(\+Hash\+String const \&a\+Name)}{SetName(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Set\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_ad3d1d7edd9c119e39e3f49fd0b55c4d9}{}\label{classGameObject_ad3d1d7edd9c119e39e3f49fd0b55c4d9}
+
+
+Set name of object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & New name of object \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Set\+Parent@{Set\+Parent}}
+\index{Set\+Parent@{Set\+Parent}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Set\+Parent(\+Game\+Object $\ast$a\+Parent)}{SetParent(GameObject *aParent)}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Set\+Parent (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Parent}
+\end{DoxyParamCaption}
+)}\hypertarget{classGameObject_aa9d3c233287adbb5d766d6c5c605793a}{}\label{classGameObject_aa9d3c233287adbb5d766d6c5c605793a}
+
+
+Set parent of object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parent} & Parent. \\
+\hline
+\end{DoxyParams}
+\index{Game\+Object@{Game\+Object}!Update@{Update}}
+\index{Update@{Update}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+Object\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classGameObject_a1bd14aa169f501f94f1721943d716535}{}\label{classGameObject_a1bd14aa169f501f94f1721943d716535}
+
+
+Updates components. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Game\+Object@{Game\+Object}!m\+Children@{m\+Children}}
+\index{m\+Children@{m\+Children}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{m\+Children}{mChildren}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object\+Container} Game\+Object\+::m\+Children\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameObject_a2f2256cb6c1402291d28595f3a83fd3b}{}\label{classGameObject_a2f2256cb6c1402291d28595f3a83fd3b}
+\index{Game\+Object@{Game\+Object}!m\+Components@{m\+Components}}
+\index{m\+Components@{m\+Components}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{m\+Components}{mComponents}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Component\+Container} Game\+Object\+::m\+Components\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameObject_a8706053a7d9e9e16d2932ddd174d0b68}{}\label{classGameObject_a8706053a7d9e9e16d2932ddd174d0b68}
+\index{Game\+Object@{Game\+Object}!m\+File\+Name@{m\+File\+Name}}
+\index{m\+File\+Name@{m\+File\+Name}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{m\+File\+Name}{mFileName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Game\+Object\+::m\+File\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameObject_ac9cf51e46f7a63be42d4b2ee88777999}{}\label{classGameObject_ac9cf51e46f7a63be42d4b2ee88777999}
+\index{Game\+Object@{Game\+Object}!m\+Manager@{m\+Manager}}
+\index{m\+Manager@{m\+Manager}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{m\+Manager}{mManager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\+Manager}$\ast$ Game\+Object\+::m\+Manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameObject_a712b44bcb5814c6924bdb3f399f43969}{}\label{classGameObject_a712b44bcb5814c6924bdb3f399f43969}
+\index{Game\+Object@{Game\+Object}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Game\+Object\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameObject_abf896795ad30b2e2a3087ca7dc54ccf0}{}\label{classGameObject_abf896795ad30b2e2a3087ca7dc54ccf0}
+\index{Game\+Object@{Game\+Object}!m\+Parent@{m\+Parent}}
+\index{m\+Parent@{m\+Parent}!Game\+Object@{Game\+Object}}
+\subsubsection[{\texorpdfstring{m\+Parent}{mParent}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Game\+Object\+::m\+Parent\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classGameObject_a606e12729c1d5f4b2c72abb15d849afa}{}\label{classGameObject_a606e12729c1d5f4b2c72abb15d849afa}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{GameObject_8h}{Game\+Object.\+h}\item 
+Core/\hyperlink{GameObject_8cpp}{Game\+Object.\+cpp}\end{DoxyCompactItemize}

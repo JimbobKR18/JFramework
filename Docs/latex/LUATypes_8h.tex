@@ -1,0 +1,44 @@
+\hypertarget{LUATypes_8h}{}\section{L\+U\+A/\+L\+U\+A\+Types.h File Reference}
+\label{LUATypes_8h}\index{L\+U\+A/\+L\+U\+A\+Types.\+h@{L\+U\+A/\+L\+U\+A\+Types.\+h}}
+{\ttfamily \#include \char`\"{}Core/\+Lua\+Includes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Game\+App.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Level\+Manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Object\+Manager.\+h\char`\"{}}\\*
+Include dependency graph for L\+U\+A\+Types.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structLUABind_1_1StaticGameApp}{L\+U\+A\+Bind\+::\+Static\+Game\+App}
+\item 
+struct \hyperlink{structLUABind_1_1FunctionCaller}{L\+U\+A\+Bind\+::\+Function\+Caller}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceLUABind}{L\+U\+A\+Bind}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceLUABind_aecf4fafdf19d34ea941b37f336821e72}{L\+U\+A\+Bind\+::\+Initialize} ()
+\item 
+void \hyperlink{namespaceLUABind_a03661ad8570eb330634d5a5bd446f151}{L\+U\+A\+Bind\+::\+Register\+Classes} ()
+\item 
+void \hyperlink{namespaceLUABind_a2ce8bef28d61033a2790902de6a38083}{L\+U\+A\+Bind\+::\+Load\+Script\+From\+File} (std\+::string const \&a\+Filename)
+\item 
+void \hyperlink{namespaceLUABind_a26c005301a9c2b40b736e8769c190977}{L\+U\+A\+Bind\+::\+Load\+Script\+From\+String} (std\+::string const \&a\+String)
+\item 
+\hyperlink{classHashString}{Hash\+String} const \& \hyperlink{namespaceLUABind_abb3e6c7955087f9c94ef09e4226c8d1c}{L\+U\+A\+Bind\+::\+Get\+Script} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{namespaceLUABind_a4739bb89930d4a83413ea23dbb886e34}{L\+U\+A\+Bind\+::\+Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param)
+\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\bool \hyperlink{namespaceLUABind_a87bfd3ae071529a749bc37b45beeee1b}{L\+U\+A\+Bind\+::\+Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param1, U param2)
+\item 
+{\footnotesize template$<$typename T , typename U , typename V $>$ }\\bool \hyperlink{namespaceLUABind_a44507ae07346bfde8db35f27b30536de}{L\+U\+A\+Bind\+::\+Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param1, U param2, V param3)
+\item 
+{\footnotesize template$<$typename T , typename U , typename V , typename W $>$ }\\bool \hyperlink{namespaceLUABind_a5241633b520a8c5574856cfd5330f11f}{L\+U\+A\+Bind\+::\+Load\+Function} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Function\+Name, T param1, U param2, V param3, W param4)
+\end{DoxyCompactItemize}

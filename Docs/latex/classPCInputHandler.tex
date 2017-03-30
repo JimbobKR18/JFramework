@@ -1,0 +1,137 @@
+\hypertarget{classPCInputHandler}{}\section{P\+C\+Input\+Handler Class Reference}
+\label{classPCInputHandler}\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+
+
+{\ttfamily \#include $<$P\+C\+Input\+Handler.\+h$>$}
+
+
+
+Inheritance diagram for P\+C\+Input\+Handler\+:
+% FIG 0
+
+
+Collaboration diagram for P\+C\+Input\+Handler\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPCInputHandler_ae97120877ff79d0ffd46eb7b97f9edb8}{P\+C\+Input\+Handler} ()
+\item 
+virtual \hyperlink{classPCInputHandler_a9b9f9bada5963ee7a1ee4d001acc66d7}{$\sim$\+P\+C\+Input\+Handler} ()
+\item 
+virtual void \hyperlink{classPCInputHandler_a9c525f21b121c85e9837b54b9815a006}{Update} ()
+\begin{DoxyCompactList}\small\item\em Keeps track of joysticks and removes / adds joysticks as necessary. \end{DoxyCompactList}\item 
+virtual int \hyperlink{classPCInputHandler_aca8209c707702eb2a867d6b3e1e21d5e}{Get\+Input\+Count} ()
+\begin{DoxyCompactList}\small\item\em Get total number of input devices. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Joystick $\ast$ \hyperlink{classPCInputHandler_a9a6ee8b3507c63c25bc50db724ea30a8}{Get\+Joystick} (int const index) const 
+\begin{DoxyCompactList}\small\item\em Get a particular joystick. \end{DoxyCompactList}\item 
+int \hyperlink{classPCInputHandler_a91f575a558208e1a136e33ba7ed9427b}{Get\+Joystick\+Instance\+Id} (int const index) const 
+\begin{DoxyCompactList}\small\item\em Get instance id of joystick. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ S\+D\+L\+\_\+\+Joystick $\ast$ $>$ \hyperlink{classPCInputHandler_ac02fcaf3e1c2250b4b55e7b755d2ea57}{m\+Joysticks}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\subsubsection[{\texorpdfstring{P\+C\+Input\+Handler()}{PCInputHandler()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Input\+Handler\+::\+P\+C\+Input\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPCInputHandler_ae97120877ff79d0ffd46eb7b97f9edb8}{}\label{classPCInputHandler_ae97120877ff79d0ffd46eb7b97f9edb8}
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!````~P\+C\+Input\+Handler@{$\sim$\+P\+C\+Input\+Handler}}
+\index{````~P\+C\+Input\+Handler@{$\sim$\+P\+C\+Input\+Handler}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\subsubsection[{\texorpdfstring{$\sim$\+P\+C\+Input\+Handler()}{~PCInputHandler()}}]{\setlength{\rightskip}{0pt plus 5cm}P\+C\+Input\+Handler\+::$\sim$\+P\+C\+Input\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCInputHandler_a9b9f9bada5963ee7a1ee4d001acc66d7}{}\label{classPCInputHandler_a9b9f9bada5963ee7a1ee4d001acc66d7}
+
+
+\subsection{Member Function Documentation}
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!Get\+Input\+Count@{Get\+Input\+Count}}
+\index{Get\+Input\+Count@{Get\+Input\+Count}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\subsubsection[{\texorpdfstring{Get\+Input\+Count()}{GetInputCount()}}]{\setlength{\rightskip}{0pt plus 5cm}int P\+C\+Input\+Handler\+::\+Get\+Input\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCInputHandler_aca8209c707702eb2a867d6b3e1e21d5e}{}\label{classPCInputHandler_aca8209c707702eb2a867d6b3e1e21d5e}
+
+
+Get total number of input devices. 
+
+\begin{DoxyReturn}{Returns}
+Number of input devices. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classInputHandler_ae147be5a0728244b3200e07c888036be}{Input\+Handler}.
+
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!Get\+Joystick@{Get\+Joystick}}
+\index{Get\+Joystick@{Get\+Joystick}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\subsubsection[{\texorpdfstring{Get\+Joystick(int const index) const }{GetJoystick(int const index) const }}]{\setlength{\rightskip}{0pt plus 5cm}S\+D\+L\+\_\+\+Joystick $\ast$ P\+C\+Input\+Handler\+::\+Get\+Joystick (
+\begin{DoxyParamCaption}
+\item[{int const}]{index}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPCInputHandler_a9a6ee8b3507c63c25bc50db724ea30a8}{}\label{classPCInputHandler_a9a6ee8b3507c63c25bc50db724ea30a8}
+
+
+Get a particular joystick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of joystick. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nullptr if out of range. Otherwise, joystick at index. 
+\end{DoxyReturn}
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!Get\+Joystick\+Instance\+Id@{Get\+Joystick\+Instance\+Id}}
+\index{Get\+Joystick\+Instance\+Id@{Get\+Joystick\+Instance\+Id}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\subsubsection[{\texorpdfstring{Get\+Joystick\+Instance\+Id(int const index) const }{GetJoystickInstanceId(int const index) const }}]{\setlength{\rightskip}{0pt plus 5cm}int P\+C\+Input\+Handler\+::\+Get\+Joystick\+Instance\+Id (
+\begin{DoxyParamCaption}
+\item[{int const}]{index}
+\end{DoxyParamCaption}
+) const}\hypertarget{classPCInputHandler_a91f575a558208e1a136e33ba7ed9427b}{}\label{classPCInputHandler_a91f575a558208e1a136e33ba7ed9427b}
+
+
+Get instance id of joystick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of joystick in mapping. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Actual joystick instance id. 
+\end{DoxyReturn}
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!Update@{Update}}
+\index{Update@{Update}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void P\+C\+Input\+Handler\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPCInputHandler_a9c525f21b121c85e9837b54b9815a006}{}\label{classPCInputHandler_a9c525f21b121c85e9837b54b9815a006}
+
+
+Keeps track of joysticks and removes / adds joysticks as necessary. 
+
+
+
+Implements \hyperlink{classInputHandler_a00ba2ddb62ec812a2ad237f025b9753e}{Input\+Handler}.
+
+
+
+\subsection{Member Data Documentation}
+\index{P\+C\+Input\+Handler@{P\+C\+Input\+Handler}!m\+Joysticks@{m\+Joysticks}}
+\index{m\+Joysticks@{m\+Joysticks}!P\+C\+Input\+Handler@{P\+C\+Input\+Handler}}
+\subsubsection[{\texorpdfstring{m\+Joysticks}{mJoysticks}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$S\+D\+L\+\_\+\+Joystick$\ast$$>$ P\+C\+Input\+Handler\+::m\+Joysticks\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classPCInputHandler_ac02fcaf3e1c2250b4b55e7b755d2ea57}{}\label{classPCInputHandler_ac02fcaf3e1c2250b4b55e7b755d2ea57}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Input/\hyperlink{PCInputHandler_8h}{P\+C\+Input\+Handler.\+h}\item 
+Input/\hyperlink{PCInputHandler_8cpp}{P\+C\+Input\+Handler.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,184 @@
+\hypertarget{classComponent}{}\section{Component Class Reference}
+\label{classComponent}\index{Component@{Component}}
+
+
+{\ttfamily \#include $<$Component.\+h$>$}
+
+
+
+Inheritance diagram for Component\+:
+% FIG 0
+
+
+Collaboration diagram for Component\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classComponent_a8775db6d1a2c1afc2e77cd3c8f39da6f}{Component} ()
+\item 
+\hyperlink{classComponent_a7b8a94ef459c5ecb19055c51039e9f1b}{Component} (int const \&a\+U\+ID)
+\item 
+\hyperlink{classComponent_a057de53077c3254054067e0a05cb6966}{Component} (\hyperlink{classComponent}{Component} const \&a\+Component)
+\item 
+virtual \hyperlink{classComponent_a2e9aa4348314d981f05f67397ad2f872}{$\sim$\+Component} ()
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classComponent_a0767b97b1145de355b8ac4437fcfecfe}{Get\+Owner} () const 
+\item 
+void \hyperlink{classComponent_a4f915a5ce290238aecd141aecf420dfc}{Set\+Owner} (\hyperlink{classGameObject}{Game\+Object} $\ast$a\+Owner)
+\item 
+int \hyperlink{classComponent_a95c0d5ab3e67ec8f45d981b1fe3960b7}{Get\+Defined\+U\+ID} ()
+\item 
+virtual void \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Update} ()=0
+\item 
+virtual void \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)=0
+\item 
+virtual void \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)=0
+\item 
+virtual void \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)=0
+\item 
+virtual void \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)=0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classComponent_a4d5c6d8b5cd0e961ad57d7215b647def}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classComponent_aaae9410817ad6731bdb567100df7e510}{m\+Owner}
+\item 
+int \hyperlink{classComponent_a416652bc12aff229d7ca5885ba8e6579}{m\+U\+ID}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Component@{Component}!Component@{Component}}
+\index{Component@{Component}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Component()}{Component()}}]{\setlength{\rightskip}{0pt plus 5cm}Component\+::\+Component (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classComponent_a8775db6d1a2c1afc2e77cd3c8f39da6f}{}\label{classComponent_a8775db6d1a2c1afc2e77cd3c8f39da6f}
+\index{Component@{Component}!Component@{Component}}
+\index{Component@{Component}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Component(int const \&a\+U\+I\+D)}{Component(int const &aUID)}}]{\setlength{\rightskip}{0pt plus 5cm}Component\+::\+Component (
+\begin{DoxyParamCaption}
+\item[{int const \&}]{a\+U\+ID}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classComponent_a7b8a94ef459c5ecb19055c51039e9f1b}{}\label{classComponent_a7b8a94ef459c5ecb19055c51039e9f1b}
+\index{Component@{Component}!Component@{Component}}
+\index{Component@{Component}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Component(\+Component const \&a\+Component)}{Component(Component const &aComponent)}}]{\setlength{\rightskip}{0pt plus 5cm}Component\+::\+Component (
+\begin{DoxyParamCaption}
+\item[{{\bf Component} const \&}]{a\+Component}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classComponent_a057de53077c3254054067e0a05cb6966}{}\label{classComponent_a057de53077c3254054067e0a05cb6966}
+\index{Component@{Component}!````~Component@{$\sim$\+Component}}
+\index{````~Component@{$\sim$\+Component}!Component@{Component}}
+\subsubsection[{\texorpdfstring{$\sim$\+Component()}{~Component()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Component\+::$\sim$\+Component (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classComponent_a2e9aa4348314d981f05f67397ad2f872}{}\label{classComponent_a2e9aa4348314d981f05f67397ad2f872}
+
+
+\subsection{Member Function Documentation}
+\index{Component@{Component}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)=0}{Deserialize(Parser &aParser)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Component\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{}\label{classComponent_a3a643593142fb0e6429fbdc6dddf1950}
+
+
+Implemented in \hyperlink{classSurface_a5afb925d505f53974fd5542698be9407}{Surface}, \hyperlink{classTransform_a4bc75f2d8356608ffdbc1ec56cd86a27}{Transform}, \hyperlink{classPCShaderSurface_ae655e35c7c679f8d4de963786cc24fa5}{P\+C\+Shader\+Surface}, \hyperlink{classChemistryMaterial_a2c3eb3d1b2560c62359e886255a6b700}{Chemistry\+Material}, \hyperlink{classPhysicsObject_a131cc28cad0335509d0372543ebcd513}{Physics\+Object}, \hyperlink{classPCSurface_a0406f2287a52aebb4da1b6ef0deddf8d}{P\+C\+Surface}, \hyperlink{classChemistryElement_a963adac4f720d945ec6a291bfaa81063}{Chemistry\+Element}, \hyperlink{classController_acf414fa790e19413ac4f83c5dc0f1744}{Controller}, and \hyperlink{classStateObject_af2cc01c2dc3583199d3a05820dde68e1}{State\+Object}.
+
+\index{Component@{Component}!Get\+Defined\+U\+ID@{Get\+Defined\+U\+ID}}
+\index{Get\+Defined\+U\+ID@{Get\+Defined\+U\+ID}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Get\+Defined\+U\+I\+D()}{GetDefinedUID()}}]{\setlength{\rightskip}{0pt plus 5cm}int Component\+::\+Get\+Defined\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classComponent_a95c0d5ab3e67ec8f45d981b1fe3960b7}{}\label{classComponent_a95c0d5ab3e67ec8f45d981b1fe3960b7}
+\index{Component@{Component}!Get\+Owner@{Get\+Owner}}
+\index{Get\+Owner@{Get\+Owner}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Get\+Owner() const }{GetOwner() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Component\+::\+Get\+Owner (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classComponent_a0767b97b1145de355b8ac4437fcfecfe}{}\label{classComponent_a0767b97b1145de355b8ac4437fcfecfe}
+\index{Component@{Component}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int Component\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classComponent_a4d5c6d8b5cd0e961ad57d7215b647def}{}\label{classComponent_a4d5c6d8b5cd0e961ad57d7215b647def}
+\index{Component@{Component}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)=0}{ReceiveMessage(Message const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Component\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{}\label{classComponent_a23c98ed51e86362def45b4b4e1e775b6}
+
+
+Implemented in \hyperlink{classSurface_a4bc9df15d34a240fcb62f79282054862}{Surface}, \hyperlink{classTransform_aecbe05756c579fb4e36cbf6b2e36e58c}{Transform}, \hyperlink{classPCShaderSurface_ae004f90212579a2448de1b7bc014bc1e}{P\+C\+Shader\+Surface}, \hyperlink{classChemistryMaterial_af159d6d1cf20bef34fe9c0ec95f0157e}{Chemistry\+Material}, \hyperlink{classPhysicsObject_ac3b6b5e359c343a36da1564bfe4a9337}{Physics\+Object}, \hyperlink{classPCSurface_aad85a98841b47cc7bf4b46e72c0692db}{P\+C\+Surface}, \hyperlink{classChemistryElement_ab01661c92d69ef48b0f427ebc2cc15b8}{Chemistry\+Element}, \hyperlink{classController_a9ac0b86e4b71abdafb61f542165d3e87}{Controller}, and \hyperlink{classStateObject_ac861388d961e1de6e57b168b5ee93b96}{State\+Object}.
+
+\index{Component@{Component}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)=0}{SendMessage(Message const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Component\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{}\label{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}
+
+
+Implemented in \hyperlink{classSurface_a05f530ec3be9c36410c193c3f7878935}{Surface}, \hyperlink{classTransform_aeea708beadcc8a67261a9dacb8151900}{Transform}, \hyperlink{classPCShaderSurface_a080c3656b20f23493096d16325bc3005}{P\+C\+Shader\+Surface}, \hyperlink{classChemistryMaterial_a8fe8185fec324a55b470f3c62b09209d}{Chemistry\+Material}, \hyperlink{classPhysicsObject_a922c9aca3c8a8bada45a69a09d4231e9}{Physics\+Object}, \hyperlink{classPCSurface_a60d206d597fdfd577df4917d6544f127}{P\+C\+Surface}, \hyperlink{classChemistryElement_ac16ea591ab9d999ae6bc5a9eb6599d5b}{Chemistry\+Element}, \hyperlink{classController_a4f1e140db32aa50927565e22b1abe8cd}{Controller}, and \hyperlink{classStateObject_a4093cde1756c8580067e121740396eb0}{State\+Object}.
+
+\index{Component@{Component}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)=0}{Serialize(Parser &aParser)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Component\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{}\label{classComponent_a1739b9ad5a77194c80da069311d4f9d5}
+
+
+Implemented in \hyperlink{classSurface_a4d98b3f6be9a39184f70796b1858c620}{Surface}, \hyperlink{classTransform_a2fe5546a59d933a11316966b9ec49e19}{Transform}, \hyperlink{classPCShaderSurface_a540f9f1d910279d4f60a707a059fb0e1}{P\+C\+Shader\+Surface}, \hyperlink{classChemistryMaterial_a0795a1607c7a771bedbc48c6a87b6d94}{Chemistry\+Material}, \hyperlink{classPhysicsObject_a145770d38d3469a5bf77e2c0318fc1fb}{Physics\+Object}, \hyperlink{classPCSurface_a441bbcebb3b8cdab0966856331733908}{P\+C\+Surface}, \hyperlink{classChemistryElement_ab1f83928a5f589f0c5a8bdf0848c07cc}{Chemistry\+Element}, \hyperlink{classController_ac5ce7c4254d4b565f9630f710e7f8de5}{Controller}, and \hyperlink{classStateObject_a6f824bbb81a19e26abaa5156b29941ab}{State\+Object}.
+
+\index{Component@{Component}!Set\+Owner@{Set\+Owner}}
+\index{Set\+Owner@{Set\+Owner}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Set\+Owner(\+Game\+Object $\ast$a\+Owner)}{SetOwner(GameObject *aOwner)}}]{\setlength{\rightskip}{0pt plus 5cm}void Component\+::\+Set\+Owner (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+Object} $\ast$}]{a\+Owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classComponent_a4f915a5ce290238aecd141aecf420dfc}{}\label{classComponent_a4f915a5ce290238aecd141aecf420dfc}
+\index{Component@{Component}!Update@{Update}}
+\index{Update@{Update}!Component@{Component}}
+\subsubsection[{\texorpdfstring{Update()=0}{Update()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Component\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{}\label{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}
+
+
+Implemented in \hyperlink{classSurface_a36094693997d1cd7bdc6dca831952de8}{Surface}, \hyperlink{classTransform_a3256c0fb53d0b341ad8d80fe61e5fb2d}{Transform}, \hyperlink{classPCShaderSurface_a49251c5ad3d59fc484601e3a5df7cdb5}{P\+C\+Shader\+Surface}, \hyperlink{classChemistryMaterial_a138000ab29b8567bd6dc766cb976e712}{Chemistry\+Material}, \hyperlink{classPhysicsObject_a8da7c2b9a0d491633dc8057b6d95de11}{Physics\+Object}, \hyperlink{classPCSurface_aa6fe355056fdba082057589d573f82a3}{P\+C\+Surface}, \hyperlink{classChemistryElement_abc0f9525c2f510d61a930fbd7f27ee78}{Chemistry\+Element}, \hyperlink{classController_aa6a687ad1d55632cc531ca1dc0c66efa}{Controller}, and \hyperlink{classStateObject_a3fcf36666733125f1e6eae7f0f654db4}{State\+Object}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Component@{Component}!m\+Owner@{m\+Owner}}
+\index{m\+Owner@{m\+Owner}!Component@{Component}}
+\subsubsection[{\texorpdfstring{m\+Owner}{mOwner}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object}$\ast$ Component\+::m\+Owner\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classComponent_aaae9410817ad6731bdb567100df7e510}{}\label{classComponent_aaae9410817ad6731bdb567100df7e510}
+\index{Component@{Component}!m\+U\+ID@{m\+U\+ID}}
+\index{m\+U\+ID@{m\+U\+ID}!Component@{Component}}
+\subsubsection[{\texorpdfstring{m\+U\+ID}{mUID}}]{\setlength{\rightskip}{0pt plus 5cm}int Component\+::m\+U\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classComponent_a416652bc12aff229d7ca5885ba8e6579}{}\label{classComponent_a416652bc12aff229d7ca5885ba8e6579}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\hyperlink{Component_8h}{Component.\+h}\end{DoxyCompactItemize}

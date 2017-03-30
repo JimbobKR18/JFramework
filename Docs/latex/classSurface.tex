@@ -1,0 +1,720 @@
+\hypertarget{classSurface}{}\section{Surface Class Reference}
+\label{classSurface}\index{Surface@{Surface}}
+
+
+{\ttfamily \#include $<$Surface.\+h$>$}
+
+
+
+Inheritance diagram for Surface\+:
+% FIG 0
+
+
+Collaboration diagram for Surface\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ \hyperlink{structScrollInfo}{Scroll\+Info} $>$ \hyperlink{classSurface_a7b781fa8ee9f22afe59f5aa871fd7b6e}{Scroll\+Info\+Container}
+\item 
+typedef Scroll\+Info\+Container\+::const\+\_\+iterator \hyperlink{classSurface_a603071753114924b36bdba9241010984}{Scroll\+Info\+IT}
+\item 
+typedef std\+::vector$<$ \hyperlink{classSurfaceProperty}{Surface\+Property} $\ast$ $>$ \hyperlink{classSurface_a7890ba0bba332887c7511468f10a8e85}{Property\+Container}
+\item 
+typedef Property\+Container\+::iterator \hyperlink{classSurface_a828990970629ddd1207584544daaca7f}{Property\+Container\+It}
+\item 
+typedef Property\+Container\+::const\+\_\+iterator \hyperlink{classSurface_ab30c0b6e5e6119d88e09c50c71632819}{Property\+Container\+Const\+It}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSurface_a8fc57f2a15292135c00545c9d224ec68}{Surface} ()
+\item 
+\hyperlink{classSurface_a931c648df6d3dc8c8b301dbc4ce34809}{Surface} (\hyperlink{classGraphicsManager}{Graphics\+Manager} $\ast$a\+Manager)
+\item 
+virtual \hyperlink{classSurface_a89de75c95cb550d432f3ea4ed1429db0}{$\sim$\+Surface} ()
+\item 
+\hyperlink{classGraphicsManager}{Graphics\+Manager} $\ast$ \hyperlink{classSurface_a8768f73c25896fa5d05b5fcda38d34ee}{Get\+Manager} () const 
+\item 
+\hyperlink{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fe}{Viewspace} \hyperlink{classSurface_ad37870a954209590d1214a9061922052}{Get\+View\+Mode} () const 
+\item 
+\hyperlink{structVector4}{Vector4} \& \hyperlink{classSurface_a189a2849426d0aa832bf5d3acde61d52}{Get\+Color} ()
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classSurface_ad8f11dc73de76bd66d835672fbace1ce}{Get\+File\+Name} ()
+\item 
+void \hyperlink{classSurface_a044c347d9bcc9cc4957469583007cbf7}{Set\+View\+Mode} (\hyperlink{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fe}{Viewspace} const \&a\+Viewmode)
+\item 
+void \hyperlink{classSurface_a9b4a542382c114455f66aa1bf11f7369}{Set\+Texture\+Size} (\hyperlink{structVector3}{Vector3} const \&a\+Texture\+Size)
+\item 
+void \hyperlink{classSurface_a374b2c6a89c8fcbc3c3bf932c9218313}{Set\+Color} (\hyperlink{structVector4}{Vector4} const \&a\+Color)
+\item 
+void \hyperlink{classSurface_a27551307057fdb923739146d1c87dd6a}{Set\+File\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+File\+Name)
+\item 
+virtual void \hyperlink{classSurface_a634f4bfe638855b7ef0cb889feebaac3}{Load\+Image} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Asserts, please implement the platform specific implementation. \end{DoxyCompactList}\item 
+virtual \hyperlink{structVector3}{Vector3} \hyperlink{classSurface_a1d80ab9d8946932c2ffb2788728f3263}{Load\+Text} (\hyperlink{classHashString}{Hash\+String} const \&a\+Font, \hyperlink{classHashString}{Hash\+String} const \&a\+Text, \hyperlink{structVector4}{Vector4} const \&a\+Foreground\+Color, \hyperlink{structVector4}{Vector4} const \&a\+Background\+Color, int a\+Size, int a\+Max\+Width)
+\begin{DoxyCompactList}\small\item\em Asserts, please implement the platform specific implementation. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSurface_ab01df27c2a91269a97773cb1df1c0f14}{Load\+Shaders} (\hyperlink{classHashString}{Hash\+String} const \&a\+Vertex\+Shader\+Filename, \hyperlink{classHashString}{Hash\+String} const \&a\+Fragment\+Shader\+Filename)
+\begin{DoxyCompactList}\small\item\em Asserts, please implement the platform specific implementation. \end{DoxyCompactList}\item 
+\hyperlink{classTextureCoordinates}{Texture\+Coordinates} $\ast$ \hyperlink{classSurface_a394ba021f319e09c882ac50f4bfd7a95}{Get\+Texture\+Data} () const 
+\begin{DoxyCompactList}\small\item\em Get texture coordinate data (animation data) \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_abdf13f4b9824c89984c0c1b0c47ca2ed}{Set\+Texture\+Coordinate\+Data} (int const a\+Num\+Animations, std\+::vector$<$ int $>$ const \&a\+Num\+Frames, std\+::vector$<$ std\+::vector$<$ float $>$$>$ const \&a\+Animation\+Speeds)
+\begin{DoxyCompactList}\small\item\em Set up animation data helper. \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_abd4dc8878b22e5305399d136ed2d8ca1}{Set\+Animated} (bool a\+Animated)
+\begin{DoxyCompactList}\small\item\em Set whether this surface is animated. \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_ae300aa7884ccec3af3177350acb9a663}{Set\+Animation} (int a\+Animation, bool a\+Run\+Once=false)
+\begin{DoxyCompactList}\small\item\em Get current animation. \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_a310cb33a757cb83f1b284f81602fc93c}{Set\+Current\+Frame} (int a\+Frame)
+\begin{DoxyCompactList}\small\item\em Set current frame of animation. \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_a003a81ac5e9f43b4219e1ce657a07912}{Set\+Frame\+By\+ID} (int a\+Frame\+ID)
+\begin{DoxyCompactList}\small\item\em Set frame by id in animation file. (Regardless of animation) \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_a69b04e2e3f2736665e3068088a3b1cad}{Set\+Animation\+Speed} (float a\+Animation\+Speed)
+\begin{DoxyCompactList}\small\item\em Set speed of current animation. \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_aaf0699f4c23d4a4da2804463e9c34ad7}{Finish\+Animation} ()
+\begin{DoxyCompactList}\small\item\em Force finish animation. \end{DoxyCompactList}\item 
+bool \hyperlink{classSurface_a1bcc35b80eceb50fb275f09dd878c756}{Current\+Animation\+Completed} ()
+\begin{DoxyCompactList}\small\item\em Check if current animation has iterated at least once. \end{DoxyCompactList}\item 
+virtual unsigned \hyperlink{classSurface_a807bafe8551b2a80b4f0aa87b6a50e77}{Get\+Texture\+ID} () const 
+\item 
+virtual unsigned \hyperlink{classSurface_a109736ab841dbd36ca58ffd45d40b315}{Get\+Program\+ID} () const 
+\item 
+void \hyperlink{classSurface_a3ddc25662d07d31a74e7007ab45a3607}{Create\+Scroll\+Effect} (\hyperlink{Surface_8h_a9611c8ec37ba9a84fb6cbd1227a08a4d}{Scroll\+Type} const \&a\+Scroll\+Type, \hyperlink{structVector3}{Vector3} const \&a\+Goal\+Size)
+\begin{DoxyCompactList}\small\item\em Create scrolling reveal effect. \end{DoxyCompactList}\item 
+\hyperlink{classSurface_a7890ba0bba332887c7511468f10a8e85}{Property\+Container} const \& \hyperlink{classSurface_ac301b28956a82d934fbde574c7939d3c}{Get\+Properties} () const 
+\begin{DoxyCompactList}\small\item\em Get properties container. \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_af2b6b352890f66373271af0e1400fb75}{Add\+Or\+Edit\+Property} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name, \hyperlink{SurfaceProperty_8h_a7ff5a5c54f182b86d1cd993cf4512c87}{Property\+Type} const \&a\+Type, \hyperlink{classHashString}{Hash\+String} const \&a\+Target\+Value, \hyperlink{classHashString}{Hash\+String} const \&a\+Default\+Value)
+\begin{DoxyCompactList}\small\item\em Edit property if there, otherwise add. \end{DoxyCompactList}\item 
+void \hyperlink{classSurface_aebd7366b209283c2da847551a43e122b}{Clear\+Properties} ()
+\begin{DoxyCompactList}\small\item\em Clear properties for a surface. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSurface_a36094693997d1cd7bdc6dca831952de8}{Update} ()
+\begin{DoxyCompactList}\small\item\em Simple update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSurface_a05f530ec3be9c36410c193c3f7878935}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to owner for other components. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSurface_a4bc9df15d34a240fcb62f79282054862}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive a message. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSurface_a4d98b3f6be9a39184f70796b1858c620}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize to file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSurface_a5afb925d505f53974fd5542698be9407}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Read from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classSurface_ac956ca9cc45b4d2b2c5456529c96d2a4}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Make this object usable in L\+UA. \end{DoxyCompactList}\item 
+static int \hyperlink{classSurface_aba76571de7008e6f3c08177e1d316cc0}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTextureCoordinates}{Texture\+Coordinates} $\ast$ \hyperlink{classSurface_abc58ab23f3d82dd16ddb550d3173618e}{m\+Tex\+Coord}
+\item 
+\hyperlink{classGraphicsManager}{Graphics\+Manager} $\ast$ \hyperlink{classSurface_aeddc9c9fb4c768ecac85cbf146f4d3cd}{m\+Manager}
+\item 
+\hyperlink{Surface_8h_a4fa0651be6bee50d62c7c9166114f6fe}{Viewspace} \hyperlink{classSurface_a1d630bf18afc808bf7765e2203280b86}{m\+Viewmode}
+\item 
+\hyperlink{structVector3}{Vector3} \hyperlink{classSurface_a9d0d573b14332b5f3ee2d7e2cc78012c}{m\+Texture\+Size}
+\item 
+\hyperlink{structVector4}{Vector4} \hyperlink{classSurface_a4b8a0cac22eafc2bd5e02fab3ee7f309}{m\+Color}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classSurface_acdac859d5653ee7f5e49c0e323001caf}{m\+File\+Name}
+\item 
+bool \hyperlink{classSurface_ab9c0d9fbb4968a7d5bb0cc785d24373b}{m\+No\+Render}
+\item 
+\hyperlink{classSurface_a7b781fa8ee9f22afe59f5aa871fd7b6e}{Scroll\+Info\+Container} \hyperlink{classSurface_a6582c39cc99bf1d6f67fc54db1134544}{m\+Scroll\+Info}
+\item 
+\hyperlink{classSurface_a7890ba0bba332887c7511468f10a8e85}{Property\+Container} \hyperlink{classSurface_a59a2b7281f8bad2a51f7e6b97d2d4962}{m\+Properties}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classSurface_a44624ee5007ddfe4603c8f3d90e0222f}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Surface\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Surface@{Surface}!Property\+Container@{Property\+Container}}
+\index{Property\+Container@{Property\+Container}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Property\+Container}{PropertyContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Surface\+Property}$\ast$$>$ {\bf Surface\+::\+Property\+Container}}\hypertarget{classSurface_a7890ba0bba332887c7511468f10a8e85}{}\label{classSurface_a7890ba0bba332887c7511468f10a8e85}
+\index{Surface@{Surface}!Property\+Container\+Const\+It@{Property\+Container\+Const\+It}}
+\index{Property\+Container\+Const\+It@{Property\+Container\+Const\+It}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Property\+Container\+Const\+It}{PropertyContainerConstIt}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Property\+Container\+::const\+\_\+iterator {\bf Surface\+::\+Property\+Container\+Const\+It}}\hypertarget{classSurface_ab30c0b6e5e6119d88e09c50c71632819}{}\label{classSurface_ab30c0b6e5e6119d88e09c50c71632819}
+\index{Surface@{Surface}!Property\+Container\+It@{Property\+Container\+It}}
+\index{Property\+Container\+It@{Property\+Container\+It}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Property\+Container\+It}{PropertyContainerIt}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Property\+Container\+::iterator {\bf Surface\+::\+Property\+Container\+It}}\hypertarget{classSurface_a828990970629ddd1207584544daaca7f}{}\label{classSurface_a828990970629ddd1207584544daaca7f}
+\index{Surface@{Surface}!Scroll\+Info\+Container@{Scroll\+Info\+Container}}
+\index{Scroll\+Info\+Container@{Scroll\+Info\+Container}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Scroll\+Info\+Container}{ScrollInfoContainer}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::vector$<${\bf Scroll\+Info}$>$ {\bf Surface\+::\+Scroll\+Info\+Container}}\hypertarget{classSurface_a7b781fa8ee9f22afe59f5aa871fd7b6e}{}\label{classSurface_a7b781fa8ee9f22afe59f5aa871fd7b6e}
+\index{Surface@{Surface}!Scroll\+Info\+IT@{Scroll\+Info\+IT}}
+\index{Scroll\+Info\+IT@{Scroll\+Info\+IT}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Scroll\+Info\+IT}{ScrollInfoIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef Scroll\+Info\+Container\+::const\+\_\+iterator {\bf Surface\+::\+Scroll\+Info\+IT}}\hypertarget{classSurface_a603071753114924b36bdba9241010984}{}\label{classSurface_a603071753114924b36bdba9241010984}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Surface@{Surface}!Surface@{Surface}}
+\index{Surface@{Surface}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Surface()}{Surface()}}]{\setlength{\rightskip}{0pt plus 5cm}Surface\+::\+Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_a8fc57f2a15292135c00545c9d224ec68}{}\label{classSurface_a8fc57f2a15292135c00545c9d224ec68}
+\index{Surface@{Surface}!Surface@{Surface}}
+\index{Surface@{Surface}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Surface(\+Graphics\+Manager $\ast$a\+Manager)}{Surface(GraphicsManager *aManager)}}]{\setlength{\rightskip}{0pt plus 5cm}Surface\+::\+Surface (
+\begin{DoxyParamCaption}
+\item[{{\bf Graphics\+Manager} $\ast$}]{a\+Manager}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_a931c648df6d3dc8c8b301dbc4ce34809}{}\label{classSurface_a931c648df6d3dc8c8b301dbc4ce34809}
+\index{Surface@{Surface}!````~Surface@{$\sim$\+Surface}}
+\index{````~Surface@{$\sim$\+Surface}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{$\sim$\+Surface()}{~Surface()}}]{\setlength{\rightskip}{0pt plus 5cm}Surface\+::$\sim$\+Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a89de75c95cb550d432f3ea4ed1429db0}{}\label{classSurface_a89de75c95cb550d432f3ea4ed1429db0}
+
+
+\subsection{Member Function Documentation}
+\index{Surface@{Surface}!Add\+Or\+Edit\+Property@{Add\+Or\+Edit\+Property}}
+\index{Add\+Or\+Edit\+Property@{Add\+Or\+Edit\+Property}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Add\+Or\+Edit\+Property(\+Hash\+String const \&a\+Name, Property\+Type const \&a\+Type, Hash\+String const \&a\+Target\+Value, Hash\+String const \&a\+Default\+Value)}{AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Add\+Or\+Edit\+Property (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name, }
+\item[{{\bf Property\+Type} const \&}]{a\+Type, }
+\item[{{\bf Hash\+String} const \&}]{a\+Target\+Value, }
+\item[{{\bf Hash\+String} const \&}]{a\+Default\+Value}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_af2b6b352890f66373271af0e1400fb75}{}\label{classSurface_af2b6b352890f66373271af0e1400fb75}
+
+
+Edit property if there, otherwise add. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name of property \\
+\hline
+{\em a\+Type} & Type of property \\
+\hline
+{\em a\+Target\+Value} & Target value of property \\
+\hline
+{\em a\+Default\+Value} & Default value of property \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Clear\+Properties@{Clear\+Properties}}
+\index{Clear\+Properties@{Clear\+Properties}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Clear\+Properties()}{ClearProperties()}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Clear\+Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_aebd7366b209283c2da847551a43e122b}{}\label{classSurface_aebd7366b209283c2da847551a43e122b}
+
+
+Clear properties for a surface. 
+
+\index{Surface@{Surface}!Create\+Scroll\+Effect@{Create\+Scroll\+Effect}}
+\index{Create\+Scroll\+Effect@{Create\+Scroll\+Effect}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Create\+Scroll\+Effect(\+Scroll\+Type const \&a\+Scroll\+Type, Vector3 const \&a\+Goal\+Size)}{CreateScrollEffect(ScrollType const &aScrollType, Vector3 const &aGoalSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Create\+Scroll\+Effect (
+\begin{DoxyParamCaption}
+\item[{{\bf Scroll\+Type} const \&}]{a\+Scroll\+Type, }
+\item[{{\bf Vector3} const \&}]{a\+Goal\+Size}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_a3ddc25662d07d31a74e7007ab45a3607}{}\label{classSurface_a3ddc25662d07d31a74e7007ab45a3607}
+
+
+Create scrolling reveal effect. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Scroll\+Type} & H\+O\+R\+I\+Z\+O\+N\+T\+AL or V\+E\+R\+T\+I\+C\+AL. \\
+\hline
+{\em a\+Goal\+Size} & Goal size of the object (in world space). \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Current\+Animation\+Completed@{Current\+Animation\+Completed}}
+\index{Current\+Animation\+Completed@{Current\+Animation\+Completed}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Current\+Animation\+Completed()}{CurrentAnimationCompleted()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Surface\+::\+Current\+Animation\+Completed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_a1bcc35b80eceb50fb275f09dd878c756}{}\label{classSurface_a1bcc35b80eceb50fb275f09dd878c756}
+
+
+Check if current animation has iterated at least once. 
+
+\begin{DoxyReturn}{Returns}
+True if true. 
+\end{DoxyReturn}
+\index{Surface@{Surface}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)}{Deserialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a5afb925d505f53974fd5542698be9407}{}\label{classSurface_a5afb925d505f53974fd5542698be9407}
+
+
+Read from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File stream to read from \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Component}.
+
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_ae655e35c7c679f8d4de963786cc24fa5}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_a0406f2287a52aebb4da1b6ef0deddf8d}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Finish\+Animation@{Finish\+Animation}}
+\index{Finish\+Animation@{Finish\+Animation}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Finish\+Animation()}{FinishAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Finish\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_aaf0699f4c23d4a4da2804463e9c34ad7}{}\label{classSurface_aaf0699f4c23d4a4da2804463e9c34ad7}
+
+
+Force finish animation. 
+
+\index{Surface@{Surface}!Get\+Color@{Get\+Color}}
+\index{Get\+Color@{Get\+Color}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+Color()}{GetColor()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector4}\& Surface\+::\+Get\+Color (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_a189a2849426d0aa832bf5d3acde61d52}{}\label{classSurface_a189a2849426d0aa832bf5d3acde61d52}
+\index{Surface@{Surface}!Get\+File\+Name@{Get\+File\+Name}}
+\index{Get\+File\+Name@{Get\+File\+Name}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+File\+Name()}{GetFileName()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Surface\+::\+Get\+File\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_ad8f11dc73de76bd66d835672fbace1ce}{}\label{classSurface_ad8f11dc73de76bd66d835672fbace1ce}
+\index{Surface@{Surface}!Get\+Manager@{Get\+Manager}}
+\index{Get\+Manager@{Get\+Manager}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+Manager() const }{GetManager() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Graphics\+Manager}$\ast$ Surface\+::\+Get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_a8768f73c25896fa5d05b5fcda38d34ee}{}\label{classSurface_a8768f73c25896fa5d05b5fcda38d34ee}
+\index{Surface@{Surface}!Get\+Program\+ID@{Get\+Program\+ID}}
+\index{Get\+Program\+ID@{Get\+Program\+ID}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+Program\+I\+D() const }{GetProgramID() const }}]{\setlength{\rightskip}{0pt plus 5cm}virtual unsigned Surface\+::\+Get\+Program\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSurface_a109736ab841dbd36ca58ffd45d40b315}{}\label{classSurface_a109736ab841dbd36ca58ffd45d40b315}
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_aa89277538add28b391e109d375a1e397}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_a24a0e4acd092742475a9556af8294da7}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Get\+Properties@{Get\+Properties}}
+\index{Get\+Properties@{Get\+Properties}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+Properties() const }{GetProperties() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Surface\+::\+Property\+Container} const \& Surface\+::\+Get\+Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classSurface_ac301b28956a82d934fbde574c7939d3c}{}\label{classSurface_ac301b28956a82d934fbde574c7939d3c}
+
+
+Get properties container. 
+
+\begin{DoxyReturn}{Returns}
+Container of properties 
+\end{DoxyReturn}
+\index{Surface@{Surface}!Get\+Texture\+Data@{Get\+Texture\+Data}}
+\index{Get\+Texture\+Data@{Get\+Texture\+Data}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+Texture\+Data() const }{GetTextureData() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Texture\+Coordinates} $\ast$ Surface\+::\+Get\+Texture\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classSurface_a394ba021f319e09c882ac50f4bfd7a95}{}\label{classSurface_a394ba021f319e09c882ac50f4bfd7a95}
+
+
+Get texture coordinate data (animation data) 
+
+\begin{DoxyReturn}{Returns}
+Texture coordinate data. 
+\end{DoxyReturn}
+\index{Surface@{Surface}!Get\+Texture\+ID@{Get\+Texture\+ID}}
+\index{Get\+Texture\+ID@{Get\+Texture\+ID}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+Texture\+I\+D() const }{GetTextureID() const }}]{\setlength{\rightskip}{0pt plus 5cm}virtual unsigned Surface\+::\+Get\+Texture\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSurface_a807bafe8551b2a80b4f0aa87b6a50e77}{}\label{classSurface_a807bafe8551b2a80b4f0aa87b6a50e77}
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_addbb77f1a9d6db52e97f8d9a295096e0}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_a12a1c96a21cf6c1830ab7a5e64a24155}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int Surface\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classSurface_aba76571de7008e6f3c08177e1d316cc0}{}\label{classSurface_aba76571de7008e6f3c08177e1d316cc0}
+\index{Surface@{Surface}!Get\+View\+Mode@{Get\+View\+Mode}}
+\index{Get\+View\+Mode@{Get\+View\+Mode}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Get\+View\+Mode() const }{GetViewMode() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Viewspace} Surface\+::\+Get\+View\+Mode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_ad37870a954209590d1214a9061922052}{}\label{classSurface_ad37870a954209590d1214a9061922052}
+\index{Surface@{Surface}!Load\+Image@{Load\+Image}}
+\index{Load\+Image@{Load\+Image}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Load\+Image(\+Hash\+String const \&a\+Name)}{LoadImage(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Load\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a634f4bfe638855b7ef0cb889feebaac3}{}\label{classSurface_a634f4bfe638855b7ef0cb889feebaac3}
+
+
+Asserts, please implement the platform specific implementation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Nothing. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_a174eb5f22b5502263d69f13948da226a}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_a657bfb03f74cbb36e81b46882f37596d}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Load\+Shaders@{Load\+Shaders}}
+\index{Load\+Shaders@{Load\+Shaders}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Load\+Shaders(\+Hash\+String const \&a\+Vertex\+Shader\+Filename, Hash\+String const \&a\+Fragment\+Shader\+Filename)}{LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Load\+Shaders (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Vertex\+Shader\+Filename, }
+\item[{{\bf Hash\+String} const \&}]{a\+Fragment\+Shader\+Filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_ab01df27c2a91269a97773cb1df1c0f14}{}\label{classSurface_ab01df27c2a91269a97773cb1df1c0f14}
+
+
+Asserts, please implement the platform specific implementation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Vertex\+Shader\+Filename} & Nothing. \\
+\hline
+{\em a\+Fragment\+Shader\+Filename} & Nothing. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_a89d0b3e19f210afbe3edee6be389dbe9}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_adabab53e2036848efc1fe5404f087005}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Load\+Text@{Load\+Text}}
+\index{Load\+Text@{Load\+Text}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Load\+Text(\+Hash\+String const \&a\+Font, Hash\+String const \&a\+Text, Vector4 const \&a\+Foreground\+Color, Vector4 const \&a\+Background\+Color, int a\+Size, int a\+Max\+Width)}{LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Surface\+::\+Load\+Text (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Font, }
+\item[{{\bf Hash\+String} const \&}]{a\+Text, }
+\item[{{\bf Vector4} const \&}]{a\+Foreground\+Color, }
+\item[{{\bf Vector4} const \&}]{a\+Background\+Color, }
+\item[{int}]{a\+Size, }
+\item[{int}]{a\+Max\+Width}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a1d80ab9d8946932c2ffb2788728f3263}{}\label{classSurface_a1d80ab9d8946932c2ffb2788728f3263}
+
+
+Asserts, please implement the platform specific implementation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Font} & Nothing. \\
+\hline
+{\em a\+Text} & Nothing. \\
+\hline
+{\em a\+Foreground\+Color} & Nothing. \\
+\hline
+{\em a\+Background\+Color} & Nothing. \\
+\hline
+{\em a\+Size} & Nothing. \\
+\hline
+{\em a\+Max\+Width} & Nothing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_a199474fdbdac125b9abb8b00cd56d844}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_a00445d9f691b18c909d11d0987f66c6b}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a4bc9df15d34a240fcb62f79282054862}{}\label{classSurface_a4bc9df15d34a240fcb62f79282054862}
+
+
+Receive a message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & Received message \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Component}.
+
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_ae004f90212579a2448de1b7bc014bc1e}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_aad85a98841b47cc7bf4b46e72c0692db}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a05f530ec3be9c36410c193c3f7878935}{}\label{classSurface_a05f530ec3be9c36410c193c3f7878935}
+
+
+Send message to owner for other components. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Component}.
+
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_a080c3656b20f23493096d16325bc3005}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_a60d206d597fdfd577df4917d6544f127}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a4d98b3f6be9a39184f70796b1858c620}{}\label{classSurface_a4d98b3f6be9a39184f70796b1858c620}
+
+
+Serialize to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & File stream to write to. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Component}.
+
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_a540f9f1d910279d4f60a707a059fb0e1}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_a441bbcebb3b8cdab0966856331733908}{P\+C\+Surface}.
+
+\index{Surface@{Surface}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classSurface_ac956ca9cc45b4d2b2c5456529c96d2a4}{}\label{classSurface_ac956ca9cc45b4d2b2c5456529c96d2a4}
+
+
+Make this object usable in L\+UA. 
+
+\index{Surface@{Surface}!Set\+Animated@{Set\+Animated}}
+\index{Set\+Animated@{Set\+Animated}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Animated(bool a\+Animated)}{SetAnimated(bool aAnimated)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Animated (
+\begin{DoxyParamCaption}
+\item[{bool}]{a\+Animated}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_abd4dc8878b22e5305399d136ed2d8ca1}{}\label{classSurface_abd4dc8878b22e5305399d136ed2d8ca1}
+
+
+Set whether this surface is animated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animated} & True is animated, false otherwise \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Set\+Animation@{Set\+Animation}}
+\index{Set\+Animation@{Set\+Animation}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Animation(int a\+Animation, bool a\+Run\+Once=false)}{SetAnimation(int aAnimation, bool aRunOnce=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Animation (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+Animation, }
+\item[{bool}]{a\+Run\+Once = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_ae300aa7884ccec3af3177350acb9a663}{}\label{classSurface_ae300aa7884ccec3af3177350acb9a663}
+
+
+Get current animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animation} & Animation id to run \\
+\hline
+{\em a\+Run\+Once} & Iterates only once then stops if true. \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Set\+Animation\+Speed@{Set\+Animation\+Speed}}
+\index{Set\+Animation\+Speed@{Set\+Animation\+Speed}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Animation\+Speed(float a\+Animation\+Speed)}{SetAnimationSpeed(float aAnimationSpeed)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Animation\+Speed (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+Animation\+Speed}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_a69b04e2e3f2736665e3068088a3b1cad}{}\label{classSurface_a69b04e2e3f2736665e3068088a3b1cad}
+
+
+Set speed of current animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Animation\+Speed} & Time between frames (in seconds) \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Set\+Color@{Set\+Color}}
+\index{Set\+Color@{Set\+Color}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Color(\+Vector4 const \&a\+Color)}{SetColor(Vector4 const &aColor)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Color (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector4} const \&}]{a\+Color}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_a374b2c6a89c8fcbc3c3bf932c9218313}{}\label{classSurface_a374b2c6a89c8fcbc3c3bf932c9218313}
+\index{Surface@{Surface}!Set\+Current\+Frame@{Set\+Current\+Frame}}
+\index{Set\+Current\+Frame@{Set\+Current\+Frame}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Current\+Frame(int a\+Frame)}{SetCurrentFrame(int aFrame)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Current\+Frame (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+Frame}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_a310cb33a757cb83f1b284f81602fc93c}{}\label{classSurface_a310cb33a757cb83f1b284f81602fc93c}
+
+
+Set current frame of animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Frame} & Frame of current animation \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Set\+File\+Name@{Set\+File\+Name}}
+\index{Set\+File\+Name@{Set\+File\+Name}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+File\+Name(\+Hash\+String const \&a\+File\+Name)}{SetFileName(HashString const &aFileName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+File\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+File\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_a27551307057fdb923739146d1c87dd6a}{}\label{classSurface_a27551307057fdb923739146d1c87dd6a}
+\index{Surface@{Surface}!Set\+Frame\+By\+ID@{Set\+Frame\+By\+ID}}
+\index{Set\+Frame\+By\+ID@{Set\+Frame\+By\+ID}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Frame\+By\+I\+D(int a\+Frame\+I\+D)}{SetFrameByID(int aFrameID)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Frame\+By\+ID (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+Frame\+ID}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_a003a81ac5e9f43b4219e1ce657a07912}{}\label{classSurface_a003a81ac5e9f43b4219e1ce657a07912}
+
+
+Set frame by id in animation file. (Regardless of animation) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Frame\+ID} & The id to set to. \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Set\+Texture\+Coordinate\+Data@{Set\+Texture\+Coordinate\+Data}}
+\index{Set\+Texture\+Coordinate\+Data@{Set\+Texture\+Coordinate\+Data}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Texture\+Coordinate\+Data(int const a\+Num\+Animations, std\+::vector$<$ int $>$ const \&a\+Num\+Frames, std\+::vector$<$ std\+::vector$<$ float $>$$>$ const \&a\+Animation\+Speeds)}{SetTextureCoordinateData(int const aNumAnimations, std::vector< int > const &aNumFrames, std::vector< std::vector< float >> const &aAnimationSpeeds)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Texture\+Coordinate\+Data (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Num\+Animations, }
+\item[{std\+::vector$<$ int $>$ const \&}]{a\+Num\+Frames, }
+\item[{std\+::vector$<$ std\+::vector$<$ float $>$$>$ const \&}]{a\+Animation\+Speeds}
+\end{DoxyParamCaption}
+)}\hypertarget{classSurface_abdf13f4b9824c89984c0c1b0c47ca2ed}{}\label{classSurface_abdf13f4b9824c89984c0c1b0c47ca2ed}
+
+
+Set up animation data helper. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Num\+Animations} & Total number of animations \\
+\hline
+{\em a\+Num\+Frames} & Number of frames per animation \\
+\hline
+{\em a\+Animation\+Speed} & Time between frames \\
+\hline
+\end{DoxyParams}
+\index{Surface@{Surface}!Set\+Texture\+Size@{Set\+Texture\+Size}}
+\index{Set\+Texture\+Size@{Set\+Texture\+Size}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+Texture\+Size(\+Vector3 const \&a\+Texture\+Size)}{SetTextureSize(Vector3 const &aTextureSize)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+Texture\+Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{a\+Texture\+Size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_a9b4a542382c114455f66aa1bf11f7369}{}\label{classSurface_a9b4a542382c114455f66aa1bf11f7369}
+\index{Surface@{Surface}!Set\+View\+Mode@{Set\+View\+Mode}}
+\index{Set\+View\+Mode@{Set\+View\+Mode}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Set\+View\+Mode(\+Viewspace const \&a\+Viewmode)}{SetViewMode(Viewspace const &aViewmode)}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Set\+View\+Mode (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewspace} const \&}]{a\+Viewmode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSurface_a044c347d9bcc9cc4957469583007cbf7}{}\label{classSurface_a044c347d9bcc9cc4957469583007cbf7}
+\index{Surface@{Surface}!Update@{Update}}
+\index{Update@{Update}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Surface\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSurface_a36094693997d1cd7bdc6dca831952de8}{}\label{classSurface_a36094693997d1cd7bdc6dca831952de8}
+
+
+Simple update loop. 
+
+
+
+Implements \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Component}.
+
+
+
+Reimplemented in \hyperlink{classPCShaderSurface_a49251c5ad3d59fc484601e3a5df7cdb5}{P\+C\+Shader\+Surface}, and \hyperlink{classPCSurface_aa6fe355056fdba082057589d573f82a3}{P\+C\+Surface}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Surface@{Surface}!m\+Color@{m\+Color}}
+\index{m\+Color@{m\+Color}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+Color}{mColor}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector4} Surface\+::m\+Color\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_a4b8a0cac22eafc2bd5e02fab3ee7f309}{}\label{classSurface_a4b8a0cac22eafc2bd5e02fab3ee7f309}
+\index{Surface@{Surface}!m\+File\+Name@{m\+File\+Name}}
+\index{m\+File\+Name@{m\+File\+Name}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+File\+Name}{mFileName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Surface\+::m\+File\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_acdac859d5653ee7f5e49c0e323001caf}{}\label{classSurface_acdac859d5653ee7f5e49c0e323001caf}
+\index{Surface@{Surface}!m\+Manager@{m\+Manager}}
+\index{m\+Manager@{m\+Manager}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+Manager}{mManager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Graphics\+Manager}$\ast$ Surface\+::m\+Manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_aeddc9c9fb4c768ecac85cbf146f4d3cd}{}\label{classSurface_aeddc9c9fb4c768ecac85cbf146f4d3cd}
+\index{Surface@{Surface}!m\+No\+Render@{m\+No\+Render}}
+\index{m\+No\+Render@{m\+No\+Render}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+No\+Render}{mNoRender}}]{\setlength{\rightskip}{0pt plus 5cm}bool Surface\+::m\+No\+Render\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_ab9c0d9fbb4968a7d5bb0cc785d24373b}{}\label{classSurface_ab9c0d9fbb4968a7d5bb0cc785d24373b}
+\index{Surface@{Surface}!m\+Properties@{m\+Properties}}
+\index{m\+Properties@{m\+Properties}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+Properties}{mProperties}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Property\+Container} Surface\+::m\+Properties\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_a59a2b7281f8bad2a51f7e6b97d2d4962}{}\label{classSurface_a59a2b7281f8bad2a51f7e6b97d2d4962}
+\index{Surface@{Surface}!m\+Scroll\+Info@{m\+Scroll\+Info}}
+\index{m\+Scroll\+Info@{m\+Scroll\+Info}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+Scroll\+Info}{mScrollInfo}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scroll\+Info\+Container} Surface\+::m\+Scroll\+Info\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_a6582c39cc99bf1d6f67fc54db1134544}{}\label{classSurface_a6582c39cc99bf1d6f67fc54db1134544}
+\index{Surface@{Surface}!m\+Tex\+Coord@{m\+Tex\+Coord}}
+\index{m\+Tex\+Coord@{m\+Tex\+Coord}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+Tex\+Coord}{mTexCoord}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Texture\+Coordinates}$\ast$ Surface\+::m\+Tex\+Coord\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_abc58ab23f3d82dd16ddb550d3173618e}{}\label{classSurface_abc58ab23f3d82dd16ddb550d3173618e}
+\index{Surface@{Surface}!m\+Texture\+Size@{m\+Texture\+Size}}
+\index{m\+Texture\+Size@{m\+Texture\+Size}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+Texture\+Size}{mTextureSize}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector3} Surface\+::m\+Texture\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_a9d0d573b14332b5f3ee2d7e2cc78012c}{}\label{classSurface_a9d0d573b14332b5f3ee2d7e2cc78012c}
+\index{Surface@{Surface}!m\+Viewmode@{m\+Viewmode}}
+\index{m\+Viewmode@{m\+Viewmode}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{m\+Viewmode}{mViewmode}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Viewspace} Surface\+::m\+Viewmode\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSurface_a1d630bf18afc808bf7765e2203280b86}{}\label{classSurface_a1d630bf18afc808bf7765e2203280b86}
+\index{Surface@{Surface}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Surface@{Surface}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const Surface\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Surface\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classSurface_a44624ee5007ddfe4603c8f3d90e0222f}{}\label{classSurface_a44624ee5007ddfe4603c8f3d90e0222f}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Components/\hyperlink{Surface_8h}{Surface.\+h}\item 
+Components/\hyperlink{Surface_8cpp}{Surface.\+cpp}\end{DoxyCompactItemize}

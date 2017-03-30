@@ -1,0 +1,170 @@
+\hypertarget{classMenuImage}{}\section{Menu\+Image Class Reference}
+\label{classMenuImage}\index{Menu\+Image@{Menu\+Image}}
+
+
+{\ttfamily \#include $<$Menu\+Image.\+h$>$}
+
+
+
+Inheritance diagram for Menu\+Image\+:
+% FIG 0
+
+
+Collaboration diagram for Menu\+Image\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMenuImage_a02adcb91a8281c0cb32a77e7ff0061c7}{Menu\+Image} (\hyperlink{classMenu}{Menu} $\ast$a\+Owner, \hyperlink{classHashString}{Hash\+String} const \&a\+Filename, bool const a\+Replaceable)
+\item 
+\hyperlink{classMenuImage_a9802502749a22188b65dfc101f98bd3b}{$\sim$\+Menu\+Image} ()
+\item 
+virtual void \hyperlink{classMenuImage_afc629a2bde05705f00d26e71319390a8}{Draw} ()
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuImage_a1c54191212d06d40c596f09ec428f361}{Update} ()
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuImage_a595a3402404b28d0fbe9793a3364ffbb}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuImage_a9162c043b69171720f75b80717583919}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Does nothing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classMenuImage_ac5ecd63269a18b3a6c2e1c113616122e}{Parse\+Additional\+Data} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Gather additional data from deserialized file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Menu\+Image@{Menu\+Image}!Menu\+Image@{Menu\+Image}}
+\index{Menu\+Image@{Menu\+Image}!Menu\+Image@{Menu\+Image}}
+\subsubsection[{\texorpdfstring{Menu\+Image(\+Menu $\ast$a\+Owner, Hash\+String const \&a\+Filename, bool const a\+Replaceable)}{MenuImage(Menu *aOwner, HashString const &aFilename, bool const aReplaceable)}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Image\+::\+Menu\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf Menu} $\ast$}]{a\+Owner, }
+\item[{{\bf Hash\+String} const \&}]{a\+Filename, }
+\item[{bool const}]{a\+Replaceable}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuImage_a02adcb91a8281c0cb32a77e7ff0061c7}{}\label{classMenuImage_a02adcb91a8281c0cb32a77e7ff0061c7}
+\index{Menu\+Image@{Menu\+Image}!````~Menu\+Image@{$\sim$\+Menu\+Image}}
+\index{````~Menu\+Image@{$\sim$\+Menu\+Image}!Menu\+Image@{Menu\+Image}}
+\subsubsection[{\texorpdfstring{$\sim$\+Menu\+Image()}{~MenuImage()}}]{\setlength{\rightskip}{0pt plus 5cm}Menu\+Image\+::$\sim$\+Menu\+Image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMenuImage_a9802502749a22188b65dfc101f98bd3b}{}\label{classMenuImage_a9802502749a22188b65dfc101f98bd3b}
+
+
+\subsection{Member Function Documentation}
+\index{Menu\+Image@{Menu\+Image}!Draw@{Draw}}
+\index{Draw@{Draw}!Menu\+Image@{Menu\+Image}}
+\subsubsection[{\texorpdfstring{Draw()}{Draw()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Image\+::\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuImage_afc629a2bde05705f00d26e71319390a8}{}\label{classMenuImage_afc629a2bde05705f00d26e71319390a8}
+
+
+Does nothing. 
+
+
+
+Implements \hyperlink{classMenuElement_a64a401777d1f8f9bb668d4b134bb13f7}{Menu\+Element}.
+
+
+
+Reimplemented in \hyperlink{classMenuButton_aac414152e785dbc256aa307b23792143}{Menu\+Button}.
+
+\index{Menu\+Image@{Menu\+Image}!Parse\+Additional\+Data@{Parse\+Additional\+Data}}
+\index{Parse\+Additional\+Data@{Parse\+Additional\+Data}!Menu\+Image@{Menu\+Image}}
+\subsubsection[{\texorpdfstring{Parse\+Additional\+Data(\+Parser \&a\+Parser)}{ParseAdditionalData(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Image\+::\+Parse\+Additional\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuImage_ac5ecd63269a18b3a6c2e1c113616122e}{}\label{classMenuImage_ac5ecd63269a18b3a6c2e1c113616122e}
+
+
+Gather additional data from deserialized file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classMenuElement_abd61bb2ffffd877dd39a0079512a8dbc}{Menu\+Element}.
+
+
+
+Reimplemented in \hyperlink{classMenuButton_a2e8ea938dfbfda31407f7aa672f1a607}{Menu\+Button}.
+
+\index{Menu\+Image@{Menu\+Image}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Menu\+Image@{Menu\+Image}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Image\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuImage_a9162c043b69171720f75b80717583919}{}\label{classMenuImage_a9162c043b69171720f75b80717583919}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classMenuElement_a9efc98212994476526bc0b314e18b950}{Menu\+Element}.
+
+
+
+Reimplemented in \hyperlink{classMenuButton_a6d4ea5866ebba20ea57d6c48a0c6fa20}{Menu\+Button}.
+
+\index{Menu\+Image@{Menu\+Image}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Menu\+Image@{Menu\+Image}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Image\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuImage_a595a3402404b28d0fbe9793a3364ffbb}{}\label{classMenuImage_a595a3402404b28d0fbe9793a3364ffbb}
+
+
+Does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classMenuElement_a1b341775acf0ec3d3a064dccd78af2cd}{Menu\+Element}.
+
+
+
+Reimplemented in \hyperlink{classMenuButton_ae3f1300dc3e55be8b2609e7fcb71e0fc}{Menu\+Button}.
+
+\index{Menu\+Image@{Menu\+Image}!Update@{Update}}
+\index{Update@{Update}!Menu\+Image@{Menu\+Image}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Menu\+Image\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classMenuImage_a1c54191212d06d40c596f09ec428f361}{}\label{classMenuImage_a1c54191212d06d40c596f09ec428f361}
+
+
+Does nothing. 
+
+
+
+Implements \hyperlink{classMenuElement_a025aeb7bf41cf9ca7069dba7dbf07f47}{Menu\+Element}.
+
+
+
+Reimplemented in \hyperlink{classMenuButton_a929dfef7a69a776f4b1da3d151236dcb}{Menu\+Button}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{MenuImage_8h}{Menu\+Image.\+h}\item 
+Logic/\hyperlink{MenuImage_8cpp}{Menu\+Image.\+cpp}\end{DoxyCompactItemize}

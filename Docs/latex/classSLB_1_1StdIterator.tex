@@ -1,0 +1,121 @@
+\hypertarget{classSLB_1_1StdIterator}{}\section{S\+LB\+:\+:Std\+Iterator$<$ Traits $>$ Class Template Reference}
+\label{classSLB_1_1StdIterator}\index{S\+L\+B\+::\+Std\+Iterator$<$ Traits $>$@{S\+L\+B\+::\+Std\+Iterator$<$ Traits $>$}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Std\+Iterator$<$ Traits $>$\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Std\+Iterator$<$ Traits $>$\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef Traits\+::\+Get\+Iterator\+Member \hyperlink{classSLB_1_1StdIterator_ad7822e03cd31e30c8f2f6a393ce993b9}{Member\+Funcs}
+\item 
+typedef Traits\+::\+Container \hyperlink{classSLB_1_1StdIterator_aea113f18b9853918114083198d640da2}{Container}
+\item 
+typedef Traits\+::\+Iterator \hyperlink{classSLB_1_1StdIterator_aa762795d74dbc68a58e644cfb665418b}{Iterator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1StdIterator_aedc353f371aeda76fc21f4268f0b558c}{Std\+Iterator} (\hyperlink{classSLB_1_1StdIterator_ad7822e03cd31e30c8f2f6a393ce993b9}{Member\+Funcs} m\+\_\+first, \hyperlink{classSLB_1_1StdIterator_ad7822e03cd31e30c8f2f6a393ce993b9}{Member\+Funcs} m\+\_\+end)
+\item 
+int \hyperlink{classSLB_1_1StdIterator_abfb1efa6670cf1e47be39afd26da10a9}{push} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classSLB_1_1StdIterator_a7e2956299f8db36b8f51ce1cdf90b583}{next} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1StdIterator_a3da4485e9f0f0faada257e761a3ad3a5}{Std\+Iterator} (const \hyperlink{classSLB_1_1StdIterator}{Std\+Iterator} \&slbo)
+\item 
+\hyperlink{classSLB_1_1StdIterator}{Std\+Iterator} \& \hyperlink{classSLB_1_1StdIterator_a009d180ddb6b1b51570bf5eda73f9884}{operator=} (const \hyperlink{classSLB_1_1StdIterator}{Std\+Iterator} \&slbo)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1StdIterator_ad7822e03cd31e30c8f2f6a393ce993b9}{Member\+Funcs} \hyperlink{classSLB_1_1StdIterator_a1c40404f63288aa1d21dc945828bb3ae}{\+\_\+begin}
+\item 
+\hyperlink{classSLB_1_1StdIterator_ad7822e03cd31e30c8f2f6a393ce993b9}{Member\+Funcs} \hyperlink{classSLB_1_1StdIterator_a74296453f134ef29853bd2d649a9883d}{\+\_\+end}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!Container@{Container}}
+\index{Container@{Container}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{Container}{Container}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Traits$>$ typedef Traits\+::\+Container {\bf S\+L\+B\+::\+Std\+Iterator}$<$ Traits $>$\+::{\bf Container}}\hypertarget{classSLB_1_1StdIterator_aea113f18b9853918114083198d640da2}{}\label{classSLB_1_1StdIterator_aea113f18b9853918114083198d640da2}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!Iterator@{Iterator}}
+\index{Iterator@{Iterator}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{Iterator}{Iterator}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Traits$>$ typedef Traits\+::\+Iterator {\bf S\+L\+B\+::\+Std\+Iterator}$<$ Traits $>$\+::{\bf Iterator}}\hypertarget{classSLB_1_1StdIterator_aa762795d74dbc68a58e644cfb665418b}{}\label{classSLB_1_1StdIterator_aa762795d74dbc68a58e644cfb665418b}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!Member\+Funcs@{Member\+Funcs}}
+\index{Member\+Funcs@{Member\+Funcs}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{Member\+Funcs}{MemberFuncs}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Traits$>$ typedef Traits\+::\+Get\+Iterator\+Member {\bf S\+L\+B\+::\+Std\+Iterator}$<$ Traits $>$\+::{\bf Member\+Funcs}}\hypertarget{classSLB_1_1StdIterator_ad7822e03cd31e30c8f2f6a393ce993b9}{}\label{classSLB_1_1StdIterator_ad7822e03cd31e30c8f2f6a393ce993b9}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!Std\+Iterator@{Std\+Iterator}}
+\index{Std\+Iterator@{Std\+Iterator}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{Std\+Iterator(\+Member\+Funcs m\+\_\+first, Member\+Funcs m\+\_\+end)}{StdIterator(MemberFuncs m_first, MemberFuncs m_end)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf S\+L\+B\+::\+Std\+Iterator}$<$ T $>$\+::{\bf Std\+Iterator} (
+\begin{DoxyParamCaption}
+\item[{{\bf Member\+Funcs}}]{m\+\_\+first, }
+\item[{{\bf Member\+Funcs}}]{m\+\_\+end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1StdIterator_aedc353f371aeda76fc21f4268f0b558c}{}\label{classSLB_1_1StdIterator_aedc353f371aeda76fc21f4268f0b558c}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!Std\+Iterator@{Std\+Iterator}}
+\index{Std\+Iterator@{Std\+Iterator}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{Std\+Iterator(const Std\+Iterator \&slbo)}{StdIterator(const StdIterator &slbo)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Traits$>$ {\bf S\+L\+B\+::\+Std\+Iterator}$<$ Traits $>$\+::{\bf Std\+Iterator} (
+\begin{DoxyParamCaption}
+\item[{const {\bf Std\+Iterator}$<$ Traits $>$ \&}]{slbo}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1StdIterator_a3da4485e9f0f0faada257e761a3ad3a5}{}\label{classSLB_1_1StdIterator_a3da4485e9f0f0faada257e761a3ad3a5}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!next@{next}}
+\index{next@{next}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{next(lua\+\_\+\+State $\ast$\+L)}{next(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ int {\bf S\+L\+B\+::\+Std\+Iterator}$<$ T $>$\+::next (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}\hypertarget{classSLB_1_1StdIterator_a7e2956299f8db36b8f51ce1cdf90b583}{}\label{classSLB_1_1StdIterator_a7e2956299f8db36b8f51ce1cdf90b583}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!operator=@{operator=}}
+\index{operator=@{operator=}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{operator=(const Std\+Iterator \&slbo)}{operator=(const StdIterator &slbo)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Traits$>$ {\bf Std\+Iterator}\& {\bf S\+L\+B\+::\+Std\+Iterator}$<$ Traits $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Std\+Iterator}$<$ Traits $>$ \&}]{slbo}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1StdIterator_a009d180ddb6b1b51570bf5eda73f9884}{}\label{classSLB_1_1StdIterator_a009d180ddb6b1b51570bf5eda73f9884}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!push@{push}}
+\index{push@{push}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{push(lua\+\_\+\+State $\ast$\+L)}{push(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ int {\bf S\+L\+B\+::\+Std\+Iterator}$<$ T $>$\+::push (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1StdIterator_abfb1efa6670cf1e47be39afd26da10a9}{}\label{classSLB_1_1StdIterator_abfb1efa6670cf1e47be39afd26da10a9}
+
+
+Implements \hyperlink{classSLB_1_1IteratorBase_af4fada363e1e5ee31a1ee589793feb3a}{S\+L\+B\+::\+Iterator\+Base}.
+
+
+
+\subsection{Member Data Documentation}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!\+\_\+begin@{\+\_\+begin}}
+\index{\+\_\+begin@{\+\_\+begin}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{\+\_\+begin}{_begin}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Traits$>$ {\bf Member\+Funcs} {\bf S\+L\+B\+::\+Std\+Iterator}$<$ Traits $>$\+::\+\_\+begin\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1StdIterator_a1c40404f63288aa1d21dc945828bb3ae}{}\label{classSLB_1_1StdIterator_a1c40404f63288aa1d21dc945828bb3ae}
+\index{S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}!\+\_\+end@{\+\_\+end}}
+\index{\+\_\+end@{\+\_\+end}!S\+L\+B\+::\+Std\+Iterator@{S\+L\+B\+::\+Std\+Iterator}}
+\subsubsection[{\texorpdfstring{\+\_\+end}{_end}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Traits$>$ {\bf Member\+Funcs} {\bf S\+L\+B\+::\+Std\+Iterator}$<$ Traits $>$\+::\+\_\+end\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classSLB_1_1StdIterator_a74296453f134ef29853bd2d649a9883d}{}\label{classSLB_1_1StdIterator_a74296453f134ef29853bd2d649a9883d}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\end{DoxyCompactItemize}

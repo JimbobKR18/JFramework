@@ -1,0 +1,488 @@
+\hypertarget{classChemistryMaterial}{}\section{Chemistry\+Material Class Reference}
+\label{classChemistryMaterial}\index{Chemistry\+Material@{Chemistry\+Material}}
+
+
+{\ttfamily \#include $<$Chemistry\+Material.\+h$>$}
+
+
+
+Inheritance diagram for Chemistry\+Material\+:
+% FIG 0
+
+
+Collaboration diagram for Chemistry\+Material\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classChemistryMaterial_a812f1f68991aac1bbaf701386e19821e}{Chemistry\+Material} (\hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$a\+Manager)
+\item 
+virtual \hyperlink{classChemistryMaterial_ad92582e6e4c96ed9eb12874c1cb274f2}{$\sim$\+Chemistry\+Material} ()
+\item 
+\hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$ \hyperlink{classChemistryMaterial_a2e897128716848c896e421ec5284e63b}{Get\+Manager} () const 
+\item 
+\hyperlink{classHashString}{Hash\+String} const \hyperlink{classChemistryMaterial_aec435329d4fd005443539461edfdd61b}{Get\+Name} () const 
+\item 
+float const \hyperlink{classChemistryMaterial_a21d5b317a95a685c156105007c0a1f23}{Get\+Current\+Temperature} () const 
+\item 
+float const \hyperlink{classChemistryMaterial_aec7d8dda957f2df913a7caabaf434381}{Get\+Current\+Wattage} () const 
+\item 
+float const \hyperlink{classChemistryMaterial_a9ef652976b2ab9da968e1133a62c1dce}{Get\+Boiling\+Point} () const 
+\item 
+float const \hyperlink{classChemistryMaterial_abfc31cee9db843741184f00ce09c1c5b}{Get\+Melting\+Point} () const 
+\item 
+float const \hyperlink{classChemistryMaterial_a11427696039b8743adc83bc5d1f1a7bd}{Get\+Freezing\+Point} () const 
+\item 
+float const \hyperlink{classChemistryMaterial_abb17739d660e2ffdba70b9a1bebabdbd}{Get\+Conductivity} () const 
+\item 
+float const \hyperlink{classChemistryMaterial_ad038c5df67e4d1d67613717428c02d7d}{Get\+Heat\+Transfer\+Rate} () const 
+\item 
+void \hyperlink{classChemistryMaterial_a86aa557fdf29fe24929d076acc2f3dd9}{Set\+Name} (\hyperlink{classHashString}{Hash\+String} const \&a\+Name)
+\begin{DoxyCompactList}\small\item\em Set name of material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryMaterial_a40d7fd30a4f5bb266da5d29c47e1d45d}{Set\+Current\+Temperature} (float const a\+Current\+Temperature)
+\begin{DoxyCompactList}\small\item\em Set current temperature of material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryMaterial_a543a5d6aebe1a7d28ca83d347490746d}{Set\+Current\+Wattage} (float const a\+Current\+Wattage)
+\begin{DoxyCompactList}\small\item\em Set current wattage of material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryMaterial_a379d99c5367a729057ab5c1ba059db0f}{Set\+Boiling\+Point} (float const a\+Boiling\+Point)
+\begin{DoxyCompactList}\small\item\em Set boiling point of material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryMaterial_a5d0492b780b08a2c2d626157aeeafa19}{Set\+Melting\+Point} (float const a\+Melting\+Point)
+\begin{DoxyCompactList}\small\item\em Set melting point of material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryMaterial_a9f1c3a74825ed15824b39c492be4d092}{Set\+Freezing\+Point} (float const a\+Freezing\+Point)
+\begin{DoxyCompactList}\small\item\em Set freezing point of material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryMaterial_a1fc73bce0ce392c665e60860944c1ba1}{Set\+Conductivity} (float const a\+Conductivity)
+\begin{DoxyCompactList}\small\item\em Set conductivity of material. \end{DoxyCompactList}\item 
+void \hyperlink{classChemistryMaterial_afbbd05b0cb008f3ec35b345f06ca5caa}{Set\+Heat\+Transfer\+Rate} (float const a\+Heat\+Transfer\+Rate)
+\begin{DoxyCompactList}\small\item\em Set heat transfer rate of material. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryMaterial_a138000ab29b8567bd6dc766cb976e712}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryMaterial_a8fe8185fec324a55b470f3c62b09209d}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Send message to upper levels. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryMaterial_af159d6d1cf20bef34fe9c0ec95f0157e}{Receive\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)
+\begin{DoxyCompactList}\small\item\em Receive message from above. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryMaterial_a0795a1607c7a771bedbc48c6a87b6d94}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize out. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classChemistryMaterial_a2c3eb3d1b2560c62359e886255a6b700}{Deserialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Deserialize from parser into memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classChemistryMaterial_a49a6bf73f781091468d000c9760d969a}{Serialize\+L\+UA} ()
+\begin{DoxyCompactList}\small\item\em Serialize to L\+UA. \end{DoxyCompactList}\item 
+static int \hyperlink{classChemistryMaterial_ab7a07bf9cf41694681dd29ebf8b102b3}{Get\+U\+ID} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$ \hyperlink{classChemistryMaterial_afebb0a227f7f72dcb3e7dc063f31a59d}{m\+Manager}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classChemistryMaterial_adf9b0dde3f152ce1b811f0ceaa1e4c2b}{m\+Name}
+\item 
+float \hyperlink{classChemistryMaterial_acdf7f62cf2879887171441700a9bfb79}{m\+Current\+Temperature}
+\item 
+float \hyperlink{classChemistryMaterial_a5202313db6b25671d3e9ffabcd22410a}{m\+Current\+Wattage}
+\item 
+float \hyperlink{classChemistryMaterial_acc2f58f43485b64d584c8519b7a42a1a}{m\+Boiling\+Point}
+\item 
+float \hyperlink{classChemistryMaterial_aed7be13b668ef2b28f953e6d1db7a514}{m\+Melting\+Point}
+\item 
+float \hyperlink{classChemistryMaterial_aaf2f04beeb88954c488a8ceb8670698d}{m\+Freezing\+Point}
+\item 
+float \hyperlink{classChemistryMaterial_af8b790b8370a436c739a8e940d5f6991}{m\+Conductivity}
+\item 
+float \hyperlink{classChemistryMaterial_a7356f2450db88635bdd34c29bec3401a}{m\+Heat\+Transfer\+Rate}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int const \hyperlink{classChemistryMaterial_a4813b379e8e51e9e7ac2c23363ac32f4}{s\+U\+ID} = \hyperlink{namespaceCommon_a994c43a8ea7b03968186a635687a6521}{Common\+::\+String\+Hash\+Function}(\char`\"{}Chemistry\+Material\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Chemistry\+Material@{Chemistry\+Material}!Chemistry\+Material@{Chemistry\+Material}}
+\index{Chemistry\+Material@{Chemistry\+Material}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Chemistry\+Material(\+Chemistry\+Manager $\ast$a\+Manager)}{ChemistryMaterial(ChemistryManager *aManager)}}]{\setlength{\rightskip}{0pt plus 5cm}Chemistry\+Material\+::\+Chemistry\+Material (
+\begin{DoxyParamCaption}
+\item[{{\bf Chemistry\+Manager} $\ast$}]{a\+Manager}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a812f1f68991aac1bbaf701386e19821e}{}\label{classChemistryMaterial_a812f1f68991aac1bbaf701386e19821e}
+\index{Chemistry\+Material@{Chemistry\+Material}!````~Chemistry\+Material@{$\sim$\+Chemistry\+Material}}
+\index{````~Chemistry\+Material@{$\sim$\+Chemistry\+Material}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{$\sim$\+Chemistry\+Material()}{~ChemistryMaterial()}}]{\setlength{\rightskip}{0pt plus 5cm}Chemistry\+Material\+::$\sim$\+Chemistry\+Material (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryMaterial_ad92582e6e4c96ed9eb12874c1cb274f2}{}\label{classChemistryMaterial_ad92582e6e4c96ed9eb12874c1cb274f2}
+
+
+\subsection{Member Function Documentation}
+\index{Chemistry\+Material@{Chemistry\+Material}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Deserialize(\+Parser \&a\+Parser)}{Deserialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Deserialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryMaterial_a2c3eb3d1b2560c62359e886255a6b700}{}\label{classChemistryMaterial_a2c3eb3d1b2560c62359e886255a6b700}
+
+
+Deserialize from parser into memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to gather data from. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a3a643593142fb0e6429fbdc6dddf1950}{Component}.
+
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Boiling\+Point@{Get\+Boiling\+Point}}
+\index{Get\+Boiling\+Point@{Get\+Boiling\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Boiling\+Point() const }{GetBoilingPoint() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Material\+::\+Get\+Boiling\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_a9ef652976b2ab9da968e1133a62c1dce}{}\label{classChemistryMaterial_a9ef652976b2ab9da968e1133a62c1dce}
+\begin{DoxyReturn}{Returns}
+Boiling point. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Conductivity@{Get\+Conductivity}}
+\index{Get\+Conductivity@{Get\+Conductivity}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Conductivity() const }{GetConductivity() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Material\+::\+Get\+Conductivity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_abb17739d660e2ffdba70b9a1bebabdbd}{}\label{classChemistryMaterial_abb17739d660e2ffdba70b9a1bebabdbd}
+\begin{DoxyReturn}{Returns}
+Conductivity. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Current\+Temperature@{Get\+Current\+Temperature}}
+\index{Get\+Current\+Temperature@{Get\+Current\+Temperature}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Temperature() const }{GetCurrentTemperature() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Material\+::\+Get\+Current\+Temperature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_a21d5b317a95a685c156105007c0a1f23}{}\label{classChemistryMaterial_a21d5b317a95a685c156105007c0a1f23}
+\begin{DoxyReturn}{Returns}
+Current temperature. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Current\+Wattage@{Get\+Current\+Wattage}}
+\index{Get\+Current\+Wattage@{Get\+Current\+Wattage}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Current\+Wattage() const }{GetCurrentWattage() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Material\+::\+Get\+Current\+Wattage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_aec7d8dda957f2df913a7caabaf434381}{}\label{classChemistryMaterial_aec7d8dda957f2df913a7caabaf434381}
+\begin{DoxyReturn}{Returns}
+Current wattage. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Freezing\+Point@{Get\+Freezing\+Point}}
+\index{Get\+Freezing\+Point@{Get\+Freezing\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Freezing\+Point() const }{GetFreezingPoint() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Material\+::\+Get\+Freezing\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_a11427696039b8743adc83bc5d1f1a7bd}{}\label{classChemistryMaterial_a11427696039b8743adc83bc5d1f1a7bd}
+\begin{DoxyReturn}{Returns}
+Freezing point. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Heat\+Transfer\+Rate@{Get\+Heat\+Transfer\+Rate}}
+\index{Get\+Heat\+Transfer\+Rate@{Get\+Heat\+Transfer\+Rate}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Heat\+Transfer\+Rate() const }{GetHeatTransferRate() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Material\+::\+Get\+Heat\+Transfer\+Rate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_ad038c5df67e4d1d67613717428c02d7d}{}\label{classChemistryMaterial_ad038c5df67e4d1d67613717428c02d7d}
+\begin{DoxyReturn}{Returns}
+Heat transfer rate per second. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Manager@{Get\+Manager}}
+\index{Get\+Manager@{Get\+Manager}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Manager() const }{GetManager() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemistry\+Manager} $\ast$ Chemistry\+Material\+::\+Get\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_a2e897128716848c896e421ec5284e63b}{}\label{classChemistryMaterial_a2e897128716848c896e421ec5284e63b}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classManager}{Manager} 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Melting\+Point@{Get\+Melting\+Point}}
+\index{Get\+Melting\+Point@{Get\+Melting\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Melting\+Point() const }{GetMeltingPoint() const }}]{\setlength{\rightskip}{0pt plus 5cm}float const Chemistry\+Material\+::\+Get\+Melting\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_abfc31cee9db843741184f00ce09c1c5b}{}\label{classChemistryMaterial_abfc31cee9db843741184f00ce09c1c5b}
+\begin{DoxyReturn}{Returns}
+Melting point. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+Name() const }{GetName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} const Chemistry\+Material\+::\+Get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classChemistryMaterial_aec435329d4fd005443539461edfdd61b}{}\label{classChemistryMaterial_aec435329d4fd005443539461edfdd61b}
+\begin{DoxyReturn}{Returns}
+Name. 
+\end{DoxyReturn}
+\index{Chemistry\+Material@{Chemistry\+Material}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static int Chemistry\+Material\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classChemistryMaterial_ab7a07bf9cf41694681dd29ebf8b102b3}{}\label{classChemistryMaterial_ab7a07bf9cf41694681dd29ebf8b102b3}
+\index{Chemistry\+Material@{Chemistry\+Material}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Receive\+Message(\+Message const \&a\+Message)}{ReceiveMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Receive\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryMaterial_af159d6d1cf20bef34fe9c0ec95f0157e}{}\label{classChemistryMaterial_af159d6d1cf20bef34fe9c0ec95f0157e}
+
+
+Receive message from above. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to receive. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a23c98ed51e86362def45b4b4e1e775b6}{Component}.
+
+\index{Chemistry\+Material@{Chemistry\+Material}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)}{SendMessage(Message const &aMessage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryMaterial_a8fe8185fec324a55b470f3c62b09209d}{}\label{classChemistryMaterial_a8fe8185fec324a55b470f3c62b09209d}
+
+
+Send message to upper levels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Message} & \hyperlink{classMessage}{Message} to send. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_ad5f05e33c116c7eaa0e8f4f12447998d}{Component}.
+
+\index{Chemistry\+Material@{Chemistry\+Material}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryMaterial_a0795a1607c7a771bedbc48c6a87b6d94}{}\label{classChemistryMaterial_a0795a1607c7a771bedbc48c6a87b6d94}
+
+
+Serialize out. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & \hyperlink{classParser}{Parser} to write to. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classComponent_a1739b9ad5a77194c80da069311d4f9d5}{Component}.
+
+\index{Chemistry\+Material@{Chemistry\+Material}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classChemistryMaterial_a49a6bf73f781091468d000c9760d969a}{}\label{classChemistryMaterial_a49a6bf73f781091468d000c9760d969a}
+
+
+Serialize to L\+UA. 
+
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Boiling\+Point@{Set\+Boiling\+Point}}
+\index{Set\+Boiling\+Point@{Set\+Boiling\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Boiling\+Point(float const a\+Boiling\+Point)}{SetBoilingPoint(float const aBoilingPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Boiling\+Point (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Boiling\+Point}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a379d99c5367a729057ab5c1ba059db0f}{}\label{classChemistryMaterial_a379d99c5367a729057ab5c1ba059db0f}
+
+
+Set boiling point of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Boiling\+Point} & Boiling point. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Conductivity@{Set\+Conductivity}}
+\index{Set\+Conductivity@{Set\+Conductivity}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Conductivity(float const a\+Conductivity)}{SetConductivity(float const aConductivity)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Conductivity (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Conductivity}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a1fc73bce0ce392c665e60860944c1ba1}{}\label{classChemistryMaterial_a1fc73bce0ce392c665e60860944c1ba1}
+
+
+Set conductivity of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Conductivity} & Conductivity. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Current\+Temperature@{Set\+Current\+Temperature}}
+\index{Set\+Current\+Temperature@{Set\+Current\+Temperature}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Current\+Temperature(float const a\+Current\+Temperature)}{SetCurrentTemperature(float const aCurrentTemperature)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Current\+Temperature (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Current\+Temperature}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a40d7fd30a4f5bb266da5d29c47e1d45d}{}\label{classChemistryMaterial_a40d7fd30a4f5bb266da5d29c47e1d45d}
+
+
+Set current temperature of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Current\+Temperature} & Temperature. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Current\+Wattage@{Set\+Current\+Wattage}}
+\index{Set\+Current\+Wattage@{Set\+Current\+Wattage}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Current\+Wattage(float const a\+Current\+Wattage)}{SetCurrentWattage(float const aCurrentWattage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Current\+Wattage (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Current\+Wattage}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a543a5d6aebe1a7d28ca83d347490746d}{}\label{classChemistryMaterial_a543a5d6aebe1a7d28ca83d347490746d}
+
+
+Set current wattage of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Current\+Wattage} & Wattage. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Freezing\+Point@{Set\+Freezing\+Point}}
+\index{Set\+Freezing\+Point@{Set\+Freezing\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Freezing\+Point(float const a\+Freezing\+Point)}{SetFreezingPoint(float const aFreezingPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Freezing\+Point (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Freezing\+Point}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a9f1c3a74825ed15824b39c492be4d092}{}\label{classChemistryMaterial_a9f1c3a74825ed15824b39c492be4d092}
+
+
+Set freezing point of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Freezing\+Point} & Freezing point. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Heat\+Transfer\+Rate@{Set\+Heat\+Transfer\+Rate}}
+\index{Set\+Heat\+Transfer\+Rate@{Set\+Heat\+Transfer\+Rate}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Heat\+Transfer\+Rate(float const a\+Heat\+Transfer\+Rate)}{SetHeatTransferRate(float const aHeatTransferRate)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Heat\+Transfer\+Rate (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Heat\+Transfer\+Rate}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_afbbd05b0cb008f3ec35b345f06ca5caa}{}\label{classChemistryMaterial_afbbd05b0cb008f3ec35b345f06ca5caa}
+
+
+Set heat transfer rate of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Heat\+Transfer\+Rate} & Heat transfer rate per second. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Melting\+Point@{Set\+Melting\+Point}}
+\index{Set\+Melting\+Point@{Set\+Melting\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Melting\+Point(float const a\+Melting\+Point)}{SetMeltingPoint(float const aMeltingPoint)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Melting\+Point (
+\begin{DoxyParamCaption}
+\item[{float const}]{a\+Melting\+Point}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a5d0492b780b08a2c2d626157aeeafa19}{}\label{classChemistryMaterial_a5d0492b780b08a2c2d626157aeeafa19}
+
+
+Set melting point of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Melting\+Point} & Melting point. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Set\+Name@{Set\+Name}}
+\index{Set\+Name@{Set\+Name}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Set\+Name(\+Hash\+String const \&a\+Name)}{SetName(HashString const &aName)}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Set\+Name (
+\begin{DoxyParamCaption}
+\item[{{\bf Hash\+String} const \&}]{a\+Name}
+\end{DoxyParamCaption}
+)}\hypertarget{classChemistryMaterial_a86aa557fdf29fe24929d076acc2f3dd9}{}\label{classChemistryMaterial_a86aa557fdf29fe24929d076acc2f3dd9}
+
+
+Set name of material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Name} & Name. \\
+\hline
+\end{DoxyParams}
+\index{Chemistry\+Material@{Chemistry\+Material}!Update@{Update}}
+\index{Update@{Update}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Chemistry\+Material\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChemistryMaterial_a138000ab29b8567bd6dc766cb976e712}{}\label{classChemistryMaterial_a138000ab29b8567bd6dc766cb976e712}
+
+
+Update loop. 
+
+
+
+Implements \hyperlink{classComponent_abda56474d6ccfbdab47cb5e0cd595c2b}{Component}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Boiling\+Point@{m\+Boiling\+Point}}
+\index{m\+Boiling\+Point@{m\+Boiling\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Boiling\+Point}{mBoilingPoint}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Material\+::m\+Boiling\+Point\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_acc2f58f43485b64d584c8519b7a42a1a}{}\label{classChemistryMaterial_acc2f58f43485b64d584c8519b7a42a1a}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Conductivity@{m\+Conductivity}}
+\index{m\+Conductivity@{m\+Conductivity}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Conductivity}{mConductivity}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Material\+::m\+Conductivity\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_af8b790b8370a436c739a8e940d5f6991}{}\label{classChemistryMaterial_af8b790b8370a436c739a8e940d5f6991}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Current\+Temperature@{m\+Current\+Temperature}}
+\index{m\+Current\+Temperature@{m\+Current\+Temperature}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Current\+Temperature}{mCurrentTemperature}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Material\+::m\+Current\+Temperature\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_acdf7f62cf2879887171441700a9bfb79}{}\label{classChemistryMaterial_acdf7f62cf2879887171441700a9bfb79}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Current\+Wattage@{m\+Current\+Wattage}}
+\index{m\+Current\+Wattage@{m\+Current\+Wattage}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Current\+Wattage}{mCurrentWattage}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Material\+::m\+Current\+Wattage\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_a5202313db6b25671d3e9ffabcd22410a}{}\label{classChemistryMaterial_a5202313db6b25671d3e9ffabcd22410a}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Freezing\+Point@{m\+Freezing\+Point}}
+\index{m\+Freezing\+Point@{m\+Freezing\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Freezing\+Point}{mFreezingPoint}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Material\+::m\+Freezing\+Point\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_aaf2f04beeb88954c488a8ceb8670698d}{}\label{classChemistryMaterial_aaf2f04beeb88954c488a8ceb8670698d}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Heat\+Transfer\+Rate@{m\+Heat\+Transfer\+Rate}}
+\index{m\+Heat\+Transfer\+Rate@{m\+Heat\+Transfer\+Rate}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Heat\+Transfer\+Rate}{mHeatTransferRate}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Material\+::m\+Heat\+Transfer\+Rate\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_a7356f2450db88635bdd34c29bec3401a}{}\label{classChemistryMaterial_a7356f2450db88635bdd34c29bec3401a}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Manager@{m\+Manager}}
+\index{m\+Manager@{m\+Manager}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Manager}{mManager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemistry\+Manager}$\ast$ Chemistry\+Material\+::m\+Manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_afebb0a227f7f72dcb3e7dc063f31a59d}{}\label{classChemistryMaterial_afebb0a227f7f72dcb3e7dc063f31a59d}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Melting\+Point@{m\+Melting\+Point}}
+\index{m\+Melting\+Point@{m\+Melting\+Point}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Melting\+Point}{mMeltingPoint}}]{\setlength{\rightskip}{0pt plus 5cm}float Chemistry\+Material\+::m\+Melting\+Point\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_aed7be13b668ef2b28f953e6d1db7a514}{}\label{classChemistryMaterial_aed7be13b668ef2b28f953e6d1db7a514}
+\index{Chemistry\+Material@{Chemistry\+Material}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Chemistry\+Material\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChemistryMaterial_adf9b0dde3f152ce1b811f0ceaa1e4c2b}{}\label{classChemistryMaterial_adf9b0dde3f152ce1b811f0ceaa1e4c2b}
+\index{Chemistry\+Material@{Chemistry\+Material}!s\+U\+ID@{s\+U\+ID}}
+\index{s\+U\+ID@{s\+U\+ID}!Chemistry\+Material@{Chemistry\+Material}}
+\subsubsection[{\texorpdfstring{s\+U\+ID}{sUID}}]{\setlength{\rightskip}{0pt plus 5cm}int const Chemistry\+Material\+::s\+U\+ID = {\bf Common\+::\+String\+Hash\+Function}(\char`\"{}Chemistry\+Material\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classChemistryMaterial_a4813b379e8e51e9e7ac2c23363ac32f4}{}\label{classChemistryMaterial_a4813b379e8e51e9e7ac2c23363ac32f4}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Components/\hyperlink{ChemistryMaterial_8h}{Chemistry\+Material.\+h}\item 
+Components/\hyperlink{ChemistryMaterial_8cpp}{Chemistry\+Material.\+cpp}\end{DoxyCompactItemize}

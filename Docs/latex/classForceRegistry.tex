@@ -1,0 +1,136 @@
+\hypertarget{classForceRegistry}{}\section{Force\+Registry Class Reference}
+\label{classForceRegistry}\index{Force\+Registry@{Force\+Registry}}
+
+
+{\ttfamily \#include $<$Force\+Registry.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classForceRegistry_ab69e6e3b787675dc1ce0d58ba49701af}{Force\+Registry} ()
+\item 
+\hyperlink{classForceRegistry_a88048f34e9ce4968967de7418681181b}{$\sim$\+Force\+Registry} ()
+\item 
+void \hyperlink{classForceRegistry_a8febcd744c3790be29fbb2311486ae9e}{Update} ()
+\begin{DoxyCompactList}\small\item\em Apply forces to objects. \end{DoxyCompactList}\item 
+void \hyperlink{classForceRegistry_a75593d52a622aeb567ee0acf6c7f3950}{Add} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object, \hyperlink{classForceGenerator}{Force\+Generator} $\ast$a\+Generator)
+\begin{DoxyCompactList}\small\item\em Add force to be apllied to object every frame. \end{DoxyCompactList}\item 
+void \hyperlink{classForceRegistry_a0db4ce225bb277d455c539a75400b699}{Remove} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object, \hyperlink{classForceGenerator}{Force\+Generator} $\ast$a\+Generator)
+\begin{DoxyCompactList}\small\item\em Remove force object pairing. \end{DoxyCompactList}\item 
+void \hyperlink{classForceRegistry_a8c0eab836bdf28dc589f8fe20425a42c}{Remove\+Forces\+For\+Object} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object)
+\begin{DoxyCompactList}\small\item\em For an object, remove all forces. \end{DoxyCompactList}\item 
+void \hyperlink{classForceRegistry_a5cd064be5bf7edb0ac72d6b05a536ee8}{Clear} ()
+\begin{DoxyCompactList}\small\item\em Clear all forces. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{structForceRegistration}{Force\+Registration} $>$ \hyperlink{classForceRegistry_af77d26c421a8c2eb8c9975f76c775f58}{m\+Registry}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Force\+Registry@{Force\+Registry}!Force\+Registry@{Force\+Registry}}
+\index{Force\+Registry@{Force\+Registry}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{Force\+Registry()}{ForceRegistry()}}]{\setlength{\rightskip}{0pt plus 5cm}Force\+Registry\+::\+Force\+Registry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceRegistry_ab69e6e3b787675dc1ce0d58ba49701af}{}\label{classForceRegistry_ab69e6e3b787675dc1ce0d58ba49701af}
+\index{Force\+Registry@{Force\+Registry}!````~Force\+Registry@{$\sim$\+Force\+Registry}}
+\index{````~Force\+Registry@{$\sim$\+Force\+Registry}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{$\sim$\+Force\+Registry()}{~ForceRegistry()}}]{\setlength{\rightskip}{0pt plus 5cm}Force\+Registry\+::$\sim$\+Force\+Registry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceRegistry_a88048f34e9ce4968967de7418681181b}{}\label{classForceRegistry_a88048f34e9ce4968967de7418681181b}
+
+
+\subsection{Member Function Documentation}
+\index{Force\+Registry@{Force\+Registry}!Add@{Add}}
+\index{Add@{Add}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{Add(\+Physics\+Object $\ast$a\+Object, Force\+Generator $\ast$a\+Generator)}{Add(PhysicsObject *aObject, ForceGenerator *aGenerator)}}]{\setlength{\rightskip}{0pt plus 5cm}void Force\+Registry\+::\+Add (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Force\+Generator} $\ast$}]{a\+Generator}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceRegistry_a75593d52a622aeb567ee0acf6c7f3950}{}\label{classForceRegistry_a75593d52a622aeb567ee0acf6c7f3950}
+
+
+Add force to be apllied to object every frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+{\em a\+Generator} & \\
+\hline
+\end{DoxyParams}
+\index{Force\+Registry@{Force\+Registry}!Clear@{Clear}}
+\index{Clear@{Clear}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{Clear()}{Clear()}}]{\setlength{\rightskip}{0pt plus 5cm}void Force\+Registry\+::\+Clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceRegistry_a5cd064be5bf7edb0ac72d6b05a536ee8}{}\label{classForceRegistry_a5cd064be5bf7edb0ac72d6b05a536ee8}
+
+
+Clear all forces. 
+
+\index{Force\+Registry@{Force\+Registry}!Remove@{Remove}}
+\index{Remove@{Remove}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{Remove(\+Physics\+Object $\ast$a\+Object, Force\+Generator $\ast$a\+Generator)}{Remove(PhysicsObject *aObject, ForceGenerator *aGenerator)}}]{\setlength{\rightskip}{0pt plus 5cm}void Force\+Registry\+::\+Remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object, }
+\item[{{\bf Force\+Generator} $\ast$}]{a\+Generator}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceRegistry_a0db4ce225bb277d455c539a75400b699}{}\label{classForceRegistry_a0db4ce225bb277d455c539a75400b699}
+
+
+Remove force object pairing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+{\em a\+Generator} & \\
+\hline
+\end{DoxyParams}
+\index{Force\+Registry@{Force\+Registry}!Remove\+Forces\+For\+Object@{Remove\+Forces\+For\+Object}}
+\index{Remove\+Forces\+For\+Object@{Remove\+Forces\+For\+Object}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{Remove\+Forces\+For\+Object(\+Physics\+Object $\ast$a\+Object)}{RemoveForcesForObject(PhysicsObject *aObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Force\+Registry\+::\+Remove\+Forces\+For\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceRegistry_a8c0eab836bdf28dc589f8fe20425a42c}{}\label{classForceRegistry_a8c0eab836bdf28dc589f8fe20425a42c}
+
+
+For an object, remove all forces. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object} & \\
+\hline
+\end{DoxyParams}
+\index{Force\+Registry@{Force\+Registry}!Update@{Update}}
+\index{Update@{Update}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Force\+Registry\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classForceRegistry_a8febcd744c3790be29fbb2311486ae9e}{}\label{classForceRegistry_a8febcd744c3790be29fbb2311486ae9e}
+
+
+Apply forces to objects. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Force\+Registry@{Force\+Registry}!m\+Registry@{m\+Registry}}
+\index{m\+Registry@{m\+Registry}!Force\+Registry@{Force\+Registry}}
+\subsubsection[{\texorpdfstring{m\+Registry}{mRegistry}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Force\+Registration}$>$ Force\+Registry\+::m\+Registry\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classForceRegistry_af77d26c421a8c2eb8c9975f76c775f58}{}\label{classForceRegistry_af77d26c421a8c2eb8c9975f76c775f58}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physics/\hyperlink{ForceRegistry_8h}{Force\+Registry.\+h}\item 
+Physics/\hyperlink{ForceRegistry_8cpp}{Force\+Registry.\+cpp}\end{DoxyCompactItemize}

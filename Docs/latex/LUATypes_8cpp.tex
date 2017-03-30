@@ -1,0 +1,87 @@
+\hypertarget{LUATypes_8cpp}{}\section{L\+U\+A/\+L\+U\+A\+Types.cpp File Reference}
+\label{LUATypes_8cpp}\index{L\+U\+A/\+L\+U\+A\+Types.\+cpp@{L\+U\+A/\+L\+U\+A\+Types.\+cpp}}
+{\ttfamily \#include \char`\"{}L\+U\+A\+Types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Core/\+Common.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Components/\+Surface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Components/\+Transform.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Components/\+Physics\+Object.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Components/\+Chemistry\+Element.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Components/\+Chemistry\+Material.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Components/\+State\+Object.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Core/\+Game\+Object.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Sound\+Manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Input\+Manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Controller\+Manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Graphics\+Manager.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Managers/\+Physics\+World.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Core/\+Math\+Ext.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Logic/\+Level.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Core/\+Interpolation.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Core/\+Quadratic\+Interpolation.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Messages/\+Collision\+Message.\+h\char`\"{}}\\*
+Include dependency graph for L\+U\+A\+Types.\+cpp\+:
+% FIG 0
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceLUABind}{L\+U\+A\+Bind}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{LUATypes_8cpp_ae38aece999903a1235e4fe26d8673b7c}{L\+U\+A\+F\+I\+L\+E\+C\+H\+E\+CK}()
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::pair$<$ int, \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{namespaceLUABind_a8c953e7cbebaf43f533bf2fd4a9a32bd}{L\+U\+A\+Bind\+::\+Script\+Pair}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceLUABind_aecf4fafdf19d34ea941b37f336821e72}{L\+U\+A\+Bind\+::\+Initialize} ()
+\item 
+void \hyperlink{namespaceLUABind_a03661ad8570eb330634d5a5bd446f151}{L\+U\+A\+Bind\+::\+Register\+Classes} ()
+\item 
+void \hyperlink{namespaceLUABind_ac3bb5a708c6471bf1fd888571141bb23}{L\+U\+A\+Bind\+::\+Load\+Script\+From\+File} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\item 
+void \hyperlink{namespaceLUABind_affb461d6e5e2640f7cf334b5cf51715c}{L\+U\+A\+Bind\+::\+Load\+Script\+From\+String} (\hyperlink{classHashString}{Hash\+String} const \&a\+String)
+\item 
+\hyperlink{classHashString}{Hash\+String} const \& \hyperlink{namespaceLUABind_abb3e6c7955087f9c94ef09e4226c8d1c}{L\+U\+A\+Bind\+::\+Get\+Script} (\hyperlink{classHashString}{Hash\+String} const \&a\+Filename)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{L\+U\+A\+Bind\+::m\+Scripts}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{L\+U\+A\+Types.\+cpp@{L\+U\+A\+Types.\+cpp}!L\+U\+A\+F\+I\+L\+E\+C\+H\+E\+CK@{L\+U\+A\+F\+I\+L\+E\+C\+H\+E\+CK}}
+\index{L\+U\+A\+F\+I\+L\+E\+C\+H\+E\+CK@{L\+U\+A\+F\+I\+L\+E\+C\+H\+E\+CK}!L\+U\+A\+Types.\+cpp@{L\+U\+A\+Types.\+cpp}}
+\subsubsection[{\texorpdfstring{L\+U\+A\+F\+I\+L\+E\+C\+H\+E\+CK}{LUAFILECHECK}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+U\+A\+F\+I\+L\+E\+C\+H\+E\+CK(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{LUATypes_8cpp_ae38aece999903a1235e4fe26d8673b7c}{}\label{LUATypes_8cpp_ae38aece999903a1235e4fe26d8673b7c}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{if}(\hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{mScripts}.find(aFilename.ToHash()) == \hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{mScripts}.end()) \(\backslash\)
+                        \{ \(\backslash\)
+                          std::ifstream file(\hyperlink{namespaceCommon_a5e31a3c13642f991a5b3e7b17c97e0c8}{Common::RelativePath}(\textcolor{stringliteral}{"Game"}, aFilename.
+      ToString()).c\_str()); \(\backslash\)
+                          if(file.is\_open()) \(\backslash\)
+                          \{ \(\backslash\)
+                            std::string contents((std::istreambuf\_iterator<char>(file)), 
+      std::istreambuf\_iterator<char>()); \(\backslash\)
+                            HashString convertedContents(contents); \hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{\(\backslash\)}
+\hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{                            mScripts}.insert(
+      \hyperlink{namespaceLUABind_a8c953e7cbebaf43f533bf2fd4a9a32bd}{ScriptPair}(aFilename.ToHash(), convertedContents)); \(\backslash\)
+                          \} \(\backslash\)
+                          else \(\backslash\)
+                          \{ \hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{\(\backslash\)}
+\hyperlink{namespaceLUABind_a68dfcbf21488f0655a899f0ef65b2554}{                            mScripts}.insert(
+      \hyperlink{namespaceLUABind_a8c953e7cbebaf43f533bf2fd4a9a32bd}{ScriptPair}(aFilename.ToHash(), \textcolor{stringliteral}{""})); \(\backslash\)
+                          \} \(\backslash\)
+                        \}
+\end{DoxyCode}

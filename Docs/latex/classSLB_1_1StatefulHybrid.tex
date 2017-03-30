@@ -1,0 +1,90 @@
+\hypertarget{classSLB_1_1StatefulHybrid}{}\section{S\+LB\+:\+:Stateful\+Hybrid$<$ T, S $>$ Class Template Reference}
+\label{classSLB_1_1StatefulHybrid}\index{S\+L\+B\+::\+Stateful\+Hybrid$<$ T, S $>$@{S\+L\+B\+::\+Stateful\+Hybrid$<$ T, S $>$}}
+
+
+{\ttfamily \#include $<$S\+L\+B.\+hpp$>$}
+
+
+
+Inheritance diagram for S\+LB\+:\+:Stateful\+Hybrid$<$ T, S $>$\+:
+% FIG 0
+
+
+Collaboration diagram for S\+LB\+:\+:Stateful\+Hybrid$<$ T, S $>$\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSLB_1_1StatefulHybrid_ad06607c6e361b8377d7c058245467391}{Stateful\+Hybrid} (\hyperlink{classSLB_1_1Manager}{Manager} $\ast$m=\hyperlink{classSLB_1_1Manager_a174e4612520c3412d10a68e659651677}{Manager\+::default\+Manager}())
+\item 
+virtual \hyperlink{classSLB_1_1StatefulHybrid_a810dc1b8eeb6fa059691143de289f11c}{$\sim$\+Stateful\+Hybrid} ()
+\item 
+virtual bool \hyperlink{classSLB_1_1StatefulHybrid_aac044f80a0ebec91f6f917475ff14269}{is\+Attached} () const 
+\item 
+virtual lua\+\_\+\+State $\ast$ \hyperlink{classSLB_1_1StatefulHybrid_aa2df20e99183de03b3a87b7de7a0bb96}{get\+Lua\+State} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classSLB_1_1StatefulHybrid_a04ad7225f817785bc7ec954bca627f33}{on\+New\+State} (lua\+\_\+\+State $\ast$L)
+\item 
+virtual void \hyperlink{classSLB_1_1StatefulHybrid_a1515e8460c9bfb82bcb2c249651addd7}{on\+Close\+State} (lua\+\_\+\+State $\ast$L)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}!Stateful\+Hybrid@{Stateful\+Hybrid}}
+\index{Stateful\+Hybrid@{Stateful\+Hybrid}!S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}}
+\subsubsection[{\texorpdfstring{Stateful\+Hybrid(\+Manager $\ast$m=\+Manager\+::default\+Manager())}{StatefulHybrid(Manager *m=Manager::defaultManager())}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class S = S\+L\+B\+::\+Script$>$ {\bf S\+L\+B\+::\+Stateful\+Hybrid}$<$ T, S $>$\+::{\bf Stateful\+Hybrid} (
+\begin{DoxyParamCaption}
+\item[{{\bf Manager} $\ast$}]{m = {\ttfamily {\bf Manager\+::default\+Manager}()}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classSLB_1_1StatefulHybrid_ad06607c6e361b8377d7c058245467391}{}\label{classSLB_1_1StatefulHybrid_ad06607c6e361b8377d7c058245467391}
+\index{S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}!````~Stateful\+Hybrid@{$\sim$\+Stateful\+Hybrid}}
+\index{````~Stateful\+Hybrid@{$\sim$\+Stateful\+Hybrid}!S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}}
+\subsubsection[{\texorpdfstring{$\sim$\+Stateful\+Hybrid()}{~StatefulHybrid()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class S = S\+L\+B\+::\+Script$>$ virtual {\bf S\+L\+B\+::\+Stateful\+Hybrid}$<$ T, S $>$\+::$\sim${\bf Stateful\+Hybrid} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1StatefulHybrid_a810dc1b8eeb6fa059691143de289f11c}{}\label{classSLB_1_1StatefulHybrid_a810dc1b8eeb6fa059691143de289f11c}
+
+
+\subsection{Member Function Documentation}
+\index{S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}!get\+Lua\+State@{get\+Lua\+State}}
+\index{get\+Lua\+State@{get\+Lua\+State}!S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}}
+\subsubsection[{\texorpdfstring{get\+Lua\+State()}{getLuaState()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class S = S\+L\+B\+::\+Script$>$ virtual lua\+\_\+\+State$\ast$ {\bf S\+L\+B\+::\+Stateful\+Hybrid}$<$ T, S $>$\+::get\+Lua\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1StatefulHybrid_aa2df20e99183de03b3a87b7de7a0bb96}{}\label{classSLB_1_1StatefulHybrid_aa2df20e99183de03b3a87b7de7a0bb96}
+\index{S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}!is\+Attached@{is\+Attached}}
+\index{is\+Attached@{is\+Attached}!S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}}
+\subsubsection[{\texorpdfstring{is\+Attached() const }{isAttached() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T , class S $>$ bool {\bf S\+L\+B\+::\+Stateful\+Hybrid}$<$ T, S $>$\+::is\+Attached (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1StatefulHybrid_aac044f80a0ebec91f6f917475ff14269}{}\label{classSLB_1_1StatefulHybrid_aac044f80a0ebec91f6f917475ff14269}
+
+
+Reimplemented from \hyperlink{classSLB_1_1HybridBase_adc23d6cdac6debf7a5981fef426c69d2}{S\+L\+B\+::\+Hybrid\+Base}.
+
+\index{S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}!on\+Close\+State@{on\+Close\+State}}
+\index{on\+Close\+State@{on\+Close\+State}!S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}}
+\subsubsection[{\texorpdfstring{on\+Close\+State(lua\+\_\+\+State $\ast$\+L)}{onCloseState(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class S = S\+L\+B\+::\+Script$>$ virtual void {\bf S\+L\+B\+::\+Stateful\+Hybrid}$<$ T, S $>$\+::on\+Close\+State (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1StatefulHybrid_a1515e8460c9bfb82bcb2c249651addd7}{}\label{classSLB_1_1StatefulHybrid_a1515e8460c9bfb82bcb2c249651addd7}
+\index{S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}!on\+New\+State@{on\+New\+State}}
+\index{on\+New\+State@{on\+New\+State}!S\+L\+B\+::\+Stateful\+Hybrid@{S\+L\+B\+::\+Stateful\+Hybrid}}
+\subsubsection[{\texorpdfstring{on\+New\+State(lua\+\_\+\+State $\ast$\+L)}{onNewState(lua_State *L)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T, class S = S\+L\+B\+::\+Script$>$ virtual void {\bf S\+L\+B\+::\+Stateful\+Hybrid}$<$ T, S $>$\+::on\+New\+State (
+\begin{DoxyParamCaption}
+\item[{lua\+\_\+\+State $\ast$}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSLB_1_1StatefulHybrid_a04ad7225f817785bc7ec954bca627f33}{}\label{classSLB_1_1StatefulHybrid_a04ad7225f817785bc7ec954bca627f33}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+L\+U\+A/\hyperlink{SLB_8hpp}{S\+L\+B.\+hpp}\end{DoxyCompactItemize}

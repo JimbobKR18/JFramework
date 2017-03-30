@@ -1,0 +1,153 @@
+\hypertarget{MathExt_8h}{}\section{Core/\+Math\+Ext.h File Reference}
+\label{MathExt_8h}\index{Core/\+Math\+Ext.\+h@{Core/\+Math\+Ext.\+h}}
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include \char`\"{}Common.\+h\char`\"{}}\\*
+Include dependency graph for Math\+Ext.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structVector2}{Vector2}
+\item 
+struct \hyperlink{structVector3}{Vector3}
+\item 
+struct \hyperlink{structVector4}{Vector4}
+\item 
+struct \hyperlink{structMatrix33}{Matrix33}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{MathExt_8h_a1182d84e5b2b4c71e948fad734fc4e54}{D\+E\+G\+R\+E\+E\+\_\+\+T\+O\+\_\+\+R\+A\+DS}~(3.\+141592f / 180.\+0f)
+\item 
+\#define \hyperlink{MathExt_8h_a3c3bc0c8d7350717d8afde4b5299e073}{R\+A\+D\+S\+\_\+\+T\+O\+\_\+\+D\+E\+G\+R\+EE}~(180.\+0f / 3.\+141592f)
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{MathExt_8h_a0792b703e89c99d4c39f13e093992576}{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \{ \hyperlink{MathExt_8h_a0792b703e89c99d4c39f13e093992576a9f946c80fd170fb040150af595fabf25}{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT} = 0, 
+\hyperlink{MathExt_8h_a0792b703e89c99d4c39f13e093992576ac1e710ffe0bcdd4bd2929031094e51f5}{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}, 
+\hyperlink{MathExt_8h_a0792b703e89c99d4c39f13e093992576a2a886d512df4438c187498e07a1c5ba5}{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+HT}
+ \}
+\item 
+enum \hyperlink{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4}{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \{ \hyperlink{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4a602b2e611425e59b883168ae09ce75bc}{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+T\+OP} = 0, 
+\hyperlink{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4abdf3ca01ee7617e56fd98e74b1a0bca4}{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}, 
+\hyperlink{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4ad7110d3788e989766c79dea79c12c046}{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+O\+T\+T\+OM}
+ \}
+\item 
+enum \hyperlink{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568}{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT} \{ \hyperlink{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a56a2fac4f092df41e80754ae3c549bf4}{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+F\+R\+O\+NT} = 0, 
+\hyperlink{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a9f2aed51c348c37324dd4f36c34bb8cb}{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}, 
+\hyperlink{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a4d83425f7dae2bd814cd862916aab18f}{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+A\+CK}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \hyperlink{MathExt_8h_a8a1c1eb9733cbfc8a82def2c32581a83}{Lesser} (T const \&aA, T const \&aB)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \hyperlink{MathExt_8h_a0bfd7fa7fccf884ffecad0a0f8b91ac8}{Greater} (T const \&aA, T const \&aB)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{MathExt_8h_a1975feaa0223123fc98350f2278db863}{Within\+Range} (T const \&a\+Root, T const \&a\+Compare, T const \&a\+Range)
+\item 
+void \hyperlink{MathExt_8h_a23aa47247668bb6fd0272e4df5e89d5a}{print\+\_\+matrix} (\hyperlink{structMatrix33}{Matrix33} const \&\+\_\+matrix)
+\item 
+void \hyperlink{MathExt_8h_a5038c455df97816e8e58bc01e17a95d1}{print\+\_\+vector} (\hyperlink{structVector3}{Vector3} const \&\+\_\+point)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!D\+E\+G\+R\+E\+E\+\_\+\+T\+O\+\_\+\+R\+A\+DS@{D\+E\+G\+R\+E\+E\+\_\+\+T\+O\+\_\+\+R\+A\+DS}}
+\index{D\+E\+G\+R\+E\+E\+\_\+\+T\+O\+\_\+\+R\+A\+DS@{D\+E\+G\+R\+E\+E\+\_\+\+T\+O\+\_\+\+R\+A\+DS}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{D\+E\+G\+R\+E\+E\+\_\+\+T\+O\+\_\+\+R\+A\+DS}{DEGREE_TO_RADS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\+E\+G\+R\+E\+E\+\_\+\+T\+O\+\_\+\+R\+A\+DS~(3.\+141592f / 180.\+0f)}\hypertarget{MathExt_8h_a1182d84e5b2b4c71e948fad734fc4e54}{}\label{MathExt_8h_a1182d84e5b2b4c71e948fad734fc4e54}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!R\+A\+D\+S\+\_\+\+T\+O\+\_\+\+D\+E\+G\+R\+EE@{R\+A\+D\+S\+\_\+\+T\+O\+\_\+\+D\+E\+G\+R\+EE}}
+\index{R\+A\+D\+S\+\_\+\+T\+O\+\_\+\+D\+E\+G\+R\+EE@{R\+A\+D\+S\+\_\+\+T\+O\+\_\+\+D\+E\+G\+R\+EE}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{R\+A\+D\+S\+\_\+\+T\+O\+\_\+\+D\+E\+G\+R\+EE}{RADS_TO_DEGREE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+A\+D\+S\+\_\+\+T\+O\+\_\+\+D\+E\+G\+R\+EE~(180.\+0f / 3.\+141592f)}\hypertarget{MathExt_8h_a3c3bc0c8d7350717d8afde4b5299e073}{}\label{MathExt_8h_a3c3bc0c8d7350717d8afde4b5299e073}
+
+
+\subsection{Enumeration Type Documentation}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT@{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}}
+\index{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT@{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}{X_ALIGNMENT}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf X\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}}\hypertarget{MathExt_8h_a0792b703e89c99d4c39f13e093992576}{}\label{MathExt_8h_a0792b703e89c99d4c39f13e093992576}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT@{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT@{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT}}\item[{\em 
+X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+L\+E\+FT\hypertarget{MathExt_8h_a0792b703e89c99d4c39f13e093992576a9f946c80fd170fb040150af595fabf25}{}\label{MathExt_8h_a0792b703e89c99d4c39f13e093992576a9f946c80fd170fb040150af595fabf25}
+}]\index{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER@{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER@{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}}\item[{\em 
+X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER\hypertarget{MathExt_8h_a0792b703e89c99d4c39f13e093992576ac1e710ffe0bcdd4bd2929031094e51f5}{}\label{MathExt_8h_a0792b703e89c99d4c39f13e093992576ac1e710ffe0bcdd4bd2929031094e51f5}
+}]\index{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+HT@{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+HT}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+HT@{X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+HT}}\item[{\em 
+X\+\_\+\+A\+L\+I\+G\+N\+\_\+\+R\+I\+G\+HT\hypertarget{MathExt_8h_a0792b703e89c99d4c39f13e093992576a2a886d512df4438c187498e07a1c5ba5}{}\label{MathExt_8h_a0792b703e89c99d4c39f13e093992576a2a886d512df4438c187498e07a1c5ba5}
+}]\end{description}
+\end{Desc}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT@{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}}
+\index{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT@{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}{Y_ALIGNMENT}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Y\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}}\hypertarget{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4}{}\label{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+T\+OP@{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+T\+OP}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+T\+OP@{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+T\+OP}}\item[{\em 
+Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+T\+OP\hypertarget{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4a602b2e611425e59b883168ae09ce75bc}{}\label{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4a602b2e611425e59b883168ae09ce75bc}
+}]\index{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER@{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER@{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}}\item[{\em 
+Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER\hypertarget{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4abdf3ca01ee7617e56fd98e74b1a0bca4}{}\label{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4abdf3ca01ee7617e56fd98e74b1a0bca4}
+}]\index{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+O\+T\+T\+OM@{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+O\+T\+T\+OM}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+O\+T\+T\+OM@{Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+O\+T\+T\+OM}}\item[{\em 
+Y\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+O\+T\+T\+OM\hypertarget{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4ad7110d3788e989766c79dea79c12c046}{}\label{MathExt_8h_a0de91f93b1c4a18a768f6070ddc579b4ad7110d3788e989766c79dea79c12c046}
+}]\end{description}
+\end{Desc}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT@{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}}
+\index{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT@{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}{Z_ALIGNMENT}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Z\+\_\+\+A\+L\+I\+G\+N\+M\+E\+NT}}\hypertarget{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568}{}\label{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+F\+R\+O\+NT@{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+F\+R\+O\+NT}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+F\+R\+O\+NT@{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+F\+R\+O\+NT}}\item[{\em 
+Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+F\+R\+O\+NT\hypertarget{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a56a2fac4f092df41e80754ae3c549bf4}{}\label{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a56a2fac4f092df41e80754ae3c549bf4}
+}]\index{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER@{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER@{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER}}\item[{\em 
+Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+C\+E\+N\+T\+ER\hypertarget{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a9f2aed51c348c37324dd4f36c34bb8cb}{}\label{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a9f2aed51c348c37324dd4f36c34bb8cb}
+}]\index{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+A\+CK@{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+A\+CK}!Math\+Ext.\+h@{Math\+Ext.\+h}}\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+A\+CK@{Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+A\+CK}}\item[{\em 
+Z\+\_\+\+A\+L\+I\+G\+N\+\_\+\+B\+A\+CK\hypertarget{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a4d83425f7dae2bd814cd862916aab18f}{}\label{MathExt_8h_a3f663abe91c584f6ee19cfe53b0ad568a4d83425f7dae2bd814cd862916aab18f}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Function Documentation}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Greater@{Greater}}
+\index{Greater@{Greater}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{Greater(\+T const \&a\+A, T const \&a\+B)}{Greater(T const &aA, T const &aB)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T Greater (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{aA, }
+\item[{T const \&}]{aB}
+\end{DoxyParamCaption}
+)}\hypertarget{MathExt_8h_a0bfd7fa7fccf884ffecad0a0f8b91ac8}{}\label{MathExt_8h_a0bfd7fa7fccf884ffecad0a0f8b91ac8}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Lesser@{Lesser}}
+\index{Lesser@{Lesser}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{Lesser(\+T const \&a\+A, T const \&a\+B)}{Lesser(T const &aA, T const &aB)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T Lesser (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{aA, }
+\item[{T const \&}]{aB}
+\end{DoxyParamCaption}
+)}\hypertarget{MathExt_8h_a8a1c1eb9733cbfc8a82def2c32581a83}{}\label{MathExt_8h_a8a1c1eb9733cbfc8a82def2c32581a83}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!print\+\_\+matrix@{print\+\_\+matrix}}
+\index{print\+\_\+matrix@{print\+\_\+matrix}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+matrix(\+Matrix33 const \&\+\_\+matrix)}{print_matrix(Matrix33 const &_matrix)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf Matrix33} const \&}]{\+\_\+matrix}
+\end{DoxyParamCaption}
+)}\hypertarget{MathExt_8h_a23aa47247668bb6fd0272e4df5e89d5a}{}\label{MathExt_8h_a23aa47247668bb6fd0272e4df5e89d5a}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!print\+\_\+vector@{print\+\_\+vector}}
+\index{print\+\_\+vector@{print\+\_\+vector}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+vector(\+Vector3 const \&\+\_\+point)}{print_vector(Vector3 const &_point)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+vector (
+\begin{DoxyParamCaption}
+\item[{{\bf Vector3} const \&}]{\+\_\+point}
+\end{DoxyParamCaption}
+)}\hypertarget{MathExt_8h_a5038c455df97816e8e58bc01e17a95d1}{}\label{MathExt_8h_a5038c455df97816e8e58bc01e17a95d1}
+\index{Math\+Ext.\+h@{Math\+Ext.\+h}!Within\+Range@{Within\+Range}}
+\index{Within\+Range@{Within\+Range}!Math\+Ext.\+h@{Math\+Ext.\+h}}
+\subsubsection[{\texorpdfstring{Within\+Range(\+T const \&a\+Root, T const \&a\+Compare, T const \&a\+Range)}{WithinRange(T const &aRoot, T const &aCompare, T const &aRange)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool Within\+Range (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{a\+Root, }
+\item[{T const \&}]{a\+Compare, }
+\item[{T const \&}]{a\+Range}
+\end{DoxyParamCaption}
+)}\hypertarget{MathExt_8h_a1975feaa0223123fc98350f2278db863}{}\label{MathExt_8h_a1975feaa0223123fc98350f2278db863}

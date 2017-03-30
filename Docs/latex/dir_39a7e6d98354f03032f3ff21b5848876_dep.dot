@@ -1,0 +1,8 @@
+digraph "Sound" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  dir_39a7e6d98354f03032f3ff21b5848876 [shape=box, label="Sound", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_39a7e6d98354f03032f3ff21b5848876.html"];
+  dir_c6310732a22f63c0c2fc5595561e68f1 [shape=box label="Core" fillcolor="white" style="filled" color="red" URL="dir_c6310732a22f63c0c2fc5595561e68f1.html"];
+  dir_39a7e6d98354f03032f3ff21b5848876->dir_c6310732a22f63c0c2fc5595561e68f1 [headlabel="2", labeldistance=1.5 headhref="dir_000014_000002.html"];
+}

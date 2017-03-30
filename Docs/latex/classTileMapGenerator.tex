@@ -1,0 +1,725 @@
+\hypertarget{classTileMapGenerator}{}\section{Tile\+Map\+Generator Class Reference}
+\label{classTileMapGenerator}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+
+
+{\ttfamily \#include $<$Tile\+Map\+Generator.\+h$>$}
+
+
+
+Collaboration diagram for Tile\+Map\+Generator\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTileMapGenerator_ab1a10fc2b40cce1e449a2fefe5725dfd}{Tile\+Map\+Generator} ()
+\item 
+\hyperlink{classTileMapGenerator_a7a7e6112a0e1424f480d86bd58a9f270}{Tile\+Map\+Generator} (int a\+Width, int a\+Height, int a\+Tile\+Size, \hyperlink{classHashString}{Hash\+String} const \&a\+Image\+Name, \hyperlink{classHashString}{Hash\+String} const \&a\+Data\+Name, std\+::vector$<$ int $>$ const \&a\+Tiles, std\+::vector$<$ int $>$ const \&a\+Collision\+Data, std\+::vector$<$ int $>$ const \&a\+Collision\+Shapes, std\+::vector$<$ int $>$ const \&a\+Material\+Data, std\+::map$<$ int, float $>$ const \&a\+Tile\+Heights, std\+::map$<$ int, \hyperlink{classHashString}{Hash\+String} $>$ const \&a\+Materials, std\+::map$<$ int, std\+::vector$<$ int $>$$>$ const \&a\+Animations, float const a\+Animation\+Speed, \hyperlink{classLevel}{Level} $\ast$a\+Owner)
+\item 
+\hyperlink{classTileMapGenerator_ac1b30222d9367e0892ce32d9beba66a3}{$\sim$\+Tile\+Map\+Generator} ()
+\item 
+void \hyperlink{classTileMapGenerator_ad1092415748f74dc618e99f5f72b01c8}{Update} ()
+\begin{DoxyCompactList}\small\item\em Update loop (i.\+e. update animations) \end{DoxyCompactList}\item 
+int \hyperlink{classTileMapGenerator_abd5c9dcfaebf7dd27c6e4e2de480a0cf}{Get\+Width} () const 
+\begin{DoxyCompactList}\small\item\em Get Tilemap width. \end{DoxyCompactList}\item 
+int \hyperlink{classTileMapGenerator_a4521033aee720cdfdb1d87ac9167f567}{Get\+Height} () const 
+\begin{DoxyCompactList}\small\item\em Get Tilemap height. \end{DoxyCompactList}\item 
+int \hyperlink{classTileMapGenerator_a2d344e88a8a5576cedbfc7356e36336f}{Get\+Tile\+Size} () const 
+\begin{DoxyCompactList}\small\item\em Get tile size (in pixels) \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classTileMapGenerator_aa65424ba87e8d61486c61adcc69679eb}{Get\+Image\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get source image name. \end{DoxyCompactList}\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classTileMapGenerator_a14d5a60cd74332ed8c7f955053704ac5}{Get\+Data\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get data file name. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \& \hyperlink{classTileMapGenerator_ac94ae18715f584cf56aea48d56218f51}{Get\+Art\+Tiles} ()
+\begin{DoxyCompactList}\small\item\em Get art tiles vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \& \hyperlink{classTileMapGenerator_a88e67eec90e1bffe2061c5208f7ca588}{Get\+Collision\+Tiles} ()
+\begin{DoxyCompactList}\small\item\em Get collision tiles vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \& \hyperlink{classTileMapGenerator_ad07f166e4ca9403aeef91e637169e8ff}{Get\+Collision\+Shapes} ()
+\begin{DoxyCompactList}\small\item\em Get collision shapes vector. \end{DoxyCompactList}\item 
+std\+::map$<$ int, float $>$ \& \hyperlink{classTileMapGenerator_ae847830b0000cf5096bf3b67e4b0de57}{Get\+Tile\+Heights} ()
+\begin{DoxyCompactList}\small\item\em Get tile height map. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classTileMapGenerator_ae2195cd2f66ef6d197a0c0a08d93553e}{Get\+Object} (int const aX, int const aY)
+\begin{DoxyCompactList}\small\item\em Get object at x, y index. \end{DoxyCompactList}\item 
+\hyperlink{classGameObject}{Game\+Object} $\ast$ \hyperlink{classTileMapGenerator_af42183c69394016bb5be960ae3b1d5bc}{Get\+Object} (int const a\+Index)
+\begin{DoxyCompactList}\small\item\em Get object at index. \end{DoxyCompactList}\item 
+int \hyperlink{classTileMapGenerator_ac9d67405c433ca5d5f0eb2a319014ea1}{Get\+Tile\+Value} (int const aX, int const aY)
+\begin{DoxyCompactList}\small\item\em Get art value of tile at position. \end{DoxyCompactList}\item 
+int \hyperlink{classTileMapGenerator_aa807cfb201069a5dc623d3b61e8c4174}{Get\+Collision\+Value} (int const aX, int const aY)
+\begin{DoxyCompactList}\small\item\em Get collision value of tile at position. \end{DoxyCompactList}\item 
+int \hyperlink{classTileMapGenerator_a23648f2fe869d0dfe025cfa389bfe8fc}{Get\+Index} (int const aX, int const aY)
+\begin{DoxyCompactList}\small\item\em Helper method to get index value at position in world coordinates. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{classTileMapGenerator_aadfcb40aa3bae090254e0187021c1af6}{Get\+Indices} (int const aX, int const aY, int const bX, int const bY)
+\begin{DoxyCompactList}\small\item\em Helper method to get index values from position A to position B. \end{DoxyCompactList}\item 
+void \hyperlink{classTileMapGenerator_ad370d7e32a980582c7849b3dcb4da724}{Serialize} (\hyperlink{classParser}{Parser} \&a\+Parser)
+\begin{DoxyCompactList}\small\item\em Serialize to file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480}{Collision\+Shapes} \{ \\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a5ae1e45f0fcb1287d8a7df66e7efb71b}{E\+M\+P\+TY} = 0, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aab2e0bfc90d99bc474c7dc5daa1a1b27}{C\+U\+BE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a26a52fad22bf4fe210d7489b08daf481}{T\+O\+P\+L\+E\+FT}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aed5a88739a3360c01f0a1d9bf0007983}{B\+O\+T\+T\+O\+M\+L\+E\+FT}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a2fef6ae8fab713502143bf2cd9e92898}{T\+O\+P\+R\+I\+G\+HT}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480abc7d6a164d460162d8130ac8b2ea5517}{B\+O\+T\+T\+O\+M\+R\+I\+G\+HT}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ad85058e54853696600fdf2fa209043d1}{B\+A\+C\+K\+S\+L\+A\+SH}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adb2e04734b352c5efac08ecb3508a5a6}{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+SH}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aa4dac01f449c5c1ac79254b28e851120}{L\+E\+F\+T\+S\+I\+DE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a7f1cc2dc84cab125fad395e4dffbbd40}{R\+I\+G\+H\+T\+S\+I\+DE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a994de68d629d42069d64663f242fb23c}{T\+O\+P\+S\+I\+DE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a11511734b4387f1c0d8a77bc59bb53a9}{B\+O\+T\+T\+O\+M\+S\+I\+DE}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a62d999e3c7903bd1d8470db499d746fc}{H\+A\+L\+F\+T\+OP}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adea02dae97fdee69fe17ca4c18e6495c}{H\+A\+L\+F\+B\+O\+T\+T\+OM}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a024e3bd4b232683714998b309c37737e}{H\+A\+L\+F\+L\+E\+FT}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a1c6b9abf78ac790b35627ea782bb3f4b}{H\+A\+L\+F\+R\+I\+G\+HT}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ab5130e26281825a3290a0bf18a03e002}{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+FT}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a13aedeea7b3d1d18dae3231cbe423528}{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+HT}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a6126d2d1499f022dcda8adbe6f90883b}{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+FT}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aea255d1647866d36d49a5a4b5d72665c}{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+HT}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a63ab3b58bc1b8c9d5ad67ce3e84bef08}{C\+U\+B\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a332f834145518a88eb8b8d1dff0bce26}{T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aad7c9d6d6a2d201344ff7e99e13a6aea}{B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a56bc79f5e7cb5a680662c14e8da48f44}{T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ad617eddcea39c98ddf42580648a4603c}{B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a64247646cd0e3e08e78153f96038f2c2}{B\+A\+C\+K\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a760e647004da7686153ffab3b3f0fe52}{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a09742650be743692292975b19a4029dc}{L\+E\+F\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a6e3ac4af6d7d6b74adca90f91aba566f}{R\+I\+G\+H\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a7e468462f04123089c85e50b58c2920d}{T\+O\+P\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480af8172a0ab81823073fe64e30c07be47e}{B\+O\+T\+T\+O\+M\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a62e29767612209d859483943e4e0b37b}{H\+A\+L\+F\+T\+O\+P\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aece85f4624f1523c9634265dfa1705c8}{H\+A\+L\+F\+B\+O\+T\+T\+O\+M\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ab90c8b2cbd34f21d6867695ea5b71979}{H\+A\+L\+F\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aaec476b8f11a1ddf2e3e7d04665f8184}{H\+A\+L\+F\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a78affcde2004c282209f620a51464f23}{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\\*
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480abcaec92fcbd343b492ae887b9f550770}{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aa021dfa3a39d73426540a103a1ae8a40}{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aacab9e7d93df47f06ca4d73736d4754a}{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}, 
+\hyperlink{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adac2999ea821ae9f262ea9c3e2610eab}{A\+L\+L\+\_\+\+C\+O\+L\+L\+I\+S\+I\+O\+N\+\_\+\+S\+H\+A\+P\+ES}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTileMapGenerator_a67847204349df3bf1ef314181e9e7dc2}{Create\+Tiles\+In\+Range} (unsigned const a\+Start, unsigned const a\+End, \hyperlink{structVector3}{Vector3} const \&a\+Tile\+Size, \hyperlink{classObjectManager}{Object\+Manager} $\ast$a\+Object\+Manager, \hyperlink{classPhysicsWorld}{Physics\+World} $\ast$a\+Physics\+World, \hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$a\+Chemistry\+Manager)
+\begin{DoxyCompactList}\small\item\em Helper method to create tiles from one index to another. \end{DoxyCompactList}\item 
+\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$ \hyperlink{classTileMapGenerator_a405b1fefe91d246977638af9f096ef84}{Create\+Physics\+At\+Index} (unsigned const a\+Index, \hyperlink{classPhysicsWorld}{Physics\+World} $\ast$a\+Physics\+World, \hyperlink{classTransform}{Transform} $\ast$a\+Transform, \hyperlink{structVector3}{Vector3} const \&a\+Zero\+Vector, unsigned const a\+Collision\+Data\+Vector\+Size, float a\+Z\+Pos)
+\begin{DoxyCompactList}\small\item\em Create physics object at index. \end{DoxyCompactList}\item 
+\hyperlink{classChemistryMaterial}{Chemistry\+Material} $\ast$ \hyperlink{classTileMapGenerator_aee320638476651610a5d2b79b481fd39}{Create\+Material\+At\+Index} (unsigned const a\+Index, \hyperlink{classChemistryManager}{Chemistry\+Manager} $\ast$a\+Chemistry\+Manager)
+\begin{DoxyCompactList}\small\item\em Create material at index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classTileMapGenerator_a5465fd60f8897f7a6f9347091a20db85}{m\+Width}
+\item 
+int \hyperlink{classTileMapGenerator_ad6448a870a8488d8c061691fb50e48f4}{m\+Height}
+\item 
+int \hyperlink{classTileMapGenerator_a1283774e574f8cad65f5655ed44f2f58}{m\+Tile\+Size}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classTileMapGenerator_aa311820f47d30ecb2a149309056f7fe1}{m\+Image\+Name}
+\item 
+\hyperlink{classHashString}{Hash\+String} \hyperlink{classTileMapGenerator_a404e5ae457f83dddc3f1885db1977492}{m\+Data\+Name}
+\item 
+std\+::vector$<$ int $>$ \hyperlink{classTileMapGenerator_a56f5a8a73968d218f891c06550caeacf}{m\+Tiles}
+\item 
+std\+::vector$<$ int $>$ \hyperlink{classTileMapGenerator_aa5ba592e33617b95ea1b5b0c9cde8f58}{m\+Collision\+Data}
+\item 
+std\+::vector$<$ int $>$ \hyperlink{classTileMapGenerator_a19c6cd2094aecea6b5023d5d4b6b7f06}{m\+Collision\+Shapes}
+\item 
+std\+::map$<$ int, float $>$ \hyperlink{classTileMapGenerator_a3c87011be2473b781ce74334f44e22da}{m\+Tile\+Heights}
+\item 
+std\+::vector$<$ \hyperlink{classGameObject}{Game\+Object} $\ast$ $>$ \hyperlink{classTileMapGenerator_aa2fcfe47a8ec1df8efcc6c70fa9569f8}{m\+Objects}
+\item 
+float \hyperlink{classTileMapGenerator_a825f78b3c667def795a56a9f588a201f}{m\+Animation\+Speed}
+\item 
+float \hyperlink{classTileMapGenerator_a71ee0ca8d20adcf3a3ed90dab02eac28}{m\+Current\+Animation\+Time}
+\item 
+std\+::map$<$ \hyperlink{classSurface}{Surface} $\ast$, int $>$ \hyperlink{classTileMapGenerator_ab0d06a6840abf94e7da908865e9f6417}{m\+Animated\+Objects}
+\item 
+std\+::map$<$ int, std\+::vector$<$ int $>$ $>$ \hyperlink{classTileMapGenerator_af4a5352a6da40e73dca83bd61438c5eb}{m\+Animations}
+\item 
+std\+::map$<$ int, int $>$ \hyperlink{classTileMapGenerator_a13df3ece1e27582b842f6add478b941a}{m\+Current\+Frames}
+\item 
+std\+::vector$<$ int $>$ \hyperlink{classTileMapGenerator_a6a696d8c2baf1e9eadb7c7332b8a2933}{m\+Materials}
+\item 
+std\+::map$<$ int, \hyperlink{classHashString}{Hash\+String} $>$ \hyperlink{classTileMapGenerator_aba5484cd0ce2eeecc413ba6d81d3352b}{m\+Material\+Names}
+\item 
+\hyperlink{classLevel}{Level} $\ast$ \hyperlink{classTileMapGenerator_a4f7e2e7890f7ad6ed8ec47390e7bb192}{m\+Owner}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Collision\+Shapes@{Collision\+Shapes}}
+\index{Collision\+Shapes@{Collision\+Shapes}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Collision\+Shapes}{CollisionShapes}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Tile\+Map\+Generator\+::\+Collision\+Shapes}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{E\+M\+P\+TY@{E\+M\+P\+TY}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!E\+M\+P\+TY@{E\+M\+P\+TY}}\item[{\em 
+E\+M\+P\+TY\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a5ae1e45f0fcb1287d8a7df66e7efb71b}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a5ae1e45f0fcb1287d8a7df66e7efb71b}
+}]\index{C\+U\+BE@{C\+U\+BE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!C\+U\+BE@{C\+U\+BE}}\item[{\em 
+C\+U\+BE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aab2e0bfc90d99bc474c7dc5daa1a1b27}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aab2e0bfc90d99bc474c7dc5daa1a1b27}
+}]\index{T\+O\+P\+L\+E\+FT@{T\+O\+P\+L\+E\+FT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!T\+O\+P\+L\+E\+FT@{T\+O\+P\+L\+E\+FT}}\item[{\em 
+T\+O\+P\+L\+E\+FT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a26a52fad22bf4fe210d7489b08daf481}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a26a52fad22bf4fe210d7489b08daf481}
+}]\index{B\+O\+T\+T\+O\+M\+L\+E\+FT@{B\+O\+T\+T\+O\+M\+L\+E\+FT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+O\+T\+T\+O\+M\+L\+E\+FT@{B\+O\+T\+T\+O\+M\+L\+E\+FT}}\item[{\em 
+B\+O\+T\+T\+O\+M\+L\+E\+FT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aed5a88739a3360c01f0a1d9bf0007983}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aed5a88739a3360c01f0a1d9bf0007983}
+}]\index{T\+O\+P\+R\+I\+G\+HT@{T\+O\+P\+R\+I\+G\+HT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!T\+O\+P\+R\+I\+G\+HT@{T\+O\+P\+R\+I\+G\+HT}}\item[{\em 
+T\+O\+P\+R\+I\+G\+HT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a2fef6ae8fab713502143bf2cd9e92898}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a2fef6ae8fab713502143bf2cd9e92898}
+}]\index{B\+O\+T\+T\+O\+M\+R\+I\+G\+HT@{B\+O\+T\+T\+O\+M\+R\+I\+G\+HT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+O\+T\+T\+O\+M\+R\+I\+G\+HT@{B\+O\+T\+T\+O\+M\+R\+I\+G\+HT}}\item[{\em 
+B\+O\+T\+T\+O\+M\+R\+I\+G\+HT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480abc7d6a164d460162d8130ac8b2ea5517}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480abc7d6a164d460162d8130ac8b2ea5517}
+}]\index{B\+A\+C\+K\+S\+L\+A\+SH@{B\+A\+C\+K\+S\+L\+A\+SH}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+A\+C\+K\+S\+L\+A\+SH@{B\+A\+C\+K\+S\+L\+A\+SH}}\item[{\em 
+B\+A\+C\+K\+S\+L\+A\+SH\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ad85058e54853696600fdf2fa209043d1}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ad85058e54853696600fdf2fa209043d1}
+}]\index{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+SH@{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+SH}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+SH@{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+SH}}\item[{\em 
+F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+SH\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adb2e04734b352c5efac08ecb3508a5a6}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adb2e04734b352c5efac08ecb3508a5a6}
+}]\index{L\+E\+F\+T\+S\+I\+DE@{L\+E\+F\+T\+S\+I\+DE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!L\+E\+F\+T\+S\+I\+DE@{L\+E\+F\+T\+S\+I\+DE}}\item[{\em 
+L\+E\+F\+T\+S\+I\+DE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aa4dac01f449c5c1ac79254b28e851120}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aa4dac01f449c5c1ac79254b28e851120}
+}]\index{R\+I\+G\+H\+T\+S\+I\+DE@{R\+I\+G\+H\+T\+S\+I\+DE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!R\+I\+G\+H\+T\+S\+I\+DE@{R\+I\+G\+H\+T\+S\+I\+DE}}\item[{\em 
+R\+I\+G\+H\+T\+S\+I\+DE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a7f1cc2dc84cab125fad395e4dffbbd40}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a7f1cc2dc84cab125fad395e4dffbbd40}
+}]\index{T\+O\+P\+S\+I\+DE@{T\+O\+P\+S\+I\+DE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!T\+O\+P\+S\+I\+DE@{T\+O\+P\+S\+I\+DE}}\item[{\em 
+T\+O\+P\+S\+I\+DE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a994de68d629d42069d64663f242fb23c}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a994de68d629d42069d64663f242fb23c}
+}]\index{B\+O\+T\+T\+O\+M\+S\+I\+DE@{B\+O\+T\+T\+O\+M\+S\+I\+DE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+O\+T\+T\+O\+M\+S\+I\+DE@{B\+O\+T\+T\+O\+M\+S\+I\+DE}}\item[{\em 
+B\+O\+T\+T\+O\+M\+S\+I\+DE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a11511734b4387f1c0d8a77bc59bb53a9}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a11511734b4387f1c0d8a77bc59bb53a9}
+}]\index{H\+A\+L\+F\+T\+OP@{H\+A\+L\+F\+T\+OP}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+T\+OP@{H\+A\+L\+F\+T\+OP}}\item[{\em 
+H\+A\+L\+F\+T\+OP\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a62d999e3c7903bd1d8470db499d746fc}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a62d999e3c7903bd1d8470db499d746fc}
+}]\index{H\+A\+L\+F\+B\+O\+T\+T\+OM@{H\+A\+L\+F\+B\+O\+T\+T\+OM}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+B\+O\+T\+T\+OM@{H\+A\+L\+F\+B\+O\+T\+T\+OM}}\item[{\em 
+H\+A\+L\+F\+B\+O\+T\+T\+OM\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adea02dae97fdee69fe17ca4c18e6495c}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adea02dae97fdee69fe17ca4c18e6495c}
+}]\index{H\+A\+L\+F\+L\+E\+FT@{H\+A\+L\+F\+L\+E\+FT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+L\+E\+FT@{H\+A\+L\+F\+L\+E\+FT}}\item[{\em 
+H\+A\+L\+F\+L\+E\+FT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a024e3bd4b232683714998b309c37737e}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a024e3bd4b232683714998b309c37737e}
+}]\index{H\+A\+L\+F\+R\+I\+G\+HT@{H\+A\+L\+F\+R\+I\+G\+HT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+R\+I\+G\+HT@{H\+A\+L\+F\+R\+I\+G\+HT}}\item[{\em 
+H\+A\+L\+F\+R\+I\+G\+HT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a1c6b9abf78ac790b35627ea782bb3f4b}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a1c6b9abf78ac790b35627ea782bb3f4b}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+FT@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+FT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+FT@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+FT}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+FT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ab5130e26281825a3290a0bf18a03e002}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ab5130e26281825a3290a0bf18a03e002}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+HT@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+HT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+HT@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+HT}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+HT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a13aedeea7b3d1d18dae3231cbe423528}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a13aedeea7b3d1d18dae3231cbe423528}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+FT@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+FT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+FT@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+FT}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+FT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a6126d2d1499f022dcda8adbe6f90883b}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a6126d2d1499f022dcda8adbe6f90883b}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+HT@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+HT}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+HT@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+HT}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+HT\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aea255d1647866d36d49a5a4b5d72665c}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aea255d1647866d36d49a5a4b5d72665c}
+}]\index{C\+U\+B\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{C\+U\+B\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!C\+U\+B\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{C\+U\+B\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+C\+U\+B\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a63ab3b58bc1b8c9d5ad67ce3e84bef08}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a63ab3b58bc1b8c9d5ad67ce3e84bef08}
+}]\index{T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a332f834145518a88eb8b8d1dff0bce26}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a332f834145518a88eb8b8d1dff0bce26}
+}]\index{B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aad7c9d6d6a2d201344ff7e99e13a6aea}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aad7c9d6d6a2d201344ff7e99e13a6aea}
+}]\index{T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a56bc79f5e7cb5a680662c14e8da48f44}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a56bc79f5e7cb5a680662c14e8da48f44}
+}]\index{B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ad617eddcea39c98ddf42580648a4603c}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ad617eddcea39c98ddf42580648a4603c}
+}]\index{B\+A\+C\+K\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+A\+C\+K\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+A\+C\+K\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+A\+C\+K\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+B\+A\+C\+K\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a64247646cd0e3e08e78153f96038f2c2}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a64247646cd0e3e08e78153f96038f2c2}
+}]\index{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+F\+O\+R\+W\+A\+R\+D\+S\+L\+A\+S\+H\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a760e647004da7686153ffab3b3f0fe52}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a760e647004da7686153ffab3b3f0fe52}
+}]\index{L\+E\+F\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{L\+E\+F\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!L\+E\+F\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{L\+E\+F\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+L\+E\+F\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a09742650be743692292975b19a4029dc}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a09742650be743692292975b19a4029dc}
+}]\index{R\+I\+G\+H\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{R\+I\+G\+H\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!R\+I\+G\+H\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{R\+I\+G\+H\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+R\+I\+G\+H\+T\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a6e3ac4af6d7d6b74adca90f91aba566f}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a6e3ac4af6d7d6b74adca90f91aba566f}
+}]\index{T\+O\+P\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{T\+O\+P\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!T\+O\+P\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{T\+O\+P\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+T\+O\+P\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a7e468462f04123089c85e50b58c2920d}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a7e468462f04123089c85e50b58c2920d}
+}]\index{B\+O\+T\+T\+O\+M\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+O\+T\+T\+O\+M\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!B\+O\+T\+T\+O\+M\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{B\+O\+T\+T\+O\+M\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+B\+O\+T\+T\+O\+M\+S\+I\+D\+E\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480af8172a0ab81823073fe64e30c07be47e}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480af8172a0ab81823073fe64e30c07be47e}
+}]\index{H\+A\+L\+F\+T\+O\+P\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+T\+O\+P\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+T\+O\+P\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+T\+O\+P\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+H\+A\+L\+F\+T\+O\+P\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a62e29767612209d859483943e4e0b37b}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a62e29767612209d859483943e4e0b37b}
+}]\index{H\+A\+L\+F\+B\+O\+T\+T\+O\+M\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+B\+O\+T\+T\+O\+M\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+B\+O\+T\+T\+O\+M\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+B\+O\+T\+T\+O\+M\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+H\+A\+L\+F\+B\+O\+T\+T\+O\+M\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aece85f4624f1523c9634265dfa1705c8}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aece85f4624f1523c9634265dfa1705c8}
+}]\index{H\+A\+L\+F\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+H\+A\+L\+F\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ab90c8b2cbd34f21d6867695ea5b71979}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480ab90c8b2cbd34f21d6867695ea5b71979}
+}]\index{H\+A\+L\+F\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!H\+A\+L\+F\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{H\+A\+L\+F\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+H\+A\+L\+F\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aaec476b8f11a1ddf2e3e7d04665f8184}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aaec476b8f11a1ddf2e3e7d04665f8184}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a78affcde2004c282209f620a51464f23}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480a78affcde2004c282209f620a51464f23}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+T\+O\+P\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480abcaec92fcbd343b492ae887b9f550770}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480abcaec92fcbd343b492ae887b9f550770}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+L\+E\+F\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aa021dfa3a39d73426540a103a1ae8a40}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aa021dfa3a39d73426540a103a1ae8a40}
+}]\index{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE@{Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE}}\item[{\em 
+Q\+U\+A\+R\+T\+E\+R\+B\+O\+T\+T\+O\+M\+R\+I\+G\+H\+T\+\_\+\+P\+A\+S\+S\+A\+B\+LE\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aacab9e7d93df47f06ca4d73736d4754a}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480aacab9e7d93df47f06ca4d73736d4754a}
+}]\index{A\+L\+L\+\_\+\+C\+O\+L\+L\+I\+S\+I\+O\+N\+\_\+\+S\+H\+A\+P\+ES@{A\+L\+L\+\_\+\+C\+O\+L\+L\+I\+S\+I\+O\+N\+\_\+\+S\+H\+A\+P\+ES}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!A\+L\+L\+\_\+\+C\+O\+L\+L\+I\+S\+I\+O\+N\+\_\+\+S\+H\+A\+P\+ES@{A\+L\+L\+\_\+\+C\+O\+L\+L\+I\+S\+I\+O\+N\+\_\+\+S\+H\+A\+P\+ES}}\item[{\em 
+A\+L\+L\+\_\+\+C\+O\+L\+L\+I\+S\+I\+O\+N\+\_\+\+S\+H\+A\+P\+ES\hypertarget{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adac2999ea821ae9f262ea9c3e2610eab}{}\label{classTileMapGenerator_adbe2ce45196adb0a3e09a215cc367480adac2999ea821ae9f262ea9c3e2610eab}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Tile\+Map\+Generator()}{TileMapGenerator()}}]{\setlength{\rightskip}{0pt plus 5cm}Tile\+Map\+Generator\+::\+Tile\+Map\+Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ab1a10fc2b40cce1e449a2fefe5725dfd}{}\label{classTileMapGenerator_ab1a10fc2b40cce1e449a2fefe5725dfd}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Tile\+Map\+Generator(int a\+Width, int a\+Height, int a\+Tile\+Size, Hash\+String const \&a\+Image\+Name, Hash\+String const \&a\+Data\+Name, std\+::vector$<$ int $>$ const \&a\+Tiles, std\+::vector$<$ int $>$ const \&a\+Collision\+Data, std\+::vector$<$ int $>$ const \&a\+Collision\+Shapes, std\+::vector$<$ int $>$ const \&a\+Material\+Data, std\+::map$<$ int, float $>$ const \&a\+Tile\+Heights, std\+::map$<$ int, Hash\+String $>$ const \&a\+Materials, std\+::map$<$ int, std\+::vector$<$ int $>$$>$ const \&a\+Animations, float const a\+Animation\+Speed, Level $\ast$a\+Owner)}{TileMapGenerator(int aWidth, int aHeight, int aTileSize, HashString const &aImageName, HashString const &aDataName, std::vector< int > const &aTiles, std::vector< int > const &aCollisionData, std::vector< int > const &aCollisionShapes, std::vector< int > const &aMaterialData, std::map< int, float > const &aTileHeights, std::map< int, HashString > const &aMaterials, std::map< int, std::vector< int >> const &aAnimations, float const aAnimationSpeed, Level *aOwner)}}]{\setlength{\rightskip}{0pt plus 5cm}Tile\+Map\+Generator\+::\+Tile\+Map\+Generator (
+\begin{DoxyParamCaption}
+\item[{int}]{a\+Width, }
+\item[{int}]{a\+Height, }
+\item[{int}]{a\+Tile\+Size, }
+\item[{{\bf Hash\+String} const \&}]{a\+Image\+Name, }
+\item[{{\bf Hash\+String} const \&}]{a\+Data\+Name, }
+\item[{std\+::vector$<$ int $>$ const \&}]{a\+Tiles, }
+\item[{std\+::vector$<$ int $>$ const \&}]{a\+Collision\+Data, }
+\item[{std\+::vector$<$ int $>$ const \&}]{a\+Collision\+Shapes, }
+\item[{std\+::vector$<$ int $>$ const \&}]{a\+Material\+Data, }
+\item[{std\+::map$<$ int, float $>$ const \&}]{a\+Tile\+Heights, }
+\item[{std\+::map$<$ int, {\bf Hash\+String} $>$ const \&}]{a\+Materials, }
+\item[{std\+::map$<$ int, std\+::vector$<$ int $>$$>$ const \&}]{a\+Animations, }
+\item[{float const}]{a\+Animation\+Speed, }
+\item[{{\bf Level} $\ast$}]{a\+Owner}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_a7a7e6112a0e1424f480d86bd58a9f270}{}\label{classTileMapGenerator_a7a7e6112a0e1424f480d86bd58a9f270}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!````~Tile\+Map\+Generator@{$\sim$\+Tile\+Map\+Generator}}
+\index{````~Tile\+Map\+Generator@{$\sim$\+Tile\+Map\+Generator}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{$\sim$\+Tile\+Map\+Generator()}{~TileMapGenerator()}}]{\setlength{\rightskip}{0pt plus 5cm}Tile\+Map\+Generator\+::$\sim$\+Tile\+Map\+Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ac1b30222d9367e0892ce32d9beba66a3}{}\label{classTileMapGenerator_ac1b30222d9367e0892ce32d9beba66a3}
+
+
+\subsection{Member Function Documentation}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Create\+Material\+At\+Index@{Create\+Material\+At\+Index}}
+\index{Create\+Material\+At\+Index@{Create\+Material\+At\+Index}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Create\+Material\+At\+Index(unsigned const a\+Index, Chemistry\+Manager $\ast$a\+Chemistry\+Manager)}{CreateMaterialAtIndex(unsigned const aIndex, ChemistryManager *aChemistryManager)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Chemistry\+Material} $\ast$ Tile\+Map\+Generator\+::\+Create\+Material\+At\+Index (
+\begin{DoxyParamCaption}
+\item[{unsigned const}]{a\+Index, }
+\item[{{\bf Chemistry\+Manager} $\ast$}]{a\+Chemistry\+Manager}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_aee320638476651610a5d2b79b481fd39}{}\label{classTileMapGenerator_aee320638476651610a5d2b79b481fd39}
+
+
+Create material at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & Index to create material for. \\
+\hline
+{\em a\+Chemistry\+Manager} & Chemistry manager. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New material. 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Create\+Physics\+At\+Index@{Create\+Physics\+At\+Index}}
+\index{Create\+Physics\+At\+Index@{Create\+Physics\+At\+Index}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Create\+Physics\+At\+Index(unsigned const a\+Index, Physics\+World $\ast$a\+Physics\+World, Transform $\ast$a\+Transform, Vector3 const \&a\+Zero\+Vector, unsigned const a\+Collision\+Data\+Vector\+Size, float a\+Z\+Pos)}{CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, float aZPos)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physics\+Object} $\ast$ Tile\+Map\+Generator\+::\+Create\+Physics\+At\+Index (
+\begin{DoxyParamCaption}
+\item[{unsigned const}]{a\+Index, }
+\item[{{\bf Physics\+World} $\ast$}]{a\+Physics\+World, }
+\item[{{\bf Transform} $\ast$}]{a\+Transform, }
+\item[{{\bf Vector3} const \&}]{a\+Zero\+Vector, }
+\item[{unsigned const}]{a\+Collision\+Data\+Vector\+Size, }
+\item[{float}]{a\+Z\+Pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a405b1fefe91d246977638af9f096ef84}{}\label{classTileMapGenerator_a405b1fefe91d246977638af9f096ef84}
+
+
+Create physics object at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & Index to create physics at. \\
+\hline
+{\em a\+Physics\+World} & Physics manager. \\
+\hline
+{\em a\+Transform} & \hyperlink{classTransform}{Transform} of object. \\
+\hline
+{\em a\+Zero\+Vector} & Empty vector. \\
+\hline
+{\em a\+Collision\+Data\+Vector\+Size} & Size of collision data vector. \\
+\hline
+{\em a\+Z\+Pos} & Z position of shape. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new Physics object. 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Create\+Tiles\+In\+Range@{Create\+Tiles\+In\+Range}}
+\index{Create\+Tiles\+In\+Range@{Create\+Tiles\+In\+Range}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Create\+Tiles\+In\+Range(unsigned const a\+Start, unsigned const a\+End, Vector3 const \&a\+Tile\+Size, Object\+Manager $\ast$a\+Object\+Manager, Physics\+World $\ast$a\+Physics\+World, Chemistry\+Manager $\ast$a\+Chemistry\+Manager)}{CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+Generator\+::\+Create\+Tiles\+In\+Range (
+\begin{DoxyParamCaption}
+\item[{unsigned const}]{a\+Start, }
+\item[{unsigned const}]{a\+End, }
+\item[{{\bf Vector3} const \&}]{a\+Tile\+Size, }
+\item[{{\bf Object\+Manager} $\ast$}]{a\+Object\+Manager, }
+\item[{{\bf Physics\+World} $\ast$}]{a\+Physics\+World, }
+\item[{{\bf Chemistry\+Manager} $\ast$}]{a\+Chemistry\+Manager}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a67847204349df3bf1ef314181e9e7dc2}{}\label{classTileMapGenerator_a67847204349df3bf1ef314181e9e7dc2}
+
+
+Helper method to create tiles from one index to another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Start} & Index to start \\
+\hline
+{\em a\+End} & Index to end \\
+\hline
+{\em a\+Tile\+Size} & Size of tiles in pixels \\
+\hline
+{\em a\+Object\+Manager} & Object manager to add objects to \\
+\hline
+{\em a\+Physics\+World} & Physics manager to add physics objects to \\
+\hline
+{\em a\+Chemistry\+Manager} & Chemistry manager to create materials and such \\
+\hline
+\end{DoxyParams}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Art\+Tiles@{Get\+Art\+Tiles}}
+\index{Get\+Art\+Tiles@{Get\+Art\+Tiles}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Art\+Tiles()}{GetArtTiles()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ \& Tile\+Map\+Generator\+::\+Get\+Art\+Tiles (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ac94ae18715f584cf56aea48d56218f51}{}\label{classTileMapGenerator_ac94ae18715f584cf56aea48d56218f51}
+
+
+Get art tiles vector. 
+
+\begin{DoxyReturn}{Returns}
+Art tiles vector 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Collision\+Shapes@{Get\+Collision\+Shapes}}
+\index{Get\+Collision\+Shapes@{Get\+Collision\+Shapes}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Collision\+Shapes()}{GetCollisionShapes()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ \& Tile\+Map\+Generator\+::\+Get\+Collision\+Shapes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ad07f166e4ca9403aeef91e637169e8ff}{}\label{classTileMapGenerator_ad07f166e4ca9403aeef91e637169e8ff}
+
+
+Get collision shapes vector. 
+
+\begin{DoxyReturn}{Returns}
+Collision shapes vector 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Collision\+Tiles@{Get\+Collision\+Tiles}}
+\index{Get\+Collision\+Tiles@{Get\+Collision\+Tiles}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Collision\+Tiles()}{GetCollisionTiles()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ \& Tile\+Map\+Generator\+::\+Get\+Collision\+Tiles (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_a88e67eec90e1bffe2061c5208f7ca588}{}\label{classTileMapGenerator_a88e67eec90e1bffe2061c5208f7ca588}
+
+
+Get collision tiles vector. 
+
+\begin{DoxyReturn}{Returns}
+Collision tiles vector 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Collision\+Value@{Get\+Collision\+Value}}
+\index{Get\+Collision\+Value@{Get\+Collision\+Value}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Collision\+Value(int const a\+X, int const a\+Y)}{GetCollisionValue(int const aX, int const aY)}}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::\+Get\+Collision\+Value (
+\begin{DoxyParamCaption}
+\item[{int const}]{aX, }
+\item[{int const}]{aY}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_aa807cfb201069a5dc623d3b61e8c4174}{}\label{classTileMapGenerator_aa807cfb201069a5dc623d3b61e8c4174}
+
+
+Get collision value of tile at position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aX} & X in world coordinates \\
+\hline
+{\em aY} & Y in world coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Collision value of tile at position 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Data\+Name@{Get\+Data\+Name}}
+\index{Get\+Data\+Name@{Get\+Data\+Name}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Data\+Name() const }{GetDataName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Tile\+Map\+Generator\+::\+Get\+Data\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTileMapGenerator_a14d5a60cd74332ed8c7f955053704ac5}{}\label{classTileMapGenerator_a14d5a60cd74332ed8c7f955053704ac5}
+
+
+Get data file name. 
+
+\begin{DoxyReturn}{Returns}
+Data file name 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Height@{Get\+Height}}
+\index{Get\+Height@{Get\+Height}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Height() const }{GetHeight() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::\+Get\+Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTileMapGenerator_a4521033aee720cdfdb1d87ac9167f567}{}\label{classTileMapGenerator_a4521033aee720cdfdb1d87ac9167f567}
+
+
+Get Tilemap height. 
+
+\begin{DoxyReturn}{Returns}
+Height of tilemap 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Image\+Name@{Get\+Image\+Name}}
+\index{Get\+Image\+Name@{Get\+Image\+Name}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Image\+Name() const }{GetImageName() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Tile\+Map\+Generator\+::\+Get\+Image\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTileMapGenerator_aa65424ba87e8d61486c61adcc69679eb}{}\label{classTileMapGenerator_aa65424ba87e8d61486c61adcc69679eb}
+
+
+Get source image name. 
+
+\begin{DoxyReturn}{Returns}
+Name of source image 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Index@{Get\+Index}}
+\index{Get\+Index@{Get\+Index}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Index(int const a\+X, int const a\+Y)}{GetIndex(int const aX, int const aY)}}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::\+Get\+Index (
+\begin{DoxyParamCaption}
+\item[{int const}]{aX, }
+\item[{int const}]{aY}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_a23648f2fe869d0dfe025cfa389bfe8fc}{}\label{classTileMapGenerator_a23648f2fe869d0dfe025cfa389bfe8fc}
+
+
+Helper method to get index value at position in world coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aX} & X in world coordinates \\
+\hline
+{\em aY} & Y in world coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Index at position 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Indices@{Get\+Indices}}
+\index{Get\+Indices@{Get\+Indices}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Indices(int const a\+X, int const a\+Y, int const b\+X, int const b\+Y)}{GetIndices(int const aX, int const aY, int const bX, int const bY)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ int $>$ Tile\+Map\+Generator\+::\+Get\+Indices (
+\begin{DoxyParamCaption}
+\item[{int const}]{aX, }
+\item[{int const}]{aY, }
+\item[{int const}]{bX, }
+\item[{int const}]{bY}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_aadfcb40aa3bae090254e0187021c1af6}{}\label{classTileMapGenerator_aadfcb40aa3bae090254e0187021c1af6}
+
+
+Helper method to get index values from position A to position B. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aX} & aX in world coordinates \\
+\hline
+{\em aY} & aY in world coordinates \\
+\hline
+{\em bX} & bX in world coordinates \\
+\hline
+{\em bY} & bY in world coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Indices captured inside box drawn by coordinates. 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Object@{Get\+Object}}
+\index{Get\+Object@{Get\+Object}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Object(int const a\+X, int const a\+Y)}{GetObject(int const aX, int const aY)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Tile\+Map\+Generator\+::\+Get\+Object (
+\begin{DoxyParamCaption}
+\item[{int const}]{aX, }
+\item[{int const}]{aY}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ae2195cd2f66ef6d197a0c0a08d93553e}{}\label{classTileMapGenerator_ae2195cd2f66ef6d197a0c0a08d93553e}
+
+
+Get object at x, y index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aX} & X in world coordinates \\
+\hline
+{\em aY} & Y in world coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object at position 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Object@{Get\+Object}}
+\index{Get\+Object@{Get\+Object}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Object(int const a\+Index)}{GetObject(int const aIndex)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+Object} $\ast$ Tile\+Map\+Generator\+::\+Get\+Object (
+\begin{DoxyParamCaption}
+\item[{int const}]{a\+Index}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_af42183c69394016bb5be960ae3b1d5bc}{}\label{classTileMapGenerator_af42183c69394016bb5be960ae3b1d5bc}
+
+
+Get object at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Index} & Index to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object at index 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Tile\+Heights@{Get\+Tile\+Heights}}
+\index{Get\+Tile\+Heights@{Get\+Tile\+Heights}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Tile\+Heights()}{GetTileHeights()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ int, float $>$ \& Tile\+Map\+Generator\+::\+Get\+Tile\+Heights (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ae847830b0000cf5096bf3b67e4b0de57}{}\label{classTileMapGenerator_ae847830b0000cf5096bf3b67e4b0de57}
+
+
+Get tile height map. 
+
+\begin{DoxyReturn}{Returns}
+Tile height map 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Tile\+Size@{Get\+Tile\+Size}}
+\index{Get\+Tile\+Size@{Get\+Tile\+Size}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Tile\+Size() const }{GetTileSize() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::\+Get\+Tile\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTileMapGenerator_a2d344e88a8a5576cedbfc7356e36336f}{}\label{classTileMapGenerator_a2d344e88a8a5576cedbfc7356e36336f}
+
+
+Get tile size (in pixels) 
+
+\begin{DoxyReturn}{Returns}
+Size of tiles in pixels. 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Tile\+Value@{Get\+Tile\+Value}}
+\index{Get\+Tile\+Value@{Get\+Tile\+Value}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Tile\+Value(int const a\+X, int const a\+Y)}{GetTileValue(int const aX, int const aY)}}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::\+Get\+Tile\+Value (
+\begin{DoxyParamCaption}
+\item[{int const}]{aX, }
+\item[{int const}]{aY}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ac9d67405c433ca5d5f0eb2a319014ea1}{}\label{classTileMapGenerator_ac9d67405c433ca5d5f0eb2a319014ea1}
+
+
+Get art value of tile at position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aX} & X in world coordinates \\
+\hline
+{\em aY} & Y in world coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Art value of tile at position 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Get\+Width@{Get\+Width}}
+\index{Get\+Width@{Get\+Width}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Get\+Width() const }{GetWidth() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::\+Get\+Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classTileMapGenerator_abd5c9dcfaebf7dd27c6e4e2de480a0cf}{}\label{classTileMapGenerator_abd5c9dcfaebf7dd27c6e4e2de480a0cf}
+
+
+Get Tilemap width. 
+
+\begin{DoxyReturn}{Returns}
+Width of tilemap 
+\end{DoxyReturn}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Serialize(\+Parser \&a\+Parser)}{Serialize(Parser &aParser)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+Generator\+::\+Serialize (
+\begin{DoxyParamCaption}
+\item[{{\bf Parser} \&}]{a\+Parser}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ad370d7e32a980582c7849b3dcb4da724}{}\label{classTileMapGenerator_ad370d7e32a980582c7849b3dcb4da724}
+
+
+Serialize to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Parser} & The file parser \\
+\hline
+\end{DoxyParams}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!Update@{Update}}
+\index{Update@{Update}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{Update()}{Update()}}]{\setlength{\rightskip}{0pt plus 5cm}void Tile\+Map\+Generator\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTileMapGenerator_ad1092415748f74dc618e99f5f72b01c8}{}\label{classTileMapGenerator_ad1092415748f74dc618e99f5f72b01c8}
+
+
+Update loop (i.\+e. update animations) 
+
+
+
+\subsection{Member Data Documentation}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Animated\+Objects@{m\+Animated\+Objects}}
+\index{m\+Animated\+Objects@{m\+Animated\+Objects}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Animated\+Objects}{mAnimatedObjects}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Surface}$\ast$, int$>$ Tile\+Map\+Generator\+::m\+Animated\+Objects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_ab0d06a6840abf94e7da908865e9f6417}{}\label{classTileMapGenerator_ab0d06a6840abf94e7da908865e9f6417}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Animations@{m\+Animations}}
+\index{m\+Animations@{m\+Animations}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Animations}{mAnimations}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$int, std\+::vector$<$int$>$ $>$ Tile\+Map\+Generator\+::m\+Animations\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_af4a5352a6da40e73dca83bd61438c5eb}{}\label{classTileMapGenerator_af4a5352a6da40e73dca83bd61438c5eb}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Animation\+Speed@{m\+Animation\+Speed}}
+\index{m\+Animation\+Speed@{m\+Animation\+Speed}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Animation\+Speed}{mAnimationSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}float Tile\+Map\+Generator\+::m\+Animation\+Speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a825f78b3c667def795a56a9f588a201f}{}\label{classTileMapGenerator_a825f78b3c667def795a56a9f588a201f}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Collision\+Data@{m\+Collision\+Data}}
+\index{m\+Collision\+Data@{m\+Collision\+Data}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Collision\+Data}{mCollisionData}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$int$>$ Tile\+Map\+Generator\+::m\+Collision\+Data\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_aa5ba592e33617b95ea1b5b0c9cde8f58}{}\label{classTileMapGenerator_aa5ba592e33617b95ea1b5b0c9cde8f58}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Collision\+Shapes@{m\+Collision\+Shapes}}
+\index{m\+Collision\+Shapes@{m\+Collision\+Shapes}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Collision\+Shapes}{mCollisionShapes}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$int$>$ Tile\+Map\+Generator\+::m\+Collision\+Shapes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a19c6cd2094aecea6b5023d5d4b6b7f06}{}\label{classTileMapGenerator_a19c6cd2094aecea6b5023d5d4b6b7f06}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Current\+Animation\+Time@{m\+Current\+Animation\+Time}}
+\index{m\+Current\+Animation\+Time@{m\+Current\+Animation\+Time}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Current\+Animation\+Time}{mCurrentAnimationTime}}]{\setlength{\rightskip}{0pt plus 5cm}float Tile\+Map\+Generator\+::m\+Current\+Animation\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a71ee0ca8d20adcf3a3ed90dab02eac28}{}\label{classTileMapGenerator_a71ee0ca8d20adcf3a3ed90dab02eac28}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Current\+Frames@{m\+Current\+Frames}}
+\index{m\+Current\+Frames@{m\+Current\+Frames}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Current\+Frames}{mCurrentFrames}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$int, int$>$ Tile\+Map\+Generator\+::m\+Current\+Frames\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a13df3ece1e27582b842f6add478b941a}{}\label{classTileMapGenerator_a13df3ece1e27582b842f6add478b941a}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Data\+Name@{m\+Data\+Name}}
+\index{m\+Data\+Name@{m\+Data\+Name}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Data\+Name}{mDataName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Tile\+Map\+Generator\+::m\+Data\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a404e5ae457f83dddc3f1885db1977492}{}\label{classTileMapGenerator_a404e5ae457f83dddc3f1885db1977492}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Height@{m\+Height}}
+\index{m\+Height@{m\+Height}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Height}{mHeight}}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::m\+Height\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_ad6448a870a8488d8c061691fb50e48f4}{}\label{classTileMapGenerator_ad6448a870a8488d8c061691fb50e48f4}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Image\+Name@{m\+Image\+Name}}
+\index{m\+Image\+Name@{m\+Image\+Name}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Image\+Name}{mImageName}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\+String} Tile\+Map\+Generator\+::m\+Image\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_aa311820f47d30ecb2a149309056f7fe1}{}\label{classTileMapGenerator_aa311820f47d30ecb2a149309056f7fe1}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Material\+Names@{m\+Material\+Names}}
+\index{m\+Material\+Names@{m\+Material\+Names}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Material\+Names}{mMaterialNames}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$int, {\bf Hash\+String}$>$ Tile\+Map\+Generator\+::m\+Material\+Names\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_aba5484cd0ce2eeecc413ba6d81d3352b}{}\label{classTileMapGenerator_aba5484cd0ce2eeecc413ba6d81d3352b}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Materials@{m\+Materials}}
+\index{m\+Materials@{m\+Materials}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Materials}{mMaterials}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$int$>$ Tile\+Map\+Generator\+::m\+Materials\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a6a696d8c2baf1e9eadb7c7332b8a2933}{}\label{classTileMapGenerator_a6a696d8c2baf1e9eadb7c7332b8a2933}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Objects@{m\+Objects}}
+\index{m\+Objects@{m\+Objects}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Objects}{mObjects}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Game\+Object}$\ast$$>$ Tile\+Map\+Generator\+::m\+Objects\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_aa2fcfe47a8ec1df8efcc6c70fa9569f8}{}\label{classTileMapGenerator_aa2fcfe47a8ec1df8efcc6c70fa9569f8}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Owner@{m\+Owner}}
+\index{m\+Owner@{m\+Owner}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Owner}{mOwner}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Level}$\ast$ Tile\+Map\+Generator\+::m\+Owner\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a4f7e2e7890f7ad6ed8ec47390e7bb192}{}\label{classTileMapGenerator_a4f7e2e7890f7ad6ed8ec47390e7bb192}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Tile\+Heights@{m\+Tile\+Heights}}
+\index{m\+Tile\+Heights@{m\+Tile\+Heights}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Tile\+Heights}{mTileHeights}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$int, float$>$ Tile\+Map\+Generator\+::m\+Tile\+Heights\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a3c87011be2473b781ce74334f44e22da}{}\label{classTileMapGenerator_a3c87011be2473b781ce74334f44e22da}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Tiles@{m\+Tiles}}
+\index{m\+Tiles@{m\+Tiles}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Tiles}{mTiles}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$int$>$ Tile\+Map\+Generator\+::m\+Tiles\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a56f5a8a73968d218f891c06550caeacf}{}\label{classTileMapGenerator_a56f5a8a73968d218f891c06550caeacf}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Tile\+Size@{m\+Tile\+Size}}
+\index{m\+Tile\+Size@{m\+Tile\+Size}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Tile\+Size}{mTileSize}}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::m\+Tile\+Size\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a1283774e574f8cad65f5655ed44f2f58}{}\label{classTileMapGenerator_a1283774e574f8cad65f5655ed44f2f58}
+\index{Tile\+Map\+Generator@{Tile\+Map\+Generator}!m\+Width@{m\+Width}}
+\index{m\+Width@{m\+Width}!Tile\+Map\+Generator@{Tile\+Map\+Generator}}
+\subsubsection[{\texorpdfstring{m\+Width}{mWidth}}]{\setlength{\rightskip}{0pt plus 5cm}int Tile\+Map\+Generator\+::m\+Width\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTileMapGenerator_a5465fd60f8897f7a6f9347091a20db85}{}\label{classTileMapGenerator_a5465fd60f8897f7a6f9347091a20db85}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Logic/\hyperlink{TileMapGenerator_8h}{Tile\+Map\+Generator.\+h}\item 
+Logic/\hyperlink{TileMapGenerator_8cpp}{Tile\+Map\+Generator.\+cpp}\end{DoxyCompactItemize}

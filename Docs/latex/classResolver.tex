@@ -1,0 +1,430 @@
+\hypertarget{classResolver}{}\section{Resolver Class Reference}
+\label{classResolver}\index{Resolver@{Resolver}}
+
+
+{\ttfamily \#include $<$Resolver.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classResolver_a19068f3ea9b219a8a9a254d227451d17}{Resolver} ()
+\item 
+\hyperlink{classResolver_acbb5f19d83d3d7caa91534c96cb73d68}{$\sim$\+Resolver} ()
+\item 
+void \hyperlink{classResolver_a397db1928dfbb57afdbe06198b0fc0ff}{Update} (float a\+Duration)
+\begin{DoxyCompactList}\small\item\em Update loop for resolving shapes. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a7e5d20676229e996f2705a3948f7ea7c}{Add\+Prelim\+Pair} (\hyperlink{structPotentialPair}{Potential\+Pair} const \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Add a pair to be checked in pre check. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_ac7cb738bf2e6e159ed6aac7838b819c9}{Add\+Collided\+Pair} (\hyperlink{structCollisionPair}{Collision\+Pair} const \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Add pair that collided. \end{DoxyCompactList}\item 
+bool \hyperlink{classResolver_aee1c829f8d576d471bebe719610fbadf}{Find} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object1, \hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object2)
+\begin{DoxyCompactList}\small\item\em Find a pair in our list of potential pairs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classResolver_ae31949701a0279514220c8a7458a62ff}{Calculate\+Separating\+Velocity} (\hyperlink{structCollisionPair}{Collision\+Pair} const \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Calculate separating velocities. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a963388770cc259e54f295385d44a9be2}{Resolve\+Penetration} (\hyperlink{structCollisionPair}{Collision\+Pair} const \&a\+Pair)
+\item 
+void \hyperlink{classResolver_afbe8f522c75487cfb41cd631f87ece33}{Resolve\+Velocity} (\hyperlink{structCollisionPair}{Collision\+Pair} const \&a\+Pair, float a\+Duration)
+\begin{DoxyCompactList}\small\item\em Resolve for velocities. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a5eb41265a563926cd780f0efd3759ae2}{Send\+Collision\+Messages} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair) const 
+\begin{DoxyCompactList}\small\item\em Notify object of collision. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a7c373ef170f07e9f0333ebf903ca7ece}{Resolve} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair, float a\+Duration)
+\begin{DoxyCompactList}\small\item\em Resolve pairs. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_ad460715037be4c30721adfebe3a9218c}{Calculate\+Sphere\+To\+Sphere} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Resolve sphere. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a66c94d8c166faedbf0cbe6f707c54501}{Calculate\+Sphere\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Resolve sphere and cube. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a2005d8985466135c49db98076d80b05b}{Calculate\+Cube\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Resolve cubes. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_af8db9e30bdd401ed6a2c85bbf18af611}{Calculate\+Triangle\+To\+Sphere} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Resolve triangle and sphere. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_aa6d0177ef6e33fe532c166ff0bd66cff}{Calculate\+Triangle\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Resolve \hyperlink{structTriangle}{Triangle} and cube. Work in progress. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_ab28f2ae93d8d24019234227f85f859ce}{Calculate\+Triangle\+To\+Triangle} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Calculate triangles. Work in progress. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a22bbe9fc95bb2bcd34f3c9f8414473ca}{Calculate\+Line\+To\+Sphere} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Calculate \hyperlink{structLine}{Line} to \hyperlink{structSphere}{Sphere} resolution. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a0a63e895e92ceb64391a5ef0c065634e}{Calculate\+Line\+To\+Cube} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Calculate \hyperlink{structLine}{Line} to \hyperlink{structCube}{Cube} resolution. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_abdf399dc56200d866d2095a542cbc83f}{Calculate\+Line\+To\+Triangle} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Calculate \hyperlink{structLine}{Line} to \hyperlink{structTriangle}{Triangle} resolution. \end{DoxyCompactList}\item 
+void \hyperlink{classResolver_a3f2f3660c744b0043762f6ebf1ed750a}{Calculate\+Line\+To\+Line} (\hyperlink{structCollisionPair}{Collision\+Pair} \&a\+Pair)
+\begin{DoxyCompactList}\small\item\em Calculate \hyperlink{structLine}{Line} to \hyperlink{structLine}{Line} resolution. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{classResolver_a80cb6f9b3ce62e4b7120829fd470452e}{Calculate\+Hash} (\hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object1, \hyperlink{classPhysicsObject}{Physics\+Object} $\ast$a\+Object2)
+\begin{DoxyCompactList}\small\item\em Calculate hash between two bodies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ \hyperlink{structCollisionPair}{Collision\+Pair} $>$ \hyperlink{classResolver_a15080b750588bd786ba11dfcc8047f77}{m\+Collided\+Pairs}
+\item 
+std\+::unordered\+\_\+map$<$ size\+\_\+t, \hyperlink{structPotentialPair}{Potential\+Pair} $>$ \hyperlink{classResolver_a0252400c555ad722d8dad2cdc61359d6}{m\+Potential\+Pairs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Resolver@{Resolver}!Resolver@{Resolver}}
+\index{Resolver@{Resolver}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Resolver()}{Resolver()}}]{\setlength{\rightskip}{0pt plus 5cm}Resolver\+::\+Resolver (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classResolver_a19068f3ea9b219a8a9a254d227451d17}{}\label{classResolver_a19068f3ea9b219a8a9a254d227451d17}
+\index{Resolver@{Resolver}!````~Resolver@{$\sim$\+Resolver}}
+\index{````~Resolver@{$\sim$\+Resolver}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{$\sim$\+Resolver()}{~Resolver()}}]{\setlength{\rightskip}{0pt plus 5cm}Resolver\+::$\sim$\+Resolver (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classResolver_acbb5f19d83d3d7caa91534c96cb73d68}{}\label{classResolver_acbb5f19d83d3d7caa91534c96cb73d68}
+
+
+\subsection{Member Function Documentation}
+\index{Resolver@{Resolver}!Add\+Collided\+Pair@{Add\+Collided\+Pair}}
+\index{Add\+Collided\+Pair@{Add\+Collided\+Pair}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Add\+Collided\+Pair(\+Collision\+Pair const \&a\+Pair)}{AddCollidedPair(CollisionPair const &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Add\+Collided\+Pair (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} const \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)}\hypertarget{classResolver_ac7cb738bf2e6e159ed6aac7838b819c9}{}\label{classResolver_ac7cb738bf2e6e159ed6aac7838b819c9}
+
+
+Add pair that collided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & The pair to add. \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Add\+Prelim\+Pair@{Add\+Prelim\+Pair}}
+\index{Add\+Prelim\+Pair@{Add\+Prelim\+Pair}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Add\+Prelim\+Pair(\+Potential\+Pair const \&a\+Pair)}{AddPrelimPair(PotentialPair const &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Add\+Prelim\+Pair (
+\begin{DoxyParamCaption}
+\item[{{\bf Potential\+Pair} const \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)}\hypertarget{classResolver_a7e5d20676229e996f2705a3948f7ea7c}{}\label{classResolver_a7e5d20676229e996f2705a3948f7ea7c}
+
+
+Add a pair to be checked in pre check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Pair to add \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Cube\+To\+Cube@{Calculate\+Cube\+To\+Cube}}
+\index{Calculate\+Cube\+To\+Cube@{Calculate\+Cube\+To\+Cube}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Cube\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CalculateCubeToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Cube\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a2005d8985466135c49db98076d80b05b}{}\label{classResolver_a2005d8985466135c49db98076d80b05b}
+
+
+Resolve cubes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Cubes \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Hash@{Calculate\+Hash}}
+\index{Calculate\+Hash@{Calculate\+Hash}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Hash(\+Physics\+Object $\ast$a\+Object1, Physics\+Object $\ast$a\+Object2)}{CalculateHash(PhysicsObject *aObject1, PhysicsObject *aObject2)}}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Resolver\+::\+Calculate\+Hash (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object1, }
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a80cb6f9b3ce62e4b7120829fd470452e}{}\label{classResolver_a80cb6f9b3ce62e4b7120829fd470452e}
+
+
+Calculate hash between two bodies. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object1} & Body 1 \\
+\hline
+{\em a\+Object2} & Body 2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hash value. 
+\end{DoxyReturn}
+\index{Resolver@{Resolver}!Calculate\+Line\+To\+Cube@{Calculate\+Line\+To\+Cube}}
+\index{Calculate\+Line\+To\+Cube@{Calculate\+Line\+To\+Cube}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Line\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CalculateLineToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Line\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a0a63e895e92ceb64391a5ef0c065634e}{}\label{classResolver_a0a63e895e92ceb64391a5ef0c065634e}
+
+
+Calculate \hyperlink{structLine}{Line} to \hyperlink{structCube}{Cube} resolution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \hyperlink{structLine}{Line} and \hyperlink{structCube}{Cube} \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Line\+To\+Line@{Calculate\+Line\+To\+Line}}
+\index{Calculate\+Line\+To\+Line@{Calculate\+Line\+To\+Line}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Line\+To\+Line(\+Collision\+Pair \&a\+Pair)}{CalculateLineToLine(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Line\+To\+Line (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a3f2f3660c744b0043762f6ebf1ed750a}{}\label{classResolver_a3f2f3660c744b0043762f6ebf1ed750a}
+
+
+Calculate \hyperlink{structLine}{Line} to \hyperlink{structLine}{Line} resolution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Both Lines \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Line\+To\+Sphere@{Calculate\+Line\+To\+Sphere}}
+\index{Calculate\+Line\+To\+Sphere@{Calculate\+Line\+To\+Sphere}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Line\+To\+Sphere(\+Collision\+Pair \&a\+Pair)}{CalculateLineToSphere(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Line\+To\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a22bbe9fc95bb2bcd34f3c9f8414473ca}{}\label{classResolver_a22bbe9fc95bb2bcd34f3c9f8414473ca}
+
+
+Calculate \hyperlink{structLine}{Line} to \hyperlink{structSphere}{Sphere} resolution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \hyperlink{structLine}{Line} and \hyperlink{structSphere}{Sphere} \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Line\+To\+Triangle@{Calculate\+Line\+To\+Triangle}}
+\index{Calculate\+Line\+To\+Triangle@{Calculate\+Line\+To\+Triangle}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Line\+To\+Triangle(\+Collision\+Pair \&a\+Pair)}{CalculateLineToTriangle(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Line\+To\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_abdf399dc56200d866d2095a542cbc83f}{}\label{classResolver_abdf399dc56200d866d2095a542cbc83f}
+
+
+Calculate \hyperlink{structLine}{Line} to \hyperlink{structTriangle}{Triangle} resolution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \hyperlink{structLine}{Line} and \hyperlink{structTriangle}{Triangle} \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Separating\+Velocity@{Calculate\+Separating\+Velocity}}
+\index{Calculate\+Separating\+Velocity@{Calculate\+Separating\+Velocity}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Separating\+Velocity(\+Collision\+Pair const \&a\+Pair)}{CalculateSeparatingVelocity(CollisionPair const &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}float Resolver\+::\+Calculate\+Separating\+Velocity (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} const \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_ae31949701a0279514220c8a7458a62ff}{}\label{classResolver_ae31949701a0279514220c8a7458a62ff}
+
+
+Calculate separating velocities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Pair to calculate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The separating velocity along the normal. 
+\end{DoxyReturn}
+\index{Resolver@{Resolver}!Calculate\+Sphere\+To\+Cube@{Calculate\+Sphere\+To\+Cube}}
+\index{Calculate\+Sphere\+To\+Cube@{Calculate\+Sphere\+To\+Cube}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Sphere\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CalculateSphereToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Sphere\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a66c94d8c166faedbf0cbe6f707c54501}{}\label{classResolver_a66c94d8c166faedbf0cbe6f707c54501}
+
+
+Resolve sphere and cube. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \hyperlink{structSphere}{Sphere} and cube \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Sphere\+To\+Sphere@{Calculate\+Sphere\+To\+Sphere}}
+\index{Calculate\+Sphere\+To\+Sphere@{Calculate\+Sphere\+To\+Sphere}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Sphere\+To\+Sphere(\+Collision\+Pair \&a\+Pair)}{CalculateSphereToSphere(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Sphere\+To\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_ad460715037be4c30721adfebe3a9218c}{}\label{classResolver_ad460715037be4c30721adfebe3a9218c}
+
+
+Resolve sphere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Pair of spheres \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Triangle\+To\+Cube@{Calculate\+Triangle\+To\+Cube}}
+\index{Calculate\+Triangle\+To\+Cube@{Calculate\+Triangle\+To\+Cube}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Triangle\+To\+Cube(\+Collision\+Pair \&a\+Pair)}{CalculateTriangleToCube(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Triangle\+To\+Cube (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_aa6d0177ef6e33fe532c166ff0bd66cff}{}\label{classResolver_aa6d0177ef6e33fe532c166ff0bd66cff}
+
+
+Resolve \hyperlink{structTriangle}{Triangle} and cube. Work in progress. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \hyperlink{structTriangle}{Triangle} and cube. \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Triangle\+To\+Sphere@{Calculate\+Triangle\+To\+Sphere}}
+\index{Calculate\+Triangle\+To\+Sphere@{Calculate\+Triangle\+To\+Sphere}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Triangle\+To\+Sphere(\+Collision\+Pair \&a\+Pair)}{CalculateTriangleToSphere(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Triangle\+To\+Sphere (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_af8db9e30bdd401ed6a2c85bbf18af611}{}\label{classResolver_af8db9e30bdd401ed6a2c85bbf18af611}
+
+
+Resolve triangle and sphere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & \hyperlink{structTriangle}{Triangle} and sphere \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Calculate\+Triangle\+To\+Triangle@{Calculate\+Triangle\+To\+Triangle}}
+\index{Calculate\+Triangle\+To\+Triangle@{Calculate\+Triangle\+To\+Triangle}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Calculate\+Triangle\+To\+Triangle(\+Collision\+Pair \&a\+Pair)}{CalculateTriangleToTriangle(CollisionPair &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Calculate\+Triangle\+To\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_ab28f2ae93d8d24019234227f85f859ce}{}\label{classResolver_ab28f2ae93d8d24019234227f85f859ce}
+
+
+Calculate triangles. Work in progress. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Triangles. \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Find@{Find}}
+\index{Find@{Find}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Find(\+Physics\+Object $\ast$a\+Object1, Physics\+Object $\ast$a\+Object2)}{Find(PhysicsObject *aObject1, PhysicsObject *aObject2)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Resolver\+::\+Find (
+\begin{DoxyParamCaption}
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object1, }
+\item[{{\bf Physics\+Object} $\ast$}]{a\+Object2}
+\end{DoxyParamCaption}
+)}\hypertarget{classResolver_aee1c829f8d576d471bebe719610fbadf}{}\label{classResolver_aee1c829f8d576d471bebe719610fbadf}
+
+
+Find a pair in our list of potential pairs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Object1} & First object \\
+\hline
+{\em a\+Object2} & Second object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not that pair already exists 
+\end{DoxyReturn}
+\index{Resolver@{Resolver}!Resolve@{Resolve}}
+\index{Resolve@{Resolve}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Resolve(\+Collision\+Pair \&a\+Pair, float a\+Duration)}{Resolve(CollisionPair &aPair, float aDuration)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Resolve (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair, }
+\item[{float}]{a\+Duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a7c373ef170f07e9f0333ebf903ca7ece}{}\label{classResolver_a7c373ef170f07e9f0333ebf903ca7ece}
+
+
+Resolve pairs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Pair to resolve \\
+\hline
+{\em a\+Duration} & Time between frames \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Resolve\+Penetration@{Resolve\+Penetration}}
+\index{Resolve\+Penetration@{Resolve\+Penetration}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Resolve\+Penetration(\+Collision\+Pair const \&a\+Pair)}{ResolvePenetration(CollisionPair const &aPair)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Resolve\+Penetration (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} const \&}]{a\+Pair}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a963388770cc259e54f295385d44a9be2}{}\label{classResolver_a963388770cc259e54f295385d44a9be2}
+\index{Resolver@{Resolver}!Resolve\+Velocity@{Resolve\+Velocity}}
+\index{Resolve\+Velocity@{Resolve\+Velocity}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Resolve\+Velocity(\+Collision\+Pair const \&a\+Pair, float a\+Duration)}{ResolveVelocity(CollisionPair const &aPair, float aDuration)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Resolve\+Velocity (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} const \&}]{a\+Pair, }
+\item[{float}]{a\+Duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_afbe8f522c75487cfb41cd631f87ece33}{}\label{classResolver_afbe8f522c75487cfb41cd631f87ece33}
+
+
+Resolve for velocities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Pair to resolve \\
+\hline
+{\em a\+Duration} & Length of frame \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Send\+Collision\+Messages@{Send\+Collision\+Messages}}
+\index{Send\+Collision\+Messages@{Send\+Collision\+Messages}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Send\+Collision\+Messages(\+Collision\+Pair \&a\+Pair) const }{SendCollisionMessages(CollisionPair &aPair) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Send\+Collision\+Messages (
+\begin{DoxyParamCaption}
+\item[{{\bf Collision\+Pair} \&}]{a\+Pair}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a5eb41265a563926cd780f0efd3759ae2}{}\label{classResolver_a5eb41265a563926cd780f0efd3759ae2}
+
+
+Notify object of collision. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Pair} & Pair to message \\
+\hline
+\end{DoxyParams}
+\index{Resolver@{Resolver}!Update@{Update}}
+\index{Update@{Update}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{Update(float a\+Duration)}{Update(float aDuration)}}]{\setlength{\rightskip}{0pt plus 5cm}void Resolver\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float}]{a\+Duration}
+\end{DoxyParamCaption}
+)}\hypertarget{classResolver_a397db1928dfbb57afdbe06198b0fc0ff}{}\label{classResolver_a397db1928dfbb57afdbe06198b0fc0ff}
+
+
+Update loop for resolving shapes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Duration} & Time elapsed between flames. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Resolver@{Resolver}!m\+Collided\+Pairs@{m\+Collided\+Pairs}}
+\index{m\+Collided\+Pairs@{m\+Collided\+Pairs}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{m\+Collided\+Pairs}{mCollidedPairs}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<${\bf Collision\+Pair}$>$ Resolver\+::m\+Collided\+Pairs\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a15080b750588bd786ba11dfcc8047f77}{}\label{classResolver_a15080b750588bd786ba11dfcc8047f77}
+\index{Resolver@{Resolver}!m\+Potential\+Pairs@{m\+Potential\+Pairs}}
+\index{m\+Potential\+Pairs@{m\+Potential\+Pairs}!Resolver@{Resolver}}
+\subsubsection[{\texorpdfstring{m\+Potential\+Pairs}{mPotentialPairs}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unordered\+\_\+map$<$size\+\_\+t, {\bf Potential\+Pair}$>$ Resolver\+::m\+Potential\+Pairs\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classResolver_a0252400c555ad722d8dad2cdc61359d6}{}\label{classResolver_a0252400c555ad722d8dad2cdc61359d6}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Physics/\hyperlink{Resolver_8h}{Resolver.\+h}\item 
+Physics/\hyperlink{Resolver_8cpp}{Resolver.\+cpp}\end{DoxyCompactItemize}

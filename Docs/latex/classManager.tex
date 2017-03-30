@@ -1,0 +1,189 @@
+\hypertarget{classManager}{}\section{Manager Class Reference}
+\label{classManager}\index{Manager@{Manager}}
+
+
+{\ttfamily \#include $<$Manager.\+h$>$}
+
+
+
+Inheritance diagram for Manager\+:
+% FIG 0
+
+
+Collaboration diagram for Manager\+:
+% FIG 1
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::list$<$ \hyperlink{classMessage}{Message} $\ast$ $>$\+::iterator \hyperlink{classManager_a076ef5e1579b75f8c614bd2f1492fc1f}{Message\+IT}
+\item 
+typedef std\+::list$<$ \hyperlink{classMessage}{Message} $\ast$ $>$\+::const\+\_\+iterator \hyperlink{classManager_aef9931b456639fc47d53241aac0a359c}{Const\+Message\+IT}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{Manager} ()
+\item 
+\hyperlink{classManager_a55c7070e93b42767d2d8533e42c4d93a}{Manager} (\hyperlink{classGameApp}{Game\+App} $\ast$a\+App, std\+::string a\+Name, unsigned a\+U\+ID)
+\item 
+virtual \hyperlink{classManager_a3dbc694b640c70009c5e0dec515d692c}{$\sim$\+Manager} ()
+\item 
+\hyperlink{classGameApp}{Game\+App} $\ast$ \hyperlink{classManager_ae23e9b444e64294c7aecbb1d7c45d74c}{Get\+Owning\+App} ()
+\item 
+std\+::string \hyperlink{classManager_a0f832758f5cab37c766bfc63ba029fcd}{Get\+Defined\+Name} ()
+\item 
+unsigned \hyperlink{classManager_a512c837bdf02071dc149955bd60fd341}{Get\+Defined\+U\+ID} ()
+\item 
+virtual void \hyperlink{classManager_adeae9d4bc705f47837c2eece7d9eb523}{Update} ()=0
+\item 
+virtual void \hyperlink{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{Send\+Message} (\hyperlink{classMessage}{Message} const \&a\+Message)=0
+\item 
+virtual void \hyperlink{classManager_a2cf644ec0476f3a07ca5b977953a5925}{Process\+Delayed\+Message} (\hyperlink{classMessage}{Message} $\ast$a\+Message)=0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned \hyperlink{classManager_aa03cb6e60ebd782e3a5e165854c5172d}{Get\+U\+ID} ()
+\item 
+static void \hyperlink{classManager_ac9cf13655fb8aeb04a95bc02c76d22ba}{Serialize\+L\+UA} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ \hyperlink{classMessage}{Message} $\ast$ $>$ \hyperlink{classManager_a2bc4fe3e13417022d2a12249dd4997eb}{m\+Delayed\+Messages}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGameApp}{Game\+App} $\ast$ \hyperlink{classManager_a36229c6d248b1d9db13c463e0fe3cb57}{m\+App}
+\item 
+std\+::string \hyperlink{classManager_a126bbe95ad1a955a50d79560c3a01c4f}{m\+Name}
+\item 
+unsigned \hyperlink{classManager_ab1385f905d790384d4b9282c82153548}{m\+U\+ID}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\index{Manager@{Manager}!Const\+Message\+IT@{Const\+Message\+IT}}
+\index{Const\+Message\+IT@{Const\+Message\+IT}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Const\+Message\+IT}{ConstMessageIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::list$<${\bf Message}$\ast$$>$\+::const\+\_\+iterator {\bf Manager\+::\+Const\+Message\+IT}}\hypertarget{classManager_aef9931b456639fc47d53241aac0a359c}{}\label{classManager_aef9931b456639fc47d53241aac0a359c}
+\index{Manager@{Manager}!Message\+IT@{Message\+IT}}
+\index{Message\+IT@{Message\+IT}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Message\+IT}{MessageIT}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::list$<${\bf Message}$\ast$$>$\+::iterator {\bf Manager\+::\+Message\+IT}}\hypertarget{classManager_a076ef5e1579b75f8c614bd2f1492fc1f}{}\label{classManager_a076ef5e1579b75f8c614bd2f1492fc1f}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Manager@{Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Manager()}{Manager()}}]{\setlength{\rightskip}{0pt plus 5cm}Manager\+::\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{}\label{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}
+\index{Manager@{Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Manager(\+Game\+App $\ast$a\+App, std\+::string a\+Name, unsigned a\+U\+I\+D)}{Manager(GameApp *aApp, std::string aName, unsigned aUID)}}]{\setlength{\rightskip}{0pt plus 5cm}Manager\+::\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Game\+App} $\ast$}]{a\+App, }
+\item[{std\+::string}]{a\+Name, }
+\item[{unsigned}]{a\+U\+ID}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classManager_a55c7070e93b42767d2d8533e42c4d93a}{}\label{classManager_a55c7070e93b42767d2d8533e42c4d93a}
+\index{Manager@{Manager}!````~Manager@{$\sim$\+Manager}}
+\index{````~Manager@{$\sim$\+Manager}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Manager()}{~Manager()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Manager\+::$\sim$\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classManager_a3dbc694b640c70009c5e0dec515d692c}{}\label{classManager_a3dbc694b640c70009c5e0dec515d692c}
+
+
+\subsection{Member Function Documentation}
+\index{Manager@{Manager}!Get\+Defined\+Name@{Get\+Defined\+Name}}
+\index{Get\+Defined\+Name@{Get\+Defined\+Name}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Get\+Defined\+Name()}{GetDefinedName()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Manager\+::\+Get\+Defined\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classManager_a0f832758f5cab37c766bfc63ba029fcd}{}\label{classManager_a0f832758f5cab37c766bfc63ba029fcd}
+\index{Manager@{Manager}!Get\+Defined\+U\+ID@{Get\+Defined\+U\+ID}}
+\index{Get\+Defined\+U\+ID@{Get\+Defined\+U\+ID}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Get\+Defined\+U\+I\+D()}{GetDefinedUID()}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Manager\+::\+Get\+Defined\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classManager_a512c837bdf02071dc149955bd60fd341}{}\label{classManager_a512c837bdf02071dc149955bd60fd341}
+\index{Manager@{Manager}!Get\+Owning\+App@{Get\+Owning\+App}}
+\index{Get\+Owning\+App@{Get\+Owning\+App}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Get\+Owning\+App()}{GetOwningApp()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+App}$\ast$ Manager\+::\+Get\+Owning\+App (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classManager_ae23e9b444e64294c7aecbb1d7c45d74c}{}\label{classManager_ae23e9b444e64294c7aecbb1d7c45d74c}
+\index{Manager@{Manager}!Get\+U\+ID@{Get\+U\+ID}}
+\index{Get\+U\+ID@{Get\+U\+ID}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Get\+U\+I\+D()}{GetUID()}}]{\setlength{\rightskip}{0pt plus 5cm}static unsigned Manager\+::\+Get\+U\+ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classManager_aa03cb6e60ebd782e3a5e165854c5172d}{}\label{classManager_aa03cb6e60ebd782e3a5e165854c5172d}
+\index{Manager@{Manager}!Process\+Delayed\+Message@{Process\+Delayed\+Message}}
+\index{Process\+Delayed\+Message@{Process\+Delayed\+Message}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Process\+Delayed\+Message(\+Message $\ast$a\+Message)=0}{ProcessDelayedMessage(Message *aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Manager\+::\+Process\+Delayed\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classManager_a2cf644ec0476f3a07ca5b977953a5925}{}\label{classManager_a2cf644ec0476f3a07ca5b977953a5925}
+
+
+Implemented in \hyperlink{classInputManager_a2bd2dff85a3a9b51eae02d5e3826885e}{Input\+Manager}, \hyperlink{classChemistryManager_a19f683fb17327d395038f411bb1a963e}{Chemistry\+Manager}, \hyperlink{classSoundManager_a53d3df2614b23ff7c1b383ae7ca60330}{Sound\+Manager}, \hyperlink{classPhysicsWorld_a5ac21fa96d9b36b4c63ac9d2a9c64777}{Physics\+World}, \hyperlink{classControllerManager_a33a4e3b271d5d38304d3e22197d719dd}{Controller\+Manager}, \hyperlink{classDebugManager_ade321538ddc51cadbbd9624ce6c0628d}{Debug\+Manager}, \hyperlink{classGraphicsManager_a7de02da0159ccdc15f865d8c9d6278fe}{Graphics\+Manager}, \hyperlink{classLevelManager_a375d01bd082ee3fd3981925f0b6a5640}{Level\+Manager}, \hyperlink{classObjectManager_ab5d8bbac1f3e7e907ca8a8be2928e593}{Object\+Manager}, and \hyperlink{classNetworkManager_a3bfc52f52ebcec23eacf456660f1e9a6}{Network\+Manager}.
+
+\index{Manager@{Manager}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Send\+Message(\+Message const \&a\+Message)=0}{SendMessage(Message const &aMessage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Manager\+::\+Send\+Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} const \&}]{a\+Message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classManager_a150f34a2afd05d01f468e1ecc8ce7912}{}\label{classManager_a150f34a2afd05d01f468e1ecc8ce7912}
+
+
+Implemented in \hyperlink{classInputManager_a24bf2c54661a42d3af837b6165f0890b}{Input\+Manager}, \hyperlink{classChemistryManager_a10dbb210239f8953f2f478f903bff7cb}{Chemistry\+Manager}, \hyperlink{classSoundManager_a71c2d1a4f59afe4fb3c2e2d36110685e}{Sound\+Manager}, \hyperlink{classPhysicsWorld_a44d25e8d9d2e75e993e5bd0a550cc3aa}{Physics\+World}, \hyperlink{classControllerManager_a51d581f556f5dc1df44dd9bf52bf654b}{Controller\+Manager}, \hyperlink{classDebugManager_a75c0d45e3ad7eb78e39c70176be8b49c}{Debug\+Manager}, \hyperlink{classGraphicsManager_a1dfc5ea39106bac02b4cdaaea5e4d20b}{Graphics\+Manager}, \hyperlink{classLevelManager_a4cc512a6416f28ea8bfee08ed780e876}{Level\+Manager}, \hyperlink{classObjectManager_a4d6aa33b172cd0d15575702fe4ef2e5d}{Object\+Manager}, and \hyperlink{classNetworkManager_a5877be08a550014e491d6993d1fc137e}{Network\+Manager}.
+
+\index{Manager@{Manager}!Serialize\+L\+UA@{Serialize\+L\+UA}}
+\index{Serialize\+L\+UA@{Serialize\+L\+UA}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Serialize\+L\+U\+A()}{SerializeLUA()}}]{\setlength{\rightskip}{0pt plus 5cm}static void Manager\+::\+Serialize\+L\+UA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classManager_ac9cf13655fb8aeb04a95bc02c76d22ba}{}\label{classManager_ac9cf13655fb8aeb04a95bc02c76d22ba}
+\index{Manager@{Manager}!Update@{Update}}
+\index{Update@{Update}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Update()=0}{Update()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Manager\+::\+Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classManager_adeae9d4bc705f47837c2eece7d9eb523}{}\label{classManager_adeae9d4bc705f47837c2eece7d9eb523}
+
+
+Implemented in \hyperlink{classInputManager_aa5480931dba2720e7d80dd00a53adae0}{Input\+Manager}, \hyperlink{classChemistryManager_aa65a3231440bbab7f588f136c0439fee}{Chemistry\+Manager}, \hyperlink{classSoundManager_aaf241621221cdbefeba78e8b6bc29240}{Sound\+Manager}, \hyperlink{classPhysicsWorld_a8cb6d48d4de75cabc4e3943b16666200}{Physics\+World}, \hyperlink{classControllerManager_a8f59b1425c2dc17c1fd93875230f714c}{Controller\+Manager}, \hyperlink{classDebugManager_ac38c481d6098016147998e4600d1fbbf}{Debug\+Manager}, \hyperlink{classGraphicsManager_a84004634b1d8d0435f6adfaaf6b3d4b4}{Graphics\+Manager}, \hyperlink{classLevelManager_a7800611361e7c2ae99102e69429456fc}{Level\+Manager}, \hyperlink{classObjectManager_ac6035906749a40ec3a1d685ebed11c89}{Object\+Manager}, and \hyperlink{classNetworkManager_ad71efb4104426ea7201edaff52ba9a00}{Network\+Manager}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Manager@{Manager}!m\+App@{m\+App}}
+\index{m\+App@{m\+App}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{m\+App}{mApp}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\+App}$\ast$ Manager\+::m\+App\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a36229c6d248b1d9db13c463e0fe3cb57}{}\label{classManager_a36229c6d248b1d9db13c463e0fe3cb57}
+\index{Manager@{Manager}!m\+Delayed\+Messages@{m\+Delayed\+Messages}}
+\index{m\+Delayed\+Messages@{m\+Delayed\+Messages}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{m\+Delayed\+Messages}{mDelayedMessages}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::list$<${\bf Message} $\ast$$>$ Manager\+::m\+Delayed\+Messages}\hypertarget{classManager_a2bc4fe3e13417022d2a12249dd4997eb}{}\label{classManager_a2bc4fe3e13417022d2a12249dd4997eb}
+\index{Manager@{Manager}!m\+Name@{m\+Name}}
+\index{m\+Name@{m\+Name}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{m\+Name}{mName}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Manager\+::m\+Name\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a126bbe95ad1a955a50d79560c3a01c4f}{}\label{classManager_a126bbe95ad1a955a50d79560c3a01c4f}
+\index{Manager@{Manager}!m\+U\+ID@{m\+U\+ID}}
+\index{m\+U\+ID@{m\+U\+ID}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{m\+U\+ID}{mUID}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned Manager\+::m\+U\+ID\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ab1385f905d790384d4b9282c82153548}{}\label{classManager_ab1385f905d790384d4b9282c82153548}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Managers/\hyperlink{Manager_8h}{Manager.\+h}\end{DoxyCompactItemize}
