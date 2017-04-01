@@ -9,14 +9,23 @@ JFramework is a 100% free, 100% component based framework that currently operate
 
 - Managers
   - ObjectManager
+    - Iterates over GameObjects in the current active level, updates their components.
   - LevelManager
+    - Change levels, update level, etc.
   - ChemistryManager
+    - Manage chemical materials and elements. Has a factory to create custom elements and materials. Updates chemicals and adjusts temperature.
   - PhysicsWorld
+    - Manage physics objects, collisions, calls scripts for collision, and passes messages around.
   - DebugManager
+    - Mainly unused, but can be used to track objects created and deleted and various other debug functionality. I would like to add AntTweakBar or something here at some point.
   - GraphicsManager
+    - Manage surfaces and screens to render GameObjects on screen. Also has functionality to convert from world space to screen space and vice versa.
   - ControllerManager
+    - Create and delete controllers.
   - NetworkManager
+    - Networking functionality, untested.
   - SoundManager
+    - Create, play, and delete sounds.
   
 - Components
   - ChemistryElement
