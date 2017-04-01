@@ -38,11 +38,23 @@ JFramework is a 100% free, 100% component based framework that currently operate
   
 - JFramework File Format
   - Parser
+    - All files that are read in using JFramework's formatting should be loaded in via the Parser class. Once loaded in, you can access elements in a file by calling the Find() method.
+    - Calling Find() will return a Root object, which is a node that contains name to value pairs, as well as children (also stored as Root) belonging to it.
+    - To get a value from a Root, simply call GetValue(), which is the value as a HashString. HashString includes helpful methods to convert itself into an int, float, std::string, char const*, arrays and etc.
+  - Formatting
+    - TODO
   
 - Assets
+  - The assets folder can be configured in a file called SystemProperties.ini with a setting as such:
+    - AssetsDirectory = /home/jimmy/Documents/ZombieStealth/Assets/
+  - The SystemProperties.ini file must be in the same directory as your game executable.
+  
 - Levels (cpp stuff)
+
 - Input
+
 - Menus
+
 - Helpful classes
   - Common
   - Interpolators
