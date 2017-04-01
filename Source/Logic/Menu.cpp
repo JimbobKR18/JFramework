@@ -73,7 +73,7 @@ MenuElement* Menu::GetElement(HashString const &aName) const
  */
 MenuElement* Menu::GetElementByObjectName(HashString const &aObjectName) const
 {
-  for(ConstElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(MenuElement::ConstElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     if((*it)->GetObject()->GetName() == aObjectName)
     {
@@ -90,7 +90,7 @@ MenuElement* Menu::GetElementByObjectName(HashString const &aObjectName) const
  */
 MenuElement* Menu::GetElementByFileName(HashString const &aFileName) const
 {
-  for(ConstElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(MenuElement::ConstElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     if((*it)->GetObject()->GetFileName() == aFileName)
     {
@@ -104,7 +104,7 @@ MenuElement* Menu::GetElementByFileName(HashString const &aFileName) const
  * @brief Get all elements in menu.
  * @return All elements in menu.
  */
-Menu::ElementContainer Menu::GetElements() const
+MenuElement::ElementContainer Menu::GetElements() const
 {
   return mMenuElements;
 }
@@ -118,7 +118,7 @@ void Menu::AddObject(MenuElement *aElement)
   if(aElement && aElement->IsReplaceable())
     assert(!"Replaceable element placed in regular elements, will cause error.");
   
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     if(aElement == *it)
     {
@@ -126,7 +126,7 @@ void Menu::AddObject(MenuElement *aElement)
     }
   }
   
-  mMenuElements.push_back(aElement);
+  mMenuElements.insert(aElement);
   aElement->SetOwner(this);
 }
 
@@ -139,7 +139,7 @@ void Menu::AddReplaceableObject(MenuElement *aElement)
   if(aElement && !aElement->IsReplaceable())
     assert(!"Regular element placed in replaceable elements, will cause error.");
   
-  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+  for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
   {
     if(aElement == *it)
     {
@@ -147,7 +147,7 @@ void Menu::AddReplaceableObject(MenuElement *aElement)
     }
   }
   
-  mReplaceableElements.push_back(aElement);
+  mReplaceableElements.insert(aElement);
   aElement->SetOwner(this);
 }
 
@@ -158,23 +158,19 @@ void Menu::AddReplaceableObject(MenuElement *aElement)
 void Menu::DeleteObject(MenuElement *aElement)
 {
   // Using delayed delete
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     if(aElement == *it)
     {
-      mMenuElements.erase(it);
-      mOwner->DeleteObjectDelayed(aElement->GetObject());
-      delete aElement;
+      DeleteElementChildren(*it, false);
       return;
     }
   }
-  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+  for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
   {
     if(aElement == *it)
     {
-      mReplaceableElements.erase(it);
-      mOwner->DeleteObjectDelayed(aElement->GetObject());
-      delete aElement;
+      DeleteElementChildren(*it, true);
       return;
     }
   }
@@ -186,12 +182,12 @@ void Menu::DeleteObject(MenuElement *aElement)
  */
 void Menu::DeleteObjects()
 {
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end();)
+  for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end();)
   {
     DeleteObject(*it);
     it = mMenuElements.begin();
   }
-  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end();)
+  for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end();)
   {
     DeleteObject(*it);
     it = mReplaceableElements.begin();
@@ -205,13 +201,13 @@ void Menu::DeleteObjects()
  */
 void Menu::Update()
 {
-  for(ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end();)
+  for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end();)
   {
     DeleteObject(*it);
     it = mReplaceableElements.begin();
   }
   mReplaceableElements.clear();
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     (*it)->Update();
   }
@@ -223,7 +219,7 @@ void Menu::Update()
  */
 void Menu::ReceiveMessage(Message const& aMessage)
 {
-  for(ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
   {
     (*it)->ReceiveMessage(aMessage);
   }
@@ -294,6 +290,8 @@ void Menu::ParseFile()
       
       parent->GetObject()->AddChild(element->GetObject());
       element->GetObject()->SetParent(parent->GetObject());
+      parent->AddChild(element);
+      element->SetParent(parent);
     }
 
     AddObject(element);
@@ -414,4 +412,43 @@ void Menu::ParseSurface(GameObject *aObject, Root *aSurface)
     objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
   }
 #endif
+}
+
+/**
+ * @brief Delete element and its children.
+ * @param aElement Element to delete.
+ * @param aReplaceable Mark true to denote that it is a replaceable element.
+ */
+void Menu::DeleteElementChildren(MenuElement *aElement, bool aReplaceable)
+{
+  for(MenuElement::ElementIT it = aElement->GetChildren().begin(); it != aElement->GetChildren().end(); ++it)
+  {
+    DeleteElementChildren(*it, aReplaceable);
+  }
+  
+  if(!aReplaceable)
+  {
+    for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+    {
+      if(*it == aElement)
+      {
+        mMenuElements.erase(it);
+        break;
+      }
+    }
+  }
+  else
+  {
+    for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+    {
+      if(*it == aElement)
+      {
+        mReplaceableElements.erase(it);
+        break;
+      }
+    }
+  }
+  
+  mOwner->DeleteObjectDelayed(aElement->GetObject());
+  delete aElement;
 }

@@ -564,8 +564,8 @@ void Level::Serialize(Parser &aParser)
   ObjectContainer menuObjects;
   for(MenuIT menuIT = mMenus.begin(); menuIT != mMenus.end(); ++menuIT)
   {
-    Menu::ElementContainer elements = (*menuIT)->GetElements();
-    for(Menu::ElementIT elementIT = elements.begin(); elementIT != elements.end(); ++elementIT)
+    MenuElement::ElementContainer elements = (*menuIT)->GetElements();
+    for(MenuElement::ElementIT elementIT = elements.begin(); elementIT != elements.end(); ++elementIT)
     {
       menuObjects.push_back((*elementIT)->GetObject());
     }

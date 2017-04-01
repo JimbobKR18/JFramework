@@ -18,22 +18,39 @@
 
 class MenuElement
 {
+public:
+  typedef std::set<MenuElement*>   ElementContainer;
+  typedef ElementContainer::iterator  ElementIT;
+  typedef ElementContainer::const_iterator  ConstElementIT;
+  
 protected:
   Menu*       mOwner;
   GameObject* mObject;
   bool        mReplaceable;
   
+  MenuElement*     mParent;
+  ElementContainer mChildren;
+  
 public:
   MenuElement(Menu *aOwner, HashString const &aFileName, bool const aReplaceable);
-  
   virtual ~MenuElement();
   
+  // GETTERS
   Menu*         GetOwner();
   GameObject*   GetObject();
   bool          IsReplaceable() const;
+  MenuElement*  GetParent() const;
+  ElementContainer& GetChildren();
   
+  // SETTERS
   void          SetOwner(Menu* aOwner);
+  void          SetParent(MenuElement *aParent);
   
+  // OPERATIONS
+  void          AddChild(MenuElement* aObject);
+  void          RemoveChild(MenuElement *aObject);
+  
+  // VIRTUALS
   virtual void  Draw() = 0;
   virtual void  Update() = 0;
   virtual void  SendMessage(Message const &aMessage) = 0;

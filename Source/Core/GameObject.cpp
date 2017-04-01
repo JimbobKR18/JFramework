@@ -55,6 +55,10 @@ GameObject::~GameObject()
   {
     it->second->SetParent(mParent);
   }
+  if(mParent)
+  {
+    mParent->RemoveChild(this);
+  }
   mParent = nullptr;
   mChildren.clear();
 }
