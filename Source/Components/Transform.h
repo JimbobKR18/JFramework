@@ -16,6 +16,18 @@ enum AxisLock
   ALL_AXES = 7
 };
 
+enum ParentInherit
+{
+  INHERIT_NONE = 0,
+  INHERIT_POSITION = 1,
+  INHERIT_ROTATION = 2,
+  INHERIT_SCALE = 4,
+  INHERIT_POSITION_ROTATION = 3,
+  INHERIT_ROTATION_SCALE = 6,
+  INHERIT_POSITION_SCALE = 5,
+  INHERIT_ALL = 7
+};
+
 class Transform : public Component
 {
 private:
@@ -27,6 +39,7 @@ private:
   Y_ALIGNMENT mYAlign;
   Z_ALIGNMENT mZAlign;
   AxisLock    mLockedAxes;
+  ParentInherit mInheritInfo;
   
   Vector3 mHierarchicalPosition;
   Vector3 mHierarchicalScale;
@@ -47,6 +60,7 @@ public:
   Y_ALIGNMENT         GetYAlignment() const;
   Z_ALIGNMENT         GetZAlignment() const;
   AxisLock            GetLockedAxes() const;
+  ParentInherit       GetParentInheritanceInfo() const;
   
   Vector3 const&      GetHierarchicalPosition() const;
   Vector3 const&      GetHierarchicalScale() const;
@@ -61,6 +75,7 @@ public:
   void                SetYAlignment(Y_ALIGNMENT const &aAlign);
   void                SetZAlignment(Z_ALIGNMENT const &aAlign);
   void                SetLockedAxis(AxisLock const &aLockedAxes);
+  void                SetParentInheritanceInfo(ParentInherit const &aInheritInfo);
   
   // VIRTUALS
   virtual void        Update();

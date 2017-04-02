@@ -6,7 +6,7 @@ int const Transform::sUID = Common::StringHashFunction("Transform");
 
 Transform::Transform() : Component(Transform::sUID), mPosition(), mScale(1, 1, 1), mSize(), mRotation(),
                          mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER), mLockedAxes(NO_AXIS),
-                         mHierarchicalPosition(), mHierarchicalScale(1, 1, 1), mHierarchicalRotation()
+                         mHierarchicalPosition(), mHierarchicalScale(1, 1, 1), mHierarchicalRotation(), mInheritInfo(INHERIT_ALL)
 {
 }
 
@@ -84,6 +84,15 @@ Z_ALIGNMENT Transform::GetZAlignment() const
 AxisLock Transform::GetLockedAxes() const
 {
   return mLockedAxes;
+}
+
+/**
+ * @brief Get parent inheritance info.
+ * @return Inheritance info.
+ */
+ParentInherit Transform::GetParentInheritanceInfo() const
+{
+  return mInheritInfo;
 }
 
 /**
@@ -220,6 +229,15 @@ void Transform::SetLockedAxis(AxisLock const &aLockedAxes)
 }
 
 /**
+ * @brief Set what will be inherited by object's parent.
+ * @param aInheritInfo Inheritance info.
+ */
+void Transform::SetParentInheritanceInfo(ParentInherit const &aInheritInfo)
+{
+  mInheritInfo = aInheritInfo;
+}
+
+/**
  * @brief Update loop
  */
 void Transform::Update()
@@ -297,6 +315,23 @@ void Transform::Serialize(Parser &aParser)
     transform->Place(TRANSFORM, "LockedAxes", "XZ_AXIS");
   else if(mLockedAxes == ALL_AXES)
     transform->Place(TRANSFORM, "LockedAxes", "ALL_AXES");
+    
+  if(mInheritInfo == INHERIT_NONE)
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_NONE");
+  else if(mLockedAxes == INHERIT_POSITION)
+    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_POSITION");
+  else if(mLockedAxes == INHERIT_ROTATION)
+    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_ROTATION");
+  else if(mLockedAxes == INHERIT_SCALE)
+    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_SCALE");
+  else if(mLockedAxes == INHERIT_POSITION_ROTATION)
+    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_POSITION_ROTATION");
+  else if(mLockedAxes == INHERIT_ROTATION_SCALE)
+    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_ROTATION_SCALE");
+  else if(mLockedAxes == INHERIT_POSITION_SCALE)
+    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_POSITION_SCALE");
+  else if(mLockedAxes == INHERIT_ALL)
+    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_ALL");
     
   // Rotations are a little TOO complicated, so set them to 0
   transform->Place(TRANSFORM, "RotationX", Common::IntToString(0));
@@ -389,6 +424,33 @@ void Transform::Deserialize(Parser &aParser)
       mLockedAxes = XZ_AXIS;
     else if(axisLock == "ALL_AXES")
       mLockedAxes = ALL_AXES;
+    else
+      assert(!"Invalid axis lock value passed in.");
+  }
+  
+  // Parent inherit info
+  Root* inheritNode = aParser.Find("Transform", "InheritInfo");
+  if(inheritNode)
+  {
+    HashString inheritInfo = inheritNode->GetValue();
+    if(inheritInfo == "INHERIT_NONE")
+      mInheritInfo = INHERIT_NONE;
+    else if(inheritInfo == "INHERIT_POSITION")
+      mInheritInfo = INHERIT_POSITION;
+    else if(inheritInfo == "INHERIT_ROTATION")
+      mInheritInfo = INHERIT_ROTATION;
+    else if(inheritInfo == "INHERIT_SCALE")
+      mInheritInfo = INHERIT_SCALE;
+    else if(inheritInfo == "INHERIT_POSITION_ROTATION")
+      mInheritInfo = INHERIT_POSITION_ROTATION;
+    else if(inheritInfo == "INHERIT_ROTATION_SCALE")
+      mInheritInfo = INHERIT_ROTATION_SCALE;
+    else if(inheritInfo == "INHERIT_POSITION_SCALE")
+      mInheritInfo = INHERIT_POSITION_SCALE;
+    else if(inheritInfo == "INHERIT_ALL")
+      mInheritInfo = INHERIT_ALL;
+    else
+      assert(!"Invalid inheritance value passed in.");
   }
 }
 
@@ -418,11 +480,19 @@ void Transform::CalculateHierarchy()
   mHierarchicalRotation = mRotation;
   
   GameObject *owner = GetOwner();
-  if(owner && owner->GetParent())
+  if(mInheritInfo != INHERIT_NONE && owner && owner->GetParent())
   {
     Transform *parentTransform = GetOwner()->GetParent()->GET<Transform>();
-    mHierarchicalPosition = parentTransform->GetHierarchicalPosition() + (parentTransform->GetHierarchicalRotation() * mPosition);
-    mHierarchicalScale = parentTransform->GetHierarchicalScale().Multiply(mScale);
-    mHierarchicalRotation = parentTransform->GetHierarchicalRotation() * mRotation;
+    if(mInheritInfo | INHERIT_POSITION != 0)
+    {
+      if(mInheritInfo | INHERIT_ROTATION != 0)
+        mHierarchicalPosition = parentTransform->GetHierarchicalPosition() + (parentTransform->GetHierarchicalRotation() * mPosition);
+      else
+        mHierarchicalPosition = parentTransform->GetHierarchicalPosition() + mPosition;
+    }
+    if(mInheritInfo | INHERIT_SCALE != 0)
+      mHierarchicalScale = parentTransform->GetHierarchicalScale().Multiply(mScale);
+    if(mInheritInfo | INHERIT_ROTATION != 0)
+      mHierarchicalRotation = parentTransform->GetHierarchicalRotation() * mRotation;
   }
 }

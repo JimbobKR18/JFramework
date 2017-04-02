@@ -1090,7 +1090,36 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
       axisLock = XZ_AXIS;
     else if(axisLockString == "ALL_AXES")
       axisLock = ALL_AXES;
+    else
+      assert(!"Invalid axis lock value passed in.");
     objTransform->SetLockedAxis(axisLock);
+  }
+  
+  // Parent inherit info
+  Root* inheritNode = aTransform->Find("InheritInfo");
+  if(inheritNode)
+  {
+    ParentInherit inheritance = INHERIT_ALL;
+    HashString inheritInfo = inheritNode->GetValue();
+    if(inheritInfo == "INHERIT_NONE")
+      inheritance = INHERIT_NONE;
+    else if(inheritInfo == "INHERIT_POSITION")
+      inheritance = INHERIT_POSITION;
+    else if(inheritInfo == "INHERIT_ROTATION")
+      inheritance = INHERIT_ROTATION;
+    else if(inheritInfo == "INHERIT_SCALE")
+      inheritance = INHERIT_SCALE;
+    else if(inheritInfo == "INHERIT_POSITION_ROTATION")
+      inheritance = INHERIT_POSITION_ROTATION;
+    else if(inheritInfo == "INHERIT_ROTATION_SCALE")
+      inheritance = INHERIT_ROTATION_SCALE;
+    else if(inheritInfo == "INHERIT_POSITION_SCALE")
+      inheritance = INHERIT_POSITION_SCALE;
+    else if(inheritInfo == "INHERIT_ALL")
+      inheritance = INHERIT_ALL;
+    else
+      assert(!"Invalid inheritance value passed in.");
+    objTransform->SetParentInheritanceInfo(inheritance);
   }
 
   // Auto set camera bounds based on objects in environment

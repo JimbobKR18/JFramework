@@ -369,6 +369,58 @@ void Menu::ParseTransform(GameObject *aObject, Root *aTransform)
     else if(aTransform->Find("AlignZ")->GetValue() != "CENTER")
       assert(!"Invalid value passed into ZAlign");
   }
+  
+  // Axis lock (optional)
+  Root* axisLockRoot = aTransform->Find("LockedAxes");
+  if(axisLockRoot)
+  {
+    AxisLock axisLock = NO_AXIS;
+    HashString axisLockString = axisLockRoot->GetValue();
+    if(axisLockString == "X_AXIS")
+      axisLock = X_AXIS;
+    else if(axisLockString == "Y_AXIS")
+      axisLock = Y_AXIS;
+    else if(axisLockString == "Z_AXIS")
+      axisLock = Z_AXIS;
+    else if(axisLockString == "XY_AXIS")
+      axisLock = XY_AXIS;
+    else if(axisLockString == "YZ_AXIS")
+      axisLock = YZ_AXIS;
+    else if(axisLockString == "XZ_AXIS")
+      axisLock = XZ_AXIS;
+    else if(axisLockString == "ALL_AXES")
+      axisLock = ALL_AXES;
+    else
+      assert(!"Invalid axis lock value passed in.");
+    objTransform->SetLockedAxis(axisLock);
+  }
+  
+  // Parent inherit info
+  Root* inheritNode = aTransform->Find("InheritInfo");
+  if(inheritNode)
+  {
+    ParentInherit inheritance = INHERIT_ALL;
+    HashString inheritInfo = inheritNode->GetValue();
+    if(inheritInfo == "INHERIT_NONE")
+      inheritance = INHERIT_NONE;
+    else if(inheritInfo == "INHERIT_POSITION")
+      inheritance = INHERIT_POSITION;
+    else if(inheritInfo == "INHERIT_ROTATION")
+      inheritance = INHERIT_ROTATION;
+    else if(inheritInfo == "INHERIT_SCALE")
+      inheritance = INHERIT_SCALE;
+    else if(inheritInfo == "INHERIT_POSITION_ROTATION")
+      inheritance = INHERIT_POSITION_ROTATION;
+    else if(inheritInfo == "INHERIT_ROTATION_SCALE")
+      inheritance = INHERIT_ROTATION_SCALE;
+    else if(inheritInfo == "INHERIT_POSITION_SCALE")
+      inheritance = INHERIT_POSITION_SCALE;
+    else if(inheritInfo == "INHERIT_ALL")
+      inheritance = INHERIT_ALL;
+    else
+      assert(!"Invalid inheritance value passed in.");
+    objTransform->SetParentInheritanceInfo(inheritance);
+  }
 }
 
 /**
