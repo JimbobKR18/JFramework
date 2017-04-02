@@ -5,7 +5,8 @@
 int const Transform::sUID = Common::StringHashFunction("Transform");
 
 Transform::Transform() : Component(Transform::sUID), mPosition(), mScale(1, 1, 1), mSize(), mRotation(),
-                         mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER), mLockedAxes(NO_AXIS)
+                         mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER), mLockedAxes(NO_AXIS),
+                         mHierarchicalPosition(), mHierarchicalScale(1, 1, 1), mHierarchicalRotation()
 {
 }
 
@@ -20,6 +21,96 @@ Transform::~Transform()
 Vector3& Transform::GetPosition()
 {
   return mPosition;
+}
+
+/**
+ * @brief Get scale of transform
+ * @return scale
+ */
+Vector3& Transform::GetScale()
+{
+  return mScale;
+}
+
+/**
+ * @brief Get size of transform (linear)
+ * @return size
+ */
+Vector3& Transform::GetSize()
+{
+  return mSize;
+}
+
+/**
+ * @brief Get rotation of transform
+ * @return rotation
+ */
+Matrix33& Transform::GetRotation()
+{
+  return mRotation;
+}
+
+/**
+ * @brief Get x alignment of transform
+ * @return alignment
+ */
+X_ALIGNMENT Transform::GetXAlignment() const
+{
+  return mXAlign;
+}
+
+/**
+ * @brief Get y alignment of transform
+ * @return alignment
+ */
+Y_ALIGNMENT Transform::GetYAlignment() const
+{
+  return mYAlign;
+}
+
+/**
+ * @brief Get z alignment of transform
+ * @return alignment
+ */
+Z_ALIGNMENT Transform::GetZAlignment() const
+{
+  return mZAlign;
+}
+
+/**
+ * @brief Get currently locked axes.
+ * @return Currently locked axes.
+ */
+AxisLock Transform::GetLockedAxes() const
+{
+  return mLockedAxes;
+}
+
+/**
+ * @brief Get position, taking into account parents.
+ * @return Hierarchical position.
+ */
+Vector3 const& Transform::GetHierarchicalPosition() const
+{
+  return mHierarchicalPosition;
+}
+
+/**
+ * @brief Get scale, taking into account parents.
+ * @return Hierarchical scale.
+ */
+Vector3 const& Transform::GetHierarchicalScale() const
+{
+  return mHierarchicalScale;
+}
+
+/**
+ * @brief Get rotation, taking into account parents.
+ * @return Hierarchical rotation.
+ */
+Matrix33 const& Transform::GetHierarchicalRotation() const
+{
+  return mHierarchicalRotation;
 }
 
 /**
@@ -63,30 +154,12 @@ void Transform::SetPosition(Vector3 const &aPos)
 }
 
 /**
- * @brief Get scale of transform
- * @return scale
- */
-Vector3& Transform::GetScale()
-{
-  return mScale;
-}
-
-/**
  * @brief Set scale of transform (scalar)
  * @param aScale scale
  */
 void Transform::SetScale(Vector3 const &aScale)
 {
   mScale = aScale;
-}
-
-/**
- * @brief Get size of transform (linear)
- * @return size
- */
-Vector3& Transform::GetSize()
-{
-  return mSize;
 }
 
 /**
@@ -99,30 +172,12 @@ void Transform::SetSize(Vector3 const &aSize)
 }
 
 /**
- * @brief Get rotation of transform
- * @return rotation
- */
-Matrix33& Transform::GetRotation()
-{
-  return mRotation;
-}
-
-/**
  * @brief Set rotation of transform
  * @param aRotation transform
  */
 void Transform::SetRotation(Matrix33 const &aRotation)
 {
   mRotation = aRotation;
-}
-
-/**
- * @brief Get x alignment of transform
- * @return alignment
- */
-X_ALIGNMENT Transform::GetXAlignment() const
-{
-  return mXAlign;
 }
 
 /**
@@ -135,15 +190,6 @@ void Transform::SetXAlignment(X_ALIGNMENT const &aAlign)
 }
 
 /**
- * @brief Get y alignment of transform
- * @return alignment
- */
-Y_ALIGNMENT Transform::GetYAlignment() const
-{
-  return mYAlign;
-}
-
-/**
  * @brief Set y alignment of transform
  * @param aAlign alignment
  */
@@ -153,30 +199,12 @@ void Transform::SetYAlignment(Y_ALIGNMENT const &aAlign)
 }
 
 /**
- * @brief Get z alignment of transform
- * @return alignment
- */
-Z_ALIGNMENT Transform::GetZAlignment() const
-{
-  return mZAlign;
-}
-
-/**
  * @brief Set z alignment of transform
  * @param aAlign alignment
  */
 void Transform::SetZAlignment(Z_ALIGNMENT const &aAlign)
 {
   mZAlign = aAlign;
-}
-
-/**
- * @brief Get currently locked axes.
- * @return Currently locked axes.
- */
-AxisLock Transform::GetLockedAxes() const
-{
-  return mLockedAxes;
 }
 
 /**
@@ -193,6 +221,22 @@ void Transform::SetLockedAxis(AxisLock const &aLockedAxes)
  */
 void Transform::Update()
 {
+  mHierarchicalPosition = Vector3();
+  mHierarchicalScale = mScale;
+  mHierarchicalRotation = Matrix33();
+  
+  GameObject *curObject = GetOwner();
+  while(curObject && curObject->GetParent())
+  {
+    Transform *currentTransform = curObject->GET<Transform>();
+    Transform *parentTransform = curObject->GetParent()->GET<Transform>();
+    mHierarchicalPosition += parentTransform->GetRotation() * currentTransform->GetPosition();
+    mHierarchicalScale *= parentTransform->GetScale();
+    
+    // TODO may be wrong.
+    mHierarchicalRotation *= parentTransform->GetRotation();
+    curObject = curObject->GetParent();
+  }
 }
 
 /**

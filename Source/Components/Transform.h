@@ -28,41 +28,46 @@ private:
   Z_ALIGNMENT mZAlign;
   AxisLock    mLockedAxes;
   
+  Vector3 mHierarchicalPosition;
+  Vector3 mHierarchicalScale;
+  Matrix33 mHierarchicalRotation;
+  
   static int const sUID;
 
 public:
   Transform();
   virtual ~Transform();
 
+  // GETTERS
   Vector3&            GetPosition();
-  void                SetPosition(Vector3 const &aPos);
-
   Vector3&            GetScale();
-  void                SetScale(Vector3 const &aScale);
-
   Vector3&            GetSize();
-  void                SetSize(Vector3 const &aSize);
-  
   Matrix33&           GetRotation();
-  void                SetRotation(Matrix33 const &aRotation);
-
   X_ALIGNMENT         GetXAlignment() const;
-  void                SetXAlignment(X_ALIGNMENT const &aAlign);
-
   Y_ALIGNMENT         GetYAlignment() const;
-  void                SetYAlignment(Y_ALIGNMENT const &aAlign);
-
   Z_ALIGNMENT         GetZAlignment() const;
-  void                SetZAlignment(Z_ALIGNMENT const &aAlign);
-  
   AxisLock            GetLockedAxes() const;
+  
+  Vector3 const&      GetHierarchicalPosition() const;
+  Vector3 const&      GetHierarchicalScale() const;
+  Matrix33 const&     GetHierarchicalRotation() const;
+  
+  // SETTERS
+  void                SetPosition(Vector3 const &aPos);
+  void                SetScale(Vector3 const &aScale);
+  void                SetSize(Vector3 const &aSize);
+  void                SetRotation(Matrix33 const &aRotation);
+  void                SetXAlignment(X_ALIGNMENT const &aAlign);
+  void                SetYAlignment(Y_ALIGNMENT const &aAlign);
+  void                SetZAlignment(Z_ALIGNMENT const &aAlign);
   void                SetLockedAxis(AxisLock const &aLockedAxes);
-
-  void                Update();
-  void                SendMessage(Message const &aMessage) {}
-  void                ReceiveMessage(Message const &aMessage) {}
-  void                Serialize(Parser &aParser);
-  void                Deserialize(Parser &aParser);
+  
+  // VIRTUALS
+  virtual void        Update();
+  virtual void        SendMessage(Message const &aMessage) {}
+  virtual void        ReceiveMessage(Message const &aMessage) {}
+  virtual void        Serialize(Parser &aParser);
+  virtual void        Deserialize(Parser &aParser);
   static int          GetUID() {return sUID;}
   static void         SerializeLUA();
 };
