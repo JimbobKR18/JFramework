@@ -221,21 +221,17 @@ void Transform::SetLockedAxis(AxisLock const &aLockedAxes)
  */
 void Transform::Update()
 {
-  mHierarchicalPosition = Vector3();
+  mHierarchicalPosition = mPosition;
   mHierarchicalScale = mScale;
-  mHierarchicalRotation = Matrix33();
+  mHierarchicalRotation = mRotation;
   
-  GameObject *curObject = GetOwner();
-  while(curObject && curObject->GetParent())
+  GameObject *parent = GetOwner()->GetParent();
+  while(parent)
   {
-    Transform *currentTransform = curObject->GET<Transform>();
-    Transform *parentTransform = curObject->GetParent()->GET<Transform>();
-    mHierarchicalPosition += parentTransform->GetRotation() * currentTransform->GetPosition();
-    mHierarchicalScale *= parentTransform->GetScale();
-    
-    // TODO may be wrong.
-    mHierarchicalRotation *= parentTransform->GetRotation();
-    curObject = curObject->GetParent();
+    Transform *parentTransform = parent->GET<Transform>();
+    mHierarchicalPosition = parentTransform->GetHierarchicalPosition() + (parentTransform->GetHierarchicalRotation() * mPosition);
+    mHierarchicalScale *= parentTransform->GetHierarchicalScale();
+    mHierarchicalRotation = parentTransform->GetHierarchicalRotation() * mRotation;
   }
 }
 
