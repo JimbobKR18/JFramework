@@ -81,6 +81,10 @@ float Resolver::CalculateSeparatingVelocity(CollisionPair const &aPair)
   return separatingVelocity * aPair.mNormal;
 }
 
+/**
+ * @brief Resolve penetration of two objects
+ * @param aPair Pair ro resolve
+ */
 void Resolver::ResolvePenetration(CollisionPair const &aPair)
 {
   if(aPair.mPenetration <= 0)

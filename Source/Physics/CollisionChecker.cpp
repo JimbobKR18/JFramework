@@ -145,10 +145,10 @@ bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position.Multiply(t1->GetScale());
-  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position.Multiply(t2->GetScale());
-  float t1Size = aPair.mShapes[0]->GetSize(0) * t1->GetScale().x;
-  float t2Size = aPair.mShapes[1]->GetSize(0) * t2->GetScale().x;
+  Vector3 t1Pos = t1->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(t1->GetHierarchicalScale());
+  Vector3 t2Pos = t2->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(t2->GetHierarchicalScale());
+  float t1Size = aPair.mShapes[0]->GetSize(0) * t1->GetHierarchicalScale().x;
+  float t2Size = aPair.mShapes[1]->GetSize(0) * t2->GetHierarchicalScale().x;
 
   if(t1Size + t2Size > (t1Pos - t2Pos).length())
   {
@@ -170,15 +170,15 @@ bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
   Transform *sphere = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *cube = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 spherePos = sphere->GetPosition() + aPair.mShapes[0]->position.Multiply(sphere->GetScale());
-  Vector3 cubePos = cube->GetPosition() + aPair.mShapes[1]->position.Multiply(cube->GetScale());
+  Vector3 spherePos = sphere->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(sphere->GetHierarchicalScale());
+  Vector3 cubePos = cube->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(cube->GetHierarchicalScale());
   Vector3 relPos = spherePos - cubePos;
   
   Vector3 closestPoint;
 
   for(int i = 0; i < 3; ++i)
   {
-    float cubeSize = aPair.mShapes[1]->GetSize(i) * cube->GetScale().GetValue(i);
+    float cubeSize = aPair.mShapes[1]->GetSize(i) * cube->GetHierarchicalScale().GetValue(i);
     
     if(relPos[i] < -cubeSize)
     {
@@ -195,7 +195,7 @@ bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
   }
 
   Vector3 dist = relPos - closestPoint;
-  float size = aPair.mShapes[0]->GetSize(0) * sphere->GetScale().x;
+  float size = aPair.mShapes[0]->GetSize(0) * sphere->GetHierarchicalScale().x;
   return dist.x*dist.x + dist.y*dist.y + dist.z*dist.z < size*size;
 }
 
@@ -208,12 +208,12 @@ bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetPosition() + aPair.mShapes[0]->position.Multiply(t1->GetScale());
-  Vector3 t2Pos = t2->GetPosition() + aPair.mShapes[1]->position.Multiply(t2->GetScale());
+  Vector3 t1Pos = t1->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(t1->GetHierarchicalScale());
+  Vector3 t2Pos = t2->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(t2->GetHierarchicalScale());
 
-  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= aPair.mShapes[0]->GetSize(0) * t1->GetScale().x + aPair.mShapes[1]->GetSize(0) * t2->GetScale().x;
-  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= aPair.mShapes[0]->GetSize(1) * t1->GetScale().y + aPair.mShapes[1]->GetSize(1) * t2->GetScale().y;
-  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= aPair.mShapes[0]->GetSize(2) * t1->GetScale().z + aPair.mShapes[1]->GetSize(2) * t2->GetScale().z;
+  bool xCheck = fabs(t1Pos.x - t2Pos.x) <= aPair.mShapes[0]->GetSize(0) * t1->GetHierarchicalScale().x + aPair.mShapes[1]->GetSize(0) * t2->GetHierarchicalScale().x;
+  bool yCheck = fabs(t1Pos.y - t2Pos.y) <= aPair.mShapes[0]->GetSize(1) * t1->GetHierarchicalScale().y + aPair.mShapes[1]->GetSize(1) * t2->GetHierarchicalScale().y;
+  bool zCheck = fabs(t1Pos.z - t2Pos.z) <= aPair.mShapes[0]->GetSize(2) * t1->GetHierarchicalScale().z + aPair.mShapes[1]->GetSize(2) * t2->GetHierarchicalScale().z;
 
   return xCheck && yCheck && zCheck;
 }
@@ -232,11 +232,11 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   Sphere* sphere = (Sphere*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 spherePos = sphere->position.Multiply(sphereTransform->GetScale()) + sphereTransform->GetPosition();
-  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), spherePos);
+  Vector3 spherePos = sphere->position.Multiply(sphereTransform->GetHierarchicalScale()) + sphereTransform->GetHierarchicalPosition();
+  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetHierarchicalPosition(), spherePos);
   
   Vector3 dist = closestPoint - spherePos;
-  if(dist.length() < sphere->GetSize(0) * sphereTransform->GetScale().x)
+  if(dist.length() < sphere->GetSize(0) * sphereTransform->GetHierarchicalScale().x)
     return true;
   
   return false;
@@ -256,8 +256,8 @@ bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
   Cube* cube = (Cube*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 cubePos = cube->position + cubeTransform->GetPosition();
-  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetPosition(), cubePos);
+  Vector3 cubePos = cube->position + cubeTransform->GetHierarchicalPosition();
+  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetHierarchicalPosition(), cubePos);
   Vector3 dist = closestPoint - cubePos;
   
   // TODO doesn't work. Check orange collision book.
@@ -295,9 +295,9 @@ bool CollisionChecker::CheckLineToSphere(CollisionPair &aPair)
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Line* line = (Line*)(aPair.mShapes[0]);
   Line tempLine = (*line);
-  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetScale());
-  tempLine.position = tempLine.position.Multiply(lineTransform->GetScale());
-  tempLine.position += lineTransform->GetPosition();
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetHierarchicalScale());
+  tempLine.position = tempLine.position.Multiply(lineTransform->GetHierarchicalScale());
+  tempLine.position += lineTransform->GetHierarchicalPosition();
     
   return CheckLineToSphere(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
 }
@@ -317,9 +317,9 @@ bool CollisionChecker::CheckLineToCube(CollisionPair &aPair)
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Line* line = (Line*)(aPair.mShapes[0]);
   Line tempLine = (*line);
-  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetScale());
-  tempLine.position = tempLine.position.Multiply(lineTransform->GetScale());
-  tempLine.position += lineTransform->GetPosition();
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetHierarchicalScale());
+  tempLine.position = tempLine.position.Multiply(lineTransform->GetHierarchicalScale());
+  tempLine.position += lineTransform->GetHierarchicalPosition();
     
   return CheckLineToCube(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
 }
@@ -354,8 +354,8 @@ bool CollisionChecker::CheckLineToLine(CollisionPair &aPair)
  */
 bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape)
 {
-  float radius = aShape->GetSize(0) * aSphere->GetScale().x;
-  Vector3 scaledSpherePos = aSphere->GetPosition() + aShape->position.Multiply(aSphere->GetScale());
+  float radius = aShape->GetSize(0) * aSphere->GetHierarchicalScale().x;
+  Vector3 scaledSpherePos = aSphere->GetHierarchicalPosition() + aShape->position.Multiply(aSphere->GetHierarchicalScale());
   Vector3 closestPoint = aSegment.ClosestPointToPoint(scaledSpherePos);
   return (closestPoint - scaledSpherePos).length() < radius;
 }
@@ -384,16 +384,16 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   Vector3 direction = aSegment.direction;
   Vector3 min = Vector3(aShape->position.x - aShape->GetSize(0),
                         aShape->position.y - aShape->GetSize(1),
-                        aShape->position.z - aShape->GetSize(2)).Multiply(aCube->GetScale());
+                        aShape->position.z - aShape->GetSize(2)).Multiply(aCube->GetHierarchicalScale());
   Vector3 max = Vector3(aShape->position.x + aShape->GetSize(0),
                         aShape->position.y + aShape->GetSize(1),
-                        aShape->position.z + aShape->GetSize(2)).Multiply(aCube->GetScale());
+                        aShape->position.z + aShape->GetSize(2)).Multiply(aCube->GetHierarchicalScale());
                         
-  min += aCube->GetPosition();
-  max += aCube->GetPosition();
+  min += aCube->GetHierarchicalPosition();
+  max += aCube->GetHierarchicalPosition();
   Vector3 collision;
   
-  if(fabs(aShape->GetSize(2) * aCube->GetScale().GetValue(2)) <= MINIMUM_SIZE)
+  if(fabs(aShape->GetSize(2) * aCube->GetHierarchicalScale().GetValue(2)) <= MINIMUM_SIZE)
   {
     dimensions = 2;
   }

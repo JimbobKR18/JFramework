@@ -55,8 +55,8 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
     {
       Transform *transform = obj->GET<Transform>();
       PhysicsObject *physicsObject = obj->GET<PhysicsObject>();
-      Vector3 position = transform->GetPosition();
-      Vector3 scale = transform->GetScale();
+      Vector3 position = transform->GetHierarchicalPosition();
+      Vector3 scale = transform->GetHierarchicalScale();
       Vector3 broadSize = physicsObject->GetBroadSize();
 
       if((*it)->GetViewMode() == VIEW_ABSOLUTE)
@@ -207,8 +207,8 @@ void PCScreen::Draw(std::vector<Surface*> const &aObjects)
       ++it;
       
       // Get transforms in local and world space.
-      Matrix33 modelTransform = transform->GetRotation() * Matrix33(transform->GetScale());
-      Vector3 position = transform->GetPosition();
+      Matrix33 modelTransform = transform->GetHierarchicalRotation() * Matrix33(transform->GetHierarchicalScale());
+      Vector3 position = transform->GetHierarchicalPosition();
       Vector3 size = transform->GetSize();
       
       TextureCoordinates *texCoord = surface->GetTextureData();
