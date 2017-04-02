@@ -1076,6 +1076,7 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
   {
     AxisLock axisLock = NO_AXIS;
     HashString axisLockString = axisLockRoot->GetValue();
+    DebugLogPrint("%s", axisLockString.ToCharArray());
     if(axisLockString == "X_AXIS")
       axisLock = X_AXIS;
     else if(axisLockString == "Y_AXIS")
@@ -1090,6 +1091,8 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
       axisLock = XZ_AXIS;
     else if(axisLockString == "ALL_AXES")
       axisLock = ALL_AXES;
+    else if(axisLockString == "NO_AXIS")
+      axisLock = NO_AXIS;
     else
       assert(!"Invalid axis lock value passed in.");
     objTransform->SetLockedAxis(axisLock);
