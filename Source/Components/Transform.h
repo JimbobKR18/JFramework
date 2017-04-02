@@ -70,6 +70,9 @@ public:
   virtual void        Deserialize(Parser &aParser);
   static int          GetUID() {return sUID;}
   static void         SerializeLUA();
+  
+private:
+  void                CalculateHierarchy();
 };
 
 #endif

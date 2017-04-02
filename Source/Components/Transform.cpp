@@ -151,6 +151,7 @@ void Transform::SetPosition(Vector3 const &aPos)
       assert(!"How did you even get here?");
       break;
   }
+  CalculateHierarchy();
 }
 
 /**
@@ -160,6 +161,7 @@ void Transform::SetPosition(Vector3 const &aPos)
 void Transform::SetScale(Vector3 const &aScale)
 {
   mScale = aScale;
+  CalculateHierarchy();
 }
 
 /**
@@ -178,6 +180,7 @@ void Transform::SetSize(Vector3 const &aSize)
 void Transform::SetRotation(Matrix33 const &aRotation)
 {
   mRotation = aRotation;
+  CalculateHierarchy();
 }
 
 /**
@@ -221,18 +224,7 @@ void Transform::SetLockedAxis(AxisLock const &aLockedAxes)
  */
 void Transform::Update()
 {
-  mHierarchicalPosition = mPosition;
-  mHierarchicalScale = mScale;
-  mHierarchicalRotation = mRotation;
-  
-  GameObject *parent = GetOwner()->GetParent();
-  if(parent)
-  {
-    Transform *parentTransform = parent->GET<Transform>();
-    mHierarchicalPosition = parentTransform->GetHierarchicalPosition() + (parentTransform->GetHierarchicalRotation() * mPosition);
-    mHierarchicalScale *= parentTransform->GetHierarchicalScale();
-    mHierarchicalRotation = parentTransform->GetHierarchicalRotation() * mRotation;
-  }
+  CalculateHierarchy();
 }
 
 /**
@@ -414,4 +406,23 @@ void Transform::SerializeLUA()
           .set("SetRotation", &Transform::SetRotation)
           .set("SetScale", &Transform::SetScale)
           .set("SetSize", &Transform::SetSize);
+}
+
+/**
+ * @brief Calculate all hierarchical data.
+ */
+void Transform::CalculateHierarchy()
+{
+  mHierarchicalPosition = mPosition;
+  mHierarchicalScale = mScale;
+  mHierarchicalRotation = mRotation;
+  
+  GameObject *owner = GetOwner();
+  if(owner && owner->GetParent())
+  {
+    Transform *parentTransform = GetOwner()->GetParent()->GET<Transform>();
+    mHierarchicalPosition = parentTransform->GetHierarchicalPosition() + (parentTransform->GetHierarchicalRotation() * mPosition);
+    mHierarchicalScale = parentTransform->GetHierarchicalScale().Multiply(mScale);
+    mHierarchicalRotation = parentTransform->GetHierarchicalRotation() * mRotation;
+  }
 }
