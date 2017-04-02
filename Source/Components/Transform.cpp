@@ -226,7 +226,7 @@ void Transform::Update()
   mHierarchicalRotation = mRotation;
   
   GameObject *parent = GetOwner()->GetParent();
-  while(parent)
+  if(parent)
   {
     Transform *parentTransform = parent->GET<Transform>();
     mHierarchicalPosition = parentTransform->GetHierarchicalPosition() + (parentTransform->GetHierarchicalRotation() * mPosition);
