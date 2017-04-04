@@ -134,7 +134,7 @@ JFramework is a 100% free, 100% component based framework that currently operate
   
 - Assets
   - The assets folder can be configured in a file called SystemProperties.ini with a setting as such:
-    - AssetsDirectory = /home/jimmy/Documents/ZombieStealth/Assets/
+    - <code>AssetsDirectory = /home/jimmy/Documents/ZombieStealth/Assets/</code>
   - The SystemProperties.ini file must be in the same directory as your game executable.
   
 - Levels (cpp stuff)
