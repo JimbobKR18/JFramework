@@ -48,8 +48,89 @@ JFramework is a 100% free, 100% component based framework that currently operate
     - All files that are read in using JFramework's formatting should be loaded in via the Parser class. Once loaded in, you can access elements in a file by calling the Find() method.
     - Calling Find() will return a Root object, which is a node that contains name to value pairs, as well as children (also stored as Root) belonging to it.
     - To get a value from a Root, simply call GetValue(), which is the value as a HashString. HashString includes helpful methods to convert itself into an int, float, std::string, char const*, arrays and etc.
-  - Formatting
-    - TODO
+  - Formatting (Insert newlines)
+    - <code>Start
+{
+	Name
+	{
+		Value = Oliver
+	}
+	PhysicsObject
+	{
+		Mass = 50
+		Static = false
+		Gravity = false
+		Passable = false
+		Damping = 0.00000000000000001
+		Restitution = 0
+		Shape_0
+		{
+			Type = SPHERE
+			Radius = 12
+			PositionX = 0
+			PositionY = 20
+			PositionZ = 0
+		}
+	}
+	Surface
+	{
+		TextureName = nesswalk.png
+		AnimationCount = 24
+		AnimationSpeeds
+		{
+			Animation_0 = 0.15,0.15
+			Animation_1 = 0.15,0.15
+			Animation_10 = 0.15,0.15
+			Animation_11 = 0.15,0.15
+			Animation_12 = 0.15,0.15
+			Animation_13 = 0.15,0.15
+			Animation_14 = 0.15,0.15
+			Animation_15 = 0.15,0.15
+			Animation_16 = 0.1,0.1
+			Animation_17 = 0.1,0.1
+			Animation_18 = 0.1,0.1
+			Animation_19 = 0.1,0.1
+			Animation_2 = 0.15,0.15
+			Animation_20 = 0.1,0.1
+			Animation_21 = 0.1,0.1
+			Animation_22 = 0.1,0.1
+			Animation_23 = 0.1,0.1
+			Animation_3 = 0.15,0.15
+			Animation_4 = 0.15,0.15
+			Animation_5 = 0.15,0.15
+			Animation_6 = 0.15,0.15
+			Animation_7 = 0.15,0.15
+			Animation_8 = 0.15,0.15
+			Animation_9 = 0.15,0.15
+		}
+		FrameNumbers = 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+		Animated = true
+		VertexShader = Basic.vs
+		FragmentShader = Basic.fs
+	}
+	Transform
+	{
+		PositionX = 0
+		PositionY = 0
+		PositionZ = 0
+		ScaleX = 1
+		ScaleY = 1
+		ScaleZ = 1
+		SizeX = 26
+		SizeY = 36
+		SizeZ = 32
+		RotationX = 0
+    RotationY = 0
+    RotationZ = 0
+		AlignX = CENTER
+		AlignY = CENTER
+		AlignZ = CENTER
+	}
+	Focus
+	{
+		IsFocus = true
+	}
+}</code>
   
 - Assets
   - The assets folder can be configured in a file called SystemProperties.ini with a setting as such:
