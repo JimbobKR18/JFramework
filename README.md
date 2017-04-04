@@ -29,12 +29,19 @@ JFramework is a 100% free, 100% component based framework that currently operate
   
 - Components
   - ChemistryElement
+    - Emits a temperature or wattage (or both!) to hand off to ChemistryMaterials, does not change properties over time.
   - ChemistryMaterial
+    - Stores and emits temperature and wattage (or both!), temperature falls off or increases over time, based on environment factors.
   - Controller
+    - Define behaviors for objects, meant to be abstracted from, due to the variety of bahaviors an object can exhibit.
   - PhysicsObject
+    - Details how an object should interact with the environment, define shapes, mass, restitution, and various other factors to dictate how the object should move.
   - StateObject
+    - Represents a state machine.
   - Surface
+    - Dictates how an object should be drawn, including coordinate system, color, texture, shader, etc.
   - Transform
+    - Details the objects orientation in the game, can be in view or world space (dictated by surface view mode.)
   
 - JFramework File Format
   - Parser
@@ -57,10 +64,18 @@ JFramework is a 100% free, 100% component based framework that currently operate
 
 - Helpful classes
   - Common
+    - Helper functions that are used throughout the engine.
   - Interpolators
+    - Helper class where you dictate an object must equal a value within a time limit, this class will handle the rest, so long as you call Update().
   - HashString
+    - Handy class that stores strings and can has faster string comparison. Class knows how to convert itself to various objects (int, float, arrays). Use this whenever possible.
   - LUA
+    - Various LUA functionality stated in this folder, check out LUATypes.h for full details.
   - MathExt
+    - Contains various math helper classes. (Vector, Matrix, etc.)
   - Constants
+    - Define values in a Constants.txt file in Assets/Game and JFramework will allow you to get these values (as float, int, string, array, etc.) for use in your game. Makes magic numbers less of a thing, and data drives the engine.
   - SystemProperties
+    - For now, define where the Assets folder for you game is.
   - StateMachine
+    - Dictate how an object should go between states.
