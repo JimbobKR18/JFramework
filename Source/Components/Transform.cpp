@@ -319,19 +319,19 @@ void Transform::Serialize(Parser &aParser)
   if(mInheritInfo == INHERIT_NONE)
     transform->Place(TRANSFORM, "InheritInfo", "INHERIT_NONE");
   else if(mInheritInfo == INHERIT_POSITION)
-    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_POSITION");
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_POSITION");
   else if(mInheritInfo == INHERIT_ROTATION)
-    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_ROTATION");
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_ROTATION");
   else if(mInheritInfo == INHERIT_SCALE)
-    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_SCALE");
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_SCALE");
   else if(mInheritInfo == INHERIT_POSITION_ROTATION)
-    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_POSITION_ROTATION");
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_POSITION_ROTATION");
   else if(mInheritInfo == INHERIT_ROTATION_SCALE)
-    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_ROTATION_SCALE");
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_ROTATION_SCALE");
   else if(mInheritInfo == INHERIT_POSITION_SCALE)
-    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_POSITION_SCALE");
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_POSITION_SCALE");
   else if(mInheritInfo == INHERIT_ALL)
-    transform->Place(TRANSFORM, "LockedAxes", "INHERIT_ALL");
+    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_ALL");
     
   // Rotations are a little TOO complicated, so set them to 0
   transform->Place(TRANSFORM, "RotationX", Common::IntToString(0));
