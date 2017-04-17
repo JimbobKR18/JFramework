@@ -12,12 +12,12 @@
 #include "ControllerManager.h"
 #include "SoundManager.h"
 #include "TileMapGenerator.h"
-#include "Menu.h"
 #include "Common.h"
 #include "LuaIncludes.h"
 #include "ObjectDeleteMessage.h"
 #include "ObjectCreateMessage.h"
 #include "ResetLevelMessage.h"
+#include "Menu.h"
 
 #if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -33,10 +33,10 @@ Level::Level()
   assert(!"Do not use the level default constructor.");
 }
 
-Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoParse) :
-             mName(""), mFileName(aFileName), mMusicName(""), mObjects(),
-             mStaticObjects(), mMenus(), mOwner(aManager), mGenerator(NULL),
-             mFocusTarget(NULL), mActive(false), mClearColor(0, 0, 0, 1), mMaxBoundary(0,0,0), 
+Level::Level(LevelManager *aManager, HashString const &aFileName, HashString const &aFolderName, bool aAutoParse) :
+             mName(""), mFolderName(aFolderName), mFileName(aFileName), mMusicName(""), mObjects(),
+             mMenus(), mOwner(aManager), mGenerator(nullptr),
+             mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMaxBoundary(0,0,0), 
              mMinBoundary(0,0,0), mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
@@ -46,21 +46,21 @@ Level::Level(LevelManager *aManager, HashString const &aFileName, bool aAutoPars
   }
   mName.Reverse();
   mName = mName.SubString(0, mName.Size() - 4);
+  
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
+  {
+    mObjects.push_back(ObjectContainer());
+  }
 
   if(aAutoParse)
+  {
     ParseBaseFile();
+  }
 }
 
 Level::~Level()
 {
-  if(mActive)
-  {
-    mObjects.clear();
-    mStaticObjects.clear();
-  }
-  else
-    DeleteObjects();
-
+  DeleteObjects();
   if(mGenerator)
     delete mGenerator;
 }
@@ -129,17 +129,14 @@ GameObject* Level::FindObject(HashString const &aObjectName)
   // This is designed to be naive
   // if two objects share the same name...
   // well, too bad.
-  ObjectIT end = mObjects.end();
-  for(ObjectIT it = mObjects.begin(); it != end; ++it)
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
-    if(aObjectName == (*it)->GetName())
-      return *it;
-  }
-  end = mStaticObjects.end();
-  for(ObjectIT it = mStaticObjects.begin(); it != end; ++it)
-  {
-    if(aObjectName == (*it)->GetName())
-      return *it;
+    ObjectIT end = mObjects[i].end();
+    for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
+    {
+      if(aObjectName == (*it)->GetName())
+        return *it;
+    }
   }
   return nullptr;
 }
@@ -149,10 +146,10 @@ GameObject* Level::FindObject(HashString const &aObjectName)
  * @param aPosition
  * @return A vector of objects touching the location, can be empty.
  */
-Level::ObjectContainer Level::FindObjects(Vector3 const &aPosition) const
+Level::ObjectVector Level::FindObjects(Vector3 const &aPosition) const
 {
-  ObjectContainer ret;
-  for(ConstObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  ObjectVector ret;
+  for(ConstObjectIT it = mObjects[ObjectPlacement::DEFAULT].begin(); it != mObjects[ObjectPlacement::DEFAULT].end(); ++it)
   {
     Transform* transform = (*it)->GET<Transform>();
     Cube cube(transform->GetPosition(), transform->GetSize());
@@ -199,7 +196,7 @@ void Level::AddMenu(Menu *aMenu)
  */
 void Level::RemoveMenu(Menu *aMenu)
 {
-  if(aMenu == NULL)
+  if(aMenu == nullptr)
     return;
 
   for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
@@ -212,9 +209,7 @@ void Level::RemoveMenu(Menu *aMenu)
     }
   }
   
-  #ifdef _DEBUG
-    assert(!"Menu not found, you sure you added it to this list?");
-  #endif
+  assert(!"Menu not found, you sure you added it to this list?");
 }
 
 /**
@@ -233,34 +228,9 @@ void Level::RemoveMenus()
  * @brief Add object to our vector of objects.
  * @param aObject
  */
-void Level::AddObject(GameObject *aObject)
+void Level::AddObject(GameObject *aObject, ObjectPlacement const aPlacement)
 {
-  ObjectIT objectsEnd = mObjects.end();
-  for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
-  {
-    if(*it == aObject)
-    {
-      return;
-    }
-  }
-  mObjects.push_back(aObject);
-}
-
-/**
- * @brief Add an object that's not meant to be updated.
- * @param aObject
- */
-void Level::AddStaticObject(GameObject *aObject)
-{
-  ObjectIT staticObjectsEnd = mStaticObjects.end();
-  for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
-  {
-    if(*it == aObject)
-    {
-      return;
-    }
-  }
-  mStaticObjects.push_back(aObject);
+  mObjects[aPlacement].insert(aObject);
 }
 
 /**
@@ -278,24 +248,19 @@ void Level::DeleteObject(GameObject *aObject)
     graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   }
   
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
-    if(aObject == *it)
+    ObjectIT end = mObjects[i].end();
+    for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
     {
-      RemoveObjectFromScenarios(*it);
-      mObjects.erase(it);
-      DeleteObjectChildren(aObject);
-      objectManager->DeleteObject(aObject);
-      return;
-    }
-  }
-  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
-  {
-    if(aObject == *it)
-    {
-      mStaticObjects.erase(it);
-      objectManager->DeleteObject(aObject);
-      return;
+      if(aObject == *it)
+      {
+        RemoveObjectFromScenarios(*it);
+        mObjects[i].erase(it);
+        DeleteObjectChildren(aObject);
+        objectManager->DeleteObject(aObject);
+        return;
+      }
     }
   }
 }
@@ -305,13 +270,13 @@ void Level::DeleteObject(GameObject *aObject)
  * @param aFileName
  * @return The newly created object.
  */
-GameObject* Level::CreateObjectDelayed(HashString const &aFileName, HashString const &aFolder)
+GameObject* Level::CreateObjectDelayed(HashString const &aFileName, HashString const &aFolder, HashString const &aType, ObjectPlacement const aPlacement)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  GameObject *object = objectManager->CreateObjectNoAdd(aFileName, aFolder);
+  GameObject *object = objectManager->CreateObjectNoAdd(aFileName, aFolder, aType);
   ObjectCreateMessage *msg = new ObjectCreateMessage(object);
   objectManager->ProcessDelayedMessage(msg);
-  AddObject(object);
+  AddObject(object, aPlacement);
   return object;
 }
 
@@ -323,27 +288,22 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
-    if(aObject == *it)
+    ObjectIT end = mObjects[i].end();
+    for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
     {
-      RemoveObjectFromScenarios(*it);
-      mObjects.erase(it);
-      DeleteObjectChildrenDelayed(aObject);
-      
-      ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
-      objectManager->ProcessDelayedMessage(msg);
-      break;
-    }
-  }
-  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
-  {
-    if(aObject == *it)
-    {
-      mStaticObjects.erase(it);
-      ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
-      objectManager->ProcessDelayedMessage(msg);
-      break;
+      if(aObject == *it)
+      {
+        RemoveObjectFromScenarios(*it);
+        mObjects[i].erase(it);
+        DeleteObjectChildrenDelayed(aObject);
+        
+        ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
+        objectManager->ProcessDelayedMessage(msg);
+        break;
+      }
     }
   }
   ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
@@ -356,25 +316,22 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
 void Level::DeleteObjects()
 {
   ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
-    RemoveObjectFromScenarios(*it);
-    manager->DeleteObject(*it);
+    ObjectIT end = mObjects[i].end();
+    for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
+    {
+      RemoveObjectFromScenarios(*it);
+      manager->DeleteObject(*it);
+    }
+    mObjects[i].clear();
   }
-  mObjects.clear();
-  
-  for(ObjectIT it = mStaticObjects.begin(); it != mStaticObjects.end(); ++it)
-  {
-    manager->DeleteObject(*it);
-  }
-  mStaticObjects.clear();
-  manager->ClearObjects();
-  
   for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
   {
     delete *it;
   }
   mMenus.clear();
+  manager->ClearObjects();
   manager->GetOwningApp()->ClearDelayedMessages();
 }
 
@@ -383,7 +340,7 @@ void Level::DeleteObjects()
  */
 void Level::Reset()
 {
-  GetManager()->ProcessDelayedMessage(new ResetLevelMessage());
+  GetManager()->ProcessDelayedMessage(new ResetLevelMessage(mName));
 }
 
 /**
@@ -441,56 +398,50 @@ Vector3 Level::GetMinBoundary() const
  * @brief Place all objects to be rendered / updated.
  * @param aPrevLevel
  */
-void Level::Load(Level* const aPrevLevel)
+void Level::Load(Level const *aPrevLevel)
 {
   // Load all objects
-  LoadObjects(mObjects, false);
-  LoadObjects(mStaticObjects, true);
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
+    LoadObjects(mObjects[i], static_cast<ObjectPlacement>(i));
 
   if(!mMusicName.Empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, Sound::INFINITE_LOOPS);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
-  mActive = true;
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMaxBoundary(mMaxBoundary);
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMinBoundary(mMinBoundary);
-  
-  mOwner->SetActiveLevel(this);
 }
 
 /**
  * @brief Specify all objects to be be displayed / updated.
  * @param aNextLevel
  */
-void Level::Unload(Level* const aNextLevel)
+void Level::Unload(Level const *aNextLevel)
 {
   // Unload all objects
-  UnloadObjects(mObjects);
-  UnloadObjects(mStaticObjects);
-  
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
+    UnloadObjects(mObjects[i]);
+    
   // Remove menus because they are not level files.
   RemoveMenus();
 
   if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
 
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(NULL);
-  mActive = false;
-  
-  mOwner->SetActiveLevel(NULL);
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(nullptr);
 }
 
 /**
  * @brief Load all objects in list into view.
  * @param aObjects Objects to add.
  */
-void Level::LoadObjects(ObjectContainer const &aObjects, bool const aStatic)
+void Level::LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const aPlacement)
 {
   for(ConstObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it, aStatic);
+    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it, (aPlacement == ObjectPlacement::STATIC) ? true : false);
     if((*it)->GET<PhysicsObject>())
       mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
     if((*it)->GET<Surface>())
@@ -532,6 +483,13 @@ void Level::UnloadObjects(ObjectContainer const &aObjects)
  */
 void Level::Update()
 {
+  for(ObjectIT it = mObjects[ObjectPlacement::REPLACEABLE].begin(); it != mObjects[ObjectPlacement::REPLACEABLE].end();)
+  {
+    DeleteObject(*it);
+    it = mObjects[ObjectPlacement::REPLACEABLE].begin();
+  }
+  mObjects[ObjectPlacement::REPLACEABLE].clear();
+  
   for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
   {
     (*it)->Update();
@@ -551,7 +509,7 @@ void Level::Update()
  */
 void Level::ParseAdditionalData(Root *aRoot, GameObject *aObject)
 { 
-  DebugLogPrint("Root %s skipped, are you trying to read in additional data for a new level type?", aRoot->GetName().ToCharArray());
+  aObject->ParseAdditionalData(aRoot);
 }
 
 /**
@@ -567,7 +525,7 @@ void Level::Serialize(Parser &aParser)
     MenuElement::ElementContainer elements = (*menuIT)->GetElements();
     for(MenuElement::ElementIT elementIT = elements.begin(); elementIT != elements.end(); ++elementIT)
     {
-      menuObjects.push_back((*elementIT)->GetObject());
+      menuObjects.insert((*elementIT)->GetObject());
     }
   }
   
@@ -575,10 +533,10 @@ void Level::Serialize(Parser &aParser)
     mGenerator->Serialize(aParser);
     
   // For each object not in a scenario, place in default scenario.
-  for(ObjectIT it = mObjects.begin(); it != mObjects.end(); ++it)
+  for(ObjectIT it = mObjects[ObjectPlacement::DEFAULT].begin(); it != mObjects[ObjectPlacement::DEFAULT].end(); ++it)
   {
     if(ObjectNotInScenario(*it))
-      mScenarios[mFileName].push_back(*it);
+      mScenarios[mFileName].insert(*it);
   }
     
   SerializeObjects(aParser, mScenarios[mFileName], menuObjects);
@@ -654,10 +612,10 @@ void Level::SerializeLUA()
 /**
  * @brief Parse file to create our level. Include game object component overrides.
  */
-void Level::ParseFile(HashString const &aFileName)
+void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName)
 {
-  TextParser parser(Common::RelativePath("Game", aFileName).c_str());
-  GameObject *object = NULL;
+  TextParser parser(Common::RelativePath(aFolderName, aFileName).c_str());
+  GameObject *object = nullptr;
   HashString const curObject = "Object_";
   int curIndex = 0;
 
@@ -671,12 +629,18 @@ void Level::ParseFile(HashString const &aFileName)
   while(curRoot)
   {
     // Make Object to assign params to
-    object = new GameObject(objectManager, curRoot->Find("File")->GetValue());
-    objectManager->ParseObject(object);
-    mObjects.push_back(object);
-    mScenarios[aFileName].push_back(object);
+    HashString folder = "Game";
+    HashString type = "Type";
+    
+    if(curRoot->Find("Folder"))
+      folder = curRoot->Find("Folder")->GetValue();
+    if(curRoot->Find("Type"))
+      type = curRoot->Find("Type")->GetValue();
+    
+    object = objectManager->CreateObjectNoAdd(curRoot->Find("File")->GetValue(), folder, type);
+    mObjects[ObjectPlacement::DEFAULT].insert(object);
+    mScenarios[aFileName].insert(object);
 
-    // TODO PhysicsObject serialization
     // Get transform information
     if(curRoot->Find("Transform"))
     {
@@ -686,6 +650,10 @@ void Level::ParseFile(HashString const &aFileName)
     if(curRoot->Find("Surface"))
     {
       ParseSurface(object, curRoot->Find("Surface"));
+    }
+    if(curRoot->Find("Text"))
+    {
+      ParseText(object, curRoot->Find("Text"));
     }
     // Get physics information
     if(curRoot->Find("PhysicsObject"))
@@ -754,6 +722,13 @@ void Level::ParseFile(HashString const &aFileName)
   {
     mMusicName = parser.Find("Music")->Find("Song")->GetValue().ToString();
   }
+  if(parser.Find("Scenario"))
+  {
+    Root* scenario = parser.Find("Scenario");
+    ParseFile(scenario->Find("Name")->GetValue(), scenario->Find("Folder")->GetValue());
+    if(scenario->Find("Load")->GetValue().ToBool())
+      LoadScenario(scenario->Find("Name")->GetValue());
+  }
   if(parser.Find("Bounds"))
   {
     /*
@@ -771,11 +746,6 @@ void Level::ParseFile(HashString const &aFileName)
     y = parser.Find("Bounds")->Find("MinY")->GetValue().ToInt();
     mMinBoundary = Vector3(x, y, 0);
   }
-  if(parser.Find("Menu"))
-  {
-    // Menu adds itself to level.
-    new Menu(this, parser.Find("Menu")->Find("MenuName")->GetValue());
-  }
   if(parser.Find("ClearColor"))
   {
     float r, g, b, a;
@@ -785,12 +755,49 @@ void Level::ParseFile(HashString const &aFileName)
     a = parser.Find("ClearColor")->Find("ColorA")->GetValue().ToFloat();
     mClearColor = Vector4(r, g, b, a);
   }
+  if(parser.Find("Menu"))
+  {
+    // Menu adds itself to level.
+    new Menu(this, parser.Find("Menu")->Find("Name")->GetValue());
+  }
 
   RootContainer untouched = parser.GetBaseRoot()->GetUntouchedRoots();
   for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
   {
     ParseAdditionalData(*it, nullptr);
   }
+}
+
+/**
+ * @brief Create and name a blank scenario to edit.
+ * @param aScenarioName Name.
+ * @return New scenario.
+ */
+Level::ObjectContainer* Level::CreateEmptyScenario(HashString const &aScenarioName)
+{
+  if(mScenarios.find(aScenarioName) == mScenarios.end())
+  {
+    mScenarios[aScenarioName] = ObjectContainer();
+    return &mScenarios[aScenarioName];
+  }
+  else
+  {
+    DebugLogPrint("%s scenario file already exists", aScenarioName.ToCharArray());
+    assert(!"Scenario file already exists.");
+  }
+}
+
+/**
+ * @brief Helper method to do all leg work for scenarios.
+ * @param aFileName File name.
+ * @param aFolderName Folder where file is located, relative to assets directory.
+ * @return ObjectContainer reference.
+ */
+Level::ObjectContainer* Level::ParseAndLoadScenario(HashString const &aFileName, HashString const &aFolderName)
+{
+  ParseFile(aFileName, aFolderName);
+  LoadScenario(aFileName);
+  return &mScenarios[aFileName];
 }
 
 /**
@@ -802,7 +809,7 @@ void Level::LoadScenario(HashString const &aFileName)
   if(mScenarios.find(aFileName) != mScenarios.end())
   {
     ObjectContainer &objects = mScenarios[aFileName];
-    LoadObjects(objects, false);
+    LoadObjects(objects, ObjectPlacement::DEFAULT);
   }
   else
   {
@@ -841,6 +848,24 @@ void Level::UnloadScenario(HashString const &aFileName)
 }
 
 /**
+ * @brief Retrieve scenario
+ * @param aFileName Name of scenario
+ * @return Scenario if found.
+ */
+Level::ObjectContainer* Level::GetScenario(HashString const &aFileName)
+{
+  if(mScenarios.find(aFileName) != mScenarios.end())
+  {
+    return &mScenarios.at(aFileName);
+  }
+  else
+  {
+    DebugLogPrint("%s scenario file not found", aFileName.ToCharArray());
+    return nullptr;
+  }
+}
+
+/**
  * @brief Unload all scenarios
  */
 void Level::UnloadScenarios()
@@ -864,25 +889,36 @@ void Level::UnloadScenarios()
  */
 void Level::ParseBaseFile()
 {
-  ParseFile(mFileName);
+  ParseFile(mFileName, mFolderName);
 }
 
 /**
  * @brief Get all objects in level.
  * @return All objects.
  */
-Level::ObjectContainer& Level::GetObjects()
+Level::ObjectContainer& Level::GetObjects(ObjectPlacement const aPlacement)
 {
-  return mObjects;
+  return mObjects[aPlacement];
 }
 
 /**
- * @brief Get all static objects in level.
- * @return All static objects.
+ * @brief Find object in container.
+ * @param aContainer Container to find object in.
+ * @param aName Name of object.
+ * @return Object, or nullptr if nothing found.
  */
-Level::ObjectContainer& Level::GetStaticObjects()
+GameObject* Level::FindObject(ObjectContainer const &aContainer, HashString const &aName)
 {
-  return mStaticObjects;
+  // This is designed to be naive
+  // if two objects share the same name...
+  // well, too bad.
+  ConstObjectIT end = aContainer.end();
+  for(ConstObjectIT it = aContainer.begin(); it != end; ++it)
+  {
+    if(aName == (*it)->GetName() || aName == (*it)->GetFileName())
+      return *it;
+  }
+  return nullptr;
 }
 
 /**
@@ -915,7 +951,6 @@ void Level::DeleteObjectChildrenDelayed(GameObject *aObject)
  * @brief Serialize out objects
  * @param aParser Parser to write objects to
  * @param aObjects Objects to write
- * @param aMenuObjects Objects to avoid writing
  */
 void Level::SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects)
 {
@@ -944,7 +979,6 @@ void Level::SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectC
 /**
  * @brief Serialize all scenario files into separate chunks.
  * @param aParser Parser to get filename and directory from. (To be in same place as main level file.)
- * @param aMenuObjects Objects to avoid writing
  */
 void Level::SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects)
 {
@@ -1170,6 +1204,14 @@ void Level::ParseSurface(GameObject *aObject, Root *aSurface)
     objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
   }
 #endif
+}
+
+/**
+ * @brief Get text data from root.
+ */
+void Level::ParseText(GameObject *aObject, Root* aText)
+{
+  // TODO
 }
 
 /**
@@ -1431,7 +1473,6 @@ void Level::ParseTileGenerator(TextParser &aParser)
   
   // Reserve the tilemap data to avoid reallocs.
   int totalAllocation = width * height;
-  mStaticObjects.reserve(totalAllocation);
   frames.reserve(totalAllocation);
   collision.reserve(totalAllocation);
   shapes.reserve(totalAllocation);

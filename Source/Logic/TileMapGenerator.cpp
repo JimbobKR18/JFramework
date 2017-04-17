@@ -337,8 +337,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   for(unsigned int i = aStart; i != aEnd; ++i)
   {
     // Make GameObject to place
-    GameObject *obj = new GameObject(aObjectManager, mImageName);
-    aObjectManager->ParseObject(obj);
+    GameObject *obj = aObjectManager->CreateObjectNoAdd(mImageName);
     aObjectManager->AddObject(obj, true);
     
     // Set name of tile, for collision reasons
@@ -402,7 +401,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
     }
     
     // Add object to our level for easier loading later
-    mOwner->AddStaticObject(obj);
+    mOwner->AddObject(obj, ObjectPlacement::STATIC);
     
     // Add object to our tile list
     mObjects.push_back(obj);

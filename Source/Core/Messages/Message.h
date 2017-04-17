@@ -20,7 +20,7 @@ private:
   
 public:
   Message() {}
-  Message(Message const &aMessage) : mDesc(aMessage.mDesc) {}
+  Message(Message const &aMessage) : mDesc(aMessage.mDesc), mContent(aMessage.mContent) {}
   virtual ~Message() {}
 
 protected:

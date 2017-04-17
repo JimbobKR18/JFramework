@@ -294,6 +294,15 @@ void GameObject::Interact(GameObject *aObject)
 }
 
 /**
+ * @brief Parse any additional data.
+ * @param aRoot Root to gather data from.
+ */
+void GameObject::ParseAdditionalData(Root *aRoot)
+{
+  DebugLogPrint("ParseAdditionalData called on GameObject, nothing to do.");
+}
+
+/**
  * @brief Make object usable in LUA
  */
 void GameObject::SerializeLUA()

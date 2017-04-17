@@ -273,6 +273,10 @@ void Surface::SendMessage(Message const &aMessage)
  */
 void Surface::ReceiveMessage(Message const &aMessage)
 {
+  if(aMessage.GetDescription() == "Finish")
+  {
+    FinishAnimation();
+  }
 }
 
 /**

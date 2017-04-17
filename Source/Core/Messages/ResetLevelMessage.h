@@ -6,10 +6,10 @@
 class ResetLevelMessage : public Message
 {
 public:
-    ResetLevelMessage() : Message()
+    ResetLevelMessage(HashString const &aLevelName) : Message()
     {
       SetDescription("ResetLevel");
-      SetContent("");
+      SetContent(aLevelName);
     }
     ~ResetLevelMessage()
     {

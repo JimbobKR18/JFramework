@@ -13,6 +13,7 @@
 #include "LuaIncludes.h"
 #include "ObjectDeleteMessage.h"
 #include "ObjectCreateMessage.h"
+#include "DefaultGameObjectFactory.h"
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCShaderSurface.h"
@@ -20,13 +21,26 @@
 #endif
 
 unsigned const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
-ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", ObjectManager::sUID)
+ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", ObjectManager::sUID),
+  mObjects(), mStaticObjects(), mFactory(new DefaultGameObjectFactory())
 {
 }
 
 ObjectManager::~ObjectManager()
 {
   ClearObjects();
+}
+
+GameObjectFactory* ObjectManager::GetGameObjectFactory() const
+{
+  return mFactory;
+}
+  
+void ObjectManager::SetGameObjectFactory(GameObjectFactory* aFactory)
+{
+  if(mFactory)
+    delete mFactory;
+  mFactory = aFactory;
 }
 
 /**
@@ -99,10 +113,10 @@ void ObjectManager::ProcessDelayedMessage(Message *aMessage)
  * @param aFilename
  * @return The newly created object.
  */
-GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString const &aFolder)
+GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString const &aFolder, HashString const &aType)
 {
   TextParser parser(Common::RelativePath(aFolder, aFilename));
-  GameObject *object = new GameObject(this, aFilename);
+  GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
   AddObject(object);
   ParseDictionary(object, parser);
   return object;
@@ -113,10 +127,10 @@ GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString 
  * @param aFilename
  * @return The newly created object.
  */
-GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder)
+GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder, HashString const &aType)
 {
   TextParser parser(Common::RelativePath(aFolder, aFilename));
-  GameObject *object = new GameObject(this, aFilename);
+  GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
   ParseDictionary(object, parser);
   return object;
 }
@@ -124,10 +138,11 @@ GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashSt
 /**
  * @brief Parse object from file, create components.
  * @param aObject
+ * @param aFolder
  */
-void ObjectManager::ParseObject(GameObject *aObject)
+void ObjectManager::ParseObject(GameObject *aObject, HashString const &aFolder)
 {
-  TextParser parser(Common::RelativePath("Game", aObject->GetFileName()));
+  TextParser parser(Common::RelativePath(aFolder, aObject->GetFileName()));
   ParseDictionary(aObject, parser);
 }
 
@@ -226,7 +241,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 {
   if(aParser.Find("Name"))
   {
-    std::string name = aParser.Find("Name", "Value")->GetValue().ToString();
+    HashString name = aParser.Find("Name", "Value")->GetValue();
     aObject->SetName(name);
   }
   if(aParser.Find("PhysicsObject"))
@@ -298,6 +313,13 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
     {
       GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
     }
+  }
+  
+  // Parse additional stuff if need be.
+  RootContainer untouched = aParser.GetBaseRoot()->GetUntouchedRoots();
+  for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
+  {
+    aObject->ParseAdditionalData(*it);
   }
 }
 

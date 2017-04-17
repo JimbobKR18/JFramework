@@ -5,28 +5,27 @@
 #include "TextParser.h"
 
 unsigned const LevelManager::sUID = Common::StringHashFunction("LevelManager");
-LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager", LevelManager::sUID), mActiveLevel(NULL)
+LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager", LevelManager::sUID), mActiveLevel(nullptr)
 {
-
 }
 
 LevelManager::~LevelManager()
 {
-
 }
 
 /**
  * @brief Create a level from a filename
  * @param aFilename
+ * @param aFolderName
  * @return 
  */
-Level *LevelManager::CreateLevel(std::string const &aFilename)
+Level *LevelManager::CreateLevel(HashString const &aFilename, HashString const &aFolderName)
 {
   Level *ret = GetLevel(aFilename);
 
   if(!ret)
   {
-    ret = new Level(this, aFilename, true);
+    ret = new Level(this, aFilename, aFolderName, true);
     AddLevel(ret);
   }
 
@@ -38,11 +37,11 @@ Level *LevelManager::CreateLevel(std::string const &aFilename)
  * @param aLevelName
  * @return 
  */
-Level *LevelManager::GetLevel(std::string const &aLevelName)
+Level *LevelManager::GetLevel(HashString const &aLevelName)
 {
-  for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
+  for(LevelIT it = mLevels.begin(); it != mLevels.end(); ++it)
   {
-    if((*it)->GetFileName() == aLevelName)
+    if((*it)->GetFileName() == aLevelName || (*it)->GetName() == aLevelName)
     {
       return *it;
     }
@@ -56,8 +55,8 @@ Level *LevelManager::GetLevel(std::string const &aLevelName)
  */
 void LevelManager::DeleteLevel(Level *aLevel)
 {
-	RemoveLevel(aLevel);
-	delete aLevel;
+  RemoveLevel(aLevel);
+  delete aLevel;
 }
 
 /**
@@ -65,7 +64,7 @@ void LevelManager::DeleteLevel(Level *aLevel)
  * @param aLevelName
  * @param aReset
  */
-void LevelManager::LoadLevelDelayed(std::string const &aLevelName, bool aReset)
+void LevelManager::LoadLevelDelayed(HashString const &aLevelName, bool aReset)
 {
   GetOwningApp()->GET<InputManager>()->DeclineInputs();
   LevelChangeMessage *msg = new LevelChangeMessage(aLevelName, (aReset ? "true" : "false"));
@@ -77,11 +76,11 @@ void LevelManager::LoadLevelDelayed(std::string const &aLevelName, bool aReset)
  * @param aLevelName
  * @param aReset
  */
-void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
+void LevelManager::LoadLevel(HashString const &aLevelName, bool aReset)
 {
-  for(std::vector<Level*>::const_iterator it = mLevels.begin(); it != mLevels.end(); ++it)
+  for(LevelConstIT it = mLevels.begin(); it != mLevels.end(); ++it)
   {
-    if((*it)->GetFileName() == aLevelName)
+    if((*it)->GetFileName() == aLevelName || (*it)->GetName() == aLevelName)
     {
       Level* prevLevel = mActiveLevel;
       if(mActiveLevel)
@@ -89,6 +88,7 @@ void LevelManager::LoadLevel(std::string const &aLevelName, bool aReset)
       if(aReset)
         (*it)->ResetLevel();
       (*it)->Load(prevLevel);
+      mActiveLevel = *it;
       GetOwningApp()->GET<InputManager>()->AcceptInputs();
       return;
     }
@@ -107,36 +107,13 @@ Level *LevelManager::GetActiveLevel()
 }
 
 /**
- * @brief Set current active level.
- * @param aLevel
- */
-void LevelManager::SetActiveLevel(Level *aLevel)
-{
-  mActiveLevel = aLevel;
-}
-
-/**
- * @brief Write out current active level to a file.
- * @param aFolder
- * @param aFileName
- */
-void LevelManager::SaveActiveLevelAs(std::string const &aFolder, std::string const &aFileName)
-{
-  TextParser objectParser(Common::RelativePath(aFolder, aFileName + ".txt"), MODE_OUTPUT);
-  TextParser mapParser(Common::RelativePath(aFolder, aFileName + "_Map.txt"), MODE_OUTPUT);
-  mActiveLevel->Serialize(objectParser);
-  mActiveLevel->SerializeTileMap(mapParser);
-  objectParser.Write();
-  mapParser.Write();
-}
-
-/**
  * @brief Basic update loop.
  */
 void LevelManager::Update()
 {
   if(mActiveLevel)
     mActiveLevel->Update();
+  
   MessageIT msgEnd = mDelayedMessages.end();
   for(MessageIT it = mDelayedMessages.begin(); it != msgEnd; ++it)
   {
@@ -191,7 +168,7 @@ void LevelManager::SerializeLUA()
 void LevelManager::AddLevel(Level *aLevel)
 {
   // Check to see if object is in our list
-  for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
+  for(LevelIT it = mLevels.begin(); it != mLevels.end(); ++it)
   {
     if(*it == aLevel || (*it)->GetFileName() == aLevel->GetFileName())
     {
@@ -199,7 +176,7 @@ void LevelManager::AddLevel(Level *aLevel)
     }
   }
   
-  mLevels.push_back(aLevel);
+  mLevels.insert(aLevel);
 }
 
 /**
@@ -208,7 +185,7 @@ void LevelManager::AddLevel(Level *aLevel)
  */
 void LevelManager::RemoveLevel(Level *aLevel)
 {
-  for(LevelsIT it = mLevels.begin(); it != mLevels.end(); ++it)
+  for(LevelIT it = mLevels.begin(); it != mLevels.end(); ++it)
   {
     if(*it == aLevel)
     {
