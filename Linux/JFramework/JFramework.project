@@ -126,19 +126,13 @@
     <File Name="../../Source/Graphics/SurfaceProperty.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Logic">
-    <File Name="../../Source/Logic/MenuElement.h"/>
     <File Name="../../Source/Logic/Constants.cpp"/>
     <File Name="../../Source/Logic/Constants.h"/>
     <File Name="../../Source/Logic/TileMapGenerator.h"/>
     <File Name="../../Source/Logic/Level.cpp"/>
     <File Name="../../Source/Logic/Level.h"/>
-    <File Name="../../Source/Logic/MenuElement.cpp"/>
     <File Name="../../Source/Logic/MenuText.h"/>
-    <File Name="../../Source/Logic/MenuImage.cpp"/>
-    <File Name="../../Source/Logic/Menu.cpp"/>
-    <File Name="../../Source/Logic/Menu.h"/>
     <File Name="../../Source/Logic/MenuText.cpp"/>
-    <File Name="../../Source/Logic/MenuImage.h"/>
     <File Name="../../Source/Logic/TileMapGenerator.cpp"/>
     <File Name="../../Source/Logic/MenuButton.h"/>
     <File Name="../../Source/Logic/MenuButton.cpp"/>
@@ -155,10 +149,17 @@
     <VirtualDirectory Name="Effects">
       <File Name="../../Source/Logic/Effects/Effect.cpp"/>
       <File Name="../../Source/Logic/Effects/Effect.h"/>
-      <File Name="../../Source/Logic/Effects/EffectsManager.cpp"/>
-      <File Name="../../Source/Logic/Effects/EffectsManager.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Logic/ControllerFactory.h"/>
+    <File Name="../../Source/Logic/GameObjectFactory.h"/>
+    <File Name="../../Source/Logic/DefaultGameObjectFactory.h"/>
+    <File Name="../../Source/Logic/DefaultGameObjectFactory.cpp"/>
+    <File Name="../../Source/Logic/Menu.cpp"/>
+    <File Name="../../Source/Logic/Menu.h"/>
+    <File Name="../../Source/Logic/MenuElement.cpp"/>
+    <File Name="../../Source/Logic/MenuElement.h"/>
+    <File Name="../../Source/Logic/MenuImage.cpp"/>
+    <File Name="../../Source/Logic/MenuImage.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Managers">
     <File Name="../../Source/Managers/InputManager.h"/>
@@ -182,6 +183,8 @@
     <File Name="../../Source/Managers/NetworkManager.cpp"/>
     <File Name="../../Source/Managers/ChemistryManager.h"/>
     <File Name="../../Source/Managers/ChemistryManager.cpp"/>
+    <File Name="../../Source/Managers/EffectsManager.cpp"/>
+    <File Name="../../Source/Managers/EffectsManager.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Parsers">
     <File Name="../../Source/Parsers/TextParser.h"/>

@@ -1,6 +1,9 @@
 #include "EffectsManager.h"
 
-EffectsManager::EffectsManager()
+unsigned const EffectsManager::sUID = Common::StringHashFunction("EffectsManager");
+
+EffectsManager::EffectsManager(GameApp *aApp) : Manager(aApp, "EffectsManager", EffectsManager::sUID),
+  mEffects()
 {
 }
 
@@ -126,14 +129,13 @@ void EffectsManager::RemoveEffects()
 
 /**
  * @brief Update loop
- * @param aDT Time passage, in seconds.
  */
-void EffectsManager::Update(float const aDT)
+void EffectsManager::Update()
 {
   EffectIT end = mEffects.end();
   for(EffectIT it = mEffects.begin(); it != end; ++it)
   {
-    (*it)->Update(aDT);
+    (*it)->Update(GetOwningApp()->GetAppStep());
   }
   for(EffectIT it = mEffects.begin(); it != end;)
   {
@@ -148,4 +150,20 @@ void EffectsManager::Update(float const aDT)
       ++it;
     }
   }
+}
+
+/**
+ * @brief Does nothing.
+ * @param aMessage Message to do nothing with.
+ */
+void EffectsManager::ProcessDelayedMessage(Message* aMessage)
+{
+}
+
+/**
+ * @brief Send message to all objects.
+ * @param aMessage Message to send.
+ */
+void EffectsManager::SendMessage(Message const& aMessage)
+{
 }

@@ -604,6 +604,7 @@ void Level::SerializeLUA()
           .set("CreateObject", &Level::CreateObjectDelayed)
           .set("DeleteObject", &Level::DeleteObjectDelayed)
           .set("ParseFile", &Level::ParseFile)
+          .set("ParseAndLoadScenario", &Level::ParseAndLoadScenario)
           .set("LoadScenario", &Level::LoadScenario)
           .set("UnloadScenario", &Level::UnloadScenario)
           .set("UnloadScenarios", &Level::UnloadScenarios);

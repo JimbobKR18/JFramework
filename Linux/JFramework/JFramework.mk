@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=28/03/17
+Date                   :=18/04/17
 CodeLitePath           :=/home/jimmy/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -62,13 +62,14 @@ AS       := as
 CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/up_up_Source_LUA_lua.c$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Common.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Shape.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_main.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_GameApp.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Controller.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_PhysicsObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_ChemistryElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_View.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_TextureCoordinates.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Graphics_ZRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_BatchRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Constants.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Level.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_MenuText.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_TileMapGenerator.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Logic_MenuButton.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/up_up_Source_Graphics_ZRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_BatchRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Constants.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Level.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_MenuText.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_TileMapGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_MenuButton.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) 
 
-Objects1=$(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCSurface.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(ObjectSuffix) 
+Objects1=$(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) \
+	
 
 
 
@@ -302,30 +303,6 @@ $(IntermediateDirectory)/up_up_Source_Logic_Level.cpp$(DependSuffix): ../../Sour
 $(IntermediateDirectory)/up_up_Source_Logic_Level.cpp$(PreprocessSuffix): ../../Source/Logic/Level.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_Level.cpp$(PreprocessSuffix) ../../Source/Logic/Level.cpp
 
-$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix): ../../Source/Logic/MenuElement.cpp $(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/MenuElement.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(DependSuffix): ../../Source/Logic/MenuElement.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(DependSuffix) -MM ../../Source/Logic/MenuElement.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(PreprocessSuffix): ../../Source/Logic/MenuElement.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(PreprocessSuffix) ../../Source/Logic/MenuElement.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix): ../../Source/Logic/MenuImage.cpp $(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/MenuImage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(DependSuffix): ../../Source/Logic/MenuImage.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(DependSuffix) -MM ../../Source/Logic/MenuImage.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(PreprocessSuffix): ../../Source/Logic/MenuImage.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(PreprocessSuffix) ../../Source/Logic/MenuImage.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix): ../../Source/Logic/Menu.cpp $(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/Menu.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(DependSuffix): ../../Source/Logic/Menu.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(DependSuffix) -MM ../../Source/Logic/Menu.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(PreprocessSuffix): ../../Source/Logic/Menu.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(PreprocessSuffix) ../../Source/Logic/Menu.cpp
-
 $(IntermediateDirectory)/up_up_Source_Logic_MenuText.cpp$(ObjectSuffix): ../../Source/Logic/MenuText.cpp $(IntermediateDirectory)/up_up_Source_Logic_MenuText.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/MenuText.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_MenuText.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/up_up_Source_Logic_MenuText.cpp$(DependSuffix): ../../Source/Logic/MenuText.cpp
@@ -357,6 +334,38 @@ $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(DependSuffix):
 
 $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(PreprocessSuffix): ../../Source/Logic/SystemProperties.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(PreprocessSuffix) ../../Source/Logic/SystemProperties.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(ObjectSuffix): ../../Source/Logic/DefaultGameObjectFactory.cpp $(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/DefaultGameObjectFactory.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(DependSuffix): ../../Source/Logic/DefaultGameObjectFactory.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(DependSuffix) -MM ../../Source/Logic/DefaultGameObjectFactory.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(PreprocessSuffix): ../../Source/Logic/DefaultGameObjectFactory.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(PreprocessSuffix) ../../Source/Logic/DefaultGameObjectFactory.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix): ../../Source/Logic/Menu.cpp $(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/Menu.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(DependSuffix): ../../Source/Logic/Menu.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(DependSuffix) -MM ../../Source/Logic/Menu.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(PreprocessSuffix): ../../Source/Logic/Menu.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_Menu.cpp$(PreprocessSuffix) ../../Source/Logic/Menu.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix): ../../Source/Logic/MenuElement.cpp $(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/MenuElement.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(DependSuffix): ../../Source/Logic/MenuElement.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(DependSuffix) -MM ../../Source/Logic/MenuElement.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(PreprocessSuffix): ../../Source/Logic/MenuElement.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_MenuElement.cpp$(PreprocessSuffix) ../../Source/Logic/MenuElement.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix): ../../Source/Logic/MenuImage.cpp $(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/MenuImage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(DependSuffix): ../../Source/Logic/MenuImage.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(DependSuffix) -MM ../../Source/Logic/MenuImage.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(PreprocessSuffix): ../../Source/Logic/MenuImage.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_MenuImage.cpp$(PreprocessSuffix) ../../Source/Logic/MenuImage.cpp
 
 $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix): ../../Source/Managers/ObjectManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/ObjectManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix) $(IncludePath)
@@ -437,6 +446,14 @@ $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(DependSuffi
 
 $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(PreprocessSuffix): ../../Source/Managers/ChemistryManager.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(PreprocessSuffix) ../../Source/Managers/ChemistryManager.cpp
+
+$(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix): ../../Source/Managers/EffectsManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/EffectsManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(DependSuffix): ../../Source/Managers/EffectsManager.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(DependSuffix) -MM ../../Source/Managers/EffectsManager.cpp
+
+$(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(PreprocessSuffix): ../../Source/Managers/EffectsManager.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(PreprocessSuffix) ../../Source/Managers/EffectsManager.cpp
 
 $(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix): ../../Source/Parsers/Parser.cpp $(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Parsers/Parser.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IncludePath)
@@ -645,14 +662,6 @@ $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(DependSuffix): .
 
 $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(PreprocessSuffix): ../../Source/Logic/Effects/Effect.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(PreprocessSuffix) ../../Source/Logic/Effects/Effect.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(ObjectSuffix): ../../Source/Logic/Effects/EffectsManager.cpp $(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/Effects/EffectsManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(DependSuffix): ../../Source/Logic/Effects/EffectsManager.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(DependSuffix) -MM ../../Source/Logic/Effects/EffectsManager.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(PreprocessSuffix): ../../Source/Logic/Effects/EffectsManager.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_Effects_EffectsManager.cpp$(PreprocessSuffix) ../../Source/Logic/Effects/EffectsManager.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

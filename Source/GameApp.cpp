@@ -9,6 +9,7 @@
 #include "InputManager.h"
 #include "SoundManager.h"
 #include "DebugManager.h"
+#include "EffectsManager.h"
 #include "LUATypes.h"
 #include "Constants.h"
 #include "SystemProperties.h"
@@ -34,6 +35,7 @@ GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAp
   AddManager(new InputManager(this));
   AddManager(new SoundManager(this));
   AddManager(new ChemistryManager(this, Constants::GetFloat("DefaultTemperature")));
+  AddManager(new EffectsManager(this));
 #ifdef _DEBUG
   AddManager(new DebugManager(this));
 #endif
