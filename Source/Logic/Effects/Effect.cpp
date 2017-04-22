@@ -1,5 +1,9 @@
 #include "Effect.h"
 
+Effect::Effect() : mObject(nullptr), mTime(0), mName("") 
+{
+}
+
 Effect::Effect(HashString const &aName, GameObject *aObject, float aTime) : mObject(aObject), mTime(aTime), mName(aName) 
 {
 }

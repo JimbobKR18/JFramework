@@ -12,6 +12,7 @@ private:
   HashString  mName;
 
 public:
+  Effect();
   Effect(HashString const &aName, GameObject *aObject, float aTime);
   virtual ~Effect();
 

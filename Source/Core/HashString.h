@@ -12,6 +12,10 @@
 #include <vector>
 #include <unordered_map>
 
+// Defined for compilation reasons
+class Vector3;
+class Vector4;
+
 // Basically an extension of std::string, now with hashing.
 class HashString
 {
@@ -78,6 +82,8 @@ public:
   std::vector<std::string> ToStringVector() const;
   std::vector<int> ToIntVector() const;
   std::vector<float> ToFloatVector() const;
+  Vector3 ToVector3() const;
+  Vector4 ToVector4() const;
   HashString ToLower() const;
   HashString ToUpper() const;
   HashString ToLiteral() const;

@@ -8,6 +8,7 @@
 #include "HashString.h"
 #include "Common.h"
 #include "LUATypes.h"
+#include "MathExt.h"
 
 // Constructors
 HashString::HashString() : mString(""), mHash(0)
@@ -444,6 +445,26 @@ std::vector<int> HashString::ToIntVector() const
 std::vector<float> HashString::ToFloatVector() const
 {
   return Common::StringToFloatVector(mString);
+}
+
+/**
+ * @brief Convert to Vector3
+ * @return String as a vector3
+ */
+Vector3 HashString::ToVector3() const
+{
+  std::vector<float> values = ToFloatVector();
+  return Vector3(values[0], values[1], values[2]);
+}
+
+/**
+ * @brief Convert to Vector4
+ * @return String as a vector4
+ */
+Vector4 HashString::ToVector4() const
+{
+  std::vector<float> values = ToFloatVector();
+  return Vector4(values[0], values[1], values[2], values[3]);
 }
 
 /**
