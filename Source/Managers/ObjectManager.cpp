@@ -9,6 +9,7 @@
 #include "GraphicsManager.h"
 #include "ChemistryManager.h"
 #include "ControllerManager.h"
+#include "EffectsManager.h"
 #include "DebugManager.h"
 #include "LuaIncludes.h"
 #include "ObjectDeleteMessage.h"
@@ -314,12 +315,42 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
       GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
     }
   }
+  if(aParser.Find("Effects"))
+  {
+    ParseEffects(aObject, aParser.Find("Effects"));
+  }
   
   // Parse additional stuff if need be.
   RootContainer untouched = aParser.GetBaseRoot()->GetUntouchedRoots();
   for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
   {
     aObject->ParseAdditionalData(*it);
+  }
+}
+
+/**
+ * @brief Parse effects root.
+ * @param aObject Object to apply effects to.
+ * @param aEffects Effects root.
+ */
+void ObjectManager::ParseEffects(GameObject *aObject, Root *aEffects)
+{
+  EffectsManager* effectsManager = GetOwningApp()->GET<EffectsManager>();
+  int curIndex = 0;
+  HashString const effectString = "Effect_";
+  HashString curEffect = effectString + Common::IntToString(curIndex);
+  while(aEffects->Find(curEffect))
+  {
+    Root* effectRoot = aEffects->Find(curEffect);
+    HashString name = effectRoot->Find("Name")->GetValue();
+    float time = effectRoot->Find("Time")->GetValue().ToFloat();
+    Effect* effect = effectsManager->CreateEffect(name);
+    effect->Deserialize(effectRoot);
+    effect->SetName(name);
+    effect->SetObject(aObject);
+    effect->SetTime(time);
+    ++curIndex;
+    curEffect = effectString + Common::IntToString(curIndex);
   }
 }
 

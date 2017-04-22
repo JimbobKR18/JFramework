@@ -18,6 +18,7 @@
 #include "ObjectCreateMessage.h"
 #include "ResetLevelMessage.h"
 #include "Menu.h"
+#include "EffectsManager.h"
 
 #if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -660,6 +661,11 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     if(curRoot->Find("PhysicsObject"))
     {
       ParsePhysicsObject(object, curRoot->Find("PhysicsObject"));
+    }
+    // Get effects information
+    if(curRoot->Find("Effects"))
+    {
+      ParseEffects(object, curRoot->Find("Effects"));
     }
     // Get chemistry information
     if(curRoot->Find("ChemistryMaterial"))
@@ -1447,6 +1453,30 @@ void Level::ParseChemistryElement(GameObject *aObject, Root* aChemistryElement)
     float directionZ = aChemistryElement->Find("DirectionZ")->GetValue().ToFloat();
     Vector3 direction = Vector3(directionX, directionY, directionZ);
     chemistryElement->SetDirectionality(direction);
+  }
+}
+
+/**
+ * @brief Parse effects root.
+ */
+void Level::ParseEffects(GameObject *aObject, Root *aEffects)
+{
+  EffectsManager* effectsManager = GetManager()->GetOwningApp()->GET<EffectsManager>();
+  int curIndex = 0;
+  HashString const effectString = "Effect_";
+  HashString curEffect = effectString + Common::IntToString(curIndex);
+  while(aEffects->Find(curEffect))
+  {
+    Root* effectRoot = aEffects->Find(curEffect);
+    HashString name = effectRoot->Find("Name")->GetValue();
+    float time = effectRoot->Find("Time")->GetValue().ToFloat();
+    Effect* effect = effectsManager->CreateEffect(name);
+    effect->Deserialize(effectRoot);
+    effect->SetName(name);
+    effect->SetObject(aObject);
+    effect->SetTime(time);
+    ++curIndex;
+    curEffect = effectString + Common::IntToString(curIndex);
   }
 }
 

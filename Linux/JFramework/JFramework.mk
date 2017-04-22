@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=18/04/17
+Date                   :=21/04/17
 CodeLitePath           :=/home/jimmy/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -69,7 +69,7 @@ Objects0=$(IntermediateDirectory)/up_up_Source_LUA_lua.c$(ObjectSuffix) $(Interm
 Objects1=$(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_Sound.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_PCSound.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) \
-	
+	$(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) 
 
 
 
@@ -662,6 +662,14 @@ $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(DependSuffix): .
 
 $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(PreprocessSuffix): ../../Source/Logic/Effects/Effect.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(PreprocessSuffix) ../../Source/Logic/Effects/Effect.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix): ../../Source/Logic/Effects/DefaultEffectsFactory.cpp $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/Effects/DefaultEffectsFactory.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(DependSuffix): ../../Source/Logic/Effects/DefaultEffectsFactory.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(DependSuffix) -MM ../../Source/Logic/Effects/DefaultEffectsFactory.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(PreprocessSuffix): ../../Source/Logic/Effects/DefaultEffectsFactory.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(PreprocessSuffix) ../../Source/Logic/Effects/DefaultEffectsFactory.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

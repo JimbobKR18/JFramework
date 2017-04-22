@@ -19,11 +19,17 @@ public:
   GameObject* GetObject() const;
   float const GetTime() const;
   HashString const GetName() const;
+  
+  // SETTERS
+  void SetObject(GameObject* aObject);
+  void SetTime(float aTime);
+  void SetName(HashString const &aName);
 
   // VIRTUALS
   virtual void Update(float const aDT) = 0;
   virtual void Complete() = 0;
   virtual bool IsComplete() = 0;
+  virtual void Deserialize(Root* aRoot) = 0;
 };
 
 #endif

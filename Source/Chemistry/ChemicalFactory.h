@@ -8,8 +8,8 @@
 class ChemicalFactory
 {
 public:
-  ChemicalFactory() {};
-  virtual ~ChemicalFactory() {};
+  ChemicalFactory() {}
+  virtual ~ChemicalFactory() {}
   
   virtual ChemistryMaterial* CreateMaterial(ChemistryManager *aManager, HashString const &aName) = 0;
   virtual ChemistryElement* CreateElement(ChemistryManager *aManager, HashString const &aName) = 0;

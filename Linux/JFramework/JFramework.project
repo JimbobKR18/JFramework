@@ -149,6 +149,9 @@
     <VirtualDirectory Name="Effects">
       <File Name="../../Source/Logic/Effects/Effect.cpp"/>
       <File Name="../../Source/Logic/Effects/Effect.h"/>
+      <File Name="../../Source/Logic/Effects/EffectsFactory.h"/>
+      <File Name="../../Source/Logic/Effects/DefaultEffectsFactory.h"/>
+      <File Name="../../Source/Logic/Effects/DefaultEffectsFactory.cpp"/>
     </VirtualDirectory>
     <File Name="../../Source/Logic/ControllerFactory.h"/>
     <File Name="../../Source/Logic/GameObjectFactory.h"/>

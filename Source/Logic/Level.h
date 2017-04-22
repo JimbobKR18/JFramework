@@ -124,6 +124,7 @@ private:
   void              ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject);
   void              ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial);
   void              ParseChemistryElement(GameObject *aObject, Root* aChemistryElement);
+  void              ParseEffects(GameObject *aObject, Root *aEffects);
   void              ParseTileGenerator(TextParser &aParser);
 };
 

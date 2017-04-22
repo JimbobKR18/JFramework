@@ -45,6 +45,7 @@ public:
   static void         SerializeLUA();
 private:
   void                ParseDictionary(GameObject *aObject, Parser &aParser);
+  void                ParseEffects(GameObject *aObject, Root *aEffects);
   typedef std::vector<GameObject*>::iterator ObjectIT;
 };
 

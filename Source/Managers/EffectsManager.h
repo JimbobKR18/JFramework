@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "Manager.h"
 #include "Effect.h"
+#include "EffectsFactory.h"
 
 class EffectsManager : public Manager
 {
@@ -14,13 +15,19 @@ public:
   
 private:
   EffectContainer mEffects;
+  EffectsFactory* mEffectsFactory;
   
   static unsigned const sUID;
   
 public:
   EffectsManager(GameApp *aApp);
   virtual ~EffectsManager();
-
+  
+  // SETTERS
+  void SetEffectsFactory(EffectsFactory *aEffectsFactory);
+  
+  // METHODS
+  Effect* CreateEffect(HashString const &aName);
   void AddEffect(Effect* aEffect);
   void RemoveEffect(HashString const &aName);
   void RemoveMatchingEffects(HashString const &aName);

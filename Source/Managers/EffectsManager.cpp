@@ -1,9 +1,10 @@
 #include "EffectsManager.h"
+#include "DefaultEffectsFactory.h"
 
 unsigned const EffectsManager::sUID = Common::StringHashFunction("EffectsManager");
 
 EffectsManager::EffectsManager(GameApp *aApp) : Manager(aApp, "EffectsManager", EffectsManager::sUID),
-  mEffects()
+  mEffects(), mEffectsFactory(new DefaultEffectsFactory())
 {
 }
 
@@ -15,6 +16,29 @@ EffectsManager::~EffectsManager()
     delete *it;
   }
   mEffects.clear();
+}
+
+/**
+ * @brief Set effects factory
+ * @param aEffectsFactory Factory
+ */
+void EffectsManager::SetEffectsFactory(EffectsFactory *aEffectsFactory)
+{
+  if(mEffectsFactory)
+    delete mEffectsFactory;
+  mEffectsFactory = aEffectsFactory;
+}
+
+/**
+ * @brief Create new effect using effect factory.
+ * @param aName Name of effect.
+ * @return New effect.
+ */
+Effect* EffectsManager::CreateEffect(HashString const &aName)
+{
+  Effect* effect = mEffectsFactory->CreateEffect(this, aName);
+  AddEffect(effect);
+  return effect;
 }
 
 /**
