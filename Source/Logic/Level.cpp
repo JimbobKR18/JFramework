@@ -434,6 +434,7 @@ void Level::Unload(Level const *aNextLevel)
     mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(nullptr);
+  mOwner->GetOwningApp()->GET<EffectsManager>()->RemoveEffects();
 }
 
 /**
