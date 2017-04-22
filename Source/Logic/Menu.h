@@ -45,6 +45,7 @@ private:
   void                           ParseFile();
   void                           ParseTransform(GameObject *aObject, Root *aTransform);
   void                           ParseSurface(GameObject *aObject, Root *aSurface);
+  void                           ParseEffects(GameObject *aObject, Root *aEffects);
   void                           DeleteElementChildren(MenuElement *aElement, bool aReplaceable);
 };
 

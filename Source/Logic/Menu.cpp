@@ -10,6 +10,7 @@
 #include "MenuText.h"
 #include "ObjectManager.h"
 #include "LevelManager.h"
+#include "EffectsManager.h"
 
 Menu::Menu(Level *aLevel, HashString const &aFileName) : mOwner(aLevel), mFileName(aFileName), mMenuElements(), mReplaceableElements()
 {
@@ -280,6 +281,10 @@ void Menu::ParseFile()
     {
       element->GetObject()->SetName(newElement->Find("ObjectName")->GetValue());
     }
+    if(newElement->Find("Effects"))
+    {
+      ParseEffects(element->GetObject(), newElement->Find("Effects"));
+    }
     if(newElement->Find("Parent"))
     {
       HashString parentName = newElement->Find("Parent")->GetValue();
@@ -466,6 +471,32 @@ void Menu::ParseSurface(GameObject *aObject, Root *aSurface)
     objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
   }
 #endif
+}
+
+/**
+ * @brief Parse effects root.
+ * @param aObject Object to apply effects to.
+ * @param aEffects Effects root.
+ */
+void Menu::ParseEffects(GameObject *aObject, Root *aEffects)
+{
+  EffectsManager* effectsManager = mOwner->GetManager()->GetOwningApp()->GET<EffectsManager>();
+  int curIndex = 0;
+  HashString const effectString = "Effect_";
+  HashString curEffect = effectString + Common::IntToString(curIndex);
+  while(aEffects->Find(curEffect))
+  {
+    Root* effectRoot = aEffects->Find(curEffect);
+    HashString name = effectRoot->Find("Name")->GetValue();
+    float time = effectRoot->Find("Time")->GetValue().ToFloat();
+    Effect* effect = effectsManager->CreateEffect(name);
+    effect->Deserialize(effectRoot);
+    effect->SetName(name);
+    effect->SetObject(aObject);
+    effect->SetTime(time);
+    ++curIndex;
+    curEffect = effectString + Common::IntToString(curIndex);
+  }
 }
 
 /**
