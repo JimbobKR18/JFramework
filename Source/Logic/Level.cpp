@@ -242,12 +242,14 @@ void Level::DeleteObject(GameObject *aObject)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
+  EffectsManager *effectsManager = mOwner->GetOwningApp()->GET<EffectsManager>();
   
   // Unassociate object from view target if need be
   if(graphicsManager->GetScreen()->GetView().GetTarget() == aObject)
   {
     graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   }
+  effectsManager->RemoveEffectsForObject(aObject);
   
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
