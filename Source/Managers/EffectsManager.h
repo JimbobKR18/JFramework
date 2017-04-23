@@ -27,7 +27,7 @@ public:
   void SetEffectsFactory(EffectsFactory *aEffectsFactory);
   
   // METHODS
-  Effect* CreateEffect(HashString const &aName);
+  Effect* CreateEffect(HashString const &aType);
   void AddEffect(Effect* aEffect);
   void RemoveEffect(HashString const &aName);
   void RemoveMatchingEffects(HashString const &aName);

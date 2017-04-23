@@ -31,12 +31,12 @@ void EffectsManager::SetEffectsFactory(EffectsFactory *aEffectsFactory)
 
 /**
  * @brief Create new effect using effect factory.
- * @param aName Name of effect.
+ * @param aType Type of effect.
  * @return New effect.
  */
-Effect* EffectsManager::CreateEffect(HashString const &aName)
+Effect* EffectsManager::CreateEffect(HashString const &aType)
 {
-  Effect* effect = mEffectsFactory->CreateEffect(this, aName);
+  Effect* effect = mEffectsFactory->CreateEffect(this, aType);
   AddEffect(effect);
   return effect;
 }

@@ -9,7 +9,7 @@ public:
   DefaultEffectsFactory();
   virtual ~DefaultEffectsFactory();
   
-  virtual Effect* CreateEffect(EffectsManager* aManager, HashString const& aName);
+  virtual Effect* CreateEffect(EffectsManager* aManager, HashString const& aType);
 };
 
 #endif // __JFramework_DefaultEffectsFactory_h_

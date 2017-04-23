@@ -10,7 +10,7 @@ public:
   EffectsFactory() {}
   virtual ~EffectsFactory() {}
   
-  virtual Effect* CreateEffect(EffectsManager *aManager, HashString const &aName) = 0;
+  virtual Effect* CreateEffect(EffectsManager *aManager, HashString const &aType) = 0;
 };
 
 #endif // __JFramework_EffectsFactory_h_

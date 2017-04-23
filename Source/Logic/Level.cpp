@@ -249,7 +249,6 @@ void Level::DeleteObject(GameObject *aObject)
   {
     graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
   }
-  effectsManager->RemoveEffectsForObject(aObject);
   
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
@@ -262,6 +261,7 @@ void Level::DeleteObject(GameObject *aObject)
         mObjects[i].erase(it);
         DeleteObjectChildren(aObject);
         objectManager->DeleteObject(aObject);
+        effectsManager->RemoveEffectsForObject(aObject);
         return;
       }
     }
@@ -1473,9 +1473,10 @@ void Level::ParseEffects(GameObject *aObject, Root *aEffects)
   while(aEffects->Find(curEffect))
   {
     Root* effectRoot = aEffects->Find(curEffect);
+    HashString type = effectRoot->Find("Type")->GetValue();
     HashString name = effectRoot->Find("Name")->GetValue();
     float time = effectRoot->Find("Time")->GetValue().ToFloat();
-    Effect* effect = effectsManager->CreateEffect(name);
+    Effect* effect = effectsManager->CreateEffect(type);
     effect->Deserialize(effectRoot);
     effect->SetName(name);
     effect->SetObject(aObject);
