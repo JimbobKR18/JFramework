@@ -75,8 +75,7 @@ void EffectsManager::RemoveEffect(HashString const &aName)
  */
 void EffectsManager::RemoveMatchingEffects(HashString const &aName)
 {
-  EffectIT end = mEffects.end();
-  for(EffectIT it = mEffects.begin(); it != end;)
+  for(EffectIT it = mEffects.begin(); it != mEffects.end();)
   {
     if((*it)->GetName() == aName)
     {
@@ -97,8 +96,7 @@ void EffectsManager::RemoveMatchingEffects(HashString const &aName)
  */
 void EffectsManager::RemoveEffectsForObject(GameObject *aObject)
 {
-  EffectIT end = mEffects.end();
-  for(EffectIT it = mEffects.begin(); it != end;)
+  for(EffectIT it = mEffects.begin(); it != mEffects.end();)
   {
     if((*it)->GetObject() == aObject)
     {
