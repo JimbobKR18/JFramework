@@ -79,9 +79,10 @@ void EffectsManager::RemoveMatchingEffects(HashString const &aName)
   {
     if((*it)->GetName() == aName)
     {
-      (*it)->Complete();
-      delete *it;
+      Effect *effect = *it;
       it = mEffects.erase(it);
+      effect->Complete();
+      delete effect;
     }
     else
     {
@@ -100,9 +101,10 @@ void EffectsManager::RemoveEffectsForObject(GameObject *aObject)
   {
     if((*it)->GetObject() == aObject)
     {
-      (*it)->Complete();
-      delete *it;
+      Effect *effect = *it;
       it = mEffects.erase(it);
+      effect->Complete();
+      delete effect;
     }
     else
     {
@@ -159,13 +161,12 @@ void EffectsManager::Update()
   {
     (*it)->Update(GetOwningApp()->GetAppStep());
   }
-  for(EffectIT it = mEffects.begin(); it != end;)
+  for(EffectIT it = mEffects.begin(); it != mEffects.end();)
   {
     if((*it)->IsComplete())
     {
       delete *it;
       it = mEffects.erase(it);
-      end = mEffects.end();
     }
     else
     {
