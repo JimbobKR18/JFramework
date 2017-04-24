@@ -538,3 +538,66 @@ void Menu::DeleteElementChildren(MenuElement *aElement, bool aReplaceable)
   mOwner->DeleteObjectDelayed(aElement->GetObject());
   delete aElement;
 }
+
+/**
+ * @brief Remove elements based on object, doesn't delete object.
+ * @param aObject Object to search for and remove.
+ */
+void Menu::ShallowRemoveElementForObject(GameObject *aObject)
+{
+  for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+  {
+    if(aObject == (*it)->GetObject())
+    {
+      ShallowRemoveElementChildren(*it, false);
+      return;
+    }
+  }
+  for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+  {
+    if(aObject == (*it)->GetObject())
+    {
+      ShallowRemoveElementChildren(*it, true);
+      return;
+    }
+  }
+}
+
+/**
+ * @brief Remove element children based on object, doesn't delete object.
+ * @param aElement Object to search for and remove.
+ * @param aReplaceable What grouping the object belongs to.
+ */
+void Menu::ShallowRemoveElementChildren(MenuElement *aElement, bool aReplaceable)
+{
+  for(MenuElement::ElementIT it = aElement->GetChildren().begin(); it != aElement->GetChildren().end(); ++it)
+  {
+    ShallowRemoveElementChildren(*it, aReplaceable);
+  }
+  
+  if(!aReplaceable)
+  {
+    for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
+    {
+      if(aElement == *it)
+      {
+        mMenuElements.erase(it);
+        break;
+      }
+    }
+  }
+  else
+  {
+    for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+    {
+      if(aElement == *it)
+      {
+        mReplaceableElements.erase(it);
+        break;
+      }
+    }
+  }
+  
+  // Don't delete object associated.
+  delete aElement;
+}

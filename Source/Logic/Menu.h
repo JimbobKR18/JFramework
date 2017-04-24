@@ -13,6 +13,10 @@
 
 class Menu
 {
+public:
+  // For shallow removal.
+  friend class Level;
+  
 private:
   Level*                         mOwner;
   HashString                     mName;
@@ -47,6 +51,8 @@ private:
   void                           ParseSurface(GameObject *aObject, Root *aSurface);
   void                           ParseEffects(GameObject *aObject, Root *aEffects);
   void                           DeleteElementChildren(MenuElement *aElement, bool aReplaceable);
+  void                           ShallowRemoveElementForObject(GameObject *aObject);
+  void                           ShallowRemoveElementChildren(MenuElement *aElement, bool aReplaceable);
 };
 
 #endif /* MENU_H_ */

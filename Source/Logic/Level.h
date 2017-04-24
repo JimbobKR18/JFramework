@@ -118,6 +118,7 @@ private:
   void              SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects);
   bool              ObjectNotInScenario(GameObject *aObject);
   void              RemoveObjectFromScenarios(GameObject *aObject);
+  void              RemoveObjectFromMenus(GameObject *aObject);
   void              ParseTransform(GameObject *aObject, Root* aTransform);
   void              ParseSurface(GameObject *aObject, Root* aSurface);
   void              ParseText(GameObject *aObject, Root* aText);

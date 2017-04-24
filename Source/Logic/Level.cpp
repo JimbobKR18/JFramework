@@ -258,6 +258,7 @@ void Level::DeleteObject(GameObject *aObject)
       if(aObject == *it)
       {
         RemoveObjectFromScenarios(*it);
+        RemoveObjectFromMenus(*it);
         mObjects[i].erase(it);
         DeleteObjectChildren(aObject);
         objectManager->DeleteObject(aObject);
@@ -301,6 +302,7 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
       if(aObject == *it)
       {
         RemoveObjectFromScenarios(*it);
+        RemoveObjectFromMenus(*it);
         mObjects[i].erase(it);
         DeleteObjectChildrenDelayed(aObject);
         
@@ -331,11 +333,7 @@ void Level::DeleteObjects()
     }
     mObjects[i].clear();
   }
-  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
-  {
-    delete *it;
-  }
-  mMenus.clear();
+  RemoveMenus();
   manager->ClearObjects();
   manager->GetOwningApp()->ClearDelayedMessages();
 }
@@ -1050,6 +1048,18 @@ void Level::RemoveObjectFromScenarios(GameObject *aObject)
         break;
       }
     }
+  }
+}
+
+/**
+ * @brief Remove object from Menus, shallow.
+ * @param aObject Object to search and remove.
+ */
+void Level::RemoveObjectFromMenus(GameObject *aObject)
+{
+  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
+  {
+    (*it)->ShallowRemoveElementForObject(aObject);
   }
 }
 
