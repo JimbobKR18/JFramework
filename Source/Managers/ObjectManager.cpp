@@ -6,6 +6,7 @@
 #include "ChemistryElement.h"
 #include "Transform.h"
 #include "StateObject.h"
+#include "CustomScript.h"
 #include "GraphicsManager.h"
 #include "ChemistryManager.h"
 #include "ControllerManager.h"
@@ -305,6 +306,12 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 
     surface->Deserialize(aParser);
     aObject->AddComponent(surface);
+  }
+  if(aParser.Find("CustomScript"))
+  {
+    CustomScript *customScript = new CustomScript();
+    customScript->Deserialize(aParser);
+    aObject->AddComponent(customScript);
   }
   if(aParser.Find("Focus"))
   {

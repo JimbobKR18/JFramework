@@ -13,6 +13,7 @@
 #include "Components/ChemistryElement.h"
 #include "Components/ChemistryMaterial.h"
 #include "Components/StateObject.h"
+#include "Components/CustomScript.h"
 #include "Core/GameObject.h"
 #include "Managers/SoundManager.h"
 #include "Managers/InputManager.h"
@@ -91,6 +92,9 @@ namespace LUABind
     
     // States
     StateObject::SerializeLUA();
+    
+    // CustomScript
+    CustomScript::SerializeLUA();
 
     // GameObject
     GameObject::SerializeLUA();

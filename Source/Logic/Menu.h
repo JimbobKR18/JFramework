@@ -50,6 +50,7 @@ private:
   void                           ParseTransform(GameObject *aObject, Root *aTransform);
   void                           ParseSurface(GameObject *aObject, Root *aSurface);
   void                           ParseEffects(GameObject *aObject, Root *aEffects);
+  void                           ParseCustomScript(GameObject *aObject, Root *aCustomScript);
   void                           DeleteElementChildren(MenuElement *aElement, bool aReplaceable);
   void                           ShallowRemoveElementForObject(GameObject *aObject);
   void                           ShallowRemoveElementChildren(MenuElement *aElement, bool aReplaceable);

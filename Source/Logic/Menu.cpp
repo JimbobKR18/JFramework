@@ -11,6 +11,7 @@
 #include "ObjectManager.h"
 #include "LevelManager.h"
 #include "EffectsManager.h"
+#include "CustomScript.h"
 
 Menu::Menu(Level *aLevel, HashString const &aFileName) : mOwner(aLevel), mFileName(aFileName), mMenuElements(), mReplaceableElements()
 {
@@ -277,6 +278,10 @@ void Menu::ParseFile()
     {
       ParseSurface(element->GetObject(), newElement->Find("Surface"));
     }
+    if(newElement->Find("CustomScript"))
+    {
+      ParseCustomScript(element->GetObject(), newElement->Find("CustomScript"));
+    }
     if(newElement->Find("ObjectName"))
     {
       element->GetObject()->SetName(newElement->Find("ObjectName")->GetValue());
@@ -498,6 +503,26 @@ void Menu::ParseEffects(GameObject *aObject, Root *aEffects)
     ++curIndex;
     curEffect = effectString + Common::IntToString(curIndex);
   }
+}
+
+/**
+ * @brief Parse custom script root.
+ * @param aObject Object to apply effects to.
+ * @param aCustomScript Custom script root.
+ */
+void Menu::ParseCustomScript(GameObject *aObject, Root *aCustomScript)
+{
+  CustomScript *customScript = aObject->GET<CustomScript>();
+  if(!customScript)
+  {
+    customScript = new CustomScript();
+    aObject->AddComponent(customScript);
+  }
+  
+  if(aCustomScript->Find("FileName"))
+    customScript->SetFileName(aCustomScript->Find("FileName")->GetValue());
+  if(aCustomScript->Find("UpdateFunctionName"))
+    customScript->SetUpdateFunctionName(aCustomScript->Find("UpdateFunctionName")->GetValue());
 }
 
 /**

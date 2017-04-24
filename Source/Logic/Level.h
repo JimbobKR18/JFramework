@@ -126,6 +126,7 @@ private:
   void              ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial);
   void              ParseChemistryElement(GameObject *aObject, Root* aChemistryElement);
   void              ParseEffects(GameObject *aObject, Root *aEffects);
+  void              ParseCustomScript(GameObject *aObject, Root *aCustomScript);
   void              ParseTileGenerator(TextParser &aParser);
 };
 

@@ -7,6 +7,7 @@
 #include "ChemistryElement.h"
 #include "GraphicsManager.h"
 #include "ChemistryManager.h"
+#include "CustomScript.h"
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
 #include "ControllerManager.h"
@@ -671,6 +672,11 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     if(curRoot->Find("Effects"))
     {
       ParseEffects(object, curRoot->Find("Effects"));
+    }
+    // Get customscript information
+    if(curRoot->Find("CustomScript"))
+    {
+      ParseCustomScript(object, curRoot->Find("CustomScript"));
     }
     // Get chemistry information
     if(curRoot->Find("ChemistryMaterial"))
@@ -1496,6 +1502,24 @@ void Level::ParseEffects(GameObject *aObject, Root *aEffects)
     ++curIndex;
     curEffect = effectString + Common::IntToString(curIndex);
   }
+}
+
+/**
+ * @brief Parse custom script root.
+ */
+void Level::ParseCustomScript(GameObject *aObject, Root *aCustomScript)
+{
+  CustomScript *customScript = aObject->GET<CustomScript>();
+  if(!customScript)
+  {
+    customScript = new CustomScript();
+    aObject->AddComponent(customScript);
+  }
+  
+  if(aCustomScript->Find("FileName"))
+    customScript->SetFileName(aCustomScript->Find("FileName")->GetValue());
+  if(aCustomScript->Find("UpdateFunctionName"))
+    customScript->SetUpdateFunctionName(aCustomScript->Find("UpdateFunctionName")->GetValue());
 }
 
 /**
