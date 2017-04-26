@@ -4,8 +4,9 @@
 #include <cmath>
 #include "Common.h"
 
-#define DEGREE_TO_RADS (3.141592f / 180.0f)
-#define RADS_TO_DEGREE (180.0f / 3.141592f)
+#define PI 3.1415926f
+#define DEGREE_TO_RADS (PI / 180.0f)
+#define RADS_TO_DEGREE (180.0f / PI)
 
 enum X_ALIGNMENT
 {
