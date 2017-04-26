@@ -353,10 +353,10 @@ void ObjectManager::ParseEffects(GameObject *aObject, Root *aEffects)
     HashString name = effectRoot->Find("Name")->GetValue();
     float time = effectRoot->Find("Time")->GetValue().ToFloat();
     Effect* effect = effectsManager->CreateEffect(type);
-    effect->Deserialize(effectRoot);
     effect->SetName(name);
     effect->SetObject(aObject);
     effect->SetTime(time);
+    effect->Deserialize(effectRoot);
     ++curIndex;
     curEffect = effectString + Common::IntToString(curIndex);
   }
