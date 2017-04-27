@@ -38,18 +38,6 @@ Root const *Root::Search(HashString const &aValue) const
         return ret;
       }
     }
-    // Search children for node (deeper)
-    for(rootConstIT it = mChildren.begin(); it != mChildren.end(); ++it)
-    {
-      Root const *ret = (*it)->Search(aValue);
-      if(ret)
-      {
-        if(ret->mName == aValue)
-        {
-          return ret;
-        }
-      }
-    }
   }
 
   return nullptr;
@@ -77,19 +65,6 @@ Root *Root::Find(HashString const &aValue)
       {
         ret->mTouched = true;
         return ret;
-      }
-    }
-    // Search children for node (deeper)
-    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
-    {
-      Root *ret = (*it)->Find(aValue);
-      if(ret)
-      {
-        if(ret->mName == aValue)
-        {
-          ret->mTouched = true;
-          return ret;
-        }
       }
     }
   }
