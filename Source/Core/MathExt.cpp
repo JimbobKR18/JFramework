@@ -1031,3 +1031,810 @@ HashString Matrix33::GetName()
 {
   return "Matrix33";
 }
+
+//-----------------------------
+// MATRIX44
+//-----------------------------
+
+Matrix44::Matrix44()
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
+    {
+      if (i == j)
+        values[i][j] = 1;
+      else
+        values[i][j] = 0;
+    }
+  }
+}
+
+Matrix44::Matrix44(float aValues[4][4])
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
+    {
+      values[i][j] = aValues[i][j];
+    }
+  }
+}
+
+Matrix44::Matrix44(float aValues[16])
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
+    {
+      values[i][j] = aValues[(i * 4) + j];
+    }
+  }
+}
+
+Matrix44::Matrix44(Vector4 const &aValues)
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
+    {
+      if (i == j)
+        values[i][j] = aValues.GetValue(i);
+      else
+        values[i][j] = 0;
+    }
+  }
+}
+
+Matrix44 Matrix44::Concatenate(Matrix44 const &rhs) const
+{
+  return *this * rhs;
+}
+
+Matrix44 Matrix44::Rotate(Vector4 const &aAxis, float const aAngle) const
+{
+  // THE IDEA:
+  // Rotate to xz plane
+  // Rotate to z axis
+  // Rotate about z axis
+  // Rotate by inverse z axis transform
+  // Rotate by inverse xz plane transform
+  float angle = aAngle * DEGREE_TO_RADS;
+  float cosine = cos(angle);
+  float sine = sin(angle);
+  float xylength = sqrt(aAxis.x * aAxis.x + aAxis.y * aAxis.y);
+  float xyzlength = aAxis.length();
+
+  // What if we're already on the z plane?
+  float templength = xylength > 0.0f ? xylength : 1.0f;
+
+  float xzvalues[4][4] =
+  {
+  { aAxis.x / templength, aAxis.y / templength, 0, 0 },
+  { -aAxis.y / templength, aAxis.x / templength, 0, 0 },
+  { 0, 0, 1, 0},
+  { 0, 0, 0, 1 } };
+  float zvalues[4][4] =
+  {
+  { aAxis.z / xyzlength, 0, -xylength / xyzlength, 0 },
+  { 0, 1, 0, 0 },
+  { xylength / xyzlength, 0, aAxis.z / xyzlength, 0 },
+  { 0, 0, 0, 1} };
+  float rotvalues[4][4] =
+  {
+  { cosine, -sine, 0, 0 },
+  { sine, cosine, 0, 0 },
+  { 0, 0, 1, 0 },
+  { 0, 0, 0, 1 } };
+
+  // Create identity matrix if on z plane already
+  if (xylength <= 0.0f)
+  {
+    xzvalues[0][0] = 1.0f;
+    xzvalues[1][1] = 1.0f;
+  }
+
+  Matrix44 ret;
+  Matrix44 xztrans(xzvalues);
+  Matrix44 ztrans(zvalues);
+  Matrix44 xzinvert = xztrans.Invert();
+  Matrix44 zinvert = ztrans.Invert();
+  Matrix44 rotation(rotvalues);
+
+  ret = xzinvert * zinvert * rotation * ztrans * xztrans;
+
+  return ret;
+}
+
+Matrix44 Matrix44::Invert() const
+{
+  Matrix44 ret;
+  float det = Determinant();
+
+  ret.values[0][0] = 
+    Determinant(values[1][1], values[1][1], values[2][3] * values[3][2], values[2][2] * values[3][3]) +
+    Determinant(values[1][2], values[1][2], values[2][1] * values[3][3], values[2][3] * values[3][1]) + 
+    Determinant(values[1][3], values[1][3], values[2][2] * values[3][1], values[2][1] * values[3][2]);
+  ret.values[0][1] = 
+    Determinant(values[0][1], values[0][1], values[2][2] * values[3][3], values[2][3] * values[3][2]) +
+    Determinant(values[0][2], values[0][2], values[2][3] * values[3][1], values[2][1] * values[3][3]) + 
+    Determinant(values[0][3], values[0][3], values[2][1] * values[3][2], values[2][2] * values[3][1]);
+  ret.values[0][2] = 
+    Determinant(values[0][1], values[0][1], values[1][3] * values[3][2], values[1][2] * values[3][3]) +
+    Determinant(values[0][2], values[0][2], values[1][1] * values[3][3], values[1][3] * values[3][1]) + 
+    Determinant(values[0][3], values[0][3], values[1][2] * values[3][1], values[1][1] * values[3][2]);
+  ret.values[0][3] = 
+    Determinant(values[0][1], values[0][1], values[1][2] * values[2][3], values[1][3] * values[2][2]) +
+    Determinant(values[0][2], values[0][2], values[1][3] * values[2][1], values[1][1] * values[2][3]) + 
+    Determinant(values[0][3], values[0][3], values[1][1] * values[2][2], values[1][2] * values[2][1]);
+
+  ret.values[1][0] = 
+    Determinant(values[1][0], values[1][0], values[2][2] * values[3][3], values[2][3] * values[3][2]) +
+    Determinant(values[1][2], values[1][2], values[2][3] * values[3][0], values[2][0] * values[3][3]) + 
+    Determinant(values[1][3], values[1][3], values[2][0] * values[3][2], values[2][2] * values[3][0]);
+  ret.values[1][1] = 
+    Determinant(values[0][0], values[0][0], values[2][3] * values[3][2], values[2][2] * values[3][3]) +
+    Determinant(values[0][2], values[0][2], values[2][0] * values[3][3], values[2][3] * values[3][0]) + 
+    Determinant(values[0][3], values[0][3], values[2][2] * values[3][0], values[2][0] * values[3][2]);
+  ret.values[1][2] = 
+    Determinant(values[0][0], values[0][0], values[1][2] * values[3][3], values[1][3] * values[3][2]) +
+    Determinant(values[0][2], values[0][2], values[1][3] * values[3][0], values[1][0] * values[3][3]) + 
+    Determinant(values[0][3], values[0][3], values[1][0] * values[3][2], values[1][2] * values[3][0]);
+  ret.values[1][3] = 
+    Determinant(values[0][0], values[0][0], values[1][3] * values[2][2], values[1][2] * values[2][3]) +
+    Determinant(values[0][2], values[0][2], values[1][0] * values[2][3], values[1][3] * values[2][0]) + 
+    Determinant(values[0][3], values[0][3], values[1][2] * values[2][0], values[1][0] * values[2][2]);
+
+  ret.values[2][0] = 
+    Determinant(values[1][0], values[1][0], values[2][3] * values[3][1], values[2][1] * values[3][3]) +
+    Determinant(values[1][1], values[1][1], values[2][0] * values[3][3], values[2][3] * values[3][0]) + 
+    Determinant(values[1][3], values[1][3], values[2][1] * values[3][0], values[2][0] * values[3][1]);
+  ret.values[2][1] = 
+    Determinant(values[0][0], values[0][0], values[2][1] * values[3][3], values[2][3] * values[3][1]) +
+    Determinant(values[0][1], values[0][1], values[2][3] * values[3][0], values[2][0] * values[3][3]) + 
+    Determinant(values[0][3], values[0][3], values[2][0] * values[3][1], values[2][1] * values[3][0]);
+  ret.values[2][2] = 
+    Determinant(values[0][0], values[0][0], values[1][3] * values[3][1], values[1][1] * values[3][3]) +
+    Determinant(values[0][1], values[0][1], values[1][0] * values[3][3], values[1][3] * values[3][0]) + 
+    Determinant(values[0][3], values[0][3], values[1][1] * values[3][0], values[1][0] * values[3][1]);
+  ret.values[2][3] = 
+    Determinant(values[0][0], values[0][0], values[1][1] * values[2][3], values[1][3] * values[2][1]) +
+    Determinant(values[0][1], values[0][1], values[1][3] * values[2][0], values[1][0] * values[2][3]) + 
+    Determinant(values[0][3], values[0][3], values[1][0] * values[2][1], values[1][1] * values[2][0]);
+
+  ret.values[3][0] = 
+    Determinant(values[1][0], values[1][0], values[2][1] * values[3][2], values[2][2] * values[3][1]) +
+    Determinant(values[1][1], values[1][1], values[2][2] * values[3][0], values[2][0] * values[3][2]) + 
+    Determinant(values[1][2], values[1][2], values[2][0] * values[3][1], values[2][1] * values[3][0]);
+  ret.values[3][1] = 
+    Determinant(values[0][0], values[0][0], values[2][2] * values[3][1], values[2][1] * values[3][2]) +
+    Determinant(values[0][1], values[0][1], values[2][0] * values[3][2], values[2][2] * values[3][0]) + 
+    Determinant(values[0][2], values[0][2], values[2][1] * values[3][0], values[2][0] * values[3][1]);
+  ret.values[3][2] = 
+    Determinant(values[0][0], values[0][0], values[1][1] * values[3][2], values[1][2] * values[3][1]) +
+    Determinant(values[0][1], values[0][1], values[1][2] * values[3][0], values[1][0] * values[3][2]) + 
+    Determinant(values[0][2], values[0][2], values[1][0] * values[3][1], values[1][1] * values[3][0]);
+  ret.values[3][3] = 
+    Determinant(values[0][0], values[0][0], values[1][2] * values[2][1], values[1][1] * values[2][2]) +
+    Determinant(values[0][1], values[0][1], values[1][0] * values[2][2], values[1][2] * values[2][0]) + 
+    Determinant(values[0][2], values[0][2], values[1][1] * values[2][0], values[1][0] * values[2][1]);
+
+  return ret * (1.0f / det);
+}
+
+float Matrix44::Determinant() const
+{
+  return 
+    Determinant(values[0][0] * values[1][1], values[0][0] * values[1][1], values[2][3] * values[3][2], values[2][2] * values[3][3]) +
+    Determinant(values[0][0] * values[1][2], values[0][0] * values[1][2], values[2][1] * values[3][3], values[2][3] * values[3][1]) +
+    Determinant(values[0][0] * values[1][3], values[0][0] * values[1][3], values[2][2] * values[3][1], values[2][1] * values[3][2]) +
+    Determinant(values[0][1] * values[1][0], values[0][1] * values[1][0], values[2][2] * values[3][3], values[2][3] * values[3][2]) +
+    Determinant(values[0][1] * values[1][2], values[0][1] * values[1][2], values[2][3] * values[3][0], values[2][0] * values[3][3]) +
+    Determinant(values[0][1] * values[1][3], values[0][1] * values[1][3], values[2][0] * values[3][2], values[2][2] * values[3][0]) +
+    Determinant(values[0][2] * values[1][0], values[0][2] * values[1][0], values[2][3] * values[3][1], values[2][1] * values[3][3]) +
+    Determinant(values[0][2] * values[1][1], values[0][2] * values[1][1], values[2][0] * values[3][3], values[2][3] * values[3][0]) +
+    Determinant(values[0][2] * values[1][3], values[0][2] * values[1][3], values[2][1] * values[3][0], values[2][0] * values[3][1]) +
+    Determinant(values[0][3] * values[1][0], values[0][3] * values[1][0], values[2][1] * values[3][2], values[2][2] * values[3][1]) +
+    Determinant(values[0][3] * values[1][1], values[0][3] * values[1][1], values[2][2] * values[3][0], values[2][0] * values[3][2]) +
+    Determinant(values[0][3] * values[1][2], values[0][3] * values[1][2], values[2][0] * values[3][1], values[2][1] * values[3][0]);
+}
+
+float Matrix44::Determinant(float const aA, float const aB, float const aC,
+    float const aD) const
+{
+  return (aA * aD) - (aB * aC);
+}
+
+void Matrix44::operator=(Matrix44 const &aMatrix)
+{
+  for(int i = 0; i < 4; ++i)
+  {
+    for(int j = 0; j < 4; ++j)
+    {
+      values[i][j] = aMatrix.values[i][j];
+    }
+  }
+}
+
+bool Matrix44::operator==(Matrix44 const &aMatrix) const
+{
+  for(int i = 0; i < 4; ++i)
+  {
+    for(int j = 0; j < 4; ++j)
+    {
+      if(values[i][j] != aMatrix.values[i][j])
+        return false;
+    }
+  }
+  return true;
+}
+
+Matrix44 Matrix44::operator*(Matrix44 const &rhs) const
+{
+  Matrix44 ret;
+
+  ret.values[0][0] = values[0][0] * rhs.values[0][0] + values[0][1] * rhs.values[1][0] 
+      + values[0][2] * rhs.values[2][0] + values[0][3] * rhs.values[3][0];
+  ret.values[0][1] = values[0][0] * rhs.values[0][1] + values[0][1] * rhs.values[1][1] 
+      + values[0][2] * rhs.values[2][1] + values[0][3] * rhs.values[3][1];
+  ret.values[0][2] = values[0][0] * rhs.values[0][2] + values[0][1] * rhs.values[1][2] 
+      + values[0][2] * rhs.values[2][2] + values[0][3] * rhs.values[3][2];
+  ret.values[0][3] = values[0][0] * rhs.values[0][3] + values[0][1] * rhs.values[1][3] 
+      + values[0][2] * rhs.values[2][3] + values[0][3] * rhs.values[3][3];
+
+  ret.values[1][0] = values[1][0] * rhs.values[0][0] + values[1][1] * rhs.values[1][0] 
+      + values[1][2] * rhs.values[2][0] + values[1][3] * rhs.values[3][0];
+  ret.values[1][1] = values[1][0] * rhs.values[0][1] + values[1][1] * rhs.values[1][1] 
+      + values[1][2] * rhs.values[2][1] + values[1][3] * rhs.values[3][1];
+  ret.values[1][2] = values[1][0] * rhs.values[0][2] + values[1][1] * rhs.values[1][2] 
+      + values[0][2] * rhs.values[2][2] + values[1][3] * rhs.values[3][2];
+  ret.values[1][3] = values[1][0] * rhs.values[0][3] + values[1][1] * rhs.values[1][3] 
+      + values[1][2] * rhs.values[2][3] + values[1][3] * rhs.values[3][3];
+
+  ret.values[2][0] = values[2][0] * rhs.values[0][0] + values[2][1] * rhs.values[1][0] 
+      + values[2][2] * rhs.values[2][0] + values[0][3] * rhs.values[3][0];
+  ret.values[2][1] = values[2][0] * rhs.values[0][1] + values[2][1] * rhs.values[1][1] 
+      + values[2][2] * rhs.values[2][1] + values[2][3] * rhs.values[3][1];
+  ret.values[2][2] = values[2][0] * rhs.values[0][2] + values[2][1] * rhs.values[1][2] 
+      + values[2][2] * rhs.values[2][2] + values[2][3] * rhs.values[3][2];
+  ret.values[2][3] = values[2][0] * rhs.values[0][3] + values[2][1] * rhs.values[1][3] 
+      + values[2][2] * rhs.values[2][3] + values[2][3] * rhs.values[3][3];
+
+  ret.values[3][0] = values[3][0] * rhs.values[0][0] + values[3][1] * rhs.values[1][0] 
+      + values[3][2] * rhs.values[2][0] + values[3][3] * rhs.values[3][0];
+  ret.values[3][1] = values[3][0] * rhs.values[0][1] + values[3][1] * rhs.values[1][1] 
+      + values[3][2] * rhs.values[2][1] + values[3][3] * rhs.values[3][1];
+  ret.values[3][2] = values[3][0] * rhs.values[0][2] + values[3][1] * rhs.values[1][2] 
+      + values[3][2] * rhs.values[2][2] + values[3][3] * rhs.values[3][2];
+  ret.values[3][3] = values[3][0] * rhs.values[0][3] + values[3][1] * rhs.values[1][3] 
+      + values[3][2] * rhs.values[2][3] + values[3][3] * rhs.values[3][3];
+
+  return ret;
+}
+
+Matrix44 Matrix44::operator*(float const aValue) const
+{
+  Matrix44 ret = *this;
+
+  for (int i = 0; i < 4; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
+    {
+      ret.values[i][j] *= aValue;
+    }
+  }
+
+  return ret;
+}
+
+Vector4 Matrix44::operator*(Vector4 const &rhs) const
+{
+  Vector4 ret;
+
+  ret.x = values[0][0] * rhs.x + values[0][1] * rhs.y + values[0][2] * rhs.z + values[0][3] * rhs.w;
+  ret.y = values[1][0] * rhs.x + values[1][1] * rhs.y + values[1][2] * rhs.z + values[1][3] * rhs.w;
+  ret.z = values[2][0] * rhs.x + values[2][1] * rhs.y + values[2][2] * rhs.z + values[2][3] * rhs.w;
+  ret.w = values[3][0] * rhs.x + values[3][1] * rhs.y + values[3][2] * rhs.z + values[3][3] * rhs.w;
+
+  return ret;
+}
+
+void Matrix44::Scale(Vector4 const &aScale)
+{
+  float values[16] = {aScale.x, 0, 0, 0,
+                          0, aScale.y, 0, 0,
+                          0, 0, aScale.z, 0,
+                          0, 0, 0, aScale.w};
+  Matrix44 scaleMatrix = Matrix44(values);
+  (*this) *= scaleMatrix;
+}
+
+void Matrix44::RotateX(float const aAngle)
+{
+  (*this) = Rotate(Vector4(1,0,0,0), aAngle);
+}
+
+void Matrix44::RotateY(float const aAngle)
+{
+  (*this) = Rotate(Vector4(0,1,0,0), aAngle);
+}
+
+void Matrix44::RotateZ(float const aAngle)
+{
+  (*this) = Rotate(Vector4(0,0,1,0), aAngle);
+}
+
+void Matrix44::RotateW(float const aAngle)
+{
+  (*this) = Rotate(Vector4(0,0,0,1), aAngle);
+}
+
+void Matrix44::operator*=(Matrix44 const &rhs)
+{
+  *this = *this * rhs;
+}
+
+void Matrix44::operator*=(float const aValue)
+{
+  *this = *this * aValue;
+}
+
+bool Matrix44::validate() const
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    for (int j = 0; j < 4; ++j)
+    {
+      if(std::isnan(values[i][j]))
+        assert(!"Matrix44 has failed validation.");
+    }
+  }
+  return true;
+}
+
+void Matrix44::SerializeLUA()
+{
+  SLB::Class<Matrix44>("Matrix44")
+      .set("Concatenate", &Matrix44::Concatenate)
+      .set("Rotate", &Matrix44::Rotate)
+      .set("RotateX", &Matrix44::RotateX)
+      .set("RotateY", &Matrix44::RotateY)
+      .set("RotateZ", &Matrix44::RotateZ)
+      .set("RotateW", &Matrix44::RotateW)
+      .set("Invert", &Matrix44::Invert);
+}
+
+HashString Matrix44::GetName()
+{
+  return "Matrix44";
+}
+
+//-----------------------------
+// QUATERNION
+//-----------------------------
+
+Quaternion::Quaternion() : x(0.0f), y(0.0f), z(0.0f), w(1.0f) 
+{
+}
+
+Quaternion::Quaternion(float aX, float aY, float aZ, float aW) : x(aX), y(aY), z(aZ), w(aW) 
+{
+}
+
+Quaternion::Quaternion(float aX, float aY, float aZ)
+{
+  Set(aX,aY,aZ);
+}
+
+Quaternion::Quaternion(Vector3 const& aVec)
+{
+  Set(aVec.x,aVec.y,aVec.z);
+}
+
+Quaternion& Quaternion::normalize()
+{
+  return (*this *= sqrtf( x*x + y*y + z*z + w*w ));
+}
+
+bool Quaternion::operator==(Quaternion const& rhs) const
+{
+  return ((x == rhs.x) &&
+    (y == rhs.y) &&
+    (z == rhs.z) &&
+    (w == rhs.w));
+}
+
+bool Quaternion::operator!=(Quaternion const& rhs) const
+{
+  return !(*this == rhs);
+}
+
+Quaternion& Quaternion::operator=(Quaternion const& rhs)
+{
+  x = rhs.x;
+  y = rhs.y;
+  z = rhs.z;
+  w = rhs.w;
+  return *this;
+}
+
+Quaternion Quaternion::operator*(Quaternion const& rhs) const
+{
+  Quaternion tmp;
+
+  tmp.w = (rhs.w * w) - (rhs.x * x) - (rhs.y * y) - (rhs.z * z);
+  tmp.x = (rhs.w * x) + (rhs.x * w) + (rhs.y * z) - (rhs.z * y);
+  tmp.y = (rhs.w * y) + (rhs.y * w) + (rhs.z * x) - (rhs.x * z);
+  tmp.z = (rhs.w * z) + (rhs.z * w) + (rhs.x * y) - (rhs.y * x);
+
+  return tmp;
+}
+
+Quaternion Quaternion::operator*(float aS) const
+{
+  return Quaternion(aS*x, aS*y, aS*z, aS*w);
+}
+
+Quaternion& Quaternion::operator*=(float aS)
+{
+  x *= aS;
+  y *= aS;
+  z *= aS;
+  w *= aS;
+  return *this;
+}
+
+Quaternion& Quaternion::operator*=(Quaternion const& rhs)
+{
+  return (*this = rhs * (*this));
+}
+
+Quaternion Quaternion::operator+(Quaternion const& rhs) const
+{
+  return Quaternion(x+rhs.x, y+rhs.y, z+rhs.z, w+rhs.w);
+}
+
+Vector3 Quaternion::operator*(Vector3 const& aV) const
+{
+  Vector3 uv, uuv;
+  Vector3 qvec(x, y, z);
+  uv = qvec.Cross(aV);
+  uuv = qvec.Cross(uv);
+  uv *= (2.0f * w);
+  uuv *= 2.0f;
+
+  return aV + uv + uuv;
+}
+
+Matrix44 Quaternion::GetMatrixFast() const
+{
+  float values[16];
+  
+  values[0] = 1.0f - 2.0f*y*y - 2.0f*z*z;
+  values[1] = 2.0f*x*y + 2.0f*z*w;
+  values[2] = 2.0f*x*z - 2.0f*y*w;
+  values[3] = 0.0f;
+
+  values[4] = 2.0f*x*y - 2.0f*z*w;
+  values[5] = 1.0f - 2.0f*x*x - 2.0f*z*z;
+  values[6] = 2.0f*z*y + 2.0f*x*w;
+  values[7] = 0.0f;
+
+  values[8] = 2.0f*x*z + 2.0f*y*w;
+  values[9] = 2.0f*z*y - 2.0f*x*w;
+  values[10] = 1.0f - 2.0f*x*x - 2.0f*y*y;
+  values[11] = 0.0f;
+
+  values[12] = 0.0f;
+  values[13] = 0.0f;
+  values[14] = 0.0f;
+  values[15] = 1.0f;
+
+  return Matrix44(values);
+}
+
+Matrix44 Quaternion::GetMatrix(const Vector3 &aCenter) const
+{
+  Quaternion q( *this);
+  q.normalize();
+  float x = q.x;
+  float y = q.y;
+  float z = q.z;
+  float w = q.w;
+
+  float values[16];
+  values[0] = 1.0f - 2.0f*y*y - 2.0f*z*z;
+  values[1] = 2.0f*x*y + 2.0f*z*w;
+  values[2] = 2.0f*x*z - 2.0f*y*w;
+  values[3] = 0.0f;
+
+  values[4] = 2.0f*x*y - 2.0f*z*w;
+  values[5] = 1.0f - 2.0f*x*x - 2.0f*z*z;
+  values[6] = 2.0f*z*y + 2.0f*x*w;
+  values[7] = 0.0f;
+
+  values[8] = 2.0f*x*z + 2.0f*y*w;
+  values[9] = 2.0f*z*y - 2.0f*x*w;
+  values[10] = 1.0f - 2.0f*x*x - 2.0f*y*y;
+  values[11] = 0.0f;
+
+  values[12] = aCenter.x;
+  values[13] = aCenter.y;
+  values[14] = aCenter.z;
+  values[15] = 1.0f;
+
+  return Matrix44(values);
+}
+
+Matrix44 Quaternion::GetMatrixCenter(const Vector3 &aCenter,
+          const Vector3 &aTranslation) const
+{
+  Quaternion q(*this);
+  q.normalize();
+  float x = q.x;
+  float y = q.y;
+  float z = q.z;
+  float w = q.w;
+
+  float values[16];
+  values[0] = 1.0f - 2.0f*y*y - 2.0f*z*z;
+  values[1] = 2.0f*x*y + 2.0f*z*w;
+  values[2] = 2.0f*x*z - 2.0f*y*w;
+  values[3] = 0.0f;
+
+  values[4] = 2.0f*x*y - 2.0f*z*w;
+  values[5] = 1.0f - 2.0f*x*x - 2.0f*z*z;
+  values[6] = 2.0f*z*y + 2.0f*x*w;
+  values[7] = 0.0f;
+
+  values[8] = 2.0f*x*z + 2.0f*y*w;
+  values[9] = 2.0f*z*y - 2.0f*x*w;
+  values[10] = 1.0f - 2.0f*x*x - 2.0f*y*y;
+  values[11] = 0.0f;
+
+  return Matrix44(values);
+}
+
+Matrix44 Quaternion::GetMatrixTransposed() const
+{
+  Matrix44 dest;
+
+  Quaternion q(*this);
+  q.normalize();
+  float x = q.x;
+  float y = q.y;
+  float z = q.z;
+  float w = q.w;
+
+  float values[16];
+  values[0] = 1.0f - 2.0f*y*y - 2.0f*z*z;
+  values[4] = 2.0f*x*y + 2.0f*z*w;
+  values[8] = 2.0f*x*z - 2.0f*y*w;
+  values[12] = 0.0f;
+
+  values[1] = 2.0f*x*y - 2.0f*z*w;
+  values[5] = 1.0f - 2.0f*x*x - 2.0f*z*z;
+  values[9] = 2.0f*z*y + 2.0f*x*w;
+  values[13] = 0.0f;
+
+  values[2] = 2.0f*x*z + 2.0f*y*w;
+  values[6] = 2.0f*z*y - 2.0f*x*w;
+  values[10] = 1.0f - 2.0f*x*x - 2.0f*y*y;
+  values[14] = 0.0f;
+
+  values[3] = 0.0f;
+  values[7] = 0.0f;
+  values[11] = 0.0f;
+  values[15] = 1.0f;
+
+  return Matrix44(values);
+}
+
+Quaternion& Quaternion::Invert()
+{
+  x = -x; y = -y; z = -z;
+  return *this;
+}
+
+Quaternion& Quaternion::Set(float aX, float aY, float aZ, float aW)
+{
+  x = aX;
+  y = aY;
+  z = aZ;
+  w = aW;
+  return *this;
+}
+
+Quaternion& Quaternion::Set(float aX, float aY, float aZ)
+{
+  double angle;
+
+  angle = aX * 0.5;
+  const double sr = sin(angle);
+  const double cr = cos(angle);
+
+  angle = aY * 0.5;
+  const double sp = sin(angle);
+  const double cp = cos(angle);
+
+  angle = aZ * 0.5;
+  const double sy = sin(angle);
+  const double cy = cos(angle);
+
+  const double cpcy = cp * cy;
+  const double spcy = sp * cy;
+  const double cpsy = cp * sy;
+  const double spsy = sp * sy;
+
+  x = (float)(sr * cpcy - cr * spsy);
+  y = (float)(cr * spcy + sr * cpsy);
+  z = (float)(cr * cpsy - sr * spcy);
+  w = (float)(cr * cpcy + sr * spsy);
+
+  return normalize();
+}
+
+Quaternion& Quaternion::Set(Vector3 const& aVec)
+{
+  return Set(aVec.x, aVec.y, aVec.z);
+}
+
+Quaternion& Quaternion::Set(Quaternion const& aQuat)
+{
+  return (*this=aQuat);
+}
+
+bool Quaternion::Equals(Quaternion const& rhs, const float aTolerance) const
+{
+  return WithinRange<float>( x, rhs.x, aTolerance) &&
+    WithinRange<float>( y, rhs.y, aTolerance) &&
+    WithinRange<float>( z, rhs.z, aTolerance) &&
+    WithinRange<float>( w, rhs.w, aTolerance);
+}
+
+Quaternion& Quaternion::Lerp(Quaternion aQ1, Quaternion aQ2, float aTime)
+{
+  const float scale = 1.0f - aTime;
+  return (*this = (aQ1*scale) + (aQ2*aTime));
+}
+
+Quaternion& Quaternion::Slerp(Quaternion aQ1, Quaternion aQ2, float aTime, float aThreshold)
+{
+  float angle = aQ1.Dot(aQ2);
+
+  // make sure we use the short rotation
+  if (angle < 0.0f)
+  {
+    aQ1 *= -1.0f;
+    angle *= -1.0f;
+  }
+
+  if (angle <= (1 - aThreshold)) // spherical interpolation
+  {
+    const float theta = acosf(angle);
+    const float invsintheta = 1.0f / sinf(theta);
+    const float scale = sinf(theta * (1.0f - aTime)) * invsintheta;
+    const float invscale = sinf(theta * aTime) * invsintheta;
+    return (*this = (aQ1*scale) + (aQ2*invscale));
+  }
+  else // linear interpolation
+    return Lerp(aQ1,aQ2,aTime);
+}
+
+float Quaternion::Dot(Quaternion const& aQ2) const
+{
+  return (x * aQ2.x) + (y * aQ2.y) + (z * aQ2.z) + (w * aQ2.w);
+}
+
+Quaternion& Quaternion::FromAngleAxis(float aAngle, Vector3 const& aAxis)
+{
+  const float fHalfAngle = 0.5f*aAngle;
+  const float fSin = sinf(fHalfAngle);
+  w = cosf(fHalfAngle);
+  x = fSin*aAxis.x;
+  y = fSin*aAxis.y;
+  z = fSin*aAxis.z;
+  return *this;
+}
+
+void Quaternion::ToAngleAxis(float &aAngle, Vector3 &aAxis) const
+{
+  const float scale = sqrtf(x*x + y*y + z*z);
+
+  if (WithinRange<float>(scale, 0, ROUNDING_ERROR) || w > 1.0f || w < -1.0f)
+  {
+    aAngle = 0.0f;
+    aAxis.x = 0.0f;
+    aAxis.y = 1.0f;
+    aAxis.z = 0.0f;
+  }
+  else
+  {
+    const float invscale = 1.0f / scale;
+    aAngle = 2.0f * acosf(w);
+    aAxis.x = x * invscale;
+    aAxis.y = y * invscale;
+    aAxis.z = z * invscale;
+  }
+}
+
+Vector3 Quaternion::ToEuler() const
+{
+  Vector3 euler;
+  const double sqw = w*w;
+  const double sqx = x*x;
+  const double sqy = y*y;
+  const double sqz = z*z;
+  const double test = 2.0 * (y*w - x*z);
+
+  if (WithinRange<float>(test, 1.0, 0.000001))
+  {
+    // heading = rotation about z-axis
+    euler.z = (float) (-2.0*atan2(x, w));
+    // bank = rotation about x-axis
+    euler.x = 0;
+    // attitude = rotation about y-axis
+    euler.y = (float) (PI/2.0);
+  }
+  else if (WithinRange<float>(test, -1.0, 0.000001))
+  {
+    // heading = rotation about z-axis
+    euler.z = (float) (2.0*atan2(x, w));
+    // bank = rotation about x-axis
+    euler.x = 0;
+    // attitude = rotation about y-axis
+    euler.y = (float) (PI/-2.0);
+  }
+  else
+  {
+    // heading = rotation about z-axis
+    euler.z = (float) atan2(2.0 * (x*y +z*w),(sqx - sqy - sqz + sqw));
+    // bank = rotation about x-axis
+    euler.x = (float) atan2(2.0 * (y*z +x*w),(-sqx - sqy + sqz + sqw));
+    // attitude = rotation about y-axis
+    euler.y = (float) asin(Clamp<double>(test, -1.0, 1.0));
+  }
+  return euler;
+}
+
+Quaternion& Quaternion::Identity()
+{
+  w = 1.0f;
+  x = 0.0f;
+  y = 0.0f;
+  z = 0.0f;
+  return *this;
+}
+
+Quaternion& Quaternion::RotationFromTo(Vector3 const& aFrom, Vector3 const& aTo)
+{
+  // Based on Stan Melax's article in Game Programming Gems
+  // Copy, since cannot modify local
+  Vector3 v0 = aFrom;
+  Vector3 v1 = aTo;
+  v0.normalize();
+  v1.normalize();
+
+  const float d = v0.Dot(v1);
+  if (d >= 1.0f) // If dot == 1, vectors are the same
+  {
+    return Identity();
+  }
+  else if (d <= -1.0f) // exactly opposite
+  {
+    Vector3 axis(1.0f, 0.0f, 0.0f);
+    axis = axis.Cross(v0);
+    if (axis.length() == 0)
+    {
+      axis = Vector3(0.0f,1.0f,0.0f);
+      axis = axis.Cross(v0);
+    }
+    // same as fromAngleAxis(PI, axis).normalize();
+    return Set(axis.x, axis.y, axis.z, 0).normalize();
+  }
+
+  const float s = sqrtf( (1+d)*2 ); // optimize inv_sqrt
+  const float invs = 1.0f / s;
+  const Vector3 c = v0.Cross(v1)*invs;
+  return Set(c.x, c.y, c.z, s * 0.5f).normalize();
+}
