@@ -1431,9 +1431,9 @@ Quaternion::Quaternion(Vector3 const& aVec)
   Set(aVec.x,aVec.y,aVec.z);
 }
 
-Quaternion& Quaternion::normalize()
+Quaternion Quaternion::normalize() const
 {
-  return (*this *= sqrtf( x*x + y*y + z*z + w*w ));
+  return sqrtf(x*x + y*y + z*z + w*w);
 }
 
 bool Quaternion::operator==(Quaternion const& rhs) const
@@ -1535,8 +1535,7 @@ Matrix44 Quaternion::GetMatrixFast() const
 
 Matrix44 Quaternion::GetMatrix(const Vector3 &aCenter) const
 {
-  Quaternion q( *this);
-  q.normalize();
+  Quaternion q(*this).normalize();
   float x = q.x;
   float y = q.y;
   float z = q.z;
@@ -1569,8 +1568,7 @@ Matrix44 Quaternion::GetMatrix(const Vector3 &aCenter) const
 Matrix44 Quaternion::GetMatrixCenter(const Vector3 &aCenter,
           const Vector3 &aTranslation) const
 {
-  Quaternion q(*this);
-  q.normalize();
+  Quaternion q(*this).normalize();
   float x = q.x;
   float y = q.y;
   float z = q.z;
@@ -1599,8 +1597,7 @@ Matrix44 Quaternion::GetMatrixTransposed() const
 {
   Matrix44 dest;
 
-  Quaternion q(*this);
-  q.normalize();
+  Quaternion q(*this).normalize();
   float x = q.x;
   float y = q.y;
   float z = q.z;
@@ -1671,7 +1668,8 @@ Quaternion& Quaternion::Set(float aX, float aY, float aZ)
   z = (float)(cr * cpsy - sr * spcy);
   w = (float)(cr * cpcy + sr * spsy);
 
-  return normalize();
+  *this = normalize();
+  return *this;
 }
 
 Quaternion& Quaternion::Set(Vector3 const& aVec)
@@ -1810,10 +1808,8 @@ Quaternion& Quaternion::RotationFromTo(Vector3 const& aFrom, Vector3 const& aTo)
 {
   // Based on Stan Melax's article in Game Programming Gems
   // Copy, since cannot modify local
-  Vector3 v0 = aFrom;
-  Vector3 v1 = aTo;
-  v0.normalize();
-  v1.normalize();
+  Vector3 v0 = aFrom.normalize();
+  Vector3 v1 = aTo.normalize();
 
   const float d = v0.Dot(v1);
   if (d >= 1.0f) // If dot == 1, vectors are the same

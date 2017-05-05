@@ -258,7 +258,7 @@ struct Quaternion
   float z;
   float w;
   
-  Quaternion& normalize();
+  Quaternion normalize() const;
 
   // Constructors
   Quaternion();
