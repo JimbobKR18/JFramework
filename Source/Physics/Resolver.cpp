@@ -573,13 +573,13 @@ void Resolver::CalculateLineToCube(CollisionPair &aPair)
       switch(i)
       {
       case 0:
-        aPair.mNormal = Vector3(1,0,0);
+        aPair.mNormal = Vector3(dist.x,0,0).normalize();
         break;
       case 1:
-        aPair.mNormal = Vector3(0,1,0);
+        aPair.mNormal = Vector3(0,dist.y,0).normalize();
         break;
       case 2:
-        aPair.mNormal = Vector3(0,0,1);
+        aPair.mNormal = Vector3(0,0,dist.z).normalize();
         break;
       default:
         assert(!"How did you even get here?");

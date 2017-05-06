@@ -164,7 +164,7 @@ void PhysicsObject::Serialize(Parser &aParser)
     switch((*it)->shape)
     {
     case Shape::AABB:
-      shapeObject->Place(curShape, "Type", "CUBE");
+      shapeObject->Place(curShape, "Type", "AABB");
       shapeObject->Place(curShape, "SizeX", Common::IntToString((*it)->GetSize(0)));
       shapeObject->Place(curShape, "SizeY", Common::IntToString((*it)->GetSize(1)));
       shapeObject->Place(curShape, "SizeZ", Common::IntToString((*it)->GetSize(2)));
@@ -257,7 +257,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
     HashString type = tempShape->Find("Type")->GetValue();
     
     // Discern type and serialize accordingly
-    if(type == "CUBE")
+    if(type == "CUBE" || type == "AABB")
     {
       newShape = new AxisAlignedBoundingBox();
       AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)newShape;
