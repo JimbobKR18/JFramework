@@ -123,4 +123,16 @@ namespace ShapeMath
     float w = 1.0f - u - v;
     return aA * u + aB * v + aC * w;
   }
+  
+  /**
+   * @brief Get area of triangle.
+   * @param aA Point of triangle.
+   * @param aB Point of triangle.
+   * @param aC Point of triangle.
+   * @return Area of triangle.
+   */
+  float const Signed2DTriArea(Vector3 const &aA, Vector3 const &aB, Vector3 const &aC)
+  {
+    return (aA.x - aC.x) * (aB.y - aC.y) - (aA.y - aC.y) * (aB.x - aC.x);
+  }
 }

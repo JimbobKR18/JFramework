@@ -369,6 +369,36 @@ float Triangle::GetSize(int index)
 }
 
 //------------------------------
+// PLANE
+//------------------------------
+Plane::Plane() : Shape(PLANE), normal(1,0,0), distance()
+{
+}
+
+Plane::Plane(Vector3 const &aNormal, float const aDistance) : Shape(PLANE), normal(aNormal), distance(aDistance)
+{
+}
+
+Plane::~Plane()
+{
+}
+  
+Vector3 Plane::GetNormal()
+{
+  return normal;
+}
+
+float Plane::GetDistance()
+{
+  return distance;
+}
+
+float Plane::GetSize(int index)
+{
+  return distance;
+}
+
+//------------------------------
 // PRINTING
 //------------------------------
 /**

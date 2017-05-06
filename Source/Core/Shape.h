@@ -15,7 +15,8 @@ struct Shape
     SPHERE,
     CIRCLE,
     LINE,
-    TRIANGLE
+    TRIANGLE,
+    PLANE
   } shape;
   
   Shape(ShapeType aShape);
@@ -87,6 +88,20 @@ struct Triangle : public Shape
   virtual ~Triangle();
   
   Vector3 GetPoint(int index);
+  virtual float GetSize(int index);
+};
+
+struct Plane : public Shape
+{
+  Vector3 normal;
+  float distance;
+  
+  Plane();
+  Plane(Vector3 const &aNormal, float const aDistance);
+  virtual ~Plane();
+  
+  Vector3 GetNormal();
+  float GetDistance();
   virtual float GetSize(int index);
 };
 

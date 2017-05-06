@@ -349,7 +349,30 @@ bool CollisionChecker::CheckLineToTriangle(CollisionPair &aPair)
  */
 bool CollisionChecker::CheckLineToLine(CollisionPair &aPair)
 {
-  // TODO
+  Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  Line *l1 = dynamic_cast<Line*>(aPair.mShapes[0]);
+  Line *l2 = dynamic_cast<Line*>(aPair.mShapes[1]);
+  
+  Vector3 a = t1->GetHierarchicalPosition() + l1->position.Multiply(t1->GetHierarchicalScale());
+  Vector3 b = a + (l1->direction.Multiply(t1->GetHierarchicalScale()) * l1->length);
+  Vector3 c = t2->GetHierarchicalPosition() + l2->position.Multiply(t2->GetHierarchicalScale());
+  Vector3 d = c + (l2->direction.Multiply(t2->GetHierarchicalScale()) * l2->length);
+  
+  float a1 = ShapeMath::Signed2DTriArea(a, b, d);
+  float a2 = ShapeMath::Signed2DTriArea(a, b, c);
+  
+  if(a1 * a2 < 0)
+  {
+    float a3 = ShapeMath::Signed2DTriArea(c, d, a);
+    float a4 = a3 + a2 - a1;
+    
+    if(a3 * a4 < 0)
+    {
+      return true;
+    }
+  }
   return false;
 }
 
