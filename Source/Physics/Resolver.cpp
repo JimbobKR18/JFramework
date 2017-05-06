@@ -446,7 +446,6 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
     aPair.Switch();
   }
   
-  // TODO doesn't work check orange collision book
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
   AxisAlignedBoundingBox* aabb = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
@@ -463,10 +462,11 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float size = aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i);
-    if(fabs(dist[i]) - size < minDistance)
+    float distance = fabs(fabs(dist[i]) - size);
+    if(distance < minDistance)
     {
       axis = i;
-      minDistance = fabs(dist[i]) - size;
+      minDistance = distance;
     }
   }
   
@@ -475,13 +475,13 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
   switch(axis)
   {
     case 0:
-      normal = Vector3(minDistance,0,0).normalize();
+      normal = Vector3(dist.x,0,0).normalize();
       break;
     case 1:
-      normal = Vector3(0,minDistance,0).normalize();
+      normal = Vector3(0,dist.y,0).normalize();
       break;
     case 2:
-      normal = Vector3(0,0,minDistance).normalize();
+      normal = Vector3(0,0,dist.z).normalize();
       break;
   }
   

@@ -266,10 +266,9 @@ bool CollisionChecker::CheckTriangleToAABB(CollisionPair &aPair)
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(aabbPos, a, b, c);
   Vector3 dist = closestPoint - aabbPos;
   
-  // TODO doesn't work. Check orange collision book.
   for(int i = 0; i < 3; ++i)
   {
-    if(fabs(dist[i]) > aabb->GetSize(i))
+    if(fabs(dist[i]) > aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i))
       return false;
   }
     

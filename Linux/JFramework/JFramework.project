@@ -72,6 +72,8 @@
     <File Name="../../Source/Core/QuadraticInterpolation.h"/>
     <File Name="../../Source/Core/RoundAboutInterpolation.h"/>
     <File Name="../../Source/Core/Threading.h"/>
+    <File Name="../../Source/Core/ShapeMath.h"/>
+    <File Name="../../Source/Core/ShapeMath.cpp"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
@@ -95,6 +97,8 @@
     <File Name="../../Source/Components/ChemistryElement.cpp"/>
     <File Name="../../Source/Components/StateObject.h"/>
     <File Name="../../Source/Components/StateObject.cpp"/>
+    <File Name="../../Source/Components/CustomScript.h"/>
+    <File Name="../../Source/Components/CustomScript.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>
