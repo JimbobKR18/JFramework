@@ -30,13 +30,13 @@ private:
 
   // Calculation of normals etc.
   void  CalculateSphereToSphere(CollisionPair &aPair);
-  void  CalculateSphereToCube(CollisionPair &aPair);
-  void  CalculateCubeToCube(CollisionPair &aPair);
+  void  CalculateSphereToAABB(CollisionPair &aPair);
+  void  CalculateAABBToAABB(CollisionPair &aPair);
   void  CalculateTriangleToSphere(CollisionPair &aPair);
-  void  CalculateTriangleToCube(CollisionPair &aPair);
+  void  CalculateTriangleToAABB(CollisionPair &aPair);
   void  CalculateTriangleToTriangle(CollisionPair &aPair);
   void  CalculateLineToSphere(CollisionPair &aPair);
-  void  CalculateLineToCube(CollisionPair &aPair);
+  void  CalculateLineToAABB(CollisionPair &aPair);
   void  CalculateLineToTriangle(CollisionPair &aPair);
   void  CalculateLineToLine(CollisionPair &aPair);
   

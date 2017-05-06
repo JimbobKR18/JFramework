@@ -207,7 +207,7 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       CalculateSphereToSphere(aPair);
       break;
     case Shape::AABB:
-      CalculateSphereToCube(aPair);
+      CalculateSphereToAABB(aPair);
       break;
     case Shape::TRIANGLE:
       CalculateTriangleToSphere(aPair);
@@ -223,16 +223,16 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     switch(aPair.mShapes[1]->shape)
     {
     case Shape::SPHERE:
-      CalculateSphereToCube(aPair);
+      CalculateSphereToAABB(aPair);
       break;
     case Shape::AABB:
-      CalculateCubeToCube(aPair);
+      CalculateAABBToAABB(aPair);
       break;
     case Shape::TRIANGLE:
-      CalculateTriangleToCube(aPair);
+      CalculateTriangleToAABB(aPair);
       break;
     case Shape::LINE:
-      CalculateLineToCube(aPair);
+      CalculateLineToAABB(aPair);
       break;
     default:
       break;
@@ -245,7 +245,7 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       CalculateTriangleToSphere(aPair);
       break;
     case Shape::AABB:
-      CalculateTriangleToCube(aPair);
+      CalculateTriangleToAABB(aPair);
       break;
     case Shape::TRIANGLE:
       CalculateTriangleToTriangle(aPair);
@@ -264,7 +264,7 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       CalculateLineToSphere(aPair);
       break;
     case Shape::AABB:
-      CalculateLineToCube(aPair);
+      CalculateLineToAABB(aPair);
       break;
     case Shape::TRIANGLE:
       CalculateLineToTriangle(aPair);
@@ -307,10 +307,10 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
 }
 
 /**
- * @brief Resolve sphere and cube
- * @param aPair Sphere and cube
+ * @brief Resolve sphere and aabb
+ * @param aPair Sphere and aabb
  */
-void Resolver::CalculateSphereToCube(CollisionPair &aPair)
+void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
@@ -355,10 +355,10 @@ void Resolver::CalculateSphereToCube(CollisionPair &aPair)
 }
 
 /**
- * @brief Resolve cubes
- * @param aPair Cubes
+ * @brief Resolve aabbs
+ * @param aPair AABBs
  */
-void Resolver::CalculateCubeToCube(CollisionPair &aPair)
+void Resolver::CalculateAABBToAABB(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
@@ -435,10 +435,10 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
 }
 
 /**
- * @brief Resolve Triangle and cube. Work in progress.
- * @param aPair Triangle and cube.
+ * @brief Resolve Triangle and aabb. Work in progress.
+ * @param aPair Triangle and aabb.
  */
-void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
+void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
 {
   // Ordering is important
   if(aPair.mShapes[0]->shape != Shape::TRIANGLE)
@@ -448,21 +448,21 @@ void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
   
   // TODO doesn't work check orange collision book
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
-  AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)aPair.mShapes[1];
+  AxisAlignedBoundingBox* aabb = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 cubePos = cube->position.Multiply(cubeTransform->GetHierarchicalScale()) + cubeTransform->GetHierarchicalPosition();
+  Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 aabbPos = aabb->position.Multiply(aabbTransform->GetHierarchicalScale()) + aabbTransform->GetHierarchicalPosition();
   Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
   Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
   Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(cubePos, a, b, c);
-  Vector3 dist = closestPoint - cubePos;
+  Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(aabbPos, a, b, c);
+  Vector3 dist = closestPoint - aabbPos;
   int axis = 0;
   float minDistance = 0xffffff;
   
   for(int i = 0; i < 3; ++i)
   {
-    float size = cube->GetSize(i) * cubeTransform->GetHierarchicalScale().GetValue(i);
+    float size = aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i);
     if(fabs(dist[i]) - size < minDistance)
     {
       axis = i;
@@ -533,10 +533,10 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
 }
 
 /**
- * @brief Calculate Line to Cube resolution
- * @param aPair Line and Cube
+ * @brief Calculate Line to AABB resolution
+ * @param aPair Line and AABB
  */
-void Resolver::CalculateLineToCube(CollisionPair &aPair)
+void Resolver::CalculateLineToAABB(CollisionPair &aPair)
 {
   // TODO this doesn't work, but I'll leave it in so at least something happens.
   if(aPair.mShapes[0]->shape == Shape::AABB)
@@ -546,23 +546,23 @@ void Resolver::CalculateLineToCube(CollisionPair &aPair)
   
   // Basic set up
   Line *line = (Line*)aPair.mShapes[0];
-  AxisAlignedBoundingBox *cube = (AxisAlignedBoundingBox*)aPair.mShapes[1];
+  AxisAlignedBoundingBox *aabb = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform *cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Transform *aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   
   // Find closest point on line to sphere pos and calculate penetration
   // based on radius.
-  Vector3 cubePos = cubeTransform->GetHierarchicalPosition() + cube->position.Multiply(cubeTransform->GetHierarchicalScale());
+  Vector3 aabbPos = aabbTransform->GetHierarchicalPosition() + aabb->position.Multiply(aabbTransform->GetHierarchicalScale());
   Vector3 linePos = lineTransform->GetHierarchicalPosition() + line->position.Multiply(lineTransform->GetHierarchicalScale());
   Vector3 lineEnd = linePos + ((line->direction.Multiply(lineTransform->GetHierarchicalScale()) * line->length));
-  Vector3 closestPoint = ShapeMath::ClosestPointPointSegment(cubePos, linePos, lineEnd);
-  Vector3 dist = closestPoint - cubePos;
+  Vector3 closestPoint = ShapeMath::ClosestPointPointSegment(aabbPos, linePos, lineEnd);
+  Vector3 dist = closestPoint - aabbPos;
   
   // Push out on smallest axis
   aPair.mPenetration = FLT_MAX;
   for(int i = 0; i < 3; ++i)
   {
-    float size = cube->GetSize(i) * cubeTransform->GetHierarchicalScale().GetValue(i);
+    float size = aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i);
     float diff = size - dist.length();
     if(aPair.mPenetration > fabs(diff))
     {

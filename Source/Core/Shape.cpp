@@ -76,6 +76,46 @@ float AxisAlignedBoundingBox::GetSize(int index)
 }
 
 //------------------------------
+// OrientedBoundingBox
+//------------------------------
+OrientedBoundingBox::OrientedBoundingBox() : Shape(OBB), up(), right(), forward(), extents()
+{
+}
+
+OrientedBoundingBox::OrientedBoundingBox(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight,
+  Vector3 const &aForward, Vector3 const &aExtents) : Shape(OBB), up(aUp), right(aRight), forward(aForward), extents(aExtents)
+{
+  position = aPosition;
+}
+OrientedBoundingBox::~OrientedBoundingBox()
+{
+}
+  
+Vector3 OrientedBoundingBox::GetAxis(int index)
+{
+  switch(index)
+  {
+    case 0:
+      return right;
+      break;
+    case 1:
+      return up;
+      break;
+    case 2:
+      return forward;
+      break;
+    default:
+      assert(!"Wrong value handed into GetAxis for OBB");
+      break;
+  }
+}
+
+float OrientedBoundingBox::GetSize(int index)
+{
+  return extents[index];
+}
+
+//------------------------------
 // SPHERE
 //------------------------------
 Sphere::Sphere() : Shape(SPHERE)

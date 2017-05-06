@@ -16,7 +16,8 @@ struct Shape
     CIRCLE,
     LINE,
     TRIANGLE,
-    PLANE
+    PLANE,
+    OBB
   } shape;
   
   Shape(ShapeType aShape);
@@ -35,6 +36,22 @@ struct AxisAlignedBoundingBox : public Shape
   bool Get3DCollision(Vector3 const &aPosition);
   bool Get2DCollision(Vector3 const &aPosition);
   
+  virtual float GetSize(int index);
+};
+
+struct OrientedBoundingBox : public Shape
+{
+  Vector3 up;
+  Vector3 right;
+  Vector3 forward;
+  Vector3 extents;
+  
+  OrientedBoundingBox();
+  OrientedBoundingBox(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight,
+    Vector3 const &aForward, Vector3 const &aExtents);
+  virtual ~OrientedBoundingBox();
+  
+  Vector3 GetAxis(int index);
   virtual float GetSize(int index);
 };
 

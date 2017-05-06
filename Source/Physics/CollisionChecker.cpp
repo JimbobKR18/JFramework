@@ -36,7 +36,7 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
           collided = CheckSphereToSphere(potentialPair);
           break;
         case Shape::AABB:
-          collided = CheckSphereToCube(potentialPair);
+          collided = CheckSphereToAABB(potentialPair);
           break;
         case Shape::TRIANGLE:
           collided = CheckTriangleToSphere(potentialPair);
@@ -52,16 +52,16 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         switch((*it2)->shape)
         {
         case Shape::SPHERE:
-          collided = CheckSphereToCube(potentialPair);
+          collided = CheckSphereToAABB(potentialPair);
           break;
         case Shape::AABB:
-          collided = CheckCubeToCube(potentialPair);
+          collided = CheckAABBToAABB(potentialPair);
           break;
         case Shape::TRIANGLE:
-          collided = CheckTriangleToCube(potentialPair);
+          collided = CheckTriangleToAABB(potentialPair);
           break;
         case Shape::LINE:
-          collided = CheckLineToCube(potentialPair);
+          collided = CheckLineToAABB(potentialPair);
           break;
         default:
           break;
@@ -74,7 +74,7 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
           collided = CheckTriangleToSphere(potentialPair);
           break;
         case Shape::AABB:
-          collided = CheckTriangleToCube(potentialPair);
+          collided = CheckTriangleToAABB(potentialPair);
           break;
         case Shape::TRIANGLE:
           collided = CheckTriangleToTriangle(potentialPair);
@@ -93,7 +93,7 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
           collided = CheckLineToSphere(potentialPair);
           break;
         case Shape::AABB:
-          collided = CheckLineToCube(potentialPair);
+          collided = CheckLineToAABB(potentialPair);
           break;
         case Shape::TRIANGLE:
           collided = CheckLineToTriangle(potentialPair);
@@ -129,7 +129,7 @@ bool CollisionChecker::CheckLineCollision(Line const &aSegment, Transform* aTran
     return CheckLineToSphere(aSegment, aTransform, aShape);
     break;
   case Shape::AABB:
-    return CheckLineToCube(aSegment, aTransform, aShape);
+    return CheckLineToAABB(aSegment, aTransform, aShape);
     break;
   default:
     return false;
@@ -160,34 +160,34 @@ bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
 }
 
 /**
- * @brief Sphere to cube check
+ * @brief Sphere to aabb check
  * @param aPair
  */
-bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
+bool CollisionChecker::CheckSphereToAABB(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape != Shape::SPHERE)
     aPair.Switch();
 
   Transform *sphere = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform *cube = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Transform *aabb = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
   Vector3 spherePos = sphere->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(sphere->GetHierarchicalScale());
-  Vector3 cubePos = cube->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(cube->GetHierarchicalScale());
-  Vector3 relPos = spherePos - cubePos;
+  Vector3 aabbPos = aabb->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(aabb->GetHierarchicalScale());
+  Vector3 relPos = spherePos - aabbPos;
   
   Vector3 closestPoint;
 
   for(int i = 0; i < 3; ++i)
   {
-    float cubeSize = aPair.mShapes[1]->GetSize(i) * cube->GetHierarchicalScale().GetValue(i);
+    float aabbSize = aPair.mShapes[1]->GetSize(i) * aabb->GetHierarchicalScale().GetValue(i);
     
-    if(relPos[i] < -cubeSize)
+    if(relPos[i] < -aabbSize)
     {
-      closestPoint[i] = -cubeSize;
+      closestPoint[i] = -aabbSize;
     }
-    else if(relPos[i] > cubeSize)
+    else if(relPos[i] > aabbSize)
     {
-      closestPoint[i] = cubeSize;
+      closestPoint[i] = aabbSize;
     }
     else
     {
@@ -201,10 +201,10 @@ bool CollisionChecker::CheckSphereToCube(CollisionPair &aPair)
 }
 
 /**
- * @brief Cube to cube check
+ * @brief AABB to aabb check
  * @param aPair
  */
-bool CollisionChecker::CheckCubeToCube(CollisionPair &aPair)
+bool CollisionChecker::CheckAABBToAABB(CollisionPair &aPair)
 {
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
@@ -247,30 +247,29 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
 }
 
 /**
- * @brief Triangle to Cube check
+ * @brief Triangle to AABB check
  * @param aPair
  */
-bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
+bool CollisionChecker::CheckTriangleToAABB(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::AABB)
     aPair.Switch();
   
-  // TODO take scale into account.
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
-  AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)aPair.mShapes[1];
+  AxisAlignedBoundingBox* aabb = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 cubePos = cube->position + cubeTransform->GetHierarchicalPosition();
+  Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 aabbPos = aabb->position.Multiply(aabbTransform->GetHierarchicalScale()) + aabbTransform->GetHierarchicalPosition();
   Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
   Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
   Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(cubePos, a, b, c);
-  Vector3 dist = closestPoint - cubePos;
+  Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(aabbPos, a, b, c);
+  Vector3 dist = closestPoint - aabbPos;
   
   // TODO doesn't work. Check orange collision book.
   for(int i = 0; i < 3; ++i)
   {
-    if(fabs(dist[i]) > cube->GetSize(i))
+    if(fabs(dist[i]) > aabb->GetSize(i))
       return false;
   }
     
@@ -310,11 +309,11 @@ bool CollisionChecker::CheckLineToSphere(CollisionPair &aPair)
 }
 
 /**
- * @brief Line to Cube check
+ * @brief Line to AABB check
  * @param aPair
  * @return true if collided
  */
-bool CollisionChecker::CheckLineToCube(CollisionPair &aPair)
+bool CollisionChecker::CheckLineToAABB(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::AABB)
     aPair.Switch();
@@ -328,7 +327,7 @@ bool CollisionChecker::CheckLineToCube(CollisionPair &aPair)
   tempLine.position = tempLine.position.Multiply(lineTransform->GetHierarchicalScale());
   tempLine.position += lineTransform->GetHierarchicalPosition();
     
-  return CheckLineToCube(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
+  return CheckLineToAABB(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
 }
 
 /**
@@ -392,12 +391,12 @@ bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSpher
 }
 
 /**
- * @brief Line to cube check
+ * @brief Line to aabb check
  * @param aSegment Line
- * @param aSphere Cube transform
- * @param aShape Cube shape
+ * @param aSphere AABB transform
+ * @param aShape AABB shape
  */
-bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, Shape* aShape)
+bool CollisionChecker::CheckLineToAABB(Line const &aSegment, Transform *aAABB, Shape* aShape)
 {
   // TODO MAY BE BROKEN!
   // http://bit.ly/1p1SX3G
@@ -415,16 +414,16 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
   Vector3 direction = aSegment.direction;
   Vector3 min = Vector3(aShape->position.x - aShape->GetSize(0),
                         aShape->position.y - aShape->GetSize(1),
-                        aShape->position.z - aShape->GetSize(2)).Multiply(aCube->GetHierarchicalScale());
+                        aShape->position.z - aShape->GetSize(2)).Multiply(aAABB->GetHierarchicalScale());
   Vector3 max = Vector3(aShape->position.x + aShape->GetSize(0),
                         aShape->position.y + aShape->GetSize(1),
-                        aShape->position.z + aShape->GetSize(2)).Multiply(aCube->GetHierarchicalScale());
+                        aShape->position.z + aShape->GetSize(2)).Multiply(aAABB->GetHierarchicalScale());
                         
-  min += aCube->GetHierarchicalPosition();
-  max += aCube->GetHierarchicalPosition();
+  min += aAABB->GetHierarchicalPosition();
+  max += aAABB->GetHierarchicalPosition();
   Vector3 collision;
   
-  if(fabs(aShape->GetSize(2) * aCube->GetHierarchicalScale().GetValue(2)) <= MINIMUM_SIZE)
+  if(fabs(aShape->GetSize(2) * aAABB->GetHierarchicalScale().GetValue(2)) <= MINIMUM_SIZE)
   {
     dimensions = 2;
   }
@@ -451,7 +450,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
     }
   }
 
-  // Line origin inside cube
+  // Line origin inside aabb
   if(inside)
   {
     collision = aSegment.position;
@@ -499,7 +498,7 @@ bool CollisionChecker::CheckLineToCube(Line const &aSegment, Transform *aCube, S
     }
   }
 
-  // Line origin inside cube
+  // Line origin inside aabb
   if(inside)
   {
     collision = aSegment.position;
