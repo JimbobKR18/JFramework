@@ -1433,7 +1433,7 @@ Quaternion::Quaternion(Vector3 const& aVec)
 
 Quaternion Quaternion::normalize() const
 {
-  return sqrtf(x*x + y*y + z*z + w*w);
+  return *this * sqrtf(x*x + y*y + z*z + w*w);
 }
 
 bool Quaternion::operator==(Quaternion const& rhs) const
@@ -1535,7 +1535,7 @@ Matrix44 Quaternion::GetMatrixFast() const
 
 Matrix44 Quaternion::GetMatrix(const Vector3 &aCenter) const
 {
-  Quaternion q(*this).normalize();
+  Quaternion q = Quaternion(*this).normalize();
   float x = q.x;
   float y = q.y;
   float z = q.z;
@@ -1568,7 +1568,7 @@ Matrix44 Quaternion::GetMatrix(const Vector3 &aCenter) const
 Matrix44 Quaternion::GetMatrixCenter(const Vector3 &aCenter,
           const Vector3 &aTranslation) const
 {
-  Quaternion q(*this).normalize();
+  Quaternion q = Quaternion(*this).normalize();
   float x = q.x;
   float y = q.y;
   float z = q.z;
@@ -1597,7 +1597,7 @@ Matrix44 Quaternion::GetMatrixTransposed() const
 {
   Matrix44 dest;
 
-  Quaternion q(*this).normalize();
+  Quaternion q = Quaternion(*this).normalize();
   float x = q.x;
   float y = q.y;
   float z = q.z;
@@ -1826,11 +1826,15 @@ Quaternion& Quaternion::RotationFromTo(Vector3 const& aFrom, Vector3 const& aTo)
       axis = axis.Cross(v0);
     }
     // same as fromAngleAxis(PI, axis).normalize();
-    return Set(axis.x, axis.y, axis.z, 0).normalize();
+    Set(axis.x, axis.y, axis.z, 0);
+    *this = this->normalize();
+    return *this;
   }
 
   const float s = sqrtf( (1+d)*2 ); // optimize inv_sqrt
   const float invs = 1.0f / s;
   const Vector3 c = v0.Cross(v1)*invs;
-  return Set(c.x, c.y, c.z, s * 0.5f).normalize();
+  Set(c.x, c.y, c.z, s * 0.5f);
+  *this = this->normalize();
+  return *this;
 }

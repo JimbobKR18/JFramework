@@ -44,8 +44,6 @@ struct Sphere : public Shape
   Sphere();
   Sphere(Vector3 const &aPosition, float const aRadius);
   virtual ~Sphere();
-
-  bool GetCollision(Vector3 const &aPosition);
   
   virtual float GetSize(int index);
 };
@@ -73,7 +71,6 @@ struct Line : public Shape
   Line(Vector3 const &aStart, Vector3 const &aEnd);
   virtual ~Line();
 
-  Vector3 ClosestPointToPoint(Vector3 const &aPoint) const;
   bool GetCollisions(Line const &aCompare, Circle &aOutput);
   
   virtual float GetSize(int index);
@@ -89,7 +86,6 @@ struct Triangle : public Shape
   Triangle(std::vector<Vector3> const &aPoints);
   virtual ~Triangle();
   
-  Vector3 GetClosestPointToTriangle(Vector3 const &aTrianglePosition, Vector3 const &aPoint);
   Vector3 GetPoint(int index);
   virtual float GetSize(int index);
 };

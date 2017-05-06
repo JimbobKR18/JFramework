@@ -94,17 +94,6 @@ Sphere::~Sphere()
 }
 
 /**
- * @brief See if point collides with box. 3D space.
- * @param aPosition Point to check
- * @return True if collided.
- */
-bool Sphere::GetCollision(Vector3 const &aPosition)
-{
-  float dist = (aPosition - position).length();
-  return dist <= radius;
-}
-
-/**
  * @brief Get size of sphere
  * @param index Does nothing
  * @return Size of sphere (radius)
@@ -170,28 +159,6 @@ Line::Line(Vector3 const &aStart, Vector3 const &aEnd) :
 
 Line::~Line()
 {
-}
-
-/**
- * @brief Get closest point on line to point
- * @param aPoint Point to check
- * @return Closest point on line to said point.
- */
-// http://bit.ly/1zFqgQ7
-Vector3 Line::ClosestPointToPoint(Vector3 const &aPoint) const
-{
-  Vector3 end = position + (direction * length);
-  Vector3 x1 = position - aPoint;
-  Vector3 x2 = end - position;
-  float lengthSquared = length * length;
-  float t = -(x1.Dot(x2)) / lengthSquared;
-  
-  if(t > 1.0f)
-    t = 1.0f;
-  else if(t < 0.0f)
-    t = 0.0f;
-  
-  return position + (direction * (length * t));
 }
 
 /**
@@ -367,52 +334,6 @@ Triangle::Triangle(std::vector<Vector3> const &aPoints) : Triangle(aPoints[0], a
 
 Triangle::~Triangle()
 {
-}
-
-/**
- * @brief Get the closest point on a triangle to a particular point
- * @param aTrianglePosition Where the triangle is located.
- * @param aPoint Point to compare to.
- * @return Closest point
- */
-Vector3 Triangle::GetClosestPointToTriangle(Vector3 const &aTrianglePosition, Vector3 const &aPoint)
-{
-  Vector3 a = aTrianglePosition + points[0];
-  Vector3 b = aTrianglePosition + points[1];
-  Vector3 c = aTrianglePosition + points[2];
-  
-  Vector3 ab = b - a;
-  Vector3 ac = c - a;
-  Vector3 bc = c - b;
-  
-  float snom = (aPoint - a).Dot(ab), sdenom = (aPoint - b).Dot(a - b);
-  float tnom = (aPoint - a).Dot(ac), tdenom = (aPoint - c).Dot(a - c);
-  if(snom <= 0.0f && tnom <= 0.0f) 
-    return a;
-  
-  float unom = (aPoint - b).Dot(bc), udenom = (aPoint - c).Dot(b - c);
-  if(sdenom <= 0.0f && unom <- 0.0f)
-    return b;
-  if(tdenom <= 0.0f && udenom <= 0.0f)
-    return c;
-  
-  Vector3 n = ab.Cross(ac);
-  float vc = n.Dot((a - aPoint).Cross(b - aPoint));
-  if(vc <= 0.0f && snom >= 0.0f && sdenom >= 0.0f)
-    return a + ab * snom / (snom + sdenom);
-  
-  float va = n.Dot((b - aPoint).Cross(c - aPoint));
-  if(va <= 0.0f && unom >= 0.0f && udenom >= 0.0f)
-    return b + bc * unom / (unom + udenom);
-    
-  float vb = n.Dot((c - aPoint).Cross(a - aPoint));
-  if(vb <= 0.0f && tnom >= 0.0f && tdenom >= 0.0f)
-    return a + ac * tnom / (tnom + tdenom);
-    
-  float u = va / (va + vb + vc);
-  float v = vb / (va + vb + vc);
-  float w = 1.0f - u - v;
-  return a * u + b * v + c * w;
 }
 
 /**

@@ -7,6 +7,7 @@
 
 #include "CollisionChecker.h"
 #include "PhysicsObject.h"
+#include "ShapeMath.h"
 
 /**
  * @brief General catch all shape collision caller.
@@ -233,7 +234,10 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 spherePos = sphere->position.Multiply(sphereTransform->GetHierarchicalScale()) + sphereTransform->GetHierarchicalPosition();
-  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetHierarchicalPosition(), spherePos);
+  Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(spherePos, a, b, c);
   
   Vector3 dist = closestPoint - spherePos;
   if(dist.length() < sphere->GetSize(0) * sphereTransform->GetHierarchicalScale().x)
@@ -257,7 +261,10 @@ bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 cubePos = cube->position + cubeTransform->GetHierarchicalPosition();
-  Vector3 closestPoint = triangle->GetClosestPointToTriangle(triTransform->GetHierarchicalPosition(), cubePos);
+  Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(cubePos, a, b, c);
   Vector3 dist = closestPoint - cubePos;
   
   // TODO doesn't work. Check orange collision book.
@@ -356,7 +363,8 @@ bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSpher
 {
   float radius = aShape->GetSize(0) * aSphere->GetHierarchicalScale().x;
   Vector3 scaledSpherePos = aSphere->GetHierarchicalPosition() + aShape->position.Multiply(aSphere->GetHierarchicalScale());
-  Vector3 closestPoint = aSegment.ClosestPointToPoint(scaledSpherePos);
+  Vector3 lineEnd = aSegment.position + (aSegment.direction * aSegment.length);
+  Vector3 closestPoint = ShapeMath::ClosestPointPointSegment(scaledSpherePos, aSegment.position, lineEnd);
   return (closestPoint - scaledSpherePos).length() < radius;
 }
 
