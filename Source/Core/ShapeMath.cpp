@@ -3,6 +3,13 @@
 
 namespace ShapeMath
 {
+  /**
+   * @brief Get closest point on line segment, given a point.
+   * @param aPoint Point to check.
+   * @param aA Start of line.
+   * @param aB End of line.
+   * @return Closest point along line.
+   */
   Vector3 const ClosestPointPointSegment(Vector3 const &aPoint, Vector3 const &aA, Vector3 const &aB)
   {
     /**
@@ -30,6 +37,13 @@ namespace ShapeMath
     return aA + (ab * t);
   }
   
+  /**
+   * @brief Get closest point along AABB, given a point.
+   * @param aPoint Point to check.
+   * @param aMin Minimum boundary of AABB.
+   * @param aMax Maximum boundary of AABB.
+   * @return Closest point along AABB.
+   */
   Vector3 const ClosestPointPointAABB(Vector3 const &aPoint, Vector3 const &aMin, Vector3 const &aMax)
   {
     Vector3 ret;
@@ -43,6 +57,14 @@ namespace ShapeMath
     return ret;
   }
   
+  /**
+   * @brief Get closest point along OBB, given a point.
+   * @param aPoint Point to check.
+   * @param aCenter Center of OBB.
+   * @param aOrientation Orientating vectors of OBB.
+   * @param aExtent Max extents of OBB along orienting vectors.
+   * @return Closest point along OBB.
+   */
   Vector3 const ClosestPointPointOBB(Vector3 const &aPoint, Vector3 const &aCenter, Vector3 const aOrientation[3], Vector3 const &aExtent)
   {
     Vector3 ret;
@@ -58,6 +80,14 @@ namespace ShapeMath
     return ret;
   }
   
+  /**
+   * @brief Get closest point along triangle, given a point.
+   * @param aPoint Point to check.
+   * @param aA Point of triangle.
+   * @param aB Point of triangle.
+   * @param aC Point of triangle.
+   * @return Closest point along triangle.
+   */
   Vector3 const ClosestPointPointTriangle(Vector3 const &aPoint, Vector3 const &aA, Vector3 const &aB, Vector3 const &aC)
   {
     Vector3 ab = aB - aA;
