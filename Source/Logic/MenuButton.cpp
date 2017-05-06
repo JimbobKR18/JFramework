@@ -44,12 +44,12 @@ void MenuButton::ParseAdditionalData(Parser& aParser)
     size.y = aParser.Find("ClickableArea", "SizeY")->GetValue().ToFloat();
     size.z = aParser.Find("ClickableArea", "SizeZ")->GetValue().ToFloat();
     
-    mClickableArea = Cube(position, size);
+    mClickableArea = AxisAlignedBoundingBox(position, size);
   }
   else
   {
     // If there is no area specified in the resource file, default to the Transform component.
-    mClickableArea = Cube(GetObject()->GET<Transform>()->GetPosition(), GetObject()->GET<Transform>()->GetSize());
+    mClickableArea = AxisAlignedBoundingBox(GetObject()->GET<Transform>()->GetPosition(), GetObject()->GET<Transform>()->GetSize());
   }
 }
 

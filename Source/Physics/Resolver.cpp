@@ -206,7 +206,7 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::SPHERE:
       CalculateSphereToSphere(aPair);
       break;
-    case Shape::CUBE:
+    case Shape::AABB:
       CalculateSphereToCube(aPair);
       break;
     case Shape::TRIANGLE:
@@ -219,13 +219,13 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       break;
     }
     break;
-  case Shape::CUBE:
+  case Shape::AABB:
     switch(aPair.mShapes[1]->shape)
     {
     case Shape::SPHERE:
       CalculateSphereToCube(aPair);
       break;
-    case Shape::CUBE:
+    case Shape::AABB:
       CalculateCubeToCube(aPair);
       break;
     case Shape::TRIANGLE:
@@ -244,7 +244,7 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::SPHERE:
       CalculateTriangleToSphere(aPair);
       break;
-    case Shape::CUBE:
+    case Shape::AABB:
       CalculateTriangleToCube(aPair);
       break;
     case Shape::TRIANGLE:
@@ -263,7 +263,7 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::SPHERE:
       CalculateLineToSphere(aPair);
       break;
-    case Shape::CUBE:
+    case Shape::AABB:
       CalculateLineToCube(aPair);
       break;
     case Shape::TRIANGLE:
@@ -448,7 +448,7 @@ void Resolver::CalculateTriangleToCube(CollisionPair &aPair)
   
   // TODO doesn't work check orange collision book
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
-  Cube* cube = (Cube*)aPair.mShapes[1];
+  AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 cubePos = cube->position.Multiply(cubeTransform->GetHierarchicalScale()) + cubeTransform->GetHierarchicalPosition();
@@ -539,14 +539,14 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
 void Resolver::CalculateLineToCube(CollisionPair &aPair)
 {
   // TODO this doesn't work, but I'll leave it in so at least something happens.
-  if(aPair.mShapes[0]->shape == Shape::CUBE)
+  if(aPair.mShapes[0]->shape == Shape::AABB)
   {
     aPair.Switch();
   }
   
   // Basic set up
   Line *line = (Line*)aPair.mShapes[0];
-  Cube *cube = (Cube*)aPair.mShapes[1];
+  AxisAlignedBoundingBox *cube = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   

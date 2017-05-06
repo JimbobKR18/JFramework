@@ -12,19 +12,18 @@ Shape::~Shape()
 }
 
 //------------------------------
-// CUBE
+// AXISALIGNEDBOUNDINGBOX
 //------------------------------
-Cube::Cube() : Shape(CUBE)
+AxisAlignedBoundingBox::AxisAlignedBoundingBox() : Shape(AABB)
 {
 }
 
-Cube::Cube(Vector3 const &aPosition, Vector3 const &aSize) : 
-    Shape(CUBE), size(aSize)
+AxisAlignedBoundingBox::AxisAlignedBoundingBox(Vector3 const &aPosition, Vector3 const &aSize) : Shape(AABB), size(aSize)
 {
   position = aPosition;
 }
 
-Cube::~Cube()
+AxisAlignedBoundingBox::~AxisAlignedBoundingBox()
 {
 }
 
@@ -33,11 +32,11 @@ Cube::~Cube()
  * @param aPosition Point to check
  * @return True if collided.
  */
-bool Cube::Get3DCollision(Vector3 const &aPosition)
+bool AxisAlignedBoundingBox::Get3DCollision(Vector3 const &aPosition)
 {
   // SEPARATING AXIS THEORUM
   Vector3 dist = aPosition - position;
-  for (int i = 0; i <= 2; ++i)
+  for (int i = 0; i <= 3; ++i)
   {
     if (fabs(dist[i]) > size[i])
     {
@@ -52,7 +51,7 @@ bool Cube::Get3DCollision(Vector3 const &aPosition)
  * @param aPosition Point to check
  * @return True if collided.
  */
-bool Cube::Get2DCollision(Vector3 const &aPosition)
+bool AxisAlignedBoundingBox::Get2DCollision(Vector3 const &aPosition)
 {
   // SEPARATING AXIS THEORUM
   Vector3 dist = aPosition - position;
@@ -71,7 +70,7 @@ bool Cube::Get2DCollision(Vector3 const &aPosition)
  * @param index Axis to check (x = 0, y = 1, z = 2)
  * @return Size on axis
  */
-float Cube::GetSize(int index)
+float AxisAlignedBoundingBox::GetSize(int index)
 {
   return size[index];
 }

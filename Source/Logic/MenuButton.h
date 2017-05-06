@@ -8,7 +8,7 @@
 class MenuButton: public MenuImage
 {
 private:
-  Cube mClickableArea;
+  AxisAlignedBoundingBox mClickableArea;
   
 public:
   MenuButton(Menu *aOwner, HashString const &aFilename);

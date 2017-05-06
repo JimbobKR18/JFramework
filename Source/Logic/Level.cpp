@@ -154,7 +154,7 @@ Level::ObjectVector Level::FindObjects(Vector3 const &aPosition) const
   for(ConstObjectIT it = mObjects[ObjectPlacement::DEFAULT].begin(); it != mObjects[ObjectPlacement::DEFAULT].end(); ++it)
   {
     Transform* transform = (*it)->GET<Transform>();
-    Cube cube(transform->GetPosition(), transform->GetSize());
+    AxisAlignedBoundingBox cube(transform->GetPosition(), transform->GetSize());
 
     if(cube.Get2DCollision(aPosition))
     {
@@ -1313,14 +1313,14 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
     HashString type = tempShape->Find("Type")->GetValue();
     
     // Discern type and serialize accordingly
-    if(type == "CUBE")
+    if(type == "CUBE" || type == "AABB")
     {
-      newShape = new Cube();
-      Cube* cube = (Cube*)newShape;
+      newShape = new AxisAlignedBoundingBox();
+      AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)newShape;
       cube->size = Vector3(tempShape->Find("SizeX")->GetValue().ToFloat(),
                           tempShape->Find("SizeY")->GetValue().ToFloat(),
                           tempShape->Find("SizeZ")->GetValue().ToFloat());
-      cube->shape = Shape::CUBE;
+      cube->shape = Shape::AABB;
     }
     else if(type == "SPHERE")
     {

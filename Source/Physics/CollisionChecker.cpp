@@ -35,7 +35,7 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::SPHERE:
           collided = CheckSphereToSphere(potentialPair);
           break;
-        case Shape::CUBE:
+        case Shape::AABB:
           collided = CheckSphereToCube(potentialPair);
           break;
         case Shape::TRIANGLE:
@@ -48,13 +48,13 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
           break;
         }
         break;
-      case Shape::CUBE:
+      case Shape::AABB:
         switch((*it2)->shape)
         {
         case Shape::SPHERE:
           collided = CheckSphereToCube(potentialPair);
           break;
-        case Shape::CUBE:
+        case Shape::AABB:
           collided = CheckCubeToCube(potentialPair);
           break;
         case Shape::TRIANGLE:
@@ -73,7 +73,7 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::SPHERE:
           collided = CheckTriangleToSphere(potentialPair);
           break;
-        case Shape::CUBE:
+        case Shape::AABB:
           collided = CheckTriangleToCube(potentialPair);
           break;
         case Shape::TRIANGLE:
@@ -92,7 +92,7 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::SPHERE:
           collided = CheckLineToSphere(potentialPair);
           break;
-        case Shape::CUBE:
+        case Shape::AABB:
           collided = CheckLineToCube(potentialPair);
           break;
         case Shape::TRIANGLE:
@@ -128,7 +128,7 @@ bool CollisionChecker::CheckLineCollision(Line const &aSegment, Transform* aTran
   case Shape::SPHERE:
     return CheckLineToSphere(aSegment, aTransform, aShape);
     break;
-  case Shape::CUBE:
+  case Shape::AABB:
     return CheckLineToCube(aSegment, aTransform, aShape);
     break;
   default:
@@ -252,12 +252,12 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
  */
 bool CollisionChecker::CheckTriangleToCube(CollisionPair &aPair)
 {
-  if(aPair.mShapes[0]->shape == Shape::CUBE)
+  if(aPair.mShapes[0]->shape == Shape::AABB)
     aPair.Switch();
   
   // TODO take scale into account.
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
-  Cube* cube = (Cube*)aPair.mShapes[1];
+  AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* cubeTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 cubePos = cube->position + cubeTransform->GetHierarchicalPosition();
@@ -316,7 +316,7 @@ bool CollisionChecker::CheckLineToSphere(CollisionPair &aPair)
  */
 bool CollisionChecker::CheckLineToCube(CollisionPair &aPair)
 {
-  if(aPair.mShapes[0]->shape == Shape::CUBE)
+  if(aPair.mShapes[0]->shape == Shape::AABB)
     aPair.Switch();
     
   // Move line into world space

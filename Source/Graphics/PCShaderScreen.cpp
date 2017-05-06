@@ -131,7 +131,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           }
           glEnd();
         }
-        else if((*it)->shape == Shape::CUBE)
+        else if((*it)->shape == Shape::AABB)
         {
           Vector3 cubePos = position + (*it)->position.Multiply(scale);
           float xSize = (*it)->GetSize(0) * scale.x;

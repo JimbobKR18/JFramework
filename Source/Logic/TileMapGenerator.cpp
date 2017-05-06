@@ -446,7 +446,7 @@ PhysicsObject* TileMapGenerator::CreatePhysicsAtIndex(unsigned const aIndex, Phy
      mCollisionShapes[aIndex] == CollisionShapes::CUBE_PASSABLE ||
      mCollisionShapes[aIndex] >= CollisionShapes::ALL_COLLISION_SHAPES)
   {
-    shape = new Cube(aZeroVector, aTransform->GetSize());
+    shape = new AxisAlignedBoundingBox(aZeroVector, aTransform->GetSize());
     
     if(mCollisionShapes.size() < aCollisionDataVectorSize)
     {

@@ -11,7 +11,7 @@ struct Shape
   
   enum ShapeType
   {
-    CUBE = 0,
+    AABB = 0,
     SPHERE,
     CIRCLE,
     LINE,
@@ -24,13 +24,13 @@ struct Shape
   virtual float GetSize(int index) = 0;
 };
 
-struct Cube : public Shape
+struct AxisAlignedBoundingBox : public Shape
 {
   Vector3 size;
 
-  Cube();
-  Cube(Vector3 const &aPosition, Vector3 const &aSize);
-  virtual ~Cube();
+  AxisAlignedBoundingBox();
+  AxisAlignedBoundingBox(Vector3 const &aPosition, Vector3 const &aSize);
+  virtual ~AxisAlignedBoundingBox();
 
   bool Get3DCollision(Vector3 const &aPosition);
   bool Get2DCollision(Vector3 const &aPosition);

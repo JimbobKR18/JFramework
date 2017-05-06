@@ -163,7 +163,7 @@ void PhysicsObject::Serialize(Parser &aParser)
     
     switch((*it)->shape)
     {
-    case Shape::CUBE:
+    case Shape::AABB:
       shapeObject->Place(curShape, "Type", "CUBE");
       shapeObject->Place(curShape, "SizeX", Common::IntToString((*it)->GetSize(0)));
       shapeObject->Place(curShape, "SizeY", Common::IntToString((*it)->GetSize(1)));
@@ -259,12 +259,12 @@ void PhysicsObject::Deserialize(Parser &aParser)
     // Discern type and serialize accordingly
     if(type == "CUBE")
     {
-      newShape = new Cube();
-      Cube* cube = (Cube*)newShape;
+      newShape = new AxisAlignedBoundingBox();
+      AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)newShape;
       cube->size = Vector3(tempShape->Find("SizeX")->GetValue().ToFloat(),
                           tempShape->Find("SizeY")->GetValue().ToFloat(),
                           tempShape->Find("SizeZ")->GetValue().ToFloat());
-      cube->shape = Shape::CUBE;
+      cube->shape = Shape::AABB;
     }
     else if(type == "SPHERE")
     {
