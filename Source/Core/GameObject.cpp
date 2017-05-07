@@ -20,7 +20,7 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(ObjectManager *aManager, HashString const &aFileName) :
-                       mFileName(aFileName), mName(""), mComponents(), mManager(aManager),
+                       mFileName(aFileName), mName(""), mTags(), mComponents(), mManager(aManager),
                        mParent(nullptr), mChildren()
 {
   for(int i = aFileName.Length() - 1; i >= 0 && aFileName[i] != '/'; --i)
@@ -35,6 +35,7 @@ GameObject::GameObject(ObjectManager *aManager, HashString const &aFileName) :
 GameObject::GameObject(GameObject const &aGameObject) :
                               mFileName(aGameObject.mFileName),
                               mName(aGameObject.mName),
+                              mTags(aGameObject.mTags),
                               mComponents(aGameObject.mComponents),
                               mManager(nullptr),
                               mParent(nullptr), 
@@ -61,6 +62,7 @@ GameObject::~GameObject()
   }
   mParent = nullptr;
   mChildren.clear();
+  mTags.clear();
 }
 
 /**
@@ -240,6 +242,42 @@ bool GameObject::HasComponentByName(HashString const &aName) const
 }
 
 /**
+ * @brief Add tag to object.
+ * @param aTag Tag to add.
+ */
+void GameObject::AddTag(HashString const &aTag)
+{
+  mTags[aTag.ToHash()] = aTag;
+}
+
+/**
+ * @brief Remove tag from object.
+ * @param aTag Tag to remove.
+ */
+void GameObject::RemoveTag(HashString const &aTag)
+{
+  mTags.erase(aTag.ToHash());
+}
+
+/**
+ * @brief Remove all tags.
+ */
+void GameObject::ClearTags()
+{
+  mTags.clear();
+}
+
+/**
+ * @brief Verify if object has tag.
+ * @param aTag Tag to search for.
+ * @return True if tag is there.
+ */
+bool GameObject::HasTag(HashString const &aTag) const
+{
+  return mTags.find(aTag.ToHash()) != mTags.end();
+}
+
+/**
  * @brief Updates components
  */
 void GameObject::Update()
@@ -281,6 +319,16 @@ void GameObject::Serialize(Parser &aParser)
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
     it->second->Serialize(aParser);
+  }
+  
+  if(!mTags.empty())
+  {
+    std::vector<std::string> tags;
+    for(TagConstIT it = mTags.begin(); it != mTags.end(); ++it)
+    {
+      tags.push_back(it->second);
+    }
+    aParser.Place(object, "Tags", Common::StringVectorToString(tags));
   }
 }
 

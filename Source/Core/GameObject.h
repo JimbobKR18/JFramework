@@ -27,9 +27,14 @@ public:
   typedef GameObjectContainer::iterator GameObjectIT;
   typedef GameObjectContainer::const_iterator GameObjectConstIT;
   
+  typedef std::unordered_map<int, HashString> TagContainer;
+  typedef TagContainer::iterator TagIT;
+  typedef TagContainer::const_iterator TagConstIT;
+  
 private:
   HashString          mFileName;
   HashString          mName;
+  TagContainer        mTags;
   ComponentContainer  mComponents;
   ObjectManager*      mManager;
   
@@ -63,6 +68,10 @@ public:
   Component*                 GetComponentByName(HashString const &aName) const;
   bool                       HasComponent(int const &aUID) const;
   bool                       HasComponentByName(HashString const &aName) const;
+  void                       AddTag(HashString const &aTag);
+  void                       RemoveTag(HashString const &aTag);
+  void                       ClearTags();
+  bool                       HasTag(HashString const &aTag) const;
 
   // VIRTUALS / STATICS
   virtual void               Update();

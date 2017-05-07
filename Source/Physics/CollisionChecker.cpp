@@ -16,12 +16,12 @@
 std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair const &aPair)
 {
   std::vector<CollisionPair> pairs;
-  PhysicsObject::constShapeIT it1End = aPair.mBodies[0]->GetShapes().end();
-  PhysicsObject::constShapeIT it2End = aPair.mBodies[1]->GetShapes().end();
-  for(PhysicsObject::constShapeIT it = aPair.mBodies[0]->GetShapes().begin();
+  PhysicsObject::ConstShapeIT it1End = aPair.mBodies[0]->GetShapes().end();
+  PhysicsObject::ConstShapeIT it2End = aPair.mBodies[1]->GetShapes().end();
+  for(PhysicsObject::ConstShapeIT it = aPair.mBodies[0]->GetShapes().begin();
       it != it1End; ++it)
   {
-    for(PhysicsObject::constShapeIT it2 = aPair.mBodies[1]->GetShapes().begin();
+    for(PhysicsObject::ConstShapeIT it2 = aPair.mBodies[1]->GetShapes().begin();
       it2 != it2End; ++it2)
     {
       bool collided = false;

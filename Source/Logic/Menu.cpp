@@ -290,6 +290,17 @@ void Menu::ParseFile()
     {
       ParseEffects(element->GetObject(), newElement->Find("Effects"));
     }
+    if(newElement->Find("Tags"))
+    {
+      if(newElement->Find("Tags")->Find("Clear") && newElement->Find("Tags")->Find("Clear")->GetValue().ToBool())
+        element->GetObject()->ClearTags();
+      
+      std::vector<HashString> tags = newElement->Find("Tags")->GetValue().ToHashStringVector();
+      for(std::vector<HashString>::iterator it = tags.begin(); it != tags.end(); ++it)
+      {
+        element->GetObject()->AddTag(*it);
+      }
+    }
     if(newElement->Find("Parent"))
     {
       HashString parentName = newElement->Find("Parent")->GetValue();

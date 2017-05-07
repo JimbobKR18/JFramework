@@ -29,7 +29,7 @@ PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sU
 PhysicsObject::~PhysicsObject()
 {
   // Delete all shapes associated with this object
-  for(shapeIT it = mShapes.begin(); it != mShapes.end(); ++it)
+  for(ShapeIT it = mShapes.begin(); it != mShapes.end(); ++it)
   {
     delete *it;
   }
@@ -72,8 +72,8 @@ void PhysicsObject::Update()
 
   // Update the size for broadphasing, may be a bit slow, though
   Vector3 maxRange = transform->GetSize();
-  shapeIT end = mShapes.end();
-  for(shapeIT it = mShapes.begin(); it != end; ++it)
+  ShapeIT end = mShapes.end();
+  for(ShapeIT it = mShapes.begin(); it != end; ++it)
   {
     Shape *shape = *it;
     maxRange.x = Greater<float>(maxRange.x, shape->GetSize(0));
@@ -137,7 +137,7 @@ void PhysicsObject::Serialize(Parser &aParser)
   if(!mIgnoreList.empty())
   {
     std::vector<std::string> ignoreList;
-    for(IgnoreContainer::iterator it = mIgnoreList.begin(); it != mIgnoreList.end(); ++it)
+    for(IgnoreIT it = mIgnoreList.begin(); it != mIgnoreList.end(); ++it)
     {
       ignoreList.push_back(it->second);
     }
@@ -149,7 +149,7 @@ void PhysicsObject::Serialize(Parser &aParser)
   Root* physicsObject = object->Find(PHYSICS_OBJECT);
   HashString const SHAPE = "Shape_";
   int curIndex = 0;
-  for(shapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
+  for(ShapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
   {
     HashString curShape = SHAPE + Common::IntToString((*it)->id);
     Vector3 localPosition = (*it)->position;
@@ -391,12 +391,27 @@ void PhysicsObject::RemoveIgnore(HashString const &aObjectName)
 
 /**
  * @brief Check if we should ignore the object in question
- * @param aObjectName The name of the object to maybe ignore
+ * @param aObject The object to maybe ignore
  * @return Whether or not to ignore collision with this object
  */
-bool PhysicsObject::IgnoreObject(HashString const &aObjectName)
+bool PhysicsObject::IgnoreObject(GameObject const *aObject) const
 {
-  return mIgnoreList.find(aObjectName.ToHash()) != mIgnoreList.end();
+  if(mIgnoreList.find(aObject->GetName().ToHash()) != mIgnoreList.end())
+    return true;
+    
+  if(mIgnoreList.find(aObject->GetFileName().ToHash()) != mIgnoreList.end())
+    return true;
+    
+  PhysicsObject::ConstIgnoreIT end = mIgnoreList.end();
+  for(PhysicsObject::ConstIgnoreIT it = mIgnoreList.begin(); it != end; ++it)
+  {
+    if(aObject->HasTag(it->second))
+    {
+      return true;
+    }
+  }
+    
+  return false;
 }
 
 /**
@@ -629,7 +644,7 @@ void PhysicsObject::SetIgnoreList(PhysicsObject::IgnoreContainer const &aIgnoreL
  * @brief Get all shapes
  * @return Shapes belonging to this object.
  */
-std::vector<Shape*>& PhysicsObject::GetShapes()
+PhysicsObject::ShapeContainer& PhysicsObject::GetShapes()
 {
   return mShapes;
 }

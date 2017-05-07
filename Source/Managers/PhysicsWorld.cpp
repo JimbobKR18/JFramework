@@ -202,8 +202,8 @@ bool PhysicsWorld::LineCollidesWithAnything(Line const &aLine, std::vector<Physi
   {
     if(std::find(ignoreBegin, ignoreEnd, *it) != ignoreEnd)
       continue;
-    PhysicsObject::shapeIT shapesEnd = (*it)->GetShapes().end();
-    for(PhysicsObject::shapeIT it2 = (*it)->GetShapes().begin(); it2 != shapesEnd; ++it2)
+    PhysicsObject::ShapeIT shapesEnd = (*it)->GetShapes().end();
+    for(PhysicsObject::ShapeIT it2 = (*it)->GetShapes().begin(); it2 != shapesEnd; ++it2)
     {
       if(CollisionChecker::CheckLineCollision(aLine, (*it)->GetOwner()->GET<Transform>(), *it2))
         return true;
@@ -244,7 +244,7 @@ void PhysicsWorld::SweepAndPrune()
         continue;
       
       HashString it2Name = it2Object->GetOwner()->GetName();
-      bool ignore = itObject->IgnoreObject(it2Name) || it2Object->IgnoreObject(itName);
+      bool ignore = itObject->IgnoreObject(it2Object->GetOwner()) || it2Object->IgnoreObject(itObject->GetOwner());
 
       if(itObject != it2Object && !ignore)
       {

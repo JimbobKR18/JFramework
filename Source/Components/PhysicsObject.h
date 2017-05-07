@@ -18,8 +18,12 @@ class PhysicsObject : public Component
 {
 public:
   typedef std::unordered_map<int, HashString> IgnoreContainer;
-  typedef std::vector<Shape*>::iterator shapeIT;
-  typedef std::vector<Shape*>::const_iterator constShapeIT;
+  typedef IgnoreContainer::iterator IgnoreIT;
+  typedef IgnoreContainer::const_iterator ConstIgnoreIT;
+  
+  typedef std::vector<Shape*> ShapeContainer;
+  typedef ShapeContainer::iterator ShapeIT;
+  typedef ShapeContainer::const_iterator ConstShapeIT;
   
 private:
   PhysicsWorld*       mWorld;
@@ -37,7 +41,7 @@ private:
                       mPassable,
                       mActive;
   IgnoreContainer     mIgnoreList;
-  std::vector<Shape*> mShapes;
+  ShapeContainer      mShapes;
   
   static int const sUID;
 
@@ -60,7 +64,7 @@ public:
   void                 ClearForces();
   void                 AddIgnore(HashString const &aObjectName);
   void                 RemoveIgnore(HashString const &aObjectName);
-  bool                 IgnoreObject(HashString const &aObjectName);
+  bool                 IgnoreObject(GameObject const *aObject) const;
 
   // Getters and setters
   Vector3              GetVelocity() const;
@@ -99,7 +103,7 @@ public:
   IgnoreContainer      GetIgnoreList() const;
   void                 SetIgnoreList(IgnoreContainer const &aIgnoreList);
   
-  std::vector<Shape*>& GetShapes();
+  ShapeContainer&      GetShapes();
 };
 
 #endif /* defined(__JFramework__PhysicsObject__) */

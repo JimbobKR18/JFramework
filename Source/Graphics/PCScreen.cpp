@@ -74,8 +74,8 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 
       // For each shape, draw the outline
       std::vector<Shape*> const& shapes = physicsObject->GetShapes();
-      PhysicsObject::constShapeIT end = shapes.end();
-      for(PhysicsObject::constShapeIT it = shapes.begin(); it != end; ++it)
+      PhysicsObject::ConstShapeIT end = shapes.end();
+      for(PhysicsObject::ConstShapeIT it = shapes.begin(); it != end; ++it)
       {
         if((*it)->shape == Shape::SPHERE)
         {

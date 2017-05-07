@@ -709,6 +709,17 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
         object->SetName(curRoot->Find("Name")->GetValue());
       }
     }
+    if(curRoot->Find("Tags"))
+    {
+      if(curRoot->Find("Tags")->Find("Clear") && curRoot->Find("Tags")->Find("Clear")->GetValue().ToBool())
+        object->ClearTags();
+      
+      std::vector<HashString> tags = curRoot->Find("Tags")->GetValue().ToHashStringVector();
+      for(std::vector<HashString>::iterator it = tags.begin(); it != tags.end(); ++it)
+      {
+        object->AddTag(*it);
+      }
+    }
     if(curRoot->Find("Parent"))
     {
       HashString parentName = curRoot->Find("Parent")->GetValue();
