@@ -2,6 +2,7 @@
 #include "PhysicsObject.h"
 #include "PCSurface.h"
 #include "Constants.h"
+#include "ShapeMath.h"
 
 #define VERTEX_ARRAYS
 
@@ -58,6 +59,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       Vector3 position = transform->GetHierarchicalPosition();
       Vector3 scale = transform->GetHierarchicalScale();
       Vector3 broadSize = physicsObject->GetBroadSize();
+      Matrix33 rotation = transform->GetHierarchicalRotation();
 
       if((*it)->GetViewMode() == VIEW_ABSOLUTE)
       {
@@ -79,7 +81,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       {
         if((*it)->shape == Shape::SPHERE)
         {
-          Vector3 spherePos = position + (*it)->position.Multiply(scale);
+          Vector3 spherePos = position + (*it)->position.Multiply(rotation * scale);
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           
@@ -95,7 +97,7 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         }
         else if((*it)->shape == Shape::AABB)
         {
-          Vector3 cubePos = position + (*it)->position.Multiply(scale);
+          Vector3 cubePos = position + (*it)->position.Multiply(rotation * scale);
           float xSize = (*it)->GetSize(0) * scale.x;
           float ySize = (*it)->GetSize(1) * scale.y;
           
@@ -112,15 +114,15 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         else if((*it)->shape == Shape::TRIANGLE)
         {
           Triangle* triangle = (Triangle*)(*it);
-          Vector3 triPos = position + (*it)->position.Multiply(scale);
+          Vector3 triPos = position + (*it)->position.Multiply(rotation * scale);
           glBegin(GL_LINE_STRIP);
           glColor3f(1.0f, 0.0f, 0.0f);
           for(int i = 0; i < 3; ++i)
           {
-            Vector3 point = triPos + triangle->GetPoint(i).Multiply(scale);
+            Vector3 point = triPos + triangle->GetPoint(i).Multiply(rotation * scale);
             glVertex3f(point.x, point.y, point.z);
           }
-          Vector3 point = triPos + triangle->GetPoint(0).Multiply(scale);
+          Vector3 point = triPos + triangle->GetPoint(0).Multiply(rotation * scale);
           glVertex3f(point.x, point.y, point.z);
           glEnd();
         }

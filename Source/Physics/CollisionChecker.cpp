@@ -146,8 +146,8 @@ bool CollisionChecker::CheckSphereToSphere(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(t1->GetHierarchicalScale());
-  Vector3 t2Pos = t2->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(t2->GetHierarchicalScale());
+  Vector3 t1Pos = ShapeMath::GetLocalCoordinates(t1, aPair.mShapes[0]->position);
+  Vector3 t2Pos = ShapeMath::GetLocalCoordinates(t2, aPair.mShapes[1]->position);
   float t1Size = aPair.mShapes[0]->GetSize(0) * t1->GetHierarchicalScale().x;
   float t2Size = aPair.mShapes[1]->GetSize(0) * t2->GetHierarchicalScale().x;
 
@@ -171,8 +171,8 @@ bool CollisionChecker::CheckSphereToAABB(CollisionPair &aPair)
   Transform *sphere = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *aabb = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 spherePos = sphere->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(sphere->GetHierarchicalScale());
-  Vector3 aabbPos = aabb->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(aabb->GetHierarchicalScale());
+  Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphere, aPair.mShapes[0]->position);
+  Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabb, aPair.mShapes[1]->position);
   Vector3 relPos = spherePos - aabbPos;
   
   Vector3 closestPoint;
@@ -209,8 +209,8 @@ bool CollisionChecker::CheckAABBToAABB(CollisionPair &aPair)
   Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
 
-  Vector3 t1Pos = t1->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(t1->GetHierarchicalScale());
-  Vector3 t2Pos = t2->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(t2->GetHierarchicalScale());
+  Vector3 t1Pos = ShapeMath::GetLocalCoordinates(t1, aPair.mShapes[0]->position);
+  Vector3 t2Pos = ShapeMath::GetLocalCoordinates(t2, aPair.mShapes[1]->position);
 
   bool xCheck = fabs(t1Pos.x - t2Pos.x) <= aPair.mShapes[0]->GetSize(0) * t1->GetHierarchicalScale().x + aPair.mShapes[1]->GetSize(0) * t2->GetHierarchicalScale().x;
   bool yCheck = fabs(t1Pos.y - t2Pos.y) <= aPair.mShapes[0]->GetSize(1) * t1->GetHierarchicalScale().y + aPair.mShapes[1]->GetSize(1) * t2->GetHierarchicalScale().y;
@@ -233,10 +233,10 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   Sphere* sphere = (Sphere*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 spherePos = sphere->position.Multiply(sphereTransform->GetHierarchicalScale()) + sphereTransform->GetHierarchicalPosition();
-  Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphereTransform, sphere->position);
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(spherePos, a, b, c);
   
   Vector3 dist = closestPoint - spherePos;
@@ -259,10 +259,10 @@ bool CollisionChecker::CheckTriangleToAABB(CollisionPair &aPair)
   AxisAlignedBoundingBox* aabb = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 aabbPos = aabb->position.Multiply(aabbTransform->GetHierarchicalScale()) + aabbTransform->GetHierarchicalPosition();
-  Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabbTransform, aabb->position);
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(aabbPos, a, b, c);
   Vector3 dist = closestPoint - aabbPos;
   
@@ -300,9 +300,8 @@ bool CollisionChecker::CheckLineToSphere(CollisionPair &aPair)
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Line* line = (Line*)(aPair.mShapes[0]);
   Line tempLine = (*line);
-  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetHierarchicalScale());
-  tempLine.position = tempLine.position.Multiply(lineTransform->GetHierarchicalScale());
-  tempLine.position += lineTransform->GetHierarchicalPosition();
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetRotation() * lineTransform->GetHierarchicalScale());
+  tempLine.position = ShapeMath::GetLocalCoordinates(lineTransform, tempLine.position);
     
   return CheckLineToSphere(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
 }
@@ -322,9 +321,8 @@ bool CollisionChecker::CheckLineToAABB(CollisionPair &aPair)
   Transform *lineTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Line* line = (Line*)(aPair.mShapes[0]);
   Line tempLine = (*line);
-  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetHierarchicalScale());
-  tempLine.position = tempLine.position.Multiply(lineTransform->GetHierarchicalScale());
-  tempLine.position += lineTransform->GetHierarchicalPosition();
+  tempLine.direction = tempLine.direction.Multiply(lineTransform->GetRotation() * lineTransform->GetHierarchicalScale());
+  tempLine.position = ShapeMath::GetLocalCoordinates(lineTransform, tempLine.position);
     
   return CheckLineToAABB(tempLine, aPair.mBodies[1]->GetOwner()->GET<Transform>(), aPair.mShapes[1]);
 }
@@ -353,10 +351,10 @@ bool CollisionChecker::CheckLineToLine(CollisionPair &aPair)
   Line *l1 = dynamic_cast<Line*>(aPair.mShapes[0]);
   Line *l2 = dynamic_cast<Line*>(aPair.mShapes[1]);
   
-  Vector3 a = t1->GetHierarchicalPosition() + l1->position.Multiply(t1->GetHierarchicalScale());
-  Vector3 b = a + (l1->direction.Multiply(t1->GetHierarchicalScale()) * l1->length);
-  Vector3 c = t2->GetHierarchicalPosition() + l2->position.Multiply(t2->GetHierarchicalScale());
-  Vector3 d = c + (l2->direction.Multiply(t2->GetHierarchicalScale()) * l2->length);
+  Vector3 a = ShapeMath::GetLocalCoordinates(t1, l1->position);
+  Vector3 b = a + (l1->direction.Multiply(t1->GetHierarchicalRotation() * t1->GetHierarchicalScale()) * l1->length);
+  Vector3 c = ShapeMath::GetLocalCoordinates(t2, l2->position);
+  Vector3 d = c + (l2->direction.Multiply(t2->GetHierarchicalRotation() * t2->GetHierarchicalScale()) * l2->length);
   
   float a1 = ShapeMath::Signed2DTriArea(a, b, d);
   float a2 = ShapeMath::Signed2DTriArea(a, b, c);
@@ -383,7 +381,7 @@ bool CollisionChecker::CheckLineToLine(CollisionPair &aPair)
 bool CollisionChecker::CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape)
 {
   float radius = aShape->GetSize(0) * aSphere->GetHierarchicalScale().x;
-  Vector3 scaledSpherePos = aSphere->GetHierarchicalPosition() + aShape->position.Multiply(aSphere->GetHierarchicalScale());
+  Vector3 scaledSpherePos = ShapeMath::GetLocalCoordinates(aSphere, aShape->position);
   Vector3 lineEnd = aSegment.position + (aSegment.direction * aSegment.length);
   Vector3 closestPoint = ShapeMath::ClosestPointPointSegment(scaledSpherePos, aSegment.position, lineEnd);
   return (closestPoint - scaledSpherePos).length() < radius;
@@ -413,13 +411,13 @@ bool CollisionChecker::CheckLineToAABB(Line const &aSegment, Transform *aAABB, S
   Vector3 direction = aSegment.direction;
   Vector3 min = Vector3(aShape->position.x - aShape->GetSize(0),
                         aShape->position.y - aShape->GetSize(1),
-                        aShape->position.z - aShape->GetSize(2)).Multiply(aAABB->GetHierarchicalScale());
+                        aShape->position.z - aShape->GetSize(2));
   Vector3 max = Vector3(aShape->position.x + aShape->GetSize(0),
                         aShape->position.y + aShape->GetSize(1),
-                        aShape->position.z + aShape->GetSize(2)).Multiply(aAABB->GetHierarchicalScale());
+                        aShape->position.z + aShape->GetSize(2));
                         
-  min += aAABB->GetHierarchicalPosition();
-  max += aAABB->GetHierarchicalPosition();
+  min = ShapeMath::GetLocalCoordinates(aAABB, min);
+  max = ShapeMath::GetLocalCoordinates(aAABB, max);
   Vector3 collision;
   
   if(fabs(aShape->GetSize(2) * aAABB->GetHierarchicalScale().GetValue(2)) <= MINIMUM_SIZE)

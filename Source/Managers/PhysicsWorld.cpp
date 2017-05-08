@@ -21,9 +21,9 @@
 bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 {
   // Left aligned
-  float x1 = object1->GetOwner()->GET<Transform>()->GetPosition().x -
+  float x1 = object1->GetOwner()->GET<Transform>()->GetHierarchicalPosition().x -
       object1->GetBroadSize().x;
-  float x2 = object2->GetOwner()->GET<Transform>()->GetPosition().x -
+  float x2 = object2->GetOwner()->GET<Transform>()->GetHierarchicalPosition().x -
       object2->GetBroadSize().x;
   if(x1 < x2)
   {
@@ -251,9 +251,9 @@ void PhysicsWorld::SweepAndPrune()
         if((!itObject->IsStatic() || !it2Object->IsStatic()) &&
            !mResolver.Find(itObject, it2Object))
         {
-          float x1 = itTransform->GetPosition().x;
+          float x1 = itTransform->GetHierarchicalPosition().x;
           float x1Size = itObject->GetBroadSize().x;
-          float x2 = it2Object->GetOwner()->GET<Transform>()->GetPosition().x;
+          float x2 = it2Object->GetOwner()->GET<Transform>()->GetHierarchicalPosition().x;
           float x2Size = it2Object->GetBroadSize().x;
 
           float xPosDiff = fabs(x1 - x2);

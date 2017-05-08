@@ -135,4 +135,15 @@ namespace ShapeMath
   {
     return (aA.x - aC.x) * (aB.y - aC.y) - (aA.y - aC.y) * (aB.x - aC.x);
   }
+  
+  /**
+   * @brief Transform local position into world coordinates.
+   * @param aTransform Transform.
+   * @param aLocalPosition Position local to transform.
+   * @return Position in world space.
+   */
+  Vector3 GetLocalCoordinates(Transform *aTransform, Vector3 const &aLocalPosition)
+  {
+    return aTransform->GetHierarchicalPosition() + aLocalPosition.Multiply(aTransform->GetHierarchicalRotation() * aTransform->GetHierarchicalScale());
+  }
 }

@@ -297,8 +297,8 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(b1Transform->GetHierarchicalScale());
-  Vector3 b2Pos = b2Transform->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(b1Transform->GetHierarchicalScale());
+  Vector3 b1Pos = ShapeMath::GetLocalCoordinates(b1Transform, aPair.mShapes[0]->position);
+  Vector3 b2Pos = ShapeMath::GetLocalCoordinates(b2Transform, aPair.mShapes[1]->position);
 
   aPair.mPenetration = fabs((b1Pos - b2Pos).length() - 
     (aPair.mShapes[0]->GetSize(0) * b1Transform->GetHierarchicalScale().x + aPair.mShapes[1]->GetSize(0) * b2Transform->GetHierarchicalScale().x));
@@ -314,8 +314,8 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(b1Transform->GetHierarchicalScale());
-  Vector3 b2Pos = b2Transform->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(b2Transform->GetHierarchicalScale());
+  Vector3 b1Pos = ShapeMath::GetLocalCoordinates(b1Transform, aPair.mShapes[0]->position);
+  Vector3 b2Pos = ShapeMath::GetLocalCoordinates(b2Transform, aPair.mShapes[1]->position);
  
   int axis = 0;
   float shortestDistance = 0xffffff;
@@ -362,8 +362,8 @@ void Resolver::CalculateAABBToAABB(CollisionPair &aPair)
 {
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = b1Transform->GetHierarchicalPosition() + aPair.mShapes[0]->position.Multiply(b1Transform->GetHierarchicalScale());
-  Vector3 b2Pos = b2Transform->GetHierarchicalPosition() + aPair.mShapes[1]->position.Multiply(b2Transform->GetHierarchicalScale());
+  Vector3 b1Pos = ShapeMath::GetLocalCoordinates(b1Transform, aPair.mShapes[0]->position);
+  Vector3 b2Pos = ShapeMath::GetLocalCoordinates(b2Transform, aPair.mShapes[1]->position);
   
   int axis = 0;
   float shortestDistance = 0xffffff;
@@ -418,10 +418,10 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
   Sphere* sphere = (Sphere*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 spherePos = sphere->position.Multiply(sphereTransform->GetHierarchicalScale()) + sphereTransform->GetHierarchicalPosition();
-  Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphereTransform, sphere->position);
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(spherePos, a, b, c);
   
   Vector3 dist = closestPoint - spherePos;
@@ -450,10 +450,10 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
   AxisAlignedBoundingBox* aabb = (AxisAlignedBoundingBox*)aPair.mShapes[1];
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 aabbPos = aabb->position.Multiply(aabbTransform->GetHierarchicalScale()) + aabbTransform->GetHierarchicalPosition();
-  Vector3 a = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(0).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 b = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(1).Multiply(triTransform->GetHierarchicalScale()));
-  Vector3 c = triTransform->GetHierarchicalPosition() + (triangle->GetPoint(2).Multiply(triTransform->GetHierarchicalScale()));
+  Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabbTransform, aabb->position);
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(aabbPos, a, b, c);
   Vector3 dist = closestPoint - aabbPos;
   int axis = 0;
@@ -518,9 +518,9 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
   
   // Find closest point on line to sphere pos and calculate penetration
   // based on radius.
-  Vector3 spherePos = sphereTransform->GetHierarchicalPosition() + sphere->position.Multiply(sphereTransform->GetHierarchicalScale());
-  Vector3 linePos = lineTransform->GetHierarchicalPosition() + line->position.Multiply(lineTransform->GetHierarchicalScale());
-  Vector3 lineEnd = linePos + ((line->direction.Multiply(lineTransform->GetHierarchicalScale()) * line->length));
+  Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphereTransform, sphere->position);
+  Vector3 linePos = ShapeMath::GetLocalCoordinates(lineTransform, line->position);
+  Vector3 lineEnd = linePos + ((line->direction.Multiply(lineTransform->GetHierarchicalRotation() * lineTransform->GetHierarchicalScale()) * line->length));
   Vector3 closestPoint = ShapeMath::ClosestPointPointSegment(spherePos, linePos, lineEnd);
   Vector3 dist = closestPoint - spherePos;
   float radius = sphere->GetSize(0) * sphereTransform->GetHierarchicalScale().x;
@@ -552,9 +552,9 @@ void Resolver::CalculateLineToAABB(CollisionPair &aPair)
   
   // Find closest point on line to sphere pos and calculate penetration
   // based on radius.
-  Vector3 aabbPos = aabbTransform->GetHierarchicalPosition() + aabb->position.Multiply(aabbTransform->GetHierarchicalScale());
-  Vector3 linePos = lineTransform->GetHierarchicalPosition() + line->position.Multiply(lineTransform->GetHierarchicalScale());
-  Vector3 lineEnd = linePos + ((line->direction.Multiply(lineTransform->GetHierarchicalScale()) * line->length));
+  Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabbTransform, aabb->position);
+  Vector3 linePos = ShapeMath::GetLocalCoordinates(lineTransform, line->position);
+  Vector3 lineEnd = linePos + ((line->direction.Multiply(lineTransform->GetHierarchicalRotation() * lineTransform->GetHierarchicalScale()) * line->length));
   Vector3 closestPoint = ShapeMath::ClosestPointPointSegment(aabbPos, linePos, lineEnd);
   Vector3 dist = closestPoint - aabbPos;
   
@@ -611,10 +611,10 @@ void Resolver::CalculateLineToLine(CollisionPair &aPair)
   Line *l1 = dynamic_cast<Line*>(aPair.mShapes[0]);
   Line *l2 = dynamic_cast<Line*>(aPair.mShapes[1]);
   
-  Vector3 a = t1->GetHierarchicalPosition() + l1->position.Multiply(t1->GetHierarchicalScale());
-  Vector3 b = a + (l1->direction.Multiply(t1->GetHierarchicalScale()) * l1->length);
-  Vector3 c = t2->GetHierarchicalPosition() + l2->position.Multiply(t2->GetHierarchicalScale());
-  Vector3 d = c + (l2->direction.Multiply(t2->GetHierarchicalScale()) * l2->length);
+  Vector3 a = ShapeMath::GetLocalCoordinates(t1, l1->position);
+  Vector3 b = a + (l1->direction.Multiply(t1->GetHierarchicalRotation() * t1->GetHierarchicalScale()) * l1->length);
+  Vector3 c = ShapeMath::GetLocalCoordinates(t2, l2->position);
+  Vector3 d = c + (l2->direction.Multiply(t2->GetHierarchicalRotation() * t2->GetHierarchicalScale()) * l2->length);
   
   float a1 = ShapeMath::Signed2DTriArea(a, b, d);
   float a2 = ShapeMath::Signed2DTriArea(a, b, c);

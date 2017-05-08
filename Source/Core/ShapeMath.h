@@ -3,6 +3,7 @@
 
 #include "MathExt.h"
 #include "Shape.h"
+#include "Transform.h"
 
 namespace ShapeMath
 {
@@ -11,6 +12,7 @@ namespace ShapeMath
   Vector3 const ClosestPointPointOBB(Vector3 const &aPoint, Vector3 const &aCenter, Vector3 const aOrientation[3], Vector3 const &aExtent);
   Vector3 const ClosestPointPointTriangle(Vector3 const &aPoint, Vector3 const &aA, Vector3 const &aB, Vector3 const &aC);
   float const Signed2DTriArea(Vector3 const &aA, Vector3 const &aB, Vector3 const &aC);
+  Vector3 GetLocalCoordinates(Transform *aTransform, Vector3 const &aLocalPosition);
 }
 
 #endif
