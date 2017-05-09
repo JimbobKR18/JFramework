@@ -161,6 +161,6 @@ JFramework is a 100% free, 100% component based framework that currently operate
   - StateMachine
     - Dictate how an object should go between states.
     
-  - Common issues
-    - "SDL_main not defined" <-- Don't include any other files named "main", don't have any functions named "main".
-    - "Cannot start program (0xc000022) <-- Verify file permissions on ALL folders and files.
+- Common issues
+  - "SDL_main not defined" <-- Don't include any other files named "main", don't have any functions named "main".
+  - "Cannot start program (0xc000022) <-- Verify file permissions on ALL folders and files.
