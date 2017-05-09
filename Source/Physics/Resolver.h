@@ -39,6 +39,11 @@ private:
   void  CalculateLineToAABB(CollisionPair &aPair);
   void  CalculateLineToTriangle(CollisionPair &aPair);
   void  CalculateLineToLine(CollisionPair &aPair);
+  void  CalculateOBBToSphere(CollisionPair &aPair);
+  void  CalculateOBBToAABB(CollisionPair &aPair);
+  void  CalculateOBBToOBB(CollisionPair &aPair);
+  void  CalculateOBBToTriangle(CollisionPair &aPair);
+  void  CalculateOBBToLine(CollisionPair &aPair);
   
   // Hash calculations
   size_t CalculateHash(PhysicsObject *aObject1, PhysicsObject *aObject2);

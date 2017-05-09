@@ -165,13 +165,13 @@ void PhysicsObject::Serialize(Parser &aParser)
     {
     case Shape::AABB:
       shapeObject->Place(curShape, "Type", "AABB");
-      shapeObject->Place(curShape, "SizeX", Common::IntToString((*it)->GetSize(0)));
-      shapeObject->Place(curShape, "SizeY", Common::IntToString((*it)->GetSize(1)));
-      shapeObject->Place(curShape, "SizeZ", Common::IntToString((*it)->GetSize(2)));
+      shapeObject->Place(curShape, "SizeX", Common::FloatToString((*it)->GetSize(0)));
+      shapeObject->Place(curShape, "SizeY", Common::FloatToString((*it)->GetSize(1)));
+      shapeObject->Place(curShape, "SizeZ", Common::FloatToString((*it)->GetSize(2)));
       break;
     case Shape::SPHERE:
       shapeObject->Place(curShape, "Type", "SPHERE");
-      shapeObject->Place(curShape, "Radius", Common::IntToString((*it)->GetSize(0)));
+      shapeObject->Place(curShape, "Radius", Common::FloatToString((*it)->GetSize(0)));
       break;
     case Shape::TRIANGLE:
     {
@@ -180,10 +180,10 @@ void PhysicsObject::Serialize(Parser &aParser)
       HashString point = "Point_";
       for(int i = 0; i < 3; ++i)
       {
-        HashString pointId = point + Common::IntToString(i);
-        shapeObject->Place(curShape, pointId + "X", Common::IntToString(triangle->points[i].x));
-        shapeObject->Place(curShape, pointId + "Y", Common::IntToString(triangle->points[i].y));
-        shapeObject->Place(curShape, pointId + "Z", Common::IntToString(triangle->points[i].z));
+        HashString pointId = point + Common::FloatToString(i);
+        shapeObject->Place(curShape, pointId + "X", Common::FloatToString(triangle->points[i].x));
+        shapeObject->Place(curShape, pointId + "Y", Common::FloatToString(triangle->points[i].y));
+        shapeObject->Place(curShape, pointId + "Z", Common::FloatToString(triangle->points[i].z));
       }
       break;
     }
@@ -191,10 +191,29 @@ void PhysicsObject::Serialize(Parser &aParser)
     {
       Line *line = (Line*)(*it);
       shapeObject->Place(curShape, "Type", "LINE");
-      shapeObject->Place(curShape, "Length", Common::IntToString((*it)->GetSize(0)));
-      shapeObject->Place(curShape, "DirectionX", Common::IntToString(line->direction.x));
-      shapeObject->Place(curShape, "DirectionY", Common::IntToString(line->direction.y));
-      shapeObject->Place(curShape, "DirectionZ", Common::IntToString(line->direction.z));
+      shapeObject->Place(curShape, "Length", Common::FloatToString((*it)->GetSize(0)));
+      shapeObject->Place(curShape, "DirectionX", Common::FloatToString(line->direction.x));
+      shapeObject->Place(curShape, "DirectionY", Common::FloatToString(line->direction.y));
+      shapeObject->Place(curShape, "DirectionZ", Common::FloatToString(line->direction.z));
+      break;
+    }
+    case Shape::OBB:
+    {
+      OrientedBoundingBox *obb = (OrientedBoundingBox*)(*it);
+      shapeObject->Place(curShape, "Type", "OBB");
+      shapeObject->Place(curShape, "UpX", Common::FloatToString(obb->up.x));
+      shapeObject->Place(curShape, "UpY", Common::FloatToString(obb->up.y));
+      shapeObject->Place(curShape, "UpZ", Common::FloatToString(obb->up.z));
+      shapeObject->Place(curShape, "RightX", Common::FloatToString(obb->right.x));
+      shapeObject->Place(curShape, "RightY", Common::FloatToString(obb->right.y));
+      shapeObject->Place(curShape, "RightZ", Common::FloatToString(obb->right.z));
+      shapeObject->Place(curShape, "ForwardX", Common::FloatToString(obb->forward.x));
+      shapeObject->Place(curShape, "ForwardY", Common::FloatToString(obb->forward.y));
+      shapeObject->Place(curShape, "ForwardZ", Common::FloatToString(obb->forward.z));
+      shapeObject->Place(curShape, "ExtentX", Common::FloatToString(obb->extents.x));
+      shapeObject->Place(curShape, "ExtentY", Common::FloatToString(obb->extents.y));
+      shapeObject->Place(curShape, "ExtentZ", Common::FloatToString(obb->extents.z));
+      break;
     }
     default:
       break;
@@ -294,9 +313,27 @@ void PhysicsObject::Deserialize(Parser &aParser)
       Line *line = (Line*)newShape;
       line->direction = Vector3(tempShape->Find("DirectionX")->GetValue().ToFloat(),
                                 tempShape->Find("DirectionY")->GetValue().ToFloat(),
-                                tempShape->Find("DirectionZ")->GetValue().ToFloat());
+                                tempShape->Find("DirectionZ")->GetValue().ToFloat()).normalize();
       line->length = tempShape->Find("Length")->GetValue().ToFloat();
       line->shape = Shape::LINE;
+    }
+    else if(type == "OBB")
+    {
+      newShape = new OrientedBoundingBox();
+      OrientedBoundingBox *obb = (OrientedBoundingBox*)newShape;
+      obb->up = Vector3(tempShape->Find("UpX")->GetValue().ToFloat(),
+                        tempShape->Find("UpY")->GetValue().ToFloat(),
+                        tempShape->Find("UpZ")->GetValue().ToFloat()).normalize();
+      obb->right = Vector3(tempShape->Find("RightX")->GetValue().ToFloat(),
+                        tempShape->Find("RightY")->GetValue().ToFloat(),
+                        tempShape->Find("RightZ")->GetValue().ToFloat()).normalize();
+      obb->forward = Vector3(tempShape->Find("ForwardX")->GetValue().ToFloat(),
+                        tempShape->Find("ForwardY")->GetValue().ToFloat(),
+                        tempShape->Find("ForwardZ")->GetValue().ToFloat()).normalize();
+      obb->extents = Vector3(tempShape->Find("ExtentX")->GetValue().ToFloat(),
+                        tempShape->Find("ExtentY")->GetValue().ToFloat(),
+                        tempShape->Find("ExtentZ")->GetValue().ToFloat());
+      obb->shape = Shape::OBB;
     }
     else
       assert(!"Invalid shape given");

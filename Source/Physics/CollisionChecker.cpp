@@ -44,6 +44,9 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::LINE:
           collided = CheckLineToSphere(potentialPair);
           break;
+        case Shape::OBB:
+          collided = CheckOBBToSphere(potentialPair);
+          break;
         default:
           break;
         }
@@ -62,6 +65,9 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
           break;
         case Shape::LINE:
           collided = CheckLineToAABB(potentialPair);
+          break;
+        case Shape::OBB:
+          collided = CheckOBBToAABB(potentialPair);
           break;
         default:
           break;
@@ -82,6 +88,9 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::LINE:
           collided = CheckLineToTriangle(potentialPair);
           break;
+        case Shape::OBB:
+          collided = CheckOBBToTriangle(potentialPair);
+          break;
         default:
           break;
         }
@@ -101,9 +110,35 @@ std::vector<CollisionPair> CollisionChecker::CheckShapeCollision(PotentialPair c
         case Shape::LINE:
           collided = CheckLineToLine(potentialPair);
           break;
+        case Shape::OBB:
+          collided = CheckOBBToLine(potentialPair);
+          break;
         default:
           break;
         }
+        break;
+      case Shape::OBB:
+        switch((*it2)->shape)
+        {
+        case Shape::SPHERE:
+          collided = CheckOBBToSphere(potentialPair);
+          break;
+        case Shape::AABB:
+          collided = CheckOBBToAABB(potentialPair);
+          break;
+        case Shape::TRIANGLE:
+          collided = CheckOBBToTriangle(potentialPair);
+          break;
+        case Shape::LINE:
+          collided = CheckOBBToLine(potentialPair);
+          break;
+        case Shape::OBB:
+          collided = CheckOBBToOBB(potentialPair);
+          break;
+        default:
+          break;
+        }
+        break;
       default:
         break;
       }
@@ -369,6 +404,78 @@ bool CollisionChecker::CheckLineToLine(CollisionPair &aPair)
       return true;
     }
   }
+  return false;
+}
+
+/**
+ * @brief OBB to Sphere check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckOBBToSphere(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::SPHERE)
+    aPair.Switch();
+  OrientedBoundingBox *obb = dynamic_cast<OrientedBoundingBox*>(aPair.mShapes[0]);
+  Sphere *sphere = dynamic_cast<Sphere*>(aPair.mShapes[1]);
+  Transform* obbTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  Vector3 orientation[3];
+  orientation[0] = obbTransform->GetHierarchicalRotation() * obb->right;
+  orientation[1] = obbTransform->GetHierarchicalRotation() * obb->up;
+  orientation[2] = obbTransform->GetHierarchicalRotation() * obb->forward;
+  Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphereTransform, sphere->position);
+  Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
+  Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(spherePos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
+  Vector3 diff = closestPoint - spherePos;
+  
+  return diff.length() <= sphere->radius;
+}
+
+/**
+ * @brief OBB to AABB check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckOBBToAABB(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::AABB)
+    aPair.Switch();
+  return false;
+}
+
+/**
+ * @brief OBB to OBB check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckOBBToOBB(CollisionPair &aPair)
+{
+  return false;
+}
+
+/**
+ * @brief OBB to Triangle check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckOBBToTriangle(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::TRIANGLE)
+    aPair.Switch();
+  return false;
+}
+
+/**
+ * @brief OBB to Line check
+ * @param aPair
+ * @return true if collided
+ */
+bool CollisionChecker::CheckOBBToLine(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::LINE)
+    aPair.Switch();
   return false;
 }
 

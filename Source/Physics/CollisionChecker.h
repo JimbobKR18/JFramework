@@ -32,6 +32,11 @@ private:
   static bool CheckLineToAABB(CollisionPair &aPair);
   static bool CheckLineToTriangle(CollisionPair &aPair);
   static bool CheckLineToLine(CollisionPair &aPair);
+  static bool CheckOBBToSphere(CollisionPair &aPair);
+  static bool CheckOBBToAABB(CollisionPair &aPair);
+  static bool CheckOBBToOBB(CollisionPair &aPair);
+  static bool CheckOBBToTriangle(CollisionPair &aPair);
+  static bool CheckOBBToLine(CollisionPair &aPair);
 
   // Line functions, also not visible.
   static bool CheckLineToSphere(Line const &aSegment, Transform *aSphere, Shape* aShape);

@@ -1361,9 +1361,27 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
       Line *line = (Line*)newShape;
       line->direction = Vector3(tempShape->Find("DirectionX")->GetValue().ToFloat(),
                                 tempShape->Find("DirectionY")->GetValue().ToFloat(),
-                                tempShape->Find("DirectionZ")->GetValue().ToFloat());
+                                tempShape->Find("DirectionZ")->GetValue().ToFloat()).normalize();
       line->length = tempShape->Find("Length")->GetValue().ToFloat();
       line->shape = Shape::LINE;
+    }
+    else if(type == "OBB")
+    {
+      newShape = new OrientedBoundingBox();
+      OrientedBoundingBox *obb = (OrientedBoundingBox*)newShape;
+      obb->up = Vector3(tempShape->Find("UpX")->GetValue().ToFloat(),
+                        tempShape->Find("UpY")->GetValue().ToFloat(),
+                        tempShape->Find("UpZ")->GetValue().ToFloat()).normalize();
+      obb->right = Vector3(tempShape->Find("RightX")->GetValue().ToFloat(),
+                        tempShape->Find("RightY")->GetValue().ToFloat(),
+                        tempShape->Find("RightZ")->GetValue().ToFloat()).normalize();
+      obb->forward = Vector3(tempShape->Find("ForwardX")->GetValue().ToFloat(),
+                        tempShape->Find("ForwardY")->GetValue().ToFloat(),
+                        tempShape->Find("ForwardZ")->GetValue().ToFloat()).normalize();
+      obb->extents = Vector3(tempShape->Find("ExtentX")->GetValue().ToFloat(),
+                        tempShape->Find("ExtentY")->GetValue().ToFloat(),
+                        tempShape->Find("ExtentZ")->GetValue().ToFloat());
+      obb->shape = Shape::OBB;
     }
     else
       assert(!"Invalid shape given");

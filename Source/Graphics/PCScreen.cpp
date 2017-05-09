@@ -137,6 +137,25 @@ void PCScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           glVertex3f(lineEnd.x, lineEnd.y, lineEnd.z);
           glEnd();
         }
+        else if((*it)->shape == Shape::OBB)
+        {
+          OrientedBoundingBox *obb = (OrientedBoundingBox*)(*it);
+          Vector3 cubePos = position + (*it)->position.Multiply(rotation * scale);
+          Vector3 extent0 = rotation * scale.Multiply(obb->GetAxis(0) * obb->GetSize(0));
+          Vector3 extent1 = rotation * scale.Multiply(obb->GetAxis(1) * obb->GetSize(1));
+          Vector3 pt1 = extent0 + extent1;
+          Vector3 pt2 = extent0 - extent1;
+          
+          // Physics Box Line
+          glBegin(GL_LINE_STRIP);
+          glColor3f(1.0f, 0.0f, 0.0f);
+          glVertex3f(cubePos.x + pt1.x, cubePos.y + pt1.y, cubePos.z);
+          glVertex3f(cubePos.x - pt2.x, cubePos.y - pt2.y, cubePos.z);
+          glVertex3f(cubePos.x - pt1.x, cubePos.y - pt1.y, cubePos.z);
+          glVertex3f(cubePos.x + pt2.x, cubePos.y + pt2.y, cubePos.z);
+          glVertex3f(cubePos.x + pt1.x, cubePos.y + pt1.y, cubePos.z);
+          glEnd();
+        }
       }
 
       // Broad Size Line

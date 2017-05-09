@@ -215,6 +215,9 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::LINE:
       CalculateLineToSphere(aPair);
       break;
+    case Shape::OBB:
+      CalculateOBBToSphere(aPair);
+      break;
     default:
       break;
     }
@@ -233,6 +236,9 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       break;
     case Shape::LINE:
       CalculateLineToAABB(aPair);
+      break;
+    case Shape::OBB:
+      CalculateOBBToAABB(aPair);
       break;
     default:
       break;
@@ -253,6 +259,9 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
     case Shape::LINE:
       CalculateLineToTriangle(aPair);
       break;
+    case Shape::OBB:
+      CalculateOBBToTriangle(aPair);
+      break;
     default:
       break;
     }
@@ -271,6 +280,31 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
       break;
     case Shape::LINE:
       CalculateLineToLine(aPair);
+      break;
+    case Shape::OBB:
+      CalculateOBBToLine(aPair);
+      break;
+    default:
+      break;
+    }
+    break;
+  case Shape::OBB:
+    switch(aPair.mShapes[1]->shape)
+    {
+    case Shape::SPHERE:
+      CalculateOBBToSphere(aPair);
+      break;
+    case Shape::AABB:
+      CalculateOBBToAABB(aPair);
+      break;
+    case Shape::TRIANGLE:
+      CalculateOBBToTriangle(aPair);
+      break;
+    case Shape::LINE:
+      CalculateOBBToLine(aPair);
+      break;
+    case Shape::OBB:
+      CalculateOBBToOBB(aPair);
       break;
     default:
       break;
@@ -347,9 +381,7 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
       break;
   }
 
-  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
-                        (aPair.mShapes[0]->GetSize(axis) * b1Transform->GetHierarchicalScale().GetValue(axis) + 
-                        aPair.mShapes[1]->GetSize(axis) * b2Transform->GetHierarchicalScale().GetValue(axis)));
+  aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
 }
@@ -395,9 +427,7 @@ void Resolver::CalculateAABBToAABB(CollisionPair &aPair)
       break;
   }
   
-  aPair.mPenetration = fabs(fabs(b1Pos[axis] - b2Pos[axis]) - 
-                        (aPair.mShapes[0]->GetSize(axis) * b1Transform->GetHierarchicalScale().GetValue(axis) + 
-                        aPair.mShapes[1]->GetSize(axis) * b2Transform->GetHierarchicalScale().GetValue(axis)));
+  aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
 }
@@ -496,7 +526,7 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
  */
 void Resolver::CalculateTriangleToTriangle(CollisionPair &aPair)
 {
-  assert(!"TODO");
+  DebugLogPrint("TODO: CalculateTriangleToTriangle\n");
 }
 
 /**
@@ -595,8 +625,7 @@ void Resolver::CalculateLineToAABB(CollisionPair &aPair)
  */
 void Resolver::CalculateLineToTriangle(CollisionPair &aPair)
 {
-  // TODO
-  //assert(!"TODO");
+  DebugLogPrint("TODO: CalculateLineToTriangle\n");
 }
 
 /**
@@ -627,6 +656,88 @@ void Resolver::CalculateLineToLine(CollisionPair &aPair)
   aPair.mPenetration = p.length();
   aPair.mNormal = (p - a).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
+}
+
+/**
+ * @brief Calculate OBB to Sphere resolution.
+ * @param aPair OBB and Sphere.
+ */
+void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::SPHERE)
+    aPair.Switch();
+    
+  OrientedBoundingBox *obb = dynamic_cast<OrientedBoundingBox*>(aPair.mShapes[0]);
+  Sphere *sphere = dynamic_cast<Sphere*>(aPair.mShapes[1]);
+  Transform* obbTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  Vector3 orientation[3];
+  orientation[0] = obbTransform->GetHierarchicalRotation() * obb->right;
+  orientation[1] = obbTransform->GetHierarchicalRotation() * obb->up;
+  orientation[2] = obbTransform->GetHierarchicalRotation() * obb->forward;
+  Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphereTransform, sphere->position);
+  Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
+  Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(spherePos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
+  Vector3 diff = closestPoint - spherePos;
+  float shortestDistance = FLT_MAX;
+  float shortestAxis = 0;
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    Vector3 axis = obb->GetAxis(i);
+    Vector3 projection = axis * (diff.Dot(axis) / axis.Dot(axis));
+    float distance = projection.length();
+    if(distance < shortestDistance)
+    {
+      shortestAxis = i;
+      shortestDistance = distance;
+    }
+  }
+  
+  Vector3 normal = diff.Multiply(obb->GetAxis(shortestAxis)).normalize();
+  aPair.mPenetration = shortestDistance;
+  aPair.mNormal = normal;
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
+}
+
+/**
+ * @brief Calculate OBB to AABB resolution.
+ * @param aPair OBB and AABB.
+ */
+void Resolver::CalculateOBBToAABB(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::AABB)
+    aPair.Switch();
+}
+
+/**
+ * @brief Calculate OBB to OBB resolution.
+ * @param aPair Both OBBs.
+ */
+void Resolver::CalculateOBBToOBB(CollisionPair &aPair)
+{
+  
+}
+
+/**
+ * @brief Calculate OBB to Triangle resolution.
+ * @param aPair OBB and Triangle.
+ */
+void Resolver::CalculateOBBToTriangle(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::TRIANGLE)
+    aPair.Switch();
+}
+
+/**
+ * @brief Calculate OBB to Line resolution.
+ * @param aPair OBB and Line.
+ */
+void Resolver::CalculateOBBToLine(CollisionPair &aPair)
+{
+  if(aPair.mShapes[0]->shape == Shape::LINE)
+    aPair.Switch();
 }
 
 /**
