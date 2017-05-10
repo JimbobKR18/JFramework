@@ -472,7 +472,29 @@ bool CollisionChecker::CheckOBBToAABB(CollisionPair &aPair)
  */
 bool CollisionChecker::CheckOBBToOBB(CollisionPair &aPair)
 {
-  return false;
+  OrientedBoundingBox *obb1 = dynamic_cast<OrientedBoundingBox*>(aPair.mShapes[0]);
+  OrientedBoundingBox *obb2 = dynamic_cast<OrientedBoundingBox*>(aPair.mShapes[1]);
+  Transform* obb1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* obb2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  Vector3 orientation[3];
+  orientation[0] = obb2Transform->GetHierarchicalRotation() * obb2->right;
+  orientation[1] = obb2Transform->GetHierarchicalRotation() * obb2->up;
+  orientation[2] = obb2Transform->GetHierarchicalRotation() * obb2->forward;
+  Vector3 obb1Pos = ShapeMath::GetLocalCoordinates(obb1Transform, obb1->position);
+  Vector3 obb2Pos = ShapeMath::GetLocalCoordinates(obb2Transform, obb2->position);
+  Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(obb1Pos, obb2Pos, orientation, obb2Transform->GetHierarchicalScale().Multiply(obb2->extents));
+  Vector3 diff = closestPoint - obb1Pos;
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    float compare = obb1->extents[i] * obb1Transform->GetHierarchicalScale().GetValue(i);
+    float d = diff.Dot(obb1->GetAxis(i));
+    if(fabs(d) > compare)
+      return false;
+  }
+    
+  return true;
 }
 
 /**
@@ -484,7 +506,28 @@ bool CollisionChecker::CheckOBBToTriangle(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::TRIANGLE)
     aPair.Switch();
-  return false;
+  
+  OrientedBoundingBox *obb = dynamic_cast<OrientedBoundingBox*>(aPair.mShapes[0]);
+  Triangle *triangle = dynamic_cast<Triangle*>(aPair.mShapes[1]);
+  Transform* obbTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* triTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
+  Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
+  Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(obbPos, a, b, c);
+  Vector3 diff = closestPoint - obbPos;
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    float compare = obb->extents[i] * obbTransform->GetHierarchicalScale().GetValue(i);
+    float d = diff.Dot(obb->GetAxis(i));
+    if(fabs(d) > compare)
+      return false;
+  }
+    
+  return true;
 }
 
 /**
