@@ -709,6 +709,53 @@ void Resolver::CalculateOBBToAABB(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::AABB)
     aPair.Switch();
+    
+  OrientedBoundingBox *obb = dynamic_cast<OrientedBoundingBox*>(aPair.mShapes[0]);
+  AxisAlignedBoundingBox *aabb = dynamic_cast<AxisAlignedBoundingBox*>(aPair.mShapes[1]);
+  Transform* obbTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  Vector3 orientation[3];
+  orientation[0] = obbTransform->GetHierarchicalRotation() * obb->right;
+  orientation[1] = obbTransform->GetHierarchicalRotation() * obb->up;
+  orientation[2] = obbTransform->GetHierarchicalRotation() * obb->forward;
+  Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabbTransform, aabb->position);
+  Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
+  Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(aabbPos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
+  Vector3 diff = closestPoint - aabbPos;
+  
+  int axis = 0;
+  float minDistance = 0xffffff;
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    float size = aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i);
+    float distance = fabs(fabs(diff[i]) - size);
+    if(distance < minDistance)
+    {
+      axis = i;
+      minDistance = distance;
+    }
+  }
+  
+  Vector3 normal;
+  // Figure out the normal
+  switch(axis)
+  {
+    case 0:
+      normal = Vector3(diff.x,0,0).normalize();
+      break;
+    case 1:
+      normal = Vector3(0,diff.y,0).normalize();
+      break;
+    case 2:
+      normal = Vector3(0,0,diff.z).normalize();
+      break;
+  }
+  
+  aPair.mPenetration = minDistance;
+  aPair.mNormal = normal;
+  aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
 }
 
 /**

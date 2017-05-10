@@ -442,7 +442,28 @@ bool CollisionChecker::CheckOBBToAABB(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::AABB)
     aPair.Switch();
-  return false;
+  OrientedBoundingBox *obb = dynamic_cast<OrientedBoundingBox*>(aPair.mShapes[0]);
+  AxisAlignedBoundingBox *aabb = dynamic_cast<AxisAlignedBoundingBox*>(aPair.mShapes[1]);
+  Transform* obbTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  
+  Vector3 orientation[3];
+  orientation[0] = obbTransform->GetHierarchicalRotation() * obb->right;
+  orientation[1] = obbTransform->GetHierarchicalRotation() * obb->up;
+  orientation[2] = obbTransform->GetHierarchicalRotation() * obb->forward;
+  Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabbTransform, aabb->position);
+  Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
+  Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(aabbPos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
+  Vector3 diff = closestPoint - aabbPos;
+  
+  
+  for(int i = 0; i < 3; ++i)
+  {
+    if(fabs(diff[i]) > aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i))
+      return false;
+  }
+    
+  return true;
 }
 
 /**
