@@ -539,6 +539,7 @@ bool CollisionChecker::CheckOBBToLine(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::LINE)
     aPair.Switch();
+  // TODO
   return false;
 }
 

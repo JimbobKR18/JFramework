@@ -875,6 +875,7 @@ void Resolver::CalculateOBBToLine(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::LINE)
     aPair.Switch();
+  // TODO
 }
 
 /**
