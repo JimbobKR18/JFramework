@@ -489,7 +489,7 @@ bool CollisionChecker::CheckOBBToOBB(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float compare = obb1->extents[i] * obb1Transform->GetHierarchicalScale().GetValue(i);
-    float d = diff.Dot(obb1->GetAxis(i));
+    float d = diff.Dot(obb1Transform->GetHierarchicalRotation() * obb1->GetAxis(i));
     if(fabs(d) > compare)
       return false;
   }
@@ -522,7 +522,7 @@ bool CollisionChecker::CheckOBBToTriangle(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float compare = obb->extents[i] * obbTransform->GetHierarchicalScale().GetValue(i);
-    float d = diff.Dot(obb->GetAxis(i));
+    float d = diff.Dot(obbTransform->GetHierarchicalRotation() * obb->GetAxis(i));
     if(fabs(d) > compare)
       return false;
   }

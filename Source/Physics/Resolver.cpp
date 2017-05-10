@@ -678,8 +678,7 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
   orientation[2] = obbTransform->GetHierarchicalRotation() * obb->forward;
   Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphereTransform, sphere->position);
   Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
-  Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(spherePos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
-  Vector3 diff = closestPoint - spherePos;
+  Vector3 diff = obbPos - spherePos;
   float shortestDistance = FLT_MAX;
   float shortestAxis = 0;
   
@@ -687,7 +686,7 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
   {
     Vector3 axis = obb->GetAxis(i);
     Vector3 projection = axis * (diff.Dot(axis) / axis.Dot(axis));
-    float distance = projection.length();
+    float distance = fabs(projection.length() - obb->GetSize(i));
     if(distance < shortestDistance)
     {
       shortestAxis = i;
@@ -695,7 +694,7 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
     }
   }
   
-  Vector3 normal = diff.Multiply(obb->GetAxis(shortestAxis)).normalize();
+  Vector3 normal = (obb->GetAxis(shortestAxis) * diff.Dot(obb->GetAxis(shortestAxis))).normalize();
   aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
@@ -783,7 +782,7 @@ void Resolver::CalculateOBBToOBB(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float size = obb1->extents[i] * obb1Transform->GetHierarchicalScale().GetValue(i);
-    float d = diff.Dot(obb1->GetAxis(i));
+    float d = diff.Dot(obb1Transform->GetHierarchicalRotation() * obb1->GetAxis(i));
     float distance = fabs(fabs(d) - size);
     if(distance < minDistance)
     {
@@ -797,15 +796,16 @@ void Resolver::CalculateOBBToOBB(CollisionPair &aPair)
   switch(axis)
   {
     case 0:
-      normal = (obb1->right * -diff.Dot(obb1->right)).normalize();
+      normal = obb1Transform->GetHierarchicalRotation() * obb1->right;
       break;
     case 1:
-      normal = (obb1->up * -diff.Dot(obb1->up)).normalize();
+      normal = obb1Transform->GetHierarchicalRotation() * obb1->up;
       break;
     case 2:
-      normal = (obb1->forward * -diff.Dot(obb1->forward)).normalize();
+      normal = obb1Transform->GetHierarchicalRotation() * obb1->forward;
       break;
   }
+  normal = (normal * -diff.Dot(normal)).normalize();
   
   aPair.mPenetration = minDistance;
   aPair.mNormal = normal;
@@ -838,7 +838,7 @@ void Resolver::CalculateOBBToTriangle(CollisionPair &aPair)
   for(int i = 0; i < 3; ++i)
   {
     float size = obb->extents[i] * obbTransform->GetHierarchicalScale().GetValue(i);
-    float d = diff.Dot(obb->GetAxis(i));
+    float d = diff.Dot(obbTransform->GetHierarchicalRotation() * obb->GetAxis(i));
     float distance = fabs(fabs(d) - size);
     if(distance < minDistance)
     {
@@ -852,15 +852,16 @@ void Resolver::CalculateOBBToTriangle(CollisionPair &aPair)
   switch(axis)
   {
     case 0:
-      normal = (obb->right * -diff.Dot(obb->right)).normalize();
+      normal = obbTransform->GetHierarchicalRotation() * obb->right;
       break;
     case 1:
-      normal = (obb->up * -diff.Dot(obb->up)).normalize();
+      normal = obbTransform->GetHierarchicalRotation() * obb->up;
       break;
     case 2:
-      normal = (obb->forward * -diff.Dot(obb->forward)).normalize();
+      normal = obbTransform->GetHierarchicalRotation() * obb->forward;
       break;
   }
+  normal = (normal * -diff.Dot(normal)).normalize();
   
   aPair.mPenetration = minDistance;
   aPair.mNormal = normal;
