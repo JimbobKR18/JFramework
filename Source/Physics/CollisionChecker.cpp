@@ -456,7 +456,6 @@ bool CollisionChecker::CheckOBBToAABB(CollisionPair &aPair)
   Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(aabbPos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
   Vector3 diff = closestPoint - aabbPos;
   
-  
   for(int i = 0; i < 3; ++i)
   {
     if(fabs(diff[i]) > aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i))
