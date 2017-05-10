@@ -684,9 +684,10 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
   
   for(int i = 0; i < 3; ++i)
   {
-    Vector3 axis = obb->GetAxis(i);
+    Vector3 axis = obbTransform->GetHierarchicalRotation() * obb->GetAxis(i);
     Vector3 projection = axis * (diff.Dot(axis) / axis.Dot(axis));
-    float distance = fabs(projection.length() - obb->GetSize(i));
+    float size = obb->GetSize(i) * obbTransform->GetHierarchicalScale().GetValue(i);
+    float distance = fabs(projection.length() - size);
     if(distance < shortestDistance)
     {
       shortestAxis = i;
@@ -694,7 +695,8 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
     }
   }
   
-  Vector3 normal = (obb->GetAxis(shortestAxis) * diff.Dot(obb->GetAxis(shortestAxis))).normalize();
+  Vector3 axis = obbTransform->GetHierarchicalRotation() * obb->GetAxis(shortestAxis);
+  Vector3 normal = (axis * diff.Dot(axis)).normalize();
   aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
