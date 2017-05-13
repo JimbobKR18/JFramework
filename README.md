@@ -8,6 +8,12 @@ JFramework is a 100% free, 100% component based framework that currently operate
   - SDL2_net (https://www.libsdl.org/projects/SDL_net)
   - SDL2_image (https://www.libsdl.org/projects/SDL_image)
   - GLEW (http://glew.sourceforge.net/index.html)
+  
+- Installation
+  - Download the libraries mentioned above.
+    - In Windows and OSX, that means you have to place them in an easy to access location after downloading them yourself.
+    - In Linux, you can simply install the libraries using your package manager.
+  - Download this code.
 
 - Architecture Overview
   - It all starts at the GameApp class. Whenever you make a new game, be sure to derive from this class. Initializing this class creates all of the managers needed by JFramework to function. In your own app constructor, feel free to create new managers or register new classes in LUA.
