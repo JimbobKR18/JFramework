@@ -99,6 +99,8 @@
     <File Name="../../Source/Components/StateObject.cpp"/>
     <File Name="../../Source/Components/CustomScript.h"/>
     <File Name="../../Source/Components/CustomScript.cpp"/>
+    <File Name="../../Source/Components/Constraint.cpp"/>
+    <File Name="../../Source/Components/Constraint.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>
@@ -216,6 +218,8 @@
     <File Name="../../Source/Physics/CollisionChecker.cpp"/>
     <File Name="../../Source/Physics/PotentialPair.h"/>
     <File Name="../../Source/Physics/PotentialPair.cpp"/>
+    <File Name="../../Source/Physics/Joint.h"/>
+    <File Name="../../Source/Physics/Joint.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Sound">
     <File Name="../../Source/Sound/Sound.h"/>

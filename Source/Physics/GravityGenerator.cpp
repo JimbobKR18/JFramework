@@ -21,5 +21,5 @@ GravityGenerator::~GravityGenerator()
  */
 void GravityGenerator::Update(PhysicsObject *aObject, float aDuration)
 {
-	aObject->AddForce(GetForce() * aObject->GetMass());
+  aObject->AddForce(GetForce() * aObject->GetMass());
 }

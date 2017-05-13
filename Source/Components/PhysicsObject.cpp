@@ -22,7 +22,7 @@ PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sU
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
                   mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
                   mDamping(0.01f), mRestitution(0.0f), mMaximumVelocity(-1.0f), mStatic(false),
-                  mGravity(true), mPassable(false), mActive(true), mIgnoreList(), mShapes()
+                  mGravity(true), mPassable(false), mActive(true), mIgnoreList(), mShapes(), mJoints()
 {
 }
 
@@ -219,6 +219,21 @@ void PhysicsObject::Serialize(Parser &aParser)
       break;
     }
   }
+  
+  // Joints
+  HashString const JOINT = "Joint_";
+  curIndex = 0;
+  for(JointIT it = mJoints.begin(); it != mJoints.end(); ++it, ++curIndex)
+  {
+    HashString curJoint = JOINT + Common::IntToString((*it)->GetID());
+    Vector3 localPosition = (*it)->GetPosition();
+    physicsObject->Place(PHYSICS_OBJECT, curJoint, "");
+    Root* jointObject = physicsObject->Find(curJoint);
+    
+    jointObject->Place(curJoint, "PositionX", Common::FloatToString(localPosition.x));
+    jointObject->Place(curJoint, "PositionY", Common::FloatToString(localPosition.y));
+    jointObject->Place(curJoint, "PositionZ", Common::FloatToString(localPosition.z));
+  }
 }
 
 /**
@@ -353,6 +368,24 @@ void PhysicsObject::Deserialize(Parser &aParser)
     ++curIndex;
     curShape = SHAPE + Common::IntToString(curIndex);
   }
+  
+  HashString const JOINT = "Joint_";
+  curIndex = 0;
+  HashString curJoint = JOINT + Common::IntToString(curIndex);
+  
+  // Adding joints
+  // NOTE: ALL JOINT POSITIONS ARE IN LOCAL SPACE
+  while(aParser.Find(PHYSICS_OBJECT, curJoint))
+  {
+    Root* tempJoint = aParser.Find(PHYSICS_OBJECT, curJoint);
+    float positionX = tempJoint->Find("PositionX")->GetValue().ToFloat();
+    float positionY = tempJoint->Find("PositionY")->GetValue().ToFloat();
+    float positionZ = tempJoint->Find("PositionZ")->GetValue().ToFloat();
+    Joint *joint = new Joint(curIndex, Vector3(positionX,positionY,positionZ), this);
+    AddJoint(joint);
+    ++curIndex;
+    curJoint = JOINT + Common::IntToString(curIndex);
+  }
 }
 
 /**
@@ -389,6 +422,15 @@ void PhysicsObject::SerializeLUA()
 void PhysicsObject::AddShape(Shape* aShape)
 {
   mShapes.push_back(aShape);
+}
+
+/**
+ * @brief Add joint to list
+ * @param aJoint Joint to add
+ */
+void PhysicsObject::AddJoint(Joint* aJoint)
+{
+  mJoints.push_back(aJoint);
 }
 
 /**
@@ -684,4 +726,13 @@ void PhysicsObject::SetIgnoreList(PhysicsObject::IgnoreContainer const &aIgnoreL
 PhysicsObject::ShapeContainer& PhysicsObject::GetShapes()
 {
   return mShapes;
+}
+
+/**
+ * @brief Get all joints
+ * @return Joints belonging to this object.
+ */
+PhysicsObject::JointContainer& PhysicsObject::GetJoints()
+{
+  return mJoints;
 }

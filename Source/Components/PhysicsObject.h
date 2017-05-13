@@ -13,6 +13,7 @@
 #include "PhysicsWorld.h"
 #include "MathExt.h"
 #include "Shape.h"
+#include "Joint.h"
 
 class PhysicsObject : public Component
 {
@@ -24,6 +25,10 @@ public:
   typedef std::vector<Shape*> ShapeContainer;
   typedef ShapeContainer::iterator ShapeIT;
   typedef ShapeContainer::const_iterator ConstShapeIT;
+  
+  typedef std::vector<Joint*> JointContainer;
+  typedef JointContainer::iterator JointIT;
+  typedef JointContainer::const_iterator ConstJointIT;
   
 private:
   PhysicsWorld*       mWorld;
@@ -42,6 +47,7 @@ private:
                       mActive;
   IgnoreContainer     mIgnoreList;
   ShapeContainer      mShapes;
+  JointContainer      mJoints;
   
   static int const sUID;
 
@@ -60,6 +66,7 @@ public:
 
   // Methods - Misc.
   void                 AddShape(Shape* aShape);
+  void                 AddJoint(Joint* aJoint);
   void                 AddForce(Vector3 const &aForce);
   void                 ClearForces();
   void                 AddIgnore(HashString const &aObjectName);
@@ -104,6 +111,7 @@ public:
   void                 SetIgnoreList(IgnoreContainer const &aIgnoreList);
   
   ShapeContainer&      GetShapes();
+  JointContainer&      GetJoints();
 };
 
 #endif /* defined(__JFramework__PhysicsObject__) */
