@@ -1,7 +1,15 @@
 # JFramework
 JFramework is a 100% free, 100% component based framework that currently operates on Windows, MacOSX (10 and above, whenever that becomes a thing.), and Linux (Debian and Redhat). This README is intended to help you get started with the basics of operating with the framework.
 
-- Architecture overview
+- Required Libraries
+  - SDL2 (https://www.libsdl.org/download-2.0.php)
+  - SDL2_mixer (https://www.libsdl.org/projects/SDL_mixer)
+  - SDL2_ttf (https://www.libsdl.org/projects/SDL_ttf)
+  - SDL2_net (https://www.libsdl.org/projects/SDL_net)
+  - SDL2_image (https://www.libsdl.org/projects/SDL_image)
+  - GLEW (http://glew.sourceforge.net/index.html)
+
+- Architecture Overview
   - It all starts at the GameApp class. Whenever you make a new game, be sure to derive from this class. Initializing this class creates all of the managers needed by JFramework to function. In your own app constructor, feel free to create new managers or register new classes in LUA.
   - Every frame, JFramework iterates over its managers and calls Update(), updating the current level, objects within that level, etc.
   - Your custom manager update loops will NOT be called unless you call AddManager() on your GameApp.
@@ -143,7 +151,7 @@ JFramework is a 100% free, 100% component based framework that currently operate
 
 - Menus
 
-- Helpful classes
+- Helpful Classes
   - Common
     - Helper functions that are used throughout the engine.
   - Interpolators
@@ -161,6 +169,6 @@ JFramework is a 100% free, 100% component based framework that currently operate
   - StateMachine
     - Dictate how an object should go between states.
     
-- Common issues
+- Common Issues
   - "SDL_main not defined" <-- Don't include any other files named "main", don't have any functions named "main".
   - "Cannot start program (0xc000022) <-- Verify file permissions on ALL folders and files.
