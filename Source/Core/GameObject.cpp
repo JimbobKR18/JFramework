@@ -55,11 +55,13 @@ GameObject::~GameObject()
   for(GameObjectIT it = mChildren.begin(); it != mChildren.end(); ++it)
   {
     it->second->SetParent(mParent);
+    if(mParent)
+      mParent->AddChild(it->second);
   }
+
   if(mParent)
-  {
     mParent->RemoveChild(this);
-  }
+
   mParent = nullptr;
   mChildren.clear();
   mTags.clear();
@@ -187,8 +189,12 @@ void GameObject::AddChild(GameObject* aObject)
  */
 void GameObject::RemoveChild(GameObject *aObject)
 {
-  aObject->SetParent(nullptr);
-  mChildren.erase(aObject->GetName().ToHash());
+  GameObjectIT it = mChildren.find(aObject->GetName().ToHash());
+  if(it != mChildren.end())
+  {
+    aObject->SetParent(nullptr);
+    mChildren.erase(aObject->GetName().ToHash());
+  }
 }
 
 /**
@@ -256,7 +262,11 @@ void GameObject::AddTag(HashString const &aTag)
  */
 void GameObject::RemoveTag(HashString const &aTag)
 {
-  mTags.erase(aTag.ToHash());
+  TagIT it = mTags.find(aTag.ToHash());
+  if(it != mTags.end())
+  {
+    mTags.erase(aTag.ToHash());
+  }
 }
 
 /**
