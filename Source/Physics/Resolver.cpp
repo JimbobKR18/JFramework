@@ -346,6 +346,10 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
  */
 void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
 {
+  // Ordering is important
+  if(aPair.mShapes[0]->shape != Shape::SPHERE)
+    aPair.Switch();
+  
   Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 b1Pos = ShapeMath::GetLocalCoordinates(b1Transform, aPair.mShapes[0]->position);
@@ -440,9 +444,7 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
 {
   // Ordering is important
   if(aPair.mShapes[0]->shape != Shape::TRIANGLE)
-  {
     aPair.Switch();
-  }
   
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
   Sphere* sphere = (Sphere*)aPair.mShapes[1];
@@ -472,9 +474,7 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
 {
   // Ordering is important
   if(aPair.mShapes[0]->shape != Shape::TRIANGLE)
-  {
     aPair.Switch();
-  }
   
   Triangle* triangle = (Triangle*)aPair.mShapes[0];
   AxisAlignedBoundingBox* aabb = (AxisAlignedBoundingBox*)aPair.mShapes[1];
@@ -536,9 +536,7 @@ void Resolver::CalculateTriangleToTriangle(CollisionPair &aPair)
 void Resolver::CalculateLineToSphere(CollisionPair &aPair)
 {
   if(aPair.mShapes[0]->shape == Shape::SPHERE)
-  {
     aPair.Switch();
-  }
   
   // Basic set up
   Line *line = (Line*)aPair.mShapes[0];
@@ -568,11 +566,8 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
  */
 void Resolver::CalculateLineToAABB(CollisionPair &aPair)
 {
-  // TODO this doesn't work, but I'll leave it in so at least something happens.
   if(aPair.mShapes[0]->shape == Shape::AABB)
-  {
     aPair.Switch();
-  }
   
   // Basic set up
   Line *line = (Line*)aPair.mShapes[0];
@@ -599,7 +594,6 @@ void Resolver::CalculateLineToAABB(CollisionPair &aPair)
       aPair.mPenetration = diff;
       aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
       
-      // TODO get the correct normal
       switch(i)
       {
       case 0:
