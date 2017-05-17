@@ -14,7 +14,7 @@ Shape::~Shape()
 //------------------------------
 // AXISALIGNEDBOUNDINGBOX
 //------------------------------
-AxisAlignedBoundingBox::AxisAlignedBoundingBox() : Shape(AABB)
+AxisAlignedBoundingBox::AxisAlignedBoundingBox() : Shape(AABB), size()
 {
 }
 
@@ -118,7 +118,7 @@ float OrientedBoundingBox::GetSize(int index)
 //------------------------------
 // SPHERE
 //------------------------------
-Sphere::Sphere() : Shape(SPHERE)
+Sphere::Sphere() : Shape(SPHERE), radius(0)
 {
 }
 
@@ -354,6 +354,9 @@ float Line::GetSize(int index)
 //------------------------------
 Triangle::Triangle() : Shape(TRIANGLE)
 {
+  points[0] = Vector3();
+  points[1] = Vector3();
+  points[2] = Vector3();
 }
 
 Triangle::Triangle(Vector3 const &aPoint1, Vector3 const &aPoint2, Vector3 const &aPoint3) : Shape(TRIANGLE)
