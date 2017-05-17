@@ -350,19 +350,20 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   if(aPair.mShapes[0]->shape != Shape::SPHERE)
     aPair.Switch();
   
-  Transform *b1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
-  Transform *b2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
-  Vector3 b1Pos = ShapeMath::GetLocalCoordinates(b1Transform, aPair.mShapes[0]->position);
-  Vector3 b2Pos = ShapeMath::GetLocalCoordinates(b2Transform, aPair.mShapes[1]->position);
- 
+  Transform *sphere = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *aabb = aPair.mBodies[1]->GetOwner()->GET<Transform>();
+  Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphere, aPair.mShapes[0]->position);
+  Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabb, aPair.mShapes[1]->position);
+  Vector3 aabbSize = dynamic_cast<AxisAlignedBoundingBox*>(aPair.mShapes[1])->size.Multiply(aabb->GetHierarchicalScale());
+  Vector3 closestPoint = ShapeMath::ClosestPointPointAABB(spherePos, aabbPos - aabbSize, aabbPos + aabbSize);
+  Vector3 dist = closestPoint - spherePos;
+  float size = aPair.mShapes[0]->GetSize(0) * sphere->GetHierarchicalScale().x;
+  
   int axis = 0;
   float shortestDistance = 0xffffff;
-  
   for(int i = 0; i < 3; ++i)
   {
-    float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - 
-                      (aPair.mShapes[0]->GetSize(i) * b1Transform->GetHierarchicalScale().GetValue(i) + 
-                      aPair.mShapes[1]->GetSize(i) * b2Transform->GetHierarchicalScale().GetValue(i)));
+    float distance = fabs(size - fabs(dist[i]));
     if(distance < shortestDistance)
     {
       axis = i;
@@ -375,13 +376,13 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   switch(axis)
   {
     case 0:
-      normal = Vector3(b1Pos[axis] - b2Pos[axis],0,0).normalize();
+      normal = Vector3(spherePos[axis] - aabbPos[axis],0,0).normalize();
       break;
     case 1:
-      normal = Vector3(0,b1Pos[axis] - b2Pos[axis],0).normalize();
+      normal = Vector3(0,spherePos[axis] - aabbPos[axis],0).normalize();
       break;
     case 2:
-      normal = Vector3(0,0,b1Pos[axis] - b2Pos[axis]).normalize();
+      normal = Vector3(0,0,spherePos[axis] - aabbPos[axis]).normalize();
       break;
   }
 
