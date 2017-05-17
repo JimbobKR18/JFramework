@@ -208,8 +208,6 @@ bool CollisionChecker::CheckSphereToAABB(CollisionPair &aPair)
 
   Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphere, aPair.mShapes[0]->position);
   Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabb, aPair.mShapes[1]->position);
-  Vector3 relPos = spherePos - aabbPos;
-  
   Vector3 aabbSize = dynamic_cast<AxisAlignedBoundingBox*>(aPair.mShapes[1])->size.Multiply(aabb->GetHierarchicalScale());
   Vector3 closestPoint = ShapeMath::ClosestPointPointAABB(spherePos, aabbPos - aabbSize, aabbPos + aabbSize);
 
