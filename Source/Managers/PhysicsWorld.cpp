@@ -239,6 +239,7 @@ void PhysicsWorld::SweepAndPrune()
     for(PhysicsIT it2 = it; it2 != end; ++it2)
     {
       PhysicsObject *it2Object = *it2;
+      Transform *it2Transform = it2Object->GetOwner()->GET<Transform>();
       
       if(!it2Object->IsActive())
         continue;
@@ -252,9 +253,9 @@ void PhysicsWorld::SweepAndPrune()
            !mResolver.Find(itObject, it2Object))
         {
           float x1 = itTransform->GetHierarchicalPosition().x;
-          float x1Size = itObject->GetBroadSize().x;
-          float x2 = it2Object->GetOwner()->GET<Transform>()->GetHierarchicalPosition().x;
-          float x2Size = it2Object->GetBroadSize().x;
+          float x1Size = itObject->GetBroadSize().x * itTransform->GetHierarchicalScale().x;
+          float x2 = it2Transform->GetHierarchicalPosition().x;
+          float x2Size = it2Object->GetBroadSize().x * it2Transform->GetHierarchicalScale().x;
 
           float xPosDiff = fabs(x1 - x2);
           float xSizeTotal = x1Size + x2Size;
