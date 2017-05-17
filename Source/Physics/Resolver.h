@@ -11,7 +11,6 @@ private:
   int mResolveAxes;
   std::list<CollisionPair> mCollidedPairs;
   std::unordered_map<size_t, PotentialPair> mPotentialPairs;
-  std::set<PotentialPair> mSortedPairs;
 
 public:
   Resolver();

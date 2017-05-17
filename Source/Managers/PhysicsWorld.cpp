@@ -22,9 +22,9 @@ bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 {
   // Left aligned
   float x1 = object1->GetOwner()->GET<Transform>()->GetHierarchicalPosition().x -
-      object1->GetBroadSize().x;
+      (object1->GetBroadSize().x * object1->GetOwner()->GET<Transform>()->GetHierarchicalScale().x);
   float x2 = object2->GetOwner()->GET<Transform>()->GetHierarchicalPosition().x -
-      object2->GetBroadSize().x;
+      (object2->GetBroadSize().x * object2->GetOwner()->GET<Transform>()->GetHierarchicalScale().x);
   if(x1 < x2)
   {
     return true;
