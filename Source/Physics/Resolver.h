@@ -8,6 +8,7 @@
 class Resolver
 {
 private:
+  int mResolveAxes;
   std::list<CollisionPair> mCollidedPairs;
   std::unordered_map<size_t, PotentialPair> mPotentialPairs;
 

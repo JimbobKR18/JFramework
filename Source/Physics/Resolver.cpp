@@ -4,9 +4,12 @@
 #include "CollisionMessage.h"
 #include "CollisionChecker.h"
 #include "ShapeMath.h"
+#include "Constants.h"
 
-Resolver::Resolver()
+Resolver::Resolver() : mResolveAxes(3), mCollidedPairs(), mPotentialPairs()
 {
+  if(Constants::GetBoolean("2DCollisionOnly"))
+    mResolveAxes = 2;
 }
 
 Resolver::~Resolver()
@@ -361,7 +364,7 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   
   int axis = 0;
   float shortestDistance = 0xffffff;
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     float distance = fabs(size - fabs(dist[i]));
     if(distance < shortestDistance)
@@ -405,7 +408,7 @@ void Resolver::CalculateAABBToAABB(CollisionPair &aPair)
   int axis = 0;
   float shortestDistance = 0xffffff;
   
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     float distance = fabs(fabs(b2Pos[i] - b1Pos[i]) - 
                       (aPair.mShapes[0]->GetSize(i) * b1Transform->GetHierarchicalScale().GetValue(i) + 
@@ -490,7 +493,7 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
   int axis = 0;
   float minDistance = 0xffffff;
   
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     float size = aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i);
     float distance = fabs(fabs(dist[i]) - size);
@@ -586,7 +589,7 @@ void Resolver::CalculateLineToAABB(CollisionPair &aPair)
   
   // Push out on smallest axis
   aPair.mPenetration = FLT_MAX;
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     float size = aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i);
     float diff = size - dist.length();
@@ -677,7 +680,7 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
   float shortestDistance = FLT_MAX;
   float shortestAxis = 0;
   
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     Vector3 axis = obbTransform->GetHierarchicalRotation() * obb->GetAxis(i);
     Vector3 projection = axis * (diff.Dot(axis) / axis.Dot(axis));
@@ -723,7 +726,7 @@ void Resolver::CalculateOBBToAABB(CollisionPair &aPair)
   int axis = 0;
   float minDistance = 0xffffff;
   
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     float size = aabb->GetSize(i) * aabbTransform->GetHierarchicalScale().GetValue(i);
     float distance = fabs(fabs(diff[i]) - size);
@@ -776,7 +779,7 @@ void Resolver::CalculateOBBToOBB(CollisionPair &aPair)
   
   int axis = 0;
   float minDistance = 0xffffff;
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     float size = obb1->extents[i] * obb1Transform->GetHierarchicalScale().GetValue(i);
     float d = diff.Dot(obb1Transform->GetHierarchicalRotation() * obb1->GetAxis(i));
@@ -832,7 +835,7 @@ void Resolver::CalculateOBBToTriangle(CollisionPair &aPair)
   
   int axis = 0;
   float minDistance = 0xffffff;
-  for(int i = 0; i < 3; ++i)
+  for(int i = 0; i < mResolveAxes; ++i)
   {
     float size = obb->extents[i] * obbTransform->GetHierarchicalScale().GetValue(i);
     float d = diff.Dot(obbTransform->GetHierarchicalRotation() * obb->GetAxis(i));
