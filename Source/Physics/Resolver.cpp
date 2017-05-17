@@ -6,7 +6,7 @@
 #include "ShapeMath.h"
 #include "Constants.h"
 
-Resolver::Resolver() : mResolveAxes(3), mCollidedPairs(), mPotentialPairs()
+Resolver::Resolver() : mResolveAxes(3), mCollidedPairs(), mPotentialPairs(), mSortedPairs()
 {
   if(Constants::GetBoolean("2DCollisionOnly"))
     mResolveAxes = 2;
@@ -22,25 +22,21 @@ Resolver::~Resolver()
  */
 void Resolver::Update(float aDuration)
 {
-  std::unordered_map<size_t, PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
-  for(std::unordered_map<size_t, PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
+  std::set<PotentialPair>::iterator potentialEnd = mSortedPairs.end();
+  for(std::set<PotentialPair>::iterator it = mSortedPairs.begin(); it != potentialEnd; ++it)
   {
-    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(it->second);
+    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(*it);
     std::vector<CollisionPair>::iterator pairsEnd = pairs.end();
     for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairsEnd; ++it2)
     {
-      AddCollidedPair(*it2);
+      Resolve(*it2, aDuration);
+      SendCollisionMessages(*it2);
     }
   }
   
-  std::list<CollisionPair>::iterator collidedEnd = mCollidedPairs.end();
-  for(std::list<CollisionPair>::iterator it = mCollidedPairs.begin(); it != collidedEnd; ++it)
-  {
-    Resolve(*it, aDuration);
-    SendCollisionMessages(*it);
-  }
   mCollidedPairs.clear();
   mPotentialPairs.clear();
+  mSortedPairs.clear();
 }
 
 /**
@@ -50,6 +46,7 @@ void Resolver::Update(float aDuration)
 void Resolver::AddPrelimPair(PotentialPair const &aPair)
 {
   mPotentialPairs[CalculateHash(aPair.mBodies[0], aPair.mBodies[1])] = aPair;
+  mSortedPairs.insert(aPair);
 }
 
 /**

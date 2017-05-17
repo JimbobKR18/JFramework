@@ -259,10 +259,11 @@ void PhysicsWorld::SweepAndPrune()
 
           float xPosDiff = fabs(x1 - x2);
           float xSizeTotal = x1Size + x2Size;
+          float realDistance = (itTransform->GetHierarchicalPosition() - it2Transform->GetHierarchicalPosition()).length();
 
           if(xSizeTotal > xPosDiff)
           {
-            mResolver.AddPrelimPair(PotentialPair(itObject, it2Object));
+            mResolver.AddPrelimPair(PotentialPair(itObject, it2Object, realDistance));
           }
           else
           {
