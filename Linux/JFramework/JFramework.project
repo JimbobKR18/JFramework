@@ -74,6 +74,7 @@
     <File Name="../../Source/Core/Threading.h"/>
     <File Name="../../Source/Core/ShapeMath.h"/>
     <File Name="../../Source/Core/ShapeMath.cpp"/>
+    <File Name="../../Source/Core/Threading.cpp"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>

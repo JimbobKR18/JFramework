@@ -13,6 +13,7 @@
 #include "LUATypes.h"
 #include "Constants.h"
 #include "SystemProperties.h"
+#include "Threading.h"
 
 GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
 {
@@ -134,14 +135,7 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
   
   while(mDT >= mAppStep)
   {
-    if(lockedFramerate)
-    {
-      mDT = mAppStep;
-    }
-    else
-    {
-      mDT -= mAppStep;
-    }
+    mDT -= mAppStep;
 
     for(std::vector<Manager*>::iterator it = mManagers.begin(); it != managersEnd; ++it)
     {
@@ -161,6 +155,14 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
     }
     
     BetweenFrameUpdate();
+    
+    // VSync if enabled.
+    if(lockedFramerate && mDT <= mAppStep)
+    {
+      int dtTicks = mDT * 1000.0f;
+      int appTicks = mAppStep * 1000.0f;
+      Threading::thread_sleep(appTicks - dtTicks);
+    }
   }
 }
 
