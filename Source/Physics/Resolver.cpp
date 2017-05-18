@@ -22,10 +22,10 @@ Resolver::~Resolver()
  */
 void Resolver::Update(float aDuration)
 {
-  std::unordered_map<size_t, PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
-  for(std::unordered_map<size_t, PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
+  std::set<PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
+  for(std::set<PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
   {
-    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(it->second);
+    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(*it);
     std::vector<CollisionPair>::iterator pairsEnd = pairs.end();
     for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairsEnd; ++it2)
     {
@@ -44,7 +44,7 @@ void Resolver::Update(float aDuration)
  */
 void Resolver::AddPrelimPair(PotentialPair const &aPair)
 {
-  mPotentialPairs[CalculateHash(aPair.mBodies[0], aPair.mBodies[1])] = aPair;
+  mPotentialPairs.insert(aPair);
 }
 
 /**
@@ -58,13 +58,12 @@ void Resolver::AddCollidedPair(CollisionPair const &aPair)
 
 /**
  * @brief Find a pair in our list of potential pairs.
- * @param aObject1 First object
- * @param aObject2 Second object
+ * @param aPair Pair
  * @return Whether or not that pair already exists
  */
-bool Resolver::Find(PhysicsObject *aObject1, PhysicsObject *aObject2)
+bool Resolver::Find(PotentialPair const &aPair)
 {
-  return mPotentialPairs.find(CalculateHash(aObject1, aObject2)) != mPotentialPairs.end();
+  return mPotentialPairs.find(aPair) != mPotentialPairs.end();
 }
 
 /**

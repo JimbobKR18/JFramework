@@ -10,7 +10,7 @@ class Resolver
 private:
   int mResolveAxes;
   std::list<CollisionPair> mCollidedPairs;
-  std::unordered_map<size_t, PotentialPair> mPotentialPairs;
+  std::set<PotentialPair> mPotentialPairs;
 
 public:
   Resolver();
@@ -19,7 +19,7 @@ public:
   void Update(float aDuration);
   void AddPrelimPair(PotentialPair const &aPair);
   void AddCollidedPair(CollisionPair const &aPair);
-  bool Find(PhysicsObject *aObject1, PhysicsObject *aObject2);
+  bool Find(PotentialPair const &aPair);
 
 private:
   // Methods to resolve collisions
