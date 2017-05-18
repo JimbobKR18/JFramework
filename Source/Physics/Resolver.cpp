@@ -6,7 +6,7 @@
 #include "ShapeMath.h"
 #include "Constants.h"
 
-Resolver::Resolver() : mResolveAxes(3), mCollidedPairs(), mPotentialPairs()
+Resolver::Resolver() : mResolveAxes(3), mPotentialPairs()
 {
   if(Constants::GetBoolean("2DCollisionOnly"))
     mResolveAxes = 2;
@@ -22,8 +22,8 @@ Resolver::~Resolver()
  */
 void Resolver::Update(float aDuration)
 {
-  std::set<PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
-  for(std::set<PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
+  std::vector<PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
+  for(std::vector<PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
   {
     std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(*it);
     std::vector<CollisionPair>::iterator pairsEnd = pairs.end();
@@ -33,8 +33,6 @@ void Resolver::Update(float aDuration)
       SendCollisionMessages(*it2);
     }
   }
-  
-  mCollidedPairs.clear();
   mPotentialPairs.clear();
 }
 
@@ -44,16 +42,7 @@ void Resolver::Update(float aDuration)
  */
 void Resolver::AddPrelimPair(PotentialPair const &aPair)
 {
-  mPotentialPairs.insert(aPair);
-}
-
-/**
- * @brief Add pair that collided.
- * @param aPair The pair to add.
- */
-void Resolver::AddCollidedPair(CollisionPair const &aPair)
-{
-  mCollidedPairs.push_back(aPair);
+  mPotentialPairs.push_back(aPair);
 }
 
 /**
@@ -63,7 +52,7 @@ void Resolver::AddCollidedPair(CollisionPair const &aPair)
  */
 bool Resolver::Find(PotentialPair const &aPair)
 {
-  return mPotentialPairs.find(aPair) != mPotentialPairs.end();
+  return std::find(mPotentialPairs.begin(), mPotentialPairs.end(), aPair) != mPotentialPairs.end();
 }
 
 /**

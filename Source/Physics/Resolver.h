@@ -9,8 +9,7 @@ class Resolver
 {
 private:
   int mResolveAxes;
-  std::list<CollisionPair> mCollidedPairs;
-  std::set<PotentialPair> mPotentialPairs;
+  std::vector<PotentialPair> mPotentialPairs;
 
 public:
   Resolver();

@@ -235,6 +235,8 @@ void PhysicsWorld::SweepAndPrune()
     
     HashString itName = itObject->GetOwner()->GetName();
     Transform *itTransform = itObject->GetOwner()->GET<Transform>();
+    float x1 = itTransform->GetHierarchicalPosition().x;
+    float x1Size = itObject->GetBroadSize().x * itTransform->GetHierarchicalScale().x;
 
     for(PhysicsIT it2 = it; it2 != end; ++it2)
     {
@@ -255,15 +257,11 @@ void PhysicsWorld::SweepAndPrune()
         if((!itObject->IsStatic() || !it2Object->IsStatic()) &&
            !mResolver.Find(potentialPair))
         {
-          float x1 = itTransform->GetHierarchicalPosition().x;
-          float x1Size = itObject->GetBroadSize().x * itTransform->GetHierarchicalScale().x;
           float x2 = it2Transform->GetHierarchicalPosition().x;
           float x2Size = it2Object->GetBroadSize().x * it2Transform->GetHierarchicalScale().x;
-
           float xPosDiff = fabs(x1 - x2);
           float xSizeTotal = x1Size + x2Size;
-          float realDistance = (itTransform->GetHierarchicalPosition() - it2Transform->GetHierarchicalPosition()).length();
-
+          
           if(xSizeTotal > xPosDiff)
           {
             mResolver.AddPrelimPair(potentialPair);
