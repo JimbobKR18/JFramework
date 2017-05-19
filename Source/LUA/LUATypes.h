@@ -35,27 +35,7 @@ namespace LUABind
   
   struct FunctionCaller : public SLB::Script
   {
-    bool LoadFile(HashString const &aFilename, HashString const &aFunctionName)
-    {
-      // Load the file up
-      HashString const& contents = GetScript(aFilename);
-      
-      if(contents.Empty())
-      {
-        DebugLogPrint("LUA File: %s not found!\n", aFilename.ToCharArray());
-        return false;
-      }
-      else if(!contents.Find(aFunctionName))
-      {
-        DebugLogPrint("LUA function: %s in file: %s not found!\n",
-                      aFunctionName.ToCharArray(), aFilename.ToCharArray());
-        return false;
-      }
-      
-      // Try catch in case anything happens
-      doString(contents.ToCharArray());
-      return true;
-    }
+    bool LoadFile(HashString const &aFilename, HashString const &aFunctionName);
     
     // Returns true if function called successfully
     template<typename T>

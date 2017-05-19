@@ -50,6 +50,7 @@ namespace LUABind
   // Our manager and scripts
   std::map<int,HashString> mScripts;
   typedef std::pair<int,HashString> ScriptPair;
+  std::unordered_map<int, HashString> mInvalidFunctionsCache;
   
   GameApp* StaticGameApp::mApp = NULL; 
   
@@ -142,5 +143,33 @@ namespace LUABind
   {
     LUAFILECHECK()
     return mScripts.find(aFilename.ToHash())->second;
+  }
+  
+  bool FunctionCaller::LoadFile(HashString const &aFilename, HashString const &aFunctionName)
+  {
+    HashString functionKey = aFilename + aFunctionName;
+    if(mInvalidFunctionsCache.find(functionKey.ToHash()) != mInvalidFunctionsCache.end())
+      return false;
+    
+    // Load the file up
+    HashString const& contents = GetScript(aFilename);
+    
+    if(contents.Empty())
+    {
+      DebugLogPrint("LUA File: %s not found!\n", aFilename.ToCharArray());
+      mInvalidFunctionsCache[functionKey.ToHash()] = functionKey;
+      return false;
+    }
+    else if(!contents.Find(aFunctionName))
+    {
+      DebugLogPrint("LUA function: %s in file: %s not found!\n",
+                    aFunctionName.ToCharArray(), aFilename.ToCharArray());
+      mInvalidFunctionsCache[functionKey.ToHash()] = functionKey;
+      return false;
+    }
+    
+    // Try catch in case anything happens
+    doString(contents.ToCharArray());
+    return true;
   }
 };
