@@ -2,16 +2,17 @@
 #include "Transform.h"
 #include "ZRenderSorter.h"
 #include "BatchRenderSorter.h"
+#include "Constants.h"
 
-Screen::Screen() : mWidth(0), mHeight(0), mFullScreen(false),  
+Screen::Screen() : mOwner(nullptr), mWidth(0), mHeight(0), mFullScreen(false),  
   mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr)
 {
 }
 
-Screen::Screen(int aW, int aH, bool aFullScreen) : mWidth(aW), mHeight(aH), 
-  mFullScreen(aFullScreen), mView()
+Screen::Screen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen) : 
+  mOwner(aOwner), mWidth(aW), mHeight(aH), mFullScreen(aFullScreen), mView()
 {
-  mView.SetSize(Vector3(aW, aH, 0));
+  mView.SetSize(Vector3(Constants::GetInteger("RenderWidth"), Constants::GetInteger("RenderHeight"), 0));
   mDepthRenderSorter = new ZRenderSorter();
   mBatchRenderSorter = new BatchRenderSorter();
 }
@@ -20,6 +21,11 @@ Screen::~Screen()
 {
   delete mDepthRenderSorter;
   delete mBatchRenderSorter;
+}
+
+GraphicsManager* Screen::GetOwner() const
+{
+  return mOwner;
 }
 
 int Screen::GetWidth() const

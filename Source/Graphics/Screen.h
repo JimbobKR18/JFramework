@@ -8,6 +8,7 @@
 class Screen
 {
 private:
+  GraphicsManager*    mOwner;
   int                 mWidth;
   int                 mHeight;
   bool                mFullScreen;
@@ -17,10 +18,11 @@ private:
 
 public:
   Screen();
-  Screen(int aW, int aH, bool aFullScreen);
+  Screen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen);
   virtual ~Screen();
 
   // Width, Height, and Fullscreen
+  GraphicsManager*        GetOwner() const;
   int                     GetWidth() const;
   void                    SetWidth(int const aWidth);
   int                     GetHeight() const;
@@ -43,8 +45,7 @@ public:
   virtual void            SetClearColor(Vector4 const &aClearColor) = 0;
   virtual void            ChangeSize(int aW, int aH, bool aFullScreen) = 0;
   virtual void            PreDraw() = 0;
-  virtual void            Draw(std::vector<Surface*> const &aObjects) = 0;
-  virtual void            DrawUI(std::vector<Surface*> const &aObjects) = 0;
+  virtual void            Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects) = 0;
   virtual void            DebugDraw(std::vector<Surface*> const &aObjects) = 0;
   virtual void            SwapBuffers() = 0;
 };

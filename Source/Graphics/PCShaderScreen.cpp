@@ -4,6 +4,7 @@
 #include "Constants.h"
 #include "SurfaceProperty.h"
 #include "GraphicsManager.h"
+#include "ShaderLoader.h"
 
 #define VERTEX_ARRAYS
 
@@ -20,9 +21,9 @@ PCShaderScreen::PCShaderScreen() : Screen()
   assert(!"Do not use this");
 }
 
-PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH, aFullScreen), mWindow(nullptr), 
-  mGLContext(), mDisplayMode(), mVertexArrayObjectID(0), mVertexBufferID(0), mTextureBufferID(0),
-  mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0), mMaxTextures(0)
+PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen) : Screen(aOwner, aW, aH, aFullScreen), 
+  mWindow(nullptr), mGLContext(), mDisplayMode(), mDefaultFrameBufferID(0), mVertexArrayObjectID(0), mVertexBufferID(0), 
+  mTextureBufferID(0), mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0), mMaxTextures(0), mFramebuffer(nullptr)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -52,6 +53,7 @@ PCShaderScreen::PCShaderScreen(int aW, int aH, bool aFullScreen) : Screen(aW, aH
 
 PCShaderScreen::~PCShaderScreen()
 {
+  delete mFramebuffer;
   glDeleteBuffers(1, &mVertexBufferID);
   glDeleteBuffers(1, &mTextureBufferID);
   glDeleteBuffers(1, &mPositionBufferID);
@@ -100,8 +102,8 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       }
       else if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
       {
-        position.x = GetWidth() * position.x;
-        position.y = GetHeight() * position.y;
+        position.x = GetView().GetSize().x * position.x;
+        position.y = GetView().GetSize().y * position.y;
       }
 
       glLoadIdentity();
@@ -221,7 +223,121 @@ void PCShaderScreen::PreDraw()
  * @brief Draw objects
  * @param aObjects
  */
-void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
+void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects)
+{
+  mFramebuffer->Bind();
+  DrawObjects(aObjects);
+  DrawObjects(aUIObjects);
+  #ifdef _DEBUG_DRAW
+    // Displays bounds of objects with PhysicsObject
+    DebugDraw(aObjects);
+  #endif
+  mFramebuffer->Draw(mDefaultFrameBufferID, GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+}
+
+/**
+ * @brief Swap buffers
+ */
+void PCShaderScreen::SwapBuffers()
+{
+  SDL_GL_SwapWindow(mWindow);
+}
+
+/**
+ * @brief Set clear color.
+ * @param aClearColor Color.
+ */
+void PCShaderScreen::SetClearColor(Vector4 const &aClearColor)
+{
+  glClearColor(aClearColor.x, aClearColor.y, aClearColor.z, aClearColor.w);
+}
+
+/**
+ * @brief Change window size
+ * @param aW Width
+ * @param aH Height
+ * @param aFullScreen
+ */
+void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
+{
+  // Set full screen or not
+  SetWidth(aW);
+  SetHeight(aH);
+  SetFullScreen(aFullScreen);
+  int fullScreen = 0;
+  if(aFullScreen)
+    fullScreen = SDL_WINDOW_FULLSCREEN_DESKTOP;
+  SDL_SetWindowFullscreen(mWindow, fullScreen);
+  
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,        1);
+  
+  SDL_GL_SetAttribute(SDL_GL_RED_SIZE,            8);
+  SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,          8);
+  SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,           8);
+  SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,          8);
+
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,          16);
+  SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,         32);
+
+  SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,      8);
+  SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,    8);
+  SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,     8);
+  SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,    8);
+
+  SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
+  SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
+
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  glClearDepth(1.0f);
+
+  if(aFullScreen)
+  {
+    float ratio = ((float)mDisplayMode.w / (float)aH);
+    int x = aW * ratio;
+    int y = aH * ratio;
+    glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, mDisplayMode.w * ratio, mDisplayMode.h);
+  }
+  else
+    glViewport(0, 0, aW, aH);
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+
+  glOrtho(0, aW, aH, 0, 1, -1);
+
+  glMatrixMode(GL_MODELVIEW);
+
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glEnable(GL_TEXTURE_2D);
+  glEnable(GL_BLEND);
+  glEnable(GL_CULL_FACE);
+  glDisable(GL_DEPTH_TEST);
+
+  glShadeModel(GL_SMOOTH);
+
+  glLoadIdentity();
+  
+  glGenVertexArrays(1, &mVertexArrayObjectID);
+  glGenBuffers(1, &mVertexBufferID);
+  glGenBuffers(1, &mTextureBufferID);
+  glGenBuffers(1, &mPositionBufferID);
+  glGenBuffers(1, &mColorBufferID);
+  glGenBuffers(1, &mIndexBufferID);
+  
+  glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mDefaultFrameBufferID);
+  glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &mMaxTextures);
+  
+  if(mFramebuffer)
+    delete mFramebuffer;
+  mFramebuffer = new Framebuffer(Constants::GetInteger("RenderWidth"), Constants::GetInteger("RenderHeight"));
+  mFramebuffer->Generate(GetOwner());
+}
+
+/**
+ * @brief Draw objects
+ * @param aObjects
+ */
+void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects)
 {
   // Camera position and size
   Vector3 &cameraPosition = GetView().GetPosition();
@@ -237,15 +353,12 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
   std::vector<Vector4> colorData;
   std::vector<GLuint> indices;
   
-  vertexData.reserve(1024);
-  textureData.reserve(1024);
-  colorData.reserve(1024);
-  positionData.reserve(1024);
-  indices.reserve(1024);
-  
-#ifdef _DEBUG_DRAW
-  int numCalls = 0;
-#endif
+  int numVertices = aObjects.size() * 4;
+  vertexData.reserve(numVertices);
+  textureData.reserve(numVertices);
+  colorData.reserve(numVertices);
+  positionData.reserve(numVertices);
+  indices.reserve(numVertices);
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -266,10 +379,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     int objectPosLocation = glGetAttribLocation(program, "objectPos");
     int colorPosLocation = glGetAttribLocation(program, "primaryColor");
-    
-#ifdef _DEBUG_DRAW
-    ++numCalls;
-#endif
     
     // Camera translation
     float cameraMatrix[9];
@@ -308,8 +417,8 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
       // If transform is a percentage of screen, convert.
       if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
       {
-        position.x = GetWidth() * position.x;
-        position.y = GetHeight() * position.y;
+        position.x = GetView().GetSize().x * position.x;
+        position.y = GetView().GetSize().y * position.y;
       }
 
       // Move object based on its alignment
@@ -427,106 +536,6 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects)
     positionData.clear();
     indices.clear();
   }
-  
-#ifdef _DEBUG_DRAW
-  DebugLogPrint("Number of draw calls this frame: %d\n", numCalls);
-#endif
-}
-
-/**
- * @brief Draw UI objects
- * @param aObjects
- */
-void PCShaderScreen::DrawUI(std::vector<Surface*> const &aObjects)
-{
-  Draw(aObjects);
-}
-
-/**
- * @brief Swap buffers
- */
-void PCShaderScreen::SwapBuffers()
-{
-  SDL_GL_SwapWindow(mWindow);
-}
-
-/**
- * @brief Set clear color.
- * @param aClearColor Color.
- */
-void PCShaderScreen::SetClearColor(Vector4 const &aClearColor)
-{
-  glClearColor(aClearColor.x, aClearColor.y, aClearColor.z, aClearColor.w);
-}
-
-/**
- * @brief Change window size
- * @param aW Width
- * @param aH Height
- * @param aFullScreen
- */
-void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
-{
-  // Set full screen or not
-  SetWidth(aW);
-  SetHeight(aH);
-  SetFullScreen(aFullScreen);
-  int fullScreen = 0;
-  if(aFullScreen)
-    fullScreen = SDL_WINDOW_FULLSCREEN_DESKTOP;
-  SDL_SetWindowFullscreen(mWindow, fullScreen);
-  
-  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,        1);
-  
-  SDL_GL_SetAttribute(SDL_GL_RED_SIZE,            8);
-  SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,          8);
-  SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,           8);
-  SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE,          8);
-
-  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,          16);
-  SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,         32);
-
-  SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,      8);
-  SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,    8);
-  SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,     8);
-  SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,    8);
-
-  SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
-  SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
-
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-  glClearDepth(1.0f);
-
-  if(aFullScreen)
-    glViewport((mDisplayMode.w - aW)/2, (mDisplayMode.h - aH)/2, aW, aH);
-  else
-    glViewport(0, 0, aW, aH);
-
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-
-  glOrtho(0, aW, aH, 0, 1, -1);
-
-  glMatrixMode(GL_MODELVIEW);
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_BLEND);
-  glEnable(GL_CULL_FACE);
-  glDisable(GL_DEPTH_TEST);
-
-  glShadeModel(GL_SMOOTH);
-
-  glLoadIdentity();
-  
-  glGenVertexArrays(1, &mVertexArrayObjectID);
-  glGenBuffers(1, &mVertexBufferID);
-  glGenBuffers(1, &mTextureBufferID);
-  glGenBuffers(1, &mPositionBufferID);
-  glGenBuffers(1, &mColorBufferID);
-  glGenBuffers(1, &mIndexBufferID);
-  
-  glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &mMaxTextures);
 }
 
 /**

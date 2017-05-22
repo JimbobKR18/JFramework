@@ -22,15 +22,16 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
-#ifndef SHADER_COMPATIBLE
-  mScreen = new PCScreen(aWidth, aHeight, aFullScreen);
+#ifdef SHADER_COMPATIBLE
+  mScreen = new PCShaderScreen(this, aWidth, aHeight, aFullScreen);
 #else
-  mScreen = new PCShaderScreen(aWidth, aHeight, aFullScreen);
+  assert(!"Needs screen for this device.");
 #endif
 }
 
 GraphicsManager::~GraphicsManager()
 {
+  delete mScreen;
 }
 
 /**
@@ -41,12 +42,7 @@ void GraphicsManager::Update()
   mScreen->GetView().Update();
   mScreen->SortObjects(mSurfaces);
   mScreen->PreDraw();
-  mScreen->Draw(mSurfaces);
-  mScreen->DrawUI(mUIElements);
-#ifdef _DEBUG_DRAW
-  // Displays bounds of objects with PhysicsObject
-  mScreen->DebugDraw(mSurfaces);
-#endif
+  mScreen->Draw(mSurfaces, mUIElements);
   mScreen->SwapBuffers();
 }
 
@@ -90,10 +86,10 @@ void GraphicsManager::SerializeLUA()
  */
 Surface *GraphicsManager::CreateSurface()
 {
-#ifndef SHADER_COMPATIBLE
-  Surface *surface = new PCSurface(this);
-#else
+#ifdef SHADER_COMPATIBLE
   Surface *surface = new PCShaderSurface(this);
+#else
+  assert(!"Create surface for device.");
 #endif
 
   AddSurface(surface);
@@ -106,10 +102,10 @@ Surface *GraphicsManager::CreateSurface()
  */
 Surface *GraphicsManager::CreateUISurface()
 {
-#ifndef SHADER_COMPATIBLE
-  Surface *surface = new PCSurface(this);
-#else
+#ifdef SHADER_COMPATIBLE
   Surface *surface = new PCShaderSurface(this);
+#else
+  assert(!"Create surface for device.");
 #endif
 
   AddUISurface(surface);

@@ -19,7 +19,6 @@
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCShaderSurface.h"
-  #include "PCSurface.h"
 #endif
 
 unsigned const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
@@ -283,14 +282,14 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
   if(aParser.Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)
-    PCSurface *surface = nullptr;
+    PCShaderSurface *surface = nullptr;
 #else
     Surface *surface = nullptr;
 #endif
     if(aParser.Find("Surface", "UIElement") && aParser.Find("Surface", "UIElement")->GetValue().ToBool())
     {
 #if !defined(ANDROID) && !defined(IOS)
-      surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
+      surface = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
 #else
       surface = GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
 #endif
@@ -298,7 +297,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
     else
     {
 #if !defined(ANDROID) && !defined(IOS)
-      surface = (PCSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+      surface = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #else
       surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
 #endif

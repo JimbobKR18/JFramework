@@ -23,6 +23,12 @@ ShaderLoader::~ShaderLoader()
 {
 }
 
+/**
+ * @brief Loads shaders
+ * @param aVertexShaderFilename Name of vertex shader.
+ * @param aFragmentShaderFilename Name of fragment shader.
+ * @return [0] - program name. [1] - vertex shader id. [2] - fragment shader id. [3] - vertex shader contents. [4] - fragment shader contents.
+ */
 std::vector<HashString> ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
 {
   std::vector<HashString> ret;

@@ -4,6 +4,7 @@
 #include "Screen.h"
 #include "Transform.h"
 #include "PCShaderSurface.h"
+#include "Framebuffer.h"
 #if defined(_WIN32)
   #include <GL\glew.h>
   #include "SDL.h"
@@ -25,6 +26,7 @@ private:
   SDL_Window*   mWindow;
   SDL_GLContext mGLContext;
   SDL_DisplayMode mDisplayMode;
+  GLint        mDefaultFrameBufferID;
   GLuint        mVertexArrayObjectID;
   GLuint        mVertexBufferID;
   GLuint        mTextureBufferID;
@@ -32,21 +34,22 @@ private:
   GLuint        mColorBufferID;
   GLuint        mIndexBufferID;
   GLint         mMaxTextures;
+  Framebuffer*  mFramebuffer;
 
 public:
   PCShaderScreen();
-  PCShaderScreen(int aW, int aH, bool aFullScreen);
+  PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen);
   virtual ~PCShaderScreen();
 
   virtual void PreDraw();
-  virtual void Draw(std::vector<Surface*> const &aObjects);
-  virtual void DrawUI(std::vector<Surface*> const &aObjects);
+  virtual void Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects);
   virtual void DebugDraw(std::vector<Surface*> const &aObjects);
   virtual void SwapBuffers();
   virtual void SetClearColor(Vector4 const &aClearColor);
   virtual void ChangeSize(int aW, int aH, bool aFullScreen);
 
 private:
+  void DrawObjects(std::vector<Surface*> const &aObjects);
   void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);

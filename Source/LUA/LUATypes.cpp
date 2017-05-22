@@ -27,7 +27,7 @@
 #include "Messages/CollisionMessage.h"
 
 #ifdef PC
-#include "Graphics/PCSurface.h"
+#include "Graphics/PCShaderSurface.h"
 #endif
 
 #define LUAFILECHECK()  if(mScripts.find(aFilename.ToHash()) == mScripts.end()) \
@@ -82,7 +82,7 @@ namespace LUABind
     
     // Surface
     Surface::SerializeLUA();
-    PCSurface::SerializeLUA();
+    PCShaderSurface::SerializeLUA();
     
     // Physics
     PhysicsObject::SerializeLUA();
