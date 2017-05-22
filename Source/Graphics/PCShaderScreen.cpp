@@ -353,7 +353,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects)
   std::vector<Vector4> colorData;
   std::vector<GLuint> indices;
   
-  int numVertices = aObjects.size() * 4;
+  int numVertices = aObjects.size() * 6;
   vertexData.reserve(numVertices);
   textureData.reserve(numVertices);
   colorData.reserve(numVertices);

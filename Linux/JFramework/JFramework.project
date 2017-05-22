@@ -115,14 +115,10 @@
     <File Name="../../Source/Graphics/BatchRenderSorter.h"/>
     <File Name="../../Source/Graphics/BatchRenderSorter.cpp"/>
     <VirtualDirectory Name="Surfaces">
-      <File Name="../../Source/Graphics/PCSurface.h"/>
-      <File Name="../../Source/Graphics/PCSurface.cpp"/>
       <File Name="../../Source/Graphics/PCShaderSurface.h"/>
       <File Name="../../Source/Graphics/PCShaderSurface.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Screens">
-      <File Name="../../Source/Graphics/PCScreen.cpp"/>
-      <File Name="../../Source/Graphics/PCScreen.h"/>
       <File Name="../../Source/Graphics/PCShaderScreen.cpp"/>
       <File Name="../../Source/Graphics/PCShaderScreen.h"/>
       <File Name="../../Source/Graphics/Screen.cpp"/>
@@ -131,6 +127,10 @@
     <File Name="../../Source/Graphics/ShaderData.h"/>
     <File Name="../../Source/Graphics/SurfaceProperty.h"/>
     <File Name="../../Source/Graphics/SurfaceProperty.cpp"/>
+    <File Name="../../Source/Graphics/ShaderLoader.h"/>
+    <File Name="../../Source/Graphics/ShaderLoader.cpp"/>
+    <File Name="../../Source/Graphics/Framebuffer.h"/>
+    <File Name="../../Source/Graphics/Framebuffer.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Logic">
     <File Name="../../Source/Logic/Constants.cpp"/>
