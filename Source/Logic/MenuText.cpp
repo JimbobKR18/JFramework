@@ -5,7 +5,7 @@
  *      Author: jimmy
  */
 
-#if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
+#if !defined(IOS) && !defined(ANDROID)
 #define SHADER_COMPATIBLE
 #endif
 
@@ -16,8 +16,6 @@
 
 #ifdef SHADER_COMPATIBLE
   #include "PCShaderSurface.h"
-#elif defined(__APPLE__)
-  #include "PCSurface.h"
 #else
 #endif
 
@@ -116,9 +114,6 @@ void MenuText::ParseAdditionalData(Parser &aParser)
 
 #ifdef SHADER_COMPATIBLE
   PCShaderSurface *surface = (PCShaderSurface*)app->GET<GraphicsManager>()->CreateUISurface();
-  Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
-#elif defined(__APPLE__)
-  PCSurface *surface = (PCSurface*)app->GET<GraphicsManager>()->CreateUISurface();
   Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
 #else
   Surface *surface = app->GET<GraphicsManager>()->CreateUISurface();

@@ -6,7 +6,7 @@
 //
 //
 
-#if !defined(__APPLE__) && !defined(IOS) && !defined(ANDROID)
+#if !defined(IOS) && !defined(ANDROID)
 #define SHADER_COMPATIBLE
 #endif
 
@@ -16,8 +16,6 @@
 
 #ifdef SHADER_COMPATIBLE
   #include "PCShaderSurface.h"
-#elif defined(__APPLE__)
-  #include "PCSurface.h"
 #else
 #endif
 
@@ -71,8 +69,6 @@ void MenuImage::ParseAdditionalData(Parser &aParser)
   {
 #ifdef SHADER_COMPATIBLE
     PCShaderSurface *surface = (PCShaderSurface*)mObject->GET<Surface>();
-#elif defined(__APPLE__)
-    PCSurface *surface = (PCSurface*)mObject->GET<Surface>();
 #else
     Surface *surface = mObject->GET<Surface>();
 #endif
