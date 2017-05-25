@@ -21,7 +21,7 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
                                                                            mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr)
 {
   // Add Default Texture
-  AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(-1, 0, 0));
+  AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0));
 #ifdef SHADER_COMPATIBLE
   mScreen = new PCShaderScreen(this, aWidth, aHeight, aFullScreen);
 #else
@@ -280,6 +280,15 @@ bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
   }
 
   return true;
+}
+
+/**
+ * @brief Reset device.
+ */
+void GraphicsManager::ResetDevice()
+{
+  mTextures.clear();
+  mShaders.clear();
 }
 
 /**

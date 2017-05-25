@@ -55,6 +55,7 @@ public:
   bool                ShaderDataExists(HashString const &aFilename) const;
 
   // Misc.
+  void                ResetDevice();
   Vector3             AbsToRel(Vector3 const &aPosition) const;
   Vector3             RelToAbs(Vector3 const &aPosition) const;
 };

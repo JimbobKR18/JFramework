@@ -1,4 +1,6 @@
 #include "ShaderLoader.h"
+#include "Constants.h"
+#include "MathExt.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <SDL2/SDL_image.h>
@@ -27,12 +29,11 @@ ShaderLoader::~ShaderLoader()
  * @brief Loads shaders
  * @param aVertexShaderFilename Name of vertex shader.
  * @param aFragmentShaderFilename Name of fragment shader.
- * @return [0] - program name. [1] - vertex shader id. [2] - fragment shader id. [3] - vertex shader contents. [4] - fragment shader contents.
+ * @return Shader data.
  */
-std::vector<HashString> ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
+ShaderData ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
 {
-  std::vector<HashString> ret;
-  
+  ShaderData ret;
   std::ifstream vertexFile(Common::RelativePath("Shaders", aVertexShaderFilename.ToCharArray()).c_str());
   std::ifstream fragmentFile(Common::RelativePath("Shaders", aFragmentShaderFilename.ToCharArray()).c_str());
   if(vertexFile.is_open() && fragmentFile.is_open())
@@ -112,11 +113,11 @@ std::vector<HashString> ShaderLoader::LoadShaders(HashString const &aVertexShade
       DebugLogPrint("GL LINK ERROR: %s\n", &infoLog[0]);
     }
     
-    ret.push_back(Common::IntToString(program));
-    ret.push_back(Common::IntToString(vertexShader));
-    ret.push_back(Common::IntToString(fragmentShader));
-    ret.push_back(vertexContents);
-    ret.push_back(fragmentContents);
+    ret.mProgramID = program;
+    ret.mVertexShaderID = vertexShader;
+    ret.mFragmentShaderID = fragmentShader;
+    ret.mVertexContents = vertexContents;
+    ret.mFragmentContents = fragmentContents;
   }
   else
   {
@@ -125,4 +126,159 @@ std::vector<HashString> ShaderLoader::LoadShaders(HashString const &aVertexShade
   }
   
   return ret;
+}
+
+TextureData ShaderLoader::LoadTexture(HashString const &aTextureFileName)
+{
+  TextureData textureData;
+  GLenum textureFormat;
+  SDL_Surface* surface = IMG_Load(Common::RelativePath("Art", aTextureFileName).c_str());
+  int numberOfColors = 0;
+  if(surface)
+  {
+    if ((surface->w & (surface->w - 1)) != 0 )
+    {
+      DebugLogPrint("warning: width of image: %s is not a power of 2\n", aTextureFileName.ToCharArray());
+    }
+
+    if ((surface->h & (surface->h - 1)) != 0 )
+    {
+      DebugLogPrint("warning: height of image: %s is not a power of 2\n", aTextureFileName.ToCharArray());
+    }
+    
+    numberOfColors = surface->format->BytesPerPixel;
+    if (numberOfColors == 4)
+    {
+      if (surface->format->Rmask == 0x000000ff)
+        textureFormat = GL_RGBA;
+      else
+        #ifndef _WIN32
+          textureFormat = GL_BGRA;
+        #else
+          textureFormat = GL_RGBA;
+        #endif
+    }
+    else if (numberOfColors == 3)
+    {
+      if (surface->format->Rmask == 0x000000ff)
+        textureFormat = GL_RGB;
+      else
+        #ifndef _WIN32
+          textureFormat = GL_BGR;
+        #else
+          textureFormat = GL_RGB;
+        #endif
+    }
+    else
+    {
+      DebugLogPrint("warning: image %s is not truecolor...  this will probably break\n", aTextureFileName.ToCharArray());
+      DebugLogPrint("warning: bytes per pixel for image %s: %d\n", aTextureFileName.ToCharArray(), numberOfColors);
+    }
+
+    textureData.mTextureName = aTextureFileName;
+    textureData.mWidth = surface->w;
+    textureData.mHeight = surface->h;
+    textureData.mTextureID = ImportTexture(surface, textureFormat);
+    return textureData;
+  }
+  else
+  {
+    DebugLogPrint("warning: file: %s not found or incompatible format, check this out\n", aTextureFileName.ToCharArray());
+    return textureData;
+  }
+}
+
+TextureData ShaderLoader::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
+{
+  TextureData textureData;
+  GLenum textureFormat;
+  Uint32 rmask, gmask, bmask, amask;
+  #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+      rmask = 0xff000000;
+      gmask = 0x00ff0000;
+      bmask = 0x0000ff00;
+      amask = 0x000000ff;
+  #else
+      rmask = 0x000000ff;
+      gmask = 0x0000ff00;
+      bmask = 0x00ff0000;
+      amask = 0xff000000;
+  #endif
+  if(!TTF_WasInit())
+    TTF_Init();
+  TTF_Font* font = TTF_OpenFont(Common::RelativePath("Fonts", aFont).c_str(), aSize);
+  if(!font)
+  {
+    font = nullptr;
+    DebugLogPrint("warning: file not found or incompatible format, check this out\n");
+    DebugLogPrint("%s", TTF_GetError());
+    return textureData;
+  }
+
+  // Create text texture
+  SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
+  //SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
+  SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(font, aText.ToCharArray(), fgColor, aMaxWidth);
+  if(!msg)
+  {
+    DebugLogPrint("TTF_RenderText failed: %s", TTF_GetError());
+    assert(msg);
+  }
+
+#ifdef __APPLE__
+  textureFormat = GL_BGRA;
+#else
+  textureFormat = GL_RGBA;
+#endif
+  
+  SDL_Surface *surface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
+  SDL_BlitSurface(msg, NULL, surface, NULL);
+  
+  textureData.mTextureName = aFont + aText + Common::IntToString(aSize);
+  textureData.mWidth = surface->w;
+  textureData.mHeight = surface->h;
+  textureData.mTextureID = ImportTexture(surface, textureFormat);
+  return textureData;
+}
+
+int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
+{
+  GLuint textureId = 0;
+  GLint minFilter = GL_LINEAR;
+  GLint magFilter = GL_LINEAR;
+  GLint wrapS = GL_REPEAT;
+  GLint wrapT = GL_REPEAT;
+  if(Constants::GetString("OpenGLMinFilter") == "GL_NEAREST")
+  {
+    minFilter = GL_NEAREST;
+  }
+  if(Constants::GetString("OpenGLMagFilter") == "GL_NEAREST")
+  {
+    magFilter = GL_NEAREST;
+  }
+  if(Constants::GetString("OpenGLWrapModeS") == "GL_CLAMP_TO_EDGE")
+  {
+    wrapS = GL_CLAMP_TO_EDGE;
+  }
+  if(Constants::GetString("OpenGLWrapModeT") == "GL_CLAMP_TO_EDGE")
+  {
+    wrapT = GL_CLAMP_TO_EDGE;
+  }
+
+  glGenTextures(1, &textureId);
+  glBindTexture(GL_TEXTURE_2D, textureId);
+
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapT);
+#ifdef __APPLE__
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_CACHED_APPLE);
+  glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, GL_TRUE);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, aSurface->w, aSurface->h, 0, aTextureFormat, GL_UNSIGNED_INT_8_8_8_8_REV, aSurface->pixels);
+#else
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, aSurface->w, aSurface->h, 0, aTextureFormat, GL_UNSIGNED_BYTE, aSurface->pixels);
+#endif
+
+  return textureId;
 }

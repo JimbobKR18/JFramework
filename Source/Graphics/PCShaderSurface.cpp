@@ -205,12 +205,11 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
     return;
   }
   
-  std::vector<HashString> glValues = ShaderLoader::LoadShaders(aVertexShaderFilename, aFragmentShaderFilename);
-  mProgramID = glValues[0].ToInt();
-  mVertexShaderID = glValues[1].ToInt();
-  mFragmentShaderID = glValues[2].ToInt();
-  
-  GetManager()->AddShaderPairing(shaderKey, ShaderData(mProgramID, mVertexShaderID, mFragmentShaderID, glValues[3], glValues[4]));
+  ShaderData const &shaderData = ShaderLoader::LoadShaders(aVertexShaderFilename, aFragmentShaderFilename);
+  mProgramID = shaderData.mProgramID;
+  mVertexShaderID = shaderData.mVertexShaderID;
+  mFragmentShaderID = shaderData.mFragmentShaderID;
+  GetManager()->AddShaderPairing(shaderKey, shaderData);
 }
 
 /**
@@ -383,7 +382,7 @@ void PCShaderSurface::AddTexturePairing(HashString const &aName)
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
 #endif
 
-  GetManager()->AddTexturePairing(aName, TextureData(mTextureID, mSurface->w, mSurface->h));
+  GetManager()->AddTexturePairing(aName, TextureData(aName, mTextureID, mSurface->w, mSurface->h));
 }
 
 /**

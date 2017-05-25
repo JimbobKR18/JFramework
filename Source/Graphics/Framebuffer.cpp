@@ -38,10 +38,9 @@ void Framebuffer::Generate(GraphicsManager *aManager)
   glBindFramebuffer(GL_FRAMEBUFFER, mFrameBufferID);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mRenderedTextureID, 0);
   
-  std::vector<HashString> shaderInfo = ShaderLoader::LoadShaders(mVertexShaderFilename, mFragmentShaderFilename);
-  aManager->AddShaderPairing(mVertexShaderFilename + mFragmentShaderFilename, 
-    ShaderData(shaderInfo[0].ToInt(), shaderInfo[1].ToInt(), shaderInfo[2].ToInt(), shaderInfo[3], shaderInfo[4]));
-  mFramebufferProgramID = shaderInfo[0].ToInt();
+  ShaderData const &shaderInfo = ShaderLoader::LoadShaders(mVertexShaderFilename, mFragmentShaderFilename);
+  aManager->AddShaderPairing(mVertexShaderFilename + mFragmentShaderFilename, shaderInfo);
+  mFramebufferProgramID = shaderInfo.mProgramID;
   
   glGenBuffers(1, &mVertexBufferID);
   glGenBuffers(1, &mTextureBufferID);

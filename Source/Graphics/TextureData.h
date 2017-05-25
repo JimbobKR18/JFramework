@@ -10,15 +10,17 @@
 
 struct TextureData
 {
+  HashString mTextureName;
   unsigned mTextureID;
   unsigned mWidth;
   unsigned mHeight;
 
   TextureData() : mTextureID(0), mWidth(0), mHeight(0) {}
-  TextureData(unsigned aTextureID, unsigned aWidth, unsigned aHeight) :
-    mTextureID(aTextureID), mWidth(aWidth), mHeight(aHeight) {}
+  TextureData(HashString const &aTextureName, unsigned aTextureID, unsigned aWidth, unsigned aHeight) :
+    mTextureName(aTextureName), mTextureID(aTextureID), mWidth(aWidth), mHeight(aHeight) {}
   void operator=(TextureData const &aRhs)
   {
+    mTextureName = aRhs.mTextureName;
     mTextureID = aRhs.mTextureID;
     mWidth = aRhs.mWidth;
     mHeight = aRhs.mHeight;
