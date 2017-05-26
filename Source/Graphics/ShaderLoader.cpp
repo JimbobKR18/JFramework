@@ -17,6 +17,8 @@
 #endif
 #endif
 
+std::vector<SDL_Surface*> ShaderLoader::mSurfaces;
+
 ShaderLoader::ShaderLoader()
 {
 }
@@ -311,9 +313,16 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
 #else
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, aSurface->w, aSurface->h, 0, aTextureFormat, GL_UNSIGNED_BYTE, aSurface->pixels);
 #endif
-  
-  // TODO breaks mac build. But is a memory leak.
-  //SDL_FreeSurface(aSurface);
+  mSurfaces.push_back(aSurface);
 
   return textureId;
+}
+
+void ShaderLoader::Clear()
+{
+  for(std::vector<SDL_Surface*>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  {
+    SDL_FreeSurface(*it);
+  }
+  mSurfaces.clear();
 }

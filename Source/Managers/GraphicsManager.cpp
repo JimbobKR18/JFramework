@@ -289,6 +289,7 @@ bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
  */
 void GraphicsManager::ResetDevice()
 {
+  ShaderLoader::Clear();
   std::vector<TextureData*> newTextures;
   std::vector<ShaderData*> newShaders;
   std::set<GameObject*> allocatedObjects = GetOwningApp()->GET<ObjectManager>()->GetAllocatedObjects();

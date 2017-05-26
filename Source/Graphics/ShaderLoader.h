@@ -26,6 +26,9 @@
 
 class ShaderLoader
 {
+private:
+  static std::vector<SDL_Surface*> mSurfaces;
+  
 public:
   ShaderLoader();
   virtual ~ShaderLoader();
@@ -33,6 +36,7 @@ public:
   static ShaderData* LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
   static TextureData* LoadTexture(HashString const &aTextureFileName);
   static TextureData* LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  static void Clear();
   
 private:
   static int ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat);
