@@ -15,8 +15,8 @@ public:
 private:
   std::vector<Surface*>               mSurfaces;
   std::vector<Surface*>               mUIElements;
-  std::map<HashString, TextureData>   mTextures;
-  std::map<HashString, ShaderData>    mShaders;
+  std::map<HashString, TextureData*>  mTextures;
+  std::map<HashString, ShaderData*>   mShaders;
   Screen*                             mScreen;
 
   static unsigned const sUID;
@@ -46,12 +46,12 @@ public:
   Screen*             GetScreen();
   
   // Texture management
-  void                AddTexturePairing(HashString const &aFilename, TextureData const &aData);
-  TextureData const&  GetTextureData(HashString const &aFilename) const;
+  void                AddTexturePairing(HashString const &aFilename, TextureData *aData);
+  TextureData*        GetTextureData(HashString const &aFilename) const;
   
   // Shader management
-  void                AddShaderPairing(HashString const &aFilename, ShaderData const &aData);
-  ShaderData const&   GetShaderData(HashString const &aFilename) const;
+  void                AddShaderPairing(HashString const &aFilename, ShaderData *aData);
+  ShaderData*         GetShaderData(HashString const &aFilename) const;
   bool                ShaderDataExists(HashString const &aFilename) const;
 
   // Misc.

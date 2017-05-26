@@ -31,9 +31,9 @@ ShaderLoader::~ShaderLoader()
  * @param aFragmentShaderFilename Name of fragment shader.
  * @return Shader data.
  */
-ShaderData ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
+ShaderData* ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
 {
-  ShaderData ret;
+  ShaderData* ret = new ShaderData();
   std::ifstream vertexFile(Common::RelativePath("Shaders", aVertexShaderFilename.ToCharArray()).c_str());
   std::ifstream fragmentFile(Common::RelativePath("Shaders", aFragmentShaderFilename.ToCharArray()).c_str());
   if(vertexFile.is_open() && fragmentFile.is_open())
@@ -113,11 +113,13 @@ ShaderData ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, Ha
       DebugLogPrint("GL LINK ERROR: %s\n", &infoLog[0]);
     }
     
-    ret.mProgramID = program;
-    ret.mVertexShaderID = vertexShader;
-    ret.mFragmentShaderID = fragmentShader;
-    ret.mVertexContents = vertexContents;
-    ret.mFragmentContents = fragmentContents;
+    ret->mProgramID = program;
+    ret->mVertexShaderID = vertexShader;
+    ret->mFragmentShaderID = fragmentShader;
+    ret->mVertexContents = vertexContents;
+    ret->mFragmentContents = fragmentContents;
+    ret->mVertexFileName = aVertexShaderFilename;
+    ret->mFragmentFileName = aFragmentShaderFilename;
   }
   else
   {
@@ -128,9 +130,14 @@ ShaderData ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, Ha
   return ret;
 }
 
-TextureData ShaderLoader::LoadTexture(HashString const &aTextureFileName)
+/**
+ * @brief Load texture.
+ * @param aTextureFileName Name of texture file.
+ * @return Data for texture.
+ */
+TextureData* ShaderLoader::LoadTexture(HashString const &aTextureFileName)
 {
-  TextureData textureData;
+  TextureData* textureData = new TextureData();
   GLenum textureFormat;
   SDL_Surface* surface = IMG_Load(Common::RelativePath("Art", aTextureFileName).c_str());
   int numberOfColors = 0;
@@ -175,22 +182,33 @@ TextureData ShaderLoader::LoadTexture(HashString const &aTextureFileName)
       DebugLogPrint("warning: bytes per pixel for image %s: %d\n", aTextureFileName.ToCharArray(), numberOfColors);
     }
 
-    textureData.mTextureName = aTextureFileName;
-    textureData.mWidth = surface->w;
-    textureData.mHeight = surface->h;
-    textureData.mTextureID = ImportTexture(surface, textureFormat);
+    textureData->mTextureName = aTextureFileName;
+    textureData->mWidth = surface->w;
+    textureData->mHeight = surface->h;
+    textureData->mTextureID = ImportTexture(surface, textureFormat);
     return textureData;
   }
   else
   {
+    delete textureData;
     DebugLogPrint("warning: file: %s not found or incompatible format, check this out\n", aTextureFileName.ToCharArray());
-    return textureData;
+    return nullptr;
   }
 }
 
-TextureData ShaderLoader::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
+/**
+ * @brief Load image as text.
+ * @param aFont Font.
+ * @param aText Contents.
+ * @param aForegroundColor Primary color.
+ * @param aBackgroundColor Background color.
+ * @param aSize Size of font.
+ * @param aMaxWidth Word wrapping.
+ * @return Text as image.
+ */
+TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
 {
-  TextureData textureData;
+  TextureData* textureData = new TextureData();
   GLenum textureFormat;
   Uint32 rmask, gmask, bmask, amask;
   #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -209,10 +227,11 @@ TextureData ShaderLoader::LoadText(HashString const &aFont, HashString const &aT
   TTF_Font* font = TTF_OpenFont(Common::RelativePath("Fonts", aFont).c_str(), aSize);
   if(!font)
   {
+    delete textureData;
     font = nullptr;
     DebugLogPrint("warning: file not found or incompatible format, check this out\n");
     DebugLogPrint("%s", TTF_GetError());
-    return textureData;
+    return nullptr;
   }
 
   // Create text texture
@@ -234,13 +253,20 @@ TextureData ShaderLoader::LoadText(HashString const &aFont, HashString const &aT
   SDL_Surface *surface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
   SDL_BlitSurface(msg, NULL, surface, NULL);
   
-  textureData.mTextureName = aFont + aText + Common::IntToString(aSize);
-  textureData.mWidth = surface->w;
-  textureData.mHeight = surface->h;
-  textureData.mTextureID = ImportTexture(surface, textureFormat);
+  textureData->mTextureName = aFont + aText + Common::IntToString(aSize);
+  textureData->mWidth = surface->w;
+  textureData->mHeight = surface->h;
+  textureData->mTextureID = ImportTexture(surface, textureFormat);
+  TTF_CloseFont(font);
   return textureData;
 }
 
+/**
+ * @brief Import texture into OpenGL.
+ * @param aSurface Copy data from here.
+ * @param aTextureFormat Format of image.
+ * @return Texture id.
+ */
 int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
 {
   GLuint textureId = 0;
@@ -279,6 +305,7 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
 #else
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, aSurface->w, aSurface->h, 0, aTextureFormat, GL_UNSIGNED_BYTE, aSurface->pixels);
 #endif
+  SDL_FreeSurface(aSurface);
 
   return textureId;
 }

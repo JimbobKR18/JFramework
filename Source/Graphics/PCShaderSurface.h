@@ -31,10 +31,6 @@ private:
   GLuint        mProgramID;
   GLuint        mVertexShaderID;
   GLuint        mFragmentShaderID;
-  SDL_Surface*  mSurface;
-  GLenum        mTextureFormat;
-  GLint         mNumberOfColors;
-  TTF_Font*     mFont;
   HashString    mVertexShaderFileName;
   HashString    mFragmentShaderFileName;
   
@@ -65,10 +61,6 @@ public:
   virtual void        Deserialize(Parser &aParser);
   static void         SerializeLUA();
   static int          GetUID() {return sUID;}
-  
-private:
-  void                AddTexturePairing(HashString const &aName);
-  void                PrintGLError(int const aLineNumber);
 };
 
 #endif

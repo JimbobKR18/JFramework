@@ -327,6 +327,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mDefaultFrameBufferID);
   glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &mMaxTextures);
   
+  GetOwner()->ResetDevice();
   if(mFramebuffer)
     delete mFramebuffer;
   mFramebuffer = new Framebuffer(Constants::GetInteger("RenderWidth"), Constants::GetInteger("RenderHeight"));

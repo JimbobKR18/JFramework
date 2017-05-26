@@ -22,30 +22,18 @@
 
 int const PCShaderSurface::sUID = Common::StringHashFunction("Surface");
 
-PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(0), mProgramID(0), mVertexShaderID(0), mFragmentShaderID(0),
-                                     mSurface(nullptr), mTextureFormat(), mNumberOfColors(0), mFont(nullptr), mVertexShaderFileName(),
-                                     mFragmentShaderFileName()
+PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(-1), mProgramID(0), mVertexShaderID(0), mFragmentShaderID(0),
+                                     mVertexShaderFileName(), mFragmentShaderFileName()
 {
   assert(!"Do not use");
 }
-PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(0), mProgramID(0), mVertexShaderID(0),
-                                                              mFragmentShaderID(0), mSurface(nullptr), mTextureFormat(), mNumberOfColors(0),
-                                                              mFont(nullptr), mVertexShaderFileName(), mFragmentShaderFileName()
+PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(-1), mProgramID(0), mVertexShaderID(0),
+                                                              mFragmentShaderID(0), mVertexShaderFileName(), mFragmentShaderFileName()
 {
 }
 
 PCShaderSurface::~PCShaderSurface()
 {
-  if(mFont)
-  {
-    TTF_CloseFont(mFont);
-  }
-  if(mSurface)
-  {
-    SDL_FreeSurface(mSurface);
-  }
-  mFont = nullptr;
-  mSurface = nullptr;
 }
 
 /**
@@ -56,60 +44,22 @@ void PCShaderSurface::LoadImage(HashString const &aName)
 {
   /* If the file was already loaded,
      let's avoid assigning a new id. */
-  TextureData const& textureData = GetManager()->GetTextureData(aName);
-  if(textureData.mTextureID != (unsigned)-1)
+  TextureData* textureData = GetManager()->GetTextureData(aName);
+  if(textureData->mTextureID != (unsigned)-1)
   {
-    mTextureID = textureData.mTextureID;
-    SetTextureSize(Vector3(textureData.mWidth, textureData.mHeight, 0));
+    mTextureID = textureData->mTextureID;
+    SetTextureSize(Vector3(textureData->mWidth, textureData->mHeight, 0));
   }
   // else we load the image from file
-  else if((mSurface = IMG_Load(Common::RelativePath("Art", aName).c_str())))
-  {
-    if ((mSurface->w & (mSurface->w - 1)) != 0 )
-    {
-      DebugLogPrint("warning: width of image: %s is not a power of 2\n", aName.ToCharArray());
-    }
-
-    if ((mSurface->h & (mSurface->h - 1)) != 0 )
-    {
-      DebugLogPrint("warning: height of image: %s is not a power of 2\n", aName.ToCharArray());
-    }
-    
-    SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
-    mNumberOfColors = mSurface->format->BytesPerPixel;
-    if (mNumberOfColors == 4)
-    {
-      if (mSurface->format->Rmask == 0x000000ff)
-        mTextureFormat = GL_RGBA;
-      else
-#ifndef _WIN32
-        mTextureFormat = GL_BGRA;
-#else
-        mTextureFormat = GL_RGBA;
-#endif
-    }
-    else if (mNumberOfColors == 3)
-    {
-      if (mSurface->format->Rmask == 0x000000ff)
-        mTextureFormat = GL_RGB;
-      else
-#ifndef _WIN32
-        mTextureFormat = GL_BGR;
-#else
-        mTextureFormat = GL_RGB;
-#endif
-    }
-    else
-    {
-      DebugLogPrint("warning: image %s is not truecolor...  this will probably break\n", aName.ToCharArray());
-      DebugLogPrint("warning: bytes per pixel for image %s: %d\n", aName.ToCharArray(), mNumberOfColors);
-    }
-
-    AddTexturePairing(aName);
-  }
   else
   {
-    DebugLogPrint("warning: file: %s not found or incompatible format, check this out\n", aName.ToCharArray());
+    TextureData *textureData = ShaderLoader::LoadTexture(aName);
+    if(textureData)
+    {
+      SetTextureSize(Vector3(textureData->mWidth, textureData->mHeight, 0));
+      GetManager()->AddTexturePairing(textureData->mTextureName, textureData);
+      mTextureID = textureData->mTextureID;
+    }
   }
 }
 
@@ -125,65 +75,29 @@ void PCShaderSurface::LoadImage(HashString const &aName)
  */
 Vector3 PCShaderSurface::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
 {
-  // Endianness is important here
-  Uint32 rmask, gmask, bmask, amask;
-  #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-      rmask = 0xff000000;
-      gmask = 0x00ff0000;
-      bmask = 0x0000ff00;
-      amask = 0x000000ff;
-  #else
-      rmask = 0x000000ff;
-      gmask = 0x0000ff00;
-      bmask = 0x00ff0000;
-      amask = 0xff000000;
-  #endif
-
   HashString const textureDataHash = aFont + aText + Common::IntToString(aSize);
-  TextureData const& data = GetManager()->GetTextureData(textureDataHash);
-  if(data.mTextureID != (unsigned)-1)
+  TextureData* data = GetManager()->GetTextureData(textureDataHash);
+  if(data->mTextureID != (unsigned)-1)
   {
-    Vector3 size = Vector3(data.mWidth, data.mHeight, 0);
-    mTextureID = data.mTextureID;
+    Vector3 size = Vector3(data->mWidth, data->mHeight, 0);
+    mTextureID = data->mTextureID;
     SetTextureSize(size);
     return size;
   }
   else
   {
-    if(!TTF_WasInit())
-      TTF_Init();
-    mFont = TTF_OpenFont(Common::RelativePath("Fonts", aFont).c_str(), aSize);
-    if(!mFont)
+    TextureData* textureData = ShaderLoader::LoadText(aFont, aText, aForegroundColor, aBackgroundColor, aSize, aMaxWidth);
+    if(textureData)
     {
-      mFont = NULL;
-      DebugLogPrint("warning: file not found or incompatible format, check this out\n");
-      DebugLogPrint("%s", TTF_GetError());
+      SetTextureSize(Vector3(textureData->mWidth, textureData->mHeight, 0));
+      GetManager()->AddTexturePairing(textureData->mTextureName, textureData);
+      mTextureID = textureData->mTextureID;
+      return Vector3(textureData->mWidth, textureData->mHeight, 0);
+    }
+    else
+    {
       return Vector3(0, 0, 0);
     }
-
-    // Create text texture
-    SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
-    //SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
-    SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(mFont, aText.ToCharArray(), fgColor, aMaxWidth);
-    if(!msg)
-    {
-      DebugLogPrint("TTF_RenderText failed: %s", TTF_GetError());
-      assert(msg);
-    }
-
-#ifdef __APPLE__
-    mTextureFormat = GL_BGRA;
-#else
-    mTextureFormat = GL_RGBA;
-#endif
-    
-    mSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
-    SetTextureSize(Vector3(mSurface->w, mSurface->h, 0));
-    SDL_BlitSurface(msg, NULL, mSurface, NULL);
-
-    AddTexturePairing(textureDataHash);
-
-    return Vector3(mSurface->w, mSurface->h, 0);
   }
 }
 
@@ -201,14 +115,14 @@ void PCShaderSurface::LoadShaders(HashString const &aVertexShaderFilename, HashS
   
   if(GetManager()->ShaderDataExists(shaderKey))
   {
-    mProgramID = GetManager()->GetShaderData(shaderKey).mProgramID;
+    mProgramID = GetManager()->GetShaderData(shaderKey)->mProgramID;
     return;
   }
   
-  ShaderData const &shaderData = ShaderLoader::LoadShaders(aVertexShaderFilename, aFragmentShaderFilename);
-  mProgramID = shaderData.mProgramID;
-  mVertexShaderID = shaderData.mVertexShaderID;
-  mFragmentShaderID = shaderData.mFragmentShaderID;
+  ShaderData *shaderData = ShaderLoader::LoadShaders(aVertexShaderFilename, aFragmentShaderFilename);
+  mProgramID = shaderData->mProgramID;
+  mVertexShaderID = shaderData->mVertexShaderID;
+  mFragmentShaderID = shaderData->mFragmentShaderID;
   GetManager()->AddShaderPairing(shaderKey, shaderData);
 }
 
@@ -338,62 +252,4 @@ void PCShaderSurface::SerializeLUA()
 {
   SLB::Class<PCShaderSurface>("PCShaderSurface")
     .inherits<Surface>();
-}
-
-/**
- * @brief Helper to set basic texture params via config file.
- * @param aName Name of object in texture pairing.
- */
-void PCShaderSurface::AddTexturePairing(HashString const &aName)
-{
-  GLint minFilter = GL_LINEAR;
-  GLint magFilter = GL_LINEAR;
-  GLint wrapS = GL_REPEAT;
-  GLint wrapT = GL_REPEAT;
-  if(Constants::GetString("OpenGLMinFilter") == "GL_NEAREST")
-  {
-    minFilter = GL_NEAREST;
-  }
-  if(Constants::GetString("OpenGLMagFilter") == "GL_NEAREST")
-  {
-    magFilter = GL_NEAREST;
-  }
-  if(Constants::GetString("OpenGLWrapModeS") == "GL_CLAMP_TO_EDGE")
-  {
-    wrapS = GL_CLAMP_TO_EDGE;
-  }
-  if(Constants::GetString("OpenGLWrapModeT") == "GL_CLAMP_TO_EDGE")
-  {
-    wrapT = GL_CLAMP_TO_EDGE;
-  }
-
-  glGenTextures(1, &mTextureID);
-  glBindTexture(GL_TEXTURE_2D, mTextureID);
-
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapT);
-#ifdef __APPLE__
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_CACHED_APPLE);
-  glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, GL_TRUE);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, mTextureFormat, GL_UNSIGNED_INT_8_8_8_8_REV, mSurface->pixels);
-#else
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mSurface->w, mSurface->h, 0, mTextureFormat, GL_UNSIGNED_BYTE, mSurface->pixels);
-#endif
-
-  GetManager()->AddTexturePairing(aName, TextureData(aName, mTextureID, mSurface->w, mSurface->h));
-}
-
-/**
- * @brief Prints GL error info.
- * @param aLineNumber Use __LINE__ wherever you use this.
- */
-void PCShaderSurface::PrintGLError(int const aLineNumber)
-{
-#ifndef _WIN32
-  GLenum errorCode = glGetError();
-  if(errorCode != 0)
-    DebugLogPrint("(%s) (%i) %i: %s\n", __FILE__, aLineNumber, errorCode, gluErrorString(errorCode));
-#endif
 }

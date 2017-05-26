@@ -21,7 +21,7 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
                                                                            mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr)
 {
   // Add Default Texture
-  AddTexturePairing(DEFAULT_TEXTURE_NAME, TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0));
+  AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0));
 #ifdef SHADER_COMPATIBLE
   mScreen = new PCShaderScreen(this, aWidth, aHeight, aFullScreen);
 #else
@@ -216,18 +216,18 @@ Screen *GraphicsManager::GetScreen()
  * @param aFilename
  * @param aData
  */
-void GraphicsManager::AddTexturePairing(HashString const &aFilename, TextureData const &aData)
+void GraphicsManager::AddTexturePairing(HashString const &aFilename, TextureData *aData)
 {
-  mTextures.insert(std::pair<HashString, TextureData>(aFilename, aData));
+  mTextures.insert(std::pair<HashString, TextureData*>(aFilename, aData));
 }
 
 /**
  * @brief Get data for texture by filename
  * @param aFilename
  */
-TextureData const& GraphicsManager::GetTextureData(HashString const &aFilename) const
+TextureData* GraphicsManager::GetTextureData(HashString const &aFilename) const
 {
-  std::map<HashString, TextureData>::const_iterator pos = mTextures.find(aFilename);
+  std::map<HashString, TextureData*>::const_iterator pos = mTextures.find(aFilename);
 
   if(pos == mTextures.end())
   {
@@ -242,9 +242,9 @@ TextureData const& GraphicsManager::GetTextureData(HashString const &aFilename) 
  * @param aFilename Name of shader file.
  * @param aData Data of shader file.
  */
-void GraphicsManager::AddShaderPairing(HashString const &aFilename, ShaderData const &aData)
+void GraphicsManager::AddShaderPairing(HashString const &aFilename, ShaderData *aData)
 {
-  mShaders.insert(std::pair<HashString, ShaderData>(aFilename, aData));
+  mShaders.insert(std::pair<HashString, ShaderData*>(aFilename, aData));
 }
 
 /**
@@ -252,9 +252,9 @@ void GraphicsManager::AddShaderPairing(HashString const &aFilename, ShaderData c
  * @param aFilename Name of shader file.
  * @return Data of shader file. Will assert if file not found.
  */
-ShaderData const& GraphicsManager::GetShaderData(HashString const &aFilename) const
+ShaderData* GraphicsManager::GetShaderData(HashString const &aFilename) const
 {
-  std::map<HashString, ShaderData>::const_iterator pos = mShaders.find(aFilename);
+  std::map<HashString, ShaderData*>::const_iterator pos = mShaders.find(aFilename);
 
   if(pos == mShaders.end())
   {
@@ -272,7 +272,7 @@ ShaderData const& GraphicsManager::GetShaderData(HashString const &aFilename) co
  */
 bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
 {
-  std::map<HashString, ShaderData>::const_iterator pos = mShaders.find(aFilename);
+  std::map<HashString, ShaderData*>::const_iterator pos = mShaders.find(aFilename);
 
   if(pos == mShaders.end())
   {
@@ -287,8 +287,32 @@ bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
  */
 void GraphicsManager::ResetDevice()
 {
+  std::vector<TextureData*> newTextures;
+  std::vector<ShaderData*> newShaders;
+  for(std::map<HashString, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
+  {
+    TextureData* data = it->second;
+    newTextures.push_back(new TextureData(*data));
+    delete data;
+  }
+  for(std::map<HashString, ShaderData*>::iterator it = mShaders.begin(); it != mShaders.end(); ++it)
+  {
+    ShaderData* data = it->second;
+    newShaders.push_back(new ShaderData(*data));
+    delete data;
+  }
   mTextures.clear();
   mShaders.clear();
+  
+  for(std::vector<TextureData*>::iterator it = newTextures.begin(); it != newTextures.end(); ++it)
+  {
+    mTextures.insert(std::pair<HashString, TextureData*>((*it)->mTextureName, *it));
+  }
+  for(std::vector<ShaderData*>::iterator it = newShaders.begin(); it != newShaders.end(); ++it)
+  {
+    HashString shaderKey = (*it)->mVertexFileName + (*it)->mFragmentFileName;
+    mShaders.insert(std::pair<HashString, ShaderData*>(shaderKey, *it));
+  }
 }
 
 /**
