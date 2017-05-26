@@ -318,6 +318,9 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
   return textureId;
 }
 
+/**
+ * @brief Clear all SDL_Surfaces.
+ */
 void ShaderLoader::Clear()
 {
   for(std::vector<SDL_Surface*>::iterator it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
