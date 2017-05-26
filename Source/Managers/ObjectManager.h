@@ -14,6 +14,7 @@ private:
 #endif
   std::vector<GameObject*> mObjects;
   std::vector<GameObject*> mStaticObjects;
+  std::set<GameObject*> mAllocatedObjects;
   
   GameObjectFactory *mFactory;
 
@@ -24,6 +25,7 @@ public:
   
   // Getters
   GameObjectFactory*  GetGameObjectFactory() const;
+  std::set<GameObject*>& GetAllocatedObjects();
   
   // Setters
   void                SetGameObjectFactory(GameObjectFactory* aFactory);

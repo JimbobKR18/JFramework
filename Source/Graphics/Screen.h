@@ -4,6 +4,8 @@
 #include "Surface.h"
 #include "View.h"
 #include "ScreenRenderSorter.h"
+#include "TextureData.h"
+#include "ShaderData.h"
 
 class Screen
 {
@@ -42,6 +44,8 @@ public:
   // Batching
   void                    SortObjects(std::vector<Surface*> &aObjects);
 
+  virtual void            ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData) = 0;
+  virtual void            ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData) = 0;
   virtual void            SetClearColor(Vector4 const &aClearColor) = 0;
   virtual void            ChangeSize(int aW, int aH, bool aFullScreen) = 0;
   virtual void            PreDraw() = 0;

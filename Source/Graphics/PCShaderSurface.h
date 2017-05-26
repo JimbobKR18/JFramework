@@ -52,6 +52,12 @@ public:
   unsigned            GetFragmentShaderID() const;
   HashString const&   GetVertexShaderFilename() const;
   HashString const&   GetFragmentShaderFilename() const;
+  
+  // Setters
+  void                SetTextureID(unsigned const aTextureID);
+  void                SetProgramID(unsigned const aProgramID);
+  void                SetVertexShaderID(unsigned const aVertexShaderID);
+  void                SetFragmentShaderID(unsigned const aFragmentShaderID);
 
   // Derived from Component
   virtual void        Update();

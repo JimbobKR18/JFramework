@@ -41,6 +41,8 @@ public:
   PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen);
   virtual ~PCShaderScreen();
 
+  virtual void ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData);
+  virtual void ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData);
   virtual void PreDraw();
   virtual void Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects);
   virtual void DebugDraw(std::vector<Surface*> const &aObjects);

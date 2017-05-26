@@ -1,6 +1,7 @@
 #include "Common.h"
 #include "GraphicsManager.h"
 #include "ObjectDeleteMessage.h"
+#include "ObjectManager.h"
 
 #if !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -9,6 +10,7 @@
 #ifdef SHADER_COMPATIBLE
   #include "PCShaderScreen.h"
   #include "PCShaderSurface.h"
+  #include "ShaderLoader.h"
 #else
   #include "PCScreen.h"
   #include "PCSurface.h"
@@ -21,7 +23,7 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
                                                                            mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr)
 {
   // Add Default Texture
-  AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0));
+  AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, "", "", Vector4(), Vector4(), 0, 0));
 #ifdef SHADER_COMPATIBLE
   mScreen = new PCShaderScreen(this, aWidth, aHeight, aFullScreen);
 #else
@@ -289,16 +291,44 @@ void GraphicsManager::ResetDevice()
 {
   std::vector<TextureData*> newTextures;
   std::vector<ShaderData*> newShaders;
+  std::set<GameObject*> allocatedObjects = GetOwningApp()->GET<ObjectManager>()->GetAllocatedObjects();
   for(std::map<HashString, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
   {
     TextureData* data = it->second;
-    newTextures.push_back(new TextureData(*data));
+    TextureData* newTexture = nullptr;
+    
+    if(!data->mFont.Empty())
+      newTexture = ShaderLoader::LoadText(data->mFont, data->mText, data->mForegroundColor, data->mBackgroundColor, data->mSize, data->mMaxWidth);
+    else
+      newTexture = ShaderLoader::LoadTexture(data->mTextureName);
+      
+    if(!newTexture)
+      newTexture = new TextureData(*data);
+    
+    newTextures.push_back(newTexture);
+    
+    for(std::set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
+    {
+      mScreen->ResetObjectTexture((*it2)->GET<Surface>(), data, newTexture);
+    }
+    
     delete data;
   }
   for(std::map<HashString, ShaderData*>::iterator it = mShaders.begin(); it != mShaders.end(); ++it)
   {
     ShaderData* data = it->second;
-    newShaders.push_back(new ShaderData(*data));
+    ShaderData* newShader = ShaderLoader::LoadShaders(data->mVertexFileName, data->mFragmentFileName);
+    
+    if(!newShader)
+      newShader = new ShaderData(*data);
+    
+    newShaders.push_back(newShader);
+    
+    for(std::set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
+    {
+      mScreen->ResetObjectShader((*it2)->GET<Surface>(), data, newShader);
+    }
+    
     delete data;
   }
   mTextures.clear();

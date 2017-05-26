@@ -23,7 +23,7 @@
 
 unsigned const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
 ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", ObjectManager::sUID),
-  mObjects(), mStaticObjects(), mFactory(new DefaultGameObjectFactory())
+  mObjects(), mStaticObjects(), mAllocatedObjects(), mFactory(new DefaultGameObjectFactory())
 {
 }
 
@@ -35,6 +35,11 @@ ObjectManager::~ObjectManager()
 GameObjectFactory* ObjectManager::GetGameObjectFactory() const
 {
   return mFactory;
+}
+
+std::set<GameObject*>& ObjectManager::GetAllocatedObjects()
+{
+  return mAllocatedObjects;
 }
   
 void ObjectManager::SetGameObjectFactory(GameObjectFactory* aFactory)
@@ -120,6 +125,7 @@ GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString 
   GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
   AddObject(object);
   ParseDictionary(object, parser);
+  mAllocatedObjects.insert(object);
   return object;
 }
 
@@ -133,6 +139,7 @@ GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashSt
   TextParser parser(Common::RelativePath(aFolder, aFilename));
   GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
   ParseDictionary(object, parser);
+  mAllocatedObjects.insert(object);
   return object;
 }
 
@@ -154,6 +161,7 @@ void ObjectManager::ParseObject(GameObject *aObject, HashString const &aFolder)
 void ObjectManager::DeleteObject(GameObject *aObj)
 {
   RemoveObject(aObj);
+  mAllocatedObjects.erase(aObj);
   delete aObj;
 }
 
@@ -368,5 +376,6 @@ void ObjectManager::ClearObjects()
 {
   mObjects.clear();
   mStaticObjects.clear();
+  mAllocatedObjects.clear();
 }
 

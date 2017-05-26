@@ -257,6 +257,12 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
   textureData->mWidth = surface->w;
   textureData->mHeight = surface->h;
   textureData->mTextureID = ImportTexture(surface, textureFormat);
+  textureData->mFont = aFont;
+  textureData->mText = aText;
+  textureData->mForegroundColor = aForegroundColor;
+  textureData->mBackgroundColor = aBackgroundColor;
+  textureData->mSize = aSize;
+  textureData->mMaxWidth = aMaxWidth;
   TTF_CloseFont(font);
   return textureData;
 }

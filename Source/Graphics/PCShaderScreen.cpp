@@ -212,6 +212,40 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 }
 
 /**
+ * @brief Reset object texture on device reset.
+ * @param aSurface Surface to reset.
+ * @param aOldData Data pre reset.
+ * @param aNewData Data post reset.
+ */
+void PCShaderScreen::ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData)
+{
+  if(!aSurface)
+    return;
+  PCShaderSurface *surface = (PCShaderSurface*)aSurface;
+  if(surface->GetTextureID() == aOldData->mTextureID)
+    surface->SetTextureID(aNewData->mTextureID);
+}
+
+/**
+ * @brief Reset object shader on device reset.
+ * @param aSurface Surface to reset.
+ * @param aOldData Data pre reset.
+ * @param aNewData Data post reset.
+ */
+void PCShaderScreen::ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData)
+{
+  if(!aSurface)
+    return;
+  PCShaderSurface *surface = (PCShaderSurface*)aSurface;
+  if(surface->GetProgramID() == aOldData->mProgramID)
+    surface->SetProgramID(aNewData->mProgramID);
+  if(surface->GetVertexShaderID() == aOldData->mVertexShaderID)
+    surface->SetVertexShaderID(aNewData->mVertexShaderID);
+  if(surface->GetFragmentShaderID() == aOldData->mFragmentShaderID)
+    surface->SetFragmentShaderID(aNewData->mFragmentShaderID);
+}
+
+/**
  * @brief Operations to run before draw phase.
  */
 void PCShaderScreen::PreDraw()

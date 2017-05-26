@@ -181,6 +181,42 @@ HashString const& PCShaderSurface::GetFragmentShaderFilename() const
 }
 
 /**
+ * @brief Set texture ID.
+ * @param aTextureID Texture ID.
+ */
+void PCShaderSurface::SetTextureID(unsigned const aTextureID)
+{
+  mTextureID = aTextureID;
+}
+
+/**
+ * @brief Set program ID.
+ * @param aProgramID Program ID.
+ */
+void PCShaderSurface::SetProgramID(unsigned const aProgramID)
+{
+  mProgramID = aProgramID;
+}
+
+/**
+ * @brief Set vertex shader ID.
+ * @param aVertexShaderID Vertex shader ID.
+ */
+void PCShaderSurface::SetVertexShaderID(unsigned const aVertexShaderID)
+{
+  mVertexShaderID = aVertexShaderID;
+}
+
+/**
+ * @brief Set fragment shader ID.
+ * @param aFragmentShaderID Fragment shader ID.
+ */
+void PCShaderSurface::SetFragmentShaderID(unsigned const aFragmentShaderID)
+{
+  mFragmentShaderID = aFragmentShaderID;
+}
+
+/**
  * @brief Simple update loop.
  */
 void PCShaderSurface::Update()
