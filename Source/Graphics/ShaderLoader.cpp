@@ -311,7 +311,9 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
 #else
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, aSurface->w, aSurface->h, 0, aTextureFormat, GL_UNSIGNED_BYTE, aSurface->pixels);
 #endif
-  SDL_FreeSurface(aSurface);
+  
+  // TODO breaks mac build. But is a memory leak.
+  //SDL_FreeSurface(aSurface);
 
   return textureId;
 }

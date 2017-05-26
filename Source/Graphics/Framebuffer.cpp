@@ -12,6 +12,7 @@ Framebuffer::Framebuffer(int aWidth, int aHeight) : mWidth(aWidth), mHeight(aHei
 
 Framebuffer::~Framebuffer()
 {
+  glDeleteProgram(mFramebufferProgramID);
   glDeleteBuffers(1, &mVertexBufferID);
   glDeleteBuffers(1, &mTextureBufferID);
   glDeleteBuffers(1, &mIndexBufferID);
