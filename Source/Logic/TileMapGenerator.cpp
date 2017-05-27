@@ -320,13 +320,6 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   std::map<int, float>::const_iterator tileHeightsEnd = mTileHeights.end();
   PhysicsObject::IgnoreContainer ignoreContainer;
   
-  // Make tiles ignore other tiles for collision
-  for(int i = 0; i < 99; ++i)
-  {
-    HashString value = "Tile_" + Common::IntToString(i);
-    ignoreContainer.insert(std::pair<int, HashString>(value.ToHash(), value));
-  }
-  
   // Get the position of the starting index.
   while(xPos >= mWidth)
   {
