@@ -445,7 +445,7 @@ void Resolver::CalculateTriangleToSphere(CollisionPair &aPair)
   
   Vector3 dist = closestPoint - spherePos;
   float size = sphere->GetSize(0) * sphereTransform->GetHierarchicalScale().x;
-  if(dist.length() < size)
+  if(dist.length() <= size)
   {
     aPair.mPenetration = size - dist.length();
     aPair.mNormal = dist.normalize();
