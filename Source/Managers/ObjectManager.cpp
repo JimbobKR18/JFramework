@@ -111,6 +111,20 @@ void ObjectManager::ProcessDelayedMessage(Message *aMessage)
     ObjectCreateMessage *msg = (ObjectCreateMessage*)aMessage;
     GetOwningApp()->GET<DebugManager>()->HandleCreate(msg);
   }
+  
+  for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  {
+    Message *message = *it;
+    if(message->GetDescription() == OBJECT_CREATE.ToCharArray() && aMessage->GetDescription() == OBJECT_DELETE.ToCharArray())
+    {
+      ObjectCreateMessage *oldCreateMessage = (ObjectCreateMessage*)message;
+      ObjectDeleteMessage *newDeleteMessage = (ObjectDeleteMessage*)aMessage;
+      if(oldCreateMessage->mObject == newDeleteMessage->mObject)
+      {
+        assert(!"Cannot create and delete a delayed object in the same frame.");
+      }
+    }
+  }
 #endif
 }
 
