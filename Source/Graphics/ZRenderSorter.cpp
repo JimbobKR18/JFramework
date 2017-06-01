@@ -19,13 +19,13 @@ bool ZSortPredicate(Surface *object1, Surface *object2)
   
   if(object1->GetOwner())
   {
-    z1 = object1->GetOwner()->GET<Transform>()->GetPosition().z;
+    z1 = object1->GetOwner()->GET<Transform>()->GetHierarchicalPosition().z;
     id1 = object1->GetTextureID();
     p1 = object1->GetProgramID();
   }
   if(object2->GetOwner())
   {
-    z2 = object2->GetOwner()->GET<Transform>()->GetPosition().z;
+    z2 = object2->GetOwner()->GET<Transform>()->GetHierarchicalPosition().z;
     id2 = object2->GetTextureID();
     p2 = object2->GetProgramID();
   }
