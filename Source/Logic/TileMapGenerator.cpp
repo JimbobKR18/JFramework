@@ -31,9 +31,9 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    std::vector<int> const &aCollisionData,
                                    std::vector<int> const &aCollisionShapes,
                                    std::vector<int> const &aMaterials,
-                                   std::map<int, float> const &aTileHeights,
-                                   std::map<int, HashString> const &aMaterialNames,
-                                   std::map<int, std::vector<int>> const &aAnimations,
+                                   std::unordered_map<int, float> const &aTileHeights,
+                                   std::unordered_map<int, HashString> const &aMaterialNames,
+                                   std::unordered_map<int, std::vector<int>> const &aAnimations,
                                    float const aAnimationSpeed, Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight),
                                    mTileSize(aTileSize), mImageName(aImageName),
@@ -77,8 +77,8 @@ void TileMapGenerator::Update()
   mCurrentAnimationTime -= mAnimationSpeed;
 
   // Advance frames
-  std::map<int, int>::iterator framesEnd = mCurrentFrames.end();
-  for (std::map<int, int>::iterator it = mCurrentFrames.begin(); it != framesEnd; ++it)
+  std::unordered_map<int, int>::iterator framesEnd = mCurrentFrames.end();
+  for (std::unordered_map<int, int>::iterator it = mCurrentFrames.begin(); it != framesEnd; ++it)
   {
     int key = it->first;
     std::vector<int> animation = mAnimations.find(key)->second;
@@ -93,8 +93,8 @@ void TileMapGenerator::Update()
   }
 
   // Set frames
-  std::map<Surface*, int>::iterator animatedEnd = mAnimatedObjects.end();
-  for (std::map<Surface*, int>::iterator it = mAnimatedObjects.begin(); it != animatedEnd; ++it)
+  std::unordered_map<Surface*, int>::iterator animatedEnd = mAnimatedObjects.end();
+  for (std::unordered_map<Surface*, int>::iterator it = mAnimatedObjects.begin(); it != animatedEnd; ++it)
   {
     std::vector<int> animation = mAnimations.find(it->second)->second;
     int currentFrame = mCurrentFrames.find(it->second)->second;
@@ -179,7 +179,7 @@ std::vector<int>& TileMapGenerator::GetCollisionShapes()
  * @brief Get tile height map
  * @return Tile height map
  */
-std::map<int, float>& TileMapGenerator::GetTileHeights()
+std::unordered_map<int, float>& TileMapGenerator::GetTileHeights()
 {
   return mTileHeights;
 }
@@ -317,7 +317,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   Vector3 const zeroVector = Vector3(0,0,0);
   unsigned const collisionDataVectorSize = mCollisionData.size();
   unsigned const tileDataVectorSize = mTiles.size();
-  std::map<int, float>::const_iterator tileHeightsEnd = mTileHeights.end();
+  std::unordered_map<int, float>::const_iterator tileHeightsEnd = mTileHeights.end();
   PhysicsObject::IgnoreContainer ignoreContainer;
   
   // Get the position of the starting index.

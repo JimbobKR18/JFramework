@@ -1562,9 +1562,9 @@ void Level::ParseTileGenerator(TextParser &aParser)
   int width, height, tileSize;
   HashString file, frameDataFilename, settingsDataFileName;
   std::vector<int> frames, collision, shapes, materials;
-  std::map<int, float> heights;
-  std::map<int, std::vector<int>> animations;
-  std::map<int, HashString> materialInfo;
+  std::unordered_map<int, float> heights;
+  std::unordered_map<int, std::vector<int>> animations;
+  std::unordered_map<int, HashString> materialInfo;
   float tileAnimationSpeed = 0.0f;
 
   width = tileMap->Find("Width")->GetValue().ToInt();

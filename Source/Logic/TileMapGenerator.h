@@ -77,19 +77,19 @@ private:
   std::vector<int>                  mTiles;
   std::vector<int>                  mCollisionData;
   std::vector<int>                  mCollisionShapes;
-  std::map<int, float>              mTileHeights;
+  std::unordered_map<int, float>              mTileHeights;
   std::vector<GameObject*>          mObjects;
 
   // Animated tiles
   float                             mAnimationSpeed;
   float                             mCurrentAnimationTime;
-  std::map<Surface*, int>           mAnimatedObjects;
-  std::map<int, std::vector<int>>   mAnimations;
-  std::map<int, int>                mCurrentFrames;
+  std::unordered_map<Surface*, int>           mAnimatedObjects;
+  std::unordered_map<int, std::vector<int>>   mAnimations;
+  std::unordered_map<int, int>                mCurrentFrames;
   
   // Materials
   std::vector<int>                  mMaterials;
-  std::map<int, HashString>         mMaterialNames;
+  std::unordered_map<int, HashString>         mMaterialNames;
 
   // Level owning this generator
   Level*                          mOwner;
@@ -103,9 +103,9 @@ public:
                    std::vector<int> const &aCollisionData, 
                    std::vector<int> const &aCollisionShapes,
                    std::vector<int> const &aMaterialData,
-                   std::map<int, float> const &aTileHeights, 
-                   std::map<int, HashString> const &aMaterials, 
-                   std::map<int, std::vector<int>> const &aAnimations,
+                   std::unordered_map<int, float> const &aTileHeights, 
+                   std::unordered_map<int, HashString> const &aMaterials, 
+                   std::unordered_map<int, std::vector<int>> const &aAnimations,
                    float const aAnimationSpeed, Level *aOwner);
   ~TileMapGenerator();
 
@@ -119,7 +119,7 @@ public:
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
   std::vector<int>& GetCollisionShapes();
-  std::map<int, float>& GetTileHeights();
+  std::unordered_map<int, float>& GetTileHeights();
 
   GameObject*       GetObject(int const aX, int const aY);
   GameObject*       GetObject(int const aIndex);
