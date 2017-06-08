@@ -24,7 +24,7 @@ Constants::~Constants()
  */
 HashString const &Constants::GetString(HashString const &aValue)
 {
-  ValueContainerIT it = mValues.find(aValue);
+  ValueContainerIT it = mValues.find(aValue.ToHash());
 
   if(it == mValues.end())
     assert(!"Value not found!");
@@ -73,7 +73,7 @@ void Constants::Deserialize()
     infile >> key;
     infile >> empty;
     infile >> value;
-    mValues[key] = Common::ParseString(&infile, value);
+    mValues[Common::StringHashFunction(key)] = Common::ParseString(&infile, value);
   }
   infile.close();
 }

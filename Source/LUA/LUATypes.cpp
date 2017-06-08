@@ -48,7 +48,7 @@
 namespace LUABind
 {
   // Our manager and scripts
-  std::map<int,HashString> mScripts;
+  std::unordered_map<int,HashString> mScripts;
   typedef std::pair<int,HashString> ScriptPair;
   std::unordered_map<int, HashString> mInvalidFunctionsCache;
   
