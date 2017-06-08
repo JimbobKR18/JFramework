@@ -243,33 +243,31 @@ void PhysicsWorld::SweepAndPrune()
       PhysicsObject *it2Object = *it2;
       Transform *it2Transform = it2Object->GetOwner()->GET<Transform>();
       
-      if(!it2Object->IsActive())
+      if(itObject == it2Object)
         continue;
-      
-      HashString it2Name = it2Object->GetOwner()->GetName();
-      bool ignore = itObject->IgnoreObject(it2Object->GetOwner()) || it2Object->IgnoreObject(itObject->GetOwner());
+      else if(!it2Object->IsActive())
+        continue;
+      else if(itObject->IsStatic() && it2Object->IsStatic())
+        continue;
+      else if(itObject->IgnoreObject(it2Object->GetOwner()) || it2Object->IgnoreObject(itObject->GetOwner()))
+        continue;
 
-      if(itObject != it2Object && !ignore)
+      float realDistance = (itTransform->GetHierarchicalPosition() - it2Transform->GetHierarchicalPosition()).length();
+      PotentialPair potentialPair(itObject, it2Object, realDistance);
+      if(!mResolver.Find(potentialPair))
       {
-        float realDistance = (itTransform->GetHierarchicalPosition() - it2Transform->GetHierarchicalPosition()).length();
-        PotentialPair potentialPair(itObject, it2Object, realDistance);
-
-        if((!itObject->IsStatic() || !it2Object->IsStatic()) &&
-           !mResolver.Find(potentialPair))
+        float x2 = it2Transform->GetHierarchicalPosition().x;
+        float x2Size = it2Object->GetBroadSize().x * it2Transform->GetHierarchicalScale().x;
+        float xPosDiff = fabs(x1 - x2);
+        float xSizeTotal = x1Size + x2Size;
+        
+        if(xSizeTotal > xPosDiff)
         {
-          float x2 = it2Transform->GetHierarchicalPosition().x;
-          float x2Size = it2Object->GetBroadSize().x * it2Transform->GetHierarchicalScale().x;
-          float xPosDiff = fabs(x1 - x2);
-          float xSizeTotal = x1Size + x2Size;
-          
-          if(xSizeTotal > xPosDiff)
-          {
-            mResolver.AddPrelimPair(potentialPair);
-          }
-          else
-          {
-            break;
-          }
+          mResolver.AddPrelimPair(potentialPair);
+        }
+        else
+        {
+          break;
         }
       }
     }
