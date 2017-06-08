@@ -103,6 +103,6 @@ void Screen::SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter)
  */
 void Screen::SortObjects(std::vector<Surface*> &aObjects)
 {
-  mBatchRenderSorter->SortPredicate(aObjects);
+  //mBatchRenderSorter->SortPredicate(aObjects);
   mDepthRenderSorter->SortPredicate(aObjects);
 }
