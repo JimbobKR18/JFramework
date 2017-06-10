@@ -15,8 +15,8 @@ public:
 private:
   std::vector<Surface*>               mSurfaces;
   std::vector<Surface*>               mUIElements;
-  std::map<HashString, TextureData*>  mTextures;
-  std::map<HashString, ShaderData*>   mShaders;
+  std::unordered_map<int, TextureData*>  mTextures;
+  std::unordered_map<int, ShaderData*>   mShaders;
   Screen*                             mScreen;
 
   static unsigned const sUID;
