@@ -326,6 +326,17 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClearDepth(1.0f);
+  
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glEnable(GL_TEXTURE_2D);
+  glEnable(GL_BLEND);
+  glEnable(GL_CULL_FACE);
+  glDisable(GL_DEPTH_TEST);
+  //glEnable(GL_DEPTH_TEST);
+  //glDepthFunc(GL_LEQUAL);
+  //glDepthMask(GL_TRUE);
+
+  glShadeModel(GL_SMOOTH);
 
   if(aFullScreen)
   {
@@ -341,17 +352,9 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glLoadIdentity();
 
   glOrtho(0, aW, aH, 0, 1, -1);
+  //gluPerspective(45, (float)aW / (float)aH, 0.01f, 100.0f);
 
   glMatrixMode(GL_MODELVIEW);
-
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_BLEND);
-  glEnable(GL_CULL_FACE);
-  glDisable(GL_DEPTH_TEST);
-
-  glShadeModel(GL_SMOOTH);
-
   glLoadIdentity();
   
   glGenVertexArrays(1, &mVertexArrayObjectID);
