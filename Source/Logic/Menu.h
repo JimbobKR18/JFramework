@@ -51,9 +51,9 @@ private:
   void                           ParseSurface(GameObject *aObject, Root *aSurface);
   void                           ParseEffects(GameObject *aObject, Root *aEffects);
   void                           ParseCustomScript(GameObject *aObject, Root *aCustomScript);
-  void                           DeleteElementChildren(MenuElement *aElement, bool aReplaceable);
+  void                           DeleteElementChildren(MenuElement *aElement);
   void                           ShallowRemoveElementForObject(GameObject *aObject);
-  void                           ShallowRemoveElementChildren(MenuElement *aElement, bool aReplaceable);
+  void                           ShallowRemoveElementChildren(MenuElement *aElement);
 };
 
 #endif /* MENU_H_ */

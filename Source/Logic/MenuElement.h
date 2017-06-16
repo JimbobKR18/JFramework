@@ -28,9 +28,6 @@ protected:
   GameObject* mObject;
   bool        mReplaceable;
   
-  MenuElement*     mParent;
-  ElementContainer mChildren;
-  
 public:
   MenuElement(Menu *aOwner, HashString const &aFileName, bool const aReplaceable);
   virtual ~MenuElement();
@@ -39,16 +36,9 @@ public:
   Menu*         GetOwner();
   GameObject*   GetObject();
   bool          IsReplaceable() const;
-  MenuElement*  GetParent() const;
-  ElementContainer& GetChildren();
   
   // SETTERS
   void          SetOwner(Menu* aOwner);
-  void          SetParent(MenuElement *aParent);
-  
-  // OPERATIONS
-  void          AddChild(MenuElement* aObject);
-  void          RemoveChild(MenuElement *aObject);
   
   // VIRTUALS
   virtual void  Draw() = 0;

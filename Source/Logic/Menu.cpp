@@ -160,23 +160,7 @@ void Menu::AddReplaceableObject(MenuElement *aElement)
 void Menu::DeleteObject(MenuElement *aElement)
 {
   // Using delayed delete
-  for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
-  {
-    if(aElement == *it)
-    {
-      DeleteElementChildren(*it, false);
-      return;
-    }
-  }
-  for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
-  {
-    if(aElement == *it)
-    {
-      DeleteElementChildren(*it, true);
-      return;
-    }
-  }
-  assert(!"MenuElement not found.");
+  DeleteElementChildren(aElement);
 }
 
 /**
@@ -311,8 +295,6 @@ void Menu::ParseFile()
       
       parent->GetObject()->AddChild(element->GetObject());
       element->GetObject()->SetParent(parent->GetObject());
-      parent->AddChild(element);
-      element->SetParent(parent);
     }
 
     AddObject(element);
@@ -539,38 +521,11 @@ void Menu::ParseCustomScript(GameObject *aObject, Root *aCustomScript)
 /**
  * @brief Delete element and its children.
  * @param aElement Element to delete.
- * @param aReplaceable Mark true to denote that it is a replaceable element.
  */
-void Menu::DeleteElementChildren(MenuElement *aElement, bool aReplaceable)
+void Menu::DeleteElementChildren(MenuElement *aElement)
 {
-  for(MenuElement::ElementIT it = aElement->GetChildren().begin(); it != aElement->GetChildren().end(); ++it)
-  {
-    DeleteElementChildren(*it, aReplaceable);
-  }
-  
-  if(!aReplaceable)
-  {
-    for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
-    {
-      if(*it == aElement)
-      {
-        mMenuElements.erase(it);
-        break;
-      }
-    }
-  }
-  else
-  {
-    for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
-    {
-      if(*it == aElement)
-      {
-        mReplaceableElements.erase(it);
-        break;
-      }
-    }
-  }
-  
+  mMenuElements.erase(aElement);
+  mReplaceableElements.erase(aElement);
   mOwner->DeleteObjectDelayed(aElement->GetObject());
   delete aElement;
 }
@@ -585,7 +540,7 @@ void Menu::ShallowRemoveElementForObject(GameObject *aObject)
   {
     if(aObject == (*it)->GetObject())
     {
-      ShallowRemoveElementChildren(*it, false);
+      ShallowRemoveElementChildren(*it);
       return;
     }
   }
@@ -593,7 +548,7 @@ void Menu::ShallowRemoveElementForObject(GameObject *aObject)
   {
     if(aObject == (*it)->GetObject())
     {
-      ShallowRemoveElementChildren(*it, true);
+      ShallowRemoveElementChildren(*it);
       return;
     }
   }
@@ -604,35 +559,10 @@ void Menu::ShallowRemoveElementForObject(GameObject *aObject)
  * @param aElement Object to search for and remove.
  * @param aReplaceable What grouping the object belongs to.
  */
-void Menu::ShallowRemoveElementChildren(MenuElement *aElement, bool aReplaceable)
+void Menu::ShallowRemoveElementChildren(MenuElement *aElement)
 {
-  for(MenuElement::ElementIT it = aElement->GetChildren().begin(); it != aElement->GetChildren().end(); ++it)
-  {
-    ShallowRemoveElementChildren(*it, aReplaceable);
-  }
-  
-  if(!aReplaceable)
-  {
-    for(MenuElement::ElementIT it = mMenuElements.begin(); it != mMenuElements.end(); ++it)
-    {
-      if(aElement == *it)
-      {
-        mMenuElements.erase(it);
-        break;
-      }
-    }
-  }
-  else
-  {
-    for(MenuElement::ElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
-    {
-      if(aElement == *it)
-      {
-        mReplaceableElements.erase(it);
-        break;
-      }
-    }
-  }
+  mMenuElements.erase(aElement);
+  mReplaceableElements.erase(aElement);
   
   // Don't delete object associated.
   delete aElement;
