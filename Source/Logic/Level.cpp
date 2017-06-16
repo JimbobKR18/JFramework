@@ -294,6 +294,7 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
   EffectsManager *effectsManager = mOwner->GetOwningApp()->GET<EffectsManager>();
+  bool found = false;
   
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
@@ -310,8 +311,11 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
         ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
         objectManager->ProcessDelayedMessage(msg);
         effectsManager->RemoveEffectsForObject(aObject);
+        found = true;
         break;
       }
+      if(found)
+        break;
     }
   }
   ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
