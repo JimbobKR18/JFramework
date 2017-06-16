@@ -54,16 +54,21 @@ GameObject::~GameObject()
   
   for(GameObjectIT it = mChildren.begin(); it != mChildren.end(); ++it)
   {
-    it->second->SetParent(mParent);
     if(mParent)
+    {
       mParent->AddChild(it->second);
+    }
+    else
+    {
+      it->second->SetParent(nullptr);
+    }
   }
+  mChildren.clear();
 
   if(mParent)
     mParent->RemoveChild(this);
 
   mParent = nullptr;
-  mChildren.clear();
   mTags.clear();
 }
 
@@ -176,6 +181,10 @@ void GameObject::RemoveComponent(int const &aUID, bool aDelete)
  */
 void GameObject::AddChild(GameObject* aObject)
 {
+  // Don't add self.
+  if(aObject == this)
+    return;
+
   if(aObject->GetParent())
     aObject->GetParent()->RemoveChild(aObject);
     
@@ -193,7 +202,7 @@ void GameObject::RemoveChild(GameObject *aObject)
   if(it != mChildren.end())
   {
     aObject->SetParent(nullptr);
-    mChildren.erase(aObject->GetName().ToHash());
+    mChildren.erase(it);
   }
 }
 

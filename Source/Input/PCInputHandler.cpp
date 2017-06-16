@@ -17,9 +17,9 @@ void PCInputHandler::Update()
   unsigned numJoysticks = SDL_NumJoysticks();
   
   // Removal
-  for(std::vector<SDL_Joystick*>::iterator it = mJoysticks.begin(); it != mJoysticks.end();)
+  for(std::unordered_map<int, SDL_Joystick*>::iterator it = mJoysticks.begin(); it != mJoysticks.end();)
   {
-    char const* joystickName = SDL_JoystickName(*it);
+    char const* joystickName = SDL_JoystickName(it->second);
     
     if(joystickName == nullptr)
     {
@@ -35,7 +35,11 @@ void PCInputHandler::Update()
   if(numJoysticks > mJoysticks.size())
   {
     for(unsigned i = 0; i < numJoysticks; ++i)
-      mJoysticks.push_back(SDL_JoystickOpen(i));
+    {
+      SDL_Joystick* joystick = SDL_JoystickOpen(i);
+      int instanceId = SDL_JoystickInstanceID(joystick);
+      mJoysticks[instanceId] = joystick;
+    }
   }
 }
 
@@ -55,12 +59,13 @@ int PCInputHandler::GetInputCount()
  */
 SDL_Joystick* PCInputHandler::GetJoystick(int const index) const
 {
-  if(index < 0 || index >= mJoysticks.size())
+  std::unordered_map<int, SDL_Joystick*>::const_iterator instance = mJoysticks.find(index);
+  if(instance == mJoysticks.end())
   {
     return nullptr;
   }
   
-  return mJoysticks[index];
+  return instance->second;
 }
 
 /**

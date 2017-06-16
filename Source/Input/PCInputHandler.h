@@ -13,7 +13,7 @@
 class PCInputHandler : public InputHandler
 {
 private:
-  std::vector<SDL_Joystick*> mJoysticks;
+  std::unordered_map<int, SDL_Joystick*> mJoysticks;
   
 public:
   PCInputHandler();
