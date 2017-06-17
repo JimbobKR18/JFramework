@@ -12,7 +12,7 @@
 #include "ObjectManager.h"
 #include "Menu.h"
 
-MenuElement::MenuElement(Menu *aOwner, HashString const &aFileName, bool const aReplaceable) : mOwner(aOwner), mReplaceable(aReplaceable)
+MenuElement::MenuElement(Menu *aOwner, HashString const &aFileName, bool const aReplaceable) : mOwner(aOwner), mReplaceable(aReplaceable), mObject(nullptr)
 {
   mObject = mOwner->GetLevel()->CreateObjectDelayed(aFileName, "Menus");
 }

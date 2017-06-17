@@ -334,6 +334,7 @@ void Level::DeleteObjects()
     for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
     {
       RemoveObjectFromScenarios(*it);
+      RemoveObjectFromMenus(*it);
       manager->DeleteObject(*it);
     }
     mObjects[i].clear();
