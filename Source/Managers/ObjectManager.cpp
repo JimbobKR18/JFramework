@@ -98,15 +98,31 @@ void ObjectManager::SendMessage(Message const &aMsg)
  */
 void ObjectManager::ProcessDelayedMessage(Message *aMessage)
 {
+  // Avoid double delete.
+  for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
+  {
+    Message *message = *it;
+    if(message->GetDescription() == OBJECT_DELETE && aMessage->GetDescription() == OBJECT_DELETE)
+    {
+      ObjectDeleteMessage *oldDeleteMessage = (ObjectDeleteMessage*)message;
+      ObjectDeleteMessage *newDeleteMessage = (ObjectDeleteMessage*)aMessage;
+      if(oldDeleteMessage->mObject == newDeleteMessage->mObject)
+      {
+        DebugLogPrint("Double delete called on object in same frame.\n");
+        delete aMessage;
+        return;
+      }
+    }
+  }
   mDelayedMessages.push_back(aMessage);
 
 #ifdef _DEBUG
-  if(aMessage->GetDescription() == OBJECT_DELETE.ToCharArray()) 
+  if(aMessage->GetDescription() == OBJECT_DELETE) 
   {
     ObjectDeleteMessage *msg = (ObjectDeleteMessage*)aMessage;
     GetOwningApp()->GET<DebugManager>()->HandleDelete(msg);
   }
-  else if(aMessage->GetDescription() == OBJECT_CREATE.ToCharArray()) 
+  else if(aMessage->GetDescription() == OBJECT_CREATE) 
   {
     ObjectCreateMessage *msg = (ObjectCreateMessage*)aMessage;
     GetOwningApp()->GET<DebugManager>()->HandleCreate(msg);
@@ -115,7 +131,7 @@ void ObjectManager::ProcessDelayedMessage(Message *aMessage)
   for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
   {
     Message *message = *it;
-    if(message->GetDescription() == OBJECT_CREATE.ToCharArray() && aMessage->GetDescription() == OBJECT_DELETE.ToCharArray())
+    if(message->GetDescription() == OBJECT_CREATE && aMessage->GetDescription() == OBJECT_DELETE)
     {
       ObjectCreateMessage *oldCreateMessage = (ObjectCreateMessage*)message;
       ObjectDeleteMessage *newDeleteMessage = (ObjectDeleteMessage*)aMessage;

@@ -231,7 +231,6 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
   {
     delete textureData;
     font = nullptr;
-    DebugLogPrint("warning: file not found or incompatible format, check this out\n");
     DebugLogPrint("%s", TTF_GetError());
     return nullptr;
   }

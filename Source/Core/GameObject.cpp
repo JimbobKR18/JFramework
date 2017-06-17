@@ -357,7 +357,9 @@ void GameObject::Serialize(Parser &aParser)
  */
 void GameObject::Interact(GameObject *aObject) 
 { 
+#ifdef _DEBUG
   DebugLogPrint("%s collided into %s\n", mName.ToCharArray(), aObject->GetName().ToCharArray()); 
+#endif
 }
 
 /**
@@ -366,7 +368,9 @@ void GameObject::Interact(GameObject *aObject)
  */
 void GameObject::ParseAdditionalData(Root *aRoot)
 {
-  DebugLogPrint("ParseAdditionalData called on GameObject, nothing to do.");
+#ifdef _DEBUG
+  DebugLogPrint("ParseAdditionalData called on GameObject, nothing to do.\n");
+#endif
 }
 
 /**
