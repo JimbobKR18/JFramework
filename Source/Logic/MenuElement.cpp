@@ -19,6 +19,7 @@ MenuElement::MenuElement(Menu *aOwner, HashString const &aFileName, bool const a
 
 MenuElement::~MenuElement()
 {
+  mObject = nullptr;
 }
 
 /**
