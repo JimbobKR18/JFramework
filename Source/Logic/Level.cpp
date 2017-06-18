@@ -219,9 +219,10 @@ void Level::RemoveMenu(Menu *aMenu)
  */
 void Level::RemoveMenus()
 {
-  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
+  for(MenuIT it = mMenus.begin(); it != mMenus.end();)
   {
     delete *it;
+    it = mMenus.erase(it);
   }
   mMenus.clear();
 }
