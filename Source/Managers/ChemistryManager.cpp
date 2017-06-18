@@ -13,8 +13,6 @@ ChemistryManager::ChemistryManager(GameApp *aApp, float const aCurrentTemperatur
 ChemistryManager::~ChemistryManager()
 {
   delete mFactory;
-  ClearMaterials();
-  ClearElements();
 }
 
 /**
