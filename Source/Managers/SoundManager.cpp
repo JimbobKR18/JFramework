@@ -111,6 +111,8 @@ void SoundManager::PlaySoundTimed(HashString const &aFilename, int const aNumLoo
  */
 void SoundManager::StopSound(HashString const &aFilename)
 {
+  if(mSounds.find(aFilename.ToHash()) == mSounds.end())
+    return;
   mSounds[aFilename.ToHash()]->Stop();
 }
 
@@ -121,6 +123,8 @@ void SoundManager::StopSound(HashString const &aFilename)
  */
 void SoundManager::StopSoundTimed(HashString const &aFilename, int const aMillis)
 {
+  if(mSounds.find(aFilename.ToHash()) == mSounds.end())
+    return;
   mSounds[aFilename.ToHash()]->FadeOut(aMillis);
 }
 
@@ -143,6 +147,8 @@ void SoundManager::SetVolume(float const aVolume)
  */
 void SoundManager::SetSoundVolume(HashString const &aFilename, float const aVolume)
 {
+  if(mSounds.find(aFilename.ToHash()) == mSounds.end())
+    return;
   mSounds[aFilename.ToHash()]->SetVolume(aVolume);
 }
 
@@ -152,6 +158,8 @@ void SoundManager::SetSoundVolume(HashString const &aFilename, float const aVolu
  */
 void SoundManager::ResumeSound(HashString const &aFilename)
 {
+  if(mSounds.find(aFilename.ToHash()) == mSounds.end())
+    return;
   mSounds[aFilename.ToHash()]->Resume();
 }
 
@@ -161,6 +169,8 @@ void SoundManager::ResumeSound(HashString const &aFilename)
  */
 void SoundManager::PauseSound(HashString const &aFilename)
 {
+  if(mSounds.find(aFilename.ToHash()) == mSounds.end())
+    return;
   mSounds[aFilename.ToHash()]->Pause();
 }
 
