@@ -88,6 +88,8 @@ void SoundManager::RemoveSound(Sound *aSound)
  */
 void SoundManager::PlaySound(HashString const &aFilename, int const aNumLoops)
 {
+  if(mSounds.find(aFilename.ToHash()) == mSounds.end())
+    CreateSound(aFilename);
   mSounds[aFilename.ToHash()]->Play(aNumLoops);
 }
 
@@ -98,6 +100,8 @@ void SoundManager::PlaySound(HashString const &aFilename, int const aNumLoops)
  */
 void SoundManager::PlaySoundTimed(HashString const &aFilename, int const aNumLoops, int const aMillis)
 {
+  if(mSounds.find(aFilename.ToHash()) == mSounds.end())
+    CreateSound(aFilename);
   mSounds[aFilename.ToHash()]->Play(aNumLoops, aMillis);
 }
 
