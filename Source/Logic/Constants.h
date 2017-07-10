@@ -27,6 +27,7 @@ public:
   static float const GetFloat(HashString const &aValue);
   static bool const GetBoolean(HashString const &aValue);
   static void Deserialize();
+  static void SerializeLUA();
 };
 
 #endif /* CONSTANTS_H_ */

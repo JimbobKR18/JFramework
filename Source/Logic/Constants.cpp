@@ -6,6 +6,7 @@
  */
 
 #include "Constants.h"
+#include "LUATypes.h"
 #include <fstream>
 
 Constants::ValueContainer Constants::mValues;
@@ -76,4 +77,12 @@ void Constants::Deserialize()
     mValues[Common::StringHashFunction(key)] = Common::ParseString(&infile, value);
   }
   infile.close();
+}
+
+void Constants::SerializeLUA()
+{
+  SLB::Class<Constants>("Constants").set("GetString", &Constants::GetString)
+                                    .set("GetInteger", &Constants::GetInteger)
+                                    .set("GetFloat", &Constants::GetFloat)
+                                    .set("GetBoolean", &Constants::GetBoolean);
 }
