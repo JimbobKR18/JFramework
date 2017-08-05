@@ -176,7 +176,7 @@ void ChemistryElement::ReceiveMessage(Message const& aMessage)
     }
     
     HashString luaFunctionName = mName + "_" + otherChemical->GetName() + "_Reaction";
-    if(!LUABind::LoadFunction<ChemistryElement*>("ChemistryMessages.LUA",
+    if(!LUABind::LoadFunction<ChemistryElement*>("ChemistryMessages.lua",
                                      luaFunctionName,
                                      this, otherChemical))
     {

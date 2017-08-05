@@ -204,7 +204,7 @@ void GameApp::ClearDelayedMessages()
  */
 void GameApp::Start()
 {
-  LUABind::LoadFunction<std::string>("Main.LUA", "main", "");
+  LUABind::LoadFunction<std::string>("Main.lua", "main", "");
 }
 
 /**

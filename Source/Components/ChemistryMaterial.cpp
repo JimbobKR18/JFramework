@@ -214,7 +214,7 @@ void ChemistryMaterial::ReceiveMessage(Message const& aMessage)
     }
     
     HashString luaFunctionName = mName + "_" + otherChemical->GetName() + "_Reaction";
-    if(!LUABind::LoadFunction<ChemistryMaterial*>("ChemistryMessages.LUA",
+    if(!LUABind::LoadFunction<ChemistryMaterial*>("ChemistryMessages.lua",
                                      luaFunctionName,
                                      this, otherChemical))
     {
@@ -245,7 +245,7 @@ void ChemistryMaterial::ReceiveMessage(Message const& aMessage)
     }
     
     HashString luaFunctionName = mName + "_" + otherChemical->GetName() + "_Reaction";
-    if(!LUABind::LoadFunction<ChemistryMaterial*>("ChemistryMessages.LUA",
+    if(!LUABind::LoadFunction<ChemistryMaterial*>("ChemistryMessages.lua",
                                      luaFunctionName,
                                      this, otherChemical))
     {
