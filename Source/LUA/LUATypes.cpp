@@ -26,6 +26,7 @@
 #include "Core/QuadraticInterpolation.h"
 #include "Messages/CollisionMessage.h"
 #include "Logic/Constants.h"
+#include "Logic/SystemProperties.h"
 
 #ifdef PC
 #include "Graphics/PCShaderSurface.h"
@@ -116,6 +117,9 @@ namespace LUABind
     
     // Constants
     Constants::SerializeLUA();
+    
+    // SystemProperties
+    SystemProperties::SerializeLUA();
     
     // GameApp
     GameApp::SerializeLUA();

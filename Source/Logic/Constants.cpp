@@ -7,7 +7,6 @@
 
 #include "Constants.h"
 #include "LUATypes.h"
-#include <fstream>
 
 Constants::ValueContainer Constants::mValues;
 

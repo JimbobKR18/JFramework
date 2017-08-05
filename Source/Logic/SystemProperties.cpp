@@ -1,4 +1,5 @@
 #include "SystemProperties.h"
+#include "LUATypes.h"
 
 /* This class is meant to be read in from a file in the same location as
  * the executable. */
@@ -44,4 +45,9 @@ void SystemProperties::Deserialize()
       assert(!"Invalid property found.");
   }
   infile.close();
+}
+
+void SystemProperties::SerializeLUA()
+{
+  SLB::Class<SystemProperties>("SystemProperties").set("GetAssetsDirectory", &SystemProperties::GetAssetsDirectory);
 }

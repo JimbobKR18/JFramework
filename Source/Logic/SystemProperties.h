@@ -22,6 +22,7 @@ public:
 
   static HashString const &GetAssetsDirectory();
   static void Deserialize();
+  static void SerializeLUA();
 };
 
 #endif
