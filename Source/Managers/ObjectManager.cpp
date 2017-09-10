@@ -137,6 +137,7 @@ void ObjectManager::ProcessDelayedMessage(Message *aMessage)
       ObjectDeleteMessage *newDeleteMessage = (ObjectDeleteMessage*)aMessage;
       if(oldCreateMessage->mObject == newDeleteMessage->mObject)
       {
+        DebugLogPrint("Object with name %s being created and deleted in the same frame.\n", oldCreateMessage->mObject->GetName().ToCharArray());
         assert(!"Cannot create and delete a delayed object in the same frame.");
       }
     }
