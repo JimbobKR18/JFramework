@@ -27,7 +27,7 @@ public:
   SoundManager(GameApp *aApp);
   ~SoundManager();
 
-  Sound*              CreateSound(HashString const &aFilename);
+  Sound*              CreateSound(HashString const &aFilename, HashString const &aAlias = "");
   void                DeleteSound(Sound* aSound);
   void                AddSound(Sound *aSound);
   void                RemoveSound(Sound *aSound);
@@ -47,6 +47,9 @@ public:
   static unsigned     GetUID() {return sUID;}
 
   static void         SerializeLUA();
+  
+private:
+  void                LoadSounds();
 };
 
 #endif

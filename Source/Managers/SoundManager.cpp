@@ -8,12 +8,13 @@
 
 #include "SoundManager.h"
 #include "Common.h"
+#include "TextParser.h"
 #if !defined(ANDROID) && !defined(IOS)
 #include "PCSound.h"
 #endif
 
 unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
-SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID)
+SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSounds()
 {
 #if !defined(ANDROID) && !defined(IOS)
   int flags=MIX_INIT_OGG;
@@ -28,6 +29,8 @@ SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundM
     assert(!"Could not open SDL_Mix OpenAudio, aborting.");
   }
 #endif
+
+  LoadSounds();
 }
 
 SoundManager::~SoundManager()
@@ -41,15 +44,18 @@ SoundManager::~SoundManager()
 /**
  * @brief Create a sound by filename.
  * @param aFilename
+ * @param aAlias
  * @return The newly created sound.
  */
-Sound* SoundManager::CreateSound(HashString const &aFilename)
+Sound* SoundManager::CreateSound(HashString const &aFilename, HashString const &aAlias)
 {
 #if !defined(ANDROID) && !defined(IOS)
   Sound *newSound = new PCSound(Common::RelativePath("Sounds", aFilename));
 #else
   Sound *newSound = new Sound(Common::RelativePath("Sounds", aFilename));
 #endif
+  if(!aAlias.Empty())
+    newSound->SetName(aAlias);
   AddSound(newSound);
   return newSound;
 }
@@ -210,4 +216,24 @@ void SoundManager::SerializeLUA()
       .set("SetSoundVolume", &SoundManager::SetSoundVolume)
       .set("ResumeSound", &SoundManager::ResumeSound)
       .set("PauseSound", &SoundManager::PauseSound);
+}
+
+/**
+ * @brief Load sounds from SoundAliases.txt file.
+ */
+void SoundManager::LoadSounds()
+{
+  int index = 0;
+  HashString const sound = "Sound_";
+  HashString curIndex = sound + Common::IntToString(index);
+  HashString const fileName = "SoundAliases.txt";
+  
+  TextParser parser(Common::RelativePath("Sounds", fileName));
+  while(parser.Find(curIndex))
+  {
+    Root *curSound = parser.Find(curIndex);
+    CreateSound(curSound->Find("File")->GetValue(), curSound->Find("Name")->GetValue());
+    ++index;
+    curIndex = sound + Common::IntToString(index);
+  }
 }

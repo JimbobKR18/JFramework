@@ -28,6 +28,7 @@ public:
   virtual ~Sound();
   
   HashString GetName() const;
+  void       SetName(HashString const &aName);
   
   virtual void Play(int const aNumLoops) = 0;
   virtual void Play(int const aNumLoops, int const aTime) = 0;

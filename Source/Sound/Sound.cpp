@@ -36,3 +36,8 @@ HashString Sound::GetName() const
 {
   return mName;
 }
+
+void Sound::SetName(HashString const &aName)
+{
+  mName = aName;
+}
