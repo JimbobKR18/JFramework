@@ -50,8 +50,8 @@ HashString const &SystemProperties::GetDefaultVertexShaderName()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get default fragment shader file name
+ * @return Fragment shader file name as HashString.
  */
 HashString const &SystemProperties::GetDefaultFragmentShaderName()
 {
@@ -59,8 +59,8 @@ HashString const &SystemProperties::GetDefaultFragmentShaderName()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get framebuffer vertex shader file name.
+ * @return Vertex shader file name as HashString.
  */
 HashString const &SystemProperties::GetFramebufferVertexShaderName()
 {
@@ -68,8 +68,8 @@ HashString const &SystemProperties::GetFramebufferVertexShaderName()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get framebuffer fragment shader file name
+ * @return Fragment shader file name as HashString.
  */
 HashString const &SystemProperties::GetFramebufferFragmentShaderName()
 {
@@ -77,8 +77,8 @@ HashString const &SystemProperties::GetFramebufferFragmentShaderName()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get mag filter setting.
+ * @return Mag filter as HashString.
  */
 HashString const &SystemProperties::GetMagFilter()
 {
@@ -86,8 +86,8 @@ HashString const &SystemProperties::GetMagFilter()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get min filter setting.
+ * @return Min filter as HashString.
  */
 HashString const &SystemProperties::GetMinFilter()
 {
@@ -95,8 +95,8 @@ HashString const &SystemProperties::GetMinFilter()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get Wrap Mode S.
+ * @return Wrap Mode S as HashString.
  */
 HashString const &SystemProperties::GetWrapModeS()
 {
@@ -104,8 +104,8 @@ HashString const &SystemProperties::GetWrapModeS()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get Wrap Mode T.
+ * @return Wrap Mode T as HashString.
  */
 HashString const &SystemProperties::GetWrapModeT()
 {
@@ -113,8 +113,8 @@ HashString const &SystemProperties::GetWrapModeT()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get fullscreen setting.
+ * @return Fullscreen setting.
  */
 bool const SystemProperties::GetFullScreen()
 {
@@ -122,8 +122,8 @@ bool const SystemProperties::GetFullScreen()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get game title setting.
+ * @return Game title as HashString.
  */
 HashString const &SystemProperties::GetGameTitle()
 {
@@ -131,8 +131,8 @@ HashString const &SystemProperties::GetGameTitle()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get screen width setting.
+ * @return Screen width.
  */
 int const SystemProperties::GetScreenWidth()
 {
@@ -140,8 +140,8 @@ int const SystemProperties::GetScreenWidth()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get screen height setting.
+ * @return Screen height.
  */
 int const SystemProperties::GetScreenHeight()
 {
@@ -149,8 +149,8 @@ int const SystemProperties::GetScreenHeight()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get render width setting.
+ * @return Render width.
  */
 int const SystemProperties::GetRenderWidth()
 {
@@ -158,8 +158,8 @@ int const SystemProperties::GetRenderWidth()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get render height setting.
+ * @return Render height.
  */
 int const SystemProperties::GetRenderHeight()
 {
@@ -167,8 +167,8 @@ int const SystemProperties::GetRenderHeight()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get number of frames per second.
+ * @return Frames per second.
  */
 float const SystemProperties::GetRefreshRate()
 {
@@ -176,8 +176,8 @@ float const SystemProperties::GetRefreshRate()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get whether framerate is locked or not.
+ * @return Locked framerate setting.
  */
 bool const SystemProperties::GetLockedFramerate()
 {
@@ -185,8 +185,8 @@ bool const SystemProperties::GetLockedFramerate()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get if collision resolves in 2D only.
+ * @return 2D collision setting.
  */
 bool const SystemProperties::Get2DCollisionOnly()
 {
@@ -194,8 +194,8 @@ bool const SystemProperties::Get2DCollisionOnly()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief Get packet size setting.
+ * @return Packet size.
  */
 int const SystemProperties::GetPacketSize()
 {
