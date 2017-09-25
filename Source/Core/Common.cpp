@@ -313,9 +313,11 @@ namespace Common
     std::string ret;
     int literalLocation = aString.find("Literal");
     int constantLocation = aString.find("Constant");
-    if(literalLocation == std::string::npos && constantLocation == std::string::npos)
+    int systemPropertyLocation = aString.find("SystemProperty");
+    if(literalLocation == std::string::npos && constantLocation == std::string::npos &&
+        systemPropertyLocation == std::string::npos)
       return aString;
-    else
+    else if(literalLocation != std::string::npos || constantLocation != std::string::npos)
     {
       // Getting the full string
       int offset = (literalLocation != std::string::npos) ? literalLocation : constantLocation;
@@ -343,6 +345,50 @@ namespace Common
           break;
         if(next != ')' && next != '(')
           ret.push_back(next);
+      }
+    }
+    else if(systemPropertyLocation != std::string::npos)
+    {
+      // Getting the full string
+      int offset = 14;
+      unsigned pos = offset;
+      char next;
+      bool earlyout = false;
+      // Literal(blah) is one whole word, extract
+      while(pos < aString.length())
+      {
+        char next = aString[pos];
+        if(next == '\n')
+        {
+          earlyout = true;
+          break;
+        }
+        if(next != ')' && next != '(')
+          ret.push_back(next);
+        ++pos;
+      }
+      // Didn't hit newline, get rest of sentence
+      while(!earlyout && infile->get(next))
+      {
+        if(next == '\n')
+          break;
+        if(next != ')' && next != '(')
+          ret.push_back(next);
+      }
+      
+      std::string systemPropertyName = TrimString(ret);
+      if(systemPropertyName == "ScreenWidth")
+        return Common::IntToString(SystemProperties::GetScreenWidth());
+      else if(systemPropertyName == "ScreenHeight")
+        return Common::IntToString(SystemProperties::GetScreenHeight());
+      else if(systemPropertyName == "RenderWidth")
+        return Common::IntToString(SystemProperties::GetRenderWidth());
+      else if(systemPropertyName == "RenderHeight")
+        return Common::IntToString(SystemProperties::GetRenderHeight());
+      else
+      {
+        DebugLogPrint("System property %s not found!", systemPropertyName.c_str());
+        assert(!"System property not found!");
       }
     }
     

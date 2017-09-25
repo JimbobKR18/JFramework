@@ -27,7 +27,10 @@ HashString const &Constants::GetString(HashString const &aValue)
   ValueContainerIT it = mValues.find(aValue.ToHash());
 
   if(it == mValues.end())
+  {
+    DebugLogPrint("Value %s not found!\n", aValue.ToCharArray());
     assert(!"Value not found!");
+  }
 
   return it->second;
 }
