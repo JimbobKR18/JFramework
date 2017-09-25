@@ -24,18 +24,18 @@ GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAp
   Constants::Deserialize();
   
   // Set app refresh rate
-  mAppStep = 1.0f / Constants::GetFloat("RefreshRate");
+  mAppStep = 1.0f / SystemProperties::GetRefreshRate();
 
   // All current managers added here
   // You can add your own manager in your derived class from GameApp.
   AddManager(new ObjectManager(this));
   AddManager(new PhysicsWorld(this));
-  AddManager(new GraphicsManager(this, Constants::GetFloat("ScreenWidth"), Constants::GetFloat("ScreenHeight"), Constants::GetBoolean("FullScreen")));
+  AddManager(new GraphicsManager(this, SystemProperties::GetScreenWidth(), SystemProperties::GetScreenHeight(), SystemProperties::GetFullScreen()));
   AddManager(new LevelManager(this));
   AddManager(new ControllerManager(this));
   AddManager(new InputManager(this));
   AddManager(new SoundManager(this));
-  AddManager(new ChemistryManager(this, Constants::GetFloat("DefaultTemperature")));
+  AddManager(new ChemistryManager(this, 0));
   AddManager(new EffectsManager(this));
 #ifdef _DEBUG
   AddManager(new DebugManager(this));
@@ -126,7 +126,7 @@ void GameApp::SetLastFrameTime(unsigned int const &aLastFrame)
  */
 void GameApp::Update(unsigned int const &aTicksSinceStart)
 {
-  bool lockedFramerate = Constants::GetBoolean("LockedFramerate");
+  bool lockedFramerate = SystemProperties::GetLockedFramerate();
   std::vector<Message*>::iterator messagesEnd;
   std::vector<Manager*>::iterator managersEnd = mManagers.end();
   float diff = (float)(aTicksSinceStart - mLastFrame) / 1000.0f;

@@ -1,5 +1,5 @@
 #include "ShaderLoader.h"
-#include "Constants.h"
+#include "SystemProperties.h"
 #include "MathExt.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
@@ -281,19 +281,19 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
   GLint magFilter = GL_LINEAR;
   GLint wrapS = GL_REPEAT;
   GLint wrapT = GL_REPEAT;
-  if(Constants::GetString("OpenGLMinFilter") == "GL_NEAREST")
+  if(SystemProperties::GetMinFilter() == "GL_NEAREST")
   {
     minFilter = GL_NEAREST;
   }
-  if(Constants::GetString("OpenGLMagFilter") == "GL_NEAREST")
+  if(SystemProperties::GetMagFilter() == "GL_NEAREST")
   {
     magFilter = GL_NEAREST;
   }
-  if(Constants::GetString("OpenGLWrapModeS") == "GL_CLAMP_TO_EDGE")
+  if(SystemProperties::GetWrapModeS() == "GL_CLAMP_TO_EDGE")
   {
     wrapS = GL_CLAMP_TO_EDGE;
   }
-  if(Constants::GetString("OpenGLWrapModeT") == "GL_CLAMP_TO_EDGE")
+  if(SystemProperties::GetWrapModeT() == "GL_CLAMP_TO_EDGE")
   {
     wrapT = GL_CLAMP_TO_EDGE;
   }

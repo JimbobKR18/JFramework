@@ -3,6 +3,7 @@
 #include "GraphicsManager.h"
 #include "LUATypes.h"
 #include "Constants.h"
+#include "SystemProperties.h"
 #include "ShaderLoader.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
@@ -264,8 +265,8 @@ void PCShaderSurface::Serialize(Parser &aParser)
 void PCShaderSurface::Deserialize(Parser &aParser)
 {
   HashString fileName = "";
-  HashString vertexShader = Constants::GetString("DefaultVertexShaderFileName");
-  HashString fragmentShader = Constants::GetString("DefaultFragmentShaderFileName");
+  HashString vertexShader = SystemProperties::GetDefaultVertexShaderName();
+  HashString fragmentShader = SystemProperties::GetDefaultFragmentShaderName();
   
   if(aParser.Find("Surface", "TextureName"))
     fileName = aParser.Find("Surface", "TextureName")->GetValue().ToString();

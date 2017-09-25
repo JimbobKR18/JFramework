@@ -1,12 +1,13 @@
 #include "Framebuffer.h"
 #include "ShaderLoader.h"
 #include "GraphicsManager.h"
+#include "SystemProperties.h"
 
 Framebuffer::Framebuffer(int aWidth, int aHeight) : mWidth(aWidth), mHeight(aHeight),
   mFramebufferProgramID(0), mFrameBufferID(0), mRenderedTextureID(0), mVertexBufferID(0), 
   mTextureBufferID(0), mIndexBufferID(0), mVertexArrayObjectID(0),
-  mVertexShaderFilename(Constants::GetString("FramebufferVertexShaderFileName")), 
-  mFragmentShaderFilename(Constants::GetString("FramebufferFragmentShaderFileName"))
+  mVertexShaderFilename(SystemProperties::GetFramebufferVertexShaderName()), 
+  mFragmentShaderFilename(SystemProperties::GetFramebufferFragmentShaderName())
 {
 }
 

@@ -2,6 +2,7 @@
 #include "PhysicsObject.h"
 #include "PCShaderSurface.h"
 #include "Constants.h"
+#include "SystemProperties.h"
 #include "SurfaceProperty.h"
 #include "GraphicsManager.h"
 #include "ShaderLoader.h"
@@ -35,7 +36,7 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   SDL_GL_SetSwapInterval(1);
 #endif
   
-  mWindow = SDL_CreateWindow(Constants::GetString("GameTitle").ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH,
+  mWindow = SDL_CreateWindow(SystemProperties::GetGameTitle().ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH,
                              SDL_WINDOW_OPENGL);
   mGLContext = SDL_GL_CreateContext(mWindow);
   SDL_GL_MakeCurrent(mWindow, mGLContext);
@@ -50,7 +51,7 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   
   ChangeSize(aW, aH, aFullScreen);
   
-  mFramebuffer = new Framebuffer(Constants::GetInteger("RenderWidth"), Constants::GetInteger("RenderHeight"));
+  mFramebuffer = new Framebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight());
   mFramebuffer->Generate(GetOwner());
 }
 

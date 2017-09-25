@@ -4,11 +4,12 @@
 #include "CollisionMessage.h"
 #include "CollisionChecker.h"
 #include "ShapeMath.h"
+#include "SystemProperties.h"
 #include "Constants.h"
 
 Resolver::Resolver() : mResolveAxes(3), mPotentialPairs()
 {
-  if(Constants::GetBoolean("2DCollisionOnly"))
+  if(SystemProperties::Get2DCollisionOnly())
     mResolveAxes = 2;
 }
 

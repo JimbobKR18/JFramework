@@ -2,7 +2,7 @@
 #include "Transform.h"
 #include "ZRenderSorter.h"
 #include "BatchRenderSorter.h"
-#include "Constants.h"
+#include "SystemProperties.h"
 
 Screen::Screen() : mOwner(nullptr), mWidth(0), mHeight(0), mFullScreen(false),  
   mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr)
@@ -12,7 +12,7 @@ Screen::Screen() : mOwner(nullptr), mWidth(0), mHeight(0), mFullScreen(false),
 Screen::Screen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen) : 
   mOwner(aOwner), mWidth(aW), mHeight(aH), mFullScreen(aFullScreen), mView()
 {
-  mView.SetSize(Vector3(Constants::GetInteger("RenderWidth"), Constants::GetInteger("RenderHeight"), 0));
+  mView.SetSize(Vector3(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 0));
   mDepthRenderSorter = new ZRenderSorter();
   mBatchRenderSorter = new BatchRenderSorter();
 }

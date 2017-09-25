@@ -1,5 +1,5 @@
 #include "PCNetworkPort.h"
-#include "Constants.h"
+#include "SystemProperties.h"
 
 PCNetworkPort::PCNetworkPort() : mSocket()
 {
@@ -53,7 +53,7 @@ void PCNetworkPort::Unbind()
  */
 void PCNetworkPort::Send(HashString const &aMessage)
 {
-  UDPpacket *packet = SDLNet_AllocPacket(Constants::GetInteger("PacketSize"));
+  UDPpacket *packet = SDLNet_AllocPacket(SystemProperties::GetPacketSize());
   packet->len = aMessage.Length();
   packet->data = (Uint8*)aMessage.ToCharArray();
   if(!SDLNet_UDP_Send(mSocket, 0, packet))
@@ -89,7 +89,7 @@ HashString PCNetworkPort::Receive()
  */
 void PCNetworkPort::SendMany(std::vector<HashString> const &aMessages)
 {
-  UDPpacket **packetVector = SDLNet_AllocPacketV(aMessages.size(), Constants::GetInteger("PacketSize"));
+  UDPpacket **packetVector = SDLNet_AllocPacketV(aMessages.size(), SystemProperties::GetPacketSize());
   
   for(int i = 0; i < aMessages.size(); ++i)
   {
