@@ -18,7 +18,7 @@ PCSound::PCSound(HashString const &aFilename) : Sound(aFilename), mChannel(-1)
   mChunk = Mix_LoadWAV(aFilename.ToCharArray());
   if(!mChunk)
   {
-    DebugLogPrint("Mix_QuickLoad_WAV: %s\n", Mix_GetError());
+    DebugLogPrint("Mix_QuickLoad_WAV: %s\n%s\n", Mix_GetError(), aFilename.ToCharArray());
 #ifdef _DEBUG
     assert(!"Mix_Quickload_WAV failed, aborting.");
 #endif
