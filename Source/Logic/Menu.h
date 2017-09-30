@@ -35,6 +35,10 @@ public:
   MenuElement*                   GetElementByObjectName(HashString const &aObjectName) const;
   MenuElement*                   GetElementByFileName(HashString const &aFileName) const;
   MenuElement::ElementContainer  GetElements() const;
+  MenuElement*                   GetReplaceableElement(HashString const &aName) const;
+  MenuElement*                   GetReplaceableElementByObjectName(HashString const &aObjectName) const;
+  MenuElement*                   GetReplaceableElementByFileName(HashString const &aFileName) const;
+  MenuElement::ElementContainer  GetReplaceableElements() const;
 
   void                           AddObject(MenuElement *aElement);
   void                           AddReplaceableObject(MenuElement *aElement);

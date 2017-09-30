@@ -112,6 +112,66 @@ MenuElement::ElementContainer Menu::GetElements() const
 }
 
 /**
+ * @brief Retrieve a replaceable element if available. Uses file name if ".txt" or ".xml" is in name.
+ * @param aFileName
+ * @return The element specified, else nullptr.
+ */
+MenuElement* Menu::GetReplaceableElement(HashString const &aName) const
+{
+  if(aName.Find(".txt") || aName.Find(".xml"))
+  {
+    return GetReplaceableElementByFileName(aName);
+  }
+  else
+  {
+    return GetReplaceableElementByObjectName(aName);
+  }
+}
+
+/**
+ * @brief Retrieve a replaceable element by object name if available.
+ * @param aFileName
+ * @return The element specified, else nullptr.
+ */
+MenuElement* Menu::GetReplaceableElementByObjectName(HashString const &aObjectName) const
+{
+  for(MenuElement::ConstElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+  {
+    if((*it)->GetObject()->GetName() == aObjectName)
+    {
+      return *it;
+    }
+  }
+  return nullptr;
+}
+
+/**
+ * @brief Retrieve a replaceable element by file name if available.
+ * @param aFileName
+ * @return The element specified, else nullptr.
+ */
+MenuElement* Menu::GetReplaceableElementByFileName(HashString const &aFileName) const
+{
+  for(MenuElement::ConstElementIT it = mReplaceableElements.begin(); it != mReplaceableElements.end(); ++it)
+  {
+    if((*it)->GetObject()->GetFileName() == aFileName)
+    {
+      return *it;
+    }
+  }
+  return nullptr;
+}
+
+/**
+ * @brief Get all replaceable elements in menu.
+ * @return All elements in menu.
+ */
+MenuElement::ElementContainer Menu::GetReplaceableElements() const
+{
+  return mReplaceableElements;
+}
+
+/**
  * @brief Adds an element to our menu.
  * @param aElement
  */
