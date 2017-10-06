@@ -220,6 +220,17 @@ void Vector2::operator/=(float const aMultiplier)
   y /= aMultiplier;
 }
 
+float Vector2::AngleBetweenRadians(Vector2 const &rhs)
+{
+  float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
+  return acosf(cosineAngle);
+}
+
+float Vector2::AngleBetweenDegrees(Vector2 const &rhs)
+{
+  return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
+}
+
 bool Vector2::validate() const
 {
   if(std::isnan(x) || std::isnan(y))
@@ -464,6 +475,17 @@ void Vector3::operator/=(float const aMultiplier)
   z /= aMultiplier;
 }
 
+float Vector3::AngleBetweenRadians(Vector3 const &rhs)
+{
+  float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
+  return acosf(cosineAngle);
+}
+
+float Vector3::AngleBetweenDegrees(Vector3 const &rhs)
+{
+  return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
+}
+
 bool Vector3::validate() const
 {
   if(std::isnan(x) || std::isnan(y) || std::isnan(z))
@@ -703,6 +725,17 @@ void Vector4::operator/=(float const aMultiplier)
   y /= aMultiplier;
   z /= aMultiplier;
   w /= aMultiplier;
+}
+
+float Vector4::AngleBetweenRadians(Vector4 const &rhs)
+{
+  float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
+  return acosf(cosineAngle);
+}
+
+float Vector4::AngleBetweenDegrees(Vector4 const &rhs)
+{
+  return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
 }
 
 bool Vector4::validate() const
