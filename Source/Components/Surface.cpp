@@ -346,6 +346,52 @@ void Surface::Serialize(Parser &aParser)
   else if(mViewmode == VIEW_PERCENTAGE_OF_CAMERA)
     viewMode = "PERCENTAGE";
   surface->Place(SURFACE, "ViewMode", viewMode.ToString());
+  
+  // Properties
+  if(!mProperties.empty())
+  {
+    surface->Place(SURFACE, "Properties", "");
+    HashString const PROPERTY = "Property_";
+    curIndex = 0;
+    Root* propertiesNode = surface->Find("Properties");
+    for(PropertyContainerIt it = mProperties.begin(); it != mProperties.end(); ++it, ++curIndex)
+    {
+      HashString curNode = PROPERTY + Common::IntToString(curIndex);
+      propertiesNode->Place("Properties", curNode, "");
+      
+      HashString type = "";
+      switch((*it)->GetType())
+      {
+      case PropertyType::INT1:
+        type = "INT1";
+        break;
+      case PropertyType::INT3:
+        type = "INT3";
+        break;
+      case PropertyType::INT4:
+        type = "INT4";
+        break;
+      case PropertyType::FLOAT1:
+        type = "FLOAT1";
+        break;
+      case PropertyType::FLOAT3:
+        type = "FLOAT3";
+        break;
+      case PropertyType::FLOAT4:
+        type = "FLOAT4";
+        break;
+      default:
+        assert(!"Invalid PropertyType trying to be serialized.");
+        break;
+      }
+      
+      Root* propertyNode = propertiesNode->Find(curNode);
+      propertyNode->Place(curNode, "Name", (*it)->GetName());
+      propertyNode->Place(curNode, "Type", type);
+      propertyNode->Place(curNode, "TargetValue", (*it)->GetTargetValue());
+      propertyNode->Place(curNode, "DefaultValue", (*it)->GetDefaultValue());
+    }
+  }
 }
 
 /**
@@ -377,7 +423,7 @@ void Surface::Deserialize(Parser &aParser)
   if(aParser.Find("Surface", "AnimationSpeeds") && aParser.Find("Surface", "AnimationSpeeds")->Find("Animation_0"))
   {
     // Optional parameter to change the animation speeds.
-    HashString nodeName = "Animation_";
+    HashString const nodeName = "Animation_";
     int index = 0;
     HashString curIndex = nodeName + Common::IntToString(index);
     Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
@@ -462,6 +508,44 @@ void Surface::Deserialize(Parser &aParser)
   if(aParser.Find("Surface", "StartingAnimation"))
   {
     startingAnimation = aParser.Find("Surface", "StartingAnimation")->GetValue().ToInt();
+  }
+  if(aParser.Find("Surface", "Properties"))
+  {
+    HashString const nodeName = "Property_";
+    int index = 0;
+    HashString curIndex = nodeName + Common::IntToString(index);
+    Root* propertyNode = aParser.Find("Surface", "Properties");
+    
+    while(propertyNode->Find(curIndex))
+    {
+      Root* curNode = propertyNode->Find(curIndex);
+      PropertyType propertyType = PropertyType::INT1;
+      HashString const type = curNode->Find("Type")->GetValue();
+      
+      if(type == "INT1")
+        propertyType = PropertyType::INT1;
+      else if(type == "INT3")
+        propertyType = PropertyType::INT3;
+      else if(type == "INT4")
+        propertyType = PropertyType::INT4;
+      else if(type == "FLOAT1")
+        propertyType = PropertyType::FLOAT1;
+      else if(type == "FLOAT3")
+        propertyType = PropertyType::FLOAT3;
+      else if(type == "FLOAT4")
+        propertyType = PropertyType::FLOAT4;
+      else
+      {
+        DebugLogPrint("Invalid value %s passed into Property deserialization.", type.ToCharArray());
+        assert(!"Invalid value passed into Property deserialization.");
+      }
+      
+      AddOrEditProperty(curNode->Find("Name")->GetValue(), propertyType, 
+        curNode->Find("TargetValue")->GetValue(), curNode->Find("DefaultValue")->GetValue());
+      
+      ++index;
+      curIndex = nodeName + Common::IntToString(index);
+    }
   }
   
   SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
