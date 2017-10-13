@@ -127,6 +127,11 @@ namespace LUABind
     // StaticGameApp
     SLB::Class<StaticGameApp, SLB::Instance::NoCopyNoDestroy>("StaticGameApp")
         .set("GetApp", StaticGameApp::GetApp);
+        
+    // Helpers
+    SLB::Class<std::vector<HashString>>("HashStringVector")
+        .set("size", &std::vector<HashString>::size)
+        .set("empty", &std::vector<HashString>::empty);
 
     // Platform specific scripts
 #ifdef PC
