@@ -131,7 +131,8 @@ namespace LUABind
     // Helpers
     SLB::Class<std::vector<HashString>>("HashStringVector")
         .set("size", &std::vector<HashString>::size)
-        .set("empty", &std::vector<HashString>::empty);
+        .set("empty", &std::vector<HashString>::empty)
+        .set("at", static_cast<std::vector<HashString>::reference(std::vector<HashString>::*)(std::vector<HashString>::size_type)>(&std::vector<HashString>::at));
 
     // Platform specific scripts
 #ifdef PC
