@@ -129,10 +129,10 @@ namespace LUABind
         .set("GetApp", StaticGameApp::GetApp);
         
     // Helpers
-    SLB::Class<std::vector<HashString>>("HashStringVector")
-        .set("size", &std::vector<HashString>::size)
-        .set("empty", &std::vector<HashString>::empty)
-        .set("at", static_cast<std::vector<HashString>::reference(std::vector<HashString>::*)(std::vector<HashString>::size_type)>(&std::vector<HashString>::at));
+    SERIALIZE_VECTOR(int, "IntVector");
+    SERIALIZE_VECTOR(float, "FloatVector");
+    SERIALIZE_VECTOR(bool, "BoolVector");
+    SERIALIZE_VECTOR(HashString, "HashStringVector");
 
     // Platform specific scripts
 #ifdef PC

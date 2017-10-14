@@ -14,6 +14,11 @@
 #include "Managers/LevelManager.h"
 #include "Managers/ObjectManager.h"
 
+#define SERIALIZE_VECTOR(T, NAME) SLB::Class<std::vector<T>>(NAME) \
+        .set("size", &std::vector<T>::size) \
+        .set("empty", &std::vector<T>::empty) \
+        .set("at", static_cast<std::vector<T>::reference(std::vector<T>::*)(std::vector<T>::size_type)>(&std::vector<T>::at))
+
 namespace LUABind
 {
   // A way to access the app and manage resources
