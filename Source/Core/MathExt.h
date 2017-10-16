@@ -74,8 +74,8 @@ struct Vector2
   void    operator*=(float const aMultiplier);
   void    operator/=(float const aMultiplier);
   
-  float   AngleBetweenRadians(Vector2 const &rhs);
-  float   AngleBetweenDegrees(Vector2 const &rhs);
+  float   AngleBetweenRadians(Vector2 const &rhs) const;
+  float   AngleBetweenDegrees(Vector2 const &rhs) const;
   
   // Helpful debugging
   bool    validate() const;
@@ -128,8 +128,8 @@ struct Vector3
   void    operator*=(float const aMultiplier);
   void    operator/=(float const aMultiplier);
   
-  float   AngleBetweenRadians(Vector3 const &rhs);
-  float   AngleBetweenDegrees(Vector3 const &rhs);
+  float   AngleBetweenRadians(Vector3 const &rhs) const;
+  float   AngleBetweenDegrees(Vector3 const &rhs) const;
   
   // Helpful debugging
   bool    validate() const;
@@ -179,8 +179,8 @@ struct Vector4
   void    operator*=(float const aMultiplier);
   void    operator/=(float const aMultiplier);
   
-  float   AngleBetweenRadians(Vector4 const &rhs);
-  float   AngleBetweenDegrees(Vector4 const &rhs);
+  float   AngleBetweenRadians(Vector4 const &rhs) const;
+  float   AngleBetweenDegrees(Vector4 const &rhs) const;
   
   // Helpful debugging
   bool validate() const;

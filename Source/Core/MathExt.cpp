@@ -220,13 +220,13 @@ void Vector2::operator/=(float const aMultiplier)
   y /= aMultiplier;
 }
 
-float Vector2::AngleBetweenRadians(Vector2 const &rhs)
+float Vector2::AngleBetweenRadians(Vector2 const &rhs) const
 {
   float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
   return acosf(cosineAngle);
 }
 
-float Vector2::AngleBetweenDegrees(Vector2 const &rhs)
+float Vector2::AngleBetweenDegrees(Vector2 const &rhs) const
 {
   return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
 }
@@ -475,13 +475,13 @@ void Vector3::operator/=(float const aMultiplier)
   z /= aMultiplier;
 }
 
-float Vector3::AngleBetweenRadians(Vector3 const &rhs)
+float Vector3::AngleBetweenRadians(Vector3 const &rhs) const
 {
   float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
   return acosf(cosineAngle);
 }
 
-float Vector3::AngleBetweenDegrees(Vector3 const &rhs)
+float Vector3::AngleBetweenDegrees(Vector3 const &rhs) const
 {
   return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
 }
@@ -727,13 +727,13 @@ void Vector4::operator/=(float const aMultiplier)
   w /= aMultiplier;
 }
 
-float Vector4::AngleBetweenRadians(Vector4 const &rhs)
+float Vector4::AngleBetweenRadians(Vector4 const &rhs) const
 {
   float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
   return acosf(cosineAngle);
 }
 
-float Vector4::AngleBetweenDegrees(Vector4 const &rhs)
+float Vector4::AngleBetweenDegrees(Vector4 const &rhs) const
 {
   return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
 }
