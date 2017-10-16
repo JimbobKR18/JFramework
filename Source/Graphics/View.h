@@ -14,6 +14,7 @@ private:
   Vector3                 mHalfSize;
   Vector3                 mMaxBoundary;
   Vector3                 mMinBoundary;
+  Vector3                 mOffset;
   GameObject*             mTarget;
   float                   mTime;
   Interpolation<Vector3>* mInterpolator;
@@ -28,6 +29,7 @@ public:
   Vector3&  GetSize();
   Matrix33& GetRotation();
   Vector3&  GetScale();
+  Vector3&  GetOffset();
   Matrix33  GetFinalTransform();
   Vector3   GetHalfSize() const;
   Vector3   GetMaxBoundary() const;
@@ -37,6 +39,7 @@ public:
   // Setters
   void      SetSize(Vector3 const &aSize);
   void      SetPosition(Vector3 const &aPos);
+  void      SetOffset(Vector3 const &aPos);
   void      SetTarget(GameObject *aObj);
   void      SetTime(float aTime);
   void      SetMaxBoundary(Vector3 const &aMaxBoundary);

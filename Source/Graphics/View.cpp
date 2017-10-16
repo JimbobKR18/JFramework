@@ -4,8 +4,8 @@
 #include "ObjectManager.h"
 
 View::View(float aTime) : mTransform(), mHalfSize(0,0,0), mMaxBoundary(0,0,0),
-                          mMinBoundary(0,0,0), mTarget(nullptr), mTime(0), 
-                          mInterpolator(nullptr)
+                          mMinBoundary(0,0,0), mOffset(0,0,0), mTarget(nullptr), 
+                          mTime(0), mInterpolator(nullptr)
 {
 }
 
@@ -58,6 +58,15 @@ Matrix33& View::GetRotation()
 Vector3& View::GetScale()
 {
   return mTransform.GetScale();
+}
+
+/**
+ * @brief Get offset of view
+ * @return offset
+ */
+Vector3& View::GetOffset()
+{
+  return mOffset;
 }
 
 /**
@@ -125,6 +134,15 @@ void View::SetPosition(Vector3 const &aPos)
 }
 
 /**
+ * @brief Set offset of view
+ * @param aPos position
+ */
+void View::SetOffset(Vector3 const &aPos)
+{
+  mOffset = aPos;
+}
+
+/**
  * @brief Set view target (who to follow), clears interpolator.
  * @param aObj target
  */
@@ -176,14 +194,17 @@ void View::Update()
   // Follow target
   if(mTarget)
   {
+    // Destination is target position + offset.
+    Vector3 destination = mTarget->GET<Transform>()->GetPosition() + mOffset;
+    
     // For tiny times, just go to the target.
     if(mTime <= 0.01f)
-      position = mTarget->GET<Transform>()->GetPosition();
+      position = destination;
     else
     {
       if(!mInterpolator)
       {
-        mInterpolator = new Interpolation<Vector3>(&position, mTarget->GET<Transform>()->GetPosition(), mTime);
+        mInterpolator = new Interpolation<Vector3>(&position, destination, mTime);
       }
       else
       {
