@@ -49,6 +49,9 @@ namespace Common
   std::vector<bool>         StringToBoolVector(std::string const &aValue);
   std::vector<std::string>  StringToStringVector(std::string const &aValue);
   std::vector<HashString>   StringToHashStringVector(std::string const &aValue);
+  
+  std::set<std::string>     StringToStringSet(std::string const &aValue);
+  std::set<HashString>      StringToHashStringSet(std::string const &aValue);
 
   std::string               IntToString(int const aValue);
   std::string               FloatToString(float const aValue);
@@ -58,6 +61,9 @@ namespace Common
   std::string               BoolVectorToString(std::vector<bool> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   std::string               HashStringVectorToString(std::vector<HashString> &aValue);
+  
+  std::string               StringSetToString(std::set<std::string> &aValue);
+  std::string               HashStringSetToString(std::set<HashString> &aValue);
   
   std::string               ParseString(std::istream *infile, std::string const &aString);
   std::string               TrimString(std::string const &aString);

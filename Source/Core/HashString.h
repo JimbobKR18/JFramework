@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <set>
 #include <unordered_map>
 
 // Defined for compilation reasons
@@ -82,6 +83,9 @@ public:
   std::vector<std::string> ToStringVector() const;
   std::vector<int> ToIntVector() const;
   std::vector<float> ToFloatVector() const;
+  std::vector<bool> ToBoolVector() const;
+  std::set<HashString> ToHashStringSet() const;
+  std::set<std::string> ToStringSet() const;
   Vector3 ToVector3() const;
   Vector4 ToVector4() const;
   HashString ToLower() const;

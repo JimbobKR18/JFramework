@@ -448,6 +448,33 @@ std::vector<float> HashString::ToFloatVector() const
 }
 
 /**
+ * @brief Convert to bool vector, split by ","
+ * @return String as bool vector
+ */
+std::vector<bool> HashString::ToBoolVector() const
+{
+  return Common::StringToBoolVector(mString);
+}
+
+/**
+ * @brief Convert to HashString set, split by ","
+ * @return String as HashString set
+ */
+std::set<HashString> HashString::ToHashStringSet() const
+{
+  return Common::StringToHashStringSet(mString);
+}
+
+/**
+ * @brief Convert to string set, split by ","
+ * @return String as string set
+ */
+std::set<std::string> HashString::ToStringSet() const
+{
+  return Common::StringToStringSet(mString);
+}
+
+/**
  * @brief Convert to Vector3
  * @return String as a vector3
  */

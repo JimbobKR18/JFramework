@@ -173,6 +173,54 @@ namespace Common
     ret.push_back(value);
     return ret;
   }
+  
+  /**
+   * @brief Converts String to String Set
+   * @param aValue
+   */
+  std::set<std::string> StringToStringSet(std::string const &aValue)
+  {
+    std::set<std::string> ret;
+    std::string value;
+    for(unsigned i = 0; i < aValue.length(); ++i)
+    {
+      if(aValue[i] == ',')
+      {
+        ret.insert(value);
+        value.clear();
+      }
+      else
+      {
+        value.push_back(aValue[i]);
+      }
+    }
+    ret.insert(value);
+    return ret;
+  }
+  
+  /**
+   * @brief Converts String to HashString Set
+   * @param aValue
+   */
+  std::set<HashString> StringToHashStringSet(std::string const &aValue)
+  {
+    std::set<HashString> ret;
+    std::string value;
+    for(unsigned i = 0; i < aValue.length(); ++i)
+    {
+      if(aValue[i] == ',')
+      {
+        ret.insert(value);
+        value.clear();
+      }
+      else
+      {
+        value.push_back(aValue[i]);
+      }
+    }
+    ret.insert(value);
+    return ret;
+  }
 
   /**
    * @brief Converts Int to String
@@ -294,6 +342,44 @@ namespace Common
     std::string ret;
     std::vector<HashString>::iterator end = aValue.end();
     for(std::vector<HashString>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      ret += (*it).ToString();
+      ret += ",";
+    }
+    
+    // Remove last comma
+    ret = ret.substr(0, ret.size() - 1);
+    return ret;
+  }
+  
+  /**
+   * @brief Converts String Set to String (comma separated)
+   * @param aValue
+   */
+  std::string StringSetToString(std::set<std::string> &aValue)
+  {
+    std::string ret;
+    std::set<std::string>::iterator end = aValue.end();
+    for(std::set<std::string>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      ret += *it;
+      ret += ",";
+    }
+    
+    // Remove last comma
+    ret = ret.substr(0, ret.size() - 1);
+    return ret;
+  }
+  
+  /**
+   * @brief Converts HashString Set to String (comma separated)
+   * @param aValue
+   */
+  std::string HashStringSetToString(std::set<HashString> &aValue)
+  {
+    std::string ret;
+    std::set<HashString>::iterator end = aValue.end();
+    for(std::set<HashString>::iterator it = aValue.begin(); it != end; ++it)
     {
       ret += (*it).ToString();
       ret += ",";
