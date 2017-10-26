@@ -400,13 +400,19 @@ void Surface::Serialize(Parser &aParser)
  */
 void Surface::Deserialize(Parser &aParser)
 {
+  float const frameRate = GetManager()->GetOwningApp()->GetAppSpeed();
   bool animated = false;
+  bool frameBased = false;
   int numAnimations = 1;
   int startingAnimation = 0;
   std::vector<std::vector<float>> animationSpeed;
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
+  if(aParser.Find("Surface", "FrameBased"))
+  {
+    frameBased = aParser.Find("Surface", "FrameBased")->GetValue().ToBool();
+  }
   if(aParser.Find("Surface", "AnimationCount"))
   {
     Root* animationCount = aParser.Find("Surface", "AnimationCount");
@@ -432,6 +438,16 @@ void Surface::Deserialize(Parser &aParser)
     {
       Root* curNode = animationSpeedNode->Find(curIndex);
       std::vector<float> singleSpeeds = curNode->GetValue().ToFloatVector();
+      
+      // Convert from frames to time.
+      if(frameBased)
+      {
+        for(unsigned i = 0; i < singleSpeeds.size(); ++i)
+        {
+          singleSpeeds[i] = singleSpeeds[i] * frameRate;
+        }
+      }
+      
       animationSpeed.push_back(singleSpeeds);
       ++index;
       curIndex = nodeName + Common::IntToString(index);
@@ -448,7 +464,7 @@ void Surface::Deserialize(Parser &aParser)
       std::vector<float> speedVector;
       for(int j = 0; j < numFrames[i]; ++j)
       {
-        speedVector.push_back(singleSpeeds[i]);
+        speedVector.push_back((frameBased) ? singleSpeeds[i] * frameRate : singleSpeeds[i]);
       }
       animationSpeed.push_back(speedVector);
     }
@@ -462,7 +478,8 @@ void Surface::Deserialize(Parser &aParser)
       animationSpeed.push_back(std::vector<float>());
       for(int j = 0; j < numFrames[i]; ++j)
       {
-        animationSpeed[i].push_back(animationSpeedNode->GetValue().ToFloat());
+        float speed = animationSpeedNode->GetValue().ToFloat();
+        animationSpeed[i].push_back((frameBased) ? speed * frameRate : speed);
       }
     }
   }
@@ -474,7 +491,7 @@ void Surface::Deserialize(Parser &aParser)
       animationSpeed.push_back(std::vector<float>());
       for(int j = 0; j < numFrames[i]; ++j)
       {
-        animationSpeed[i].push_back(DT);
+        animationSpeed[i].push_back(frameRate);
       }
     }
   }
