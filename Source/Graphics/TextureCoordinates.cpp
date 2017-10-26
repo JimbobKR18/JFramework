@@ -180,6 +180,15 @@ int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
 }
 
 /**
+ * @brief Get current frame in animation.
+ * @return Current frame.
+ */
+int TextureCoordinates::GetCurrentFrame() const
+{
+  return mCurFrame;
+}
+
+/**
  * @brief Get speed for animation
  * @param aAnimation The animation index.
  * @return 

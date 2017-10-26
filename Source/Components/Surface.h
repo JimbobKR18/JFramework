@@ -58,7 +58,9 @@ public:
   GraphicsManager*    GetManager() const { return mManager; }
   Viewspace           GetViewMode() const { return mViewmode; }
   Vector4&            GetColor() { return mColor; }
-  HashString          GetFileName() { return mFileName; }
+  HashString          GetFileName() const { return mFileName; }
+  int                 GetCurrentAnimation() const { if(mTexCoord) return mTexCoord->GetCurrentAnimation(); else return 0; }
+  int                 GetCurrentFrame() const { if(mTexCoord) return mTexCoord->GetCurrentFrame(); else return 0; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }

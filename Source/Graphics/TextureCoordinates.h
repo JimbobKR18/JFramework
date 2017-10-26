@@ -57,6 +57,7 @@ public:
   int   GetNumberOfAnimations() const;
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
+  int   GetCurrentFrame() const;
   float GetAnimationSpeed(int const aAnimation) const;
   SpeedContainer const GetAnimationHolds(int const aAnimation) const;
   bool  GetCompleted() const;

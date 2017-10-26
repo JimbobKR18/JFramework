@@ -400,7 +400,7 @@ void Surface::Serialize(Parser &aParser)
  */
 void Surface::Deserialize(Parser &aParser)
 {
-  float const frameRate = GetManager()->GetOwningApp()->GetAppSpeed();
+  float const frameRate = GetManager()->GetOwningApp()->GetAppStep();
   bool animated = false;
   bool frameBased = false;
   int numAnimations = 1;
