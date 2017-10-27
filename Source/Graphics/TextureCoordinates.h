@@ -60,6 +60,7 @@ public:
   int   GetCurrentFrame() const;
   float GetAnimationSpeed(int const aAnimation) const;
   SpeedContainer const GetAnimationHolds(int const aAnimation) const;
+  float GetTimeToFrame(int const aAnimation, int const aFrame) const;
   bool  GetCompleted() const;
   bool  GetAnimated() const;
 

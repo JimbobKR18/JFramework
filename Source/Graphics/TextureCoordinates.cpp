@@ -209,6 +209,31 @@ TextureCoordinates::SpeedContainer const TextureCoordinates::GetAnimationHolds(i
 }
 
 /**
+ * @brief Get time to a specific frame in animation.
+ * @param aAnimation Animation to get frame from.
+ * @param aFrame Frame to get time for.
+ * @return Time to reach a particular frame.
+ */
+float TextureCoordinates::GetTimeToFrame(int const aAnimation, int const aFrame) const
+{
+  TextureCoordinates::SpeedContainer speeds = GetAnimationHolds(aAnimation);
+  float ret = 0;
+  
+  if(aFrame >= speeds.size())
+  {
+    DebugLogPrint("Frame %d exceeds number of frames in animation %d.", aFrame, aAnimation);
+    assert(!"Frame exceeds number of frames in animation.");
+  }
+  
+  for(int i = 0; i < aFrame; ++i)
+  {
+    ret += speeds[i];
+  }
+  
+  return ret;
+}
+
+/**
  * @brief Is the current animation finished cycling through?
  * @return 
  */
