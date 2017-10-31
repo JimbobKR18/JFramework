@@ -222,8 +222,7 @@ void Vector2::operator/=(float const aMultiplier)
 
 float Vector2::AngleBetweenRadians(Vector2 const &rhs) const
 {
-  float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
-  return acosf(cosineAngle);
+  return atan2f(rhs.y,rhs.x) - atan2f(y,x);
 }
 
 float Vector2::AngleBetweenDegrees(Vector2 const &rhs) const
@@ -475,15 +474,20 @@ void Vector3::operator/=(float const aMultiplier)
   z /= aMultiplier;
 }
 
-float Vector3::AngleBetweenRadians(Vector3 const &rhs) const
+float Vector3::AngleBetweenRadians(Vector3 const &rhs, Vector3 const &aNormal) const
 {
-  float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
-  return acosf(cosineAngle);
+  Vector3 cross = this->Cross(rhs);
+  float angle = acosf(this->Dot(rhs) / (length() * rhs.length()));
+  
+  if(aNormal.Dot(cross) >= 0.0f)
+    return angle;
+  else
+    return -angle;
 }
 
-float Vector3::AngleBetweenDegrees(Vector3 const &rhs) const
+float Vector3::AngleBetweenDegrees(Vector3 const &rhs, Vector3 const &aNormal) const
 {
-  return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
+  return AngleBetweenRadians(rhs, aNormal) * RADS_TO_DEGREE;
 }
 
 bool Vector3::validate() const
@@ -727,15 +731,20 @@ void Vector4::operator/=(float const aMultiplier)
   w /= aMultiplier;
 }
 
-float Vector4::AngleBetweenRadians(Vector4 const &rhs) const
+float Vector4::AngleBetweenRadians(Vector4 const &rhs, Vector4 const &aNormal) const
 {
-  float cosineAngle = this->Dot(rhs) / (length() * rhs.length());
-  return acosf(cosineAngle);
+  Vector4 cross = this->Cross(rhs);
+  float angle = acosf(this->Dot(rhs) / (length() * rhs.length()));
+  
+  if(aNormal.Dot(cross) >= 0.0f)
+    return angle;
+  else
+    return -angle;
 }
 
-float Vector4::AngleBetweenDegrees(Vector4 const &rhs) const
+float Vector4::AngleBetweenDegrees(Vector4 const &rhs, Vector4 const &aNormal) const
 {
-  return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
+  return AngleBetweenRadians(rhs, aNormal) * RADS_TO_DEGREE;
 }
 
 bool Vector4::validate() const
