@@ -15,7 +15,7 @@ HashString::HashString() : mString(""), mHash(0)
 {
 }
 
-HashString::HashString(HashString  const &aRhs) : mString(aRhs.mString), mHash(aRhs.mHash)
+HashString::HashString(HashString const &aRhs) : mString(aRhs.mString), mHash(aRhs.mHash)
 {
 }
 

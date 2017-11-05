@@ -29,7 +29,7 @@ private:
 public:
   // Constructors
   HashString();
-  HashString(HashString  const &aRhs);
+  HashString(HashString const &aRhs);
   HashString(char const* aString, unsigned aStart = 0, unsigned aEnd = -1);
   HashString(std::string const &aString, unsigned aStart = 0, unsigned aEnd = -1);
   
