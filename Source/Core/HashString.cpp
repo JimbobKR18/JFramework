@@ -583,6 +583,14 @@ void HashString::SerializeLUA()
     .set("NotEqualsCharArray", static_cast<bool(HashString::*)(char const*)const>(&HashString::operator!=))
     .set("NotEqualsString", static_cast<bool(HashString::*)(std::string const&)const>(&HashString::operator!=))
     .set("NotEqualsHashString", static_cast<bool(HashString::*)(HashString const&)const>(&HashString::operator!=))
+    .set("LessThanCharArray", static_cast<bool(HashString::*)(char const*)const>(&HashString::operator<))
+    .set("LessThanString", static_cast<bool(HashString::*)(std::string const&)const>(&HashString::operator<))
+    .set("LessThanHashString", static_cast<bool(HashString::*)(HashString const&)const>(&HashString::operator<))
+    .set("GreaterThanCharArray", static_cast<bool(HashString::*)(char const*)const>(&HashString::operator>))
+    .set("GreaterThanString", static_cast<bool(HashString::*)(std::string const&)const>(&HashString::operator>))
+    .set("GreaterThanHashString", static_cast<bool(HashString::*)(HashString const&)const>(&HashString::operator>))
+    .set("Add", static_cast<HashString(HashString::*)(HashString const&)const>(&HashString::operator+))
+    .set("AddEquals", static_cast<void(HashString::*)(HashString const&)>(&HashString::operator+=))
     .set("ToString", &HashString::ToString)
     .set("ToCharArray", &HashString::ToCharArray)
     .set("ToInt", &HashString::ToInt)
@@ -590,7 +598,9 @@ void HashString::SerializeLUA()
     .set("ToBool", &HashString::ToBool)
     .set("ToLower", &HashString::ToLower)
     .set("ToUpper", &HashString::ToUpper)
-    .set("ToLiteral", &HashString::ToLiteral);
+    .set("ToLiteral", &HashString::ToLiteral)
+    .set("ToVector3", &HashString::ToVector3)
+    .set("ToVector4", &HashString::ToVector4);
 }
 
 /**
