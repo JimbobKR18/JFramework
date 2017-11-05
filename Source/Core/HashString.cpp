@@ -39,6 +39,13 @@ HashString::HashString(std::string const &aString, unsigned aStart, unsigned aEn
   *this = HashString(aString.c_str(), aStart, aEnd);
 }
 
+// Destructor
+HashString::~HashString()
+{
+  mHash = -1;
+  mString.clear();
+}
+
 // Const Operations
 /**
  * @return The size of the string.
