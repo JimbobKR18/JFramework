@@ -41,6 +41,7 @@ public:
   int Length() const;
   bool Empty() const;
   bool Find(HashString const &aString) const;
+  int FindNumberOfOccurrences(HashString const &aString) const;
   HashString SubString(int aStart, int aLength) const;
   HashString Trim() const;
   std::vector<HashString> Split(HashString const &aDelimiter) const;

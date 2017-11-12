@@ -85,6 +85,29 @@ bool HashString::Find(HashString const &aString) const
 }
 
 /**
+ * @brief Find number of occurrences of a substring in our string.
+ * @param aString The substring to search for.
+ * @return Number of occurrences.
+ */
+int HashString::FindNumberOfOccurrences(HashString const &aString) const
+{
+  int ret = 0;
+  HashString current;
+  
+  for(int i = 0; i < mString.size(); ++i)
+  {
+    current.Push(mString[i]);
+    if(current.Find(aString))
+    {
+      ++ret;
+      current.Clear();
+    }
+  }
+  
+  return ret;
+}
+
+/**
  * @brief Get a substring out of our main string.
  * @param aStart Where the substring begins
  * @param aLength How long the substring will be
@@ -574,6 +597,7 @@ void HashString::SerializeLUA()
     .set("Length", &HashString::Length)
     .set("Empty", &HashString::Empty)
     .set("Find", &HashString::Find)
+    .set("FindNumberOfOccurrences", &HashString::FindNumberOfOccurrences)
     .set("SubString", &HashString::SubString)
     .set("Reverse", &HashString::Reverse)
     .set("Push", &HashString::Push)
