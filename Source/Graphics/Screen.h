@@ -17,6 +17,7 @@ private:
   View                mView;
   ScreenRenderSorter* mBatchRenderSorter;
   ScreenRenderSorter* mDepthRenderSorter;
+  ScreenRenderSorter* mUIRenderSorter;
 
 public:
   Screen();
@@ -41,8 +42,13 @@ public:
   ScreenRenderSorter*     GetDepthRenderSorter();
   // Set depth render sorting method
   void                    SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter);
+  // Set UI render sorting method
+  void                    SetUIRenderSorter(ScreenRenderSorter *aUIRenderSorter);
+  // Get UI render sorting method (Post batching)
+  ScreenRenderSorter*     GetUIRenderSorter();
   // Batching
   void                    SortObjects(std::vector<Surface*> &aObjects);
+  void                    SortUI(std::vector<Surface*> &aObjects);
 
   virtual void            ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData) = 0;
   virtual void            ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData) = 0;

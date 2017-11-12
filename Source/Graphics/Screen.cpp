@@ -5,7 +5,7 @@
 #include "SystemProperties.h"
 
 Screen::Screen() : mOwner(nullptr), mWidth(0), mHeight(0), mFullScreen(false),  
-  mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr)
+  mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr), mUIRenderSorter(nullptr)
 {
 }
 
@@ -14,12 +14,14 @@ Screen::Screen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen) :
 {
   mView.SetSize(Vector3(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 0));
   mDepthRenderSorter = new ZRenderSorter();
+  mUIRenderSorter = new ZRenderSorter();
   mBatchRenderSorter = new BatchRenderSorter();
 }
 
 Screen::~Screen()
 {
   delete mDepthRenderSorter;
+  delete mUIRenderSorter;
   delete mBatchRenderSorter;
 }
 
@@ -70,7 +72,7 @@ ScreenRenderSorter* Screen::GetBatchRenderSorter()
 
 /**
  * @brief Redefine behavior of how objects should be rendered.
- * @param aRenderSorter
+ * @param aBatchRenderSorter
  */
 void Screen::SetBatchRenderSorter(ScreenRenderSorter *aBatchRenderSorter)
 {
@@ -87,7 +89,7 @@ ScreenRenderSorter* Screen::GetDepthRenderSorter()
 
 /**
  * @brief Redefine behavior of how objects should be rendered.
- * @param aRenderSorter
+ * @param aDepthRenderSorter
  */
 void Screen::SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter)
 {
@@ -95,6 +97,23 @@ void Screen::SetDepthRenderSorter(ScreenRenderSorter *aDepthRenderSorter)
     delete mDepthRenderSorter;
     
   mDepthRenderSorter = aDepthRenderSorter;
+}
+
+ScreenRenderSorter* Screen::GetUIRenderSorter()
+{
+  return mUIRenderSorter;
+}
+
+/**
+ * @brief Redefine behavior of how objects should be rendered.
+ * @param aUIRenderSorter
+ */
+void Screen::SetUIRenderSorter(ScreenRenderSorter *aUIRenderSorter)
+{
+  if(mDepthRenderSorter)
+    delete mUIRenderSorter;
+    
+  mUIRenderSorter = aUIRenderSorter;
 }
 
 /**
@@ -105,4 +124,13 @@ void Screen::SortObjects(std::vector<Surface*> &aObjects)
 {
   //mBatchRenderSorter->SortPredicate(aObjects);
   mDepthRenderSorter->SortPredicate(aObjects);
+}
+
+/**
+ * @brief Sorts objects to be rendered. (Assumes that objects of same texture ID are at the same z depth.)
+ * @param aObjects
+ */
+void Screen::SortUI(std::vector<Surface*> &aObjects)
+{
+  mUIRenderSorter->SortPredicate(aObjects);
 }

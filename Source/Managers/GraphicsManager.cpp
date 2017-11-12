@@ -43,6 +43,7 @@ void GraphicsManager::Update()
 {
   mScreen->GetView().Update();
   mScreen->SortObjects(mSurfaces);
+  mScreen->SortUI(mUIElements);
   mScreen->PreDraw();
   mScreen->Draw(mSurfaces, mUIElements);
   mScreen->SwapBuffers();
