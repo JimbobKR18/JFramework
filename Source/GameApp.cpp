@@ -15,7 +15,7 @@
 #include "SystemProperties.h"
 #include "Threading.h"
 
-GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
+GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mSkipFrames(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
 {
   // AutoParses ./SystemProperties.ini
   SystemProperties::Deserialize();
@@ -121,6 +121,15 @@ void GameApp::SetLastFrameTime(unsigned int const &aLastFrame)
 }
 
 /**
+ * @brief Set number of frames to skip.
+ * @param aSkipFrames Number of frames to skip.
+ */
+void GameApp::SkipFrames(unsigned int const &aSkipFrames)
+{
+  mSkipFrames = aSkipFrames;
+}
+
+/**
  * @brief Update loop
  * @param aTicksSinceStart Time, in millis, since the app started.
  */
@@ -136,6 +145,12 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
   while(mDT >= mAppStep)
   {
     mDT -= mAppStep;
+    
+    if(mSkipFrames > 0)
+    {
+      --mSkipFrames;
+      continue;
+    }
 
     for(std::vector<Manager*>::iterator it = mManagers.begin(); it != managersEnd; ++it)
     {

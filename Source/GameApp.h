@@ -13,6 +13,7 @@ private:
   std::vector<Manager*> mManagers;
   std::vector<Message*> mDelayedMessages;
   unsigned int          mLastFrame;
+  unsigned int          mSkipFrames;
   float                 mDT;
   float                 mAppStep;
   float                 mAppSpeed;
@@ -28,6 +29,7 @@ public:
   bool              GetActive() const;
   void              SetActive(bool const aActive);
   void              SetLastFrameTime(unsigned int const &aLastFrame);
+  void              SkipFrames(unsigned int const &aSkipFrames);
   virtual void      Update(unsigned int const &aTicksSinceStart);
   void              SendMessage(Message const &aMessage);
   void              SendMessageDelayed(Message *aMessage);
