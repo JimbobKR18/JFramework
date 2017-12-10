@@ -60,6 +60,7 @@ public:
   HashString    GetFileName() const;
   HashString    GetMusicName() const;
   LevelManager* GetManager() const;
+  int           GetMusicChannel() const;
 
   TileMapGenerator* GetTileMap() const;
   GameObject*       GetFocusTarget() const;

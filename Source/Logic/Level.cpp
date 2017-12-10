@@ -104,6 +104,15 @@ LevelManager *Level::GetManager() const
 }
 
 /**
+ * @brief Get music channel
+ * @return Music channel
+ */
+int Level::GetMusicChannel() const
+{
+  return mMusicChannel;
+}
+
+/**
  * @brief Get the tile map generator. You can get individual tiles and other helperful things here.
  * @return The tile map generator.
  */

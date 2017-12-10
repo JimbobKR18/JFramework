@@ -129,7 +129,7 @@ void SoundManager::PauseSound(int aChannel)
 }
 
 /**
- * @brief Does nothing for now.
+ * @brief Update loop.
  */
 void SoundManager::Update()
 {
