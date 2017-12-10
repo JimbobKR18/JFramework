@@ -12,33 +12,32 @@
 
 #include "Common.h"
 #include "Manager.h"
-#include "Sound.h"
+#include "SoundSystem.h"
 
 class SoundManager : public Manager
 {
 private:
-  typedef std::unordered_map<int, Sound*>           SoundContainer;
-  typedef SoundContainer::iterator                  SoundIt;
-  SoundContainer                                    mSounds;
+  SoundSystem*                                      mSoundSystem;
 
   static unsigned const sUID;
 
 public:
+  static int const INFINITE_LOOPS = -1;
+  static int const ONE_LOOP = 0;
+
   SoundManager(GameApp *aApp);
   ~SoundManager();
 
-  Sound*              CreateSound(HashString const &aFilename, HashString const &aAlias = "");
-  void                DeleteSound(Sound* aSound);
-  void                AddSound(Sound *aSound);
-  void                RemoveSound(Sound *aSound);
-  void                PlaySound(HashString const &aFilename, int const aNumLoops);
-  void                PlaySoundTimed(HashString const &aFilename, int const aNumLoops, int const aMillis);
-  void                StopSound(HashString const &aFilename);
-  void                StopSoundTimed(HashString const &aFilename, int const aMillis);
+  void                CreateSound(HashString const &aFilename, HashString const &aAlias = "");
+  void                DeleteSound(HashString const &aName);
+  int                 PlaySound(HashString const &aName, int const aNumLoops);
+  int                 PlaySoundTimed(HashString const &aName, int const aNumLoops, int const aMillis);
+  void                StopSound(int aChannel);
+  void                StopSoundTimed(int aChannel, int const aMillis);
   void                SetVolume(float const aVolume);
-  void                SetSoundVolume(HashString const &aFilename, float const aVolume);
-  void                ResumeSound(HashString const &aFilename);
-  void                PauseSound(HashString const &aFilename);
+  void                SetSoundVolume(int aChannel, float const aVolume);
+  void                ResumeSound(int aChannel);
+  void                PauseSound(int aChannel);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);

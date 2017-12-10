@@ -38,8 +38,8 @@ Level::Level()
 Level::Level(LevelManager *aManager, HashString const &aFileName, HashString const &aFolderName, bool aAutoParse) :
              mName(""), mFolderName(aFolderName), mFileName(aFileName), mMusicName(""), mObjects(),
              mMenus(), mOwner(aManager), mGenerator(nullptr),
-             mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMaxBoundary(0,0,0), 
-             mMinBoundary(0,0,0), mScenarios()
+             mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMusicChannel(-1),
+             mMaxBoundary(0,0,0), mMinBoundary(0,0,0), mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
       i >= 0 && aFileName[i] != '/'; --i)
@@ -415,7 +415,7 @@ void Level::Load(Level const *aPrevLevel)
     LoadObjects(mObjects[i], static_cast<ObjectPlacement>(i));
 
   if(!mMusicName.Empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
-    mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, Sound::INFINITE_LOOPS);
+    mMusicChannel = mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, SoundManager::INFINITE_LOOPS);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
 
@@ -438,7 +438,7 @@ void Level::Unload(Level const *aNextLevel)
   RemoveMenus();
 
   if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
-    mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicName);
+    mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicChannel);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(nullptr);
   

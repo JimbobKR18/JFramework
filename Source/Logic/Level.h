@@ -44,6 +44,7 @@ private:
   TileMapGenerator*  mGenerator;
   GameObject*        mFocusTarget;
   Vector4            mClearColor;
+  int                mMusicChannel;
 
   Vector3            mMaxBoundary;
   Vector3            mMinBoundary;
