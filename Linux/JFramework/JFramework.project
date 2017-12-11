@@ -223,10 +223,14 @@
     <File Name="../../Source/Physics/Joint.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Sound">
-    <File Name="../../Source/Sound/Sound.h"/>
-    <File Name="../../Source/Sound/PCSound.h"/>
-    <File Name="../../Source/Sound/Sound.cpp"/>
-    <File Name="../../Source/Sound/PCSound.cpp"/>
+    <VirtualDirectory Name="SoundSystems">
+      <File Name="../../Source/Sound/SoundSystems/SoundSystem.h"/>
+      <File Name="../../Source/Sound/SoundSystems/SoundSystem.cpp"/>
+      <File Name="../../Source/Sound/SoundSystems/SDLSoundSystem.h"/>
+      <File Name="../../Source/Sound/SoundSystems/SDLSoundSystem.cpp"/>
+      <File Name="../../Source/Sound/SoundSystems/FMODSoundSystem.h"/>
+      <File Name="../../Source/Sound/SoundSystems/FMODSoundSystem.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="Network">
     <File Name="../../Source/Network/PCNetworkPort.cpp"/>
@@ -269,6 +273,7 @@
         <IncludePath Value="../../Source/Components"/>
         <IncludePath Value="../../Source/Physics"/>
         <IncludePath Value="../../Source/Sound"/>
+        <IncludePath Value="../../Source/Sound/SoundSystems"/>
         <IncludePath Value="../../Source/Managers"/>
         <IncludePath Value="../../Source/Graphics"/>
         <IncludePath Value="../../Source/LUA"/>
@@ -277,6 +282,8 @@
         <IncludePath Value="../../Source/TinyXML"/>
         <IncludePath Value="../../Source/Input"/>
         <IncludePath Value="../../Source/Core/Messages"/>
+        <IncludePath Value="../../Linux/fmod/api/studio/inc"/>
+        <IncludePath Value="../../Linux/fmod/api/lowlevel/inc"/>
         <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/ZombieStealth/Assets/"/>
         <Preprocessor Value="ASSET_DIRECTORY_TEMP=/home/jimmy/Documents/project-chang-e/Assets/"/>
         <Preprocessor Value="_DEBUG"/>
@@ -333,6 +340,7 @@
         <IncludePath Value="../../Source/Components"/>
         <IncludePath Value="../../Source/Physics"/>
         <IncludePath Value="../../Source/Sound"/>
+        <IncludePath Value="../../Source/Sound/SoundSystems"/>
         <IncludePath Value="../../Source/Managers"/>
         <IncludePath Value="../../Source/Graphics"/>
         <IncludePath Value="../../Source/LUA"/>
@@ -341,6 +349,8 @@
         <IncludePath Value="../../Source/TinyXML"/>
         <IncludePath Value="../../Source/Input"/>
         <IncludePath Value="../../Source/Core/Messages"/>
+        <IncludePath Value="../../Linux/fmod/api/studio/inc"/>
+        <IncludePath Value="../../Linux/fmod/api/lowlevel/inc"/>
         <Preprocessor Value="ASSET_DIRECTORY=/home/jimmy/Documents/ZombieStealth/Assets/"/>
         <Preprocessor Value="ASSET_DIRECTORY_TEMP=/home/jimmy/Documents/project-chang-e/Assets/"/>
       </Compiler>

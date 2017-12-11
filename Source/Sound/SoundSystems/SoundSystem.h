@@ -13,15 +13,13 @@ public:
   virtual void CreateSound(HashString const& aFilename, HashString const& aAlias) = 0;
   virtual void DeleteSound(HashString const& aName) = 0;
   virtual int PlaySound(HashString const& aName, int const aNumLoops) = 0;
-  virtual int PlaySoundTimed(HashString const& aName, int const aNumLoops, int const aMillis) = 0;
   virtual int FadeInSound(HashString const& aName, int const aNumLoops, int const aTime) = 0;
-  virtual int FadeInSoundTimed(HashString const& aName, int const aNumLoops, int const aFadeTime, int const aPlayTime) = 0;
   virtual void ResumeSound(int const aChannel) = 0;
   virtual void PauseSound(int const aChannel) = 0;
   virtual void SetVolume(float const aVolume) = 0;
   virtual void SetChannelVolume(int const aChannel, float const aVolume) = 0;
   virtual void StopSound(int const aChannel) = 0;
-  virtual void StopSoundTimed(int const aChannel, int const aMillis) = 0;
+  virtual void FadeOutSound(int const aChannel, int const aMillis) = 0;
 };
 
 #endif // __JFramework_SoundSystem_h_

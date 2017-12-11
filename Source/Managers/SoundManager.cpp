@@ -11,13 +11,14 @@
 #include "TextParser.h"
 #if !defined(ANDROID) && !defined(IOS)
 #include "SDLSoundSystem.h"
+#include "FMODSoundSystem.h"
 #endif
 
 unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
 SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr)
 {
 #if !defined(ANDROID) && !defined(IOS)
-  mSoundSystem = new SDLSoundSystem();
+  mSoundSystem = new FMODSoundSystem();
 #else
   assert(!"Platform not supported. (SoundManager.cpp)");
 #endif
@@ -61,34 +62,12 @@ int SoundManager::PlaySound(HashString const &aName, int const aNumLoops)
 }
 
 /**
- * @brief Play a sound for a set amount of time.
- * @param aName
- * @param aNumLoops
- * @param aMillis Time in millis.
- * @return Channel of sound
- */
-int SoundManager::PlaySoundTimed(HashString const &aName, int const aNumLoops, int const aMillis)
-{
-  return mSoundSystem->PlaySoundTimed(aName, aNumLoops, aMillis);
-}
-
-/**
  * @brief Stop a sound.
  * @param aChannel
  */
 void SoundManager::StopSound(int aChannel)
 {
   mSoundSystem->StopSound(aChannel);
-}
-
-/**
- * @brief Fade out a sound over time
- * @param aChannel
- * @param aMillis Time in millis
- */
-void SoundManager::StopSoundTimed(int aChannel, int const aMillis)
-{
-  mSoundSystem->StopSoundTimed(aChannel, aMillis);
 }
 
 /**
@@ -159,9 +138,7 @@ void SoundManager::SerializeLUA()
 {
   SLB::Class<SoundManager>("SoundManager").inherits<Manager>()
       .set("PlaySound", &SoundManager::PlaySound)
-      .set("PlaySoundTime", &SoundManager::PlaySoundTimed)
       .set("StopSound", &SoundManager::StopSound)
-      .set("StopSoundTimed", &SoundManager::StopSoundTimed)
       .set("SetSoundVolume", &SoundManager::SetSoundVolume)
       .set("ResumeSound", &SoundManager::ResumeSound)
       .set("PauseSound", &SoundManager::PauseSound);
