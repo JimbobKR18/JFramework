@@ -460,7 +460,7 @@ void FMODSoundSystem::SetChannelGroup3DSpread(HashString const &aGroupName, floa
  */
 DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
 {
-  if(aType >= FMOD_DSP_TYPE_MAX)
+  if(aType >= DSP_TYPE_MAX)
   {
     DebugLogPrint("DSP type %d exceeds FMOD max.", aType);
     assert(!"DSP type exceeds FMOD max.");
@@ -471,6 +471,9 @@ DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
   {
   case DSP_TYPE_ECHO:
     dsp = new FMODDSP_Echo(mFMODSystem, aName);
+    break;
+  default:
+    assert(!"DSP_Type not supported.");
     break;
   }
   mDSPContainer[aName.ToHash()] = dsp;
