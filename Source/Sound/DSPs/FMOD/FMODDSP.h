@@ -9,7 +9,11 @@
 class FMODDSP : public DSP
 {
 private:
+  typedef std::unordered_map<int, FMOD::DSPConnection*>     FMODDSPConnectionContainer;
+  typedef FMODDSPConnectionContainer::iterator              FMODDSPConnectionIt;
+
   FMOD::DSP* mDSP;
+  FMODDSPConnectionContainer mConnectionContainer;
 
 public:
   FMODDSP(FMOD::System* aSystem, DSP_Type const &aType, HashString const &aName);
@@ -18,6 +22,9 @@ public:
   
   FMOD::DSP* GetFMODDSP();
   
+  virtual void SetFormat(int aNumChannels, Speaker_Mode const &aSpeakerMode);
+  virtual void AddInput(DSP* aInput, float **aMixMatrix, int aWidth, int aHeight);
+  virtual void RemoveInput(DSP* aInput);
   virtual void SetActive(bool const aActive);
   virtual void SetBypass(bool const aBypass);
 };

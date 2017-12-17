@@ -51,6 +51,8 @@ public:
   
   // DSPs
   DSP* CreateDSP(HashString const &aName, DSP_Type const &aType);
+  DSP* GetDSPFromChannel(int aChannel, int aIndex);
+  DSP* GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex);
   void DeleteDSP(DSP *aDSP);
   void AddDSPToChannel(DSP *aDSP, int const aChannel, int const aIndex);
   void AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupName, int const aIndex);

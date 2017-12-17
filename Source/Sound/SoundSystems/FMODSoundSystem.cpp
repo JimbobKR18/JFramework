@@ -21,6 +21,8 @@ FMODSoundSystem::FMODSoundSystem() : mFMODStudioSystem(nullptr), mFMODSystem(nul
   
   mFMODStudioSystem->getLowLevelSystem(&mFMODSystem);
   mFMODSystem->getMasterChannelGroup(&mMasterChannelGroup);
+  
+  mChannelGroupContainer[Common::StringHashFunction("Master")] = mMasterChannelGroup;
 }
 
 FMODSoundSystem::~FMODSoundSystem()
@@ -265,6 +267,41 @@ DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
   }
   mDSPContainer[aName.ToHash()] = dsp;
   return dsp;
+}
+
+/**
+ * @brief Get DSP from channel
+ * @param aChannel
+ * @param aIndex
+ * @return 
+ */
+DSP* FMODSoundSystem::GetDSPFromChannel(int aChannel, int aIndex)
+{
+  FMOD::DSP *dsp;
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->getDSP(aIndex, &dsp);
+  return new FMODDSP(dsp, Common::IntToString(aChannel));
+}
+
+/**
+ * @brief Get DSP from channel group
+ * @param aGroupName
+ * @param aIndex
+ * @return 
+ */
+DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  FMOD::DSP *dsp;
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->getDSP(aIndex, &dsp);
+  return new FMODDSP(dsp, aGroupName);
 }
 
 /**

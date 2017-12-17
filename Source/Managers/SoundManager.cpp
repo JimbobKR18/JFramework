@@ -167,6 +167,28 @@ DSP* SoundManager::CreateDSP(HashString const &aName, DSP_Type const &aType)
 }
 
 /**
+ * @brief Get DSP from channel
+ * @param aChannel
+ * @param aIndex
+ * @return 
+ */
+DSP* SoundManager::GetDSPFromChannel(int aChannel, int aIndex)
+{
+  return mSoundSystem->GetDSPFromChannel(aChannel, aIndex);
+}
+
+/**
+ * @brief Get DSP from channel group
+ * @param aGroupName
+ * @param aIndex
+ * @return 
+ */
+DSP* SoundManager::GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex)
+{
+  return mSoundSystem->GetDSPFromChannelGroup(aGroupName, aIndex);
+}
+
+/**
  * @brief Delete DSP
  * @param aDSP
  */

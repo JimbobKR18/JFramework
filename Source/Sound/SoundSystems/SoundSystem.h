@@ -41,6 +41,8 @@ public:
   
   // DSPs
   virtual DSP* CreateDSP(HashString const &aName, DSP_Type const &aType) = 0;
+  virtual DSP* GetDSPFromChannel(int aChannel, int aIndex) = 0;
+  virtual DSP* GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex) = 0;
   virtual void DeleteDSP(DSP *aDSP) = 0;
   virtual void AddDSPToChannel(DSP *aDSP, int const aChannel, int const aIndex) = 0;
   virtual void AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupName, int const aIndex) = 0;
