@@ -42,12 +42,24 @@ public:
   virtual void SetChannelVolume(int const aChannel, float const aVolume);
   virtual void StopChannel(int const aChannel);
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency);
+  virtual void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
+  virtual void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
+  virtual void SetChannel3DAttenuation(int const aChannel, std::vector<Vector3> const &aPoints);
+  virtual void SetChannel3DMinMaxDistance(int const aChannel, float const aMinDistance, float const aMaxDistance);
+  virtual void SetChannel3DOcclusion(int const aChannel, float const aDirectOcclusion, float const aReverbOcclusion);
+  virtual void SetChannel3DSpread(int const aChannel, float const aAngle);
   
   // Channel groups
   virtual void CreateChannelGroup(HashString const &aGroupName);
   virtual void AddChannelToGroup(HashString const &aGroupName, int const aChannel);
   virtual void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume);
   virtual void StopChannelGroup(HashString const &aGroupName);
+  virtual void SetChannelGroup3DAttributes(HashString const &aGroupName, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
+  virtual void SetChannelGroup3DCone(HashString const &aGroupName, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
+  virtual void SetChannelGroup3DAttenuation(HashString const &aGroupName, std::vector<Vector3> const &aPoints);
+  virtual void SetChannelGroup3DMinMaxDistance(HashString const &aGroupName, float const aMinDistance, float const aMaxDistance);
+  virtual void SetChannelGroup3DOcclusion(HashString const &aGroupName, float const aDirectOcclusion, float const aReverbOcclusion);
+  virtual void SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle);
   
   // DSPs
   virtual DSP* CreateDSP(HashString const &aName, DSP_Type const &aType);

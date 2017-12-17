@@ -181,6 +181,95 @@ void FMODSoundSystem::SetChannelFrequency(int const aChannel, float const aFrequ
 }
 
 /**
+ * @brief Set 3D attributes for channel
+ * @param aGroupName
+ * @param aPos
+ * @param aVel
+ * @param aAltPanPos
+ */
+void FMODSoundSystem::SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos)
+{
+  FMOD_VECTOR pos = {aPos.x, aPos.y, aPos.z};
+  FMOD_VECTOR vel = {aVel.x, aVel.y, aVel.z};
+  FMOD_VECTOR altPanPos = {aAltPanPos.x, aAltPanPos.y, aAltPanPos.z};
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->set3DAttributes(&pos, &vel, &altPanPos);
+}
+
+/**
+ * @brief Set cone for channel
+ * @param aGroupName
+ * @param aOrientation
+ * @param aInsideAngle
+ * @param aOutsideAngle
+ * @param aOutsideVolume
+ */
+void FMODSoundSystem::SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume)
+{
+  FMOD_VECTOR orientation = {aOrientation.x, aOrientation.y, aOrientation.z};
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->set3DConeOrientation(&orientation);
+  channel->set3DConeSettings(aInsideAngle, aOutsideAngle, aOutsideVolume);
+}
+
+/**
+ * @brief Set 3D attenuation for channel
+ * @param aGroupName
+ * @param aPoints
+ */
+void FMODSoundSystem::SetChannel3DAttenuation(int const aChannel, std::vector<Vector3> const &aPoints)
+{
+  std::vector<FMOD_VECTOR> points;
+  for(std::vector<Vector3>::const_iterator it = aPoints.begin(); it != aPoints.end(); ++it)
+  {
+    points.push_back({it->x, it->y, it->z});
+  }
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->set3DCustomRolloff(&points[0], aPoints.size());
+}
+
+/**
+ * @brief Set 3D min max distance for channel
+ * @param aGroupName
+ * @param aMinDistance
+ * @param aMaxDistance
+ */
+void FMODSoundSystem::SetChannel3DMinMaxDistance(int const aChannel, float const aMinDistance, float const aMaxDistance)
+{
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->set3DMinMaxDistance(aMinDistance, aMaxDistance);
+}
+
+/**
+ * @brief Set occlusion for channel
+ * @param aGroupName
+ * @param aDirectOcclusion
+ * @param aReverbOcclusion
+ */
+void FMODSoundSystem::SetChannel3DOcclusion(int const aChannel, float const aDirectOcclusion, float const aReverbOcclusion)
+{
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->set3DOcclusion(aDirectOcclusion, aReverbOcclusion);
+}
+
+/**
+ * @brief Set spread for channel
+ * @param aGroupName
+ * @param aAngle
+ */
+void FMODSoundSystem::SetChannel3DSpread(int const aChannel, float const aAngle)
+{
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->set3DSpread(aAngle);
+}
+
+/**
  * @brief Create channel group
  * @param aGroupName
  */
@@ -242,6 +331,125 @@ void FMODSoundSystem::StopChannelGroup(HashString const &aGroupName)
   
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->stop();
+}
+
+/**
+ * @brief Set 3D attributes for channel group
+ * @param aGroupName
+ * @param aPos
+ * @param aVel
+ * @param aAltPanPos
+ */
+void FMODSoundSystem::SetChannelGroup3DAttributes(HashString const &aGroupName, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  FMOD_VECTOR pos = {aPos.x, aPos.y, aPos.z};
+  FMOD_VECTOR vel = {aVel.x, aVel.y, aVel.z};
+  FMOD_VECTOR altPanPos = {aAltPanPos.x, aAltPanPos.y, aAltPanPos.z};
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->set3DAttributes(&pos, &vel, &altPanPos);
+}
+
+/**
+ * @brief Set cone for channel group
+ * @param aGroupName
+ * @param aOrientation
+ * @param aInsideAngle
+ * @param aOutsideAngle
+ * @param aOutsideVolume
+ */
+void FMODSoundSystem::SetChannelGroup3DCone(HashString const &aGroupName, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  FMOD_VECTOR orientation = {aOrientation.x, aOrientation.y, aOrientation.z};
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->set3DConeOrientation(&orientation);
+  group->set3DConeSettings(aInsideAngle, aOutsideAngle, aOutsideVolume);
+}
+
+/**
+ * @brief Set 3D attenuation for channel group
+ * @param aGroupName
+ * @param aPoints
+ */
+void FMODSoundSystem::SetChannelGroup3DAttenuation(HashString const &aGroupName, std::vector<Vector3> const &aPoints)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  std::vector<FMOD_VECTOR> points;
+  for(std::vector<Vector3>::const_iterator it = aPoints.begin(); it != aPoints.end(); ++it)
+  {
+    points.push_back({it->x, it->y, it->z});
+  }
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->set3DCustomRolloff(&points[0], aPoints.size());
+}
+
+/**
+ * @brief Set 3D min max distance for channel group
+ * @param aGroupName
+ * @param aMinDistance
+ * @param aMaxDistance
+ */
+void FMODSoundSystem::SetChannelGroup3DMinMaxDistance(HashString const &aGroupName, float const aMinDistance, float const aMaxDistance)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->set3DMinMaxDistance(aMinDistance, aMaxDistance);
+}
+
+/**
+ * @brief Set occlusion for channel group
+ * @param aGroupName
+ * @param aDirectOcclusion
+ * @param aReverbOcclusion
+ */
+void FMODSoundSystem::SetChannelGroup3DOcclusion(HashString const &aGroupName, float const aDirectOcclusion, float const aReverbOcclusion)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->set3DOcclusion(aDirectOcclusion, aReverbOcclusion);
+}
+
+/**
+ * @brief Set spread for channel group
+ * @param aGroupName
+ * @param aAngle
+ */
+void FMODSoundSystem::SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->set3DSpread(aAngle);
 }
 
 /**

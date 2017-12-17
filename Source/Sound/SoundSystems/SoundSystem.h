@@ -2,6 +2,7 @@
 #define __JFramework_SoundSystem_h_
 
 #include "Common.h"
+#include "MathExt.h"
 #include "DSP_Type.h"
 #include "DSP.h"
 
@@ -32,12 +33,24 @@ public:
   virtual void SetChannelVolume(int const aChannel, float const aVolume) = 0;
   virtual void StopChannel(int const aChannel) = 0;
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency) = 0;
+  virtual void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos) = 0;
+  virtual void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume) = 0;
+  virtual void SetChannel3DAttenuation(int const aChannel, std::vector<Vector3> const &aPoints) = 0;
+  virtual void SetChannel3DMinMaxDistance(int const aChannel, float const aMinDistance, float const aMaxDistance) = 0;
+  virtual void SetChannel3DOcclusion(int const aChannel, float const aDirectOcclusion, float const aReverbOcclusion) = 0;
+  virtual void SetChannel3DSpread(int const aChannel, float const aAngle) = 0;
   
   // Channel groups
   virtual void CreateChannelGroup(HashString const &aGroupName) = 0;
   virtual void AddChannelToGroup(HashString const &aGroupName, int const aChannel) = 0;
   virtual void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume) = 0;
   virtual void StopChannelGroup(HashString const &aGroupName) = 0;
+  virtual void SetChannelGroup3DAttributes(HashString const &aGroupName, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos) = 0;
+  virtual void SetChannelGroup3DCone(HashString const &aGroupName, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume) = 0;
+  virtual void SetChannelGroup3DAttenuation(HashString const &aGroupName, std::vector<Vector3> const &aPoints) = 0;
+  virtual void SetChannelGroup3DMinMaxDistance(HashString const &aGroupName, float const aMinDistance, float const aMaxDistance) = 0;
+  virtual void SetChannelGroup3DOcclusion(HashString const &aGroupName, float const aDirectOcclusion, float const aReverbOcclusion) = 0;
+  virtual void SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle) = 0;
   
   // DSPs
   virtual DSP* CreateDSP(HashString const &aName, DSP_Type const &aType) = 0;

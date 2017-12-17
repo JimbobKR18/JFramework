@@ -42,12 +42,24 @@ public:
   void SetChannelVolume(int const aChannel, float const aVolume);
   void StopChannel(int const aChannel);
   void SetChannelFrequency(int const aChannel, float const aFrequency);
+  void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
+  void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
+  void SetChannel3DAttenuation(int const aChannel, std::vector<Vector3> const &aPoints);
+  void SetChannel3DMinMaxDistance(int const aChannel, float const aMinDistance, float const aMaxDistance);
+  void SetChannel3DOcclusion(int const aChannel, float const aDirectOcclusion, float const aReverbOcclusion);
+  void SetChannel3DSpread(int const aChannel, float const aAngle);
   
   // Channel groups
   void CreateChannelGroup(HashString const &aGroupName);
   void AddChannelToGroup(HashString const &aGroupName, int const aChannel);
   void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume);
   void StopChannelGroup(HashString const &aGroupName);
+  void SetChannelGroup3DAttributes(HashString const &aGroupName, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
+  void SetChannelGroup3DCone(HashString const &aGroupName, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
+  void SetChannelGroup3DAttenuation(HashString const &aGroupName, std::vector<Vector3> const &aPoints);
+  void SetChannelGroup3DMinMaxDistance(HashString const &aGroupName, float const aMinDistance, float const aMaxDistance);
+  void SetChannelGroup3DOcclusion(HashString const &aGroupName, float const aDirectOcclusion, float const aReverbOcclusion);
+  void SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle);
   
   // DSPs
   DSP* CreateDSP(HashString const &aName, DSP_Type const &aType);

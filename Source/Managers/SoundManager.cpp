@@ -118,6 +118,73 @@ void SoundManager::SetChannelFrequency(int const aChannel, float const aFrequenc
 }
 
 /**
+ * @brief Set 3D attributes for channel
+ * @param aGroupName
+ * @param aPos
+ * @param aVel
+ * @param aAltPanPos
+ */
+void SoundManager::SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos)
+{
+  mSoundSystem->SetChannel3DAttributes(aChannel, aPos, aVel, aAltPanPos);
+}
+
+/**
+ * @brief Set cone for channel
+ * @param aGroupName
+ * @param aOrientation
+ * @param aInsideAngle
+ * @param aOutsideAngle
+ * @param aOutsideVolume
+ */
+void SoundManager::SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume)
+{
+  mSoundSystem->SetChannel3DCone(aChannel, aOrientation, aInsideAngle, aOutsideAngle, aOutsideVolume);
+}
+
+/**
+ * @brief Set 3D attenuation for channel
+ * @param aGroupName
+ * @param aPoints
+ */
+void SoundManager::SetChannel3DAttenuation(int const aChannel, std::vector<Vector3> const &aPoints)
+{
+  mSoundSystem->SetChannel3DAttenuation(aChannel, aPoints);
+}
+
+/**
+ * @brief Set 3D min max distance for channel
+ * @param aGroupName
+ * @param aMinDistance
+ * @param aMaxDistance
+ */
+void SoundManager::SetChannel3DMinMaxDistance(int const aChannel, float const aMinDistance, float const aMaxDistance)
+{
+  mSoundSystem->SetChannel3DMinMaxDistance(aChannel, aMinDistance, aMaxDistance);
+}
+
+/**
+ * @brief Set occlusion for channel
+ * @param aGroupName
+ * @param aDirectOcclusion
+ * @param aReverbOcclusion
+ */
+void SoundManager::SetChannel3DOcclusion(int const aChannel, float const aDirectOcclusion, float const aReverbOcclusion)
+{
+  mSoundSystem->SetChannel3DOcclusion(aChannel, aDirectOcclusion, aReverbOcclusion);
+}
+
+/**
+ * @brief Set spread for channel
+ * @param aGroupName
+ * @param aAngle
+ */
+void SoundManager::SetChannel3DSpread(int const aChannel, float const aAngle)
+{
+  mSoundSystem->SetChannel3DSpread(aChannel, aAngle);
+}
+
+/**
  * @brief Create new channel group
  * @param aGroupName
  */
@@ -153,6 +220,73 @@ void SoundManager::SetChannelGroupVolume(HashString const &aGroupName, float con
 void SoundManager::StopChannelGroup(HashString const &aGroupName)
 {
   mSoundSystem->StopChannelGroup(aGroupName);
+}
+
+/**
+ * @brief Set 3D attributes for channel group
+ * @param aGroupName
+ * @param aPos
+ * @param aVel
+ * @param aAltPanPos
+ */
+void SoundManager::SetChannelGroup3DAttributes(HashString const &aGroupName, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos)
+{
+  mSoundSystem->SetChannelGroup3DAttributes(aGroupName, aPos, aVel, aAltPanPos);
+}
+
+/**
+ * @brief Set cone for channel group
+ * @param aGroupName
+ * @param aOrientation
+ * @param aInsideAngle
+ * @param aOutsideAngle
+ * @param aOutsideVolume
+ */
+void SoundManager::SetChannelGroup3DCone(HashString const &aGroupName, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume)
+{
+  mSoundSystem->SetChannelGroup3DCone(aGroupName, aOrientation, aInsideAngle, aOutsideAngle, aOutsideVolume);
+}
+
+/**
+ * @brief Set 3D attenuation for channel group
+ * @param aGroupName
+ * @param aPoints
+ */
+void SoundManager::SetChannelGroup3DAttenuation(HashString const &aGroupName, std::vector<Vector3> const &aPoints)
+{
+  mSoundSystem->SetChannelGroup3DAttenuation(aGroupName, aPoints);
+}
+
+/**
+ * @brief Set 3D min max distance for channel group
+ * @param aGroupName
+ * @param aMinDistance
+ * @param aMaxDistance
+ */
+void SoundManager::SetChannelGroup3DMinMaxDistance(HashString const &aGroupName, float const aMinDistance, float const aMaxDistance)
+{
+  mSoundSystem->SetChannelGroup3DMinMaxDistance(aGroupName, aMinDistance, aMaxDistance);
+}
+
+/**
+ * @brief Set occlusion for channel group
+ * @param aGroupName
+ * @param aDirectOcclusion
+ * @param aReverbOcclusion
+ */
+void SoundManager::SetChannelGroup3DOcclusion(HashString const &aGroupName, float const aDirectOcclusion, float const aReverbOcclusion)
+{
+  mSoundSystem->SetChannelGroup3DOcclusion(aGroupName, aDirectOcclusion, aReverbOcclusion);
+}
+
+/**
+ * @brief Set spread for channel group
+ * @param aGroupName
+ * @param aAngle
+ */
+void SoundManager::SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle)
+{
+  mSoundSystem->SetChannelGroup3DSpread(aGroupName, aAngle);
 }
 
 /**
