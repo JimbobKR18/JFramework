@@ -492,7 +492,10 @@ DSP* FMODSoundSystem::GetDSPFromChannel(int aChannel, int aIndex)
   FMOD::Channel *channel;
   mFMODSystem->getChannel(aChannel, &channel);
   channel->getDSP(aIndex, &dsp);
-  return new FMODDSP(dsp, Common::IntToString(aChannel));
+  
+  FMODDSP* fmodDSP = new FMODDSP(dsp, Common::IntToString(aChannel));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = fmodDSP;
+  return fmodDSP;
 }
 
 /**
@@ -512,7 +515,11 @@ DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int a
   FMOD::DSP *dsp;
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->getDSP(aIndex, &dsp);
-  return new FMODDSP(dsp, aGroupName);
+  
+  FMODDSP* fmodDSP = new FMODDSP(dsp, aGroupName + Common::IntToString(aIndex));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = fmodDSP;
+  
+  return fmodDSP;
 }
 
 /**
