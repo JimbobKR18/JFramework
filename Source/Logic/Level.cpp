@@ -447,7 +447,7 @@ void Level::Unload(Level const *aNextLevel)
   RemoveMenus();
 
   if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
-    mOwner->GetOwningApp()->GET<SoundManager>()->StopSound(mMusicChannel);
+    mOwner->GetOwningApp()->GET<SoundManager>()->StopChannel(mMusicChannel);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(nullptr);
   

@@ -226,11 +226,22 @@
     <VirtualDirectory Name="SoundSystems">
       <File Name="../../Source/Sound/SoundSystems/SoundSystem.h"/>
       <File Name="../../Source/Sound/SoundSystems/SoundSystem.cpp"/>
-      <File Name="../../Source/Sound/SoundSystems/SDLSoundSystem.h"/>
-      <File Name="../../Source/Sound/SoundSystems/SDLSoundSystem.cpp"/>
       <File Name="../../Source/Sound/SoundSystems/FMODSoundSystem.h"/>
       <File Name="../../Source/Sound/SoundSystems/FMODSoundSystem.cpp"/>
     </VirtualDirectory>
+    <File Name="../../Source/Sound/DSP_Type.h"/>
+    <VirtualDirectory Name="DSPs">
+      <VirtualDirectory Name="FMOD">
+        <File Name="FMODDSP.h"/>
+        <File Name="FMODDSP.cpp"/>
+        <File Name="FMODDSP_Echo.h"/>
+        <File Name="FMODDSP_Echo.cpp"/>
+      </VirtualDirectory>
+      <File Name="DSP_Echo.h"/>
+      <File Name="DSP_Echo.cpp"/>
+    </VirtualDirectory>
+    <File Name="../../Source/Sound/DSP.h"/>
+    <File Name="../../Source/Sound/DSP.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Network">
     <File Name="../../Source/Network/PCNetworkPort.cpp"/>
@@ -274,6 +285,8 @@
         <IncludePath Value="../../Source/Physics"/>
         <IncludePath Value="../../Source/Sound"/>
         <IncludePath Value="../../Source/Sound/SoundSystems"/>
+        <IncludePath Value="../../Source/Sound/DSPs"/>
+        <IncludePath Value="../../Source/Sound/DSPs/FMOD"/>
         <IncludePath Value="../../Source/Managers"/>
         <IncludePath Value="../../Source/Graphics"/>
         <IncludePath Value="../../Source/LUA"/>

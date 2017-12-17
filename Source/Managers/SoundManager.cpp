@@ -10,7 +10,6 @@
 #include "Common.h"
 #include "TextParser.h"
 #if !defined(ANDROID) && !defined(IOS)
-#include "SDLSoundSystem.h"
 #include "FMODSoundSystem.h"
 #endif
 
@@ -35,10 +34,11 @@ SoundManager::~SoundManager()
  * @brief Create a sound by filename.
  * @param aFilename
  * @param aAlias
+ * @param aSource
  */
-void SoundManager::CreateSound(HashString const &aFilename, HashString const &aAlias)
+void SoundManager::CreateSound(HashString const &aFilename, HashString const &aAlias, SoundSystem::SoundSource const &aSource)
 {
-  mSoundSystem->CreateSound(aFilename, aAlias);
+  mSoundSystem->CreateSound(aFilename, aAlias, aSource);
 }
 
 /**
@@ -62,49 +62,159 @@ int SoundManager::PlaySound(HashString const &aName, int const aNumLoops)
 }
 
 /**
- * @brief Stop a sound.
- * @param aChannel
- */
-void SoundManager::StopSound(int aChannel)
-{
-  mSoundSystem->StopSound(aChannel);
-}
-
-/**
- * @brief Set volume of all sounds.
- * @param aVolume Volume value from 0 to 1.
- */
-void SoundManager::SetVolume(float const aVolume)
-{
-  mSoundSystem->SetVolume(aVolume);
-}
-
-/**
- * @brief Set the volume of a sound.
- * @param aChannel
- * @param aVolume The volume to set the sound to.
- */
-void SoundManager::SetSoundVolume(int aChannel, float const aVolume)
-{
-  mSoundSystem->SetChannelVolume(aChannel, aVolume);
-}
-
-/**
  * @brief Resume a sound from pause.
  * @param aChannel
  */
-void SoundManager::ResumeSound(int aChannel)
+void SoundManager::ResumeChannel(int aChannel)
 {
-  mSoundSystem->ResumeSound(aChannel);
+  mSoundSystem->ResumeChannel(aChannel);
 }
 
 /**
  * @brief Pause a sound.
  * @param aChannel
  */
-void SoundManager::PauseSound(int aChannel)
+void SoundManager::PauseChannel(int aChannel)
 {
-  mSoundSystem->PauseSound(aChannel);
+  mSoundSystem->PauseChannel(aChannel);
+}
+
+/**
+ * @brief Set volume of all sounds.
+ * @param aVolume Volume value from 0 to 1.
+ */
+void SoundManager::SetMasterVolume(float const aVolume)
+{
+  mSoundSystem->SetMasterVolume(aVolume);
+}
+
+/**
+ * @brief Set the volume of a channel.
+ * @param aChannel
+ * @param aVolume The volume to set the sound to.
+ */
+void SoundManager::SetChannelVolume(int aChannel, float const aVolume)
+{
+  mSoundSystem->SetChannelVolume(aChannel, aVolume);
+}
+
+/**
+ * @brief Stop a sound.
+ * @param aChannel
+ */
+void SoundManager::StopChannel(int aChannel)
+{
+  mSoundSystem->StopChannel(aChannel);
+}
+
+/**
+ * @brief Set speed of channel via frequency
+ * @param aChannel
+ * @param aFrequency
+ */
+void SoundManager::SetChannelFrequency(int const aChannel, float const aFrequency)
+{
+  mSoundSystem->SetChannelFrequency(aChannel, aFrequency);
+}
+
+/**
+ * @brief Create new channel group
+ * @param aGroupName
+ */
+void SoundManager::CreateChannelGroup(HashString const &aGroupName)
+{
+  mSoundSystem->CreateChannelGroup(aGroupName);
+}
+
+/**
+ * @brief Add channel to group
+ * @param aGroupName
+ * @param aChannel
+ */
+void SoundManager::AddChannelToGroup(HashString const &aGroupName, int const aChannel)
+{
+  mSoundSystem->AddChannelToGroup(aGroupName, aChannel);
+}
+
+/**
+ * @brief Set volume of channel group
+ * @param aGroupName
+ * @param aVolume
+ */
+void SoundManager::SetChannelGroupVolume(HashString const &aGroupName, float const aVolume)
+{
+  mSoundSystem->SetChannelGroupVolume(aGroupName, aVolume);
+}
+
+/**
+ * @brief Stop playing a channel group
+ * @param aGroupName
+ */
+void SoundManager::StopChannelGroup(HashString const &aGroupName)
+{
+  mSoundSystem->StopChannelGroup(aGroupName);
+}
+
+/**
+ * @brief Create new DSP (Digital Signal Processor)
+ * @param aName
+ * @param aType
+ * @return 
+ */
+DSP* SoundManager::CreateDSP(HashString const &aName, DSP_Type const &aType)
+{
+  return mSoundSystem->CreateDSP(aName, aType);
+}
+
+/**
+ * @brief Delete DSP
+ * @param aDSP
+ */
+void SoundManager::DeleteDSP(DSP *aDSP)
+{
+  mSoundSystem->DeleteDSP(aDSP);
+}
+
+/**
+ * @brief Add DSP to a channel
+ * @param aDSP
+ * @param aChannel
+ * @param aIndex
+ */
+void SoundManager::AddDSPToChannel(DSP *aDSP, int const aChannel, int const aIndex)
+{
+  mSoundSystem->AddDSPToChannel(aDSP, aChannel, aIndex);
+}
+
+/**
+ * @brief Add DSP to a channel group
+ * @param aDSP
+ * @param aGroupName
+ * @param aIndex
+ */
+void SoundManager::AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupName, int const aIndex)
+{
+  mSoundSystem->AddDSPToChannelGroup(aDSP, aGroupName, aIndex);
+}
+
+/**
+ * @brief Remove DSP from a channel
+ * @param aDSP
+ * @param aChannel
+ */
+void SoundManager::RemoveDSPFromChannel(DSP *aDSP, int const aChannel)
+{
+  mSoundSystem->RemoveDSPFromChannel(aDSP, aChannel);
+}
+
+/**
+ * @brief Remove DSP from a channel group
+ * @param aDSP
+ * @param aGroupName
+ */
+void SoundManager::RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGroupName)
+{
+  mSoundSystem->RemoveDSPFromChannelGroup(aDSP, aGroupName);
 }
 
 /**
@@ -138,10 +248,10 @@ void SoundManager::SerializeLUA()
 {
   SLB::Class<SoundManager>("SoundManager").inherits<Manager>()
       .set("PlaySound", &SoundManager::PlaySound)
-      .set("StopSound", &SoundManager::StopSound)
-      .set("SetSoundVolume", &SoundManager::SetSoundVolume)
-      .set("ResumeSound", &SoundManager::ResumeSound)
-      .set("PauseSound", &SoundManager::PauseSound);
+      .set("StopChannel", &SoundManager::StopChannel)
+      .set("SetSoundVolume", &SoundManager::SetChannelVolume)
+      .set("ResumeChannel", &SoundManager::ResumeChannel)
+      .set("PauseChannel", &SoundManager::PauseChannel);
 }
 
 /**
@@ -158,7 +268,12 @@ void SoundManager::LoadSounds()
   while(parser.Find(curIndex))
   {
     Root *curSound = parser.Find(curIndex);
-    CreateSound(curSound->Find("File")->GetValue(), curSound->Find("Name")->GetValue());
+    SoundSystem::SoundSource source = SoundSystem::SoundSource::DEFAULT;
+    
+    if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Stream")
+      source = SoundSystem::SoundSource::STREAM;
+    
+    CreateSound(curSound->Find("File")->GetValue(), curSound->Find("Name")->GetValue(), source);
     ++index;
     curIndex = sound + Common::IntToString(index);
   }
