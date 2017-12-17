@@ -232,13 +232,13 @@
     <File Name="../../Source/Sound/DSP_Type.h"/>
     <VirtualDirectory Name="DSPs">
       <VirtualDirectory Name="FMOD">
-        <File Name="FMODDSP.h"/>
-        <File Name="FMODDSP.cpp"/>
-        <File Name="FMODDSP_Echo.h"/>
-        <File Name="FMODDSP_Echo.cpp"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP.cpp"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP.h"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.h"/>
       </VirtualDirectory>
-      <File Name="DSP_Echo.h"/>
-      <File Name="DSP_Echo.cpp"/>
+      <File Name="../../Source/Sound/DSPs/DSP_Echo.cpp"/>
+      <File Name="../../Source/Sound/DSPs/DSP_Echo.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Sound/DSP.h"/>
     <File Name="../../Source/Sound/DSP.cpp"/>

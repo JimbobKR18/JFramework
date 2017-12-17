@@ -69,7 +69,7 @@ Objects0=$(IntermediateDirectory)/up_up_Source_LUA_lua.c$(ObjectSuffix) $(Interm
 Objects1=$(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Physics_Joint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screen.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_SoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/DSP_Echo.cpp$(ObjectSuffix) $(IntermediateDirectory)/FMODDSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/FMODDSP_Echo.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_SoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(ObjectSuffix) \
 	
 
 
@@ -720,29 +720,29 @@ $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(De
 $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(PreprocessSuffix): ../../Source/Sound/SoundSystems/FMODSoundSystem.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(PreprocessSuffix) ../../Source/Sound/SoundSystems/FMODSoundSystem.cpp
 
-$(IntermediateDirectory)/DSP_Echo.cpp$(ObjectSuffix): DSP_Echo.cpp $(IntermediateDirectory)/DSP_Echo.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Linux/JFramework/DSP_Echo.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/DSP_Echo.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/DSP_Echo.cpp$(DependSuffix): DSP_Echo.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DSP_Echo.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/DSP_Echo.cpp$(DependSuffix) -MM DSP_Echo.cpp
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(ObjectSuffix): ../../Source/Sound/DSPs/DSP_Echo.cpp $(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Sound/DSPs/DSP_Echo.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(DependSuffix): ../../Source/Sound/DSPs/DSP_Echo.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(DependSuffix) -MM ../../Source/Sound/DSPs/DSP_Echo.cpp
 
-$(IntermediateDirectory)/DSP_Echo.cpp$(PreprocessSuffix): DSP_Echo.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DSP_Echo.cpp$(PreprocessSuffix) DSP_Echo.cpp
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(PreprocessSuffix): ../../Source/Sound/DSPs/DSP_Echo.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(PreprocessSuffix) ../../Source/Sound/DSPs/DSP_Echo.cpp
 
-$(IntermediateDirectory)/FMODDSP.cpp$(ObjectSuffix): FMODDSP.cpp $(IntermediateDirectory)/FMODDSP.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Linux/JFramework/FMODDSP.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/FMODDSP.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/FMODDSP.cpp$(DependSuffix): FMODDSP.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/FMODDSP.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/FMODDSP.cpp$(DependSuffix) -MM FMODDSP.cpp
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(ObjectSuffix): ../../Source/Sound/DSPs/FMOD/FMODDSP.cpp $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Sound/DSPs/FMOD/FMODDSP.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(DependSuffix): ../../Source/Sound/DSPs/FMOD/FMODDSP.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(DependSuffix) -MM ../../Source/Sound/DSPs/FMOD/FMODDSP.cpp
 
-$(IntermediateDirectory)/FMODDSP.cpp$(PreprocessSuffix): FMODDSP.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/FMODDSP.cpp$(PreprocessSuffix) FMODDSP.cpp
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(PreprocessSuffix): ../../Source/Sound/DSPs/FMOD/FMODDSP.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP.cpp$(PreprocessSuffix) ../../Source/Sound/DSPs/FMOD/FMODDSP.cpp
 
-$(IntermediateDirectory)/FMODDSP_Echo.cpp$(ObjectSuffix): FMODDSP_Echo.cpp $(IntermediateDirectory)/FMODDSP_Echo.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Linux/JFramework/FMODDSP_Echo.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/FMODDSP_Echo.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/FMODDSP_Echo.cpp$(DependSuffix): FMODDSP_Echo.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/FMODDSP_Echo.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/FMODDSP_Echo.cpp$(DependSuffix) -MM FMODDSP_Echo.cpp
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(ObjectSuffix): ../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(DependSuffix): ../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(DependSuffix) -MM ../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp
 
-$(IntermediateDirectory)/FMODDSP_Echo.cpp$(PreprocessSuffix): FMODDSP_Echo.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/FMODDSP_Echo.cpp$(PreprocessSuffix) FMODDSP_Echo.cpp
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(PreprocessSuffix): ../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(PreprocessSuffix) ../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
