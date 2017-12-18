@@ -14,6 +14,10 @@ FMODDSP::~FMODDSP()
   mDSP = nullptr;
 }
 
+/**
+ * @brief Get FMOD DSP object
+ * @return 
+ */
 FMOD::DSP* FMODDSP::GetFMODDSP()
 {
   return mDSP;

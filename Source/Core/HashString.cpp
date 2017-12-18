@@ -94,7 +94,7 @@ int HashString::FindNumberOfOccurrences(HashString const &aString) const
   int ret = 0;
   HashString current;
   
-  for(int i = 0; i < mString.size(); ++i)
+  for(unsigned i = 0; i < mString.size(); ++i)
   {
     current.Push(mString[i]);
     if(current.Find(aString))
