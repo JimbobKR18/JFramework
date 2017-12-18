@@ -1,14 +1,26 @@
 #ifndef __JFramework__FMODDSP_Echo_h_
 #define __JFramework__FMODDSP_Echo_h_
 
-#include "FMODDSP.h"
 #include "DSP_Echo.h"
+#include "fmod_studio.hpp"
+#include "fmod_errors.h"
+#include "FMODSoundSystem.h"
 
-class FMODDSP_Echo : public FMODDSP, public DSP_Echo
+class FMODDSP_Echo : public DSP_Echo
 {
+private:
+  typedef std::unordered_map<int, FMOD::DSPConnection*>     FMODDSPConnectionContainer;
+  typedef FMODDSPConnectionContainer::iterator              FMODDSPConnectionIt;
+
+  FMOD::DSP* mDSP;
+  FMODSoundSystem *mSoundSystem;
+  FMODDSPConnectionContainer mConnectionContainer;
+  
 public:
-  FMODDSP_Echo(FMOD::System* aSystem, HashString const &aName);
+  FMODDSP_Echo(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashString const &aName);
   virtual ~FMODDSP_Echo();
+  
+  FMOD::DSP* GetFMODDSP();
   
   virtual void SetFormat(int aNumChannels, Speaker_Mode const &aSpeakerMode);
   virtual void AddInput(DSP* aInput, float **aMixMatrix, int aWidth, int aHeight);

@@ -18,7 +18,11 @@
 class SoundManager : public Manager
 {
 private:
-  SoundSystem*                                      mSoundSystem;
+  typedef std::unordered_map<int, DSP*>     DSPContainer;
+  typedef DSPContainer::iterator            DSPIt;
+
+  SoundSystem* mSoundSystem;
+  DSPContainer mDSPContainer;
 
   static unsigned const sUID;
 

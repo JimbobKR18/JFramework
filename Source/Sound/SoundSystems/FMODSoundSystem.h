@@ -4,7 +4,6 @@
 #include "SoundSystem.h" // Base class: SoundSystem
 #include "fmod_studio.hpp"
 #include "fmod_errors.h"
-#include "FMODDSP.h"
 
 class FMODSoundSystem : public SoundSystem
 {
@@ -13,8 +12,8 @@ private:
   typedef FMODSoundContainer::iterator              FMODSoundIt;
   typedef std::unordered_map<int, FMOD::ChannelGroup*> FMODChannelGroupContainer;
   typedef FMODChannelGroupContainer::iterator          FMODChannelGroupIt;
-  typedef std::unordered_map<int, FMODDSP*>     FMODDSPContainer;
-  typedef FMODDSPContainer::iterator            FMODDSPIt;
+  typedef std::unordered_map<int, FMOD::DSP*>     FMODDSPContainer;
+  typedef FMODDSPContainer::iterator              FMODDSPIt;
 
   FMOD::Studio::System* mFMODStudioSystem;
   FMOD::System* mFMODSystem;
@@ -26,6 +25,9 @@ private:
 public:
   FMODSoundSystem();
   virtual ~FMODSoundSystem();
+  
+  // Getters
+  FMOD::DSP* GetDSP(HashString const &aName);
 
   // Update
   virtual void Update(float const aDT);
@@ -65,7 +67,7 @@ public:
   virtual DSP* CreateDSP(HashString const &aName, DSP_Type const &aType);
   virtual DSP* GetDSPFromChannel(int aChannel, int aIndex);
   virtual DSP* GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex);
-  virtual void DeleteDSP(DSP *aDSP);
+  virtual bool DeleteDSP(DSP *aDSP);
   virtual void AddDSPToChannel(DSP *aDSP, int const aChannel, int const aIndex);
   virtual void AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupName, int const aIndex);
   virtual void RemoveDSPFromChannel(DSP *aDSP, int const aChannel);

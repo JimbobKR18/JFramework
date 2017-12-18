@@ -14,7 +14,7 @@
 #endif
 
 unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
-SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr)
+SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr), mDSPContainer()
 {
 #if !defined(ANDROID) && !defined(IOS)
   mSoundSystem = new FMODSoundSystem();
@@ -28,6 +28,11 @@ SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundM
 SoundManager::~SoundManager()
 {
   delete mSoundSystem;
+  for(DSPIt it = mDSPContainer.begin(); it != mDSPContainer.end(); ++it)
+  {
+    delete it->second;
+  }
+  mDSPContainer.clear();
 }
 
 /**
@@ -297,7 +302,9 @@ void SoundManager::SetChannelGroup3DSpread(HashString const &aGroupName, float c
  */
 DSP* SoundManager::CreateDSP(HashString const &aName, DSP_Type const &aType)
 {
-  return mSoundSystem->CreateDSP(aName, aType);
+  DSP *dsp = mSoundSystem->CreateDSP(aName, aType);
+  mDSPContainer[dsp->GetName().ToHash()] = dsp;
+  return dsp;
 }
 
 /**
@@ -308,7 +315,13 @@ DSP* SoundManager::CreateDSP(HashString const &aName, DSP_Type const &aType)
  */
 DSP* SoundManager::GetDSPFromChannel(int aChannel, int aIndex)
 {
-  return mSoundSystem->GetDSPFromChannel(aChannel, aIndex);
+  HashString name = Common::IntToString(aChannel) + Common::IntToString(aIndex);
+  if(mDSPContainer.find(name.ToHash()) != mDSPContainer.end())
+    return mDSPContainer[name.ToHash()];
+  
+  DSP *dsp = mSoundSystem->GetDSPFromChannel(aChannel, aIndex);
+  mDSPContainer[dsp->GetName().ToHash()] = dsp;
+  return dsp;
 }
 
 /**
@@ -319,7 +332,13 @@ DSP* SoundManager::GetDSPFromChannel(int aChannel, int aIndex)
  */
 DSP* SoundManager::GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex)
 {
-  return mSoundSystem->GetDSPFromChannelGroup(aGroupName, aIndex);
+  HashString name = aGroupName + Common::IntToString(aIndex);
+  if(mDSPContainer.find(name.ToHash()) != mDSPContainer.end())
+    return mDSPContainer[name.ToHash()];
+    
+  DSP *dsp = mSoundSystem->GetDSPFromChannelGroup(aGroupName, aIndex);
+  mDSPContainer[dsp->GetName().ToHash()] = dsp;
+  return dsp;
 }
 
 /**
@@ -328,7 +347,11 @@ DSP* SoundManager::GetDSPFromChannelGroup(HashString const &aGroupName, int aInd
  */
 void SoundManager::DeleteDSP(DSP *aDSP)
 {
-  mSoundSystem->DeleteDSP(aDSP);
+  if(mSoundSystem->DeleteDSP(aDSP))
+  {
+    mDSPContainer.erase(aDSP->GetName().ToHash());
+    delete aDSP;
+  }
 }
 
 /**

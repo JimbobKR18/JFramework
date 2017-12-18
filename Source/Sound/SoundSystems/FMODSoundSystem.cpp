@@ -34,12 +34,22 @@ FMODSoundSystem::~FMODSoundSystem()
   }
   for(FMODDSPIt it = mDSPContainer.begin(); it != mDSPContainer.end(); ++it)
   {
-    it->second->GetFMODDSP()->release();
+    it->second->release();
     delete it->second;
   }
   mChannelGroupContainer.clear();
   mDSPContainer.clear();
   mFMODStudioSystem->release();
+}
+
+/**
+ * @brief Get FMOD DSP by name
+ * @param aName
+ * @return 
+ */
+FMOD::DSP* FMODSoundSystem::GetDSP(HashString const &aName)
+{
+  return mDSPContainer[aName.ToHash()];
 }
 
 /**
@@ -471,13 +481,13 @@ DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
   switch(aType)
   {
   case DSP_TYPE_ECHO:
-    dsp = new FMODDSP_Echo(mFMODSystem, aName);
+    dsp = new FMODDSP_Echo(mFMODSystem, this, aName);
+    mDSPContainer[aName.ToHash()] = ((FMODDSP_Echo*)dsp)->GetFMODDSP();
     break;
   default:
     assert(!"DSP_Type not supported.");
     break;
   }
-  mDSPContainer[aName.ToHash()] = (FMODDSP*)dsp;
   return dsp;
 }
 
@@ -494,8 +504,8 @@ DSP* FMODSoundSystem::GetDSPFromChannel(int aChannel, int aIndex)
   mFMODSystem->getChannel(aChannel, &channel);
   channel->getDSP(aIndex, &dsp);
   
-  DSP* fmodDSP = new FMODDSP_Basic(dsp, Common::IntToString(aChannel));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = (FMODDSP*)fmodDSP;
+  DSP* fmodDSP = new FMODDSP_Basic(dsp, this, Common::IntToString(aChannel));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = ((FMODDSP_Basic*)fmodDSP)->GetFMODDSP();
   return fmodDSP;
 }
 
@@ -517,8 +527,8 @@ DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int a
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->getDSP(aIndex, &dsp);
   
-  DSP* fmodDSP = new FMODDSP_Basic(dsp, aGroupName + Common::IntToString(aIndex));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = (FMODDSP*)fmodDSP;
+  DSP* fmodDSP = new FMODDSP_Basic(dsp, this, aGroupName + Common::IntToString(aIndex));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = ((FMODDSP_Basic*)fmodDSP)->GetFMODDSP();
   
   return fmodDSP;
 }
@@ -527,7 +537,7 @@ DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int a
  * @brief Delete DSP
  * @param aDSP
  */
-void FMODSoundSystem::DeleteDSP(DSP *aDSP)
+bool FMODSoundSystem::DeleteDSP(DSP *aDSP)
 {
   if(mDSPContainer.find(aDSP->GetName().ToHash()) == mDSPContainer.end())
   {
@@ -535,16 +545,17 @@ void FMODSoundSystem::DeleteDSP(DSP *aDSP)
     assert(!"DSP does not exist.");
   }
   
-  FMOD_RESULT result = mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP()->release();
+  FMOD_RESULT result = mDSPContainer[aDSP->GetName().ToHash()]->release();
   if(result != FMOD_ERR_DSP_INUSE)
   {
     mDSPContainer.erase(aDSP->GetName().ToHash());
-    delete aDSP;
+    return true;
   }
   else
   {
     DebugLogPrint("DSP %s in use, cannot delete.", aDSP->GetName().ToCharArray());
   }
+  return false;
 }
 
 /**
@@ -565,8 +576,8 @@ void FMODSoundSystem::AddDSPToChannel(DSP *aDSP, int const aChannel, int const a
   FMOD_RESULT result = mFMODSystem->getChannel(aChannel, &channel);
   if(result == FMOD_OK)
   {
-    result = channel->addDSP(aIndex, mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
-    DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+    FMOD::DSP* dsp = mDSPContainer[aDSP->GetName().ToHash()];
+    channel->addDSP(aIndex, dsp);
   }
   else
   {
@@ -595,7 +606,7 @@ void FMODSoundSystem::AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupNa
   }
   
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
-  group->addDSP(aIndex, mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
+  group->addDSP(aIndex, mDSPContainer[aDSP->GetName().ToHash()]);
 }
 
 /**
@@ -609,7 +620,7 @@ void FMODSoundSystem::RemoveDSPFromChannel(DSP *aDSP, int const aChannel)
   FMOD_RESULT result = mFMODSystem->getChannel(aChannel, &channel);
   if(result == FMOD_OK)
   {
-    channel->removeDSP(mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
+    channel->removeDSP(mDSPContainer[aDSP->GetName().ToHash()]);
   }
   else
   {
@@ -637,5 +648,5 @@ void FMODSoundSystem::RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGr
   }
   
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
-  group->removeDSP(mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
+  group->removeDSP(mDSPContainer[aDSP->GetName().ToHash()]);
 }

@@ -1,11 +1,28 @@
 #include "FMODDSP_Echo.h"
 
-FMODDSP_Echo::FMODDSP_Echo(FMOD::System* aSystem, HashString const &aName) : FMODDSP(aSystem, DSP_TYPE_ECHO), DSP_Echo(aName)
+FMODDSP_Echo::FMODDSP_Echo(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashString const &aName) : 
+  DSP_Echo(aName), mDSP(nullptr), mSoundSystem(aSoundSystem), mConnectionContainer()
 {
+  FMOD_RESULT result = aSystem->createDSPByType((FMOD_DSP_TYPE)DSP_TYPE_ECHO, &mDSP);
+  if(result != FMOD_OK)
+  {
+    DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+    assert(!"FMOD failed to create DSP");
+  }
 }
 
 FMODDSP_Echo::~FMODDSP_Echo()
 {
+  mDSP = nullptr;
+}
+
+/**
+ * @brief Get FMOD DSP
+ * @return 
+ */
+FMOD::DSP* FMODDSP_Echo::GetFMODDSP()
+{
+  return mDSP;
 }
 
 /**
@@ -28,8 +45,7 @@ void FMODDSP_Echo::SetFormat(int aNumChannels, Speaker_Mode const &aSpeakerMode)
 void FMODDSP_Echo::AddInput(DSP* aDSP, float **aMixMatrix, int aWidth, int aHeight)
 {
   FMOD::DSPConnection *connection;
-  FMODDSP *fmodDSP = (FMODDSP*)aDSP;
-  mDSP->addInput(fmodDSP->GetFMODDSP(), &connection);
+  mDSP->addInput(mSoundSystem->GetDSP(aDSP->GetName()), &connection);
   connection->setMixMatrix(&aMixMatrix[0][0], aWidth, aHeight);
   mConnectionContainer[(GetName() + aDSP->GetName()).ToHash()] = connection;
 }
@@ -40,8 +56,7 @@ void FMODDSP_Echo::AddInput(DSP* aDSP, float **aMixMatrix, int aWidth, int aHeig
  */
 void FMODDSP_Echo::RemoveInput(DSP* aInput)
 {
-  FMODDSP *fmodDSP = (FMODDSP*)aInput;
-  mDSP->disconnectFrom(fmodDSP->GetFMODDSP(), mConnectionContainer[(GetName() + aInput->GetName()).ToHash()]);
+  mDSP->disconnectFrom(mSoundSystem->GetDSP(aInput->GetName()), mConnectionContainer[(GetName() + aInput->GetName()).ToHash()]);
 }
 
 /**
@@ -68,7 +83,7 @@ void FMODDSP_Echo::SetBypass(bool const aBypass)
  */
 void FMODDSP_Echo::SetDelay(float aDelay)
 {
-  GetFMODDSP()->setParameterFloat(FMOD_DSP_ECHO_DELAY, aDelay);
+  mDSP->setParameterFloat(FMOD_DSP_ECHO_DELAY, aDelay);
 }
 
 /**
@@ -77,7 +92,7 @@ void FMODDSP_Echo::SetDelay(float aDelay)
  */
 void FMODDSP_Echo::SetFeedback(float aFeedback)
 {
-  GetFMODDSP()->setParameterFloat(FMOD_DSP_ECHO_FEEDBACK, aFeedback);
+  mDSP->setParameterFloat(FMOD_DSP_ECHO_FEEDBACK, aFeedback);
 }
 
 /**
@@ -86,7 +101,7 @@ void FMODDSP_Echo::SetFeedback(float aFeedback)
  */
 void FMODDSP_Echo::SetDryLevel(float aDryLevel)
 {
-  GetFMODDSP()->setParameterFloat(FMOD_DSP_ECHO_DRYLEVEL, aDryLevel);
+  mDSP->setParameterFloat(FMOD_DSP_ECHO_DRYLEVEL, aDryLevel);
 }
 
 /**
@@ -95,5 +110,5 @@ void FMODDSP_Echo::SetDryLevel(float aDryLevel)
  */
 void FMODDSP_Echo::SetWetLevel(float aWetLevel)
 {
-  GetFMODDSP()->setParameterFloat(FMOD_DSP_ECHO_WETLEVEL, aWetLevel);
+  mDSP->setParameterFloat(FMOD_DSP_ECHO_WETLEVEL, aWetLevel);
 }
