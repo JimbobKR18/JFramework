@@ -1,4 +1,5 @@
 #include "FMODSoundSystem.h"
+#include "FMODDSP_Basic.h"
 #include "FMODDSP_Echo.h"
 
 FMODSoundSystem::FMODSoundSystem() : mFMODStudioSystem(nullptr), mFMODSystem(nullptr), 
@@ -466,7 +467,7 @@ DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
     assert(!"DSP type exceeds FMOD max.");
   }
   
-  FMODDSP *dsp = nullptr;
+  DSP *dsp = nullptr;
   switch(aType)
   {
   case DSP_TYPE_ECHO:
@@ -476,7 +477,7 @@ DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
     assert(!"DSP_Type not supported.");
     break;
   }
-  mDSPContainer[aName.ToHash()] = dsp;
+  mDSPContainer[aName.ToHash()] = (FMODDSP*)dsp;
   return dsp;
 }
 
@@ -493,8 +494,8 @@ DSP* FMODSoundSystem::GetDSPFromChannel(int aChannel, int aIndex)
   mFMODSystem->getChannel(aChannel, &channel);
   channel->getDSP(aIndex, &dsp);
   
-  FMODDSP* fmodDSP = new FMODDSP(dsp, Common::IntToString(aChannel));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = fmodDSP;
+  DSP* fmodDSP = new FMODDSP_Basic(dsp, Common::IntToString(aChannel));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = (FMODDSP*)fmodDSP;
   return fmodDSP;
 }
 
@@ -516,8 +517,8 @@ DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int a
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->getDSP(aIndex, &dsp);
   
-  FMODDSP* fmodDSP = new FMODDSP(dsp, aGroupName + Common::IntToString(aIndex));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = fmodDSP;
+  DSP* fmodDSP = new FMODDSP_Basic(dsp, aGroupName + Common::IntToString(aIndex));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = (FMODDSP*)fmodDSP;
   
   return fmodDSP;
 }
@@ -561,8 +562,17 @@ void FMODSoundSystem::AddDSPToChannel(DSP *aDSP, int const aChannel, int const a
   }
   
   FMOD::Channel *channel;
-  mFMODSystem->getChannel(aChannel, &channel);
-  channel->addDSP(aIndex, mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
+  FMOD_RESULT result = mFMODSystem->getChannel(aChannel, &channel);
+  if(result == FMOD_OK)
+  {
+    result = channel->addDSP(aIndex, mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
+    DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+  }
+  else
+  {
+    DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+    assert(!"FMOD failed to get channel.");
+  }
 }
 
 /**
@@ -596,8 +606,16 @@ void FMODSoundSystem::AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupNa
 void FMODSoundSystem::RemoveDSPFromChannel(DSP *aDSP, int const aChannel)
 {
   FMOD::Channel *channel;
-  mFMODSystem->getChannel(aChannel, &channel);
-  channel->removeDSP(mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
+  FMOD_RESULT result = mFMODSystem->getChannel(aChannel, &channel);
+  if(result == FMOD_OK)
+  {
+    channel->removeDSP(mDSPContainer[aDSP->GetName().ToHash()]->GetFMODDSP());
+  }
+  else
+  {
+    DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+    assert(!"FMOD failed to get channel.");
+  }
 }
 
 /**

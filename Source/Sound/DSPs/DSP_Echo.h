@@ -1,10 +1,12 @@
 #ifndef __JFramework__DSP_Echo_h_
 #define __JFramework__DSP_Echo_h_
 
-class DSP_Echo
+#include "DSP.h"
+
+class DSP_Echo : public DSP
 {
 public:
-  DSP_Echo();
+  DSP_Echo(HashString const& aName);
   virtual ~DSP_Echo();
   
   // Virtuals
