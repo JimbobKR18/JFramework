@@ -536,6 +536,7 @@ DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int a
 /**
  * @brief Delete DSP
  * @param aDSP
+ * @return True if DSP was successfully deleted
  */
 bool FMODSoundSystem::DeleteDSP(DSP *aDSP)
 {
