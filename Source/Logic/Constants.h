@@ -9,6 +9,7 @@
 #define __JFramework_Constants_h_
 
 #include "Common.h"
+#include "MathExt.h"
 #include "TextParser.h"
 
 class Constants
@@ -26,6 +27,8 @@ public:
   static int const GetInteger(HashString const &aValue);
   static float const GetFloat(HashString const &aValue);
   static bool const GetBoolean(HashString const &aValue);
+  static Vector3 const GetVector3(HashString const &aValue);
+  static Vector4 const GetVector4(HashString const &aValue);
   static void Deserialize();
   static void SerializeLUA();
 };

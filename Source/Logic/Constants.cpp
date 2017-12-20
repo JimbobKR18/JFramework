@@ -63,6 +63,24 @@ bool const Constants::GetBoolean(HashString const &aValue)
 }
 
 /**
+ * @brief Get Vector3 from values map, asserts if nothign found.
+ * @param aValue Value to find.
+ */
+Vector3 const Constants::GetVector3(HashString const &aValue)
+{
+  return GetString(aValue).ToVector3();
+}
+
+/**
+ * @brief Get Vector4 from values map, asserts if nothign found.
+ * @param aValue Value to find.
+ */
+Vector4 const Constants::GetVector4(HashString const &aValue)
+{
+  return GetString(aValue).ToVector4();
+}
+
+/**
  * @brief Read in values from file
  */
 void Constants::Deserialize()
