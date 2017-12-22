@@ -12,6 +12,7 @@
 #include "CollisionChecker.h"
 #include "PotentialPair.h"
 #include "Common.h"
+#include "Constants.h"
 
 /**
  * @brief Determines how to sort between two PhysicsObjects
@@ -35,7 +36,7 @@ bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 
 unsigned const PhysicsWorld::sUID = Common::StringHashFunction("PhysicsWorld");
 
-PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld", PhysicsWorld::sUID), mGravity(Vector3(0, 20000.0f, 0))
+PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld", PhysicsWorld::sUID), mGravity(Constants::GetVector3("GravityForce"))
 {
 }
 
