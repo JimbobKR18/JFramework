@@ -48,6 +48,7 @@ public:
   // Forces
   void                          RegisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
   void                          UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGenerator);
+  void                          RegisterGravity(PhysicsObject *aObject);
   void                          UnregisterGravity(PhysicsObject *aObject);
   // Misc.
   bool                          LineCollidesWithAnything(Line const &aLine, std::vector<PhysicsObject*> const &aIgnoreList);

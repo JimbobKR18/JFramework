@@ -180,6 +180,15 @@ void PhysicsWorld::UnregisterForce(PhysicsObject *aObject, ForceGenerator *aGene
 }
 
 /**
+ * @brief Helper method to add gravity to object.
+ * @param aObject
+ */
+void PhysicsWorld::RegisterGravity(PhysicsObject *aObject)
+{
+  RegisterForce(aObject, &mGravity);
+}
+
+/**
  * @brief Helper method to remove gravity on object.
  * @param aObject
  */
