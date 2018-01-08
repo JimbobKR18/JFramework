@@ -57,7 +57,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   
   // Reserve total tiles ahead of time to avoid reallocs
   mObjects.resize(mTiles.size(), nullptr);
-  CreateTilesInRange(0, mTiles.size(), tileSize, objectManager, physicsWorld, chemistryManager);
+  CreateTilesInRange(0, 0, mWidth, mHeight, tileSize, objectManager, physicsWorld, chemistryManager);
 }
 
 TileMapGenerator::~TileMapGenerator()
@@ -306,17 +306,19 @@ void TileMapGenerator::Serialize(Parser &aParser)
 
 /**
  * @brief Helper method to create tiles from one index to another
- * @param aStart Index to start
- * @param aEnd Index to end
+ * @param aXStart X Index to start
+ * @param aYStart Y Index to start
+ * @param aXEnd X Index to end
+ * @param aYEnd Y Index to end
  * @param aTileSize Size of tiles in pixels
  * @param aObjectManager Object manager to add objects to
  * @param aPhysicsWorld Physics manager to add physics objects to
  * @param aChemistryManager Chemistry manager to create materials and such
  */
-void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, 
+void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const aYStart, 
+  unsigned const aXEnd, unsigned const aYEnd, Vector3 const &aTileSize, 
   ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager)
 {
-  int xPos = aStart, yPos = 0;
   float halfX = mWidth * mTileSize;
   float halfY = mHeight * mTileSize;
   float const defaultZPos = -0.9999f;
@@ -326,90 +328,94 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aStart, unsigned const 
   std::unordered_map<int, float>::const_iterator tileHeightsEnd = mTileHeights.end();
   PhysicsObject::IgnoreContainer ignoreContainer;
   
-  // Get the position of the starting index.
-  while(xPos >= mWidth)
-  {
-    ++yPos;
-    xPos -= mWidth;
-  }
+  // Bounds checking
+  if(aXEnd < aXStart || aYEnd < aYStart)
+    assert(!"ERROR [TileMapGenerator]: Ends cannot be before starts.");
+  else if(aXStart < 0 || aYStart < 0)
+    assert(!"ERROR [TileMapGenerator]: Starts cannot be less than 0.");
+  else if(aXEnd > mWidth || aYEnd > mHeight)
+    assert(!"ERROR [TileMapGenerator]: Ends cannot exceed bounds of map.");
   
-  for(unsigned int i = aStart; i != aEnd; ++i)
+  for(unsigned int y = aYStart; y < aYEnd; ++y)
   {
-    // Make GameObject to place
-    GameObject *obj = aObjectManager->CreateObjectNoAdd(mImageName);
-    aObjectManager->AddObject(obj, true);
-    
-    // Set name of tile, for collision reasons
-    obj->SetName(HashString("Tile_") + Common::IntToString(mCollisionData[i]));
-
-    // Get Transform of new object
-    float zPos = defaultZPos;
-    
-    // If we have a height for this id, use it.
-    if(mTileHeights.find(mTiles[i]) != tileHeightsEnd)
+    for(unsigned int x = aXStart; x < aXEnd; ++x)
     {
-      zPos = mTileHeights[mTiles[i]];
-    }
-    
-    Transform *transform = obj->GET<Transform>();
-    Vector3 position = Vector3(-halfX + (mTileSize * 2 * xPos),
-                                                  -halfY + (mTileSize * 2 * yPos), zPos);
-    transform->SetPosition(position);
-    transform->SetSize(aTileSize);
-    
-    // Figure out the max and min camera boundaries based on tilemap
-    if(i == 0)
-      mOwner->SetMinBoundary(position - aTileSize);
-    else if(i == tileDataVectorSize - 1)
-      mOwner->SetMaxBoundary(position + aTileSize);
-
-    // Set the frame data
-    Surface *surface = obj->GET<Surface>();
-    surface->SetAnimated(false);
-    surface->SetFrameByID(mTiles[i]);
-    
-    // Add PhysicsObject if the tile has collision
-    if(mCollisionData[i] != CollisionShapes::EMPTY ||
-        (mCollisionShapes.size() > i && mCollisionShapes[i] != CollisionShapes::EMPTY))
-    {
-      PhysicsObject *physics = CreatePhysicsAtIndex(i, aPhysicsWorld, transform, 
-        zeroVector, collisionDataVectorSize, zPos);
+      // Calculate index
+      int i = x + (y * mWidth);
       
-      // Set ignore list for physics
-      physics->SetIgnoreList(ignoreContainer);
+      // Basic check to be sure we're not overwriting an index
+      if(mObjects[i] != nullptr)
+        continue;
+      
+      // Make GameObject to place
+      GameObject *obj = aObjectManager->CreateObjectNoAdd(mImageName);
+      aObjectManager->AddObject(obj, true);
+      
+      // Set name of tile, for collision reasons
+      obj->SetName(HashString("Tile_") + Common::IntToString(mCollisionData[i]));
 
-      obj->AddComponent(physics);
-    }
-    else if(mCollisionShapes.size() < collisionDataVectorSize)
-    {
-      mCollisionShapes.push_back(CollisionShapes::EMPTY);
-    }
+      // Get Transform of new object
+      float zPos = defaultZPos;
+      
+      // If we have a height for this id, use it.
+      if(mTileHeights.find(mTiles[i]) != tileHeightsEnd)
+      {
+        zPos = mTileHeights[mTiles[i]];
+      }
+      
+      Transform *transform = obj->GET<Transform>();
+      Vector3 position = Vector3(-halfX + (mTileSize * 2 * x),
+                                 -halfY + (mTileSize * 2 * y), zPos);
+      transform->SetPosition(position);
+      transform->SetSize(aTileSize);
+      
+      // Figure out the max and min camera boundaries based on tilemap
+      if(i == 0)
+        mOwner->SetMinBoundary(position - aTileSize);
+      else if(i == tileDataVectorSize - 1)
+        mOwner->SetMaxBoundary(position + aTileSize);
 
-    // Animation
-    if(mAnimations.find(mTiles[i]) != mAnimations.end())
-    {
-      mAnimatedObjects[surface] = mTiles[i];
-      mCurrentFrames[mTiles[i]] = 0;
-    }
-    
-    // Materials, if data is available
-    if(mMaterials.size() > 0 && mMaterialNames.find(mMaterials[i]) != mMaterialNames.end())
-    {
-      ChemistryMaterial *material = CreateMaterialAtIndex(i, aChemistryManager);
-      obj->AddComponent(material);
-    }
-    
-    // Add object to our level for easier loading later
-    mOwner->AddObject(obj, ObjectPlacement::STATIC);
-    
-    // Add object to our tile list
-    mObjects.push_back(obj);
+      // Set the frame data
+      Surface *surface = obj->GET<Surface>();
+      surface->SetAnimated(false);
+      surface->SetFrameByID(mTiles[i]);
+      
+      // Add PhysicsObject if the tile has collision
+      if(mCollisionData[i] != CollisionShapes::EMPTY ||
+          (mCollisionShapes.size() > i && mCollisionShapes[i] != CollisionShapes::EMPTY))
+      {
+        PhysicsObject *physics = CreatePhysicsAtIndex(i, aPhysicsWorld, transform, 
+          zeroVector, collisionDataVectorSize, zPos);
+        
+        // Set ignore list for physics
+        physics->SetIgnoreList(ignoreContainer);
 
-    ++xPos;
-    if(xPos >= mWidth)
-    {
-      xPos = 0;
-      ++yPos;
+        obj->AddComponent(physics);
+      }
+      else if(mCollisionShapes.size() < collisionDataVectorSize)
+      {
+        mCollisionShapes.push_back(CollisionShapes::EMPTY);
+      }
+
+      // Animation
+      if(mAnimations.find(mTiles[i]) != mAnimations.end())
+      {
+        mAnimatedObjects[surface] = mTiles[i];
+        mCurrentFrames[mTiles[i]] = 0;
+      }
+      
+      // Materials, if data is available
+      if(mMaterials.size() > 0 && mMaterialNames.find(mMaterials[i]) != mMaterialNames.end())
+      {
+        ChemistryMaterial *material = CreateMaterialAtIndex(i, aChemistryManager);
+        obj->AddComponent(material);
+      }
+      
+      // Add object to our level for easier loading later
+      mOwner->AddObject(obj, ObjectPlacement::STATIC);
+      
+      // Add object to our tile list
+      mObjects[i] = obj;
     }
   }
 }

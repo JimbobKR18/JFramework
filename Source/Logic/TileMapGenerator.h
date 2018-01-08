@@ -131,7 +131,8 @@ public:
   void              Serialize(Parser &aParser);
   
 private:
-  void              CreateTilesInRange(unsigned const aStart, unsigned const aEnd, Vector3 const &aTileSize, 
+  void              CreateTilesInRange(unsigned const aXStart, unsigned const aYStart, 
+                      unsigned const aXEnd, unsigned const aYEnd, Vector3 const &aTileSize, 
                       ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager);
   PhysicsObject*    CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
                       Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, 
