@@ -56,13 +56,19 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
   Vector3 tileSize = Vector3(mTileSize, mTileSize, mTileSize);
   
   // Reserve total tiles ahead of time to avoid reallocs
-  mObjects.reserve(mTiles.size());
+  mObjects.resize(mTiles.size(), nullptr);
   CreateTilesInRange(0, mTiles.size(), tileSize, objectManager, physicsWorld, chemistryManager);
 }
 
 TileMapGenerator::~TileMapGenerator()
 {
   mTiles.clear();
+  mCollisionData.clear();
+  mCollisionShapes.clear();
+  mTileHeights.clear();
+  mMaterials.clear();
+  mMaterialNames.clear();
+  mAnimations.clear();
 }
 
 /**
@@ -556,6 +562,8 @@ PhysicsObject* TileMapGenerator::CreatePhysicsAtIndex(unsigned const aIndex, Phy
   }
   else
   {
+    DebugLogPrint("ERROR [TileMapGenerator]: Index %d has Art %d, Collision ID %d, and Shape %d", aIndex, 
+      mTiles[aIndex], mCollisionData[aIndex], mCollisionShapes[aIndex]);
     assert(!"Invalid value handed into TileMapGenerator.");
   }
   

@@ -77,6 +77,9 @@ namespace Common
   int                       GetCurrentYear();
   int                       GetCurrentMonth();
   int                       GetCurrentDayOfMonth();
+  
+  template<typename T>      
+  std::unordered_map<int, T> ConvertVectorToHashMap(std::vector<T> const &aVector);
 }
 
 #endif

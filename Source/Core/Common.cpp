@@ -621,4 +621,20 @@ namespace Common
     
     return parts->tm_mday;
   }
+  
+  /**
+   * @brief Simple function to turn a vector into a hashmap.
+   * @param aVector Vector to convert.
+   * @return Hashmap where each key corresponds to index of vector.
+   */
+  template<typename T>      
+  std::unordered_map<int, T> ConvertVectorToHashMap(std::vector<T> const &aVector)
+  {
+    std::unordered_map<int, T> ret;
+    
+    for(int i = 0; i < aVector.size(); ++i)
+      ret[i] = aVector[i];
+    
+    return ret;
+  }
 }
