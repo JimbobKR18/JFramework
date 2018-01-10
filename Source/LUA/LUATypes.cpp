@@ -131,7 +131,7 @@ namespace LUABind
     // Helpers
     SERIALIZE_VECTOR(int, "IntVector");
     SERIALIZE_VECTOR(float, "FloatVector");
-    SERIALIZE_VECTOR(bool, "BoolVector");
+    SERIALIZE_IMMUTABLE_VECTOR(bool, "BoolVector");
     SERIALIZE_VECTOR(HashString, "HashStringVector");
 
     // Platform specific scripts

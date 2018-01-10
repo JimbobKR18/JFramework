@@ -354,6 +354,8 @@
         <IncludePath Value="../../Source/Physics"/>
         <IncludePath Value="../../Source/Sound"/>
         <IncludePath Value="../../Source/Sound/SoundSystems"/>
+        <IncludePath Value="../../Source/Sound/DSPs"/>
+        <IncludePath Value="../../Source/Sound/DSPs/FMOD"/>
         <IncludePath Value="../../Source/Managers"/>
         <IncludePath Value="../../Source/Graphics"/>
         <IncludePath Value="../../Source/LUA"/>

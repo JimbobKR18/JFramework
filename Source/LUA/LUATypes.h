@@ -15,6 +15,15 @@
 #include "Managers/ObjectManager.h"
 
 #define SERIALIZE_VECTOR(T, NAME) SLB::Class<std::vector<T>>(NAME) \
+        .constructor() \
+        .set("push_back", static_cast<void(std::vector<T>::*)(const std::vector<T>::value_type&)>(&std::vector<T>::push_back)) \
+        .set("pop_back", &std::vector<T>::pop_back) \
+        .set("size", &std::vector<T>::size) \
+        .set("empty", &std::vector<T>::empty) \
+        .set("at", static_cast<std::vector<T>::reference(std::vector<T>::*)(std::vector<T>::size_type)>(&std::vector<T>::at))
+        
+#define SERIALIZE_IMMUTABLE_VECTOR(T, NAME) SLB::Class<std::vector<T>>(NAME) \
+        .constructor() \
         .set("size", &std::vector<T>::size) \
         .set("empty", &std::vector<T>::empty) \
         .set("at", static_cast<std::vector<T>::reference(std::vector<T>::*)(std::vector<T>::size_type)>(&std::vector<T>::at))
