@@ -25,6 +25,8 @@
 #include "Core/Interpolations/Interpolation.h"
 #include "Core/Interpolations/QuadraticInterpolation.h"
 #include "Core/Interpolations/RoundAboutInterpolation.h"
+#include "Core/Interpolations/RelativeLinearInterpolation.h"
+#include "Core/Interpolations/RelativeRoundAboutInterpolation.h"
 #include "Messages/CollisionMessage.h"
 #include "Logic/Constants.h"
 #include "Logic/SystemProperties.h"
@@ -81,6 +83,10 @@ namespace LUABind
     QuadraticInterpolation<Vector4>::SerializeLUA();
     RoundAboutInterpolation<Vector3>::SerializeLUA();
     RoundAboutInterpolation<Vector4>::SerializeLUA();
+    RelativeLinearInterpolation<Vector3>::SerializeLUA();
+    RelativeLinearInterpolation<Vector4>::SerializeLUA();
+    RelativeRoundAboutInterpolation<Vector3>::SerializeLUA();
+    RelativeRoundAboutInterpolation<Vector4>::SerializeLUA();
 
     // Transform
     Transform::SerializeLUA();

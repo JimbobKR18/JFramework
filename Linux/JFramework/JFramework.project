@@ -63,18 +63,22 @@
     <File Name="../../Source/Core/HashString.cpp"/>
     <File Name="../../Source/Core/HashString.h"/>
     <File Name="../../Source/Core/Common.h"/>
-    <File Name="../../Source/Core/Interpolation.h"/>
     <File Name="../../Source/Core/Shape.h"/>
     <File Name="../../Source/Core/Shape.cpp"/>
     <File Name="../../Source/Core/FileCache.cpp"/>
     <File Name="../../Source/Core/FileCache.h"/>
     <File Name="../../Source/Core/PlatformIncludes.h"/>
-    <File Name="../../Source/Core/QuadraticInterpolation.h"/>
-    <File Name="../../Source/Core/RoundAboutInterpolation.h"/>
     <File Name="../../Source/Core/Threading.h"/>
     <File Name="../../Source/Core/ShapeMath.h"/>
     <File Name="../../Source/Core/ShapeMath.cpp"/>
     <File Name="../../Source/Core/Threading.cpp"/>
+    <VirtualDirectory Name="Interpolations">
+      <File Name="../../Source/Core/Interpolations/Interpolation.h"/>
+      <File Name="../../Source/Core/Interpolations/QuadraticInterpolation.h"/>
+      <File Name="../../Source/Core/Interpolations/RoundAboutInterpolation.h"/>
+      <File Name="../../Source/Core/Interpolations/RelativeLinearInterpolation.h"/>
+      <File Name="../../Source/Core/Interpolations/RelativeRoundAboutInterpolation.h"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
@@ -277,6 +281,7 @@
         <IncludePath Value="."/>
         <IncludePath Value="../../Source"/>
         <IncludePath Value="../../Source/Core"/>
+        <IncludePath Value="../../Source/Core/Interpolations"/>
         <IncludePath Value="../../Source/Logic"/>
         <IncludePath Value="../../Source/Logic/StateMachine"/>
         <IncludePath Value="../../Source/Logic/Effects"/>
@@ -346,6 +351,7 @@
         <IncludePath Value="."/>
         <IncludePath Value="../../Source"/>
         <IncludePath Value="../../Source/Core"/>
+        <IncludePath Value="../../Source/Core/Interpolations"/>
         <IncludePath Value="../../Source/Logic"/>
         <IncludePath Value="../../Source/Logic/StateMachine"/>
         <IncludePath Value="../../Source/Logic/Effects"/>

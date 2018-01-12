@@ -9,7 +9,7 @@ template<typename T>
 class RelativeLinearInterpolation : public Interpolation<T>
 {
 private:
-  float mStep;
+  T mStep;
   
 public:
   RelativeLinearInterpolation(T* aStart, T const& aFinish, float aTime) : Interpolation<T>(aStart, aFinish, aTime)
