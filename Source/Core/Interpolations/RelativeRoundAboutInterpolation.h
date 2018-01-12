@@ -14,7 +14,7 @@ private:
 public:
   RelativeRoundAboutInterpolation(T* aStart, T const& aFinish, float aTime) : Interpolation<T>(aStart, aFinish, aTime)
   {
-    mStep = (aFinish - aStart) / aTime;
+    mStep = (aFinish - *aStart) / aTime;
   }
   virtual ~RelativeRoundAboutInterpolation() {}
 
@@ -35,7 +35,7 @@ public:
     if(percentage > 0.5f)
       step = -mStep;
     
-    (*Interpolation<T>::mCurrent) += mStep;
+    (*Interpolation<T>::mCurrent) += step * aDT;
   }
   
   /**

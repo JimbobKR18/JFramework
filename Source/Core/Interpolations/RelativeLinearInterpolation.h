@@ -14,7 +14,7 @@ private:
 public:
   RelativeLinearInterpolation(T* aStart, T const& aFinish, float aTime) : Interpolation<T>(aStart, aFinish, aTime)
   {
-    mStep = (aFinish - aStart) / aTime;
+    mStep = (aFinish - *aStart) / aTime;
   }
   virtual ~RelativeLinearInterpolation() {}
 
@@ -25,7 +25,7 @@ public:
   virtual void Update(float aDT)
   {
     Interpolation<T>::mCurrentTime += aDT;
-    (*Interpolation<T>::mCurrent) += mStep;
+    (*Interpolation<T>::mCurrent) += mStep * aDT;
   }
   
   /**
