@@ -22,8 +22,9 @@
 #include "Managers/PhysicsWorld.h"
 #include "Core/MathExt.h"
 #include "Logic/Level.h"
-#include "Core/Interpolation.h"
-#include "Core/QuadraticInterpolation.h"
+#include "Core/Interpolations/Interpolation.h"
+#include "Core/Interpolations/QuadraticInterpolation.h"
+#include "Core/Interpolations/RoundAboutInterpolation.h"
 #include "Messages/CollisionMessage.h"
 #include "Logic/Constants.h"
 #include "Logic/SystemProperties.h"
@@ -78,6 +79,8 @@ namespace LUABind
     Interpolation<Vector4>::SerializeLUA();
     QuadraticInterpolation<Vector3>::SerializeLUA();
     QuadraticInterpolation<Vector4>::SerializeLUA();
+    RoundAboutInterpolation<Vector3>::SerializeLUA();
+    RoundAboutInterpolation<Vector4>::SerializeLUA();
 
     // Transform
     Transform::SerializeLUA();
