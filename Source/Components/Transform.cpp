@@ -253,7 +253,7 @@ void Transform::Serialize(Parser &aParser)
 {
   HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const TRANSFORM = "Transform";
-  Root* object = aParser.Find(objectName);
+  ParserNode* object = aParser.Find(objectName);
   char const *values[9] = {"PositionX",
                             "PositionY",
                             "PositionZ",
@@ -264,7 +264,7 @@ void Transform::Serialize(Parser &aParser)
                             "SizeY",
                             "SizeZ"};
   object->Place(objectName, TRANSFORM, "");
-  Root* transform = object->Find(TRANSFORM);
+  ParserNode* transform = object->Find(TRANSFORM);
   
   for(int i = 0; i < 9; ++i)
   {
@@ -406,7 +406,7 @@ void Transform::Deserialize(Parser &aParser)
   }
   
   // Axis lock
-  Root* axisLockNode = aParser.Find("Transform", "LockedAxes");
+  ParserNode* axisLockNode = aParser.Find("Transform", "LockedAxes");
   if(axisLockNode)
   {
     HashString axisLock = axisLockNode->GetValue();
@@ -431,7 +431,7 @@ void Transform::Deserialize(Parser &aParser)
   }
   
   // Parent inherit info
-  Root* inheritNode = aParser.Find("Transform", "InheritInfo");
+  ParserNode* inheritNode = aParser.Find("Transform", "InheritInfo");
   if(inheritNode)
   {
     HashString inheritInfo = inheritNode->GetValue();

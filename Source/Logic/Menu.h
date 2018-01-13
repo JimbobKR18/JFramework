@@ -51,10 +51,10 @@ public:
   
 private:
   void                           ParseFile();
-  void                           ParseTransform(GameObject *aObject, Root *aTransform);
-  void                           ParseSurface(GameObject *aObject, Root *aSurface);
-  void                           ParseEffects(GameObject *aObject, Root *aEffects);
-  void                           ParseCustomScript(GameObject *aObject, Root *aCustomScript);
+  void                           ParseTransform(GameObject *aObject, ParserNode *aTransform);
+  void                           ParseSurface(GameObject *aObject, ParserNode *aSurface);
+  void                           ParseEffects(GameObject *aObject, ParserNode *aEffects);
+  void                           ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript);
   void                           DeleteElementChildren(MenuElement *aElement);
   void                           ShallowRemoveElementForObject(GameObject *aObject);
   void                           ShallowRemoveElementChildren(MenuElement *aElement);

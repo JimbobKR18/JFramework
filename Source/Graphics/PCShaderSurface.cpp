@@ -250,9 +250,9 @@ void PCShaderSurface::Serialize(Parser &aParser)
 {
   HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const SURFACE = "Surface";
-  Root* object = aParser.Find(objectName);
+  ParserNode* object = aParser.Find(objectName);
   Surface::Serialize(aParser);
-  Root* surface = object->Find(SURFACE);
+  ParserNode* surface = object->Find(SURFACE);
   surface->Place(SURFACE, "TextureName", GetFileName());
   surface->Place(SURFACE, "VertexShader", mVertexShaderFileName);
   surface->Place(SURFACE, "FragmentShader", mFragmentShaderFileName);

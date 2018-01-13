@@ -529,7 +529,7 @@ void Level::Update()
  * @param aRoot Root node to read from.
  * @param aObject Object to apply data to.
  */
-void Level::ParseAdditionalData(Root *aRoot, GameObject *aObject)
+void Level::ParseAdditionalData(ParserNode *aRoot, GameObject *aObject)
 { 
   aObject->ParseAdditionalData(aRoot);
 }
@@ -643,7 +643,7 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
   int curIndex = 0;
 
   HashString tempIndex = curObject + Common::IntToString(curIndex);
-  Root* curRoot = parser.Find(tempIndex);
+  ParserNode* curRoot = parser.Find(tempIndex);
   
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
@@ -747,8 +747,8 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
       object->SetParent(parent);
     }
 
-    RootContainer untouched = curRoot->GetUntouchedRoots();
-    for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
+    ParserNodeContainer untouched = curRoot->GetUntouchedRoots();
+    for(parserNodeIT it = untouched.begin(); it != untouched.end(); ++it)
     {
       ParseAdditionalData(*it, object);
     }
@@ -768,7 +768,7 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
   }
   if(parser.Find("Scenario"))
   {
-    Root* scenario = parser.Find("Scenario");
+    ParserNode* scenario = parser.Find("Scenario");
     ParseFile(scenario->Find("Name")->GetValue(), scenario->Find("Folder")->GetValue());
     if(scenario->Find("Load")->GetValue().ToBool())
       LoadScenario(scenario->Find("Name")->GetValue());
@@ -805,8 +805,8 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     new Menu(this, parser.Find("Menu")->Find("Name")->GetValue());
   }
 
-  RootContainer untouched = parser.GetBaseRoot()->GetUntouchedRoots();
-  for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
+  ParserNodeContainer untouched = parser.GetBaseRoot()->GetUntouchedRoots();
+  for(parserNodeIT it = untouched.begin(); it != untouched.end(); ++it)
   {
     ParseAdditionalData(*it, nullptr);
   }
@@ -1098,7 +1098,7 @@ void Level::RemoveObjectFromMenus(GameObject *aObject)
 /**
  * @brief Get transform data for an object from a root.
  */
-void Level::ParseTransform(GameObject *aObject, Root *aTransform)
+void Level::ParseTransform(GameObject *aObject, ParserNode *aTransform)
 {
   float posX, posY, posZ,
       scaleX, scaleY, scaleZ,
@@ -1161,7 +1161,7 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
   }
   
   // Axis lock (optional)
-  Root* axisLockRoot = aTransform->Find("LockedAxes");
+  ParserNode* axisLockRoot = aTransform->Find("LockedAxes");
   if(axisLockRoot)
   {
     AxisLock axisLock = NO_AXIS;
@@ -1189,7 +1189,7 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
   }
   
   // Parent inherit info
-  Root* inheritNode = aTransform->Find("InheritInfo");
+  ParserNode* inheritNode = aTransform->Find("InheritInfo");
   if(inheritNode)
   {
     ParentInherit inheritance = INHERIT_ALL;
@@ -1225,7 +1225,7 @@ void Level::ParseTransform(GameObject *aObject, Root *aTransform)
 /**
  * @brief Get surface data from a root.
  */
-void Level::ParseSurface(GameObject *aObject, Root *aSurface)
+void Level::ParseSurface(GameObject *aObject, ParserNode *aSurface)
 {
   Surface* objSurface = aObject->GET<Surface>();
   if(aSurface->Find("ColorR"))
@@ -1265,7 +1265,7 @@ void Level::ParseSurface(GameObject *aObject, Root *aSurface)
 /**
  * @brief Get text data from root.
  */
-void Level::ParseText(GameObject *aObject, Root* aText)
+void Level::ParseText(GameObject *aObject, ParserNode* aText)
 {
   // TODO
 }
@@ -1273,7 +1273,7 @@ void Level::ParseText(GameObject *aObject, Root* aText)
 /**
  * @brief Get physics object data from a root.
  */
-void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
+void Level::ParsePhysicsObject(GameObject *aObject, ParserNode* aPhysicsObject)
 {
   // If object doesn't have physicsobject, it does now.
   PhysicsObject* physicsObject = aObject->GET<PhysicsObject>();
@@ -1333,7 +1333,7 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
   while(aPhysicsObject->Find(curShape))
   {
-    Root* tempShape = aPhysicsObject->Find(curShape);
+    ParserNode* tempShape = aPhysicsObject->Find(curShape);
     Shape* newShape = nullptr;
     
     HashString type = tempShape->Find("Type")->GetValue();
@@ -1421,7 +1421,7 @@ void Level::ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject)
 /**
  * @brief Get chemistry material data from root.
  */
-void Level::ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial)
+void Level::ParseChemistryMaterial(GameObject *aObject, ParserNode* aChemistryMaterial)
 {
   // If object doesn't have chemistryMaterial, it does now.
   ChemistryMaterial* chemistryMaterial = aObject->GET<ChemistryMaterial>();
@@ -1477,7 +1477,7 @@ void Level::ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial
 /**
  * @brief Get chemistry element data from root.
  */
-void Level::ParseChemistryElement(GameObject *aObject, Root* aChemistryElement)
+void Level::ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryElement)
 {
   // If object doesn't have chemistryElement, it does now.
   ChemistryElement* chemistryElement = aObject->GET<ChemistryElement>();
@@ -1526,7 +1526,7 @@ void Level::ParseChemistryElement(GameObject *aObject, Root* aChemistryElement)
 /**
  * @brief Parse effects root.
  */
-void Level::ParseEffects(GameObject *aObject, Root *aEffects)
+void Level::ParseEffects(GameObject *aObject, ParserNode *aEffects)
 {
   EffectsManager* effectsManager = GetManager()->GetOwningApp()->GET<EffectsManager>();
   int curIndex = 0;
@@ -1534,7 +1534,7 @@ void Level::ParseEffects(GameObject *aObject, Root *aEffects)
   HashString curEffect = effectString + Common::IntToString(curIndex);
   while(aEffects->Find(curEffect))
   {
-    Root* effectRoot = aEffects->Find(curEffect);
+    ParserNode* effectRoot = aEffects->Find(curEffect);
     HashString type = effectRoot->Find("Type")->GetValue();
     HashString name = effectRoot->Find("Name")->GetValue();
     float time = effectRoot->Find("Time")->GetValue().ToFloat();
@@ -1551,7 +1551,7 @@ void Level::ParseEffects(GameObject *aObject, Root *aEffects)
 /**
  * @brief Parse custom script root.
  */
-void Level::ParseCustomScript(GameObject *aObject, Root *aCustomScript)
+void Level::ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript)
 {
   CustomScript *customScript = aObject->GET<CustomScript>();
   if(!customScript)
@@ -1572,7 +1572,7 @@ void Level::ParseCustomScript(GameObject *aObject, Root *aCustomScript)
  */
 void Level::ParseTileGenerator(TextParser &aParser)
 {
-  Root* tileMap = aParser.Find("TileMapGenerator");
+  ParserNode* tileMap = aParser.Find("TileMapGenerator");
   HashString value, empty;
   int width, height, tileSize;
   HashString file, frameDataFilename, settingsDataFileName;
@@ -1631,7 +1631,7 @@ void Level::ParseTileGenerator(TextParser &aParser)
     curIndex = material + Common::IntToString(index);
     while(settingsData.Find(curIndex))
     {
-      Root* base = settingsData.Find(curIndex);
+      ParserNode* base = settingsData.Find(curIndex);
       HashString name = base->Find("Name")->GetValue();
       materialInfo[index] = name;
       ++index;

@@ -5,16 +5,16 @@
  *      Author: jimbob
  */
 
-#include "Root.h"
+#include "ParserNode.h"
 
-Root::Root() : mValue(""), mName(""), mChildren(), mParent(nullptr), mTouched(false)
+ParserNode::ParserNode() : mValue(""), mName(""), mChildren(), mParent(nullptr), mTouched(false)
 {
 }
 
-Root::~Root()
+ParserNode::~ParserNode()
 {
   // Delete all children associated with this root
-  for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
       delete *it;
   mChildren.clear();
 }
@@ -23,16 +23,16 @@ Root::~Root()
  * @brief Search for node whose name matches value. Does not mark nodes as touched.
  * @param aValue
  */
-Root const *Root::Search(HashString const &aValue) const
+ParserNode const *ParserNode::Search(HashString const &aValue) const
 {
   if(mName == aValue)
     return this;
   else
   {
     // Search for node of same name first, early out
-    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
-      Root *ret = *it;
+      ParserNode *ret = *it;
       if(ret->mName == aValue)
       {
         return ret;
@@ -47,7 +47,7 @@ Root const *Root::Search(HashString const &aValue) const
  * @brief Find node whose name matches value.
  * @param aValue
  */
-Root *Root::Find(HashString const &aValue)
+ParserNode *ParserNode::Find(HashString const &aValue)
 {
   // Found our node
   if(mName == aValue)
@@ -58,9 +58,9 @@ Root *Root::Find(HashString const &aValue)
   else
   {
     // Search for node of same name first, early out
-    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
-      Root *ret = *it;
+      ParserNode *ret = *it;
       if(ret->mName == aValue)
       {
         ret->mTouched = true;
@@ -77,14 +77,14 @@ Root *Root::Find(HashString const &aValue)
  * @param aValue Name of value to find.
  * @return Set of values amongst children.
  */
-std::set<Root*> Root::FindAll(HashString const &aValue)
+std::set<ParserNode*> ParserNode::FindAll(HashString const &aValue)
 {
-  std::set<Root*> allRoots;
+  std::set<ParserNode*> allRoots;
   
   // Search for node of same name first, early out
-  for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
   {
-    Root *ret = *it;
+    ParserNode *ret = *it;
     if(ret->mName == aValue)
     {
       ret->mTouched = true;
@@ -101,15 +101,15 @@ std::set<Root*> Root::FindAll(HashString const &aValue)
  * @param aElement
  * @param aValue
  */
-void Root::Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)
+void ParserNode::Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)
 {
   if(mName == aRoot)
   {
-    Root *node = Find(aElement);
+    ParserNode *node = Find(aElement);
 
     if(!node)
     {
-      node = new Root();
+      node = new ParserNode();
       node->mName = aElement;
     }
     node->mValue = aValue;
@@ -124,7 +124,7 @@ void Root::Place(HashString const &aRoot, HashString const &aElement, HashString
   }
   else
   {
-    for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
       (*it)->Place(aRoot, aElement, aValue);
     }
@@ -135,7 +135,7 @@ void Root::Place(HashString const &aRoot, HashString const &aElement, HashString
  * @brief Insert root into children.
  * @param root
  */
-void Root::Insert(Root* root)
+void ParserNode::Insert(ParserNode* root)
 {
   mChildren.insert(root);
 }
@@ -143,7 +143,7 @@ void Root::Insert(Root* root)
 /**
  * @brief Get name of node.
  */
-HashString Root::GetName() const
+HashString ParserNode::GetName() const
 {
   return mName;
 }
@@ -151,7 +151,7 @@ HashString Root::GetName() const
 /**
  * @brief Get value of node
  */
-HashString Root::GetValue() const
+HashString ParserNode::GetValue() const
 {
   return mValue;
 }
@@ -159,7 +159,7 @@ HashString Root::GetValue() const
 /**
  * @brief Get children for node
  */
-RootContainer& Root::GetChildren()
+ParserNodeContainer& ParserNode::GetChildren()
 {
   return mChildren;
 }
@@ -167,7 +167,7 @@ RootContainer& Root::GetChildren()
 /**
  * @brief Get node parent
  */
-Root* Root::GetParent() const
+ParserNode* ParserNode::GetParent() const
 {
   return mParent;
 }
@@ -175,14 +175,14 @@ Root* Root::GetParent() const
 /**
  * @brief Get untouched roots of node (unsearched)
  */
-RootContainer Root::GetUntouchedRoots() const
+ParserNodeContainer ParserNode::GetUntouchedRoots() const
 {
-  RootContainer ret;
-  for(rootIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  ParserNodeContainer ret;
+  for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
   {
     if((*it)->mTouched)
     {
-      RootContainer addendum = (*it)->GetUntouchedRoots();
+      ParserNodeContainer addendum = (*it)->GetUntouchedRoots();
       ret.insert(addendum.begin(), addendum.end());
     }
     else
@@ -198,7 +198,7 @@ RootContainer Root::GetUntouchedRoots() const
  * @brief Set node name
  * @param aName
  */
-void Root::SetName(HashString const &aName)
+void ParserNode::SetName(HashString const &aName)
 {
   mName = aName;
 }
@@ -207,7 +207,7 @@ void Root::SetName(HashString const &aName)
  * @brief Set node value
  * @param aValue
  */
-void Root::SetValue(HashString const &aValue)
+void ParserNode::SetValue(HashString const &aValue)
 {
   mValue = aValue;
 }
@@ -216,7 +216,7 @@ void Root::SetValue(HashString const &aValue)
  * @brief Set node parent
  * @param aParent
  */
-void Root::SetParent(Root* aParent)
+void ParserNode::SetParent(ParserNode* aParent)
 {
   mParent = aParent;
 }
@@ -225,7 +225,7 @@ void Root::SetParent(Root* aParent)
  * @brief Set root equal to another
  * @param rhs Root to set this equal to.
  */
-void Root::operator=(Root const &rhs)
+void ParserNode::operator=(ParserNode const &rhs)
 {
   mValue = rhs.mValue;
   mName = rhs.mName;
@@ -238,7 +238,7 @@ void Root::operator=(Root const &rhs)
  * @param rhs Root to check against.
  * @return True if comes before.
  */
-bool Root::operator<(Root const &rhs)
+bool ParserNode::operator<(ParserNode const &rhs)
 {
   return mName < rhs.mName;
 }

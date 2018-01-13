@@ -80,7 +80,7 @@ void CustomScript::Serialize(Parser& aParser)
 {
   HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const CUSTOMSCRIPT_OBJECT = "CustomScript";
-  Root* object = aParser.Find(objectName);
+  ParserNode* object = aParser.Find(objectName);
   
   object->Place(objectName, CUSTOMSCRIPT_OBJECT, "");
   object->Place(CUSTOMSCRIPT_OBJECT, "Name", mFileName);

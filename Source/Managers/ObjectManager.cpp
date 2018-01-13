@@ -366,8 +366,8 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
   }
   
   // Parse additional stuff if need be.
-  RootContainer untouched = aParser.GetBaseRoot()->GetUntouchedRoots();
-  for(rootIT it = untouched.begin(); it != untouched.end(); ++it)
+  ParserNodeContainer untouched = aParser.GetBaseRoot()->GetUntouchedRoots();
+  for(parserNodeIT it = untouched.begin(); it != untouched.end(); ++it)
   {
     aObject->ParseAdditionalData(*it);
   }
@@ -378,7 +378,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
  * @param aObject Object to apply effects to.
  * @param aEffects Effects root.
  */
-void ObjectManager::ParseEffects(GameObject *aObject, Root *aEffects)
+void ObjectManager::ParseEffects(GameObject *aObject, ParserNode *aEffects)
 {
   EffectsManager* effectsManager = GetOwningApp()->GET<EffectsManager>();
   int curIndex = 0;
@@ -386,7 +386,7 @@ void ObjectManager::ParseEffects(GameObject *aObject, Root *aEffects)
   HashString curEffect = effectString + Common::IntToString(curIndex);
   while(aEffects->Find(curEffect))
   {
-    Root* effectRoot = aEffects->Find(curEffect);
+    ParserNode* effectRoot = aEffects->Find(curEffect);
     HashString type = effectRoot->Find("Type")->GetValue();
     HashString name = effectRoot->Find("Name")->GetValue();
     float time = effectRoot->Find("Time")->GetValue().ToFloat();

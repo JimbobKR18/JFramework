@@ -28,7 +28,7 @@ std::string Parser::GetFilename() const
 /**
  * @brief Get top level root node.
  */
-Root* Parser::GetBaseRoot() const
+ParserNode* Parser::GetBaseRoot() const
 {
   return mDictionary;
 }
@@ -46,10 +46,10 @@ void Parser::SetCurrentObjectIndex(int const aIndex)
  * @brief Find element by name (first occurrence)
  * @param aElement Element string to find
  */
-Root* Parser::Find(HashString const &aElement)
+ParserNode* Parser::Find(HashString const &aElement)
 {
   // Search inside roots to find value
-  Root *value = mDictionary->Find(aElement);
+  ParserNode *value = mDictionary->Find(aElement);
   return value;
 }
 
@@ -58,11 +58,11 @@ Root* Parser::Find(HashString const &aElement)
  * @param aRoot
  * @param aElement
  */
-Root* Parser::Find(HashString const &aRoot, HashString const &aElement)
+ParserNode* Parser::Find(HashString const &aRoot, HashString const &aElement)
 {
   // Find node and search it for an element
   std::vector<HashString> splitString = aRoot.Split("/");
-  Root *node = mDictionary->Find(splitString[0]);
+  ParserNode *node = mDictionary->Find(splitString[0]);
 
   if(!node)
     return nullptr;
@@ -83,10 +83,10 @@ Root* Parser::Find(HashString const &aRoot, HashString const &aElement)
  * @param aElement Name of element.
  * @return All elements matching name.
  */
-std::set<Root*> Parser::FindAll(HashString const &aElement)
+std::set<ParserNode*> Parser::FindAll(HashString const &aElement)
 {
   // Find node and search it for an element
-  Root *node = mDictionary->Find(aElement);
+  ParserNode *node = mDictionary->Find(aElement);
   return node->FindAll(aElement);
 }
 
@@ -97,7 +97,7 @@ std::set<Root*> Parser::FindAll(HashString const &aElement)
  */
 void Parser::Place(HashString const &aElement, HashString const &aValue)
 {
-  Root* newRoot = SetUpTree(mDictionary, aElement.Split("/"));
+  ParserNode* newRoot = SetUpTree(mDictionary, aElement.Split("/"));
   newRoot->SetValue(aValue);
 }
 
@@ -109,8 +109,8 @@ void Parser::Place(HashString const &aElement, HashString const &aValue)
  */
 void Parser::Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)
 {
-  Root* newNodes = SetUpTree(mDictionary, aRoot.Split("/"));
-  Root* newRoot = SetUpTree(newNodes, aElement.Split("/"));
+  ParserNode* newNodes = SetUpTree(mDictionary, aRoot.Split("/"));
+  ParserNode* newRoot = SetUpTree(newNodes, aElement.Split("/"));
   newRoot->SetValue(aValue);
 }
 
@@ -119,17 +119,17 @@ void Parser::Place(HashString const &aRoot, HashString const &aElement, HashStri
  * @param aBase Where to start building from.
  * @param aStringHierarchy
  */
-Root* Parser::SetUpTree(Root* aBase, std::vector<HashString> const &aStringHierarchy)
+ParserNode* Parser::SetUpTree(ParserNode* aBase, std::vector<HashString> const &aStringHierarchy)
 {
-  Root* current = aBase;
-  Root* ret = nullptr;
+  ParserNode* current = aBase;
+  ParserNode* ret = nullptr;
   
   for(unsigned i = 0; i < aStringHierarchy.size(); ++i)
   {
-    Root* next = current->Find(aStringHierarchy[i]);
+    ParserNode* next = current->Find(aStringHierarchy[i]);
     if(!next)
     {
-      next = new Root();
+      next = new ParserNode();
       current->Insert(next);
       next->SetParent(current);
       next->SetName(aStringHierarchy[i]);

@@ -17,7 +17,7 @@ public:
    * @param aData Any extra data needed to create controller.
    * @return New controller.
    */
-  virtual Controller* CreateController(ControllerManager *aManager, HashString const &aName, Root* const aData=nullptr) = 0;
+  virtual Controller* CreateController(ControllerManager *aManager, HashString const &aName, ParserNode* const aData=nullptr) = 0;
 };
 
 #endif // __JFramework_ControllerFactory_h_

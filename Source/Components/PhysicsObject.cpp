@@ -123,7 +123,7 @@ void PhysicsObject::Serialize(Parser &aParser)
 {
   HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const PHYSICS_OBJECT = "PhysicsObject";
-  Root* object = aParser.Find(objectName);
+  ParserNode* object = aParser.Find(objectName);
   
   object->Place(objectName, PHYSICS_OBJECT, "");
   object->Place(PHYSICS_OBJECT, "Gravity", Common::BoolToString(IsAffectedByGravity()));
@@ -146,7 +146,7 @@ void PhysicsObject::Serialize(Parser &aParser)
   
   // Serialize each shape
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
-  Root* physicsObject = object->Find(PHYSICS_OBJECT);
+  ParserNode* physicsObject = object->Find(PHYSICS_OBJECT);
   HashString const SHAPE = "Shape_";
   int curIndex = 0;
   for(ShapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
@@ -154,7 +154,7 @@ void PhysicsObject::Serialize(Parser &aParser)
     HashString curShape = SHAPE + Common::IntToString((*it)->id);
     Vector3 localPosition = (*it)->position;
     physicsObject->Place(PHYSICS_OBJECT, curShape, "");
-    Root* shapeObject = physicsObject->Find(curShape);
+    ParserNode* shapeObject = physicsObject->Find(curShape);
     
     shapeObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
     shapeObject->Place(curShape, "PositionY", Common::FloatToString(localPosition.y));
@@ -228,7 +228,7 @@ void PhysicsObject::Serialize(Parser &aParser)
     HashString curJoint = JOINT + Common::IntToString((*it)->GetID());
     Vector3 localPosition = (*it)->GetPosition();
     physicsObject->Place(PHYSICS_OBJECT, curJoint, "");
-    Root* jointObject = physicsObject->Find(curJoint);
+    ParserNode* jointObject = physicsObject->Find(curJoint);
     
     jointObject->Place(curJoint, "PositionX", Common::FloatToString(localPosition.x));
     jointObject->Place(curJoint, "PositionY", Common::FloatToString(localPosition.y));
@@ -285,7 +285,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
   while(aParser.Find(PHYSICS_OBJECT, curShape))
   {
-    Root* tempShape = aParser.Find(PHYSICS_OBJECT, curShape);
+    ParserNode* tempShape = aParser.Find(PHYSICS_OBJECT, curShape);
     Shape* newShape = nullptr;
     
     HashString type = tempShape->Find("Type")->GetValue();
@@ -377,7 +377,7 @@ void PhysicsObject::Deserialize(Parser &aParser)
   // NOTE: ALL JOINT POSITIONS ARE IN LOCAL SPACE
   while(aParser.Find(PHYSICS_OBJECT, curJoint))
   {
-    Root* tempJoint = aParser.Find(PHYSICS_OBJECT, curJoint);
+    ParserNode* tempJoint = aParser.Find(PHYSICS_OBJECT, curJoint);
     float positionX = tempJoint->Find("PositionX")->GetValue().ToFloat();
     float positionY = tempJoint->Find("PositionY")->GetValue().ToFloat();
     float positionZ = tempJoint->Find("PositionZ")->GetValue().ToFloat();

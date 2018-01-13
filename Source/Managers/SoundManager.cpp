@@ -446,7 +446,7 @@ void SoundManager::LoadSounds()
   TextParser parser(Common::RelativePath("Sounds", fileName));
   while(parser.Find(curIndex))
   {
-    Root *curSound = parser.Find(curIndex);
+    ParserNode *curSound = parser.Find(curIndex);
     SoundSystem::SoundSource source = SoundSystem::SoundSource::DEFAULT;
     
     if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Stream")

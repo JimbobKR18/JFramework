@@ -93,7 +93,7 @@ public:
   virtual void      PreReset() {};
   virtual void      PostReset() {};
   virtual void      Update();
-  virtual void      ParseAdditionalData(Root *aRoot, GameObject *aObject);
+  virtual void      ParseAdditionalData(ParserNode *aRoot, GameObject *aObject);
   virtual void      Serialize(Parser &aParser);
   virtual void      ReceiveMessage(Message const& aMessage);
   virtual void      SendMessage(Message const& aMessage);
@@ -121,14 +121,14 @@ private:
   bool              ObjectNotInScenario(GameObject *aObject);
   void              RemoveObjectFromScenarios(GameObject *aObject);
   void              RemoveObjectFromMenus(GameObject *aObject);
-  void              ParseTransform(GameObject *aObject, Root* aTransform);
-  void              ParseSurface(GameObject *aObject, Root* aSurface);
-  void              ParseText(GameObject *aObject, Root* aText);
-  void              ParsePhysicsObject(GameObject *aObject, Root* aPhysicsObject);
-  void              ParseChemistryMaterial(GameObject *aObject, Root* aChemistryMaterial);
-  void              ParseChemistryElement(GameObject *aObject, Root* aChemistryElement);
-  void              ParseEffects(GameObject *aObject, Root *aEffects);
-  void              ParseCustomScript(GameObject *aObject, Root *aCustomScript);
+  void              ParseTransform(GameObject *aObject, ParserNode* aTransform);
+  void              ParseSurface(GameObject *aObject, ParserNode* aSurface);
+  void              ParseText(GameObject *aObject, ParserNode* aText);
+  void              ParsePhysicsObject(GameObject *aObject, ParserNode* aPhysicsObject);
+  void              ParseChemistryMaterial(GameObject *aObject, ParserNode* aChemistryMaterial);
+  void              ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryElement);
+  void              ParseEffects(GameObject *aObject, ParserNode *aEffects);
+  void              ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript);
   void              ParseTileGenerator(TextParser &aParser);
 };
 

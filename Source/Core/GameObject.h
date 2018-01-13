@@ -78,7 +78,7 @@ public:
   virtual void               ReceiveMessage(Message const &aMessage);
   virtual void               Serialize(Parser &aParser);
   virtual void               Interact(GameObject *aObject);
-  virtual void               ParseAdditionalData(Root *aRoot);
+  virtual void               ParseAdditionalData(ParserNode *aRoot);
   static void                SerializeLUA();
   
   // TEMPLATES

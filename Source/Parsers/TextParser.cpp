@@ -1,7 +1,7 @@
 #include "TextParser.h"
 #include "FileCache.h"
 
-bool RootSortPredicate(Root* aRoot1, Root* aRoot2)
+bool RootSortPredicate(ParserNode* aRoot1, ParserNode* aRoot2)
 {
   return (*aRoot1) < (*aRoot2);
 }
@@ -24,7 +24,7 @@ TextParser::TextParser(HashString const &aFilename, TextMode const &aMode) : Par
   }
   else if(aMode == MODE_OUTPUT && mOutput.good())
   {
-    mDictionary = new Root();
+    mDictionary = new ParserNode();
     mDictionary->SetName("Start");
   }
   else
@@ -45,7 +45,7 @@ TextParser::~TextParser()
  */
 void TextParser::Parse()
 {
-  Root *mCurNode = nullptr;
+  ParserNode *mCurNode = nullptr;
 
   while(!mInput.eof())
   {
@@ -61,7 +61,7 @@ void TextParser::Parse()
       continue;
     }
 
-    Root *node = new Root();
+    ParserNode *node = new ParserNode();
     node->SetName(name);
     mInput >> type;
 
@@ -112,20 +112,20 @@ void TextParser::Write()
  * @brief Write out root and all children below it.
  * @param aRoot Root to write
  */
-void TextParser::WriteRoot(Root *aRoot)
+void TextParser::WriteRoot(ParserNode *aRoot)
 {
   if(aRoot->GetValue() == "")
   {
     // Sorting for cleanliness
-    std::vector<Root*> roots;
+    std::vector<ParserNode*> roots;
     std::copy(aRoot->GetChildren().begin(), aRoot->GetChildren().end(), std::back_inserter(roots));
     std::sort(roots.begin(), roots.end(), RootSortPredicate);
-    std::vector<Root*>::iterator begin = roots.begin();
-    std::vector<Root*>::iterator end = roots.end();
+    std::vector<ParserNode*>::iterator begin = roots.begin();
+    std::vector<ParserNode*>::iterator end = roots.end();
     mOutput << InsertIndents() << aRoot->GetName() << std::endl;
     mOutput << InsertIndents() << "{" << std::endl;
     ++mCurrentIndent;
-    for(std::vector<Root*>::iterator it = begin; it != end; ++it)
+    for(std::vector<ParserNode*>::iterator it = begin; it != end; ++it)
     {
       WriteRoot(*it);
     }

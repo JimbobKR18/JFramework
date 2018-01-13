@@ -29,7 +29,7 @@ public:
   void                SetControllerFactory(ControllerFactory* aFactory);
   
   // Management
-  Controller*         CreateController(HashString const &aName, Root* const aData);
+  Controller*         CreateController(HashString const &aName, ParserNode* const aData);
   void                DeleteController(Controller *aController);
   void                AddController(Controller *aController);
   void                RemoveController(Controller *aController);

@@ -129,7 +129,7 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   // Reveal the text slowly rather than all at once.
   if(aParser.Find("Animation"))
   {
-    Root* animation = aParser.Find("Animation");
+    ParserNode* animation = aParser.Find("Animation");
     std::vector<std::vector<float>> animationSpeeds;
     std::vector<float> animationSpeed, speedFromFile;
     std::vector<int> numFrames;

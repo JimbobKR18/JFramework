@@ -38,7 +38,7 @@ void ControllerManager::SetControllerFactory(ControllerFactory* aFactory)
  * @param aName Name of controller type.
  * @return New controller.
  */
-Controller* ControllerManager::CreateController(HashString const &aName, Root* const aData)
+Controller* ControllerManager::CreateController(HashString const &aName, ParserNode* const aData)
 {
   Controller* controller = mFactory->CreateController(this, aName, aData);
   AddController(controller);

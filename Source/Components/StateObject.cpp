@@ -56,7 +56,7 @@ void StateObject::Serialize(Parser& aParser)
 {
   HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const STATE_OBJECT = "StateObject";
-  Root* object = aParser.Find(objectName);
+  ParserNode* object = aParser.Find(objectName);
   
   StateMachine::StateContainer const& states = mStateMachine->GetStates();
   StateMachine::LinkContainer const& links = mStateMachine->GetLinks();
@@ -66,23 +66,23 @@ void StateObject::Serialize(Parser& aParser)
   object->Place(STATE_OBJECT, "States", "");
   object->Place(STATE_OBJECT, "Links", "");
   
-  Root* statesNode = object->Find("States");
+  ParserNode* statesNode = object->Find("States");
   for(StateMachine::StateIT it = states.begin(); it != states.end(); ++it, ++curIndex)
   {
     HashString name = HashString("State_") + Common::IntToString(curIndex);
     statesNode->Place("States", name, "");
-    Root* stateNode = statesNode->Find(name);
+    ParserNode* stateNode = statesNode->Find(name);
     stateNode->Place(name, "Name", (*it)->GetName());
     stateNode->Place(name, "TimeAlive", Common::FloatToString((*it)->GetTimeAlive()));
   }
   
   curIndex = 0;
-  Root* linksNode = object->Find("Links");
+  ParserNode* linksNode = object->Find("Links");
   for(StateMachine::LinkIT it = links.begin(); it != links.end(); ++it, ++curIndex)
   {
     HashString name = HashString("Link_") + Common::IntToString(curIndex);
     statesNode->Place("Links", name, "");
-    Root* linkNode = linksNode->Find(name);
+    ParserNode* linkNode = linksNode->Find(name);
     HashString type = "NONE";
     switch((*it)->GetType())
     {
@@ -116,13 +116,13 @@ void StateObject::Deserialize(Parser& aParser)
   int curIndex = 0;
   
   std::map<int, State*> states;
-  Root* statesNode = aParser.Find(STATE_OBJECT, "States");
-  Root* linksNode = aParser.Find(STATE_OBJECT, "Links");
+  ParserNode* statesNode = aParser.Find(STATE_OBJECT, "States");
+  ParserNode* linksNode = aParser.Find(STATE_OBJECT, "Links");
   
   HashString curName = HashString("State_") + Common::IntToString(curIndex);
   while(statesNode->Find(curName))
   {
-    Root* stateNode = statesNode->Find(curName);
+    ParserNode* stateNode = statesNode->Find(curName);
     HashString name = stateNode->Find("Name")->GetValue();
     float timeAlive = INFINITE_TIME_ALIVE;
     
@@ -142,7 +142,7 @@ void StateObject::Deserialize(Parser& aParser)
   curName = HashString("Link_") + Common::IntToString(curIndex);
   while(linksNode->Find(curName))
   {
-    Root* linkNode = linksNode->Find(curName);
+    ParserNode* linkNode = linksNode->Find(curName);
     HashString state1Name = linkNode->Find("State_0")->GetValue();
     HashString state2Name = linkNode->Find("State_1")->GetValue();
     HashString typeName = linkNode->Find("Type")->GetValue();

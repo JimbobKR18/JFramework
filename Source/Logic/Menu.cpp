@@ -293,7 +293,7 @@ void Menu::ParseFile()
 
   while(parser.Find(curObject.ToString()))
   {
-    Root* newElement = parser.Find(curObject.ToString());
+    ParserNode* newElement = parser.Find(curObject.ToString());
     HashString name;
     
     // Compatibility layer
@@ -371,7 +371,7 @@ void Menu::ParseFile()
  * @brief Get transform data for an object from a root.
  * @param aTransform
  */
-void Menu::ParseTransform(GameObject *aObject, Root *aTransform)
+void Menu::ParseTransform(GameObject *aObject, ParserNode *aTransform)
 {
   float posX, posY, posZ,
       scaleX, scaleY, scaleZ,
@@ -434,7 +434,7 @@ void Menu::ParseTransform(GameObject *aObject, Root *aTransform)
   }
   
   // Axis lock (optional)
-  Root* axisLockRoot = aTransform->Find("LockedAxes");
+  ParserNode* axisLockRoot = aTransform->Find("LockedAxes");
   if(axisLockRoot)
   {
     AxisLock axisLock = NO_AXIS;
@@ -461,7 +461,7 @@ void Menu::ParseTransform(GameObject *aObject, Root *aTransform)
   }
   
   // Parent inherit info
-  Root* inheritNode = aTransform->Find("InheritInfo");
+  ParserNode* inheritNode = aTransform->Find("InheritInfo");
   if(inheritNode)
   {
     ParentInherit inheritance = INHERIT_ALL;
@@ -492,7 +492,7 @@ void Menu::ParseTransform(GameObject *aObject, Root *aTransform)
  * @brief Get surface data from a root.
  * @param aSurface
  */
-void Menu::ParseSurface(GameObject *aObject, Root *aSurface)
+void Menu::ParseSurface(GameObject *aObject, ParserNode *aSurface)
 {
   Surface* objSurface = aObject->GET<Surface>();
   int startingAnimation = 0;
@@ -536,7 +536,7 @@ void Menu::ParseSurface(GameObject *aObject, Root *aSurface)
  * @param aObject Object to apply effects to.
  * @param aEffects Effects root.
  */
-void Menu::ParseEffects(GameObject *aObject, Root *aEffects)
+void Menu::ParseEffects(GameObject *aObject, ParserNode *aEffects)
 {
   EffectsManager* effectsManager = mOwner->GetManager()->GetOwningApp()->GET<EffectsManager>();
   int curIndex = 0;
@@ -544,7 +544,7 @@ void Menu::ParseEffects(GameObject *aObject, Root *aEffects)
   HashString curEffect = effectString + Common::IntToString(curIndex);
   while(aEffects->Find(curEffect))
   {
-    Root* effectRoot = aEffects->Find(curEffect);
+    ParserNode* effectRoot = aEffects->Find(curEffect);
     HashString type = effectRoot->Find("Type")->GetValue();
     HashString name = effectRoot->Find("Name")->GetValue();
     float time = effectRoot->Find("Time")->GetValue().ToFloat();
@@ -563,7 +563,7 @@ void Menu::ParseEffects(GameObject *aObject, Root *aEffects)
  * @param aObject Object to apply effects to.
  * @param aCustomScript Custom script root.
  */
-void Menu::ParseCustomScript(GameObject *aObject, Root *aCustomScript)
+void Menu::ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript)
 {
   CustomScript *customScript = aObject->GET<CustomScript>();
   if(!customScript)

@@ -287,7 +287,7 @@ void Surface::Serialize(Parser &aParser)
 {
   HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const SURFACE = "Surface";
-  Root* object = aParser.Find(objectName);
+  ParserNode* object = aParser.Find(objectName);
   TextureCoordinates *coords = GetTextureData();
   std::vector<int> animations;
   bool animated = coords->GetAnimated();
@@ -300,7 +300,7 @@ void Surface::Serialize(Parser &aParser)
                             "ColorA"};
 
   object->Place(objectName, SURFACE, "");
-  Root* surface = object->Find(SURFACE);
+  ParserNode* surface = object->Find(SURFACE);
   surface->Place(SURFACE, "AnimationCount", Common::IntToString(numanimations));
   for(int i = 0; i < numanimations; ++i)
   {
@@ -323,7 +323,7 @@ void Surface::Serialize(Parser &aParser)
   surface->Place(SURFACE, "AnimationSpeeds", "");
   HashString const ANIMATION = "Animation_";
   int curIndex = 0;
-  Root* animationSpeedsNode = surface->Find("AnimationSpeeds");
+  ParserNode* animationSpeedsNode = surface->Find("AnimationSpeeds");
   for(std::vector<std::vector<float>>::iterator it = animationSpeeds.begin(); it != animationSpeeds.end(); ++it, ++curIndex)
   {
     HashString curNode = ANIMATION + Common::IntToString(curIndex);
@@ -353,7 +353,7 @@ void Surface::Serialize(Parser &aParser)
     surface->Place(SURFACE, "Properties", "");
     HashString const PROPERTY = "Property_";
     curIndex = 0;
-    Root* propertiesNode = surface->Find("Properties");
+    ParserNode* propertiesNode = surface->Find("Properties");
     for(PropertyContainerIt it = mProperties.begin(); it != mProperties.end(); ++it, ++curIndex)
     {
       HashString curNode = PROPERTY + Common::IntToString(curIndex);
@@ -385,7 +385,7 @@ void Surface::Serialize(Parser &aParser)
         break;
       }
       
-      Root* propertyNode = propertiesNode->Find(curNode);
+      ParserNode* propertyNode = propertiesNode->Find(curNode);
       propertyNode->Place(curNode, "Name", (*it)->GetName());
       propertyNode->Place(curNode, "Type", type);
       propertyNode->Place(curNode, "TargetValue", (*it)->GetTargetValue());
@@ -415,7 +415,7 @@ void Surface::Deserialize(Parser &aParser)
   }
   if(aParser.Find("Surface", "AnimationCount"))
   {
-    Root* animationCount = aParser.Find("Surface", "AnimationCount");
+    ParserNode* animationCount = aParser.Find("Surface", "AnimationCount");
 
     numFrames.clear();
     numAnimations = animationCount->GetValue().ToInt();
@@ -432,11 +432,11 @@ void Surface::Deserialize(Parser &aParser)
     HashString const nodeName = "Animation_";
     int index = 0;
     HashString curIndex = nodeName + Common::IntToString(index);
-    Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
+    ParserNode* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
     
     while(animationSpeedNode->Find(curIndex))
     {
-      Root* curNode = animationSpeedNode->Find(curIndex);
+      ParserNode* curNode = animationSpeedNode->Find(curIndex);
       std::vector<float> singleSpeeds = curNode->GetValue().ToFloatVector();
       
       // Convert from frames to time.
@@ -456,7 +456,7 @@ void Surface::Deserialize(Parser &aParser)
   else if(aParser.Find("Surface", "AnimationSpeeds"))
   {
     // Optional parameter to change the animation speeds.
-    Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
+    ParserNode* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
     std::vector<float> singleSpeeds = animationSpeedNode->GetValue().ToFloatVector();
     
     for(unsigned i = 0; i < singleSpeeds.size(); ++i)
@@ -472,7 +472,7 @@ void Surface::Deserialize(Parser &aParser)
   else if(aParser.Find("Surface", "AnimationSpeed"))
   {
     // Optional parameter to change the animation speed, using a single number.
-    Root* animationSpeedNode = aParser.Find("Surface", "AnimationSpeed");
+    ParserNode* animationSpeedNode = aParser.Find("Surface", "AnimationSpeed");
     for(int i = 0; i < numAnimations; ++i)
     {
       animationSpeed.push_back(std::vector<float>());
@@ -531,11 +531,11 @@ void Surface::Deserialize(Parser &aParser)
     HashString const nodeName = "Property_";
     int index = 0;
     HashString curIndex = nodeName + Common::IntToString(index);
-    Root* propertyNode = aParser.Find("Surface", "Properties");
+    ParserNode* propertyNode = aParser.Find("Surface", "Properties");
     
     while(propertyNode->Find(curIndex))
     {
-      Root* curNode = propertyNode->Find(curIndex);
+      ParserNode* curNode = propertyNode->Find(curIndex);
       PropertyType propertyType = PropertyType::INT1;
       HashString const type = curNode->Find("Type")->GetValue();
       

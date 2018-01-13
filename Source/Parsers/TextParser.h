@@ -27,7 +27,7 @@ class TextParser : public Parser
     // Write
     void          Write();
   private:
-    void          WriteRoot(Root *aRoot);
+    void          WriteRoot(ParserNode *aRoot);
     std::string   InsertIndents();
 };
 

@@ -193,7 +193,7 @@ void ChemistryElement::Serialize(Parser& aParser)
 {
   HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const CHEMISTRY_OBJECT = "ChemistryElement";
-  Root* object = aParser.Find(objectName);
+  ParserNode* object = aParser.Find(objectName);
   
   object->Place(objectName, CHEMISTRY_OBJECT, "");
   object->Place(CHEMISTRY_OBJECT, "Name", mName);

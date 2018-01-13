@@ -30,7 +30,7 @@ public:
   virtual void Update(float const aDT) = 0;
   virtual void Complete() = 0;
   virtual bool IsComplete() = 0;
-  virtual void Deserialize(Root* aRoot) = 0;
+  virtual void Deserialize(ParserNode* aRoot) = 0;
 };
 
 #endif

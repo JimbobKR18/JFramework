@@ -366,7 +366,7 @@ void GameObject::Interact(GameObject *aObject)
  * @brief Parse any additional data.
  * @param aRoot Root to gather data from.
  */
-void GameObject::ParseAdditionalData(Root *aRoot)
+void GameObject::ParseAdditionalData(ParserNode *aRoot)
 {
 #ifdef _DEBUG
   DebugLogPrint("ParseAdditionalData called on GameObject, nothing to do.\n");
