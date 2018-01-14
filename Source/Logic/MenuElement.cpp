@@ -68,7 +68,7 @@ void MenuElement::ParseFile(Parser &aParser)
   {
     // Get Position, Scale, and Size
     Transform *transform = mObject->GET<Transform>();
-    transform->Deserialize(aParser);
+    transform->Deserialize(aParser.Find("Transform"));
     transform->GetPosition().z = 0.99f;
   }
   ParseAdditionalData(aParser);

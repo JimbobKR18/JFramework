@@ -279,25 +279,24 @@ void ChemistryMaterial::Serialize(Parser& aParser)
  * @brief Deserialize from parser into memory.
  * @param aParser Parser to gather data from.
  */
-void ChemistryMaterial::Deserialize(Parser& aParser)
+void ChemistryMaterial::Deserialize(ParserNode *aNode)
 {
-  HashString const CHEMISTRY_OBJECT = "ChemistryMaterial";
-  if(aParser.Find(CHEMISTRY_OBJECT, "Name"))
-    mName = aParser.Find(CHEMISTRY_OBJECT, "Name")->GetValue();
-  if(aParser.Find(CHEMISTRY_OBJECT, "BoilingPoint"))
-    mBoilingPoint = aParser.Find(CHEMISTRY_OBJECT, "BoilingPoint")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "MeltingPoint"))
-    mMeltingPoint = aParser.Find(CHEMISTRY_OBJECT, "MeltingPoint")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "FreezingPoint"))
-    mFreezingPoint = aParser.Find(CHEMISTRY_OBJECT, "FreezingPoint")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "Conductivity"))
-    mConductivity = aParser.Find(CHEMISTRY_OBJECT, "Conductivity")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "HeatTransferRate"))
-    mHeatTransferRate = aParser.Find(CHEMISTRY_OBJECT, "HeatTransferRate")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "StartingTemperature"))
-    mCurrentTemperature = aParser.Find(CHEMISTRY_OBJECT, "StartingTemperature")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "StartingWattage"))
-    mCurrentWattage = aParser.Find(CHEMISTRY_OBJECT, "StartingWattage")->GetValue().ToFloat();
+  if(aNode->Find("Name"))
+    mName = aNode->Find("Name")->GetValue();
+  if(aNode->Find("BoilingPoint"))
+    mBoilingPoint = aNode->Find("BoilingPoint")->GetValue().ToFloat();
+  if(aNode->Find("MeltingPoint"))
+    mMeltingPoint = aNode->Find("MeltingPoint")->GetValue().ToFloat();
+  if(aNode->Find("FreezingPoint"))
+    mFreezingPoint = aNode->Find("FreezingPoint")->GetValue().ToFloat();
+  if(aNode->Find("Conductivity"))
+    mConductivity = aNode->Find("Conductivity")->GetValue().ToFloat();
+  if(aNode->Find("HeatTransferRate"))
+    mHeatTransferRate = aNode->Find("HeatTransferRate")->GetValue().ToFloat();
+  if(aNode->Find("StartingTemperature"))
+    mCurrentTemperature = aNode->Find("StartingTemperature")->GetValue().ToFloat();
+  if(aNode->Find("StartingWattage"))
+    mCurrentWattage = aNode->Find("StartingWattage")->GetValue().ToFloat();
 }
 
 /**

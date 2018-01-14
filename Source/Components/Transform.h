@@ -82,7 +82,7 @@ public:
   virtual void        SendMessage(Message const &aMessage) {}
   virtual void        ReceiveMessage(Message const &aMessage) {}
   virtual void        Serialize(Parser &aParser);
-  virtual void        Deserialize(Parser &aParser);
+  virtual void        Deserialize(ParserNode *aNode);
   static int          GetUID() {return sUID;}
   static void         SerializeLUA();
   

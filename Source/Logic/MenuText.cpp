@@ -13,6 +13,8 @@
 #include "LUATypes.h"
 #include "Transform.h"
 #include "GraphicsManager.h"
+#include "SystemProperties.h"
+#include "Menu.h"
 
 #ifdef SHADER_COMPATIBLE
   #include "PCShaderSurface.h"
@@ -118,8 +120,20 @@ void MenuText::ParseAdditionalData(Parser &aParser)
 #else
   Surface *surface = app->GET<GraphicsManager>()->CreateUISurface();
 #endif
+  std::vector<std::vector<float>> animationSpeed;
+  animationSpeed.push_back(std::vector<float>());
+  animationSpeed[0].push_back(GetOwner()->GetLevel()->GetManager()->GetOwningApp()->GetAppStep());
+  
+  std::vector<int> numFrames;
+  numFrames.push_back(1);
+  
   surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
-  surface->Deserialize(aParser);
+  surface->SetFileName("");
+  surface->LoadImage(surface->GetFileName());
+  surface->LoadShaders(SystemProperties::GetDefaultVertexShaderName(), SystemProperties::GetDefaultFragmentShaderName());
+  surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
+  surface->SetAnimated(false);
+  surface->SetAnimation(0);
   
   // Update texture to be the right size.
   Transform *transform = mObject->GET<Transform>();

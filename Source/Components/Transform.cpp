@@ -343,23 +343,26 @@ void Transform::Serialize(Parser &aParser)
  * @brief Read from file
  * @param aParser File to read from
  */
-void Transform::Deserialize(Parser &aParser)
+void Transform::Deserialize(ParserNode *aNode)
 {
   // Position, Scale, Size
-  SetPosition(Vector3(aParser.Find("Transform", "PositionX")->GetValue().ToFloat(),
-                      aParser.Find("Transform", "PositionY")->GetValue().ToFloat(),
-                      aParser.Find("Transform", "PositionZ")->GetValue().ToFloat()));
-  SetScale(Vector3(aParser.Find("Transform", "ScaleX")->GetValue().ToFloat(),
-                   aParser.Find("Transform", "ScaleY")->GetValue().ToFloat(),
-                   aParser.Find("Transform", "ScaleZ")->GetValue().ToFloat()));
-  SetSize(Vector3(aParser.Find("Transform", "SizeX")->GetValue().ToFloat(),
-                  aParser.Find("Transform", "SizeY")->GetValue().ToFloat(),
-                  aParser.Find("Transform", "SizeZ")->GetValue().ToFloat()));
+  if(aNode->Find("PositionX"))
+    SetPosition(Vector3(aNode->Find("PositionX")->GetValue().ToFloat(),
+                        aNode->Find("PositionY")->GetValue().ToFloat(),
+                        aNode->Find("PositionZ")->GetValue().ToFloat()));
+  if(aNode->Find("ScaleX"))
+    SetScale(Vector3(aNode->Find("ScaleX")->GetValue().ToFloat(),
+                     aNode->Find("ScaleY")->GetValue().ToFloat(),
+                     aNode->Find("ScaleZ")->GetValue().ToFloat()));
+  if(aNode->Find("SizeX"))
+    SetSize(Vector3(aNode->Find("SizeX")->GetValue().ToFloat(),
+                    aNode->Find("SizeY")->GetValue().ToFloat(),
+                    aNode->Find("SizeZ")->GetValue().ToFloat()));
 
   // Alignment
-  HashString xAlign = aParser.Find("Transform", "AlignX")->GetValue();
-  HashString yAlign = aParser.Find("Transform", "AlignY")->GetValue();
-  HashString zAlign = aParser.Find("Transform", "AlignZ")->GetValue();
+  HashString xAlign = aNode->Find("AlignX") ? aNode->Find("AlignX")->GetValue() : "";
+  HashString yAlign = aNode->Find("AlignY") ? aNode->Find("AlignY")->GetValue() : "";
+  HashString zAlign = aNode->Find("AlignZ") ? aNode->Find("AlignZ")->GetValue() : "";
   if(xAlign != "")
   {
     if(xAlign == "LEFT")
@@ -389,27 +392,17 @@ void Transform::Deserialize(Parser &aParser)
   }
   
   // Rotation
-  HashString xRotation = aParser.Find("Transform", "RotationX")->GetValue();
-  HashString yRotation = aParser.Find("Transform", "RotationY")->GetValue();
-  HashString zRotation = aParser.Find("Transform", "RotationZ")->GetValue();
-  if(xRotation != "")
-  {
-    mRotation = mRotation.Rotate(Vector3(1,0,0), xRotation.ToFloat());
-  }
-  if(yRotation != "")
-  {
-    mRotation = mRotation.Rotate(Vector3(0,1,0), yRotation.ToFloat());
-  }
-  if(zRotation != "")
-  {
-    mRotation = mRotation.Rotate(Vector3(0,0,1), zRotation.ToFloat());
-  }
+  if(aNode->Find("RotationX"))
+    mRotation = mRotation.Rotate(Vector3(1,0,0), aNode->Find("RotationX")->GetValue().ToFloat());
+  if(aNode->Find("RotationY"))
+    mRotation = mRotation.Rotate(Vector3(0,1,0), aNode->Find("RotationY")->GetValue().ToFloat());
+  if(aNode->Find("RotationZ"))
+    mRotation = mRotation.Rotate(Vector3(0,0,1), aNode->Find("RotationZ")->GetValue().ToFloat());
   
   // Axis lock
-  ParserNode* axisLockNode = aParser.Find("Transform", "LockedAxes");
-  if(axisLockNode)
+  if(aNode->Find("LockedAxes"))
   {
-    HashString axisLock = axisLockNode->GetValue();
+    HashString axisLock = aNode->Find("LockedAxes")->GetValue();
     if(axisLock == "X_AXIS")
       mLockedAxes = X_AXIS;
     else if(axisLock == "Y_AXIS")
@@ -431,10 +424,9 @@ void Transform::Deserialize(Parser &aParser)
   }
   
   // Parent inherit info
-  ParserNode* inheritNode = aParser.Find("Transform", "InheritInfo");
-  if(inheritNode)
+  if(aNode->Find("InheritInfo"))
   {
-    HashString inheritInfo = inheritNode->GetValue();
+    HashString inheritInfo = aNode->Find("InheritInfo")->GetValue();
     if(inheritInfo == "INHERIT_NONE")
       mInheritInfo = INHERIT_NONE;
     else if(inheritInfo == "INHERIT_POSITION")

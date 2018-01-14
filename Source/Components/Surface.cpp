@@ -398,7 +398,7 @@ void Surface::Serialize(Parser &aParser)
  * @brief Read from file
  * @param aParser File stream to read from
  */
-void Surface::Deserialize(Parser &aParser)
+void Surface::Deserialize(ParserNode *aNode)
 {
   float const frameRate = GetManager()->GetOwningApp()->GetAppStep();
   bool animated = false;
@@ -409,30 +409,30 @@ void Surface::Deserialize(Parser &aParser)
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
-  if(aParser.Find("Surface", "FrameBased"))
+  if(aNode->Find("FrameBased"))
   {
-    frameBased = aParser.Find("Surface", "FrameBased")->GetValue().ToBool();
+    frameBased = aNode->Find("FrameBased")->GetValue().ToBool();
   }
-  if(aParser.Find("Surface", "AnimationCount"))
+  if(aNode->Find("AnimationCount"))
   {
-    ParserNode* animationCount = aParser.Find("Surface", "AnimationCount");
+    ParserNode* animationCount = aNode->Find("AnimationCount");
 
     numFrames.clear();
     numAnimations = animationCount->GetValue().ToInt();
-    numFrames = aParser.Find("Surface", "FrameNumbers")->GetValue().ToIntVector();
+    numFrames = aNode->Find("FrameNumbers")->GetValue().ToIntVector();
     
-    bool isAnimated = aParser.Find("Surface", "Animated")->GetValue().ToBool();
+    bool isAnimated = aNode->Find("Animated")->GetValue().ToBool();
     if(isAnimated)
       animated = true;
   }
   // Supports compatibility mode with old and really old files, support single animation speed or multiple.
-  if(aParser.Find("Surface", "AnimationSpeeds") && aParser.Find("Surface", "AnimationSpeeds")->Find("Animation_0"))
+  if(aNode->Find("AnimationSpeeds") && aNode->Find("AnimationSpeeds")->Find("Animation_0"))
   {
     // Optional parameter to change the animation speeds.
     HashString const nodeName = "Animation_";
     int index = 0;
     HashString curIndex = nodeName + Common::IntToString(index);
-    ParserNode* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
+    ParserNode* animationSpeedNode = aNode->Find("AnimationSpeeds");
     
     while(animationSpeedNode->Find(curIndex))
     {
@@ -453,10 +453,10 @@ void Surface::Deserialize(Parser &aParser)
       curIndex = nodeName + Common::IntToString(index);
     }
   }
-  else if(aParser.Find("Surface", "AnimationSpeeds"))
+  else if(aNode->Find("AnimationSpeeds"))
   {
     // Optional parameter to change the animation speeds.
-    ParserNode* animationSpeedNode = aParser.Find("Surface", "AnimationSpeeds");
+    ParserNode* animationSpeedNode = aNode->Find("AnimationSpeeds");
     std::vector<float> singleSpeeds = animationSpeedNode->GetValue().ToFloatVector();
     
     for(unsigned i = 0; i < singleSpeeds.size(); ++i)
@@ -469,10 +469,10 @@ void Surface::Deserialize(Parser &aParser)
       animationSpeed.push_back(speedVector);
     }
   }
-  else if(aParser.Find("Surface", "AnimationSpeed"))
+  else if(aNode->Find("AnimationSpeed"))
   {
     // Optional parameter to change the animation speed, using a single number.
-    ParserNode* animationSpeedNode = aParser.Find("Surface", "AnimationSpeed");
+    ParserNode* animationSpeedNode = aNode->Find("AnimationSpeed");
     for(int i = 0; i < numAnimations; ++i)
     {
       animationSpeed.push_back(std::vector<float>());
@@ -495,24 +495,24 @@ void Surface::Deserialize(Parser &aParser)
       }
     }
   }
-  if(aParser.Find("Surface", "NoRender"))
+  if(aNode->Find("NoRender"))
   {
-    mNoRender = aParser.Find("Surface", "NoRender")->GetValue().ToBool();
+    mNoRender = aNode->Find("NoRender")->GetValue().ToBool();
     if(mNoRender)
       mManager->RemoveSurface(this);
   }
-  if(aParser.Find("Surface", "ColorR"))
+  if(aNode->Find("ColorR"))
   {
-    float red = aParser.Find("Surface", "ColorR")->GetValue().ToFloat();
-    float green = aParser.Find("Surface", "ColorG")->GetValue().ToFloat();
-    float blue = aParser.Find("Surface", "ColorB")->GetValue().ToFloat();
-    float alpha = aParser.Find("Surface", "ColorA")->GetValue().ToFloat();
+    float red = aNode->Find("ColorR")->GetValue().ToFloat();
+    float green = aNode->Find("ColorG")->GetValue().ToFloat();
+    float blue = aNode->Find("ColorB")->GetValue().ToFloat();
+    float alpha = aNode->Find("ColorA")->GetValue().ToFloat();
 
     mColor = Vector4(red, green, blue, alpha);
   }
-  if(aParser.Find("Surface", "ViewMode"))
+  if(aNode->Find("ViewMode"))
   {
-    HashString viewMode = aParser.Find("Surface", "ViewMode")->GetValue();
+    HashString viewMode = aNode->Find("ViewMode")->GetValue();
     if(viewMode == "ABSOLUTE")
       mViewmode = VIEW_ABSOLUTE;
     else if(viewMode == "RELATIVE")
@@ -522,16 +522,16 @@ void Surface::Deserialize(Parser &aParser)
     else
       assert(!"Invalid value passed into ViewMode for Surface. (Surface.cpp)");  
   }
-  if(aParser.Find("Surface", "StartingAnimation"))
+  if(aNode->Find("StartingAnimation"))
   {
-    startingAnimation = aParser.Find("Surface", "StartingAnimation")->GetValue().ToInt();
+    startingAnimation = aNode->Find("StartingAnimation")->GetValue().ToInt();
   }
-  if(aParser.Find("Surface", "Properties"))
+  if(aNode->Find("Properties"))
   {
     HashString const nodeName = "Property_";
     int index = 0;
     HashString curIndex = nodeName + Common::IntToString(index);
-    ParserNode* propertyNode = aParser.Find("Surface", "Properties");
+    ParserNode* propertyNode = aNode->Find("Properties");
     
     while(propertyNode->Find(curIndex))
     {

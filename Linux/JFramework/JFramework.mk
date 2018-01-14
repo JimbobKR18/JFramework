@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=11/01/18
+Date                   :=13/01/18
 CodeLitePath           :=/home/jimmy/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -67,7 +67,7 @@ Objects0=$(IntermediateDirectory)/up_up_Source_LUA_lua.c$(ObjectSuffix) $(Interm
 	$(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) 
 
 Objects1=$(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Physics_Joint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screen.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_SoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Basic.cpp$(ObjectSuffix) \
 	
@@ -520,13 +520,13 @@ $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(DependSuffix): ../
 $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(PreprocessSuffix): ../../Source/Parsers/TextParser.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(PreprocessSuffix) ../../Source/Parsers/TextParser.cpp
 
-$(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix): ../../Source/Parsers/Root.cpp $(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Parsers/Root.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(DependSuffix): ../../Source/Parsers/Root.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(DependSuffix) -MM ../../Source/Parsers/Root.cpp
+$(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix): ../../Source/Parsers/ParserNode.cpp $(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Parsers/ParserNode.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(DependSuffix): ../../Source/Parsers/ParserNode.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(DependSuffix) -MM ../../Source/Parsers/ParserNode.cpp
 
-$(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(PreprocessSuffix): ../../Source/Parsers/Root.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Parsers_Root.cpp$(PreprocessSuffix) ../../Source/Parsers/Root.cpp
+$(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(PreprocessSuffix): ../../Source/Parsers/ParserNode.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(PreprocessSuffix) ../../Source/Parsers/ParserNode.cpp
 
 $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix): ../../Source/Physics/GravityGenerator.cpp $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Physics/GravityGenerator.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IncludePath)

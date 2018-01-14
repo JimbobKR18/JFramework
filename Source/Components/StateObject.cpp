@@ -110,17 +110,23 @@ void StateObject::Serialize(Parser& aParser)
  * @brief Read from format.
  * @param aParser Parser to read from.
  */
-void StateObject::Deserialize(Parser& aParser)
+void StateObject::Deserialize(ParserNode *aNode)
 {
-  HashString const STATE_OBJECT = "StateObject";
+  if(mStateMachine)
+  {
+    delete mStateMachine;
+    mStateMachine = nullptr;
+  }
+  mStateMachine = new StateMachine();
+  
   int curIndex = 0;
   
   std::map<int, State*> states;
-  ParserNode* statesNode = aParser.Find(STATE_OBJECT, "States");
-  ParserNode* linksNode = aParser.Find(STATE_OBJECT, "Links");
+  ParserNode* statesNode = aNode->Find("States");
+  ParserNode* linksNode = aNode->Find("Links");
   
   HashString curName = HashString("State_") + Common::IntToString(curIndex);
-  while(statesNode->Find(curName))
+  while(statesNode && statesNode->Find(curName))
   {
     ParserNode* stateNode = statesNode->Find(curName);
     HashString name = stateNode->Find("Name")->GetValue();
@@ -140,7 +146,7 @@ void StateObject::Deserialize(Parser& aParser)
   
   curIndex = 0;
   curName = HashString("Link_") + Common::IntToString(curIndex);
-  while(linksNode->Find(curName))
+  while(linksNode && linksNode->Find(curName))
   {
     ParserNode* linkNode = linksNode->Find(curName);
     HashString state1Name = linkNode->Find("State_0")->GetValue();

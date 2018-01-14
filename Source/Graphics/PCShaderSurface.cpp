@@ -262,24 +262,24 @@ void PCShaderSurface::Serialize(Parser &aParser)
  * @brief Read from file.
  * @param aParser File to read from.
  */
-void PCShaderSurface::Deserialize(Parser &aParser)
+void PCShaderSurface::Deserialize(ParserNode *aNode)
 {
   HashString fileName = "";
   HashString vertexShader = SystemProperties::GetDefaultVertexShaderName();
   HashString fragmentShader = SystemProperties::GetDefaultFragmentShaderName();
   
-  if(aParser.Find("Surface", "TextureName"))
-    fileName = aParser.Find("Surface", "TextureName")->GetValue().ToString();
-  if(aParser.Find("Surface", "VertexShader"))
-    vertexShader = aParser.Find("Surface", "VertexShader")->GetValue().ToString();
-  if(aParser.Find("Surface", "FragmentShader"))
-    fragmentShader = aParser.Find("Surface", "FragmentShader")->GetValue().ToString();
+  if(aNode->Find("TextureName"))
+    fileName = aNode->Find("TextureName")->GetValue().ToString();
+  if(aNode->Find("VertexShader"))
+    vertexShader = aNode->Find("VertexShader")->GetValue().ToString();
+  if(aNode->Find("FragmentShader"))
+    fragmentShader = aNode->Find("FragmentShader")->GetValue().ToString();
 
   SetFileName(fileName);
   LoadImage(GetFileName());
   LoadShaders(vertexShader, fragmentShader);
   
-  Surface::Deserialize(aParser);
+  Surface::Deserialize(aNode);
 }
 
 /**

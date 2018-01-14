@@ -205,8 +205,8 @@
     <File Name="../../Source/Parsers/Parser.cpp"/>
     <File Name="../../Source/Parsers/TextParser.cpp"/>
     <File Name="../../Source/Parsers/Parser.h"/>
-    <File Name="../../Source/Parsers/Root.h"/>
-    <File Name="../../Source/Parsers/Root.cpp"/>
+    <File Name="../../Source/Parsers/ParserNode.h"/>
+    <File Name="../../Source/Parsers/ParserNode.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Physics">
     <File Name="../../Source/Physics/GravityGenerator.cpp"/>

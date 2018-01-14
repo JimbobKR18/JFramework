@@ -91,11 +91,12 @@ void CustomScript::Serialize(Parser& aParser)
  * @brief Deserialize from parser.
  * @param aParser Parser to read from.
  */
-void CustomScript::Deserialize(Parser& aParser)
+void CustomScript::Deserialize(ParserNode *aNode)
 {
-  HashString const CUSTOMSCRIPT_OBJECT = "CustomScript";
-  mFileName = aParser.Find(CUSTOMSCRIPT_OBJECT, "FileName")->GetValue();
-  mUpdateFunctionName = aParser.Find(CUSTOMSCRIPT_OBJECT, "UpdateFunctionName")->GetValue();
+  if(aNode->Find("FileName"))
+    mFileName = aNode->Find("FileName")->GetValue();
+  if(aNode->Find("UpdateFunctionName"))
+    mUpdateFunctionName = aNode->Find("UpdateFunctionName")->GetValue();
 }
 
 /**

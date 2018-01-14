@@ -35,6 +35,12 @@ PhysicsObject::~PhysicsObject()
   }
   mShapes.clear();
   
+  for(JointIT it = mJoints.begin(); it != mJoints.end(); ++it)
+  {
+    delete *it;
+  }
+  mJoints.clear();
+  
   mWorld->RemoveObject(this);
   mWorld = nullptr;
 }
@@ -240,42 +246,42 @@ void PhysicsObject::Serialize(Parser &aParser)
  * @brief Read from file
  * @param aParser File to read from.
  */
-void PhysicsObject::Deserialize(Parser &aParser)
+void PhysicsObject::Deserialize(ParserNode *aNode)
 {
   // Is our object affected by gravity?
   // What is the object's mass? Is it static?
-  HashString const PHYSICS_OBJECT = "PhysicsObject";
-  bool gravity = aParser.Find(PHYSICS_OBJECT, "Gravity")->GetValue().ToBool();
-  bool isStatic = aParser.Find(PHYSICS_OBJECT, "Static")->GetValue().ToBool();
-  bool isPassable = aParser.Find(PHYSICS_OBJECT, "Passable")->GetValue().ToBool();
-  SetMass(aParser.Find(PHYSICS_OBJECT, "Mass")->GetValue().ToInt());
-  mDamping = aParser.Find(PHYSICS_OBJECT, "Damping")->GetValue().ToFloat();
-  mRestitution = aParser.Find(PHYSICS_OBJECT, "Restitution")->GetValue().ToFloat();
+  if(aNode->Find("Static"))
+    SetStatic(aNode->Find("Static")->GetValue().ToBool());
+  if(aNode->Find("Passable"))
+    SetPassable(aNode->Find("Passable")->GetValue().ToBool());
+  if(aNode->Find("Mass"))
+    SetMass(aNode->Find("Mass")->GetValue().ToFloat());
+  if(aNode->Find("Damping"))
+    mDamping = aNode->Find("Damping")->GetValue().ToFloat();
+  if(aNode->Find("Restitution"))
+    mRestitution = aNode->Find("Restitution")->GetValue().ToFloat();
 
-  // Optional
-  if(aParser.Find(PHYSICS_OBJECT, "IgnoreList"))
+  if(aNode->Find("IgnoreList"))
   {
-    std::vector<std::string> ignoreList = aParser.Find(PHYSICS_OBJECT, "IgnoreList")->GetValue().ToStringVector();
+    mIgnoreList.clear();
+    std::vector<std::string> ignoreList = aNode->Find("IgnoreList")->GetValue().ToStringVector();
     
     for(std::vector<std::string>::iterator it = ignoreList.begin(); it != ignoreList.end(); ++it)
     {
       mIgnoreList[Common::StringHashFunction(*it)] = *it;
     }
   }
-  if(aParser.Find(PHYSICS_OBJECT, "MaxVelocity"))
+  if(aNode->Find("MaxVelocity"))
   {
-    mMaximumVelocity = aParser.Find(PHYSICS_OBJECT, "MaxVelocity")->GetValue().ToFloat();
+    mMaximumVelocity = aNode->Find("MaxVelocity")->GetValue().ToFloat();
   }
 
   // Default true
-  if(!gravity)
+  if(aNode->Find("Gravity") && !aNode->Find("Gravity")->GetValue().ToBool())
   {
     GetOwner()->GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(this);
     SetAffectedByGravity(false);
   }
-  
-  SetStatic(isStatic);
-  SetPassable(isPassable);
   
   HashString const SHAPE = "Shape_";
   int curIndex = 0;
@@ -283,9 +289,17 @@ void PhysicsObject::Deserialize(Parser &aParser)
   
   // Adding shapes
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
-  while(aParser.Find(PHYSICS_OBJECT, curShape))
+  if(aNode->Find(curShape))
   {
-    ParserNode* tempShape = aParser.Find(PHYSICS_OBJECT, curShape);
+    for(ShapeIT it = mShapes.begin(); it != mShapes.end(); ++it)
+    {
+      delete *it;
+    }
+    mShapes.clear();
+  }
+  while(aNode->Find(curShape))
+  {
+    ParserNode* tempShape = aNode->Find(curShape);
     Shape* newShape = nullptr;
     
     HashString type = tempShape->Find("Type")->GetValue();
@@ -375,9 +389,17 @@ void PhysicsObject::Deserialize(Parser &aParser)
   
   // Adding joints
   // NOTE: ALL JOINT POSITIONS ARE IN LOCAL SPACE
-  while(aParser.Find(PHYSICS_OBJECT, curJoint))
+  if(aNode->Find(curJoint))
   {
-    ParserNode* tempJoint = aParser.Find(PHYSICS_OBJECT, curJoint);
+    for(JointIT it = mJoints.begin(); it != mJoints.end(); ++it)
+    {
+      delete *it;
+    }
+    mJoints.clear();
+  }
+  while(aNode->Find(curJoint))
+  {
+    ParserNode* tempJoint = aNode->Find(curJoint);
     float positionX = tempJoint->Find("PositionX")->GetValue().ToFloat();
     float positionY = tempJoint->Find("PositionY")->GetValue().ToFloat();
     float positionZ = tempJoint->Find("PositionZ")->GetValue().ToFloat();

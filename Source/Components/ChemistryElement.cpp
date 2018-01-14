@@ -210,25 +210,24 @@ void ChemistryElement::Serialize(Parser& aParser)
  * @brief Deserialize from parser into memory.
  * @param aParser Parser to gather data from.
  */
-void ChemistryElement::Deserialize(Parser& aParser)
+void ChemistryElement::Deserialize(ParserNode *aNode)
 {
-  HashString const CHEMISTRY_OBJECT = "ChemistryElement";
-  if(aParser.Find(CHEMISTRY_OBJECT, "Name"))
-    mName = aParser.Find(CHEMISTRY_OBJECT, "Name")->GetValue();
-  if(aParser.Find(CHEMISTRY_OBJECT, "Temperature"))
-    mTemperature = aParser.Find(CHEMISTRY_OBJECT, "Temperature")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "Wattage"))
-    mWattage = aParser.Find(CHEMISTRY_OBJECT, "Wattage")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "Scale"))
-    mScale = aParser.Find(CHEMISTRY_OBJECT, "Scale")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "Falloff"))
-    mFalloff = aParser.Find(CHEMISTRY_OBJECT, "Falloff")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "DirectionX"))
-    mDirectionality.x = aParser.Find(CHEMISTRY_OBJECT, "DirectionX")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "DirectionY"))
-    mDirectionality.y = aParser.Find(CHEMISTRY_OBJECT, "DirectionY")->GetValue().ToFloat();
-  if(aParser.Find(CHEMISTRY_OBJECT, "DirectionZ"))
-    mDirectionality.z = aParser.Find(CHEMISTRY_OBJECT, "DirectionZ")->GetValue().ToFloat();
+  if(aNode->Find("Name"))
+    mName = aNode->Find("Name")->GetValue();
+  if(aNode->Find("Temperature"))
+    mTemperature = aNode->Find("Temperature")->GetValue().ToFloat();
+  if(aNode->Find("Wattage"))
+    mWattage = aNode->Find("Wattage")->GetValue().ToFloat();
+  if(aNode->Find("Scale"))
+    mScale = aNode->Find("Scale")->GetValue().ToFloat();
+  if(aNode->Find("Falloff"))
+    mFalloff = aNode->Find("Falloff")->GetValue().ToFloat();
+  if(aNode->Find("DirectionX"))
+    mDirectionality.x = aNode->Find("DirectionX")->GetValue().ToFloat();
+  if(aNode->Find("DirectionY"))
+    mDirectionality.y = aNode->Find("DirectionY")->GetValue().ToFloat();
+  if(aNode->Find("DirectionZ"))
+    mDirectionality.z = aNode->Find("DirectionZ")->GetValue().ToFloat();
 }
 
 /**

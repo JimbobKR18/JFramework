@@ -288,34 +288,34 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
   {
     PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
     aObject->AddComponent(object);
-    object->Deserialize(aParser);
+    object->Deserialize(aParser.Find("PhysicsObject"));
   }
   if(aParser.Find("ChemistryMaterial"))
   {
     HashString name = aParser.Find("ChemistryMaterial")->Find("Name")->GetValue();
     ChemistryMaterial *object = GetOwningApp()->GET<ChemistryManager>()->CreateMaterial(name);
     aObject->AddComponent(object);
-    object->Deserialize(aParser);
+    object->Deserialize(aParser.Find("ChemistryMaterial"));
   }
   if(aParser.Find("ChemistryElement"))
   {
     HashString name = aParser.Find("ChemistryElement")->Find("Name")->GetValue();
     ChemistryElement *object = GetOwningApp()->GET<ChemistryManager>()->CreateElement(name);
     aObject->AddComponent(object);
-    object->Deserialize(aParser);
+    object->Deserialize(aParser.Find("ChemistryElement"));
   }
   if(aParser.Find("Transform"))
   {
     // Get Position, Scale, and Size
     Transform *transform = new Transform();
-    transform->Deserialize(aParser);
+    transform->Deserialize(aParser.Find("Transform"));
     aObject->AddComponent(transform);
   }
   if(aParser.Find("StateObject"))
   {
     // Get Position, Scale, and Size
     StateObject *stateObject = new StateObject();
-    stateObject->Deserialize(aParser);
+    stateObject->Deserialize(aParser.Find("StateObject"));
     aObject->AddComponent(stateObject);
   }
   if(aParser.Find("Surface"))
@@ -342,13 +342,13 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 #endif
     }
 
-    surface->Deserialize(aParser);
+    surface->Deserialize(aParser.Find("Surface"));
     aObject->AddComponent(surface);
   }
   if(aParser.Find("CustomScript"))
   {
     CustomScript *customScript = new CustomScript();
-    customScript->Deserialize(aParser);
+    customScript->Deserialize(aParser.Find("CustomScript"));
     aObject->AddComponent(customScript);
   }
   if(aParser.Find("Focus"))

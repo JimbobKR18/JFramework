@@ -508,7 +508,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects)
         indices.push_back(i + (iteration * 6));
       }
       
-      // If this object has properties, separate into it's own draw call.
+      // If this object has properties, separate into its own draw call.
       if((*it)->GetProperties().size() != 0)
       {
         ++it;

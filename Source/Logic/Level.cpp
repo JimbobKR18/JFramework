@@ -1100,126 +1100,17 @@ void Level::RemoveObjectFromMenus(GameObject *aObject)
  */
 void Level::ParseTransform(GameObject *aObject, ParserNode *aTransform)
 {
-  float posX, posY, posZ,
-      scaleX, scaleY, scaleZ,
-      sizeX, sizeY, sizeZ,
-      rotateX, rotateY, rotateZ;
-  posX = aTransform->Find("PositionX")->GetValue().ToFloat();
-  posY = aTransform->Find("PositionY")->GetValue().ToFloat();
-  posZ = aTransform->Find("PositionZ")->GetValue().ToFloat();
-  scaleX = aTransform->Find("ScaleX")->GetValue().ToFloat();
-  scaleY = aTransform->Find("ScaleY")->GetValue().ToFloat();
-  scaleZ = aTransform->Find("ScaleZ")->GetValue().ToFloat();
-  sizeX = aTransform->Find("SizeX")->GetValue().ToFloat();
-  sizeY = aTransform->Find("SizeY")->GetValue().ToFloat();
-  sizeZ = aTransform->Find("SizeZ")->GetValue().ToFloat();
-  rotateX = aTransform->Find("RotationX")->GetValue().ToFloat();
-  rotateY = aTransform->Find("RotationY")->GetValue().ToFloat();
-  rotateZ = aTransform->Find("RotationZ")->GetValue().ToFloat();
-
   Transform* objTransform = aObject->GET<Transform>();
-  objTransform->SetPosition(Vector3(posX,posY,posZ));
-  objTransform->SetScale(Vector3(scaleX,scaleY,scaleZ));
-  objTransform->SetSize(Vector3(sizeX,sizeY,sizeZ));
+  objTransform->Deserialize(aTransform);
   
-  Matrix33 rotation;
-  rotation = rotation.Rotate(Vector3(1,0,0), rotateX);
-  rotation = rotation.Rotate(Vector3(0,1,0), rotateY);
-  rotation = rotation.Rotate(Vector3(0,0,1), rotateZ);
-  objTransform->SetRotation(rotation);
-  
-  // Alignment (optional)
-  if(aTransform->Find("AlignX"))
-  {
-    objTransform->SetXAlignment(X_ALIGN_CENTER);
-    if(aTransform->Find("AlignX")->GetValue() == "LEFT")
-      objTransform->SetXAlignment(X_ALIGN_LEFT);
-    else if(aTransform->Find("AlignX")->GetValue() == "RIGHT")
-      objTransform->SetXAlignment(X_ALIGN_RIGHT);
-    else if(aTransform->Find("AlignX")->GetValue() != "CENTER")
-      assert(!"Invalid value passed into XAlign");
-  }
-  if(aTransform->Find("AlignY"))
-  {
-    objTransform->SetYAlignment(Y_ALIGN_CENTER);
-    if(aTransform->Find("AlignY")->GetValue() == "TOP")
-      objTransform->SetYAlignment(Y_ALIGN_TOP);
-    else if(aTransform->Find("AlignY")->GetValue() == "BOTTOM")
-      objTransform->SetYAlignment(Y_ALIGN_BOTTOM);
-    else if(aTransform->Find("AlignY")->GetValue() != "CENTER")
-      assert(!"Invalid value passed into YAlign");
-  }
-  if(aTransform->Find("AlignZ"))
-  {
-    objTransform->SetZAlignment(Z_ALIGN_CENTER);
-    if(aTransform->Find("AlignZ")->GetValue() == "FRONT")
-      objTransform->SetZAlignment(Z_ALIGN_FRONT);
-    else if(aTransform->Find("AlignZ")->GetValue() == "BACK")
-      objTransform->SetZAlignment(Z_ALIGN_BACK);
-    else if(aTransform->Find("AlignZ")->GetValue() != "CENTER")
-      assert(!"Invalid value passed into ZAlign");
-  }
-  
-  // Axis lock (optional)
-  ParserNode* axisLockRoot = aTransform->Find("LockedAxes");
-  if(axisLockRoot)
-  {
-    AxisLock axisLock = NO_AXIS;
-    HashString axisLockString = axisLockRoot->GetValue();
-    DebugLogPrint("%s", axisLockString.ToCharArray());
-    if(axisLockString == "X_AXIS")
-      axisLock = X_AXIS;
-    else if(axisLockString == "Y_AXIS")
-      axisLock = Y_AXIS;
-    else if(axisLockString == "Z_AXIS")
-      axisLock = Z_AXIS;
-    else if(axisLockString == "XY_AXIS")
-      axisLock = XY_AXIS;
-    else if(axisLockString == "YZ_AXIS")
-      axisLock = YZ_AXIS;
-    else if(axisLockString == "XZ_AXIS")
-      axisLock = XZ_AXIS;
-    else if(axisLockString == "ALL_AXES")
-      axisLock = ALL_AXES;
-    else if(axisLockString == "NO_AXIS")
-      axisLock = NO_AXIS;
-    else
-      assert(!"Invalid axis lock value passed in.");
-    objTransform->SetLockedAxis(axisLock);
-  }
-  
-  // Parent inherit info
-  ParserNode* inheritNode = aTransform->Find("InheritInfo");
-  if(inheritNode)
-  {
-    ParentInherit inheritance = INHERIT_ALL;
-    HashString inheritInfo = inheritNode->GetValue();
-    if(inheritInfo == "INHERIT_NONE")
-      inheritance = INHERIT_NONE;
-    else if(inheritInfo == "INHERIT_POSITION")
-      inheritance = INHERIT_POSITION;
-    else if(inheritInfo == "INHERIT_ROTATION")
-      inheritance = INHERIT_ROTATION;
-    else if(inheritInfo == "INHERIT_SCALE")
-      inheritance = INHERIT_SCALE;
-    else if(inheritInfo == "INHERIT_POSITION_ROTATION")
-      inheritance = INHERIT_POSITION_ROTATION;
-    else if(inheritInfo == "INHERIT_ROTATION_SCALE")
-      inheritance = INHERIT_ROTATION_SCALE;
-    else if(inheritInfo == "INHERIT_POSITION_SCALE")
-      inheritance = INHERIT_POSITION_SCALE;
-    else if(inheritInfo == "INHERIT_ALL")
-      inheritance = INHERIT_ALL;
-    else
-      assert(!"Invalid inheritance value passed in.");
-    objTransform->SetParentInheritanceInfo(inheritance);
-  }
+  Vector3 pos = objTransform->GetPosition();
+  Vector3 size = objTransform->GetSize();
 
   // Auto set camera bounds based on objects in environment
-  mMinBoundary.x = Lesser<float>(posX - sizeX, mMinBoundary.x);
-  mMinBoundary.y = Lesser<float>(posY - sizeY, mMinBoundary.y);
-  mMaxBoundary.x = Greater<float>(posX + sizeX, mMaxBoundary.x);
-  mMaxBoundary.y = Greater<float>(posY + sizeY, mMaxBoundary.y);
+  mMinBoundary.x = Lesser<float>(pos.x - size.x, mMinBoundary.x);
+  mMinBoundary.y = Lesser<float>(pos.y - size.y, mMinBoundary.y);
+  mMaxBoundary.x = Greater<float>(pos.x + size.x, mMaxBoundary.x);
+  mMaxBoundary.y = Greater<float>(pos.y + size.y, mMaxBoundary.y);
 }
 
 /**
@@ -1228,38 +1119,7 @@ void Level::ParseTransform(GameObject *aObject, ParserNode *aTransform)
 void Level::ParseSurface(GameObject *aObject, ParserNode *aSurface)
 {
   Surface* objSurface = aObject->GET<Surface>();
-  if(aSurface->Find("ColorR"))
-  {
-    float r, g, b, a;
-    r = aSurface->Find("ColorR")->GetValue().ToFloat();
-    g = aSurface->Find("ColorG")->GetValue().ToFloat();
-    b = aSurface->Find("ColorB")->GetValue().ToFloat();
-    a = aSurface->Find("ColorA")->GetValue().ToFloat();
-    objSurface->SetColor(Vector4(r, g, b, a));
-  }
-  if(aSurface->Find("StartingAnimation"))
-  {
-    int startingAnimation = aSurface->Find("StartingAnimation")->GetValue().ToInt();
-    objSurface->SetAnimation(startingAnimation);
-  }
-  if(aSurface->Find("ViewMode"))
-  {
-    HashString viewMode = aSurface->Find("ViewMode")->GetValue();
-    if(viewMode == "ABSOLUTE")
-      objSurface->SetViewMode(VIEW_ABSOLUTE);
-    else if(viewMode == "RELATIVE")
-      objSurface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
-    else if(viewMode == "PERCENTAGE")
-      objSurface->SetViewMode(VIEW_PERCENTAGE_OF_CAMERA);
-    else
-      assert(!"Invalid value passed into ViewMode for Surface. (Level.cpp)");  
-  }
-#ifdef SHADER_COMPATIBLE
-  if(aSurface->Find("VertexShader") && aSurface->Find("FragmentShader"))
-  {
-    objSurface->LoadShaders(aSurface->Find("VertexShader")->GetValue(), aSurface->Find("FragmentShader")->GetValue());
-  }
-#endif
+  objSurface->Deserialize(aSurface);
 }
 
 /**
@@ -1283,139 +1143,7 @@ void Level::ParsePhysicsObject(GameObject *aObject, ParserNode* aPhysicsObject)
     aObject->AddComponent(physicsObject);
   }
   
-  // Clear out current shapes.
-  std::vector<Shape*>& shapes = physicsObject->GetShapes();
-  for(std::vector<Shape*>::iterator it = shapes.begin(); it != shapes.end(); ++it)
-  {
-    delete *it;
-  }
-  shapes.clear();
-  
-  // Serialize the physicsobject
-  bool gravity = aPhysicsObject->Find("Gravity")->GetValue().ToBool();
-  bool isStatic = aPhysicsObject->Find("Static")->GetValue().ToBool();
-  bool isPassable = aPhysicsObject->Find("Passable")->GetValue().ToBool();
-  physicsObject->SetMass(aPhysicsObject->Find("Mass")->GetValue().ToInt());
-  physicsObject->SetDamping(aPhysicsObject->Find("Damping")->GetValue().ToFloat());
-  
-  // Optional
-  if(aPhysicsObject->Find("IgnoreList"))
-  {
-    std::vector<std::string> ignoreList = aPhysicsObject->Find("IgnoreList")->GetValue().ToStringVector();
-    PhysicsObject::IgnoreContainer ignoreContainer;
-    
-    for(std::vector<std::string>::iterator it = ignoreList.begin(); it != ignoreList.end(); ++it)
-    {
-      ignoreContainer[Common::StringHashFunction(*it)] = *it;
-    }
-    physicsObject->SetIgnoreList(ignoreContainer);
-  }
-  if(aPhysicsObject->Find("MaxVelocity"))
-  {
-    physicsObject->SetMaxVelocity(aPhysicsObject->Find("MaxVelocity")->GetValue().ToFloat());
-  }
-  
-  // Default true
-  if(!gravity)
-  {
-    GetManager()->GetOwningApp()->GET<PhysicsWorld>()->UnregisterGravity(physicsObject);
-    physicsObject->SetAffectedByGravity(false);
-  }
-  
-  physicsObject->SetStatic(isStatic);
-  physicsObject->SetPassable(isPassable);
-  
-  HashString const SHAPE = "Shape_";
-  int curIndex = 0;
-  HashString curShape = SHAPE + Common::IntToString(curIndex);
-  
-  // Adding shapes
-  // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
-  while(aPhysicsObject->Find(curShape))
-  {
-    ParserNode* tempShape = aPhysicsObject->Find(curShape);
-    Shape* newShape = nullptr;
-    
-    HashString type = tempShape->Find("Type")->GetValue();
-    
-    // Discern type and serialize accordingly
-    if(type == "CUBE" || type == "AABB")
-    {
-      newShape = new AxisAlignedBoundingBox();
-      AxisAlignedBoundingBox* cube = (AxisAlignedBoundingBox*)newShape;
-      cube->size = Vector3(tempShape->Find("SizeX")->GetValue().ToFloat(),
-                          tempShape->Find("SizeY")->GetValue().ToFloat(),
-                          tempShape->Find("SizeZ")->GetValue().ToFloat());
-      cube->shape = Shape::AABB;
-    }
-    else if(type == "SPHERE")
-    {
-      newShape = new Sphere();
-      Sphere* sphere = (Sphere*)newShape;
-      sphere->radius = tempShape->Find("Radius")->GetValue().ToFloat();
-      sphere->shape = Shape::SPHERE;
-    }
-    else if(type == "TRIANGLE")
-    {
-      newShape = new Triangle();
-      Triangle* triangle = (Triangle*)newShape;
-      HashString point = "Point_";
-      for(int i = 0; i < 3; ++i)
-      {
-        HashString pointId = point + Common::IntToString(i);
-        Vector3 point(tempShape->Find(pointId + "X")->GetValue().ToFloat(),
-                      tempShape->Find(pointId + "Y")->GetValue().ToFloat(),
-                      tempShape->Find(pointId + "Z")->GetValue().ToFloat());
-        triangle->points[i] = point;
-      }
-      triangle->shape = Shape::TRIANGLE;
-    }
-    else if(type == "LINE")
-    {
-      newShape = new Line();
-      Line *line = (Line*)newShape;
-      line->direction = Vector3(tempShape->Find("DirectionX")->GetValue().ToFloat(),
-                                tempShape->Find("DirectionY")->GetValue().ToFloat(),
-                                tempShape->Find("DirectionZ")->GetValue().ToFloat()).normalize();
-      line->length = tempShape->Find("Length")->GetValue().ToFloat();
-      line->shape = Shape::LINE;
-    }
-    else if(type == "OBB")
-    {
-      newShape = new OrientedBoundingBox();
-      OrientedBoundingBox *obb = (OrientedBoundingBox*)newShape;
-      obb->up = Vector3(tempShape->Find("UpX")->GetValue().ToFloat(),
-                        tempShape->Find("UpY")->GetValue().ToFloat(),
-                        tempShape->Find("UpZ")->GetValue().ToFloat()).normalize();
-      obb->right = Vector3(tempShape->Find("RightX")->GetValue().ToFloat(),
-                        tempShape->Find("RightY")->GetValue().ToFloat(),
-                        tempShape->Find("RightZ")->GetValue().ToFloat()).normalize();
-      obb->forward = Vector3(tempShape->Find("ForwardX")->GetValue().ToFloat(),
-                        tempShape->Find("ForwardY")->GetValue().ToFloat(),
-                        tempShape->Find("ForwardZ")->GetValue().ToFloat()).normalize();
-      obb->extents = Vector3(tempShape->Find("ExtentX")->GetValue().ToFloat(),
-                        tempShape->Find("ExtentY")->GetValue().ToFloat(),
-                        tempShape->Find("ExtentZ")->GetValue().ToFloat());
-      obb->shape = Shape::OBB;
-    }
-    else
-      assert(!"Invalid shape given");
-      
-    newShape->id = curIndex;
-    newShape->position = Vector3(tempShape->Find("PositionX")->GetValue().ToFloat(),
-                                 tempShape->Find("PositionY")->GetValue().ToFloat(),
-                                 tempShape->Find("PositionZ")->GetValue().ToFloat());
-                                 
-    // If passable flag is found, use it. Default false.
-    if(tempShape->Find("Passable"))
-    {
-      newShape->passable = tempShape->Find("Passable")->GetValue().ToBool();
-    }
-    physicsObject->AddShape(newShape);
-    
-    ++curIndex;
-    curShape = SHAPE + Common::IntToString(curIndex);
-  }
+  physicsObject->Deserialize(aPhysicsObject);
 }
 
 /**
@@ -1560,10 +1288,7 @@ void Level::ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript)
     aObject->AddComponent(customScript);
   }
   
-  if(aCustomScript->Find("FileName"))
-    customScript->SetFileName(aCustomScript->Find("FileName")->GetValue());
-  if(aCustomScript->Find("UpdateFunctionName"))
-    customScript->SetUpdateFunctionName(aCustomScript->Find("UpdateFunctionName")->GetValue());
+  customScript->Deserialize(aCustomScript);
 }
 
 /**

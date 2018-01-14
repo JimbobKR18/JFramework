@@ -73,6 +73,6 @@ void MenuImage::ParseAdditionalData(Parser &aParser)
     Surface *surface = mObject->GET<Surface>();
 #endif
     surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
-    surface->Deserialize(aParser);
+    surface->Deserialize(aParser.Find("Surface"));
   }
 }
