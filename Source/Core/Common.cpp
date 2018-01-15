@@ -538,7 +538,7 @@ namespace Common
       switch(i % 6)
       {
       case 0:
-        hashValue += (static_cast<int>(aString[i]) + i) ^ key[i % len];
+        hashValue += (static_cast<int>(aString[i]) + i) | key[i % len];
       case 1:
         hashValue += (static_cast<int>(aString[i]) + i) & key[i % len];
       case 2:
