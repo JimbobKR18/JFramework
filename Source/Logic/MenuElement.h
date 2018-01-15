@@ -10,11 +10,11 @@
 #define __JFramework__MenuElement__
 
 #include "GameObject.h"
-#include "TextParser.h"
 #include "Transform.h"
 #include "ObjectManager.h"
 #include "LevelManager.h"
 #include "Message.h"
+#include "ParserFactory.h"
 
 class MenuElement
 {
@@ -45,10 +45,10 @@ public:
   virtual void  Update() = 0;
   virtual void  SendMessage(Message const &aMessage) = 0;
   virtual void  ReceiveMessage(Message const &aMessage) = 0;
-  virtual void  ParseAdditionalData(Parser &aParser) = 0;
+  virtual void  ParseAdditionalData(Parser *aParser) = 0;
   
 protected:
-  void          ParseFile(Parser &aParser);
+  void          ParseFile(Parser *aParser);
 };
 
 #endif /* defined(__JFramework__MenuElement__) */

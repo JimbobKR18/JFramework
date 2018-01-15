@@ -10,7 +10,6 @@
 
 #include "Common.h"
 #include "MathExt.h"
-#include "TextParser.h"
 
 class Constants
 {

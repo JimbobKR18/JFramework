@@ -9,7 +9,6 @@
 #define __JFramework_SystemProperties_h_
 
 #include "Common.h"
-#include "TextParser.h"
 
 class SystemProperties
 {

@@ -16,6 +16,7 @@
 #include "ObjectDeleteMessage.h"
 #include "ObjectCreateMessage.h"
 #include "DefaultGameObjectFactory.h"
+#include "ParserFactory.h"
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCShaderSurface.h"
@@ -152,11 +153,12 @@ void ObjectManager::ProcessDelayedMessage(Message *aMessage)
  */
 GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString const &aFolder, HashString const &aType)
 {
-  TextParser parser(Common::RelativePath(aFolder, aFilename));
+  Parser *parser = ParserFactory::CreateInputParser(aFolder, aFilename);
   GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
   AddObject(object);
   ParseDictionary(object, parser);
   mAllocatedObjects.insert(object);
+  delete parser;
   return object;
 }
 
@@ -167,10 +169,11 @@ GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString 
  */
 GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder, HashString const &aType)
 {
-  TextParser parser(Common::RelativePath(aFolder, aFilename));
+  Parser *parser = ParserFactory::CreateInputParser(aFolder, aFilename);
   GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
   ParseDictionary(object, parser);
   mAllocatedObjects.insert(object);
+  delete parser;
   return object;
 }
 
@@ -181,8 +184,9 @@ GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashSt
  */
 void ObjectManager::ParseObject(GameObject *aObject, HashString const &aFolder)
 {
-  TextParser parser(Common::RelativePath(aFolder, aObject->GetFileName()));
+  Parser *parser = ParserFactory::CreateInputParser(aFolder, aObject->GetFileName());
   ParseDictionary(aObject, parser);
+  delete parser;
 }
 
 /**
@@ -277,55 +281,55 @@ void ObjectManager::SerializeLUA()
  * @param aObject
  * @param aParser
  */
-void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
+void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
 {
-  if(aParser.Find("Name"))
+  if(aParser->Find("Name"))
   {
-    HashString name = aParser.Find("Name", "Value")->GetValue();
+    HashString name = aParser->Find("Name", "Value")->GetValue();
     aObject->SetName(name);
   }
-  if(aParser.Find("PhysicsObject"))
+  if(aParser->Find("PhysicsObject"))
   {
     PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
     aObject->AddComponent(object);
-    object->Deserialize(aParser.Find("PhysicsObject"));
+    object->Deserialize(aParser->Find("PhysicsObject"));
   }
-  if(aParser.Find("ChemistryMaterial"))
+  if(aParser->Find("ChemistryMaterial"))
   {
-    HashString name = aParser.Find("ChemistryMaterial")->Find("Name")->GetValue();
+    HashString name = aParser->Find("ChemistryMaterial")->Find("Name")->GetValue();
     ChemistryMaterial *object = GetOwningApp()->GET<ChemistryManager>()->CreateMaterial(name);
     aObject->AddComponent(object);
-    object->Deserialize(aParser.Find("ChemistryMaterial"));
+    object->Deserialize(aParser->Find("ChemistryMaterial"));
   }
-  if(aParser.Find("ChemistryElement"))
+  if(aParser->Find("ChemistryElement"))
   {
-    HashString name = aParser.Find("ChemistryElement")->Find("Name")->GetValue();
+    HashString name = aParser->Find("ChemistryElement")->Find("Name")->GetValue();
     ChemistryElement *object = GetOwningApp()->GET<ChemistryManager>()->CreateElement(name);
     aObject->AddComponent(object);
-    object->Deserialize(aParser.Find("ChemistryElement"));
+    object->Deserialize(aParser->Find("ChemistryElement"));
   }
-  if(aParser.Find("Transform"))
+  if(aParser->Find("Transform"))
   {
     // Get Position, Scale, and Size
     Transform *transform = new Transform();
-    transform->Deserialize(aParser.Find("Transform"));
+    transform->Deserialize(aParser->Find("Transform"));
     aObject->AddComponent(transform);
   }
-  if(aParser.Find("StateObject"))
+  if(aParser->Find("StateObject"))
   {
     // Get Position, Scale, and Size
     StateObject *stateObject = new StateObject();
-    stateObject->Deserialize(aParser.Find("StateObject"));
+    stateObject->Deserialize(aParser->Find("StateObject"));
     aObject->AddComponent(stateObject);
   }
-  if(aParser.Find("Surface"))
+  if(aParser->Find("Surface"))
   {
 #if !defined(ANDROID) && !defined(IOS)
     PCShaderSurface *surface = nullptr;
 #else
     Surface *surface = nullptr;
 #endif
-    if(aParser.Find("Surface", "UIElement") && aParser.Find("Surface", "UIElement")->GetValue().ToBool())
+    if(aParser->Find("Surface", "UIElement") && aParser->Find("Surface", "UIElement")->GetValue().ToBool())
     {
 #if !defined(ANDROID) && !defined(IOS)
       surface = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
@@ -342,31 +346,31 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser &aParser)
 #endif
     }
 
-    surface->Deserialize(aParser.Find("Surface"));
+    surface->Deserialize(aParser->Find("Surface"));
     aObject->AddComponent(surface);
   }
-  if(aParser.Find("CustomScript"))
+  if(aParser->Find("CustomScript"))
   {
     CustomScript *customScript = new CustomScript();
-    customScript->Deserialize(aParser.Find("CustomScript"));
+    customScript->Deserialize(aParser->Find("CustomScript"));
     aObject->AddComponent(customScript);
   }
-  if(aParser.Find("Focus"))
+  if(aParser->Find("Focus"))
   {
-    bool isTarget = aParser.Find("Focus", "IsFocus")->GetValue().ToBool();
+    bool isTarget = aParser->Find("Focus", "IsFocus")->GetValue().ToBool();
 
     if(isTarget)
     {
       GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
     }
   }
-  if(aParser.Find("Effects"))
+  if(aParser->Find("Effects"))
   {
-    ParseEffects(aObject, aParser.Find("Effects"));
+    ParseEffects(aObject, aParser->Find("Effects"));
   }
   
   // Parse additional stuff if need be.
-  ParserNodeContainer untouched = aParser.GetBaseRoot()->GetUntouchedRoots();
+  ParserNodeContainer untouched = aParser->GetBaseRoot()->GetUntouchedRoots();
   for(parserNodeIT it = untouched.begin(); it != untouched.end(); ++it)
   {
     aObject->ParseAdditionalData(*it);

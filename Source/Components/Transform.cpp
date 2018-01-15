@@ -1,5 +1,4 @@
 #include "Transform.h"
-#include "TextParser.h"
 #include "LuaIncludes.h"
 
 int const Transform::sUID = Common::StringHashFunction("Transform");

@@ -8,7 +8,7 @@
 
 #include "SoundManager.h"
 #include "Common.h"
-#include "TextParser.h"
+#include "ParserFactory.h"
 #if !defined(ANDROID) && !defined(IOS)
 #include "FMODSoundSystem.h"
 #endif
@@ -443,10 +443,10 @@ void SoundManager::LoadSounds()
   HashString curIndex = sound + Common::IntToString(index);
   HashString const fileName = "SoundAliases.txt";
   
-  TextParser parser(Common::RelativePath("Sounds", fileName));
-  while(parser.Find(curIndex))
+  Parser *parser = ParserFactory::CreateInputParser("Sounds", fileName);
+  while(parser->Find(curIndex))
   {
-    ParserNode *curSound = parser.Find(curIndex);
+    ParserNode *curSound = parser->Find(curIndex);
     SoundSystem::SoundSource source = SoundSystem::SoundSource::DEFAULT;
     
     if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Stream")
@@ -456,4 +456,7 @@ void SoundManager::LoadSounds()
     ++index;
     curIndex = sound + Common::IntToString(index);
   }
+  
+  // Clean up.
+  delete parser;
 }

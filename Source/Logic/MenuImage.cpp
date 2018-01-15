@@ -21,8 +21,9 @@
 
 MenuImage::MenuImage(Menu *aOwner, HashString const &aFilename, bool const aReplaceable) : MenuElement(aOwner, aFilename, aReplaceable)
 {
-  TextParser parser(Common::RelativePath("Menus", aFilename));
+  Parser *parser = ParserFactory::CreateInputParser("Menus", aFilename);
   ParseFile(parser);
+  delete parser;
 }
 
 MenuImage::~MenuImage()
@@ -63,9 +64,9 @@ void MenuImage::ReceiveMessage(Message const &aMessage)
  * @brief Gather additional data from deserialized file.
  * @param aParser
  */
-void MenuImage::ParseAdditionalData(Parser &aParser)
+void MenuImage::ParseAdditionalData(Parser *aParser)
 {
-  if(aParser.Find("Surface"))
+  if(aParser->Find("Surface"))
   {
 #ifdef SHADER_COMPATIBLE
     PCShaderSurface *surface = (PCShaderSurface*)mObject->GET<Surface>();
@@ -73,6 +74,6 @@ void MenuImage::ParseAdditionalData(Parser &aParser)
     Surface *surface = mObject->GET<Surface>();
 #endif
     surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
-    surface->Deserialize(aParser.Find("Surface"));
+    surface->Deserialize(aParser->Find("Surface"));
   }
 }

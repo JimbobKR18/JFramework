@@ -62,13 +62,13 @@ void MenuElement::SetOwner(Menu* aOwner)
  * @brief Helper to create an element.
  * @param aParser
  */
-void MenuElement::ParseFile(Parser &aParser)
+void MenuElement::ParseFile(Parser *aParser)
 {
-  if(aParser.Find("Transform"))
+  if(aParser->Find("Transform"))
   {
     // Get Position, Scale, and Size
     Transform *transform = mObject->GET<Transform>();
-    transform->Deserialize(aParser.Find("Transform"));
+    transform->Deserialize(aParser->Find("Transform"));
     transform->GetPosition().z = 0.99f;
   }
   ParseAdditionalData(aParser);

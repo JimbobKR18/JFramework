@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 #include "Manager.h"
-#include "TextParser.h"
+#include "Parser.h"
 #include "GameObjectFactory.h"
 
 class ObjectManager : public Manager
@@ -46,7 +46,7 @@ public:
   void                RemoveObject(GameObject *aObj);
   static void         SerializeLUA();
 private:
-  void                ParseDictionary(GameObject *aObject, Parser &aParser);
+  void                ParseDictionary(GameObject *aObject, Parser *aParser);
   void                ParseEffects(GameObject *aObject, ParserNode *aEffects);
   typedef std::vector<GameObject*>::iterator ObjectIT;
 };

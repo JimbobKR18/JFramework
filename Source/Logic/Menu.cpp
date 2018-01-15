@@ -284,16 +284,16 @@ void Menu::SendMessage(Message const& aMessage)
  */
 void Menu::ParseFile()
 {
-  TextParser parser(Common::RelativePath("Menus", mFileName).c_str());
+  Parser* parser = ParserFactory::CreateInputParser("Menus", mFileName);
 
   MenuElement *element = nullptr;
   HashString object = "Object_";
   int curIndex = 0;
   HashString curObject = object + Common::IntToString(curIndex);
 
-  while(parser.Find(curObject.ToString()))
+  while(parser->Find(curObject.ToString()))
   {
-    ParserNode* newElement = parser.Find(curObject.ToString());
+    ParserNode* newElement = parser->Find(curObject.ToString());
     HashString name;
     
     // Compatibility layer
@@ -362,6 +362,9 @@ void Menu::ParseFile()
     ++curIndex;
     curObject = object + Common::IntToString(curIndex);
   }
+  
+  // Clean up
+  delete parser;
 
   // Add our menu to the level
   mOwner->AddMenu(this);

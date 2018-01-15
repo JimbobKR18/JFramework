@@ -4,7 +4,6 @@
 #include "Common.h"
 #include "GameObject.h"
 #include "Parser.h"
-#include "TextParser.h"
 #include "TileMapGenerator.h"
 #include "MathExt.h"
 
@@ -129,7 +128,7 @@ private:
   void              ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryElement);
   void              ParseEffects(GameObject *aObject, ParserNode *aEffects);
   void              ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript);
-  void              ParseTileGenerator(TextParser &aParser);
+  void              ParseTileGenerator(Parser *aParser);
 };
 
 #endif

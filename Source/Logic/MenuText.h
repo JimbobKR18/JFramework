@@ -29,7 +29,7 @@ public:
   virtual void Update();
   virtual void SendMessage(Message const &aMessage);
   virtual void ReceiveMessage(Message const &aMessage);
-  virtual void ParseAdditionalData(Parser &aParser);
+  virtual void ParseAdditionalData(Parser *aParser);
 };
 
 #endif /* MENUTEXT_H_ */

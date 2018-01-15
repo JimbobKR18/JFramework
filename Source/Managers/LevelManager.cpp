@@ -2,7 +2,6 @@
 #include "InputManager.h"
 #include "LuaIncludes.h"
 #include "LevelChangeMessage.h"
-#include "TextParser.h"
 
 unsigned const LevelManager::sUID = Common::StringHashFunction("LevelManager");
 LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager", LevelManager::sUID), mActiveLevel(nullptr)

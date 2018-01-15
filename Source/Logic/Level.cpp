@@ -20,6 +20,7 @@
 #include "ResetLevelMessage.h"
 #include "Menu.h"
 #include "EffectsManager.h"
+#include "ParserFactory.h"
 
 #if !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -637,13 +638,13 @@ void Level::SerializeLUA()
  */
 void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName)
 {
-  TextParser parser(Common::RelativePath(aFolderName, aFileName).c_str());
+  Parser *parser = ParserFactory::CreateInputParser(aFolderName, aFileName);
   GameObject *object = nullptr;
   HashString const curObject = "Object_";
   int curIndex = 0;
 
   HashString tempIndex = curObject + Common::IntToString(curIndex);
-  ParserNode* curRoot = parser.Find(tempIndex);
+  ParserNode* curRoot = parser->Find(tempIndex);
   
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
@@ -755,25 +756,25 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
 
     ++curIndex;
     tempIndex = curObject + Common::IntToString(curIndex);
-    curRoot = parser.Find(tempIndex);
+    curRoot = parser->Find(tempIndex);
   }
 
-  if(parser.Find("TileMapGenerator"))
+  if(parser->Find("TileMapGenerator"))
   {
     ParseTileGenerator(parser);
   }
-  if(parser.Find("Music"))
+  if(parser->Find("Music"))
   {
-    mMusicName = parser.Find("Music")->Find("Song")->GetValue().ToString();
+    mMusicName = parser->Find("Music")->Find("Song")->GetValue().ToString();
   }
-  if(parser.Find("Scenario"))
+  if(parser->Find("Scenario"))
   {
-    ParserNode* scenario = parser.Find("Scenario");
+    ParserNode* scenario = parser->Find("Scenario");
     ParseFile(scenario->Find("Name")->GetValue(), scenario->Find("Folder")->GetValue());
     if(scenario->Find("Load")->GetValue().ToBool())
       LoadScenario(scenario->Find("Name")->GetValue());
   }
-  if(parser.Find("Bounds"))
+  if(parser->Find("Bounds"))
   {
     /*
      * Set camera bounds manually
@@ -783,33 +784,36 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
      * 3. See below
      */
     int x, y;
-    x = parser.Find("Bounds")->Find("MaxX")->GetValue().ToInt();
-    y = parser.Find("Bounds")->Find("MaxY")->GetValue().ToInt();
+    x = parser->Find("Bounds")->Find("MaxX")->GetValue().ToInt();
+    y = parser->Find("Bounds")->Find("MaxY")->GetValue().ToInt();
     mMaxBoundary = Vector3(x, y, 0);
-    x = parser.Find("Bounds")->Find("MinX")->GetValue().ToInt();
-    y = parser.Find("Bounds")->Find("MinY")->GetValue().ToInt();
+    x = parser->Find("Bounds")->Find("MinX")->GetValue().ToInt();
+    y = parser->Find("Bounds")->Find("MinY")->GetValue().ToInt();
     mMinBoundary = Vector3(x, y, 0);
   }
-  if(parser.Find("ClearColor"))
+  if(parser->Find("ClearColor"))
   {
     float r, g, b, a;
-    r = parser.Find("ClearColor")->Find("ColorR")->GetValue().ToFloat();
-    g = parser.Find("ClearColor")->Find("ColorG")->GetValue().ToFloat();
-    b = parser.Find("ClearColor")->Find("ColorB")->GetValue().ToFloat();
-    a = parser.Find("ClearColor")->Find("ColorA")->GetValue().ToFloat();
+    r = parser->Find("ClearColor")->Find("ColorR")->GetValue().ToFloat();
+    g = parser->Find("ClearColor")->Find("ColorG")->GetValue().ToFloat();
+    b = parser->Find("ClearColor")->Find("ColorB")->GetValue().ToFloat();
+    a = parser->Find("ClearColor")->Find("ColorA")->GetValue().ToFloat();
     mClearColor = Vector4(r, g, b, a);
   }
-  if(parser.Find("Menu"))
+  if(parser->Find("Menu"))
   {
     // Menu adds itself to level.
-    new Menu(this, parser.Find("Menu")->Find("Name")->GetValue());
+    new Menu(this, parser->Find("Menu")->Find("Name")->GetValue());
   }
 
-  ParserNodeContainer untouched = parser.GetBaseRoot()->GetUntouchedRoots();
+  ParserNodeContainer untouched = parser->GetBaseRoot()->GetUntouchedRoots();
   for(parserNodeIT it = untouched.begin(); it != untouched.end(); ++it)
   {
     ParseAdditionalData(*it, nullptr);
   }
+  
+  // Clean up
+  delete parser;
 }
 
 /**
@@ -1040,7 +1044,7 @@ void Level::SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects)
       continue;
     }
     HashString currentFileName = fileName + Common::IntToString(curIndex);
-    Parser *parser = new TextParser(Common::RelativePath(folder, currentFileName + ".txt"), MODE_OUTPUT);
+    Parser *parser = ParserFactory::CreateOutputParser(folder, currentFileName + ".txt");
     SerializeObjects(*parser, it->second, aMenuObjects);
     parser->Write();
     delete parser;
@@ -1224,9 +1228,9 @@ void Level::ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript)
  * @brief Create tile generator helper.
  * @param aParser
  */
-void Level::ParseTileGenerator(TextParser &aParser)
+void Level::ParseTileGenerator(Parser *aParser)
 {
-  ParserNode* tileMap = aParser.Find("TileMapGenerator");
+  ParserNode* tileMap = aParser->Find("TileMapGenerator");
   HashString value, empty;
   int width, height, tileSize;
   HashString file, frameDataFilename, settingsDataFileName;
@@ -1255,14 +1259,14 @@ void Level::ParseTileGenerator(TextParser &aParser)
     HashString const animation = "Animation_";
     HashString const material = "Material_";
     settingsDataFileName = tileMap->Find("SettingsFile")->GetValue();
-    TextParser settingsData(Common::RelativePath("Maps", settingsDataFileName));
+    Parser *settingsData = ParserFactory::CreateInputParser("Maps", settingsDataFileName);
     
     // Heightmap
     int index = 0;
     HashString curIndex = height + Common::IntToString(index);
-    while(settingsData.Find(curIndex))
+    while(settingsData->Find(curIndex))
     {
-      std::vector<float> values = Common::StringToFloatVector(settingsData.Find(curIndex)->GetValue());
+      std::vector<float> values = Common::StringToFloatVector(settingsData->Find(curIndex)->GetValue());
       heights[static_cast<int>(values[0])] = values[1];
       ++index;
       curIndex = height + Common::IntToString(index);
@@ -1271,10 +1275,10 @@ void Level::ParseTileGenerator(TextParser &aParser)
     // Animations
     index = 0;
     curIndex = animation + Common::IntToString(index);
-    while(settingsData.Find(curIndex))
+    while(settingsData->Find(curIndex))
     {
-      int tileID = settingsData.Find(curIndex)->Find("TileID")->GetValue().ToInt();
-      std::vector<int> animationData = settingsData.Find(curIndex)->Find("Animation")->GetValue().ToIntVector();
+      int tileID = settingsData->Find(curIndex)->Find("TileID")->GetValue().ToInt();
+      std::vector<int> animationData = settingsData->Find(curIndex)->Find("Animation")->GetValue().ToIntVector();
       animations[tileID] = animationData;
       ++index;
       curIndex = animation + Common::IntToString(index);
@@ -1283,9 +1287,9 @@ void Level::ParseTileGenerator(TextParser &aParser)
     // Materials
     index = 0;
     curIndex = material + Common::IntToString(index);
-    while(settingsData.Find(curIndex))
+    while(settingsData->Find(curIndex))
     {
-      ParserNode* base = settingsData.Find(curIndex);
+      ParserNode* base = settingsData->Find(curIndex);
       HashString name = base->Find("Name")->GetValue();
       materialInfo[index] = name;
       ++index;
@@ -1293,24 +1297,27 @@ void Level::ParseTileGenerator(TextParser &aParser)
     }
 
     // Animation speed
-    if(settingsData.Find("AnimationSpeed"))
+    if(settingsData->Find("AnimationSpeed"))
     {
-      tileAnimationSpeed = settingsData.Find("AnimationSpeed")->GetValue().ToFloat();
+      tileAnimationSpeed = settingsData->Find("AnimationSpeed")->GetValue().ToFloat();
     }
+    
+    delete settingsData;
   }
 
-  TextParser tileMapData(Common::RelativePath("Maps", frameDataFilename));
-  frames = Common::StringToIntVector(tileMapData.Find("MapArtData")->GetValue());
-  collision = Common::StringToIntVector(tileMapData.Find("Collision")->GetValue());
+  Parser *tileMapData = ParserFactory::CreateInputParser("Maps", frameDataFilename);
+  frames = Common::StringToIntVector(tileMapData->Find("MapArtData")->GetValue());
+  collision = Common::StringToIntVector(tileMapData->Find("Collision")->GetValue());
   
-  if(tileMapData.Find("CollisionShapes"))
+  if(tileMapData->Find("CollisionShapes"))
   {
-    shapes = Common::StringToIntVector(tileMapData.Find("CollisionShapes")->GetValue());
+    shapes = Common::StringToIntVector(tileMapData->Find("CollisionShapes")->GetValue());
   }
-  if(tileMapData.Find("Materials"))
+  if(tileMapData->Find("Materials"))
   {
-    materials = Common::StringToIntVector(tileMapData.Find("Materials")->GetValue());
+    materials = Common::StringToIntVector(tileMapData->Find("Materials")->GetValue());
   }
+  delete tileMapData;
 
   mGenerator = new TileMapGenerator(width, height, tileSize,
                                    file, frameDataFilename,

@@ -5,8 +5,9 @@
 MenuButton::MenuButton(Menu *aOwner, HashString const &aFilename) : MenuImage(aOwner, aFilename, false), mClickableArea()
 {
   // MenuImage base hasn't initialized yet.
-  TextParser parser(Common::RelativePath("Menus", aFilename));
+  Parser *parser = ParserFactory::CreateInputParser("Menus", aFilename);
   ParseAdditionalData(parser);
+  delete parser;
 }
 
 MenuButton::~MenuButton()
@@ -31,18 +32,18 @@ void MenuButton::Update()
  * @brief Gather additional data from deserialized file.
  * @param aParser
  */
-void MenuButton::ParseAdditionalData(Parser& aParser)
+void MenuButton::ParseAdditionalData(Parser *aParser)
 {
   // This should be in screen space
-  if(aParser.Find("ClickableArea"))
+  if(aParser->Find("ClickableArea"))
   {
     Vector3 position, size;
-    position.x = aParser.Find("ClickableArea", "PositionX")->GetValue().ToFloat();
-    position.y = aParser.Find("ClickableArea", "PositionY")->GetValue().ToFloat();
-    position.z = aParser.Find("ClickableArea", "PositionZ")->GetValue().ToFloat();
-    size.x = aParser.Find("ClickableArea", "SizeX")->GetValue().ToFloat();
-    size.y = aParser.Find("ClickableArea", "SizeY")->GetValue().ToFloat();
-    size.z = aParser.Find("ClickableArea", "SizeZ")->GetValue().ToFloat();
+    position.x = aParser->Find("ClickableArea", "PositionX")->GetValue().ToFloat();
+    position.y = aParser->Find("ClickableArea", "PositionY")->GetValue().ToFloat();
+    position.z = aParser->Find("ClickableArea", "PositionZ")->GetValue().ToFloat();
+    size.x = aParser->Find("ClickableArea", "SizeX")->GetValue().ToFloat();
+    size.y = aParser->Find("ClickableArea", "SizeY")->GetValue().ToFloat();
+    size.z = aParser->Find("ClickableArea", "SizeZ")->GetValue().ToFloat();
     
     mClickableArea = AxisAlignedBoundingBox(position, size);
   }

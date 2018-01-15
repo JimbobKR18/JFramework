@@ -24,8 +24,9 @@
 MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText, bool const aReplaceable) :
   MenuElement(aOwner, aSettingsFilename, aReplaceable), mText(aText), mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
 {
-  TextParser parser(Common::RelativePath("Menus", aSettingsFilename));
+  Parser* parser = ParserFactory::CreateInputParser("Menus", aSettingsFilename);
   ParseFile(parser);
+  delete parser;
 }
 
 MenuText::~MenuText()
@@ -75,39 +76,39 @@ void MenuText::ReceiveMessage(Message const &aMessage)
  * @brief Gathers additional data from deserialized file.
  * @param aParser
  */
-void MenuText::ParseAdditionalData(Parser &aParser)
+void MenuText::ParseAdditionalData(Parser *aParser)
 {
   GameApp* app = LUABind::StaticGameApp::GetApp();
-  if(aParser.Find("Font"))
+  if(aParser->Find("Font"))
   {
-    mFont = aParser.Find("Font", "FontName")->GetValue().ToString();
-    mSize = Common::StringToInt(aParser.Find("Font", "Size")->GetValue());
+    mFont = aParser->Find("Font", "FontName")->GetValue().ToString();
+    mSize = Common::StringToInt(aParser->Find("Font", "Size")->GetValue());
   }
-  if(aParser.Find("ForegroundColor"))
+  if(aParser->Find("ForegroundColor"))
   {
-    mForegroundColor.x = aParser.Find("ForegroundColor", "r")->GetValue().ToInt();
-    mForegroundColor.y = aParser.Find("ForegroundColor", "g")->GetValue().ToInt();
-    mForegroundColor.z = aParser.Find("ForegroundColor", "b")->GetValue().ToInt();
-    mForegroundColor.w = aParser.Find("ForegroundColor", "a")->GetValue().ToInt();
+    mForegroundColor.x = aParser->Find("ForegroundColor", "r")->GetValue().ToInt();
+    mForegroundColor.y = aParser->Find("ForegroundColor", "g")->GetValue().ToInt();
+    mForegroundColor.z = aParser->Find("ForegroundColor", "b")->GetValue().ToInt();
+    mForegroundColor.w = aParser->Find("ForegroundColor", "a")->GetValue().ToInt();
   }
-  if(aParser.Find("BackgroundColor"))
+  if(aParser->Find("BackgroundColor"))
   {
-    mBackgroundColor.x = aParser.Find("BackgroundColor", "r")->GetValue().ToInt();
-    mBackgroundColor.y = aParser.Find("BackgroundColor", "g")->GetValue().ToInt();
-    mBackgroundColor.z = aParser.Find("BackgroundColor", "b")->GetValue().ToInt();
-    mBackgroundColor.w = aParser.Find("BackgroundColor", "a")->GetValue().ToInt();
+    mBackgroundColor.x = aParser->Find("BackgroundColor", "r")->GetValue().ToInt();
+    mBackgroundColor.y = aParser->Find("BackgroundColor", "g")->GetValue().ToInt();
+    mBackgroundColor.z = aParser->Find("BackgroundColor", "b")->GetValue().ToInt();
+    mBackgroundColor.w = aParser->Find("BackgroundColor", "a")->GetValue().ToInt();
   }
   
   // Text can be overwritten in Menu file.
-  if(aParser.Find("Text") && mText.Empty())
+  if(aParser->Find("Text") && mText.Empty())
   {
-    mText = aParser.Find("Text", "Value")->GetValue().ToString();
+    mText = aParser->Find("Text", "Value")->GetValue().ToString();
   }
   
   // Set a max width, otherwise default to screen width..
-  if(aParser.Find("MaxWidth"))
+  if(aParser->Find("MaxWidth"))
   {
-    mMaxWidth = aParser.Find("MaxWidth", "Value")->GetValue().ToInt();
+    mMaxWidth = aParser->Find("MaxWidth", "Value")->GetValue().ToInt();
   }
   else
   {
@@ -141,9 +142,9 @@ void MenuText::ParseAdditionalData(Parser &aParser)
   transform->SetSize(size);
   
   // Reveal the text slowly rather than all at once.
-  if(aParser.Find("Animation"))
+  if(aParser->Find("Animation"))
   {
-    ParserNode* animation = aParser.Find("Animation");
+    ParserNode* animation = aParser->Find("Animation");
     std::vector<std::vector<float>> animationSpeeds;
     std::vector<float> animationSpeed, speedFromFile;
     std::vector<int> numFrames;
