@@ -76,7 +76,7 @@ public:
   // VIRTUALS / STATICS
   virtual void               Update();
   virtual void               ReceiveMessage(Message const &aMessage);
-  virtual void               Serialize(Parser &aParser);
+  virtual void               Serialize(ParserNode *aNode);
   virtual void               Interact(GameObject *aObject);
   virtual void               ParseAdditionalData(ParserNode *aRoot);
   static void                SerializeLUA();

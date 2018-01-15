@@ -552,7 +552,7 @@ void Level::Serialize(Parser &aParser)
   }
   
   if(mGenerator)
-    mGenerator->Serialize(aParser);
+    mGenerator->Serialize(aParser.GetBaseRoot());
     
   // For each object not in a scenario, place in default scenario.
   for(ObjectIT it = mObjects[ObjectPlacement::DEFAULT].begin(); it != mObjects[ObjectPlacement::DEFAULT].end(); ++it)
@@ -1009,12 +1009,14 @@ void Level::SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectC
     HashString objectString = object + Common::IntToString(curIndex);
     aParser.SetCurrentObjectIndex(curIndex);
     aParser.Place(objectString, "");
-    (*it)->Serialize(aParser);
+    
+    ParserNode *objectNode = aParser.Find(objectString);
+    (*it)->Serialize(objectNode);
 
     if(*it == mFocusTarget)
     {
-      aParser.Place(objectString, "Focus", "");
-      aParser.Find(objectString)->Place("Focus", "IsFocus", "true");
+      objectNode->Place("Focus", "");
+      objectNode->Find("Focus")->Place("IsFocus", "true");
     }
     ++curIndex;
   }
@@ -1038,8 +1040,8 @@ void Level::SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects)
       continue;
     }
     HashString currentFileName = fileName + Common::IntToString(curIndex);
-    TextParser *parser = new TextParser(Common::RelativePath(folder, currentFileName + ".txt"), MODE_OUTPUT);
-    SerializeObjects(*(Parser*)parser, it->second, aMenuObjects);
+    Parser *parser = new TextParser(Common::RelativePath(folder, currentFileName + ".txt"), MODE_OUTPUT);
+    SerializeObjects(*parser, it->second, aMenuObjects);
     parser->Write();
     delete parser;
     ++curIndex;
@@ -1159,47 +1161,7 @@ void Level::ParseChemistryMaterial(GameObject *aObject, ParserNode* aChemistryMa
     aObject->AddComponent(chemistryMaterial);
   }
   
-  // Serialize the chemistryMaterial 
-  if(aChemistryMaterial->Find("Name"))
-  {
-    HashString name = aChemistryMaterial->Find("Name")->GetValue();
-    chemistryMaterial->SetName(name);
-  }
-  if(aChemistryMaterial->Find("BoilingPoint"))
-  {
-    float boilingPoint = aChemistryMaterial->Find("BoilingPoint")->GetValue().ToFloat();
-    chemistryMaterial->SetBoilingPoint(boilingPoint);
-  }
-  if(aChemistryMaterial->Find("MeltingPoint"))
-  {
-    float meltingPoint = aChemistryMaterial->Find("MeltingPoint")->GetValue().ToFloat();
-    chemistryMaterial->SetMeltingPoint(meltingPoint);
-  }
-  if(aChemistryMaterial->Find("FreezingPoint"))
-  {
-    float freezingPoint = aChemistryMaterial->Find("FreezingPoint")->GetValue().ToFloat();
-    chemistryMaterial->SetFreezingPoint(freezingPoint);
-  }
-  if(aChemistryMaterial->Find("Conductivity"))
-  {
-    float conductivity = aChemistryMaterial->Find("Conductivity")->GetValue().ToFloat();
-    chemistryMaterial->SetConductivity(conductivity);
-  }
-  if(aChemistryMaterial->Find("HeatTransferRate"))
-  {
-    float heatTransferRate = aChemistryMaterial->Find("HeatTransferRate")->GetValue().ToFloat();
-    chemistryMaterial->SetHeatTransferRate(heatTransferRate);
-  }
-  if(aChemistryMaterial->Find("StartingTemperature"))
-  {
-    float temperature = aChemistryMaterial->Find("StartingTemperature")->GetValue().ToFloat();
-    chemistryMaterial->SetCurrentTemperature(temperature);
-  }
-  if(aChemistryMaterial->Find("StartingWattage"))
-  {
-    float wattage = aChemistryMaterial->Find("StartingWattage")->GetValue().ToFloat();
-    chemistryMaterial->SetCurrentWattage(wattage);
-  }
+  chemistryMaterial->Deserialize(aChemistryMaterial);
 }
 
 /**
@@ -1215,40 +1177,7 @@ void Level::ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryEle
     aObject->AddComponent(chemistryElement);
   }
   
-  // Serialize the chemistryElement
-  if(aChemistryElement->Find("Name"))
-  {
-    HashString name = aChemistryElement->Find("Name")->GetValue();
-    chemistryElement->SetName(name);
-  }
-  if(aChemistryElement->Find("Temperature"))
-  {
-    float temperature = aChemistryElement->Find("Temperature")->GetValue().ToFloat();
-    chemistryElement->SetTemperature(temperature);
-  }
-  if(aChemistryElement->Find("Wattage"))
-  {
-    float wattage = aChemistryElement->Find("Wattage")->GetValue().ToFloat();
-    chemistryElement->SetWattage(wattage);
-  }
-  if(aChemistryElement->Find("Scale"))
-  {
-    float scale = aChemistryElement->Find("Scale")->GetValue().ToFloat();
-    chemistryElement->SetScale(scale);
-  }
-  if(aChemistryElement->Find("Falloff"))
-  {
-    float falloff = aChemistryElement->Find("Falloff")->GetValue().ToFloat();
-    chemistryElement->SetFalloff(falloff);
-  }
-  if(aChemistryElement->Find("DirectionX"))
-  {
-    float directionX = aChemistryElement->Find("DirectionX")->GetValue().ToFloat();
-    float directionY = aChemistryElement->Find("DirectionY")->GetValue().ToFloat();
-    float directionZ = aChemistryElement->Find("DirectionZ")->GetValue().ToFloat();
-    Vector3 direction = Vector3(directionX, directionY, directionZ);
-    chemistryElement->SetDirectionality(direction);
-  }
+  chemistryElement->Deserialize(aChemistryElement);
 }
 
 /**

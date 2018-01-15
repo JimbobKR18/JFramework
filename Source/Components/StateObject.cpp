@@ -50,38 +50,36 @@ void StateObject::ReceiveMessage(Message const& aMessage)
 
 /**
  * @brief Serialize to file format.
- * @param aParser Parser to write to.
+ * @param aNode ParserNode to write to.
  */
-void StateObject::Serialize(Parser& aParser)
+void StateObject::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const STATE_OBJECT = "StateObject";
-  ParserNode* object = aParser.Find(objectName);
-  
   StateMachine::StateContainer const& states = mStateMachine->GetStates();
   StateMachine::LinkContainer const& links = mStateMachine->GetLinks();
   int curIndex = 0;
   
-  object->Place(objectName, STATE_OBJECT, "");
-  object->Place(STATE_OBJECT, "States", "");
-  object->Place(STATE_OBJECT, "Links", "");
+  aNode->Place(STATE_OBJECT, "");
+  ParserNode *stateObjectNode = aNode->Find(STATE_OBJECT);
+  stateObjectNode->Place("States", "");
+  stateObjectNode->Place("Links", "");
   
-  ParserNode* statesNode = object->Find("States");
+  ParserNode* statesNode = stateObjectNode->Find("States");
   for(StateMachine::StateIT it = states.begin(); it != states.end(); ++it, ++curIndex)
   {
     HashString name = HashString("State_") + Common::IntToString(curIndex);
-    statesNode->Place("States", name, "");
+    statesNode->Place(name, "");
     ParserNode* stateNode = statesNode->Find(name);
-    stateNode->Place(name, "Name", (*it)->GetName());
-    stateNode->Place(name, "TimeAlive", Common::FloatToString((*it)->GetTimeAlive()));
+    stateNode->Place("Name", (*it)->GetName());
+    stateNode->Place("TimeAlive", Common::FloatToString((*it)->GetTimeAlive()));
   }
   
   curIndex = 0;
-  ParserNode* linksNode = object->Find("Links");
+  ParserNode* linksNode = stateObjectNode->Find("Links");
   for(StateMachine::LinkIT it = links.begin(); it != links.end(); ++it, ++curIndex)
   {
     HashString name = HashString("Link_") + Common::IntToString(curIndex);
-    statesNode->Place("Links", name, "");
+    linksNode->Place(name, "");
     ParserNode* linkNode = linksNode->Find(name);
     HashString type = "NONE";
     switch((*it)->GetType())
@@ -100,9 +98,9 @@ void StateObject::Serialize(Parser& aParser)
       break;
     }
     
-    linkNode->Place(name, "State_0", (*it)->GetStart()->GetName());
-    linkNode->Place(name, "State_1", (*it)->GetEnd()->GetName());
-    linkNode->Place(name, "Type", type);
+    linkNode->Place("State_0", (*it)->GetStart()->GetName());
+    linkNode->Place("State_1", (*it)->GetEnd()->GetName());
+    linkNode->Place("Type", type);
   }
 }
 

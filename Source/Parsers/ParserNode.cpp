@@ -96,39 +96,22 @@ std::set<ParserNode*> ParserNode::FindAll(HashString const &aValue)
 }
 
 /**
- * @brief Place node under this node with root and element name, with value.
- * @param aRoot
+ * @brief Place node under this node with element name, with value.
  * @param aElement
  * @param aValue
  */
-void ParserNode::Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue)
+void ParserNode::Place(HashString const &aElement, HashString const &aValue)
 {
-  if(mName == aRoot)
-  {
-    ParserNode *node = Find(aElement);
+  ParserNode *node = Find(aElement);
 
-    if(!node)
-    {
-      node = new ParserNode();
-      node->mName = aElement;
-    }
-    node->mValue = aValue;
-    node->mParent = this;
+  if(!node)
+  {
+    node = new ParserNode();
+    node->mName = aElement;
     mChildren.insert(node);
   }
-  else if(mName == aElement)
-  {
-    DebugLogPrint("info: Value %s found in %s, old value: %s new value: %s\n", 
-      aElement.ToCharArray(), aRoot.ToCharArray(), mValue.ToCharArray(), aValue.ToCharArray());
-    mValue = aValue;
-  }
-  else
-  {
-    for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
-    {
-      (*it)->Place(aRoot, aElement, aValue);
-    }
-  }
+  node->mValue = aValue;
+  node->mParent = this;
 }
 
 /**

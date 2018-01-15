@@ -123,22 +123,21 @@ void PhysicsObject::ReceiveMessage(Message const &aMessage)
 
 /**
  * @brief Serialize to file
- * @param aParser The file to serialize to.
+ * @param aParserNode The node to serialize to.
  */
-void PhysicsObject::Serialize(Parser &aParser)
+void PhysicsObject::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const PHYSICS_OBJECT = "PhysicsObject";
-  ParserNode* object = aParser.Find(objectName);
+  aNode->Place(PHYSICS_OBJECT, "");
+  ParserNode* object = aNode->Find(PHYSICS_OBJECT);
   
-  object->Place(objectName, PHYSICS_OBJECT, "");
-  object->Place(PHYSICS_OBJECT, "Gravity", Common::BoolToString(IsAffectedByGravity()));
-  object->Place(PHYSICS_OBJECT, "Static", Common::BoolToString(mStatic));
-  object->Place(PHYSICS_OBJECT, "Passable", Common::BoolToString(mPassable));
-  object->Place(PHYSICS_OBJECT, "Mass", Common::FloatToString(mMass));
-  object->Place(PHYSICS_OBJECT, "Damping", Common::FloatToString(mDamping));
-  object->Place(PHYSICS_OBJECT, "Restitution", Common::FloatToString(mRestitution));
-  object->Place(PHYSICS_OBJECT, "MaxVelocity", Common::FloatToString(mMaximumVelocity));
+  object->Place("Gravity", Common::BoolToString(IsAffectedByGravity()));
+  object->Place("Static", Common::BoolToString(mStatic));
+  object->Place("Passable", Common::BoolToString(mPassable));
+  object->Place("Mass", Common::FloatToString(mMass));
+  object->Place("Damping", Common::FloatToString(mDamping));
+  object->Place("Restitution", Common::FloatToString(mRestitution));
+  object->Place("MaxVelocity", Common::FloatToString(mMaximumVelocity));
   
   if(!mIgnoreList.empty())
   {
@@ -147,78 +146,77 @@ void PhysicsObject::Serialize(Parser &aParser)
     {
       ignoreList.push_back(it->second);
     }
-    object->Place(PHYSICS_OBJECT, "IgnoreList", Common::StringVectorToString(ignoreList));
+    object->Place("IgnoreList", Common::StringVectorToString(ignoreList));
   }
   
   // Serialize each shape
   // NOTE: ALL SHAPE POSITIONS ARE IN LOCAL SPACE
-  ParserNode* physicsObject = object->Find(PHYSICS_OBJECT);
   HashString const SHAPE = "Shape_";
   int curIndex = 0;
   for(ShapeIT it = mShapes.begin(); it != mShapes.end(); ++it, ++curIndex)
   {
     HashString curShape = SHAPE + Common::IntToString((*it)->id);
     Vector3 localPosition = (*it)->position;
-    physicsObject->Place(PHYSICS_OBJECT, curShape, "");
-    ParserNode* shapeObject = physicsObject->Find(curShape);
+    object->Place(curShape, "");
+    ParserNode* shapeObject = object->Find(curShape);
     
-    shapeObject->Place(curShape, "PositionX", Common::FloatToString(localPosition.x));
-    shapeObject->Place(curShape, "PositionY", Common::FloatToString(localPosition.y));
-    shapeObject->Place(curShape, "PositionZ", Common::FloatToString(localPosition.z));
-    shapeObject->Place(curShape, "Passable", Common::BoolToString((*it)->passable));
+    shapeObject->Place("PositionX", Common::FloatToString(localPosition.x));
+    shapeObject->Place("PositionY", Common::FloatToString(localPosition.y));
+    shapeObject->Place("PositionZ", Common::FloatToString(localPosition.z));
+    shapeObject->Place("Passable", Common::BoolToString((*it)->passable));
     
     switch((*it)->shape)
     {
     case Shape::AABB:
-      shapeObject->Place(curShape, "Type", "AABB");
-      shapeObject->Place(curShape, "SizeX", Common::FloatToString((*it)->GetSize(0)));
-      shapeObject->Place(curShape, "SizeY", Common::FloatToString((*it)->GetSize(1)));
-      shapeObject->Place(curShape, "SizeZ", Common::FloatToString((*it)->GetSize(2)));
+      shapeObject->Place("Type", "AABB");
+      shapeObject->Place("SizeX", Common::FloatToString((*it)->GetSize(0)));
+      shapeObject->Place("SizeY", Common::FloatToString((*it)->GetSize(1)));
+      shapeObject->Place("SizeZ", Common::FloatToString((*it)->GetSize(2)));
       break;
     case Shape::SPHERE:
-      shapeObject->Place(curShape, "Type", "SPHERE");
-      shapeObject->Place(curShape, "Radius", Common::FloatToString((*it)->GetSize(0)));
+      shapeObject->Place("Type", "SPHERE");
+      shapeObject->Place("Radius", Common::FloatToString((*it)->GetSize(0)));
       break;
     case Shape::TRIANGLE:
     {
       Triangle* triangle = (Triangle*)(*it);
-      shapeObject->Place(curShape, "Type", "TRIANGLE");
+      shapeObject->Place("Type", "TRIANGLE");
       HashString point = "Point_";
       for(int i = 0; i < 3; ++i)
       {
         HashString pointId = point + Common::FloatToString(i);
-        shapeObject->Place(curShape, pointId + "X", Common::FloatToString(triangle->points[i].x));
-        shapeObject->Place(curShape, pointId + "Y", Common::FloatToString(triangle->points[i].y));
-        shapeObject->Place(curShape, pointId + "Z", Common::FloatToString(triangle->points[i].z));
+        shapeObject->Place(pointId + "X", Common::FloatToString(triangle->points[i].x));
+        shapeObject->Place(pointId + "Y", Common::FloatToString(triangle->points[i].y));
+        shapeObject->Place(pointId + "Z", Common::FloatToString(triangle->points[i].z));
       }
       break;
     }
     case Shape::LINE:
     {
       Line *line = (Line*)(*it);
-      shapeObject->Place(curShape, "Type", "LINE");
-      shapeObject->Place(curShape, "Length", Common::FloatToString((*it)->GetSize(0)));
-      shapeObject->Place(curShape, "DirectionX", Common::FloatToString(line->direction.x));
-      shapeObject->Place(curShape, "DirectionY", Common::FloatToString(line->direction.y));
-      shapeObject->Place(curShape, "DirectionZ", Common::FloatToString(line->direction.z));
+      shapeObject->Place("Type", "LINE");
+      shapeObject->Place("Length", Common::FloatToString((*it)->GetSize(0)));
+      shapeObject->Place("DirectionX", Common::FloatToString(line->direction.x));
+      shapeObject->Place("DirectionY", Common::FloatToString(line->direction.y));
+      shapeObject->Place("DirectionZ", Common::FloatToString(line->direction.z));
       break;
     }
     case Shape::OBB:
     {
       OrientedBoundingBox *obb = (OrientedBoundingBox*)(*it);
-      shapeObject->Place(curShape, "Type", "OBB");
-      shapeObject->Place(curShape, "UpX", Common::FloatToString(obb->up.x));
-      shapeObject->Place(curShape, "UpY", Common::FloatToString(obb->up.y));
-      shapeObject->Place(curShape, "UpZ", Common::FloatToString(obb->up.z));
-      shapeObject->Place(curShape, "RightX", Common::FloatToString(obb->right.x));
-      shapeObject->Place(curShape, "RightY", Common::FloatToString(obb->right.y));
-      shapeObject->Place(curShape, "RightZ", Common::FloatToString(obb->right.z));
-      shapeObject->Place(curShape, "ForwardX", Common::FloatToString(obb->forward.x));
-      shapeObject->Place(curShape, "ForwardY", Common::FloatToString(obb->forward.y));
-      shapeObject->Place(curShape, "ForwardZ", Common::FloatToString(obb->forward.z));
-      shapeObject->Place(curShape, "ExtentX", Common::FloatToString(obb->extents.x));
-      shapeObject->Place(curShape, "ExtentY", Common::FloatToString(obb->extents.y));
-      shapeObject->Place(curShape, "ExtentZ", Common::FloatToString(obb->extents.z));
+      shapeObject->Place("Type", "OBB");
+      shapeObject->Place("UpX", Common::FloatToString(obb->up.x));
+      shapeObject->Place("UpY", Common::FloatToString(obb->up.y));
+      shapeObject->Place("UpZ", Common::FloatToString(obb->up.z));
+      shapeObject->Place("RightX", Common::FloatToString(obb->right.x));
+      shapeObject->Place("RightY", Common::FloatToString(obb->right.y));
+      shapeObject->Place("RightZ", Common::FloatToString(obb->right.z));
+      shapeObject->Place("ForwardX", Common::FloatToString(obb->forward.x));
+      shapeObject->Place("ForwardY", Common::FloatToString(obb->forward.y));
+      shapeObject->Place("ForwardZ", Common::FloatToString(obb->forward.z));
+      shapeObject->Place("ExtentX", Common::FloatToString(obb->extents.x));
+      shapeObject->Place("ExtentY", Common::FloatToString(obb->extents.y));
+      shapeObject->Place("ExtentZ", Common::FloatToString(obb->extents.z));
       break;
     }
     default:
@@ -233,18 +231,18 @@ void PhysicsObject::Serialize(Parser &aParser)
   {
     HashString curJoint = JOINT + Common::IntToString((*it)->GetID());
     Vector3 localPosition = (*it)->GetPosition();
-    physicsObject->Place(PHYSICS_OBJECT, curJoint, "");
-    ParserNode* jointObject = physicsObject->Find(curJoint);
+    object->Place(curJoint, "");
+    ParserNode* jointObject = object->Find(curJoint);
     
-    jointObject->Place(curJoint, "PositionX", Common::FloatToString(localPosition.x));
-    jointObject->Place(curJoint, "PositionY", Common::FloatToString(localPosition.y));
-    jointObject->Place(curJoint, "PositionZ", Common::FloatToString(localPosition.z));
+    jointObject->Place("PositionX", Common::FloatToString(localPosition.x));
+    jointObject->Place("PositionY", Common::FloatToString(localPosition.y));
+    jointObject->Place("PositionZ", Common::FloatToString(localPosition.z));
   }
 }
 
 /**
  * @brief Read from file
- * @param aParser File to read from.
+ * @param aNode ParserNode to read from.
  */
 void PhysicsObject::Deserialize(ParserNode *aNode)
 {

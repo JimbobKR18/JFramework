@@ -74,22 +74,21 @@ void CustomScript::ReceiveMessage(Message const& aMessage)
 
 /**
  * @brief Serialize out to parser.
- * @param aParser Parse to write to.
+ * @param aNode ParserNode to write to.
  */
-void CustomScript::Serialize(Parser& aParser)
+void CustomScript::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const CUSTOMSCRIPT_OBJECT = "CustomScript";
-  ParserNode* object = aParser.Find(objectName);
+  aNode->Place(CUSTOMSCRIPT_OBJECT, "");
   
-  object->Place(objectName, CUSTOMSCRIPT_OBJECT, "");
-  object->Place(CUSTOMSCRIPT_OBJECT, "Name", mFileName);
-  object->Place(CUSTOMSCRIPT_OBJECT, "Temperature", mUpdateFunctionName);
+  ParserNode *customScript = aNode->Find(CUSTOMSCRIPT_OBJECT);
+  customScript->Place("FileName", mFileName);
+  customScript->Place("UpdateFunctionName", mUpdateFunctionName);
 }
 
 /**
  * @brief Deserialize from parser.
- * @param aParser Parser to read from.
+ * @param aNode ParserNode to read from.
  */
 void CustomScript::Deserialize(ParserNode *aNode)
 {

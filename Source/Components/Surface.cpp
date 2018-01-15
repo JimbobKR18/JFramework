@@ -281,27 +281,25 @@ void Surface::ReceiveMessage(Message const &aMessage)
 
 /**
  * @brief Serialize to file
- * @param aParser File stream to write to.
+ * @param aNode ParserNode to write to.
  */
-void Surface::Serialize(Parser &aParser)
+void Surface::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const SURFACE = "Surface";
-  ParserNode* object = aParser.Find(objectName);
   TextureCoordinates *coords = GetTextureData();
   std::vector<int> animations;
   bool animated = coords->GetAnimated();
   int numanimations = coords->GetNumberOfAnimations();
   std::vector<std::vector<float>> animationSpeeds;
   int currentAnimation = coords->GetCurrentAnimation();
-  char const* values[4] = { "ColorR",
-                            "ColorG",
-                            "ColorB",
-                            "ColorA"};
+  char const* values[4] = {"ColorR",
+                           "ColorG",
+                           "ColorB",
+                           "ColorA"};
 
-  object->Place(objectName, SURFACE, "");
-  ParserNode* surface = object->Find(SURFACE);
-  surface->Place(SURFACE, "AnimationCount", Common::IntToString(numanimations));
+  aNode->Place(SURFACE, "");
+  ParserNode* surface = aNode->Find(SURFACE);
+  surface->Place("AnimationCount", Common::IntToString(numanimations));
   for(int i = 0; i < numanimations; ++i)
   {
     animations.push_back(coords->GetAnimationFrameCounts(i));
@@ -316,27 +314,27 @@ void Surface::Serialize(Parser &aParser)
 
   if(animated)
   {
-    surface->Place(SURFACE, "FrameNumbers", Common::IntVectorToString(animations));
+    surface->Place("FrameNumbers", Common::IntVectorToString(animations));
   }
   
   // Animation speeds
-  surface->Place(SURFACE, "AnimationSpeeds", "");
+  surface->Place("AnimationSpeeds", "");
   HashString const ANIMATION = "Animation_";
   int curIndex = 0;
   ParserNode* animationSpeedsNode = surface->Find("AnimationSpeeds");
   for(std::vector<std::vector<float>>::iterator it = animationSpeeds.begin(); it != animationSpeeds.end(); ++it, ++curIndex)
   {
     HashString curNode = ANIMATION + Common::IntToString(curIndex);
-    animationSpeedsNode->Place("AnimationSpeeds", curNode, Common::FloatVectorToString(*it));
+    animationSpeedsNode->Place(curNode, Common::FloatVectorToString(*it));
   }
   
   // Everything else animation related
-  surface->Place(SURFACE, "Animated", Common::BoolToString(animated));
-  surface->Place(SURFACE, "NoRender", Common::BoolToString(mNoRender));
-  surface->Place(SURFACE, "StartingAnimation", Common::IntToString(currentAnimation));
+  surface->Place("Animated", Common::BoolToString(animated));
+  surface->Place("NoRender", Common::BoolToString(mNoRender));
+  surface->Place("StartingAnimation", Common::IntToString(currentAnimation));
   for(int i = 0; i < 4; ++i)
   {
-    surface->Place("Surface", values[i], Common::IntToString(mColor[i]));
+    surface->Place(values[i], Common::IntToString(mColor[i]));
   }
   
   // View mode
@@ -345,19 +343,19 @@ void Surface::Serialize(Parser &aParser)
     viewMode = "RELATIVE";
   else if(mViewmode == VIEW_PERCENTAGE_OF_CAMERA)
     viewMode = "PERCENTAGE";
-  surface->Place(SURFACE, "ViewMode", viewMode.ToString());
+  surface->Place("ViewMode", viewMode.ToString());
   
   // Properties
   if(!mProperties.empty())
   {
-    surface->Place(SURFACE, "Properties", "");
+    surface->Place("Properties", "");
     HashString const PROPERTY = "Property_";
     curIndex = 0;
     ParserNode* propertiesNode = surface->Find("Properties");
     for(PropertyContainerIt it = mProperties.begin(); it != mProperties.end(); ++it, ++curIndex)
     {
       HashString curNode = PROPERTY + Common::IntToString(curIndex);
-      propertiesNode->Place("Properties", curNode, "");
+      propertiesNode->Place(curNode, "");
       
       HashString type = "";
       switch((*it)->GetType())
@@ -386,17 +384,17 @@ void Surface::Serialize(Parser &aParser)
       }
       
       ParserNode* propertyNode = propertiesNode->Find(curNode);
-      propertyNode->Place(curNode, "Name", (*it)->GetName());
-      propertyNode->Place(curNode, "Type", type);
-      propertyNode->Place(curNode, "TargetValue", (*it)->GetTargetValue());
-      propertyNode->Place(curNode, "DefaultValue", (*it)->GetDefaultValue());
+      propertyNode->Place("Name", (*it)->GetName());
+      propertyNode->Place("Type", type);
+      propertyNode->Place("TargetValue", (*it)->GetTargetValue());
+      propertyNode->Place("DefaultValue", (*it)->GetDefaultValue());
     }
   }
 }
 
 /**
  * @brief Read from file
- * @param aParser File stream to read from
+ * @param aNode ParserNode to read from.
  */
 void Surface::Deserialize(ParserNode *aNode)
 {

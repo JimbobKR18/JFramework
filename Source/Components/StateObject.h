@@ -19,7 +19,7 @@ public:
 
   virtual void SendMessage(Message const& aMessage);
   virtual void ReceiveMessage(Message const& aMessage);
-  virtual void Serialize(Parser& aParser);
+  virtual void Serialize(ParserNode *aNode);
   virtual void Deserialize(ParserNode *aNode);
   virtual void Update();
   static void  SerializeLUA();

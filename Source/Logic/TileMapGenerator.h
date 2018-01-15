@@ -128,7 +128,7 @@ public:
   int               GetIndex(int const aX, int const aY);
   std::vector<int>  GetIndices(int const aX, int const aY, int const bX, int const bY);
 
-  void              Serialize(Parser &aParser);
+  void              Serialize(ParserNode *aNode);
   
 private:
   void              CreateTilesInRange(unsigned const aXStart, unsigned const aYStart, 

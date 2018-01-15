@@ -247,13 +247,11 @@ void Transform::Update()
 
 /**
  * @brief Serialize to file (cannot handle rotations)
- * @param aParser File to serialize to
+ * @param aNode ParserNode to serialize to.
  */
-void Transform::Serialize(Parser &aParser)
+void Transform::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const TRANSFORM = "Transform";
-  ParserNode* object = aParser.Find(objectName);
   char const *values[9] = {"PositionX",
                             "PositionY",
                             "PositionZ",
@@ -263,9 +261,8 @@ void Transform::Serialize(Parser &aParser)
                             "SizeX",
                             "SizeY",
                             "SizeZ"};
-  object->Place(objectName, TRANSFORM, "");
-  ParserNode* transform = object->Find(TRANSFORM);
-  
+  aNode->Place(TRANSFORM, "");
+  ParserNode* transform = aNode->Find(TRANSFORM);
   for(int i = 0; i < 9; ++i)
   {
     float value = 0;
@@ -275,73 +272,73 @@ void Transform::Serialize(Parser &aParser)
       value = mScale[i - 3];
     else
       value = mSize[i - 6];
-    transform->Place(TRANSFORM, values[i], Common::FloatToString(value));
+    transform->Place(values[i], Common::FloatToString(value));
   }
 
   if(mXAlign == X_ALIGN_LEFT)
-    transform->Place(TRANSFORM, "AlignX", "LEFT");
+    transform->Place("AlignX", "LEFT");
   else if(mXAlign == X_ALIGN_CENTER)
-    transform->Place(TRANSFORM, "AlignX", "CENTER");
+    transform->Place("AlignX", "CENTER");
   else if(mXAlign == X_ALIGN_RIGHT)
-    transform->Place(TRANSFORM, "AlignX", "RIGHT");
+    transform->Place("AlignX", "RIGHT");
 
   if(mYAlign == Y_ALIGN_TOP)
-    transform->Place(TRANSFORM, "AlignY", "TOP");
+    transform->Place("AlignY", "TOP");
   else if(mYAlign == Y_ALIGN_CENTER)
-    transform->Place(TRANSFORM, "AlignY", "CENTER");
+    transform->Place("AlignY", "CENTER");
   else if(mYAlign == Y_ALIGN_BOTTOM)
-    transform->Place(TRANSFORM, "AlignY", "BOTTOM");
+    transform->Place("AlignY", "BOTTOM");
 
   if(mZAlign == Z_ALIGN_FRONT)
-    transform->Place(TRANSFORM, "AlignZ", "FRONT");
+    transform->Place("AlignZ", "FRONT");
   else if(mZAlign == Z_ALIGN_CENTER)
-    transform->Place(TRANSFORM, "AlignZ", "CENTER");
+    transform->Place("AlignZ", "CENTER");
   else if(mZAlign == Z_ALIGN_BACK)
-    transform->Place(TRANSFORM, "AlignZ", "BACK");
+    transform->Place("AlignZ", "BACK");
     
   if(mLockedAxes == NO_AXIS)
-    transform->Place(TRANSFORM, "LockedAxes", "NO_AXIS");
+    transform->Place("LockedAxes", "NO_AXIS");
   else if(mLockedAxes == X_AXIS)
-    transform->Place(TRANSFORM, "LockedAxes", "X_AXIS");
+    transform->Place("LockedAxes", "X_AXIS");
   else if(mLockedAxes == Y_AXIS)
-    transform->Place(TRANSFORM, "LockedAxes", "Y_AXIS");
+    transform->Place("LockedAxes", "Y_AXIS");
   else if(mLockedAxes == Z_AXIS)
-    transform->Place(TRANSFORM, "LockedAxes", "Z_AXIS");
+    transform->Place("LockedAxes", "Z_AXIS");
   else if(mLockedAxes == XY_AXIS)
-    transform->Place(TRANSFORM, "LockedAxes", "XY_AXIS");
+    transform->Place("LockedAxes", "XY_AXIS");
   else if(mLockedAxes == YZ_AXIS)
-    transform->Place(TRANSFORM, "LockedAxes", "YZ_AXIS");
+    transform->Place("LockedAxes", "YZ_AXIS");
   else if(mLockedAxes == XZ_AXIS)
-    transform->Place(TRANSFORM, "LockedAxes", "XZ_AXIS");
+    transform->Place("LockedAxes", "XZ_AXIS");
   else if(mLockedAxes == ALL_AXES)
-    transform->Place(TRANSFORM, "LockedAxes", "ALL_AXES");
+    transform->Place("LockedAxes", "ALL_AXES");
     
   if(mInheritInfo == INHERIT_NONE)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_NONE");
+    transform->Place("InheritInfo", "INHERIT_NONE");
   else if(mInheritInfo == INHERIT_POSITION)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_POSITION");
+    transform->Place("InheritInfo", "INHERIT_POSITION");
   else if(mInheritInfo == INHERIT_ROTATION)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_ROTATION");
+    transform->Place("InheritInfo", "INHERIT_ROTATION");
   else if(mInheritInfo == INHERIT_SCALE)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_SCALE");
+    transform->Place("InheritInfo", "INHERIT_SCALE");
   else if(mInheritInfo == INHERIT_POSITION_ROTATION)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_POSITION_ROTATION");
+    transform->Place("InheritInfo", "INHERIT_POSITION_ROTATION");
   else if(mInheritInfo == INHERIT_ROTATION_SCALE)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_ROTATION_SCALE");
+    transform->Place("InheritInfo", "INHERIT_ROTATION_SCALE");
   else if(mInheritInfo == INHERIT_POSITION_SCALE)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_POSITION_SCALE");
+    transform->Place("InheritInfo", "INHERIT_POSITION_SCALE");
   else if(mInheritInfo == INHERIT_ALL)
-    transform->Place(TRANSFORM, "InheritInfo", "INHERIT_ALL");
+    transform->Place("InheritInfo", "INHERIT_ALL");
     
   // Rotations are a little TOO complicated, so set them to 0
-  transform->Place(TRANSFORM, "RotationX", Common::IntToString(0));
-  transform->Place(TRANSFORM, "RotationY", Common::IntToString(0));
-  transform->Place(TRANSFORM, "RotationZ", Common::IntToString(0));
+  transform->Place("RotationX", Common::IntToString(0));
+  transform->Place("RotationY", Common::IntToString(0));
+  transform->Place("RotationZ", Common::IntToString(0));
 }
 
 /**
  * @brief Read from file
- * @param aParser File to read from
+ * @param aNode ParserNode to read from.
  */
 void Transform::Deserialize(ParserNode *aNode)
 {

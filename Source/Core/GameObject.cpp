@@ -323,21 +323,20 @@ void GameObject::ReceiveMessage(Message const &aMessage)
 
 /**
  * @brief Output to file
- * @param aParser File to output to
+ * @param aNode ParserNode to output to
  */
-void GameObject::Serialize(Parser &aParser)
+void GameObject::Serialize(ParserNode *aNode)
 {
-  HashString object = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
-  aParser.Place(object, "File", mFileName);
-  aParser.Place(object, "Name", HashString("Literal(") + mName + HashString(")"));
+  aNode->Place("File", mFileName);
+  aNode->Place("Name", HashString("Literal(") + mName + HashString(")"));
   
   if(mParent)
-    aParser.Place(object, "Parent", mParent->GetName());
+    aNode->Place("Parent", mParent->GetName());
 
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
-    it->second->Serialize(aParser);
+    it->second->Serialize(aNode);
   }
   
   if(!mTags.empty())
@@ -347,7 +346,7 @@ void GameObject::Serialize(Parser &aParser)
     {
       tags.push_back(it->second);
     }
-    aParser.Place(object, "Tags", Common::StringVectorToString(tags));
+    aNode->Place("Tags", Common::StringVectorToString(tags));
   }
 }
 

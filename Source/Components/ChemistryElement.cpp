@@ -189,26 +189,26 @@ void ChemistryElement::ReceiveMessage(Message const& aMessage)
  * @brief Serialize out.
  * @param aParser Parser to write to.
  */
-void ChemistryElement::Serialize(Parser& aParser)
+void ChemistryElement::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const CHEMISTRY_OBJECT = "ChemistryElement";
-  ParserNode* object = aParser.Find(objectName);
   
-  object->Place(objectName, CHEMISTRY_OBJECT, "");
-  object->Place(CHEMISTRY_OBJECT, "Name", mName);
-  object->Place(CHEMISTRY_OBJECT, "Temperature", Common::FloatToString(mTemperature));
-  object->Place(CHEMISTRY_OBJECT, "Wattage", Common::FloatToString(mWattage));
-  object->Place(CHEMISTRY_OBJECT, "Scale", Common::FloatToString(mScale));
-  object->Place(CHEMISTRY_OBJECT, "Falloff", Common::FloatToString(mFalloff));
-  object->Place(CHEMISTRY_OBJECT, "DirectionX", Common::FloatToString(mDirectionality.x));
-  object->Place(CHEMISTRY_OBJECT, "DirectionY", Common::FloatToString(mDirectionality.y));
-  object->Place(CHEMISTRY_OBJECT, "DirectionZ", Common::FloatToString(mDirectionality.z));
+  aNode->Place(CHEMISTRY_OBJECT, "");
+  ParserNode* object = aNode->Find(CHEMISTRY_OBJECT);
+  
+  object->Place("Name", mName);
+  object->Place("Temperature", Common::FloatToString(mTemperature));
+  object->Place("Wattage", Common::FloatToString(mWattage));
+  object->Place("Scale", Common::FloatToString(mScale));
+  object->Place("Falloff", Common::FloatToString(mFalloff));
+  object->Place("DirectionX", Common::FloatToString(mDirectionality.x));
+  object->Place("DirectionY", Common::FloatToString(mDirectionality.y));
+  object->Place("DirectionZ", Common::FloatToString(mDirectionality.z));
 }
 
 /**
  * @brief Deserialize from parser into memory.
- * @param aParser Parser to gather data from.
+ * @param aNode ParserNode to read from.
  */
 void ChemistryElement::Deserialize(ParserNode *aNode)
 {

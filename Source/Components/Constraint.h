@@ -24,7 +24,7 @@ public:
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;
   virtual void        ReceiveMessage(Message const &aMessage) = 0;
-  virtual void        Serialize(Parser &aParser) = 0;
+  virtual void        Serialize(ParserNode *aNode) = 0;
   virtual void        Deserialize(ParserNode *aNode) = 0;
   static int          GetUID() {return sUID;}
 };

@@ -36,7 +36,7 @@ public:
   ParserNode const*     Search(HashString const &aValue) const;
   ParserNode*           Find(HashString const &aValue);
   std::set<ParserNode*> FindAll(HashString const &aValue);
-  void            Place(HashString const &aRoot, HashString const &aElement, HashString const &aValue);
+  void            Place(HashString const &aElement, HashString const &aValue);
   void            Insert(ParserNode* root);
 
   // GETTERS

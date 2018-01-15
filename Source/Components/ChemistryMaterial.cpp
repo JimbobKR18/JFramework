@@ -256,28 +256,28 @@ void ChemistryMaterial::ReceiveMessage(Message const& aMessage)
 
 /**
  * @brief Serialize out.
- * @param aParser Parser to write to.
+ * @param aNode ParserNode to write to.
  */
-void ChemistryMaterial::Serialize(Parser& aParser)
+void ChemistryMaterial::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const CHEMISTRY_OBJECT = "ChemistryMaterial";
-  ParserNode* object = aParser.Find(objectName);
   
-  object->Place(objectName, CHEMISTRY_OBJECT, "");
-  object->Place(CHEMISTRY_OBJECT, "Name", mName);
-  object->Place(CHEMISTRY_OBJECT, "BoilingPoint", Common::FloatToString(mBoilingPoint));
-  object->Place(CHEMISTRY_OBJECT, "MeltingPoint", Common::FloatToString(mMeltingPoint));
-  object->Place(CHEMISTRY_OBJECT, "FreezingPoint", Common::FloatToString(mFreezingPoint));
-  object->Place(CHEMISTRY_OBJECT, "Conductivity", Common::FloatToString(mConductivity));
-  object->Place(CHEMISTRY_OBJECT, "HeatTransferRate", Common::FloatToString(mHeatTransferRate));
-  object->Place(CHEMISTRY_OBJECT, "StartingTemperature", Common::FloatToString(mCurrentTemperature));
-  object->Place(CHEMISTRY_OBJECT, "StartingWattage", Common::FloatToString(mCurrentWattage));
+  aNode->Place(CHEMISTRY_OBJECT, "");
+  ParserNode* object = aNode->Find(CHEMISTRY_OBJECT);
+  
+  object->Place("Name", mName);
+  object->Place("BoilingPoint", Common::FloatToString(mBoilingPoint));
+  object->Place("MeltingPoint", Common::FloatToString(mMeltingPoint));
+  object->Place("FreezingPoint", Common::FloatToString(mFreezingPoint));
+  object->Place("Conductivity", Common::FloatToString(mConductivity));
+  object->Place("HeatTransferRate", Common::FloatToString(mHeatTransferRate));
+  object->Place("StartingTemperature", Common::FloatToString(mCurrentTemperature));
+  object->Place("StartingWattage", Common::FloatToString(mCurrentWattage));
 }
 
 /**
  * @brief Deserialize from parser into memory.
- * @param aParser Parser to gather data from.
+ * @param aNode ParserNode to read from.
  */
 void ChemistryMaterial::Deserialize(ParserNode *aNode)
 {

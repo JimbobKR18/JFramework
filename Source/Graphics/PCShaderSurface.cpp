@@ -244,29 +244,27 @@ void PCShaderSurface::ReceiveMessage(Message const &aMessage)
 
 /**
  * @brief Serialize to file.
- * @param aParser File to write into.
+ * @param aNode ParserNode to write into.
  */
-void PCShaderSurface::Serialize(Parser &aParser)
+void PCShaderSurface::Serialize(ParserNode *aNode)
 {
-  HashString const objectName = HashString("Object_") + Common::IntToString(aParser.GetCurrentObjectIndex());
   HashString const SURFACE = "Surface";
-  ParserNode* object = aParser.Find(objectName);
-  Surface::Serialize(aParser);
-  ParserNode* surface = object->Find(SURFACE);
-  surface->Place(SURFACE, "TextureName", GetFileName());
-  surface->Place(SURFACE, "VertexShader", mVertexShaderFileName);
-  surface->Place(SURFACE, "FragmentShader", mFragmentShaderFileName);
+  Surface::Serialize(aNode);
+  ParserNode* surface = aNode->Find(SURFACE);
+  surface->Place("TextureName", GetFileName());
+  surface->Place("VertexShader", mVertexShaderFileName);
+  surface->Place("FragmentShader", mFragmentShaderFileName);
 }
 
 /**
  * @brief Read from file.
- * @param aParser File to read from.
+ * @param aNode ParserNode to read from.
  */
 void PCShaderSurface::Deserialize(ParserNode *aNode)
 {
-  HashString fileName = "";
-  HashString vertexShader = SystemProperties::GetDefaultVertexShaderName();
-  HashString fragmentShader = SystemProperties::GetDefaultFragmentShaderName();
+  HashString fileName = GetFileName();
+  HashString vertexShader = (GetVertexShaderFilename() == "") ? SystemProperties::GetDefaultVertexShaderName() : GetVertexShaderFilename();
+  HashString fragmentShader = (GetFragmentShaderFilename() == "") ? SystemProperties::GetDefaultFragmentShaderName() : GetFragmentShaderFilename();
   
   if(aNode->Find("TextureName"))
     fileName = aNode->Find("TextureName")->GetValue().ToString();

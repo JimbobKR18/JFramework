@@ -292,16 +292,18 @@ std::vector<int> TileMapGenerator::GetIndices(int const aX, int const aY, int co
 
 /**
  * @brief Serialize to file
- * @param aParser The file parser
+ * @param aNode ParserNode to write to.
  */
-void TileMapGenerator::Serialize(Parser &aParser)
+void TileMapGenerator::Serialize(ParserNode *aNode)
 {
-  aParser.Place("TileMapGenerator", "");
-  aParser.Place("TileMapGenerator", "Width", Common::IntToString(mWidth));
-  aParser.Place("TileMapGenerator", "Height", Common::IntToString(mHeight));
-  aParser.Place("TileMapGenerator", "TileSize", Common::IntToString(mTileSize));
-  aParser.Place("TileMapGenerator", "Image", mImageName);
-  aParser.Place("TileMapGenerator", "Data", mDataName);
+  aNode->Place("TileMapGenerator", "");
+  
+  ParserNode *tileMapNode = aNode->Find("TileMapGenerator");
+  tileMapNode->Place("Width", Common::IntToString(mWidth));
+  tileMapNode->Place("Height", Common::IntToString(mHeight));
+  tileMapNode->Place("TileSize", Common::IntToString(mTileSize));
+  tileMapNode->Place("Image", mImageName);
+  tileMapNode->Place("Data", mDataName);
 }
 
 /**
