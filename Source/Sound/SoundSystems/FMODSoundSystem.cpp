@@ -118,7 +118,7 @@ int FMODSoundSystem::PlaySound(HashString const& aName, int const aNumLoops)
   channel->setLoopCount(aNumLoops);
   if(result != FMOD_OK)
   {
-    DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+    DebugLogPrint("FMOD error: (%s) (%d) %s\n", aName.ToCharArray(), result, FMOD_ErrorString(result));
     assert(!"FMOD failed to play sound.");
   }
   channel->getIndex(&index);
