@@ -51,7 +51,7 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   
   ChangeSize(aW, aH, aFullScreen);
   
-  mFramebuffer = new Framebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight());
+  mFramebuffer = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight());
   mFramebuffer->Generate(GetOwner());
 }
 

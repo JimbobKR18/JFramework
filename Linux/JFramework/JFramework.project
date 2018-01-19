@@ -119,14 +119,12 @@
     <File Name="../../Source/Graphics/BatchRenderSorter.h"/>
     <File Name="../../Source/Graphics/BatchRenderSorter.cpp"/>
     <VirtualDirectory Name="Surfaces">
-      <File Name="../../Source/Graphics/PCShaderSurface.h"/>
-      <File Name="../../Source/Graphics/PCShaderSurface.cpp"/>
+      <File Name="../../Source/Graphics/Surfaces/PCShaderSurface.cpp"/>
+      <File Name="../../Source/Graphics/Surfaces/PCShaderSurface.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Screens">
-      <File Name="../../Source/Graphics/PCShaderScreen.cpp"/>
-      <File Name="../../Source/Graphics/PCShaderScreen.h"/>
-      <File Name="../../Source/Graphics/Screen.cpp"/>
-      <File Name="../../Source/Graphics/Screen.h"/>
+      <File Name="../../Source/Graphics/Screens/PCShaderScreen.cpp"/>
+      <File Name="../../Source/Graphics/Screens/PCShaderScreen.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Graphics/ShaderData.h"/>
     <File Name="../../Source/Graphics/SurfaceProperty.h"/>
@@ -135,6 +133,12 @@
     <File Name="../../Source/Graphics/ShaderLoader.cpp"/>
     <File Name="../../Source/Graphics/Framebuffer.h"/>
     <File Name="../../Source/Graphics/Framebuffer.cpp"/>
+    <VirtualDirectory Name="Framebuffers">
+      <File Name="../../Source/Graphics/Framebuffers/GLFramebuffer.cpp"/>
+      <File Name="../../Source/Graphics/Framebuffers/GLFramebuffer.h"/>
+    </VirtualDirectory>
+    <File Name="../../Source/Graphics/Screen.cpp"/>
+    <File Name="../../Source/Graphics/Screen.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Logic">
     <File Name="../../Source/Logic/Constants.cpp"/>
@@ -296,6 +300,9 @@
         <IncludePath Value="../../Source/Sound/DSPs/FMOD"/>
         <IncludePath Value="../../Source/Managers"/>
         <IncludePath Value="../../Source/Graphics"/>
+        <IncludePath Value="../../Source/Graphics/Screens"/>
+        <IncludePath Value="../../Source/Graphics/Surfaces"/>
+        <IncludePath Value="../../Source/Graphics/Framebuffers"/>
         <IncludePath Value="../../Source/LUA"/>
         <IncludePath Value="../../Source/Parsers"/>
         <IncludePath Value="../../Source/Network"/>
@@ -366,6 +373,9 @@
         <IncludePath Value="../../Source/Sound/DSPs/FMOD"/>
         <IncludePath Value="../../Source/Managers"/>
         <IncludePath Value="../../Source/Graphics"/>
+        <IncludePath Value="../../Source/Graphics/Screens"/>
+        <IncludePath Value="../../Source/Graphics/Surfaces"/>
+        <IncludePath Value="../../Source/Graphics/Framebuffers"/>
         <IncludePath Value="../../Source/LUA"/>
         <IncludePath Value="../../Source/Parsers"/>
         <IncludePath Value="../../Source/Network"/>

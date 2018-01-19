@@ -32,7 +32,7 @@
 #include "Logic/SystemProperties.h"
 
 #ifdef PC
-#include "Graphics/PCShaderSurface.h"
+#include "Graphics/Surfaces/PCShaderSurface.h"
 #endif
 
 #define LUAFILECHECK()  if(mScripts.find(aFilename.ToHash()) == mScripts.end()) \
