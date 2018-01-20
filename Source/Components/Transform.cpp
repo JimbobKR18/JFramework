@@ -372,6 +372,14 @@ void Transform::Serialize(ParserNode *aNode)
   transform->Place("RotationX", Common::IntToString(0));
   transform->Place("RotationY", Common::IntToString(0));
   transform->Place("RotationZ", Common::IntToString(0));
+  
+  // Boundaries
+  transform->Place("MaxPositionX", Common::FloatToString(mMaxBoundary.x));
+  transform->Place("MaxPositionY", Common::FloatToString(mMaxBoundary.y));
+  transform->Place("MaxPositionZ", Common::FloatToString(mMaxBoundary.z));
+  transform->Place("MinPositionX", Common::FloatToString(mMinBoundary.x));
+  transform->Place("MinPositionY", Common::FloatToString(mMinBoundary.y));
+  transform->Place("MinPositionZ", Common::FloatToString(mMinBoundary.z));
 }
 
 /**
@@ -393,6 +401,16 @@ void Transform::Deserialize(ParserNode *aNode)
     SetSize(Vector3(aNode->Find("SizeX")->GetValue().ToFloat(),
                     aNode->Find("SizeY")->GetValue().ToFloat(),
                     aNode->Find("SizeZ")->GetValue().ToFloat()));
+  
+  // Boundaries
+  if(aNode->Find("MaxPositionX"))
+    mMaxBoundary = Vector3(aNode->Find("MaxPositionX")->GetValue().ToFloat(),
+                    aNode->Find("MaxPositionY")->GetValue().ToFloat(),
+                    aNode->Find("MaxPositionZ")->GetValue().ToFloat());
+  if(aNode->Find("MinPositionX"))
+    mMaxBoundary = Vector3(aNode->Find("MinPositionX")->GetValue().ToFloat(),
+                    aNode->Find("MinPositionY")->GetValue().ToFloat(),
+                    aNode->Find("MinPositionZ")->GetValue().ToFloat());
 
   // Alignment
   HashString xAlign = aNode->Find("AlignX") ? aNode->Find("AlignX")->GetValue() : "";
