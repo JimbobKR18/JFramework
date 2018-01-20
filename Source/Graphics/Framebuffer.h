@@ -10,10 +10,14 @@ public:
   Framebuffer();
   virtual ~Framebuffer();
   
-  // VIRTUALS
+  // VIRTUAL GETTERS
+  virtual int GetTextureID() const = 0;
+  
+  // VIRTUAL METHODS
   virtual void Generate(GraphicsManager *aManager) = 0;
   virtual void Bind() = 0;
-  virtual void Draw(int aDefaultFramebuffer, int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen) = 0;
+  virtual void Unbind(int aDefaultFramebuffer) = 0;
+  virtual void Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen) = 0;
 };
 
 #endif //__JFramework_Framebuffer_h_

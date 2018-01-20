@@ -23,6 +23,15 @@ GLFramebuffer::~GLFramebuffer()
 }
 
 /**
+ * @brief Get rendered texture id.
+ * @return Rendered texture id.
+ */
+int GLFramebuffer::GetTextureID() const
+{
+  return mRenderedTextureID;
+}
+
+/**
  * @brief Generate framebuffer information.
  * @param aManager Cache shader stuff.
  */
@@ -36,9 +45,6 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-  
-  glBindFramebuffer(GL_FRAMEBUFFER, mFrameBufferID);
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mRenderedTextureID, 0);
   
   HashString shaderKey = mVertexShaderFilename + mFragmentShaderFilename;
   if(aManager->ShaderDataExists(shaderKey))
@@ -86,26 +92,35 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
 void GLFramebuffer::Bind()
 {
   glBindFramebuffer(GL_FRAMEBUFFER, mFrameBufferID);
+  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mRenderedTextureID, 0);
   glViewport(0, 0, mWidth, mHeight);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 /**
- * @brief Draw elements from framebuffer to screen.
+ * @brief Unbind framebuffer from being written to.
  * @param aDefaultFramebuffer Screen framebuffer.
+ */
+void GLFramebuffer::Unbind(int aDefaultFramebuffer)
+{
+  glBindFramebuffer(GL_FRAMEBUFFER, aDefaultFramebuffer);
+  glBindTexture(GL_TEXTURE_2D, 0);
+  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+/**
+ * @brief Draw elements from framebuffer to screen.
  * @param aDefaultWidth Width of game screen.
  * @param aDefaultHeight Height of game screen.
  * @param aScreenWidth Literal width of window.
  * @param aScreenHeight Literal height of window.
  * @param aFullScreen Is this full screen?
  */
-void GLFramebuffer::Draw(int aDefaultFramebuffer, int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen)
+void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen)
 {
   int texCoordPosLocation = glGetAttribLocation(mFramebufferProgramID, "texCoord");
   int posCoordPosLocation = glGetAttribLocation(mFramebufferProgramID, "vertexPos");
-  
-  glBindFramebuffer(GL_FRAMEBUFFER, aDefaultFramebuffer);
-  glBindTexture(GL_TEXTURE_2D, 0);
   
   if(aFullScreen)
   {
@@ -116,8 +131,6 @@ void GLFramebuffer::Draw(int aDefaultFramebuffer, int aDefaultWidth, int aDefaul
   }
   else
     glViewport(0, 0, aDefaultWidth, aDefaultHeight);
-  
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
   glBindVertexArray(mVertexArrayObjectID);
   glUseProgram(mFramebufferProgramID);

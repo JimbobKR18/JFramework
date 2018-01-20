@@ -270,7 +270,8 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Sur
     // Displays bounds of objects with PhysicsObject
     DebugDraw(aObjects);
   #endif
-  mFramebuffer->Draw(mDefaultFrameBufferID, GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+  mFramebuffer->Unbind(mDefaultFrameBufferID);
+  mFramebuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
 }
 
 /**
@@ -341,10 +342,10 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 
   if(aFullScreen)
   {
-    float ratio = ((float)mDisplayMode.w / (float)aH);
+    float ratio = ((float)mDisplayMode.h / (float)aH);
     int x = aW * ratio;
     int y = aH * ratio;
-    glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, mDisplayMode.w * ratio, mDisplayMode.h);
+    glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, aW * ratio, mDisplayMode.h);
   }
   else
     glViewport(0, 0, aW, aH);

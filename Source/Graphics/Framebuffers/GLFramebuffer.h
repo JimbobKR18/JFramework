@@ -44,9 +44,11 @@ public:
   virtual ~GLFramebuffer();
   
   // VIRTUALS
+  virtual int GetTextureID() const;
   virtual void Generate(GraphicsManager *aManager);
   virtual void Bind();
-  virtual void Draw(int aDefaultFramebuffer, int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen);
+  virtual void Unbind(int aDefaultFramebuffer);
+  virtual void Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen);
   
   // METHODS
   void DisableVertexAttribArray(int aVertexAttrib);
