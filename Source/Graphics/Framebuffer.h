@@ -10,6 +10,7 @@ public:
   Framebuffer();
   virtual ~Framebuffer();
   
+  // VIRTUALS
   virtual void Generate(GraphicsManager *aManager) = 0;
   virtual void Bind() = 0;
   virtual void Draw(int aDefaultFramebuffer, int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen) = 0;

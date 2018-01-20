@@ -21,8 +21,9 @@
   #include <SDL2/SDL.h>
 #endif
 
-struct GLFramebuffer : public Framebuffer
+class GLFramebuffer : public Framebuffer
 {
+private:
   int           mWidth;
   int           mHeight;
   GLuint        mFramebufferProgramID;
@@ -38,13 +39,16 @@ struct GLFramebuffer : public Framebuffer
   std::vector<Vector2> mTexCoords;
   std::vector<unsigned> mIndices;
   
+public:
   GLFramebuffer(int aWidth, int aHeight);
   virtual ~GLFramebuffer();
   
+  // VIRTUALS
   virtual void Generate(GraphicsManager *aManager);
   virtual void Bind();
   virtual void Draw(int aDefaultFramebuffer, int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen);
   
+  // METHODS
   void DisableVertexAttribArray(int aVertexAttrib);
   void PushRenderDataV2(std::vector<Vector2> &aData, int aAttribLocation, Vector2 const &aAttribute);
   void PushRenderDataV3(std::vector<Vector3> &aData, int aAttribLocation, Vector3 const &aAttribute);
