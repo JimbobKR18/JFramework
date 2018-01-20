@@ -5,7 +5,8 @@ int const Transform::sUID = Common::StringHashFunction("Transform");
 
 Transform::Transform() : Component(Transform::sUID), mPosition(), mScale(1, 1, 1), mSize(), mRotation(),
                          mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER), mLockedAxes(NO_AXIS),
-                         mInheritInfo(INHERIT_ALL), mHierarchicalPosition(), mHierarchicalScale(1, 1, 1), mHierarchicalRotation()
+                         mInheritInfo(INHERIT_ALL), mHierarchicalPosition(), mHierarchicalScale(1, 1, 1), mHierarchicalRotation(),
+                         mMaxBoundary(FLT_MAX, FLT_MAX, FLT_MAX), mMinBoundary(-FLT_MAX, -FLT_MAX, -FLT_MAX)
 {
 }
 
@@ -122,6 +123,24 @@ Matrix33 const& Transform::GetHierarchicalRotation() const
 }
 
 /**
+ * @brief Get max boundary.
+ * @return Max boundary.
+ */
+Vector3 Transform::GetMaxBoundary() const
+{
+  return mMaxBoundary;
+}
+
+/**
+ * @brief Get min boundary.
+ * @return Min boundary.
+ */
+Vector3 Transform::GetMinBoundary() const
+{
+  return mMinBoundary;
+}
+
+/**
  * @brief Set position of transform
  * @param aPos position
  */
@@ -160,6 +179,7 @@ void Transform::SetPosition(Vector3 const &aPos)
       break;
   }
   CalculateHierarchy();
+  EnforceBoundaries();
 }
 
 /**
@@ -237,11 +257,30 @@ void Transform::SetParentInheritanceInfo(ParentInherit const &aInheritInfo)
 }
 
 /**
+ * @brief Set max boundary.
+ * @param aMaxBoundary Max boundary.
+ */
+void Transform::SetMaxBoundary(Vector3 const &aMaxBoundary)
+{
+  mMaxBoundary = aMaxBoundary;
+}
+
+/**
+ * @brief Set min boundary.
+ * @param aMinBoundary Min boundary.
+ */
+void Transform::SetMinBoundary(Vector3 const &aMinBoundary)
+{
+  mMinBoundary = aMinBoundary;
+}
+
+/**
  * @brief Update loop
  */
 void Transform::Update()
 {
   CalculateHierarchy();
+  EnforceBoundaries();
 }
 
 /**
@@ -485,4 +524,21 @@ void Transform::CalculateHierarchy()
     if((mInheritInfo & INHERIT_ROTATION) != 0)
       mHierarchicalRotation = parentTransform->GetHierarchicalRotation() * mRotation;
   }
+}
+
+/**
+ * @brief Make sure object is within bounds.
+ */
+void Transform::EnforceBoundaries()
+{
+  Vector3 scaledSize = mSize.Divide(mScale);
+  if(mPosition.x - scaledSize.x < mMinBoundary.x)
+    mPosition.x = mMinBoundary.x + scaledSize.x;
+  else if(mPosition.x + scaledSize.x > mMaxBoundary.x)
+    mPosition.x = mMaxBoundary.x - scaledSize.x;
+
+  if(mPosition.y - scaledSize.y < mMinBoundary.y)
+    mPosition.y = mMinBoundary.y + scaledSize.y;
+  else if(mPosition.y + scaledSize.y > mMaxBoundary.y)
+    mPosition.y = mMaxBoundary.y - scaledSize.y;
 }

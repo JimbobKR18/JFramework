@@ -1,6 +1,7 @@
 #ifndef __JFramework_Transform_h_
 #define __JFramework_Transform_h_
 
+#include "Common.h"
 #include "Component.h"
 #include "MathExt.h"
 
@@ -31,19 +32,22 @@ enum ParentInherit
 class Transform : public Component
 {
 private:
-  Vector3     mPosition;
-  Vector3     mScale;
-  Vector3     mSize;
-  Matrix33    mRotation;
-  X_ALIGNMENT mXAlign;
-  Y_ALIGNMENT mYAlign;
-  Z_ALIGNMENT mZAlign;
-  AxisLock    mLockedAxes;
+  Vector3       mPosition;
+  Vector3       mScale;
+  Vector3       mSize;
+  Matrix33      mRotation;
+  X_ALIGNMENT   mXAlign;
+  Y_ALIGNMENT   mYAlign;
+  Z_ALIGNMENT   mZAlign;
+  AxisLock      mLockedAxes;
   ParentInherit mInheritInfo;
   
-  Vector3 mHierarchicalPosition;
-  Vector3 mHierarchicalScale;
-  Matrix33 mHierarchicalRotation;
+  Vector3       mHierarchicalPosition;
+  Vector3       mHierarchicalScale;
+  Matrix33      mHierarchicalRotation;
+  
+  Vector3       mMaxBoundary;
+  Vector3       mMinBoundary;
   
   static int const sUID;
 
@@ -61,10 +65,11 @@ public:
   Z_ALIGNMENT         GetZAlignment() const;
   AxisLock            GetLockedAxes() const;
   ParentInherit       GetParentInheritanceInfo() const;
-  
   Vector3 const&      GetHierarchicalPosition() const;
   Vector3 const&      GetHierarchicalScale() const;
   Matrix33 const&     GetHierarchicalRotation() const;
+  Vector3             GetMaxBoundary() const;
+  Vector3             GetMinBoundary() const;
   
   // SETTERS
   void                SetPosition(Vector3 const &aPos);
@@ -76,6 +81,8 @@ public:
   void                SetZAlignment(Z_ALIGNMENT const &aAlign);
   void                SetLockedAxis(AxisLock const &aLockedAxes);
   void                SetParentInheritanceInfo(ParentInherit const &aInheritInfo);
+  void                SetMaxBoundary(Vector3 const &aMaxBoundary);
+  void                SetMinBoundary(Vector3 const &aMinBoundary);
   
   // VIRTUALS
   virtual void        Update();
@@ -88,6 +95,7 @@ public:
   
 private:
   void                CalculateHierarchy();
+  void                EnforceBoundaries();
 };
 
 #endif
