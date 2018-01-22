@@ -1,0 +1,48 @@
+#ifndef __JFramework__Camera__
+#define __JFramework__Camera__
+
+#include "Common.h"
+#include "MathExt.h"
+#include "Component.h"
+#include "Framebuffer.h"
+
+class GraphicsManager;
+
+class Camera : public Component
+{
+private:
+  Vector3 mSize;
+  Vector3 mOffset;
+  bool mPrimary;
+  GraphicsManager *mManager;
+  Framebuffer *mFramebuffer;
+
+  static int const  sUID;
+  
+public:
+  Camera();
+  Camera(GraphicsManager *aManager);
+  virtual ~Camera();
+  
+  // Methods
+  Vector3 GetSize() const;
+  void SetSize(Vector3 const &aSize);
+  Vector3& GetOffset();
+  void SetOffset(Vector3 const &aOffset);
+  bool GetPrimary() const;
+  void SetPrimary(bool aPrimary);
+  Framebuffer* GetFramebuffer();
+  
+  // Virtuals derived from Component
+  virtual void Update();
+  virtual void SendMessage(Message const& aMessage);
+  virtual void ReceiveMessage(Message const& aMessage);
+  virtual void Serialize(ParserNode *aNode);
+  virtual void Deserialize(ParserNode *aNode);
+  
+  // Statics
+  static void SerializeLUA();
+  static int GetUID() {return sUID;}
+};
+
+#endif // __JFramework__Camera__

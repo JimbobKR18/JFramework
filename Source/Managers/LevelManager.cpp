@@ -82,12 +82,12 @@ void LevelManager::LoadLevel(HashString const &aLevelName, bool aReset)
     if((*it)->GetFileName() == aLevelName || (*it)->GetName() == aLevelName)
     {
       Level* prevLevel = mActiveLevel;
-      if(mActiveLevel)
-        mActiveLevel->Unload(*it);
-      if(aReset)
-        (*it)->ResetLevel();
-      (*it)->Load(prevLevel);
       mActiveLevel = *it;
+      if(prevLevel)
+        prevLevel->Unload(mActiveLevel);
+      if(aReset)
+        mActiveLevel->ResetLevel();
+      mActiveLevel->Load(prevLevel);
       GetOwningApp()->GET<InputManager>()->AcceptInputs();
       return;
     }

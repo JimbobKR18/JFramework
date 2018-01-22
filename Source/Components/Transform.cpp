@@ -140,6 +140,11 @@ Vector3 Transform::GetMinBoundary() const
   return mMinBoundary;
 }
 
+Matrix33 Transform::GetFinalTransform() const
+{
+  return mRotation * Matrix33(mScale);
+}
+
 /**
  * @brief Set position of transform
  * @param aPos position

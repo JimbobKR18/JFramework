@@ -20,7 +20,8 @@
 
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
-                                                                           mSurfaces(), mUIElements(), mTextures(), mShaders(), mScreen(nullptr)
+                                                                           mSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(),
+                                                                           mScreen(nullptr), mPrimaryCamera(nullptr)
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, "", "", Vector4(), Vector4(), 0, 0));
@@ -41,11 +42,10 @@ GraphicsManager::~GraphicsManager()
  */
 void GraphicsManager::Update()
 {
-  mScreen->GetView().Update();
   mScreen->SortObjects(mSurfaces);
   mScreen->SortUI(mUIElements);
   mScreen->PreDraw();
-  mScreen->Draw(mSurfaces, mUIElements);
+  mScreen->Draw(mSurfaces, mUIElements, mCameras);
   mScreen->SwapBuffers();
 }
 
@@ -65,13 +65,8 @@ void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
 {
   if(aMessage->GetDescription() == OBJECT_DELETE.ToCharArray()) 
   {
+    // TODO dunno what to do here.
     ObjectDeleteMessage *msg = (ObjectDeleteMessage*)aMessage;
-    // If this object was our view target, remember to unassociate.
-    if(mScreen->GetView().GetTarget() == msg->mObject)
-    {
-      mScreen->GetView().SetTarget(nullptr);
-      mScreen->GetView().SetTime(0.0f);
-    }
     delete aMessage;
   }
 }
@@ -207,11 +202,108 @@ void GraphicsManager::ClearSurfaces()
 }
 
 /**
+ * @brief Create camera and manage it
+ * @return New camera
+ */
+Camera* GraphicsManager::CreateCamera()
+{
+  Camera *camera = new Camera(this);
+  AddCamera(camera);
+  return camera;
+}
+
+/**
+ * @brief Delete and unmanage camera
+ * @param aCamera Camera to delete
+ */
+void GraphicsManager::DeleteCamera(Camera *aCamera)
+{
+  RemoveCamera(aCamera);
+  delete aCamera;
+}
+
+/**
+ * @brief Manage camera
+ * @param aCamera Camera to manage
+ */
+void GraphicsManager::AddCamera(Camera *aCamera)
+{
+  mCameras.insert(aCamera);
+  
+  if(mPrimaryCamera == nullptr)
+  {
+    mPrimaryCamera = aCamera;
+    mPrimaryCamera->SetPrimary(true);
+  }
+}
+
+/**
+ * @brief Unmanage camera
+ * @param aCamera Camera to unmanage
+ */
+void GraphicsManager::RemoveCamera(Camera *aCamera)
+{
+  aCamera->SetPrimary(false);
+  mCameras.erase(aCamera);
+  if(aCamera == mPrimaryCamera)
+  {
+    if(mCameras.size() > 0)
+    {
+      mPrimaryCamera = *(mCameras.begin());
+      mPrimaryCamera->SetPrimary(true);
+    }
+    else
+      mPrimaryCamera = nullptr;
+  }
+}
+
+/**
+ * @brief Remove all cameras
+ */
+void GraphicsManager::ClearCameras()
+{
+  for(std::set<Camera*>::iterator it = mCameras.begin(); it != mCameras.end();)
+  {
+    DeleteCamera(*it);
+    it = mCameras.begin();
+  }
+}
+
+/**
+ * @brief Set camera as active viewing camera
+ * @param aCamera Camera to set to active
+ */
+void GraphicsManager::SetPrimaryCamera(Camera *aCamera)
+{
+  if(aCamera != nullptr && mCameras.find(aCamera) == mCameras.end())
+  {
+    DebugLogPrint("Attempting to assign primary camera when camera is not being managed.");
+    assert(!"Attempting to assign primary camera when camera is not being managed.");
+  }
+  
+  if(mPrimaryCamera)
+    mPrimaryCamera->SetPrimary(false);
+  
+  mPrimaryCamera = aCamera;
+  if(mPrimaryCamera)
+    mPrimaryCamera->SetPrimary(true);
+}
+
+/**
  * @brief Get screen object (the renderer)
  */
 Screen *GraphicsManager::GetScreen()
 {
   return mScreen;
+}
+
+/**
+ * @brief Get current viewing camera
+ * @return Current viewing camera
+ */
+Camera *GraphicsManager::GetPrimaryCamera()
+{
+  return mPrimaryCamera;
 }
 
 /**
@@ -353,11 +445,12 @@ void GraphicsManager::ResetDevice()
  */
 Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
 {
-  Vector3 ret = mScreen->GetView().GetFinalTransform() * mScreen->GetView().GetPosition();
+  Transform *cameraTransform = mPrimaryCamera->GetOwner()->GET<Transform>();
+  Vector3 ret = cameraTransform->GetFinalTransform() * cameraTransform->GetPosition();
 
-  ret -= mScreen->GetView().GetHalfSize();
+  ret -= cameraTransform->GetSize();
   ret += aPosition;
-  ret = mScreen->GetView().GetFinalTransform().Invert() * ret;
+  ret = cameraTransform->GetFinalTransform().Invert() * ret;
 
   return ret;
 }
@@ -368,10 +461,11 @@ Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
  */
 Vector3 GraphicsManager::RelToAbs(Vector3 const &aPosition) const
 {
-  Vector3 ret = mScreen->GetView().GetFinalTransform() * aPosition;
+  Transform *cameraTransform = mPrimaryCamera->GetOwner()->GET<Transform>();
+  Vector3 ret = cameraTransform->GetFinalTransform() * aPosition;
 
-  ret += mScreen->GetView().GetHalfSize();
-  ret -= mScreen->GetView().GetFinalTransform() * mScreen->GetView().GetPosition();
+  ret += cameraTransform->GetSize();
+  ret -= cameraTransform->GetFinalTransform() * cameraTransform->GetPosition();
 
   return ret;
 }

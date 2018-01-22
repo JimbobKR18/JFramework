@@ -2,7 +2,8 @@
 #define __JFramework_Framebuffer_h_
 
 #include "Common.h"
-#include "GraphicsManager.h"
+
+class GraphicsManager;
 
 class Framebuffer
 {

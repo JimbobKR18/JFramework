@@ -21,6 +21,7 @@
 #include "Menu.h"
 #include "EffectsManager.h"
 #include "ParserFactory.h"
+#include "FollowComponent.h"
 
 #if !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -123,12 +124,21 @@ TileMapGenerator* Level::GetTileMap() const
 }
 
 /**
- * @brief Get the camera's focus target for the level.
- * @return The camera target.
+ * @brief Get the level's focus target for the level.
+ * @return The focus target.
  */
 GameObject* Level::GetFocusTarget() const
 {
   return mFocusTarget;
+}
+
+/**
+ * @brief Set the level's focus target for the level.
+ * @param aObject The focus target.
+ */
+void Level::SetFocusTarget(GameObject *aObject)
+{
+  mFocusTarget = aObject;
 }
 
 /**
@@ -146,7 +156,7 @@ GameObject* Level::FindObject(HashString const &aObjectName)
     ObjectIT end = mObjects[i].end();
     for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
     {
-      if(aObjectName == (*it)->GetName())
+      if(aObjectName == (*it)->GetName() || aObjectName == (*it)->GetFileName())
         return *it;
     }
   }
@@ -255,12 +265,6 @@ void Level::DeleteObject(GameObject *aObject)
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
   EffectsManager *effectsManager = mOwner->GetOwningApp()->GET<EffectsManager>();
-  
-  // Unassociate object from view target if need be
-  if(graphicsManager->GetScreen()->GetView().GetTarget() == aObject)
-  {
-    graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
-  }
   
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
@@ -371,7 +375,7 @@ void Level::ResetLevel()
   PreReset();
   // Reset view to set when reparsing file.
   GraphicsManager *graphicsManager = GetManager()->GetOwningApp()->GET<GraphicsManager>();
-  graphicsManager->GetScreen()->GetView().SetTarget(nullptr);
+  graphicsManager->SetPrimaryCamera(nullptr);
   // NOTE: Removes menus too
   DeleteObjects();
   ParseBaseFile();
@@ -427,11 +431,10 @@ void Level::Load(Level const *aPrevLevel)
   if(!mMusicName.Empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
     mMusicChannel = mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, SoundManager::INFINITE_LOOPS);
 
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(mFocusTarget);
-
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMaxBoundary(mMaxBoundary);
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetMinBoundary(mMinBoundary);
+  
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetPrimaryCamera()->GetOwner()->GET<Transform>()->SetMaxBoundary(mMaxBoundary);
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetPrimaryCamera()->GetOwner()->GET<Transform>()->SetMinBoundary(mMinBoundary);
 }
 
 /**
@@ -450,7 +453,7 @@ void Level::Unload(Level const *aNextLevel)
   if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->StopChannel(mMusicChannel);
 
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(nullptr);
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera(nullptr);
   
   // Something to consider
   //mOwner->GetOwningApp()->GET<EffectsManager>()->RemoveEffects();
@@ -475,6 +478,11 @@ void Level::LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const a
       mOwner->GetOwningApp()->GET<ChemistryManager>()->AddMaterial((*it)->GET<ChemistryMaterial>());
     if((*it)->GET<ChemistryElement>())
       mOwner->GetOwningApp()->GET<ChemistryManager>()->AddElement((*it)->GET<ChemistryElement>());
+    if((*it)->GET<Camera>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddCamera((*it)->GET<Camera>());
+      
+    if((*it)->GET<Camera>() && (*it)->GET<Camera>()->GetPrimary())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera((*it)->GET<Camera>());
   }
 }
 
@@ -498,6 +506,8 @@ void Level::UnloadObjects(ObjectContainer const &aObjects)
       mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveMaterial((*it)->GET<ChemistryMaterial>());
     if((*it)->GET<ChemistryElement>())
       mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveElement((*it)->GET<ChemistryElement>());
+    if((*it)->GET<Camera>())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveCamera((*it)->GET<Camera>());
   }
 }
 
@@ -703,13 +713,16 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     {
       ParseChemistryElement(object, curRoot->Find("ChemistryElement"));
     }
+    if(curRoot->Find("Camera"))
+    {
+      ParseCamera(object, curRoot->Find("Camera"));
+    }
     // Who is the focus of this level?
     if(curRoot->Find("Focus"))
     {
       bool value = curRoot->Find("Focus")->Find("IsFocus")->GetValue().ToBool();
       if(value)
       {
-        graphicsManager->GetScreen()->GetView().SetTarget(object);
         mFocusTarget = object;
       }
     }
@@ -1129,6 +1142,20 @@ void Level::ParseSurface(GameObject *aObject, ParserNode *aSurface)
 }
 
 /**
+ * @brief Get camera data from a root.
+ */
+void Level::ParseCamera(GameObject *aObject, ParserNode* aCamera)
+{
+  Camera *camera = aObject->GET<Camera>();
+  if(camera == nullptr)
+  {
+    camera = GetManager()->GetOwningApp()->GET<GraphicsManager>()->CreateCamera();
+    aObject->AddComponent(camera);
+  }
+  camera->Deserialize(aCamera);
+}
+
+/**
  * @brief Get text data from root.
  */
 void Level::ParseText(GameObject *aObject, ParserNode* aText)
@@ -1182,6 +1209,21 @@ void Level::ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryEle
   }
   
   chemistryElement->Deserialize(aChemistryElement);
+}
+
+/**
+ * @brief Get follow data from root.
+ */
+void Level::ParseFollowComponent(GameObject *aObject, ParserNode* aFollowComponent)
+{
+  FollowComponent *followComponent = aObject->GET<FollowComponent>();
+  if(!followComponent)
+  {
+    followComponent = new FollowComponent();
+    aObject->AddComponent(followComponent);
+  }
+  
+  followComponent->Deserialize(aFollowComponent);
 }
 
 /**

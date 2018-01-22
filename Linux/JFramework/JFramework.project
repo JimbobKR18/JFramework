@@ -106,13 +106,15 @@
     <File Name="../../Source/Components/CustomScript.cpp"/>
     <File Name="../../Source/Components/Constraint.cpp"/>
     <File Name="../../Source/Components/Constraint.h"/>
+    <File Name="../../Source/Components/Camera.h"/>
+    <File Name="../../Source/Components/Camera.cpp"/>
+    <File Name="../../Source/Components/FollowComponent.h"/>
+    <File Name="../../Source/Components/FollowComponent.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>
     <File Name="../../Source/Graphics/TextureData.h"/>
-    <File Name="../../Source/Graphics/View.cpp"/>
     <File Name="../../Source/Graphics/TextureCoordinates.cpp"/>
-    <File Name="../../Source/Graphics/View.h"/>
     <File Name="../../Source/Graphics/ScreenRenderSorter.h"/>
     <File Name="../../Source/Graphics/ZRenderSorter.h"/>
     <File Name="../../Source/Graphics/ZRenderSorter.cpp"/>

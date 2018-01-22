@@ -14,6 +14,8 @@
 #include "Components/ChemistryMaterial.h"
 #include "Components/StateObject.h"
 #include "Components/CustomScript.h"
+#include "Components/Camera.h"
+#include "Components/FollowComponent.h"
 #include "Core/GameObject.h"
 #include "Managers/SoundManager.h"
 #include "Managers/InputManager.h"
@@ -91,9 +93,10 @@ namespace LUABind
     // Transform
     Transform::SerializeLUA();
     
-    // Surface
+    // Graphics
     Surface::SerializeLUA();
     PCShaderSurface::SerializeLUA();
+    Camera::SerializeLUA();
     
     // Physics
     PhysicsObject::SerializeLUA();
@@ -107,6 +110,9 @@ namespace LUABind
     
     // CustomScript
     CustomScript::SerializeLUA();
+    
+    // FollowComponent
+    FollowComponent::SerializeLUA();
 
     // GameObject
     GameObject::SerializeLUA();

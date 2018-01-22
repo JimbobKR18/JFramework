@@ -5,14 +5,13 @@
 #include "SystemProperties.h"
 
 Screen::Screen() : mOwner(nullptr), mWidth(0), mHeight(0), mFullScreen(false),  
-  mView(), mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr), mUIRenderSorter(nullptr)
+  mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr), mUIRenderSorter(nullptr)
 {
 }
 
 Screen::Screen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen) : 
-  mOwner(aOwner), mWidth(aW), mHeight(aH), mFullScreen(aFullScreen), mView()
+  mOwner(aOwner), mWidth(aW), mHeight(aH), mFullScreen(aFullScreen)
 {
-  mView.SetSize(Vector3(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 0));
   mDepthRenderSorter = new ZRenderSorter();
   mUIRenderSorter = new ZRenderSorter();
   mBatchRenderSorter = new BatchRenderSorter();
@@ -58,11 +57,6 @@ bool Screen::IsFullScreen() const
 void Screen::SetFullScreen(bool const aFullScreen)
 {
   mFullScreen = aFullScreen;
-}
-
-View &Screen::GetView()
-{
-  return mView;
 }
 
 ScreenRenderSorter* Screen::GetBatchRenderSorter()

@@ -3,6 +3,7 @@
 
 #include "Manager.h"
 #include "Surface.h"
+#include "Camera.h"
 #include "Screen.h"
 #include "TextureData.h"
 #include "ShaderData.h"
@@ -17,7 +18,9 @@ private:
   std::vector<Surface*>               mUIElements;
   std::unordered_map<int, TextureData*>  mTextures;
   std::unordered_map<int, ShaderData*>   mShaders;
+  std::set<Camera*>                   mCameras;
   Screen*                             mScreen;
+  Camera*                             mPrimaryCamera;
 
   static unsigned const sUID;
 public:
@@ -33,7 +36,7 @@ public:
   
   static void         SerializeLUA();
 
-  // Manager stuff
+  // Surface Management
   Surface*            CreateSurface();
   Surface*            CreateUISurface();
   void                DeleteSurface(Surface *aSurface);
@@ -41,9 +44,18 @@ public:
   void                AddUISurface(Surface *aSurface);
   void                RemoveSurface(Surface *aSurface);
   void                ClearSurfaces();
+  
+  // Camera Management
+  Camera*             CreateCamera();
+  void                DeleteCamera(Camera *aCamera);
+  void                AddCamera(Camera *aCamera);
+  void                RemoveCamera(Camera *aCamera);
+  void                ClearCameras();
+  void                SetPrimaryCamera(Camera *aCamera);
 
-  // Get the screen info
+  // Getters
   Screen*             GetScreen();
+  Camera*             GetPrimaryCamera();
   
   // Texture management
   void                AddTexturePairing(HashString const &aFilename, TextureData *aData);

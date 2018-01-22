@@ -13,7 +13,8 @@ GLFramebuffer::GLFramebuffer(int aWidth, int aHeight) : Framebuffer(), mWidth(aW
 
 GLFramebuffer::~GLFramebuffer()
 {
-  glDeleteProgram(mFramebufferProgramID);
+  // TODO do NOT delete this program.
+  //glDeleteProgram(mFramebufferProgramID);
   glDeleteBuffers(1, &mVertexBufferID);
   glDeleteBuffers(1, &mTextureBufferID);
   glDeleteBuffers(1, &mIndexBufferID);

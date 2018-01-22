@@ -24,7 +24,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
 
 PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen) : Screen(aOwner, aW, aH, aFullScreen), 
   mWindow(nullptr), mGLContext(), mDisplayMode(), mDefaultFrameBufferID(0), mVertexArrayObjectID(0), mVertexBufferID(0), 
-  mTextureBufferID(0), mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0), mMaxTextures(0), mFramebuffer(nullptr)
+  mTextureBufferID(0), mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0), mMaxTextures(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -50,14 +50,10 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   }
   
   ChangeSize(aW, aH, aFullScreen);
-  
-  mFramebuffer = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight());
-  mFramebuffer->Generate(GetOwner());
 }
 
 PCShaderScreen::~PCShaderScreen()
 {
-  delete mFramebuffer;
   glDeleteBuffers(1, &mVertexBufferID);
   glDeleteBuffers(1, &mTextureBufferID);
   glDeleteBuffers(1, &mPositionBufferID);
@@ -75,9 +71,11 @@ PCShaderScreen::~PCShaderScreen()
 void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
-  Matrix33 viewMatrix = GetView().GetFinalTransform();
-  Vector3 &cameraPosition = GetView().GetPosition();
-  Vector3 cameraSize = GetView().GetHalfSize();
+  // Camera position and size
+  Transform *cameraTransform = GetOwner()->GetPrimaryCamera()->GetOwner()->GET<Transform>();
+  Vector3 &cameraPosition = cameraTransform->GetPosition();
+  Vector3 cameraSize = cameraTransform->GetSize();
+  Matrix33 viewMatrix = cameraTransform->GetFinalTransform();
   Vector3 cameraDiff = cameraPosition - cameraSize;
   
   float cameraMatrix[9];
@@ -106,8 +104,8 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       }
       else if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
       {
-        position.x = GetView().GetSize().x * position.x;
-        position.y = GetView().GetSize().y * position.y;
+        position.x = (cameraSize.x * 2.0f) * position.x;
+        position.y = (cameraSize.y * 2.0f) * position.y;
       }
 
       glLoadIdentity();
@@ -260,18 +258,24 @@ void PCShaderScreen::PreDraw()
 /**
  * @brief Draw objects
  * @param aObjects
+ * @param aUIObjects
+ * @param aCameras
  */
-void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects)
+void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, std::set<Camera*> const aCameras)
 {
-  mFramebuffer->Bind();
-  DrawObjects(aObjects);
-  DrawObjects(aUIObjects);
-  #ifdef _DEBUG_DRAW
-    // Displays bounds of objects with PhysicsObject
-    DebugDraw(aObjects);
-  #endif
-  mFramebuffer->Unbind(mDefaultFrameBufferID);
-  mFramebuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+  for(std::set<Camera*>::const_iterator it = aCameras.begin(); it != aCameras.end(); ++it)
+  {
+    (*it)->GetFramebuffer()->Bind();
+    DrawObjects(aObjects, *it);
+    DrawObjects(aUIObjects, *it);
+    #ifdef _DEBUG_DRAW
+      DebugDraw(aObjects);
+    #endif
+    (*it)->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
+    
+    if((*it)->GetPrimary())
+      (*it)->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+  }
 }
 
 /**
@@ -373,15 +377,17 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 }
 
 /**
- * @brief Draw objects
+ * @brief Draw objects from camera perspective
  * @param aObjects
+ * @param aCamera
  */
-void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects)
+void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *aCamera)
 {
   // Camera position and size
-  Vector3 &cameraPosition = GetView().GetPosition();
-  Vector3 cameraSize = GetView().GetHalfSize();
-  Matrix33 viewMatrix = GetView().GetFinalTransform();
+  Transform *cameraTransform = aCamera->GetOwner()->GET<Transform>();
+  Vector3 cameraPosition = cameraTransform->GetPosition() + aCamera->GetOffset();
+  Vector3 cameraSize = cameraTransform->GetSize();
+  Matrix33 viewMatrix = cameraTransform->GetFinalTransform();
   Matrix33 identityMatrix = Matrix33();
   
   // Must scale, rotate, then translate camera offset
@@ -456,8 +462,8 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects)
       // If transform is a percentage of screen, convert.
       if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
       {
-        position.x = GetView().GetSize().x * position.x;
-        position.y = GetView().GetSize().y * position.y;
+        position.x = (cameraSize.x * 2.0f) * position.x;
+        position.y = (cameraSize.y * 2.0f) * position.y;
       }
 
       // Move object based on its alignment

@@ -17,6 +17,7 @@
 #include "ObjectCreateMessage.h"
 #include "DefaultGameObjectFactory.h"
 #include "ParserFactory.h"
+#include "FollowComponent.h"
 
 #if !defined(ANDROID) && !defined(IOS)
   #include "PCShaderSurface.h"
@@ -312,15 +313,15 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
   {
     // Get Position, Scale, and Size
     Transform *transform = new Transform();
-    transform->Deserialize(aParser->Find("Transform"));
     aObject->AddComponent(transform);
+    transform->Deserialize(aParser->Find("Transform"));
   }
   if(aParser->Find("StateObject"))
   {
     // Get Position, Scale, and Size
     StateObject *stateObject = new StateObject();
-    stateObject->Deserialize(aParser->Find("StateObject"));
     aObject->AddComponent(stateObject);
+    stateObject->Deserialize(aParser->Find("StateObject"));
   }
   if(aParser->Find("Surface"))
   {
@@ -346,23 +347,30 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
 #endif
     }
 
-    surface->Deserialize(aParser->Find("Surface"));
     aObject->AddComponent(surface);
+    surface->Deserialize(aParser->Find("Surface"));
+  }
+  if(aParser->Find("Camera"))
+  {
+    Camera *camera = GetOwningApp()->GET<GraphicsManager>()->CreateCamera();
+    aObject->AddComponent(camera);
+    camera->Deserialize(aParser->Find("Camera"));
+  }
+  if(aParser->Find("FollowComponent"))
+  {
+    FollowComponent *followComponent = new FollowComponent();
+    aObject->AddComponent(followComponent);
+    followComponent->Deserialize(aParser->Find("FollowComponent"));
   }
   if(aParser->Find("CustomScript"))
   {
     CustomScript *customScript = new CustomScript();
-    customScript->Deserialize(aParser->Find("CustomScript"));
     aObject->AddComponent(customScript);
+    customScript->Deserialize(aParser->Find("CustomScript"));
   }
   if(aParser->Find("Focus"))
   {
-    bool isTarget = aParser->Find("Focus", "IsFocus")->GetValue().ToBool();
-
-    if(isTarget)
-    {
-      GetOwningApp()->GET<GraphicsManager>()->GetScreen()->GetView().SetTarget(aObject);
-    }
+    DebugLogPrint("DEPRECATED: Focus.\n");
   }
   if(aParser->Find("Effects"))
   {

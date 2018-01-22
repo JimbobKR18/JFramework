@@ -6,6 +6,7 @@
 #include "Parser.h"
 #include "TileMapGenerator.h"
 #include "MathExt.h"
+#include "Camera.h"
 
 enum ObjectPlacement
 {
@@ -63,6 +64,7 @@ public:
 
   TileMapGenerator* GetTileMap() const;
   GameObject*       GetFocusTarget() const;
+  void              SetFocusTarget(GameObject *aObject);
   GameObject*       FindObject(HashString const &aObjectName);
   ObjectVector      FindObjects(Vector3 const &aPosition) const;
   Menu*             FindMenu(HashString const &aMenuName);
@@ -122,10 +124,12 @@ private:
   void              RemoveObjectFromMenus(GameObject *aObject);
   void              ParseTransform(GameObject *aObject, ParserNode* aTransform);
   void              ParseSurface(GameObject *aObject, ParserNode* aSurface);
+  void              ParseCamera(GameObject *aObject, ParserNode* aCamera);
   void              ParseText(GameObject *aObject, ParserNode* aText);
   void              ParsePhysicsObject(GameObject *aObject, ParserNode* aPhysicsObject);
   void              ParseChemistryMaterial(GameObject *aObject, ParserNode* aChemistryMaterial);
   void              ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryElement);
+  void              ParseFollowComponent(GameObject *aObject, ParserNode* aFollowComponent);
   void              ParseEffects(GameObject *aObject, ParserNode *aEffects);
   void              ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript);
   void              ParseTileGenerator(Parser *aParser);

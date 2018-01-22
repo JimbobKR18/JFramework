@@ -70,6 +70,7 @@ public:
   Matrix33 const&     GetHierarchicalRotation() const;
   Vector3             GetMaxBoundary() const;
   Vector3             GetMinBoundary() const;
+  Matrix33            GetFinalTransform() const;
   
   // SETTERS
   void                SetPosition(Vector3 const &aPos);
