@@ -4,12 +4,15 @@
 #include "Common.h"
 #include "Component.h"
 #include "GameObject.h"
+#include "Interpolation.h"
 
 class FollowComponent : public Component
 {
 private:
   GameObject *mTarget;
   HashString mTargetName;
+  float mTime;
+  Interpolation<Vector3> *mInterpolator;
   
   static int const sUID;
 public:
@@ -21,6 +24,8 @@ public:
   void SetTarget(GameObject *aTarget);
   HashString GetTargetName() const;
   void SetTargetName(HashString const &aTargetName);
+  float GetTime() const;
+  void SetTime(float aTime);
   
   // Virtuals derived from Component
   virtual void Update();

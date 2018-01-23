@@ -6,7 +6,8 @@
 
 int const FollowComponent::sUID = Common::StringHashFunction("FollowComponent");
 
-FollowComponent::FollowComponent() : Component(FollowComponent::sUID), mTarget(nullptr), mTargetName()
+FollowComponent::FollowComponent() : Component(FollowComponent::sUID), mTarget(nullptr), 
+  mTargetName(), mTime(0), mInterpolator(nullptr)
 {
 }
 
@@ -31,6 +32,9 @@ GameObject *FollowComponent::GetTarget()
 void FollowComponent::SetTarget(GameObject *aTarget)
 {
   mTarget = aTarget;
+  
+  if(aTarget)
+    mTargetName = aTarget->GetName();
 }
 
 /**
@@ -49,6 +53,25 @@ HashString FollowComponent::GetTargetName() const
 void FollowComponent::SetTargetName(HashString const &aTargetName)
 {
   mTargetName = aTargetName;
+  mTarget = nullptr;
+}
+
+/**
+ * @brief Get travel time to destination
+ * @return Travel Time in seconds
+ */
+float FollowComponent::GetTime() const
+{
+  return mTime;
+}
+
+/**
+ * @brief Set travel time to destination
+ * @param aTime Time in seconds
+ */
+void FollowComponent::SetTime(float aTime)
+{
+  mTime = aTime;
 }
 
 // Virtuals derived from Component
@@ -57,8 +80,6 @@ void FollowComponent::SetTargetName(HashString const &aTargetName)
  */
 void FollowComponent::Update()
 {
-  Transform *transform = GetOwner()->GET<Transform>();
-  
   if(!mTarget && !mTargetName.Empty())
   {
     Level *currentLevel = GetOwner()->GetManager()->GetOwningApp()->GET<LevelManager>()->GetActiveLevel();
@@ -68,8 +89,28 @@ void FollowComponent::Update()
   
   if(mTarget)
   {
+    Transform *transform = GetOwner()->GET<Transform>();
     Transform *targetTransform = mTarget->GET<Transform>();
-    transform->SetPosition(targetTransform->GetPosition());
+    Vector3 &position = transform->GetPosition();
+    
+    if(mTime <= 0.01f)
+      position = targetTransform->GetPosition();
+    else
+    {
+      if(!mInterpolator)
+      {
+        mInterpolator = new Interpolation<Vector3>(&position, targetTransform->GetPosition(), mTime);
+      }
+      else
+      {
+        mInterpolator->Update(mTarget->GetManager()->GetOwningApp()->GetAppStep());
+        if(mInterpolator->IsComplete())
+        {
+          delete mInterpolator;
+          mInterpolator = nullptr;
+        }
+      }
+    }
   }
 }
 
