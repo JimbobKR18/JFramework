@@ -9,8 +9,8 @@
 class ObjectManager : public Manager
 {
 private:
-  std::vector<GameObject*> mObjects;
-  std::vector<GameObject*> mStaticObjects;
+  std::set<GameObject*> mObjects;
+  std::set<GameObject*> mStaticObjects;
   std::set<GameObject*> mAllocatedObjects;
   
   GameObjectFactory *mFactory;
@@ -36,16 +36,16 @@ public:
 
   GameObject*         CreateObject(HashString const &aFilename, HashString const &aFolder = "Game", HashString const &aType = "Default");
   GameObject*         CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder = "Game", HashString const &aType = "Default");
+  GameObject*         FindObject(HashString const &aName);
   void                ParseObject(GameObject *aObject, HashString const &aFolder = "Game");
   void                DeleteObject(GameObject *aObj);
-  void                ClearObjects();
   void                AddObject(GameObject *aObj, bool aStatic = false);
   void                RemoveObject(GameObject *aObj);
   static void         SerializeLUA();
 private:
   void                ParseDictionary(GameObject *aObject, Parser *aParser);
   void                ParseEffects(GameObject *aObject, ParserNode *aEffects);
-  typedef std::vector<GameObject*>::iterator ObjectIT;
+  typedef std::set<GameObject*>::iterator ObjectIT;
 };
 
 #endif

@@ -355,7 +355,6 @@ void Level::DeleteObjects()
     mObjects[i].clear();
   }
   RemoveMenus();
-  manager->ClearObjects();
   manager->GetOwningApp()->ClearDelayedMessages();
 }
 

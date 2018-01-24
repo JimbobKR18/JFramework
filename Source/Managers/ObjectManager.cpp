@@ -31,7 +31,12 @@ ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", Obj
 
 ObjectManager::~ObjectManager()
 {
-  ClearObjects();
+  // Clean all objects
+  for(std::set<GameObject*>::iterator it = mAllocatedObjects.begin(); it != mAllocatedObjects.end();)
+  {
+    DeleteObject(*it);
+    it = mAllocatedObjects.begin();
+  }
 }
 
 GameObjectFactory* ObjectManager::GetGameObjectFactory() const
@@ -179,6 +184,30 @@ GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashSt
 }
 
 /**
+ * @brief Find and return first instance of object with name (filename or otherwise)
+ * @param aName Name of object (filename or assigned name)
+ * @return Object if found, otherwise null.
+ */
+GameObject* ObjectManager::FindObject(HashString const &aName)
+{
+  // Check non static objects first
+  ObjectIT objectsEnd = mObjects.end();
+  for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
+  {
+    if((*it)->GetName() == aName || (*it)->GetFileName() == aName)
+      return *it;
+  }
+  
+  // If nothing, search static objects
+  ObjectIT staticObjectsEnd = mStaticObjects.end();
+  for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
+  {
+    if((*it)->GetName() == aName || (*it)->GetFileName() == aName)
+      return *it;
+  }
+}
+
+/**
  * @brief Parse object from file, create components.
  * @param aObject
  * @param aFolder
@@ -213,28 +242,10 @@ void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
     DebugLogPrint("Not sure why, but a null object was created. (ObjectManager AddObject)");
   }
   
-  // Check to see if object is in our list
-  ObjectIT objectsEnd = mObjects.end();
-  for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
-  {
-    if(*it == aObj)
-    {
-      return;
-    }
-  }
-  ObjectIT staticObjectsEnd = mStaticObjects.end();
-  for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
-  {
-    if(*it == aObj)
-    {
-      return;
-    }
-  }
-  
   if(!aStatic)
-    mObjects.push_back(aObj);
+    mObjects.insert(aObj);
   else
-    mStaticObjects.push_back(aObj);
+    mStaticObjects.insert(aObj);
 }
 
 /**
@@ -244,24 +255,12 @@ void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
  */
 void ObjectManager::RemoveObject(GameObject *aObj)
 {
-  ObjectIT objectsEnd = mObjects.end();
-  for(ObjectIT it = mObjects.begin(); it != objectsEnd; ++it)
-  {
-    if(*it == aObj)
-    {
-      mObjects.erase(it);
-      return;
-    }
-  }
-  ObjectIT staticObjectsEnd = mStaticObjects.end();
-  for(ObjectIT it = mStaticObjects.begin(); it != staticObjectsEnd; ++it)
-  {
-    if(*it == aObj)
-    {
-      mStaticObjects.erase(it);
-      return;
-    }
-  }
+  size_t numErased = mObjects.erase(aObj);
+  if(numErased > 0)
+    return;
+  numErased = mStaticObjects.erase(aObj);
+  if(numErased > 0)
+    return;
 }
 
 /**
@@ -274,7 +273,7 @@ void ObjectManager::SerializeLUA()
           .set("DeleteObject", &ObjectManager::DeleteObject)
           .set("AddObject", &ObjectManager::AddObject)
           .set("RemoveObject", &ObjectManager::RemoveObject)
-          .set("ClearObjects", &ObjectManager::ClearObjects);
+          .set("FindObject", &ObjectManager::FindObject);
 }
 
 /**
@@ -411,14 +410,3 @@ void ObjectManager::ParseEffects(GameObject *aObject, ParserNode *aEffects)
     curEffect = effectString + Common::IntToString(curIndex);
   }
 }
-
-/**
- * @brief Clean out all vectors, no delete though, so it leaks.
- */
-void ObjectManager::ClearObjects()
-{
-  mObjects.clear();
-  mStaticObjects.clear();
-  mAllocatedObjects.clear();
-}
-
