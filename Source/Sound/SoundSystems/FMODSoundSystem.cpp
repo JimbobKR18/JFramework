@@ -77,6 +77,7 @@ void FMODSoundSystem::CreateSound(HashString const& aFilename, HashString const&
   if(aSource == SoundSource::STREAM)
     mode = FMOD_CREATESTREAM;
   
+  mode |= FMOD_LOOP_NORMAL;
   FMOD_RESULT result = mFMODSystem->createSound(fileName.ToCharArray(), mode, 0, &sound);
   if(result != FMOD_OK)
   {
