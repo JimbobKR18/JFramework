@@ -9,9 +9,6 @@
 class ObjectManager : public Manager
 {
 private:
-#ifdef _DEBUG
-  std::map<size_t, int> mDelayedDeletions;
-#endif
   std::vector<GameObject*> mObjects;
   std::vector<GameObject*> mStaticObjects;
   std::set<GameObject*> mAllocatedObjects;

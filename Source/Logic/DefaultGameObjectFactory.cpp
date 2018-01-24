@@ -3,7 +3,7 @@
 #include "MenuText.h"
 #include "ObjectManager.h"
 
-DefaultGameObjectFactory::DefaultGameObjectFactory()
+DefaultGameObjectFactory::DefaultGameObjectFactory() : mIndex(0)
 {
 }
 
@@ -20,5 +20,5 @@ DefaultGameObjectFactory::~DefaultGameObjectFactory()
  */
 GameObject* DefaultGameObjectFactory::CreateGameObject(ObjectManager* aManager, HashString const& aFileName, HashString const& aType)
 {
-  return new GameObject(aManager, aFileName);
+  return new GameObject(aManager, mIndex++, aFileName);
 }

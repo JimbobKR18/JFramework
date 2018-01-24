@@ -23,7 +23,7 @@ public:
   typedef ComponentContainer::iterator ComponentIT;
   typedef ComponentContainer::const_iterator ComponentConstIT;
   
-  typedef std::unordered_map<int, GameObject*> GameObjectContainer;
+  typedef std::unordered_map<unsigned, GameObject*> GameObjectContainer;
   typedef GameObjectContainer::iterator GameObjectIT;
   typedef GameObjectContainer::const_iterator GameObjectConstIT;
   
@@ -32,6 +32,7 @@ public:
   typedef TagContainer::const_iterator TagConstIT;
   
 private:
+  unsigned            mID;
   HashString          mFileName;
   HashString          mName;
   TagContainer        mTags;
@@ -43,11 +44,12 @@ private:
   
 public:
   GameObject();
-  GameObject(ObjectManager *aManager, HashString const &aFileName);
+  GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName);
   GameObject(GameObject const &aGameObject);
   virtual ~GameObject();
 
   // GETTERS
+  int                        GetID() const;
   HashString                 GetName() const;
   HashString                 GetFileName() const;
   ObjectManager*             GetManager() const;
@@ -55,6 +57,7 @@ public:
   GameObjectContainer const& GetChildren() const;
   
   // SETTERS
+  void                       SetID(int const &aID);
   void                       SetName(HashString const &aName);
   void                       SetParent(GameObject *aParent);
   

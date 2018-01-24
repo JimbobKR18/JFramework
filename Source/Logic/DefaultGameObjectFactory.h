@@ -5,6 +5,9 @@
 
 class DefaultGameObjectFactory : public GameObjectFactory
 {
+private:
+  unsigned mIndex;
+  
 public:
   DefaultGameObjectFactory();
   virtual ~DefaultGameObjectFactory();

@@ -19,8 +19,8 @@ GameObject::GameObject()
   assert(!"GameObject instantiated without a file!");
 }
 
-GameObject::GameObject(ObjectManager *aManager, HashString const &aFileName) :
-                       mFileName(aFileName), mName(""), mTags(), mComponents(), mManager(aManager),
+GameObject::GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName) :
+                       mID(aID), mFileName(aFileName), mName(""), mTags(), mComponents(), mManager(aManager),
                        mParent(nullptr), mChildren()
 {
   for(int i = aFileName.Length() - 1; i >= 0 && aFileName[i] != '/'; --i)
@@ -33,6 +33,7 @@ GameObject::GameObject(ObjectManager *aManager, HashString const &aFileName) :
 
 // Sounds like a bad idea right now...
 GameObject::GameObject(GameObject const &aGameObject) :
+                              mID(aGameObject.mID),
                               mFileName(aGameObject.mFileName),
                               mName(aGameObject.mName),
                               mTags(aGameObject.mTags),
@@ -82,6 +83,15 @@ GameObject* GameObject::GetParent() const
 }
 
 /**
+ * @brief Get ID of this object.
+ * @return ID.
+ */
+int GameObject::GetID() const
+{
+  return mID;
+}
+
+/**
  * @brief Get name of game object
  * @return Name of object
  */
@@ -106,6 +116,15 @@ HashString GameObject::GetFileName() const
 ObjectManager *GameObject::GetManager() const
 {
   return mManager;
+}
+
+/**
+ * @brief Set ID of object
+ * @param aID New ID of object
+ */
+void GameObject::SetID(int const &aID)
+{
+  mID = aID;
 }
 
 /**
@@ -189,7 +208,7 @@ void GameObject::AddChild(GameObject* aObject)
     aObject->GetParent()->RemoveChild(aObject);
     
   aObject->SetParent(this);
-  mChildren[aObject->GetName().ToHash()] = aObject;
+  mChildren[aObject->GetID()] = aObject;
 }
 
 /**
@@ -198,7 +217,7 @@ void GameObject::AddChild(GameObject* aObject)
  */
 void GameObject::RemoveChild(GameObject *aObject)
 {
-  GameObjectIT it = mChildren.find(aObject->GetName().ToHash());
+  GameObjectIT it = mChildren.find(aObject->GetID());
   if(it != mChildren.end())
   {
     aObject->SetParent(nullptr);
