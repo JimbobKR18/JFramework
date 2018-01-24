@@ -226,8 +226,10 @@ void ObjectManager::ParseObject(GameObject *aObject, HashString const &aFolder)
 void ObjectManager::DeleteObject(GameObject *aObj)
 {
   RemoveObject(aObj);
-  mAllocatedObjects.erase(aObj);
-  delete aObj;
+  
+  size_t numDeleted = mAllocatedObjects.erase(aObj);
+  if(numDeleted > 0)
+    delete aObj;
 }
 
 /**

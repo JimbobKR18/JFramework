@@ -61,6 +61,7 @@ PCShaderScreen::~PCShaderScreen()
   glDeleteBuffers(1, &mIndexBufferID);
   glDeleteVertexArrays(1, &mVertexArrayObjectID);
   SDL_GL_DeleteContext(mGLContext);
+  SDL_DestroyWindow(mWindow);
   SDL_Quit();
 }
 

@@ -10,6 +10,10 @@ LevelManager::LevelManager(GameApp *aApp) : Manager(aApp, "LevelManager", LevelM
 
 LevelManager::~LevelManager()
 {
+  for(LevelIT it = mLevels.begin(); it != mLevels.end(); ++it)
+  {
+    delete *it;
+  }
 }
 
 /**
