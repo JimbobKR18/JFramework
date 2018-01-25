@@ -22,12 +22,14 @@ class FileCache
 {
 private:
   typedef std::unordered_map<int, FileCacheData*> FileContainer;
+  typedef FileContainer::iterator FileIT;
   static FileContainer mFiles;
 public:
   FileCache();
   virtual ~FileCache();
   
   static HashString GetFile(HashString const &aFilename);
+  static void Clear();
 };
 
 #endif // __JFramework__FileCache_H_

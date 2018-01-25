@@ -34,6 +34,17 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
 
 GraphicsManager::~GraphicsManager()
 {
+  for(std::unordered_map<int, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
+  {
+    delete it->second;
+  }
+  for(std::unordered_map<int, ShaderData*>::iterator it = mShaders.begin(); it != mShaders.end(); ++it)
+  {
+    delete it->second;
+  }
+  mTextures.clear();
+  mShaders.clear();
+  ShaderLoader::Clear();
   delete mScreen;
 }
 

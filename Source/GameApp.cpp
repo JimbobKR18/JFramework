@@ -14,6 +14,7 @@
 #include "Constants.h"
 #include "SystemProperties.h"
 #include "Threading.h"
+#include "FileCache.h"
 
 GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mSkipFrames(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
 {
@@ -53,8 +54,9 @@ GameApp::~GameApp()
   {
     delete (*it);
   }
-
   mManagers.clear();
+  
+  FileCache::Clear();
 }
 
 /**

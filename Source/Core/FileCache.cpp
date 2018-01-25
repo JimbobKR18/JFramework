@@ -44,3 +44,15 @@ HashString FileCache::GetFile(HashString const &aFilename)
   fileFromDisk.close();
   return fileContents;
 }
+
+/**
+ * @brief Clear out file cache.
+ */
+void FileCache::Clear()
+{
+  for(FileIT it = mFiles.begin(); it != mFiles.end(); ++it)
+  {
+    delete it->second;
+  }
+  mFiles.clear();
+}
