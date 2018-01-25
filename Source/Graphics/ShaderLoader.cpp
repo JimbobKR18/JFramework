@@ -265,6 +265,7 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
   textureData->mSize = aSize;
   textureData->mMaxWidth = aMaxWidth;
   TTF_CloseFont(font);
+  SDL_FreeSurface(msg);
   return textureData;
 }
 
