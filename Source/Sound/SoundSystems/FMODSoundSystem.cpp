@@ -28,6 +28,10 @@ FMODSoundSystem::FMODSoundSystem() : mFMODStudioSystem(nullptr), mFMODSystem(nul
 
 FMODSoundSystem::~FMODSoundSystem()
 {
+  for(FMODSoundIt it = mSoundContainer.begin(); it != mSoundContainer.end(); ++it)
+  {
+    it->second->release();
+  }
   for(FMODChannelGroupIt it = mChannelGroupContainer.begin(); it != mChannelGroupContainer.end(); ++it)
   {
     it->second->release();
@@ -37,6 +41,7 @@ FMODSoundSystem::~FMODSoundSystem()
     it->second->release();
     delete it->second;
   }
+  mSoundContainer.clear();
   mChannelGroupContainer.clear();
   mDSPContainer.clear();
   mFMODStudioSystem->release();
