@@ -37,6 +37,7 @@ ObjectManager::~ObjectManager()
     DeleteObject(*it);
     it = mAllocatedObjects.begin();
   }
+  delete mFactory;
 }
 
 GameObjectFactory* ObjectManager::GetGameObjectFactory() const
