@@ -16,6 +16,7 @@ EffectsManager::~EffectsManager()
     delete *it;
   }
   mEffects.clear();
+  delete mEffectsFactory;
 }
 
 /**
