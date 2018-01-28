@@ -132,6 +132,9 @@ void Camera::Serialize(ParserNode *aNode)
   
   object->Place("Width", Common::IntToString(mSize.x));
   object->Place("Height", Common::IntToString(mSize.y));
+  
+  if(mManager->GetPrimaryCamera() == this)
+    object->Place("Primary", Common::BoolToString(true));
 }
 
 /**
