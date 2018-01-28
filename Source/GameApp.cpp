@@ -230,7 +230,7 @@ void GameApp::Start()
  */
 void GameApp::AddManager(Manager *aManager)
 {
-	mManagers.push_back(aManager);
+  mManagers.push_back(aManager);
 }
 
 /**

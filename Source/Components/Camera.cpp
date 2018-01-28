@@ -151,7 +151,11 @@ void Camera::Deserialize(ParserNode *aNode)
   }
   
   delete mFramebuffer;
+  
+  #ifdef SHADER_COMPATIBLE
   mFramebuffer = new GLFramebuffer(mSize.x, mSize.y);
+  #endif
+  
   mFramebuffer->Generate(mManager);
 }
   
