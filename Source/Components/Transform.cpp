@@ -394,28 +394,44 @@ void Transform::Serialize(ParserNode *aNode)
 void Transform::Deserialize(ParserNode *aNode)
 {
   // Position, Scale, Size
+  Vector3 position = mPosition;
   if(aNode->Find("PositionX"))
-    SetPosition(Vector3(aNode->Find("PositionX")->GetValue().ToFloat(),
-                        aNode->Find("PositionY")->GetValue().ToFloat(),
-                        aNode->Find("PositionZ")->GetValue().ToFloat()));
+    position.x = aNode->Find("PositionX")->GetValue().ToFloat();
+  if(aNode->Find("PositionY"))
+    position.y = aNode->Find("PositionY")->GetValue().ToFloat();
+  if(aNode->Find("PositionZ"))
+    position.z = aNode->Find("PositionZ")->GetValue().ToFloat();
+  SetPosition(position);
+  
+  // WARNING: Setting scale to 0 causes a bug where the renderer doesn't draw them.
   if(aNode->Find("ScaleX"))
-    SetScale(Vector3(aNode->Find("ScaleX")->GetValue().ToFloat(),
-                     aNode->Find("ScaleY")->GetValue().ToFloat(),
-                     aNode->Find("ScaleZ")->GetValue().ToFloat()));
+    mScale.x = aNode->Find("ScaleX")->GetValue().ToFloat();
+  if(aNode->Find("ScaleY"))
+    mScale.y = aNode->Find("ScaleY")->GetValue().ToFloat();
+  if(aNode->Find("ScaleZ"))
+    mScale.z = aNode->Find("ScaleZ")->GetValue().ToFloat();
+    
   if(aNode->Find("SizeX"))
-    SetSize(Vector3(aNode->Find("SizeX")->GetValue().ToFloat(),
-                    aNode->Find("SizeY")->GetValue().ToFloat(),
-                    aNode->Find("SizeZ")->GetValue().ToFloat()));
+    mSize.x = aNode->Find("SizeX")->GetValue().ToFloat();
+  if(aNode->Find("SizeY"))
+    mSize.y = aNode->Find("SizeY")->GetValue().ToFloat();
+  if(aNode->Find("SizeZ"))
+    mSize.z = aNode->Find("SizeZ")->GetValue().ToFloat();
   
   // Boundaries
   if(aNode->Find("MaxPositionX"))
-    mMaxBoundary = Vector3(aNode->Find("MaxPositionX")->GetValue().ToFloat(),
-                    aNode->Find("MaxPositionY")->GetValue().ToFloat(),
-                    aNode->Find("MaxPositionZ")->GetValue().ToFloat());
+    mMaxBoundary.x = aNode->Find("MaxPositionX")->GetValue().ToFloat();
+  if(aNode->Find("MaxPositionY"))
+    mMaxBoundary.y = aNode->Find("MaxPositionY")->GetValue().ToFloat();
+  if(aNode->Find("MaxPositionZ"))
+    mMaxBoundary.z = aNode->Find("MaxPositionZ")->GetValue().ToFloat();
+    
   if(aNode->Find("MinPositionX"))
-    mMaxBoundary = Vector3(aNode->Find("MinPositionX")->GetValue().ToFloat(),
-                    aNode->Find("MinPositionY")->GetValue().ToFloat(),
-                    aNode->Find("MinPositionZ")->GetValue().ToFloat());
+    mMinBoundary.x = aNode->Find("MinPositionX")->GetValue().ToFloat();
+  if(aNode->Find("MinPositionY"))
+    mMinBoundary.y = aNode->Find("MinPositionY")->GetValue().ToFloat();
+  if(aNode->Find("MinPositionZ"))
+    mMinBoundary.z = aNode->Find("MinPositionZ")->GetValue().ToFloat();
 
   // Alignment
   HashString xAlign = aNode->Find("AlignX") ? aNode->Find("AlignX")->GetValue() : "";
@@ -504,6 +520,8 @@ void Transform::Deserialize(ParserNode *aNode)
     else
       assert(!"Invalid inheritance value passed in.");
   }
+  
+  CalculateHierarchy();
 }
 
 /**
