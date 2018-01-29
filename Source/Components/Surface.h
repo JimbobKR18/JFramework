@@ -21,6 +21,13 @@ enum Viewspace
   VIEW_PERCENTAGE_OF_CAMERA
 };
 
+enum TextRenderStyle
+{
+  DEFAULT_RENDER_STYLE,
+  SMOOTH_RENDER_STYLE,
+  CHARACTER_BY_CHARACTER_STYLE
+};
+
 struct ScrollInfo
 {
   ScrollType mType;
@@ -37,14 +44,26 @@ public:
   typedef PropertyContainer::const_iterator PropertyContainerConstIt;
   
 private:
+  // Base
   TextureCoordinates* mTexCoord;
   GraphicsManager*    mManager;
   Viewspace           mViewmode;
   Vector3             mTextureSize;
-  Vector4             mColor;
-  HashString          mFileName;
+  Vector4             mPrimaryColor;
   bool                mNoRender;
   
+  // Default
+  HashString          mFileName;
+  
+  // Text
+  HashString          mText;
+  HashString          mFontName;
+  int                 mFontSize;
+  int                 mMaxTextWidth;
+  Vector4             mSecondaryColor;
+  Vector3             mOriginalSize;
+  
+  // Etc.
   ScrollInfoContainer mScrollInfo;
   PropertyContainer   mProperties;
   
@@ -57,20 +76,34 @@ public:
   // Getters
   GraphicsManager*    GetManager() const { return mManager; }
   Viewspace           GetViewMode() const { return mViewmode; }
-  Vector4&            GetColor() { return mColor; }
+  Vector4&            GetColor() { return mPrimaryColor; }
+  bool                GetNoRender() { return mNoRender; }
   HashString          GetFileName() const { return mFileName; }
+  HashString          GetText() const { return mText; }
+  HashString          GetFontName() const { return mFontName; }
+  int                 GetFontSize() const { return mFontSize; }
+  int                 GetMaxTextWidth() const { return mMaxTextWidth; }
+  Vector4             GetSecondaryColor() const { return mSecondaryColor; }
+  Vector3             GetOriginalSize() const { return mOriginalSize; }
   int                 GetCurrentAnimation() const { if(mTexCoord) return mTexCoord->GetCurrentAnimation(); else return 0; }
   int                 GetCurrentFrame() const { if(mTexCoord) return mTexCoord->GetCurrentFrame(); else return 0; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
   void                SetTextureSize(Vector3 const& aTextureSize) { mTextureSize = aTextureSize; }
-  void                SetColor(Vector4 const& aColor) { mColor = aColor; }
+  void                SetColor(Vector4 const& aColor) { mPrimaryColor = aColor; }
+  void                SetNoRender(bool const aNoRender) { mNoRender = aNoRender; }
+  void                SetText(HashString const &aText) { mText = aText; }
+  void                SetFontName(HashString const &aFontName) { mFontName = aFontName; }
+  void                SetFontSize(int const aFontSize) { mFontSize = aFontSize; }
+  void                SetMaxTextWidth(int const aMaxTextWidth) { mMaxTextWidth = aMaxTextWidth; }
+  void                SetSecondaryColor(Vector4 const &aSecondaryColor) { mSecondaryColor = aSecondaryColor; }
+  void                SetOriginalSize(Vector3 const &aOriginalSize) { mOriginalSize = aOriginalSize; }
   void                SetFileName(HashString const& aFileName) { mFileName = aFileName; }
   
   // Textures and Shaders
   virtual void        LoadImage(HashString const &aName);
-  virtual Vector3     LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  virtual void        LoadText(HashString const &aText, TextRenderStyle const &aRenderStyle);
   virtual void        LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
   
   // Texture Coordinates

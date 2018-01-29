@@ -5,6 +5,7 @@
 #include "Constants.h"
 #include "SystemProperties.h"
 #include "ShaderLoader.h"
+#include "Transform.h"
 
 #if !defined(_WIN32) && !defined(__APPLE__)
 #include <SDL2/SDL_image.h>
@@ -65,40 +66,79 @@ void PCShaderSurface::LoadImage(HashString const &aName)
 }
 
 /**
- * @brief Loads a text surface in font.
- * @param aFont Font to use.
+ * @brief Loads a text surface. Font is configured from deserialize.
  * @param aText Text to render.
- * @param aForegroundColor Color of the text.
- * @param aBackgroundColor Color of the background.
- * @param aSize Size of font.
- * @param aMaxWidth Max width of a single line (in pixels).
+ * @param aRenderStyle Render all at once, smooth, or one character at a time.
  * @return 
  */
-Vector3 PCShaderSurface::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
+void PCShaderSurface::LoadText(HashString const &aText, TextRenderStyle const &aRenderStyle)
 {
-  HashString const textureDataHash = aFont + aText + Common::IntToString(aSize);
+  HashString const textureDataHash = GetFontName() + aText + Common::IntToString(GetFontSize());
   TextureData* data = GetManager()->GetTextureData(textureDataHash);
+  Vector3 size;
   if(data->mTextureID != (unsigned)-1)
   {
-    Vector3 size = Vector3(data->mWidth, data->mHeight, 0);
+    size = Vector3(data->mWidth, data->mHeight, 0);
     mTextureID = data->mTextureID;
     SetTextureSize(size);
-    return size;
   }
   else
   {
-    TextureData* textureData = ShaderLoader::LoadText(aFont, aText, aForegroundColor, aBackgroundColor, aSize, aMaxWidth);
+    TextureData* textureData = ShaderLoader::LoadText(GetFontName(), aText, GetColor(), GetSecondaryColor(), GetFontSize(), GetMaxTextWidth());
     if(textureData)
     {
-      SetTextureSize(Vector3(textureData->mWidth, textureData->mHeight, 0));
+      size = Vector3(textureData->mWidth, textureData->mHeight, 0);
+      SetTextureSize(size);
       GetManager()->AddTexturePairing(textureData->mTextureName, textureData);
       mTextureID = textureData->mTextureID;
-      return Vector3(textureData->mWidth, textureData->mHeight, 0);
+    }
+  }
+  
+  // Update texture to be the right size.
+  Transform *transform = GetOwner()->GET<Transform>();
+  transform->SetSize(size);
+  SetOriginalSize(size);
+  SetText(aText);
+  
+  if(aRenderStyle == DEFAULT_RENDER_STYLE)
+  {
+    std::vector<std::vector<float>> animationSpeed;
+    animationSpeed.push_back(std::vector<float>());
+    animationSpeed[0].push_back(GetManager()->GetOwningApp()->GetAppStep());
+    
+    std::vector<int> numFrames;
+    numFrames.push_back(1);
+    
+    SetTextureCoordinateData(1, numFrames, animationSpeed);
+    SetAnimated(false);
+    SetAnimation(0);
+  }
+  else
+  {
+    std::vector<std::vector<float>> animationSpeeds;
+    std::vector<int> numFrames;
+    
+    // Manually set the number of frames, or auto jump a character at a time.
+    if(aRenderStyle == SMOOTH_RENDER_STYLE)
+    {
+      numFrames.push_back(GetTextureData()->GetAnimationFrameCounts(0));
     }
     else
     {
-      return Vector3(0, 0, 0);
+      numFrames.push_back(aText.Length());
     }
+
+    std::vector<float> animationSpeed;
+    for(int i = 0; i < numFrames[0]; ++i)
+      animationSpeed.push_back(GetTextureData()->GetAnimationHolds(0)[0]);
+    animationSpeeds.push_back(animationSpeed);
+
+    CreateScrollEffect(ScrollType::HORIZONTAL, GetOriginalSize());
+    SetTextureCoordinateData(1, numFrames, animationSpeeds);
+    GetTextureData()->SetXGain(0, 0);
+    SetAnimation(0, true);
+    SetAnimated(true);
+    transform->GetSize().x = 0;
   }
 }
 
@@ -262,22 +302,51 @@ void PCShaderSurface::Serialize(ParserNode *aNode)
  */
 void PCShaderSurface::Deserialize(ParserNode *aNode)
 {
-  HashString fileName = GetFileName();
   HashString vertexShader = (GetVertexShaderFilename() == "") ? SystemProperties::GetDefaultVertexShaderName() : GetVertexShaderFilename();
   HashString fragmentShader = (GetFragmentShaderFilename() == "") ? SystemProperties::GetDefaultFragmentShaderName() : GetFragmentShaderFilename();
   
-  if(aNode->Find("TextureName"))
-    fileName = aNode->Find("TextureName")->GetValue().ToString();
   if(aNode->Find("VertexShader"))
     vertexShader = aNode->Find("VertexShader")->GetValue().ToString();
   if(aNode->Find("FragmentShader"))
     fragmentShader = aNode->Find("FragmentShader")->GetValue().ToString();
 
-  SetFileName(fileName);
-  LoadImage(GetFileName());
-  LoadShaders(vertexShader, fragmentShader);
-  
-  Surface::Deserialize(aNode);
+  if(aNode->GetName() == "Surface")
+  {
+    HashString fileName = GetFileName();
+    if(aNode->Find("TextureName"))
+      fileName = aNode->Find("TextureName")->GetValue().ToString();
+      
+    SetFileName(fileName);
+    LoadImage(GetFileName());
+    LoadShaders(vertexShader, fragmentShader);
+    Surface::Deserialize(aNode);
+  }
+  else if(aNode->GetName() == "Text")
+  {
+    TextRenderStyle renderStyle = TextRenderStyle::DEFAULT_RENDER_STYLE;
+    
+    if(aNode->Find("RenderStyle"))
+    {
+      if(aNode->Find("RenderStyle")->GetValue() == "SMOOTH")
+        renderStyle = TextRenderStyle::SMOOTH_RENDER_STYLE;
+      else if(aNode->Find("RenderStyle")->GetValue() == "CHARACTER_BY_CHARACTER")
+        renderStyle = TextRenderStyle::CHARACTER_BY_CHARACTER_STYLE;
+      else
+      {
+        DebugLogPrint("Incorrect render style %s used for text rendering.", aNode->Find("RenderStyle")->GetValue().ToCharArray());
+        assert(!"Incorrect render style used for text rendering.");
+      }
+    }
+    
+    if(!GetText().Empty())
+      LoadText(GetText(), renderStyle);
+    LoadShaders(vertexShader, fragmentShader);
+    Surface::Deserialize(aNode);
+  }
+  else
+  {
+    assert(!"Node has wrong name for deserialization");
+  }
 }
 
 /**

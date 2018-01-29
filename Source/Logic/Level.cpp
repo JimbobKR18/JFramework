@@ -1159,7 +1159,8 @@ void Level::ParseCamera(GameObject *aObject, ParserNode* aCamera)
  */
 void Level::ParseText(GameObject *aObject, ParserNode* aText)
 {
-  // TODO
+  Surface* objText = aObject->GET<Surface>();
+  objText->Deserialize(aText);
 }
 
 /**

@@ -339,9 +339,6 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glEnable(GL_BLEND);
   glEnable(GL_CULL_FACE);
   glDisable(GL_DEPTH_TEST);
-  //glEnable(GL_DEPTH_TEST);
-  //glDepthFunc(GL_LEQUAL);
-  //glDepthMask(GL_TRUE);
 
   glShadeModel(GL_SMOOTH);
 
@@ -418,6 +415,12 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     Viewspace viewSpace = surface->GetViewMode();
     Vector4 cameraTranslation;
     
+    if(surface->GetNoRender())
+    {
+      ++it;
+      continue;
+    }
+    
     // Start using shader
     glUseProgram(program);
     int activeTexture = 0;
@@ -452,6 +455,12 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
       GameObject *owner = (*it)->GetOwner();
       PCShaderSurface *surface = owner->GET<PCShaderSurface>();
       Transform *transform = owner->GET<Transform>();
+      
+      if(surface->GetNoRender())
+      {
+        ++it;
+        continue;
+      }
     
       // Get transforms in local and world space.
       Matrix33 modelTransform = transform->GetHierarchicalRotation() * Matrix33(transform->GetHierarchicalScale());

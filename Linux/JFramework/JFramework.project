@@ -110,6 +110,8 @@
     <File Name="../../Source/Components/Camera.cpp"/>
     <File Name="../../Source/Components/FollowComponent.h"/>
     <File Name="../../Source/Components/FollowComponent.cpp"/>
+    <File Name="../../Source/Components/Button.h"/>
+    <File Name="../../Source/Components/Button.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>

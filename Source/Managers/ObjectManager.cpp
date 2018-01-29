@@ -352,6 +352,33 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
     aObject->AddComponent(surface);
     surface->Deserialize(aParser->Find("Surface"));
   }
+  if(aParser->Find("Text"))
+  {
+#if !defined(ANDROID) && !defined(IOS)
+    PCShaderSurface *text = nullptr;
+#else
+    Surface *text = nullptr;
+#endif
+    if(aParser->Find("Surface", "UIElement") && aParser->Find("Surface", "UIElement")->GetValue().ToBool())
+    {
+#if !defined(ANDROID) && !defined(IOS)
+      text = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
+#else
+      text = GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
+#endif
+    }
+    else
+    {
+#if !defined(ANDROID) && !defined(IOS)
+      text = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+#else
+      text = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
+#endif
+    }
+
+    aObject->AddComponent(text);
+    text->Deserialize(aParser->Find("Text"));
+  }
   if(aParser->Find("Camera"))
   {
     Camera *camera = GetOwningApp()->GET<GraphicsManager>()->CreateCamera();

@@ -42,7 +42,7 @@ public:
   virtual ~PCShaderSurface();
 
   virtual void        LoadImage(HashString const &aName);
-  virtual Vector3     LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  virtual void        LoadText(HashString const &aText, TextRenderStyle const &aRenderStyle);
   virtual void        LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
   
   // Getters

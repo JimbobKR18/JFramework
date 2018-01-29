@@ -9,16 +9,19 @@
 int const Surface::sUID = Common::StringHashFunction("Surface");
 
 Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
-                     mTextureSize(), mColor(1,1,1,1), mFileName(""), mNoRender(false), mScrollInfo(),
-                     mProperties()
+                     mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), mFileName(), 
+                     mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
+                     mOriginalSize(), mScrollInfo(), mProperties()
 {
   assert(!"Surface needs a graphicsmanager");
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
-                                              mTextureSize(), mColor(1,1,1,1), mFileName(""), 
-                                              mNoRender(false), mScrollInfo(), mProperties()
+                                              mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
+                                              mFileName(), mText(), mFontName(), mFontSize(0), 
+                                              mMaxTextWidth(0), mSecondaryColor(), mOriginalSize(),
+                                              mScrollInfo(), mProperties()
 {
 }
 
@@ -45,18 +48,13 @@ void Surface::LoadImage(HashString const &aName)
 
 /**
  * @brief Asserts, please implement the platform specific implementation.
- * @param aFont Nothing.
  * @param aText Nothing.
- * @param aForegroundColor Nothing.
- * @param aBackgroundColor Nothing.
- * @param aSize Nothing.
- * @param aMaxWidth Nothing.
+ * @param aRenderStyle Nothing.
  * @return Nothing.
  */
-Vector3 Surface::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
+void Surface::LoadText(HashString const &aText, TextRenderStyle const &aRenderStyle)
 {
   assert(!"Not supported (Surface LoadText)");
-  return Vector3();
 }
 
 /**
@@ -275,6 +273,11 @@ void Surface::ReceiveMessage(Message const &aMessage)
 {
   if(aMessage.GetDescription() == "Finish")
   {
+    if(!mText.Empty())
+    {
+      Transform *transform = GetOwner()->GET<Transform>();
+      transform->SetSize(GetOriginalSize());
+    }
     FinishAnimation();
   }
 }
@@ -334,7 +337,7 @@ void Surface::Serialize(ParserNode *aNode)
   surface->Place("StartingAnimation", Common::IntToString(currentAnimation));
   for(int i = 0; i < 4; ++i)
   {
-    surface->Place(values[i], Common::IntToString(mColor[i]));
+    surface->Place(values[i], Common::IntToString(mPrimaryColor[i]));
   }
   
   // View mode
@@ -496,8 +499,6 @@ void Surface::Deserialize(ParserNode *aNode)
   if(aNode->Find("NoRender"))
   {
     mNoRender = aNode->Find("NoRender")->GetValue().ToBool();
-    if(mNoRender)
-      mManager->RemoveSurface(this);
   }
   if(aNode->Find("ColorR"))
   {
@@ -506,7 +507,23 @@ void Surface::Deserialize(ParserNode *aNode)
     float blue = aNode->Find("ColorB")->GetValue().ToFloat();
     float alpha = aNode->Find("ColorA")->GetValue().ToFloat();
 
-    mColor = Vector4(red, green, blue, alpha);
+    mPrimaryColor = Vector4(red, green, blue, alpha);
+  }
+  if(aNode->Find("PrimaryColor"))
+  {
+    ParserNode* primaryColor = aNode->Find("PrimaryColor");
+    mPrimaryColor.x = primaryColor->Find("r")->GetValue().ToInt();
+    mPrimaryColor.y = primaryColor->Find("g")->GetValue().ToInt();
+    mPrimaryColor.z = primaryColor->Find("b")->GetValue().ToInt();
+    mPrimaryColor.w = primaryColor->Find("a")->GetValue().ToInt();
+  }
+  if(aNode->Find("SecondaryColor"))
+  {
+    ParserNode* secondaryColor = aNode->Find("SecondaryColor");
+    mSecondaryColor.x = secondaryColor->Find("r")->GetValue().ToInt();
+    mSecondaryColor.y = secondaryColor->Find("g")->GetValue().ToInt();
+    mSecondaryColor.z = secondaryColor->Find("b")->GetValue().ToInt();
+    mSecondaryColor.w = secondaryColor->Find("a")->GetValue().ToInt();
   }
   if(aNode->Find("ViewMode"))
   {
@@ -561,6 +578,22 @@ void Surface::Deserialize(ParserNode *aNode)
       ++index;
       curIndex = nodeName + Common::IntToString(index);
     }
+  }
+  
+  // Text
+  mMaxTextWidth = mManager->GetScreen()->GetWidth();
+  if(aNode->Find("Font"))
+  {
+    mFontName = aNode->Find("Font")->Find("Name")->GetValue().ToString();
+    mFontSize = Common::StringToInt(aNode->Find("Font")->Find("Size")->GetValue());
+  }
+  if(aNode->Find("MaxTextWidth"))
+  {
+    mMaxTextWidth = aNode->Find("MaxWidth")->GetValue().ToInt();
+  }
+  if(aNode->Find("Contents"))
+  {
+    mText = aNode->Find("Contents")->GetValue().ToString();
   }
   
   SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);

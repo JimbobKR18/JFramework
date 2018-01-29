@@ -36,11 +36,20 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
                                                                                                   mSpeeds(),
                                                                                                   mAnimations()
 {
+  // Validation
   if(aNumAnimations != aNumFrames.size() || aNumAnimations != aAnimationSpeeds.size())
   {
     assert(!"Number of animations vs the number of frames or animations speeds does not match.");
   }
+  for(int i = 0; i < aNumAnimations; ++i)
+  {
+    if(aNumFrames[i] != aAnimationSpeeds[i].size())
+    {
+      assert(!"Number of frames vs interval between frames does not match.");
+    }
+  }
   
+  // Initialization
   int maxFrames = 0;
   
   // Push back all frame data

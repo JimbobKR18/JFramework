@@ -13,13 +13,8 @@
 class MenuText : public MenuElement
 {
 private:
-  HashString    mText;
-  HashString    mFont;
-  int           mSize;
-  int           mMaxWidth;
-  Vector4       mForegroundColor;
-  Vector4       mBackgroundColor;
-  Vector3       mOriginalSize;
+  HashString      mText;
+  TextRenderStyle mTextRenderStyle;
 
 public:
   MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText, bool const aReplaceable);

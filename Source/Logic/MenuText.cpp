@@ -22,7 +22,7 @@
 #endif
 
 MenuText::MenuText(Menu *aOwner, HashString const &aSettingsFilename, HashString const &aText, bool const aReplaceable) :
-  MenuElement(aOwner, aSettingsFilename, aReplaceable), mText(aText), mFont(), mSize(0), mMaxWidth(0), mForegroundColor(), mBackgroundColor(), mOriginalSize()
+  MenuElement(aOwner, aSettingsFilename, aReplaceable), mText(aText), mTextRenderStyle(TextRenderStyle::DEFAULT_RENDER_STYLE)
 {
   Parser* parser = ParserFactory::CreateInputParser("Menus", aSettingsFilename);
   ParseFile(parser);
@@ -67,7 +67,7 @@ void MenuText::ReceiveMessage(Message const &aMessage)
     Transform *transform = mObject->GET<Transform>();
     Surface *surface = mObject->GET<Surface>();
     
-    transform->SetSize(mOriginalSize);
+    transform->SetSize(surface->GetOriginalSize());
     surface->FinishAnimation();
   }
 }
@@ -78,111 +78,21 @@ void MenuText::ReceiveMessage(Message const &aMessage)
  */
 void MenuText::ParseAdditionalData(Parser *aParser)
 {
-  GameApp* app = LUABind::StaticGameApp::GetApp();
-  if(aParser->Find("Font"))
+  if(aParser->Find("Text")->Find("RenderStyle"))
   {
-    mFont = aParser->Find("Font", "FontName")->GetValue().ToString();
-    mSize = Common::StringToInt(aParser->Find("Font", "Size")->GetValue());
-  }
-  if(aParser->Find("ForegroundColor"))
-  {
-    mForegroundColor.x = aParser->Find("ForegroundColor", "r")->GetValue().ToInt();
-    mForegroundColor.y = aParser->Find("ForegroundColor", "g")->GetValue().ToInt();
-    mForegroundColor.z = aParser->Find("ForegroundColor", "b")->GetValue().ToInt();
-    mForegroundColor.w = aParser->Find("ForegroundColor", "a")->GetValue().ToInt();
-  }
-  if(aParser->Find("BackgroundColor"))
-  {
-    mBackgroundColor.x = aParser->Find("BackgroundColor", "r")->GetValue().ToInt();
-    mBackgroundColor.y = aParser->Find("BackgroundColor", "g")->GetValue().ToInt();
-    mBackgroundColor.z = aParser->Find("BackgroundColor", "b")->GetValue().ToInt();
-    mBackgroundColor.w = aParser->Find("BackgroundColor", "a")->GetValue().ToInt();
-  }
-  
-  // Text can be overwritten in Menu file.
-  if(aParser->Find("Text") && mText.Empty())
-  {
-    mText = aParser->Find("Text", "Value")->GetValue().ToString();
-  }
-  
-  // Set a max width, otherwise default to screen width..
-  if(aParser->Find("MaxWidth"))
-  {
-    mMaxWidth = aParser->Find("MaxWidth", "Value")->GetValue().ToInt();
-  }
-  else
-  {
-    mMaxWidth = app->GET<GraphicsManager>()->GetScreen()->GetWidth();
-  }
-
-#ifdef SHADER_COMPATIBLE
-  PCShaderSurface *surface = (PCShaderSurface*)app->GET<GraphicsManager>()->CreateUISurface();
-  Vector3 size = surface->LoadText(mFont, mText, mForegroundColor, mBackgroundColor, mSize, mMaxWidth);
-#else
-  Surface *surface = app->GET<GraphicsManager>()->CreateUISurface();
-#endif
-  std::vector<std::vector<float>> animationSpeed;
-  animationSpeed.push_back(std::vector<float>());
-  animationSpeed[0].push_back(GetOwner()->GetLevel()->GetManager()->GetOwningApp()->GetAppStep());
-  
-  std::vector<int> numFrames;
-  numFrames.push_back(1);
-  
-  surface->SetViewMode(VIEW_RELATIVE_TO_CAMERA);
-  surface->SetFileName("");
-  surface->LoadImage(surface->GetFileName());
-  surface->LoadShaders(SystemProperties::GetDefaultVertexShaderName(), SystemProperties::GetDefaultFragmentShaderName());
-  surface->SetTextureCoordinateData(1, numFrames, animationSpeed);
-  surface->SetAnimated(false);
-  surface->SetAnimation(0);
-  
-  // Update texture to be the right size.
-  Transform *transform = mObject->GET<Transform>();
-  mOriginalSize = size;
-  transform->SetSize(size);
-  
-  // Reveal the text slowly rather than all at once.
-  if(aParser->Find("Animation"))
-  {
-    ParserNode* animation = aParser->Find("Animation");
-    std::vector<std::vector<float>> animationSpeeds;
-    std::vector<float> animationSpeed, speedFromFile;
-    std::vector<int> numFrames;
-    
-    // Get speed from file.
-    speedFromFile = animation->Find("AnimationSpeeds")->GetValue().ToFloatVector();
-    
-    // Manually set the number of frames, or auto jump a character at a time.
-    if(animation->Find("NumFrames"))
-    {
-      numFrames = animation->Find("NumFrames")->GetValue().ToIntVector();
-    }
+    HashString textRenderStyle = aParser->Find("Text")->Find("RenderStyle")->GetValue();
+    if(textRenderStyle == "SMOOTH")
+      mTextRenderStyle = TextRenderStyle::SMOOTH_RENDER_STYLE;
+    else if(textRenderStyle == "CHARACTER_BY_CHARACTER")
+      mTextRenderStyle = TextRenderStyle::CHARACTER_BY_CHARACTER_STYLE;
     else
     {
-      numFrames.push_back(mText.Length());
+      DebugLogPrint("Incorrect render style %s used for text rendering.", textRenderStyle.ToCharArray());
+      assert(!"Incorrect render style used for text rendering.");
     }
-
-    // Set frames in animation system.
-    for(int i = 0; i < numFrames[0]; ++i)
-    {
-      if(i >= speedFromFile.size())
-      {
-        animationSpeed.push_back(speedFromFile[speedFromFile.size() - 1]);
-      }
-      else
-      {
-        animationSpeed.push_back(speedFromFile[i]);
-      }
-    }
-    animationSpeeds.push_back(animationSpeed);
-
-    surface->CreateScrollEffect(ScrollType::HORIZONTAL, mOriginalSize);
-    surface->SetTextureCoordinateData(1, numFrames, animationSpeeds);
-    surface->GetTextureData()->SetXGain(0, 0);
-    surface->SetAnimation(0, true);
-    surface->SetAnimated(true);
-    transform->GetSize().x = 0;
   }
   
-  mObject->AddComponent(surface);
+  Surface *surface = mObject->GET<Surface>();
+  surface->SetViewMode(Viewspace::VIEW_RELATIVE_TO_CAMERA);
+  surface->LoadText(mText, mTextRenderStyle);
 }
