@@ -512,18 +512,18 @@ void Surface::Deserialize(ParserNode *aNode)
   if(aNode->Find("PrimaryColor"))
   {
     ParserNode* primaryColor = aNode->Find("PrimaryColor");
-    mPrimaryColor.x = primaryColor->Find("r")->GetValue().ToInt();
-    mPrimaryColor.y = primaryColor->Find("g")->GetValue().ToInt();
-    mPrimaryColor.z = primaryColor->Find("b")->GetValue().ToInt();
-    mPrimaryColor.w = primaryColor->Find("a")->GetValue().ToInt();
+    mPrimaryColor.x = primaryColor->Find("r")->GetValue().ToFloat();
+    mPrimaryColor.y = primaryColor->Find("g")->GetValue().ToFloat();
+    mPrimaryColor.z = primaryColor->Find("b")->GetValue().ToFloat();
+    mPrimaryColor.w = primaryColor->Find("a")->GetValue().ToFloat();
   }
   if(aNode->Find("SecondaryColor"))
   {
     ParserNode* secondaryColor = aNode->Find("SecondaryColor");
-    mSecondaryColor.x = secondaryColor->Find("r")->GetValue().ToInt();
-    mSecondaryColor.y = secondaryColor->Find("g")->GetValue().ToInt();
-    mSecondaryColor.z = secondaryColor->Find("b")->GetValue().ToInt();
-    mSecondaryColor.w = secondaryColor->Find("a")->GetValue().ToInt();
+    mSecondaryColor.x = secondaryColor->Find("r")->GetValue().ToFloat();
+    mSecondaryColor.y = secondaryColor->Find("g")->GetValue().ToFloat();
+    mSecondaryColor.z = secondaryColor->Find("b")->GetValue().ToFloat();
+    mSecondaryColor.w = secondaryColor->Find("a")->GetValue().ToFloat();
   }
   if(aNode->Find("ViewMode"))
   {
