@@ -13,6 +13,7 @@ struct CollisionPair
   float           mPenetration;
   Vector3         mRelativeVelocity;
   Vector3         mNormal;
+  Vector3         mContactPoint;
 
   CollisionPair(PhysicsObject* aBody1, PhysicsObject* aBody2, Shape* aShape1, Shape* aShape2);
   void operator=(CollisionPair const &rhs);

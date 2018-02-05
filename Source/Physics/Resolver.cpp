@@ -168,11 +168,11 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
 void Resolver::SendCollisionMessages(CollisionPair &aPair) const
 {
   CollisionMessage message1("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner(),
-                           aPair.mShapes[0], aPair.mShapes[1], aPair.mNormal, aPair.mRelativeVelocity,
-                           aPair.mPenetration);
+                           aPair.mShapes[0], aPair.mShapes[1], aPair.mPenetration, aPair.mNormal, 
+                           aPair.mRelativeVelocity, aPair.mContactPoint);
   CollisionMessage message2("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner(),
-                           aPair.mShapes[0], aPair.mShapes[1], aPair.mNormal.Invert(), aPair.mRelativeVelocity.Invert(),
-                           aPair.mPenetration);
+                           aPair.mShapes[0], aPair.mShapes[1], aPair.mPenetration, aPair.mNormal.Invert(), 
+                           aPair.mRelativeVelocity.Invert(), aPair.mContactPoint.Invert());
   aPair.mBodies[0]->GetOwner()->ReceiveMessage(message1);
   aPair.mBodies[1]->GetOwner()->ReceiveMessage(message2);
 }

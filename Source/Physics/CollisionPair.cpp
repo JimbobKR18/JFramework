@@ -2,7 +2,7 @@
 #include "PhysicsObject.h"
 
 CollisionPair::CollisionPair(PhysicsObject* aBody1, PhysicsObject* aBody2, Shape* aShape1, Shape* aShape2) : 
-  mPenetration(0), mRelativeVelocity(), mNormal()
+  mPenetration(0), mRelativeVelocity(), mNormal(), mContactPoint()
 {
   mBodies[0] = aBody1;
   mBodies[1] = aBody2;
