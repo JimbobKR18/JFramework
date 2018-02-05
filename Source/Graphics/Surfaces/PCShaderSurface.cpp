@@ -68,10 +68,9 @@ void PCShaderSurface::LoadImage(HashString const &aName)
 /**
  * @brief Loads a text surface. Font is configured from deserialize.
  * @param aText Text to render.
- * @param aRenderStyle Render all at once, smooth, or one character at a time.
  * @return 
  */
-void PCShaderSurface::LoadText(HashString const &aText, TextRenderStyle const &aRenderStyle)
+void PCShaderSurface::LoadText(HashString const &aText)
 {
   HashString const textureDataHash = GetFontName() + aText + Common::IntToString(GetFontSize());
   TextureData* data = GetManager()->GetTextureData(textureDataHash);
@@ -100,7 +99,7 @@ void PCShaderSurface::LoadText(HashString const &aText, TextRenderStyle const &a
   SetOriginalSize(size);
   SetText(aText);
   
-  if(aRenderStyle == DEFAULT_RENDER_STYLE)
+  if(GetTextRenderStyle() == DEFAULT_RENDER_STYLE)
   {
     std::vector<std::vector<float>> animationSpeed;
     animationSpeed.push_back(std::vector<float>());
@@ -119,7 +118,7 @@ void PCShaderSurface::LoadText(HashString const &aText, TextRenderStyle const &a
     std::vector<int> numFrames;
     
     // Manually set the number of frames, or auto jump a character at a time.
-    if(aRenderStyle == SMOOTH_RENDER_STYLE)
+    if(GetTextRenderStyle() == SMOOTH_RENDER_STYLE)
     {
       numFrames.push_back(GetTextureData()->GetAnimationFrameCounts(0));
     }
@@ -280,6 +279,7 @@ void PCShaderSurface::SendMessage(Message const &aMessage)
  */
 void PCShaderSurface::ReceiveMessage(Message const &aMessage)
 {
+  Surface::ReceiveMessage(aMessage);
 }
 
 /**
@@ -318,13 +318,10 @@ void PCShaderSurface::Deserialize(ParserNode *aNode)
       
     SetFileName(fileName);
     LoadImage(GetFileName());
-    LoadShaders(vertexShader, fragmentShader);
-    Surface::Deserialize(aNode);
   }
   else if(aNode->GetName() == "Text")
   {
     TextRenderStyle renderStyle = TextRenderStyle::DEFAULT_RENDER_STYLE;
-    
     if(aNode->Find("RenderStyle"))
     {
       if(aNode->Find("RenderStyle")->GetValue() == "SMOOTH")
@@ -337,16 +334,17 @@ void PCShaderSurface::Deserialize(ParserNode *aNode)
         assert(!"Incorrect render style used for text rendering.");
       }
     }
-    
-    if(!GetText().Empty())
-      LoadText(GetText(), renderStyle);
-    LoadShaders(vertexShader, fragmentShader);
-    Surface::Deserialize(aNode);
+    SetTextRenderStyle(renderStyle);
+    if(aNode->Find("Contents"))
+      LoadText(aNode->Find("Contents")->GetValue());
   }
   else
   {
     assert(!"Node has wrong name for deserialization");
   }
+  
+  LoadShaders(vertexShader, fragmentShader);
+  Surface::Deserialize(aNode);
 }
 
 /**

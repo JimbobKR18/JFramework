@@ -24,11 +24,8 @@ public:
   typedef std::set<GameObject*> ObjectContainer;
   typedef std::vector<GameObject*> ObjectVector;
   typedef std::map<HashString, ObjectContainer> FileContainer;
-  typedef std::vector<Menu*> MenuContainer;
   typedef ObjectContainer::iterator ObjectIT;
   typedef ObjectContainer::const_iterator ConstObjectIT;
-  typedef MenuContainer::iterator MenuIT;
-  typedef MenuContainer::const_iterator ConstMenuIT;
   typedef FileContainer::iterator FileContainerIT;
   typedef FileContainer::const_iterator ConstFileContainerIT;
   typedef std::vector<ObjectContainer> ObjectContainerMap;
@@ -39,7 +36,6 @@ private:
   HashString         mFileName;
   HashString         mMusicName;
   ObjectContainerMap mObjects;
-  MenuContainer      mMenus;
   LevelManager*      mOwner;
   TileMapGenerator*  mGenerator;
   GameObject*        mFocusTarget;
@@ -67,17 +63,12 @@ public:
   void              SetFocusTarget(GameObject *aObject);
   GameObject*       FindObject(HashString const &aObjectName);
   ObjectVector      FindObjects(Vector3 const &aPosition) const;
-  Menu*             FindMenu(HashString const &aMenuName);
-  
-  void              AddMenu(Menu *aMenu);
-  void              RemoveMenu(Menu *aMenu);
-  void              RemoveMenus();
 
   void              AddObject(GameObject *aObject, ObjectPlacement const aPlacement);
-  void              DeleteObject(GameObject *aObject);
+  virtual void      DeleteObject(GameObject *aObject);
   GameObject*       CreateObjectDelayed(HashString const &aFileName, HashString const &aFolder = "Game", HashString const &aType = "Default", ObjectPlacement const aPlacement = ObjectPlacement::DEFAULT);
-  void              DeleteObjectDelayed(GameObject *aObject);
-  void              DeleteObjects();
+  virtual void      DeleteObjectDelayed(GameObject *aObject);
+  virtual void      DeleteObjects();
   void              Reset();
   void              ResetLevel();
 
@@ -117,11 +108,10 @@ protected:
 private:
   void              DeleteObjectChildren(GameObject *aObject);
   void              DeleteObjectChildrenDelayed(GameObject *aObject);
-  void              SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects);
-  void              SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects);
+  void              SerializeObjects(Parser &aParser, ObjectContainer &aObjects);
+  void              SerializeScenarios(Parser &aParser);
   bool              ObjectNotInScenario(GameObject *aObject);
   void              RemoveObjectFromScenarios(GameObject *aObject);
-  void              RemoveObjectFromMenus(GameObject *aObject);
   void              ParseTransform(GameObject *aObject, ParserNode* aTransform);
   void              ParseSurface(GameObject *aObject, ParserNode* aSurface);
   void              ParseCamera(GameObject *aObject, ParserNode* aCamera);

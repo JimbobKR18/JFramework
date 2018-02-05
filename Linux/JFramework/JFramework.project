@@ -150,11 +150,7 @@
     <File Name="../../Source/Logic/TileMapGenerator.h"/>
     <File Name="../../Source/Logic/Level.cpp"/>
     <File Name="../../Source/Logic/Level.h"/>
-    <File Name="../../Source/Logic/MenuText.h"/>
-    <File Name="../../Source/Logic/MenuText.cpp"/>
     <File Name="../../Source/Logic/TileMapGenerator.cpp"/>
-    <File Name="../../Source/Logic/MenuButton.h"/>
-    <File Name="../../Source/Logic/MenuButton.cpp"/>
     <VirtualDirectory Name="StateMachine">
       <File Name="../../Source/Logic/StateMachine/StateMachine.cpp"/>
       <File Name="../../Source/Logic/StateMachine/StateMachine.h"/>
@@ -176,12 +172,6 @@
     <File Name="../../Source/Logic/GameObjectFactory.h"/>
     <File Name="../../Source/Logic/DefaultGameObjectFactory.h"/>
     <File Name="../../Source/Logic/DefaultGameObjectFactory.cpp"/>
-    <File Name="../../Source/Logic/Menu.cpp"/>
-    <File Name="../../Source/Logic/Menu.h"/>
-    <File Name="../../Source/Logic/MenuElement.cpp"/>
-    <File Name="../../Source/Logic/MenuElement.h"/>
-    <File Name="../../Source/Logic/MenuImage.cpp"/>
-    <File Name="../../Source/Logic/MenuImage.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Managers">
     <File Name="../../Source/Managers/InputManager.h"/>

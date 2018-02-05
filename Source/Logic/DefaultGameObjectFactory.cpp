@@ -1,6 +1,4 @@
 #include "DefaultGameObjectFactory.h"
-#include "MenuButton.h"
-#include "MenuText.h"
 #include "ObjectManager.h"
 
 DefaultGameObjectFactory::DefaultGameObjectFactory() : mIndex(0)

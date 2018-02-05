@@ -11,7 +11,7 @@ int const Surface::sUID = Common::StringHashFunction("Surface");
 Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
                      mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), mFileName(), 
                      mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
-                     mOriginalSize(), mScrollInfo(), mProperties()
+                     mOriginalSize(), mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
 {
   assert(!"Surface needs a graphicsmanager");
 }
@@ -21,7 +21,7 @@ Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoor
                                               mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
                                               mFileName(), mText(), mFontName(), mFontSize(0), 
                                               mMaxTextWidth(0), mSecondaryColor(), mOriginalSize(),
-                                              mScrollInfo(), mProperties()
+                                              mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
 {
 }
 
@@ -49,10 +49,9 @@ void Surface::LoadImage(HashString const &aName)
 /**
  * @brief Asserts, please implement the platform specific implementation.
  * @param aText Nothing.
- * @param aRenderStyle Nothing.
  * @return Nothing.
  */
-void Surface::LoadText(HashString const &aText, TextRenderStyle const &aRenderStyle)
+void Surface::LoadText(HashString const &aText)
 {
   assert(!"Not supported (Surface LoadText)");
 }
@@ -589,11 +588,25 @@ void Surface::Deserialize(ParserNode *aNode)
   }
   if(aNode->Find("MaxTextWidth"))
   {
-    mMaxTextWidth = aNode->Find("MaxWidth")->GetValue().ToInt();
+    mMaxTextWidth = aNode->Find("MaxTextWidth")->GetValue().ToInt();
   }
   if(aNode->Find("Contents"))
   {
     mText = aNode->Find("Contents")->GetValue().ToString();
+  }
+  if(aNode->Find("RenderStyle"))
+  {
+    if(aNode->Find("RenderStyle")->GetValue() == "SMOOTH")
+      mTextRenderStyle = TextRenderStyle::SMOOTH_RENDER_STYLE;
+    else if(aNode->Find("RenderStyle")->GetValue() == "CHARACTER_BY_CHARACTER")
+      mTextRenderStyle = TextRenderStyle::CHARACTER_BY_CHARACTER_STYLE;
+    else if(aNode->Find("RenderStyle")->GetValue() == "DEFAULT")
+      mTextRenderStyle = TextRenderStyle::DEFAULT_RENDER_STYLE;
+    else
+    {
+      DebugLogPrint("Incorrect render style %s used for text rendering.", aNode->Find("RenderStyle")->GetValue().ToCharArray());
+      assert(!"Incorrect render style used for text rendering.");
+    }
   }
   
   SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);

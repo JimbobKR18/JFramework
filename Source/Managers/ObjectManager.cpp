@@ -359,7 +359,7 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
 #else
     Surface *text = nullptr;
 #endif
-    if(aParser->Find("Surface", "UIElement") && aParser->Find("Surface", "UIElement")->GetValue().ToBool())
+    if(aParser->Find("Text", "UIElement") && aParser->Find("Text", "UIElement")->GetValue().ToBool())
     {
 #if !defined(ANDROID) && !defined(IOS)
       text = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();

@@ -18,7 +18,6 @@
 #include "ObjectDeleteMessage.h"
 #include "ObjectCreateMessage.h"
 #include "ResetLevelMessage.h"
-#include "Menu.h"
 #include "EffectsManager.h"
 #include "ParserFactory.h"
 #include "FollowComponent.h"
@@ -39,8 +38,7 @@ Level::Level()
 
 Level::Level(LevelManager *aManager, HashString const &aFileName, HashString const &aFolderName, bool aAutoParse) :
              mName(""), mFolderName(aFolderName), mFileName(aFileName), mMusicName(""), mObjects(),
-             mMenus(), mOwner(aManager), mGenerator(nullptr),
-             mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMusicChannel(-1),
+             mOwner(aManager), mGenerator(nullptr), mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMusicChannel(-1),
              mMaxBoundary(0,0,0), mMinBoundary(0,0,0), mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
@@ -186,68 +184,6 @@ Level::ObjectVector Level::FindObjects(Vector3 const &aPosition) const
 }
 
 /**
- * @brief Find a menu by name.
- * @param aMenuName
- * @return The menu, or nullptr.
- */
-Menu* Level::FindMenu(HashString const &aMenuName)
-{
-  for(ConstMenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
-  {
-    if((*it)->GetName() == aMenuName)
-    {
-      return *it;
-    }
-  }
-  return nullptr;
-}
-
-/**
- * @brief Add a menu to our level.
- * @param aMenu
- */
-void Level::AddMenu(Menu *aMenu)
-{
-  if(!FindMenu(aMenu->GetName()))
-    mMenus.push_back(aMenu);
-}
-
-/**
- * @brief Remove a menu from our level.
- * @param aMenu
- */
-void Level::RemoveMenu(Menu *aMenu)
-{
-  if(aMenu == nullptr)
-    return;
-
-  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
-  {
-    if(*it == aMenu)
-    {
-      delete *it;
-      mMenus.erase(it);
-      return;
-    }
-  }
-  
-  assert(!"Menu not found, you sure you added it to this list?");
-}
-
-/**
- * @brief Remove all menus, the right way.
- */
-void Level::RemoveMenus()
-{
-  for(MenuIT it = mMenus.begin(); it != mMenus.end();)
-  {
-    delete *it;
-    it = mMenus.erase(it);
-  }
-  mMenus.clear();
-}
-
-/**
  * @brief Add object to our vector of objects.
  * @param aObject
  */
@@ -263,7 +199,6 @@ void Level::AddObject(GameObject *aObject, ObjectPlacement const aPlacement)
 void Level::DeleteObject(GameObject *aObject)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
   EffectsManager *effectsManager = mOwner->GetOwningApp()->GET<EffectsManager>();
   
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
@@ -274,7 +209,6 @@ void Level::DeleteObject(GameObject *aObject)
       if(aObject == *it)
       {
         RemoveObjectFromScenarios(*it);
-        RemoveObjectFromMenus(*it);
         mObjects[i].erase(it);
         DeleteObjectChildren(aObject);
         objectManager->DeleteObject(aObject);
@@ -319,7 +253,6 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
       if(aObject == *it)
       {
         RemoveObjectFromScenarios(*it);
-        RemoveObjectFromMenus(*it);
         mObjects[i].erase(it);
         DeleteObjectChildrenDelayed(aObject);
         
@@ -349,12 +282,10 @@ void Level::DeleteObjects()
     for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
     {
       RemoveObjectFromScenarios(*it);
-      RemoveObjectFromMenus(*it);
       manager->DeleteObject(*it);
     }
     mObjects[i].clear();
   }
-  RemoveMenus();
   manager->GetOwningApp()->ClearDelayedMessages();
 }
 
@@ -375,7 +306,8 @@ void Level::ResetLevel()
   // Reset view to set when reparsing file.
   GraphicsManager *graphicsManager = GetManager()->GetOwningApp()->GET<GraphicsManager>();
   graphicsManager->SetPrimaryCamera(nullptr);
-  // NOTE: Removes menus too
+  
+  // Delete objects and reload.
   DeleteObjects();
   ParseBaseFile();
   PostReset();
@@ -445,9 +377,6 @@ void Level::Unload(Level const *aNextLevel)
   // Unload all objects
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
     UnloadObjects(mObjects[i]);
-    
-  // Remove menus because they are not level files.
-  RemoveMenus();
 
   if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
     mOwner->GetOwningApp()->GET<SoundManager>()->StopChannel(mMusicChannel);
@@ -522,11 +451,6 @@ void Level::Update()
   }
   mObjects[ObjectPlacement::REPLACEABLE].clear();
   
-  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
-  {
-    (*it)->Update();
-  }
-
   // Update tile animations if possible
   if(mGenerator)
   {
@@ -550,17 +474,6 @@ void Level::ParseAdditionalData(ParserNode *aRoot, GameObject *aObject)
  */
 void Level::Serialize(Parser &aParser)
 {
-  // Put menu objects into container.
-  ObjectContainer menuObjects;
-  for(MenuIT menuIT = mMenus.begin(); menuIT != mMenus.end(); ++menuIT)
-  {
-    MenuElement::ElementContainer elements = (*menuIT)->GetElements();
-    for(MenuElement::ElementIT elementIT = elements.begin(); elementIT != elements.end(); ++elementIT)
-    {
-      menuObjects.insert((*elementIT)->GetObject());
-    }
-  }
-  
   if(mGenerator)
     mGenerator->Serialize(aParser.GetBaseRoot());
     
@@ -571,8 +484,8 @@ void Level::Serialize(Parser &aParser)
       mScenarios[mFileName].insert(*it);
   }
     
-  SerializeObjects(aParser, mScenarios[mFileName], menuObjects);
-  SerializeScenarios(aParser, menuObjects);
+  SerializeObjects(aParser, mScenarios[mFileName]);
+  SerializeScenarios(aParser);
   
   // Music
   aParser.Place("Music", "");
@@ -812,11 +725,6 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     a = parser->Find("ClearColor")->Find("ColorA")->GetValue().ToFloat();
     mClearColor = Vector4(r, g, b, a);
   }
-  if(parser->Find("Menu"))
-  {
-    // Menu adds itself to level.
-    new Menu(this, parser->Find("Menu")->Find("Name")->GetValue());
-  }
 
   ParserNodeContainer untouched = parser->GetBaseRoot()->GetUntouchedRoots();
   for(parserNodeIT it = untouched.begin(); it != untouched.end(); ++it)
@@ -1012,16 +920,12 @@ void Level::DeleteObjectChildrenDelayed(GameObject *aObject)
  * @param aParser Parser to write objects to
  * @param aObjects Objects to write
  */
-void Level::SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectContainer &aMenuObjects)
+void Level::SerializeObjects(Parser &aParser, ObjectContainer &aObjects)
 {
   int curIndex = 0;
   HashString object = "Object_";
   for(ObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    // Avoid menu objects
-    if(std::find(aMenuObjects.begin(), aMenuObjects.end(), *it) != aMenuObjects.end())
-      continue;
-    
     HashString objectString = object + Common::IntToString(curIndex);
     aParser.SetCurrentObjectIndex(curIndex);
     aParser.Place(objectString, "");
@@ -1042,7 +946,7 @@ void Level::SerializeObjects(Parser &aParser, ObjectContainer &aObjects, ObjectC
  * @brief Serialize all scenario files into separate chunks.
  * @param aParser Parser to get filename and directory from. (To be in same place as main level file.)
  */
-void Level::SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects)
+void Level::SerializeScenarios(Parser &aParser)
 {
   int curIndex = 0;
   HashString parserFile = aParser.GetFilename();
@@ -1057,7 +961,7 @@ void Level::SerializeScenarios(Parser &aParser, ObjectContainer &aMenuObjects)
     }
     HashString currentFileName = fileName + Common::IntToString(curIndex);
     Parser *parser = ParserFactory::CreateOutputParser(folder, currentFileName + ".txt");
-    SerializeObjects(*parser, it->second, aMenuObjects);
+    SerializeObjects(*parser, it->second);
     parser->Write();
     delete parser;
     ++curIndex;
@@ -1098,18 +1002,6 @@ void Level::RemoveObjectFromScenarios(GameObject *aObject)
         break;
       }
     }
-  }
-}
-
-/**
- * @brief Remove object from Menus, shallow.
- * @param aObject Object to search and remove.
- */
-void Level::RemoveObjectFromMenus(GameObject *aObject)
-{
-  for(MenuIT it = mMenus.begin(); it != mMenus.end(); ++it)
-  {
-    (*it)->ShallowRemoveElementForObject(aObject);
   }
 }
 
