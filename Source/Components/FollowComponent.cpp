@@ -57,6 +57,14 @@ void FollowComponent::SetTargetName(HashString const &aTargetName)
 }
 
 /**
+ * @brief Force component to refind target
+ */
+void FollowComponent::ResetTarget()
+{
+  mTarget = nullptr;
+}
+
+/**
  * @brief Get travel time to destination
  * @return Travel Time in seconds
  */

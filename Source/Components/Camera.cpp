@@ -148,10 +148,7 @@ void Camera::Deserialize(ParserNode *aNode)
   if(aNode->Find("Height"))
     mSize.y = aNode->Find("Height")->GetValue().ToFloat();
   if(aNode->Find("Primary"))
-  {
     mPrimary = aNode->Find("Primary")->GetValue().ToBool();
-    mManager->SetPrimaryCamera(this);
-  }
   
   delete mFramebuffer;
   

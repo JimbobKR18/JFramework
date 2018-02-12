@@ -364,8 +364,9 @@ void Level::Load(Level const *aPrevLevel)
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
   
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetPrimaryCamera()->GetOwner()->GET<Transform>()->SetMaxBoundary(mMaxBoundary);
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->GetPrimaryCamera()->GetOwner()->GET<Transform>()->SetMinBoundary(mMinBoundary);
+  Camera *primaryCamera = mOwner->GetOwningApp()->GET<GraphicsManager>()->GetPrimaryCamera();
+  primaryCamera->GetOwner()->GET<Transform>()->SetMaxBoundary(mMaxBoundary);
+  primaryCamera->GetOwner()->GET<Transform>()->SetMinBoundary(mMinBoundary);
 }
 
 /**
@@ -382,9 +383,6 @@ void Level::Unload(Level const *aNextLevel)
     mOwner->GetOwningApp()->GET<SoundManager>()->StopChannel(mMusicChannel);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera(nullptr);
-  
-  // Something to consider
-  //mOwner->GetOwningApp()->GET<EffectsManager>()->RemoveEffects();
 }
 
 /**
@@ -408,9 +406,10 @@ void Level::LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const a
       mOwner->GetOwningApp()->GET<ChemistryManager>()->AddElement((*it)->GET<ChemistryElement>());
     if((*it)->GET<Camera>())
       mOwner->GetOwningApp()->GET<GraphicsManager>()->AddCamera((*it)->GET<Camera>());
-      
     if((*it)->GET<Camera>() && (*it)->GET<Camera>()->GetPrimary())
       mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera((*it)->GET<Camera>());
+    if((*it)->GET<FollowComponent>())
+      (*it)->GET<FollowComponent>()->ResetTarget();
   }
 }
 

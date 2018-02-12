@@ -254,7 +254,6 @@ void GraphicsManager::AddCamera(Camera *aCamera)
  */
 void GraphicsManager::RemoveCamera(Camera *aCamera)
 {
-  aCamera->SetPrimary(false);
   mCameras.erase(aCamera);
   if(aCamera == mPrimaryCamera)
   {

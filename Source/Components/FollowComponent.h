@@ -24,6 +24,7 @@ public:
   void SetTarget(GameObject *aTarget);
   HashString GetTargetName() const;
   void SetTargetName(HashString const &aTargetName);
+  void ResetTarget();
   float GetTime() const;
   void SetTime(float aTime);
   
