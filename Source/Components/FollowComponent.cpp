@@ -163,10 +163,6 @@ void FollowComponent::Deserialize(ParserNode *aNode)
   if(aNode->Find("Target"))
   {
     mTargetName = aNode->Find("Target")->GetValue();
-    Level *currentLevel = GetOwner()->GetManager()->GetOwningApp()->GET<LevelManager>()->GetActiveLevel();
-    
-    if(currentLevel)
-      mTarget = currentLevel->FindObject(mTargetName);
   }
 }
 
