@@ -14,6 +14,9 @@ public:
   // VIRTUAL GETTERS
   virtual int GetTextureID() const = 0;
   
+  // VIRTUAL SETTERS
+  virtual void SetShaders(GraphicsManager *aManager, HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename) = 0;
+  
   // VIRTUAL METHODS
   virtual void Generate(GraphicsManager *aManager) = 0;
   virtual void Bind() = 0;

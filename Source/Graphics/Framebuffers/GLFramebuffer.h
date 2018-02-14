@@ -45,6 +45,7 @@ public:
   
   // VIRTUALS
   virtual int GetTextureID() const;
+  virtual void SetShaders(GraphicsManager *aManager, HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
   virtual void Generate(GraphicsManager *aManager);
   virtual void Bind();
   virtual void Unbind(int aDefaultFramebuffer);

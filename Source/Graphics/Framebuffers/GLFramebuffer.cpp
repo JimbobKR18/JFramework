@@ -33,6 +33,31 @@ int GLFramebuffer::GetTextureID() const
 }
 
 /**
+ * @brief Set shaders.
+ * @param aManager Graphics manager for shader management.
+ * @param aVertexShaderFilename Vertex shader name.
+ * @param aFragmentShaderFilename Fragment shader name.
+ */
+void GLFramebuffer::SetShaders(GraphicsManager *aManager, HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
+{
+  mVertexShaderFilename = aVertexShaderFilename;
+  mFragmentShaderFilename = aFragmentShaderFilename;
+  
+  HashString shaderKey = mVertexShaderFilename + mFragmentShaderFilename;
+  if(aManager->ShaderDataExists(shaderKey))
+  {
+    ShaderData* shaderInfo = aManager->GetShaderData(shaderKey);
+    mFramebufferProgramID = shaderInfo->mProgramID;
+  }
+  else
+  {
+    ShaderData* shaderInfo = ShaderLoader::LoadShaders(mVertexShaderFilename, mFragmentShaderFilename);
+    aManager->AddShaderPairing(mVertexShaderFilename + mFragmentShaderFilename, shaderInfo);
+    mFramebufferProgramID = shaderInfo->mProgramID;
+  }
+}
+
+/**
  * @brief Generate framebuffer information.
  * @param aManager Cache shader stuff.
  */
@@ -47,18 +72,7 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   
-  HashString shaderKey = mVertexShaderFilename + mFragmentShaderFilename;
-  if(aManager->ShaderDataExists(shaderKey))
-  {
-    ShaderData* shaderInfo = aManager->GetShaderData(shaderKey);
-    mFramebufferProgramID = shaderInfo->mProgramID;
-  }
-  else
-  {
-    ShaderData* shaderInfo = ShaderLoader::LoadShaders(mVertexShaderFilename, mFragmentShaderFilename);
-    aManager->AddShaderPairing(mVertexShaderFilename + mFragmentShaderFilename, shaderInfo);
-    mFramebufferProgramID = shaderInfo->mProgramID;
-  }
+  SetShaders(aManager, mVertexShaderFilename, mFragmentShaderFilename);
   
   glGenBuffers(1, &mVertexBufferID);
   glGenBuffers(1, &mTextureBufferID);
