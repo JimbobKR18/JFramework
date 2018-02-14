@@ -24,23 +24,29 @@ public:
   typedef std::set<GameObject*> ObjectContainer;
   typedef std::vector<GameObject*> ObjectVector;
   typedef std::map<HashString, ObjectContainer> FileContainer;
+  typedef std::vector<ObjectContainer> ObjectContainerMap;
+  typedef std::set<HashString> MusicNameContainer;
+  typedef std::map<int, HashString> MusicChannelContainer;
   typedef ObjectContainer::iterator ObjectIT;
   typedef ObjectContainer::const_iterator ConstObjectIT;
   typedef FileContainer::iterator FileContainerIT;
   typedef FileContainer::const_iterator ConstFileContainerIT;
-  typedef std::vector<ObjectContainer> ObjectContainerMap;
+  typedef MusicChannelContainer::iterator MusicChannelContainerIT;
+  typedef MusicChannelContainer::const_iterator ConstMusicChannelContainerIT;
+  typedef MusicNameContainer::iterator MusicNameContainerIT;
+  typedef MusicNameContainer::const_iterator ConstMusicNameContainerIT;
 
 private:
   HashString         mName;
   HashString         mFolderName;
   HashString         mFileName;
-  HashString         mMusicName;
+  MusicNameContainer mMusicNames;
   ObjectContainerMap mObjects;
   LevelManager*      mOwner;
   TileMapGenerator*  mGenerator;
   GameObject*        mFocusTarget;
   Vector4            mClearColor;
-  int                mMusicChannel;
+  MusicChannelContainer mMusicChannels;
 
   Vector3            mMaxBoundary;
   Vector3            mMinBoundary;
@@ -54,9 +60,9 @@ public:
 
   HashString    GetName() const;
   HashString    GetFileName() const;
-  HashString    GetMusicName() const;
+  MusicNameContainer GetMusicNames() const;
   LevelManager* GetManager() const;
-  int           GetMusicChannel() const;
+  MusicChannelContainer GetMusicChannels() const;
 
   TileMapGenerator* GetTileMap() const;
   GameObject*       GetFocusTarget() const;
@@ -78,7 +84,7 @@ public:
   Vector3           GetMinBoundary() const;
 
   void              Load(Level const *aPrevLevel);
-  void              Unload(Level const *aNextLevel);
+  void              Unload(Level *aNextLevel);
   void              LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const aPlacement);
   void              UnloadObjects(ObjectContainer const &aObjects);
 

@@ -37,8 +37,8 @@ Level::Level()
 }
 
 Level::Level(LevelManager *aManager, HashString const &aFileName, HashString const &aFolderName, bool aAutoParse) :
-             mName(""), mFolderName(aFolderName), mFileName(aFileName), mMusicName(""), mObjects(),
-             mOwner(aManager), mGenerator(nullptr), mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMusicChannel(-1),
+             mName(""), mFolderName(aFolderName), mFileName(aFileName), mMusicNames(), mObjects(),
+             mOwner(aManager), mGenerator(nullptr), mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMusicChannels(),
              mMaxBoundary(0,0,0), mMinBoundary(0,0,0), mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
@@ -86,12 +86,12 @@ HashString Level::GetFileName() const
 }
 
 /**
-* @brief Get the music name.
-* @return The music name.
+* @brief Get the music names.
+* @return The music names.
 */
-HashString Level::GetMusicName() const
+Level::MusicNameContainer Level::GetMusicNames() const
 {
-  return mMusicName;
+  return mMusicNames;
 }
 
 /**
@@ -104,12 +104,12 @@ LevelManager *Level::GetManager() const
 }
 
 /**
- * @brief Get music channel
- * @return Music channel
+ * @brief Get music channels
+ * @return Music channels
  */
-int Level::GetMusicChannel() const
+Level::MusicChannelContainer Level::GetMusicChannels() const
 {
-  return mMusicChannel;
+  return mMusicChannels;
 }
 
 /**
@@ -359,8 +359,14 @@ void Level::Load(Level const *aPrevLevel)
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
     LoadObjects(mObjects[i], static_cast<ObjectPlacement>(i));
 
-  if(!mMusicName.Empty() && (!aPrevLevel || aPrevLevel->mMusicName != mMusicName))
-    mMusicChannel = mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(mMusicName, SoundManager::INFINITE_LOOPS);
+  for(MusicNameContainerIT it = mMusicNames.begin(); it != mMusicNames.end(); ++it)
+  {
+    if(!aPrevLevel || aPrevLevel->mMusicNames.find(*it) == aPrevLevel->mMusicNames.end())
+    {
+      int channel = mOwner->GetOwningApp()->GET<SoundManager>()->PlaySound(*it, SoundManager::INFINITE_LOOPS);
+      mMusicChannels[channel] = *it;
+    }
+  }
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
   
@@ -373,14 +379,20 @@ void Level::Load(Level const *aPrevLevel)
  * @brief Specify all objects to be be displayed / updated.
  * @param aNextLevel
  */
-void Level::Unload(Level const *aNextLevel)
+void Level::Unload(Level *aNextLevel)
 {
   // Unload all objects
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
     UnloadObjects(mObjects[i]);
-
-  if(!mMusicName.Empty() && (!aNextLevel || aNextLevel->mMusicName != mMusicName))
-    mOwner->GetOwningApp()->GET<SoundManager>()->StopChannel(mMusicChannel);
+    
+  for(MusicChannelContainerIT it = mMusicChannels.begin(); it != mMusicChannels.end(); ++it)
+  {
+    if(!aNextLevel || aNextLevel->mMusicNames.find(it->second) == aNextLevel->mMusicNames.end())
+      mOwner->GetOwningApp()->GET<SoundManager>()->StopChannel(it->first);
+    else if(aNextLevel)
+      aNextLevel->mMusicChannels[it->first] = it->second;
+  }
+  mMusicChannels.clear();
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera(nullptr);
 }
@@ -487,8 +499,12 @@ void Level::Serialize(Parser &aParser)
   SerializeScenarios(aParser);
   
   // Music
+  int index = 0;
   aParser.Place("Music", "");
-  aParser.Place("Music", "Song", mMusicName);
+  for(MusicNameContainerIT it = mMusicNames.begin(); it != mMusicNames.end(); ++it, ++index)
+  {
+    aParser.Place("Music", "Song_" + Common::IntToString(index), *it);
+  }
   
   // Clear color
   aParser.Place("ClearColor", "");
@@ -689,7 +705,20 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
   }
   if(parser->Find("Music"))
   {
-    mMusicName = parser->Find("Music")->Find("Song")->GetValue().ToString();
+    ParserNode *musicNode = parser->Find("Music");
+    if(musicNode->Find("Song"))
+      mMusicNames.insert(musicNode->Find("Song")->GetValue());
+    else
+    {
+      int index = 0;
+      ParserNode *songNode = musicNode->Find("Song_" + Common::IntToString(index));
+      if(songNode)
+      {
+        mMusicNames.insert(songNode->GetValue());
+        ++index;
+        songNode = musicNode->Find("Song_" + Common::IntToString(index));
+      }
+    }
   }
   if(parser->Find("Scenario"))
   {
