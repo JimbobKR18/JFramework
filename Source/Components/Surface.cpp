@@ -103,14 +103,14 @@ void Surface::SetAnimated(bool aAnimated)
 /**
  * @brief Get current animation
  * @param aAnimation Animation id to run
- * @param aRunOnce Iterates only once then stops if true.
+ * @param aBehavior Set behavior of animation (run once and stop or run and reset, etc.)
  */
-void Surface::SetAnimation(int aAnimation, bool aRunOnce)
+void Surface::SetAnimation(int aAnimation, int aBehavior)
 {
   if(mTexCoord)
   {
     mTexCoord->SetCurrentAnimation(aAnimation);
-    mTexCoord->SetRunOnce(aRunOnce);
+    mTexCoord->SetBehavior((TextureCoordinateBehavior)aBehavior);
   }
 }
 
@@ -621,6 +621,7 @@ void Surface::SerializeLUA()
 {
   SLB::Class<Surface>("Surface")
     .inherits<Component>()
+    .enumValue("Continuous", TextureCoordinateBehavior::CONTINUOUS)
     .set("SetAnimation", &Surface::SetAnimation)
     .set("SetFrameByID", &Surface::SetFrameByID)
     .set("SetAnimated", &Surface::SetAnimated)

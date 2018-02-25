@@ -12,6 +12,13 @@
 
 #include "Common.h"
 
+enum TextureCoordinateBehavior
+{
+  CONTINUOUS = 0,
+  RUN_ONCE,
+  RETURN_TO_PREVIOUS
+};
+
 class TextureCoordinates
 {
 public:
@@ -21,6 +28,7 @@ public:
 private:
   int                         mCurFrame;
   int                         mCurAnimation;
+  int                         mPrevAnimation;
   int                         mTotalFrames;
   int                         mXSize;
   int                         mYSize;
@@ -31,7 +39,7 @@ private:
   float                       mYValues[2];
   bool                        mAnimated;
   bool                        mCompleted;
-  bool                        mRunOnce;
+  TextureCoordinateBehavior   mBehavior;
   
   // <speeds>
   std::vector<float>            mSpeedModifiers;
@@ -54,6 +62,7 @@ public:
   float GetYValue(int const aIndex) const;
   float GetCurrentAnimationSpeed() const;
   int   GetCurrentAnimation() const;
+  int   GetPreviousAnimation() const;
   int   GetNumberOfAnimations() const;
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
@@ -69,7 +78,7 @@ public:
   void  SetCurrentFrame(int const aFrame);
   void  SetFrameByID(int const aFrameID);
   void  SetAnimated(bool const aAnimated);
-  void  SetRunOnce(bool const aRunOnce);
+  void  SetBehavior(TextureCoordinateBehavior const aBehavior);
   void  SetCurrentAnimationSpeed(float const aSpeed);
   void  SetXGain(int const aIndex, float const aX);
   void  SetYGain(int const aIndex, float const aY);

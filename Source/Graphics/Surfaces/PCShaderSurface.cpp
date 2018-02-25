@@ -135,7 +135,7 @@ void PCShaderSurface::LoadText(HashString const &aText)
     CreateScrollEffect(ScrollType::HORIZONTAL, GetOriginalSize());
     SetTextureCoordinateData(1, numFrames, animationSpeeds);
     GetTextureData()->SetXGain(0, 0);
-    SetAnimation(0, true);
+    SetAnimation(0, TextureCoordinateBehavior::RUN_ONCE);
     SetAnimated(true);
     transform->GetSize().x = 0;
   }

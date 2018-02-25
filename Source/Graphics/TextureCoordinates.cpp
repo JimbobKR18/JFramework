@@ -25,13 +25,14 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
                                        std::vector<int> const &aNumFrames,
                                        std::vector<std::vector<float>> const &aAnimationSpeeds) : mCurFrame(0),
                                                                                                   mCurAnimation(0),
+                                                                                                  mPrevAnimation(0),
                                                                                                   mTotalFrames(0),
                                                                                                   mXSize(aXSize),
                                                                                                   mYSize(aYSize),
                                                                                                   mCurTime(0),
                                                                                                   mAnimated(false),
                                                                                                   mCompleted(false),
-                                                                                                  mRunOnce(false),
+                                                                                                  mBehavior(TextureCoordinateBehavior::CONTINUOUS),
                                                                                                   mSpeedModifiers(),
                                                                                                   mSpeeds(),
                                                                                                   mAnimations()
@@ -107,13 +108,17 @@ void TextureCoordinates::Update(float aDT)
     {
       mCompleted = true;
       // If only run once, do not reset the frames.
-      if(!mRunOnce)
+      if(mBehavior == TextureCoordinateBehavior::RUN_ONCE)
       {
-        mCurFrame = 0;
+        mCurFrame = mAnimations[mCurAnimation] - 1;
+      }
+      else if(mBehavior == TextureCoordinateBehavior::RETURN_TO_PREVIOUS)
+      {
+        SetCurrentAnimation(mPrevAnimation);
       }
       else
       {
-        mCurFrame = mAnimations[mCurAnimation] - 1;
+        mCurFrame = 0;
       }
     }
     
@@ -158,6 +163,15 @@ float TextureCoordinates::GetCurrentAnimationSpeed() const
 int TextureCoordinates::GetCurrentAnimation() const
 {
   return mCurAnimation;
+}
+
+/**
+ * @brief Get previous animation index.
+ * @return 
+ */
+int TextureCoordinates::GetPreviousAnimation() const
+{
+  return mPrevAnimation;
 }
 
 /**
@@ -277,7 +291,12 @@ void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
     assert(!"SetCurrentAnimation: aAnimation is larger than the number of animations.");
   }
   
-  mCurAnimation = aAnimation;
+  if(aAnimation != mCurAnimation)
+  {
+    mPrevAnimation = mCurAnimation;
+    mCurAnimation = aAnimation;
+    mBehavior = TextureCoordinateBehavior::CONTINUOUS;
+  }
   mCurFrame = 0;
   mCompleted = false;
   
@@ -338,12 +357,12 @@ void TextureCoordinates::SetAnimated(bool const aAnimated)
 }
 
 /**
- * @brief Set whether or not to run the current animation only once.
+ * @brief Set animation behavior
  * @param aRunOnce
  */
-void TextureCoordinates::SetRunOnce(bool const aRunOnce)
+void TextureCoordinates::SetBehavior(TextureCoordinateBehavior const aBehavior)
 {
-  mRunOnce = aRunOnce;
+  mBehavior = aBehavior;
 }
 
 /**
