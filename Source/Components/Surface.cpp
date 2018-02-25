@@ -620,6 +620,7 @@ void Surface::Deserialize(ParserNode *aNode)
 void Surface::SerializeLUA()
 {
   SLB::Class<Surface>("Surface")
+    .inherits<Component>()
     .set("SetAnimation", &Surface::SetAnimation)
     .set("SetFrameByID", &Surface::SetFrameByID)
     .set("SetAnimated", &Surface::SetAnimated)

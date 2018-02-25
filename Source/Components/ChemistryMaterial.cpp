@@ -304,5 +304,6 @@ void ChemistryMaterial::Deserialize(ParserNode *aNode)
  */
 void ChemistryMaterial::SerializeLUA()
 {
-  SLB::Class<ChemistryMaterial>("ChemistryMaterial");
+  SLB::Class<ChemistryMaterial>("ChemistryMaterial")
+    .inherits<Component>();
 }

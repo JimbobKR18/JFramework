@@ -414,6 +414,7 @@ void PhysicsObject::Deserialize(ParserNode *aNode)
 void PhysicsObject::SerializeLUA()
 {
   SLB::Class<PhysicsObject>("PhysicsObject")
+    .inherits<Component>()
     .set("GetVelocity", &PhysicsObject::GetVelocity)
     .set("SetVelocity", &PhysicsObject::SetVelocity)
     .set("GetAcceleration", &PhysicsObject::GetAcceleration)

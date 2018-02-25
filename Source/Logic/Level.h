@@ -25,10 +25,13 @@ public:
   typedef std::vector<GameObject*> ObjectVector;
   typedef std::map<HashString, ObjectContainer> FileContainer;
   typedef std::vector<ObjectContainer> ObjectContainerMap;
+  typedef std::vector<TileMapGenerator*> TileMapGeneratorContainer;
   typedef std::set<HashString> MusicNameContainer;
   typedef std::map<int, HashString> MusicChannelContainer;
   typedef ObjectContainer::iterator ObjectIT;
   typedef ObjectContainer::const_iterator ConstObjectIT;
+  typedef TileMapGeneratorContainer::iterator TileMapGeneratorContainerIT;
+  typedef TileMapGeneratorContainer::const_iterator ConstTileMapGeneratorContainerIT;
   typedef FileContainer::iterator FileContainerIT;
   typedef FileContainer::const_iterator ConstFileContainerIT;
   typedef MusicChannelContainer::iterator MusicChannelContainerIT;
@@ -37,21 +40,21 @@ public:
   typedef MusicNameContainer::const_iterator ConstMusicNameContainerIT;
 
 private:
-  HashString         mName;
-  HashString         mFolderName;
-  HashString         mFileName;
-  MusicNameContainer mMusicNames;
-  ObjectContainerMap mObjects;
-  LevelManager*      mOwner;
-  TileMapGenerator*  mGenerator;
-  GameObject*        mFocusTarget;
-  Vector4            mClearColor;
-  MusicChannelContainer mMusicChannels;
+  HashString                 mName;
+  HashString                 mFolderName;
+  HashString                 mFileName;
+  MusicNameContainer         mMusicNames;
+  ObjectContainerMap         mObjects;
+  LevelManager*              mOwner;
+  TileMapGeneratorContainer  mGenerators;
+  GameObject*                mFocusTarget;
+  Vector4                    mClearColor;
+  MusicChannelContainer      mMusicChannels;
 
-  Vector3            mMaxBoundary;
-  Vector3            mMinBoundary;
+  Vector3                    mMaxBoundary;
+  Vector3                    mMinBoundary;
   
-  FileContainer      mScenarios;
+  FileContainer              mScenarios;
 
 public:
   Level();
@@ -64,7 +67,7 @@ public:
   LevelManager* GetManager() const;
   MusicChannelContainer GetMusicChannels() const;
 
-  TileMapGenerator* GetTileMap() const;
+  TileMapGenerator* GetTileMap(int const aIndex = 0) const;
   GameObject*       GetFocusTarget() const;
   void              SetFocusTarget(GameObject *aObject);
   GameObject*       FindObject(HashString const &aObjectName);
@@ -95,7 +98,6 @@ public:
   virtual void      Serialize(Parser &aParser);
   virtual void      ReceiveMessage(Message const& aMessage);
   virtual void      SendMessage(Message const& aMessage);
-  void              SerializeTileMap(Parser &aParser);
 
   static void       SerializeLUA();
 
@@ -128,7 +130,7 @@ private:
   void              ParseFollowComponent(GameObject *aObject, ParserNode* aFollowComponent);
   void              ParseEffects(GameObject *aObject, ParserNode *aEffects);
   void              ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript);
-  void              ParseTileGenerator(Parser *aParser);
+  void              ParseTileGenerator(ParserNode *aTileMap);
 };
 
 #endif

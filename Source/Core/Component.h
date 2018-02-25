@@ -1,11 +1,3 @@
-//
-//  Component.h
-//  JFramework
-//
-//  Created by Jimmy Spencer on 9/1/12.
-//
-//
-
 #ifndef __JFramework__Component__
 #define __JFramework__Component__
 
@@ -14,7 +6,6 @@
 #include "Parser.h"
 #include <assert.h>
 
-#define OWNER_CHECK() if(mOwner && aOwner != nullptr) assert(!"This component already has an owner.")
 #define DEFAULT_COMPONENT_UID 0
 
 class Component
@@ -24,14 +15,14 @@ private:
   int mUID;
 
 public:
-  Component() {assert(!"Not supported.");}
-  Component(int const &aUID) : mOwner(nullptr), mUID(aUID) {}
-  Component(Component const &aComponent) : mOwner(aComponent.mOwner) {}
-  virtual ~Component() {}
+  Component();
+  Component(int const &aUID);
+  Component(Component const &aComponent);
+  virtual ~Component();
 
-  GameObject*         GetOwner() const {return mOwner;}
-  void                SetOwner(GameObject *aOwner) {OWNER_CHECK(); mOwner = aOwner;}
-  int                 GetDefinedUID() {return mUID;}
+  GameObject*         GetOwner() const;
+  void                SetOwner(GameObject *aOwner);
+  int                 GetDefinedUID();
 
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;
@@ -39,6 +30,7 @@ public:
   virtual void        Serialize(ParserNode *aNode) = 0;
   virtual void        Deserialize(ParserNode *aNode) = 0;
   static int          GetUID() {return DEFAULT_COMPONENT_UID;}
+  static void         SerializeLUA();
 };
 
 #endif /* defined(__JFramework__Component__) */

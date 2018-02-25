@@ -235,5 +235,6 @@ void ChemistryElement::Deserialize(ParserNode *aNode)
  */
 void ChemistryElement::SerializeLUA()
 {
-  SLB::Class<ChemistryElement>("ChemistryElement");
+  SLB::Class<ChemistryElement>("ChemistryElement")
+    .inherits<Component>();
 }

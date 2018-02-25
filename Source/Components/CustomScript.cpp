@@ -103,5 +103,6 @@ void CustomScript::Deserialize(ParserNode *aNode)
  */
 void CustomScript::SerializeLUA()
 {
-  SLB::Class<Surface>("CustomScript");
+  SLB::Class<Surface>("CustomScript")
+    .inherits<Component>();
 }

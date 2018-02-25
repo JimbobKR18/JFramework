@@ -38,7 +38,7 @@ Level::Level()
 
 Level::Level(LevelManager *aManager, HashString const &aFileName, HashString const &aFolderName, bool aAutoParse) :
              mName(""), mFolderName(aFolderName), mFileName(aFileName), mMusicNames(), mObjects(),
-             mOwner(aManager), mGenerator(nullptr), mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMusicChannels(),
+             mOwner(aManager), mGenerators(), mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mMusicChannels(),
              mMaxBoundary(0,0,0), mMinBoundary(0,0,0), mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
@@ -63,8 +63,9 @@ Level::Level(LevelManager *aManager, HashString const &aFileName, HashString con
 Level::~Level()
 {
   DeleteObjects();
-  if(mGenerator)
-    delete mGenerator;
+  for(TileMapGeneratorContainerIT it = mGenerators.begin(); it != mGenerators.end(); ++it)
+    delete *it;
+  mGenerators.clear();
 }
 
 /**
@@ -114,11 +115,18 @@ Level::MusicChannelContainer Level::GetMusicChannels() const
 
 /**
  * @brief Get the tile map generator. You can get individual tiles and other helperful things here.
+ * @param aIndex Which tile map to get.
  * @return The tile map generator.
  */
-TileMapGenerator* Level::GetTileMap() const
+TileMapGenerator* Level::GetTileMap(int const aIndex) const
 {
-  return mGenerator;
+  if(aIndex < 0 || aIndex >= mGenerators.size())
+  {
+    DebugLogPrint("TileMapGenerator index %d out of bounds. (Level.cpp GetTileMap)", aIndex);
+    assert(!"TileMapGenerator index out of bounds. (Level.cpp GetTileMap)");
+  }
+    
+  return mGenerators[aIndex];
 }
 
 /**
@@ -463,10 +471,8 @@ void Level::Update()
   mObjects[ObjectPlacement::REPLACEABLE].clear();
   
   // Update tile animations if possible
-  if(mGenerator)
-  {
-    mGenerator->Update();
-  }
+  for(TileMapGeneratorContainerIT it = mGenerators.begin(); it != mGenerators.end(); ++it)
+    (*it)->Update();
 }
 
 /**
@@ -485,8 +491,16 @@ void Level::ParseAdditionalData(ParserNode *aRoot, GameObject *aObject)
  */
 void Level::Serialize(Parser &aParser)
 {
-  if(mGenerator)
-    mGenerator->Serialize(aParser.GetBaseRoot());
+  // Place tile map generators.
+  int index = 0;
+  aParser.GetBaseRoot()->Place("TileMapGenerators", "");
+  ParserNode *tileMapGenerators = aParser.GetBaseRoot()->Find("TileMapGenerators");
+  for(TileMapGeneratorContainerIT it = mGenerators.begin(); it != mGenerators.end(); ++it, ++index)
+  {
+    HashString tileMapGenerator = "TileMapGenerator_" + Common::IntToString(index);
+    tileMapGenerators->Place(tileMapGenerator, "");
+    (*it)->Serialize(tileMapGenerators->Find(tileMapGenerator));
+  }
     
   // For each object not in a scenario, place in default scenario.
   for(ObjectIT it = mObjects[ObjectPlacement::DEFAULT].begin(); it != mObjects[ObjectPlacement::DEFAULT].end(); ++it)
@@ -499,7 +513,7 @@ void Level::Serialize(Parser &aParser)
   SerializeScenarios(aParser);
   
   // Music
-  int index = 0;
+  index = 0;
   aParser.Place("Music", "");
   for(MusicNameContainerIT it = mMusicNames.begin(); it != mMusicNames.end(); ++it, ++index)
   {
@@ -533,22 +547,6 @@ void Level::ReceiveMessage(Message const& aMessage)
 void Level::SendMessage(Message const& aMessage) 
 {
   GetManager()->SendMessage(aMessage);
-}
-
-/**
- * @brief Serialize the tile map portion of level to another file.
- * @param aParser
- */
-void Level::SerializeTileMap(Parser &aParser)
-{
-  if(!mGenerator)
-  {
-    DebugLogPrint("No TileMapGenerator available to Serialize in Level::SerializeTileMap");
-    return;
-  }
-  aParser.Place("MapArtData", Common::IntVectorToString(mGenerator->GetArtTiles()));
-  aParser.Place("Collision", Common::IntVectorToString(mGenerator->GetCollisionTiles()));
-  aParser.Place("CollisionShapes", Common::IntVectorToString(mGenerator->GetCollisionShapes()));
 }
 
 /**
@@ -699,9 +697,22 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     curRoot = parser->Find(tempIndex);
   }
 
+  // One or many tile maps, doesn't matter.
   if(parser->Find("TileMapGenerator"))
   {
-    ParseTileGenerator(parser);
+    ParseTileGenerator(parser->Find("TileMapGenerator"));
+  }
+  else if(parser->Find("TileMapGenerators"))
+  {
+    ParserNode* tileMapGenerators = parser->Find("TileMapGenerators");
+    int tileMapIndex = 0;
+    HashString const TILEMAPGENERATOR = "TileMapGenerator_";
+    
+    while(tileMapGenerators->Find(TILEMAPGENERATOR + Common::IntToString(tileMapIndex)))
+    {
+      ParseTileGenerator(tileMapGenerators->Find(TILEMAPGENERATOR + Common::IntToString(tileMapIndex)));
+      ++tileMapIndex;
+    }
   }
   if(parser->Find("Music"))
   {
@@ -1188,11 +1199,10 @@ void Level::ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript)
 
 /**
  * @brief Create tile generator helper.
- * @param aParser
+ * @param aTileMap
  */
-void Level::ParseTileGenerator(Parser *aParser)
+void Level::ParseTileGenerator(ParserNode *aTileMap)
 {
-  ParserNode* tileMap = aParser->Find("TileMapGenerator");
   HashString value, empty;
   int width, height, tileSize;
   HashString file, frameDataFilename, settingsDataFileName;
@@ -1201,12 +1211,13 @@ void Level::ParseTileGenerator(Parser *aParser)
   std::unordered_map<int, std::vector<int>> animations;
   std::unordered_map<int, HashString> materialInfo;
   float tileAnimationSpeed = 0.0f;
+  float zOffset = 0;
 
-  width = tileMap->Find("Width")->GetValue().ToInt();
-  height = tileMap->Find("Height")->GetValue().ToInt();
-  tileSize = tileMap->Find("TileSize")->GetValue().ToInt();
-  file = tileMap->Find("Image")->GetValue();
-  frameDataFilename = tileMap->Find("Data")->GetValue();
+  width = aTileMap->Find("Width")->GetValue().ToInt();
+  height = aTileMap->Find("Height")->GetValue().ToInt();
+  tileSize = aTileMap->Find("TileSize")->GetValue().ToInt();
+  file = aTileMap->Find("Image")->GetValue();
+  frameDataFilename = aTileMap->Find("Data")->GetValue();
   
   // Reserve the tilemap data to avoid reallocs.
   int totalAllocation = width * height;
@@ -1214,13 +1225,19 @@ void Level::ParseTileGenerator(Parser *aParser)
   collision.reserve(totalAllocation);
   shapes.reserve(totalAllocation);
   
+  // If there's ZOffset data, use it.
+  if(aTileMap->Find("ZOffset"))
+  {
+    zOffset = aTileMap->Find("ZOffset")->GetValue().ToFloat();
+  }
+  
   // If there's setting data, parse it in and use it.
-  if(tileMap->Find("SettingsFile"))
+  if(aTileMap->Find("SettingsFile"))
   {
     HashString const height = "Height_";
     HashString const animation = "Animation_";
     HashString const material = "Material_";
-    settingsDataFileName = tileMap->Find("SettingsFile")->GetValue();
+    settingsDataFileName = aTileMap->Find("SettingsFile")->GetValue();
     Parser *settingsData = ParserFactory::CreateInputParser("Maps", settingsDataFileName);
     
     // Heightmap
@@ -1281,9 +1298,9 @@ void Level::ParseTileGenerator(Parser *aParser)
   }
   delete tileMapData;
 
-  mGenerator = new TileMapGenerator(width, height, tileSize,
-                                   file, frameDataFilename,
+  mGenerators.push_back(new TileMapGenerator(width, height, tileSize,
+                                   zOffset, file, frameDataFilename,
                                    frames, collision, shapes,
                                    materials, heights, materialInfo,
-                                   animations, tileAnimationSpeed, this);
+                                   animations, tileAnimationSpeed, this));
 }

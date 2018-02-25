@@ -24,7 +24,7 @@ TileMapGenerator::TileMapGenerator()
   assert(0);
 }
 
-TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
+TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float aZOffset,
                                    HashString const &aImageName,
                                    HashString const &aDataName,
                                    std::vector<int> const &aTiles,
@@ -35,8 +35,8 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize,
                                    std::unordered_map<int, HashString> const &aMaterialNames,
                                    std::unordered_map<int, std::vector<int>> const &aAnimations,
                                    float const aAnimationSpeed, Level *aOwner) :
-                                   mWidth(aWidth), mHeight(aHeight),
-                                   mTileSize(aTileSize), mImageName(aImageName),
+                                   mWidth(aWidth), mHeight(aHeight), mTileSize(aTileSize), 
+                                   mZOffset(aZOffset), mImageName(aImageName),
                                    mDataName(aDataName), mTiles(aTiles),
                                    mCollisionData(aCollisionData), mCollisionShapes(aCollisionShapes),
                                    mTileHeights(aTileHeights), mObjects(),
@@ -296,14 +296,12 @@ std::vector<int> TileMapGenerator::GetIndices(int const aX, int const aY, int co
  */
 void TileMapGenerator::Serialize(ParserNode *aNode)
 {
-  aNode->Place("TileMapGenerator", "");
-  
-  ParserNode *tileMapNode = aNode->Find("TileMapGenerator");
-  tileMapNode->Place("Width", Common::IntToString(mWidth));
-  tileMapNode->Place("Height", Common::IntToString(mHeight));
-  tileMapNode->Place("TileSize", Common::IntToString(mTileSize));
-  tileMapNode->Place("Image", mImageName);
-  tileMapNode->Place("Data", mDataName);
+  aNode->Place("Width", Common::IntToString(mWidth));
+  aNode->Place("Height", Common::IntToString(mHeight));
+  aNode->Place("TileSize", Common::IntToString(mTileSize));
+  aNode->Place("ZOffset", Common::FloatToString(mZOffset));
+  aNode->Place("Image", mImageName);
+  aNode->Place("Data", mDataName);
 }
 
 /**
@@ -367,7 +365,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       
       Transform *transform = obj->GET<Transform>();
       Vector3 position = Vector3(-halfX + (mTileSize * 2 * x),
-                                 -halfY + (mTileSize * 2 * y), zPos);
+                                 -halfY + (mTileSize * 2 * y), zPos + mZOffset);
       transform->SetPosition(position);
       transform->SetSize(aTileSize);
       

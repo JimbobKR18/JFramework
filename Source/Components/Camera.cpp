@@ -166,6 +166,7 @@ void Camera::Deserialize(ParserNode *aNode)
 void Camera::SerializeLUA()
 {
   SLB::Class<Camera>("Camera")
+    .inherits<Component>()
     .set("GetSize", &Camera::GetSize)
     .set("SetSize", &Camera::SetSize)
     .set("GetOffset", &Camera::GetOffset)

@@ -72,12 +72,13 @@ private:
   int                               mWidth;
   int                               mHeight;
   int                               mTileSize;
+  float                             mZOffset;
   HashString                        mImageName;
   HashString                        mDataName;
   std::vector<int>                  mTiles;
   std::vector<int>                  mCollisionData;
   std::vector<int>                  mCollisionShapes;
-  std::unordered_map<int, float>              mTileHeights;
+  std::unordered_map<int, float>    mTileHeights;
   std::vector<GameObject*>          mObjects;
 
   // Animated tiles
@@ -96,7 +97,7 @@ private:
   
 public:
   TileMapGenerator();
-  TileMapGenerator(int aWidth, int aHeight, int aTileSize,
+  TileMapGenerator(int aWidth, int aHeight, int aTileSize, float aZOffset,
                    HashString const &aImageName,
                    HashString const &aDataName,
                    std::vector<int> const &aTiles,

@@ -530,14 +530,15 @@ void Transform::Deserialize(ParserNode *aNode)
 void Transform::SerializeLUA()
 {
   SLB::Class<Transform>("Transform").constructor()
-          .set("GetPosition", &Transform::GetPosition)
-          .set("GetRotation", &Transform::GetRotation)
-          .set("GetScale", &Transform::GetScale)
-          .set("GetSize", &Transform::GetSize)
-          .set("SetPosition", &Transform::SetPosition)
-          .set("SetRotation", &Transform::SetRotation)
-          .set("SetScale", &Transform::SetScale)
-          .set("SetSize", &Transform::SetSize);
+    .inherits<Component>()
+    .set("GetPosition", &Transform::GetPosition)
+    .set("GetRotation", &Transform::GetRotation)
+    .set("GetScale", &Transform::GetScale)
+    .set("GetSize", &Transform::GetSize)
+    .set("SetPosition", &Transform::SetPosition)
+    .set("SetRotation", &Transform::SetRotation)
+    .set("SetScale", &Transform::SetScale)
+    .set("SetSize", &Transform::SetSize);
 }
 
 /**

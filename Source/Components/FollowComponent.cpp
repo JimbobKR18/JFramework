@@ -173,6 +173,7 @@ void FollowComponent::Deserialize(ParserNode *aNode)
 void FollowComponent::SerializeLUA()
 {
   SLB::Class<FollowComponent>("FollowComponent")
+    .inherits<Component>()
     .set("GetTarget", &FollowComponent::GetTarget)
     .set("SetTarget", &FollowComponent::SetTarget)
     .set("GetTargetName", &FollowComponent::GetTargetName)

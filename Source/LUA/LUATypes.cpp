@@ -90,6 +90,9 @@ namespace LUABind
     RelativeRoundAboutInterpolation<Vector3>::SerializeLUA();
     RelativeRoundAboutInterpolation<Vector4>::SerializeLUA();
 
+    // Component
+    Component::SerializeLUA();
+
     // Transform
     Transform::SerializeLUA();
     
