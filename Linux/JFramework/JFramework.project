@@ -79,6 +79,7 @@
       <File Name="../../Source/Core/Interpolations/RelativeLinearInterpolation.h"/>
       <File Name="../../Source/Core/Interpolations/RelativeRoundAboutInterpolation.h"/>
     </VirtualDirectory>
+    <File Name="../../Source/Core/Component.cpp"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
