@@ -820,7 +820,7 @@ void Level::LoadScenario(HashString const &aFileName)
   }
   else
   {
-    DebugLogPrint("%s scenario file not found", aFileName.ToCharArray());
+    DebugLogPrint("%s scenario file not found\n", aFileName.ToCharArray());
     assert(!"Scenario file not found.");
   }
 }
@@ -849,7 +849,7 @@ void Level::UnloadScenario(HashString const &aFileName)
   }
   else
   {
-    DebugLogPrint("%s scenario file not found", aFileName.ToCharArray());
+    DebugLogPrint("%s scenario file not found\n", aFileName.ToCharArray());
     assert(!"Scenario file not found.");
   }
 }
@@ -867,7 +867,7 @@ Level::ObjectContainer* Level::GetScenario(HashString const &aFileName)
   }
   else
   {
-    DebugLogPrint("%s scenario file not found", aFileName.ToCharArray());
+    DebugLogPrint("%s scenario file not found\n", aFileName.ToCharArray());
     return nullptr;
   }
 }
