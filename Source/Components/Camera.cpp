@@ -143,12 +143,19 @@ void Camera::Serialize(ParserNode *aNode)
  */
 void Camera::Deserialize(ParserNode *aNode)
 {
+  HashString vertexShaderFileName = SystemProperties::GetFramebufferVertexShaderName();
+  HashString fragmentShaderFileName = SystemProperties::GetFramebufferFragmentShaderName();
+  
   if(aNode->Find("Width"))
     mSize.x = aNode->Find("Width")->GetValue().ToFloat();
   if(aNode->Find("Height"))
     mSize.y = aNode->Find("Height")->GetValue().ToFloat();
   if(aNode->Find("Primary"))
     mPrimary = aNode->Find("Primary")->GetValue().ToBool();
+  if(aNode->Find("VertexShader"))
+    vertexShaderFileName = aNode->Find("VertexShader")->GetValue();
+  if(aNode->Find("FragmentShader"))
+    fragmentShaderFileName = aNode->Find("FragmentShader")->GetValue();
   
   delete mFramebuffer;
   
@@ -156,6 +163,7 @@ void Camera::Deserialize(ParserNode *aNode)
   mFramebuffer = new GLFramebuffer(mSize.x, mSize.y);
   #endif
   
+  mFramebuffer->SetShaders(mManager, vertexShaderFileName, fragmentShaderFileName);
   mFramebuffer->Generate(mManager);
 }
   
