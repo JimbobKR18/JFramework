@@ -676,7 +676,8 @@ bool PCShaderScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
 }
 
 /**
- * @brief Set shader properties based on surface.
+ * @brief Set shader properties based on surface. HINT: If you're not seeing your intended results, remember
+ *        to declare the field as uniform in your shader.
  * @param aSurface Surface to set properties for.
  * @param aActive Decide whether or not to set values or reset.
  */
