@@ -236,8 +236,10 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
   }
 
   // Create text texture
-  SDL_Color fgColor = {(Uint8)aForegroundColor.x, (Uint8)aForegroundColor.y, (Uint8)aForegroundColor.z, (Uint8)aForegroundColor.w};
-  SDL_Color bgColor = {(Uint8)aBackgroundColor.x, (Uint8)aBackgroundColor.y, (Uint8)aBackgroundColor.z, (Uint8)aBackgroundColor.w};
+  Vector4 foregroundColor = aForegroundColor * 255.0f;
+  Vector4 backgroundColor = aBackgroundColor * 255.0f;
+  SDL_Color fgColor = {(Uint8)foregroundColor.x, (Uint8)foregroundColor.y, (Uint8)foregroundColor.z, (Uint8)foregroundColor.w};
+  SDL_Color bgColor = {(Uint8)backgroundColor.x, (Uint8)backgroundColor.y, (Uint8)backgroundColor.z, (Uint8)backgroundColor.w};
   SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(font, aText.ToCharArray(), fgColor, aMaxWidth);
   if(!msg)
   {
