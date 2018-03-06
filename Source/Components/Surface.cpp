@@ -405,10 +405,21 @@ void Surface::Deserialize(ParserNode *aNode)
   bool frameBased = false;
   int numAnimations = 1;
   int startingAnimation = 0;
-  std::vector<std::vector<float>> animationSpeed;
+  std::vector<TextureCoordinates::SpeedContainer> animationSpeed;
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
+  // Autofill values if already in place.
+  if(mTexCoord)
+  {
+    numFrames.clear();
+    animated = mTexCoord->GetAnimated();
+    numAnimations = mTexCoord->GetNumberOfAnimations();
+    animationSpeed = mTexCoord->GetAllAnimationHolds();
+    numFrames = mTexCoord->GetAllAnimationFrameCounts();
+  }
+  
+  // File sifting.
   if(aNode->Find("FrameBased"))
   {
     frameBased = aNode->Find("FrameBased")->GetValue().ToBool();
@@ -428,6 +439,9 @@ void Surface::Deserialize(ParserNode *aNode)
   // Supports compatibility mode with old and really old files, support single animation speed or multiple.
   if(aNode->Find("AnimationSpeeds") && aNode->Find("AnimationSpeeds")->Find("Animation_0"))
   {
+    // Clear animation speed.
+    animationSpeed.clear();
+    
     // Optional parameter to change the animation speeds.
     HashString const nodeName = "Animation_";
     int index = 0;
@@ -455,6 +469,9 @@ void Surface::Deserialize(ParserNode *aNode)
   }
   else if(aNode->Find("AnimationSpeeds"))
   {
+    // Clear animation speed.
+    animationSpeed.clear();
+    
     // Optional parameter to change the animation speeds.
     ParserNode* animationSpeedNode = aNode->Find("AnimationSpeeds");
     std::vector<float> singleSpeeds = animationSpeedNode->GetValue().ToFloatVector();
@@ -471,6 +488,9 @@ void Surface::Deserialize(ParserNode *aNode)
   }
   else if(aNode->Find("AnimationSpeed"))
   {
+    // Clear animation speed.
+    animationSpeed.clear();
+    
     // Optional parameter to change the animation speed, using a single number.
     ParserNode* animationSpeedNode = aNode->Find("AnimationSpeed");
     for(int i = 0; i < numAnimations; ++i)
@@ -485,6 +505,9 @@ void Surface::Deserialize(ParserNode *aNode)
   }
   else
   {
+    // Clear animation speed.
+    animationSpeed.clear();
+    
     // Default to DT
     for(int i = 0; i < numAnimations; ++i)
     {

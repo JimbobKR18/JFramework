@@ -66,9 +66,11 @@ public:
   int   GetNumberOfAnimations() const;
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
+  std::vector<int> GetAllAnimationFrameCounts() const;
   int   GetCurrentFrame() const;
   float GetAnimationSpeed(int const aAnimation) const;
   SpeedContainer const GetAnimationHolds(int const aAnimation) const;
+  std::vector<SpeedContainer> const GetAllAnimationHolds() const;
   float GetTimeToFrame(int const aAnimation, int const aFrame) const;
   bool  GetCompleted() const;
   bool  GetAnimated() const;

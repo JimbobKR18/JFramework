@@ -203,6 +203,15 @@ int TextureCoordinates::GetAnimationFrameCounts(int const aAnimation) const
 }
 
 /**
+ * @brief Get number of frames for all animations.
+ * @return Animation frame counts.
+ */
+std::vector<int> TextureCoordinates::GetAllAnimationFrameCounts() const
+{
+  return mAnimations;
+}
+
+/**
  * @brief Get current frame in animation.
  * @return Current frame.
  */
@@ -229,6 +238,15 @@ float TextureCoordinates::GetAnimationSpeed(int const aAnimation) const
 TextureCoordinates::SpeedContainer const TextureCoordinates::GetAnimationHolds(int const aAnimation) const
 {
   return mSpeeds[mCurAnimation];
+}
+
+/**
+ * @brief Get holds for all animations.
+ * @return All animation holds.
+ */
+std::vector<TextureCoordinates::SpeedContainer> const TextureCoordinates::GetAllAnimationHolds() const
+{
+  return mSpeeds;
 }
 
 /**
