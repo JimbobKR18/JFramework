@@ -503,11 +503,8 @@ void Surface::Deserialize(ParserNode *aNode)
       }
     }
   }
-  else
+  else if(animationSpeed.empty())
   {
-    // Clear animation speed.
-    animationSpeed.clear();
-    
     // Default to DT
     for(int i = 0; i < numAnimations; ++i)
     {
