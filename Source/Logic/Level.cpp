@@ -315,6 +315,11 @@ void Level::ResetLevel()
   GraphicsManager *graphicsManager = GetManager()->GetOwningApp()->GET<GraphicsManager>();
   graphicsManager->SetPrimaryCamera(nullptr);
   
+  // Delete tile maps.
+  for(TileMapGeneratorContainerIT it = mGenerators.begin(); it != mGenerators.end(); ++it)
+    delete *it;
+  mGenerators.clear();
+  
   // Delete objects and reload.
   DeleteObjects();
   ParseBaseFile();
