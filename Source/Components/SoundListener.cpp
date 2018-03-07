@@ -1,4 +1,5 @@
 #include "SoundListener.h"
+#include "LUATypes.h"
 
 int const SoundListener::sUID = Common::StringHashFunction("SoundListener");
 
@@ -48,3 +49,13 @@ void SoundListener::Serialize(ParserNode* aNode)
 void SoundListener::Deserialize(ParserNode* aNode)
 {
 }
+
+/**
+ * @brief Make this object usable in LUA
+ */
+void SoundListener::SerializeLUA()
+{
+  SLB::Class<SoundListener>("SoundListener")
+    .inherits<Component>();
+}
+

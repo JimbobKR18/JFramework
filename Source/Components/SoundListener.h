@@ -13,12 +13,15 @@ public:
   SoundListener();
   virtual ~SoundListener();
 
+  // VIRTUALS
   virtual void Update();
   virtual void ReceiveMessage(Message const& aMessage);
   virtual void SendMessage(Message const& aMessage);
   virtual void Serialize(ParserNode* aNode);
   virtual void Deserialize(ParserNode* aNode);
   
+  // STATICS
+  static void SerializeLUA();
   static int GetUID() {return sUID;}
 };
 

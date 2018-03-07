@@ -52,6 +52,8 @@ public:
   virtual void Serialize(ParserNode* aNode);
   virtual void Deserialize(ParserNode* aNode);
   
+  // STATICS
+  static void SerializeLUA();
   static int GetUID() {return sUID;}
 };
 

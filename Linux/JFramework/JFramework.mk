@@ -5,7 +5,7 @@
 ## Debug
 ProjectName            :=JFramework
 ConfigurationName      :=Debug
-WorkspacePath          :=/home/jimmy/Documents/project-chang-e/Linux/Chang-e
+WorkspacePath          :=/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth
 ProjectPath            :=/home/jimmy/Documents/JFramework/Linux/JFramework
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
@@ -88,8 +88,8 @@ $(OutputFile): $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	@echo $(Objects1) >> $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
-	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug"
-	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug/JFramework"
+	@$(MakeDirCommand) "/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth/.build-debug"
+	@echo rebuilt > "/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth/.build-debug/JFramework"
 
 MakeIntermediateDirs:
 	@test -d ./Debug || $(MakeDirCommand) ./Debug

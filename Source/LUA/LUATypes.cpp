@@ -16,6 +16,8 @@
 #include "Components/CustomScript.h"
 #include "Components/Camera.h"
 #include "Components/FollowComponent.h"
+#include "Components/SoundEmitter.h"
+#include "Components/SoundListener.h"
 #include "Core/GameObject.h"
 #include "Managers/SoundManager.h"
 #include "Managers/InputManager.h"
@@ -113,6 +115,10 @@ namespace LUABind
     
     // CustomScript
     CustomScript::SerializeLUA();
+    
+    // Sound
+    SoundEmitter::SerializeLUA();
+    SoundListener::SerializeLUA();
     
     // FollowComponent
     FollowComponent::SerializeLUA();

@@ -3,6 +3,7 @@
 #include "SoundManager.h"
 #include "ObjectManager.h"
 #include "CollisionMessage.h"
+#include "LUATypes.h"
 
 int const SoundEmitter::sUID = Common::StringHashFunction("SoundEmitter");
 
@@ -15,36 +16,64 @@ SoundEmitter::~SoundEmitter()
 {
 }
 
+/**
+ * @brief Get emit pattern for emitter.
+ * @return Emit pattern.
+ */
 SoundEmitPattern SoundEmitter::GetSoundEmitPattern() const
 {
   return mPattern;
 }
 
+/**
+ * @brief Get name of sound that will play.
+ * @return Name of sound.
+ */
 HashString SoundEmitter::GetSoundName() const
 {
   return mSoundName;
 }
 
+/**
+ * @brief Get origin point of sound for emitter.
+ * @return Origin point, in local space.
+ */
 Vector3 SoundEmitter::GetSoundOrigin() const
 {
   return mSoundOrigin;
 }
 
+/**
+ * @brief Get channel sound is playing on.
+ * @return Channel sound is playing on, if not playing, returns -1.
+ */
 int SoundEmitter::GetChannel() const
 {
   return mChannel;
 }
 
+/**
+ * @brief Set sound emit pattern.
+ * @param aPattern Sound emit pattern.
+ */
 void SoundEmitter::SetSoundEmitPattern(SoundEmitPattern const &aPattern)
 {
   mPattern = aPattern;
 }
 
+/**
+ * @brief Set sound name.
+ * @param aSoundName Name of sound.
+ */
 void SoundEmitter::SetSoundName(HashString const &aSoundName)
 {
   mSoundName = aSoundName;
 }
 
+/**
+ * @brief Set location of where sound plays from.
+ * @param aSoundOrigin Origin point in local space.
+ */
 void SoundEmitter::SetSoundOrigin(Vector3 const &aSoundOrigin)
 {
   mSoundOrigin = aSoundOrigin;
@@ -180,4 +209,18 @@ void SoundEmitter::Deserialize(ParserNode* aNode)
       assert(!"Invalid SoundEmitPattern type passed into SoundEmitter Deserialize.");
     }
   }
+}
+
+/**
+ * @brief Make this object usable in LUA
+ */
+void SoundEmitter::SerializeLUA()
+{
+  SLB::Class<SoundEmitter>("SoundEmitter")
+    .inherits<Component>()
+    .set("GetSoundName", &SoundEmitter::GetSoundName)
+    .set("GetSoundOrigin", &SoundEmitter::GetSoundOrigin)
+    .set("GetChannel", &SoundEmitter::GetChannel)
+    .set("SetSoundName", &SoundEmitter::SetSoundName)
+    .set("SetSoundOrigin", &SoundEmitter::SetSoundOrigin);
 }
