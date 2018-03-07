@@ -75,6 +75,7 @@ private:
   float                             mZOffset;
   HashString                        mImageName;
   HashString                        mDataName;
+  Vector3                           mCollisionOffset;
   std::vector<int>                  mTiles;
   std::vector<int>                  mCollisionData;
   std::vector<int>                  mCollisionShapes;
@@ -100,6 +101,7 @@ public:
   TileMapGenerator(int aWidth, int aHeight, int aTileSize, float aZOffset,
                    HashString const &aImageName,
                    HashString const &aDataName,
+                   Vector3 const &aCollisionOffset,
                    std::vector<int> const &aTiles,
                    std::vector<int> const &aCollisionData, 
                    std::vector<int> const &aCollisionShapes,
@@ -136,8 +138,8 @@ private:
                       unsigned const aXEnd, unsigned const aYEnd, Vector3 const &aTileSize, 
                       ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager);
   PhysicsObject*    CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
-                      Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, 
-                      float aZPos);
+                      Transform *aTransform, Vector3 const &aZeroVector, Vector3 const &aCollisionOffset, 
+                      unsigned const aCollisionDataVectorSize, float aZPos);
   ChemistryMaterial* CreateMaterialAtIndex(unsigned const aIndex, ChemistryManager *aChemistryManager);
 };
 

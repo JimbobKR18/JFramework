@@ -27,6 +27,7 @@ TileMapGenerator::TileMapGenerator()
 TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float aZOffset,
                                    HashString const &aImageName,
                                    HashString const &aDataName,
+                                   Vector3 const &aCollisionOffset,
                                    std::vector<int> const &aTiles,
                                    std::vector<int> const &aCollisionData,
                                    std::vector<int> const &aCollisionShapes,
@@ -36,7 +37,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float
                                    std::unordered_map<int, std::vector<int>> const &aAnimations,
                                    float const aAnimationSpeed, Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight), mTileSize(aTileSize), 
-                                   mZOffset(aZOffset), mImageName(aImageName),
+                                   mZOffset(aZOffset), mImageName(aImageName), mCollisionOffset(aCollisionOffset),
                                    mDataName(aDataName), mTiles(aTiles),
                                    mCollisionData(aCollisionData), mCollisionShapes(aCollisionShapes),
                                    mTileHeights(aTileHeights), mObjects(),
@@ -296,10 +297,14 @@ std::vector<int> TileMapGenerator::GetIndices(int const aX, int const aY, int co
  */
 void TileMapGenerator::Serialize(ParserNode *aNode)
 {
+  HashString offsetString = Common::FloatToString(mCollisionOffset.x) + "," +
+                            Common::FloatToString(mCollisionOffset.y) + "," +
+                            Common::FloatToString(mCollisionOffset.z);
   aNode->Place("Width", Common::IntToString(mWidth));
   aNode->Place("Height", Common::IntToString(mHeight));
   aNode->Place("TileSize", Common::IntToString(mTileSize));
   aNode->Place("ZOffset", Common::FloatToString(mZOffset));
+  aNode->Place("CollisionOffset", offsetString);
   aNode->Place("Image", mImageName);
   aNode->Place("Data", mDataName);
 }
@@ -385,7 +390,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
           (mCollisionShapes.size() > i && mCollisionShapes[i] != CollisionShapes::EMPTY))
       {
         PhysicsObject *physics = CreatePhysicsAtIndex(i, aPhysicsWorld, transform, 
-          zeroVector, collisionDataVectorSize, zPos);
+          zeroVector, mCollisionOffset, collisionDataVectorSize, zPos);
         
         // Set ignore list for physics
         physics->SetIgnoreList(ignoreContainer);
@@ -426,12 +431,14 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
  * @param aPhysicsWorld Physics manager.
  * @param aTransform Transform of object.
  * @param aZeroVector Empty vector.
+ * @param aCollisionOffset Collision box offset vector.
  * @param aCollisionDataVectorSize Size of collision data vector.
  * @param aZPos Z position of shape.
  * @return new Physics object.
  */
 PhysicsObject* TileMapGenerator::CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
-  Transform *aTransform, Vector3 const &aZeroVector, unsigned const aCollisionDataVectorSize, float aZPos)
+  Transform *aTransform, Vector3 const &aZeroVector, Vector3 const &aCollisionOffset, 
+  unsigned const aCollisionDataVectorSize, float aZPos)
 {
   PhysicsObject *physics = aPhysicsWorld->CreateObject();
       
@@ -581,6 +588,7 @@ PhysicsObject* TileMapGenerator::CreatePhysicsAtIndex(unsigned const aIndex, Phy
   }
   
   // Finally, add shape to our physicsobject
+  shape->position = aCollisionOffset;
   physics->AddShape(shape);
   
   return physics;

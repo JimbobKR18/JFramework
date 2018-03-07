@@ -1257,6 +1257,7 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   HashString value, empty;
   int width, height, tileSize;
   HashString file, frameDataFilename, settingsDataFileName;
+  Vector3 collisionOffset;
   std::vector<int> frames, collision, shapes, materials;
   std::unordered_map<int, float> heights;
   std::unordered_map<int, std::vector<int>> animations;
@@ -1276,10 +1277,14 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   collision.reserve(totalAllocation);
   shapes.reserve(totalAllocation);
   
-  // If there's ZOffset data, use it.
+  // If there's offset data, use it.
   if(aTileMap->Find("ZOffset"))
   {
     zOffset = aTileMap->Find("ZOffset")->GetValue().ToFloat();
+  }
+  if(aTileMap->Find("CollisionOffset"))
+  {
+    collisionOffset = aTileMap->Find("CollisionOffset")->GetValue().ToVector3();
   }
   
   // If there's setting data, parse it in and use it.
@@ -1350,7 +1355,7 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   delete tileMapData;
 
   mGenerators.push_back(new TileMapGenerator(width, height, tileSize,
-                                   zOffset, file, frameDataFilename,
+                                   zOffset, file, frameDataFilename, collisionOffset,
                                    frames, collision, shapes,
                                    materials, heights, materialInfo,
                                    animations, tileAnimationSpeed, this));
