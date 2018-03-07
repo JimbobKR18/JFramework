@@ -112,11 +112,9 @@ void SoundEmitter::ReceiveMessage(Message const& aMessage)
       mChannel = soundManager->PlaySound(mSoundName, SoundManager::INFINITE_LOOPS);
     
     if(volume > mVolume)
-    {
       mVolume = volume;
-      soundManager->SetChannelVolume(mChannel, mVolume);
-    }
     
+    soundManager->SetChannelVolume(mChannel, mVolume);
     mListeners.insert(notOwner->GET<SoundListener>());
   }
 }
