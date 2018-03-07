@@ -34,7 +34,7 @@ public:
   ~SoundManager();
   
   // Sound init and play init
-  void CreateSound(HashString const& aFilename, HashString const &aAlias = "", 
+  void CreateSound(HashString const& aFilename, HashString const &aAlias = "", float const &aDefaultVolume = 1.0f,
                    SoundSystem::SoundSource const &aSource = SoundSystem::SoundSource::DEFAULT);
   void DeleteSound(HashString const& aName);
   int PlaySound(HashString const& aName, int const aNumLoops);

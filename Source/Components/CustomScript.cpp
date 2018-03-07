@@ -30,6 +30,22 @@ HashString const CustomScript::GetUpdateFunctionName() const
 }
 
 /**
+ * @brief Get value stored in CustomScript.
+ * @param aFieldName Name of field to retrieve.
+ * @return Value if found, else assert.
+ */
+HashString const CustomScript::GetValue(HashString const &aFieldName)
+{
+  if(mValues.find(aFieldName.ToHash()) == mValues.end())
+  {
+    DebugLogPrint("Could not find field of name %s in CustomScript.\n", aFieldName.ToCharArray());
+    assert(!"Could not find field in CustomScript.");
+  }
+  
+  return mValues[aFieldName.ToHash()];
+}
+
+/**
  * @brief Set lua file name.
  * @param aFileName Lua file name.
  */
@@ -45,6 +61,16 @@ void CustomScript::SetFileName(HashString const &aFileName)
 void CustomScript::SetUpdateFunctionName(HashString const &aUpdateFunctionName)
 {
   mUpdateFunctionName = aUpdateFunctionName;
+}
+
+/**
+ * @brief Set field value.
+ * @param aFieldName Name of field.
+ * @param aFieldValue Value of field.
+ */
+void CustomScript::SetValue(HashString const &aFieldName, HashString const &aFieldValue)
+{
+  mValues[aFieldName.ToHash()] = aFieldValue;
 }
 
 /**
@@ -103,6 +129,8 @@ void CustomScript::Deserialize(ParserNode *aNode)
  */
 void CustomScript::SerializeLUA()
 {
-  SLB::Class<Surface>("CustomScript")
-    .inherits<Component>();
+  SLB::Class<CustomScript>("CustomScript")
+    .inherits<Component>()
+    .set("GetValue", &CustomScript::GetValue)
+    .set("SetValue", &CustomScript::SetValue);
 }

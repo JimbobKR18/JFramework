@@ -8,6 +8,8 @@
 #include "GraphicsManager.h"
 #include "ChemistryManager.h"
 #include "CustomScript.h"
+#include "SoundEmitter.h"
+#include "SoundListener.h"
 #include "PhysicsWorld.h"
 #include "PhysicsObject.h"
 #include "ControllerManager.h"
@@ -460,6 +462,8 @@ void Level::UnloadObjects(ObjectContainer const &aObjects)
       mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveElement((*it)->GET<ChemistryElement>());
     if((*it)->GET<Camera>())
       mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveCamera((*it)->GET<Camera>());
+    if((*it)->GET<SoundEmitter>())
+      (*it)->GET<SoundEmitter>()->StopSound();
   }
 }
 
@@ -615,6 +619,7 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     {
       ParseSurface(object, curRoot->Find("Surface"));
     }
+    // Get text information (still a surface)
     if(curRoot->Find("Text"))
     {
       ParseText(object, curRoot->Find("Text"));
@@ -643,9 +648,20 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     {
       ParseChemistryElement(object, curRoot->Find("ChemistryElement"));
     }
+    // Get camera information
     if(curRoot->Find("Camera"))
     {
       ParseCamera(object, curRoot->Find("Camera"));
+    }
+    // Get sound emitter information
+    if(curRoot->Find("SoundEmitter"))
+    {
+      ParseSoundEmitter(object, curRoot->Find("SoundEmitter"));
+    }
+    // Get sound listener information
+    if(curRoot->Find("SoundListener"))
+    {
+      ParseSoundListener(object, curRoot->Find("SoundListener"));
     }
     // Who is the focus of this level?
     if(curRoot->Find("Focus"))
@@ -1160,6 +1176,36 @@ void Level::ParseFollowComponent(GameObject *aObject, ParserNode* aFollowCompone
   }
   
   followComponent->Deserialize(aFollowComponent);
+}
+
+/**
+ * @brief Get sound emitter data from root.
+ */
+void Level::ParseSoundEmitter(GameObject *aObject, ParserNode* aSoundEmitter)
+{
+  SoundEmitter *soundEmitter = aObject->GET<SoundEmitter>();
+  if(!soundEmitter)
+  {
+    soundEmitter = new SoundEmitter();
+    aObject->AddComponent(soundEmitter);
+  }
+  
+  soundEmitter->Deserialize(aSoundEmitter);
+}
+
+/**
+ * @brief Get sound listener data from root.
+ */
+void Level::ParseSoundListener(GameObject *aObject, ParserNode* aSoundListener)
+{
+  SoundListener *soundListener = aObject->GET<SoundListener>();
+  if(!soundListener)
+  {
+    soundListener = new SoundListener();
+    aObject->AddComponent(soundListener);
+  }
+  
+  soundListener->Deserialize(aSoundListener);
 }
 
 /**

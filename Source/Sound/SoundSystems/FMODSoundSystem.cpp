@@ -2,6 +2,15 @@
 #include "FMODDSP_Basic.h"
 #include "FMODDSP_Echo.h"
 
+FMODSound::FMODSound(FMOD::Sound* aSound, float const &aVolume) : mSound(aSound), mVolume(aVolume)
+{
+}
+
+FMODSound::~FMODSound()
+{
+  mSound->release();
+}
+
 FMODSoundSystem::FMODSoundSystem() : mFMODStudioSystem(nullptr), mFMODSystem(nullptr), 
                                      mMasterChannelGroup(nullptr), mSoundContainer(), 
                                      mChannelGroupContainer(), mDSPContainer()
@@ -30,7 +39,7 @@ FMODSoundSystem::~FMODSoundSystem()
 {
   for(FMODSoundIt it = mSoundContainer.begin(); it != mSoundContainer.end(); ++it)
   {
-    it->second->release();
+    delete it->second;
   }
   for(FMODChannelGroupIt it = mChannelGroupContainer.begin(); it != mChannelGroupContainer.end(); ++it)
   {
@@ -70,9 +79,10 @@ void FMODSoundSystem::Update(float const aDT)
  * @brief Create sound
  * @param aFilename
  * @param aAlias
+ * @param aDefaultVolume
  * @param aSource
  */
-void FMODSoundSystem::CreateSound(HashString const& aFilename, HashString const& aAlias, SoundSource const& aSource)
+void FMODSoundSystem::CreateSound(HashString const& aFilename, HashString const& aAlias, float const &aDefaultVolume, SoundSource const& aSource)
 {
   HashString fileName = Common::RelativePath("Sounds", aFilename);
   FMOD::Sound *sound;
@@ -90,13 +100,14 @@ void FMODSoundSystem::CreateSound(HashString const& aFilename, HashString const&
     assert(!"FMOD failed to create sound.");
   }
   
+  FMODSound *newSound = new FMODSound(sound, aDefaultVolume);
   if(!aAlias.Empty())
   {
-    mSoundContainer[aAlias.ToHash()] = sound;
+    mSoundContainer[aAlias.ToHash()] = newSound;
   }
   else
   {
-    mSoundContainer[aFilename.ToHash()] = sound;
+    mSoundContainer[aFilename.ToHash()] = newSound;
   }
 }
 
@@ -106,7 +117,10 @@ void FMODSoundSystem::CreateSound(HashString const& aFilename, HashString const&
  */
 void FMODSoundSystem::DeleteSound(HashString const& aName)
 {
-  mSoundContainer[aName.ToHash()]->release();
+  if(mSoundContainer.find(aName.ToHash()) == mSoundContainer.end())
+    return;
+  
+  delete mSoundContainer[aName.ToHash()];
   mSoundContainer.erase(aName.ToHash());
 }
 
@@ -120,8 +134,9 @@ int FMODSoundSystem::PlaySound(HashString const& aName, int const aNumLoops)
 {
   FMOD::Channel *channel;
   int index = 0;
-  FMOD_RESULT result = mFMODSystem->playSound(mSoundContainer[aName.ToHash()], 0, false, &channel);
+  FMOD_RESULT result = mFMODSystem->playSound(mSoundContainer[aName.ToHash()]->mSound, 0, false, &channel);
   channel->setLoopCount(aNumLoops);
+  channel->setVolume(mSoundContainer[aName.ToHash()]->mVolume);
   if(result != FMOD_OK)
   {
     DebugLogPrint("FMOD error: (%s) (%d) %s\n", aName.ToCharArray(), result, FMOD_ErrorString(result));

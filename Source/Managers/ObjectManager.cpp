@@ -7,6 +7,8 @@
 #include "Transform.h"
 #include "StateObject.h"
 #include "CustomScript.h"
+#include "SoundEmitter.h"
+#include "SoundListener.h"
 #include "GraphicsManager.h"
 #include "ChemistryManager.h"
 #include "ControllerManager.h"
@@ -313,17 +315,27 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
   }
   if(aParser->Find("Transform"))
   {
-    // Get Position, Scale, and Size
     Transform *transform = new Transform();
     aObject->AddComponent(transform);
     transform->Deserialize(aParser->Find("Transform"));
   }
   if(aParser->Find("StateObject"))
   {
-    // Get Position, Scale, and Size
     StateObject *stateObject = new StateObject();
     aObject->AddComponent(stateObject);
     stateObject->Deserialize(aParser->Find("StateObject"));
+  }
+  if(aParser->Find("SoundEmitter"))
+  {
+    SoundEmitter *soundEmitter = new SoundEmitter();
+    aObject->AddComponent(soundEmitter);
+    soundEmitter->Deserialize(aParser->Find("SoundEmitter"));
+  }
+  if(aParser->Find("SoundListener"))
+  {
+    SoundListener *soundListener = new SoundListener();
+    aObject->AddComponent(soundListener);
+    soundListener->Deserialize(aParser->Find("SoundListener"));
   }
   if(aParser->Find("Surface"))
   {

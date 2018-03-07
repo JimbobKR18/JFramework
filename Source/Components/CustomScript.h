@@ -8,6 +8,7 @@ class CustomScript : public Component
 private:
   HashString mFileName;
   HashString mUpdateFunctionName;
+  std::unordered_map<int, HashString> mValues;
   
   static int const  sUID;
 public:
@@ -17,10 +18,12 @@ public:
   // Getters
   HashString const GetFileName() const;
   HashString const GetUpdateFunctionName() const;
+  HashString const GetValue(HashString const &aFieldName);
   
   // Setters
   void SetFileName(HashString const &aFileName);
   void SetUpdateFunctionName(HashString const &aUpdateFunctionName);
+  void SetValue(HashString const &aFieldName, HashString const &aFieldValue);
 
   // Virtuals derived from Component
   virtual void Update();

@@ -22,7 +22,7 @@ public:
   virtual void Update(float const aDT) = 0;
   
   // Sound init and play init
-  virtual void CreateSound(HashString const& aFilename, HashString const& aAlias, SoundSource const& aSource) = 0;
+  virtual void CreateSound(HashString const& aFilename, HashString const& aAlias, float const &aDefaultVolume, SoundSource const& aSource) = 0;
   virtual void DeleteSound(HashString const& aName) = 0;
   virtual int PlaySound(HashString const& aName, int const aNumLoops) = 0;
   

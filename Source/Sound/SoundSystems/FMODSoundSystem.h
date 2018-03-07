@@ -5,10 +5,19 @@
 #include "fmod_studio.hpp"
 #include "fmod_errors.h"
 
+struct FMODSound
+{
+  FMOD::Sound* mSound;
+  float mVolume;
+  
+  FMODSound(FMOD::Sound* aSound, float const &aVolume);
+  virtual ~FMODSound();
+};
+
 class FMODSoundSystem : public SoundSystem
 {
 private:
-  typedef std::unordered_map<int, FMOD::Sound*>     FMODSoundContainer;
+  typedef std::unordered_map<int, FMODSound*>     FMODSoundContainer;
   typedef FMODSoundContainer::iterator              FMODSoundIt;
   typedef std::unordered_map<int, FMOD::ChannelGroup*> FMODChannelGroupContainer;
   typedef FMODChannelGroupContainer::iterator          FMODChannelGroupIt;
@@ -33,7 +42,7 @@ public:
   virtual void Update(float const aDT);
   
   // Sound init and play init
-  virtual void CreateSound(HashString const& aFilename, HashString const& aAlias, SoundSource const& aSource);
+  virtual void CreateSound(HashString const& aFilename, HashString const& aAlias, float const &aDefaultVolume, SoundSource const& aSource);
   virtual void DeleteSound(HashString const& aName);
   virtual int PlaySound(HashString const& aName, int const aNumLoops);
   

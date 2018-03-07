@@ -128,6 +128,8 @@ private:
   void              ParseChemistryMaterial(GameObject *aObject, ParserNode* aChemistryMaterial);
   void              ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryElement);
   void              ParseFollowComponent(GameObject *aObject, ParserNode* aFollowComponent);
+  void              ParseSoundEmitter(GameObject *aObject, ParserNode* aSoundEmitter);
+  void              ParseSoundListener(GameObject *aObject, ParserNode* aSoundListener);
   void              ParseEffects(GameObject *aObject, ParserNode *aEffects);
   void              ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript);
   void              ParseTileGenerator(ParserNode *aTileMap);

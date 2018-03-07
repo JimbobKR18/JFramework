@@ -39,11 +39,12 @@ SoundManager::~SoundManager()
  * @brief Create a sound by filename.
  * @param aFilename
  * @param aAlias
+ * @param aDefaultVolume
  * @param aSource
  */
-void SoundManager::CreateSound(HashString const &aFilename, HashString const &aAlias, SoundSystem::SoundSource const &aSource)
+void SoundManager::CreateSound(HashString const &aFilename, HashString const &aAlias, float const &aDefaultVolume, SoundSystem::SoundSource const &aSource)
 {
-  mSoundSystem->CreateSound(aFilename, aAlias, aSource);
+  mSoundSystem->CreateSound(aFilename, aAlias, aDefaultVolume, aSource);
 }
 
 /**
@@ -448,11 +449,14 @@ void SoundManager::LoadSounds()
   {
     ParserNode *curSound = parser->Find(curIndex);
     SoundSystem::SoundSource source = SoundSystem::SoundSource::DEFAULT;
+    float volume = 1.0f;
     
     if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Stream")
       source = SoundSystem::SoundSource::STREAM;
+    if(curSound->Find("Volume"))
+      volume = curSound->Find("Volume")->GetValue().ToFloat();
     
-    CreateSound(curSound->Find("File")->GetValue(), curSound->Find("Name")->GetValue(), source);
+    CreateSound(curSound->Find("File")->GetValue(), curSound->Find("Name")->GetValue(), volume, source);
     ++index;
     curIndex = sound + Common::IntToString(index);
   }

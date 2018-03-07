@@ -113,6 +113,10 @@
     <File Name="../../Source/Components/FollowComponent.cpp"/>
     <File Name="../../Source/Components/Button.h"/>
     <File Name="../../Source/Components/Button.cpp"/>
+    <File Name="../../Source/Components/SoundEmitter.h"/>
+    <File Name="../../Source/Components/SoundEmitter.cpp"/>
+    <File Name="../../Source/Components/SoundListener.h"/>
+    <File Name="../../Source/Components/SoundListener.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>
