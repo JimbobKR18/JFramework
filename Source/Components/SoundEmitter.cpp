@@ -84,6 +84,9 @@ void SoundEmitter::SetSoundOrigin(Vector3 const &aSoundOrigin)
  */
 void SoundEmitter::StopSound()
 {
+  if(mChannel == -1)
+    return;
+    
   SoundManager *soundManager = GetOwner()->GetManager()->GetOwningApp()->GET<SoundManager>();
   soundManager->StopChannel(mChannel);
   mChannel = -1;
