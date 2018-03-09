@@ -250,9 +250,9 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* sphereTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 spherePos = ShapeMath::GetLocalCoordinates(sphereTransform, sphere->position);
-  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
-  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
-  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0) + triangle->position);
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1) + triangle->position);
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2) + triangle->position);
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(spherePos, a, b, c);
   
   Vector3 dist = closestPoint - spherePos;
@@ -276,9 +276,9 @@ bool CollisionChecker::CheckTriangleToAABB(CollisionPair &aPair)
   Transform* triTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabbTransform, aabb->position);
-  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
-  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
-  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0) + triangle->position);
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1) + triangle->position);
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2) + triangle->position);
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(aabbPos, a, b, c);
   Vector3 dist = closestPoint - aabbPos;
   
@@ -493,9 +493,9 @@ bool CollisionChecker::CheckOBBToTriangle(CollisionPair &aPair)
   Transform* obbTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* triTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   
-  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0));
-  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1));
-  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2));
+  Vector3 a = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(0) + triangle->position);
+  Vector3 b = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(1) + triangle->position);
+  Vector3 c = ShapeMath::GetLocalCoordinates(triTransform, triangle->GetPoint(2) + triangle->position);
   Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(obbPos, a, b, c);
   Vector3 diff = closestPoint - obbPos;
