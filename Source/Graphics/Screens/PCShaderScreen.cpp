@@ -262,7 +262,7 @@ void PCShaderScreen::PreDraw()
  * @param aUIObjects
  * @param aCameras
  */
-void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, std::set<Camera*> const aCameras)
+void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, std::set<Camera*> const &aCameras)
 {
   for(std::set<Camera*>::const_iterator it = aCameras.begin(); it != aCameras.end(); ++it)
   {
