@@ -12,8 +12,9 @@
                     float yBias = (0.5f / (float)mYSize); \
                     mXValues[0] = mCurFrame * mXGain[0] + xBias; \
                     mXValues[1] = (mCurFrame + 1) * mXGain[1] - xBias; \
-                    mYValues[0] = mCurAnimation * mYGain[0] + yBias; \
-                    mYValues[1] = (mCurAnimation + 1) * mYGain[1] - yBias
+                    mYValues[0] = mCurAnimation.mAnimation * mYGain[0] + yBias; \
+                    mYValues[1] = (mCurAnimation.mAnimation + 1) * mYGain[1] - yBias
+#define MAX_ANIMATION_BACKLOG 20
 
 TextureCoordinates::TextureCoordinates()
 {
@@ -24,15 +25,14 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
                                        int const aNumAnimations,
                                        std::vector<int> const &aNumFrames,
                                        std::vector<std::vector<float>> const &aAnimationSpeeds) : mCurFrame(0),
-                                                                                                  mCurAnimation(0),
-                                                                                                  mPrevAnimation(0),
+                                                                                                  mCurAnimation(),
+                                                                                                  mPrevAnimations(),
                                                                                                   mTotalFrames(0),
                                                                                                   mXSize(aXSize),
                                                                                                   mYSize(aYSize),
                                                                                                   mCurTime(0),
                                                                                                   mAnimated(false),
                                                                                                   mCompleted(false),
-                                                                                                  mBehavior(TextureCoordinateBehavior::CONTINUOUS),
                                                                                                   mSpeedModifiers(),
                                                                                                   mSpeeds(),
                                                                                                   mAnimations()
@@ -74,6 +74,9 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
   
   // Set all values to starting positions
   SETFRAMES();
+  
+  // Set base animation
+  mPrevAnimations.push_back(mCurAnimation);
 }
 
 TextureCoordinates::~TextureCoordinates()
@@ -93,28 +96,29 @@ void TextureCoordinates::Update(float aDT)
     return;
   }
   
-  mCurTime += aDT * mSpeedModifiers[mCurAnimation];
+  mCurTime += aDT * mSpeedModifiers[mCurAnimation.mAnimation];
   
   // If it's time to change a frame
-  while(mCurTime >= mSpeeds[mCurAnimation][mCurFrame])
+  while(mCurTime >= mSpeeds[mCurAnimation.mAnimation][mCurFrame])
   {
-    mCurTime -= mSpeeds[mCurAnimation][mCurFrame];
+    mCurTime -= mSpeeds[mCurAnimation.mAnimation][mCurFrame];
     
     // Increase the frame
     ++mCurFrame;
     
     // Make sure we're within bounds
-    if(mCurFrame >= mAnimations[mCurAnimation])
+    if(mCurFrame >= mAnimations[mCurAnimation.mAnimation])
     {
       mCompleted = true;
       // If only run once, do not reset the frames.
-      if(mBehavior == TextureCoordinateBehavior::RUN_ONCE)
+      if(mCurAnimation.mBehavior == TextureCoordinateBehavior::RUN_ONCE)
       {
-        mCurFrame = mAnimations[mCurAnimation] - 1;
+        mCurFrame = mAnimations[mCurAnimation.mAnimation] - 1;
       }
-      else if(mBehavior == TextureCoordinateBehavior::RETURN_TO_PREVIOUS)
+      else if(mCurAnimation.mBehavior == TextureCoordinateBehavior::RETURN_TO_PREVIOUS)
       {
-        SetCurrentAnimation(mPrevAnimation);
+        FindPreviousAnimation();
+        SetCurrentAnimation(mPrevAnimations.back().mAnimation, mPrevAnimations.back().mBehavior);
       }
       else
       {
@@ -153,7 +157,7 @@ float TextureCoordinates::GetYValue(int const aIndex) const
  */
 float TextureCoordinates::GetCurrentAnimationSpeed() const
 {
-  return mSpeeds[mCurAnimation][mCurFrame];
+  return mSpeeds[mCurAnimation.mAnimation][mCurFrame];
 }
 
 /**
@@ -162,16 +166,16 @@ float TextureCoordinates::GetCurrentAnimationSpeed() const
  */
 int TextureCoordinates::GetCurrentAnimation() const
 {
-  return mCurAnimation;
+  return mCurAnimation.mAnimation;
 }
 
 /**
- * @brief Get previous animation index.
+ * @brief Get previous animations info.
  * @return 
  */
-int TextureCoordinates::GetPreviousAnimation() const
+TextureCoordinates::AnimationInfoContainer TextureCoordinates::GetPreviousAnimations() const
 {
-  return mPrevAnimation;
+  return mPrevAnimations;
 }
 
 /**
@@ -237,7 +241,7 @@ float TextureCoordinates::GetAnimationSpeed(int const aAnimation) const
  */
 TextureCoordinates::SpeedContainer const TextureCoordinates::GetAnimationHolds(int const aAnimation) const
 {
-  return mSpeeds[mCurAnimation];
+  return mSpeeds[mCurAnimation.mAnimation];
 }
 
 /**
@@ -295,11 +299,12 @@ bool TextureCoordinates::GetAnimated() const
 /**
  * @brief Sets the current animation, starts from beginning.
  * @param aAnimation
+ * @param aBehavior
  */
-void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
+void TextureCoordinates::SetCurrentAnimation(int const aAnimation, TextureCoordinateBehavior const aBehavior)
 {
   // So as to not reset the animation, we have an early out.
-  if(mCurAnimation == aAnimation)
+  if(mCurAnimation.mAnimation == aAnimation)
   {
     return;
   }
@@ -309,11 +314,14 @@ void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
     assert(!"SetCurrentAnimation: aAnimation is larger than the number of animations.");
   }
   
-  if(aAnimation != mCurAnimation)
+  if(aAnimation != mCurAnimation.mAnimation)
   {
-    mPrevAnimation = mCurAnimation;
-    mCurAnimation = aAnimation;
-    mBehavior = TextureCoordinateBehavior::CONTINUOUS;
+    mPrevAnimations.push_back(AnimationInfo(mCurAnimation.mAnimation, mCurAnimation.mBehavior));
+    mCurAnimation.mAnimation = aAnimation;
+    mCurAnimation.mBehavior = aBehavior;
+    
+    while(mPrevAnimations.size() > MAX_ANIMATION_BACKLOG)
+      mPrevAnimations.pop_front();
   }
   mCurFrame = 0;
   mCompleted = false;
@@ -328,7 +336,7 @@ void TextureCoordinates::SetCurrentAnimation(int const aAnimation)
  */
 void TextureCoordinates::SetCurrentFrame(int const aFrame)
 {
-  if(mCurFrame > mAnimations[mCurAnimation])
+  if(mCurFrame > mAnimations[mCurAnimation.mAnimation])
   {
     assert(!"SetCurrentFrame: aFrame is larger than number of frames in animation");
   }
@@ -352,13 +360,13 @@ void TextureCoordinates::SetFrameByID(int const aFrameID)
     assert(!"SetFrameByID: aFrameID exceeds total frames in animation.");
   }
 
-  mCurAnimation = 0;
+  mCurAnimation.mAnimation = 0;
   mCurFrame = aFrameID;
 
-  while(mCurFrame >= mAnimations[mCurAnimation])
+  while(mCurFrame >= mAnimations[mCurAnimation.mAnimation])
   {
-    mCurFrame -= mAnimations[mCurAnimation];
-    ++mCurAnimation;
+    mCurFrame -= mAnimations[mCurAnimation.mAnimation];
+    ++mCurAnimation.mAnimation;
   }
 
   // Set positions of coordinates
@@ -380,7 +388,7 @@ void TextureCoordinates::SetAnimated(bool const aAnimated)
  */
 void TextureCoordinates::SetBehavior(TextureCoordinateBehavior const aBehavior)
 {
-  mBehavior = aBehavior;
+  mCurAnimation.mBehavior = aBehavior;
 }
 
 /**
@@ -389,7 +397,7 @@ void TextureCoordinates::SetBehavior(TextureCoordinateBehavior const aBehavior)
  */
 void TextureCoordinates::SetCurrentAnimationSpeed(float const aSpeed)
 {
-  mSpeedModifiers[mCurAnimation] = aSpeed;
+  mSpeedModifiers[mCurAnimation.mAnimation] = aSpeed;
 }
 
 /**
@@ -418,7 +426,7 @@ void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
 void TextureCoordinates::Finish()
 {
   // Set to last frame.
-  mCurFrame = mAnimations[mCurAnimation] - 1;
+  mCurFrame = mAnimations[mCurAnimation.mAnimation] - 1;
   // Set positions of coordinates
   SETFRAMES();
 }
@@ -431,4 +439,15 @@ void TextureCoordinates::Reset()
   mCurFrame = 0;
   mCurTime = 0;
   mCompleted = false;
+}
+
+/**
+ * @brief Pop previous animation queue to get next animation.
+ */
+void TextureCoordinates::FindPreviousAnimation()
+{
+  while(mPrevAnimations.size() > 0 && mPrevAnimations.back().mBehavior == TextureCoordinateBehavior::RETURN_TO_PREVIOUS)
+    mPrevAnimations.pop_back();
+  if(mPrevAnimations.empty())
+    mPrevAnimations.push_back(AnimationInfo(0, TextureCoordinateBehavior::CONTINUOUS));
 }

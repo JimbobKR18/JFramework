@@ -109,8 +109,7 @@ void Surface::SetAnimation(int aAnimation, int aBehavior)
 {
   if(mTexCoord)
   {
-    mTexCoord->SetCurrentAnimation(aAnimation);
-    mTexCoord->SetBehavior((TextureCoordinateBehavior)aBehavior);
+    mTexCoord->SetCurrentAnimation(aAnimation, (TextureCoordinateBehavior)aBehavior);
   }
 }
 

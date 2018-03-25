@@ -19,16 +19,30 @@ enum TextureCoordinateBehavior
   RETURN_TO_PREVIOUS
 };
 
+struct AnimationInfo
+{
+  int mAnimation;
+  TextureCoordinateBehavior mBehavior;
+  
+  AnimationInfo() : mAnimation(0), mBehavior(TextureCoordinateBehavior::CONTINUOUS) {}
+  AnimationInfo(AnimationInfo const &aAnimationInfo) : mAnimation(aAnimationInfo.mAnimation), mBehavior(aAnimationInfo.mBehavior) {}
+  AnimationInfo(int aAnimation, TextureCoordinateBehavior const aBehavior) : 
+    mAnimation(aAnimation), mBehavior(aBehavior) {}
+  virtual ~AnimationInfo() {}
+};
+
 class TextureCoordinates
 {
 public:
   typedef std::vector<float> SpeedContainer;
   typedef SpeedContainer::const_iterator SpeedConstIT;
+  typedef std::list<AnimationInfo> AnimationInfoContainer;
+  typedef AnimationInfoContainer::const_iterator AnimationInfoConstIT;
   
 private:
   int                         mCurFrame;
-  int                         mCurAnimation;
-  int                         mPrevAnimation;
+  AnimationInfo               mCurAnimation;
+  AnimationInfoContainer      mPrevAnimations;
   int                         mTotalFrames;
   int                         mXSize;
   int                         mYSize;
@@ -39,7 +53,6 @@ private:
   float                       mYValues[2];
   bool                        mAnimated;
   bool                        mCompleted;
-  TextureCoordinateBehavior   mBehavior;
   
   // <speeds>
   std::vector<float>            mSpeedModifiers;
@@ -62,7 +75,7 @@ public:
   float GetYValue(int const aIndex) const;
   float GetCurrentAnimationSpeed() const;
   int   GetCurrentAnimation() const;
-  int   GetPreviousAnimation() const;
+  AnimationInfoContainer GetPreviousAnimations() const;
   int   GetNumberOfAnimations() const;
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
@@ -76,7 +89,7 @@ public:
   bool  GetAnimated() const;
 
   // SETTERS
-  void  SetCurrentAnimation(int const aAnimation);
+  void  SetCurrentAnimation(int const aAnimation, TextureCoordinateBehavior const aBehavior);
   void  SetCurrentFrame(int const aFrame);
   void  SetFrameByID(int const aFrameID);
   void  SetAnimated(bool const aAnimated);
@@ -88,6 +101,9 @@ public:
   // HELPERS
   void  Finish();
   void  Reset();
+  
+private:
+  void  FindPreviousAnimation();
 };
 
 #endif /* defined(__JFramework__TextureCoordinates__) */
