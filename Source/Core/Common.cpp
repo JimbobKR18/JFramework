@@ -568,6 +568,9 @@ namespace Common
    */
   int RandomIntInRange(int const aX, int const bX)
   {
+    // Failsafe.
+    if(aX == bX)
+      return aX;
     return aX + (rand() % (bX - aX));
   }
 
