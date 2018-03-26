@@ -314,15 +314,16 @@ void TextureCoordinates::SetCurrentAnimation(int const aAnimation, TextureCoordi
     assert(!"SetCurrentAnimation: aAnimation is larger than the number of animations.");
   }
   
-  if(aAnimation != mCurAnimation.mAnimation)
-  {
-    mPrevAnimations.push_back(AnimationInfo(mCurAnimation.mAnimation, mCurAnimation.mBehavior));
-    mCurAnimation.mAnimation = aAnimation;
-    mCurAnimation.mBehavior = aBehavior;
+  // Push previous animation information.
+  mPrevAnimations.push_back(AnimationInfo(mCurAnimation.mAnimation, mCurAnimation.mBehavior));
+  mCurAnimation.mAnimation = aAnimation;
+  mCurAnimation.mBehavior = aBehavior;
     
-    while(mPrevAnimations.size() > MAX_ANIMATION_BACKLOG)
-      mPrevAnimations.pop_front();
-  }
+  // Purge queue.
+  while(mPrevAnimations.size() > MAX_ANIMATION_BACKLOG)
+    mPrevAnimations.pop_front();
+    
+  // Reset data.  
   mCurFrame = 0;
   mCompleted = false;
   
@@ -449,5 +450,5 @@ void TextureCoordinates::FindPreviousAnimation()
   while(mPrevAnimations.size() > 0 && mPrevAnimations.back().mBehavior == TextureCoordinateBehavior::RETURN_TO_PREVIOUS)
     mPrevAnimations.pop_back();
   if(mPrevAnimations.empty())
-    mPrevAnimations.push_back(AnimationInfo(0, TextureCoordinateBehavior::CONTINUOUS));
+    mPrevAnimations.push_back(AnimationInfo());
 }
