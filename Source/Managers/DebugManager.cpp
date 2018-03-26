@@ -42,6 +42,8 @@ void DebugManager::HandleDelete(ObjectDeleteMessage *aMsg)
 
 void DebugManager::Update()
 {
+  // Clear out, we only want to check for double deletes in a single frame.
+  mInvalidMemory.clear();
 }
 
 void DebugManager::SendMessage(Message const &aMessage)
