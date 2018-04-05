@@ -95,6 +95,14 @@ void SoundManager::SetMasterVolume(float const aVolume)
 }
 
 /**
+ * @brief Stop all sounds.
+ */
+void SoundManager::StopAllChannels()
+{
+  mSoundSystem->StopAllChannels();
+}
+
+/**
  * @brief Set the volume of a channel.
  * @param aChannel
  * @param aVolume The volume to set the sound to.

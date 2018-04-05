@@ -50,6 +50,7 @@ public:
   virtual void ResumeChannel(int const aChannel);
   virtual void PauseChannel(int const aChannel);
   virtual void SetMasterVolume(float const aVolume);
+  virtual void StopAllChannels();
   virtual void SetChannelVolume(int const aChannel, float const aVolume);
   virtual void StopChannel(int const aChannel);
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency);

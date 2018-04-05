@@ -178,6 +178,14 @@ void FMODSoundSystem::SetMasterVolume(float const aVolume)
 }
 
 /**
+ * @brief Stop all sounds
+ */
+void FMODSoundSystem::StopAllChannels()
+{
+  mMasterChannelGroup->stop();
+}
+
+/**
  * @brief Set channel volume
  * @param aChannel
  * @param aVolume

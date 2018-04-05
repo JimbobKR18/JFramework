@@ -30,6 +30,7 @@ public:
   virtual void ResumeChannel(int const aChannel) = 0;
   virtual void PauseChannel(int const aChannel) = 0;
   virtual void SetMasterVolume(float const aVolume) = 0;
+  virtual void StopAllChannels() = 0;
   virtual void SetChannelVolume(int const aChannel, float const aVolume) = 0;
   virtual void StopChannel(int const aChannel) = 0;
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency) = 0;

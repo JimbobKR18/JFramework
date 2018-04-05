@@ -43,6 +43,7 @@ public:
   void ResumeChannel(int const aChannel);
   void PauseChannel(int const aChannel);
   void SetMasterVolume(float const aVolume);
+  void StopAllChannels();
   void SetChannelVolume(int const aChannel, float const aVolume);
   void StopChannel(int const aChannel);
   void SetChannelFrequency(int const aChannel, float const aFrequency);
