@@ -208,6 +208,8 @@ GameObject* ObjectManager::FindObject(HashString const &aName)
     if((*it)->GetName() == aName || (*it)->GetFileName() == aName)
       return *it;
   }
+  
+  return nullptr;
 }
 
 /**
