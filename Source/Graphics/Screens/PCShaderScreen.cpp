@@ -75,7 +75,7 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
   // Camera position and size
   Transform *cameraTransform = GetOwner()->GetPrimaryCamera()->GetOwner()->GET<Transform>();
   Vector3 &cameraPosition = cameraTransform->GetPosition();
-  Vector3 cameraSize = cameraTransform->GetSize();
+  Vector3 cameraSize = GetOwner()->GetPrimaryCamera()->GetSize() / 2.0f;
   Matrix33 viewMatrix = cameraTransform->GetFinalTransform();
   Vector3 cameraDiff = cameraPosition - cameraSize;
   
@@ -384,7 +384,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
   // Camera position and size
   Transform *cameraTransform = aCamera->GetOwner()->GET<Transform>();
   Vector3 cameraPosition = cameraTransform->GetPosition() + aCamera->GetOffset();
-  Vector3 cameraSize = cameraTransform->GetSize();
+  Vector3 cameraSize = aCamera->GetSize() / 2.0f;
   Matrix33 viewMatrix = cameraTransform->GetFinalTransform();
   Matrix33 identityMatrix = Matrix33();
   

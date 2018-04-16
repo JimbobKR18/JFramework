@@ -458,7 +458,7 @@ Vector3 GraphicsManager::AbsToRel(Vector3 const &aPosition) const
   Transform *cameraTransform = mPrimaryCamera->GetOwner()->GET<Transform>();
   Vector3 ret = cameraTransform->GetFinalTransform() * cameraTransform->GetPosition();
 
-  ret -= cameraTransform->GetSize();
+  ret -= mPrimaryCamera->GetSize() / 2.0f;
   ret += aPosition;
   ret = cameraTransform->GetFinalTransform().Invert() * ret;
 
@@ -474,7 +474,7 @@ Vector3 GraphicsManager::RelToAbs(Vector3 const &aPosition) const
   Transform *cameraTransform = mPrimaryCamera->GetOwner()->GET<Transform>();
   Vector3 ret = cameraTransform->GetFinalTransform() * aPosition;
 
-  ret += cameraTransform->GetSize();
+  ret += mPrimaryCamera->GetSize() / 2.0f;
   ret -= cameraTransform->GetFinalTransform() * cameraTransform->GetPosition();
 
   return ret;

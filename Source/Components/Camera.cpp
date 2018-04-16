@@ -3,6 +3,7 @@
 #include "SystemProperties.h"
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
+#include "Transform.h"
 
 #if !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -101,7 +102,9 @@ Framebuffer* Camera::GetFramebuffer()
  * @brief Does nothing
  */
 void Camera::Update()
-{  
+{
+  Transform *cameraTransform = GetOwner()->GET<Transform>();
+  cameraTransform->SetSize(mSize / 2.0f);
 }
 
 /**
