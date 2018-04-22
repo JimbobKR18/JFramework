@@ -171,6 +171,16 @@ float TextureCoordinates::GetYSize() const
 }
 
 /**
+ * @brief Get bias for axis.
+ * @param aIndex 0 for X, 1 for Y.
+ * @return Bias.
+ */
+float TextureCoordinates::GetBias(int const aIndex) const
+{
+  return mBias[aIndex];
+}
+
+/**
  * @brief Get animation speed.
  * @return 
  */

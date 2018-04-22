@@ -334,6 +334,8 @@ void Surface::Serialize(ParserNode *aNode)
   surface->Place("Animated", Common::BoolToString(animated));
   surface->Place("NoRender", Common::BoolToString(mNoRender));
   surface->Place("StartingAnimation", Common::IntToString(currentAnimation));
+  surface->Place("XBias", Common::FloatToString(mTexCoord->GetBias(0)));
+  surface->Place("YBias", Common::FloatToString(mTexCoord->GetBias(1)));
   for(int i = 0; i < 4; ++i)
   {
     surface->Place(values[i], Common::IntToString(mPrimaryColor[i]));

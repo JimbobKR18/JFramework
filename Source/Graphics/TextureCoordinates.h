@@ -77,6 +77,7 @@ public:
   float GetYValue(int const aIndex) const;
   float GetXSize() const;
   float GetYSize() const;
+  float GetBias(int const aIndex) const;
   float GetCurrentAnimationSpeed() const;
   int   GetCurrentAnimation() const;
   AnimationInfoContainer GetPreviousAnimations() const;
