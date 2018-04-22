@@ -8,12 +8,10 @@
 
 #include "TextureCoordinates.h"
 
-#define SETFRAMES() float xBias = (0.5f / (float)mXSize); \
-                    float yBias = (0.5f / (float)mYSize); \
-                    mXValues[0] = mCurFrame * mXGain[0] + xBias; \
-                    mXValues[1] = (mCurFrame + 1) * mXGain[1] - xBias; \
-                    mYValues[0] = mCurAnimation.mAnimation * mYGain[0] + yBias; \
-                    mYValues[1] = (mCurAnimation.mAnimation + 1) * mYGain[1] - yBias
+#define SETFRAMES() mXValues[0] = mCurFrame * mXGain[0] + mBias[0]; \
+                    mXValues[1] = (mCurFrame + 1) * mXGain[1] - mBias[0]; \
+                    mYValues[0] = mCurAnimation.mAnimation * mYGain[0] + mBias[1]; \
+                    mYValues[1] = (mCurAnimation.mAnimation + 1) * mYGain[1] - mBias[1]
 #define MAX_ANIMATION_BACKLOG 20
 
 TextureCoordinates::TextureCoordinates()
@@ -30,6 +28,7 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
                                                                                                   mTotalFrames(0),
                                                                                                   mXSize(aXSize),
                                                                                                   mYSize(aYSize),
+                                                                                                  mMaxFrames(0),
                                                                                                   mCurTime(0),
                                                                                                   mAnimated(false),
                                                                                                   mCompleted(false),
@@ -51,7 +50,7 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
   }
   
   // Initialization
-  int maxFrames = 0;
+  mMaxFrames = 0;
   
   // Push back all frame data
   for(int i = 0; i < aNumAnimations; ++i)
@@ -62,15 +61,17 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
     mSpeedModifiers.push_back(1.0f);
     
     // Need to figure out each frame size
-    if(aNumFrames[i] > maxFrames)
+    if(aNumFrames[i] > mMaxFrames)
     {
-      maxFrames = aNumFrames[i];
+      mMaxFrames = aNumFrames[i];
     }
   }
   
   // Figure out the gain per step of animation
-  mXGain[0] = mXGain[1] = 1.0f / (float)maxFrames;
+  mXGain[0] = mXGain[1] = 1.0f / (float)mMaxFrames;
   mYGain[0] = mYGain[1] = 1.0f / (float)aNumAnimations;
+  mBias[0] = 0;
+  mBias[1] = 0;
   
   // Set all values to starting positions
   SETFRAMES();
@@ -149,6 +150,24 @@ float TextureCoordinates::GetXValue(int const aIndex) const
 float TextureCoordinates::GetYValue(int const aIndex) const
 {
   return mYValues[aIndex];
+}
+
+/**
+ * @brief Return X size of texture.
+ * @return X size of texture.
+ */
+float TextureCoordinates::GetXSize() const
+{
+  return mXSize;
+}
+
+/**
+ * @brief Return Y size of texture.
+ * @return Y size of texture.
+ */
+float TextureCoordinates::GetYSize() const
+{
+  return mYSize;
 }
 
 /**
@@ -419,6 +438,16 @@ void TextureCoordinates::SetXGain(int const aIndex, float const aXGain)
 void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
 {
   mYGain[aIndex] = aYGain;
+}
+
+/**
+ * @brief Set bias on texture coordinates.
+ * @param aIndex 0 for X, 1 for Y.
+ * @param aBias The bias.
+ */
+void TextureCoordinates::SetBias(int const aIndex, float const aBias)
+{
+  mBias[aIndex] = aBias;
 }
 
 /**

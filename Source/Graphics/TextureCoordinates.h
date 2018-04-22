@@ -46,11 +46,13 @@ private:
   int                         mTotalFrames;
   int                         mXSize;
   int                         mYSize;
+  int                         mMaxFrames;
   float                       mCurTime;
   float                       mXGain[2];
   float                       mYGain[2];
   float                       mXValues[2];
   float                       mYValues[2];
+  float                       mBias[2];
   bool                        mAnimated;
   bool                        mCompleted;
   
@@ -73,6 +75,8 @@ public:
   // GETTERS
   float GetXValue(int const aIndex) const;
   float GetYValue(int const aIndex) const;
+  float GetXSize() const;
+  float GetYSize() const;
   float GetCurrentAnimationSpeed() const;
   int   GetCurrentAnimation() const;
   AnimationInfoContainer GetPreviousAnimations() const;
@@ -97,6 +101,7 @@ public:
   void  SetCurrentAnimationSpeed(float const aSpeed);
   void  SetXGain(int const aIndex, float const aX);
   void  SetYGain(int const aIndex, float const aY);
+  void  SetBias(int const aIndex, float const aBias);
 
   // HELPERS
   void  Finish();

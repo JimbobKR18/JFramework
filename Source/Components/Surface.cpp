@@ -405,6 +405,8 @@ void Surface::Deserialize(ParserNode *aNode)
   bool frameBased = false;
   int numAnimations = 1;
   int startingAnimation = 0;
+  float xBias = 0;
+  float yBias = 0;
   std::vector<TextureCoordinates::SpeedContainer> animationSpeed;
   std::vector<int> numFrames;
   numFrames.push_back(1);
@@ -598,6 +600,14 @@ void Surface::Deserialize(ParserNode *aNode)
       curIndex = nodeName + Common::IntToString(index);
     }
   }
+  if(aNode->Find("XBias"))
+  {
+    xBias = aNode->Find("XBias")->GetValue().ToFloat();
+  }
+  if(aNode->Find("YBias"))
+  {
+    yBias = aNode->Find("YBias")->GetValue().ToFloat();
+  }
   
   // Text
   mMaxTextWidth = mManager->GetScreen()->GetWidth();
@@ -632,6 +642,10 @@ void Surface::Deserialize(ParserNode *aNode)
   SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
   SetAnimated(animated);
   SetAnimation(startingAnimation);
+  
+  // Set bias after creating texture coordinates.
+  mTexCoord->SetBias(0, xBias);
+  mTexCoord->SetBias(1, yBias);
 }
 
 /**

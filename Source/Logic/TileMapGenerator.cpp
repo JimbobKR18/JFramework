@@ -382,8 +382,11 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
 
       // Set the frame data
       Surface *surface = obj->GET<Surface>();
+      TextureCoordinates *textureData = surface->GetTextureData();
       surface->SetAnimated(false);
       surface->SetFrameByID(mTiles[i]);
+      textureData->SetBias(0, 0.1f / textureData->GetXSize());
+      textureData->SetBias(1, 0.1f / textureData->GetYSize());
       
       // Add PhysicsObject if the tile has collision
       if(mCollisionData[i] != CollisionShapes::EMPTY ||
