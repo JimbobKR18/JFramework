@@ -266,19 +266,27 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Sur
 {
   for(std::set<Camera*>::const_iterator it = aCameras.begin(); it != aCameras.end(); ++it)
   {
-    if(!(*it)->GetPrimary())
-      return;
-    
-    //(*it)->GetFramebuffer()->Bind();
+// TODO Mac does not use framebuffers
+#ifndef __APPLE__
+    (*it)->GetFramebuffer()->Bind();
     DrawObjects(aObjects, *it);
     DrawObjects(aUIObjects, *it);
     #ifdef _DEBUG_DRAW
       DebugDraw(aObjects);
     #endif
-    //(*it)->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
+    (*it)->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
     
-    //if((*it)->GetPrimary())
-      //(*it)->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+    if((*it)->GetPrimary())
+      (*it)->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+#else
+    if(!(*it)->GetPrimary())
+      return;
+    DrawObjects(aObjects, *it);
+    DrawObjects(aUIObjects, *it);
+    #ifdef _DEBUG_DRAW
+      DebugDraw(aObjects);
+    #endif
+#endif
   }
 }
 
