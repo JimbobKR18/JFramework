@@ -50,10 +50,19 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   }
   
   ChangeSize(aW, aH, aFullScreen);
+  
+#if defined(__APPLE__)
+  mFrameBuffer = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight());
+  mFrameBuffer->Generate(GetOwner());
+#endif
 }
 
 PCShaderScreen::~PCShaderScreen()
 {
+#if defined(__APPLE__)
+  delete mFrameBuffer;
+#endif
+  
   glDeleteBuffers(1, &mVertexBufferID);
   glDeleteBuffers(1, &mTextureBufferID);
   glDeleteBuffers(1, &mPositionBufferID);
@@ -266,7 +275,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Sur
 {
   for(std::set<Camera*>::const_iterator it = aCameras.begin(); it != aCameras.end(); ++it)
   {
-// TODO Mac does not use framebuffers
+// TODO Mac does not use multiple cameras with framebuffers
 #ifndef __APPLE__
     (*it)->GetFramebuffer()->Bind();
     DrawObjects(aObjects, *it);
@@ -279,6 +288,7 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Sur
     if((*it)->GetPrimary())
       (*it)->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
 #else
+    mFrameBuffer->Bind();
     if(!(*it)->GetPrimary())
       return;
     DrawObjects(aObjects, *it);
@@ -286,6 +296,8 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Sur
     #ifdef _DEBUG_DRAW
       DebugDraw(aObjects);
     #endif
+    mFrameBuffer->Unbind(mDefaultFrameBufferID);
+    mFrameBuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
 #endif
   }
 }

@@ -20,6 +20,10 @@ private:
   GLuint        mColorBufferID;
   GLuint        mIndexBufferID;
   GLint         mMaxTextures;
+  
+#if defined(__APPLE__)
+  Framebuffer*  mFrameBuffer;
+#endif
 
 public:
   PCShaderScreen();
