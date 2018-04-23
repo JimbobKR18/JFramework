@@ -266,16 +266,19 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Sur
 {
   for(std::set<Camera*>::const_iterator it = aCameras.begin(); it != aCameras.end(); ++it)
   {
-    (*it)->GetFramebuffer()->Bind();
+    if(!(*it)->GetPrimary())
+      return;
+    
+    //(*it)->GetFramebuffer()->Bind();
     DrawObjects(aObjects, *it);
     DrawObjects(aUIObjects, *it);
     #ifdef _DEBUG_DRAW
       DebugDraw(aObjects);
     #endif
-    (*it)->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
+    //(*it)->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
     
-    if((*it)->GetPrimary())
-      (*it)->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+    //if((*it)->GetPrimary())
+      //(*it)->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
   }
 }
 
@@ -558,7 +561,6 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     SetShaderProperties(surface, true);
     
     // Set VBO and buffer data.
-    glBindVertexArray(mVertexArrayObjectID);
     BindAttributeV3(GL_ARRAY_BUFFER, mVertexBufferID, vertexPosLocation, vertexData);
     BindAttributeV2(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, textureData);
     BindAttributeV3(GL_ARRAY_BUFFER, mPositionBufferID, objectPosLocation, positionData);

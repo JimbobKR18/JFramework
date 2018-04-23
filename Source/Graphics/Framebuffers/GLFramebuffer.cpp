@@ -52,7 +52,7 @@ void GLFramebuffer::SetShaders(GraphicsManager *aManager, HashString const &aVer
   else
   {
     ShaderData* shaderInfo = ShaderLoader::LoadShaders(mVertexShaderFilename, mFragmentShaderFilename);
-    aManager->AddShaderPairing(mVertexShaderFilename + mFragmentShaderFilename, shaderInfo);
+    aManager->AddShaderPairing(shaderKey, shaderInfo);
     mFramebufferProgramID = shaderInfo->mProgramID;
   }
 }

@@ -23,8 +23,6 @@ Camera::Camera(GraphicsManager *aManager) : Component(Camera::sUID),
   #ifdef SHADER_COMPATIBLE
   mFramebuffer = new GLFramebuffer(mSize.x, mSize.y);
   #endif
-  
-  mFramebuffer->Generate(mManager);
 }
 
 Camera::~Camera()
