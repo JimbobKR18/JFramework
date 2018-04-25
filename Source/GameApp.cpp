@@ -38,9 +38,7 @@ GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mSkipFrames
   AddManager(new SoundManager(this));
   AddManager(new ChemistryManager(this, 0));
   AddManager(new EffectsManager(this));
-#ifdef _DEBUG
   AddManager(new DebugManager(this));
-#endif
   
   // LUABind needs to register all LUA classes.
   // You can bind your own classes in your derived class from GameApp.

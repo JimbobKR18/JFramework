@@ -33,6 +33,7 @@ public:
   int                 HandleEvent(SDL_Event &event);
   void                HandleCreate(ObjectCreateMessage *aMsg);
   void                HandleDelete(ObjectDeleteMessage *aMsg);
+  void                LogException(std::exception const &aException);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);

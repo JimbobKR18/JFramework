@@ -28,6 +28,7 @@
 #include <sstream>
 #include <chrono>
 #include <ctime>
+#include <exception>
 #include "HashString.h"
 #include "SmartPointer.h"
 
