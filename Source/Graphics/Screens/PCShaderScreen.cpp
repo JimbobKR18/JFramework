@@ -24,7 +24,7 @@ PCShaderScreen::PCShaderScreen() : Screen()
 
 PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen) : Screen(aOwner, aW, aH, aFullScreen), 
   mWindow(nullptr), mGLContext(), mDisplayMode(), mDefaultFrameBufferID(0), mVertexArrayObjectID(0), mVertexBufferID(0), 
-  mTextureBufferID(0), mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0), mMaxTextures(0)
+  mTextureBufferID(0), mPositionBufferID(0), mColorBufferID(0), mIndexBufferID(0), mNormalBufferID(0), mMaxTextures(0)
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
@@ -68,6 +68,7 @@ PCShaderScreen::~PCShaderScreen()
   glDeleteBuffers(1, &mPositionBufferID);
   glDeleteBuffers(1, &mColorBufferID);
   glDeleteBuffers(1, &mIndexBufferID);
+  glDeleteBuffers(1, &mNormalBufferID);
   glDeleteVertexArrays(1, &mVertexArrayObjectID);
   SDL_GL_DeleteContext(mGLContext);
   SDL_DestroyWindow(mWindow);
@@ -390,6 +391,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glGenBuffers(1, &mPositionBufferID);
   glGenBuffers(1, &mColorBufferID);
   glGenBuffers(1, &mIndexBufferID);
+  glGenBuffers(1, &mNormalBufferID);
   
   glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mDefaultFrameBufferID);
   glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &mMaxTextures);
@@ -414,7 +416,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
   // Must scale, rotate, then translate camera offset
   Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraSize;
   
-  std::vector<Vector3> vertexData, positionData;
+  std::vector<Vector3> vertexData, positionData, normalData;
   std::vector<Vector2> textureData;
   std::vector<Vector4> colorData;
   std::vector<GLuint> indices;
@@ -425,6 +427,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
   colorData.reserve(numVertices);
   positionData.reserve(numVertices);
   indices.reserve(numVertices);
+  normalData.reserve(numVertices);
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -451,6 +454,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     int objectPosLocation = glGetAttribLocation(program, "objectPos");
     int colorPosLocation = glGetAttribLocation(program, "primaryColor");
+    int normalLocation = glGetAttribLocation(program, "normal");
     
     // Camera translation
     float cameraMatrix[9];
@@ -514,6 +518,9 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
       bottomLeft = modelTransform * bottomLeft;
       bottomRight = modelTransform * bottomRight;
       
+      // Calculate normal
+      Vector3 normal = topRight.Cross(topLeft).normalize();
+      
       // Vertex points
       PushRenderDataV3(vertexData, vertexPosLocation, topLeft);
       PushRenderDataV3(vertexData, vertexPosLocation, bottomLeft);
@@ -522,6 +529,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
       PushRenderDataV3(vertexData, vertexPosLocation, topRight);
       PushRenderDataV3(vertexData, vertexPosLocation, topLeft);
       
+      // Texture coordinates
       PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(0)));
       PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(1)));
       PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(1)));
@@ -529,6 +537,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
       PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(0)));
       PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(0)));
       
+      // Position data
       PushRenderDataV3(positionData, objectPosLocation, position);
       PushRenderDataV3(positionData, objectPosLocation, position);
       PushRenderDataV3(positionData, objectPosLocation, position);
@@ -536,12 +545,21 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
       PushRenderDataV3(positionData, objectPosLocation, position);
       PushRenderDataV3(positionData, objectPosLocation, position);
       
+      // Color data
       PushRenderDataV4(colorData, colorPosLocation, color);
       PushRenderDataV4(colorData, colorPosLocation, color);
       PushRenderDataV4(colorData, colorPosLocation, color);
       PushRenderDataV4(colorData, colorPosLocation, color);
       PushRenderDataV4(colorData, colorPosLocation, color);
       PushRenderDataV4(colorData, colorPosLocation, color);
+      
+      // Normal data
+      PushRenderDataV3(normalData, normalLocation, normal);
+      PushRenderDataV3(normalData, normalLocation, normal);
+      PushRenderDataV3(normalData, normalLocation, normal);
+      PushRenderDataV3(normalData, normalLocation, normal);
+      PushRenderDataV3(normalData, normalLocation, normal);
+      PushRenderDataV3(normalData, normalLocation, normal);
       
       for(int i = 0; i < 6; ++i)
       {
@@ -585,6 +603,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     BindAttributeV2(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, textureData);
     BindAttributeV3(GL_ARRAY_BUFFER, mPositionBufferID, objectPosLocation, positionData);
     BindAttributeV4(GL_ARRAY_BUFFER, mColorBufferID, colorPosLocation, colorData);
+    BindAttributeV3(GL_ARRAY_BUFFER, mNormalBufferID, normalLocation, normalData);
     
     // Set index data
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);

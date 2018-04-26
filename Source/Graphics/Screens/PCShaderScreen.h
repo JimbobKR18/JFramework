@@ -19,6 +19,7 @@ private:
   GLuint        mPositionBufferID;
   GLuint        mColorBufferID;
   GLuint        mIndexBufferID;
+  GLuint        mNormalBufferID;
   GLint         mMaxTextures;
   
 #if defined(__APPLE__)
