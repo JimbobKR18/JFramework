@@ -7,6 +7,7 @@
 
 #include "DebugManager.h"
 #include "TextParser.h"
+#include "ParserFactory.h"
 
 unsigned const DebugManager::sUID = Common::StringHashFunction("DebugManager");
 DebugManager::DebugManager(GameApp *aApp) : Manager(aApp, "DebugManager", DebugManager::sUID), mInvalidMemory()
@@ -60,11 +61,12 @@ void DebugManager::HandleDelete(ObjectDeleteMessage *aMsg)
 void DebugManager::LogException(std::exception const &aException)
 {
   char file[256];
-  sprintf(file, "CrashLog_%d", time(0));
-  TextParser parser(file, MODE_OUTPUT);
-  ParserNode *root = parser.GetBaseRoot();
+  sprintf(file, "CrashLog_%d.txt", time(0));
+  Parser *parser = ParserFactory::CreateOutputParser("", file);
+  ParserNode *root = parser->GetBaseRoot();
   root->Place("Message", aException.what());
-  parser.Write();
+  parser->Write();
+  delete parser;
   
   DebugLogPrint(aException.what());
 }
