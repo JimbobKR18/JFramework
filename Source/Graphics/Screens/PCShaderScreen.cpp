@@ -328,9 +328,24 @@ void PCShaderScreen::SetClearColor(Vector4 const &aClearColor)
  */
 void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 {
+  int width = aW;
+  int height = aH;
+  float gameRatio = (float)aW / (float)aH;
+  
+  if(width > mDisplayMode.w)
+  {
+    width = mDisplayMode.w;
+    height = width / gameRatio;
+  }
+  if(height > mDisplayMode.h)
+  {
+    height = mDisplayMode.h;
+    width = height * gameRatio;
+  }
+  
   // Set full screen or not
-  SetWidth(aW);
-  SetHeight(aH);
+  SetWidth(width);
+  SetHeight(height);
   SetFullScreen(aFullScreen);
   int fullScreen = 0;
   if(aFullScreen)
@@ -368,19 +383,19 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
 
   if(aFullScreen)
   {
-    float ratio = ((float)mDisplayMode.h / (float)aH);
-    int x = aW * ratio;
-    int y = aH * ratio;
-    glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, aW * ratio, mDisplayMode.h);
+    float ratio = ((float)mDisplayMode.h / (float)height);
+    int x = width * ratio;
+    int y = height * ratio;
+    glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, width * ratio, mDisplayMode.h);
   }
   else
-    glViewport(0, 0, aW, aH);
+    glViewport(0, 0, width, height);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  glOrtho(0, aW, aH, 0, 1, -1);
-  //gluPerspective(45, (float)aW / (float)aH, 0.01f, 100.0f);
+  glOrtho(0, width, height, 0, 1, -1);
+  //gluPerspective(45, (float)width / (float)height, 0.01f, 100.0f);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
