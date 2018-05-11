@@ -344,24 +344,24 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabb, aPair.mShapes[1]->position);
   Vector3 aabbSize = dynamic_cast<AxisAlignedBoundingBox*>(aPair.mShapes[1])->size.Multiply(aabb->GetHierarchicalScale());
   Vector3 closestPoint = ShapeMath::ClosestPointPointAABB(spherePos, aabbPos - aabbSize, aabbPos + aabbSize);
-  Vector3 dist = closestPoint - aabbPos;
+  Vector3 closestPointLocalSpace = closestPoint - aabbPos;
   float sphereSize = aPair.mShapes[0]->GetSize(0) * sphere->GetHierarchicalScale().x;
   
   int axis = 0;
   float shortestAxisDistance = 0xffffff;
   for(int i = 0; i < mResolveAxes; ++i)
   {
-    float absDist = fabs(dist[i]);
-    float distance = fabs(aabbSize[i] - absDist);
-    if(distance < shortestAxisDistance)
+    float absPointLocalSpace = fabs(closestPointLocalSpace[i]);
+    float distanceToEdge = fabs(aabbSize[i] - absPointLocalSpace);
+    if(distanceToEdge < shortestAxisDistance)
     {
       axis = i;
-      shortestAxisDistance = distance;
+      shortestAxisDistance = distanceToEdge;
     }
   }
   
-  Vector3 diff = aabbPos - spherePos;
-  float shortestDistance = fabs(aabbSize[axis] + sphereSize - fabs(diff[axis]));
+  Vector3 diffPos = aabbPos - spherePos;
+  float penetration = aabbSize[axis] + sphereSize - fabs(diffPos[axis]);
   
   Vector3 normal;
   // Figure out the normal
@@ -378,7 +378,7 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
       break;
   }
 
-  aPair.mPenetration = shortestDistance;
+  aPair.mPenetration = penetration;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
   aPair.mContactPoint = closestPoint;
