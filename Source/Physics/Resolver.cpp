@@ -141,7 +141,7 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   float totalInverseMass = 0.0f;
   if(body1)
     totalInverseMass += body1->GetInverseMass();
-  if(aPair.mBodies[1])
+  if(body2)
     totalInverseMass += body2->GetInverseMass();
   
   if(totalInverseMass <= 0) return;
@@ -344,20 +344,24 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   Vector3 aabbPos = ShapeMath::GetLocalCoordinates(aabb, aPair.mShapes[1]->position);
   Vector3 aabbSize = dynamic_cast<AxisAlignedBoundingBox*>(aPair.mShapes[1])->size.Multiply(aabb->GetHierarchicalScale());
   Vector3 closestPoint = ShapeMath::ClosestPointPointAABB(spherePos, aabbPos - aabbSize, aabbPos + aabbSize);
-  Vector3 dist = closestPoint - spherePos;
-  float size = aPair.mShapes[0]->GetSize(0) * sphere->GetHierarchicalScale().x;
+  Vector3 dist = closestPoint - aabbPos;
+  float sphereSize = aPair.mShapes[0]->GetSize(0) * sphere->GetHierarchicalScale().x;
   
   int axis = 0;
-  float shortestDistance = 0xffffff;
+  float shortestAxisDistance = 0xffffff;
   for(int i = 0; i < mResolveAxes; ++i)
   {
-    float distance = fabs(size - fabs(dist[i]));
-    if(distance < shortestDistance)
+    float absDist = fabs(dist[i]);
+    float distance = fabs(aabbSize[i] - absDist);
+    if(distance < shortestAxisDistance)
     {
       axis = i;
-      shortestDistance = distance;
+      shortestAxisDistance = distance;
     }
   }
+  
+  Vector3 diff = aabbPos - spherePos;
+  float shortestDistance = fabs(aabbSize[axis] + sphereSize - fabs(diff[axis]));
   
   Vector3 normal;
   // Figure out the normal
