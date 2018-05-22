@@ -377,7 +377,7 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = closestPoint;
+  aPair.mContactPoint = closestPoint - spherePos;
 }
 
 /**
@@ -510,7 +510,7 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
   aPair.mPenetration = minDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = closestPoint;
+  aPair.mContactPoint = dist;
 }
 
 /**
@@ -550,7 +550,7 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
     aPair.mPenetration = radius - dist.length();
     aPair.mNormal = dist.normalize();
     aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-    aPair.mContactPoint = closestPoint;
+    aPair.mContactPoint = dist;
   }
 }
 
@@ -587,7 +587,7 @@ void Resolver::CalculateLineToAABB(CollisionPair &aPair)
     {
       aPair.mPenetration = diff;
       aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-      aPair.mContactPoint = closestPoint;
+      aPair.mContactPoint = dist;
       
       switch(i)
       {
