@@ -59,7 +59,6 @@ public:
   // SETTERS
   void                       SetID(int const &aID);
   void                       SetName(HashString const &aName);
-  void                       SetParent(GameObject *aParent);
   
   // OPERATIONS
   void                       AddComponent(Component *aComponent);
@@ -94,6 +93,9 @@ public:
   {
     return HasComponent(T::GetUID());
   }
+  
+protected:
+  void                       SetParent(GameObject *aParent);
 };
 
 #endif /* defined(__JFramework__GameObject__) */

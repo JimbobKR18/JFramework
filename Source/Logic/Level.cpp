@@ -704,7 +704,6 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
         assert(!"Parent not found.");
       
       parent->AddChild(object);
-      object->SetParent(parent);
     }
 
     ParserNodeContainer untouched = curRoot->GetUntouchedRoots();
