@@ -670,14 +670,14 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
   Vector3 obbPos = ShapeMath::GetLocalCoordinates(obbTransform, obb->position);
   Vector3 diff = obbPos - spherePos;
   float shortestDistance = FLT_MAX;
-  float shortestAxis = 0;
+  int shortestAxis = 0;
   
   for(int i = 0; i < mResolveAxes; ++i)
   {
-    Vector3 axis = obbTransform->GetHierarchicalRotation() * obb->GetAxis(i);
+    Vector3 axis = orientation[i];
     Vector3 projection = axis * (diff.Dot(axis) / axis.Dot(axis));
     float size = obb->GetSize(i) * obbTransform->GetHierarchicalScale().GetValue(i);
-    float distance = fabs(projection.length() - size);
+    float distance = fabs(projection.length() - size) - (sphere->GetSize(i) * sphereTransform->GetHierarchicalScale().GetValue(i));
     if(distance < shortestDistance)
     {
       shortestAxis = i;
@@ -685,7 +685,7 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
     }
   }
   
-  Vector3 axis = obbTransform->GetHierarchicalRotation() * obb->GetAxis(shortestAxis);
+  Vector3 axis = orientation[shortestAxis];
   Vector3 normal = (axis * diff.Dot(axis)).normalize();
   aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
@@ -707,6 +707,7 @@ void Resolver::CalculateOBBToAABB(CollisionPair &aPair)
   Transform* obbTransform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* aabbTransform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   
+  // TODO broken
   Vector3 orientation[3];
   orientation[0] = obbTransform->GetHierarchicalRotation() * obb->right;
   orientation[1] = obbTransform->GetHierarchicalRotation() * obb->up;
@@ -762,6 +763,7 @@ void Resolver::CalculateOBBToOBB(CollisionPair &aPair)
   Transform* obb1Transform = aPair.mBodies[0]->GetOwner()->GET<Transform>();
   Transform* obb2Transform = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   
+  // TODO broken
   Vector3 orientation[3];
   orientation[0] = obb2Transform->GetHierarchicalRotation() * obb2->right;
   orientation[1] = obb2Transform->GetHierarchicalRotation() * obb2->up;
