@@ -75,7 +75,7 @@ namespace ShapeMath
       float dist = d.Dot(aOrientation[i]);
       if(dist > aExtent.GetValue(i)) dist = aExtent.GetValue(i);
       if(dist < -aExtent.GetValue(i)) dist = -aExtent.GetValue(i);
-      ret += aOrientation[i]* dist;
+      ret += aOrientation[i] * dist;
     }
     return ret;
   }

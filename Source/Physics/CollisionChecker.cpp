@@ -411,7 +411,8 @@ bool CollisionChecker::CheckOBBToSphere(CollisionPair &aPair)
   Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(spherePos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
   Vector3 diff = closestPoint - spherePos;
   
-  return diff.length() <= sphere->radius;
+  float size = sphere->radius * sphereTransform->GetHierarchicalScale().x;
+  return diff.Dot(diff) <= size * size;
 }
 
 /**
