@@ -351,7 +351,7 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   float shortestDistance = 0xffffff;
   for(int i = 0; i < mResolveAxes; ++i)
   {
-    float distance = aabbSize[i] + sphereSize - fabs(diffPos[i]);
+    float distance = fabs(aabbSize[i] + sphereSize - fabs(diffPos[i]));
     if(distance < shortestDistance)
     {
       axis = i;
