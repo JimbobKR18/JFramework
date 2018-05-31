@@ -676,8 +676,9 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
   {
     Vector3 axis = orientation[i];
     Vector3 projection = axis * (diff.Dot(axis) / axis.Dot(axis));
-    float size = obb->GetSize(i) * obbTransform->GetHierarchicalScale().GetValue(i);
-    float distance = fabs(projection.length() - size) - (sphere->GetSize(i) * sphereTransform->GetHierarchicalScale().GetValue(i));
+    float obbSize = obb->GetSize(i) * obbTransform->GetHierarchicalScale().GetValue(i);
+    float sphereSize = sphere->GetSize(i) * sphereTransform->GetHierarchicalScale().GetValue(i);
+    float distance = fabs(projection.length() - (obbSize + sphereSize));
     if(distance < shortestDistance)
     {
       shortestAxis = i;

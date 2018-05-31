@@ -213,7 +213,7 @@ bool CollisionChecker::CheckSphereToAABB(CollisionPair &aPair)
 
   Vector3 dist = spherePos - closestPoint;
   float size = aPair.mShapes[0]->GetSize(0) * sphere->GetHierarchicalScale().x;
-  return dist.Dot(dist) <= size*size;
+  return dist.Dot(dist) <= size * size;
 }
 
 /**
@@ -256,7 +256,8 @@ bool CollisionChecker::CheckTriangleToSphere(CollisionPair &aPair)
   Vector3 closestPoint = ShapeMath::ClosestPointPointTriangle(spherePos, a, b, c);
   
   Vector3 dist = closestPoint - spherePos;
-  if(dist.length() < sphere->GetSize(0) * sphereTransform->GetHierarchicalScale().x)
+  float size = sphere->GetSize(0) * sphereTransform->GetHierarchicalScale().x;
+  if(dist.Dot(dist) <= size * size)
     return true;
   
   return false;
@@ -692,7 +693,7 @@ bool CollisionChecker::CheckLineToAABB(Line const &aSegment, Transform *aAABB, S
     }
     else
     {
-        collision[i] = candidatePlane[i];
+      collision[i] = candidatePlane[i];
     }
   }
 
