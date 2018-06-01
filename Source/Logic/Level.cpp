@@ -68,6 +68,9 @@ Level::~Level()
   for(TileMapGeneratorContainerIT it = mGenerators.begin(); it != mGenerators.end(); ++it)
     delete *it;
   mGenerators.clear();
+  mMusicNames.clear();
+  mMusicChannels.clear();
+  mScenarios.clear();
 }
 
 /**

@@ -78,6 +78,7 @@ void LevelManager::LoadLevelDelayed(HashString const &aLevelName, bool aReset)
  * @brief Load a level immediately.
  * @param aLevelName
  * @param aReset
+ * Note that deleting previous level in pre or post reset functions in level will cause crash bug.
  */
 void LevelManager::LoadLevel(HashString const &aLevelName, bool aReset)
 {
@@ -188,6 +189,9 @@ void LevelManager::AddLevel(Level *aLevel)
  */
 void LevelManager::RemoveLevel(Level *aLevel)
 {
+  if(mActiveLevel == aLevel)
+    mActiveLevel = nullptr;
+    
   for(LevelIT it = mLevels.begin(); it != mLevels.end(); ++it)
   {
     if(*it == aLevel)
