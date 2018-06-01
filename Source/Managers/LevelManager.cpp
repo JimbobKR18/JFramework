@@ -88,10 +88,21 @@ void LevelManager::LoadLevel(HashString const &aLevelName, bool aReset)
     {
       Level* prevLevel = mActiveLevel;
       mActiveLevel = *it;
+      
+      #ifdef _DEBUG
+        HashString prevLevelName = (prevLevel != nullptr) ? prevLevel->GetName() : "";
+      #endif
+      
       if(prevLevel)
         prevLevel->Unload(mActiveLevel);
       if(aReset)
         mActiveLevel->ResetLevel();
+        
+      #ifdef _DEBUG
+        // Avoid crash bug where you accidentally delete previous level
+        assert(prevLevelName.Empty() || GetLevel(prevLevelName) != nullptr);
+      #endif
+      
       mActiveLevel->Load(prevLevel);
       GetOwningApp()->GET<InputManager>()->AcceptInputs();
       return;
