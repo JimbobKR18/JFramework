@@ -276,8 +276,6 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
         break;
     }
   }
-  ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
-  graphicsManager->ProcessDelayedMessage(msg);
 }
 
 /**

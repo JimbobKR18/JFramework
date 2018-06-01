@@ -74,12 +74,6 @@ void GraphicsManager::SendMessage(Message const &aMessage)
  */
 void GraphicsManager::ProcessDelayedMessage(Message *aMessage)
 {
-  if(aMessage->GetDescription() == OBJECT_DELETE.ToCharArray()) 
-  {
-    // TODO dunno what to do here.
-    ObjectDeleteMessage *msg = (ObjectDeleteMessage*)aMessage;
-    delete aMessage;
-  }
 }
 
 /**
