@@ -175,6 +175,26 @@ GameObject* Level::FindObject(HashString const &aObjectName)
 }
 
 /**
+ * @brief Find all objects with name.
+ * @param aObjectName
+ * @return All objects whose file name or object name match input.
+ */
+Level::ObjectVector Level::FindObjects(HashString const &aName)
+{
+  ObjectVector ret;
+  for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
+  {
+    ObjectIT end = mObjects[i].end();
+    for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
+    {
+      if(aName == (*it)->GetName() || aName == (*it)->GetFileName())
+        ret.push_back(*it);
+    }
+  }
+  return ret;
+}
+
+/**
  * @brief Find all objects touching a position
  * @param aPosition
  * @return A vector of objects touching the location, can be empty.

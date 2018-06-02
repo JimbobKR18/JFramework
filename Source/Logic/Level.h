@@ -71,6 +71,7 @@ public:
   GameObject*       GetFocusTarget() const;
   void              SetFocusTarget(GameObject *aObject);
   GameObject*       FindObject(HashString const &aObjectName);
+  ObjectVector      FindObjects(HashString const &aName);
   ObjectVector      FindObjects(Vector3 const &aPosition) const;
 
   void              AddObject(GameObject *aObject, ObjectPlacement const aPlacement);
