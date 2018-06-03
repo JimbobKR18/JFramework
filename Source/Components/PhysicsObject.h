@@ -44,7 +44,8 @@ private:
   bool                mStatic,
                       mGravity,
                       mPassable,
-                      mActive;
+                      mActive,
+                      mPaused;
   IgnoreContainer     mIgnoreList;
   ShapeContainer      mShapes;
   JointContainer      mJoints;
@@ -103,6 +104,9 @@ public:
   
   bool                 IsActive() const;
   void                 SetActive(bool const aActive);
+  
+  bool                 IsPaused() const;
+  void                 SetPaused(bool const aPaused);
 
   Vector3              GetBroadSize() const;
   void                 SetBroadSize(Vector3 const &aSize);

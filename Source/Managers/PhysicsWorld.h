@@ -38,6 +38,7 @@ public:
   void                          AddObject(PhysicsObject *aObject);
   void                          RemoveObject(PhysicsObject *aObject);
   void                          ClearObjects();
+  void                          SetPauseState(bool const aPaused);
   // Derived from Manager
   virtual void                  Update();
   virtual void                  SendMessage(Message const &aMessage);

@@ -121,6 +121,19 @@ void PhysicsWorld::ClearObjects()
 }
 
 /**
+ * @brief Set pause state of all available objects.
+ * @param aPaused Pause state.
+ */
+void PhysicsWorld::SetPauseState(bool const aPaused)
+{
+  PhysicsIT objectEnd = mObjects.end();
+  for(PhysicsIT it = mObjects.begin(); it != objectEnd; ++it)
+  {
+    (*it)->SetPaused(aPaused);
+  }
+}
+
+/**
  * @brief Basic update loop.
  */
 void PhysicsWorld::Update()

@@ -22,7 +22,7 @@ PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sU
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),
                   mBroadSize(0,0,0), mMass(0), mInverseMass(0), 
                   mDamping(0.01f), mRestitution(0.0f), mMaximumVelocity(-1.0f), mStatic(false),
-                  mGravity(true), mPassable(false), mActive(true), mIgnoreList(), mShapes(), mJoints()
+                  mGravity(true), mPassable(false), mActive(true), mPaused(false), mIgnoreList(), mShapes(), mJoints()
 {
 }
 
@@ -50,6 +50,10 @@ PhysicsObject::~PhysicsObject()
  */
 void PhysicsObject::Update()
 {
+  // Skip if paused
+  if(IsPaused())
+    return;
+  
   // Store position for later
   Transform* transform = GetOwner()->GET<Transform>();
   Vector3 position = transform->GetPosition();
@@ -431,6 +435,8 @@ void PhysicsObject::SerializeLUA()
     .set("SetStatic", &PhysicsObject::SetStatic)
     .set("IsPassable", &PhysicsObject::IsPassable)
     .set("SetPassable", &PhysicsObject::SetPassable)
+    .set("IsPaused", &PhysicsObject::IsPaused)
+    .set("SetPaused", &PhysicsObject::SetPaused)
     .set("IsActive", &PhysicsObject::IsActive)
     .set("SetActive", &PhysicsObject::SetActive)
     .set("AddForce", &PhysicsObject::AddForce);
@@ -678,7 +684,7 @@ bool PhysicsObject::IsPassable() const
 }
 
 /**
- * @brief Set if obejct is passable
+ * @brief Set if object is passable
  * @param aPassable Passable
  */
 void PhysicsObject::SetPassable(bool const aPassable)
@@ -702,6 +708,24 @@ bool PhysicsObject::IsActive() const
 void PhysicsObject::SetActive(bool const aActive)
 {
   mActive = aActive;
+}
+
+/**
+ * @brief Get pause state of physicsobject.
+ * @return Pause state.
+ */
+bool PhysicsObject::IsPaused() const
+{
+  return mPaused;
+}
+
+/**
+ * @brief Set if object is paused (skips update loop)
+ * @param aPaused Pause state.
+ */
+void PhysicsObject::SetPaused(bool const aPaused)
+{
+  mPaused = aPaused;
 }
 
 /**
