@@ -29,6 +29,7 @@
 #include <chrono>
 #include <ctime>
 #include <exception>
+#include <limits>
 #include "HashString.h"
 #include "SmartPointer.h"
 
