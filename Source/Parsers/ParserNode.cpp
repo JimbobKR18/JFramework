@@ -30,7 +30,7 @@ ParserNode const *ParserNode::Search(HashString const &aValue) const
   else
   {
     // Search for node of same name first, early out
-    for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
+    for(parserNodeConstIT it = mChildren.begin(); it != mChildren.end(); ++it)
     {
       ParserNode *ret = *it;
       if(ret->mName == aValue)
@@ -77,9 +77,9 @@ ParserNode *ParserNode::Find(HashString const &aValue)
  * @param aValue Name of value to find.
  * @return Set of values amongst children.
  */
-std::set<ParserNode*> ParserNode::FindAll(HashString const &aValue)
+ParserNodeContainer ParserNode::FindAll(HashString const &aValue)
 {
-  std::set<ParserNode*> allRoots;
+  ParserNodeContainer allRoots;
   
   // Search for node of same name first, early out
   for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
@@ -88,7 +88,7 @@ std::set<ParserNode*> ParserNode::FindAll(HashString const &aValue)
     if(ret->mName == aValue)
     {
       ret->mTouched = true;
-      allRoots.insert(ret);
+      allRoots.push_back(ret);
     }
   }
   
@@ -108,7 +108,7 @@ void ParserNode::Place(HashString const &aElement, HashString const &aValue)
   {
     node = new ParserNode();
     node->mName = aElement;
-    mChildren.insert(node);
+    mChildren.push_back(node);
   }
   node->mValue = aValue;
   node->mParent = this;
@@ -120,7 +120,7 @@ void ParserNode::Place(HashString const &aElement, HashString const &aValue)
  */
 void ParserNode::Insert(ParserNode* root)
 {
-  mChildren.insert(root);
+  mChildren.push_back(root);
 }
 
 /**
@@ -161,16 +161,16 @@ ParserNode* ParserNode::GetParent() const
 ParserNodeContainer ParserNode::GetUntouchedRoots() const
 {
   ParserNodeContainer ret;
-  for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  for(parserNodeConstIT it = mChildren.begin(); it != mChildren.end(); ++it)
   {
     if((*it)->mTouched)
     {
       ParserNodeContainer addendum = (*it)->GetUntouchedRoots();
-      ret.insert(addendum.begin(), addendum.end());
+      ret.insert(ret.end(), addendum.begin(), addendum.end());
     }
     else
     {
-      ret.insert((*it));
+      ret.push_back((*it));
       (*it)->mTouched = true;
     }
   }

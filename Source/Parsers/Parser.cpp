@@ -83,7 +83,7 @@ ParserNode* Parser::Find(HashString const &aRoot, HashString const &aElement)
  * @param aElement Name of element.
  * @return All elements matching name.
  */
-std::set<ParserNode*> Parser::FindAll(HashString const &aElement)
+ParserNodeContainer Parser::FindAll(HashString const &aElement)
 {
   // Find node and search it for an element
   ParserNode *node = mDictionary->Find(aElement);

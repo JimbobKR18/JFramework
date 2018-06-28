@@ -28,7 +28,7 @@ public:
   // Reading
   ParserNode*           Find(HashString const &aElement);
   ParserNode*           Find(HashString const &aRoot, HashString const &aElement);
-  std::set<ParserNode*> FindAll(HashString const &aElement);
+  ParserNodeContainer   FindAll(HashString const &aElement);
   virtual void    Parse() = 0;
 
   // Writing

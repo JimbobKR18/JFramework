@@ -8,15 +8,13 @@
 #ifndef ROOT_H_
 #define ROOT_H_
 
-#include <string>
-#include <set>
 #include "Common.h"
 
 // Forward declare Root
 class ParserNode;
 
 // ... for these
-typedef std::set<ParserNode*> ParserNodeContainer;
+typedef std::vector<ParserNode*> ParserNodeContainer;
 typedef ParserNodeContainer::const_iterator parserNodeConstIT;
 typedef ParserNodeContainer::iterator parserNodeIT;
 
@@ -35,7 +33,7 @@ public:
 
   ParserNode const*     Search(HashString const &aValue) const;
   ParserNode*           Find(HashString const &aValue);
-  std::set<ParserNode*> FindAll(HashString const &aValue);
+  ParserNodeContainer   FindAll(HashString const &aValue);
   void            Place(HashString const &aElement, HashString const &aValue);
   void            Insert(ParserNode* root);
 
