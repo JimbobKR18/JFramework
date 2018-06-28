@@ -12,7 +12,7 @@ public:
   DefaultGameObjectFactory();
   virtual ~DefaultGameObjectFactory();
 
-  GameObject* CreateGameObject(ObjectManager* aManager, HashString const& aFileName, HashString const& aType);
+  virtual GameObject* CreateGameObject(ObjectManager* aManager, HashString const& aFileName, HashString const& aType);
 };
 
 #endif
