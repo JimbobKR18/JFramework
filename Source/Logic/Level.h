@@ -121,16 +121,7 @@ private:
   void              SerializeScenarios(Parser &aParser);
   bool              ObjectNotInScenario(GameObject *aObject);
   void              RemoveObjectFromScenarios(GameObject *aObject);
-  void              ParseTransform(GameObject *aObject, ParserNode* aTransform);
-  void              ParseSurface(GameObject *aObject, ParserNode* aSurface);
-  void              ParseCamera(GameObject *aObject, ParserNode* aCamera);
-  void              ParseText(GameObject *aObject, ParserNode* aText);
-  void              ParsePhysicsObject(GameObject *aObject, ParserNode* aPhysicsObject);
-  void              ParseChemistryMaterial(GameObject *aObject, ParserNode* aChemistryMaterial);
-  void              ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryElement);
-  void              ParseFollowComponent(GameObject *aObject, ParserNode* aFollowComponent);
-  void              ParseSoundEmitter(GameObject *aObject, ParserNode* aSoundEmitter);
-  void              ParseSoundListener(GameObject *aObject, ParserNode* aSoundListener);
+  void              ParseTransform(GameObject *aObject);
   void              ParseEffects(GameObject *aObject, ParserNode *aEffects);
   void              ParseCustomScript(GameObject *aObject, ParserNode *aCustomScript);
   void              ParseTileGenerator(ParserNode *aTileMap);

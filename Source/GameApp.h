@@ -4,12 +4,14 @@
 #include "Common.h"
 #include "Message.h"
 #include "HashString.h"
+#include "ComponentFactory.h"
 
 class Manager;
 
 class GameApp
 {
 private:
+  ComponentFactory*     mComponentFactory;
   std::vector<Manager*> mManagers;
   std::vector<Message*> mDelayedMessages;
   unsigned int          mLastFrame;
@@ -22,6 +24,8 @@ public:
   GameApp();
   virtual ~GameApp();
 
+  ComponentFactory* GetComponentFactory();
+  void              SetComponentFactory(ComponentFactory *aComponentFactory);
   float             GetAppStep() const;
   void              SetAppStep(float const aAppStep);
   float             GetAppSpeed() const;

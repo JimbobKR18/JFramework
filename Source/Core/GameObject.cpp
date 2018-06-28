@@ -160,8 +160,11 @@ GameObject::GameObjectContainer const& GameObject::GetChildren() const
  */
 void GameObject::AddComponent(Component *aComponent)
 {
-  aComponent->SetOwner(this);
-  mComponents[aComponent->GetDefinedUID()] = aComponent;
+  if(mComponents[aComponent->GetDefinedUID()] != aComponent)
+  {
+    aComponent->SetOwner(this);
+    mComponents[aComponent->GetDefinedUID()] = aComponent;
+  }
 }
 
 /**

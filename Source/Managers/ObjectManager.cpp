@@ -1,17 +1,5 @@
 #include "Common.h"
 #include "ObjectManager.h"
-#include "PhysicsWorld.h"
-#include "PhysicsObject.h"
-#include "ChemistryMaterial.h"
-#include "ChemistryElement.h"
-#include "Transform.h"
-#include "StateObject.h"
-#include "CustomScript.h"
-#include "SoundEmitter.h"
-#include "SoundListener.h"
-#include "GraphicsManager.h"
-#include "ChemistryManager.h"
-#include "ControllerManager.h"
 #include "EffectsManager.h"
 #include "DebugManager.h"
 #include "LuaIncludes.h"
@@ -19,11 +7,6 @@
 #include "ObjectCreateMessage.h"
 #include "DefaultGameObjectFactory.h"
 #include "ParserFactory.h"
-#include "FollowComponent.h"
-
-#if !defined(ANDROID) && !defined(IOS)
-  #include "PCShaderSurface.h"
-#endif
 
 unsigned const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
 ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", ObjectManager::sUID),
@@ -295,126 +278,14 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
     HashString name = aParser->Find("Name", "Value")->GetValue();
     aObject->SetName(name);
   }
-  if(aParser->Find("PhysicsObject"))
+  
+  ComponentFactory *factory = GetOwningApp()->GetComponentFactory();
+  ParserNodeContainer children = aParser->GetBaseRoot()->GetChildren();
+  for(parserNodeIT it = children.begin(); it != children.end(); ++it)
   {
-    PhysicsObject *object = GetOwningApp()->GET<PhysicsWorld>()->CreateObject();
-    aObject->AddComponent(object);
-    object->Deserialize(aParser->Find("PhysicsObject"));
+    factory->CreateComponent(GetOwningApp(), aObject, *it);
   }
-  if(aParser->Find("ChemistryMaterial"))
-  {
-    HashString name = aParser->Find("ChemistryMaterial")->Find("Name")->GetValue();
-    ChemistryMaterial *object = GetOwningApp()->GET<ChemistryManager>()->CreateMaterial(name);
-    aObject->AddComponent(object);
-    object->Deserialize(aParser->Find("ChemistryMaterial"));
-  }
-  if(aParser->Find("ChemistryElement"))
-  {
-    HashString name = aParser->Find("ChemistryElement")->Find("Name")->GetValue();
-    ChemistryElement *object = GetOwningApp()->GET<ChemistryManager>()->CreateElement(name);
-    aObject->AddComponent(object);
-    object->Deserialize(aParser->Find("ChemistryElement"));
-  }
-  if(aParser->Find("Transform"))
-  {
-    Transform *transform = new Transform();
-    aObject->AddComponent(transform);
-    transform->Deserialize(aParser->Find("Transform"));
-  }
-  if(aParser->Find("StateObject"))
-  {
-    StateObject *stateObject = new StateObject();
-    aObject->AddComponent(stateObject);
-    stateObject->Deserialize(aParser->Find("StateObject"));
-  }
-  if(aParser->Find("SoundEmitter"))
-  {
-    SoundEmitter *soundEmitter = new SoundEmitter();
-    aObject->AddComponent(soundEmitter);
-    soundEmitter->Deserialize(aParser->Find("SoundEmitter"));
-  }
-  if(aParser->Find("SoundListener"))
-  {
-    SoundListener *soundListener = new SoundListener();
-    aObject->AddComponent(soundListener);
-    soundListener->Deserialize(aParser->Find("SoundListener"));
-  }
-  if(aParser->Find("Surface"))
-  {
-#if !defined(ANDROID) && !defined(IOS)
-    PCShaderSurface *surface = nullptr;
-#else
-    Surface *surface = nullptr;
-#endif
-    if(aParser->Find("Surface", "UIElement") && aParser->Find("Surface", "UIElement")->GetValue().ToBool())
-    {
-#if !defined(ANDROID) && !defined(IOS)
-      surface = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
-#else
-      surface = GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
-#endif
-    }
-    else
-    {
-#if !defined(ANDROID) && !defined(IOS)
-      surface = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
-#else
-      surface = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
-#endif
-    }
-
-    aObject->AddComponent(surface);
-    surface->Deserialize(aParser->Find("Surface"));
-  }
-  if(aParser->Find("Text"))
-  {
-#if !defined(ANDROID) && !defined(IOS)
-    PCShaderSurface *text = nullptr;
-#else
-    Surface *text = nullptr;
-#endif
-    if(aParser->Find("Text", "UIElement") && aParser->Find("Text", "UIElement")->GetValue().ToBool())
-    {
-#if !defined(ANDROID) && !defined(IOS)
-      text = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
-#else
-      text = GetOwningApp()->GET<GraphicsManager>()->CreateUISurface();
-#endif
-    }
-    else
-    {
-#if !defined(ANDROID) && !defined(IOS)
-      text = (PCShaderSurface*)GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
-#else
-      text = GetOwningApp()->GET<GraphicsManager>()->CreateSurface();
-#endif
-    }
-
-    aObject->AddComponent(text);
-    text->Deserialize(aParser->Find("Text"));
-  }
-  if(aParser->Find("Camera"))
-  {
-    Camera *camera = GetOwningApp()->GET<GraphicsManager>()->CreateCamera();
-    aObject->AddComponent(camera);
-    camera->Deserialize(aParser->Find("Camera"));
-  }
-  if(aParser->Find("FollowComponent"))
-  {
-    FollowComponent *followComponent = new FollowComponent();
-    aObject->AddComponent(followComponent);
-    followComponent->Deserialize(aParser->Find("FollowComponent"));
-  }
-  if(aParser->Find("CustomScript"))
-  {
-    CustomScript *customScript = new CustomScript();
-    aObject->AddComponent(customScript);
-    customScript->Deserialize(aParser->Find("CustomScript"));
-  }
-  if(aParser->Find("Focus"))
-  {
-    DebugLogPrint("DEPRECATED: Focus.\n");
-  }
+  
   if(aParser->Find("Effects"))
   {
     ParseEffects(aObject, aParser->Find("Effects"));

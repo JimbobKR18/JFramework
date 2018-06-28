@@ -2,18 +2,18 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=JFramework
-ConfigurationName      :=Release
-WorkspacePath          :=/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth
+ConfigurationName      :=Debug
+WorkspacePath          :=/home/jimmy/Documents/project-chang-e/Linux/Chang-e
 ProjectPath            :=/home/jimmy/Documents/JFramework/Linux/JFramework
-IntermediateDirectory  :=./Release
+IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=21/06/18
+Date                   :=27/06/18
 CodeLitePath           :=/home/jimmy/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/lib$(ProjectName).a
-Preprocessors          :=$(PreprocessorSwitch)NDEBUG 
+Preprocessors          :=$(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)_DEBUG_DRAW $(PreprocessorSwitch)SLB_USE_EXCEPTIONS 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/lib $(Libra
 AR       := ar rcus
 CXX      := g++
 CC       := gcc
-CXXFLAGS :=  -O -O3 -std=c++11 -Wall $(Preprocessors)
-CFLAGS   :=  -O -O3 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -O0 -std=c++11 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
+CFLAGS   :=  -g -O0 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -63,14 +63,14 @@ CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/up_up_Source_Sound_DSPs_DSP_Echo.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffers_GLFramebuffer.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_SoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Surfaces_PCShaderSurface.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Joint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Basic.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMODDSP_Echo.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_DebugManager.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Shape.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_PhysicsObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_GameApp.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_main.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Camera.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Shape.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_PhysicsObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_GameApp.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_main.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Components_Camera.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) 
 
-Objects1=$(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Component.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_lua.c$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_ShapeMath.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Common.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Components_ChemistryElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_FollowComponent.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Constraint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Controller.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Button.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_ShaderLoader.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_SoundListener.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_TextureCoordinates.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_ZRenderSorter.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Logic_Level.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_BatchRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Constants.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_TileMapGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screens_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Threading.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) 
+Objects1=$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Component.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_lua.c$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_ShapeMath.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Common.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_ChemistryElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_FollowComponent.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Constraint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Controller.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Button.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_ShaderLoader.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_SoundListener.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_TextureCoordinates.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Graphics_Screen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_ZRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Level.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_BatchRenderSorter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Constants.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_TileMapGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Screens_PCShaderScreen.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_Threading.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(ObjectSuffix) 
 
 
 
@@ -88,15 +88,15 @@ $(OutputFile): $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	@echo $(Objects1) >> $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
-	@$(MakeDirCommand) "/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth/.build-release"
-	@echo rebuilt > "/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth/.build-release/JFramework"
+	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug"
+	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug/JFramework"
 
 MakeIntermediateDirs:
-	@test -d ./Release || $(MakeDirCommand) ./Release
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 
-./Release:
-	@test -d ./Release || $(MakeDirCommand) ./Release
+./Debug:
+	@test -d ./Debug || $(MakeDirCommand) ./Debug
 
 PreBuild:
 
@@ -352,22 +352,6 @@ $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(DependSuffix): 
 $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(PreprocessSuffix): ../../Source/Managers/SoundManager.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(PreprocessSuffix) ../../Source/Managers/SoundManager.cpp
 
-$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix): ../../Source/Components/CustomScript.cpp $(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/CustomScript.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(DependSuffix): ../../Source/Components/CustomScript.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(DependSuffix) -MM ../../Source/Components/CustomScript.cpp
-
-$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(PreprocessSuffix): ../../Source/Components/CustomScript.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(PreprocessSuffix) ../../Source/Components/CustomScript.cpp
-
-$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix): ../../Source/Managers/ChemistryManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/ChemistryManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(DependSuffix): ../../Source/Managers/ChemistryManager.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(DependSuffix) -MM ../../Source/Managers/ChemistryManager.cpp
-
-$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(PreprocessSuffix): ../../Source/Managers/ChemistryManager.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(PreprocessSuffix) ../../Source/Managers/ChemistryManager.cpp
-
 $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix): ../../Source/Components/StateObject.cpp $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/StateObject.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(DependSuffix): ../../Source/Components/StateObject.cpp
@@ -448,13 +432,29 @@ $(IntermediateDirectory)/up_up_Source_Components_Camera.cpp$(DependSuffix): ../.
 $(IntermediateDirectory)/up_up_Source_Components_Camera.cpp$(PreprocessSuffix): ../../Source/Components/Camera.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_Camera.cpp$(PreprocessSuffix) ../../Source/Components/Camera.cpp
 
-$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix): ../../Source/Graphics/Framebuffer.cpp $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/Framebuffer.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(DependSuffix): ../../Source/Graphics/Framebuffer.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(DependSuffix) -MM ../../Source/Graphics/Framebuffer.cpp
+$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix): ../../Source/Components/SoundEmitter.cpp $(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/SoundEmitter.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(DependSuffix): ../../Source/Components/SoundEmitter.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(DependSuffix) -MM ../../Source/Components/SoundEmitter.cpp
 
-$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(PreprocessSuffix): ../../Source/Graphics/Framebuffer.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(PreprocessSuffix) ../../Source/Graphics/Framebuffer.cpp
+$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(PreprocessSuffix): ../../Source/Components/SoundEmitter.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(PreprocessSuffix) ../../Source/Components/SoundEmitter.cpp
+
+$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix): ../../Source/Managers/NetworkManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/NetworkManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(DependSuffix): ../../Source/Managers/NetworkManager.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(DependSuffix) -MM ../../Source/Managers/NetworkManager.cpp
+
+$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(PreprocessSuffix): ../../Source/Managers/NetworkManager.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(PreprocessSuffix) ../../Source/Managers/NetworkManager.cpp
+
+$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix): ../../Source/Core/GameObject.cpp $(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/GameObject.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(DependSuffix): ../../Source/Core/GameObject.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(DependSuffix) -MM ../../Source/Core/GameObject.cpp
+
+$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(PreprocessSuffix): ../../Source/Core/GameObject.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(PreprocessSuffix) ../../Source/Core/GameObject.cpp
 
 $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(ObjectSuffix): ../../Source/Core/FileCache.cpp $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/FileCache.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(ObjectSuffix) $(IncludePath)
@@ -464,21 +464,21 @@ $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(DependSuffix): ../../S
 $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(PreprocessSuffix): ../../Source/Core/FileCache.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(PreprocessSuffix) ../../Source/Core/FileCache.cpp
 
-$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix): ../../Source/Components/SoundEmitter.cpp $(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/SoundEmitter.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(DependSuffix): ../../Source/Components/SoundEmitter.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(DependSuffix) -MM ../../Source/Components/SoundEmitter.cpp
+$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix): ../../Source/Graphics/Framebuffer.cpp $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/Framebuffer.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(DependSuffix): ../../Source/Graphics/Framebuffer.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(DependSuffix) -MM ../../Source/Graphics/Framebuffer.cpp
 
-$(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(PreprocessSuffix): ../../Source/Components/SoundEmitter.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(PreprocessSuffix) ../../Source/Components/SoundEmitter.cpp
+$(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(PreprocessSuffix): ../../Source/Graphics/Framebuffer.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffer.cpp$(PreprocessSuffix) ../../Source/Graphics/Framebuffer.cpp
 
-$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix): ../../Source/Components/Transform.cpp $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/Transform.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(DependSuffix): ../../Source/Components/Transform.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(DependSuffix) -MM ../../Source/Components/Transform.cpp
+$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix): ../../Source/Core/HashString.cpp $(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/HashString.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(DependSuffix): ../../Source/Core/HashString.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(DependSuffix) -MM ../../Source/Core/HashString.cpp
 
-$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(PreprocessSuffix): ../../Source/Components/Transform.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(PreprocessSuffix) ../../Source/Components/Transform.cpp
+$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(PreprocessSuffix): ../../Source/Core/HashString.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(PreprocessSuffix) ../../Source/Core/HashString.cpp
 
 $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(ObjectSuffix): ../../Source/Core/MathExt.cpp $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/MathExt.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(ObjectSuffix) $(IncludePath)
@@ -488,37 +488,29 @@ $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(DependSuffix): ../../Sou
 $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(PreprocessSuffix): ../../Source/Core/MathExt.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_MathExt.cpp$(PreprocessSuffix) ../../Source/Core/MathExt.cpp
 
-$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix): ../../Source/Components/ChemistryMaterial.cpp $(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/ChemistryMaterial.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(DependSuffix): ../../Source/Components/ChemistryMaterial.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(DependSuffix) -MM ../../Source/Components/ChemistryMaterial.cpp
+$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix): ../../Source/Managers/ChemistryManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/ChemistryManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(DependSuffix): ../../Source/Managers/ChemistryManager.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(DependSuffix) -MM ../../Source/Managers/ChemistryManager.cpp
 
-$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(PreprocessSuffix): ../../Source/Components/ChemistryMaterial.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(PreprocessSuffix) ../../Source/Components/ChemistryMaterial.cpp
+$(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(PreprocessSuffix): ../../Source/Managers/ChemistryManager.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_ChemistryManager.cpp$(PreprocessSuffix) ../../Source/Managers/ChemistryManager.cpp
 
-$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix): ../../Source/Graphics/SurfaceProperty.cpp $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/SurfaceProperty.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(DependSuffix): ../../Source/Graphics/SurfaceProperty.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(DependSuffix) -MM ../../Source/Graphics/SurfaceProperty.cpp
+$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix): ../../Source/Components/CustomScript.cpp $(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/CustomScript.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(DependSuffix): ../../Source/Components/CustomScript.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(DependSuffix) -MM ../../Source/Components/CustomScript.cpp
 
-$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(PreprocessSuffix): ../../Source/Graphics/SurfaceProperty.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(PreprocessSuffix) ../../Source/Graphics/SurfaceProperty.cpp
+$(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(PreprocessSuffix): ../../Source/Components/CustomScript.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_CustomScript.cpp$(PreprocessSuffix) ../../Source/Components/CustomScript.cpp
 
-$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix): ../../Source/LUA/LUATypes.cpp $(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/LUA/LUATypes.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(DependSuffix): ../../Source/LUA/LUATypes.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(DependSuffix) -MM ../../Source/LUA/LUATypes.cpp
+$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix): ../../Source/Components/Transform.cpp $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/Transform.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(DependSuffix): ../../Source/Components/Transform.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(DependSuffix) -MM ../../Source/Components/Transform.cpp
 
-$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(PreprocessSuffix): ../../Source/LUA/LUATypes.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(PreprocessSuffix) ../../Source/LUA/LUATypes.cpp
-
-$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix): ../../Source/LUA/SLB.cpp $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/LUA/SLB.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(DependSuffix): ../../Source/LUA/SLB.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(DependSuffix) -MM ../../Source/LUA/SLB.cpp
-
-$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(PreprocessSuffix): ../../Source/LUA/SLB.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(PreprocessSuffix) ../../Source/LUA/SLB.cpp
+$(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(PreprocessSuffix): ../../Source/Components/Transform.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(PreprocessSuffix) ../../Source/Components/Transform.cpp
 
 $(IntermediateDirectory)/up_up_Source_Core_Component.cpp$(ObjectSuffix): ../../Source/Core/Component.cpp $(IntermediateDirectory)/up_up_Source_Core_Component.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/Component.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_Component.cpp$(ObjectSuffix) $(IncludePath)
@@ -536,6 +528,22 @@ $(IntermediateDirectory)/up_up_Source_LUA_lua.c$(DependSuffix): ../../Source/LUA
 $(IntermediateDirectory)/up_up_Source_LUA_lua.c$(PreprocessSuffix): ../../Source/LUA/lua.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_LUA_lua.c$(PreprocessSuffix) ../../Source/LUA/lua.c
 
+$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix): ../../Source/Components/ChemistryMaterial.cpp $(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/ChemistryMaterial.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(DependSuffix): ../../Source/Components/ChemistryMaterial.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(DependSuffix) -MM ../../Source/Components/ChemistryMaterial.cpp
+
+$(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(PreprocessSuffix): ../../Source/Components/ChemistryMaterial.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_ChemistryMaterial.cpp$(PreprocessSuffix) ../../Source/Components/ChemistryMaterial.cpp
+
+$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix): ../../Source/Graphics/SurfaceProperty.cpp $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Graphics/SurfaceProperty.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(DependSuffix): ../../Source/Graphics/SurfaceProperty.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(DependSuffix) -MM ../../Source/Graphics/SurfaceProperty.cpp
+
+$(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(PreprocessSuffix): ../../Source/Graphics/SurfaceProperty.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(PreprocessSuffix) ../../Source/Graphics/SurfaceProperty.cpp
+
 $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix): ../../Source/Physics/CollisionPair.cpp $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Physics/CollisionPair.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/up_up_Source_Physics_CollisionPair.cpp$(DependSuffix): ../../Source/Physics/CollisionPair.cpp
@@ -552,13 +560,29 @@ $(IntermediateDirectory)/up_up_Source_Core_ShapeMath.cpp$(DependSuffix): ../../S
 $(IntermediateDirectory)/up_up_Source_Core_ShapeMath.cpp$(PreprocessSuffix): ../../Source/Core/ShapeMath.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_ShapeMath.cpp$(PreprocessSuffix) ../../Source/Core/ShapeMath.cpp
 
-$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix): ../../Source/Core/HashString.cpp $(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/HashString.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(DependSuffix): ../../Source/Core/HashString.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(DependSuffix) -MM ../../Source/Core/HashString.cpp
+$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix): ../../Source/LUA/LUATypes.cpp $(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/LUA/LUATypes.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(DependSuffix): ../../Source/LUA/LUATypes.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(DependSuffix) -MM ../../Source/LUA/LUATypes.cpp
 
-$(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(PreprocessSuffix): ../../Source/Core/HashString.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_HashString.cpp$(PreprocessSuffix) ../../Source/Core/HashString.cpp
+$(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(PreprocessSuffix): ../../Source/LUA/LUATypes.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_LUA_LUATypes.cpp$(PreprocessSuffix) ../../Source/LUA/LUATypes.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix): ../../Source/Logic/SystemProperties.cpp $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/SystemProperties.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(DependSuffix): ../../Source/Logic/SystemProperties.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(DependSuffix) -MM ../../Source/Logic/SystemProperties.cpp
+
+$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(PreprocessSuffix): ../../Source/Logic/SystemProperties.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(PreprocessSuffix) ../../Source/Logic/SystemProperties.cpp
+
+$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix): ../../Source/LUA/SLB.cpp $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/LUA/SLB.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(DependSuffix): ../../Source/LUA/SLB.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(DependSuffix) -MM ../../Source/LUA/SLB.cpp
+
+$(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(PreprocessSuffix): ../../Source/LUA/SLB.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(PreprocessSuffix) ../../Source/LUA/SLB.cpp
 
 $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix): ../../Source/Physics/Resolver.cpp $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Physics/Resolver.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) $(IncludePath)
@@ -575,14 +599,6 @@ $(IntermediateDirectory)/up_up_Source_Core_Common.cpp$(DependSuffix): ../../Sour
 
 $(IntermediateDirectory)/up_up_Source_Core_Common.cpp$(PreprocessSuffix): ../../Source/Core/Common.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_Common.cpp$(PreprocessSuffix) ../../Source/Core/Common.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix): ../../Source/Logic/SystemProperties.cpp $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Logic/SystemProperties.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(DependSuffix): ../../Source/Logic/SystemProperties.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(DependSuffix) -MM ../../Source/Logic/SystemProperties.cpp
-
-$(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(PreprocessSuffix): ../../Source/Logic/SystemProperties.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(PreprocessSuffix) ../../Source/Logic/SystemProperties.cpp
 
 $(IntermediateDirectory)/up_up_Source_Components_ChemistryElement.cpp$(ObjectSuffix): ../../Source/Components/ChemistryElement.cpp $(IntermediateDirectory)/up_up_Source_Components_ChemistryElement.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Components/ChemistryElement.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Components_ChemistryElement.cpp$(ObjectSuffix) $(IncludePath)
@@ -736,6 +752,14 @@ $(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(DependSuff
 $(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(PreprocessSuffix): ../../Source/Managers/ControllerManager.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_ControllerManager.cpp$(PreprocessSuffix) ../../Source/Managers/ControllerManager.cpp
 
+$(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(ObjectSuffix): ../../Source/Core/DefaultComponentFactory.cpp $(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/DefaultComponentFactory.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(DependSuffix): ../../Source/Core/DefaultComponentFactory.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(DependSuffix) -MM ../../Source/Core/DefaultComponentFactory.cpp
+
+$(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(PreprocessSuffix): ../../Source/Core/DefaultComponentFactory.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_DefaultComponentFactory.cpp$(PreprocessSuffix) ../../Source/Core/DefaultComponentFactory.cpp
+
 $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(ObjectSuffix): ../../Source/Managers/LevelManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/LevelManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(DependSuffix): ../../Source/Managers/LevelManager.cpp
@@ -744,28 +768,12 @@ $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(DependSuffix): 
 $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(PreprocessSuffix): ../../Source/Managers/LevelManager.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_LevelManager.cpp$(PreprocessSuffix) ../../Source/Managers/LevelManager.cpp
 
-$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix): ../../Source/Managers/NetworkManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/NetworkManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(DependSuffix): ../../Source/Managers/NetworkManager.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(DependSuffix) -MM ../../Source/Managers/NetworkManager.cpp
-
-$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(PreprocessSuffix): ../../Source/Managers/NetworkManager.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(PreprocessSuffix) ../../Source/Managers/NetworkManager.cpp
-
-$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix): ../../Source/Core/GameObject.cpp $(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Core/GameObject.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(DependSuffix): ../../Source/Core/GameObject.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(DependSuffix) -MM ../../Source/Core/GameObject.cpp
-
-$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(PreprocessSuffix): ../../Source/Core/GameObject.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(PreprocessSuffix) ../../Source/Core/GameObject.cpp
-
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
 ## Clean
 ##
 clean:
-	$(RM) -r ./Release/
+	$(RM) -r ./Debug/
 
 

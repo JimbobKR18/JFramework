@@ -15,8 +15,10 @@
 #include "SystemProperties.h"
 #include "Threading.h"
 #include "FileCache.h"
+#include "DefaultComponentFactory.h"
 
-GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mSkipFrames(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
+GameApp::GameApp() : mComponentFactory(new DefaultComponentFactory()), mManagers(), mDelayedMessages(), 
+                     mLastFrame(0), mSkipFrames(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
 {
   // AutoParses ./SystemProperties.ini
   SystemProperties::Deserialize();
@@ -48,6 +50,7 @@ GameApp::GameApp() : mManagers(), mDelayedMessages(), mLastFrame(0), mSkipFrames
 
 GameApp::~GameApp()
 {
+  delete mComponentFactory;
   for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
   {
     delete (*it);
@@ -55,6 +58,25 @@ GameApp::~GameApp()
   mManagers.clear();
   
   FileCache::Clear();
+}
+
+/**
+ * @brief Get current component factory.
+ * @return Component factory.
+ */
+ComponentFactory* GameApp::GetComponentFactory()
+{
+  return mComponentFactory;
+}
+
+/**
+ * @brief Set component factory, deletes old one.
+ * @param aComponentFactory Component factory.
+ */
+void GameApp::SetComponentFactory(ComponentFactory *aComponentFactory)
+{
+  delete mComponentFactory;
+  mComponentFactory = aComponentFactory;
 }
 
 /**

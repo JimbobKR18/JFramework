@@ -40,6 +40,9 @@
     <File Name="../../Source/LUA/SLB.hpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Core">
+    <File Name="../../Source/Core/DefaultComponentFactory.cpp"/>
+    <File Name="../../Source/Core/DefaultComponentFactory.h"/>
+    <File Name="../../Source/Core/ComponentFactory.h"/>
     <VirtualDirectory Name="Messages">
       <File Name="../../Source/Core/Messages/Message.h"/>
       <File Name="../../Source/Core/Messages/ObjectDeleteMessage.h"/>

@@ -23,6 +23,7 @@
 #include "EffectsManager.h"
 #include "ParserFactory.h"
 #include "FollowComponent.h"
+#include "ComponentFactory.h"
 
 #if !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -629,61 +630,18 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     object = objectManager->CreateObjectNoAdd(curRoot->Find("File")->GetValue(), folder, type);
     mObjects[ObjectPlacement::DEFAULT].insert(object);
     mScenarios[aFileName].insert(object);
+    
+    // Create components from factory.
+    ComponentFactory *factory = mOwner->GetOwningApp()->GetComponentFactory();
+    ParserNodeContainer children = curRoot->GetChildren();
+    for(parserNodeIT it = children.begin(); it != children.end(); ++it)
+    {
+      factory->CreateComponent(mOwner->GetOwningApp(), object, *it);
+    }
 
-    // Get transform information
-    if(curRoot->Find("Transform"))
-    {
-      ParseTransform(object, curRoot->Find("Transform"));
-    }
-    // Get surface information
-    if(curRoot->Find("Surface"))
-    {
-      ParseSurface(object, curRoot->Find("Surface"));
-    }
-    // Get text information (still a surface)
-    if(curRoot->Find("Text"))
-    {
-      ParseText(object, curRoot->Find("Text"));
-    }
-    // Get physics information
-    if(curRoot->Find("PhysicsObject"))
-    {
-      ParsePhysicsObject(object, curRoot->Find("PhysicsObject"));
-    }
-    // Get effects information
-    if(curRoot->Find("Effects"))
-    {
-      ParseEffects(object, curRoot->Find("Effects"));
-    }
-    // Get customscript information
-    if(curRoot->Find("CustomScript"))
-    {
-      ParseCustomScript(object, curRoot->Find("CustomScript"));
-    }
-    // Get chemistry information
-    if(curRoot->Find("ChemistryMaterial"))
-    {
-      ParseChemistryMaterial(object, curRoot->Find("ChemistryMaterial"));
-    }
-    if(curRoot->Find("ChemistryElement"))
-    {
-      ParseChemistryElement(object, curRoot->Find("ChemistryElement"));
-    }
-    // Get camera information
-    if(curRoot->Find("Camera"))
-    {
-      ParseCamera(object, curRoot->Find("Camera"));
-    }
-    // Get sound emitter information
-    if(curRoot->Find("SoundEmitter"))
-    {
-      ParseSoundEmitter(object, curRoot->Find("SoundEmitter"));
-    }
-    // Get sound listener information
-    if(curRoot->Find("SoundListener"))
-    {
-      ParseSoundListener(object, curRoot->Find("SoundListener"));
-    }
+    // Get transform information and adjust bounds.
+    ParseTransform(object);
+    
     // Who is the focus of this level?
     if(curRoot->Find("Focus"))
     {
@@ -1088,11 +1046,9 @@ void Level::RemoveObjectFromScenarios(GameObject *aObject)
 /**
  * @brief Get transform data for an object from a root.
  */
-void Level::ParseTransform(GameObject *aObject, ParserNode *aTransform)
+void Level::ParseTransform(GameObject *aObject)
 {
   Transform* objTransform = aObject->GET<Transform>();
-  objTransform->Deserialize(aTransform);
-  
   Vector3 pos = objTransform->GetPosition();
   Vector3 size = objTransform->GetSize();
 
@@ -1101,131 +1057,6 @@ void Level::ParseTransform(GameObject *aObject, ParserNode *aTransform)
   mMinBoundary.y = Lesser<float>(pos.y - size.y, mMinBoundary.y);
   mMaxBoundary.x = Greater<float>(pos.x + size.x, mMaxBoundary.x);
   mMaxBoundary.y = Greater<float>(pos.y + size.y, mMaxBoundary.y);
-}
-
-/**
- * @brief Get surface data from a root.
- */
-void Level::ParseSurface(GameObject *aObject, ParserNode *aSurface)
-{
-  Surface* objSurface = aObject->GET<Surface>();
-  objSurface->Deserialize(aSurface);
-}
-
-/**
- * @brief Get camera data from a root.
- */
-void Level::ParseCamera(GameObject *aObject, ParserNode* aCamera)
-{
-  Camera *camera = aObject->GET<Camera>();
-  if(camera == nullptr)
-  {
-    camera = GetManager()->GetOwningApp()->GET<GraphicsManager>()->CreateCamera();
-    aObject->AddComponent(camera);
-  }
-  camera->Deserialize(aCamera);
-}
-
-/**
- * @brief Get text data from root.
- */
-void Level::ParseText(GameObject *aObject, ParserNode* aText)
-{
-  Surface* objText = aObject->GET<Surface>();
-  objText->Deserialize(aText);
-}
-
-/**
- * @brief Get physics object data from a root.
- */
-void Level::ParsePhysicsObject(GameObject *aObject, ParserNode* aPhysicsObject)
-{
-  // If object doesn't have physicsobject, it does now.
-  PhysicsObject* physicsObject = aObject->GET<PhysicsObject>();
-  if(!physicsObject)
-  {
-    physicsObject = new PhysicsObject(GetManager()->GetOwningApp()->GET<PhysicsWorld>());
-    aObject->AddComponent(physicsObject);
-  }
-  
-  physicsObject->Deserialize(aPhysicsObject);
-}
-
-/**
- * @brief Get chemistry material data from root.
- */
-void Level::ParseChemistryMaterial(GameObject *aObject, ParserNode* aChemistryMaterial)
-{
-  // If object doesn't have chemistryMaterial, it does now.
-  ChemistryMaterial* chemistryMaterial = aObject->GET<ChemistryMaterial>();
-  if(!chemistryMaterial)
-  {
-    chemistryMaterial = GetManager()->GetOwningApp()->GET<ChemistryManager>()->CreateMaterial(aChemistryMaterial->Find("Name")->GetValue());
-    aObject->AddComponent(chemistryMaterial);
-  }
-  
-  chemistryMaterial->Deserialize(aChemistryMaterial);
-}
-
-/**
- * @brief Get chemistry element data from root.
- */
-void Level::ParseChemistryElement(GameObject *aObject, ParserNode* aChemistryElement)
-{
-  // If object doesn't have chemistryElement, it does now.
-  ChemistryElement* chemistryElement = aObject->GET<ChemistryElement>();
-  if(!chemistryElement)
-  {
-    chemistryElement = GetManager()->GetOwningApp()->GET<ChemistryManager>()->CreateElement(aChemistryElement->Find("Name")->GetValue());
-    aObject->AddComponent(chemistryElement);
-  }
-  
-  chemistryElement->Deserialize(aChemistryElement);
-}
-
-/**
- * @brief Get follow data from root.
- */
-void Level::ParseFollowComponent(GameObject *aObject, ParserNode* aFollowComponent)
-{
-  FollowComponent *followComponent = aObject->GET<FollowComponent>();
-  if(!followComponent)
-  {
-    followComponent = new FollowComponent();
-    aObject->AddComponent(followComponent);
-  }
-  
-  followComponent->Deserialize(aFollowComponent);
-}
-
-/**
- * @brief Get sound emitter data from root.
- */
-void Level::ParseSoundEmitter(GameObject *aObject, ParserNode* aSoundEmitter)
-{
-  SoundEmitter *soundEmitter = aObject->GET<SoundEmitter>();
-  if(!soundEmitter)
-  {
-    soundEmitter = new SoundEmitter();
-    aObject->AddComponent(soundEmitter);
-  }
-  
-  soundEmitter->Deserialize(aSoundEmitter);
-}
-
-/**
- * @brief Get sound listener data from root.
- */
-void Level::ParseSoundListener(GameObject *aObject, ParserNode* aSoundListener)
-{
-  SoundListener *soundListener = aObject->GET<SoundListener>();
-  if(!soundListener)
-  {
-    soundListener = new SoundListener();
-    aObject->AddComponent(soundListener);
-  }
-  
-  soundListener->Deserialize(aSoundListener);
 }
 
 /**
