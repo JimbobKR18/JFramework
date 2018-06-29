@@ -85,6 +85,30 @@ bool HashString::Find(HashString const &aString) const
 }
 
 /**
+ * @brief Asserts if string starts with substring.
+ * @param aString Substring to find.
+ * @return True if string starts with substring.
+ */
+bool HashString::StartsWith(HashString const &aString) const
+{
+  if(aString.Length() == 0)
+    assert(!"HashString is empty being passed into StartsWith");
+    
+  if(aString.Length() > Length())
+    return false;
+    
+  for(int i = 0; i < Length(); ++i)
+  {
+    if(i >= aString.Length())
+      break;
+    if(mString[i] != aString[i])
+      return false;
+  }
+  
+  return true;
+}
+
+/**
  * @brief Find number of occurrences of a substring in our string.
  * @param aString The substring to search for.
  * @return Number of occurrences.

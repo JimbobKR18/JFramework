@@ -96,6 +96,28 @@ ParserNodeContainer ParserNode::FindAll(HashString const &aValue)
 }
 
 /**
+ * @brief Find all nodes whose name starts with substring.
+ * @param aValue Substring.
+ * @return All nodes whose values meet above criteria.
+ */
+ParserNodeContainer ParserNode::FindAllThatStartsWith(HashString const &aValue)
+{
+  ParserNodeContainer allRoots;
+  
+  for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  {
+    ParserNode *ret = *it;
+    if(ret->mName.StartsWith(aValue))
+    {
+      ret->mTouched = true;
+      allRoots.push_back(ret);
+    }
+  }
+  
+  return allRoots;
+}
+
+/**
  * @brief Place node under this node with element name, with value.
  * @param aElement
  * @param aValue

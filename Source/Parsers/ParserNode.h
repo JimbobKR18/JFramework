@@ -34,6 +34,7 @@ public:
   ParserNode const*     Search(HashString const &aValue) const;
   ParserNode*           Find(HashString const &aValue);
   ParserNodeContainer   FindAll(HashString const &aValue);
+  ParserNodeContainer   FindAllThatStartsWith(HashString const &aValue);
   void            Place(HashString const &aElement, HashString const &aValue);
   void            Insert(ParserNode* root);
 
