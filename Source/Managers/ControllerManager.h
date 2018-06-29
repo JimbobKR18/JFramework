@@ -17,7 +17,7 @@ class ControllerFactory;
 class ControllerManager : public Manager
 {
 private:
-  std::vector<Controller*> mControllers;
+  std::set<Controller*> mControllers;
   ControllerFactory *mFactory;
   
   static unsigned const sUID;
@@ -46,7 +46,7 @@ public:
   static void         SerializeLUA();
   
 public:
-  typedef std::vector<Controller*>::iterator ControllerIT;
+  typedef std::set<Controller*>::iterator ControllerIT;
 };
 
 #endif /* defined(__JFramework__ControllerManager__) */

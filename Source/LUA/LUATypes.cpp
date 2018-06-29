@@ -73,6 +73,7 @@ namespace LUABind
     Vector3::SerializeLUA();
     Vector4::SerializeLUA();
     Matrix33::SerializeLUA();
+    Shape::SerializeLUA();
     
     // Messages
     CollisionMessage::SerializeLUA();

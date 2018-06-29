@@ -1,4 +1,5 @@
 #include "Shape.h"
+#include "LUATypes.h"
 
 //------------------------------
 // SHAPE
@@ -9,6 +10,14 @@ Shape::Shape(ShapeType aShape) : id(0), position(), passable(false), shape(aShap
 
 Shape::~Shape()
 {
+}
+
+void Shape::SerializeLUA()
+{
+  SLB::Class<Shape, SLB::Instance::NoCopy>("Shape")
+      .property("id", &Shape::id)
+      .property("position", &Shape::position)
+      .property("passable", &Shape::passable);
 }
 
 //------------------------------

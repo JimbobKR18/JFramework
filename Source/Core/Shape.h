@@ -23,6 +23,8 @@ struct Shape
   Shape(ShapeType aShape);
   virtual ~Shape();
   virtual float GetSize(int index) = 0;
+  
+  static void SerializeLUA();
 };
 
 struct AxisAlignedBoundingBox : public Shape
