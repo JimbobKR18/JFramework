@@ -8,7 +8,7 @@ FMOD_DSP::FMOD_DSP(FMOD::DSP* aDSP, FMODSoundSystem *aSoundSystem, HashString co
 FMOD_DSP::FMOD_DSP(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashString const &aName, int const &aType) : DSP(aName), 
   mDSP(nullptr), mSoundSystem(aSoundSystem), mConnectionContainer()
 {
-  FMOD_RESULT result = aSystem->createDSPByType((FMOD_DSP_TYPE)DSP_TYPE_ECHO, &mDSP);
+  FMOD_RESULT result = aSystem->createDSPByType((FMOD_DSP_TYPE)aType, &mDSP);
   if(result != FMOD_OK)
   {
     DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
