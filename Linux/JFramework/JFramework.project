@@ -244,13 +244,9 @@
     <File Name="../../Source/Sound/DSP_Type.h"/>
     <VirtualDirectory Name="DSPs">
       <VirtualDirectory Name="FMOD">
-        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.cpp"/>
-        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP_Echo.h"/>
-        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP_Basic.cpp"/>
-        <File Name="../../Source/Sound/DSPs/FMOD/FMODDSP_Basic.h"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/FMOD_DSP.cpp"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/FMOD_DSP.h"/>
       </VirtualDirectory>
-      <File Name="../../Source/Sound/DSPs/DSP_Echo.cpp"/>
-      <File Name="../../Source/Sound/DSPs/DSP_Echo.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Sound/DSP.h"/>
     <File Name="../../Source/Sound/DSP.cpp"/>

@@ -1,6 +1,5 @@
 #include "FMODSoundSystem.h"
-#include "FMODDSP_Basic.h"
-#include "FMODDSP_Echo.h"
+#include "FMOD_DSP.h"
 
 FMODSound::FMODSound(FMOD::Sound* aSound, float const &aVolume) : mSound(aSound), mVolume(aVolume)
 {
@@ -506,17 +505,14 @@ DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
     assert(!"DSP type exceeds FMOD max.");
   }
   
-  DSP *dsp = nullptr;
-  switch(aType)
+  if(aType == DSP_Type::DSP_TYPE_UNKNOWN || aType == DSP_Type::DSP_TYPE_MAX)
   {
-  case DSP_TYPE_ECHO:
-    dsp = new FMODDSP_Echo(mFMODSystem, this, aName);
-    mDSPContainer[aName.ToHash()] = ((FMODDSP_Echo*)dsp)->GetFMODDSP();
-    break;
-  default:
-    assert(!"DSP_Type not supported.");
-    break;
+    assert(!"Invalid DSP Type passed into CreateDSP");
   }
+  
+  DSP *dsp = new FMOD_DSP(mFMODSystem, this, aName, aType);
+  mDSPContainer[aName.ToHash()] = dynamic_cast<FMOD_DSP*>(dsp)->GetFMODDSP();
+
   return dsp;
 }
 
@@ -533,8 +529,8 @@ DSP* FMODSoundSystem::GetDSPFromChannel(int aChannel, int aIndex)
   mFMODSystem->getChannel(aChannel, &channel);
   channel->getDSP(aIndex, &dsp);
   
-  DSP* fmodDSP = new FMODDSP_Basic(dsp, this, Common::IntToString(aChannel));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = ((FMODDSP_Basic*)fmodDSP)->GetFMODDSP();
+  DSP* fmodDSP = new FMOD_DSP(dsp, this, Common::IntToString(aChannel));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = dynamic_cast<FMOD_DSP*>(fmodDSP)->GetFMODDSP();
   return fmodDSP;
 }
 
@@ -556,8 +552,8 @@ DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int a
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->getDSP(aIndex, &dsp);
   
-  DSP* fmodDSP = new FMODDSP_Basic(dsp, this, aGroupName + Common::IntToString(aIndex));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = ((FMODDSP_Basic*)fmodDSP)->GetFMODDSP();
+  DSP* fmodDSP = new FMOD_DSP(dsp, this, aGroupName + Common::IntToString(aIndex));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = dynamic_cast<FMOD_DSP*>(fmodDSP)->GetFMODDSP();
   
   return fmodDSP;
 }

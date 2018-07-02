@@ -21,6 +21,10 @@ public:
   virtual void RemoveInput(DSP* aInput) = 0;
   virtual void SetActive(bool const aActive) = 0;
   virtual void SetBypass(bool const aBypass) = 0;
+  virtual void SetFloat(int const aParam, float const aValue) = 0;
+  virtual void SetInt(int const aParam, int const aValue) = 0;
+  virtual void SetBool(int const aParam, bool const aValue) = 0;
+  virtual void SetData(int const aParam, void* aData, int const aLength) = 0;
 };
 
 #endif // __JFramework__DSP_h_
