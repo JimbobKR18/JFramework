@@ -5,6 +5,8 @@
 #include "fmod_studio.hpp"
 #include "fmod_errors.h"
 
+#define FMOD_SAMPLES_PER_SECOND 44100
+
 struct FMODSound
 {
   FMOD::Sound* mSound;
@@ -53,6 +55,7 @@ public:
   virtual void StopAllChannels();
   virtual void SetChannelVolume(int const aChannel, float const aVolume);
   virtual void StopChannel(int const aChannel);
+  virtual void FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd);
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency);
   virtual void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
   virtual void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
@@ -66,6 +69,7 @@ public:
   virtual void AddChannelToGroup(HashString const &aGroupName, int const aChannel);
   virtual void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume);
   virtual void StopChannelGroup(HashString const &aGroupName);
+  virtual void FadeChannelGroup(HashString const &aGroupName, int const aTime, float const aStart, float const aEnd);
   virtual void SetChannelGroup3DAttributes(HashString const &aGroupName, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
   virtual void SetChannelGroup3DCone(HashString const &aGroupName, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
   virtual void SetChannelGroup3DAttenuation(HashString const &aGroupName, std::vector<Vector3> const &aPoints);

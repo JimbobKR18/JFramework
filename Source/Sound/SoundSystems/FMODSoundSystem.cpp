@@ -208,6 +208,23 @@ void FMODSoundSystem::StopChannel(int const aChannel)
 }
 
 /**
+ * @brief Fade channel from start to end.
+ * @param aChannel Channel to fade.
+ * @param aTime Time in samples.
+ * @param aStart Starting volume.
+ * @param aEnd Ending volume.
+ */
+void FMODSoundSystem::FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd)
+{
+  unsigned long long clock;
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  FMOD_RESULT result = channel->getDSPClock(nullptr, &clock);
+  result = channel->addFadePoint(clock, aStart);
+  result = channel->addFadePoint(clock + aTime, aEnd);
+}
+
+/**
  * @brief Set channel frequency
  * @param aChannel
  * @param aFrequency
@@ -370,6 +387,28 @@ void FMODSoundSystem::StopChannelGroup(HashString const &aGroupName)
   
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->stop();
+}
+
+/**
+ * @brief Fade channel group from start to end.
+ * @param aGroupName Channel group to fade.
+ * @param aTime Time in samples.
+ * @param aStart Starting volume.
+ * @param aEnd Ending volume.
+ */
+void FMODSoundSystem::FadeChannelGroup(HashString const &aGroupName, int const aTime, float const aStart, float const aEnd)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  unsigned long long clock;
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  FMOD_RESULT result = group->getDSPClock(nullptr, &clock);
+  result = group->addFadePoint(clock, aStart);
+  result = group->addFadePoint(clock + aTime, aEnd);
 }
 
 /**

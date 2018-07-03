@@ -33,6 +33,7 @@ public:
   virtual void StopAllChannels() = 0;
   virtual void SetChannelVolume(int const aChannel, float const aVolume) = 0;
   virtual void StopChannel(int const aChannel) = 0;
+  virtual void FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd) = 0;
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency) = 0;
   virtual void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos) = 0;
   virtual void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume) = 0;
@@ -46,6 +47,7 @@ public:
   virtual void AddChannelToGroup(HashString const &aGroupName, int const aChannel) = 0;
   virtual void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume) = 0;
   virtual void StopChannelGroup(HashString const &aGroupName) = 0;
+  virtual void FadeChannelGroup(HashString const &aGroupName, int const aTime, float const aStart, float const aEnd) = 0;
   virtual void SetChannelGroup3DAttributes(HashString const &aGroupName, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos) = 0;
   virtual void SetChannelGroup3DCone(HashString const &aGroupName, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume) = 0;
   virtual void SetChannelGroup3DAttenuation(HashString const &aGroupName, std::vector<Vector3> const &aPoints) = 0;

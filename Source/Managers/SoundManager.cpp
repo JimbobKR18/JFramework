@@ -122,6 +122,18 @@ void SoundManager::StopChannel(int aChannel)
 }
 
 /**
+ * @brief Fade channel from start to end.
+ * @param aChannel Channel to fade.
+ * @param aTime Time in samples.
+ * @param aStart Starting volume.
+ * @param aEnd Ending volume.
+ */
+void SoundManager::FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd)
+{
+  mSoundSystem->FadeChannel(aChannel, aTime, aStart, aEnd);
+}
+
+/**
  * @brief Set speed of channel via frequency
  * @param aChannel
  * @param aFrequency
@@ -234,6 +246,18 @@ void SoundManager::SetChannelGroupVolume(HashString const &aGroupName, float con
 void SoundManager::StopChannelGroup(HashString const &aGroupName)
 {
   mSoundSystem->StopChannelGroup(aGroupName);
+}
+
+/**
+ * @brief Fade channel group from start to end.
+ * @param aGroupName Channel group to fade.
+ * @param aTime Time in samples.
+ * @param aStart Starting volume.
+ * @param aEnd Ending volume.
+ */
+void SoundManager::FadeChannelGroup(HashString const &aGroupName, int const aTime, float const aStart, float const aEnd)
+{
+  mSoundSystem->FadeChannelGroup(aGroupName, aTime, aStart, aEnd);
 }
 
 /**
