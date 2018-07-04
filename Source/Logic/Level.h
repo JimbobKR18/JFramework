@@ -16,6 +16,8 @@ enum ObjectPlacement
   PLACEMENT_ALL
 };
 
+
+
 class Menu;
 class LevelManager;
 class Level
@@ -26,30 +28,30 @@ public:
   typedef std::map<HashString, ObjectContainer> FileContainer;
   typedef std::vector<ObjectContainer> ObjectContainerMap;
   typedef std::vector<TileMapGenerator*> TileMapGeneratorContainer;
-  typedef std::set<HashString> MusicNameContainer;
-  typedef std::map<int, HashString> MusicChannelContainer;
+  typedef std::map<HashString, HashString> SoundNameContainer;
+  typedef std::map<int, HashString> SoundChannelContainer;
   typedef ObjectContainer::iterator ObjectIT;
   typedef ObjectContainer::const_iterator ConstObjectIT;
   typedef TileMapGeneratorContainer::iterator TileMapGeneratorContainerIT;
   typedef TileMapGeneratorContainer::const_iterator ConstTileMapGeneratorContainerIT;
   typedef FileContainer::iterator FileContainerIT;
   typedef FileContainer::const_iterator ConstFileContainerIT;
-  typedef MusicChannelContainer::iterator MusicChannelContainerIT;
-  typedef MusicChannelContainer::const_iterator ConstMusicChannelContainerIT;
-  typedef MusicNameContainer::iterator MusicNameContainerIT;
-  typedef MusicNameContainer::const_iterator ConstMusicNameContainerIT;
+  typedef SoundChannelContainer::iterator SoundChannelContainerIT;
+  typedef SoundChannelContainer::const_iterator ConstSoundChannelContainerIT;
+  typedef SoundNameContainer::iterator SoundNameContainerIT;
+  typedef SoundNameContainer::const_iterator ConstSoundNameContainerIT;
 
 private:
   HashString                 mName;
   HashString                 mFolderName;
   HashString                 mFileName;
-  MusicNameContainer         mMusicNames;
+  SoundNameContainer         mSoundNames;
   ObjectContainerMap         mObjects;
   LevelManager*              mOwner;
   TileMapGeneratorContainer  mGenerators;
   GameObject*                mFocusTarget;
   Vector4                    mClearColor;
-  MusicChannelContainer      mMusicChannels;
+  SoundChannelContainer      mSoundChannels;
 
   Vector3                    mMaxBoundary;
   Vector3                    mMinBoundary;
@@ -63,9 +65,9 @@ public:
 
   HashString    GetName() const;
   HashString    GetFileName() const;
-  MusicNameContainer GetMusicNames() const;
+  SoundNameContainer GetSoundNames() const;
   LevelManager* GetManager() const;
-  MusicChannelContainer GetMusicChannels() const;
+  SoundChannelContainer GetSoundChannels() const;
 
   TileMapGenerator* GetTileMap(int const aIndex = 0) const;
   GameObject*       GetFocusTarget() const;

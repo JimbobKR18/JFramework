@@ -331,6 +331,12 @@ void FMODSoundSystem::SetChannel3DSpread(int const aChannel, float const aAngle)
  */
 void FMODSoundSystem::CreateChannelGroup(HashString const &aGroupName)
 {
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) != mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s already exists.", aGroupName.ToCharArray());
+    return;
+  }
+  
   FMOD::ChannelGroup *channelGroup;
   mFMODSystem->createChannelGroup(aGroupName.ToCharArray(), &channelGroup);
   mChannelGroupContainer[aGroupName.ToHash()] = channelGroup;
