@@ -54,7 +54,7 @@ bool StateMachine::IsCurrentStateExpired() const
  * @brief Get current state of StateMachine
  * @return Current State
  */
-State* StateMachine::GetCurrentState() const
+State* StateMachine::GetCurrentState()
 {
   return mCurrentState;
 }

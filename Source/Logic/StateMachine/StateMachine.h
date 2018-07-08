@@ -25,7 +25,7 @@ public:
   bool IsCurrentStateExpired() const;
   
   float GetCurrentStateTimeLeft() const;
-  State* GetCurrentState() const;
+  State* GetCurrentState();
   void SetCurrentState(HashString const &aName);
   StateContainer const& GetStates() const;
   LinkContainer const& GetLinks() const;
