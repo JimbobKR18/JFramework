@@ -30,6 +30,7 @@ public:
   StateContainer const& GetStates() const;
   LinkContainer const& GetLinks() const;
   
+  void AddState(State* aState);
   void AddLink(StateLink *aLink);
   void AddLink(State *aState1, State *aState2, StateLink::LinkType const &aLinkType);
 };

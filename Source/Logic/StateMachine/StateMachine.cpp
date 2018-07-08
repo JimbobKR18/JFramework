@@ -115,6 +115,15 @@ StateMachine::LinkContainer const& StateMachine::GetLinks() const
 }
 
 /**
+ * @brief Add state to state machine.
+ * @param aState State.
+ */
+void StateMachine::AddState(State* aState)
+{
+  mStates.insert(aState);
+}
+
+/**
  * @brief Add link to state machine.
  * @param aLink Link
  */
