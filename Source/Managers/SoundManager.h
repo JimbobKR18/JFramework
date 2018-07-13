@@ -58,6 +58,7 @@ public:
   // Channel groups
   void CreateChannelGroup(HashString const &aGroupName);
   void AddChannelToGroup(HashString const &aGroupName, int const aChannel);
+  void RemoveChannelFromGroups(int const aChannel);
   void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume);
   void StopChannelGroup(HashString const &aGroupName);
   void FadeChannelGroup(HashString const &aGroupName, int const aTime, float const aStart, float const aEnd);

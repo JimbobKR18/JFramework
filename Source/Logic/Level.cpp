@@ -425,14 +425,22 @@ void Level::Unload(Level *aNextLevel)
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
     UnloadObjects(mObjects[i]);
     
+  SoundManager *soundManager  = mOwner->GetOwningApp()->GET<SoundManager>();
   for(SoundChannelContainerIT it = mSoundChannels.begin(); it != mSoundChannels.end(); ++it)
   {
     if(!aNextLevel || aNextLevel->mSoundNames.find(it->second) == aNextLevel->mSoundNames.end())
-      mOwner->GetOwningApp()->GET<SoundManager>()->StopChannel(it->first);
+    {
+      soundManager->RemoveChannelFromGroups(it->first);
+      soundManager->StopChannel(it->first);
+    }
     else if(aNextLevel)
+    {
       aNextLevel->mSoundChannels[it->first] = it->second;
+      soundManager->AddChannelToGroup(aNextLevel->mSoundNames[it->second], it->first);
+    }
   }
-  mSoundChannels.clear();
+  if(this != aNextLevel)
+    mSoundChannels.clear();
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera(nullptr);
 }

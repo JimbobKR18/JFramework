@@ -67,6 +67,7 @@ public:
   // Channel groups
   virtual void CreateChannelGroup(HashString const &aGroupName);
   virtual void AddChannelToGroup(HashString const &aGroupName, int const aChannel);
+  virtual void RemoveChannelFromGroups(int const aChannel);
   virtual void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume);
   virtual void StopChannelGroup(HashString const &aGroupName);
   virtual void FadeChannelGroup(HashString const &aGroupName, int const aTime, float const aStart, float const aEnd);

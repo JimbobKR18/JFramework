@@ -25,11 +25,15 @@ class Level
 public:
   typedef std::set<GameObject*> ObjectContainer;
   typedef std::vector<GameObject*> ObjectVector;
+  
+  // File Name -> Object Container
   typedef std::map<HashString, ObjectContainer> FileContainer;
+  // Sound Name -> Group Name
+  typedef std::map<HashString, HashString> SoundNameContainer;
+  // Sound Channel -> Sound Name
+  typedef std::map<int, HashString> SoundChannelContainer;
   typedef std::vector<ObjectContainer> ObjectContainerMap;
   typedef std::vector<TileMapGenerator*> TileMapGeneratorContainer;
-  typedef std::map<HashString, HashString> SoundNameContainer;
-  typedef std::map<int, HashString> SoundChannelContainer;
   typedef ObjectContainer::iterator ObjectIT;
   typedef ObjectContainer::const_iterator ConstObjectIT;
   typedef TileMapGeneratorContainer::iterator TileMapGeneratorContainerIT;

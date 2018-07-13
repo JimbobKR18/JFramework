@@ -230,6 +230,15 @@ void SoundManager::AddChannelToGroup(HashString const &aGroupName, int const aCh
 }
 
 /**
+ * @brief Remove channel from groups
+ * @param aChannel Channel to remove
+ */
+void SoundManager::RemoveChannelFromGroups(int const aChannel)
+{
+  mSoundSystem->RemoveChannelFromGroups(aChannel);
+}
+
+/**
  * @brief Set volume of channel group
  * @param aGroupName
  * @param aVolume

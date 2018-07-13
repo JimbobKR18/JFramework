@@ -363,6 +363,18 @@ void FMODSoundSystem::AddChannelToGroup(HashString const &aGroupName, int const 
 }
 
 /**
+ * @brief Remove channel from groupings.
+ * @param aChannel Channel to remove.
+ */
+void FMODSoundSystem::RemoveChannelFromGroups(int const aChannel)
+{
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  
+  channel->setChannelGroup(nullptr);
+}
+
+/**
  * @brief Set channel group volume
  * @param aGroupName
  * @param aVolume
