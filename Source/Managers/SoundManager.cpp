@@ -14,7 +14,8 @@
 #endif
 
 unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
-SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr), mDSPContainer()
+SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr), 
+  mDSPContainer(), mSoundsToDSPs()
 {
 #if !defined(ANDROID) && !defined(IOS)
   mSoundSystem = new FMODSoundSystem();
@@ -28,6 +29,19 @@ SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundM
 SoundManager::~SoundManager()
 {
   delete mSoundSystem;
+  
+  // Erase all occurrences of sound to dsp linkage.
+  for(SoundDSPContainerIt it = mSoundsToDSPs.begin(); it != mSoundsToDSPs.end(); ++it)
+  {
+    SoundDSPInfoVector dsps = it->second;
+    for(SoundDSPInfoVectorIt it2 = dsps.begin(); it2 != dsps.end(); ++it2)
+    {
+      delete *it2;
+    }
+    dsps.clear();
+  }
+  mSoundsToDSPs.clear();
+  
   for(DSPIt it = mDSPContainer.begin(); it != mDSPContainer.end(); ++it)
   {
     delete it->second;
@@ -54,6 +68,18 @@ void SoundManager::CreateSound(HashString const &aFilename, HashString const &aA
 void SoundManager::DeleteSound(HashString const &aName)
 {
   mSoundSystem->DeleteSound(aName);
+  
+  // Erase all occurrences of sound to dsp linkage.
+  if(mSoundsToDSPs.find(aName.ToHash()) != mSoundsToDSPs.end())
+  {
+    SoundDSPInfoVector dsps = mSoundsToDSPs[aName.ToHash()];
+    for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
+    {
+      delete *it;
+    }
+    dsps.clear();
+    mSoundsToDSPs.erase(aName.ToHash());
+  }
 }
 
 /**
@@ -64,7 +90,21 @@ void SoundManager::DeleteSound(HashString const &aName)
  */
 int SoundManager::PlaySound(HashString const &aName, int const aNumLoops)
 {
-  return mSoundSystem->PlaySound(aName, aNumLoops);
+  int channel = mSoundSystem->PlaySound(aName, aNumLoops);
+  if(mSoundsToDSPs.find(aName.ToHash()) != mSoundsToDSPs.end())
+  {
+    SoundDSPInfoVector dsps = mSoundsToDSPs[aName.ToHash()];
+    for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
+    {
+      SoundDSPInfo* info = *it;
+      if(mDSPContainer.find(info->mDSPName.ToHash()) != mDSPContainer.end())
+      {
+        DSP *dsp = mDSPContainer[info->mDSPName.ToHash()];
+        AddDSPToChannel(dsp, channel, info->mIndex);
+      }
+    }
+  }
+  return channel;
 }
 
 /**
@@ -391,6 +431,25 @@ void SoundManager::DeleteDSP(DSP *aDSP)
 {
   if(mSoundSystem->DeleteDSP(aDSP))
   {
+    // Delete all uses of dsp.
+    for(SoundDSPContainerIt it = mSoundsToDSPs.begin(); it != mSoundsToDSPs.end(); ++it)
+    {
+      SoundDSPInfoVector dsps = it->second;
+      for(SoundDSPInfoVectorIt it2 = dsps.begin(); it2 != dsps.end();)
+      {
+        SoundDSPInfo *info = *it2;
+        if(info->mDSPName == aDSP->GetName())
+        {
+          delete info;
+          it2 = dsps.erase(it2);
+        }
+        else
+        {
+          ++it2;
+        }
+      }
+    }
+    
     mDSPContainer.erase(aDSP->GetName().ToHash());
     delete aDSP;
   }
@@ -481,25 +540,203 @@ void SoundManager::SerializeLUA()
 void SoundManager::LoadSounds()
 {
   int index = 0;
-  HashString const sound = "Sound_";
-  HashString curIndex = sound + Common::IntToString(index);
+  HashString const soundStr = "Sound_";
+  HashString const dspStr = "DSP_";
+  HashString curIndex = dspStr + Common::IntToString(index);
   HashString const fileName = "SoundAliases.txt";
   
   Parser *parser = ParserFactory::CreateInputParser("Sounds", fileName);
-  while(parser->Find(curIndex))
+  ParserNode *head = parser->GetBaseRoot();
+  while(head->Find(curIndex))
   {
-    ParserNode *curSound = parser->Find(curIndex);
+    ParserNode *curDsp = head->Find(curIndex);
+    HashString name = curDsp->Find("Name")->GetValue();
+    HashString type = curDsp->Find("Type")->GetValue();
+    
+    DSP* dsp = nullptr;
+    if(type == "MIXER")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_MIXER);
+    }
+    else if(type == "OSCILLATOR")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_OSCILLATOR);
+    }
+    else if(type == "LOWPASS")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_LOWPASS);
+    }
+    else if(type == "ITLOWPASS")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_ITLOWPASS);
+    }
+    else if(type == "HIGHPASS")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_HIGHPASS);
+    }
+    else if(type == "ECHO")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_ECHO);
+    }
+    else if(type == "FADER")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_FADER);
+    }
+    else if(type == "FLANGE")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_FLANGE);
+    }
+    else if(type == "DISTORTION")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_DISTORTION);
+    }
+    else if(type == "NORMALIZE")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_NORMALIZE);
+    }
+    else if(type == "LIMITER")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_LIMITER);
+    }
+    else if(type == "PARAMEQ")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_PARAMEQ);
+    }
+    else if(type == "PITCHSHIFT")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_PITCHSHIFT);
+    }
+    else if(type == "CHORUS")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_CHORUS);
+    }
+    else if(type == "VSTPLUGIN")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_VSTPLUGIN);
+    }
+    else if(type == "WINAMPPLUGIN")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_WINAMPPLUGIN);
+    }
+    else if(type == "ITECHO")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_ITECHO);
+    }
+    else if(type == "COMPRESSOR")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_COMPRESSOR);
+    }
+    else if(type == "SFXREVERB")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_SFXREVERB);
+    }
+    else if(type == "LOWPASS_SIMPLE")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_LOWPASS_SIMPLE);
+    }
+    else if(type == "DELAY")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_DELAY);
+    }
+    else if(type == "TREMOLO")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_TREMOLO);
+    }
+    else if(type == "LADSPAPLUGIN")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_LADSPAPLUGIN);
+    }
+    else if(type == "SEND")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_SEND);
+    }
+    else if(type == "RETURN")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_RETURN);
+    }
+    else if(type == "HIGHPASS_SIMPLE")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_HIGHPASS_SIMPLE);
+    }
+    else if(type == "PAN")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_PAN);
+    }
+    else if(type == "THREE_EQ")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_THREE_EQ);
+    }
+    else if(type == "FFT")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_FFT);
+    }
+    else if(type == "LOUDNESS_METER")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_LOUDNESS_METER);
+    }
+    else if(type == "ENVELOPEFOLLOWER")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_ENVELOPEFOLLOWER);
+    }
+    else if(type == "CONVOLUTIONREVERB")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_CONVOLUTIONREVERB);
+    }
+    else if(type == "CHANNELMIX")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_CHANNELMIX);
+    }
+    else if(type == "TRANSCEIVER")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_TRANSCEIVER);
+    }
+    else if(type == "OBJECTPAN")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_OBJECTPAN);
+    }
+    else if(type == "MULTIBAND_EQ")
+    {
+      dsp = CreateDSP(name, DSP_Type::DSP_TYPE_MULTIBAND_EQ);
+    }
+    else
+    {
+      DebugLogPrint("Invalid DSP type %s passed in.", type.ToCharArray());
+      assert(!"Invalid DSP type passed in.");
+    }
+    dsp->Deserialize(curDsp);
+    
+    ++index;
+    curIndex = dspStr + Common::IntToString(index);
+  }
+  
+  index = 0;
+  curIndex = soundStr + Common::IntToString(index);
+  while(head->Find(curIndex))
+  {
+    ParserNode *curSound = head->Find(curIndex);
     SoundSystem::SoundSource source = SoundSystem::SoundSource::DEFAULT;
     float volume = 1.0f;
     
+    HashString name = curSound->Find("Name")->GetValue();
     if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Stream")
       source = SoundSystem::SoundSource::STREAM;
     if(curSound->Find("Volume"))
       volume = curSound->Find("Volume")->GetValue().ToFloat();
+    CreateSound(curSound->Find("File")->GetValue(), name, volume, source);
     
-    CreateSound(curSound->Find("File")->GetValue(), curSound->Find("Name")->GetValue(), volume, source);
+    int dspIndex = 0;
+    HashString curDsp = dspStr + Common::IntToString(dspIndex);
+    while(curSound->Find(curDsp))
+    {
+      ParserNode *dspNode = curSound->Find(curDsp);
+      SoundDSPInfo *info = new SoundDSPInfo(dspNode->Find("Index")->GetValue().ToInt(), dspNode->Find("Name")->GetValue());
+      mSoundsToDSPs[name.ToHash()].push_back(info);
+      ++dspIndex;
+      curDsp = dspStr + Common::IntToString(dspIndex);
+    }
+    
     ++index;
-    curIndex = sound + Common::IntToString(index);
+    curIndex = soundStr + Common::IntToString(index);
   }
   
   // Clean up.

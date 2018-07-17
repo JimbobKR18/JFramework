@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "DSP_Type.h"
+#include "ParserNode.h"
 
 class DSP
 {
@@ -25,6 +26,7 @@ public:
   virtual void SetInt(int const aParam, int const aValue) = 0;
   virtual void SetBool(int const aParam, bool const aValue) = 0;
   virtual void SetData(int const aParam, void* aData, int const aLength) = 0;
+  virtual void Deserialize(ParserNode *aNode) = 0;
 };
 
 #endif // __JFramework__DSP_h_

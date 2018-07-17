@@ -18,11 +18,26 @@
 class SoundManager : public Manager
 {
 private:
-  typedef std::unordered_map<int, DSP*>     DSPContainer;
-  typedef DSPContainer::iterator            DSPIt;
+  struct SoundDSPInfo
+  {
+    int mIndex;
+    HashString mDSPName;
+    
+    SoundDSPInfo(int const aIndex, HashString const &aDSPName) : mIndex(aIndex), mDSPName(aDSPName)
+    {}
+    virtual ~SoundDSPInfo() {}
+  };
+
+  typedef std::vector<SoundDSPInfo*>                    SoundDSPInfoVector;
+  typedef std::unordered_map<int, DSP*>                 DSPContainer;
+  typedef std::unordered_map<int, SoundDSPInfoVector>   SoundDSPContainer;
+  typedef DSPContainer::iterator                        DSPIt;
+  typedef SoundDSPInfoVector::iterator                  SoundDSPInfoVectorIt;
+  typedef SoundDSPContainer::iterator                   SoundDSPContainerIt;
 
   SoundSystem* mSoundSystem;
   DSPContainer mDSPContainer;
+  SoundDSPContainer mSoundsToDSPs;
 
   static unsigned const sUID;
 

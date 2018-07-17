@@ -32,6 +32,7 @@ public:
   virtual void SetInt(int const aParam, int const aValue);
   virtual void SetBool(int const aParam, bool const aValue);
   virtual void SetData(int const aParam, void* aData, int const aLength);
+  virtual void Deserialize(ParserNode *aNode);
 };
 
 #endif // __JFramework__FMOD_DSP_h_
