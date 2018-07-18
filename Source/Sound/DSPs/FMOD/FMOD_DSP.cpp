@@ -123,6 +123,10 @@ void FMOD_DSP::SetData(int const aParam, void* aData, int const aLength)
   mDSP->setParameterData(aParam, aData, aLength);
 }
 
+/**
+ * @brief Deserialize from node
+ * @param aNode Node to deserialize
+ */
 void FMOD_DSP::Deserialize(ParserNode *aNode)
 {
   HashString name = aNode->Find("Name")->GetValue();
