@@ -93,6 +93,7 @@ void StateMachine::SetCurrentState(HashString const &aName)
       }
     }
   }
+  DebugLogPrint("No state transfer for state %s", aName.ToCharArray());
   assert(!"No state transfer found.");
 }
 

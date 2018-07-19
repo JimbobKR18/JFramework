@@ -168,6 +168,11 @@ void StateObject::Deserialize(ParserNode *aNode)
     ++curIndex;
     curName = HashString("Link_") + Common::IntToString(curIndex);
   }
+  
+  if(aNode->Find("StartingState"))
+  {
+    mStateMachine->SetCurrentState(aNode->Find("StartingState")->GetValue());
+  }
 }
 
 /**
