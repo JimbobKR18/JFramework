@@ -9,7 +9,7 @@
 class EffectsManager : public Manager
 {
 public:
-  typedef std::vector<Effect*>            EffectContainer;
+  typedef std::list<Effect*>            EffectContainer;
   typedef EffectContainer::iterator       EffectIT;
   typedef EffectContainer::const_iterator ConstEffectIT;
   
