@@ -419,8 +419,44 @@ void FMOD_DSP::Deserialize(ParserNode *aNode)
     {
       ParserNode *attributesNode = aNode->Find("Pan3DPosition");
       FMOD_DSP_PARAMETER_3DATTRIBUTES_MULTI attributes;
+      FMOD_3D_ATTRIBUTES absolute;
       attributes.numlisteners = attributesNode->Find("NumListeners")->GetValue().ToInt();
-      // TODO the rest
+      absolute.forward.x = attributesNode->Find("ForwardX")->GetValue().ToFloat();
+      absolute.forward.y = attributesNode->Find("ForwardY")->GetValue().ToFloat();
+      absolute.forward.z = attributesNode->Find("ForwardZ")->GetValue().ToFloat();
+      absolute.position.x = attributesNode->Find("PositionX")->GetValue().ToFloat();
+      absolute.position.y = attributesNode->Find("PositionY")->GetValue().ToFloat();
+      absolute.position.z = attributesNode->Find("PositionZ")->GetValue().ToFloat();
+      absolute.up.x = attributesNode->Find("UpX")->GetValue().ToFloat();
+      absolute.up.y = attributesNode->Find("UpY")->GetValue().ToFloat();
+      absolute.up.z = attributesNode->Find("UpZ")->GetValue().ToFloat();
+      absolute.velocity.x = attributesNode->Find("VelocityX")->GetValue().ToFloat();
+      absolute.velocity.y = attributesNode->Find("VelocityY")->GetValue().ToFloat();
+      absolute.velocity.z = attributesNode->Find("VelocityZ")->GetValue().ToFloat();
+      attributes.absolute = absolute;
+      
+      int currentListener = 0;
+      HashString current = "Listener_" + Common::IntToString(currentListener);
+      while(aNode->Find(current) && currentListener <= 7)
+      {
+        ParserNode* node = aNode->Find(current);
+        attributes.relative[currentListener].forward.x = node->Find("ForwardX")->GetValue().ToFloat();
+        attributes.relative[currentListener].forward.y = node->Find("ForwardY")->GetValue().ToFloat();
+        attributes.relative[currentListener].forward.z = node->Find("ForwardZ")->GetValue().ToFloat();
+        attributes.relative[currentListener].position.x = node->Find("PositionX")->GetValue().ToFloat();
+        attributes.relative[currentListener].position.y = node->Find("PositionY")->GetValue().ToFloat();
+        attributes.relative[currentListener].position.z = node->Find("PositionZ")->GetValue().ToFloat();
+        attributes.relative[currentListener].up.x = node->Find("UpX")->GetValue().ToFloat();
+        attributes.relative[currentListener].up.y = node->Find("UpY")->GetValue().ToFloat();
+        attributes.relative[currentListener].up.z = node->Find("UpZ")->GetValue().ToFloat();
+        attributes.relative[currentListener].velocity.x = node->Find("VelocityX")->GetValue().ToFloat();
+        attributes.relative[currentListener].velocity.y = node->Find("VelocityY")->GetValue().ToFloat();
+        attributes.relative[currentListener].velocity.z = node->Find("VelocityZ")->GetValue().ToFloat();
+        attributes.weight[currentListener] = node->Find("Weight")->GetValue().ToFloat();
+        
+        ++currentListener;
+        current = "Listener_" + Common::IntToString(currentListener);
+      }
       
       SetData(10, &attributes, sizeof(FMOD_DSP_PARAMETER_3DATTRIBUTES_MULTI));
     }
@@ -479,7 +515,6 @@ void FMOD_DSP::Deserialize(ParserNode *aNode)
   }
   else if(type == "LOUDNESS_METER")
   {
-    // TODO
   }
   else if(type == "ENVELOPEFOLLOWER")
   {
@@ -584,8 +619,44 @@ void FMOD_DSP::Deserialize(ParserNode *aNode)
     {
       ParserNode *attributesNode = aNode->Find("ObjectPan3DAttributes");
       FMOD_DSP_PARAMETER_3DATTRIBUTES_MULTI attributes;
+      FMOD_3D_ATTRIBUTES absolute;
       attributes.numlisteners = attributesNode->Find("NumListeners")->GetValue().ToInt();
-      // TODO the rest
+      absolute.forward.x = attributesNode->Find("ForwardX")->GetValue().ToFloat();
+      absolute.forward.y = attributesNode->Find("ForwardY")->GetValue().ToFloat();
+      absolute.forward.z = attributesNode->Find("ForwardZ")->GetValue().ToFloat();
+      absolute.position.x = attributesNode->Find("PositionX")->GetValue().ToFloat();
+      absolute.position.y = attributesNode->Find("PositionY")->GetValue().ToFloat();
+      absolute.position.z = attributesNode->Find("PositionZ")->GetValue().ToFloat();
+      absolute.up.x = attributesNode->Find("UpX")->GetValue().ToFloat();
+      absolute.up.y = attributesNode->Find("UpY")->GetValue().ToFloat();
+      absolute.up.z = attributesNode->Find("UpZ")->GetValue().ToFloat();
+      absolute.velocity.x = attributesNode->Find("VelocityX")->GetValue().ToFloat();
+      absolute.velocity.y = attributesNode->Find("VelocityY")->GetValue().ToFloat();
+      absolute.velocity.z = attributesNode->Find("VelocityZ")->GetValue().ToFloat();
+      attributes.absolute = absolute;
+      
+      int currentListener = 0;
+      HashString current = "Listener_" + Common::IntToString(currentListener);
+      while(aNode->Find(current) && currentListener <= 7)
+      {
+        ParserNode* node = aNode->Find(current);
+        attributes.relative[currentListener].forward.x = node->Find("ForwardX")->GetValue().ToFloat();
+        attributes.relative[currentListener].forward.y = node->Find("ForwardY")->GetValue().ToFloat();
+        attributes.relative[currentListener].forward.z = node->Find("ForwardZ")->GetValue().ToFloat();
+        attributes.relative[currentListener].position.x = node->Find("PositionX")->GetValue().ToFloat();
+        attributes.relative[currentListener].position.y = node->Find("PositionY")->GetValue().ToFloat();
+        attributes.relative[currentListener].position.z = node->Find("PositionZ")->GetValue().ToFloat();
+        attributes.relative[currentListener].up.x = node->Find("UpX")->GetValue().ToFloat();
+        attributes.relative[currentListener].up.y = node->Find("UpY")->GetValue().ToFloat();
+        attributes.relative[currentListener].up.z = node->Find("UpZ")->GetValue().ToFloat();
+        attributes.relative[currentListener].velocity.x = node->Find("VelocityX")->GetValue().ToFloat();
+        attributes.relative[currentListener].velocity.y = node->Find("VelocityY")->GetValue().ToFloat();
+        attributes.relative[currentListener].velocity.z = node->Find("VelocityZ")->GetValue().ToFloat();
+        attributes.weight[currentListener] = node->Find("Weight")->GetValue().ToFloat();
+        
+        ++currentListener;
+        current = "Listener_" + Common::IntToString(currentListener);
+      }
       
       SetData(0, &attributes, sizeof(FMOD_DSP_PARAMETER_3DATTRIBUTES_MULTI));
     }
