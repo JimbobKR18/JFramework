@@ -506,7 +506,7 @@ void FMOD_DSP::Deserialize(ParserNode *aNode)
       SetInt(1, aNode->Find("FFTWindowType")->GetValue().ToFloat());
     if(aNode->Find("FFTSpectrumData"))
     {
-      // TODO the rest
+      // Read only?
       FMOD_DSP_PARAMETER_DATA_TYPE data;
       SetData(2, &data, sizeof(FMOD_DSP_PARAMETER_DATA_TYPE));
     }
