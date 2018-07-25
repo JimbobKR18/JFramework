@@ -1,0 +1,367 @@
+For in depth specs see here:
+  https://www.fmod.com/resources/documentation-api?page=content/generated/lowlevel_api_DSP.html#/
+
+To create a DSP, in SoundAliases.txt, input a value like the example:
+  DSP_0 <-- Change the number, keep things in sequence.
+  {
+    Name = Example_Echo <--- Name of DSP, feel free to name however you like
+    Type = ECHO <--- Type of DSP
+    EchoDelay = 1000 <--- All fields from here on are optional
+    EchoFeedback = 1
+    EchoDryLevel = 2
+    EchoWetLevel = 1
+  }
+
+To set a DSP to a sound, create a sound in SoundAliases.txt like so:
+  Sound_0 <-- Change the number, keep things in sequence
+  {
+    File = doors/door_open.wav <--- Name of sound file in Sounds folder
+    Name = door_open <--- Name of sound, feel free to name however you like
+    DSP_0 <--- Change number as you add more, you get it
+    {
+      Name = Example_Echo <--- Name must match name of a DSP you created
+      Index = 0 <--- Index of DSP in FMOD DSP sequence
+    }
+  }
+
+Types:
+  MIXER
+  {
+    None available
+  }
+  OSCILLATOR
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_OSCILLATOR.html
+    OscillatorType: Int
+    OscillatorRate: Float
+  }
+  LOWPASS
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_LOWPASS.html
+    LowPassCutoff: Float
+    LowPassResonance: Float
+  }
+  ITLOWPASS
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_ITLOWPASS.html
+    ItLowPassCutoff: Float
+    ItLowPassResonance: Float
+  }
+  HIGHPASS
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_HIGHPASS.html
+    HighPassCutoff: Float
+    HighPassResonance: Float
+  }
+  ECHO
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_ECHO.html
+    EchoDelay: Float
+    EchoFeedback: Float
+    EchoDryLevel: Float
+    EchoWetLevel: Float
+  }
+  FADER
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_FADER.html
+    FaderGain: Float
+  }
+  FLANGE
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_FLANGE.html
+    FlangeMix: Float
+    FlangeDepth: Float
+    FlangeRate: Float
+  }
+  DISTORTION
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_DISTORTION.html
+    DistortionLevel: Float
+  }
+  NORMALIZE
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_NORMALIZE.html
+    NormalizedFadeTime: Float
+    NormalizeThreshold: Float
+    NormalizeMaxAmp: Float
+  }
+  LIMITER
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_LIMITER.html
+    LimiterReleaseTime: Float
+    LimiterCeiling: Float
+    LimiterMaximizerGain: Float
+    LimiterMode: Float
+  }
+  PARAMEQ
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_PARAMEQ.html
+    ParamEQCenter: Float
+    ParamEQBandwidth: Float
+    ParamEQGain: Float
+  }
+  PITCHSHIFT
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_PITCHSHIFT.html
+    PitchShiftPitch: Float
+    PitchShiftFFTSize: Float
+    PitchShiftOverlap: Float
+    PitchShiftMaxChannels: Float
+  }
+  CHORUS
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_CHORUS.html
+    ChorusMix: Float
+    ChorusRate: Float
+    ChorusDepth: Float
+  }
+  VSTPLUGIN
+  {
+    // Empty
+  }
+  WINAMPPLUGIN
+  {
+    // Empty
+  }
+  ITECHO
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_ITECHO.html
+    ItEchoWetDryMix: Float
+    ItEchoFeedback: Float
+    ItEchoLeftDelay: Float
+    ItEchoRightDelay: Float
+    ItEchoPanDelay: Float
+  }
+  COMPRESSOR
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_COMPRESSOR.html
+    CompressorThreshhold: Float
+    CompressorRatio: Float
+    CompressorAttack: Float
+    CompressorGainMakeup: Float
+    CompressorLinked: Bool
+    CompressorUseSideChain: DataStructure
+    {
+      Enable: Bool
+    }
+  }
+  SFXREVERB
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_SFXREVERB.html
+    SfxReverbDecayTime: Float
+    SfxReverbEarlyDelay: Float
+    SfxReverbLateDelay: Float
+    SfxReverbHFReference: Float
+    SfxReverbHFDecayRatio: Float
+    SfxReverbDiffusion: Float
+    SfxReverbDensity: Float
+    SfxReverbLowShelfFrequency: Float
+    SfxReverbLowShelfGain: Float
+    SfxReverbHighCut: Float
+    SfxReverbEarlyLateMix: Float
+    SfxReverbWetLevel: Float
+    SfxReverbDryLevel: Float
+  }
+  LOWPASS_SIMPLE
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_LOWPASS_SIMPLE.html
+    LowpassSimpleCutoff: Float
+  }
+  DELAY
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_DELAY.html
+    DelayCh(0-15): Float
+    DelayMaxDelay: Float
+  }
+  TREMOLO
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_TREMOLO.html
+    TremoloFrequency: Float
+    TremoloDepth: Float
+    TremoloShape: Float
+    TremoloSkew: Float
+    TremoloDuty: Float
+    TremoloSquare: Float
+    TremoloPhase: Float
+    TremoloSpread: Float
+  }
+  LADSPAPLUGIN
+  {
+    // Empty
+  }
+  SEND
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_SEND.html
+    SendReturnId: Int
+    SendLevel: Float
+  }
+  RETURN
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_RETURN.html
+    ReturnId: Int
+    ReturnInputSpeakerMode: Int
+  }
+  HIGHPASS_SIMPLE
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_HIGHPASS_SIMPLE.html
+    HighPassSimpleCutoff: Float
+  }
+  PAN
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_PAN.html
+    PanMode: Int
+    Pan2DStereoPosition: Float
+    Pan2DStereoDirection: Float
+    Pan2DStereoExtent: Float
+    Pan2DStereoRotation: Float
+    Pan2DStereoLFELevel: Float
+    Pan2DStereoMode: Int
+    Pan2DStereoSeparation: Float
+    Pan2DStereoAxis: Float
+    PanEnabledSpeakers: Int
+    Pan3DAttributes: DataStructure
+    {
+      NumListeners: Int
+      ForwardX: Float
+      ForwardY: Float
+      ForwardZ: Float
+      PositionX: Float
+      PositionY: Float
+      PositionZ: Float
+      UpX: Float
+      UpY: Float
+      UpZ: Float
+      VelocityX: Float
+      VelocityY: Float
+      VelocityZ: Float
+      Listener(0-7): DataStructure
+      {
+        ForwardX: Float
+        ForwardY: Float
+        ForwardZ: Float
+        PositionX: Float
+        PositionY: Float
+        PositionZ: Float
+        UpX: Float
+        UpY: Float
+        UpZ: Float
+        VelocityX: Float
+        VelocityY: Float
+        VelocityZ: Float
+        Weight: Float
+      }
+    }
+    Pan3DRolloff: Int
+    Pan3DMinDistance: Float
+    Pan3DMaxDistance: Float
+    Pan3DExtentMode: Int
+    Pan3DSoundSize: Float
+    Pan3DMinExtent: Float
+    Pan3DStereoPanBlend: Float
+    PanLFEUpmixEnabled: Int
+    PanSurroundSpeakerMode: Int
+    Pan2DHeightBlend: Float
+  }
+  THREE_EQ
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_THREE_EQ.html
+    ThreeEQLowGain: Float
+    ThreeEQMidGain: Float
+    ThreeEQHighGain: Float
+    ThreeEQLowCrossover: Float
+    ThreeEQHighCrossover: Float
+    ThreeEQCrossoverSlope: Int
+  }
+  FFT
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_FFT.html
+    FFTWindowSize: Float
+    FFTWindowType: Float
+    FFTSpectrumData: DataStructure
+    {
+      FFTDominantFreq: Float
+    }
+  }
+  LOUDNESS_METER
+  {
+    // Empty
+  }
+  ENVELOPEFOLLOWER
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_ENVELOPEFOLLOWER.html
+    EnvelopeFollowerAttack: Float
+    EnvelopeFollowerRelease: Float
+    EnvelopeFollowerEnvelope: Float
+    EnvelopeFollowerUseSideChain: DataStructure
+    {
+      Enable: Bool
+    }
+  }
+  CONVOLUTIONREVERB
+  {
+    // Empty
+  }
+  CHANNELMIX
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_CHANNELMIX.html
+    ChannelMixGainCh(0-31): Float
+  }
+  TRANSCEIVER
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_TRANSCEIVER.html
+    TransceiverTransmit: Bool
+    TransceiverGain: Float
+    TransceiverChannel: Int
+    TransceiverTransmitSpeakerMode: Int
+  }
+  OBJECTPAN
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_OBJECTPAN.html
+    ObjectPan3DAttributes: DataStructure
+    {
+      NumListeners: Int
+      ForwardX: Float
+      ForwardY: Float
+      ForwardZ: Float
+      PositionX: Float
+      PositionY: Float
+      PositionZ: Float
+      UpX: Float
+      UpY: Float
+      UpZ: Float
+      VelocityX: Float
+      VelocityY: Float
+      VelocityZ: Float
+      Listener(0-7): DataStructure
+      {
+        ForwardX: Float
+        ForwardY: Float
+        ForwardZ: Float
+        PositionX: Float
+        PositionY: Float
+        PositionZ: Float
+        UpX: Float
+        UpY: Float
+        UpZ: Float
+        VelocityX: Float
+        VelocityY: Float
+        VelocityZ: Float
+        Weight: Float
+      }
+    }
+    ObjectPan3DRolloff: Int
+    ObjectPan3DMinDistance: Float
+    ObjectPan3DMaxDistance: Float
+    ObjectPan3DExtentMode: Int
+    ObjectPan3DSoundSize: Float
+    ObjectPan3DMinExtent: Float
+    ObjectPanOutputGain: Float
+  }
+  MULTIBAND_EQ
+  {
+    https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_DSP_MULTIBAND_EQ.html
+    MultibandEQ(A-E)Filter: Int
+    MultibandEQ(A-E)Frequency: Float
+    MultibandEQ(A-E)Q: Float
+    MultibandEQ(A-E)Gain: Float
+  }
