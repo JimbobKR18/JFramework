@@ -555,32 +555,9 @@ namespace Common
   int StringHashFunction(std::string const &aString)
   {
     int hashValue = 0;
-    char const *key = "srkfadcultjylenoqickbwnxmpvg";
-    int len = strlen(key);
     for(unsigned i = 0; i < aString.length(); ++i)
     {
-      switch(i % 6)
-      {
-      case 0:
-        hashValue += (static_cast<int>(aString[i]) + i) | key[i % len];
-      case 1:
-        hashValue += (static_cast<int>(aString[i]) + i) & key[i % len];
-      case 2:
-        hashValue += (static_cast<int>(aString[i]) + i) - key[i % len];
-      case 3:
-        hashValue += (static_cast<int>(aString[i]) + i) + key[i % len];
-      case 4:
-        hashValue += (static_cast<int>(aString[i]) + i) * key[i % len];
-      case 5:
-        hashValue += (static_cast<int>(aString[i]) + i) / key[i % len];
-      }
-      switch(i % 2)
-      {
-      case 0:
-        hashValue += aString[i] - aString[aString.size() - 1 - i];
-      case 1:
-        hashValue -= aString[i] + aString[aString.size() - 1 - i];
-      }
+      hashValue = (31 * hashValue) + aString[i];
     }
     return hashValue;
   }
