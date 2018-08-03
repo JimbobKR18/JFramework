@@ -51,6 +51,14 @@ bool StateMachine::IsCurrentStateExpired() const
 }
 
 /**
+ * @brief Reset state timer.
+ */
+void StateMachine::Reset()
+{
+  mCurrentTime = 0;
+}
+
+/**
  * @brief Get current state of StateMachine
  * @return Current State
  */

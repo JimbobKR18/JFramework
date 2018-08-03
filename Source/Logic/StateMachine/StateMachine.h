@@ -23,6 +23,7 @@ public:
   
   void Update(float const aDT);
   bool IsCurrentStateExpired() const;
+  void Reset();
   
   float GetCurrentStateTimeLeft() const;
   State* GetCurrentState();
