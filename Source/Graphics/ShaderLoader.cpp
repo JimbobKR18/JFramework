@@ -288,6 +288,22 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
   {
     minFilter = GL_NEAREST;
   }
+  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_NEAREST")
+  {
+    minFilter = GL_NEAREST_MIPMAP_NEAREST;
+  }
+  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_LINEAR")
+  {
+    minFilter = GL_NEAREST_MIPMAP_LINEAR;
+  }
+  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_NEAREST")
+  {
+    minFilter = GL_LINEAR_MIPMAP_NEAREST;
+  }
+  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_LINEAR")
+  {
+    minFilter = GL_LINEAR_MIPMAP_LINEAR;
+  }
   if(SystemProperties::GetMagFilter() == "GL_NEAREST")
   {
     magFilter = GL_NEAREST;
@@ -315,6 +331,7 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
 #else
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, aSurface->w, aSurface->h, 0, aTextureFormat, GL_UNSIGNED_BYTE, aSurface->pixels);
 #endif
+  glGenerateMipmap(GL_TEXTURE_2D);
   mSurfaces.push_back(aSurface);
 
   return textureId;

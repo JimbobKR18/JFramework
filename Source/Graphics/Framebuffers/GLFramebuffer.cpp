@@ -63,14 +63,43 @@ void GLFramebuffer::SetShaders(GraphicsManager *aManager, HashString const &aVer
  */
 void GLFramebuffer::Generate(GraphicsManager *aManager)
 {
+  GLint minFilter = GL_LINEAR;
+  GLint magFilter = GL_LINEAR;
+  if(SystemProperties::GetMinFilter() == "GL_NEAREST")
+  {
+    minFilter = GL_NEAREST;
+  }
+  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_NEAREST")
+  {
+    minFilter = GL_NEAREST_MIPMAP_NEAREST;
+  }
+  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_LINEAR")
+  {
+    minFilter = GL_NEAREST_MIPMAP_LINEAR;
+  }
+  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_NEAREST")
+  {
+    minFilter = GL_LINEAR_MIPMAP_NEAREST;
+  }
+  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_LINEAR")
+  {
+    minFilter = GL_LINEAR_MIPMAP_LINEAR;
+  }
+  if(SystemProperties::GetMagFilter() == "GL_NEAREST")
+  {
+    magFilter = GL_NEAREST;
+  }
+  
+  //gluBuild2DMipmaps(GL_TEXTURE_2D, 3, mWidth, mHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   glGenFramebuffers(1, &mFrameBufferID);
   glGenTextures(1, &mRenderedTextureID);
   glBindTexture(GL_TEXTURE_2D, mRenderedTextureID);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  glGenerateMipmap(GL_TEXTURE_2D);
   
   SetShaders(aManager, mVertexShaderFilename, mFragmentShaderFilename);
   
@@ -118,6 +147,7 @@ void GLFramebuffer::Bind()
  */
 void GLFramebuffer::Unbind(int aDefaultFramebuffer)
 {
+  glGenerateMipmap(GL_TEXTURE_2D);
   glBindFramebuffer(GL_FRAMEBUFFER, aDefaultFramebuffer);
   glBindTexture(GL_TEXTURE_2D, 0);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
