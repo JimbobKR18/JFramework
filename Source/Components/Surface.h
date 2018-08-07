@@ -51,6 +51,8 @@ private:
   Vector3             mTextureSize;
   Vector4             mPrimaryColor;
   bool                mNoRender;
+  HashString          mMinFilter;
+  HashString          mMagFilter;
   
   // Default
   HashString          mFileName;
@@ -89,6 +91,8 @@ public:
   TextRenderStyle     GetTextRenderStyle() const { return mTextRenderStyle; }
   int                 GetCurrentAnimation() const { if(mTexCoord) return mTexCoord->GetCurrentAnimation(); else return 0; }
   int                 GetCurrentFrame() const { if(mTexCoord) return mTexCoord->GetCurrentFrame(); else return 0; }
+  HashString          GetMinFilter() const { return mMinFilter; }
+  HashString          GetMagFilter() const { return mMagFilter; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
@@ -103,6 +107,8 @@ public:
   void                SetOriginalSize(Vector3 const &aOriginalSize) { mOriginalSize = aOriginalSize; }
   void                SetFileName(HashString const& aFileName) { mFileName = aFileName; }
   void                SetTextRenderStyle(TextRenderStyle const& aTextRenderStyle) { mTextRenderStyle = aTextRenderStyle; }
+  void                SetMinFilter(HashString const &aMinFilter) { mMinFilter = aMinFilter; }
+  void                SetMagFilter(HashString const &aMagFilter) { mMagFilter = aMagFilter; }
   
   // Textures and Shaders
   virtual void        LoadImage(HashString const &aName);

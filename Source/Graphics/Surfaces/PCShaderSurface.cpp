@@ -55,7 +55,7 @@ void PCShaderSurface::LoadImage(HashString const &aName)
   // else we load the image from file
   else
   {
-    TextureData *textureData = ShaderLoader::LoadTexture(aName);
+    textureData = ShaderLoader::LoadTexture(aName, GetMinFilter(), GetMagFilter());
     if(textureData)
     {
       SetTextureSize(Vector3(textureData->mWidth, textureData->mHeight, 0));
@@ -83,7 +83,8 @@ void PCShaderSurface::LoadText(HashString const &aText)
   }
   else
   {
-    TextureData* textureData = ShaderLoader::LoadText(GetFontName(), aText, GetColor(), GetSecondaryColor(), GetFontSize(), GetMaxTextWidth());
+    TextureData* textureData = ShaderLoader::LoadText(GetFontName(), aText, GetMinFilter(), GetMagFilter(), 
+      GetColor(), GetSecondaryColor(), GetFontSize(), GetMaxTextWidth());
     if(textureData)
     {
       size = Vector3(textureData->mWidth, textureData->mHeight, 0);
@@ -302,6 +303,7 @@ void PCShaderSurface::Serialize(ParserNode *aNode)
  */
 void PCShaderSurface::Deserialize(ParserNode *aNode)
 {
+  Surface::Deserialize(aNode);
   HashString vertexShader = (GetVertexShaderFilename() == "") ? SystemProperties::GetDefaultVertexShaderName() : GetVertexShaderFilename();
   HashString fragmentShader = (GetFragmentShaderFilename() == "") ? SystemProperties::GetDefaultFragmentShaderName() : GetFragmentShaderFilename();
   
@@ -344,7 +346,6 @@ void PCShaderSurface::Deserialize(ParserNode *aNode)
   }
   
   LoadShaders(vertexShader, fragmentShader);
-  Surface::Deserialize(aNode);
 }
 
 /**

@@ -135,9 +135,11 @@ ShaderData* ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, H
 /**
  * @brief Load texture.
  * @param aTextureFileName Name of texture file.
+ * @param aMinFilter Min filter.
+ * @param aMagFilter Mag filter.
  * @return Data for texture.
  */
-TextureData* ShaderLoader::LoadTexture(HashString const &aTextureFileName)
+TextureData* ShaderLoader::LoadTexture(HashString const &aTextureFileName, HashString const &aMinFilter, HashString const &aMagFilter)
 {
   TextureData* textureData = new TextureData();
   GLenum textureFormat;
@@ -187,7 +189,7 @@ TextureData* ShaderLoader::LoadTexture(HashString const &aTextureFileName)
     textureData->mTextureName = aTextureFileName;
     textureData->mWidth = surface->w;
     textureData->mHeight = surface->h;
-    textureData->mTextureID = ImportTexture(surface, textureFormat);
+    textureData->mTextureID = ImportTexture(surface, textureFormat, aMinFilter, aMagFilter);
     return textureData;
   }
   else
@@ -202,13 +204,16 @@ TextureData* ShaderLoader::LoadTexture(HashString const &aTextureFileName)
  * @brief Load image as text.
  * @param aFont Font.
  * @param aText Contents.
+ * @param aMinFilter Min filter.
+ * @param aMagFilter Mag filter.
  * @param aForegroundColor Primary color.
  * @param aBackgroundColor Background color.
  * @param aSize Size of font.
  * @param aMaxWidth Word wrapping.
  * @return Text as image.
  */
-TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
+TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &aText, HashString const &aMinFilter, 
+  HashString const &aMagFilter, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth)
 {
   TextureData* textureData = new TextureData();
   GLenum textureFormat;
@@ -259,7 +264,7 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
   textureData->mTextureName = aFont + aText + Common::IntToString(aSize);
   textureData->mWidth = surface->w;
   textureData->mHeight = surface->h;
-  textureData->mTextureID = ImportTexture(surface, textureFormat);
+  textureData->mTextureID = ImportTexture(surface, textureFormat, aMinFilter, aMagFilter);
   textureData->mFont = aFont;
   textureData->mText = aText;
   textureData->mForegroundColor = aForegroundColor;
@@ -275,36 +280,38 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
  * @brief Import texture into OpenGL.
  * @param aSurface Copy data from here.
  * @param aTextureFormat Format of image.
+ * @param aMinFilter Min filter.
+ * @param aMagFilter Mag filter.
  * @return Texture id.
  */
-int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat)
+int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, HashString const &aMinFilter, HashString const &aMagFilter)
 {
   GLuint textureId = 0;
   GLint minFilter = GL_LINEAR;
   GLint magFilter = GL_LINEAR;
   GLint wrapS = GL_REPEAT;
   GLint wrapT = GL_REPEAT;
-  if(SystemProperties::GetMinFilter() == "GL_NEAREST")
+  if(aMinFilter == "GL_NEAREST")
   {
     minFilter = GL_NEAREST;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_NEAREST")
+  else if(aMinFilter == "GL_NEAREST_MIPMAP_NEAREST")
   {
     minFilter = GL_NEAREST_MIPMAP_NEAREST;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_LINEAR")
+  else if(aMinFilter == "GL_NEAREST_MIPMAP_LINEAR")
   {
     minFilter = GL_NEAREST_MIPMAP_LINEAR;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_NEAREST")
+  else if(aMinFilter == "GL_LINEAR_MIPMAP_NEAREST")
   {
     minFilter = GL_LINEAR_MIPMAP_NEAREST;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_LINEAR")
+  else if(aMinFilter == "GL_LINEAR_MIPMAP_LINEAR")
   {
     minFilter = GL_LINEAR_MIPMAP_LINEAR;
   }
-  if(SystemProperties::GetMagFilter() == "GL_NEAREST")
+  if(aMagFilter == "GL_NEAREST")
   {
     magFilter = GL_NEAREST;
   }

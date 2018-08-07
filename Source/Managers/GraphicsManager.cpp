@@ -24,7 +24,8 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
                                                                            mScreen(nullptr), mPrimaryCamera(nullptr)
 {
   // Add Default Texture
-  AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, "", "", Vector4(), Vector4(), 0, 0));
+  AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, 
+    SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter(), "", "", Vector4(), Vector4(), 0, 0));
 #ifdef SHADER_COMPATIBLE
   mScreen = new PCShaderScreen(this, aWidth, aHeight, aFullScreen);
 #else
@@ -396,9 +397,10 @@ void GraphicsManager::ResetDevice()
     TextureData* newTexture = nullptr;
     
     if(!data->mFont.Empty())
-      newTexture = ShaderLoader::LoadText(data->mFont, data->mText, data->mForegroundColor, data->mBackgroundColor, data->mSize, data->mMaxWidth);
+      newTexture = ShaderLoader::LoadText(data->mFont, data->mText, data->mMinFilter, data->mMagFilter, 
+        data->mForegroundColor, data->mBackgroundColor, data->mSize, data->mMaxWidth);
     else
-      newTexture = ShaderLoader::LoadTexture(data->mTextureName);
+      newTexture = ShaderLoader::LoadTexture(data->mTextureName, data->mMinFilter, data->mMagFilter);
       
     if(!newTexture)
       newTexture = new TextureData(*data);

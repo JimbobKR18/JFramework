@@ -34,12 +34,13 @@ public:
   virtual ~ShaderLoader();
   
   static ShaderData* LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
-  static TextureData* LoadTexture(HashString const &aTextureFileName);
-  static TextureData* LoadText(HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  static TextureData* LoadTexture(HashString const &aTextureFileName, HashString const &aMinFilter, HashString const &aMagFilter);
+  static TextureData* LoadText(HashString const &aFont, HashString const &aText, HashString const &aMinFilter, HashString const &aMagFilter, 
+    Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
   static void Clear();
   
 private:
-  static int ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat);
+  static int ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, HashString const &aMinFilter, HashString const &aMagFilter);
 };
 
 #endif // __JFramework_ShaderLoader_h_

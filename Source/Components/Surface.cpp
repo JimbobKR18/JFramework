@@ -9,8 +9,9 @@
 int const Surface::sUID = Common::StringHashFunction("Surface");
 
 Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
-                     mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), mFileName(), 
-                     mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
+                     mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
+                     mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()), 
+                     mFileName(), mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
                      mOriginalSize(), mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
 {
   assert(!"Surface needs a graphicsmanager");
@@ -19,6 +20,7 @@ Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_A
 Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
                                               mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
+                                              mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()),
                                               mFileName(), mText(), mFontName(), mFontSize(0), 
                                               mMaxTextWidth(0), mSecondaryColor(), mOriginalSize(),
                                               mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
@@ -341,6 +343,9 @@ void Surface::Serialize(ParserNode *aNode)
     surface->Place(values[i], Common::IntToString(mPrimaryColor[i]));
   }
   
+  surface->Place("MinFilter", mMinFilter);
+  surface->Place("MagFilter", mMagFilter);
+  
   // View mode
   HashString viewMode = "ABSOLUTE";
   if(mViewmode == VIEW_RELATIVE_TO_CAMERA)
@@ -609,6 +614,14 @@ void Surface::Deserialize(ParserNode *aNode)
   if(aNode->Find("YBias"))
   {
     yBias = aNode->Find("YBias")->GetValue().ToFloat();
+  }
+  if(aNode->Find("MinFilter"))
+  {
+    mMinFilter = aNode->Find("MinFilter")->GetValue();
+  }
+  if(aNode->Find("MagFilter"))
+  {
+    mMagFilter = aNode->Find("MagFilter")->GetValue();
   }
   
   // Text
