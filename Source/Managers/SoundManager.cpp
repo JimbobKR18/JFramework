@@ -831,7 +831,7 @@ void SoundManager::LoadSounds()
     HashString curSoundName = soundStr + Common::IntToString(soundNameIndex);
     while(curGroup->Find(curSoundName))
     {
-      mSoundGroups[groupName.ToHash()].insert(curGroup->Find(curSoundName)->GetValue());
+      AddSoundNameToGroup(groupName, curGroup->Find(curSoundName)->GetValue());
       ++soundNameIndex;
       curSoundName = soundStr + Common::IntToString(soundNameIndex);
     }
