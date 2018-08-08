@@ -24,6 +24,18 @@ To set a DSP to a sound, create a sound in SoundAliases.txt like so:
     }
   }
 
+To create a channel group:
+  Group_0
+  {
+    Name = group_name <--- Must be unique.
+    Sound_0 = door_open <--- Must match name of sound created earlier. Increment as you add more.
+    DSP_0 <--- You can even add DSPs to that!
+    {
+      Name = Example_Echo <--- Name must match name of a DSP you created
+      Index = 0 <--- Index of DSP in FMOD DSP sequence
+    }
+  }
+
 Types:
   MIXER
   {

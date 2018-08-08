@@ -28,16 +28,22 @@ private:
     virtual ~SoundDSPInfo() {}
   };
 
+  typedef std::set<HashString>                          SoundNameContainer;
   typedef std::vector<SoundDSPInfo*>                    SoundDSPInfoVector;
   typedef std::unordered_map<int, DSP*>                 DSPContainer;
   typedef std::unordered_map<int, SoundDSPInfoVector>   SoundDSPContainer;
+  typedef std::unordered_map<int, SoundNameContainer>   SoundGroupContainer;
   typedef DSPContainer::iterator                        DSPIt;
   typedef SoundDSPInfoVector::iterator                  SoundDSPInfoVectorIt;
   typedef SoundDSPContainer::iterator                   SoundDSPContainerIt;
+  typedef SoundNameContainer::iterator                  SoundNameContainerIt;
+  typedef SoundGroupContainer::iterator                 SoundGroupContainerIt;
 
   SoundSystem* mSoundSystem;
   DSPContainer mDSPContainer;
   SoundDSPContainer mSoundsToDSPs;
+  SoundGroupContainer mSoundGroups;
+  SoundDSPContainer mGroupsToDSPs;
 
   static unsigned const sUID;
 
@@ -72,6 +78,8 @@ public:
   
   // Channel groups
   void CreateChannelGroup(HashString const &aGroupName);
+  void PlayChannelGroup(HashString const &aGroupName, int const aNumLoops);
+  void AddSoundNameToGroup(HashString const &aGroupName, HashString const &aSoundName);
   void AddChannelToGroup(HashString const &aGroupName, int const aChannel);
   void RemoveChannelFromGroups(int const aChannel);
   void SetChannelGroupVolume(HashString const &aGroupName, float const aVolume);

@@ -15,7 +15,7 @@
 
 unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
 SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr), 
-  mDSPContainer(), mSoundsToDSPs()
+  mDSPContainer(), mSoundsToDSPs(), mSoundGroups()
 {
 #if !defined(ANDROID) && !defined(IOS)
   mSoundSystem = new FMODSoundSystem();
@@ -79,6 +79,12 @@ void SoundManager::DeleteSound(HashString const &aName)
     }
     dsps.clear();
     mSoundsToDSPs.erase(aName.ToHash());
+  }
+  
+  // Erase all occurrences in sound groups.
+  for(SoundGroupContainerIt it = mSoundGroups.begin(); it != mSoundGroups.end(); ++it)
+  {
+    it->second.erase(aName);
   }
 }
 
@@ -257,10 +263,60 @@ void SoundManager::SetChannel3DSpread(int const aChannel, float const aAngle)
 void SoundManager::CreateChannelGroup(HashString const &aGroupName)
 {
   mSoundSystem->CreateChannelGroup(aGroupName);
+  mSoundGroups[aGroupName.ToHash()] = SoundNameContainer();
 }
 
 /**
- * @brief Add channel to group
+ * @brief Play channel group, with DSPs and all.
+ * @param aGroupName
+ * @param aNumLoops
+ */
+void SoundManager::PlayChannelGroup(HashString const &aGroupName, int const aNumLoops)
+{
+  if(mSoundGroups.find(aGroupName.ToHash()) == mSoundGroups.end())
+  {
+    DebugLogPrint("Channel group %s not found!", aGroupName.ToCharArray());
+    return;
+  }
+  
+  // Play sounds
+  for(SoundNameContainerIt it = mSoundGroups[aGroupName.ToHash()].begin(); it != mSoundGroups[aGroupName.ToHash()].end(); ++it)
+  {
+    int channel = PlaySound(*it, aNumLoops);
+    AddChannelToGroup(aGroupName, channel);
+  }
+  
+  // Add DSP to groups
+  if(mGroupsToDSPs.find(aGroupName.ToHash()) != mGroupsToDSPs.end())
+  {
+    SoundDSPInfoVector dsps = mGroupsToDSPs[aGroupName.ToHash()];
+    for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
+    {
+      SoundDSPInfo* info = *it;
+      if(mDSPContainer.find(info->mDSPName.ToHash()) != mDSPContainer.end())
+      {
+        DSP *dsp = mDSPContainer[info->mDSPName.ToHash()];
+        AddDSPToChannelGroup(dsp, aGroupName, info->mIndex);
+      }
+    }
+  }
+}
+
+/**
+ * @brief Add sound to always be played when channel group plays.
+ * @param aGroupName
+ * @param aSoundName
+ */
+void SoundManager::AddSoundNameToGroup(HashString const &aGroupName, HashString const &aSoundName)
+{
+  if(mSoundGroups.find(aGroupName.ToHash()) == mSoundGroups.end())
+    CreateChannelGroup(aGroupName);
+  
+  mSoundGroups[aGroupName.ToHash()].insert(aSoundName);
+}
+
+/**
+ * @brief Add channel to group, this will not add sound to always play when you tell group to play. Consider it a temporary measure.
  * @param aGroupName
  * @param aChannel
  */
@@ -431,8 +487,27 @@ void SoundManager::DeleteDSP(DSP *aDSP)
 {
   if(mSoundSystem->DeleteDSP(aDSP))
   {
-    // Delete all uses of dsp.
+    // Delete all uses of dsp for individual sounds.
     for(SoundDSPContainerIt it = mSoundsToDSPs.begin(); it != mSoundsToDSPs.end(); ++it)
+    {
+      SoundDSPInfoVector dsps = it->second;
+      for(SoundDSPInfoVectorIt it2 = dsps.begin(); it2 != dsps.end();)
+      {
+        SoundDSPInfo *info = *it2;
+        if(info->mDSPName == aDSP->GetName())
+        {
+          delete info;
+          it2 = dsps.erase(it2);
+        }
+        else
+        {
+          ++it2;
+        }
+      }
+    }
+    
+    // Delete all uses of dsp for groups.
+    for(SoundDSPContainerIt it = mGroupsToDSPs.begin(); it != mGroupsToDSPs.end(); ++it)
     {
       SoundDSPInfoVector dsps = it->second;
       for(SoundDSPInfoVectorIt it2 = dsps.begin(); it2 != dsps.end();)
@@ -531,7 +606,8 @@ void SoundManager::SerializeLUA()
       .set("StopChannel", &SoundManager::StopChannel)
       .set("SetSoundVolume", &SoundManager::SetChannelVolume)
       .set("ResumeChannel", &SoundManager::ResumeChannel)
-      .set("PauseChannel", &SoundManager::PauseChannel);
+      .set("PauseChannel", &SoundManager::PauseChannel)
+      .set("PlayChannelGroup", &SoundManager::PlayChannelGroup);
 }
 
 /**
@@ -542,6 +618,7 @@ void SoundManager::LoadSounds()
   int index = 0;
   HashString const soundStr = "Sound_";
   HashString const dspStr = "DSP_";
+  HashString const groupStr = "Group_";
   HashString curIndex = dspStr + Common::IntToString(index);
   HashString const fileName = "SoundAliases.txt";
   
@@ -709,6 +786,7 @@ void SoundManager::LoadSounds()
     curIndex = dspStr + Common::IntToString(index);
   }
   
+  // Sound aliasing
   index = 0;
   curIndex = soundStr + Common::IntToString(index);
   while(head->Find(curIndex))
@@ -737,6 +815,41 @@ void SoundManager::LoadSounds()
     
     ++index;
     curIndex = soundStr + Common::IntToString(index);
+  }
+  
+  // Grouping
+  index = 0;
+  curIndex = groupStr + Common::IntToString(index);
+  while(head->Find(curIndex))
+  {
+    ParserNode *curGroup = head->Find(curIndex);
+    HashString groupName = curGroup->Find("Name")->GetValue();
+    CreateChannelGroup(groupName);
+    
+    // Add sounds
+    int soundNameIndex = 0;
+    HashString curSoundName = soundStr + Common::IntToString(soundNameIndex);
+    while(curGroup->Find(curSoundName))
+    {
+      mSoundGroups[groupName.ToHash()].insert(curGroup->Find(curSoundName)->GetValue());
+      ++soundNameIndex;
+      curSoundName = soundStr + Common::IntToString(soundNameIndex);
+    }
+    
+    // Add DSPs
+    int dspIndex = 0;
+    HashString curDsp = dspStr + Common::IntToString(dspIndex);
+    while(curGroup->Find(curDsp))
+    {
+      ParserNode *dspNode = curGroup->Find(curDsp);
+      SoundDSPInfo *info = new SoundDSPInfo(dspNode->Find("Index")->GetValue().ToInt(), dspNode->Find("Name")->GetValue());
+      mGroupsToDSPs[groupName.ToHash()].push_back(info);
+      ++dspIndex;
+      curDsp = dspStr + Common::IntToString(dspIndex);
+    }
+    
+    ++index;
+    curIndex = groupStr + Common::IntToString(index);
   }
   
   // Clean up.
