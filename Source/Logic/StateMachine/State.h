@@ -17,10 +17,12 @@ public:
   State(HashString const &aName, float const &aTimeAlive);
   virtual ~State();
   
-  HashString const GetName() const;
-  float const GetTimeAlive() const;
+  HashString GetName() const;
+  float GetTimeAlive() const;
   void SetName(HashString const &aName);
   void SetTimeAlive(float const &aTimeAlive);
+  
+  static void SerializeLUA();
 };
 
 #endif // __JFRAMEWORK_STATE_H

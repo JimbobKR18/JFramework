@@ -34,6 +34,8 @@
 #include "Messages/CollisionMessage.h"
 #include "Logic/Constants.h"
 #include "Logic/SystemProperties.h"
+#include "Logic/StateMachine/StateMachine.h"
+#include "Logic/StateMachine/State.h"
 
 #ifdef PC
 #include "Graphics/Surfaces/PCShaderSurface.h"
@@ -113,6 +115,8 @@ namespace LUABind
     
     // States
     StateObject::SerializeLUA();
+    StateMachine::SerializeLUA();
+    State::SerializeLUA();
     
     // CustomScript
     CustomScript::SerializeLUA();

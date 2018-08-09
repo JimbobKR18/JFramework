@@ -1,4 +1,5 @@
 #include "State.h"
+#include "LUA/LUATypes.h"
 
 State::State() : mName()
 {
@@ -20,7 +21,7 @@ State::~State()
  * @brief Get name of State.
  * @return Name.
  */
-HashString const State::GetName() const
+HashString State::GetName() const
 {
   return mName;
 }
@@ -29,7 +30,7 @@ HashString const State::GetName() const
  * @brief Get time alive.
  * @return Time alive.
  */
-float const State::GetTimeAlive() const
+float State::GetTimeAlive() const
 {
   return mTimeAlive;
 }
@@ -50,4 +51,14 @@ void State::SetName(HashString const &aName)
 void State::SetTimeAlive(float const &aTimeAlive)
 {
   mTimeAlive = aTimeAlive;
+}
+
+/**
+ * @brief Serialize to LUA.
+ */
+void State::SerializeLUA()
+{
+  SLB::Class<State>("State")
+    .set("GetName", &State::GetName)
+    .set("GetTimeAlive", &State::GetTimeAlive);
 }

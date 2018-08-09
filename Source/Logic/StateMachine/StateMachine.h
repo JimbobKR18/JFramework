@@ -34,6 +34,8 @@ public:
   void AddState(State* aState);
   void AddLink(StateLink *aLink);
   void AddLink(State *aState1, State *aState2, StateLink::LinkType const &aLinkType);
+  
+  static void SerializeLUA();
 };
 
 #endif // STATEMACHINE_H

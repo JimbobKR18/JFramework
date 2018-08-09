@@ -13,6 +13,7 @@
 #include "Transform.h"
 #include "Surface.h"
 #include "PhysicsObject.h"
+#include "StateObject.h"
 
 GameObject::GameObject()
 {
@@ -405,5 +406,6 @@ void GameObject::SerializeLUA()
           .set("GetTransform", &GameObject::GET<Transform>)
           .set("GetSurface", &GameObject::GET<Surface>)
           .set("GetPhysicsObject", &GameObject::GET<PhysicsObject>)
+          .set("GetStateObject", &GameObject::GET<StateObject>)
           .set("GetName", &GameObject::GetName);
 }

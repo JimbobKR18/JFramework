@@ -181,5 +181,6 @@ void StateObject::Deserialize(ParserNode *aNode)
 void StateObject::SerializeLUA()
 {
   SLB::Class<StateObject>("StateObject")
-    .inherits<Component>();
+    .inherits<Component>()
+    .set("GetStateMachine", &StateObject::GetStateMachine);
 }

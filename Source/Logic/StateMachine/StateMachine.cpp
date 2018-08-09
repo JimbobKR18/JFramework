@@ -1,5 +1,6 @@
 #include "Common.h"
 #include "StateMachine.h"
+#include "LUA/LUATypes.h"
 
 StateMachine::StateMachine() : mLinks(), mStates(), mCurrentState(nullptr), mCurrentTime(0)
 {
@@ -172,4 +173,17 @@ void StateMachine::AddLink(State *aState1, State *aState2, StateLink::LinkType c
       assert(!"How did you even get here?");
       break;
   }
+}
+
+/**
+ * @brief Serialize to LUA
+ */
+void StateMachine::SerializeLUA()
+{
+  SLB::Class<StateMachine>("StateMachine")
+    .set("GetCurrentState", &StateMachine::GetCurrentState)
+    .set("SetCurrentState", &StateMachine::SetCurrentState)
+    .set("Reset", &StateMachine::Reset)
+    .set("IsCurrentStateExpired", &StateMachine::IsCurrentStateExpired)
+    .set("GetCurrentStateTimeLeft", &StateMachine::GetCurrentStateTimeLeft);
 }
