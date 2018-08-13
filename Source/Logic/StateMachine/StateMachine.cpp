@@ -102,7 +102,7 @@ void StateMachine::SetCurrentState(HashString const &aName)
       }
     }
   }
-  DebugLogPrint("No state transfer for state %s", aName.ToCharArray());
+  DebugLogPrint("No state transfer from state %s to state %s", mCurrentState->GetName().ToCharArray(), aName.ToCharArray());
   assert(!"No state transfer found.");
 }
 
