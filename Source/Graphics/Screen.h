@@ -6,6 +6,7 @@
 #include "TextureData.h"
 #include "ShaderData.h"
 #include "Camera.h"
+#include "Transform.h"
 
 class Screen
 {
@@ -44,6 +45,7 @@ public:
   // Get UI render sorting method (Post batching)
   ScreenRenderSorter*     GetUIRenderSorter();
   // Batching
+  std::unordered_map<Camera*, std::vector<Surface*>> PruneObjects(std::vector<Surface*> const &aObjects, std::set<Camera*> const &aCameras);
   void                    SortObjects(std::vector<Surface*> &aObjects);
   void                    SortUI(std::vector<Surface*> &aObjects);
 
@@ -52,9 +54,12 @@ public:
   virtual void            SetClearColor(Vector4 const &aClearColor) = 0;
   virtual void            ChangeSize(int aW, int aH, bool aFullScreen) = 0;
   virtual void            PreDraw() = 0;
-  virtual void            Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, std::set<Camera*> const &aCameras) = 0;
+  virtual void            Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, Camera* aCamera) = 0;
   virtual void            DebugDraw(std::vector<Surface*> const &aObjects) = 0;
   virtual void            SwapBuffers() = 0;
+  
+protected:
+  void                    AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
 };
 
 #endif

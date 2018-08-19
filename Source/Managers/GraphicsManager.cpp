@@ -54,10 +54,14 @@ GraphicsManager::~GraphicsManager()
  */
 void GraphicsManager::Update()
 {
-  mScreen->SortObjects(mSurfaces);
-  mScreen->SortUI(mUIElements);
+  std::unordered_map<Camera*, std::vector<Surface*>> cameraObjectRenders = mScreen->PruneObjects(mSurfaces, mCameras);
   mScreen->PreDraw();
-  mScreen->Draw(mSurfaces, mUIElements, mCameras);
+  mScreen->SortUI(mUIElements);
+  for(std::unordered_map<Camera*, std::vector<Surface*>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenders.end(); ++it)
+  {
+    mScreen->SortObjects(it->second);
+    mScreen->Draw(it->second, mUIElements, it->first);
+  }
   mScreen->SwapBuffers();
 }
 

@@ -34,7 +34,7 @@ public:
   virtual void ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData);
   virtual void ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData);
   virtual void PreDraw();
-  virtual void Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, std::set<Camera*> const &aCameras);
+  virtual void Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, Camera* aCamera);
   virtual void DebugDraw(std::vector<Surface*> const &aObjects);
   virtual void SwapBuffers();
   virtual void SetClearColor(Vector4 const &aClearColor);
@@ -42,7 +42,6 @@ public:
 
 private:
   void DrawObjects(std::vector<Surface*> const &aObjects, Camera *aCamera);
-  void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
   void SetShaderProperties(PCShaderSurface *aSurface, bool aActive);

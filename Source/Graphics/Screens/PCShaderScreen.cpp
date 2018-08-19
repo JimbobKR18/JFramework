@@ -271,37 +271,34 @@ void PCShaderScreen::PreDraw()
  * @brief Draw objects
  * @param aObjects
  * @param aUIObjects
- * @param aCameras
+ * @param aCamera
  */
-void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, std::set<Camera*> const &aCameras)
+void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, Camera* aCamera)
 {
-  for(std::set<Camera*>::const_iterator it = aCameras.begin(); it != aCameras.end(); ++it)
-  {
 // TODO Mac does not use multiple cameras with framebuffers
 #ifndef __APPLE__
-    (*it)->GetFramebuffer()->Bind();
-    DrawObjects(aObjects, *it);
-    DrawObjects(aUIObjects, *it);
-    #ifdef _DEBUG_DRAW
-      DebugDraw(aObjects);
-    #endif
-    (*it)->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
-    
-    if((*it)->GetPrimary())
-      (*it)->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+  aCamera->GetFramebuffer()->Bind();
+  DrawObjects(aObjects, aCamera);
+  DrawObjects(aUIObjects, aCamera);
+  #ifdef _DEBUG_DRAW
+    DebugDraw(aObjects);
+  #endif
+  aCamera->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
+  
+  if(aCamera->GetPrimary())
+    aCamera->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
 #else
-    mFrameBuffer->Bind();
-    if(!(*it)->GetPrimary())
-      return;
-    DrawObjects(aObjects, *it);
-    DrawObjects(aUIObjects, *it);
-    #ifdef _DEBUG_DRAW
-      DebugDraw(aObjects);
-    #endif
-    mFrameBuffer->Unbind(mDefaultFrameBufferID);
-    mFrameBuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+  mFrameBuffer->Bind();
+  if(!aCamera->GetPrimary())
+    return;
+  DrawObjects(aObjects, aCamera);
+  DrawObjects(aUIObjects, aCamera);
+  #ifdef _DEBUG_DRAW
+    DebugDraw(aObjects);
+  #endif
+  mFrameBuffer->Unbind(mDefaultFrameBufferID);
+  mFrameBuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
 #endif
-  }
 }
 
 /**
@@ -455,7 +452,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     GLuint texture = surface->GetTextureID();
     GLuint program = surface->GetProgramID();
     Viewspace viewSpace = surface->GetViewMode();
-    Vector4 cameraTranslation;
+    Vector3 cameraTranslation;
     
     if(surface->GetNoRender())
     {
@@ -647,55 +644,6 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     colorData.clear();
     positionData.clear();
     indices.clear();
-  }
-}
-
-/**
- * @brief Align objects
- * @param aTransform Transform of object
- * @param aSize Object size
- * @param aPosition Object position
- */
-void PCShaderScreen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition)
-{
-  X_ALIGNMENT xAlign = aTransform->GetXAlignment();
-  Y_ALIGNMENT yAlign = aTransform->GetYAlignment();
-  Z_ALIGNMENT zAlign = aTransform->GetZAlignment();
-
-  switch(xAlign)
-  {
-  case X_ALIGN_LEFT:
-    aPosition.x += aSize.x;
-    break;
-  case X_ALIGN_RIGHT:
-    aPosition.x -= aSize.x;
-    break;
-  default:
-    break;
-  }
-
-  switch(yAlign)
-  {
-  case Y_ALIGN_TOP:
-    aPosition.y += aSize.y;
-    break;
-  case Y_ALIGN_BOTTOM:
-    aPosition.y -= aSize.y;
-    break;
-  default:
-    break;
-  }
-
-  switch(zAlign)
-  {
-  case Z_ALIGN_FRONT:
-    aPosition.z += aSize.z;
-    break;
-  case Z_ALIGN_BACK:
-    aPosition.z -= aSize.z;
-    break;
-  default:
-    break;
   }
 }
 

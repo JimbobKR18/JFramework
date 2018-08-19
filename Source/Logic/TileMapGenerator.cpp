@@ -54,7 +54,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float
   ObjectManager *objectManager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
   PhysicsWorld *physicsWorld = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>();
   ChemistryManager *chemistryManager = mOwner->GetManager()->GetOwningApp()->GET<ChemistryManager>();
-  Vector3 tileSize = Vector3(mTileSize, mTileSize, mTileSize);
+  Vector3 tileSize = Vector3(mTileSize, mTileSize, 0.1f);
   
   // Reserve total tiles ahead of time to avoid reallocs
   mObjects.resize(mTiles.size(), nullptr);
