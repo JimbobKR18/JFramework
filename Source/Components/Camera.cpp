@@ -166,6 +166,45 @@ void Camera::Deserialize(ParserNode *aNode)
   
   mFramebuffer->SetShaders(mManager, vertexShaderFileName, fragmentShaderFileName);
   mFramebuffer->Generate(mManager);
+  
+  if(aNode->Find("Properties"))
+  {
+    HashString const nodeName = "Property_";
+    int index = 0;
+    HashString curIndex = nodeName + Common::IntToString(index);
+    ParserNode* propertyNode = aNode->Find("Properties");
+    
+    while(propertyNode->Find(curIndex))
+    {
+      ParserNode* curNode = propertyNode->Find(curIndex);
+      PropertyType propertyType = PropertyType::INT1;
+      HashString const type = curNode->Find("Type")->GetValue();
+      
+      if(type == "INT1")
+        propertyType = PropertyType::INT1;
+      else if(type == "INT3")
+        propertyType = PropertyType::INT3;
+      else if(type == "INT4")
+        propertyType = PropertyType::INT4;
+      else if(type == "FLOAT1")
+        propertyType = PropertyType::FLOAT1;
+      else if(type == "FLOAT3")
+        propertyType = PropertyType::FLOAT3;
+      else if(type == "FLOAT4")
+        propertyType = PropertyType::FLOAT4;
+      else
+      {
+        DebugLogPrint("Invalid value %s passed into Property deserialization.", type.ToCharArray());
+        assert(!"Invalid value passed into Property deserialization.");
+      }
+      
+      mFramebuffer->AddOrEditProperty(curNode->Find("Name")->GetValue(), propertyType, 
+        curNode->Find("TargetValue")->GetValue(), curNode->Find("DefaultValue")->GetValue());
+      
+      ++index;
+      curIndex = nodeName + Common::IntToString(index);
+    }
+  }
 }
   
 // Statics
