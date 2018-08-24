@@ -180,6 +180,7 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   glBindVertexArray(mVertexArrayObjectID);
   glUseProgram(mFramebufferProgramID);
   glUniform1i(glGetUniformLocation(mFramebufferProgramID, "textureUnit"), 0);
+  SetShaderProperties(true);
   BindAttributeV3(GL_ARRAY_BUFFER, mVertexBufferID, posCoordPosLocation, mPositionCoords);
   BindAttributeV2(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, mTexCoords);
   
@@ -192,10 +193,78 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   
   DisableVertexAttribArray(posCoordPosLocation);
   DisableVertexAttribArray(texCoordPosLocation);
+  SetShaderProperties(false);
   glBindTexture(GL_TEXTURE_2D, 0);
   glUseProgram(0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+/**
+ * @brief Set shader properties for framebuffer. HINT: If you're not seeing your intended results, remember
+ *        to declare the field as uniform in your shader.
+ * @param aActive Decide whether or not to set values or reset.
+ */
+void GLFramebuffer::SetShaderProperties(bool aActive)
+{
+  // Set properties for shader. Separated by program id.
+  PropertyContainer const &properties = GetProperties();
+  PropertyContainerConstIt propertyEnd = properties.end();
+  for(PropertyContainerConstIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
+  {
+    SurfaceProperty *property = *propertyIt;
+    HashString value = property->GetTargetValue();
+    
+    if(!aActive)
+      value = property->GetDefaultValue();
+      
+    #ifdef _DEBUG_DRAW
+      DebugLogPrint("Setting uniform %s to %s\n", property->GetName().ToCharArray(), value.ToCharArray());
+    #endif
+    
+    switch(property->GetType())
+    {
+      case PropertyType::INT1:
+      {
+        glUniform1i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), value.ToInt());
+        break;
+      }
+      case PropertyType::INT3:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform3i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), intVector[0], intVector[1], intVector[2]);
+        break;
+      }
+      case PropertyType::INT4:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform4i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), intVector[0], intVector[1], intVector[2], intVector[3]);
+        break;
+      }
+      case PropertyType::FLOAT1:
+      {
+        glUniform1f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), value.ToFloat());
+        break;
+      }
+      case PropertyType::FLOAT3:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform3f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), floatVector[0], floatVector[1], floatVector[2]);
+        break;
+      }
+      case PropertyType::FLOAT4:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform4f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
+        break;
+      }
+      default:
+      {
+        assert(!"Invalid property type.");
+        break;
+      }
+    }
+  }
 }
 
 /**

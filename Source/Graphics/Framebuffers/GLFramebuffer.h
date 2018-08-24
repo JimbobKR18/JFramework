@@ -50,6 +50,7 @@ public:
   virtual void Bind();
   virtual void Unbind(int aDefaultFramebuffer);
   virtual void Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen);
+  virtual void SetShaderProperties(bool aActive);
   
   // METHODS
   void DisableVertexAttribArray(int aVertexAttrib);
