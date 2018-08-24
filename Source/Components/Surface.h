@@ -39,9 +39,6 @@ class Surface : public Component
 public:
   typedef std::vector<ScrollInfo> ScrollInfoContainer;
   typedef ScrollInfoContainer::const_iterator ScrollInfoIT;
-  typedef std::vector<SurfaceProperty*> PropertyContainer;
-  typedef PropertyContainer::iterator PropertyContainerIt;
-  typedef PropertyContainer::const_iterator PropertyContainerConstIt;
   
 private:
   // Base

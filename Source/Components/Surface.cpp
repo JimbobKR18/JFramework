@@ -183,7 +183,7 @@ void Surface::CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& a
  * @brief Get properties container
  * @return Container of properties
  */
-Surface::PropertyContainer const& Surface::GetProperties() const
+PropertyContainer const& Surface::GetProperties() const
 {
   return mProperties;
 }

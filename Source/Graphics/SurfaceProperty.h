@@ -38,4 +38,8 @@ public:
   void SetDefaultValue(HashString const &aTargetValue);
 };
 
+typedef std::vector<SurfaceProperty*> PropertyContainer;
+typedef PropertyContainer::iterator PropertyContainerIt;
+typedef PropertyContainer::const_iterator PropertyContainerConstIt;
+
 #endif
