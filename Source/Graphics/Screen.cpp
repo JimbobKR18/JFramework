@@ -196,7 +196,8 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
       bottomRight = cameraMatrix * ((modelTransform * bottomRight) + position) - cameraTranslation;
 
       std::vector<Vector3> points;
-      points.reserve(4);
+      points.reserve(5);
+      points.push_back((cameraMatrix * position) - cameraTranslation);
       points.push_back(topLeft);
       points.push_back(topRight);
       points.push_back(bottomLeft);
@@ -217,14 +218,14 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
       if(added)
         continue;
       
-      if((points[0].x < 0 && points[1].x > cameraSize.x) ||
-        (points[1].x < 0 && points[0].x > cameraSize.x))
+      if((points[0].x <= 0 && points[1].x >= cameraSize.x) ||
+        (points[1].x <= 0 && points[0].x >= cameraSize.x))
       {
         ret[camera].push_back(surface);
         continue;
       }
-      if((points[0].y < 0 && points[1].y > cameraSize.y) ||
-        (points[1].y < 0 && points[0].y > cameraSize.y))
+      if((points[0].y <= 0 && points[1].y >= cameraSize.y) ||
+        (points[1].y <= 0 && points[0].y >= cameraSize.y))
       {
         ret[camera].push_back(surface);
         continue;
