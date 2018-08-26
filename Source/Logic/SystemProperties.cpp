@@ -295,5 +295,6 @@ void SystemProperties::Deserialize()
 
 void SystemProperties::SerializeLUA()
 {
-  SLB::Class<SystemProperties>("SystemProperties").set("GetAssetsDirectory", &SystemProperties::GetAssetsDirectory);
+  SLB::Class<SystemProperties, SLB::Instance::NoCopyNoDestroy>("SystemProperties")
+    .set("GetAssetsDirectory", &SystemProperties::GetAssetsDirectory);
 }

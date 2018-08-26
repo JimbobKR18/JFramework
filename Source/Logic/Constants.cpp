@@ -101,8 +101,7 @@ void Constants::Deserialize()
 
 void Constants::SerializeLUA()
 {
-  SLB::Class<Constants>("Constants").set("GetString", &Constants::GetString)
-                                    .set("GetInteger", &Constants::GetInteger)
-                                    .set("GetFloat", &Constants::GetFloat)
-                                    .set("GetBoolean", &Constants::GetBoolean);
+  // NOTE: LUA does not understand const floats, ints, bool, etc. Call GetString and call conversion function instead.
+  SLB::Class<Constants, SLB::Instance::NoCopyNoDestroy>("Constants")
+    .set("GetString", &Constants::GetString);
 }
