@@ -14,6 +14,7 @@
 #include "GameObject.h"
 #include "PhysicsWorld.h"
 #include "ObjectManager.h"
+#include "GraphicsManager.h"
 #include "ChemistryManager.h"
 #include "MathExt.h"
 #include "Surface.h"
@@ -92,6 +93,9 @@ private:
   // Materials
   std::vector<int>                  mMaterials;
   std::unordered_map<int, HashString>         mMaterialNames;
+  
+  // Empty Tiles
+  std::unordered_map<int, bool>     mEmptyTiles;
 
   // Level owning this generator
   Level*                          mOwner;
@@ -107,7 +111,8 @@ public:
                    std::vector<int> const &aCollisionShapes,
                    std::vector<int> const &aMaterialData,
                    std::unordered_map<int, float> const &aTileHeights, 
-                   std::unordered_map<int, HashString> const &aMaterials, 
+                   std::unordered_map<int, HashString> const &aMaterials,
+                   std::unordered_map<int, bool> const &aEmptyTiles,
                    std::unordered_map<int, std::vector<int>> const &aAnimations,
                    float const aAnimationSpeed, Level *aOwner);
   ~TileMapGenerator();
@@ -136,7 +141,8 @@ public:
 private:
   void              CreateTilesInRange(unsigned const aXStart, unsigned const aYStart, 
                       unsigned const aXEnd, unsigned const aYEnd, Vector3 const &aTileSize, 
-                      ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager);
+                      ObjectManager *aObjectManager, GraphicsManager *aGraphicsManager, 
+                      PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager);
   PhysicsObject*    CreatePhysicsAtIndex(unsigned const aIndex, PhysicsWorld *aPhysicsWorld, 
                       Transform *aTransform, Vector3 const &aZeroVector, Vector3 const &aCollisionOffset, 
                       unsigned const aCollisionDataVectorSize, float aZPos);

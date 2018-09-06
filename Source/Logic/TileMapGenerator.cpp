@@ -34,6 +34,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float
                                    std::vector<int> const &aMaterials,
                                    std::unordered_map<int, float> const &aTileHeights,
                                    std::unordered_map<int, HashString> const &aMaterialNames,
+                                   std::unordered_map<int, bool> const &aEmptyTiles,
                                    std::unordered_map<int, std::vector<int>> const &aAnimations,
                                    float const aAnimationSpeed, Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight), mTileSize(aTileSize), 
@@ -44,7 +45,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float
                                    mAnimationSpeed(aAnimationSpeed), mCurrentAnimationTime(0),
                                    mAnimatedObjects(), mAnimations(aAnimations), mCurrentFrames(),
                                    mMaterials(aMaterials), mMaterialNames(aMaterialNames),
-                                   mOwner(aOwner)
+                                   mEmptyTiles(aEmptyTiles), mOwner(aOwner)
 {
   // mTiles and mCollisionData MUST be same size, or it's not a valid map.
   // For compatibility reasons, the shape data can be a different size because it can be empty.
@@ -53,12 +54,13 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float
 
   ObjectManager *objectManager = mOwner->GetManager()->GetOwningApp()->GET<ObjectManager>();
   PhysicsWorld *physicsWorld = mOwner->GetManager()->GetOwningApp()->GET<PhysicsWorld>();
+  GraphicsManager *graphicsManager = mOwner->GetManager()->GetOwningApp()->GET<GraphicsManager>();
   ChemistryManager *chemistryManager = mOwner->GetManager()->GetOwningApp()->GET<ChemistryManager>();
   Vector3 tileSize = Vector3(mTileSize, mTileSize, 0.1f);
   
   // Reserve total tiles ahead of time to avoid reallocs
   mObjects.resize(mTiles.size(), nullptr);
-  CreateTilesInRange(0, 0, mWidth, mHeight, tileSize, objectManager, physicsWorld, chemistryManager);
+  CreateTilesInRange(0, 0, mWidth, mHeight, tileSize, objectManager, graphicsManager, physicsWorld, chemistryManager);
 }
 
 TileMapGenerator::~TileMapGenerator()
@@ -70,6 +72,7 @@ TileMapGenerator::~TileMapGenerator()
   mMaterials.clear();
   mMaterialNames.clear();
   mAnimations.clear();
+  mEmptyTiles.clear();
 }
 
 /**
@@ -318,11 +321,13 @@ void TileMapGenerator::Serialize(ParserNode *aNode)
  * @param aTileSize Size of tiles in pixels
  * @param aObjectManager Object manager to add objects to
  * @param aPhysicsWorld Physics manager to add physics objects to
+ * @param aGraphicsManager Graphics manager to create / remove graphics
  * @param aChemistryManager Chemistry manager to create materials and such
  */
 void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const aYStart, 
   unsigned const aXEnd, unsigned const aYEnd, Vector3 const &aTileSize, 
-  ObjectManager *aObjectManager, PhysicsWorld *aPhysicsWorld, ChemistryManager *aChemistryManager)
+  ObjectManager *aObjectManager, GraphicsManager *aGraphicsManager, PhysicsWorld *aPhysicsWorld, 
+  ChemistryManager *aChemistryManager)
 {
   float halfX = mWidth * mTileSize;
   float halfY = mHeight * mTileSize;
@@ -380,13 +385,30 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       else if(i == tileDataVectorSize - 1)
         mOwner->SetMaxBoundary(position + aTileSize);
 
-      // Set the frame data
-      Surface *surface = obj->GET<Surface>();
-      TextureCoordinates *textureData = surface->GetTextureData();
-      surface->SetAnimated(false);
-      surface->SetFrameByID(mTiles[i]);
-      textureData->SetBias(0, 0.1f / textureData->GetXSize());
-      textureData->SetBias(1, 0.1f / textureData->GetYSize());
+      // If tile marked as empty, remove surface, else set surface.
+      if(mEmptyTiles.find(mTiles[i]) == mEmptyTiles.end() || !mEmptyTiles[mTiles[i]])
+      {
+        // Set the frame data
+        Surface *surface = obj->GET<Surface>();
+        TextureCoordinates *textureData = surface->GetTextureData();
+        surface->SetAnimated(false);
+        surface->SetFrameByID(mTiles[i]);
+        textureData->SetBias(0, 0.1f / textureData->GetXSize());
+        textureData->SetBias(1, 0.1f / textureData->GetYSize());
+        
+        // Animation
+        if(mAnimations.find(mTiles[i]) != mAnimations.end())
+        {
+          mAnimatedObjects[surface] = mTiles[i];
+          mCurrentFrames[mTiles[i]] = 0;
+        }
+      }
+      else
+      {
+        Surface *surface = obj->GET<Surface>();
+        obj->RemoveComponent(surface, false);
+        aGraphicsManager->DeleteSurface(surface);
+      }
       
       // Add PhysicsObject if the tile has collision
       if(mCollisionData[i] != CollisionShapes::EMPTY ||
@@ -403,13 +425,6 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       else if(mCollisionShapes.size() < collisionDataVectorSize)
       {
         mCollisionShapes.push_back(CollisionShapes::EMPTY);
-      }
-
-      // Animation
-      if(mAnimations.find(mTiles[i]) != mAnimations.end())
-      {
-        mAnimatedObjects[surface] = mTiles[i];
-        mCurrentFrames[mTiles[i]] = 0;
       }
       
       // Materials, if data is available

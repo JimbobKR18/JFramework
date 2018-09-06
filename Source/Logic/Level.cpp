@@ -1151,6 +1151,7 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   std::unordered_map<int, float> heights;
   std::unordered_map<int, std::vector<int>> animations;
   std::unordered_map<int, HashString> materialInfo;
+  std::unordered_map<int, bool> emptyTiles;
   float tileAnimationSpeed = 0.0f;
   float zOffset = 0;
 
@@ -1182,6 +1183,7 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
     HashString const height = "Height_";
     HashString const animation = "Animation_";
     HashString const material = "Material_";
+    HashString const empty = "EmptyTile_";
     settingsDataFileName = aTileMap->Find("SettingsFile")->GetValue();
     Parser *settingsData = ParserFactory::CreateInputParser("Maps", settingsDataFileName);
     
@@ -1219,6 +1221,19 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
       ++index;
       curIndex = material + Common::IntToString(index);
     }
+    
+    // Empty Tiles
+    index = 0;
+    curIndex = empty + Common::IntToString(index);
+    while(settingsData->Find(curIndex))
+    {
+      ParserNode* base = settingsData->Find(curIndex);
+      int emptyTileIndex = base->Find("TileID")->GetValue().ToInt();
+      bool isEmpty = base->Find("Empty")->GetValue().ToBool();
+      emptyTiles[emptyTileIndex] = isEmpty;
+      ++index;
+      curIndex = empty + Common::IntToString(index);
+    }
 
     // Animation speed
     if(settingsData->Find("AnimationSpeed"))
@@ -1247,5 +1262,6 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
                                    zOffset, file, frameDataFilename, collisionOffset,
                                    frames, collision, shapes,
                                    materials, heights, materialInfo,
-                                   animations, tileAnimationSpeed, this));
+                                   emptyTiles, animations, tileAnimationSpeed,
+                                   this));
 }
