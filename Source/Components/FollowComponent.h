@@ -5,6 +5,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Interpolation.h"
+#include "MathExt.h"
 
 class FollowComponent : public Component
 {
@@ -13,6 +14,7 @@ private:
   HashString mTargetName;
   float mTime;
   Interpolation<Vector3> *mInterpolator;
+  Vector3 mPosition;
   
   static int const sUID;
 public:

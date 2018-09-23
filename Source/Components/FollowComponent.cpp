@@ -7,7 +7,7 @@
 int const FollowComponent::sUID = Common::StringHashFunction("FollowComponent");
 
 FollowComponent::FollowComponent() : Component(FollowComponent::sUID), mTarget(nullptr), 
-  mTargetName(), mTime(0), mInterpolator(nullptr)
+  mTargetName(), mTime(0), mInterpolator(nullptr), mPosition()
 {
 }
 
@@ -99,15 +99,15 @@ void FollowComponent::Update()
   {
     Transform *transform = GetOwner()->GET<Transform>();
     Transform *targetTransform = mTarget->GET<Transform>();
-    Vector3 &position = transform->GetPosition();
+    mPosition = transform->GetPosition();
     
     if(mTime <= 0.01f)
-      position = targetTransform->GetPosition();
+      mPosition = targetTransform->GetPosition();
     else
     {
       if(!mInterpolator)
       {
-        mInterpolator = new Interpolation<Vector3>(&position, targetTransform->GetPosition(), mTime);
+        mInterpolator = new Interpolation<Vector3>(&mPosition, targetTransform->GetPosition(), mTime);
       }
       else
       {
@@ -119,6 +119,7 @@ void FollowComponent::Update()
         }
       }
     }
+    transform->SetPosition(mPosition);
   }
 }
 
