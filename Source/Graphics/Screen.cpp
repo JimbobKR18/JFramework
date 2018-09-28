@@ -123,6 +123,10 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
   // Return value
   std::unordered_map<Camera*, std::vector<Surface*>> ret;
   
+  // Points storage
+  std::vector<Vector3> points;
+  points.reserve(5);
+  
   // Draw each object
   // NOTE: The objects are sorted by texture id
   std::set<Camera*>::const_iterator cameraEnd = aCameras.end();
@@ -195,17 +199,16 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
       bottomLeft = cameraMatrix * ((modelTransform * bottomLeft) + position) - cameraTranslation;
       bottomRight = cameraMatrix * ((modelTransform * bottomRight) + position) - cameraTranslation;
 
-      std::vector<Vector3> points;
-      points.reserve(5);
-      points.push_back((cameraMatrix * position) - cameraTranslation);
+      points.clear();
       points.push_back(topLeft);
       points.push_back(topRight);
       points.push_back(bottomLeft);
       points.push_back(bottomRight);
+      points.push_back((cameraMatrix * position) - cameraTranslation);
       
       bool added = false;
       std::vector<Vector3>::const_iterator pointsEnd = points.end();
-      for(std::vector<Vector3>::const_iterator it3 = points.begin(); it3 != points.end(); ++it3)
+      for(std::vector<Vector3>::const_iterator it3 = points.begin(); it3 != pointsEnd; ++it3)
       {
         if(it3->x <= cameraSize.x && it3->x >= 0 &&
           it3->y <= cameraSize.y && it3->y >= 0) 
@@ -224,8 +227,8 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
         ret[camera].push_back(surface);
         continue;
       }
-      if((points[0].y <= 0 && points[1].y >= cameraSize.y) ||
-        (points[1].y <= 0 && points[0].y >= cameraSize.y))
+      if((points[0].y <= 0 && points[2].y >= cameraSize.y) ||
+        (points[2].y <= 0 && points[0].y >= cameraSize.y))
       {
         ret[camera].push_back(surface);
         continue;
