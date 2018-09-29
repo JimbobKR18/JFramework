@@ -44,7 +44,7 @@ private:
   void DrawObjects(std::vector<Surface*> const &aObjects, Camera *aCamera);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
-  void SetShaderProperties(PCShaderSurface *aSurface, bool aActive);
+  void SetShaderProperties(Surface *aSurface, bool aActive);
   void DisableVertexAttribArray(int aVertexAttrib);
   void PushRenderDataV2(std::vector<Vector2> &aData, int aAttribLocation, Vector2 const &aAttribute);
   void PushRenderDataV3(std::vector<Vector3> &aData, int aAttribLocation, Vector3 const &aAttribute);

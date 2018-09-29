@@ -448,7 +448,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
     // Get the texture id of the surface
-    PCShaderSurface *surface = (*it)->GetOwner()->GET<PCShaderSurface>();
+    Surface *surface = *it;
     GLuint texture = surface->GetTextureID();
     GLuint program = surface->GetProgramID();
     Viewspace viewSpace = surface->GetViewMode();
@@ -493,7 +493,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
           (*it)->GetTextureID() == texture && (*it)->GetViewMode() == viewSpace)
     {
       GameObject *owner = (*it)->GetOwner();
-      PCShaderSurface *surface = owner->GET<PCShaderSurface>();
+      Surface *surface = *it;
       Transform *transform = owner->GET<Transform>();
       
       if(surface->GetNoRender())
@@ -686,7 +686,7 @@ bool PCShaderScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
  * @param aSurface Surface to set properties for.
  * @param aActive Decide whether or not to set values or reset.
  */
-void PCShaderScreen::SetShaderProperties(PCShaderSurface *aSurface, bool aActive)
+void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
 {
   // Set properties for shader. Separated by program id.
   GLuint program = aSurface->GetProgramID();
