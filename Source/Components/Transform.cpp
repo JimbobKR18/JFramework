@@ -573,7 +573,9 @@ void Transform::CalculateHierarchy()
  */
 void Transform::EnforceBoundaries()
 {
-  Vector3 scaledSize = mSize.Divide(mScale);
+  // This means that the camera, when zoomed in, cannot hit the sides of levels.
+  // If you want to do that, you need to divide.
+  Vector3 scaledSize = mSize.Multiply(mScale);
   if(mPosition.x - scaledSize.x < mMinBoundary.x)
     mPosition.x = mMinBoundary.x + scaledSize.x;
   else if(mPosition.x + scaledSize.x > mMaxBoundary.x)
