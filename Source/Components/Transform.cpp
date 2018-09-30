@@ -183,8 +183,8 @@ void Transform::SetPosition(Vector3 const &aPos)
       assert(!"How did you even get here?");
       break;
   }
-  CalculateHierarchy();
   EnforceBoundaries();
+  CalculateHierarchy();
 }
 
 /**
@@ -194,6 +194,7 @@ void Transform::SetPosition(Vector3 const &aPos)
 void Transform::SetScale(Vector3 const &aScale)
 {
   mScale = aScale;
+  EnforceBoundaries();
   CalculateHierarchy();
 }
 
@@ -204,6 +205,8 @@ void Transform::SetScale(Vector3 const &aScale)
 void Transform::SetSize(Vector3 const &aSize)
 {
   mSize = aSize;
+  EnforceBoundaries();
+  CalculateHierarchy();
 }
 
 /**
@@ -213,6 +216,7 @@ void Transform::SetSize(Vector3 const &aSize)
 void Transform::SetRotation(Matrix33 const &aRotation)
 {
   mRotation = aRotation;
+  EnforceBoundaries();
   CalculateHierarchy();
 }
 
@@ -284,8 +288,8 @@ void Transform::SetMinBoundary(Vector3 const &aMinBoundary)
  */
 void Transform::Update()
 {
-  CalculateHierarchy();
   EnforceBoundaries();
+  CalculateHierarchy();
 }
 
 /**
