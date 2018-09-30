@@ -35,7 +35,7 @@ struct TextureData
                   mFont(), mText(), mForegroundColor(),
                   mBackgroundColor(), mSize(0), mMaxWidth(0) {}
   TextureData(TextureData const &aRhs) : mTextureName(aRhs.mTextureName), mTextureID(aRhs.mTextureID), 
-  mMinFilter(aRhs.mMinFilter), mMagFilter(aRhs.mMagFilter), mWidth(aRhs.mWidth), mHeight(aRhs.mHeight), 
+  mWidth(aRhs.mWidth), mHeight(aRhs.mHeight), mMinFilter(aRhs.mMinFilter), mMagFilter(aRhs.mMagFilter), 
   mFont(aRhs.mFont), mText(aRhs.mText), mForegroundColor(aRhs.mForegroundColor), mBackgroundColor(aRhs.mBackgroundColor), 
   mSize(aRhs.mSize), mMaxWidth(aRhs.mMaxWidth)
   {
