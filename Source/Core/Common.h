@@ -25,6 +25,7 @@
 #include <iterator>
 #include <cfloat>
 #include <unordered_map>
+#include <unordered_set>
 #include <sstream>
 #include <chrono>
 #include <ctime>

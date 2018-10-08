@@ -201,13 +201,15 @@ void GraphicsManager::RemoveSurface(Surface *aSurface)
  */
 void GraphicsManager::ClearSurfaces()
 {
-  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end(); ++it)
+  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end();)
   {
     DeleteSurface(*it);
+    it = mSurfaces.begin();
   }
-  for(SurfaceIT it = mUIElements.begin(); it != mUIElements.end(); ++it)
+  for(SurfaceIT it = mUIElements.begin(); it != mUIElements.end();)
   {
     DeleteSurface(*it);
+    it = mUIElements.begin();
   }
 }
 
