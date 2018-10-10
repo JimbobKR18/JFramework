@@ -21,6 +21,8 @@ public:
 
   virtual void Update();
   virtual int GetInputCount();
+  virtual void DeviceAdd(int const aId);
+  virtual void DeviceRemove(int const aId);
   
   SDL_Joystick* GetJoystick(int const index) const;
   int GetJoystickInstanceId(int const index) const;

@@ -1,6 +1,6 @@
 #include "PCInputHandler.h"
 
-PCInputHandler::PCInputHandler() : mJoysticks()
+PCInputHandler::PCInputHandler() : InputHandler(), mJoysticks()
 {
   SDL_JoystickEventState(SDL_ENABLE);
 }
@@ -14,33 +14,43 @@ PCInputHandler::~PCInputHandler()
  */
 void PCInputHandler::Update()
 {
-  unsigned numJoysticks = SDL_NumJoysticks();
-  
-  // Removal
-  for(std::unordered_map<int, SDL_Joystick*>::iterator it = mJoysticks.begin(); it != mJoysticks.end();)
+  for(std::unordered_map<int, DeviceInfo*>::iterator it = mDevices.begin(); it != mDevices.end(); ++it)
   {
-    char const* joystickName = SDL_JoystickName(it->second);
-    
-    if(joystickName == nullptr)
-    {
-      it = mJoysticks.erase(it);
-    }
-    else
-    {
-      ++it;
-    }
+    DeviceInfo *info = it->second;
+    SDL_Joystick* joystick = mJoysticks[info->GetId()];
+    info->SetAxis(0, SDL_JoystickGetAxis(joystick, 0));
+    info->SetAxis(1, SDL_JoystickGetAxis(joystick, 1));
+    info->SetAxis(2, SDL_JoystickGetAxis(joystick, 2));
+    info->SetAxis(3, SDL_JoystickGetAxis(joystick, 3));
+    info->SetAxis(4, SDL_JoystickGetAxis(joystick, 4));
+    info->SetAxis(5, SDL_JoystickGetAxis(joystick, 5));
   }
-  
-  // Addition
-  if(numJoysticks > mJoysticks.size())
-  {
-    for(unsigned i = 0; i < numJoysticks; ++i)
-    {
-      SDL_Joystick* joystick = SDL_JoystickOpen(i);
-      int instanceId = SDL_JoystickInstanceID(joystick);
-      mJoysticks[instanceId] = joystick;
-    }
-  }
+}
+
+/**
+ * @brief On device add detected
+ * @param aId Id of input
+ */
+void PCInputHandler::DeviceAdd(int const aId)
+{
+  SDL_Joystick* joystick = SDL_JoystickOpen(aId);
+  int instanceId = SDL_JoystickInstanceID(joystick);
+  HashString stickName = SDL_JoystickName(joystick);
+  mDevices[instanceId] = new DeviceInfo(instanceId, stickName);
+  mJoysticks[instanceId] = joystick;
+}
+
+/**
+ * @brief On device remove detected
+ * @param aId Id of input
+ */
+void PCInputHandler::DeviceRemove(int const aId)
+{
+  int instanceId = SDL_JoystickInstanceID(mJoysticks[aId]);
+  delete mDevices[instanceId];
+  mDevices.erase(instanceId);
+  SDL_JoystickClose(mJoysticks[instanceId]);
+  mJoysticks.erase(instanceId);
 }
 
 /**
