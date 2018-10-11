@@ -50,6 +50,7 @@ private:
   bool                mNoRender;
   HashString          mMinFilter;
   HashString          mMagFilter;
+  int                 mLayer;
   
   // Default
   HashString          mFileName;
@@ -90,6 +91,7 @@ public:
   int                 GetCurrentFrame() const { if(mTexCoord) return mTexCoord->GetCurrentFrame(); else return 0; }
   HashString          GetMinFilter() const { return mMinFilter; }
   HashString          GetMagFilter() const { return mMagFilter; }
+  int                 GetLayer() const { return mLayer; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
@@ -106,6 +108,7 @@ public:
   void                SetTextRenderStyle(TextRenderStyle const& aTextRenderStyle) { mTextRenderStyle = aTextRenderStyle; }
   void                SetMinFilter(HashString const &aMinFilter) { mMinFilter = aMinFilter; }
   void                SetMagFilter(HashString const &aMagFilter) { mMagFilter = aMagFilter; }
+  void                SetLayer(int const aLayer) { mLayer = aLayer; }
   
   // Textures and Shaders
   virtual void        LoadImage(HashString const &aName);

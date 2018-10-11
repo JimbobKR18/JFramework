@@ -11,7 +11,7 @@ int const Surface::sUID = Common::StringHashFunction("Surface");
 Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
                      mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
                      mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()), 
-                     mFileName(), mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
+                     mLayer(0), mFileName(), mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
                      mOriginalSize(), mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
 {
   assert(!"Surface needs a graphicsmanager");
@@ -21,7 +21,7 @@ Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoor
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
                                               mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
                                               mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()),
-                                              mFileName(), mText(), mFontName(), mFontSize(0), 
+                                              mLayer(0), mFileName(), mText(), mFontName(), mFontSize(0), 
                                               mMaxTextWidth(0), mSecondaryColor(), mOriginalSize(),
                                               mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
 {
@@ -345,6 +345,7 @@ void Surface::Serialize(ParserNode *aNode)
   
   surface->Place("MinFilter", mMinFilter);
   surface->Place("MagFilter", mMagFilter);
+  surface->Place("Layer", Common::IntToString(mLayer));
   
   // View mode
   HashString viewMode = "ABSOLUTE";
@@ -622,6 +623,10 @@ void Surface::Deserialize(ParserNode *aNode)
   if(aNode->Find("MagFilter"))
   {
     mMagFilter = aNode->Find("MagFilter")->GetValue();
+  }
+  if(aNode->Find("Layer"))
+  {
+    mLayer = aNode->Find("Layer")->GetValue().ToInt();
   }
   
   // Text
