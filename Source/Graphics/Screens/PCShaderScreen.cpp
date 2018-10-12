@@ -380,6 +380,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glEnable(GL_BLEND);
   glEnable(GL_CULL_FACE);
   glDisable(GL_DEPTH_TEST);
+  glDepthMask(GL_FALSE);
 
   glShadeModel(GL_SMOOTH);
 
