@@ -13,7 +13,7 @@
 class PCInputHandler : public InputHandler
 {
 private:
-  std::unordered_map<int, SDL_Joystick*> mJoysticks;
+  std::unordered_map<int, SDL_GameController*> mGameControllers;
   
 public:
   PCInputHandler();
@@ -24,8 +24,7 @@ public:
   virtual void DeviceAdd(int const aId);
   virtual void DeviceRemove(int const aId);
   
-  SDL_Joystick* GetJoystick(int const index) const;
-  int GetJoystickInstanceId(int const index) const;
+  SDL_GameController* GetGameController(int const index) const;
 };
 
 #endif

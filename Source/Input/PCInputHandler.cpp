@@ -1,8 +1,9 @@
 #include "PCInputHandler.h"
 
-PCInputHandler::PCInputHandler() : InputHandler(), mJoysticks()
+PCInputHandler::PCInputHandler() : InputHandler(), mGameControllers()
 {
-  SDL_JoystickEventState(SDL_ENABLE);
+  SDL_GameControllerEventState(SDL_ENABLE);
+  SDL_GameControllerAddMappingsFromFile(Common::RelativePath("Input", "gamecontrollerdb.txt").c_str());
 }
 
 PCInputHandler::~PCInputHandler()
@@ -10,20 +11,20 @@ PCInputHandler::~PCInputHandler()
 }
 
 /**
- * @brief Keeps track of joysticks and removes / adds joysticks as necessary.
+ * @brief Keeps track of GameControllers and removes / adds GameControllers as necessary.
  */
 void PCInputHandler::Update()
 {
   for(std::unordered_map<int, DeviceInfo*>::iterator it = mDevices.begin(); it != mDevices.end(); ++it)
   {
     DeviceInfo *info = it->second;
-    SDL_Joystick* joystick = mJoysticks[info->GetId()];
-    info->SetAxis(0, SDL_JoystickGetAxis(joystick, 0));
-    info->SetAxis(1, SDL_JoystickGetAxis(joystick, 1));
-    info->SetAxis(2, SDL_JoystickGetAxis(joystick, 2));
-    info->SetAxis(3, SDL_JoystickGetAxis(joystick, 3));
-    info->SetAxis(4, SDL_JoystickGetAxis(joystick, 4));
-    info->SetAxis(5, SDL_JoystickGetAxis(joystick, 5));
+    SDL_GameController* gameController = mGameControllers[info->GetId()];
+    info->SetAxis(0, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_LEFTX));
+    info->SetAxis(1, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_LEFTY));
+    info->SetAxis(2, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_RIGHTX));
+    info->SetAxis(3, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_RIGHTY));
+    info->SetAxis(4, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_TRIGGERLEFT));
+    info->SetAxis(5, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_TRIGGERRIGHT));
   }
 }
 
@@ -33,11 +34,10 @@ void PCInputHandler::Update()
  */
 void PCInputHandler::DeviceAdd(int const aId)
 {
-  SDL_Joystick* joystick = SDL_JoystickOpen(aId);
-  int instanceId = SDL_JoystickInstanceID(joystick);
-  HashString stickName = SDL_JoystickName(joystick);
-  mDevices[instanceId] = new DeviceInfo(instanceId, stickName);
-  mJoysticks[instanceId] = joystick;
+  SDL_GameController* gameController = SDL_GameControllerOpen(aId);
+  HashString stickName = SDL_GameControllerName(gameController);
+  mDevices[aId] = new DeviceInfo(aId, stickName);
+  mGameControllers[aId] = gameController;
 }
 
 /**
@@ -46,11 +46,10 @@ void PCInputHandler::DeviceAdd(int const aId)
  */
 void PCInputHandler::DeviceRemove(int const aId)
 {
-  int instanceId = SDL_JoystickInstanceID(mJoysticks[aId]);
-  delete mDevices[instanceId];
-  mDevices.erase(instanceId);
-  SDL_JoystickClose(mJoysticks[instanceId]);
-  mJoysticks.erase(instanceId);
+  delete mDevices[aId];
+  mDevices.erase(aId);
+  SDL_GameControllerClose(mGameControllers[aId]);
+  mGameControllers.erase(aId);
 }
 
 /**
@@ -59,32 +58,21 @@ void PCInputHandler::DeviceRemove(int const aId)
  */
 int PCInputHandler::GetInputCount()
 {
-  return mJoysticks.size();
+  return mGameControllers.size();
 }
 
 /**
- * @brief Get a particular joystick.
- * @param index Index of joystick.
- * @return nullptr if out of range. Otherwise, joystick at index.
+ * @brief Get a particular GameController.
+ * @param index Index of GameController.
+ * @return nullptr if out of range. Otherwise, GameController at index.
  */
-SDL_Joystick* PCInputHandler::GetJoystick(int const index) const
+SDL_GameController* PCInputHandler::GetGameController(int const index) const
 {
-  std::unordered_map<int, SDL_Joystick*>::const_iterator instance = mJoysticks.find(index);
-  if(instance == mJoysticks.end())
+  std::unordered_map<int, SDL_GameController*>::const_iterator instance = mGameControllers.find(index);
+  if(instance == mGameControllers.end())
   {
     return nullptr;
   }
   
   return instance->second;
-}
-
-/**
- * @brief Get instance id of joystick.
- * @param index Index of joystick in mapping.
- * @return Actual joystick instance id.
- */
-int PCInputHandler::GetJoystickInstanceId(int const index) const
-{
-  SDL_Joystick* joystick = GetJoystick(index);
-  return SDL_JoystickInstanceID(joystick);
 }
