@@ -115,13 +115,13 @@ void Screen::SetUIRenderSorter(ScreenRenderSorter *aUIRenderSorter)
  * @param aObjects
  * @param aCameras
  */
-std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vector<Surface*> const &aObjects, std::set<Camera*> const &aCameras)
+std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(std::vector<Surface*> const &aObjects, std::unordered_set<Camera*> const &aCameras)
 {
   // Identity matrix
   Matrix33 identityMatrix = Matrix33();
   
   // Return value
-  std::unordered_map<Camera*, std::vector<Surface*>> ret;
+  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> ret;
   
   // Points storage
   std::vector<Vector3> points;
@@ -129,8 +129,8 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
-  std::set<Camera*>::const_iterator cameraEnd = aCameras.end();
-  for(std::set<Camera*>::const_iterator it = aCameras.begin(); it != cameraEnd; ++it)
+  std::unordered_set<Camera*>::const_iterator cameraEnd = aCameras.end();
+  for(std::unordered_set<Camera*>::const_iterator it = aCameras.begin(); it != cameraEnd; ++it)
   {
     // Camera position and size
     Camera* camera = *it;
@@ -141,8 +141,6 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
     
     // Must scale, rotate, then translate camera offset
     Vector3 cameraDiff = (viewMatrix * cameraPosition) - (camera->GetSize() / 2.0f);
-    ret[camera].reserve(aObjects.size());
-    
     std::vector<Surface*>::const_iterator objectsEnd = aObjects.end();
     for(std::vector<Surface*>::const_iterator it2 = aObjects.begin(); it2 != objectsEnd; ++it2)
     {
@@ -157,6 +155,12 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
       {
         ++it2;
         continue;
+      }
+      
+      // Optimization
+      if(ret[camera].find(surface->GetLayer()) == ret[camera].end())
+      {
+        ret[camera][surface->GetLayer()].reserve(aObjects.size());
       }
       
       // Camera translation
@@ -214,7 +218,7 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
           it3->y <= cameraSize.y && it3->y >= 0) 
         {
           added = true;
-          ret[camera].push_back(surface);
+          ret[camera][surface->GetLayer()].push_back(surface);
           break;
         }
       }
@@ -224,13 +228,13 @@ std::unordered_map<Camera*, std::vector<Surface*>> Screen::PruneObjects(std::vec
       if((points[0].x <= 0 && points[1].x >= cameraSize.x) ||
         (points[1].x <= 0 && points[0].x >= cameraSize.x))
       {
-        ret[camera].push_back(surface);
+        ret[camera][surface->GetLayer()].push_back(surface);
         continue;
       }
       if((points[0].y <= 0 && points[2].y >= cameraSize.y) ||
         (points[2].y <= 0 && points[0].y >= cameraSize.y))
       {
-        ret[camera].push_back(surface);
+        ret[camera][surface->GetLayer()].push_back(surface);
         continue;
       }
     }

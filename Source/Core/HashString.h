@@ -89,6 +89,7 @@ public:
   std::vector<int> ToIntVector() const;
   std::vector<float> ToFloatVector() const;
   std::vector<bool> ToBoolVector() const;
+  std::set<int> ToIntSet() const;
   std::set<HashString> ToHashStringSet() const;
   std::set<std::string> ToStringSet() const;
   Vector3 ToVector3() const;

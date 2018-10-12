@@ -18,7 +18,8 @@ private:
   std::vector<Surface*>               mUIElements;
   std::unordered_map<int, TextureData*>  mTextures;
   std::unordered_map<int, ShaderData*>   mShaders;
-  std::set<Camera*>                   mCameras;
+  std::unordered_set<Camera*>         mCameras;
+  std::unordered_set<int>             mUnsortedLayers;
   Screen*                             mScreen;
   Camera*                             mPrimaryCamera;
 
@@ -52,6 +53,9 @@ public:
   void                RemoveCamera(Camera *aCamera);
   void                ClearCameras();
   void                SetPrimaryCamera(Camera *aCamera);
+  
+  // Layer Management
+  void                SetUnsortedLayers(std::unordered_set<int> const aUnsortedLayers);
 
   // Getters
   Screen*             GetScreen();

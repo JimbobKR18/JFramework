@@ -175,6 +175,28 @@ namespace Common
   }
   
   /**
+   * @brief String to int set
+   * @param aValue
+   * @return 
+   */
+  std::set<int> StringToIntSet(std::string const &aValue)
+  {
+    std::set<int> ret;
+    std::istringstream stream(aValue);
+    
+    int value;
+    
+    while(!stream.eof())
+    {
+      stream >> value;
+      ret.insert(value);
+      stream.ignore();
+    }
+    
+    return ret;
+  }
+  
+  /**
    * @brief Converts String to String Set
    * @param aValue
    */
@@ -349,6 +371,27 @@ namespace Common
     
     // Remove last comma
     ret = ret.substr(0, ret.size() - 1);
+    return ret;
+  }
+  
+  /**
+   * @brief Converts int set to String (comma separated)
+   * @param aValue
+   * @return 
+   */
+  std::string IntSetToString(std::set<int> &aValue)
+  {
+    std::string ret;
+    std::set<int>::iterator end = aValue.end();
+    for(std::set<int>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      std::ostringstream stream;
+      stream << *it;
+      ret += stream.str();
+      ret += ",";
+    }
+    ret = ret.substr(0, ret.size() - 1);
+
     return ret;
   }
   

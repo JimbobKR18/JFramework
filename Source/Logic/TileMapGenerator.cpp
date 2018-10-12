@@ -24,7 +24,7 @@ TileMapGenerator::TileMapGenerator()
   assert(0);
 }
 
-TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float aZOffset,
+TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, int aLayer, float aZOffset,
                                    HashString const &aImageName,
                                    HashString const &aDataName,
                                    Vector3 const &aCollisionOffset,
@@ -37,7 +37,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, float
                                    std::unordered_map<int, bool> const &aEmptyTiles,
                                    std::unordered_map<int, std::vector<int>> const &aAnimations,
                                    float const aAnimationSpeed, Level *aOwner) :
-                                   mWidth(aWidth), mHeight(aHeight), mTileSize(aTileSize), 
+                                   mWidth(aWidth), mHeight(aHeight), mTileSize(aTileSize), mLayer(aLayer),
                                    mZOffset(aZOffset), mImageName(aImageName), mCollisionOffset(aCollisionOffset),
                                    mDataName(aDataName), mTiles(aTiles),
                                    mCollisionData(aCollisionData), mCollisionShapes(aCollisionShapes),
@@ -393,6 +393,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
         TextureCoordinates *textureData = surface->GetTextureData();
         surface->SetAnimated(false);
         surface->SetFrameByID(mTiles[i]);
+        surface->SetLayer(mLayer);
         textureData->SetBias(0, 0.1f / textureData->GetXSize());
         textureData->SetBias(1, 0.1f / textureData->GetYSize());
         

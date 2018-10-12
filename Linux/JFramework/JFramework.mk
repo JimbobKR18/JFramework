@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=09/10/18
+Date                   :=11/10/18
 CodeLitePath           :=/home/jimmy/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -60,9 +60,9 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffers_GLFramebuffer.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_SoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Surfaces_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Joint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserFactory.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) \
+Objects0=$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffers_GLFramebuffer.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_SoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Surfaces_PCShaderSurface.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Joint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Parsers_ParserFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_EffectsManager.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Core_Shape.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_PhysicsObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_PCInputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_GameApp.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_main.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Camera.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_SoundEmitter.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Core_GameObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Core_FileCache.cpp$(ObjectSuffix) 
 
@@ -104,6 +104,14 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix): ../../Source/Managers/GraphicsManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/GraphicsManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(DependSuffix): ../../Source/Managers/GraphicsManager.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(DependSuffix) -MM ../../Source/Managers/GraphicsManager.cpp
+
+$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(PreprocessSuffix): ../../Source/Managers/GraphicsManager.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(PreprocessSuffix) ../../Source/Managers/GraphicsManager.cpp
+
 $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix): ../../Source/Sound/SoundSystems/FMODSoundSystem.cpp $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Sound/SoundSystems/FMODSoundSystem.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(DependSuffix): ../../Source/Sound/SoundSystems/FMODSoundSystem.cpp
@@ -295,14 +303,6 @@ $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(DependSuffix): 
 
 $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(PreprocessSuffix): ../../Source/Managers/InputManager.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(PreprocessSuffix) ../../Source/Managers/InputManager.cpp
-
-$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix): ../../Source/Managers/GraphicsManager.cpp $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/GraphicsManager.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(DependSuffix): ../../Source/Managers/GraphicsManager.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(DependSuffix) -MM ../../Source/Managers/GraphicsManager.cpp
-
-$(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(PreprocessSuffix): ../../Source/Managers/GraphicsManager.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Managers_GraphicsManager.cpp$(PreprocessSuffix) ../../Source/Managers/GraphicsManager.cpp
 
 $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix): ../../Source/Managers/PhysicsWorld.cpp $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Managers/PhysicsWorld.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IncludePath)

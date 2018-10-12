@@ -270,19 +270,20 @@ void PCShaderScreen::PreDraw()
 /**
  * @brief Draw objects
  * @param aObjects
- * @param aUIObjects
  * @param aCamera
  */
-void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, Camera* aCamera)
+void PCShaderScreen::Draw(std::map<int, std::vector<Surface*>> const &aObjects, Camera* aCamera)
 {
 // TODO Mac does not use multiple cameras with framebuffers
 #ifndef __APPLE__
   aCamera->GetFramebuffer()->Bind();
-  DrawObjects(aObjects, aCamera);
-  DrawObjects(aUIObjects, aCamera);
-  #ifdef _DEBUG_DRAW
-    DebugDraw(aObjects);
-  #endif
+  for(std::map<int, std::vector<Surface*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
+  {
+    DrawObjects(it->second, aCamera);
+    #ifdef _DEBUG_DRAW
+      DebugDraw(it->second);
+    #endif
+  }
   aCamera->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
   
   if(aCamera->GetPrimary())
@@ -291,11 +292,14 @@ void PCShaderScreen::Draw(std::vector<Surface*> const &aObjects, std::vector<Sur
   mFrameBuffer->Bind();
   if(!aCamera->GetPrimary())
     return;
-  DrawObjects(aObjects, aCamera);
-  DrawObjects(aUIObjects, aCamera);
-  #ifdef _DEBUG_DRAW
-    DebugDraw(aObjects);
-  #endif
+    
+  for(std::map<int, std::vector<Surface*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
+  {
+    DrawObjects(it->second, aCamera);
+    #ifdef _DEBUG_DRAW
+      DebugDraw(it->second);
+    #endif
+  }
   mFrameBuffer->Unbind(mDefaultFrameBufferID);
   mFrameBuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
 #endif

@@ -511,6 +511,15 @@ std::vector<bool> HashString::ToBoolVector() const
 }
 
 /**
+ * @brief Convert to int set, split by ","
+ * @return String as int set
+ */
+std::set<int> HashString::ToIntSet() const
+{
+  return Common::StringToIntSet(mString);
+}
+
+/**
  * @brief Convert to HashString set, split by ","
  * @return String as HashString set
  */

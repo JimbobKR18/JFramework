@@ -73,6 +73,7 @@ private:
   int                               mWidth;
   int                               mHeight;
   int                               mTileSize;
+  int                               mLayer;
   float                             mZOffset;
   HashString                        mImageName;
   HashString                        mDataName;
@@ -102,7 +103,7 @@ private:
   
 public:
   TileMapGenerator();
-  TileMapGenerator(int aWidth, int aHeight, int aTileSize, float aZOffset,
+  TileMapGenerator(int aWidth, int aHeight, int aTileSize, int aLayer, float aZOffset,
                    HashString const &aImageName,
                    HashString const &aDataName,
                    Vector3 const &aCollisionOffset,

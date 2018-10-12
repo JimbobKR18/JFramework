@@ -52,6 +52,7 @@ namespace Common
   std::vector<std::string>  StringToStringVector(std::string const &aValue);
   std::vector<HashString>   StringToHashStringVector(std::string const &aValue);
   
+  std::set<int>             StringToIntSet(std::string const &aValue);
   std::set<std::string>     StringToStringSet(std::string const &aValue);
   std::set<HashString>      StringToHashStringSet(std::string const &aValue);
 
@@ -64,6 +65,7 @@ namespace Common
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   std::string               HashStringVectorToString(std::vector<HashString> &aValue);
   
+  std::string               IntSetToString(std::set<int> &aValue);
   std::string               StringSetToString(std::set<std::string> &aValue);
   std::string               HashStringSetToString(std::set<HashString> &aValue);
   

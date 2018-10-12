@@ -182,6 +182,7 @@
     <File Name="../../Source/Logic/DefaultGameObjectFactory.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Managers">
+    <File Name="../../Source/Managers/GraphicsManager.cpp"/>
     <File Name="../../Source/Managers/InputManager.h"/>
     <File Name="../../Source/Managers/ObjectManager.cpp"/>
     <File Name="../../Source/Managers/ControllerManager.cpp"/>
@@ -196,7 +197,6 @@
     <File Name="../../Source/Managers/DebugManager.cpp"/>
     <File Name="../../Source/Managers/PhysicsWorld.cpp"/>
     <File Name="../../Source/Managers/Manager.h"/>
-    <File Name="../../Source/Managers/GraphicsManager.cpp"/>
     <File Name="../../Source/Managers/InputManager.cpp"/>
     <File Name="../../Source/Managers/DebugManager.h"/>
     <File Name="../../Source/Managers/NetworkManager.h"/>

@@ -34,7 +34,7 @@ public:
   virtual void ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData);
   virtual void ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData);
   virtual void PreDraw();
-  virtual void Draw(std::vector<Surface*> const &aObjects, std::vector<Surface*> const &aUIObjects, Camera* aCamera);
+  virtual void Draw(std::map<int, std::vector<Surface*>> const &aObjects, Camera* aCamera);
   virtual void DebugDraw(std::vector<Surface*> const &aObjects);
   virtual void SwapBuffers();
   virtual void SetClearColor(Vector4 const &aClearColor);

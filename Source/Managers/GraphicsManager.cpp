@@ -54,13 +54,22 @@ GraphicsManager::~GraphicsManager()
  */
 void GraphicsManager::Update()
 {
-  std::unordered_map<Camera*, std::vector<Surface*>> cameraObjectRenders = mScreen->PruneObjects(mSurfaces, mCameras);
+  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> cameraObjectRenders = mScreen->PruneObjects(mSurfaces, mCameras);
   mScreen->PreDraw();
   mScreen->SortUI(mUIElements);
-  for(std::unordered_map<Camera*, std::vector<Surface*>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenders.end(); ++it)
+  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator cameraObjectRenderEnd = cameraObjectRenders.end();
+  for(std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenderEnd; ++it)
   {
-    mScreen->SortObjects(it->second);
-    mScreen->Draw(it->second, mUIElements, it->first);
+    std::map<int, std::vector<Surface*>>::iterator layerEnd = it->second.end();
+    for(std::map<int, std::vector<Surface*>>::iterator it2 = it->second.begin(); it2 != layerEnd; ++it2)
+    {
+      if(mUnsortedLayers.find(it2->first) == mUnsortedLayers.end())
+      {
+        mScreen->SortObjects(it2->second);
+      }
+    }
+    cameraObjectRenders[it->first][999] = mUIElements;
+    mScreen->Draw(it->second, it->first);
   }
   mScreen->SwapBuffers();
 }
@@ -273,7 +282,7 @@ void GraphicsManager::RemoveCamera(Camera *aCamera)
  */
 void GraphicsManager::ClearCameras()
 {
-  for(std::set<Camera*>::iterator it = mCameras.begin(); it != mCameras.end();)
+  for(std::unordered_set<Camera*>::iterator it = mCameras.begin(); it != mCameras.end();)
   {
     DeleteCamera(*it);
     it = mCameras.begin();
@@ -298,6 +307,15 @@ void GraphicsManager::SetPrimaryCamera(Camera *aCamera)
   mPrimaryCamera = aCamera;
   if(mPrimaryCamera)
     mPrimaryCamera->SetPrimary(true);
+}
+
+/**
+ * @brief Set unsorted layers, optimization
+ * @param aUnsortedLayers
+ */
+void GraphicsManager::SetUnsortedLayers(std::unordered_set<int> const aUnsortedLayers)
+{
+  mUnsortedLayers = aUnsortedLayers;
 }
 
 /**

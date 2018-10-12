@@ -56,6 +56,7 @@ private:
   GameObject*                mFocusTarget;
   Vector4                    mClearColor;
   SoundChannelContainer      mSoundChannels;
+  std::unordered_set<int>    mUnsortedLayers;
 
   Vector3                    mMaxBoundary;
   Vector3                    mMinBoundary;

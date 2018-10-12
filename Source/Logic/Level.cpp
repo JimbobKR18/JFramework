@@ -409,6 +409,7 @@ void Level::Load(Level const *aPrevLevel)
   }
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->SetUnsortedLayers(mUnsortedLayers);
   
   Camera *primaryCamera = mOwner->GetOwningApp()->GET<GraphicsManager>()->GetPrimaryCamera();
   primaryCamera->GetOwner()->GET<Transform>()->SetMaxBoundary(mMaxBoundary);
@@ -569,6 +570,16 @@ void Level::Serialize(Parser &aParser)
   aParser.Place("ClearColor", "ColorG", Common::FloatToString(mClearColor.y));
   aParser.Place("ClearColor", "ColorB", Common::FloatToString(mClearColor.z));
   aParser.Place("ClearColor", "ColorA", Common::FloatToString(mClearColor.w));
+  
+  // Unsorted layers
+  std::set<int> tempLayers;
+  for(std::unordered_set<int>::const_iterator it = mUnsortedLayers.begin(); it != mUnsortedLayers.end(); ++it)
+  {
+    tempLayers.insert(*it);
+  }
+  aParser.Place("Layers", "");
+  aParser.Place("Layers", "Unsorted", Common::IntSetToString(tempLayers));
+  
 }
 
 /**
@@ -800,6 +811,18 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     b = parser->Find("ClearColor")->Find("ColorB")->GetValue().ToFloat();
     a = parser->Find("ClearColor")->Find("ColorA")->GetValue().ToFloat();
     mClearColor = Vector4(r, g, b, a);
+  }
+  if(parser->Find("Layers"))
+  {
+    ParserNode *layers = parser->Find("Layers");
+    if(layers->Find("Unsorted"))
+    {
+      std::set<int> tempLayers = layers->Find("Unsorted")->GetValue().ToIntSet();
+      for(std::set<int>::const_iterator it = tempLayers.begin(); it != tempLayers.end(); ++it)
+      {
+        mUnsortedLayers.insert(*it);
+      }
+    }
   }
 
   ParserNodeContainer untouched = parser->GetBaseRoot()->GetUntouchedRoots();
@@ -1154,6 +1177,7 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   std::unordered_map<int, bool> emptyTiles;
   float tileAnimationSpeed = 0.0f;
   float zOffset = 0;
+  int layer = 0;
 
   width = aTileMap->Find("Width")->GetValue().ToInt();
   height = aTileMap->Find("Height")->GetValue().ToInt();
@@ -1175,6 +1199,10 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   if(aTileMap->Find("CollisionOffset"))
   {
     collisionOffset = aTileMap->Find("CollisionOffset")->GetValue().ToVector3();
+  }
+  if(aTileMap->Find("Layer"))
+  {
+    layer = aTileMap->Find("Layer")->GetValue().ToInt();
   }
   
   // If there's setting data, parse it in and use it.
@@ -1245,20 +1273,20 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   }
 
   Parser *tileMapData = ParserFactory::CreateInputParser("Maps", frameDataFilename);
-  frames = Common::StringToIntVector(tileMapData->Find("MapArtData")->GetValue());
-  collision = Common::StringToIntVector(tileMapData->Find("Collision")->GetValue());
+  frames = tileMapData->Find("MapArtData")->GetValue().ToIntVector();
+  collision = tileMapData->Find("Collision")->GetValue().ToIntVector();
   
   if(tileMapData->Find("CollisionShapes"))
   {
-    shapes = Common::StringToIntVector(tileMapData->Find("CollisionShapes")->GetValue());
+    shapes = tileMapData->Find("CollisionShapes")->GetValue().ToIntVector();
   }
   if(tileMapData->Find("Materials"))
   {
-    materials = Common::StringToIntVector(tileMapData->Find("Materials")->GetValue());
+    materials = tileMapData->Find("Materials")->GetValue().ToIntVector();
   }
   delete tileMapData;
 
-  mGenerators.push_back(new TileMapGenerator(width, height, tileSize,
+  mGenerators.push_back(new TileMapGenerator(width, height, tileSize, layer,
                                    zOffset, file, frameDataFilename, collisionOffset,
                                    frames, collision, shapes,
                                    materials, heights, materialInfo,
