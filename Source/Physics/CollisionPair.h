@@ -10,6 +10,8 @@ struct CollisionPair
 {
   PhysicsObject*  mBodies[2];
   Shape*          mShapes[2];
+  Vector3         mPostResolutionMovement[2];
+  Vector3         mPostResolutionVelocities[2];
   float           mPenetration;
   Vector3         mRelativeVelocity;
   Vector3         mNormal;

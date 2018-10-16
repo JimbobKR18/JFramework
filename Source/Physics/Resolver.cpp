@@ -73,7 +73,7 @@ float Resolver::CalculateSeparatingVelocity(CollisionPair const &aPair)
  * @brief Resolve penetration of two objects
  * @param aPair Pair ro resolve
  */
-void Resolver::ResolvePenetration(CollisionPair const &aPair)
+void Resolver::ResolvePenetration(CollisionPair &aPair)
 {
   if(aPair.mPenetration <= 0)
     return;
@@ -90,14 +90,14 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
 
   // Find the rate in which each object must move
   Vector3 movePerIMass = aPair.mNormal * (aPair.mPenetration / totalInverseMass);
-  Vector3 b1Movement = movePerIMass * body1->GetInverseMass();
-  Vector3 b2Movement = movePerIMass * body2->GetInverseMass();
+  aPair.mPostResolutionMovement[0] = movePerIMass * body1->GetInverseMass();
+  aPair.mPostResolutionMovement[1] = movePerIMass * body2->GetInverseMass();
 
   // Must check if objects can be moved
   if(!body1->IsStatic())
-    transform1->SetPosition(transform1->GetPosition() + b1Movement);
+    transform1->SetPosition(transform1->GetPosition() + aPair.mPostResolutionMovement[0]);
   if(!body2->IsStatic())
-    transform2->SetPosition(transform2->GetPosition() - b2Movement);
+    transform2->SetPosition(transform2->GetPosition() - aPair.mPostResolutionMovement[1]);
 }
 
 /**
@@ -105,7 +105,7 @@ void Resolver::ResolvePenetration(CollisionPair const &aPair)
  * @param aPair Pair to resolve
  * @param aDuration Length of frame
  */
-void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
+void Resolver::ResolveVelocity(CollisionPair &aPair, float aDuration)
 {
   float separatingVelocity = CalculateSeparatingVelocity(aPair);
   
@@ -151,14 +151,14 @@ void Resolver::ResolveVelocity(CollisionPair const &aPair, float aDuration)
   Vector3 impulsePerIMass1 = aPair.mNormal * impulse1;
   Vector3 impulsePerIMass2 = aPair.mNormal * impulse2;
   
-  Vector3 b1Movement = impulsePerIMass1 * body1->GetInverseMass();
-  Vector3 b2Movement = impulsePerIMass2 * body2->GetInverseMass();
+  aPair.mPostResolutionVelocities[0] = impulsePerIMass1 * body1->GetInverseMass();
+  aPair.mPostResolutionVelocities[1] = impulsePerIMass2 * body2->GetInverseMass();
   
   if(body1 && !body1->IsStatic())
-    body1->SetVelocity(body1->GetVelocity() + b1Movement);
+    body1->SetVelocity(body1->GetVelocity() + aPair.mPostResolutionVelocities[0]);
   
   if(body2 && !body2->IsStatic())
-    body2->SetVelocity(body2->GetVelocity() - b2Movement);
+    body2->SetVelocity(body2->GetVelocity() - aPair.mPostResolutionVelocities[1]);
 }
 
 /**
@@ -308,6 +308,17 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
   
   ResolveVelocity(aPair, aDuration);
   ResolvePenetration(aPair);
+  ApplyResolutionAdjustments(aPair);
+}
+
+/**
+ * @brief Apply adjustments after resolution
+ * @param aPair Pair to adjust.
+ */
+void Resolver::ApplyResolutionAdjustments(CollisionPair &aPair)
+{
+  aPair.mContactPoint -= aPair.mPostResolutionMovement[0];
+  aPair.mContactPoint += aPair.mPostResolutionMovement[1];
 }
 
 /**

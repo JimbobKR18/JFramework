@@ -23,10 +23,13 @@ public:
 private:
   // Methods to resolve collisions
   float CalculateSeparatingVelocity(CollisionPair const &aPair);
-  void  ResolvePenetration(CollisionPair const &aPair);
-  void  ResolveVelocity(CollisionPair const &aPair, float aDuration);
+  void  ResolvePenetration(CollisionPair &aPair);
+  void  ResolveVelocity(CollisionPair &aPair, float aDuration);
   void  SendCollisionMessages(CollisionPair &aPair) const;
   void  Resolve(CollisionPair &aPair, float aDuration);
+  
+  // Adjustments
+  void  ApplyResolutionAdjustments(CollisionPair &aPair);
 
   // Calculation of normals etc.
   void  CalculateSphereToSphere(CollisionPair &aPair);
