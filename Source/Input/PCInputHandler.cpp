@@ -19,12 +19,12 @@ void PCInputHandler::Update()
   {
     DeviceInfo *info = it->second;
     SDL_GameController* gameController = mGameControllers[info->GetId()];
-    info->SetAxis(0, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_LEFTX));
+    /*info->SetAxis(0, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_LEFTX));
     info->SetAxis(1, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_LEFTY));
     info->SetAxis(2, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_RIGHTX));
     info->SetAxis(3, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_RIGHTY));
     info->SetAxis(4, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_TRIGGERLEFT));
-    info->SetAxis(5, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_TRIGGERRIGHT));
+    info->SetAxis(5, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_TRIGGERRIGHT));*/
   }
 }
 
