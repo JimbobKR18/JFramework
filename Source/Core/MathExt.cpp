@@ -80,6 +80,14 @@ Vector2 Vector2::normalize() const
   return ret;
 }
 
+Vector2 Vector2::abs() const
+{
+  Vector2 ret;
+  ret.x = fabs(x);
+  ret.y = fabs(y);
+  return ret;
+}
+
 // Equivalence
 void Vector2::operator=(Vector2 const &rhs)
 {
@@ -318,6 +326,15 @@ Vector3 Vector3::normalize() const
   ret.y /= len;
   ret.z /= len;
 
+  return ret;
+}
+
+Vector3 Vector3::abs() const
+{
+  Vector3 ret;
+  ret.x = fabs(x);
+  ret.y = fabs(y);
+  ret.z = fabs(z);
   return ret;
 }
 
@@ -590,6 +607,16 @@ Vector4 Vector4::normalize() const
   ret.z /= len;
   ret.w /= len;
 
+  return ret;
+}
+
+Vector4 Vector4::abs() const
+{
+  Vector4 ret;
+  ret.x = fabs(x);
+  ret.y = fabs(y);
+  ret.z = fabs(z);
+  ret.w = fabs(w);
   return ret;
 }
 

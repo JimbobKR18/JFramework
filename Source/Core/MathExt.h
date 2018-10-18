@@ -41,6 +41,7 @@ struct Vector2
   float&  operator[](int const aValue);
   float   GetValue(int const aValue) const;
   Vector2 normalize() const;
+  Vector2 abs() const;
   
   // Equivalence
   void    operator=(Vector2 const &rhs);
@@ -95,6 +96,7 @@ struct Vector3
   float&  operator[](int const aValue);
   float   GetValue(int const aValue) const;
   Vector3 normalize() const;
+  Vector3 abs() const;
 
   // Equivalence
   void    operator=(Vector3 const &rhs);
@@ -150,6 +152,7 @@ struct Vector4
   float   operator[](int aValue) const;
   float   GetValue(int const aValue) const;
   Vector4 normalize() const;
+  Vector4 abs() const;
 
   // Equivalence
   void    operator=(Vector4 const &rhs);
