@@ -167,12 +167,14 @@ void Resolver::ResolveVelocity(CollisionPair &aPair, float aDuration)
  */
 void Resolver::SendCollisionMessages(CollisionPair &aPair) const
 {
+  Transform *t1 = aPair.mBodies[0]->GetOwner()->GET<Transform>();
+  Transform *t2 = aPair.mBodies[1]->GetOwner()->GET<Transform>();
   CollisionMessage message1("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner(),
                            aPair.mShapes[0], aPair.mShapes[1], aPair.mPenetration, aPair.mNormal, 
-                           aPair.mRelativeVelocity, aPair.mContactPoint);
+                           aPair.mRelativeVelocity, aPair.mContactPoint - t1->GetPosition());
   CollisionMessage message2("", aPair.mBodies[0]->GetOwner(), aPair.mBodies[1]->GetOwner(),
                            aPair.mShapes[0], aPair.mShapes[1], aPair.mPenetration, aPair.mNormal.Invert(), 
-                           aPair.mRelativeVelocity.Invert(), aPair.mContactPoint.Invert());
+                           aPair.mRelativeVelocity.Invert(), aPair.mContactPoint - t2->GetPosition());
   aPair.mBodies[0]->GetOwner()->ReceiveMessage(message1);
   aPair.mBodies[1]->GetOwner()->ReceiveMessage(message2);
 }
@@ -308,17 +310,6 @@ void Resolver::Resolve(CollisionPair &aPair, float aDuration)
   
   ResolveVelocity(aPair, aDuration);
   ResolvePenetration(aPair);
-  ApplyResolutionAdjustments(aPair);
-}
-
-/**
- * @brief Apply adjustments after resolution
- * @param aPair Pair to adjust.
- */
-void Resolver::ApplyResolutionAdjustments(CollisionPair &aPair)
-{
-  aPair.mContactPoint -= aPair.mPostResolutionMovement[0];
-  aPair.mContactPoint += aPair.mPostResolutionMovement[1];
 }
 
 /**
@@ -336,7 +327,7 @@ void Resolver::CalculateSphereToSphere(CollisionPair &aPair)
     (aPair.mShapes[0]->GetSize(0) * b1Transform->GetHierarchicalScale().x + aPair.mShapes[1]->GetSize(0) * b2Transform->GetHierarchicalScale().x));
   aPair.mNormal = (b1Pos - b2Pos).normalize();
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = aPair.mNormal * (aPair.mShapes[0]->GetSize(0) * b1Transform->GetHierarchicalScale().x);
+  aPair.mContactPoint = b1Pos + (aPair.mNormal * (aPair.mShapes[0]->GetSize(0) * b1Transform->GetHierarchicalScale().x));
 }
 
 /**
@@ -388,7 +379,7 @@ void Resolver::CalculateSphereToAABB(CollisionPair &aPair)
   aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = closestPoint - spherePos;
+  aPair.mContactPoint = closestPoint;
 }
 
 /**
@@ -435,7 +426,7 @@ void Resolver::CalculateAABBToAABB(CollisionPair &aPair)
   aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = normal * shortestDistance;
+  aPair.mContactPoint = b1Pos + (normal * shortestDistance);
 }
 
 /**
@@ -521,7 +512,7 @@ void Resolver::CalculateTriangleToAABB(CollisionPair &aPair)
   aPair.mPenetration = minDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = dist;
+  aPair.mContactPoint = closestPoint;
 }
 
 /**
@@ -561,7 +552,7 @@ void Resolver::CalculateLineToSphere(CollisionPair &aPair)
     aPair.mPenetration = radius - dist.length();
     aPair.mNormal = dist.normalize();
     aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-    aPair.mContactPoint = dist;
+    aPair.mContactPoint = closestPoint;
   }
 }
 
@@ -598,7 +589,7 @@ void Resolver::CalculateLineToAABB(CollisionPair &aPair)
     {
       aPair.mPenetration = diff;
       aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-      aPair.mContactPoint = dist;
+      aPair.mContactPoint = closestPoint;
       
       switch(i)
       {
@@ -699,10 +690,11 @@ void Resolver::CalculateOBBToSphere(CollisionPair &aPair)
   
   Vector3 axis = orientation[shortestAxis];
   Vector3 normal = (axis * diff.Dot(axis)).normalize();
+  Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(spherePos, obbPos, orientation, obbTransform->GetHierarchicalScale().Multiply(obb->extents));
   aPair.mPenetration = shortestDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = normal * shortestDistance;
+  aPair.mContactPoint = closestPoint;
 }
 
 /**
@@ -761,7 +753,7 @@ void Resolver::CalculateOBBToAABB(CollisionPair &aPair)
   aPair.mPenetration = minDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = normal * minDistance;
+  aPair.mContactPoint = closestPoint;
 }
 
 /**
@@ -818,7 +810,7 @@ void Resolver::CalculateOBBToOBB(CollisionPair &aPair)
   aPair.mPenetration = minDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = normal * minDistance;
+  aPair.mContactPoint = closestPoint;
 }
 
 /**
@@ -875,7 +867,7 @@ void Resolver::CalculateOBBToTriangle(CollisionPair &aPair)
   aPair.mPenetration = minDistance;
   aPair.mNormal = normal;
   aPair.mRelativeVelocity = aPair.mBodies[0]->GetVelocity() - aPair.mBodies[1]->GetVelocity();
-  aPair.mContactPoint = normal * minDistance;
+  aPair.mContactPoint = closestPoint;
 }
 
 /**

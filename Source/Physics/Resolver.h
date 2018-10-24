@@ -27,9 +27,6 @@ private:
   void  ResolveVelocity(CollisionPair &aPair, float aDuration);
   void  SendCollisionMessages(CollisionPair &aPair) const;
   void  Resolve(CollisionPair &aPair, float aDuration);
-  
-  // Adjustments
-  void  ApplyResolutionAdjustments(CollisionPair &aPair);
 
   // Calculation of normals etc.
   void  CalculateSphereToSphere(CollisionPair &aPair);
