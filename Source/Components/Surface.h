@@ -71,6 +71,7 @@ private:
   static int const sUID;
 public:
   Surface();
+  Surface(Surface const &aSurface);
   Surface(GraphicsManager *aManager);
   virtual ~Surface();
 
@@ -144,6 +145,7 @@ public:
   virtual void        ReceiveMessage(Message const &aMessage);
   virtual void        Serialize(ParserNode *aNode);
   virtual void        Deserialize(ParserNode *aNode);
+  virtual Component*  Clone(GameObject *aNewOwner) const;
   static void         SerializeLUA();
   static int          GetUID() {return sUID;}
 };

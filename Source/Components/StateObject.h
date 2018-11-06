@@ -13,6 +13,7 @@ private:
   
 public:
   StateObject();
+  StateObject(StateObject const &aStateObject);
   virtual ~StateObject();
   
   StateMachine *GetStateMachine() const;
@@ -22,6 +23,7 @@ public:
   virtual void Serialize(ParserNode *aNode);
   virtual void Deserialize(ParserNode *aNode);
   virtual void Update();
+  virtual Component* Clone(GameObject *aNewOwner) const;
   static void  SerializeLUA();
   static int   GetUID() {return sUID;}
 };

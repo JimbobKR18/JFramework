@@ -13,6 +13,7 @@ private:
   static int const  sUID;
 public:
   CustomScript();
+  CustomScript(CustomScript const &aCustomScript);
   virtual ~CustomScript();
   
   // Getters
@@ -31,6 +32,7 @@ public:
   virtual void ReceiveMessage(Message const& aMessage);
   virtual void Serialize(ParserNode *aNode);
   virtual void Deserialize(ParserNode *aNode);
+  virtual Component* Clone(GameObject *aNewOwner) const;
   
   // Statics
   static void SerializeLUA();

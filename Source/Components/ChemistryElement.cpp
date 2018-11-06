@@ -11,6 +11,14 @@ ChemistryElement::ChemistryElement(ChemistryManager* aManager) : Component(Chemi
 {
 }
 
+ChemistryElement::ChemistryElement(ChemistryElement const &aChemistryElement) : Component(ChemistryElement::sUID),
+  mManager(aChemistryElement.mManager), mName(aChemistryElement.mName), mTemperature(aChemistryElement.mTemperature),
+  mWattage(aChemistryElement.mWattage), mScale(aChemistryElement.mScale), mFalloff(aChemistryElement.mFalloff),
+  mDirectionality(aChemistryElement.mDirectionality)
+{
+  
+}
+
 ChemistryElement::~ChemistryElement()
 {
   mManager->RemoveElement(this);
@@ -228,6 +236,16 @@ void ChemistryElement::Deserialize(ParserNode *aNode)
     mDirectionality.y = aNode->Find("DirectionY")->GetValue().ToFloat();
   if(aNode->Find("DirectionZ"))
     mDirectionality.z = aNode->Find("DirectionZ")->GetValue().ToFloat();
+}
+
+/**
+ * @brief Clone ChemistryElement
+ * @param aNewOwner The new owner
+ * @return Cloned ChemistryElement
+ */
+Component* ChemistryElement::Clone(GameObject *aNewOwner) const
+{
+  return new ChemistryElement(*this);
 }
 
 /**

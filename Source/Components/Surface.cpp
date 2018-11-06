@@ -8,13 +8,26 @@
 
 int const Surface::sUID = Common::StringHashFunction("Surface");
 
-Surface::Surface() : Component(Surface::sUID), mTexCoord(NULL), mViewmode(VIEW_ABSOLUTE),
+Surface::Surface() : Component(Surface::sUID), mTexCoord(nullptr), mViewmode(VIEW_ABSOLUTE),
                      mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
                      mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()), 
                      mLayer(0), mFileName(), mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
                      mOriginalSize(), mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
 {
   assert(!"Surface needs a graphicsmanager");
+}
+
+Surface::Surface(Surface const &aSurface) : Component(Surface::sUID), mTexCoord(new TextureCoordinates(*(aSurface.mTexCoord))), mManager(aSurface.mManager),
+                                            mViewmode(aSurface.mViewmode), mTextureSize(aSurface.mTextureSize),
+                                            mPrimaryColor(aSurface.mPrimaryColor), mNoRender(aSurface.mNoRender),
+                                            mMinFilter(aSurface.mMinFilter), mMagFilter(aSurface.mMagFilter), mLayer(aSurface.mLayer),
+                                            mFileName(aSurface.mFileName), mText(aSurface.mText), mFontName(aSurface.mFontName),
+                                            mFontSize(aSurface.mFontSize), mMaxTextWidth(aSurface.mMaxTextWidth),
+                                            mSecondaryColor(aSurface.mSecondaryColor), mOriginalSize(aSurface.mOriginalSize),
+                                            mTextRenderStyle(aSurface.mTextRenderStyle), mScrollInfo(aSurface.mScrollInfo),
+                                            mProperties(aSurface.mProperties)
+{
+  
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),
@@ -666,6 +679,16 @@ void Surface::Deserialize(ParserNode *aNode)
   // Set bias after creating texture coordinates.
   mTexCoord->SetBias(0, xBias);
   mTexCoord->SetBias(1, yBias);
+}
+
+/**
+ * @brief Copy surface
+ * @param aNewOwner The new owner
+ * @return Copied surface
+ */
+Component* Surface::Clone(GameObject *aNewOwner) const
+{
+  return new Surface(*this);
 }
 
 /**

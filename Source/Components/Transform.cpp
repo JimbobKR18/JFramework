@@ -10,6 +10,18 @@ Transform::Transform() : Component(Transform::sUID), mPosition(), mScale(1, 1, 1
 {
 }
 
+Transform::Transform(Transform const &aTransform) : Component(Transform::sUID),
+                                                    mPosition(aTransform.mPosition), mScale(aTransform.mScale),
+                                                    mSize(aTransform.mSize), mRotation(aTransform.mRotation),
+                                                    mXAlign(aTransform.mXAlign), mYAlign(aTransform.mYAlign),
+                                                    mZAlign(aTransform.mZAlign), mLockedAxes(aTransform.mLockedAxes),
+                                                    mInheritInfo(aTransform.mInheritInfo), mHierarchicalPosition(aTransform.mHierarchicalPosition),
+                                                    mHierarchicalScale(aTransform.mHierarchicalScale),
+                                                    mHierarchicalRotation(aTransform.mHierarchicalRotation),
+                                                    mMaxBoundary(aTransform.mMaxBoundary), mMinBoundary(aTransform.mMinBoundary)
+{
+}
+
 Transform::~Transform()
 {
 }
@@ -526,6 +538,16 @@ void Transform::Deserialize(ParserNode *aNode)
   }
   
   CalculateHierarchy();
+}
+
+/**
+ * @brief Copy transform
+ * @param aNewOwner The new owner
+ * @return Copied transform
+ */
+Component* Transform::Clone(GameObject *aNewOwner) const
+{
+  return new Transform(*this);
 }
 
 /**

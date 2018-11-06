@@ -22,6 +22,7 @@ private:
 
 public:
   ChemistryMaterial(ChemistryManager* aManager);
+  ChemistryMaterial(ChemistryMaterial const &aChemistryMaterial);
   virtual ~ChemistryMaterial();
   
   // Getters
@@ -51,6 +52,7 @@ public:
   virtual void ReceiveMessage(Message const& aMessage);
   virtual void Serialize(ParserNode *aNode);
   virtual void Deserialize(ParserNode *aNode);
+  virtual Component* Clone(GameObject *aNewOwner) const;
   
   // Statics
   static void SerializeLUA();

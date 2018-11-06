@@ -21,6 +21,7 @@ public:
   virtual void        ReceiveMessage(Message const &aMessage);
   virtual void        Serialize(ParserNode *aNode);
   virtual void        Deserialize(ParserNode *aNode);
+  virtual Component*  Clone(GameObject *aNewOwner) const = 0;
   virtual void        OnDownClick() = 0;
   virtual void        OnUpClick() = 0;
   static int          GetUID() {return sUID;}

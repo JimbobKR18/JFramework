@@ -20,6 +20,7 @@ private:
   static int const  sUID;
 public:
   ChemistryElement(ChemistryManager* aManager);
+  ChemistryElement(ChemistryElement const &aChemistryElement);
   virtual ~ChemistryElement();
   
   // Getters
@@ -45,6 +46,7 @@ public:
   virtual void ReceiveMessage(Message const& aMessage);
   virtual void Serialize(ParserNode *aNode);
   virtual void Deserialize(ParserNode *aNode);
+  virtual Component* Clone(GameObject *aNewOwner) const;
   
   // Statics
   static void SerializeLUA();

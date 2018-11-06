@@ -26,6 +26,53 @@ PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sU
 {
 }
 
+PhysicsObject::PhysicsObject(PhysicsObject const &aPhysicsObject) : Component(PhysicsObject::sUID), mWorld(aPhysicsObject.mWorld),
+  mVelocity(aPhysicsObject.mVelocity), mAcceleration(aPhysicsObject.mAcceleration), mForces(aPhysicsObject.mForces),
+  mBroadSize(aPhysicsObject.mBroadSize), mMass(aPhysicsObject.mMass), mInverseMass(aPhysicsObject.mInverseMass),
+  mDamping(aPhysicsObject.mDamping), mRestitution(aPhysicsObject.mRestitution), mMaximumVelocity(aPhysicsObject.mMaximumVelocity),
+  mStatic(aPhysicsObject.mStatic), mGravity(aPhysicsObject.mGravity), mPassable(aPhysicsObject.mPassable),
+  mActive(aPhysicsObject.mActive), mPaused(aPhysicsObject.mPaused), mIgnoreList(aPhysicsObject.mIgnoreList)
+{
+  // Delete all shapes associated with this object
+  for(ShapeIT it = mShapes.begin(); it != mShapes.end(); ++it)
+  {
+    Shape *shape = *it;
+    switch(shape->shape)
+    {
+      case Shape::SPHERE:
+        AddShape(new Sphere(*(Sphere*)shape));
+        break;
+      case Shape::AABB:
+        AddShape(new AxisAlignedBoundingBox(*(AxisAlignedBoundingBox*)shape));
+        break;
+      case Shape::OBB:
+        AddShape(new OrientedBoundingBox(*(OrientedBoundingBox*)shape));
+        break;
+      case Shape::CIRCLE:
+        AddShape(new Circle(*(Circle*)shape));
+        break;
+      case Shape::LINE:
+        AddShape(new Line(*(Line*)shape));
+        break;
+      case Shape::TRIANGLE:
+        AddShape(new Triangle(*(Triangle*)shape));
+        break;
+      case Shape::PLANE:
+        AddShape(new Plane(*(Plane*)shape));
+        break;
+      default:
+        assert(!"Invalid shape in PhysicsObject");
+        break;
+    }
+  }
+  
+  for(JointIT it = mJoints.begin(); it != mJoints.end(); ++it)
+  {
+    Joint *joint = *it;
+    AddJoint(new Joint(joint->GetID(), joint->GetPosition(), this));
+  }
+}
+
 PhysicsObject::~PhysicsObject()
 {
   // Delete all shapes associated with this object
@@ -410,6 +457,16 @@ void PhysicsObject::Deserialize(ParserNode *aNode)
     ++curIndex;
     curJoint = JOINT + Common::IntToString(curIndex);
   }
+}
+
+/**
+ * @brief Clone PhysicsObject
+ * @param aNewOwner The new owner
+ * @return Cloned PhysicsObject
+ */
+Component* PhysicsObject::Clone(GameObject *aNewOwner) const
+{
+  return new PhysicsObject(*this);
 }
 
 /**

@@ -74,6 +74,7 @@ public:
   void                       RemoveTag(HashString const &aTag);
   void                       ClearTags();
   bool                       HasTag(HashString const &aTag) const;
+  GameObject*                Clone() const;
 
   // VIRTUALS / STATICS
   virtual void               Update();

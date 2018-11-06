@@ -18,6 +18,27 @@ TextureCoordinates::TextureCoordinates()
 {
   assert(0);
 }
+
+TextureCoordinates::TextureCoordinates(TextureCoordinates const &aTextureCoordinates) : mCurFrame(aTextureCoordinates.mCurFrame),
+  mCurAnimation(aTextureCoordinates.mCurAnimation), mPrevAnimations(aTextureCoordinates.mPrevAnimations),
+  mTotalFrames(aTextureCoordinates.mTotalFrames), mXSize(aTextureCoordinates.mXSize),
+  mYSize(aTextureCoordinates.mYSize), mMaxFrames(aTextureCoordinates.mMaxFrames),
+  mCurTime(aTextureCoordinates.mCurTime), mAnimated(aTextureCoordinates.mAnimated),
+  mCompleted(aTextureCoordinates.mCompleted), mSpeedModifiers(aTextureCoordinates.mSpeedModifiers),
+  mSpeeds(aTextureCoordinates.mSpeeds), mAnimations(aTextureCoordinates.mAnimations)
+{
+  mXGain[0] = aTextureCoordinates.mXGain[0];
+  mXGain[1] = aTextureCoordinates.mXGain[1];
+  mYGain[0] = aTextureCoordinates.mYGain[0];
+  mYGain[1] = aTextureCoordinates.mYGain[1];
+  mXValues[0] = aTextureCoordinates.mXValues[0];
+  mXValues[1] = aTextureCoordinates.mXValues[1];
+  mYValues[0] = aTextureCoordinates.mYValues[0];
+  mYValues[1] = aTextureCoordinates.mYValues[1];
+  mBias[0] = aTextureCoordinates.mBias[0];
+  mBias[1] = aTextureCoordinates.mBias[1];
+}
+
 TextureCoordinates::TextureCoordinates(int const aXSize,
                                        int const aYSize, 
                                        int const aNumAnimations,

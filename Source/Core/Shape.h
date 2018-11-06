@@ -21,6 +21,7 @@ struct Shape
   } shape;
   
   Shape(ShapeType aShape);
+  Shape(ShapeType aShape, int aId, Vector3 const &aPosition, bool aPassable);
   virtual ~Shape();
   virtual float GetSize(int index) = 0;
   
@@ -32,6 +33,7 @@ struct AxisAlignedBoundingBox : public Shape
   Vector3 size;
 
   AxisAlignedBoundingBox();
+  AxisAlignedBoundingBox(AxisAlignedBoundingBox const &aAxisAlignedBoundingBox);
   AxisAlignedBoundingBox(Vector3 const &aPosition, Vector3 const &aSize);
   virtual ~AxisAlignedBoundingBox();
 
@@ -49,6 +51,7 @@ struct OrientedBoundingBox : public Shape
   Vector3 extents;
   
   OrientedBoundingBox();
+  OrientedBoundingBox(OrientedBoundingBox const &aOrientedBoundingBox);
   OrientedBoundingBox(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight,
     Vector3 const &aForward, Vector3 const &aExtents);
   virtual ~OrientedBoundingBox();
@@ -62,6 +65,7 @@ struct Sphere : public Shape
   float radius;
 
   Sphere();
+  Sphere(Sphere const &aSphere);
   Sphere(Vector3 const &aPosition, float const aRadius);
   virtual ~Sphere();
   
@@ -75,6 +79,7 @@ struct Circle : public Shape
   float radius;
 
   Circle();
+  Circle(Circle const &aCircle);
   Circle(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight, float const aRadius);
   virtual ~Circle();
   
@@ -87,6 +92,7 @@ struct Line : public Shape
   float length;
 
   Line();
+  Line(Line const &aLine);
   Line(Vector3 const &aPosition, Vector3 const &aDirection, float aLength);
   Line(Vector3 const &aStart, Vector3 const &aEnd);
   virtual ~Line();
@@ -101,6 +107,7 @@ struct Triangle : public Shape
   Vector3 points[3];
   
   Triangle();
+  Triangle(Triangle const &aTriangle);
   Triangle(Vector3 const &aPoint1, Vector3 const &aPoint2, Vector3 const &aPoint3);
   Triangle(Vector3 const aPoints[3]);
   Triangle(std::vector<Vector3> const &aPoints);
@@ -116,6 +123,7 @@ struct Plane : public Shape
   float distance;
   
   Plane();
+  Plane(Plane const &aPlane);
   Plane(Vector3 const &aNormal, float const aDistance);
   virtual ~Plane();
   

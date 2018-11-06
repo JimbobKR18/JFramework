@@ -25,6 +25,14 @@ Camera::Camera(GraphicsManager *aManager) : Component(Camera::sUID),
   #endif
 }
 
+Camera::Camera(Camera const &aCamera) : Component(Camera::sUID), mSize(aCamera.mSize),
+  mOffset(aCamera.mOffset), mPrimary(false), mManager(aCamera.mManager)
+{
+  #ifdef SHADER_COMPATIBLE
+  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y);
+  #endif
+}
+
 Camera::~Camera()
 {
   delete mFramebuffer;
@@ -205,6 +213,16 @@ void Camera::Deserialize(ParserNode *aNode)
       curIndex = nodeName + Common::IntToString(index);
     }
   }
+}
+
+/**
+ * @brief Clone Camera
+ * @param aNewOwner The new owner
+ * @return Cloned Camera
+ */
+Component* Camera::Clone(GameObject *aNewOwner) const
+{
+  return new Camera(*this);
 }
   
 // Statics

@@ -29,6 +29,7 @@ private:
   
 public:
   SoundEmitter();
+  SoundEmitter(SoundEmitter const &aSoundEmitter);
   virtual ~SoundEmitter();
   
   // GETTERS
@@ -51,6 +52,7 @@ public:
   virtual void SendMessage(Message const& aMessage);
   virtual void Serialize(ParserNode* aNode);
   virtual void Deserialize(ParserNode* aNode);
+  virtual Component* Clone(GameObject *aNewOwner) const;
   
   // STATICS
   static void SerializeLUA();

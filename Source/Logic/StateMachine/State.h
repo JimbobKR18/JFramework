@@ -15,6 +15,7 @@ private:
 public:
   State(HashString const &aName);
   State(HashString const &aName, float const &aTimeAlive);
+  State(State const &aState);
   virtual ~State();
   
   HashString GetName() const;

@@ -8,6 +8,11 @@ Shape::Shape(ShapeType aShape) : id(0), position(), passable(false), shape(aShap
 {
 }
 
+Shape::Shape(ShapeType aShape, int aId, Vector3 const &aPosition, bool aPassable) :
+  id(aId), position(aPosition), passable(aPassable), shape(aShape)
+{
+}
+
 Shape::~Shape()
 {
 }
@@ -25,6 +30,13 @@ void Shape::SerializeLUA()
 //------------------------------
 AxisAlignedBoundingBox::AxisAlignedBoundingBox() : Shape(AABB), size()
 {
+}
+
+AxisAlignedBoundingBox::AxisAlignedBoundingBox(AxisAlignedBoundingBox const &aAxisAlignedBoundingBox) :
+  Shape(AABB, aAxisAlignedBoundingBox.id, aAxisAlignedBoundingBox.position, aAxisAlignedBoundingBox.passable),
+  size(aAxisAlignedBoundingBox.size)
+{
+  
 }
 
 AxisAlignedBoundingBox::AxisAlignedBoundingBox(Vector3 const &aPosition, Vector3 const &aSize) : Shape(AABB), size(aSize)
@@ -91,6 +103,13 @@ OrientedBoundingBox::OrientedBoundingBox() : Shape(OBB), up(), right(), forward(
 {
 }
 
+OrientedBoundingBox::OrientedBoundingBox(OrientedBoundingBox const &aOrientedBoundingBox) :
+  Shape(OBB, aOrientedBoundingBox.id, aOrientedBoundingBox.position, aOrientedBoundingBox.passable),
+  up(aOrientedBoundingBox.up), right(aOrientedBoundingBox.right), forward(aOrientedBoundingBox.forward),
+  extents(aOrientedBoundingBox.extents)
+{
+}
+
 OrientedBoundingBox::OrientedBoundingBox(Vector3 const &aPosition, Vector3 const &aUp, Vector3 const &aRight,
   Vector3 const &aForward, Vector3 const &aExtents) : Shape(OBB), up(aUp), right(aRight), forward(aForward), extents(aExtents)
 {
@@ -131,6 +150,11 @@ Sphere::Sphere() : Shape(SPHERE), radius(0)
 {
 }
 
+Sphere::Sphere(Sphere const &aSphere) : Shape(SPHERE, aSphere.id, aSphere.position, aSphere.passable),
+  radius(aSphere.radius)
+{
+}
+
 Sphere::Sphere(Vector3 const &aPosition, float const aRadius) :
     Shape(SPHERE), radius(aRadius)
 {
@@ -157,6 +181,11 @@ float Sphere::GetSize(int index)
 
 Circle::Circle() :
     Shape(CIRCLE), up(), right(), radius(0)
+{
+}
+
+Circle::Circle(Circle const &aCircle) : Shape(CIRCLE, aCircle.id, aCircle.position, aCircle.passable),
+  up(aCircle.up), right(aCircle.right), radius(aCircle.radius)
 {
 }
 
@@ -187,6 +216,11 @@ float Circle::GetSize(int index)
 
 Line::Line() :
     Shape(LINE), direction(), length(0)
+{
+}
+
+Line::Line(Line const &aLine) : Shape(LINE, aLine.id, aLine.position, aLine.passable),
+  direction(aLine.direction), length(aLine.length)
 {
 }
 
@@ -368,6 +402,13 @@ Triangle::Triangle() : Shape(TRIANGLE)
   points[2] = Vector3();
 }
 
+Triangle::Triangle(Triangle const &aTriangle) : Shape(TRIANGLE, aTriangle.id, aTriangle.position, aTriangle.passable)
+{
+  points[0] = aTriangle.points[0];
+  points[1] = aTriangle.points[1];
+  points[2] = aTriangle.points[2];
+}
+
 Triangle::Triangle(Vector3 const &aPoint1, Vector3 const &aPoint2, Vector3 const &aPoint3) : Shape(TRIANGLE)
 {
   points[0] = aPoint1;
@@ -423,6 +464,11 @@ float Triangle::GetSize(int index)
 // PLANE
 //------------------------------
 Plane::Plane() : Shape(PLANE), normal(1,0,0), distance()
+{
+}
+
+Plane::Plane(Plane const &aPlane) : Shape(PLANE, aPlane.id, aPlane.position, aPlane.passable),
+  normal(aPlane.normal), distance(aPlane.distance)
 {
 }
 

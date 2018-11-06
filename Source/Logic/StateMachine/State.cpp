@@ -13,6 +13,10 @@ State::State(HashString const &aName, float const &aTimeAlive) : mName(aName), m
 {
 }
 
+State::State(State const &aState) : mName(aState.mName), mTimeAlive(aState.mTimeAlive)
+{
+}
+
 State::~State()
 {
 }

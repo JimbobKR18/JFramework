@@ -11,6 +11,7 @@ private:
   
 public:
   SoundListener();
+  SoundListener(SoundListener const &aSoundListener);
   virtual ~SoundListener();
 
   // VIRTUALS
@@ -19,6 +20,7 @@ public:
   virtual void SendMessage(Message const& aMessage);
   virtual void Serialize(ParserNode* aNode);
   virtual void Deserialize(ParserNode* aNode);
+  virtual Component* Clone(GameObject *aNewOwner) const;
   
   // STATICS
   static void SerializeLUA();

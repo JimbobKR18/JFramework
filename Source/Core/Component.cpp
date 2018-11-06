@@ -42,7 +42,7 @@ void Component::SetOwner(GameObject *aOwner)
  * @brief Get UID of component
  * @return UID
  */
-int Component::GetDefinedUID() 
+int Component::GetDefinedUID() const
 {
   return mUID;
 }

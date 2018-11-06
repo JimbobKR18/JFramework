@@ -11,6 +11,13 @@ ChemistryMaterial::ChemistryMaterial(ChemistryManager* aManager) : Component(Che
 {
 }
 
+ChemistryMaterial::ChemistryMaterial(ChemistryMaterial const &aChemistryMaterial) : Component(ChemistryMaterial::sUID),
+  mManager(aChemistryMaterial.mManager), mName(aChemistryMaterial.mName), mCurrentTemperature(aChemistryMaterial.mCurrentTemperature),
+  mCurrentWattage(aChemistryMaterial.mCurrentWattage), mBoilingPoint(aChemistryMaterial.mBoilingPoint), mMeltingPoint(aChemistryMaterial.mMeltingPoint),
+  mFreezingPoint(aChemistryMaterial.mFreezingPoint), mConductivity(aChemistryMaterial.mConductivity), mHeatTransferRate(aChemistryMaterial.mHeatTransferRate)
+{
+}
+
 ChemistryMaterial::~ChemistryMaterial()
 {
   mManager->RemoveMaterial(this);
@@ -297,6 +304,16 @@ void ChemistryMaterial::Deserialize(ParserNode *aNode)
     mCurrentTemperature = aNode->Find("StartingTemperature")->GetValue().ToFloat();
   if(aNode->Find("StartingWattage"))
     mCurrentWattage = aNode->Find("StartingWattage")->GetValue().ToFloat();
+}
+
+/**
+ * @brief Clone ChemistryMaterial
+ * @param aNewOwner The new owner
+ * @return Cloned ChemistryMaterial
+ */
+Component* ChemistryMaterial::Clone(GameObject *aNewOwner) const
+{
+  return new ChemistryMaterial(*this);
 }
 
 /**

@@ -53,6 +53,7 @@ private:
 
 public:
   Transform();
+  Transform(Transform const &aTransform);
   virtual ~Transform();
 
   // GETTERS
@@ -91,6 +92,7 @@ public:
   virtual void        ReceiveMessage(Message const &aMessage) {}
   virtual void        Serialize(ParserNode *aNode);
   virtual void        Deserialize(ParserNode *aNode);
+  virtual Component*  Clone(GameObject *aNewOwner) const;
   static int          GetUID() {return sUID;}
   static void         SerializeLUA();
   

@@ -6,6 +6,32 @@ StateMachine::StateMachine() : mLinks(), mStates(), mCurrentState(nullptr), mCur
 {
 }
 
+StateMachine::StateMachine(StateMachine const &aStateMachine) : mLinks(), mStates(), mCurrentState(nullptr), mCurrentTime(0)
+{
+  for(StateIT it = aStateMachine.mStates.begin(); it != aStateMachine.mStates.end(); ++it)
+  {
+    AddState(new State(**it));
+  }
+  for(LinkIT it = aStateMachine.mLinks.begin(); it != aStateMachine.mLinks.end(); ++it)
+  {
+    State *state1 = nullptr;
+    State *state2 = nullptr;
+    
+    for(StateIT it2 = mStates.begin(); it2 != mStates.end(); ++it2)
+    {
+      StateLink *link = *it;
+      State *state = *it2;
+      
+      if(state->GetName() == link->GetStart()->GetName())
+        state1 = state;
+      else if(state->GetName() == link->GetEnd()->GetName())
+        state2 = state;
+    }
+    
+    AddLink(state1, state2, (*it)->GetType());
+  }
+}
+
 StateMachine::~StateMachine()
 {
   for(LinkIT it = mLinks.begin(); it != mLinks.end(); ++it)

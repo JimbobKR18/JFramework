@@ -7,6 +7,10 @@ SoundListener::SoundListener() : Component(SoundListener::sUID)
 {
 }
 
+SoundListener::SoundListener(SoundListener const &aSoundListener) : Component(SoundListener::sUID)
+{
+}
+
 SoundListener::~SoundListener()
 {
 }
@@ -48,6 +52,16 @@ void SoundListener::Serialize(ParserNode* aNode)
  */
 void SoundListener::Deserialize(ParserNode* aNode)
 {
+}
+
+/**
+ * @brief Clone SoundListener
+ * @param aNewOwner The new owner
+ * @return Cloned SoundListener
+ */
+Component* SoundListener::Clone(GameObject *aNewOwner) const
+{
+  return new SoundListener(*this);
 }
 
 /**

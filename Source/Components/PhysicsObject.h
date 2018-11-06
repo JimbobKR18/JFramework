@@ -54,6 +54,7 @@ private:
 
 public:
   PhysicsObject(PhysicsWorld *aWorld);
+  PhysicsObject(PhysicsObject const &aPhysicsObject);
   virtual ~PhysicsObject();
 
   // Methods from Component
@@ -62,6 +63,7 @@ public:
   virtual void         ReceiveMessage(Message const &aMessage);
   virtual void         Serialize(ParserNode *aNode);
   virtual void         Deserialize(ParserNode *aNode);
+  virtual Component*   Clone(GameObject *aNewOwner) const;
   static void          SerializeLUA();
   static int           GetUID() {return sUID;}
 

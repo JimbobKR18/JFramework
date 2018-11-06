@@ -65,6 +65,7 @@ private:
   
 public:
   TextureCoordinates();
+  TextureCoordinates(TextureCoordinates const &aTextureCoordinates);
   TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, 
                      std::vector<int> const &aNumFrames, std::vector<std::vector<float>> const &aAnimationSpeeds);
   

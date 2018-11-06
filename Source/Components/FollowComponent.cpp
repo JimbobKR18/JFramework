@@ -11,6 +11,13 @@ FollowComponent::FollowComponent() : Component(FollowComponent::sUID), mTarget(n
 {
 }
 
+FollowComponent::FollowComponent(FollowComponent const &aFollowComponent) :
+  Component(FollowComponent::sUID), mTarget(nullptr),
+  mTargetName(aFollowComponent.mTargetName), mTime(0), mInterpolator(nullptr),
+  mPosition()
+{
+}
+
 FollowComponent::~FollowComponent()
 {
 }
@@ -165,6 +172,16 @@ void FollowComponent::Deserialize(ParserNode *aNode)
   {
     mTargetName = aNode->Find("Target")->GetValue();
   }
+}
+
+/**
+ * @brief Clone FollowComponent
+ * @param aNewOwner The new owner
+ * @return Cloned FollowComponent
+ */
+Component* FollowComponent::Clone(GameObject *aNewOwner) const
+{
+  return new FollowComponent(*this);
 }
 
 // Statics

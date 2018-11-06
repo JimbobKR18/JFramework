@@ -8,6 +8,11 @@ StateObject::StateObject() : Component(StateObject::sUID)
   mStateMachine = new StateMachine();
 }
 
+StateObject::StateObject(StateObject const &aStateObject) : Component(StateObject::sUID),
+  mStateMachine(new StateMachine(*(aStateObject.mStateMachine)))
+{
+}
+
 StateObject::~StateObject()
 {
   delete mStateMachine;
@@ -173,6 +178,16 @@ void StateObject::Deserialize(ParserNode *aNode)
   {
     mStateMachine->SetCurrentState(aNode->Find("StartingState")->GetValue());
   }
+}
+
+/**
+ * @brief Clone StateObject
+ * @param aNewOwner The new owner
+ * @return Cloned StateObject
+ */
+Component* StateObject::Clone(GameObject *aNewOwner) const
+{
+  return new StateObject(*this);
 }
 
 /**

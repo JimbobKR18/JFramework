@@ -19,6 +19,7 @@ private:
   
 public:
   StateMachine();
+  StateMachine(StateMachine const &aStateMachine);
   virtual ~StateMachine();
   
   void Update(float const aDT);

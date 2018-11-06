@@ -3,7 +3,14 @@
 
 int const CustomScript::sUID = Common::StringHashFunction("CustomScript");
 
-CustomScript::CustomScript() : Component(CustomScript::sUID), mFileName(), mUpdateFunctionName()
+CustomScript::CustomScript() : Component(CustomScript::sUID), mFileName(), mUpdateFunctionName(),
+  mValues()
+{
+}
+
+CustomScript::CustomScript(CustomScript const &aCustomScript) : Component(CustomScript::sUID),
+  mFileName(aCustomScript.mFileName), mUpdateFunctionName(aCustomScript.mUpdateFunctionName),
+  mValues(aCustomScript.mValues)
 {
 }
 
@@ -122,6 +129,16 @@ void CustomScript::Deserialize(ParserNode *aNode)
     mFileName = aNode->Find("FileName")->GetValue();
   if(aNode->Find("UpdateFunctionName"))
     mUpdateFunctionName = aNode->Find("UpdateFunctionName")->GetValue();
+}
+
+/**
+ * @brief Clone CustomScript
+ * @param aNewOwner The new owner
+ * @return Cloned CustomScript
+ */
+Component* CustomScript::Clone(GameObject *aNewOwner) const
+{
+  return new CustomScript(*this);
 }
 
 /**

@@ -43,7 +43,7 @@ GameObject::GameObject(GameObject const &aGameObject) :
                               mParent(nullptr), 
                               mChildren()
 {
-  assert(!"Copying GameObjects is not supported!");
+  assert(!"Copying GameObjects in this way is not supported! Use Clone()");
 }
 
 GameObject::~GameObject()
@@ -317,6 +317,43 @@ void GameObject::ClearTags()
 bool GameObject::HasTag(HashString const &aTag) const
 {
   return mTags.find(aTag.ToHash()) != mTags.end();
+}
+
+GameObject* GameObject::Clone() const
+{
+  GameObject *newObject = new GameObject();
+  newObject->mID = mID;
+  newObject->mFileName = mFileName;
+  newObject->mName = mName;
+  newObject->mTags = mTags;
+  newObject->mManager = mManager;
+  
+  // Copy base components first
+  if(HAS<Transform>())
+  {
+    newObject->AddComponent(GET<Transform>()->Clone(newObject));
+  }
+  if(HAS<PhysicsObject>())
+  {
+    newObject->AddComponent(GET<PhysicsObject>()->Clone(newObject));
+  }
+  if(HAS<Surface>())
+  {
+    newObject->AddComponent(GET<Surface>()->Clone(newObject));
+  }
+  
+  // Copy every other component
+  ComponentConstIT end = mComponents.end();
+  for(ComponentConstIT it = mComponents.begin(); it != end; ++it)
+  {
+    if(!newObject->HasComponent(it->second->GetDefinedUID()))
+    {
+      Component *newComponent = it->second->Clone(newObject);
+      newObject->AddComponent(newComponent);
+    }
+  }
+  
+  return newObject;
 }
 
 /**

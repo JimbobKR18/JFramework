@@ -41,6 +41,7 @@ public:
   virtual void        ReceiveMessage(Message const &aMessage) = 0;
   virtual void        Serialize(ParserNode *aNode) = 0;
   virtual void        Deserialize(ParserNode *aNode) = 0;
+  virtual Component*  Clone(GameObject *aNewOwner) const = 0;
   static int          GetUID() {return sUID;}
 };
 

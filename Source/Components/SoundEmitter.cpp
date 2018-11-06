@@ -12,6 +12,13 @@ SoundEmitter::SoundEmitter() : Component(SoundEmitter::sUID), mPattern(SoundEmit
 {
 }
 
+SoundEmitter::SoundEmitter(SoundEmitter const &aSoundEmitter) : Component(SoundEmitter::sUID),
+  mPattern(aSoundEmitter.mPattern), mSoundName(aSoundEmitter.mSoundName),
+  mSoundOrigin(aSoundEmitter.mSoundOrigin), mChannel(aSoundEmitter.mChannel),
+  mVolume(aSoundEmitter.mVolume), mListeners()
+{
+}
+
 SoundEmitter::~SoundEmitter()
 {
 }
@@ -212,6 +219,16 @@ void SoundEmitter::Deserialize(ParserNode* aNode)
       assert(!"Invalid SoundEmitPattern type passed into SoundEmitter Deserialize.");
     }
   }
+}
+
+/**
+ * @brief Clone SoundEmitter
+ * @param aNewOwner The new owner
+ * @return Cloned SoundEmitter
+ */
+Component* SoundEmitter::Clone(GameObject *aNewOwner) const
+{
+  return new SoundEmitter(*this);
 }
 
 /**
