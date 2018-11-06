@@ -23,7 +23,7 @@ enum Viewspace
 
 enum TextRenderStyle
 {
-  DEFAULT_RENDER_STYLE,
+  DEFAULT_RENDER_STYLE = 0,
   SMOOTH_RENDER_STYLE,
   CHARACTER_BY_CHARACTER_STYLE
 };
@@ -32,6 +32,11 @@ struct ScrollInfo
 {
   ScrollType mType;
   Vector3 mGoalSize;
+  
+  ScrollInfo() : mType(ScrollType::VERTICAL), mGoalSize() {}
+  ScrollInfo(ScrollInfo const &aScrollInfo) : mType(aScrollInfo.mType),
+    mGoalSize(aScrollInfo.mGoalSize) {}
+  virtual ~ScrollInfo() {}
 };
 
 class Surface : public Component
