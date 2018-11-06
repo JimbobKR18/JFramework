@@ -24,9 +24,13 @@ Surface::Surface(Surface const &aSurface) : Component(Surface::sUID), mTexCoord(
                                             mFileName(aSurface.mFileName), mText(aSurface.mText), mFontName(aSurface.mFontName),
                                             mFontSize(aSurface.mFontSize), mMaxTextWidth(aSurface.mMaxTextWidth),
                                             mSecondaryColor(aSurface.mSecondaryColor), mOriginalSize(aSurface.mOriginalSize),
-                                            mTextRenderStyle(aSurface.mTextRenderStyle), mScrollInfo(aSurface.mScrollInfo),
-                                            mProperties(aSurface.mProperties)
+                                            mTextRenderStyle(aSurface.mTextRenderStyle), mScrollInfo(aSurface.mScrollInfo)
 {
+  PropertyContainerConstIt propertyEnd = aSurface.mProperties.end();
+  for(PropertyContainerConstIt it = aSurface.mProperties.begin(); it != propertyEnd; ++it)
+  {
+    mProperties.push_back(new SurfaceProperty(**it));
+  }
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),

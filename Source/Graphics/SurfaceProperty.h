@@ -22,6 +22,7 @@ private:
   HashString mDefaultValue;
   
 public:
+  SurfaceProperty(SurfaceProperty const &aSurfaceProperty);
   SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
   virtual ~SurfaceProperty();
   

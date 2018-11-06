@@ -1,6 +1,12 @@
 #include "Common.h"
 #include "SurfaceProperty.h"
 
+SurfaceProperty::SurfaceProperty(SurfaceProperty const &aSurfaceProperty) :
+  mName(aSurfaceProperty.mName), mType(aSurfaceProperty.mType), mTargetValue(aSurfaceProperty.mTargetValue),
+  mDefaultValue(aSurfaceProperty.mDefaultValue)
+{
+}
+
 SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue) : 
   mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue) 
 {
