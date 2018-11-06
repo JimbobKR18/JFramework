@@ -9,6 +9,7 @@
 class ObjectManager : public Manager
 {
 private:
+  std::unordered_map<int, GameObject*> mArchetypes;
   std::set<GameObject*> mObjects;
   std::set<GameObject*> mStaticObjects;
   std::set<GameObject*> mAllocatedObjects;

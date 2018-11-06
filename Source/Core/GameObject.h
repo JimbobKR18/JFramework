@@ -15,6 +15,7 @@
 
 class Component;
 class ObjectManager;
+class GameObjectFactory;
 
 class GameObject
 {
@@ -35,6 +36,7 @@ private:
   unsigned            mID;
   HashString          mFileName;
   HashString          mName;
+  HashString          mType;
   TagContainer        mTags;
   ComponentContainer  mComponents;
   ObjectManager*      mManager;
@@ -44,13 +46,15 @@ private:
   
 public:
   GameObject();
-  GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName);
+  GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName,
+             HashString const &aType);
   GameObject(GameObject const &aGameObject);
   virtual ~GameObject();
 
   // GETTERS
   int                        GetID() const;
   HashString                 GetName() const;
+  HashString                 GetType() const;
   HashString                 GetFileName() const;
   ObjectManager*             GetManager() const;
   GameObject*                GetParent() const;
@@ -59,6 +63,7 @@ public:
   // SETTERS
   void                       SetID(int const &aID);
   void                       SetName(HashString const &aName);
+  void                       SetType(HashString const &aType);
   
   // OPERATIONS
   void                       AddComponent(Component *aComponent);
@@ -74,7 +79,7 @@ public:
   void                       RemoveTag(HashString const &aTag);
   void                       ClearTags();
   bool                       HasTag(HashString const &aTag) const;
-  GameObject*                Clone() const;
+  GameObject*                Clone(GameObjectFactory *aFactory) const;
 
   // VIRTUALS / STATICS
   virtual void               Update();

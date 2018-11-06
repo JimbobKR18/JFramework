@@ -10,7 +10,7 @@
 
 unsigned const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
 ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", ObjectManager::sUID),
-  mObjects(), mStaticObjects(), mAllocatedObjects(), mFactory(new DefaultGameObjectFactory())
+  mArchetypes(), mObjects(), mStaticObjects(), mAllocatedObjects(), mFactory(new DefaultGameObjectFactory())
 {
 }
 

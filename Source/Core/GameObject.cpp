@@ -14,15 +14,17 @@
 #include "Surface.h"
 #include "PhysicsObject.h"
 #include "StateObject.h"
+#include "GameObjectFactory.h"
 
 GameObject::GameObject()
 {
   assert(!"GameObject instantiated without a file!");
 }
 
-GameObject::GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName) :
-                       mID(aID), mFileName(aFileName), mName(""), mTags(), mComponents(), mManager(aManager),
-                       mParent(nullptr), mChildren()
+GameObject::GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName,
+                       HashString const &aType) :
+                       mID(aID), mFileName(aFileName), mName(""), mType(aType), mTags(), mComponents(),
+                       mManager(aManager), mParent(nullptr), mChildren()
 {
   for(int i = aFileName.Length() - 1; i >= 0 && aFileName[i] != '/'; --i)
   {
@@ -102,6 +104,15 @@ HashString GameObject::GetName() const
 }
 
 /**
+ * @brief Get type of game object
+ * @return Type of object
+ */
+HashString GameObject::GetType() const
+{
+  return mType;
+}
+
+/**
  * @brief  Get file name of object
  * @return Object's file name
  */
@@ -135,6 +146,15 @@ void GameObject::SetID(int const &aID)
 void GameObject::SetName(HashString const &aName)
 {
   mName = aName;
+}
+
+/**
+ * @brief Set type of object
+ * @param aType New type of object
+ */
+void GameObject::SetType(HashString const &aType)
+{
+  mType = aType;
 }
 
 /**
@@ -319,11 +339,14 @@ bool GameObject::HasTag(HashString const &aTag) const
   return mTags.find(aTag.ToHash()) != mTags.end();
 }
 
-GameObject* GameObject::Clone() const
+/**
+ * @brief Clone this GameObject
+ * @param aFactory Factory to create new GameObject
+ * @return Cloned GameObject
+ */
+GameObject* GameObject::Clone(GameObjectFactory *aFactory) const
 {
-  GameObject *newObject = new GameObject();
-  newObject->mID = mID;
-  newObject->mFileName = mFileName;
+  GameObject *newObject = aFactory->CreateGameObject(mManager, mFileName, mType);
   newObject->mName = mName;
   newObject->mTags = mTags;
   newObject->mManager = mManager;

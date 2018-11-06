@@ -27,7 +27,6 @@ Surface::Surface(Surface const &aSurface) : Component(Surface::sUID), mTexCoord(
                                             mTextRenderStyle(aSurface.mTextRenderStyle), mScrollInfo(aSurface.mScrollInfo),
                                             mProperties(aSurface.mProperties)
 {
-  
 }
 
 Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),

@@ -18,5 +18,5 @@ DefaultGameObjectFactory::~DefaultGameObjectFactory()
  */
 GameObject* DefaultGameObjectFactory::CreateGameObject(ObjectManager* aManager, HashString const& aFileName, HashString const& aType)
 {
-  return new GameObject(aManager, mIndex++, aFileName);
+  return new GameObject(aManager, mIndex++, aFileName, aType);
 }

@@ -34,6 +34,12 @@ PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager),
 {
 }
 
+PCShaderSurface::PCShaderSurface(PCShaderSurface const &aPCShaderSurface) : Surface(aPCShaderSurface), mTextureID(aPCShaderSurface.mTextureID),
+  mProgramID(aPCShaderSurface.mProgramID), mVertexShaderID(aPCShaderSurface.mVertexShaderID), mFragmentShaderID(aPCShaderSurface.mFragmentShaderID),
+  mVertexShaderFileName(aPCShaderSurface.mVertexShaderFileName), mFragmentShaderFileName(aPCShaderSurface.mFragmentShaderFileName)
+{
+}
+
 PCShaderSurface::~PCShaderSurface()
 {
 }
@@ -346,6 +352,16 @@ void PCShaderSurface::Deserialize(ParserNode *aNode)
   }
   
   LoadShaders(vertexShader, fragmentShader);
+}
+
+/**
+ * @brief Copy surface
+ * @param aNewOwner The new owner
+ * @return Copied surface
+ */
+Component* PCShaderSurface::Clone(GameObject *aNewOwner) const
+{
+  return new PCShaderSurface(*this);
 }
 
 /**

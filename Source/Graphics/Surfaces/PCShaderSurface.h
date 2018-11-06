@@ -39,6 +39,7 @@ private:
 public:
   PCShaderSurface();
   PCShaderSurface(GraphicsManager *aManager);
+  PCShaderSurface(PCShaderSurface const &aPCShaderSurface);
   virtual ~PCShaderSurface();
 
   virtual void        LoadImage(HashString const &aName);
@@ -65,6 +66,7 @@ public:
   virtual void        ReceiveMessage(Message const &aMessage);
   virtual void        Serialize(ParserNode *aNode);
   virtual void        Deserialize(ParserNode *aNode);
+  virtual Component*  Clone(GameObject *aNewOwner) const;
   static void         SerializeLUA();
   static int          GetUID() {return sUID;}
 };
