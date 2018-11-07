@@ -7,6 +7,7 @@
 class ParserFactory
 {
 private:
+  static std::unordered_map<int, Parser*> mParserCache;
   ParserFactory();
   
 public:
@@ -14,6 +15,7 @@ public:
   
   static Parser* CreateInputParser(HashString const &aFolder, HashString const &aFileName);
   static Parser* CreateOutputParser(HashString const &aFolder, HashString const &aFileName);
+  static void Cleanup();
 };
 
 #endif // __JFramework_ParserFactory_h_

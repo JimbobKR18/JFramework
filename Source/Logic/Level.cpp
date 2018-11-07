@@ -799,9 +799,6 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
   {
     ParseAdditionalData(*it, nullptr);
   }
-  
-  // Clean up
-  delete parser;
 }
 
 /**
@@ -1285,8 +1282,6 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
     {
       tileAnimationSpeed = settingsData->Find("AnimationSpeed")->GetValue().ToFloat();
     }
-    
-    delete settingsData;
   }
 
   Parser *tileMapData = ParserFactory::CreateInputParser("Maps", frameDataFilename);
@@ -1301,7 +1296,6 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   {
     materials = tileMapData->Find("Materials")->GetValue().ToIntVector();
   }
-  delete tileMapData;
 
   mGenerators.push_back(new TileMapGenerator(width, height, tileSize, layer,
                                    zOffset, file, frameDataFilename, collisionOffset,

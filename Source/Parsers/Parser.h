@@ -26,6 +26,7 @@ public:
   void            SetCurrentObjectIndex(int const aIndex);
 
   // Reading
+  void                  Reset();
   ParserNode*           Find(HashString const &aElement);
   ParserNode*           Find(HashString const &aRoot, HashString const &aElement);
   ParserNodeContainer   FindAll(HashString const &aElement);

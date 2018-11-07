@@ -150,7 +150,6 @@ GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString 
   AddObject(object);
   ParseDictionary(object, parser);
   mAllocatedObjects.insert(object);
-  delete parser;
   return object;
 }
 
@@ -165,7 +164,6 @@ GameObject *ObjectManager::CreateObjectNoAdd(HashString const &aFilename, HashSt
   GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
   ParseDictionary(object, parser);
   mAllocatedObjects.insert(object);
-  delete parser;
   return object;
 }
 
@@ -204,7 +202,6 @@ void ObjectManager::ParseObject(GameObject *aObject, HashString const &aFolder)
 {
   Parser *parser = ParserFactory::CreateInputParser(aFolder, aObject->GetFileName());
   ParseDictionary(aObject, parser);
-  delete parser;
 }
 
 /**

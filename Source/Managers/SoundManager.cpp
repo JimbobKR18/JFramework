@@ -851,7 +851,4 @@ void SoundManager::LoadSounds()
     ++index;
     curIndex = groupStr + Common::IntToString(index);
   }
-  
-  // Clean up.
-  delete parser;
 }

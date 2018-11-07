@@ -16,6 +16,7 @@
 #include "Threading.h"
 #include "FileCache.h"
 #include "DefaultComponentFactory.h"
+#include "ParserFactory.h"
 
 GameApp::GameApp() : mComponentFactory(new DefaultComponentFactory()), mManagers(), mDelayedMessages(), 
                      mLastFrame(0), mSkipFrames(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
@@ -58,6 +59,7 @@ GameApp::~GameApp()
   mManagers.clear();
   
   FileCache::Clear();
+  ParserFactory::Cleanup();
 }
 
 /**

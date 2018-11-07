@@ -15,7 +15,7 @@ ParserNode::~ParserNode()
 {
   // Delete all children associated with this root
   for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
-      delete *it;
+    delete *it;
   mChildren.clear();
 }
 
@@ -143,6 +143,18 @@ void ParserNode::Place(HashString const &aElement, HashString const &aValue)
 void ParserNode::Insert(ParserNode* root)
 {
   mChildren.push_back(root);
+}
+
+/**
+ * @brief Reset touched status of node.
+ */
+void ParserNode::Reset()
+{
+  mTouched = false;
+  for(parserNodeIT it = mChildren.begin(); it != mChildren.end(); ++it)
+  {
+    (*it)->Reset();
+  }
 }
 
 /**

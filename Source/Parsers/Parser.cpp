@@ -43,6 +43,14 @@ void Parser::SetCurrentObjectIndex(int const aIndex)
 }
 
 /**
+ * @brief Reset touched status of parser.
+ */
+void Parser::Reset()
+{
+  mDictionary->Reset();
+}
+
+/**
  * @brief Find element by name (first occurrence)
  * @param aElement Element string to find
  */

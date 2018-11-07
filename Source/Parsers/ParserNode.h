@@ -37,6 +37,7 @@ public:
   ParserNodeContainer   FindAllThatStartsWith(HashString const &aValue);
   void            Place(HashString const &aElement, HashString const &aValue);
   void            Insert(ParserNode* root);
+  void            Reset();
 
   // GETTERS
   HashString     GetName() const;
