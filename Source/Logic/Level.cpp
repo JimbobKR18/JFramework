@@ -265,6 +265,7 @@ GameObject* Level::CreateObjectDelayed(HashString const &aFileName, HashString c
   ObjectCreateMessage *msg = new ObjectCreateMessage(object);
   objectManager->ProcessDelayedMessage(msg);
   AddObject(object, aPlacement);
+  LoadObject(object, aPlacement);
   return object;
 }
 
@@ -454,23 +455,7 @@ void Level::LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const a
 {
   for(ConstObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(*it, (aPlacement == ObjectPlacement::STATIC) ? true : false);
-    if((*it)->GET<PhysicsObject>())
-      mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject((*it)->GET<PhysicsObject>());
-    if((*it)->GET<Surface>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface((*it)->GET<Surface>());
-    if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->AddController((*it)->GET<Controller>());
-    if((*it)->GET<ChemistryMaterial>())
-      mOwner->GetOwningApp()->GET<ChemistryManager>()->AddMaterial((*it)->GET<ChemistryMaterial>());
-    if((*it)->GET<ChemistryElement>())
-      mOwner->GetOwningApp()->GET<ChemistryManager>()->AddElement((*it)->GET<ChemistryElement>());
-    if((*it)->GET<Camera>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddCamera((*it)->GET<Camera>());
-    if((*it)->GET<Camera>() && (*it)->GET<Camera>()->GetPrimary())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera((*it)->GET<Camera>());
-    if((*it)->GET<FollowComponent>())
-      (*it)->GET<FollowComponent>()->ResetTarget();
+    LoadObject(*it, aPlacement);
   }
 }
 
@@ -482,22 +467,7 @@ void Level::UnloadObjects(ObjectContainer const &aObjects)
 {
   for(ConstObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    // Remove all components
-    mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(*it);
-    if((*it)->GET<PhysicsObject>())
-      mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject((*it)->GET<PhysicsObject>());
-    if((*it)->GET<Surface>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface((*it)->GET<Surface>());
-    if((*it)->GET<Controller>())
-      mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController((*it)->GET<Controller>());
-    if((*it)->GET<ChemistryMaterial>())
-      mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveMaterial((*it)->GET<ChemistryMaterial>());
-    if((*it)->GET<ChemistryElement>())
-      mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveElement((*it)->GET<ChemistryElement>());
-    if((*it)->GET<Camera>())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveCamera((*it)->GET<Camera>());
-    if((*it)->GET<SoundEmitter>())
-      (*it)->GET<SoundEmitter>()->StopSound();
+    UnloadObject(*it);
   }
 }
 
@@ -986,6 +956,54 @@ GameObject* Level::FindObject(ObjectContainer const &aContainer, HashString cons
       return *it;
   }
   return nullptr;
+}
+
+/**
+ * @brief Load object's components in
+ * @param aObject Object to load
+ */
+void Level::LoadObject(GameObject *aObject, ObjectPlacement const aPlacement)
+{
+  mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(aObject, (aPlacement == ObjectPlacement::STATIC) ? true : false);
+  if(aObject->GET<PhysicsObject>())
+    mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject(aObject->GET<PhysicsObject>());
+  if(aObject->GET<Surface>())
+    mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface(aObject->GET<Surface>());
+  if(aObject->GET<Controller>())
+    mOwner->GetOwningApp()->GET<ControllerManager>()->AddController(aObject->GET<Controller>());
+  if(aObject->GET<ChemistryMaterial>())
+    mOwner->GetOwningApp()->GET<ChemistryManager>()->AddMaterial(aObject->GET<ChemistryMaterial>());
+  if(aObject->GET<ChemistryElement>())
+    mOwner->GetOwningApp()->GET<ChemistryManager>()->AddElement(aObject->GET<ChemistryElement>());
+  if(aObject->GET<Camera>())
+    mOwner->GetOwningApp()->GET<GraphicsManager>()->AddCamera(aObject->GET<Camera>());
+  if(aObject->GET<Camera>() && aObject->GET<Camera>()->GetPrimary())
+    mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera(aObject->GET<Camera>());
+  if(aObject->GET<FollowComponent>())
+    aObject->GET<FollowComponent>()->ResetTarget();
+}
+
+/**
+ * @brief Unload object's components
+ * @param aObject Object to unload
+ */
+void Level::UnloadObject(GameObject *aObject)
+{
+  mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(aObject);
+  if(aObject->GET<PhysicsObject>())
+    mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject(aObject->GET<PhysicsObject>());
+  if(aObject->GET<Surface>())
+    mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface(aObject->GET<Surface>());
+  if(aObject->GET<Controller>())
+    mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController(aObject->GET<Controller>());
+  if(aObject->GET<ChemistryMaterial>())
+    mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveMaterial(aObject->GET<ChemistryMaterial>());
+  if(aObject->GET<ChemistryElement>())
+    mOwner->GetOwningApp()->GET<ChemistryManager>()->RemoveElement(aObject->GET<ChemistryElement>());
+  if(aObject->GET<Camera>())
+    mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveCamera(aObject->GET<Camera>());
+  if(aObject->GET<SoundEmitter>())
+    aObject->GET<SoundEmitter>()->StopSound();
 }
 
 /**

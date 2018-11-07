@@ -122,6 +122,8 @@ protected:
   ObjectContainer&  GetObjects(ObjectPlacement const aPlacement);
   GameObject*       FindObject(ObjectContainer const &aContainer, HashString const &aName);
 private:
+  void              LoadObject(GameObject *aObject, ObjectPlacement const aPlacement);
+  void              UnloadObject(GameObject *aObject);
   void              DeleteObjectChildren(GameObject *aObject);
   void              DeleteObjectChildrenDelayed(GameObject *aObject);
   void              SerializeObjects(Parser &aParser, ObjectContainer &aObjects);
