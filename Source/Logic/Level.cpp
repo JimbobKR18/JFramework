@@ -265,7 +265,6 @@ GameObject* Level::CreateObjectDelayed(HashString const &aFileName, HashString c
   ObjectCreateMessage *msg = new ObjectCreateMessage(object);
   objectManager->ProcessDelayedMessage(msg);
   AddObject(object, aPlacement);
-  LoadObject(object, aPlacement);
   return object;
 }
 
