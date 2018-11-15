@@ -132,11 +132,15 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       PhysicsObject::ConstShapeIT end = shapes.end();
       for(PhysicsObject::ConstShapeIT it = shapes.begin(); it != end; ++it)
       {
+        if((*it)->passable)
+          glColor3f(1.0f, 0.0f, 1.0f);
+        else
+          glColor3f(1.0f, 0.0f, 0.0f);
+          
         if((*it)->shape == Shape::SPHERE)
         {
           Vector3 spherePos = position + (*it)->position.Multiply(rotation * scale);
           glBegin(GL_LINE_STRIP);
-          glColor3f(1.0f, 0.0f, 0.0f);
           
           // Rotate in a circle
           for(int i = 0; i < 360; ++i)
@@ -156,7 +160,6 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           
           // Physics Box Line
           glBegin(GL_LINE_STRIP);
-          glColor3f(1.0f, 0.0f, 0.0f);
           glVertex3f(cubePos.x - xSize, cubePos.y - ySize, cubePos.z);
           glVertex3f(cubePos.x + xSize, cubePos.y - ySize, cubePos.z);
           glVertex3f(cubePos.x + xSize, cubePos.y + ySize, cubePos.z);
@@ -169,7 +172,6 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           Triangle* triangle = (Triangle*)(*it);
           Vector3 triPos = position + (*it)->position.Multiply(rotation * scale);
           glBegin(GL_LINE_STRIP);
-          glColor3f(1.0f, 0.0f, 0.0f);
           for(int i = 0; i < 3; ++i)
           {
             Vector3 point = triPos + triangle->GetPoint(i).Multiply(rotation * scale);
@@ -185,7 +187,6 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           Vector3 linePos = position + (*it)->position.Multiply(scale);
           Vector3 lineEnd = linePos + line->direction.Multiply(scale) * line->length;
           glBegin(GL_LINE_STRIP);
-          glColor3f(1.0f, 0.0f, 0.0f);
           glVertex3f(linePos.x, linePos.y, linePos.z);
           glVertex3f(lineEnd.x, lineEnd.y, lineEnd.z);
           glEnd();
@@ -201,7 +202,6 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           
           // Physics Box Line
           glBegin(GL_LINE_STRIP);
-          glColor3f(1.0f, 0.0f, 0.0f);
           glVertex3f(cubePos.x + pt1.x, cubePos.y + pt1.y, cubePos.z);
           glVertex3f(cubePos.x - pt2.x, cubePos.y - pt2.y, cubePos.z);
           glVertex3f(cubePos.x - pt1.x, cubePos.y - pt1.y, cubePos.z);
