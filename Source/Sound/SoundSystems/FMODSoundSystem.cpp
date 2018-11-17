@@ -225,6 +225,25 @@ void FMODSoundSystem::FadeChannel(int const aChannel, int const aTime, float con
 }
 
 /**
+ * @brief Delay channel start and end. TODO broken.
+ * @param aChannel Channel to delay.
+ * @param aStartDelay Time in samples.
+ * @param aEndDelay Time in samples.
+ * @param aStopChannels True if channel should stop when sound data ends.
+ */
+void FMODSoundSystem::DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels)
+{
+  FMOD::Channel *channel;
+  unsigned long long start, end;
+  bool stopChannels;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->getDelay(&start, &end, &stopChannels);
+  start += aStartDelay;
+  end += aEndDelay;
+  channel->setDelay(aStartDelay, aEndDelay, aStopChannels);
+}
+
+/**
  * @brief Set channel frequency
  * @param aChannel
  * @param aFrequency
@@ -689,7 +708,8 @@ void FMODSoundSystem::AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupNa
   }
   
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
-  group->addDSP(aIndex, mDSPContainer[aDSP->GetName().ToHash()]);
+  FMOD::DSP* dsp = mDSPContainer[aDSP->GetName().ToHash()];
+  group->addDSP(aIndex, dsp);
 }
 
 /**

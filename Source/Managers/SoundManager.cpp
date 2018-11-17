@@ -180,6 +180,18 @@ void SoundManager::FadeChannel(int const aChannel, int const aTime, float const 
 }
 
 /**
+ * @brief Delay channel start and end.
+ * @param aChannel Channel to delay.
+ * @param aStartDelay Time in samples.
+ * @param aEndDelay Time in samples.
+ * @param aStopChannels True if channel should stop when sound data ends.
+ */
+void SoundManager::DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels)
+{
+  mSoundSystem->DelayChannel(aChannel, aStartDelay, aEndDelay, aStopChannels);
+}
+
+/**
  * @brief Set speed of channel via frequency
  * @param aChannel
  * @param aFrequency

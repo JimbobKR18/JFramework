@@ -236,6 +236,8 @@
   </VirtualDirectory>
   <VirtualDirectory Name="Sound">
     <VirtualDirectory Name="SoundSystems">
+      <File Name="../../Source/Sound/SoundSystems/FMODStudioSoundSystem.cpp"/>
+      <File Name="../../Source/Sound/SoundSystems/FMODStudioSoundSystem.h"/>
       <File Name="../../Source/Sound/SoundSystems/SoundSystem.h"/>
       <File Name="../../Source/Sound/SoundSystems/SoundSystem.cpp"/>
       <File Name="../../Source/Sound/SoundSystems/FMODSoundSystem.h"/>

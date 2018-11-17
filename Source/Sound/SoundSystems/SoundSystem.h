@@ -12,7 +12,9 @@ public:
   enum SoundSource
   {
     DEFAULT = 0,
-    STREAM
+    STREAM,
+    NONBLOCKING,
+    DECOMPRESS
   };
 
   SoundSystem();
@@ -34,6 +36,7 @@ public:
   virtual void SetChannelVolume(int const aChannel, float const aVolume) = 0;
   virtual void StopChannel(int const aChannel) = 0;
   virtual void FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd) = 0;
+  virtual void DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels) = 0;
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency) = 0;
   virtual void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos) = 0;
   virtual void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume) = 0;

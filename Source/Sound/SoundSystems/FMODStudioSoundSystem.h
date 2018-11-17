@@ -1,41 +1,39 @@
-#ifndef __JFramework__FMODSoundSystem_h_
-#define __JFramework__FMODSoundSystem_h_
+#ifndef FMODSTUDIOSOUNDSYSTEM_H
+#define FMODSTUDIOSOUNDSYSTEM_H
 
 #include "SoundSystem.h" // Base class: SoundSystem
 #include "fmod_studio.hpp"
 #include "fmod_errors.h"
 
-#define FMOD_SAMPLES_PER_SECOND 44100
-
-struct FMODSound
-{
-  FMOD::Sound* mSound;
-  float mVolume;
-  
-  FMODSound(FMOD::Sound* aSound, float const &aVolume);
-  virtual ~FMODSound();
-};
-
-class FMODSoundSystem : public SoundSystem
+class FMODStudioSoundSystem : public SoundSystem
 {
 private:
-  typedef std::unordered_map<int, FMODSound*>     FMODSoundContainer;
-  typedef FMODSoundContainer::iterator              FMODSoundIt;
-  typedef std::unordered_map<int, FMOD::ChannelGroup*> FMODChannelGroupContainer;
-  typedef FMODChannelGroupContainer::iterator          FMODChannelGroupIt;
-  typedef std::unordered_map<int, FMOD::DSP*>     FMODDSPContainer;
-  typedef FMODDSPContainer::iterator              FMODDSPIt;
-
+  typedef std::unordered_map<int, FMOD::Studio::Bank*> BankContainer;
+  typedef BankContainer::iterator BankIt;
+  typedef BankContainer::const_iterator BankConstIt;
+  typedef std::unordered_map<int, FMOD::Studio::EventDescription*> EventDescriptionContainer;
+  typedef EventDescriptionContainer::iterator EventDescriptionIt;
+  typedef EventDescriptionContainer::const_iterator EventDescriptionConstIt;
+  typedef std::unordered_map<int, FMOD::Studio::EventInstance*> EventInstanceContainer;
+  typedef EventInstanceContainer::iterator EventInstanceIt;
+  typedef EventInstanceContainer::const_iterator EventInstanceConstIt;
+  typedef std::unordered_set<int> InstanceContainer;
+  typedef InstanceContainer::iterator InstanceIt;
+  typedef InstanceContainer::const_iterator InstanceConstIt;
+  typedef std::unordered_map<int, InstanceContainer> InstanceGroupContainer;
+  typedef InstanceGroupContainer::iterator InstanceGroupIt;
+  typedef InstanceGroupContainer::const_iterator InstanceGroupConstIt;
+  
   FMOD::Studio::System* mFMODStudioSystem;
-  FMOD::System* mFMODSystem;
-  FMOD::ChannelGroup* mMasterChannelGroup;
-  FMODSoundContainer mSoundContainer;
-  FMODChannelGroupContainer mChannelGroupContainer;
-  FMODDSPContainer mDSPContainer;
+  BankContainer mBanks;
+  EventDescriptionContainer mEventDescriptions;
+  EventInstanceContainer mEventInstances;
+  InstanceGroupContainer mGroups;
+  int mCurrentSound;
   
 public:
-  FMODSoundSystem();
-  virtual ~FMODSoundSystem();
+  FMODStudioSoundSystem();
+  virtual ~FMODStudioSoundSystem();
   
   // Getters
   FMOD::DSP* GetDSP(HashString const &aName);
@@ -90,4 +88,4 @@ public:
   virtual void RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGroupName);
 };
 
-#endif // __JFramework__FMODSoundSystem_h_
+#endif // FMODSTUDIOSOUNDSYSTEM_H

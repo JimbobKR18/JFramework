@@ -68,6 +68,7 @@ public:
   void SetChannelVolume(int const aChannel, float const aVolume);
   void StopChannel(int const aChannel);
   void FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd);
+  void DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels);
   void SetChannelFrequency(int const aChannel, float const aFrequency);
   void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
   void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
