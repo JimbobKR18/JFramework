@@ -41,8 +41,8 @@ Level::Level()
 
 Level::Level(LevelManager *aManager, HashString const &aFileName, HashString const &aFolderName, bool aAutoParse) :
              mName(""), mFolderName(aFolderName), mFileName(aFileName), mSoundNames(), mObjects(),
-             mOwner(aManager), mGenerators(), mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mSoundChannels(),
-             mMaxBoundary(0,0,0), mMinBoundary(0,0,0), mScenarios()
+             mOwner(aManager), mGenerators(), mFocusTarget(nullptr), mClearColor(0, 0, 0, 1), mSoundBanks(), 
+             mSoundChannels(), mMaxBoundary(0,0,0), mMinBoundary(0,0,0), mScenarios()
 {
   for(int i = static_cast<int>(aFileName.Size()) - 1;
       i >= 0 && aFileName[i] != '/'; --i)
@@ -71,6 +71,7 @@ Level::~Level()
   mGenerators.clear();
   mSoundNames.clear();
   mSoundChannels.clear();
+  mSoundBanks.clear();
   mScenarios.clear();
 }
 
@@ -117,6 +118,15 @@ LevelManager *Level::GetManager() const
 Level::SoundChannelContainer Level::GetSoundChannels() const
 {
   return mSoundChannels;
+}
+
+/**
+ * @brief Get sound banks
+ * @return Sound banks
+ */
+Level::SoundBankContainer Level::GetSoundBanks() const
+{
+  return mSoundBanks;
 }
 
 /**
@@ -397,6 +407,13 @@ void Level::Load(Level const *aPrevLevel)
     LoadObjects(mObjects[i], static_cast<ObjectPlacement>(i));
 
   SoundManager *soundManager = mOwner->GetOwningApp()->GET<SoundManager>();
+  for(SoundBankContainerIT it = mSoundBanks.begin(); it != mSoundBanks.end(); ++it)
+  {
+    if(!aPrevLevel || aPrevLevel->mSoundBanks.find(*it) == aPrevLevel->mSoundBanks.end())
+    {
+      soundManager->LoadSoundBank(*it);
+    }
+  }
   for(SoundNameContainerIT it = mSoundNames.begin(); it != mSoundNames.end(); ++it)
   {
     if(!aPrevLevel || aPrevLevel->mSoundNames.find(it->first) == aPrevLevel->mSoundNames.end())
@@ -427,6 +444,13 @@ void Level::Unload(Level *aNextLevel)
     UnloadObjects(mObjects[i]);
     
   SoundManager *soundManager  = mOwner->GetOwningApp()->GET<SoundManager>();
+  for(SoundBankContainerIT it = mSoundBanks.begin(); it != mSoundBanks.end(); ++it)
+  {
+    if(!aNextLevel || aNextLevel->mSoundBanks.find(*it) == aNextLevel->mSoundBanks.end())
+    {
+      soundManager->UnloadSoundBank(*it);
+    }
+  }
   for(SoundChannelContainerIT it = mSoundChannels.begin(); it != mSoundChannels.end(); ++it)
   {
     if(!aNextLevel || aNextLevel->mSoundNames.find(it->second) == aNextLevel->mSoundNames.end())
@@ -531,6 +555,11 @@ void Level::Serialize(Parser &aParser)
   {
     aParser.Place("Sound", "SoundName_" + Common::IntToString(index), it->first);
     aParser.Place("Sound", "Group_" + Common::IntToString(index), it->second);
+  }
+  index = 0;
+  for(SoundBankContainerIT it = mSoundBanks.begin(); it != mSoundBanks.end(); ++it, ++index)
+  {
+    aParser.Place("Sound", "Bank_" + Common::IntToString(index), *it);
   }
   
   // Clear color
@@ -711,6 +740,17 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     ParserNode *soundNode = parser->Find("Sound");
     if(!soundNode)
       soundNode = parser->Find("Music");
+    
+    int index = 0;
+    ParserNode *bankNode = soundNode->Find("Bank_" + Common::IntToString(index));
+    while(bankNode)
+    {
+      HashString bankName = bankNode->GetValue();
+          
+      mSoundBanks.insert(bankName);
+      ++index;
+      bankNode = soundNode->Find("Bank_" + Common::IntToString(index));
+    }
     
     if(soundNode->Find("SoundName"))
     {

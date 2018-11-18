@@ -33,17 +33,20 @@ private:
   typedef std::unordered_map<int, DSP*>                 DSPContainer;
   typedef std::unordered_map<int, SoundDSPInfoVector>   SoundDSPContainer;
   typedef std::unordered_map<int, SoundNameContainer>   SoundGroupContainer;
+  typedef std::unordered_map<int, HashString>           AliasContainer;
   typedef DSPContainer::iterator                        DSPIt;
   typedef SoundDSPInfoVector::iterator                  SoundDSPInfoVectorIt;
   typedef SoundDSPContainer::iterator                   SoundDSPContainerIt;
   typedef SoundNameContainer::iterator                  SoundNameContainerIt;
   typedef SoundGroupContainer::iterator                 SoundGroupContainerIt;
+  typedef AliasContainer::iterator                      AliasContainerIt;
 
   SoundSystem* mSoundSystem;
   DSPContainer mDSPContainer;
   SoundDSPContainer mSoundsToDSPs;
   SoundGroupContainer mSoundGroups;
   SoundDSPContainer mGroupsToDSPs;
+  AliasContainer mAliases;
 
   static unsigned const sUID;
 
@@ -55,6 +58,8 @@ public:
   ~SoundManager();
   
   // Sound init and play init
+  void LoadSoundBank(HashString const& aFilename, SoundSystem::SoundSource const &aSource = SoundSystem::SoundSource::DEFAULT);
+  void UnloadSoundBank(HashString const& aFilename);
   void CreateSound(HashString const& aFilename, HashString const &aAlias = "", float const &aDefaultVolume = 1.0f,
                    SoundSystem::SoundSource const &aSource = SoundSystem::SoundSource::DEFAULT);
   void DeleteSound(HashString const& aName);
@@ -69,6 +74,8 @@ public:
   void StopChannel(int const aChannel);
   void FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd);
   void DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels);
+  float GetChannelProperty(int const aChannel, HashString const &aName);
+  void SetChannelProperty(int const aChannel, HashString const &aName, float const aValue);
   void SetChannelFrequency(int const aChannel, float const aFrequency);
   void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
   void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
@@ -102,6 +109,15 @@ public:
   void AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupName, int const aIndex);
   void RemoveDSPFromChannel(DSP *aDSP, int const aChannel);
   void RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGroupName);
+  
+  // Buses
+  void SetBusMuteState(HashString const &aBusName, bool const aMute);
+  void SetBusPauseState(HashString const &aBusName, bool const aPause);
+  void SetBusVolume(HashString const &aBusName, float const aVolume);
+  void StopBus(HashString const &aBusName);
+  void FadeBus(HashString const &aBusName);
+  void LockBus(HashString const &aBusName);
+  void UnlockBus(HashString const &aBusName);
 
   virtual void        Update();
   virtual void        SendMessage(Message const &aMessage);
@@ -112,6 +128,7 @@ public:
   static void         SerializeLUA();
   
 private:
+  HashString          GetAliasIfAvailable(HashString const &aName);
   void                LoadSounds();
 };
 

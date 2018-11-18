@@ -24,7 +24,9 @@ public:
   virtual void Update(float const aDT) = 0;
   
   // Sound init and play init
-  virtual void CreateSound(HashString const& aFilename, HashString const& aAlias, float const &aDefaultVolume, SoundSource const& aSource) = 0;
+  virtual void LoadSoundBank(HashString const& aFilename, SoundSource const& aSource) = 0;
+  virtual void UnloadSoundBank(HashString const& aFilename) = 0;
+  virtual void CreateSound(HashString const& aFilename, float const &aDefaultVolume, SoundSource const& aSource) = 0;
   virtual void DeleteSound(HashString const& aName) = 0;
   virtual int PlaySound(HashString const& aName, int const aNumLoops) = 0;
   
@@ -37,6 +39,8 @@ public:
   virtual void StopChannel(int const aChannel) = 0;
   virtual void FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd) = 0;
   virtual void DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels) = 0;
+  virtual float GetChannelProperty(int const aChannel, HashString const &aName) = 0;
+  virtual void SetChannelProperty(int const aChannel, HashString const &aName, float const aValue) = 0;
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency) = 0;
   virtual void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos) = 0;
   virtual void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume) = 0;
@@ -68,6 +72,15 @@ public:
   virtual void AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupName, int const aIndex) = 0;
   virtual void RemoveDSPFromChannel(DSP *aDSP, int const aChannel) = 0;
   virtual void RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGroupName) = 0;
+  
+  // Buses
+  virtual void SetBusMuteState(HashString const &aBusName, bool const aMute) = 0;
+  virtual void SetBusPauseState(HashString const &aBusName, bool const aPause) = 0;
+  virtual void SetBusVolume(HashString const &aBusName, float const aVolume) = 0;
+  virtual void StopBus(HashString const &aBusName) = 0;
+  virtual void FadeBus(HashString const &aBusName) = 0;
+  virtual void LockBus(HashString const &aBusName) = 0;
+  virtual void UnlockBus(HashString const &aBusName) = 0;
 };
 
 #endif // __JFramework_SoundSystem_h_

@@ -75,13 +75,32 @@ void FMODSoundSystem::Update(float const aDT)
 }
 
 /**
+ * @brief Load sound bank
+ * @param aFilename
+ * @param aSource
+ */
+void FMODSoundSystem::LoadSoundBank(HashString const& aFilename, SoundSource const& aSource)
+{
+  // Does nothing
+}
+
+/**
+ * @brief Unload a sound bank
+ * @param aFilename
+ */
+void FMODSoundSystem::UnloadSoundBank(HashString const& aFilename)
+{
+  // Does nothing
+}
+
+/**
  * @brief Create sound
  * @param aFilename
  * @param aAlias
  * @param aDefaultVolume
  * @param aSource
  */
-void FMODSoundSystem::CreateSound(HashString const& aFilename, HashString const& aAlias, float const &aDefaultVolume, SoundSource const& aSource)
+void FMODSoundSystem::CreateSound(HashString const& aFilename, float const &aDefaultVolume, SoundSource const& aSource)
 {
   HashString fileName = Common::RelativePath("Sounds", aFilename);
   FMOD::Sound *sound;
@@ -100,14 +119,7 @@ void FMODSoundSystem::CreateSound(HashString const& aFilename, HashString const&
   }
   
   FMODSound *newSound = new FMODSound(sound, aDefaultVolume);
-  if(!aAlias.Empty())
-  {
-    mSoundContainer[aAlias.ToHash()] = newSound;
-  }
-  else
-  {
-    mSoundContainer[aFilename.ToHash()] = newSound;
-  }
+  mSoundContainer[aFilename.ToHash()] = newSound;
 }
 
 /**
@@ -241,6 +253,28 @@ void FMODSoundSystem::DelayChannel(int const aChannel, int const aStartDelay, in
   start += aStartDelay;
   end += aEndDelay;
   channel->setDelay(aStartDelay, aEndDelay, aStopChannels);
+}
+
+/**
+ * @brief Get channel property value.
+ * @param aChannel Channel id.
+ * @param aName Name of property.
+ * @return Property value.
+ */
+float FMODSoundSystem::GetChannelProperty(int const aChannel, HashString const &aName)
+{
+  return 0;
+}
+
+/**
+ * @brief Set channel property value.
+ * @param aChannel Channel id.
+ * @param aName Name of property.
+ * @param aValue Value of property.
+ */
+void FMODSoundSystem::SetChannelProperty(int const aChannel, HashString const &aName, float const aValue)
+{
+  // Does nothing
 }
 
 /**
@@ -752,4 +786,70 @@ void FMODSoundSystem::RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGr
   
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->removeDSP(mDSPContainer[aDSP->GetName().ToHash()]);
+}
+
+/**
+ * @brief Set bus mute state.
+ * @param aBusName Name of bus.
+ * @param aMute Mute state.
+ */
+void FMODSoundSystem::SetBusMuteState(HashString const &aBusName, bool const aMute)
+{
+  // Does nothing
+}
+
+/**
+ * @brief Set bus pause state.
+ * @param aBusName Name of bus.
+ * @param aPause Pause state.
+ */
+void FMODSoundSystem::SetBusPauseState(HashString const &aBusName, bool const aPause)
+{
+  // Does nothing
+}
+
+/**
+ * @brief Set bus volume.
+ * @param aBusName Name of bus.
+ * @param aVolume Volume level.
+ */
+void FMODSoundSystem::SetBusVolume(HashString const &aBusName, float const aVolume)
+{
+  // Does nothing
+}
+
+/**
+ * @brief Stop bus.
+ * @param aBusName Name of bus.
+ */
+void FMODSoundSystem::StopBus(HashString const &aBusName)
+{
+  // Does nothing
+}
+
+/**
+ * @brief Fade out bus.
+ * @param aBusName Name of bus.
+ */
+void FMODSoundSystem::FadeBus(HashString const &aBusName)
+{
+  // Does nothing
+}
+
+/**
+ * @brief Lock bus.
+ * @param aBusName Name of bus.
+ */
+void FMODSoundSystem::LockBus(HashString const &aBusName)
+{
+  // Does nothing
+}
+
+/**
+ * @brief Unlock bus.
+ * @param aBusName Name of bus.
+ */
+void FMODSoundSystem::UnlockBus(HashString const &aBusName)
+{
+  // Does nothing
 }

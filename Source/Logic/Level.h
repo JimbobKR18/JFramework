@@ -32,6 +32,7 @@ public:
   typedef std::map<HashString, HashString> SoundNameContainer;
   // Sound Channel -> Sound Name
   typedef std::map<int, HashString> SoundChannelContainer;
+  typedef std::set<HashString> SoundBankContainer;
   typedef std::vector<ObjectContainer> ObjectContainerMap;
   typedef std::vector<TileMapGenerator*> TileMapGeneratorContainer;
   typedef ObjectContainer::iterator ObjectIT;
@@ -44,6 +45,8 @@ public:
   typedef SoundChannelContainer::const_iterator ConstSoundChannelContainerIT;
   typedef SoundNameContainer::iterator SoundNameContainerIT;
   typedef SoundNameContainer::const_iterator ConstSoundNameContainerIT;
+  typedef SoundBankContainer::iterator SoundBankContainerIT;
+  typedef SoundBankContainer::const_iterator ConstSoundBankContainerIT;
 
 private:
   HashString                 mName;
@@ -55,6 +58,7 @@ private:
   TileMapGeneratorContainer  mGenerators;
   GameObject*                mFocusTarget;
   Vector4                    mClearColor;
+  SoundBankContainer         mSoundBanks;
   SoundChannelContainer      mSoundChannels;
   std::unordered_set<int>    mUnsortedLayers;
 
@@ -73,6 +77,7 @@ public:
   SoundNameContainer GetSoundNames() const;
   LevelManager* GetManager() const;
   SoundChannelContainer GetSoundChannels() const;
+  SoundBankContainer GetSoundBanks() const;
 
   TileMapGenerator* GetTileMap(int const aIndex = 0) const;
   GameObject*       GetFocusTarget() const;

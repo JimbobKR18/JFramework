@@ -58,13 +58,11 @@ void FMODStudioSoundSystem::Update(float const aDT)
 }
 
 /**
- * @brief Create sound
+ * @brief Load sound bank
  * @param aFilename
- * @param aAlias
- * @param aDefaultVolume
  * @param aSource
  */
-void FMODStudioSoundSystem::CreateSound(HashString const& aFilename, HashString const& aAlias, float const &aDefaultVolume, SoundSource const& aSource)
+void FMODStudioSoundSystem::LoadSoundBank(HashString const& aFilename, SoundSource const& aSource)
 {
   HashString fileName = Common::RelativePath("Sounds", aFilename);
   FMOD::Studio::Bank *bank = nullptr;
@@ -91,13 +89,38 @@ void FMODStudioSoundSystem::CreateSound(HashString const& aFilename, HashString 
     assert(!"FMOD failed to create sound.");
   }
   
-  if(!aAlias.Empty())
+  mBanks[aFilename.ToHash()] = bank;
+}
+
+/**
+ * @brief Unload a sound bank
+ * @param aFilename
+ */
+void FMODStudioSoundSystem::UnloadSoundBank(HashString const& aFilename)
+{
+  if(mBanks.find(aFilename.ToHash()) == mBanks.end())
   {
-    mBanks[aAlias.ToHash()] = bank;
+    assert(!"Sound bank not found.");
   }
-  else
+  
+  mBanks[aFilename.ToHash()]->unload();
+}
+
+/**
+ * @brief Create sound
+ * @param aFilename
+ * @param aAlias
+ * @param aDefaultVolume
+ * @param aSource
+ */
+void FMODStudioSoundSystem::CreateSound(HashString const& aFilename, float const &aDefaultVolume, SoundSource const& aSource)
+{
+  int key = aFilename.ToHash();
+  if(mEventDescriptions.find(key) == mEventDescriptions.end())
   {
-    mBanks[aFilename.ToHash()] = bank;
+    FMOD::Studio::EventDescription* description = nullptr;
+    mFMODStudioSystem->getEvent(aFilename.ToCharArray(), &description);
+    mEventDescriptions[key] = description;
   }
 }
 
@@ -183,7 +206,11 @@ void FMODStudioSoundSystem::PauseChannel(int const aChannel)
  */
 void FMODStudioSoundSystem::SetMasterVolume(float const aVolume)
 {
-  // TODO
+  for(EventInstanceIt it = mEventInstances.begin(); it != mEventInstances.end();)
+  {
+    // TODO maintain volume balance
+    it->second->setVolume(aVolume);
+  }
 }
 
 /**
@@ -256,6 +283,43 @@ void FMODStudioSoundSystem::FadeChannel(int const aChannel, int const aTime, flo
  */
 void FMODStudioSoundSystem::DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels)
 {
+  // Does nothing
+}
+
+/**
+ * @brief Get channel property value.
+ * @param aChannel Channel id.
+ * @param aName Name of property.
+ * @return Property value.
+ */
+float FMODStudioSoundSystem::GetChannelProperty(int const aChannel, HashString const &aName)
+{
+  if(mEventInstances.find(aChannel) == mEventInstances.end())
+  {
+    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    return 0;
+  }
+  
+  float value = 0;
+  mEventInstances[aChannel]->getParameterValue(aName.ToCharArray(), &value, nullptr);
+  return value;
+}
+
+/**
+ * @brief Set channel property value.
+ * @param aChannel Channel id.
+ * @param aName Name of property.
+ * @param aValue Value of property.
+ */
+void FMODStudioSoundSystem::SetChannelProperty(int const aChannel, HashString const &aName, float const aValue)
+{
+  if(mEventInstances.find(aChannel) == mEventInstances.end())
+  {
+    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    return;
+  }
+  
+  mEventInstances[aChannel]->setParameterValue(aName.ToCharArray(), aValue);
 }
 
 /**
@@ -584,4 +648,126 @@ void FMODStudioSoundSystem::RemoveDSPFromChannel(DSP *aDSP, int const aChannel)
  */
 void FMODStudioSoundSystem::RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGroupName)
 {
+}
+
+/**
+ * @brief Set bus mute state.
+ * @param aBusName Name of bus.
+ * @param aMute Mute state.
+ */
+void FMODStudioSoundSystem::SetBusMuteState(HashString const &aBusName, bool const aMute)
+{
+  FMOD::Studio::Bus *bus = nullptr;
+  mFMODStudioSystem->getBus(aBusName.ToCharArray(), &bus);
+  if(bus == nullptr)
+  {
+    DebugLogPrint("Bus %s not found.", aBusName.ToCharArray());
+    return;
+  }
+  
+  bus->setMute(aMute);
+}
+
+/**
+ * @brief Set bus pause state.
+ * @param aBusName Name of bus.
+ * @param aPause Pause state.
+ */
+void FMODStudioSoundSystem::SetBusPauseState(HashString const &aBusName, bool const aPause)
+{
+  FMOD::Studio::Bus *bus = nullptr;
+  mFMODStudioSystem->getBus(aBusName.ToCharArray(), &bus);
+  if(bus == nullptr)
+  {
+    DebugLogPrint("Bus %s not found.", aBusName.ToCharArray());
+    return;
+  }
+  
+  bus->setPaused(aPause);
+}
+
+/**
+ * @brief Set bus volume.
+ * @param aBusName Name of bus.
+ * @param aVolume Volume level.
+ */
+void FMODStudioSoundSystem::SetBusVolume(HashString const &aBusName, float const aVolume)
+{
+  FMOD::Studio::Bus *bus = nullptr;
+  mFMODStudioSystem->getBus(aBusName.ToCharArray(), &bus);
+  if(bus == nullptr)
+  {
+    DebugLogPrint("Bus %s not found.", aBusName.ToCharArray());
+    return;
+  }
+  
+  bus->setVolume(aVolume);
+}
+
+/**
+ * @brief Stop bus.
+ * @param aBusName Name of bus.
+ */
+void FMODStudioSoundSystem::StopBus(HashString const &aBusName)
+{
+  FMOD::Studio::Bus *bus = nullptr;
+  mFMODStudioSystem->getBus(aBusName.ToCharArray(), &bus);
+  if(bus == nullptr)
+  {
+    DebugLogPrint("Bus %s not found.", aBusName.ToCharArray());
+    return;
+  }
+  
+  bus->stopAllEvents(FMOD_STUDIO_STOP_IMMEDIATE);
+}
+
+/**
+ * @brief Fade out bus.
+ * @param aBusName Name of bus.
+ */
+void FMODStudioSoundSystem::FadeBus(HashString const &aBusName)
+{
+  FMOD::Studio::Bus *bus = nullptr;
+  mFMODStudioSystem->getBus(aBusName.ToCharArray(), &bus);
+  if(bus == nullptr)
+  {
+    DebugLogPrint("Bus %s not found.", aBusName.ToCharArray());
+    return;
+  }
+  
+  bus->stopAllEvents(FMOD_STUDIO_STOP_ALLOWFADEOUT);
+}
+
+/**
+ * @brief Lock bus.
+ * @param aBusName Name of bus.
+ */
+void FMODStudioSoundSystem::LockBus(HashString const &aBusName)
+{
+  FMOD::Studio::Bus *bus = nullptr;
+  mFMODStudioSystem->getBus(aBusName.ToCharArray(), &bus);
+  if(bus == nullptr)
+  {
+    DebugLogPrint("Bus %s not found.", aBusName.ToCharArray());
+    return;
+  }
+  
+  bus->lockChannelGroup();
+}
+
+/**
+ * @brief Unlock bus.
+ * @param aBusName Name of bus.
+ */
+void FMODStudioSoundSystem::UnlockBus(HashString const &aBusName)
+{
+  FMOD::Studio::Bus *bus = nullptr;
+  mFMODStudioSystem->getBus(aBusName.ToCharArray(), &bus);
+  if(bus == nullptr)
+  {
+    DebugLogPrint("Bus %s not found.", aBusName.ToCharArray());
+    return;
+  }
+  
+  bus->unlockChannelGroup();
 }

@@ -15,7 +15,7 @@
 
 unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
 SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr), 
-  mDSPContainer(), mSoundsToDSPs(), mSoundGroups()
+  mDSPContainer(), mSoundsToDSPs(), mSoundGroups(), mAliases()
 {
 #if !defined(ANDROID) && !defined(IOS)
   mSoundSystem = new FMODSoundSystem();
@@ -50,6 +50,25 @@ SoundManager::~SoundManager()
 }
 
 /**
+ * @brief Load sound bank.
+ * @param aFilename
+ * @param aSource
+ */
+void SoundManager::LoadSoundBank(HashString const& aFilename, SoundSystem::SoundSource const& aSource)
+{
+  mSoundSystem->LoadSoundBank(aFilename, aSource);
+}
+
+/**
+ * @brief Unload sound bank.
+ * @param aFilename
+ */
+void SoundManager::UnloadSoundBank(HashString const& aFilename)
+{
+  mSoundSystem->UnloadSoundBank(aFilename);
+}
+
+/**
  * @brief Create a sound by filename.
  * @param aFilename
  * @param aAlias
@@ -58,7 +77,11 @@ SoundManager::~SoundManager()
  */
 void SoundManager::CreateSound(HashString const &aFilename, HashString const &aAlias, float const &aDefaultVolume, SoundSystem::SoundSource const &aSource)
 {
-  mSoundSystem->CreateSound(aFilename, aAlias, aDefaultVolume, aSource);
+  mSoundSystem->CreateSound(aFilename, aDefaultVolume, aSource);
+  if(!aAlias.Empty())
+  {
+    mAliases[aAlias.ToHash()] = aFilename;
+  }
 }
 
 /**
@@ -67,24 +90,25 @@ void SoundManager::CreateSound(HashString const &aFilename, HashString const &aA
  */
 void SoundManager::DeleteSound(HashString const &aName)
 {
-  mSoundSystem->DeleteSound(aName);
+  HashString name = GetAliasIfAvailable(aName);
+  mSoundSystem->DeleteSound(name);
   
   // Erase all occurrences of sound to dsp linkage.
-  if(mSoundsToDSPs.find(aName.ToHash()) != mSoundsToDSPs.end())
+  if(mSoundsToDSPs.find(name.ToHash()) != mSoundsToDSPs.end())
   {
-    SoundDSPInfoVector dsps = mSoundsToDSPs[aName.ToHash()];
+    SoundDSPInfoVector dsps = mSoundsToDSPs[name.ToHash()];
     for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
     {
       delete *it;
     }
     dsps.clear();
-    mSoundsToDSPs.erase(aName.ToHash());
+    mSoundsToDSPs.erase(name.ToHash());
   }
   
   // Erase all occurrences in sound groups.
   for(SoundGroupContainerIt it = mSoundGroups.begin(); it != mSoundGroups.end(); ++it)
   {
-    it->second.erase(aName);
+    it->second.erase(name);
   }
 }
 
@@ -96,10 +120,11 @@ void SoundManager::DeleteSound(HashString const &aName)
  */
 int SoundManager::PlaySound(HashString const &aName, int const aNumLoops)
 {
-  int channel = mSoundSystem->PlaySound(aName, aNumLoops);
-  if(mSoundsToDSPs.find(aName.ToHash()) != mSoundsToDSPs.end())
+  HashString name = GetAliasIfAvailable(aName);
+  int channel = mSoundSystem->PlaySound(name, aNumLoops);
+  if(mSoundsToDSPs.find(name.ToHash()) != mSoundsToDSPs.end())
   {
-    SoundDSPInfoVector dsps = mSoundsToDSPs[aName.ToHash()];
+    SoundDSPInfoVector dsps = mSoundsToDSPs[name.ToHash()];
     for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
     {
       SoundDSPInfo* info = *it;
@@ -189,6 +214,28 @@ void SoundManager::FadeChannel(int const aChannel, int const aTime, float const 
 void SoundManager::DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels)
 {
   mSoundSystem->DelayChannel(aChannel, aStartDelay, aEndDelay, aStopChannels);
+}
+
+/**
+ * @brief Get channel property value.
+ * @param aChannel Channel id.
+ * @param aName Name of property.
+ * @return Property value.
+ */
+float SoundManager::GetChannelProperty(int const aChannel, HashString const &aName)
+{
+  return mSoundSystem->GetChannelProperty(aChannel, aName);
+}
+
+/**
+ * @brief Set channel property value.
+ * @param aChannel Channel id.
+ * @param aName Name of property.
+ * @param aValue Value of property.
+ */
+void SoundManager::SetChannelProperty(int const aChannel, HashString const &aName, float const aValue)
+{
+  mSoundSystem->SetChannelProperty(aChannel, aName, aValue);
 }
 
 /**
@@ -453,6 +500,11 @@ void SoundManager::SetChannelGroup3DSpread(HashString const &aGroupName, float c
 DSP* SoundManager::CreateDSP(HashString const &aName, DSP_Type const &aType)
 {
   DSP *dsp = mSoundSystem->CreateDSP(aName, aType);
+  if(!dsp)
+  {
+    return nullptr;
+  }
+  
   mDSPContainer[dsp->GetName().ToHash()] = dsp;
   return dsp;
 }
@@ -585,6 +637,72 @@ void SoundManager::RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGroup
 }
 
 /**
+ * @brief Set bus mute state.
+ * @param aBusName Name of bus.
+ * @param aMute Mute state.
+ */
+void SoundManager::SetBusMuteState(HashString const &aBusName, bool const aMute)
+{
+  mSoundSystem->SetBusMuteState(aBusName, aMute);
+}
+
+/**
+ * @brief Set bus pause state.
+ * @param aBusName Name of bus.
+ * @param aPause Pause state.
+ */
+void SoundManager::SetBusPauseState(HashString const &aBusName, bool const aPause)
+{
+  mSoundSystem->SetBusPauseState(aBusName, aPause);
+}
+
+/**
+ * @brief Set bus volume.
+ * @param aBusName Name of bus.
+ * @param aVolume Volume level.
+ */
+void SoundManager::SetBusVolume(HashString const &aBusName, float const aVolume)
+{
+  mSoundSystem->SetBusVolume(aBusName, aVolume);
+}
+
+/**
+ * @brief Stop bus.
+ * @param aBusName Name of bus.
+ */
+void SoundManager::StopBus(HashString const &aBusName)
+{
+  mSoundSystem->StopBus(aBusName);
+}
+
+/**
+ * @brief Fade out bus.
+ * @param aBusName Name of bus.
+ */
+void SoundManager::FadeBus(HashString const &aBusName)
+{
+  mSoundSystem->FadeBus(aBusName);
+}
+
+/**
+ * @brief Lock bus.
+ * @param aBusName Name of bus.
+ */
+void SoundManager::LockBus(HashString const &aBusName)
+{
+  mSoundSystem->LockBus(aBusName);
+}
+
+/**
+ * @brief Unlock bus.
+ * @param aBusName Name of bus.
+ */
+void SoundManager::UnlockBus(HashString const &aBusName)
+{
+  mSoundSystem->UnlockBus(aBusName);
+}
+
+/**
  * @brief Update loop.
  */
 void SoundManager::Update()
@@ -623,11 +741,27 @@ void SoundManager::SerializeLUA()
 }
 
 /**
+ * @brief Get alias if available for name.
+ * @param aName
+ * @return 
+ */
+HashString SoundManager::GetAliasIfAvailable(HashString const &aName)
+{
+  if(mAliases.find(aName.ToHash()) == mAliases.end())
+  {
+    return aName;
+  }
+  return mAliases[aName.ToHash()];
+}
+
+/**
  * @brief Load sounds from SoundAliases.txt file.
  */
 void SoundManager::LoadSounds()
 {
   int index = 0;
+  HashString const bankStr = "Bank_";
+  HashString const aliasStr = "Alias_";
   HashString const soundStr = "Sound_";
   HashString const dspStr = "DSP_";
   HashString const groupStr = "Group_";
@@ -792,10 +926,43 @@ void SoundManager::LoadSounds()
       DebugLogPrint("Invalid DSP type %s passed in.", type.ToCharArray());
       assert(!"Invalid DSP type passed in.");
     }
-    dsp->Deserialize(curDsp);
+    
+    if(dsp)
+    {
+      dsp->Deserialize(curDsp);
+    }
     
     ++index;
     curIndex = dspStr + Common::IntToString(index);
+  }
+  
+  // Banks
+  index = 0;
+  curIndex = bankStr + Common::IntToString(index);
+  while(head->Find(curIndex))
+  {
+    ParserNode *curBank = head->Find(curIndex);
+    SoundSystem::SoundSource source = SoundSystem::SoundSource::DEFAULT;
+    
+    HashString fileName = curBank->Find("File")->GetValue();
+    if(curBank->Find("Source") && curBank->Find("Source")->GetValue() == "Stream")
+      source = SoundSystem::SoundSource::STREAM;
+    else if(curBank->Find("Source") && curBank->Find("Source")->GetValue() == "Nonblocking")
+      source = SoundSystem::SoundSource::NONBLOCKING;
+    else if(curBank->Find("Source") && curBank->Find("Source")->GetValue() == "Decompress")
+      source = SoundSystem::SoundSource::DECOMPRESS;
+    LoadSoundBank(fileName, source);
+  }
+  
+  // Aliases
+  index = 0;
+  curIndex = aliasStr + Common::IntToString(index);
+  while(head->Find(curIndex))
+  {
+    ParserNode *curAlias = head->Find(curIndex);
+    HashString key = curAlias->Find("Alias")->GetValue();
+    HashString value = curAlias->Find("Filename")->GetValue();
+    mAliases[key.ToHash()] = value;
   }
   
   // Sound aliasing
@@ -810,6 +977,10 @@ void SoundManager::LoadSounds()
     HashString name = curSound->Find("Name")->GetValue();
     if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Stream")
       source = SoundSystem::SoundSource::STREAM;
+    else if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Nonblocking")
+      source = SoundSystem::SoundSource::NONBLOCKING;
+    else if(curSound->Find("Source") && curSound->Find("Source")->GetValue() == "Decompress")
+      source = SoundSystem::SoundSource::DECOMPRESS;
     if(curSound->Find("Volume"))
       volume = curSound->Find("Volume")->GetValue().ToFloat();
     CreateSound(curSound->Find("File")->GetValue(), name, volume, source);

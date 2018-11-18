@@ -42,7 +42,9 @@ public:
   virtual void Update(float const aDT);
   
   // Sound init and play init
-  virtual void CreateSound(HashString const& aFilename, HashString const& aAlias, float const &aDefaultVolume, SoundSource const& aSource);
+  virtual void LoadSoundBank(HashString const& aFilename, SoundSource const& aSource);
+  virtual void UnloadSoundBank(HashString const& aFilename);
+  virtual void CreateSound(HashString const& aFilename, float const &aDefaultVolume, SoundSource const& aSource);
   virtual void DeleteSound(HashString const& aName);
   virtual int PlaySound(HashString const& aName, int const aNumLoops);
   
@@ -55,6 +57,8 @@ public:
   virtual void StopChannel(int const aChannel);
   virtual void FadeChannel(int const aChannel, int const aTime, float const aStart, float const aEnd);
   virtual void DelayChannel(int const aChannel, int const aStartDelay, int const aEndDelay, bool const aStopChannels);
+  virtual float GetChannelProperty(int const aChannel, HashString const &aName);
+  virtual void SetChannelProperty(int const aChannel, HashString const &aName, float const aValue);
   virtual void SetChannelFrequency(int const aChannel, float const aFrequency);
   virtual void SetChannel3DAttributes(int const aChannel, Vector3 const &aPos, Vector3 const &aVel, Vector3 const &aAltPanPos);
   virtual void SetChannel3DCone(int const aChannel, Vector3 const &aOrientation, float const aInsideAngle, float const aOutsideAngle, float const aOutsideVolume);
@@ -86,6 +90,15 @@ public:
   virtual void AddDSPToChannelGroup(DSP *aDSP, HashString const& aGroupName, int const aIndex);
   virtual void RemoveDSPFromChannel(DSP *aDSP, int const aChannel);
   virtual void RemoveDSPFromChannelGroup(DSP *aDSP, HashString const& aGroupName);
+  
+  // Buses
+  virtual void SetBusMuteState(HashString const &aBusName, bool const aMute);
+  virtual void SetBusPauseState(HashString const &aBusName, bool const aPause);
+  virtual void SetBusVolume(HashString const &aBusName, float const aVolume);
+  virtual void StopBus(HashString const &aBusName);
+  virtual void FadeBus(HashString const &aBusName);
+  virtual void LockBus(HashString const &aBusName);
+  virtual void UnlockBus(HashString const &aBusName);
 };
 
 #endif // FMODSTUDIOSOUNDSYSTEM_H
