@@ -144,6 +144,6 @@ namespace ShapeMath
    */
   Vector3 GetLocalCoordinates(Transform *aTransform, Vector3 const &aLocalPosition)
   {
-    return aTransform->GetHierarchicalPosition() + aLocalPosition.Multiply(aTransform->GetHierarchicalRotation() * aTransform->GetHierarchicalScale());
+    return aTransform->GetHierarchicalPosition() + Matrix33(aTransform->GetHierarchicalScale()) * aTransform->GetHierarchicalRotation() * aLocalPosition;
   }
 }

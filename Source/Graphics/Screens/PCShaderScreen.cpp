@@ -106,9 +106,10 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       Transform *transform = obj->GET<Transform>();
       PhysicsObject *physicsObject = obj->GET<PhysicsObject>();
       Vector3 position = transform->GetHierarchicalPosition();
-      Vector3 scale = transform->GetHierarchicalScale();
+      Matrix33 scale = Matrix33(transform->GetHierarchicalScale());
       Vector3 broadSize = physicsObject->GetBroadSize();
       Matrix33 rotation = transform->GetHierarchicalRotation();
+      Matrix33 modelMatrix = scale * rotation;
 
       if((*it)->GetViewMode() == VIEW_ABSOLUTE)
       {
@@ -139,24 +140,24 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           
         if((*it)->shape == Shape::SPHERE)
         {
-          Vector3 spherePos = position + (*it)->position.Multiply(rotation * scale);
+          Vector3 spherePos = position + (modelMatrix * (*it)->position);
           glBegin(GL_LINE_STRIP);
           
           // Rotate in a circle
           for(int i = 0; i < 360; ++i)
           {
             float radians = i * DEGREE_TO_RADS;
-            float x = (*it)->GetSize(0) * cos(radians) * scale.x;
-            float y = (*it)->GetSize(1) * sin(radians) * scale.y;
+            float x = (*it)->GetSize(0) * cos(radians) * scale.values[0][0];
+            float y = (*it)->GetSize(1) * sin(radians) * scale.values[1][1];
             glVertex3f(spherePos.x + x, spherePos.y + y, spherePos.z);
           }
           glEnd();
         }
         else if((*it)->shape == Shape::AABB)
         {
-          Vector3 cubePos = position + (*it)->position.Multiply(rotation * scale);
-          float xSize = (*it)->GetSize(0) * scale.x;
-          float ySize = (*it)->GetSize(1) * scale.y;
+          Vector3 cubePos = position + (modelMatrix * (*it)->position);
+          float xSize = (*it)->GetSize(0) * scale.values[0][0];
+          float ySize = (*it)->GetSize(1) * scale.values[1][1];
           
           // Physics Box Line
           glBegin(GL_LINE_STRIP);
@@ -170,22 +171,22 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         else if((*it)->shape == Shape::TRIANGLE)
         {
           Triangle* triangle = (Triangle*)(*it);
-          Vector3 triPos = position + (*it)->position.Multiply(rotation * scale);
+          Vector3 triPos = position + (modelMatrix * (*it)->position);
           glBegin(GL_LINE_STRIP);
           for(int i = 0; i < 3; ++i)
           {
-            Vector3 point = triPos + triangle->GetPoint(i).Multiply(rotation * scale);
+            Vector3 point = triPos + (modelMatrix* triangle->GetPoint(i));
             glVertex3f(point.x, point.y, point.z);
           }
-          Vector3 point = triPos + triangle->GetPoint(0).Multiply(rotation * scale);
+          Vector3 point = triPos + (modelMatrix * triangle->GetPoint(0));
           glVertex3f(point.x, point.y, point.z);
           glEnd();
         }
         else if((*it)->shape == Shape::LINE)
         {
           Line *line = (Line*)(*it);
-          Vector3 linePos = position + (*it)->position.Multiply(scale);
-          Vector3 lineEnd = linePos + line->direction.Multiply(scale) * line->length;
+          Vector3 linePos = position + scale * (*it)->position;
+          Vector3 lineEnd = linePos + scale * line->direction * line->length;
           glBegin(GL_LINE_STRIP);
           glVertex3f(linePos.x, linePos.y, linePos.z);
           glVertex3f(lineEnd.x, lineEnd.y, lineEnd.z);
@@ -194,9 +195,9 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
         else if((*it)->shape == Shape::OBB)
         {
           OrientedBoundingBox *obb = (OrientedBoundingBox*)(*it);
-          Vector3 cubePos = position + (*it)->position.Multiply(rotation * scale);
-          Vector3 extent0 = rotation * scale.Multiply(obb->GetAxis(0) * obb->GetSize(0));
-          Vector3 extent1 = rotation * scale.Multiply(obb->GetAxis(1) * obb->GetSize(1));
+          Vector3 cubePos = position + (modelMatrix * (*it)->position);
+          Vector3 extent0 = rotation * scale * obb->GetAxis(0) * obb->GetSize(0);
+          Vector3 extent1 = rotation * scale * obb->GetAxis(1) * obb->GetSize(1);
           Vector3 pt1 = extent0 + extent1;
           Vector3 pt2 = extent0 - extent1;
           
