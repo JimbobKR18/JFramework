@@ -448,6 +448,15 @@ float HashString::ToFloat() const
 }
 
 /**
+ * @brief Convert to Double
+ * @return String as an double, "0.0" is 0.0, "1.1" is 1.1 etc.
+ */
+double HashString::ToDouble() const
+{
+  return Common::StringToDouble(mString);
+}
+
+/**
  * @brief Convert to Bool
  * @return String as an bool, "true" is true, anything else is false
  */
@@ -499,6 +508,15 @@ std::vector<int> HashString::ToIntVector() const
 std::vector<float> HashString::ToFloatVector() const
 {
   return Common::StringToFloatVector(mString);
+}
+
+/**
+ * @brief Convert to double vector, split by ","
+ * @return String as double vector
+ */
+std::vector<double> HashString::ToDoubleVector() const
+{
+  return Common::StringToDoubleVector(mString);
 }
 
 /**

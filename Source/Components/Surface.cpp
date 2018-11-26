@@ -352,8 +352,8 @@ void Surface::Serialize(ParserNode *aNode)
   surface->Place("Animated", Common::BoolToString(animated));
   surface->Place("NoRender", Common::BoolToString(mNoRender));
   surface->Place("StartingAnimation", Common::IntToString(currentAnimation));
-  surface->Place("XBias", Common::FloatToString(mTexCoord->GetBias(0)));
-  surface->Place("YBias", Common::FloatToString(mTexCoord->GetBias(1)));
+  surface->Place("XBias", Common::DoubleToString(mTexCoord->GetBias(0)));
+  surface->Place("YBias", Common::DoubleToString(mTexCoord->GetBias(1)));
   for(int i = 0; i < 4; ++i)
   {
     surface->Place(values[i], Common::IntToString(mPrimaryColor[i]));
@@ -429,8 +429,8 @@ void Surface::Deserialize(ParserNode *aNode)
   bool frameBased = false;
   int numAnimations = 1;
   int startingAnimation = 0;
-  float xBias = 0;
-  float yBias = 0;
+  double xBias = 0;
+  double yBias = 0;
   std::vector<TextureCoordinates::SpeedContainer> animationSpeed;
   std::vector<int> numFrames;
   numFrames.push_back(1);
@@ -626,11 +626,11 @@ void Surface::Deserialize(ParserNode *aNode)
   }
   if(aNode->Find("XBias"))
   {
-    xBias = aNode->Find("XBias")->GetValue().ToFloat();
+    xBias = aNode->Find("XBias")->GetValue().ToDouble();
   }
   if(aNode->Find("YBias"))
   {
-    yBias = aNode->Find("YBias")->GetValue().ToFloat();
+    yBias = aNode->Find("YBias")->GetValue().ToDouble();
   }
   if(aNode->Find("MinFilter"))
   {

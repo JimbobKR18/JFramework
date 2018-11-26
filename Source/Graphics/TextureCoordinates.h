@@ -48,11 +48,11 @@ private:
   int                         mYSize;
   int                         mMaxFrames;
   float                       mCurTime;
-  float                       mXGain[2];
-  float                       mYGain[2];
-  float                       mXValues[2];
-  float                       mYValues[2];
-  float                       mBias[2];
+  double                      mXGain[2];
+  double                      mYGain[2];
+  double                      mXValues[2];
+  double                      mYValues[2];
+  double                      mBias[2];
   bool                        mAnimated;
   bool                        mCompleted;
   
@@ -74,11 +74,11 @@ public:
   void  Update(float aDT);
 
   // GETTERS
-  float GetXValue(int const aIndex) const;
-  float GetYValue(int const aIndex) const;
-  float GetXSize() const;
-  float GetYSize() const;
-  float GetBias(int const aIndex) const;
+  double GetXValue(int const aIndex) const;
+  double GetYValue(int const aIndex) const;
+  int    GetXSize() const;
+  int    GetYSize() const;
+  double GetBias(int const aIndex) const;
   float GetCurrentAnimationSpeed() const;
   int   GetCurrentAnimation() const;
   AnimationInfoContainer GetPreviousAnimations() const;
@@ -101,9 +101,9 @@ public:
   void  SetAnimated(bool const aAnimated);
   void  SetBehavior(TextureCoordinateBehavior const aBehavior);
   void  SetCurrentAnimationSpeed(float const aSpeed);
-  void  SetXGain(int const aIndex, float const aX);
-  void  SetYGain(int const aIndex, float const aY);
-  void  SetBias(int const aIndex, float const aBias);
+  void  SetXGain(int const aIndex, double const aX);
+  void  SetYGain(int const aIndex, double const aY);
+  void  SetBias(int const aIndex, double const aBias);
 
   // HELPERS
   void  Finish();

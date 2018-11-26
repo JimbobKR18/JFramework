@@ -82,12 +82,14 @@ public:
   char const* ToCharArray() const;
   int ToInt() const;
   float ToFloat() const;
+  double ToDouble() const;
   bool ToBool() const;
   int ToHash() const;
   std::vector<HashString> ToHashStringVector() const;
   std::vector<std::string> ToStringVector() const;
   std::vector<int> ToIntVector() const;
   std::vector<float> ToFloatVector() const;
+  std::vector<double> ToDoubleVector() const;
   std::vector<bool> ToBoolVector() const;
   std::set<int> ToIntSet() const;
   std::set<HashString> ToHashStringSet() const;

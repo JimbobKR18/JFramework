@@ -52,6 +52,16 @@ namespace Common
     float ret = atof(aValue.c_str());
     return ret;
   }
+  
+  /**
+   * @brief Converts String to Double
+   * @param aValue
+   */
+  double StringToDouble(std::string const &aValue)
+  {
+    double ret = atof(aValue.c_str());
+    return ret;
+  }
 
   /**
    * @brief Converts String to Boolean, hard set to look for "true"
@@ -94,6 +104,27 @@ namespace Common
     std::istringstream stream(aValue);
     
     float value;
+    
+    while(!stream.eof())
+    {
+      stream >> value;
+      ret.push_back(value);
+      stream.ignore();
+    }
+    
+    return ret;
+  }
+  
+  /**
+   * @brief Converts String to Double Vector
+   * @param aValue
+   */
+  std::vector<double> StringToDoubleVector(std::string const &aValue)
+  {
+    std::vector<double> ret;
+    std::istringstream stream(aValue);
+    
+    double value;
     
     while(!stream.eof())
     {
@@ -265,6 +296,17 @@ namespace Common
     stream << aValue;
     return stream.str();
   }
+  
+  /**
+   * @brief Converts Double to String
+   * @param aValue
+   */
+  std::string DoubleToString(double const aValue)
+  {
+    std::ostringstream stream;
+    stream << aValue;
+    return stream.str();
+  }
 
   /**
    * @brief Converts Boolean to String
@@ -307,6 +349,26 @@ namespace Common
     std::string ret;
     std::vector<float>::iterator end = aValue.end();
     for(std::vector<float>::iterator it = aValue.begin(); it != end; ++it)
+    {
+      std::ostringstream stream;
+      stream << *it;
+      ret += stream.str();
+      ret += ",";
+    }
+    ret = ret.substr(0, ret.size() - 1);
+
+    return ret;
+  }
+  
+  /**
+   * @brief Converts Double Vector to String (comma separated)
+   * @param aValue
+   */
+  std::string DoubleVectorToString(std::vector<double> &aValue)
+  {
+    std::string ret;
+    std::vector<double>::iterator end = aValue.end();
+    for(std::vector<double>::iterator it = aValue.begin(); it != end; ++it)
     {
       std::ostringstream stream;
       stream << *it;

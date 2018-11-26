@@ -89,8 +89,8 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
   }
   
   // Figure out the gain per step of animation
-  mXGain[0] = mXGain[1] = 1.0f / (float)mMaxFrames;
-  mYGain[0] = mYGain[1] = 1.0f / (float)aNumAnimations;
+  mXGain[0] = mXGain[1] = 1.0f / (double)mMaxFrames;
+  mYGain[0] = mYGain[1] = 1.0f / (double)aNumAnimations;
   mBias[0] = 0;
   mBias[1] = 0;
   
@@ -158,7 +158,7 @@ void TextureCoordinates::Update(float aDT)
  * @param aIndex 0 for left, 1 for right.
  * @return 
  */
-float TextureCoordinates::GetXValue(int const aIndex) const
+double TextureCoordinates::GetXValue(int const aIndex) const
 {
   return mXValues[aIndex];
 }
@@ -168,7 +168,7 @@ float TextureCoordinates::GetXValue(int const aIndex) const
  * @param aIndex 0 for top, 1 for bottom.
  * @return 
  */
-float TextureCoordinates::GetYValue(int const aIndex) const
+double TextureCoordinates::GetYValue(int const aIndex) const
 {
   return mYValues[aIndex];
 }
@@ -177,7 +177,7 @@ float TextureCoordinates::GetYValue(int const aIndex) const
  * @brief Return X size of texture.
  * @return X size of texture.
  */
-float TextureCoordinates::GetXSize() const
+int TextureCoordinates::GetXSize() const
 {
   return mXSize;
 }
@@ -186,7 +186,7 @@ float TextureCoordinates::GetXSize() const
  * @brief Return Y size of texture.
  * @return Y size of texture.
  */
-float TextureCoordinates::GetYSize() const
+int TextureCoordinates::GetYSize() const
 {
   return mYSize;
 }
@@ -196,7 +196,7 @@ float TextureCoordinates::GetYSize() const
  * @param aIndex 0 for X, 1 for Y.
  * @return Bias.
  */
-float TextureCoordinates::GetBias(int const aIndex) const
+double TextureCoordinates::GetBias(int const aIndex) const
 {
   return mBias[aIndex];
 }
@@ -456,7 +456,7 @@ void TextureCoordinates::SetCurrentAnimationSpeed(float const aSpeed)
  * @param aIndex 0 for left, 1 for right.
  * @param aX The gain.
  */
-void TextureCoordinates::SetXGain(int const aIndex, float const aXGain)
+void TextureCoordinates::SetXGain(int const aIndex, double const aXGain)
 {
   mXGain[aIndex] = aXGain;
 }
@@ -466,7 +466,7 @@ void TextureCoordinates::SetXGain(int const aIndex, float const aXGain)
  * @param aIndex 0 for top, 1 for bottom.
  * @param aY The gain.
  */
-void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
+void TextureCoordinates::SetYGain(int const aIndex, double const aYGain)
 {
   mYGain[aIndex] = aYGain;
 }
@@ -476,7 +476,7 @@ void TextureCoordinates::SetYGain(int const aIndex, float const aYGain)
  * @param aIndex 0 for X, 1 for Y.
  * @param aBias The bias.
  */
-void TextureCoordinates::SetBias(int const aIndex, float const aBias)
+void TextureCoordinates::SetBias(int const aIndex, double const aBias)
 {
   mBias[aIndex] = aBias;
 }

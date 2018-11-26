@@ -45,9 +45,11 @@ namespace Common
 
   int                       StringToInt(std::string const &aValue);
   float                     StringToFloat(std::string const &aValue);
+  double                    StringToDouble(std::string const &aValue);
   bool                      StringToBool(std::string const &aValue);
   std::vector<int>          StringToIntVector(std::string const &aValue);
   std::vector<float>        StringToFloatVector(std::string const &aValue);
+  std::vector<double>       StringToDoubleVector(std::string const &aValue);
   std::vector<bool>         StringToBoolVector(std::string const &aValue);
   std::vector<std::string>  StringToStringVector(std::string const &aValue);
   std::vector<HashString>   StringToHashStringVector(std::string const &aValue);
@@ -58,9 +60,11 @@ namespace Common
 
   std::string               IntToString(int const aValue);
   std::string               FloatToString(float const aValue);
+  std::string               DoubleToString(double const aValue);
   std::string               BoolToString(bool const aValue);
   std::string               IntVectorToString(std::vector<int> &aValue);
   std::string               FloatVectorToString(std::vector<float> &aValue);
+  std::string               DoubleVectorToString(std::vector<double> &aValue);
   std::string               BoolVectorToString(std::vector<bool> &aValue);
   std::string               StringVectorToString(std::vector<std::string> &aValue);
   std::string               HashStringVectorToString(std::vector<HashString> &aValue);
