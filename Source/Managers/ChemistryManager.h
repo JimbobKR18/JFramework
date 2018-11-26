@@ -10,8 +10,8 @@ class ChemicalFactory;
 class ChemistryManager : public Manager
 {
 public:
-  typedef std::vector<ChemistryMaterial*> MaterialContainer;
-  typedef std::vector<ChemistryElement*> ElementContainer;
+  typedef std::unordered_set<ChemistryMaterial*> MaterialContainer;
+  typedef std::unordered_set<ChemistryElement*> ElementContainer;
   typedef MaterialContainer::iterator MaterialIT;
   typedef ElementContainer::iterator ElementIT;
   typedef MaterialContainer::const_iterator MaterialConstIT;

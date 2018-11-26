@@ -55,8 +55,9 @@ GraphicsManager::~GraphicsManager()
 void GraphicsManager::Update()
 {
   std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> cameraObjectRenders = mScreen->PruneObjects(mSurfaces, mCameras);
+  std::vector<Surface*> uiElements(mUIElements.begin(), mUIElements.end());
   mScreen->PreDraw();
-  mScreen->SortUI(mUIElements);
+  mScreen->SortUI(uiElements);
   std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator cameraObjectRenderEnd = cameraObjectRenders.end();
   for(std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenderEnd; ++it)
   {
@@ -68,7 +69,7 @@ void GraphicsManager::Update()
         mScreen->SortObjects(it2->second);
       }
     }
-    cameraObjectRenders[it->first][999] = mUIElements;
+    cameraObjectRenders[it->first][999] = uiElements;
     mScreen->Draw(it->second, it->first);
   }
   mScreen->SwapBuffers();
@@ -146,17 +147,7 @@ void GraphicsManager::DeleteSurface(Surface *aSurface)
  */
 void GraphicsManager::AddSurface(Surface *aSurface)
 {
-  // Check to see if object is in our list
-  SurfaceIT end = mSurfaces.end();
-  for(SurfaceIT it = mSurfaces.begin(); it != end; ++it)
-  {
-    if(*it == aSurface)
-    {
-      return;
-    }
-  }
-  
-  mSurfaces.push_back(aSurface);
+  mSurfaces.insert(aSurface);
 }
 
 /**
@@ -165,17 +156,7 @@ void GraphicsManager::AddSurface(Surface *aSurface)
  */
 void GraphicsManager::AddUISurface(Surface *aSurface)
 {
-  // Check to see if object is in our list
-  SurfaceIT end = mUIElements.end();
-  for(SurfaceIT it = mUIElements.begin(); it != end; ++it)
-  {
-    if(*it == aSurface)
-    {
-      return;
-    }
-  }
-
-  mUIElements.push_back(aSurface);
+  mUIElements.insert(aSurface);
 }
 
 /**
@@ -184,25 +165,8 @@ void GraphicsManager::AddUISurface(Surface *aSurface)
  */
 void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
-  SurfaceIT end = mSurfaces.end();
-  for(SurfaceIT it = mSurfaces.begin(); it != end; ++it)
-  {
-    if(*it == aSurface)
-    {
-      mSurfaces.erase(it);
-      break;
-    }
-  }
-
-  end = mUIElements.end();
-  for(SurfaceIT it = mUIElements.begin(); it != end; ++it)
-  {
-    if(*it == aSurface)
-    {
-      mUIElements.erase(it);
-      break;
-    }
-  }
+  mSurfaces.erase(aSurface);
+  mUIElements.erase(aSurface);
 }
 
 /**
@@ -414,7 +378,7 @@ void GraphicsManager::ResetDevice()
   ShaderLoader::Clear();
   std::vector<TextureData*> newTextures;
   std::vector<ShaderData*> newShaders;
-  std::set<GameObject*> allocatedObjects = GetOwningApp()->GET<ObjectManager>()->GetAllocatedObjects();
+  std::unordered_set<GameObject*> allocatedObjects = GetOwningApp()->GET<ObjectManager>()->GetAllocatedObjects();
   for(std::unordered_map<int, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
   {
     TextureData* data = it->second;
@@ -431,7 +395,7 @@ void GraphicsManager::ResetDevice()
     
     newTextures.push_back(newTexture);
     
-    for(std::set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
+    for(std::unordered_set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
     {
       mScreen->ResetObjectTexture((*it2)->GET<Surface>(), data, newTexture);
     }
@@ -448,7 +412,7 @@ void GraphicsManager::ResetDevice()
     
     newShaders.push_back(newShader);
     
-    for(std::set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
+    for(std::unordered_set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
     {
       mScreen->ResetObjectShader((*it2)->GET<Surface>(), data, newShader);
     }

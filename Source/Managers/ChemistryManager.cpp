@@ -54,17 +54,7 @@ void ChemistryManager::DeleteMaterial(ChemistryMaterial *aMaterial)
  */
 void ChemistryManager::AddMaterial(ChemistryMaterial *aMaterial)
 {
-  // Check to see if object is in our list
-  MaterialIT materialEnd = mMaterials.end();
-  for(MaterialIT it = mMaterials.begin(); it != materialEnd; ++it)
-  {
-    if(*it == aMaterial)
-    {
-      return;
-    }
-  }
-  
-  mMaterials.push_back(aMaterial);
+  mMaterials.insert(aMaterial);
 }
 
 /**
@@ -73,15 +63,7 @@ void ChemistryManager::AddMaterial(ChemistryMaterial *aMaterial)
  */
 void ChemistryManager::RemoveMaterial(ChemistryMaterial *aMaterial)
 {
-  MaterialIT materialEnd = mMaterials.end();
-  for(MaterialIT it = mMaterials.begin(); it != materialEnd; ++it)
-  {
-    if(*it == aMaterial)
-    {
-      mMaterials.erase(it);
-      break;
-    }
-  }
+  mMaterials.erase(aMaterial);
 }
 
 /**
@@ -125,17 +107,7 @@ void ChemistryManager::DeleteElement(ChemistryElement *aElement)
  */
 void ChemistryManager::AddElement(ChemistryElement *aElement)
 {
-  // Check to see if object is in our list
-  ElementIT elementEnd = mElements.end();
-  for(ElementIT it = mElements.begin(); it != elementEnd; ++it)
-  {
-    if(*it == aElement)
-    {
-      return;
-    }
-  }
-  
-  mElements.push_back(aElement);
+  mElements.insert(aElement);
 }
 
 /**
@@ -144,15 +116,7 @@ void ChemistryManager::AddElement(ChemistryElement *aElement)
  */
 void ChemistryManager::RemoveElement(ChemistryElement *aElement)
 {
-  ElementIT elementEnd = mElements.end();
-  for(ElementIT it = mElements.begin(); it != elementEnd; ++it)
-  {
-    if(*it == aElement)
-    {
-      mElements.erase(it);
-      break;
-    }
-  }
+  mElements.erase(aElement);
 }
 
 /**

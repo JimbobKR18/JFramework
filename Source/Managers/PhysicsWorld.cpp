@@ -36,8 +36,10 @@ bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
 
 unsigned const PhysicsWorld::sUID = Common::StringHashFunction("PhysicsWorld");
 
-PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld", PhysicsWorld::sUID), mGravity(Constants::GetVector3("GravityForce"))
+PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld", PhysicsWorld::sUID), mObjects(), mRegistry(), 
+  mGravity(Constants::GetVector3("GravityForce")), mResolver()
 {
+  mObjects.reserve(1000);
 }
 
 PhysicsWorld::~PhysicsWorld()
@@ -150,8 +152,8 @@ void PhysicsWorld::Update()
  */
 void PhysicsWorld::SendMessage(Message const &aMessage)
 {
-  std::vector<PhysicsObject *>::iterator objectEnd = mObjects.end();
-  for(std::vector<PhysicsObject *>::iterator it = mObjects.begin(); it != objectEnd; ++it)
+  PhysicsIT objectEnd = mObjects.end();
+  for(PhysicsIT it = mObjects.begin(); it != objectEnd; ++it)
   {
     (*it)->ReceiveMessage(aMessage);
   }

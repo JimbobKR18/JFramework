@@ -17,7 +17,7 @@ ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", Obj
 ObjectManager::~ObjectManager()
 {
   // Clean all objects
-  for(std::set<GameObject*>::iterator it = mAllocatedObjects.begin(); it != mAllocatedObjects.end();)
+  for(ObjectIT it = mAllocatedObjects.begin(); it != mAllocatedObjects.end();)
   {
     DeleteObject(*it);
     it = mAllocatedObjects.begin();
@@ -30,7 +30,7 @@ GameObjectFactory* ObjectManager::GetGameObjectFactory() const
   return mFactory;
 }
 
-std::set<GameObject*>& ObjectManager::GetAllocatedObjects()
+std::unordered_set<GameObject*>& ObjectManager::GetAllocatedObjects()
 {
   return mAllocatedObjects;
 }

@@ -71,14 +71,7 @@ void ControllerManager::AddController(Controller *aController)
  */
 void ControllerManager::RemoveController(Controller *aController)
 {
-  for(ControllerIT it = mControllers.begin(); it != mControllers.end(); ++it)
-  {
-    if(*it == aController)
-    {
-      mControllers.erase(it);
-      break;
-    }
-  }
+  mControllers.erase(aController);
 }
 
 /**

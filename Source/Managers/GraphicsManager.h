@@ -11,11 +11,11 @@
 class GraphicsManager : public Manager
 {
 public:
-  typedef std::vector<Surface*>::iterator SurfaceIT;
+  typedef std::unordered_set<Surface*>::iterator SurfaceIT;
   
 private:
-  std::vector<Surface*>               mSurfaces;
-  std::vector<Surface*>               mUIElements;
+  std::unordered_set<Surface*>               mSurfaces;
+  std::unordered_set<Surface*>               mUIElements;
   std::unordered_map<int, TextureData*>  mTextures;
   std::unordered_map<int, ShaderData*>   mShaders;
   std::unordered_set<Camera*>         mCameras;

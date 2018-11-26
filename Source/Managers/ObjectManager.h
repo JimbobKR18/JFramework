@@ -10,9 +10,9 @@ class ObjectManager : public Manager
 {
 private:
   std::unordered_map<int, GameObject*> mArchetypes;
-  std::set<GameObject*> mObjects;
-  std::set<GameObject*> mStaticObjects;
-  std::set<GameObject*> mAllocatedObjects;
+  std::unordered_set<GameObject*> mObjects;
+  std::unordered_set<GameObject*> mStaticObjects;
+  std::unordered_set<GameObject*> mAllocatedObjects;
   
   GameObjectFactory *mFactory;
 
@@ -23,7 +23,7 @@ public:
   
   // Getters
   GameObjectFactory*  GetGameObjectFactory() const;
-  std::set<GameObject*>& GetAllocatedObjects();
+  std::unordered_set<GameObject*>& GetAllocatedObjects();
   
   // Setters
   void                SetGameObjectFactory(GameObjectFactory* aFactory);
@@ -46,7 +46,7 @@ public:
 private:
   void                ParseDictionary(GameObject *aObject, Parser *aParser);
   void                ParseEffects(GameObject *aObject, ParserNode *aEffects);
-  typedef std::set<GameObject*>::iterator ObjectIT;
+  typedef std::unordered_set<GameObject*>::iterator ObjectIT;
 };
 
 #endif

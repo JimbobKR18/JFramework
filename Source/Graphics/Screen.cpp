@@ -115,7 +115,7 @@ void Screen::SetUIRenderSorter(ScreenRenderSorter *aUIRenderSorter)
  * @param aObjects
  * @param aCameras
  */
-std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(std::vector<Surface*> const &aObjects, std::unordered_set<Camera*> const &aCameras)
+std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(std::unordered_set<Surface*> const &aObjects, std::unordered_set<Camera*> const &aCameras)
 {
   // Identity matrix
   Matrix33 identityMatrix = Matrix33();
@@ -141,8 +141,8 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
     
     // Must scale, rotate, then translate camera offset
     Vector3 cameraDiff = (viewMatrix * cameraPosition) - (camera->GetSize() / 2.0f);
-    std::vector<Surface*>::const_iterator objectsEnd = aObjects.end();
-    for(std::vector<Surface*>::const_iterator it2 = aObjects.begin(); it2 != objectsEnd; ++it2)
+    std::unordered_set<Surface*>::const_iterator objectsEnd = aObjects.end();
+    for(std::unordered_set<Surface*>::const_iterator it2 = aObjects.begin(); it2 != objectsEnd; ++it2)
     {
       // Get the surface details
       Surface *surface = *it2;
