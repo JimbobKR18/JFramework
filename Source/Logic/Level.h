@@ -23,7 +23,7 @@ class LevelManager;
 class Level
 {
 public:
-  typedef std::set<GameObject*> ObjectContainer;
+  typedef std::unordered_set<GameObject*> ObjectContainer;
   typedef std::vector<GameObject*> ObjectVector;
   
   // File Name -> Object Container
