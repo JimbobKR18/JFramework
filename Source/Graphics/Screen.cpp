@@ -148,10 +148,27 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
     
     // Must scale, rotate, then translate camera offset
     Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraHalfSize;
-    std::unordered_set<Surface*> surfaces = aObjects.Query(cameraMin, cameraMax);
-    surfaces.insert(aMovingObjects.begin(), aMovingObjects.end());
-    std::unordered_set<Surface*>::const_iterator objectsEnd = surfaces.end();
-    for(std::unordered_set<Surface*>::const_iterator it2 = surfaces.begin(); it2 != objectsEnd; ++it2)
+    
+    // Cull terrain from data structure, whatever makes it is in.
+    std::unordered_set<Surface*> staticSurfaces = aObjects.Query(cameraMin, cameraMax);
+    std::unordered_set<Surface*>::const_iterator staticSurfacesEnd = aMovingObjects.end();
+    for(std::unordered_set<Surface*>::const_iterator it2 = staticSurfaces.begin(); it2 != staticSurfacesEnd; ++it2)
+    {
+      Surface *surface = *it2;
+      
+      // Optimization
+      if(ret[camera].find(surface->GetLayer()) == ret[camera].end())
+      {
+        ret[camera][surface->GetLayer()].reserve(staticSurfaces.size());
+      }
+      
+      // No validation
+      ret[camera][surface->GetLayer()].push_back(surface);
+    }
+    
+    // Frustum cull objects that can move (non terrain data)
+    std::unordered_set<Surface*>::const_iterator objectsEnd = aMovingObjects.end();
+    for(std::unordered_set<Surface*>::const_iterator it2 = aMovingObjects.begin(); it2 != objectsEnd; ++it2)
     {
       // Get the surface details
       Surface *surface = *it2;
@@ -169,7 +186,7 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
       // Optimization
       if(ret[camera].find(surface->GetLayer()) == ret[camera].end())
       {
-        ret[camera][surface->GetLayer()].reserve(surfaces.size());
+        ret[camera][surface->GetLayer()].reserve(aMovingObjects.size());
       }
       
       // Camera translation
