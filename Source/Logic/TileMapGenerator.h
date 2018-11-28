@@ -82,7 +82,7 @@ private:
   std::vector<int>                  mCollisionData;
   std::vector<int>                  mCollisionShapes;
   std::unordered_map<int, float>    mTileHeights;
-  std::vector<GameObject*>          mObjects;
+  std::unordered_map<int, GameObject*> mObjects;
 
   // Animated tiles
   float                             mAnimationSpeed;

@@ -24,7 +24,7 @@ GameObject::GameObject()
 GameObject::GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName,
                        HashString const &aType) :
                        mID(aID), mFileName(aFileName), mName(""), mType(aType), mTags(), mComponents(),
-                       mManager(aManager), mParent(nullptr), mChildren()
+                       mManager(aManager), mPlacement(ObjectPlacement::DEFAULT), mParent(nullptr), mChildren()
 {
   for(int i = aFileName.Length() - 1; i >= 0 && aFileName[i] != '/'; --i)
   {
@@ -42,6 +42,7 @@ GameObject::GameObject(GameObject const &aGameObject) :
                               mTags(aGameObject.mTags),
                               mComponents(aGameObject.mComponents),
                               mManager(nullptr),
+                              mPlacement(aGameObject.mPlacement),
                               mParent(nullptr), 
                               mChildren()
 {
@@ -158,6 +159,15 @@ void GameObject::SetType(HashString const &aType)
 }
 
 /**
+ * @brief Set object placement
+ * @param aPlacement Placement
+ */
+void GameObject::SetPlacement(ObjectPlacement const &aPlacement)
+{
+  mPlacement = aPlacement;
+}
+
+/**
  * @brief Set parent of object.
  * @param aParent Parent.
  */
@@ -173,6 +183,15 @@ void GameObject::SetParent(GameObject *aParent)
 GameObject::GameObjectContainer const& GameObject::GetChildren() const
 {
   return mChildren;
+}
+
+/**
+ * @brief Get placement of object.
+ * @return Placement.
+ */
+ObjectPlacement GameObject::GetPlacement() const
+{
+  return mPlacement;
 }
 
 /**

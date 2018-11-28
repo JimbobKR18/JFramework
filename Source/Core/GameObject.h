@@ -40,6 +40,7 @@ private:
   TagContainer        mTags;
   ComponentContainer  mComponents;
   ObjectManager*      mManager;
+  ObjectPlacement     mPlacement;
   
   GameObject*         mParent;
   GameObjectContainer mChildren;
@@ -59,11 +60,13 @@ public:
   ObjectManager*             GetManager() const;
   GameObject*                GetParent() const;
   GameObjectContainer const& GetChildren() const;
+  ObjectPlacement            GetPlacement() const;
   
   // SETTERS
   void                       SetID(int const &aID);
   void                       SetName(HashString const &aName);
   void                       SetType(HashString const &aType);
+  void                       SetPlacement(ObjectPlacement const &aPlacement);
   
   // OPERATIONS
   void                       AddComponent(Component *aComponent);

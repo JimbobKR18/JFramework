@@ -7,6 +7,7 @@
 #include "Screen.h"
 #include "TextureData.h"
 #include "ShaderData.h"
+#include "QuadTree.h"
 
 class GraphicsManager : public Manager
 {
@@ -14,8 +15,11 @@ public:
   typedef std::unordered_set<Surface*>::iterator SurfaceIT;
   
 private:
-  std::unordered_set<Surface*>               mSurfaces;
-  std::unordered_set<Surface*>               mUIElements;
+  QuadTree                               mQuadTree;
+  std::unordered_set<Surface*>           mSurfaces;
+  std::unordered_set<Surface*>           mNewSurfaces;
+  std::unordered_set<Surface*>           mMovingSurfaces;
+  std::unordered_set<Surface*>           mUIElements;
   std::unordered_map<int, TextureData*>  mTextures;
   std::unordered_map<int, ShaderData*>   mShaders;
   std::unordered_set<Camera*>         mCameras;
@@ -72,6 +76,8 @@ public:
 
   // Misc.
   void                ResetDevice();
+  void                ResizeTree(Vector3 const &aMinRange, Vector3 const &aMaxRange);
+  void                ClearTree();
   Vector3             AbsToRel(Vector3 const &aPosition) const;
   Vector3             RelToAbs(Vector3 const &aPosition) const;
 };

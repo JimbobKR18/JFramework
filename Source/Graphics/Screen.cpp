@@ -115,7 +115,8 @@ void Screen::SetUIRenderSorter(ScreenRenderSorter *aUIRenderSorter)
  * @param aObjects
  * @param aCameras
  */
-std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(std::unordered_set<Surface*> const &aObjects, std::unordered_set<Camera*> const &aCameras)
+std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(QuadTree const &aObjects, 
+  std::unordered_set<Surface*> const &aMovingObjects, std::unordered_set<Camera*> const &aCameras)
 {
   // Identity matrix
   Matrix33 identityMatrix = Matrix33();
@@ -137,12 +138,20 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
     Transform *cameraTransform = camera->GetOwner()->GET<Transform>();
     Vector3 cameraPosition = cameraTransform->GetPosition() + camera->GetOffset();
     Vector3 cameraSize = camera->GetSize();
+    if(cameraTransform->GetScale().length() < 1.4)
+      cameraSize = camera->GetSize().Divide(cameraTransform->GetScale());
+    
+    Vector3 cameraHalfSize = cameraSize / 2.0f;
+    Vector3 cameraMin = cameraPosition - cameraHalfSize;
+    Vector3 cameraMax = cameraPosition + cameraHalfSize;
     Matrix33 viewMatrix = cameraTransform->GetFinalTransform();
     
     // Must scale, rotate, then translate camera offset
-    Vector3 cameraDiff = (viewMatrix * cameraPosition) - (camera->GetSize() / 2.0f);
-    std::unordered_set<Surface*>::const_iterator objectsEnd = aObjects.end();
-    for(std::unordered_set<Surface*>::const_iterator it2 = aObjects.begin(); it2 != objectsEnd; ++it2)
+    Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraHalfSize;
+    std::unordered_set<Surface*> surfaces = aObjects.Query(cameraMin, cameraMax);
+    surfaces.insert(aMovingObjects.begin(), aMovingObjects.end());
+    std::unordered_set<Surface*>::const_iterator objectsEnd = surfaces.end();
+    for(std::unordered_set<Surface*>::const_iterator it2 = surfaces.begin(); it2 != objectsEnd; ++it2)
     {
       // Get the surface details
       Surface *surface = *it2;
@@ -160,7 +169,7 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
       // Optimization
       if(ret[camera].find(surface->GetLayer()) == ret[camera].end())
       {
-        ret[camera][surface->GetLayer()].reserve(aObjects.size());
+        ret[camera][surface->GetLayer()].reserve(surfaces.size());
       }
       
       // Camera translation

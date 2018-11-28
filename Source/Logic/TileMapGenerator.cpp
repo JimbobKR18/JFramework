@@ -59,7 +59,6 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, int a
   Vector3 tileSize = Vector3(mTileSize, mTileSize, 0.1f);
   
   // Reserve total tiles ahead of time to avoid reallocs
-  mObjects.resize(mTiles.size(), nullptr);
   CreateTilesInRange(0, 0, mWidth, mHeight, tileSize, objectManager, graphicsManager, physicsWorld, chemistryManager);
 }
 
@@ -356,6 +355,8 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       // Basic check to be sure we're not overwriting an index
       if(mObjects[i] != nullptr)
         continue;
+      else if(mEmptyTiles.find(mTiles[i]) != mEmptyTiles.end() && mEmptyTiles[mTiles[i]])
+        continue;
       
       // Make GameObject to place
       GameObject *obj = aObjectManager->CreateObjectNoAdd(mImageName);
@@ -385,30 +386,20 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       else if(i == tileDataVectorSize - 1)
         mOwner->SetMaxBoundary(position + aTileSize);
 
-      // If tile marked as empty, remove surface, else set surface.
-      if(mEmptyTiles.find(mTiles[i]) == mEmptyTiles.end() || !mEmptyTiles[mTiles[i]])
+      // Set the frame data
+      Surface *surface = obj->GET<Surface>();
+      TextureCoordinates *textureData = surface->GetTextureData();
+      surface->SetAnimated(false);
+      surface->SetFrameByID(mTiles[i]);
+      surface->SetLayer(mLayer);
+      textureData->SetBias(0, 0.1f / textureData->GetXSize());
+      textureData->SetBias(1, 0.1f / textureData->GetYSize());
+      
+      // Animation
+      if(mAnimations.find(mTiles[i]) != mAnimations.end())
       {
-        // Set the frame data
-        Surface *surface = obj->GET<Surface>();
-        TextureCoordinates *textureData = surface->GetTextureData();
-        surface->SetAnimated(false);
-        surface->SetFrameByID(mTiles[i]);
-        surface->SetLayer(mLayer);
-        textureData->SetBias(0, 0.1f / textureData->GetXSize());
-        textureData->SetBias(1, 0.1f / textureData->GetYSize());
-        
-        // Animation
-        if(mAnimations.find(mTiles[i]) != mAnimations.end())
-        {
-          mAnimatedObjects[surface] = mTiles[i];
-          mCurrentFrames[mTiles[i]] = 0;
-        }
-      }
-      else
-      {
-        Surface *surface = obj->GET<Surface>();
-        obj->RemoveComponent(surface, false);
-        aGraphicsManager->DeleteSurface(surface);
+        mAnimatedObjects[surface] = mTiles[i];
+        mCurrentFrames[mTiles[i]] = 0;
       }
       
       // Add PhysicsObject if the tile has collision

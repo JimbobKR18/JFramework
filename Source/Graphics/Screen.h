@@ -7,6 +7,7 @@
 #include "ShaderData.h"
 #include "Camera.h"
 #include "Transform.h"
+#include "QuadTree.h"
 
 class Screen
 {
@@ -45,7 +46,8 @@ public:
   // Get UI render sorting method (Post batching)
   ScreenRenderSorter*     GetUIRenderSorter();
   // Batching
-  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> PruneObjects(std::unordered_set<Surface*> const &aObjects, std::unordered_set<Camera*> const &aCameras);
+  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> PruneObjects(QuadTree const &aObjects, 
+                                       std::unordered_set<Surface*> const &aMovingObjects, std::unordered_set<Camera*> const &aCameras);
   void                    SortObjects(std::vector<Surface*> &aObjects);
   void                    SortUI(std::vector<Surface*> &aObjects);
 

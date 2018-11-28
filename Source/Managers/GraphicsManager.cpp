@@ -18,10 +18,12 @@
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
 
+int const DEFAULT_QUADTREE_SIZE = 3000;
+unsigned const DEFAULT_QUADTREE_CAPACITY = 32;
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
-                                                                           mSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(),
-                                                                           mScreen(nullptr), mPrimaryCamera(nullptr)
+                                                                           mQuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0)), 
+                                                                           mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, 
@@ -54,7 +56,22 @@ GraphicsManager::~GraphicsManager()
  */
 void GraphicsManager::Update()
 {
-  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> cameraObjectRenders = mScreen->PruneObjects(mSurfaces, mCameras);
+  // Only insert static objects into QuadTree.
+  for(SurfaceIT it = mNewSurfaces.begin(); it != mNewSurfaces.end(); ++it)
+  {
+    GameObject *object = (*it)->GetOwner();
+    if(object->GetPlacement() == ObjectPlacement::STATIC)
+    {
+      mQuadTree.Insert(*it);
+    }
+    else
+    {
+      mMovingSurfaces.insert(*it);
+    }
+  }
+  mNewSurfaces.clear();
+  
+  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> cameraObjectRenders = mScreen->PruneObjects(mQuadTree, mMovingSurfaces, mCameras);
   std::vector<Surface*> uiElements(mUIElements.begin(), mUIElements.end());
   mScreen->PreDraw();
   mScreen->SortUI(uiElements);
@@ -148,6 +165,7 @@ void GraphicsManager::DeleteSurface(Surface *aSurface)
 void GraphicsManager::AddSurface(Surface *aSurface)
 {
   mSurfaces.insert(aSurface);
+  mNewSurfaces.insert(aSurface);
 }
 
 /**
@@ -157,6 +175,7 @@ void GraphicsManager::AddSurface(Surface *aSurface)
 void GraphicsManager::AddUISurface(Surface *aSurface)
 {
   mUIElements.insert(aSurface);
+  mNewSurfaces.insert(aSurface);
 }
 
 /**
@@ -166,7 +185,10 @@ void GraphicsManager::AddUISurface(Surface *aSurface)
 void GraphicsManager::RemoveSurface(Surface *aSurface)
 {
   mSurfaces.erase(aSurface);
+  mNewSurfaces.erase(aSurface);
   mUIElements.erase(aSurface);
+  mMovingSurfaces.erase(aSurface);
+  mQuadTree.Remove(aSurface);
 }
 
 /**
@@ -177,13 +199,15 @@ void GraphicsManager::ClearSurfaces()
   for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end();)
   {
     DeleteSurface(*it);
-    it = mSurfaces.begin();
+    mQuadTree.Remove(*it);
+    it = mUIElements.begin();
   }
   for(SurfaceIT it = mUIElements.begin(); it != mUIElements.end();)
   {
     DeleteSurface(*it);
     it = mUIElements.begin();
   }
+  mMovingSurfaces.clear();
 }
 
 /**
@@ -431,6 +455,24 @@ void GraphicsManager::ResetDevice()
     HashString shaderKey = (*it)->mVertexFileName + (*it)->mFragmentFileName;
     mShaders.insert(std::pair<int, ShaderData*>(shaderKey.ToHash(), *it));
   }
+}
+
+/**
+ * @brief Resize tree range for optimization purposes.
+ * @param aMinRange Minimum range.
+ * @param aMaxRange Maximum range.
+ */
+void GraphicsManager::ResizeTree(Vector3 const &aMinRange, Vector3 const &aMaxRange)
+{
+  mQuadTree.Resize(aMinRange, aMaxRange);
+}
+
+/**
+ * @brief Clear tree.
+ */
+void GraphicsManager::ClearTree()
+{
+  mQuadTree.Clear();
 }
 
 /**

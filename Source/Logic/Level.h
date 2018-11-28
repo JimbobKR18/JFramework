@@ -8,17 +8,6 @@
 #include "MathExt.h"
 #include "Camera.h"
 
-enum ObjectPlacement
-{
-  DEFAULT = 0,
-  REPLACEABLE,
-  STATIC,
-  PLACEMENT_ALL
-};
-
-
-
-class Menu;
 class LevelManager;
 class Level
 {

@@ -40,6 +40,7 @@
     <File Name="../../Source/LUA/SLB.hpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Core">
+    <File Name="../../Source/Core/ObjectPlacement.h"/>
     <File Name="../../Source/Core/DefaultComponentFactory.cpp"/>
     <File Name="../../Source/Core/DefaultComponentFactory.h"/>
     <File Name="../../Source/Core/ComponentFactory.h"/>
@@ -122,6 +123,8 @@
     <File Name="../../Source/Components/SoundListener.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
+    <File Name="../../Source/Graphics/QuadTree.h"/>
+    <File Name="../../Source/Graphics/QuadTree.cpp"/>
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>
     <File Name="../../Source/Graphics/TextureData.h"/>
     <File Name="../../Source/Graphics/TextureCoordinates.cpp"/>
@@ -359,6 +362,7 @@
         <IncludePath Value="../../Source"/>
         <IncludePath Value="../../Source/Core"/>
         <IncludePath Value="../../Source/Core/Interpolations"/>
+        <IncludePath Value="../../Source/Core/Structures"/>
         <IncludePath Value="../../Source/Logic"/>
         <IncludePath Value="../../Source/Logic/StateMachine"/>
         <IncludePath Value="../../Source/Logic/Effects"/>

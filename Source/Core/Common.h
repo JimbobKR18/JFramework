@@ -32,6 +32,7 @@
 #include <exception>
 #include "HashString.h"
 #include "SmartPointer.h"
+#include "ObjectPlacement.h"
 
 #if defined(_WIN32) || defined(__APPLE__) || defined(__linux__)
   #define PC 1

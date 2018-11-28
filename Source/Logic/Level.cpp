@@ -233,6 +233,7 @@ Level::ObjectVector Level::FindObjects(Vector3 const &aPosition) const
  */
 void Level::AddObject(GameObject *aObject, ObjectPlacement const aPlacement)
 {
+  aObject->SetPlacement(aPlacement);
   mObjects[aPlacement].insert(aObject);
 }
 
@@ -291,23 +292,15 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
   
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
-    ObjectIT end = mObjects[i].end();
-    for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
+    if(mObjects[i].find(aObject) != mObjects[i].end())
     {
-      if(aObject == *it)
-      {
-        RemoveObjectFromScenarios(*it);
-        mObjects[i].erase(it);
-        DeleteObjectChildrenDelayed(aObject);
-        
-        ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
-        objectManager->ProcessDelayedMessage(msg);
-        effectsManager->RemoveEffectsForObject(aObject);
-        found = true;
-        break;
-      }
-      if(found)
-        break;
+      RemoveObjectFromScenarios(aObject);
+      mObjects[i].erase(aObject);
+      DeleteObjectChildrenDelayed(aObject);
+      
+      ObjectDeleteMessage *msg = new ObjectDeleteMessage(aObject);
+      objectManager->ProcessDelayedMessage(msg);
+      effectsManager->RemoveEffectsForObject(aObject);
     }
   }
 }
@@ -348,6 +341,7 @@ void Level::ResetLevel()
   // Reset view to set when reparsing file.
   GraphicsManager *graphicsManager = GetManager()->GetOwningApp()->GET<GraphicsManager>();
   graphicsManager->SetPrimaryCamera(nullptr);
+  graphicsManager->ClearTree();
   
   // Delete tile maps.
   for(TileMapGeneratorContainerIT it = mGenerators.begin(); it != mGenerators.end(); ++it)
@@ -427,6 +421,7 @@ void Level::Load(Level const *aPrevLevel)
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
   mOwner->GetOwningApp()->GET<GraphicsManager>()->SetUnsortedLayers(mUnsortedLayers);
+  mOwner->GetOwningApp()->GET<GraphicsManager>()->ResizeTree(mMinBoundary, mMaxBoundary);
   
   Camera *primaryCamera = mOwner->GetOwningApp()->GET<GraphicsManager>()->GetPrimaryCamera();
   primaryCamera->GetOwner()->GET<Transform>()->SetMaxBoundary(mMaxBoundary);
@@ -467,7 +462,9 @@ void Level::Unload(Level *aNextLevel)
   if(this != aNextLevel)
     mSoundChannels.clear();
 
-  mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera(nullptr);
+  GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
+  graphicsManager->SetPrimaryCamera(nullptr);
+  graphicsManager->ClearTree();
 }
 
 /**
@@ -1000,6 +997,7 @@ GameObject* Level::FindObject(ObjectContainer const &aContainer, HashString cons
  */
 void Level::LoadObject(GameObject *aObject, ObjectPlacement const aPlacement)
 {
+  aObject->SetPlacement(aPlacement);
   mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(aObject, (aPlacement == ObjectPlacement::STATIC) ? true : false);
   if(aObject->GET<PhysicsObject>())
     mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject(aObject->GET<PhysicsObject>());
@@ -1130,11 +1128,8 @@ bool Level::ObjectNotInScenario(GameObject *aObject)
 {
   for(FileContainerIT it = mScenarios.begin(); it != mScenarios.end(); ++it)
   {
-    for(ObjectIT it2 = it->second.begin(); it2 != it->second.end(); ++it2)
-    {
-      if(aObject == *it2)
-        return false;
-    }
+    if(it->second.find(aObject) != it->second.end())
+      return false;
   }
   return true;
 }
@@ -1147,14 +1142,7 @@ void Level::RemoveObjectFromScenarios(GameObject *aObject)
 {
   for(FileContainerIT it = mScenarios.begin(); it != mScenarios.end(); ++it)
   {
-    for(ObjectIT it2 = it->second.begin(); it2 != it->second.end(); ++it2)
-    {
-      if(aObject == *it2)
-      {
-        it->second.erase(it2);
-        break;
-      }
-    }
+    it->second.erase(aObject);
   }
 }
 
