@@ -459,7 +459,7 @@ void GameObject::Serialize(ParserNode *aNode)
 void GameObject::Interact(GameObject *aObject) 
 { 
 #ifdef _DEBUG
-  DebugLogPrint("%s collided into %s\n", mName.ToCharArray(), aObject->GetName().ToCharArray()); 
+  //DebugLogPrint("%s collided into %s\n", mName.ToCharArray(), aObject->GetName().ToCharArray()); 
 #endif
 }
 
@@ -470,7 +470,7 @@ void GameObject::Interact(GameObject *aObject)
 void GameObject::ParseAdditionalData(ParserNode *aRoot)
 {
 #ifdef _DEBUG
-  DebugLogPrint("ParseAdditionalData called on GameObject, nothing to do.\n");
+  //DebugLogPrint("ParseAdditionalData called on GameObject, nothing to do.\n");
 #endif
 }
 
