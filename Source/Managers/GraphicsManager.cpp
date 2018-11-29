@@ -19,7 +19,7 @@
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
 
 int const DEFAULT_QUADTREE_SIZE = 3000;
-unsigned const DEFAULT_QUADTREE_CAPACITY = 32;
+unsigned const DEFAULT_QUADTREE_CAPACITY = 8;
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
                                                                            mQuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0)), 
