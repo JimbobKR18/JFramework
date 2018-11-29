@@ -138,8 +138,8 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
     Transform *cameraTransform = camera->GetOwner()->GET<Transform>();
     Vector3 cameraPosition = cameraTransform->GetPosition() + camera->GetOffset();
     Vector3 cameraSize = camera->GetSize();
-    if(cameraTransform->GetScale().length() < 1.4)
-      cameraSize = camera->GetSize().Divide(cameraTransform->GetScale());
+    //if(cameraTransform->GetScale().length() < 1.4)
+      //cameraSize = camera->GetSize().Divide(cameraTransform->GetScale());
     
     Vector3 cameraHalfSize = cameraSize / 2.0f;
     Vector3 cameraMin = cameraPosition - cameraHalfSize;

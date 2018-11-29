@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-const Vector3 MARGIN_FOR_ERROR = Vector3(256,256,256);
+const Vector3 MARGIN_FOR_ERROR = Vector3(128,128,128);
 
 //----------------------------------------------
 // QuadTree
@@ -254,7 +254,7 @@ bool QuadTree::ObjectInRange(Surface* aSurface) const
   Vector3 midpoint = (mMaxRange + mMinRange) / 2.0f;
   Vector3 size = mMaxRange - midpoint;
   Vector3 objectPosition = transform->GetPosition();
-  Vector3 objectSize = transform->GetSize() / 2.0f;
+  Vector3 objectSize = transform->GetSize();
   
   return CheckOverlap(midpoint, objectPosition, size, objectSize);
 }
