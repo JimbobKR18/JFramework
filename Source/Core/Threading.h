@@ -13,8 +13,11 @@
 #include <mutex>
 #include <functional>
 #include <chrono>
+#include <future>
 
 #define Reference std::ref
+#define ASync std::async
+#define Future(T) std::future<T>
 typedef std::thread Thread;
 typedef std::mutex Mutex;
 

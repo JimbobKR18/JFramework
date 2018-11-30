@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "MathExt.h"
 #include "Surface.h"
+#include "Threading.h"
 
 // Stores section data
 class QuadTree
