@@ -78,13 +78,19 @@ void GraphicsManager::Update()
   std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator cameraObjectRenderEnd = cameraObjectRenders.end();
   for(std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenderEnd; ++it)
   {
+    std::vector<Thread> threads;
     std::map<int, std::vector<Surface*>>::iterator layerEnd = it->second.end();
     for(std::map<int, std::vector<Surface*>>::iterator it2 = it->second.begin(); it2 != layerEnd; ++it2)
     {
       if(mUnsortedLayers.find(it2->first) == mUnsortedLayers.end())
       {
-        mScreen->SortObjects(it2->second);
+        threads.emplace_back(Thread(&Screen::SortObjects, mScreen, Reference(it2->second)));
       }
+    }
+    
+    for(std::vector<Thread>::iterator it2 = threads.begin(); it2 != threads.end(); ++it2)
+    {
+      it2->join();
     }
     cameraObjectRenders[it->first][999] = uiElements;
     mScreen->Draw(it->second, it->first);
