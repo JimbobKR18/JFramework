@@ -231,10 +231,10 @@ std::unordered_set<Surface*> QuadTree::Query(Vector3 const &aMin, Vector3 const 
   Future(std::unordered_set<Surface*>) swTemp = ASync(&QuadTree::Query, mSouthWest, aMin, aMax);
   Future(std::unordered_set<Surface*>) seTemp = ASync(&QuadTree::Query, mSouthEast, aMin, aMax);
   
-  std::unordered_set<Surface*> nwResults = nwTemp.get();
-  std::unordered_set<Surface*> neResults = neTemp.get();
-  std::unordered_set<Surface*> swResults = swTemp.get();
-  std::unordered_set<Surface*> seResults = seTemp.get();
+  std::unordered_set<Surface*> const &nwResults = nwTemp.get();
+  std::unordered_set<Surface*> const &neResults = neTemp.get();
+  std::unordered_set<Surface*> const &swResults = swTemp.get();
+  std::unordered_set<Surface*> const &seResults = seTemp.get();
 
   ret.insert(nwResults.begin(), nwResults.end());
   ret.insert(neResults.begin(), neResults.end());
