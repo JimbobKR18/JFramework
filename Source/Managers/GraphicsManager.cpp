@@ -18,12 +18,18 @@
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
 
+void SortThread(int id, Screen *aScreen, std::vector<Surface*> &aSurfaces)
+{
+  aScreen->SortObjects(aSurfaces);
+}
+
 int const DEFAULT_QUADTREE_SIZE = 3000;
 unsigned const DEFAULT_QUADTREE_CAPACITY = 8;
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
                                                                            mQuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0)), 
                                                                            mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
+
 {
   // Add Default Texture
   AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, 
@@ -33,6 +39,13 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
 #else
   assert(!"Needs screen for this device.");
 #endif
+}
+
+GraphicsManager::GraphicsManager(GraphicsManager const &aGraphicsManager) : Manager(nullptr, "GraphicsManager", GraphicsManager::sUID),
+  mQuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0)),
+  mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
+{
+  assert(!"Not allowed");
 }
 
 GraphicsManager::~GraphicsManager()
@@ -78,20 +91,15 @@ void GraphicsManager::Update()
   std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator cameraObjectRenderEnd = cameraObjectRenders.end();
   for(std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenderEnd; ++it)
   {
-    std::vector<Thread> threads;
     std::map<int, std::vector<Surface*>>::iterator layerEnd = it->second.end();
     for(std::map<int, std::vector<Surface*>>::iterator it2 = it->second.begin(); it2 != layerEnd; ++it2)
     {
       if(mUnsortedLayers.find(it2->first) == mUnsortedLayers.end())
       {
-        threads.emplace_back(Thread(&Screen::SortObjects, mScreen, Reference(it2->second)));
+        mScreen->SortObjects(it2->second);
       }
     }
-    
-    for(std::vector<Thread>::iterator it2 = threads.begin(); it2 != threads.end(); ++it2)
-    {
-      it2->join();
-    }
+
     cameraObjectRenders[it->first][999] = uiElements;
     mScreen->Draw(it->second, it->first);
   }

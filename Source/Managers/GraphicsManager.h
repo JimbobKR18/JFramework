@@ -26,10 +26,12 @@ private:
   std::unordered_set<int>             mUnsortedLayers;
   Screen*                             mScreen;
   Camera*                             mPrimaryCamera;
+  ThreadPool                          mThreadPool;
 
   static unsigned const sUID;
 public:
   GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen);
+  GraphicsManager(GraphicsManager const &aGraphicsManager);
   ~GraphicsManager();
 
   // Derived from Manager

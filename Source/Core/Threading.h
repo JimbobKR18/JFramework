@@ -14,12 +14,14 @@
 #include <functional>
 #include <chrono>
 #include <future>
+#include "ctpl_stl.h"
 
 #define Reference std::ref
 #define ASync std::async
 #define Future(T) std::future<T>
 typedef std::thread Thread;
 typedef std::mutex Mutex;
+typedef ctpl::thread_pool ThreadPool;
 
 namespace Threading
 {
