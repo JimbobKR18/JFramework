@@ -156,9 +156,6 @@ bool QuadTree::Insert(Surface *aSurface)
  */
 bool QuadTree::Remove(Surface *aSurface)
 {
-  if(!ObjectInRange(aSurface))
-    return false;
-    
   if(mObjects.find(aSurface) != mObjects.end() && !mNorthWest)
   {
     mObjects.erase(aSurface);

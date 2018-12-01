@@ -24,7 +24,7 @@ Controller::Controller() : Component(Controller::sUID), mPaused(false)
 
 Controller::~Controller()
 {
-  mManager->RemoveController(this);
+  mManager = nullptr;
 }
 
 /**

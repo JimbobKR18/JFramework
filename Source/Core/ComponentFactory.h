@@ -20,6 +20,14 @@ public:
    * @return New component.
    */
   virtual Component* CreateComponent(GameApp* aApp, GameObject *aObject, ParserNode *aNode) = 0;
+  
+  /**
+   * @brief Delete a component.
+   * @param aApp Game app.
+   * @param aObject Object to delete component from.
+   * @param aComponent
+   */
+  virtual void DeleteComponent(GameApp* aApp, GameObject *aObject, Component *aComponent) = 0;
 };
 
 #endif // COMPONENTFACTORY_H

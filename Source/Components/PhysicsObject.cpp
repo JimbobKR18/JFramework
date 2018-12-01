@@ -87,8 +87,6 @@ PhysicsObject::~PhysicsObject()
     delete *it;
   }
   mJoints.clear();
-  
-  mWorld->RemoveObject(this);
   mWorld = nullptr;
 }
 

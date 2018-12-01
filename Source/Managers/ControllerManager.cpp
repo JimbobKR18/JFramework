@@ -106,7 +106,7 @@ void ControllerManager::Update()
   for(MessageIT it = mDelayedMessages.begin(); it != mDelayedMessages.end(); ++it)
   {
     ControllerChangeMessage *msg = (ControllerChangeMessage*)*it;
-    msg->mCurrentOwner->RemoveComponent(msg->mController, false);
+    msg->mCurrentOwner->RemoveComponent(msg->mController);
     if(msg->mNewOwner)
       msg->mNewOwner->AddComponent(msg->mController);
     delete *it;

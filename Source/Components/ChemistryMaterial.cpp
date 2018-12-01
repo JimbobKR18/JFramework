@@ -20,7 +20,6 @@ ChemistryMaterial::ChemistryMaterial(ChemistryMaterial const &aChemistryMaterial
 
 ChemistryMaterial::~ChemistryMaterial()
 {
-  mManager->RemoveMaterial(this);
   mManager = nullptr;
 }
 

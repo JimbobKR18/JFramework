@@ -10,6 +10,7 @@ public:
   virtual ~DefaultComponentFactory();
 
   virtual Component* CreateComponent(GameApp* aApp, GameObject *aObject, ParserNode *aNode);
+  virtual void DeleteComponent(GameApp* aApp, GameObject *aObject, Component *aComponent);
 };
 
 #endif // DEFAULTCOMPONENTFACTORY_H

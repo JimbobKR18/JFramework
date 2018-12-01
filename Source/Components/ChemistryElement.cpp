@@ -21,7 +21,6 @@ ChemistryElement::ChemistryElement(ChemistryElement const &aChemistryElement) : 
 
 ChemistryElement::~ChemistryElement()
 {
-  mManager->RemoveElement(this);
   mManager = nullptr;
 }
 

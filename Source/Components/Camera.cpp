@@ -36,7 +36,6 @@ Camera::Camera(Camera const &aCamera) : Component(Camera::sUID), mSize(aCamera.m
 Camera::~Camera()
 {
   delete mFramebuffer;
-  mManager->RemoveCamera(this);
 }
 
 // Methods

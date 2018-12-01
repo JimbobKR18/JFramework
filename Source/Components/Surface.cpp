@@ -46,7 +46,6 @@ Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoor
 Surface::~Surface()
 {
   ClearProperties();
-  mManager->RemoveSurface(this);
   mManager = nullptr;
   if(mTexCoord)
   {

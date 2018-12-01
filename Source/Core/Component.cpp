@@ -16,6 +16,7 @@ Component::Component(Component const &aComponent) : mOwner(aComponent.mOwner)
 
 Component::~Component() 
 {
+  mOwner = nullptr;
 }
 
 /**

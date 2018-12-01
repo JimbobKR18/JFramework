@@ -195,6 +195,15 @@ ObjectPlacement GameObject::GetPlacement() const
 }
 
 /**
+ * @brief Get components.
+ * @return Components.
+ */
+GameObject::ComponentContainer& GameObject::GetComponents()
+{
+  return mComponents;
+}
+
+/**
  * @brief Add a component to game object
  * @param aComponent Component to add
  */
@@ -210,29 +219,25 @@ void GameObject::AddComponent(Component *aComponent)
 /**
  * @brief Remove a component from game object
  * @param aComponent Component to remove
- * @param aDelete True to delete component while you are at it
  */
-void GameObject::RemoveComponent(Component *aComponent, bool aDelete)
+void GameObject::RemoveComponent(Component *aComponent)
 {
   // If component is nullptr, skip.
   if(!aComponent)
     return;
-  RemoveComponent(aComponent->GetDefinedUID(), aDelete);
+  RemoveComponent(aComponent->GetDefinedUID());
 }
 
 /**
  * @brief Remove component by component's uid
  * @param aUID UID of component to remove
- * @param aDelete True to delete component while you are at it
  */
-void GameObject::RemoveComponent(int const &aUID, bool aDelete)
+void GameObject::RemoveComponent(int const &aUID)
 {
   ComponentIT component = mComponents.find(aUID);
   if(component != mComponents.end())
   {
     component->second->SetOwner(nullptr);
-    if(aDelete)
-      delete component->second;
     mComponents.erase(component);
   }
 }

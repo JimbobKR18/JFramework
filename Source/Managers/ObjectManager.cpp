@@ -214,7 +214,15 @@ void ObjectManager::DeleteObject(GameObject *aObj)
   
   size_t numDeleted = mAllocatedObjects.erase(aObj);
   if(numDeleted > 0)
+  {
+    ComponentFactory *factory = GetOwningApp()->GetComponentFactory();
+    for(GameObject::ComponentIT it = aObj->GetComponents().begin(); it != aObj->GetComponents().end();)
+    {
+      factory->DeleteComponent(GetOwningApp(), aObj, it->second);
+      it = aObj->GetComponents().begin();
+    }
     delete aObj;
+  }
 }
 
 /**

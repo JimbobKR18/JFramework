@@ -61,6 +61,7 @@ public:
   GameObject*                GetParent() const;
   GameObjectContainer const& GetChildren() const;
   ObjectPlacement            GetPlacement() const;
+  ComponentContainer&        GetComponents();
   
   // SETTERS
   void                       SetID(int const &aID);
@@ -70,8 +71,8 @@ public:
   
   // OPERATIONS
   void                       AddComponent(Component *aComponent);
-  void                       RemoveComponent(Component *aComponent, bool aDelete);
-  void                       RemoveComponent(int const &aUID, bool aDelete);
+  void                       RemoveComponent(Component *aComponent);
+  void                       RemoveComponent(int const &aUID);
   void                       AddChild(GameObject* aObject);
   void                       RemoveChild(GameObject *aObject);
   Component*                 GetComponent(int const &aUID) const;

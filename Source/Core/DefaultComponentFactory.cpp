@@ -134,3 +134,37 @@ Component* DefaultComponentFactory::CreateComponent(GameApp* aApp, GameObject *a
   }
   return ret;
 }
+
+/**
+ * @brief Delete a component.
+ * @param aApp Game app.
+ * @param aObject Object to delete component from.
+ * @param aComponent
+ */
+void DefaultComponentFactory::DeleteComponent(GameApp* aApp, GameObject *aObject, Component *aComponent)
+{
+  if(aComponent->GetDefinedUID() == PhysicsObject::GetUID())
+  {
+    aApp->GET<PhysicsWorld>()->RemoveObject(dynamic_cast<PhysicsObject*>(aComponent));
+  }
+  if(aComponent->GetDefinedUID() == ChemistryMaterial::GetUID())
+  {
+    aApp->GET<ChemistryManager>()->RemoveMaterial(dynamic_cast<ChemistryMaterial*>(aComponent));
+  }
+  if(aComponent->GetDefinedUID() == ChemistryElement::GetUID())
+  {
+    aApp->GET<ChemistryManager>()->RemoveElement(dynamic_cast<ChemistryElement*>(aComponent));
+  }
+  if(aComponent->GetDefinedUID() == Surface::GetUID())
+  {
+    aApp->GET<GraphicsManager>()->RemoveSurface(dynamic_cast<Surface*>(aComponent));
+  }
+  if(aComponent->GetDefinedUID() == Camera::GetUID())
+  {
+    aApp->GET<GraphicsManager>()->RemoveCamera(dynamic_cast<Camera*>(aComponent));
+  }
+  aApp->GET<ControllerManager>()->RemoveController(dynamic_cast<Controller*>(aComponent));
+  
+  aObject->RemoveComponent(aComponent);
+  delete aComponent;
+}
