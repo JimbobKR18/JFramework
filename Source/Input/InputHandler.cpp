@@ -39,7 +39,7 @@ InputHandler::InputHandler() : mDevices()
 
 InputHandler::~InputHandler()
 {
-  for(DeviceIT it = mDevices.begin(); it != mDevices.end();)
+  for(DeviceIT it = mDevices.begin(); it != mDevices.end(); ++it)
   {
     delete it->second;
   }

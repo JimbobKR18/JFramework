@@ -51,13 +51,25 @@ GameApp::GameApp() : mComponentFactory(new DefaultComponentFactory()), mManagers
 
 GameApp::~GameApp()
 {
-  delete mComponentFactory;
+  // Erase levelmanager first.
+  Manager *levelManager = GET<LevelManager>();
+  for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
+  {
+    if(*it == GET<LevelManager>())
+    {
+      mManagers.erase(it);
+      break;
+    }
+  }
+  delete levelManager;
+  
   for(std::vector<Manager*>::iterator it = mManagers.begin(); it != mManagers.end(); ++it)
   {
     delete (*it);
   }
   mManagers.clear();
-  
+ 
+  delete mComponentFactory;
   FileCache::Clear();
   ParserFactory::Cleanup();
 }

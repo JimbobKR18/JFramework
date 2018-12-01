@@ -47,7 +47,6 @@ FMODSoundSystem::~FMODSoundSystem()
   for(FMODDSPIt it = mDSPContainer.begin(); it != mDSPContainer.end(); ++it)
   {
     it->second->release();
-    delete it->second;
   }
   mSoundContainer.clear();
   mChannelGroupContainer.clear();
