@@ -18,11 +18,6 @@
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
 
-void SortThread(int id, Screen *aScreen, std::vector<Surface*> &aSurfaces)
-{
-  aScreen->SortObjects(aSurfaces);
-}
-
 int const DEFAULT_QUADTREE_SIZE = 3000;
 unsigned const DEFAULT_QUADTREE_CAPACITY = 8;
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
