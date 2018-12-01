@@ -40,6 +40,7 @@
     <File Name="../../Source/LUA/SLB.hpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Core">
+    <File Name="../../Source/Core/ctpl_stl.h"/>
     <File Name="../../Source/Core/ObjectPlacement.h"/>
     <File Name="../../Source/Core/DefaultComponentFactory.cpp"/>
     <File Name="../../Source/Core/DefaultComponentFactory.h"/>

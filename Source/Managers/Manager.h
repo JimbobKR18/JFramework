@@ -11,23 +11,33 @@
 class Manager
 {
 private:
-	GameApp*            mApp;
-	std::string         mName;
+  GameApp*            mApp;
+  HashString          mName;
   unsigned            mUID;
 
 public:
-  std::list<Message *> mDelayedMessages;
+  std::list<Message*> mDelayedMessages;
 
   typedef std::list<Message*>::iterator MessageIT;
   typedef std::list<Message*>::const_iterator ConstMessageIT;
 
   Manager() {assert(0);}
-  Manager(GameApp *aApp, std::string aName, unsigned aUID) : mApp(aApp), mName(aName), mUID(aUID) {}
+  Manager(GameApp *aApp, HashString const &aName, unsigned aUID) : mApp(aApp), mName(aName), mUID(aUID) {}
   virtual ~Manager() {}
 
   GameApp*            GetOwningApp() {return mApp;}
-  std::string         GetDefinedName() {return mName;}
+  HashString          GetDefinedName() {return mName;}
   unsigned            GetDefinedUID() {return mUID;}
+  
+  void                ClearMessages() 
+  {
+    MessageIT msgEnd = mDelayedMessages.end();
+    for(MessageIT it = mDelayedMessages.begin(); it != msgEnd; ++it)
+    {
+      delete *it;
+    }
+    mDelayedMessages.clear();
+  }
 
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;

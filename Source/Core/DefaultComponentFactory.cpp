@@ -40,31 +40,31 @@ Component* DefaultComponentFactory::CreateComponent(GameApp* aApp, GameObject *a
   {
     ret = aObject->HAS<PhysicsObject>() ? aObject->GET<PhysicsObject>() : aApp->GET<PhysicsWorld>()->CreateObject();
   }
-  if(aNode->GetName() == "ChemistryMaterial")
+  else if(aNode->GetName() == "ChemistryMaterial")
   {
     ret = aObject->HAS<ChemistryMaterial>() ? aObject->GET<ChemistryMaterial>() : aApp->GET<ChemistryManager>()->CreateMaterial(aNode->Find("Name")->GetValue());
   }
-  if(aNode->GetName() == "ChemistryElement")
+  else if(aNode->GetName() == "ChemistryElement")
   {
     ret = aObject->HAS<ChemistryElement>() ? aObject->GET<ChemistryElement>() : aApp->GET<ChemistryManager>()->CreateElement(aNode->Find("Name")->GetValue());
   }
-  if(aNode->GetName() == "Transform")
+  else if(aNode->GetName() == "Transform")
   {
     ret = aObject->HAS<Transform>() ? aObject->GET<Transform>() : new Transform();
   }
-  if(aNode->GetName() == "StateObject")
+  else if(aNode->GetName() == "StateObject")
   {
     ret = aObject->HAS<StateObject>() ? aObject->GET<StateObject>() : new StateObject();
   }
-  if(aNode->GetName() == "SoundEmitter")
+  else if(aNode->GetName() == "SoundEmitter")
   {
     ret = aObject->HAS<SoundEmitter>() ? aObject->GET<SoundEmitter>() : new SoundEmitter();
   }
-  if(aNode->GetName() == "SoundListener")
+  else if(aNode->GetName() == "SoundListener")
   {
     ret = aObject->HAS<SoundListener>() ? aObject->GET<SoundListener>() : new SoundListener();
   }
-  if(aNode->GetName() == "Surface")
+  else if(aNode->GetName() == "Surface")
   {
     ret = aObject->GET<Surface>();
     if(!ret)
@@ -87,7 +87,7 @@ Component* DefaultComponentFactory::CreateComponent(GameApp* aApp, GameObject *a
       }
     }
   }
-  if(aNode->GetName() == "Text")
+  else if(aNode->GetName() == "Text")
   {
     ret = aObject->GET<Surface>();
     if(!ret)
@@ -110,15 +110,15 @@ Component* DefaultComponentFactory::CreateComponent(GameApp* aApp, GameObject *a
       }
     }
   }
-  if(aNode->GetName() == "Camera")
+  else if(aNode->GetName() == "Camera")
   {
     ret = aObject->HAS<Camera>() ? aObject->GET<Camera>() : aApp->GET<GraphicsManager>()->CreateCamera();
   }
-  if(aNode->GetName() == "FollowComponent")
+  else if(aNode->GetName() == "FollowComponent")
   {
     ret = aObject->HAS<FollowComponent>() ? aObject->GET<FollowComponent>() : new FollowComponent();
   }
-  if(aNode->GetName() == "CustomScript")
+  else if(aNode->GetName() == "CustomScript")
   {
     ret = aObject->HAS<CustomScript>() ? aObject->GET<CustomScript>() : new CustomScript();
   }
@@ -147,24 +147,27 @@ void DefaultComponentFactory::DeleteComponent(GameApp* aApp, GameObject *aObject
   {
     aApp->GET<PhysicsWorld>()->RemoveObject(dynamic_cast<PhysicsObject*>(aComponent));
   }
-  if(aComponent->GetDefinedUID() == ChemistryMaterial::GetUID())
+  else if(aComponent->GetDefinedUID() == ChemistryMaterial::GetUID())
   {
     aApp->GET<ChemistryManager>()->RemoveMaterial(dynamic_cast<ChemistryMaterial*>(aComponent));
   }
-  if(aComponent->GetDefinedUID() == ChemistryElement::GetUID())
+  else if(aComponent->GetDefinedUID() == ChemistryElement::GetUID())
   {
     aApp->GET<ChemistryManager>()->RemoveElement(dynamic_cast<ChemistryElement*>(aComponent));
   }
-  if(aComponent->GetDefinedUID() == Surface::GetUID())
+  else if(aComponent->GetDefinedUID() == Surface::GetUID())
   {
     aApp->GET<GraphicsManager>()->RemoveSurface(dynamic_cast<Surface*>(aComponent));
   }
-  if(aComponent->GetDefinedUID() == Camera::GetUID())
+  else if(aComponent->GetDefinedUID() == Camera::GetUID())
   {
     aApp->GET<GraphicsManager>()->RemoveCamera(dynamic_cast<Camera*>(aComponent));
   }
-  aApp->GET<ControllerManager>()->RemoveController(dynamic_cast<Controller*>(aComponent));
+  else
+  {
+    aApp->GET<ControllerManager>()->RemoveController(dynamic_cast<Controller*>(aComponent));
+  }
   
-  aObject->RemoveComponent(aComponent);
+  //aObject->RemoveComponent(aComponent);
   delete aComponent;
 }

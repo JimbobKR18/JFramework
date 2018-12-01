@@ -212,17 +212,15 @@ void ObjectManager::DeleteObject(GameObject *aObj)
 {
   RemoveObject(aObj);
   
-  size_t numDeleted = mAllocatedObjects.erase(aObj);
-  if(numDeleted > 0)
+  mAllocatedObjects.erase(aObj);
+  ComponentFactory *factory = GetOwningApp()->GetComponentFactory();
+  for(GameObject::ComponentIT it = aObj->GetComponents().begin(); it != aObj->GetComponents().end(); ++it)
   {
-    ComponentFactory *factory = GetOwningApp()->GetComponentFactory();
-    for(GameObject::ComponentIT it = aObj->GetComponents().begin(); it != aObj->GetComponents().end();)
-    {
-      factory->DeleteComponent(GetOwningApp(), aObj, it->second);
-      it = aObj->GetComponents().begin();
-    }
-    delete aObj;
+    Component *component = it->second;
+    factory->DeleteComponent(GetOwningApp(), aObj, component);
   }
+  aObj->GetComponents().clear();
+  delete aObj;
 }
 
 /**
@@ -250,12 +248,8 @@ void ObjectManager::AddObject(GameObject *aObj, bool aStatic)
  */
 void ObjectManager::RemoveObject(GameObject *aObj)
 {
-  size_t numErased = mObjects.erase(aObj);
-  if(numErased > 0)
-    return;
-  numErased = mStaticObjects.erase(aObj);
-  if(numErased > 0)
-    return;
+  mObjects.erase(aObj);
+  mStaticObjects.erase(aObj);
 }
 
 /**

@@ -256,8 +256,8 @@ void Level::DeleteObject(GameObject *aObject)
         RemoveObjectFromScenarios(*it);
         mObjects[i].erase(it);
         DeleteObjectChildren(aObject);
-        objectManager->DeleteObject(aObject);
         effectsManager->RemoveEffectsForObject(aObject);
+        objectManager->DeleteObject(aObject);
         return;
       }
     }
@@ -310,18 +310,21 @@ void Level::DeleteObjectDelayed(GameObject *aObject)
  */
 void Level::DeleteObjects()
 {
-  ObjectManager *manager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  // TODO doesn't address replaceable objects
+  ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
+  EffectsManager *effectsManager = mOwner->GetOwningApp()->GET<EffectsManager>();
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
     ObjectIT end = mObjects[i].end();
     for(ObjectIT it = mObjects[i].begin(); it != end; ++it)
     {
       RemoveObjectFromScenarios(*it);
-      manager->DeleteObject(*it);
+      effectsManager->RemoveEffectsForObject(*it);
+      objectManager->DeleteObject(*it);
     }
     mObjects[i].clear();
   }
-  manager->GetOwningApp()->ClearDelayedMessages();
+  objectManager->GetOwningApp()->ClearDelayedMessages();
 }
 
 /**
