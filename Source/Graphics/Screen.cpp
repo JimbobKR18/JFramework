@@ -151,7 +151,7 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
     
     // Cull terrain from data structure, whatever makes it is in.
     std::unordered_set<Surface*> staticSurfaces = aObjects.Query(cameraMin, cameraMax);
-    std::unordered_set<Surface*>::const_iterator staticSurfacesEnd = aMovingObjects.end();
+    std::unordered_set<Surface*>::const_iterator staticSurfacesEnd = staticSurfaces.end();
     for(std::unordered_set<Surface*>::const_iterator it2 = staticSurfaces.begin(); it2 != staticSurfacesEnd; ++it2)
     {
       Surface *surface = *it2;
