@@ -224,6 +224,36 @@ void ObjectManager::DeleteObject(GameObject *aObj)
 }
 
 /**
+ * @brief Delete all objects currently in game.
+ */
+void ObjectManager::DeleteObjects()
+{
+  std::unordered_set<GameObject*> allObjects;
+  allObjects.insert(mObjects.begin(), mObjects.end());
+  allObjects.insert(mStaticObjects.begin(), mStaticObjects.end());
+  
+  ObjectIT objectsEnd = allObjects.end();
+  for(ObjectIT it = allObjects.begin(); it != objectsEnd; ++it)
+  {
+    GameObject *object = *it;
+    mAllocatedObjects.erase(object);
+    
+    ComponentFactory *factory = GetOwningApp()->GetComponentFactory();
+    for(GameObject::ComponentIT it = object->GetComponents().begin(); it != object->GetComponents().end(); ++it)
+    {
+      Component *component = it->second;
+      factory->DeleteComponent(GetOwningApp(), object, component);
+    }
+    object->GetComponents().clear();
+    delete object;
+  }
+  
+  mObjects.clear();
+  mStaticObjects.clear();
+  ClearMessages();
+}
+
+/**
  * @brief Add object to objects vector.
  * @param aObj The object to add
  * @param aStatic Is this a static environment object, as in, not designed to be updated?

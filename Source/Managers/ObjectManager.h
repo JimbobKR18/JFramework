@@ -40,6 +40,7 @@ public:
   GameObject*         FindObject(HashString const &aName);
   void                ParseObject(GameObject *aObject, HashString const &aFolder = "Game");
   void                DeleteObject(GameObject *aObj);
+  void                DeleteObjects();
   void                AddObject(GameObject *aObj, bool aStatic = false);
   void                RemoveObject(GameObject *aObj);
   static void         SerializeLUA();
