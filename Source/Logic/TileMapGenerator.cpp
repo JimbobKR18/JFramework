@@ -362,9 +362,9 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       int i = x + (y * mWidth);
       
       // Basic check to be sure we're not overwriting an index
-      if(mObjects[i] != nullptr)
+      if(mEmptyTiles.find(mTiles[i]) != mEmptyTiles.end() && mEmptyTiles[mTiles[i]])
         continue;
-      else if(mEmptyTiles.find(mTiles[i]) != mEmptyTiles.end() && mEmptyTiles[mTiles[i]])
+      else if(mObjects[i] != nullptr)
         continue;
       
       // Make GameObject to place

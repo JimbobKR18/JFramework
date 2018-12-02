@@ -717,6 +717,12 @@ void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
         glUniform1i(glGetUniformLocation(program, property->GetName()), value.ToInt());
         break;
       }
+      case PropertyType::INT2:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform2i(glGetUniformLocation(program, property->GetName()), intVector[0], intVector[1]);
+        break;
+      }
       case PropertyType::INT3:
       {
         std::vector<int> intVector = value.ToIntVector();
@@ -732,6 +738,12 @@ void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
       case PropertyType::FLOAT1:
       {
         glUniform1f(glGetUniformLocation(program, property->GetName()), value.ToFloat());
+        break;
+      }
+      case PropertyType::FLOAT2:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform2f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1]);
         break;
       }
       case PropertyType::FLOAT3:

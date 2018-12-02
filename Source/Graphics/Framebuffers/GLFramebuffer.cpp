@@ -90,7 +90,6 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
     magFilter = GL_NEAREST;
   }
   
-  //gluBuild2DMipmaps(GL_TEXTURE_2D, 3, mWidth, mHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   glGenFramebuffers(1, &mFrameBufferID);
   glGenTextures(1, &mRenderedTextureID);
   glBindTexture(GL_TEXTURE_2D, mRenderedTextureID);
