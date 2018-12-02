@@ -63,16 +63,16 @@ namespace Common
   std::string               FloatToString(float const aValue);
   std::string               DoubleToString(double const aValue);
   std::string               BoolToString(bool const aValue);
-  std::string               IntVectorToString(std::vector<int> &aValue);
-  std::string               FloatVectorToString(std::vector<float> &aValue);
-  std::string               DoubleVectorToString(std::vector<double> &aValue);
-  std::string               BoolVectorToString(std::vector<bool> &aValue);
-  std::string               StringVectorToString(std::vector<std::string> &aValue);
-  std::string               HashStringVectorToString(std::vector<HashString> &aValue);
+  std::string               IntVectorToString(std::vector<int> const &aValue);
+  std::string               FloatVectorToString(std::vector<float> const &aValue);
+  std::string               DoubleVectorToString(std::vector<double> const &aValue);
+  std::string               BoolVectorToString(std::vector<bool> const &aValue);
+  std::string               StringVectorToString(std::vector<std::string> const &aValue);
+  std::string               HashStringVectorToString(std::vector<HashString> const &aValue);
   
-  std::string               IntSetToString(std::set<int> &aValue);
-  std::string               StringSetToString(std::set<std::string> &aValue);
-  std::string               HashStringSetToString(std::set<HashString> &aValue);
+  std::string               IntSetToString(std::set<int> const &aValue);
+  std::string               StringSetToString(std::set<std::string> const &aValue);
+  std::string               HashStringSetToString(std::set<HashString> const &aValue);
   
   std::string               ParseString(std::istream *infile, std::string const &aString);
   std::string               TrimString(std::string const &aString);

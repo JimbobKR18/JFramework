@@ -78,6 +78,8 @@ struct Vector2
   float   AngleBetweenRadians(Vector2 const &rhs) const;
   float   AngleBetweenDegrees(Vector2 const &rhs) const;
   
+  std::vector<float> ToVector() const;
+  
   // Helpful debugging
   bool    validate() const;
   
@@ -133,6 +135,8 @@ struct Vector3
   float   AngleBetweenRadians(Vector3 const &rhs, Vector3 const &aNormal) const;
   float   AngleBetweenDegrees(Vector3 const &rhs, Vector3 const &aNormal) const;
   
+  std::vector<float> ToVector() const;
+  
   // Helpful debugging
   bool    validate() const;
 
@@ -184,6 +188,8 @@ struct Vector4
   
   float   AngleBetweenRadians(Vector4 const &rhs, Vector4 const &aNormal) const;
   float   AngleBetweenDegrees(Vector4 const &rhs, Vector4 const &aNormal) const;
+  
+  std::vector<float> ToVector() const;
   
   // Helpful debugging
   bool validate() const;

@@ -746,6 +746,13 @@ void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
         glUniform4f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
         break;
       }
+      case PropertyType::SAMPLER2:
+      {
+        glActiveTexture(GL_TEXTURE0 + property->GetId());
+        glBindTexture(GL_TEXTURE_2D, value.ToInt());
+        glUniform1i(glGetUniformLocation(program, property->GetName()), property->GetId());
+        break;
+      }
       default:
       {
         assert(!"Invalid property type.");

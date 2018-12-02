@@ -8,7 +8,12 @@ SurfaceProperty::SurfaceProperty(SurfaceProperty const &aSurfaceProperty) :
 }
 
 SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue) : 
-  mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue) 
+  mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue), mId(0)
+{
+}
+
+SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId) : 
+  mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue), mId(aId)
 {
 }
 
@@ -53,6 +58,15 @@ HashString SurfaceProperty::GetDefaultValue() const
 }
 
 /**
+ * @brief Get Id of property
+ * @return Id
+ */
+int SurfaceProperty::GetId() const
+{
+  return mId;
+}
+
+/**
  * @brief Set name of property
  * @param aName Name
  */
@@ -86,4 +100,13 @@ void SurfaceProperty::SetTargetValue(HashString const &aTargetValue)
 void SurfaceProperty::SetDefaultValue(HashString const &aDefaultValue)
 {
   mDefaultValue = aDefaultValue;
+}
+
+/**
+ * @brief Set id
+ * @param aId id
+ */
+void SurfaceProperty::SetId(int const aId)
+{
+  mId = aId;
 }

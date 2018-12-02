@@ -10,7 +10,8 @@ enum PropertyType
   INT4,
   FLOAT1,
   FLOAT3,
-  FLOAT4
+  FLOAT4,
+  SAMPLER2
 };
 
 class SurfaceProperty
@@ -20,10 +21,12 @@ private:
   PropertyType mType;
   HashString mTargetValue;
   HashString mDefaultValue;
+  int mId;
   
 public:
   SurfaceProperty(SurfaceProperty const &aSurfaceProperty);
   SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
+  SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId);
   virtual ~SurfaceProperty();
   
   // Getters
@@ -31,12 +34,14 @@ public:
   PropertyType GetType() const;
   HashString GetTargetValue() const;
   HashString GetDefaultValue() const;
+  int GetId() const;
   
   // Setters
   void SetName(HashString const &aName);
   void SetType(PropertyType const &aType);
   void SetTargetValue(HashString const &aTargetValue);
   void SetDefaultValue(HashString const &aTargetValue);
+  void SetId(int const aId);
 };
 
 typedef std::vector<SurfaceProperty*> PropertyContainer;

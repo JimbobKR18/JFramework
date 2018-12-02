@@ -227,6 +227,31 @@ void Surface::AddOrEditProperty(HashString const &aName, PropertyType const &aTy
 }
 
 /**
+ * @brief Edit property if there, otherwise add.
+ * @param aName Name of property
+ * @param aType Type of property
+ * @param aTargetValue Target value of property
+ * @param aDefaultValue Default value of property
+ * @param aId Id of property
+ */
+void Surface::AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId)
+{
+  PropertyContainerIt propertyEnd = mProperties.end();
+  for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
+  {
+    if((*it)->GetName() == aName)
+    {
+      (*it)->SetType(aType);
+      (*it)->SetTargetValue(aTargetValue);
+      (*it)->SetDefaultValue(aDefaultValue);
+      (*it)->SetId(aId);
+      return;
+    }
+  }
+  mProperties.push_back(new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue, aId));
+}
+
+/**
  * @brief Clear properties for a surface.
  */
 void Surface::ClearProperties()

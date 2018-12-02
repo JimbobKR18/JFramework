@@ -215,6 +215,15 @@ GameObject* TileMapGenerator::GetObject(int const aIndex)
 }
 
 /**
+ * @brief Get all objects
+ * @return All objects
+ */
+std::unordered_map<int, GameObject*> TileMapGenerator::GetObjects()
+{
+  return mObjects;
+}
+
+/**
  * @brief Get art value of tile at position
  * @param aX X in world coordinates
  * @param aY Y in world coordinates

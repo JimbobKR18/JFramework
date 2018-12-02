@@ -324,11 +324,11 @@ namespace Common
    * @brief Converts Int Vector to String (comma separated)
    * @param aValue
    */
-  std::string IntVectorToString(std::vector<int> &aValue)
+  std::string IntVectorToString(std::vector<int> const &aValue)
   {
     std::string ret;
-    std::vector<int>::iterator end = aValue.end();
-    for(std::vector<int>::iterator it = aValue.begin(); it != end; ++it)
+    std::vector<int>::const_iterator end = aValue.end();
+    for(std::vector<int>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       std::ostringstream stream;
       stream << *it;
@@ -344,11 +344,11 @@ namespace Common
    * @brief Converts Float Vector to String (comma separated)
    * @param aValue
    */
-  std::string FloatVectorToString(std::vector<float> &aValue)
+  std::string FloatVectorToString(std::vector<float> const &aValue)
   {
     std::string ret;
-    std::vector<float>::iterator end = aValue.end();
-    for(std::vector<float>::iterator it = aValue.begin(); it != end; ++it)
+    std::vector<float>::const_iterator end = aValue.end();
+    for(std::vector<float>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       std::ostringstream stream;
       stream << *it;
@@ -364,11 +364,11 @@ namespace Common
    * @brief Converts Double Vector to String (comma separated)
    * @param aValue
    */
-  std::string DoubleVectorToString(std::vector<double> &aValue)
+  std::string DoubleVectorToString(std::vector<double> const &aValue)
   {
     std::string ret;
-    std::vector<double>::iterator end = aValue.end();
-    for(std::vector<double>::iterator it = aValue.begin(); it != end; ++it)
+    std::vector<double>::const_iterator end = aValue.end();
+    for(std::vector<double>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       std::ostringstream stream;
       stream << *it;
@@ -384,11 +384,11 @@ namespace Common
    * @brief Converts Bool Vector to String (comma separated)
    * @param aValue
    */
-  std::string BoolVectorToString(std::vector<bool> &aValue)
+  std::string BoolVectorToString(std::vector<bool> const &aValue)
   {
     std::string ret;
-    std::vector<bool>::iterator end = aValue.end();
-    for(std::vector<bool>::iterator it = aValue.begin(); it != end; ++it)
+    std::vector<bool>::const_iterator end = aValue.end();
+    for(std::vector<bool>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       ret += (*it ? "true" : "false");
       ret += ",";
@@ -402,11 +402,11 @@ namespace Common
    * @brief Converts String Vector to String (comma separated)
    * @param aValue
    */
-  std::string StringVectorToString(std::vector<std::string> &aValue)
+  std::string StringVectorToString(std::vector<std::string> const &aValue)
   {
     std::string ret;
-    std::vector<std::string>::iterator end = aValue.end();
-    for(std::vector<std::string>::iterator it = aValue.begin(); it != end; ++it)
+    std::vector<std::string>::const_iterator end = aValue.end();
+    for(std::vector<std::string>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       ret += *it;
       ret += ",";
@@ -421,11 +421,11 @@ namespace Common
    * @brief Converts HashString Vector to String (comma separated)
    * @param aValue
    */
-  std::string HashStringVectorToString(std::vector<HashString> &aValue)
+  std::string HashStringVectorToString(std::vector<HashString> const &aValue)
   {
     std::string ret;
-    std::vector<HashString>::iterator end = aValue.end();
-    for(std::vector<HashString>::iterator it = aValue.begin(); it != end; ++it)
+    std::vector<HashString>::const_iterator end = aValue.end();
+    for(std::vector<HashString>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       ret += (*it).ToString();
       ret += ",";
@@ -441,11 +441,11 @@ namespace Common
    * @param aValue
    * @return 
    */
-  std::string IntSetToString(std::set<int> &aValue)
+  std::string IntSetToString(std::set<int> const &aValue)
   {
     std::string ret;
-    std::set<int>::iterator end = aValue.end();
-    for(std::set<int>::iterator it = aValue.begin(); it != end; ++it)
+    std::set<int>::const_iterator end = aValue.end();
+    for(std::set<int>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       std::ostringstream stream;
       stream << *it;
@@ -461,11 +461,11 @@ namespace Common
    * @brief Converts String Set to String (comma separated)
    * @param aValue
    */
-  std::string StringSetToString(std::set<std::string> &aValue)
+  std::string StringSetToString(std::set<std::string> const &aValue)
   {
     std::string ret;
-    std::set<std::string>::iterator end = aValue.end();
-    for(std::set<std::string>::iterator it = aValue.begin(); it != end; ++it)
+    std::set<std::string>::const_iterator end = aValue.end();
+    for(std::set<std::string>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       ret += *it;
       ret += ",";
@@ -480,11 +480,11 @@ namespace Common
    * @brief Converts HashString Set to String (comma separated)
    * @param aValue
    */
-  std::string HashStringSetToString(std::set<HashString> &aValue)
+  std::string HashStringSetToString(std::set<HashString> const &aValue)
   {
     std::string ret;
-    std::set<HashString>::iterator end = aValue.end();
-    for(std::set<HashString>::iterator it = aValue.begin(); it != end; ++it)
+    std::set<HashString>::const_iterator end = aValue.end();
+    for(std::set<HashString>::const_iterator it = aValue.begin(); it != end; ++it)
     {
       ret += (*it).ToString();
       ret += ",";

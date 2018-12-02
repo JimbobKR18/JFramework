@@ -238,6 +238,14 @@ float Vector2::AngleBetweenDegrees(Vector2 const &rhs) const
   return AngleBetweenRadians(rhs) * RADS_TO_DEGREE;
 }
 
+std::vector<float> Vector2::ToVector() const
+{
+  std::vector<float> ret;
+  ret.push_back(x);
+  ret.push_back(y);
+  return ret;
+}
+
 bool Vector2::validate() const
 {
   if(std::isnan(x) || std::isnan(y))
@@ -507,6 +515,15 @@ float Vector3::AngleBetweenDegrees(Vector3 const &rhs, Vector3 const &aNormal) c
   return AngleBetweenRadians(rhs, aNormal) * RADS_TO_DEGREE;
 }
 
+std::vector<float> Vector3::ToVector() const
+{
+  std::vector<float> ret;
+  ret.push_back(x);
+  ret.push_back(y);
+  ret.push_back(z);
+  return ret;
+}
+
 bool Vector3::validate() const
 {
   if(std::isnan(x) || std::isnan(y) || std::isnan(z))
@@ -772,6 +789,16 @@ float Vector4::AngleBetweenRadians(Vector4 const &rhs, Vector4 const &aNormal) c
 float Vector4::AngleBetweenDegrees(Vector4 const &rhs, Vector4 const &aNormal) const
 {
   return AngleBetweenRadians(rhs, aNormal) * RADS_TO_DEGREE;
+}
+
+std::vector<float> Vector4::ToVector() const
+{
+  std::vector<float> ret;
+  ret.push_back(x);
+  ret.push_back(y);
+  ret.push_back(z);
+  ret.push_back(w);
+  return ret;
 }
 
 bool Vector4::validate() const
