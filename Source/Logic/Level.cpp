@@ -319,10 +319,12 @@ void Level::DeleteObjects()
     {
       RemoveObjectFromScenarios(*it);
       effectsManager->RemoveEffectsForObject(*it);
+      objectManager->DeleteObject(*it);
     }
     mObjects[i].clear();
   }
-  objectManager->DeleteObjects();
+  //objectManager->DeleteObjects();
+  objectManager->ClearMessages();
   objectManager->GetOwningApp()->ClearDelayedMessages();
 }
 
