@@ -66,6 +66,7 @@ public:
   // Getters
   Screen*             GetScreen();
   Camera*             GetPrimaryCamera();
+  QuadTree&           GetQuadTree();
   
   // Texture management
   void                AddTexturePairing(HashString const &aFilename, TextureData *aData);

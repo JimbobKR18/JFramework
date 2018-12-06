@@ -36,6 +36,15 @@ std::unordered_set<Surface*> const &QuadTree::GetObjects() const
 }
 
 /**
+ * @brief Get results of last query.
+ * @return Last query results.
+ */
+std::unordered_set<Surface*> &QuadTree::GetLastQuery()
+{
+  return mCachedQuery;
+}
+
+/**
  * @brief Get minimum range of section.
  * @return The minimum range of the section.
  */
@@ -208,7 +217,7 @@ std::unordered_set<Surface*> QuadTree::GetAllObjects() const
  * @param aMax Maximum value.
  * @return Objects in range.
  */
-std::unordered_set<Surface*> QuadTree::Query(Vector3 const &aMin, Vector3 const &aMax) const
+std::unordered_set<Surface*> QuadTree::Query(Vector3 const &aMin, Vector3 const &aMax)
 {
   std::unordered_set<Surface*> ret;
   if(!SectionInRange(aMin, aMax))
@@ -238,6 +247,7 @@ std::unordered_set<Surface*> QuadTree::Query(Vector3 const &aMin, Vector3 const 
   ret.insert(swResults.begin(), swResults.end());
   ret.insert(seResults.begin(), seResults.end());
     
+  mCachedQuery = ret;
   return ret;
 }
 

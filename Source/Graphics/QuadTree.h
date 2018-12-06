@@ -13,6 +13,7 @@ private:
   unsigned mCapacity;
 
   std::unordered_set<Surface*> mObjects;
+  std::unordered_set<Surface*> mCachedQuery;
   Vector3 mMinRange;
   Vector3 mMaxRange;
   
@@ -28,6 +29,7 @@ public:
   
   // Getters
   std::unordered_set<Surface*> const &GetObjects() const;
+  std::unordered_set<Surface*> &GetLastQuery();
   Vector3 const &GetMinRange() const;
   Vector3 const &GetMaxRange() const;
   
@@ -38,7 +40,7 @@ public:
   bool Insert(Surface *aSurface);
   bool Remove(Surface *aSurface);
   std::unordered_set<Surface*> GetAllObjects() const;
-  std::unordered_set<Surface*> Query(Vector3 const &aMin, Vector3 const &aMax) const;
+  std::unordered_set<Surface*> Query(Vector3 const &aMin, Vector3 const &aMax);
   
 private:
   bool ObjectInRange(Surface* aSurface) const;

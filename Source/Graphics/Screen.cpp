@@ -115,7 +115,7 @@ void Screen::SetUIRenderSorter(ScreenRenderSorter *aUIRenderSorter)
  * @param aObjects
  * @param aCameras
  */
-std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(QuadTree const &aObjects, 
+std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(QuadTree &aObjects, 
   std::unordered_set<Surface*> const &aMovingObjects, std::unordered_set<Camera*> const &aCameras)
 {
   // Identity matrix

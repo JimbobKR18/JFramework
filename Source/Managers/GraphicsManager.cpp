@@ -333,6 +333,15 @@ Camera *GraphicsManager::GetPrimaryCamera()
 }
 
 /**
+ * @brief Get QuadTree
+ * @return QuadTree
+ */
+QuadTree& GraphicsManager::GetQuadTree()
+{
+  return mQuadTree;
+}
+
+/**
  * @brief Add texture name and data to map.
  * @param aFilename
  * @param aData
