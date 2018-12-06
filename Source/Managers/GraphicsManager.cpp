@@ -22,7 +22,6 @@ int const DEFAULT_QUADTREE_SIZE = 3000;
 unsigned const DEFAULT_QUADTREE_CAPACITY = 8;
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
-                                                                           mQuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0)), 
                                                                            mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
 
 {
@@ -30,6 +29,7 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
   AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, 
     SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter(), "", "", Vector4(), Vector4(), 0, 0));
 #ifdef SHADER_COMPATIBLE
+  mTree = new QuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0));
   mScreen = new PCShaderScreen(this, aWidth, aHeight, aFullScreen);
 #else
   assert(!"Needs screen for this device.");
@@ -37,8 +37,7 @@ GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aF
 }
 
 GraphicsManager::GraphicsManager(GraphicsManager const &aGraphicsManager) : Manager(nullptr, "GraphicsManager", GraphicsManager::sUID),
-  mQuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0)),
-  mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
+  mTree(nullptr), mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
 {
   assert(!"Not allowed");
 }
@@ -70,7 +69,7 @@ void GraphicsManager::Update()
     GameObject *object = (*it)->GetOwner();
     if(object->GetPlacement() == ObjectPlacement::STATIC)
     {
-      mQuadTree.Insert(*it);
+      mTree->Insert(*it);
     }
     else
     {
@@ -79,7 +78,7 @@ void GraphicsManager::Update()
   }
   mNewSurfaces.clear();
   
-  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> cameraObjectRenders = mScreen->PruneObjects(mQuadTree, mMovingSurfaces, mCameras);
+  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> cameraObjectRenders = mScreen->PruneObjects(mTree, mMovingSurfaces, mCameras);
   std::vector<Surface*> uiElements(mUIElements.begin(), mUIElements.end());
   mScreen->PreDraw();
   mScreen->SortUI(uiElements);
@@ -197,7 +196,7 @@ void GraphicsManager::RemoveSurface(Surface *aSurface)
   mNewSurfaces.erase(aSurface);
   mUIElements.erase(aSurface);
   mMovingSurfaces.erase(aSurface);
-  mQuadTree.Remove(aSurface);
+  mTree->Remove(aSurface);
 }
 
 /**
@@ -208,7 +207,7 @@ void GraphicsManager::ClearSurfaces()
   for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end();)
   {
     DeleteSurface(*it);
-    mQuadTree.Remove(*it);
+    mTree->Remove(*it);
     it = mUIElements.begin();
   }
   for(SurfaceIT it = mUIElements.begin(); it != mUIElements.end();)
@@ -333,12 +332,12 @@ Camera *GraphicsManager::GetPrimaryCamera()
 }
 
 /**
- * @brief Get QuadTree
- * @return QuadTree
+ * @brief Get Tree
+ * @return Tree
  */
-QuadTree& GraphicsManager::GetQuadTree()
+Tree* GraphicsManager::GetTree()
 {
-  return mQuadTree;
+  return mTree;
 }
 
 /**
@@ -482,7 +481,7 @@ void GraphicsManager::ResetDevice()
  */
 void GraphicsManager::ResizeTree(Vector3 const &aMinRange, Vector3 const &aMaxRange)
 {
-  mQuadTree.Resize(aMinRange, aMaxRange);
+  mTree->Resize(aMinRange, aMaxRange);
 }
 
 /**
@@ -490,7 +489,7 @@ void GraphicsManager::ResizeTree(Vector3 const &aMinRange, Vector3 const &aMaxRa
  */
 void GraphicsManager::ClearTree()
 {
-  mQuadTree.Clear();
+  mTree->Clear();
 }
 
 /**

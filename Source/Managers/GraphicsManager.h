@@ -15,7 +15,7 @@ public:
   typedef std::unordered_set<Surface*>::iterator SurfaceIT;
   
 private:
-  QuadTree                               mQuadTree;
+  Tree*                                 mTree;
   std::unordered_set<Surface*>           mSurfaces;
   std::unordered_set<Surface*>           mNewSurfaces;
   std::unordered_set<Surface*>           mMovingSurfaces;
@@ -66,7 +66,7 @@ public:
   // Getters
   Screen*             GetScreen();
   Camera*             GetPrimaryCamera();
-  QuadTree&           GetQuadTree();
+  Tree*               GetTree();
   
   // Texture management
   void                AddTexturePairing(HashString const &aFilename, TextureData *aData);

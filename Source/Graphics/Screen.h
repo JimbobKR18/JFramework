@@ -46,7 +46,7 @@ public:
   // Get UI render sorting method (Post batching)
   ScreenRenderSorter*     GetUIRenderSorter();
   // Batching
-  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> PruneObjects(QuadTree &aObjects, 
+  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> PruneObjects(Tree *aObjects, 
                                        std::unordered_set<Surface*> const &aMovingObjects, std::unordered_set<Camera*> const &aCameras);
   void                    SortObjects(std::vector<Surface*> &aObjects);
   void                    SortUI(std::vector<Surface*> &aObjects);

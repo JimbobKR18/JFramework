@@ -4,18 +4,13 @@
 #include "Common.h"
 #include "MathExt.h"
 #include "Surface.h"
-#include "Threading.h"
+#include "Tree.h"
 
 // Stores section data
-class QuadTree
+class QuadTree : public Tree
 {
 private:
   unsigned mCapacity;
-
-  std::unordered_set<Surface*> mObjects;
-  std::unordered_set<Surface*> mCachedQuery;
-  Vector3 mMinRange;
-  Vector3 mMaxRange;
   
   QuadTree *mNorthWest;
   QuadTree *mNorthEast;
@@ -27,20 +22,14 @@ public:
   QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 const &aMaxRange, std::unordered_set<Surface*> aObjects);
   virtual ~QuadTree();
   
-  // Getters
-  std::unordered_set<Surface*> const &GetObjects() const;
-  std::unordered_set<Surface*> &GetLastQuery();
-  Vector3 const &GetMinRange() const;
-  Vector3 const &GetMaxRange() const;
-  
   // Methods
-  void Clear();
-  void Resize(Vector3 const &aMinRange, Vector3 const &aMaxRange);
-  void Split();
-  bool Insert(Surface *aSurface);
-  bool Remove(Surface *aSurface);
-  std::unordered_set<Surface*> GetAllObjects() const;
-  std::unordered_set<Surface*> Query(Vector3 const &aMin, Vector3 const &aMax);
+  virtual void Clear();
+  virtual void Resize(Vector3 const &aMinRange, Vector3 const &aMaxRange);
+  virtual void Split();
+  virtual bool Insert(Surface *aSurface);
+  virtual bool Remove(Surface *aSurface);
+  virtual std::unordered_set<Surface*> GetAllObjects() const;
+  virtual std::unordered_set<Surface*> Query(Vector3 const &aMin, Vector3 const &aMax);
   
 private:
   bool ObjectInRange(Surface* aSurface) const;

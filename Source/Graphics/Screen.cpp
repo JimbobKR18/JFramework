@@ -115,7 +115,7 @@ void Screen::SetUIRenderSorter(ScreenRenderSorter *aUIRenderSorter)
  * @param aObjects
  * @param aCameras
  */
-std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(QuadTree &aObjects, 
+std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneObjects(Tree *aObjects,
   std::unordered_set<Surface*> const &aMovingObjects, std::unordered_set<Camera*> const &aCameras)
 {
   // Identity matrix
@@ -150,7 +150,7 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
     Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraHalfSize;
     
     // Cull terrain from data structure, whatever makes it is in.
-    std::unordered_set<Surface*> staticSurfaces = aObjects.Query(cameraMin, cameraMax);
+    std::unordered_set<Surface*> staticSurfaces = aObjects->Query(cameraMin, cameraMax);
     std::unordered_set<Surface*>::const_iterator staticSurfacesEnd = staticSurfaces.end();
     for(std::unordered_set<Surface*>::const_iterator it2 = staticSurfaces.begin(); it2 != staticSurfacesEnd; ++it2)
     {

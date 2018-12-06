@@ -7,13 +7,12 @@ const Vector3 MARGIN_FOR_ERROR = Vector3(128,128,128);
 //----------------------------------------------
 // QuadTree
 //----------------------------------------------
-QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 const &aMaxRange) : mCapacity(aCapacity), mObjects(), 
-  mMinRange(aMinRange), mMaxRange(aMaxRange), mNorthWest(nullptr), mNorthEast(nullptr), mSouthWest(nullptr), mSouthEast(nullptr)
+QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 const &aMaxRange) : Tree(aMinRange, aMaxRange), mCapacity(aCapacity),
+  mNorthWest(nullptr), mNorthEast(nullptr), mSouthWest(nullptr), mSouthEast(nullptr)
 {
 }
 
-QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 const &aMaxRange, std::unordered_set<Surface*> aSurfaces) : mCapacity(aCapacity), mObjects(), 
-  mMinRange(aMinRange), mMaxRange(aMaxRange), mNorthWest(nullptr), mNorthEast(nullptr), mSouthWest(nullptr), mSouthEast(nullptr)
+QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 const &aMaxRange, std::unordered_set<Surface*> aSurfaces) : Tree(aMinRange, aMaxRange), mCapacity(aCapacity), mNorthWest(nullptr), mNorthEast(nullptr), mSouthWest(nullptr), mSouthEast(nullptr)
 {
   for(std::unordered_set<Surface*>::iterator it = aSurfaces.begin(); it != aSurfaces.end(); ++it)
   {
@@ -24,42 +23,6 @@ QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 c
 QuadTree::~QuadTree()
 {
   Clear();
-}
-
-/**
- * @brief Get objects in this section.
- * @return The objects in the section.
- */
-std::unordered_set<Surface*> const &QuadTree::GetObjects() const
-{
-  return mObjects;
-}
-
-/**
- * @brief Get results of last query.
- * @return Last query results.
- */
-std::unordered_set<Surface*> &QuadTree::GetLastQuery()
-{
-  return mCachedQuery;
-}
-
-/**
- * @brief Get minimum range of section.
- * @return The minimum range of the section.
- */
-Vector3 const &QuadTree::GetMinRange() const
-{
-  return mMinRange;
-}
-
-/**
- * @brief Get maximum range of section.
- * @return The maximum range of the section.
- */
-Vector3 const &QuadTree::GetMaxRange() const
-{
-  return mMaxRange;
 }
 
 /**
