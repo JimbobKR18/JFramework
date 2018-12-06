@@ -37,6 +37,7 @@ public:
   ~HashString();
 
   // Const Operations
+  char At(int const aIndex) const;
   int Size() const;
   int Length() const;
   bool Empty() const;

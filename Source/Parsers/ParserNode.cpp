@@ -7,7 +7,7 @@
 
 #include "ParserNode.h"
 
-ParserNode::ParserNode() : mValue(""), mName(""), mChildren(), mParent(nullptr), mTouched(false)
+ParserNode::ParserNode() : mValue(""), mName(""), mChildren(), mParent(nullptr), mTouched(false), mRandom(false)
 {
 }
 
@@ -170,6 +170,18 @@ HashString ParserNode::GetName() const
  */
 HashString ParserNode::GetValue() const
 {
+  if(mRandom)
+  {
+    std::string ret;
+    HashString subString = mValue.SubString(13, mValue.Length() - 14);
+    for(int i = 0; i < subString.Length(); ++i)
+      ret.push_back(subString[i]);
+    
+    std::vector<HashString> allOptions = HashString(ret).Split(",");
+    ret = allOptions[Common::RandomIntInRange(0, allOptions.size())].ToString();
+    return ret;
+  }
+  
   return mValue;
 }
 
@@ -226,6 +238,14 @@ void ParserNode::SetName(HashString const &aName)
  */
 void ParserNode::SetValue(HashString const &aValue)
 {
+  if(aValue.StartsWith("RandomSelect"))
+  {
+    mRandom = true;
+  }
+  else
+  {
+    mRandom = false;
+  }
   mValue = aValue;
 }
 

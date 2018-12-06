@@ -323,7 +323,7 @@ void Level::DeleteObjects()
     }
     mObjects[i].clear();
   }
-  //objectManager->DeleteObjects();
+  mScenarios.clear();
   objectManager->ClearMessages();
   objectManager->GetOwningApp()->ClearDelayedMessages();
 }
@@ -351,6 +351,7 @@ void Level::ResetLevel()
   for(TileMapGeneratorContainerIT it = mGenerators.begin(); it != mGenerators.end(); ++it)
     delete *it;
   mGenerators.clear();
+  mSoundNames.clear();
   
   // Delete objects and reload.
   DeleteObjects();
@@ -398,30 +399,13 @@ Vector3 Level::GetMinBoundary() const
  * @brief Place all objects to be rendered / updated.
  * @param aPrevLevel
  */
-void Level::Load(Level const *aPrevLevel)
+void Level::Load(Level *aPrevLevel)
 {
   // Load all objects
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
     LoadObjects(mObjects[i], static_cast<ObjectPlacement>(i));
 
-  SoundManager *soundManager = mOwner->GetOwningApp()->GET<SoundManager>();
-  for(SoundBankContainerIT it = mSoundBanks.begin(); it != mSoundBanks.end(); ++it)
-  {
-    if(!aPrevLevel || aPrevLevel->mSoundBanks.find(*it) == aPrevLevel->mSoundBanks.end())
-    {
-      soundManager->LoadSoundBank(*it);
-    }
-  }
-  for(SoundNameContainerIT it = mSoundNames.begin(); it != mSoundNames.end(); ++it)
-  {
-    if(!aPrevLevel || aPrevLevel->mSoundNames.find(it->first) == aPrevLevel->mSoundNames.end())
-    {
-      soundManager->CreateChannelGroup(it->second);
-      int channel = soundManager->PlaySound(it->first, SoundManager::INFINITE_LOOPS);
-      mSoundChannels[channel] = it->first;
-      soundManager->AddChannelToGroup(it->second, channel);
-    }
-  }
+  LoadSounds(aPrevLevel);
 
   mOwner->GetOwningApp()->GET<GraphicsManager>()->GetScreen()->SetClearColor(mClearColor);
   mOwner->GetOwningApp()->GET<GraphicsManager>()->SetUnsortedLayers(mUnsortedLayers);
@@ -442,29 +426,7 @@ void Level::Unload(Level *aNextLevel)
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
     UnloadObjects(mObjects[i]);
     
-  SoundManager *soundManager  = mOwner->GetOwningApp()->GET<SoundManager>();
-  for(SoundBankContainerIT it = mSoundBanks.begin(); it != mSoundBanks.end(); ++it)
-  {
-    if(!aNextLevel || aNextLevel->mSoundBanks.find(*it) == aNextLevel->mSoundBanks.end())
-    {
-      soundManager->UnloadSoundBank(*it);
-    }
-  }
-  for(SoundChannelContainerIT it = mSoundChannels.begin(); it != mSoundChannels.end(); ++it)
-  {
-    if(!aNextLevel || aNextLevel->mSoundNames.find(it->second) == aNextLevel->mSoundNames.end())
-    {
-      soundManager->RemoveChannelFromGroups(it->first);
-      soundManager->StopChannel(it->first);
-    }
-    else if(aNextLevel)
-    {
-      aNextLevel->mSoundChannels[it->first] = it->second;
-      soundManager->AddChannelToGroup(aNextLevel->mSoundNames[it->second], it->first);
-    }
-  }
-  if(this != aNextLevel)
-    mSoundChannels.clear();
+  UnloadSounds(aNextLevel);
 
   GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
   graphicsManager->SetPrimaryCamera(nullptr);
@@ -993,6 +955,63 @@ GameObject* Level::FindObject(ObjectContainer const &aContainer, HashString cons
       return *it;
   }
   return nullptr;
+}
+
+/**
+ * @brief Load sounds for level
+ * @param aPrevLevel Previous level
+ */
+void Level::LoadSounds(Level *aPrevLevel)
+{
+  SoundManager *soundManager = mOwner->GetOwningApp()->GET<SoundManager>();
+  for(SoundBankContainerIT it = mSoundBanks.begin(); it != mSoundBanks.end(); ++it)
+  {
+    if(!aPrevLevel || aPrevLevel->mSoundBanks.find(*it) == aPrevLevel->mSoundBanks.end())
+    {
+      soundManager->LoadSoundBank(*it);
+    }
+  }
+  for(SoundNameContainerIT it = mSoundNames.begin(); it != mSoundNames.end(); ++it)
+  {
+    if(!aPrevLevel || aPrevLevel->mSoundNames.find(it->first) == aPrevLevel->mSoundNames.end())
+    {
+      soundManager->CreateChannelGroup(it->second);
+      int channel = soundManager->PlaySound(it->first, SoundManager::INFINITE_LOOPS);
+      mSoundChannels[channel] = it->first;
+      soundManager->AddChannelToGroup(it->second, channel);
+    }
+  }
+}
+
+/**
+ * @brief Unload sounds for level
+ * @param aNextLevel Next level
+ */
+void Level::UnloadSounds(Level *aNextLevel)
+{
+  SoundManager *soundManager  = mOwner->GetOwningApp()->GET<SoundManager>();
+  for(SoundBankContainerIT it = mSoundBanks.begin(); it != mSoundBanks.end(); ++it)
+  {
+    if(!aNextLevel || aNextLevel->mSoundBanks.find(*it) == aNextLevel->mSoundBanks.end())
+    {
+      soundManager->UnloadSoundBank(*it);
+    }
+  }
+  for(SoundChannelContainerIT it = mSoundChannels.begin(); it != mSoundChannels.end(); ++it)
+  {
+    if(!aNextLevel || aNextLevel->mSoundNames.find(it->second) == aNextLevel->mSoundNames.end())
+    {
+      soundManager->RemoveChannelFromGroups(it->first);
+      soundManager->StopChannel(it->first);
+    }
+    else if(aNextLevel)
+    {
+      aNextLevel->mSoundChannels[it->first] = it->second;
+      soundManager->AddChannelToGroup(aNextLevel->mSoundNames[it->second], it->first);
+    }
+  }
+  if(this != aNextLevel)
+    mSoundChannels.clear();
 }
 
 /**

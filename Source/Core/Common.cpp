@@ -509,6 +509,8 @@ namespace Common
     if(literalLocation == std::string::npos && constantLocation == std::string::npos &&
         systemPropertyLocation == std::string::npos && randomLocation == std::string::npos)
       return aString;
+    else if(randomLocation != std::string::npos)
+      return aString;
     else if(literalLocation != std::string::npos || constantLocation != std::string::npos)
     {
       // Getting the full string
@@ -582,29 +584,6 @@ namespace Common
         DebugLogPrint("System property %s not found!", systemPropertyName.c_str());
         assert(!"System property not found!");
       }
-    }
-    else if(randomLocation != std::string::npos)
-    {
-      int offset = 12;
-      unsigned pos = offset;
-      char next;
-      bool earlyout = false;
-      // Literal(blah) is one whole word, extract
-      while(pos < aString.length())
-      {
-        char next = aString[pos];
-        if(next == '\n')
-        {
-          earlyout = true;
-          break;
-        }
-        if(next != ')' && next != '(')
-          ret.push_back(next);
-        ++pos;
-      }
-      
-      std::vector<HashString> allOptions = HashString(ret).Split(",");
-      ret = allOptions[Common::RandomIntInRange(0, allOptions.size())].ToString();
     }
     
     if(constantLocation != std::string::npos)

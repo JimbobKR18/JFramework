@@ -26,6 +26,7 @@ private:
   ParserNodeContainer       mChildren;
   ParserNode*               mParent;
   bool                mTouched;
+  bool                mRandom;
 
 public:
   ParserNode();

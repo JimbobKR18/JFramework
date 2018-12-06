@@ -88,7 +88,7 @@ public:
   Vector3           GetMaxBoundary() const;
   Vector3           GetMinBoundary() const;
 
-  void              Load(Level const *aPrevLevel);
+  void              Load(Level *aPrevLevel);
   void              Unload(Level *aNextLevel);
   void              LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const aPlacement);
   void              UnloadObjects(ObjectContainer const &aObjects);
@@ -115,6 +115,8 @@ protected:
   void              ParseBaseFile();
   ObjectContainer&  GetObjects(ObjectPlacement const aPlacement);
   GameObject*       FindObject(ObjectContainer const &aContainer, HashString const &aName);
+  void              LoadSounds(Level *aPrevLevel);
+  void              UnloadSounds(Level *aNextLevel);
 private:
   void              LoadObject(GameObject *aObject, ObjectPlacement const aPlacement);
   void              UnloadObject(GameObject *aObject);

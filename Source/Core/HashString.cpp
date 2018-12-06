@@ -48,6 +48,19 @@ HashString::~HashString()
 
 // Const Operations
 /**
+ * @brief Get character at index.
+ * @param aIndex index.
+ * @return Character at index.
+ */
+char HashString::At(int const aIndex) const
+{
+  if(aIndex >= mString.size())
+    assert(!"Index outside of HashString range.");
+    
+  return mString[aIndex];
+}
+
+/**
  * @return The size of the string.
  */
 int HashString::Size() const
