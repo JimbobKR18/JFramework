@@ -56,6 +56,7 @@ GraphicsManager::~GraphicsManager()
   mShaders.clear();
   ShaderLoader::Clear();
   delete mScreen;
+  delete mTree;
 }
 
 /**
