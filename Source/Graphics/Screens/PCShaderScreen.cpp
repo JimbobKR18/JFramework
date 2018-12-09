@@ -700,7 +700,7 @@ void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
   PropertyContainerConstIt propertyEnd = properties.end();
   for(PropertyContainerConstIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
   {
-    SurfaceProperty *property = *propertyIt;
+    SurfaceProperty *property = propertyIt->second;
     HashString value = property->GetTargetValue();
     
     if(!aActive)

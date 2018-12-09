@@ -124,6 +124,8 @@
     <File Name="../../Source/Components/SoundListener.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
+    <File Name="../../Source/Graphics/Tree.h"/>
+    <File Name="../../Source/Graphics/Tree.cpp"/>
     <File Name="../../Source/Graphics/QuadTree.h"/>
     <File Name="../../Source/Graphics/QuadTree.cpp"/>
     <File Name="../../Source/Graphics/TextureCoordinates.h"/>

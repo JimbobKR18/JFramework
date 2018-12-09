@@ -27,18 +27,15 @@ PropertyContainer const& Framebuffer::GetProperties() const
  */
 void Framebuffer::AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)
 {
-  PropertyContainerIt propertyEnd = mProperties.end();
-  for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
+  if(mProperties.find(aName.ToHash()) != mProperties.end())
   {
-    if((*it)->GetName() == aName)
-    {
-      (*it)->SetType(aType);
-      (*it)->SetTargetValue(aTargetValue);
-      (*it)->SetDefaultValue(aDefaultValue);
-      return;
-    }
+    SurfaceProperty *surfaceProperty = mProperties[aName.ToHash()];
+    surfaceProperty->SetType(aType);
+    surfaceProperty->SetTargetValue(aTargetValue);
+    surfaceProperty->SetDefaultValue(aDefaultValue);
+    return;
   }
-  mProperties.push_back(new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue));
+  mProperties[aName.ToHash()] = new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue);
 }
 
 /**
@@ -49,7 +46,7 @@ void Framebuffer::ClearProperties()
   PropertyContainerIt propertyEnd = mProperties.end();
   for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
   {
-    delete *it;
+    delete it->second;
   }
   mProperties.clear();
 }

@@ -46,7 +46,7 @@ public:
   void SetId(int const aId);
 };
 
-typedef std::vector<SurfaceProperty*> PropertyContainer;
+typedef std::unordered_map<int, SurfaceProperty*> PropertyContainer;
 typedef PropertyContainer::iterator PropertyContainerIt;
 typedef PropertyContainer::const_iterator PropertyContainerConstIt;
 

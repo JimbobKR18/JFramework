@@ -29,7 +29,7 @@ Surface::Surface(Surface const &aSurface) : Component(Surface::sUID), mTexCoord(
   PropertyContainerConstIt propertyEnd = aSurface.mProperties.end();
   for(PropertyContainerConstIt it = aSurface.mProperties.begin(); it != propertyEnd; ++it)
   {
-    mProperties.push_back(new SurfaceProperty(**it));
+    mProperties[it->second->GetName().ToHash()] = new SurfaceProperty(*(it->second));
   }
 }
 
@@ -212,18 +212,15 @@ PropertyContainer const& Surface::GetProperties() const
  */
 void Surface::AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)
 {
-  PropertyContainerIt propertyEnd = mProperties.end();
-  for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
+  if(mProperties.find(aName.ToHash()) != mProperties.end())
   {
-    if((*it)->GetName() == aName)
-    {
-      (*it)->SetType(aType);
-      (*it)->SetTargetValue(aTargetValue);
-      (*it)->SetDefaultValue(aDefaultValue);
-      return;
-    }
+    SurfaceProperty *surfaceProperty = mProperties[aName.ToHash()];
+    surfaceProperty->SetType(aType);
+    surfaceProperty->SetTargetValue(aTargetValue);
+    surfaceProperty->SetDefaultValue(aDefaultValue);
+    return;
   }
-  mProperties.push_back(new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue));
+  mProperties[aName.ToHash()] = new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue);
 }
 
 /**
@@ -236,19 +233,16 @@ void Surface::AddOrEditProperty(HashString const &aName, PropertyType const &aTy
  */
 void Surface::AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId)
 {
-  PropertyContainerIt propertyEnd = mProperties.end();
-  for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
+  if(mProperties.find(aName.ToHash()) != mProperties.end())
   {
-    if((*it)->GetName() == aName)
-    {
-      (*it)->SetType(aType);
-      (*it)->SetTargetValue(aTargetValue);
-      (*it)->SetDefaultValue(aDefaultValue);
-      (*it)->SetId(aId);
-      return;
-    }
+    SurfaceProperty *surfaceProperty = mProperties[aName.ToHash()];
+    surfaceProperty->SetType(aType);
+    surfaceProperty->SetTargetValue(aTargetValue);
+    surfaceProperty->SetDefaultValue(aDefaultValue);
+    surfaceProperty->SetId(aId);
+    return;
   }
-  mProperties.push_back(new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue, aId));
+  mProperties[aName.ToHash()] = new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue, aId);
 }
 
 /**
@@ -259,7 +253,7 @@ void Surface::ClearProperties()
   PropertyContainerIt propertyEnd = mProperties.end();
   for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
   {
-    delete *it;
+    delete it->second;
   }
   mProperties.clear();
 }
@@ -408,10 +402,14 @@ void Surface::Serialize(ParserNode *aNode)
       propertiesNode->Place(curNode, "");
       
       HashString type = "";
-      switch((*it)->GetType())
+      SurfaceProperty* surfaceProperty = it->second;
+      switch(surfaceProperty->GetType())
       {
       case PropertyType::INT1:
         type = "INT1";
+        break;
+      case PropertyType::INT2:
+        type = "INT2";
         break;
       case PropertyType::INT3:
         type = "INT3";
@@ -422,11 +420,17 @@ void Surface::Serialize(ParserNode *aNode)
       case PropertyType::FLOAT1:
         type = "FLOAT1";
         break;
+      case PropertyType::FLOAT2:
+        type = "FLOAT2";
+        break;
       case PropertyType::FLOAT3:
         type = "FLOAT3";
         break;
       case PropertyType::FLOAT4:
         type = "FLOAT4";
+        break;
+      case PropertyType::SAMPLER2:
+        type = "SAMPLER2";
         break;
       default:
         assert(!"Invalid PropertyType trying to be serialized.");
@@ -434,10 +438,10 @@ void Surface::Serialize(ParserNode *aNode)
       }
       
       ParserNode* propertyNode = propertiesNode->Find(curNode);
-      propertyNode->Place("Name", (*it)->GetName());
+      propertyNode->Place("Name", surfaceProperty->GetName());
       propertyNode->Place("Type", type);
-      propertyNode->Place("TargetValue", (*it)->GetTargetValue());
-      propertyNode->Place("DefaultValue", (*it)->GetDefaultValue());
+      propertyNode->Place("TargetValue", surfaceProperty->GetTargetValue());
+      propertyNode->Place("DefaultValue", surfaceProperty->GetDefaultValue());
     }
   }
 }
@@ -625,16 +629,22 @@ void Surface::Deserialize(ParserNode *aNode)
       
       if(type == "INT1")
         propertyType = PropertyType::INT1;
+      else if(type == "INT2")
+        propertyType = PropertyType::INT2;
       else if(type == "INT3")
         propertyType = PropertyType::INT3;
       else if(type == "INT4")
         propertyType = PropertyType::INT4;
       else if(type == "FLOAT1")
         propertyType = PropertyType::FLOAT1;
+      else if(type == "FLOAT2")
+        propertyType = PropertyType::FLOAT2;
       else if(type == "FLOAT3")
         propertyType = PropertyType::FLOAT3;
       else if(type == "FLOAT4")
         propertyType = PropertyType::FLOAT4;
+      else if(type == "SAMPLER2")
+        propertyType = PropertyType::SAMPLER2;
       else
       {
         DebugLogPrint("Invalid value %s passed into Property deserialization.", type.ToCharArray());
