@@ -181,6 +181,32 @@ bool Surface::CurrentAnimationCompleted()
   return false;
 }
 
+bool Surface::SurfacePropertiesEquals(Surface const *aSurface) const
+{
+  PropertyContainer const& otherSurfaceProperties = aSurface->mProperties;
+  if(mProperties.size() != otherSurfaceProperties.size())
+  {
+    return false;
+  }
+
+  PropertyContainerConstIt end = mProperties.end();
+  for(PropertyContainerConstIt it = mProperties.begin(); it != mProperties.end(); ++it) 
+  {
+    SurfaceProperty *property = it->second;
+    int hash = property->GetName().ToHash();
+    PropertyContainerConstIt otherPropertyIt = otherSurfaceProperties.find(hash);
+    if(otherPropertyIt == otherSurfaceProperties.end())
+    {
+      return false;
+    }
+    else if(*otherPropertyIt->second != *property)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
  * @brief Create scrolling reveal effect.
  * @param aScrollType HORIZONTAL or VERTICAL.

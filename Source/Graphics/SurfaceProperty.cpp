@@ -22,6 +22,23 @@ SurfaceProperty::~SurfaceProperty()
 }
 
 /**
+ * @brief Equality check
+ */
+bool SurfaceProperty::operator==(SurfaceProperty const &aRhs)
+{
+  return mName == aRhs.mName && mTargetValue == aRhs.mTargetValue && mDefaultValue == aRhs.mDefaultValue &&
+    mType == aRhs.mType && mId == aRhs.mId;
+}
+
+/**
+* @brief Inequality check
+*/
+bool SurfaceProperty::operator!=(SurfaceProperty const &aRhs)
+{
+  return !(*this == aRhs);
+}
+
+/**
  * @brief Get name of property
  * @return Name
  */

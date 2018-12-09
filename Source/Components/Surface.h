@@ -133,6 +133,7 @@ public:
   bool                CurrentAnimationCompleted();
   
   // Batching
+  bool                SurfacePropertiesEquals(Surface const *aSurface) const;
   virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); return 0; }
   virtual unsigned    GetProgramID() const { assert(!"Cannot call GetProgramID() on a raw Surface."); return 0; }
   

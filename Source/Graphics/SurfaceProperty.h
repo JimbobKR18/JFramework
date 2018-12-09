@@ -30,6 +30,10 @@ public:
   SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
   SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId);
   virtual ~SurfaceProperty();
+
+  // Operations
+  bool operator==(SurfaceProperty const &aRhs);
+  bool operator!=(SurfaceProperty const &aRhs);
   
   // Getters
   HashString GetName() const;
