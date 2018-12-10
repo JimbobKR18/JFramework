@@ -406,7 +406,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  //glOrtho(0, width, height, 0, 1, -1);
+  glOrtho(0, width, height, 0, 1, -1);
   //gluPerspective(45, (float)width / (float)height, 0.01f, 100.0f);
 
   glMatrixMode(GL_MODELVIEW);
