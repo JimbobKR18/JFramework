@@ -171,7 +171,15 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
     float ratio = ((float)aScreenHeight / (float)aDefaultHeight);
     int x = aDefaultWidth * ratio;
     int y = aDefaultHeight * ratio;
-    glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, aDefaultWidth * ratio, aScreenHeight);
+    if(x <= aScreenWidth)
+      glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, x, aScreenHeight);
+    else
+    {
+      ratio = ((float)aScreenWidth / (float)aDefaultWidth);
+      x = aDefaultWidth * ratio;
+      y = aDefaultHeight * ratio;
+      glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, aScreenWidth, y);
+    }
   }
   else
     glViewport(0, 0, aDefaultWidth, aDefaultHeight);

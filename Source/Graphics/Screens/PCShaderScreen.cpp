@@ -390,7 +390,15 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
     float ratio = ((float)mDisplayMode.h / (float)height);
     int x = width * ratio;
     int y = height * ratio;
-    glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, width * ratio, mDisplayMode.h);
+    if(x <= mDisplayMode.w)
+      glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, x, mDisplayMode.h);
+    else
+    {
+      ratio = ((float)mDisplayMode.w / (float)width);
+      x = width * ratio;
+      y = height * ratio;
+      glViewport((mDisplayMode.w - x)/2, (mDisplayMode.h - y)/2, mDisplayMode.w, y);
+    }
   }
   else
     glViewport(0, 0, width, height);
@@ -398,7 +406,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  glOrtho(0, width, height, 0, 1, -1);
+  //glOrtho(0, width, height, 0, 1, -1);
   //gluPerspective(45, (float)width / (float)height, 0.01f, 100.0f);
 
   glMatrixMode(GL_MODELVIEW);
