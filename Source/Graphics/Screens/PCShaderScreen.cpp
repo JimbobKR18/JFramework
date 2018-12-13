@@ -632,7 +632,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     GL_ERROR_CHECK();
     glBindTexture(GL_TEXTURE_2D, texture);
     GL_ERROR_CHECK();
-    glUniform1i(glGetUniformLocation(program, "textureUnit"), 0);
+    glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
     GL_ERROR_CHECK();
     glUniform3f(glGetUniformLocation(program, "cameraDiff"), cameraTranslation.x, cameraTranslation.y, cameraTranslation.z);
     GL_ERROR_CHECK();
