@@ -24,6 +24,12 @@
   #include <SDL2/SDL_ttf.h>
 #endif
 
+//#ifdef _DEBUG
+  #define GL_ERROR_CHECK() ShaderLoader::LogError(__FILE__, __LINE__)
+/*#else
+  #define GL_ERROR_CHECK()
+#endif*/
+
 class ShaderLoader
 {
 private:
@@ -33,6 +39,7 @@ public:
   ShaderLoader();
   virtual ~ShaderLoader();
   
+  static void LogError(HashString const &aFile, int aLine);
   static ShaderData* LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
   static TextureData* LoadTexture(HashString const &aTextureFileName, HashString const &aMinFilter, HashString const &aMagFilter);
   static TextureData* LoadText(HashString const &aFont, HashString const &aText, HashString const &aMinFilter, HashString const &aMagFilter, 

@@ -44,6 +44,7 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   SDL_GetDesktopDisplayMode(0, &mDisplayMode);
   
   GLenum glError = glewInit();
+  GL_ERROR_CHECK();
   if(glError != GLEW_OK)
   {
     DebugLogPrint("Error: %s\n", glewGetErrorString(glError));
@@ -266,6 +267,7 @@ void PCShaderScreen::ResetObjectShader(Surface* aSurface, ShaderData* aOldData, 
 void PCShaderScreen::PreDraw()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  GL_ERROR_CHECK();
 }
 
 /**
@@ -275,15 +277,15 @@ void PCShaderScreen::PreDraw()
  */
 void PCShaderScreen::Draw(std::map<int, std::vector<Surface*>> const &aObjects, Camera* aCamera)
 {
-// TODO Mac does not use multiple cameras with framebuffers
+  // TODO Mac does not use multiple cameras with framebuffers
 #ifndef __APPLE__
   aCamera->GetFramebuffer()->Bind();
   for(std::map<int, std::vector<Surface*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
   {
     DrawObjects(it->second, aCamera);
-    #ifdef _DEBUG_DRAW
-      DebugDraw(it->second);
-    #endif
+#ifdef _DEBUG_DRAW
+    DebugDraw(it->second);
+#endif
   }
   aCamera->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
   
@@ -293,13 +295,13 @@ void PCShaderScreen::Draw(std::map<int, std::vector<Surface*>> const &aObjects, 
   mFrameBuffer->Bind();
   if(!aCamera->GetPrimary())
     return;
-    
+  
   for(std::map<int, std::vector<Surface*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
   {
     DrawObjects(it->second, aCamera);
-    #ifdef _DEBUG_DRAW
-      DebugDraw(it->second);
-    #endif
+#ifdef _DEBUG_DRAW
+    DebugDraw(it->second);
+#endif
   }
   mFrameBuffer->Unbind(mDefaultFrameBufferID);
   mFrameBuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
@@ -321,6 +323,7 @@ void PCShaderScreen::SwapBuffers()
 void PCShaderScreen::SetClearColor(Vector4 const &aClearColor)
 {
   glClearColor(aClearColor.x, aClearColor.y, aClearColor.z, aClearColor.w);
+  GL_ERROR_CHECK();
 }
 
 /**
@@ -374,16 +377,25 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
 
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  GL_ERROR_CHECK();
   glClearDepth(1.0f);
+  GL_ERROR_CHECK();
   
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  GL_ERROR_CHECK();
   glEnable(GL_TEXTURE_2D);
+  GL_ERROR_CHECK();
   glEnable(GL_BLEND);
+  GL_ERROR_CHECK();
   glEnable(GL_CULL_FACE);
+  GL_ERROR_CHECK();
   glDisable(GL_DEPTH_TEST);
+  GL_ERROR_CHECK();
   glDepthMask(GL_FALSE);
+  GL_ERROR_CHECK();
 
   glShadeModel(GL_SMOOTH);
+  GL_ERROR_CHECK();
 
   if(aFullScreen)
   {
@@ -404,24 +416,38 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
     glViewport(0, 0, width, height);
 
   glMatrixMode(GL_PROJECTION);
+  GL_ERROR_CHECK();
   glLoadIdentity();
+  GL_ERROR_CHECK();
 
   glOrtho(0, width, height, 0, 1, -1);
   //gluPerspective(45, (float)width / (float)height, 0.01f, 100.0f);
+  GL_ERROR_CHECK();
 
   glMatrixMode(GL_MODELVIEW);
+  GL_ERROR_CHECK();
   glLoadIdentity();
+  GL_ERROR_CHECK();
   
   glGenVertexArrays(1, &mVertexArrayObjectID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mVertexBufferID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mTextureBufferID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mPositionBufferID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mColorBufferID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mIndexBufferID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mNormalBufferID);
+  GL_ERROR_CHECK();
   
   glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mDefaultFrameBufferID);
+  GL_ERROR_CHECK();
   glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &mMaxTextures);
+  GL_ERROR_CHECK();
   
   GetOwner()->ResetDevice();
 }
@@ -605,12 +631,19 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     
     // Enable textures and set uniforms.
     glBindVertexArray(mVertexArrayObjectID);
+    GL_ERROR_CHECK();
     glActiveTexture(GL_TEXTURE0 + activeTexture);
+    GL_ERROR_CHECK();
     glBindTexture(GL_TEXTURE_2D, texture);
+    GL_ERROR_CHECK();
     glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
+    GL_ERROR_CHECK();
     glUniform3f(glGetUniformLocation(program, "cameraDiff"), cameraTranslation.x, cameraTranslation.y, cameraTranslation.z);
+    GL_ERROR_CHECK();
     glUniform3f(glGetUniformLocation(program, "cameraSize"), cameraSize.x, cameraSize.y, cameraSize.z);
+    GL_ERROR_CHECK();
     glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
+    GL_ERROR_CHECK();
     
     // Set shader properties. Due to batching, done on a per surface / shader basis.
     // Shader uniforms are reset upon relinking.
@@ -625,10 +658,13 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     
     // Set index data
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
+    GL_ERROR_CHECK();
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * indices.size(), &indices[0], GL_DYNAMIC_DRAW);
+    GL_ERROR_CHECK();
     
     // Draw and disable
     glDrawElements(GL_TRIANGLES, static_cast<unsigned>(vertexData.size()), GL_UNSIGNED_INT, 0);
+    GL_ERROR_CHECK();
     DisableVertexAttribArray(vertexPosLocation);
     DisableVertexAttribArray(texCoordPosLocation);
     DisableVertexAttribArray(objectPosLocation);
@@ -639,10 +675,15 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
 
     // Reset to default texture
     glBindTexture(GL_TEXTURE_2D, 0);
+    GL_ERROR_CHECK();
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    GL_ERROR_CHECK();
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    GL_ERROR_CHECK();
     glBindVertexArray(0);
+    GL_ERROR_CHECK();
     glUseProgram(0);
+    GL_ERROR_CHECK();
     
     vertexData.clear();
     textureData.clear();
@@ -714,54 +755,65 @@ void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
       case PropertyType::INT1:
       {
         glUniform1i(glGetUniformLocation(program, property->GetName()), value.ToInt());
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::INT2:
       {
         std::vector<int> intVector = value.ToIntVector();
         glUniform2i(glGetUniformLocation(program, property->GetName()), intVector[0], intVector[1]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::INT3:
       {
         std::vector<int> intVector = value.ToIntVector();
         glUniform3i(glGetUniformLocation(program, property->GetName()), intVector[0], intVector[1], intVector[2]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::INT4:
       {
         std::vector<int> intVector = value.ToIntVector();
         glUniform4i(glGetUniformLocation(program, property->GetName()), intVector[0], intVector[1], intVector[2], intVector[3]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::FLOAT1:
       {
         glUniform1f(glGetUniformLocation(program, property->GetName()), value.ToFloat());
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::FLOAT2:
       {
         std::vector<float> floatVector = value.ToFloatVector();
         glUniform2f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::FLOAT3:
       {
         std::vector<float> floatVector = value.ToFloatVector();
         glUniform3f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1], floatVector[2]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::FLOAT4:
       {
         std::vector<float> floatVector = value.ToFloatVector();
         glUniform4f(glGetUniformLocation(program, property->GetName()), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::SAMPLER2:
       {
         glActiveTexture(GL_TEXTURE0 + property->GetId());
+        GL_ERROR_CHECK();
         glBindTexture(GL_TEXTURE_2D, value.ToInt());
+        GL_ERROR_CHECK();
         glUniform1i(glGetUniformLocation(program, property->GetName()), property->GetId());
+        GL_ERROR_CHECK();
         break;
       }
       default:
@@ -783,6 +835,7 @@ void PCShaderScreen::DisableVertexAttribArray(int aVertexAttrib)
   if(aVertexAttrib != -1)
   {
     glDisableVertexAttribArray(aVertexAttrib);
+    GL_ERROR_CHECK();
   }
 }
 
@@ -842,10 +895,15 @@ void PCShaderScreen::BindAttributeV2(GLenum aTarget, int const aBufferID, int co
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, aBufferID);
+    GL_ERROR_CHECK();
     glBufferData(aTarget, sizeof(Vector2) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    GL_ERROR_CHECK();
     glVertexAttribPointer(aAttributeLocation, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, 0);
+    GL_ERROR_CHECK();
   }
 }
 
@@ -860,10 +918,15 @@ void PCShaderScreen::BindAttributeV3(GLenum aTarget, int const aBufferID, int co
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, aBufferID);
+    GL_ERROR_CHECK();
     glBufferData(aTarget, sizeof(Vector3) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    GL_ERROR_CHECK();
     glVertexAttribPointer(aAttributeLocation, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, 0);
+    GL_ERROR_CHECK();
   }
 }
 
@@ -878,22 +941,14 @@ void PCShaderScreen::BindAttributeV4(GLenum aTarget, int const aBufferID, int co
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, aBufferID);
+    GL_ERROR_CHECK();
     glBufferData(aTarget, sizeof(Vector4) * aData.size(), &aData[0], GL_DYNAMIC_DRAW);
+    GL_ERROR_CHECK();
     glVertexAttribPointer(aAttributeLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, 0);
+    GL_ERROR_CHECK();
   }
-}
-
-/**
- * @brief Prints GL error info.
- * @param aLineNumber Use __LINE__ wherever you use this.
- */
-void PCShaderScreen::PrintGLError(int const aLineNumber)
-{
-#ifndef _WIN32
-  GLenum errorCode = glGetError();
-  if(errorCode != 0)
-    DebugLogPrint("(%s) (%i) %i: %s\n", __FILE__, aLineNumber, errorCode, gluErrorString(errorCode));
-#endif
 }

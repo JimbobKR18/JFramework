@@ -60,7 +60,6 @@ public:
   void BindAttributeV2(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector2> &aData);
   void BindAttributeV3(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector3> &aData);
   void BindAttributeV4(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData);
-  void PrintGLError(int const aLineNumber);
 };
 
 #endif //__JFramework_GLFramebuffer_h_

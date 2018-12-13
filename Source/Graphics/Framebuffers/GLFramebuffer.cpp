@@ -91,21 +91,34 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   }
   
   glGenFramebuffers(1, &mFrameBufferID);
+  GL_ERROR_CHECK();
   glGenTextures(1, &mRenderedTextureID);
+  GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, mRenderedTextureID);
+  GL_ERROR_CHECK();
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+  GL_ERROR_CHECK();
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+  GL_ERROR_CHECK();
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  GL_ERROR_CHECK();
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+  GL_ERROR_CHECK();
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  GL_ERROR_CHECK();
   glGenerateMipmap(GL_TEXTURE_2D);
+  GL_ERROR_CHECK();
   
   SetShaders(aManager, mVertexShaderFilename, mFragmentShaderFilename);
   
   glGenBuffers(1, &mVertexBufferID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mTextureBufferID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mIndexBufferID);
+  GL_ERROR_CHECK();
   glGenVertexArrays(1, &mVertexArrayObjectID);
+  GL_ERROR_CHECK();
   
   mPositionCoords.push_back(Vector3(-1,-1,0));
   mPositionCoords.push_back(Vector3(1,-1,0));
@@ -135,9 +148,13 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
 void GLFramebuffer::Bind()
 {
   glBindFramebuffer(GL_FRAMEBUFFER, mFrameBufferID);
+  GL_ERROR_CHECK();
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mRenderedTextureID, 0);
+  GL_ERROR_CHECK();
   glViewport(0, 0, mWidth, mHeight);
+  GL_ERROR_CHECK();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  GL_ERROR_CHECK();
 }
 
 /**
@@ -147,10 +164,15 @@ void GLFramebuffer::Bind()
 void GLFramebuffer::Unbind(int aDefaultFramebuffer)
 {
   glGenerateMipmap(GL_TEXTURE_2D);
+  GL_ERROR_CHECK();
   glBindFramebuffer(GL_FRAMEBUFFER, aDefaultFramebuffer);
+  GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, 0);
+  GL_ERROR_CHECK();
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
+  GL_ERROR_CHECK();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  GL_ERROR_CHECK();
 }
 
 /**
@@ -185,16 +207,22 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
     glViewport(0, 0, aDefaultWidth, aDefaultHeight);
   
   glBindVertexArray(mVertexArrayObjectID);
+  GL_ERROR_CHECK();
   glUseProgram(mFramebufferProgramID);
+  GL_ERROR_CHECK();
   glUniform1i(glGetUniformLocation(mFramebufferProgramID, "textureUnit"), 0);
+  GL_ERROR_CHECK();
   SetShaderProperties(true);
   BindAttributeV3(GL_ARRAY_BUFFER, mVertexBufferID, posCoordPosLocation, mPositionCoords);
   BindAttributeV2(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, mTexCoords);
   
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferID);
+  GL_ERROR_CHECK();
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * mIndices.size(), &mIndices[0], GL_STATIC_DRAW);
+  GL_ERROR_CHECK();
   
   glActiveTexture(GL_TEXTURE0);
+  GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, mRenderedTextureID);
   glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, 0);
   
@@ -202,9 +230,13 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   DisableVertexAttribArray(texCoordPosLocation);
   SetShaderProperties(false);
   glBindTexture(GL_TEXTURE_2D, 0);
+  GL_ERROR_CHECK();
   glUseProgram(0);
+  GL_ERROR_CHECK();
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  GL_ERROR_CHECK();
   glBindBuffer(GL_ARRAY_BUFFER, 0);
+  GL_ERROR_CHECK();
 }
 
 /**
@@ -234,35 +266,41 @@ void GLFramebuffer::SetShaderProperties(bool aActive)
       case PropertyType::INT1:
       {
         glUniform1i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), value.ToInt());
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::INT3:
       {
         std::vector<int> intVector = value.ToIntVector();
         glUniform3i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), intVector[0], intVector[1], intVector[2]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::INT4:
       {
         std::vector<int> intVector = value.ToIntVector();
         glUniform4i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), intVector[0], intVector[1], intVector[2], intVector[3]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::FLOAT1:
       {
         glUniform1f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), value.ToFloat());
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::FLOAT3:
       {
         std::vector<float> floatVector = value.ToFloatVector();
         glUniform3f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), floatVector[0], floatVector[1], floatVector[2]);
+        GL_ERROR_CHECK();
         break;
       }
       case PropertyType::FLOAT4:
       {
         std::vector<float> floatVector = value.ToFloatVector();
         glUniform4f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
+        GL_ERROR_CHECK();
         break;
       }
       default:
@@ -284,6 +322,7 @@ void GLFramebuffer::DisableVertexAttribArray(int aVertexAttrib)
   if(aVertexAttrib != -1)
   {
     glDisableVertexAttribArray(aVertexAttrib);
+    GL_ERROR_CHECK();
   }
 }
 
@@ -343,10 +382,15 @@ void GLFramebuffer::BindAttributeV2(GLenum aTarget, int const aBufferID, int con
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, aBufferID);
+    GL_ERROR_CHECK();
     glBufferData(aTarget, sizeof(Vector2) * aData.size(), &aData[0], GL_STATIC_DRAW);
+    GL_ERROR_CHECK();
     glVertexAttribPointer(aAttributeLocation, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, 0);
+    GL_ERROR_CHECK();
   }
 }
 
@@ -361,10 +405,15 @@ void GLFramebuffer::BindAttributeV3(GLenum aTarget, int const aBufferID, int con
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, aBufferID);
+    GL_ERROR_CHECK();
     glBufferData(aTarget, sizeof(Vector3) * aData.size(), &aData[0], GL_STATIC_DRAW);
+    GL_ERROR_CHECK();
     glVertexAttribPointer(aAttributeLocation, 3, GL_FLOAT, GL_FALSE, sizeof(Vector3), 0);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, 0);
+    GL_ERROR_CHECK();
   }
 }
 
@@ -379,22 +428,14 @@ void GLFramebuffer::BindAttributeV4(GLenum aTarget, int const aBufferID, int con
   if(aAttributeLocation != -1)
   {
     glEnableVertexAttribArray(aAttributeLocation);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, aBufferID);
+    GL_ERROR_CHECK();
     glBufferData(aTarget, sizeof(Vector4) * aData.size(), &aData[0], GL_STATIC_DRAW);
+    GL_ERROR_CHECK();
     glVertexAttribPointer(aAttributeLocation, 4, GL_FLOAT, GL_FALSE, sizeof(Vector4), 0);
+    GL_ERROR_CHECK();
     glBindBuffer(aTarget, 0);
+    GL_ERROR_CHECK();
   }
-}
-
-/**
- * @brief Prints GL error info.
- * @param aLineNumber Use __LINE__ wherever you use this.
- */
-void GLFramebuffer::PrintGLError(int const aLineNumber)
-{
-#ifndef _WIN32
-  GLenum errorCode = glGetError();
-  if(errorCode != 0)
-    DebugLogPrint("(%s) (%i) %i: %s\n", __FILE__, aLineNumber, errorCode, gluErrorString(errorCode));
-#endif
 }

@@ -28,6 +28,26 @@ ShaderLoader::~ShaderLoader()
 }
 
 /**
+ * @brief Logs errors related to graphics.
+ * @param aFile Name of file.
+ * @param aLine Number of line.
+ */
+void ShaderLoader::LogError(HashString const &aFile, int aLine)
+{
+  GLenum glErr = glGetError();
+  if (glErr != GL_NO_ERROR)
+  {
+    DebugLogPrint("glError in file %s @ line %d: %s\n", aFile.ToCharArray(), aLine, gluErrorString(glErr));
+    if(glErr == GL_INVALID_FRAMEBUFFER_OPERATION)
+    {
+      GLenum framebufferErr = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+      DebugLogPrint("Framebuffer error %d\n", framebufferErr);
+    }
+    //assert(!"GL_ERROR has occurred");
+  }
+}
+
+/**
  * @brief Loads shaders
  * @param aVertexShaderFilename Name of vertex shader.
  * @param aFragmentShaderFilename Name of fragment shader.
