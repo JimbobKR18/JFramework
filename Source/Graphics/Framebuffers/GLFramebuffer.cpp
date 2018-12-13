@@ -123,13 +123,13 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   
   SetShaders(aManager, mVertexShaderFilename, mFragmentShaderFilename);
   
+  glGenVertexArrays(1, &mVertexArrayObjectID);
+  GL_ERROR_CHECK();
   glGenBuffers(1, &mVertexBufferID);
   GL_ERROR_CHECK();
   glGenBuffers(1, &mTextureBufferID);
   GL_ERROR_CHECK();
   glGenBuffers(1, &mIndexBufferID);
-  GL_ERROR_CHECK();
-  glGenVertexArrays(1, &mVertexArrayObjectID);
   GL_ERROR_CHECK();
   
   mPositionCoords.push_back(Vector3(-1,-1,0));
@@ -206,17 +206,24 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
     int x = aDefaultWidth * ratio;
     int y = aDefaultHeight * ratio;
     if(x <= aScreenWidth)
+    {
       glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, x, aScreenHeight);
+      GL_ERROR_CHECK();
+    }
     else
     {
       ratio = ((float)aScreenWidth / (float)aDefaultWidth);
       x = aDefaultWidth * ratio;
       y = aDefaultHeight * ratio;
       glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, aScreenWidth, y);
+      GL_ERROR_CHECK();
     }
   }
   else
+  {
     glViewport(0, 0, aDefaultWidth, aDefaultHeight);
+    GL_ERROR_CHECK();
+  }
   
   glBindVertexArray(mVertexArrayObjectID);
   GL_ERROR_CHECK();

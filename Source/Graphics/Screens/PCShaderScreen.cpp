@@ -481,10 +481,6 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
   // Draw each object
   // NOTE: The objects are sorted by texture id
   int activeTexture = 0;
-  glBindVertexArray(mVertexArrayObjectID);
-  GL_ERROR_CHECK();
-  glActiveTexture(GL_TEXTURE0 + activeTexture);
-  GL_ERROR_CHECK();
   std::vector<Surface*>::const_iterator end = aObjects.end();
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
@@ -630,6 +626,10 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     }
     
     // Enable textures and set uniforms.
+    glBindVertexArray(mVertexArrayObjectID);
+    GL_ERROR_CHECK();
+    glActiveTexture(GL_TEXTURE0 + activeTexture);
+    GL_ERROR_CHECK();
     glBindTexture(GL_TEXTURE_2D, texture);
     GL_ERROR_CHECK();
     glUniform1i(glGetUniformLocation(program, "textureUnit"), 0);
@@ -678,6 +678,8 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     GL_ERROR_CHECK();
     glUseProgram(0);
     GL_ERROR_CHECK();
+    glBindVertexArray(0);
+    GL_ERROR_CHECK();
     
     vertexData.clear();
     textureData.clear();
@@ -685,9 +687,6 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     positionData.clear();
     indices.clear();
   }
-  
-  glBindVertexArray(0);
-  GL_ERROR_CHECK();
 }
 
 /**
