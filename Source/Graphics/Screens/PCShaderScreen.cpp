@@ -381,8 +381,6 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   GL_ERROR_CHECK();
-  glEnable(GL_TEXTURE_2D);
-  GL_ERROR_CHECK();
   glEnable(GL_BLEND);
   GL_ERROR_CHECK();
   glEnable(GL_CULL_FACE);
@@ -482,6 +480,11 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
+  int activeTexture = 0;
+  glBindVertexArray(mVertexArrayObjectID);
+  GL_ERROR_CHECK();
+  glActiveTexture(GL_TEXTURE0 + activeTexture);
+  GL_ERROR_CHECK();
   std::vector<Surface*>::const_iterator end = aObjects.end();
   for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
   {
@@ -500,7 +503,6 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     
     // Start using shader
     glUseProgram(program);
-    int activeTexture = 0;
     int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     int objectPosLocation = glGetAttribLocation(program, "objectPos");
@@ -628,13 +630,9 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     }
     
     // Enable textures and set uniforms.
-    glBindVertexArray(mVertexArrayObjectID);
-    GL_ERROR_CHECK();
-    glActiveTexture(GL_TEXTURE0 + activeTexture);
-    GL_ERROR_CHECK();
     glBindTexture(GL_TEXTURE_2D, texture);
     GL_ERROR_CHECK();
-    glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
+    glUniform1i(glGetUniformLocation(program, "textureUnit"), 0);
     GL_ERROR_CHECK();
     glUniform3f(glGetUniformLocation(program, "cameraDiff"), cameraTranslation.x, cameraTranslation.y, cameraTranslation.z);
     GL_ERROR_CHECK();
@@ -678,8 +676,6 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     GL_ERROR_CHECK();
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     GL_ERROR_CHECK();
-    glBindVertexArray(0);
-    GL_ERROR_CHECK();
     glUseProgram(0);
     GL_ERROR_CHECK();
     
@@ -689,6 +685,9 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     positionData.clear();
     indices.clear();
   }
+  
+  glBindVertexArray(0);
+  GL_ERROR_CHECK();
 }
 
 /**

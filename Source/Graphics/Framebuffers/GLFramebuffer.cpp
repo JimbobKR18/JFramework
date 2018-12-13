@@ -161,7 +161,7 @@ void GLFramebuffer::Bind()
 {
   glBindFramebuffer(GL_FRAMEBUFFER, mFrameBufferID);
   GL_ERROR_CHECK();
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mRenderedTextureID, 0);
+  glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, mRenderedTextureID, 0);
   GL_ERROR_CHECK();
   glViewport(0, 0, mWidth, mHeight);
   GL_ERROR_CHECK();
@@ -181,8 +181,8 @@ void GLFramebuffer::Unbind(int aDefaultFramebuffer)
   GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, 0);
   GL_ERROR_CHECK();
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
-  GL_ERROR_CHECK();
+  /*glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, 0, 0);
+  GL_ERROR_CHECK();*/
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   GL_ERROR_CHECK();
 }
@@ -248,6 +248,8 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
   GL_ERROR_CHECK();
   glBindBuffer(GL_ARRAY_BUFFER, 0);
+  GL_ERROR_CHECK();
+  glBindVertexArray(0);
   GL_ERROR_CHECK();
 }
 
