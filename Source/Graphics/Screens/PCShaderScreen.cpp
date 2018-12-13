@@ -28,14 +28,12 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
 {
   SDL_Init(SDL_INIT_EVERYTHING);
   
-#if defined(__APPLE__)
   glewExperimental = GL_TRUE;
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
   SDL_GL_SetSwapInterval(1);
   // TODO, detect retina display, add SDL_WINDOW_ALLOW_HIGHDPI flag
-#endif
   
   mWindow = SDL_CreateWindow(SystemProperties::GetGameTitle().ToCharArray(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, aW, aH,
                              SDL_WINDOW_OPENGL);

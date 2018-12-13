@@ -7,7 +7,8 @@ GLFramebuffer::GLFramebuffer(int aWidth, int aHeight) : Framebuffer(), mWidth(aW
   mFramebufferProgramID(0), mFrameBufferID(0), mRenderedTextureID(0), mVertexBufferID(0), 
   mTextureBufferID(0), mIndexBufferID(0), mVertexArrayObjectID(0),
   mVertexShaderFilename(SystemProperties::GetFramebufferVertexShaderName()), 
-  mFragmentShaderFilename(SystemProperties::GetFramebufferFragmentShaderName())
+  mFragmentShaderFilename(SystemProperties::GetFramebufferFragmentShaderName()),
+  mPositionCoords(), mTexCoords(), mIndices(), mGenerated(false)
 {
 }
 
@@ -15,12 +16,22 @@ GLFramebuffer::~GLFramebuffer()
 {
   // TODO do NOT delete this program.
   //glDeleteProgram(mFramebufferProgramID);
-  glDeleteBuffers(1, &mVertexBufferID);
-  glDeleteBuffers(1, &mTextureBufferID);
-  glDeleteBuffers(1, &mIndexBufferID);
-  glDeleteVertexArrays(1, &mVertexArrayObjectID);
-  glDeleteFramebuffers(1, &mFrameBufferID);
-  glDeleteTextures(1, &mRenderedTextureID);
+  if(mGenerated)
+  {
+    glDeleteBuffers(1, &mVertexBufferID);
+    glDeleteBuffers(1, &mTextureBufferID);
+    glDeleteBuffers(1, &mIndexBufferID);
+    glDeleteVertexArrays(1, &mVertexArrayObjectID);
+    glDeleteFramebuffers(1, &mFrameBufferID);
+    glDeleteTextures(1, &mRenderedTextureID);
+    
+    mVertexBufferID = 0;
+    mTextureBufferID = 0;
+    mIndexBufferID = 0;
+    mVertexArrayObjectID = 0;
+    mFrameBufferID = 0;
+    mRenderedTextureID = 0;
+  }
 }
 
 /**
@@ -63,6 +74,7 @@ void GLFramebuffer::SetShaders(GraphicsManager *aManager, HashString const &aVer
  */
 void GLFramebuffer::Generate(GraphicsManager *aManager)
 {
+  mGenerated = true;
   GLint minFilter = GL_LINEAR;
   GLint magFilter = GL_LINEAR;
   if(SystemProperties::GetMinFilter() == "GL_NEAREST")
@@ -169,7 +181,7 @@ void GLFramebuffer::Unbind(int aDefaultFramebuffer)
   GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, 0);
   GL_ERROR_CHECK();
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
+  //glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
   GL_ERROR_CHECK();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   GL_ERROR_CHECK();

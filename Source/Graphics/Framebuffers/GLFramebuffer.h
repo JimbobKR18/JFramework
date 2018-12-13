@@ -38,6 +38,7 @@ private:
   std::vector<Vector3> mPositionCoords;
   std::vector<Vector2> mTexCoords;
   std::vector<unsigned> mIndices;
+  bool          mGenerated;
   
 public:
   GLFramebuffer(int aWidth, int aHeight);
