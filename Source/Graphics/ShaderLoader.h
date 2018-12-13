@@ -24,11 +24,11 @@
   #include <SDL2/SDL_ttf.h>
 #endif
 
-//#ifdef _DEBUG
+#ifdef _DEBUG
   #define GL_ERROR_CHECK() ShaderLoader::LogError(__FILE__, __LINE__)
-/*#else
+#else
   #define GL_ERROR_CHECK()
-#endif*/
+#endif
 
 class ShaderLoader
 {
