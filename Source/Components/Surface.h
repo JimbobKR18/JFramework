@@ -98,6 +98,7 @@ public:
   HashString          GetMinFilter() const { return mMinFilter; }
   HashString          GetMagFilter() const { return mMagFilter; }
   int                 GetLayer() const { return mLayer; }
+  Vector3             GetTextureSize() const { return mTextureSize; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }

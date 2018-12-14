@@ -679,6 +679,9 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     glUniformMatrix3fv(glGetUniformLocation(program, "cameraTransform"), 1, GL_TRUE, cameraMatrix);
     GL_ERROR_CHECK();
     
+    // Set optional uniforms.
+    SetOptionalUniforms(surface);
+    
     // Set shader properties. Due to batching, done on a per surface / shader basis.
     // Shader uniforms are reset upon relinking.
     SetShaderProperties(surface, true);
@@ -724,6 +727,29 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     colorData.clear();
     positionData.clear();
     indices.clear();
+  }
+}
+
+/**
+ * @brief Set optional uniforms for surface.
+ * @param aSurface Surface.
+ */
+void PCShaderScreen::SetOptionalUniforms(Surface* aSurface)
+{
+  GLint location = -1;
+  location = glGetUniformLocation(aSurface->GetProgramID(), "textureWidth");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform1i(location, static_cast<int>(aSurface->GetTextureSize().x));
+    GL_ERROR_CHECK();
+  }
+  location = glGetUniformLocation(aSurface->GetProgramID(), "textureHeight");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform1i(location, static_cast<int>(aSurface->GetTextureSize().y));
+    GL_ERROR_CHECK();
   }
 }
 

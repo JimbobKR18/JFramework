@@ -42,6 +42,7 @@ public:
 
 private:
   void DrawObjects(std::vector<Surface*> const &aObjects, Camera *aCamera);
+  void SetOptionalUniforms(Surface* aSurface);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
   void SetShaderProperties(Surface *aSurface, bool aActive);
