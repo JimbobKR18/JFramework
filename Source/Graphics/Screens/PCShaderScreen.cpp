@@ -121,11 +121,15 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
       }
 
       glLoadIdentity();
+      GL_ERROR_CHECK();
       glPushMatrix();
+      GL_ERROR_CHECK();
       
       // Stop using shaders
       glUseProgram(0);
+      GL_ERROR_CHECK();
       glBindTexture(GL_TEXTURE_2D, 0);
+      GL_ERROR_CHECK();
 
       // For each shape, draw the outline
       std::vector<Shape*> const& shapes = physicsObject->GetShapes();
@@ -136,11 +140,13 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           glColor3f(1.0f, 0.0f, 1.0f);
         else
           glColor3f(1.0f, 0.0f, 0.0f);
+        GL_ERROR_CHECK();
           
         if((*it)->shape == Shape::SPHERE)
         {
           Vector3 spherePos = position + (modelMatrix * (*it)->position);
           glBegin(GL_LINE_STRIP);
+          GL_ERROR_CHECK();
           
           // Rotate in a circle
           for(int i = 0; i < 360; ++i)
@@ -149,8 +155,10 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
             float x = (*it)->GetSize(0) * cos(radians) * scale.values[0][0];
             float y = (*it)->GetSize(1) * sin(radians) * scale.values[1][1];
             glVertex3f(spherePos.x + x, spherePos.y + y, spherePos.z);
+            GL_ERROR_CHECK();
           }
           glEnd();
+          GL_ERROR_CHECK();
         }
         else if((*it)->shape == Shape::AABB)
         {
@@ -160,26 +168,37 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           
           // Physics Box Line
           glBegin(GL_LINE_STRIP);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x - xSize, cubePos.y - ySize, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x + xSize, cubePos.y - ySize, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x + xSize, cubePos.y + ySize, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x - xSize, cubePos.y + ySize, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x - xSize, cubePos.y - ySize, cubePos.z);
+          GL_ERROR_CHECK();
           glEnd();
+          GL_ERROR_CHECK();
         }
         else if((*it)->shape == Shape::TRIANGLE)
         {
           Triangle* triangle = (Triangle*)(*it);
           Vector3 triPos = position + (modelMatrix * (*it)->position);
           glBegin(GL_LINE_STRIP);
+          GL_ERROR_CHECK();
           for(int i = 0; i < 3; ++i)
           {
             Vector3 point = triPos + (modelMatrix* triangle->GetPoint(i));
             glVertex3f(point.x, point.y, point.z);
+            GL_ERROR_CHECK();
           }
           Vector3 point = triPos + (modelMatrix * triangle->GetPoint(0));
           glVertex3f(point.x, point.y, point.z);
+          GL_ERROR_CHECK();
           glEnd();
+          GL_ERROR_CHECK();
         }
         else if((*it)->shape == Shape::LINE)
         {
@@ -187,9 +206,13 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           Vector3 linePos = position + scale * (*it)->position;
           Vector3 lineEnd = linePos + scale * line->direction * line->length;
           glBegin(GL_LINE_STRIP);
+          GL_ERROR_CHECK();
           glVertex3f(linePos.x, linePos.y, linePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(lineEnd.x, lineEnd.y, lineEnd.z);
+          GL_ERROR_CHECK();
           glEnd();
+          GL_ERROR_CHECK();
         }
         else if((*it)->shape == Shape::OBB)
         {
@@ -202,25 +225,41 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
           
           // Physics Box Line
           glBegin(GL_LINE_STRIP);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x + pt1.x, cubePos.y + pt1.y, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x - pt2.x, cubePos.y - pt2.y, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x - pt1.x, cubePos.y - pt1.y, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x + pt2.x, cubePos.y + pt2.y, cubePos.z);
+          GL_ERROR_CHECK();
           glVertex3f(cubePos.x + pt1.x, cubePos.y + pt1.y, cubePos.z);
+          GL_ERROR_CHECK();
           glEnd();
+          GL_ERROR_CHECK();
         }
       }
 
       // Broad Size Line
       glBegin(GL_LINE_STRIP);
+      GL_ERROR_CHECK();
       glColor3f(1.0f, 1.0f, 0.0f);
+      GL_ERROR_CHECK();
       glVertex3f(position.x - broadSize.x, position.y - broadSize.y, position.z);
+      GL_ERROR_CHECK();
       glVertex3f(position.x + broadSize.x, position.y - broadSize.y, position.z);
+      GL_ERROR_CHECK();
       glVertex3f(position.x + broadSize.x, position.y + broadSize.y, position.z);
+      GL_ERROR_CHECK();
       glVertex3f(position.x - broadSize.x, position.y + broadSize.y, position.z);
+      GL_ERROR_CHECK();
       glVertex3f(position.x - broadSize.x, position.y - broadSize.y, position.z);
+      GL_ERROR_CHECK();
       glEnd();
+      GL_ERROR_CHECK();
       glPopMatrix();
+      GL_ERROR_CHECK();
     }
   }
 }
@@ -381,6 +420,8 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   GL_ERROR_CHECK();
+  glEnable(GL_TEXTURE_2D);
+  GL_ERROR_CHECK();
   glEnable(GL_BLEND);
   GL_ERROR_CHECK();
   glEnable(GL_CULL_FACE);
@@ -389,10 +430,6 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   GL_ERROR_CHECK();
   glDepthMask(GL_FALSE);
   GL_ERROR_CHECK();
-
-  glShadeModel(GL_SMOOTH);
-  GL_ERROR_CHECK();
-
   if(aFullScreen)
   {
     float ratio = ((float)mDisplayMode.h / (float)height);
@@ -499,6 +536,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     
     // Start using shader
     glUseProgram(program);
+    GL_ERROR_CHECK();
     int vertexPosLocation = glGetAttribLocation(program, "vertexPos");
     int texCoordPosLocation = glGetAttribLocation(program, "texCoord");
     int objectPosLocation = glGetAttribLocation(program, "objectPos");

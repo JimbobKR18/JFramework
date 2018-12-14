@@ -181,8 +181,6 @@ void GLFramebuffer::Unbind(int aDefaultFramebuffer)
   GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, 0);
   GL_ERROR_CHECK();
-  /*glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, 0, 0);
-  GL_ERROR_CHECK();*/
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   GL_ERROR_CHECK();
 }
