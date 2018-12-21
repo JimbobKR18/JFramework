@@ -83,6 +83,7 @@ public:
   void              Reset();
   void              ResetLevel();
 
+  void              UpdateBoundaries(Vector3 const &aPosition, Vector3 const &aSize);
   void              SetMaxBoundary(Vector3 const &aMaxBoundary);
   void              SetMinBoundary(Vector3 const &aMinBoundary);
   Vector3           GetMaxBoundary() const;

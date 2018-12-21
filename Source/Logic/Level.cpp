@@ -360,6 +360,19 @@ void Level::ResetLevel()
 }
 
 /**
+ * @brief Evaluate size at location and object level bounds.
+ * @param aPosition Center
+ * @param aSize Size of point
+ */
+void Level::UpdateBoundaries(Vector3 const &aPosition, Vector3 const &aSize)
+{
+  mMinBoundary.x = Lesser<float>(aPosition.x - aSize.x, mMinBoundary.x);
+  mMinBoundary.y = Lesser<float>(aPosition.y - aSize.y, mMinBoundary.y);
+  mMaxBoundary.x = Greater<float>(aPosition.x + aSize.x, mMaxBoundary.x);
+  mMaxBoundary.y = Greater<float>(aPosition.y + aSize.y, mMaxBoundary.y);
+}
+
+/**
  * @brief Set max area for camera view.
  * @param aMaxBoundary
  */
@@ -1179,10 +1192,7 @@ void Level::ParseTransform(GameObject *aObject)
   Vector3 size = objTransform->GetSize();
 
   // Auto set camera bounds based on objects in environment
-  mMinBoundary.x = Lesser<float>(pos.x - size.x, mMinBoundary.x);
-  mMinBoundary.y = Lesser<float>(pos.y - size.y, mMinBoundary.y);
-  mMaxBoundary.x = Greater<float>(pos.x + size.x, mMaxBoundary.x);
-  mMaxBoundary.y = Greater<float>(pos.y + size.y, mMaxBoundary.y);
+  UpdateBoundaries(pos, size);
 }
 
 /**

@@ -390,10 +390,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       transform->SetSize(aTileSize);
       
       // Figure out the max and min camera boundaries based on tilemap
-      if(i == 0)
-        mOwner->SetMinBoundary(position - aTileSize);
-      else if(i == tileDataVectorSize - 1)
-        mOwner->SetMaxBoundary(position + aTileSize);
+      mOwner->UpdateBoundaries(position, aTileSize);
 
       // Set the frame data
       Surface *surface = obj->GET<Surface>();
