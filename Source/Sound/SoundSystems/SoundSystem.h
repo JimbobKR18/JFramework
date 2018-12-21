@@ -50,6 +50,7 @@ public:
   virtual void SetChannel3DSpread(int const aChannel, float const aAngle) = 0;
   
   // Channel groups
+  virtual bool HasChannelGroup(HashString const &aGroupName) = 0;
   virtual void CreateChannelGroup(HashString const &aGroupName) = 0;
   virtual void AddChannelToGroup(HashString const &aGroupName, int const aChannel) = 0;
   virtual void RemoveChannelFromGroups(int const aChannel) = 0;
@@ -64,6 +65,7 @@ public:
   virtual void SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle) = 0;
   
   // DSPs
+  virtual bool HasDSP(HashString const &aName) = 0;
   virtual DSP* CreateDSP(HashString const &aName, DSP_Type const &aType) = 0;
   virtual DSP* GetDSPFromChannel(int aChannel, int aIndex) = 0;
   virtual DSP* GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex) = 0;

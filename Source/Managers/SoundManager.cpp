@@ -316,6 +316,16 @@ void SoundManager::SetChannel3DSpread(int const aChannel, float const aAngle)
 }
 
 /**
+ * @brief Return true if channel group exists
+ * @param aGroupName Name of group
+ * @return True if group exists
+ */
+bool SoundManager::HasChannelGroup(HashString const &aGroupName)
+{
+  return mSoundSystem->HasChannelGroup(aGroupName);
+}
+
+/**
  * @brief Create new channel group
  * @param aGroupName
  */
@@ -489,6 +499,16 @@ void SoundManager::SetChannelGroup3DOcclusion(HashString const &aGroupName, floa
 void SoundManager::SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle)
 {
   mSoundSystem->SetChannelGroup3DSpread(aGroupName, aAngle);
+}
+
+/**
+ * @brief Return true if DSP exists
+ * @param aName DSP name
+ * @return True if exists
+ */
+bool SoundManager::HasDSP(HashString const &aName)
+{
+  return mSoundSystem->HasDSP(aName);
 }
 
 /**

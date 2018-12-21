@@ -378,6 +378,16 @@ void FMODSoundSystem::SetChannel3DSpread(int const aChannel, float const aAngle)
 }
 
 /**
+ * @brief Return true if channel group exists
+ * @param aGroupName Name of group
+ * @return True if group exists
+ */
+bool FMODSoundSystem::HasChannelGroup(HashString const &aGroupName)
+{
+  return mChannelGroupContainer.find(aGroupName.ToHash()) != mChannelGroupContainer.end();
+}
+
+/**
  * @brief Create channel group
  * @param aGroupName
  */
@@ -598,6 +608,16 @@ void FMODSoundSystem::SetChannelGroup3DSpread(HashString const &aGroupName, floa
   
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->set3DSpread(aAngle);
+}
+
+/**
+ * @brief Return true if DSP exists
+ * @param aName DSP name
+ * @return True if exists
+ */
+bool FMODSoundSystem::HasDSP(HashString const &aName)
+{
+  return mDSPContainer.find(aName.ToHash()) != mDSPContainer.end();
 }
 
 /**

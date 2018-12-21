@@ -85,6 +85,7 @@ public:
   void SetChannel3DSpread(int const aChannel, float const aAngle);
   
   // Channel groups
+  bool HasChannelGroup(HashString const &aGroupName);
   void CreateChannelGroup(HashString const &aGroupName);
   void PlayChannelGroup(HashString const &aGroupName, int const aNumLoops);
   void AddSoundNameToGroup(HashString const &aGroupName, HashString const &aSoundName);
@@ -101,6 +102,7 @@ public:
   void SetChannelGroup3DSpread(HashString const &aGroupName, float const aAngle);
   
   // DSPs
+  bool HasDSP(HashString const &aName);
   DSP* CreateDSP(HashString const &aName, DSP_Type const &aType);
   DSP* GetDSPFromChannel(int aChannel, int aIndex);
   DSP* GetDSPFromChannelGroup(HashString const &aGroupName, int aIndex);
