@@ -18,18 +18,20 @@ Camera::Camera() : Component(Camera::sUID)
 
 Camera::Camera(GraphicsManager *aManager) : Component(Camera::sUID), 
   mSize(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 0),
-  mOffset(), mPrimary(false), mManager(aManager)
+  mOffset(), mPrimary(false), mManager(aManager),
+  mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter())
 {
   #ifdef SHADER_COMPATIBLE
-  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y);
+  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y, mMinFilter, mMagFilter);
   #endif
 }
 
 Camera::Camera(Camera const &aCamera) : Component(Camera::sUID), mSize(aCamera.mSize),
-  mOffset(aCamera.mOffset), mPrimary(false), mManager(aCamera.mManager)
+  mOffset(aCamera.mOffset), mPrimary(false), mManager(aCamera.mManager),
+  mMinFilter(aCamera.mMinFilter), mMagFilter(aCamera.mMagFilter)
 {
   #ifdef SHADER_COMPATIBLE
-  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y);
+  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y, mMinFilter, mMagFilter);
   #endif
 }
 
@@ -164,11 +166,15 @@ void Camera::Deserialize(ParserNode *aNode)
     vertexShaderFileName = aNode->Find("VertexShader")->GetValue();
   if(aNode->Find("FragmentShader"))
     fragmentShaderFileName = aNode->Find("FragmentShader")->GetValue();
+  if(aNode->Find("MinFilter"))
+    mMinFilter = aNode->Find("MinFilter")->GetValue();
+  if(aNode->Find("MagFilter"))
+    mMagFilter = aNode->Find("MagFilter")->GetValue();
   
   delete mFramebuffer;
   
   #ifdef SHADER_COMPATIBLE
-  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y);
+  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y, mMinFilter, mMagFilter);
   #endif
   
   mFramebuffer->SetShaders(mManager, vertexShaderFileName, fragmentShaderFileName);

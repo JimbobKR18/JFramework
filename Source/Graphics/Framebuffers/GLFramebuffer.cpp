@@ -3,11 +3,12 @@
 #include "GraphicsManager.h"
 #include "SystemProperties.h"
 
-GLFramebuffer::GLFramebuffer(int aWidth, int aHeight) : Framebuffer(), mWidth(aWidth), mHeight(aHeight),
-  mFramebufferProgramID(0), mFrameBufferID(0), mRenderedTextureID(0), mVertexBufferID(0), 
+GLFramebuffer::GLFramebuffer(int aWidth, int aHeight, HashString const &aMinFilter, HashString const &aMagFilter) : Framebuffer(), 
+  mWidth(aWidth), mHeight(aHeight), mFramebufferProgramID(0), mFrameBufferID(0), mRenderedTextureID(0), mVertexBufferID(0), 
   mTextureBufferID(0), mIndexBufferID(0), mVertexArrayObjectID(0),
   mVertexShaderFilename(SystemProperties::GetFramebufferVertexShaderName()), 
   mFragmentShaderFilename(SystemProperties::GetFramebufferFragmentShaderName()),
+  mMinFilter(aMinFilter), mMagFilter(aMagFilter),
   mPositionCoords(), mTexCoords(), mIndices(), mGenerated(false)
 {
 }
@@ -77,27 +78,27 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   mGenerated = true;
   GLint minFilter = GL_LINEAR;
   GLint magFilter = GL_LINEAR;
-  if(SystemProperties::GetMinFilter() == "GL_NEAREST")
+  if(mMinFilter == "GL_NEAREST")
   {
     minFilter = GL_NEAREST;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_NEAREST")
+  else if(mMinFilter == "GL_NEAREST_MIPMAP_NEAREST")
   {
     minFilter = GL_NEAREST_MIPMAP_NEAREST;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_NEAREST_MIPMAP_LINEAR")
+  else if(mMinFilter == "GL_NEAREST_MIPMAP_LINEAR")
   {
     minFilter = GL_NEAREST_MIPMAP_LINEAR;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_NEAREST")
+  else if(mMinFilter == "GL_LINEAR_MIPMAP_NEAREST")
   {
     minFilter = GL_LINEAR_MIPMAP_NEAREST;
   }
-  else if(SystemProperties::GetMinFilter() == "GL_LINEAR_MIPMAP_LINEAR")
+  else if(mMinFilter == "GL_LINEAR_MIPMAP_LINEAR")
   {
     minFilter = GL_LINEAR_MIPMAP_LINEAR;
   }
-  if(SystemProperties::GetMagFilter() == "GL_NEAREST")
+  if(mMagFilter == "GL_NEAREST")
   {
     magFilter = GL_NEAREST;
   }

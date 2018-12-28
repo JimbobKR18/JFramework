@@ -16,6 +16,8 @@ private:
   bool mPrimary;
   GraphicsManager *mManager;
   Framebuffer *mFramebuffer;
+  HashString mMinFilter;
+  HashString mMagFilter;
 
   static int const  sUID;
   

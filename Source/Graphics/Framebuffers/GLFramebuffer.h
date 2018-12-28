@@ -35,13 +35,15 @@ private:
   GLuint        mVertexArrayObjectID;
   HashString    mVertexShaderFilename;
   HashString    mFragmentShaderFilename;
+  HashString    mMinFilter;
+  HashString    mMagFilter;
   std::vector<Vector3> mPositionCoords;
   std::vector<Vector2> mTexCoords;
   std::vector<unsigned> mIndices;
   bool          mGenerated;
   
 public:
-  GLFramebuffer(int aWidth, int aHeight);
+  GLFramebuffer(int aWidth, int aHeight, HashString const &aMinFilter, HashString const &aMagFilter);
   virtual ~GLFramebuffer();
   
   // VIRTUALS

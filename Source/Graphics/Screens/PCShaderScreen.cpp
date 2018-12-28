@@ -52,7 +52,8 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   ChangeSize(aW, aH, aFullScreen);
   
 #if defined(__APPLE__)
-  mFrameBuffer = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight());
+  mFrameBuffer = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(),
+    SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter());
   mFrameBuffer->Generate(GetOwner());
 #endif
 }
