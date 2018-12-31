@@ -175,6 +175,7 @@ void GraphicsManager::AddSurface(Surface *aSurface)
 {
   mSurfaces.insert(aSurface);
   mNewSurfaces.insert(aSurface);
+  aSurface->SetUIElement(false);
 }
 
 /**
@@ -185,6 +186,7 @@ void GraphicsManager::AddUISurface(Surface *aSurface)
 {
   mUIElements.insert(aSurface);
   mNewSurfaces.insert(aSurface);
+  aSurface->SetUIElement(true);
 }
 
 /**
@@ -209,7 +211,7 @@ void GraphicsManager::ClearSurfaces()
   {
     DeleteSurface(*it);
     mTree->Remove(*it);
-    it = mUIElements.begin();
+    it = mSurfaces.begin();
   }
   for(SurfaceIT it = mUIElements.begin(); it != mUIElements.end();)
   {

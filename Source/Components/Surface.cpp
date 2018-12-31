@@ -12,7 +12,7 @@ Surface::Surface() : Component(Surface::sUID), mTexCoord(nullptr), mViewmode(VIE
                      mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
                      mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()), 
                      mLayer(0), mFileName(), mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
-                     mOriginalSize(), mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
+                     mOriginalSize(), mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties(), mUIElement(false)
 {
   assert(!"Surface needs a graphicsmanager");
 }
@@ -24,7 +24,7 @@ Surface::Surface(Surface const &aSurface) : Component(Surface::sUID), mTexCoord(
                                             mFileName(aSurface.mFileName), mText(aSurface.mText), mFontName(aSurface.mFontName),
                                             mFontSize(aSurface.mFontSize), mMaxTextWidth(aSurface.mMaxTextWidth),
                                             mSecondaryColor(aSurface.mSecondaryColor), mOriginalSize(aSurface.mOriginalSize),
-                                            mTextRenderStyle(aSurface.mTextRenderStyle), mScrollInfo(aSurface.mScrollInfo)
+                                            mTextRenderStyle(aSurface.mTextRenderStyle), mScrollInfo(aSurface.mScrollInfo), mUIElement(false)
 {
   PropertyContainerConstIt propertyEnd = aSurface.mProperties.end();
   for(PropertyContainerConstIt it = aSurface.mProperties.begin(); it != propertyEnd; ++it)
@@ -39,7 +39,7 @@ Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoor
                                               mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()),
                                               mLayer(0), mFileName(), mText(), mFontName(), mFontSize(0), 
                                               mMaxTextWidth(0), mSecondaryColor(), mOriginalSize(),
-                                              mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties()
+                                              mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties(), mUIElement(false)
 {
 }
 

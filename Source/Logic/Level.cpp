@@ -1038,7 +1038,13 @@ void Level::LoadObject(GameObject *aObject, ObjectPlacement const aPlacement)
   if(aObject->GET<PhysicsObject>())
     mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject(aObject->GET<PhysicsObject>());
   if(aObject->GET<Surface>())
-    mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface(aObject->GET<Surface>());
+  {
+    Surface *surface = aObject->GET<Surface>();
+    if(surface->GetUIElement())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddUISurface(aObject->GET<Surface>());
+    else
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface(aObject->GET<Surface>());
+  }
   if(aObject->GET<Controller>())
     mOwner->GetOwningApp()->GET<ControllerManager>()->AddController(aObject->GET<Controller>());
   if(aObject->GET<ChemistryMaterial>())

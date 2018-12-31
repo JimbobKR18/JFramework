@@ -72,6 +72,7 @@ private:
   // Etc.
   ScrollInfoContainer mScrollInfo;
   PropertyContainer   mProperties;
+  bool                mUIElement;
   
   static int const sUID;
 public:
@@ -99,6 +100,7 @@ public:
   HashString          GetMagFilter() const { return mMagFilter; }
   int                 GetLayer() const { return mLayer; }
   Vector3             GetTextureSize() const { return mTextureSize; }
+  bool                GetUIElement() const { return mUIElement; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
@@ -116,6 +118,7 @@ public:
   void                SetMinFilter(HashString const &aMinFilter) { mMinFilter = aMinFilter; }
   void                SetMagFilter(HashString const &aMagFilter) { mMagFilter = aMagFilter; }
   void                SetLayer(int const aLayer) { mLayer = aLayer; }
+  void                SetUIElement(bool const aUIElement) { mUIElement = aUIElement; }
   
   // Textures and Shaders
   virtual void        LoadImage(HashString const &aName);
