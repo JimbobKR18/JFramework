@@ -95,6 +95,7 @@ void GraphicsManager::Update()
       }
     }
 
+    // Avoid using layer 999, this line will erase all items in there.
     cameraObjectRenders[it->first][999] = uiElements;
     mScreen->Draw(it->second, it->first);
   }
@@ -143,6 +144,7 @@ Surface *GraphicsManager::CreateSurface()
 
 /**
  * @brief Create surface at UI layer, handy helper.
+ * @deprecated Use layering instead if possible, avoid using layer 999.
  */
 Surface *GraphicsManager::CreateUISurface()
 {
