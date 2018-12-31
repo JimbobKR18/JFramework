@@ -144,7 +144,6 @@ Surface *GraphicsManager::CreateSurface()
 
 /**
  * @brief Create surface at UI layer, handy helper.
- * @deprecated Use layering instead if possible, avoid using layer 999.
  */
 Surface *GraphicsManager::CreateUISurface()
 {
