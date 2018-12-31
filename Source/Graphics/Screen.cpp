@@ -3,6 +3,7 @@
 #include "ZRenderSorter.h"
 #include "BatchRenderSorter.h"
 #include "SystemProperties.h"
+#include "ShapeMath.h"
 
 Screen::Screen() : mOwner(nullptr), mWidth(0), mHeight(0), mFullScreen(false),  
   mBatchRenderSorter(nullptr), mDepthRenderSorter(nullptr), mUIRenderSorter(nullptr)
@@ -121,12 +122,14 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
   // Identity matrix
   Matrix33 identityMatrix = Matrix33();
   
+  // Cardinal axes
+  Vector3 axes[3];
+  axes[0] = Vector3(1, 0, 0);
+  axes[1] = Vector3(0, 1, 0);
+  axes[2] = Vector3(0, 0, 1);
+  
   // Return value
   std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> ret;
-  
-  // Points storage
-  std::vector<Vector3> points;
-  points.reserve(5);
   
   // Draw each object
   // NOTE: The objects are sorted by texture id
@@ -148,6 +151,12 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
     
     // Must scale, rotate, then translate camera offset
     Vector3 cameraDiff = (viewMatrix * cameraPosition) - cameraHalfSize;
+    
+    // Camera axes
+    Vector3 cameraAxes[3];
+    cameraAxes[0] = cameraTransform->GetHierarchicalRotation() * axes[0];
+    cameraAxes[1] = cameraTransform->GetHierarchicalRotation() * axes[1];
+    cameraAxes[2] = cameraTransform->GetHierarchicalRotation() * axes[2];
     
     // Cull terrain from data structure, whatever makes it is in.
     std::unordered_set<Surface*> staticSurfaces = aObjects->Query(cameraMin, cameraMax);
@@ -217,52 +226,24 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
       // Move object based on its alignment
       AlignmentHelper(transform, size, position);
       
-      // Get the basic coordinates for the quad
-      Vector3 topLeft(-size.x, -size.y, 0);
-      Vector3 topRight(size.x, -size.y, 0);
-      Vector3 bottomRight(size.x, size.y, 0);
-      Vector3 bottomLeft(-size.x, size.y, 0);
+      // OBB test
+      Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(cameraPosition, position, axes, transform->GetHierarchicalScale().Multiply(size));
+      Vector3 diff = closestPoint - cameraPosition;
       
-      // Model transform
-      topLeft = cameraMatrix * ((modelTransform * topLeft) + position) - cameraTranslation;
-      topRight = cameraMatrix * ((modelTransform * topRight) + position) - cameraTranslation;
-      bottomLeft = cameraMatrix * ((modelTransform * bottomLeft) + position) - cameraTranslation;
-      bottomRight = cameraMatrix * ((modelTransform * bottomRight) + position) - cameraTranslation;
-
-      points.clear();
-      points.push_back(topLeft);
-      points.push_back(topRight);
-      points.push_back(bottomLeft);
-      points.push_back(bottomRight);
-      points.push_back((cameraMatrix * position) - cameraTranslation);
-      
-      bool added = false;
-      std::vector<Vector3>::const_iterator pointsEnd = points.end();
-      for(std::vector<Vector3>::const_iterator it3 = points.begin(); it3 != pointsEnd; ++it3)
+      bool added = true;
+      for(int i = 0; i < 2; ++i)
       {
-        if(it3->x <= cameraSize.x && it3->x >= 0 &&
-          it3->y <= cameraSize.y && it3->y >= 0) 
+        float compare = cameraSize[i];
+        float d = diff.Dot(cameraAxes[i]);
+        if(fabs(d) > compare)
         {
-          added = true;
-          ret[camera][surface->GetLayer()].push_back(surface);
+          added = false;
           break;
         }
       }
-      if(added)
-        continue;
       
-      if((points[0].x <= 0 && points[1].x >= cameraSize.x) ||
-        (points[1].x <= 0 && points[0].x >= cameraSize.x))
-      {
+      if(added)
         ret[camera][surface->GetLayer()].push_back(surface);
-        continue;
-      }
-      if((points[0].y <= 0 && points[2].y >= cameraSize.y) ||
-        (points[2].y <= 0 && points[0].y >= cameraSize.y))
-      {
-        ret[camera][surface->GetLayer()].push_back(surface);
-        continue;
-      }
     }
   }
   return ret;
