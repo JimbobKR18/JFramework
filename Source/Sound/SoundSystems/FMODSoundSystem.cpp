@@ -157,6 +157,34 @@ int FMODSoundSystem::PlaySound(HashString const& aName, int const aNumLoops)
 }
 
 /**
+ * @brief Check if channel is paused
+ * @param aChannel
+ * @return True if paused
+ */
+bool FMODSoundSystem::IsChannelPaused(int const aChannel)
+{
+  bool result = false;
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->getPaused(&result);
+  return result;
+}
+
+/**
+ * @brief Check if channel is playing
+ * @param aChannel
+ * @return True if playing
+ */
+bool FMODSoundSystem::IsChannelPlaying(int const aChannel)
+{
+  bool result = false;
+  FMOD::Channel *channel;
+  mFMODSystem->getChannel(aChannel, &channel);
+  channel->isPlaying(&result);
+  return result;
+}
+
+/**
  * @brief Resume channel
  * @param aChannel
  */
@@ -375,6 +403,25 @@ void FMODSoundSystem::SetChannel3DSpread(int const aChannel, float const aAngle)
   FMOD::Channel *channel;
   mFMODSystem->getChannel(aChannel, &channel);
   channel->set3DSpread(aAngle);
+}
+
+/**
+ * @brief Check if channel group is playing
+ * @param aGroupName Name of group
+ * @return True if group is playing
+ */
+bool FMODSoundSystem::IsChannelGroupPlaying(HashString const &aGroupName)
+{
+  if(mChannelGroupContainer.find(aGroupName.ToHash()) == mChannelGroupContainer.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  bool result = false;
+  FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
+  group->isPlaying(&result);
+  return result;
 }
 
 /**

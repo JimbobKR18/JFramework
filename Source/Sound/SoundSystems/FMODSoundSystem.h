@@ -51,6 +51,8 @@ public:
   virtual int PlaySound(HashString const& aName, int const aNumLoops);
   
   // Channels
+  virtual bool IsChannelPaused(int const aChannel);
+  virtual bool IsChannelPlaying(int const aChannel);
   virtual void ResumeChannel(int const aChannel);
   virtual void PauseChannel(int const aChannel);
   virtual void SetMasterVolume(float const aVolume);
@@ -70,6 +72,7 @@ public:
   virtual void SetChannel3DSpread(int const aChannel, float const aAngle);
   
   // Channel groups
+  virtual bool IsChannelGroupPlaying(HashString const &aGroupName);
   virtual bool HasChannelGroup(HashString const &aGroupName);
   virtual void CreateChannelGroup(HashString const &aGroupName);
   virtual void AddChannelToGroup(HashString const &aGroupName, int const aChannel);

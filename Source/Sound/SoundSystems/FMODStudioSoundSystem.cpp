@@ -171,6 +171,43 @@ int FMODStudioSoundSystem::PlaySound(HashString const& aName, int const aNumLoop
 }
 
 /**
+ * @brief Check if channel is paused
+ * @param aChannel
+ * @return True if paused
+ */
+bool FMODStudioSoundSystem::IsChannelPaused(int const aChannel)
+{
+  bool result = false;
+  if(mEventInstances.find(aChannel) == mEventInstances.end())
+  {
+    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    return result;
+  }
+  
+  mEventInstances[aChannel]->getPaused(&result);
+  return result;
+}
+
+/**
+ * @brief Check if channel is playing
+ * @param aChannel
+ * @return True if playing
+ */
+bool FMODStudioSoundSystem::IsChannelPlaying(int const aChannel)
+{
+  bool result = false;
+  if(mEventInstances.find(aChannel) == mEventInstances.end())
+  {
+    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    return result;
+  }
+  
+  FMOD_STUDIO_PLAYBACK_STATE state;
+  mEventInstances[aChannel]->getPlaybackState(&state);
+  return state != FMOD_STUDIO_PLAYBACK_STOPPED;
+}
+
+/**
  * @brief Resume channel
  * @param aChannel
  */
@@ -390,6 +427,35 @@ void FMODStudioSoundSystem::SetChannel3DOcclusion(int const aChannel, float cons
  */
 void FMODStudioSoundSystem::SetChannel3DSpread(int const aChannel, float const aAngle)
 {
+}
+
+/**
+ * @brief Check if channel group is playing
+ * @param aGroupName Name of group
+ * @return True if group is playing
+ */
+bool FMODStudioSoundSystem::IsChannelGroupPlaying(HashString const &aGroupName)
+{
+  if(mGroups.find(aGroupName.ToHash()) == mGroups.end())
+  {
+    DebugLogPrint("Channel Group %s does not exist.", aGroupName.ToCharArray());
+    assert(!"Channel Group does not exist.");
+  }
+  
+  for(InstanceIt it = mGroups[aGroupName.ToHash()].begin(); it != mGroups[aGroupName.ToHash()].end(); ++it)
+  {
+    if(mEventInstances.find(*it) == mEventInstances.end())
+    {
+      continue;
+    }
+    
+    FMOD_STUDIO_PLAYBACK_STATE state;
+    mEventInstances[*it]->getPlaybackState(&state);
+    if(state != FMOD_STUDIO_PLAYBACK_STOPPED)
+      return true;
+  }
+  
+  return false;
 }
 
 /**

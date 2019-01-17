@@ -139,6 +139,26 @@ int SoundManager::PlaySound(HashString const &aName, int const aNumLoops)
 }
 
 /**
+ * @brief Check if channel is paused
+ * @param aChannel
+ * @return True if paused
+ */
+bool SoundManager::IsChannelPaused(int const aChannel)
+{
+  return mSoundSystem->IsChannelPaused(aChannel);
+}
+
+/**
+ * @brief Check if channel is playing
+ * @param aChannel
+ * @return True if playing
+ */
+bool SoundManager::IsChannelPlaying(int const aChannel)
+{
+  return mSoundSystem->IsChannelPlaying(aChannel);
+}
+
+/**
  * @brief Resume a sound from pause.
  * @param aChannel
  */
@@ -313,6 +333,16 @@ void SoundManager::SetChannel3DOcclusion(int const aChannel, float const aDirect
 void SoundManager::SetChannel3DSpread(int const aChannel, float const aAngle)
 {
   mSoundSystem->SetChannel3DSpread(aChannel, aAngle);
+}
+
+/**
+ * @brief Check if channel group is playing
+ * @param aGroupName Name of group
+ * @return True if group is playing
+ */
+bool SoundManager::IsChannelGroupPlaying(HashString const &aGroupName)
+{
+  return mSoundSystem->IsChannelGroupPlaying(aGroupName);
 }
 
 /**
