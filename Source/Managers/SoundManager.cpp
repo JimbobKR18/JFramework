@@ -94,15 +94,15 @@ void SoundManager::DeleteSound(HashString const &aName)
   mSoundSystem->DeleteSound(name);
   
   // Erase all occurrences of sound to dsp linkage.
-  if(mSoundsToDSPs.find(name.ToHash()) != mSoundsToDSPs.end())
+  if(mSoundsToDSPs.find(aName.ToHash()) != mSoundsToDSPs.end())
   {
-    SoundDSPInfoVector dsps = mSoundsToDSPs[name.ToHash()];
+    SoundDSPInfoVector dsps = mSoundsToDSPs[aName.ToHash()];
     for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
     {
       delete *it;
     }
     dsps.clear();
-    mSoundsToDSPs.erase(name.ToHash());
+    mSoundsToDSPs.erase(aName.ToHash());
   }
   
   // Erase all occurrences in sound groups.
@@ -122,9 +122,9 @@ int SoundManager::PlaySound(HashString const &aName, int const aNumLoops)
 {
   HashString name = GetAliasIfAvailable(aName);
   int channel = mSoundSystem->PlaySound(name, aNumLoops);
-  if(mSoundsToDSPs.find(name.ToHash()) != mSoundsToDSPs.end())
+  if(mSoundsToDSPs.find(aName.ToHash()) != mSoundsToDSPs.end())
   {
-    SoundDSPInfoVector dsps = mSoundsToDSPs[name.ToHash()];
+    SoundDSPInfoVector dsps = mSoundsToDSPs[aName.ToHash()];
     for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
     {
       SoundDSPInfo* info = *it;
