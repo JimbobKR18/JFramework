@@ -592,7 +592,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
       }
 
       // Move object based on its alignment
-      AlignmentHelper(transform, size, position);
+      AlignmentHelper(transform, size, position, transform->GetScale());
       
       // Get the basic coordinates for the quad
       Vector3 topLeft(-size.x, -size.y, 0);

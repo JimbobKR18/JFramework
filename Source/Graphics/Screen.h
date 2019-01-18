@@ -61,7 +61,7 @@ public:
   virtual void            SwapBuffers() = 0;
   
 protected:
-  void                    AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition);
+  void                    AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition, Vector3 &aScale);
 };
 
 #endif

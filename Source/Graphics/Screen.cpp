@@ -224,7 +224,7 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
       }
 
       // Move object based on its alignment
-      AlignmentHelper(transform, size, position);
+      AlignmentHelper(transform, size, position, transform->GetScale());
       
       // OBB test
       Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(cameraPosition, position, axes, transform->GetHierarchicalScale().Multiply(size));
@@ -273,8 +273,9 @@ void Screen::SortUI(std::vector<Surface*> &aObjects)
  * @param aTransform Transform of object
  * @param aSize Object size
  * @param aPosition Object position
+ * @param aScale Object scale
  */
-void Screen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition)
+void Screen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition, Vector3 &aScale)
 {
   X_ALIGNMENT xAlign = aTransform->GetXAlignment();
   Y_ALIGNMENT yAlign = aTransform->GetYAlignment();
@@ -283,10 +284,10 @@ void Screen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector
   switch(xAlign)
   {
   case X_ALIGN_LEFT:
-    aPosition.x += aSize.x;
+    aPosition.x += aSize.x * aScale.x;
     break;
   case X_ALIGN_RIGHT:
-    aPosition.x -= aSize.x;
+    aPosition.x -= aSize.x * aScale.x;
     break;
   default:
     break;
@@ -295,10 +296,10 @@ void Screen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector
   switch(yAlign)
   {
   case Y_ALIGN_TOP:
-    aPosition.y += aSize.y;
+    aPosition.y += aSize.y * aScale.y;
     break;
   case Y_ALIGN_BOTTOM:
-    aPosition.y -= aSize.y;
+    aPosition.y -= aSize.y * aScale.y;
     break;
   default:
     break;
@@ -307,10 +308,10 @@ void Screen::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector
   switch(zAlign)
   {
   case Z_ALIGN_FRONT:
-    aPosition.z += aSize.z;
+    aPosition.z += aSize.z * aScale.z;
     break;
   case Z_ALIGN_BACK:
-    aPosition.z -= aSize.z;
+    aPosition.z -= aSize.z * aScale.z;
     break;
   default:
     break;
