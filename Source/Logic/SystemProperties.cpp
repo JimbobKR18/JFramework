@@ -12,6 +12,7 @@ HashString SystemProperties::mMagFilter = HashString();
 HashString SystemProperties::mMinFilter = HashString();
 HashString SystemProperties::mWrapModeS = HashString();
 HashString SystemProperties::mWrapModeT = HashString();
+HashString SystemProperties::mSoundEngine = HashString();
 bool SystemProperties::mFullscreen = false;
 HashString SystemProperties::mGameTitle = HashString();
 int SystemProperties::mScreenWidth = 0;
@@ -110,6 +111,15 @@ HashString const &SystemProperties::GetWrapModeS()
 HashString const &SystemProperties::GetWrapModeT()
 {
   return mWrapModeT;
+}
+
+/**
+ * @brief Get sound engine name.
+ * @return Sound engine name.
+ */
+HashString const &SystemProperties::GetSoundEngine()
+{
+  return mSoundEngine;
 }
 
 /**
@@ -217,6 +227,7 @@ void SystemProperties::Serialize()
   outfile << "MinFilter = " << mMinFilter << std::endl;
   outfile << "WrapModeS = " << mWrapModeS << std::endl;
   outfile << "WrapModeT = " << mWrapModeT << std::endl;
+  outfile << "SoundEngine = " << mSoundEngine << std::endl;
   outfile << "FullScreen = " << mFullscreen << std::endl;
   outfile << "GameTitle = " << mGameTitle << std::endl;
   outfile << "ScreenWidth = " << mScreenWidth << std::endl;
@@ -264,6 +275,8 @@ void SystemProperties::Deserialize()
       mWrapModeS = value;
     else if(key == "WrapModeT")
       mWrapModeT = value;
+    else if(key == "SoundEngine")
+      mSoundEngine = value;
     else if(key == "FullScreen")
       mFullscreen = Common::StringToBool(value);
     else if(key == "GameTitle")

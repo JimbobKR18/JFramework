@@ -22,6 +22,7 @@ private:
   static HashString mMinFilter;
   static HashString mWrapModeS;
   static HashString mWrapModeT;
+  static HashString mSoundEngine;
   static bool mFullscreen;
   static HashString mGameTitle;
   static int mScreenWidth;
@@ -46,6 +47,7 @@ public:
   static HashString const &GetMinFilter();
   static HashString const &GetWrapModeS();
   static HashString const &GetWrapModeT();
+  static HashString const &GetSoundEngine();
   
   static bool const GetFullScreen();
   static HashString const &GetGameTitle();

@@ -9,8 +9,10 @@
 #include "SoundManager.h"
 #include "Common.h"
 #include "ParserFactory.h"
+#include "SystemProperties.h"
 #if !defined(ANDROID) && !defined(IOS)
 #include "FMODSoundSystem.h"
+#include "FMODStudioSoundSystem.h"
 #endif
 
 unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
@@ -18,7 +20,10 @@ SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundM
   mDSPContainer(), mSoundsToDSPs(), mSoundGroups(), mAliases()
 {
 #if !defined(ANDROID) && !defined(IOS)
-  mSoundSystem = new FMODSoundSystem();
+  if(SystemProperties::GetSoundEngine() == "FMOD_STUDIO")
+    mSoundSystem = new FMODStudioSoundSystem();
+  else
+    mSoundSystem = new FMODSoundSystem();
 #else
   assert(!"Platform not supported. (SoundManager.cpp)");
 #endif
