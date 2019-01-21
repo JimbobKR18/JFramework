@@ -188,7 +188,6 @@ std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> Screen::PruneO
       
       if(surface->GetNoRender())
       {
-        ++it2;
         continue;
       }
       
