@@ -578,6 +578,15 @@ void Level::SendMessage(Message const& aMessage)
 }
 
 /**
+ * @brief Get level type
+ * @return Type of level
+ */
+HashString Level::GetType() const
+{
+  return "Level";
+}
+
+/**
  * @brief Make this object viewable in LUA.
  */
 void Level::SerializeLUA()

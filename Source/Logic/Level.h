@@ -101,6 +101,7 @@ public:
   virtual void      Serialize(Parser &aParser);
   virtual void      ReceiveMessage(Message const& aMessage);
   virtual void      SendMessage(Message const& aMessage);
+  virtual HashString GetType() const;
 
   static void       SerializeLUA();
 
