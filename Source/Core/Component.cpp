@@ -6,11 +6,11 @@ Component::Component()
   assert(!"Not supported.");
 }
 
-Component::Component(int const &aUID) : mOwner(nullptr), mUID(aUID) 
+Component::Component(int const &aUID) : mOwner(nullptr), mInitialized(false), mUID(aUID) 
 {
 }
 
-Component::Component(Component const &aComponent) : mOwner(aComponent.mOwner) 
+Component::Component(Component const &aComponent) : mOwner(aComponent.mOwner), mInitialized(aComponent.mInitialized)
 {
 }
 
@@ -46,6 +46,23 @@ void Component::SetOwner(GameObject *aOwner)
 int Component::GetDefinedUID() const
 {
   return mUID;
+}
+
+/**
+ * @brief Get initialization state of component
+ * @return True if initialized
+ */
+bool Component::GetInitialized() const
+{
+  return mInitialized;
+}
+
+/**
+ * @brief Override this function to have a one time call on first update
+ */
+void Component::Initialize()
+{
+  mInitialized = true;
 }
 
 /**

@@ -12,6 +12,7 @@ class Component
 {
 private:
   GameObject* mOwner;
+  bool mInitialized;
   int mUID;
 
 public:
@@ -23,7 +24,9 @@ public:
   GameObject*         GetOwner() const;
   void                SetOwner(GameObject *aOwner);
   int                 GetDefinedUID() const;
+  bool                GetInitialized() const;
 
+  virtual void        Initialize();
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;
   virtual void        ReceiveMessage(Message const &aMessage) = 0;

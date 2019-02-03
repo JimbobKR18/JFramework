@@ -411,7 +411,10 @@ void GameObject::Update()
   ComponentIT end = mComponents.end();
   for(ComponentIT it = mComponents.begin(); it != end; ++it)
   {
-    it->second->Update();
+    Component *component = it->second;
+    if(!component->GetInitialized())
+      component->Initialize();
+    component->Update();
   }
 }
 
