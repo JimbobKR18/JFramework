@@ -147,7 +147,7 @@ public:
   // Properties
   PropertyContainer const&  GetProperties() const;
   void                      AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
-  void                      AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId);
+  void                      AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId);
   void                      ClearProperties();
   
   // Derived from Component

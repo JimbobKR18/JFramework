@@ -13,7 +13,16 @@ enum PropertyType
   FLOAT2,
   FLOAT3,
   FLOAT4,
-  SAMPLER2
+  SAMPLER2,
+  INT1VECTOR,
+  INT2VECTOR,
+  INT3VECTOR,
+  INT4VECTOR,
+  FLOAT1VECTOR,
+  FLOAT2VECTOR,
+  FLOAT3VECTOR,
+  FLOAT4VECTOR,
+  SAMPLER2VECTOR
 };
 
 class SurfaceProperty
@@ -23,12 +32,12 @@ private:
   PropertyType mType;
   HashString mTargetValue;
   HashString mDefaultValue;
-  int mId;
+  HashString mId;
   
 public:
   SurfaceProperty(SurfaceProperty const &aSurfaceProperty);
   SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
-  SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId);
+  SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId);
   virtual ~SurfaceProperty();
 
   // Operations
@@ -40,14 +49,14 @@ public:
   PropertyType GetType() const;
   HashString GetTargetValue() const;
   HashString GetDefaultValue() const;
-  int GetId() const;
+  HashString GetId() const;
   
   // Setters
   void SetName(HashString const &aName);
   void SetType(PropertyType const &aType);
   void SetTargetValue(HashString const &aTargetValue);
   void SetDefaultValue(HashString const &aTargetValue);
-  void SetId(int const aId);
+  void SetId(HashString const &aId);
 };
 
 typedef std::unordered_map<int, SurfaceProperty*> PropertyContainer;

@@ -869,11 +869,87 @@ void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
       }
       case PropertyType::SAMPLER2:
       {
-        glActiveTexture(GL_TEXTURE0 + property->GetId());
+        int id = property->GetId().ToInt();
+        glActiveTexture(GL_TEXTURE0 + id);
         GL_ERROR_CHECK();
         glBindTexture(GL_TEXTURE_2D, value.ToInt());
         GL_ERROR_CHECK();
-        glUniform1i(glGetUniformLocation(program, property->GetName()), property->GetId());
+        glUniform1i(glGetUniformLocation(program, property->GetName()), id);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::INT1VECTOR:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform1iv(glGetUniformLocation(program, property->GetName()), intVector.size(), &intVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::INT2VECTOR:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform2iv(glGetUniformLocation(program, property->GetName()), intVector.size() / 2, &intVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::INT3VECTOR:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform3iv(glGetUniformLocation(program, property->GetName()), intVector.size() / 3, &intVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::INT4VECTOR:
+      {
+        std::vector<int> intVector = value.ToIntVector();
+        glUniform4iv(glGetUniformLocation(program, property->GetName()), intVector.size() / 4, &intVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::FLOAT1VECTOR:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform1fv(glGetUniformLocation(program, property->GetName()), floatVector.size(), &floatVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::FLOAT2VECTOR:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform2fv(glGetUniformLocation(program, property->GetName()), floatVector.size() / 2, &floatVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::FLOAT3VECTOR:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform3fv(glGetUniformLocation(program, property->GetName()), floatVector.size() / 3, &floatVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::FLOAT4VECTOR:
+      {
+        std::vector<float> floatVector = value.ToFloatVector();
+        glUniform4fv(glGetUniformLocation(program, property->GetName()), floatVector.size() / 4, &floatVector[0]);
+        GL_ERROR_CHECK();
+        break;
+      }
+      case PropertyType::SAMPLER2VECTOR:
+      {
+        std::vector<int> ids = property->GetId().ToIntVector();
+        std::vector<int> values = value.ToIntVector();
+        
+        if(ids.size() != values.size())
+          assert(!"Sampler id and value sizes do not match. (PCShaderScreen.cpp)(SetShaderProperties)");
+        
+        for(int i = 0; i < ids.size(); ++i)
+        {
+          glActiveTexture(GL_TEXTURE0 + ids[i]);
+          GL_ERROR_CHECK();
+          glBindTexture(GL_TEXTURE_2D, values[i]);
+          GL_ERROR_CHECK();
+        }
+        glUniform1iv(glGetUniformLocation(program, property->GetName()), ids.size(), &ids[0]);
         GL_ERROR_CHECK();
         break;
       }

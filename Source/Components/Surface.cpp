@@ -257,7 +257,7 @@ void Surface::AddOrEditProperty(HashString const &aName, PropertyType const &aTy
  * @param aDefaultValue Default value of property
  * @param aId Id of property
  */
-void Surface::AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId)
+void Surface::AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId)
 {
   if(mProperties.find(aName.ToHash()) != mProperties.end())
   {

@@ -3,16 +3,18 @@
 
 SurfaceProperty::SurfaceProperty(SurfaceProperty const &aSurfaceProperty) :
   mName(aSurfaceProperty.mName), mType(aSurfaceProperty.mType), mTargetValue(aSurfaceProperty.mTargetValue),
-  mDefaultValue(aSurfaceProperty.mDefaultValue)
+  mDefaultValue(aSurfaceProperty.mDefaultValue), mId(aSurfaceProperty.mId)
 {
 }
 
-SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue) : 
-  mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue), mId(0)
+SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, 
+  HashString const &aDefaultValue) : 
+  mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue), mId("0")
 {
 }
 
-SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, int const aId) : 
+SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, 
+  HashString const &aDefaultValue, HashString const &aId) : 
   mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue), mId(aId)
 {
 }
@@ -78,7 +80,7 @@ HashString SurfaceProperty::GetDefaultValue() const
  * @brief Get Id of property
  * @return Id
  */
-int SurfaceProperty::GetId() const
+HashString SurfaceProperty::GetId() const
 {
   return mId;
 }
@@ -123,7 +125,7 @@ void SurfaceProperty::SetDefaultValue(HashString const &aDefaultValue)
  * @brief Set id
  * @param aId id
  */
-void SurfaceProperty::SetId(int const aId)
+void SurfaceProperty::SetId(HashString const &aId)
 {
   mId = aId;
 }
