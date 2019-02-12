@@ -73,7 +73,7 @@ public:
   void              SetFocusTarget(GameObject *aObject);
   GameObject*       FindObject(HashString const &aObjectName);
   ObjectVector      FindObjects(HashString const &aName);
-  ObjectVector      FindObjects(Vector3 const &aPosition) const;
+  ObjectVector      FindObjectsAtPosition(Vector3 const &aPosition) const;
 
   void              AddObject(GameObject *aObject, ObjectPlacement const aPlacement);
   virtual void      DeleteObject(GameObject *aObject);
@@ -116,7 +116,7 @@ public:
 protected:
   void              ParseBaseFile();
   ObjectContainer&  GetObjects(ObjectPlacement const aPlacement);
-  GameObject*       FindObject(ObjectContainer const &aContainer, HashString const &aName);
+  GameObject*       FindObjectInContainer(ObjectContainer const &aContainer, HashString const &aName);
   void              LoadSounds(Level *aPrevLevel);
   void              UnloadSounds(Level *aNextLevel);
 private:

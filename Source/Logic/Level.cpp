@@ -210,7 +210,7 @@ Level::ObjectVector Level::FindObjects(HashString const &aName)
  * @param aPosition
  * @return A vector of objects touching the location, can be empty.
  */
-Level::ObjectVector Level::FindObjects(Vector3 const &aPosition) const
+Level::ObjectVector Level::FindObjectsAtPosition(Vector3 const &aPosition) const
 {
   ObjectVector ret;
   for(ConstObjectIT it = mObjects[ObjectPlacement::DEFAULT].begin(); it != mObjects[ObjectPlacement::DEFAULT].end(); ++it)
@@ -602,7 +602,10 @@ void Level::SerializeLUA()
           .set("ParseAndLoadScenario", &Level::ParseAndLoadScenario)
           .set("LoadScenario", &Level::LoadScenario)
           .set("UnloadScenario", &Level::UnloadScenario)
-          .set("UnloadScenarios", &Level::UnloadScenarios);
+          .set("UnloadScenarios", &Level::UnloadScenarios)
+          .set("FindObject", &Level::FindObject)
+          .set("FindObjects", &Level::FindObjects)
+          .set("FindObjectsAtPosition", &Level::FindObjectsAtPosition);
 }
 
 /**
@@ -965,7 +968,7 @@ Level::ObjectContainer& Level::GetObjects(ObjectPlacement const aPlacement)
  * @param aName Name of object.
  * @return Object, or nullptr if nothing found.
  */
-GameObject* Level::FindObject(ObjectContainer const &aContainer, HashString const &aName)
+GameObject* Level::FindObjectInContainer(ObjectContainer const &aContainer, HashString const &aName)
 {
   // This is designed to be naive
   // if two objects share the same name...

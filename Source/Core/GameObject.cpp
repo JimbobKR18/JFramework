@@ -15,6 +15,8 @@
 #include "PhysicsObject.h"
 #include "StateObject.h"
 #include "GameObjectFactory.h"
+#include "Camera.h"
+#include "FollowComponent.h"
 
 GameObject::GameObject()
 {
@@ -494,5 +496,7 @@ void GameObject::SerializeLUA()
           .set("GetSurface", &GameObject::GET<Surface>)
           .set("GetPhysicsObject", &GameObject::GET<PhysicsObject>)
           .set("GetStateObject", &GameObject::GET<StateObject>)
+          .set("GetFollowComponent", &GameObject::GET<FollowComponent>)
+          .set("GetCamera", &GameObject::GET<Camera>)
           .set("GetName", &GameObject::GetName);
 }
