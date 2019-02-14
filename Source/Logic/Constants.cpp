@@ -19,7 +19,7 @@ Constants::~Constants()
 }
 
 /**
- * @brief Get string from values map, asserts if nothign found.
+ * @brief Get string from values map, asserts if nothing found.
  * @param aValue Value to find.
  */
 HashString const &Constants::GetString(HashString const &aValue)
@@ -36,7 +36,7 @@ HashString const &Constants::GetString(HashString const &aValue)
 }
 
 /**
- * @brief Get int from values map, asserts if nothign found.
+ * @brief Get int from values map, asserts if nothing found.
  * @param aValue Value to find.
  */
 int const Constants::GetInteger(HashString const &aValue)
@@ -45,7 +45,7 @@ int const Constants::GetInteger(HashString const &aValue)
 }
 
 /**
- * @brief Get float from values map, asserts if nothign found.
+ * @brief Get float from values map, asserts if nothing found.
  * @param aValue Value to find.
  */
 float const Constants::GetFloat(HashString const &aValue)
@@ -54,7 +54,7 @@ float const Constants::GetFloat(HashString const &aValue)
 }
 
 /**
- * @brief Get bool from values map, asserts if nothign found.
+ * @brief Get bool from values map, asserts if nothing found.
  * @param aValue Value to find.
  */
 bool const Constants::GetBoolean(HashString const &aValue)
@@ -63,7 +63,34 @@ bool const Constants::GetBoolean(HashString const &aValue)
 }
 
 /**
- * @brief Get Vector3 from values map, asserts if nothign found.
+ * @brief Get int vector from values map, asserts if nothing found.
+ * @param aValue Value to find.
+ */
+std::vector<int> const Constants::GetIntegerVector(HashString const &aValue)
+{
+  return GetString(aValue).ToIntVector();
+}
+
+/**
+ * @brief Get float vector from values map, asserts if nothing found.
+ * @param aValue Value to find.
+ */
+std::vector<float> const Constants::GetFloatVector(HashString const &aValue)
+{
+  return GetString(aValue).ToFloatVector();
+}
+
+/**
+ * @brief Get bool vector from values map, asserts if nothing found.
+ * @param aValue Value to find.
+ */
+std::vector<bool> const Constants::GetBooleanVector(HashString const &aValue)
+{
+  return GetString(aValue).ToBoolVector();
+}
+
+/**
+ * @brief Get Vector3 from values map, asserts if nothing found.
  * @param aValue Value to find.
  */
 Vector3 const Constants::GetVector3(HashString const &aValue)
@@ -72,7 +99,7 @@ Vector3 const Constants::GetVector3(HashString const &aValue)
 }
 
 /**
- * @brief Get Vector4 from values map, asserts if nothign found.
+ * @brief Get Vector4 from values map, asserts if nothing found.
  * @param aValue Value to find.
  */
 Vector4 const Constants::GetVector4(HashString const &aValue)

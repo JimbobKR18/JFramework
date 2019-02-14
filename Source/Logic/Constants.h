@@ -26,6 +26,9 @@ public:
   static int const GetInteger(HashString const &aValue);
   static float const GetFloat(HashString const &aValue);
   static bool const GetBoolean(HashString const &aValue);
+  static std::vector<int> const GetIntegerVector(HashString const &aValue);
+  static std::vector<float> const GetFloatVector(HashString const &aValue);
+  static std::vector<bool> const GetBooleanVector(HashString const &aValue);
   static Vector3 const GetVector3(HashString const &aValue);
   static Vector4 const GetVector4(HashString const &aValue);
   static void Deserialize();
