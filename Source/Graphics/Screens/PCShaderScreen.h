@@ -31,6 +31,7 @@ public:
   PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen);
   virtual ~PCShaderScreen();
 
+  virtual void SetGlobalShaderProperty(ShaderData *aShaderData, SurfaceProperty const &aProperty);
   virtual void ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData);
   virtual void ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData);
   virtual void PreDraw();
@@ -53,6 +54,7 @@ private:
   void BindAttributeV2(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector2> &aData);
   void BindAttributeV3(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector3> &aData);
   void BindAttributeV4(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData);
+  void SetShaderUniform(int aProgram, HashString const &aName, PropertyType const &aPropertyType, HashString const &aValue, HashString const &aId);
 };
 
 #endif

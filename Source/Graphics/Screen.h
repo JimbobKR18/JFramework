@@ -51,6 +51,7 @@ public:
   void                    SortObjects(std::vector<Surface*> &aObjects);
   void                    SortUI(std::vector<Surface*> &aObjects);
 
+  virtual void            SetGlobalShaderProperty(ShaderData *aShaderData, SurfaceProperty const &aProperty) = 0;
   virtual void            ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData) = 0;
   virtual void            ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData) = 0;
   virtual void            SetClearColor(Vector4 const &aClearColor) = 0;
