@@ -13,6 +13,7 @@ class GameApp
 private:
   ComponentFactory*     mComponentFactory;
   std::vector<Manager*> mManagers;
+  std::unordered_map<unsigned, Manager*> mManagerLookup;
   std::vector<Message*> mDelayedMessages;
   unsigned int          mLastFrame;
   unsigned int          mSkipFrames;
