@@ -76,6 +76,8 @@ public:
   void                AddShaderPairing(HashString const &aFilename, ShaderData *aData);
   ShaderData*         GetShaderData(HashString const &aFilename) const;
   bool                ShaderDataExists(HashString const &aFilename) const;
+  void                SetGlobalShaderProperty(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename,
+                                              SurfaceProperty const &aProperty);
 
   // Misc.
   void                ResetDevice();

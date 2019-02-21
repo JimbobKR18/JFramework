@@ -416,6 +416,23 @@ bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
 }
 
 /**
+ * @brief Set shader property globally for program. HINT: If you're not seeing your intended results, remember
+ *        to declare the field as uniform in your shader.
+ * @param aVertexShaderFilename Vertex shader file name.
+ * @param aFragmentShaderFilename Fragment shader file name.
+ * @param aProperty Property to set shader to.
+ */
+void GraphicsManager::SetGlobalShaderProperty(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename,
+                                            SurfaceProperty const &aProperty)
+{
+  HashString key = aVertexShaderFilename + aFragmentShaderFilename;
+  if(ShaderDataExists(key))
+  {
+    mScreen->SetGlobalShaderProperty(GetShaderData(key), aProperty);
+  }
+}
+
+/**
  * @brief Reset device.
  */
 void GraphicsManager::ResetDevice()
