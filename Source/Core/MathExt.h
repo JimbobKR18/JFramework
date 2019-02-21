@@ -79,6 +79,7 @@ struct Vector2
   float   AngleBetweenDegrees(Vector2 const &rhs) const;
   
   std::vector<float> ToVector() const;
+  HashString ToString() const;
   
   // Helpful debugging
   bool    validate() const;
@@ -136,6 +137,7 @@ struct Vector3
   float   AngleBetweenDegrees(Vector3 const &rhs, Vector3 const &aNormal) const;
   
   std::vector<float> ToVector() const;
+  HashString ToString() const;
   
   // Helpful debugging
   bool    validate() const;
@@ -190,6 +192,7 @@ struct Vector4
   float   AngleBetweenDegrees(Vector4 const &rhs, Vector4 const &aNormal) const;
   
   std::vector<float> ToVector() const;
+  HashString ToString() const;
   
   // Helpful debugging
   bool validate() const;

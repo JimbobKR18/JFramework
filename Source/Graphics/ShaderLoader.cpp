@@ -281,7 +281,7 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
   SDL_Surface *surface = SDL_CreateRGBSurface(SDL_SWSURFACE, msg->w, msg->h, 32, rmask, gmask, bmask, amask);
   SDL_BlitSurface(msg, NULL, surface, NULL);
   
-  textureData->mTextureName = aFont + aText + Common::IntToString(aSize);
+  textureData->mTextureName = aFont + aText + Common::IntToString(aSize) + aMinFilter + aMagFilter;
   textureData->mWidth = surface->w;
   textureData->mHeight = surface->h;
   textureData->mTextureID = ImportTexture(surface, textureFormat, aMinFilter, aMagFilter);

@@ -78,7 +78,8 @@ void PCShaderSurface::LoadImage(HashString const &aName)
  */
 void PCShaderSurface::LoadText(HashString const &aText)
 {
-  HashString const textureDataHash = GetFontName() + aText + Common::IntToString(GetFontSize());
+  HashString const textureDataHash = GetFontName() + aText + Common::IntToString(GetFontSize()) +
+    GetMinFilter() + GetMagFilter();
   TextureData* data = GetManager()->GetTextureData(textureDataHash);
   Vector3 size;
   if(data->mTextureID != (unsigned)-1)

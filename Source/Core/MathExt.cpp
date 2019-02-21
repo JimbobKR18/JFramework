@@ -246,6 +246,11 @@ std::vector<float> Vector2::ToVector() const
   return ret;
 }
 
+HashString Vector2::ToString() const
+{
+  return Common::FloatVectorToString(ToVector());
+}
+
 bool Vector2::validate() const
 {
   if(std::isnan(x) || std::isnan(y))
@@ -524,6 +529,11 @@ std::vector<float> Vector3::ToVector() const
   return ret;
 }
 
+HashString Vector3::ToString() const
+{
+  return Common::FloatVectorToString(ToVector());
+}
+
 bool Vector3::validate() const
 {
   if(std::isnan(x) || std::isnan(y) || std::isnan(z))
@@ -799,6 +809,11 @@ std::vector<float> Vector4::ToVector() const
   ret.push_back(z);
   ret.push_back(w);
   return ret;
+}
+
+HashString Vector4::ToString() const
+{
+  return Common::FloatVectorToString(ToVector());
 }
 
 bool Vector4::validate() const
