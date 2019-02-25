@@ -2,18 +2,18 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Release
 ProjectName            :=JFramework
-ConfigurationName      :=Debug
+ConfigurationName      :=Release
 WorkspacePath          :=/home/jimmy/Documents/project-chang-e/Linux/Chang-e
 ProjectPath            :=/home/jimmy/Documents/JFramework/Linux/JFramework
-IntermediateDirectory  :=./Debug
+IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=11/02/19
+Date                   :=24/02/19
 CodeLitePath           :=/home/jimmy/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/lib$(ProjectName).a
-Preprocessors          :=$(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)_DEBUG_DRAW $(PreprocessorSwitch)SLB_USE_EXCEPTIONS 
+Preprocessors          :=$(PreprocessorSwitch)NDEBUG 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -36,7 +36,7 @@ ObjectsFileList        :="JFramework.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Core/Interpolations $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Logic/StateMachine $(IncludeSwitch)../../Source/Logic/Effects $(IncludeSwitch)../../Source/Chemistry $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Sound/SoundSystems $(IncludeSwitch)../../Source/Sound/DSPs $(IncludeSwitch)../../Source/Sound/DSPs/FMOD $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/Graphics/Screens $(IncludeSwitch)../../Source/Graphics/Surfaces $(IncludeSwitch)../../Source/Graphics/Framebuffers $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/Network $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Input $(IncludeSwitch)../../Source/Core/Messages $(IncludeSwitch)../../Linux/fmod/api/studio/inc $(IncludeSwitch)../../Linux/fmod/api/lowlevel/inc 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)../../Source $(IncludeSwitch)../../Source/Core $(IncludeSwitch)../../Source/Core/Interpolations $(IncludeSwitch)../../Source/Core/Structures $(IncludeSwitch)../../Source/Logic $(IncludeSwitch)../../Source/Logic/StateMachine $(IncludeSwitch)../../Source/Logic/Effects $(IncludeSwitch)../../Source/Chemistry $(IncludeSwitch)../../Source/Components $(IncludeSwitch)../../Source/Physics $(IncludeSwitch)../../Source/Sound $(IncludeSwitch)../../Source/Sound/SoundSystems $(IncludeSwitch)../../Source/Sound/DSPs $(IncludeSwitch)../../Source/Sound/DSPs/FMOD $(IncludeSwitch)../../Source/Managers $(IncludeSwitch)../../Source/Graphics $(IncludeSwitch)../../Source/Graphics/Screens $(IncludeSwitch)../../Source/Graphics/Surfaces $(IncludeSwitch)../../Source/Graphics/Framebuffers $(IncludeSwitch)../../Source/LUA $(IncludeSwitch)../../Source/Parsers $(IncludeSwitch)../../Source/Network $(IncludeSwitch)../../Source/TinyXML $(IncludeSwitch)../../Source/Input $(IncludeSwitch)../../Source/Core/Messages $(IncludeSwitch)../../Linux/fmod/api/studio/inc $(IncludeSwitch)../../Linux/fmod/api/lowlevel/inc 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/lib $(Libra
 AR       := ar rcus
 CXX      := g++
 CC       := gcc
-CXXFLAGS :=  -g -O0 -std=c++11 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
-CFLAGS   :=  -g -O0 -Wall -fno-inline -fno-eliminate-unused-debug-types $(Preprocessors)
+CXXFLAGS :=  -O -O3 -std=c++11 -Wall $(Preprocessors)
+CFLAGS   :=  -O -O3 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -67,7 +67,7 @@ Objects0=$(IntermediateDirectory)/up_up_Source_Logic_DefaultGameObjectFactory.cp
 	$(IntermediateDirectory)/up_up_Source_Managers_NetworkManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Resolver.cpp$(ObjectSuffix) 
 
 Objects1=$(IntermediateDirectory)/up_up_Source_Components_Surface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_ObjectManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_SLB.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_SoundManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_SystemProperties.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_PhysicsWorld.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_InputManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_SoundListener.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_StateObject.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_GravityGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Components_SoundListener.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_DSP.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_PCNetworkPort.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Components_Controller.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_CollisionChecker.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_SurfaceProperty.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Network_NetworkPort.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_PotentialPair.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_ParserNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Parsers_Parser.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Physics_Joint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Input_InputHandler.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Chemistry_DefaultChemicalFactory.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Components_Constraint.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Managers_DebugManager.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Surfaces_PCShaderSurface.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_SoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateLink.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Graphics_Framebuffers_GLFramebuffer.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_LUA_lua.c$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_StateMachine.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_StateMachine_State.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_Effect.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/up_up_Source_Components_ChemistryElement.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Logic_Effects_DefaultEffectsFactory.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODStudioSoundSystem.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(ObjectSuffix) 
@@ -88,15 +88,15 @@ $(OutputFile): $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	@echo $(Objects1) >> $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
-	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug"
-	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-debug/JFramework"
+	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release"
+	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release/JFramework"
 
 MakeIntermediateDirs:
-	@test -d ./Debug || $(MakeDirCommand) ./Debug
+	@test -d ./Release || $(MakeDirCommand) ./Release
 
 
-./Debug:
-	@test -d ./Debug || $(MakeDirCommand) ./Debug
+./Release:
+	@test -d ./Release || $(MakeDirCommand) ./Release
 
 PreBuild:
 
@@ -504,6 +504,14 @@ $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(DependSuffix): .
 $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(PreprocessSuffix): ../../Source/Components/Transform.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Components_Transform.cpp$(PreprocessSuffix) ../../Source/Components/Transform.cpp
 
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(ObjectSuffix): ../../Source/Sound/DSPs/FMOD/DSP_FMOD.cpp $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Sound/DSPs/FMOD/DSP_FMOD.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(DependSuffix): ../../Source/Sound/DSPs/FMOD/DSP_FMOD.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(DependSuffix) -MM ../../Source/Sound/DSPs/FMOD/DSP_FMOD.cpp
+
+$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(PreprocessSuffix): ../../Source/Sound/DSPs/FMOD/DSP_FMOD.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_DSP_FMOD.cpp$(PreprocessSuffix) ../../Source/Sound/DSPs/FMOD/DSP_FMOD.cpp
+
 $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix): ../../Source/Parsers/TextParser.cpp $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Parsers/TextParser.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/up_up_Source_Parsers_TextParser.cpp$(DependSuffix): ../../Source/Parsers/TextParser.cpp
@@ -543,14 +551,6 @@ $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(DependSuffix):
 
 $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(PreprocessSuffix): ../../Source/Physics/ForceGenerator.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Physics_ForceGenerator.cpp$(PreprocessSuffix) ../../Source/Physics/ForceGenerator.cpp
-
-$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(ObjectSuffix): ../../Source/Sound/DSPs/FMOD/FMOD_DSP.cpp $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Sound/DSPs/FMOD/FMOD_DSP.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(DependSuffix): ../../Source/Sound/DSPs/FMOD/FMOD_DSP.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(DependSuffix) -MM ../../Source/Sound/DSPs/FMOD/FMOD_DSP.cpp
-
-$(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(PreprocessSuffix): ../../Source/Sound/DSPs/FMOD/FMOD_DSP.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/up_up_Source_Sound_DSPs_FMOD_FMOD_DSP.cpp$(PreprocessSuffix) ../../Source/Sound/DSPs/FMOD/FMOD_DSP.cpp
 
 $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix): ../../Source/Physics/ForceRegistry.cpp $(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jimmy/Documents/JFramework/Source/Physics/ForceRegistry.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/up_up_Source_Physics_ForceRegistry.cpp$(ObjectSuffix) $(IncludePath)
@@ -782,6 +782,6 @@ $(IntermediateDirectory)/up_up_Source_Sound_SoundSystems_FMODSoundSystem.cpp$(Pr
 ## Clean
 ##
 clean:
-	$(RM) -r ./Debug/
+	$(RM) -r ./Release/
 
 

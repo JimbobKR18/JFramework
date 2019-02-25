@@ -252,8 +252,8 @@
     <File Name="../../Source/Sound/DSP_Type.h"/>
     <VirtualDirectory Name="DSPs">
       <VirtualDirectory Name="FMOD">
-        <File Name="../../Source/Sound/DSPs/FMOD/FMOD_DSP.cpp"/>
-        <File Name="../../Source/Sound/DSPs/FMOD/FMOD_DSP.h"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/DSP_FMOD.h"/>
+        <File Name="../../Source/Sound/DSPs/FMOD/DSP_FMOD.cpp"/>
       </VirtualDirectory>
     </VirtualDirectory>
     <File Name="../../Source/Sound/DSP.h"/>
