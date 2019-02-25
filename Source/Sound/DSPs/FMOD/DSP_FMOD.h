@@ -1,12 +1,12 @@
-#ifndef __JFramework__FMOD_DSP_h_
-#define __JFramework__FMOD_DSP_h_
+#ifndef __JFramework__DSP_FMOD_h_
+#define __JFramework__DSP_FMOD_h_
 
 #include "DSP.h"
 #include "fmod_studio.hpp"
 #include "fmod_errors.h"
 #include "FMODSoundSystem.h"
 
-class FMOD_DSP : public DSP
+class DSP_FMOD : public DSP
 {
 private:
   typedef std::unordered_map<int, FMOD::DSPConnection*>     FMODDSPConnectionContainer;
@@ -17,9 +17,9 @@ private:
   FMODDSPConnectionContainer mConnectionContainer;
   
 public:
-  FMOD_DSP(FMOD::DSP* aDSP, FMODSoundSystem *aSoundSystem, HashString const &aName);
-  FMOD_DSP(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashString const &aName, int const &aType);
-  virtual ~FMOD_DSP();
+  DSP_FMOD(FMOD::DSP* aDSP, FMODSoundSystem *aSoundSystem, HashString const &aName);
+  DSP_FMOD(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashString const &aName, int const &aType);
+  virtual ~DSP_FMOD();
   
   FMOD::DSP* GetFMODDSP();
 
@@ -35,4 +35,4 @@ public:
   virtual void Deserialize(ParserNode *aNode);
 };
 
-#endif // __JFramework__FMOD_DSP_h_
+#endif // __JFramework__DSP_FMOD_h_

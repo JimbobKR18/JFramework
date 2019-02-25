@@ -1,11 +1,11 @@
-#include "FMOD_DSP.h"
+#include "DSP_FMOD.h"
 
-FMOD_DSP::FMOD_DSP(FMOD::DSP* aDSP, FMODSoundSystem *aSoundSystem, HashString const &aName) : DSP(aName), mDSP(aDSP),
+DSP_FMOD::DSP_FMOD(FMOD::DSP* aDSP, FMODSoundSystem *aSoundSystem, HashString const &aName) : DSP(aName), mDSP(aDSP),
   mSoundSystem(aSoundSystem), mConnectionContainer()
 {
 }
 
-FMOD_DSP::FMOD_DSP(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashString const &aName, int const &aType) : DSP(aName), 
+DSP_FMOD::DSP_FMOD(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashString const &aName, int const &aType) : DSP(aName), 
   mDSP(nullptr), mSoundSystem(aSoundSystem), mConnectionContainer()
 {
   FMOD_RESULT result = aSystem->createDSPByType((FMOD_DSP_TYPE)aType, &mDSP);
@@ -16,7 +16,7 @@ FMOD_DSP::FMOD_DSP(FMOD::System* aSystem, FMODSoundSystem *aSoundSystem, HashStr
   }
 }
 
-FMOD_DSP::~FMOD_DSP()
+DSP_FMOD::~DSP_FMOD()
 {
   mDSP = nullptr;
 }
@@ -25,7 +25,7 @@ FMOD_DSP::~FMOD_DSP()
  * @brief Get FMOD DSP
  * @return 
  */
-FMOD::DSP* FMOD_DSP::GetFMODDSP()
+FMOD::DSP* DSP_FMOD::GetFMODDSP()
 {
   return mDSP;
 }
@@ -35,7 +35,7 @@ FMOD::DSP* FMOD_DSP::GetFMODDSP()
  * @param aNumChannels
  * @param aSpeakerMode
  */
-void FMOD_DSP::SetFormat(int aNumChannels, Speaker_Mode const &aSpeakerMode)
+void DSP_FMOD::SetFormat(int aNumChannels, Speaker_Mode const &aSpeakerMode)
 {
   mDSP->setChannelFormat(0, aNumChannels, (FMOD_SPEAKERMODE)aSpeakerMode);
 }
@@ -47,7 +47,7 @@ void FMOD_DSP::SetFormat(int aNumChannels, Speaker_Mode const &aSpeakerMode)
  * @param aWidth
  * @param aHeight
  */
-void FMOD_DSP::AddInput(DSP* aDSP, float **aMixMatrix, int aWidth, int aHeight)
+void DSP_FMOD::AddInput(DSP* aDSP, float **aMixMatrix, int aWidth, int aHeight)
 {
   FMOD::DSPConnection *connection;
   mDSP->addInput(mSoundSystem->GetDSP(aDSP->GetName()), &connection);
@@ -59,7 +59,7 @@ void FMOD_DSP::AddInput(DSP* aDSP, float **aMixMatrix, int aWidth, int aHeight)
  * @brief Remove DSP as input
  * @param aInput
  */
-void FMOD_DSP::RemoveInput(DSP* aInput)
+void DSP_FMOD::RemoveInput(DSP* aInput)
 {
   mDSP->disconnectFrom(mSoundSystem->GetDSP(aInput->GetName()), mConnectionContainer[(GetName() + aInput->GetName()).ToHash()]);
 }
@@ -68,7 +68,7 @@ void FMOD_DSP::RemoveInput(DSP* aInput)
  * @brief Set DSP as active
  * @param aActive
  */
-void FMOD_DSP::SetActive(bool const aActive)
+void DSP_FMOD::SetActive(bool const aActive)
 {
   mDSP->setActive(aActive);
 }
@@ -77,7 +77,7 @@ void FMOD_DSP::SetActive(bool const aActive)
  * @brief Set DSP bypass
  * @param aBypass
  */
-void FMOD_DSP::SetBypass(bool const aBypass)
+void DSP_FMOD::SetBypass(bool const aBypass)
 {
   mDSP->setBypass(aBypass);
 }
@@ -87,7 +87,7 @@ void FMOD_DSP::SetBypass(bool const aBypass)
  * @param aParam https://www.fmod.com/docs/api/content/generated/FMOD_DSP_SetParameterFloat.html
  * @param aValue
  */
-void FMOD_DSP::SetFloat(int const aParam, float const aValue)
+void DSP_FMOD::SetFloat(int const aParam, float const aValue)
 {
   mDSP->setParameterFloat(aParam, aValue);
 }
@@ -97,7 +97,7 @@ void FMOD_DSP::SetFloat(int const aParam, float const aValue)
  * @param aParam https://www.fmod.com/docs/api/content/generated/FMOD_DSP_SetParameterInt.html
  * @param aValue
  */
-void FMOD_DSP::SetInt(int const aParam, int const aValue)
+void DSP_FMOD::SetInt(int const aParam, int const aValue)
 {
   mDSP->setParameterInt(aParam, aValue);
 }
@@ -107,7 +107,7 @@ void FMOD_DSP::SetInt(int const aParam, int const aValue)
  * @param aParam https://www.fmod.com/docs/api/content/generated/FMOD_DSP_SetParameterBool.html
  * @param aValue
  */
-void FMOD_DSP::SetBool(int const aParam, bool const aValue)
+void DSP_FMOD::SetBool(int const aParam, bool const aValue)
 {
   mDSP->setParameterBool(aParam, aValue);
 }
@@ -118,7 +118,7 @@ void FMOD_DSP::SetBool(int const aParam, bool const aValue)
  * @param aData
  * @param aLength
  */
-void FMOD_DSP::SetData(int const aParam, void* aData, int const aLength)
+void DSP_FMOD::SetData(int const aParam, void* aData, int const aLength)
 {
   mDSP->setParameterData(aParam, aData, aLength);
 }
@@ -127,7 +127,7 @@ void FMOD_DSP::SetData(int const aParam, void* aData, int const aLength)
  * @brief Deserialize from node
  * @param aNode Node to deserialize
  */
-void FMOD_DSP::Deserialize(ParserNode *aNode)
+void DSP_FMOD::Deserialize(ParserNode *aNode)
 {
   HashString name = aNode->Find("Name")->GetValue();
   HashString type = aNode->Find("Type")->GetValue();

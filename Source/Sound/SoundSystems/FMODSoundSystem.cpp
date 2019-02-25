@@ -1,5 +1,5 @@
 #include "FMODSoundSystem.h"
-#include "FMOD_DSP.h"
+#include "DSP_FMOD.h"
 
 FMODSound::FMODSound(FMOD::Sound* aSound, float const &aVolume) : mSound(aSound), mVolume(aVolume)
 {
@@ -686,8 +686,8 @@ DSP* FMODSoundSystem::CreateDSP(HashString const &aName, DSP_Type const &aType)
     assert(!"Invalid DSP Type passed into CreateDSP");
   }
   
-  DSP *dsp = new FMOD_DSP(mFMODSystem, this, aName, aType);
-  mDSPContainer[aName.ToHash()] = dynamic_cast<FMOD_DSP*>(dsp)->GetFMODDSP();
+  DSP *dsp = new DSP_FMOD(mFMODSystem, this, aName, aType);
+  mDSPContainer[aName.ToHash()] = dynamic_cast<DSP_FMOD*>(dsp)->GetFMODDSP();
 
   return dsp;
 }
@@ -705,8 +705,8 @@ DSP* FMODSoundSystem::GetDSPFromChannel(int aChannel, int aIndex)
   mFMODSystem->getChannel(aChannel, &channel);
   channel->getDSP(aIndex, &dsp);
   
-  DSP* fmodDSP = new FMOD_DSP(dsp, this, Common::IntToString(aChannel));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = dynamic_cast<FMOD_DSP*>(fmodDSP)->GetFMODDSP();
+  DSP* fmodDSP = new DSP_FMOD(dsp, this, Common::IntToString(aChannel));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = dynamic_cast<DSP_FMOD*>(fmodDSP)->GetFMODDSP();
   return fmodDSP;
 }
 
@@ -728,8 +728,8 @@ DSP* FMODSoundSystem::GetDSPFromChannelGroup(HashString const &aGroupName, int a
   FMOD::ChannelGroup *group = mChannelGroupContainer[aGroupName.ToHash()];
   group->getDSP(aIndex, &dsp);
   
-  DSP* fmodDSP = new FMOD_DSP(dsp, this, aGroupName + Common::IntToString(aIndex));
-  mDSPContainer[fmodDSP->GetName().ToHash()] = dynamic_cast<FMOD_DSP*>(fmodDSP)->GetFMODDSP();
+  DSP* fmodDSP = new DSP_FMOD(dsp, this, aGroupName + Common::IntToString(aIndex));
+  mDSPContainer[fmodDSP->GetName().ToHash()] = dynamic_cast<DSP_FMOD*>(fmodDSP)->GetFMODDSP();
   
   return fmodDSP;
 }
