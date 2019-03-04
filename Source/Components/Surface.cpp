@@ -108,6 +108,20 @@ void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int
 }
 
 /**
+ * @brief Set up animation data helper
+ * @param aNumColumns Columns in file
+ * @param aNumRows Rows in file
+ * @param aAnimations Animation data
+ */
+void Surface::SetTextureCoordinateData(int const aNumColumns, int const aNumRows, std::vector<AnimationInfo*> const &aAnimations)
+{
+  if(mTexCoord)
+    delete mTexCoord;
+  
+  mTexCoord = new TextureCoordinates(mTextureSize.x, mTextureSize.y, aNumColumns, aNumRows, aAnimations);
+}
+
+/**
  * @brief Set whether this surface is animated
  * @param aAnimated True is animated, false otherwise
  */
@@ -363,33 +377,25 @@ void Surface::Serialize(ParserNode *aNode)
 
   aNode->Place(SURFACE, "");
   ParserNode* surface = aNode->Find(SURFACE);
-  surface->Place("AnimationCount", Common::IntToString(numanimations));
-  for(int i = 0; i < numanimations; ++i)
-  {
-    animations.push_back(coords->GetAnimationFrameCounts(i));
-    
-    animationSpeeds.push_back(std::vector<float>());
-    TextureCoordinates::SpeedContainer speedForAnimation = coords->GetAnimationHolds(i);
-    for(TextureCoordinates::SpeedConstIT it = speedForAnimation.begin(); it != speedForAnimation.end(); ++it)
-    {
-      animationSpeeds[i].push_back(*it);
-    }
-  }
-
-  if(animated)
-  {
-    surface->Place("FrameNumbers", Common::IntVectorToString(animations));
-  }
   
-  // Animation speeds
-  surface->Place("AnimationSpeeds", "");
+  // Animations
+  surface->Place("Animations", "");
   HashString const ANIMATION = "Animation_";
   int curIndex = 0;
-  ParserNode* animationSpeedsNode = surface->Find("AnimationSpeeds");
-  for(std::vector<std::vector<float>>::iterator it = animationSpeeds.begin(); it != animationSpeeds.end(); ++it, ++curIndex)
+  ParserNode* animationsNode = surface->Find("Animations");
+  animationsNode->Place("Columns", Common::IntToString(mTexCoord->GetMaxFrames()));
+  animationsNode->Place("Rows", Common::IntToString(mTexCoord->GetTotalFrames() / mTexCoord->GetMaxFrames()));
+  
+  for(std::vector<AnimationInfo*>::const_iterator it = mTexCoord->GetAllAnimations().begin(); it != mTexCoord->GetAllAnimations().end(); ++it, ++curIndex)
   {
+    AnimationInfo const *info = *it;
     HashString curNode = ANIMATION + Common::IntToString(curIndex);
-    animationSpeedsNode->Place(curNode, Common::FloatVectorToString(*it));
+    animationsNode->Place(curNode, "");
+    ParserNode* animationInfosNode = animationsNode->Find(curNode);
+    
+    animationInfosNode->Place("Speed", Common::FloatVectorToString(info->mSpeeds));
+    animationInfosNode->Place("SpeedModifier", Common::FloatToString(info->mSpeedModifier));
+    animationInfosNode->Place("Frames", Common::IntVectorToString(info->mFrames));
   }
   
   // Everything else animation related
@@ -485,7 +491,7 @@ void Surface::Deserialize(ParserNode *aNode)
   int startingAnimation = 0;
   double xBias = 0;
   double yBias = 0;
-  std::vector<TextureCoordinates::SpeedContainer> animationSpeed;
+  std::vector<std::vector<float>> animationSpeed;
   std::vector<int> numFrames;
   numFrames.push_back(1);
   
@@ -504,97 +510,179 @@ void Surface::Deserialize(ParserNode *aNode)
   {
     frameBased = aNode->Find("FrameBased")->GetValue().ToBool();
   }
-  if(aNode->Find("AnimationCount"))
+  
+  // Animation
+  if(aNode->Find("Animations"))
   {
-    ParserNode* animationCount = aNode->Find("AnimationCount");
-
-    numFrames.clear();
-    numAnimations = animationCount->GetValue().ToInt();
-    numFrames = aNode->Find("FrameNumbers")->GetValue().ToIntVector();
-    
-    bool isAnimated = aNode->Find("Animated")->GetValue().ToBool();
-    if(isAnimated)
-      animated = true;
-  }
-  // Supports compatibility mode with old and really old files, support single animation speed or multiple.
-  if(aNode->Find("AnimationSpeeds") && aNode->Find("AnimationSpeeds")->Find("Animation_0"))
-  {
-    // Clear animation speed.
-    animationSpeed.clear();
-    
-    // Optional parameter to change the animation speeds.
     HashString const nodeName = "Animation_";
     int index = 0;
     HashString curIndex = nodeName + Common::IntToString(index);
-    ParserNode* animationSpeedNode = aNode->Find("AnimationSpeeds");
+    ParserNode *animationNode = aNode->Find("Animations");
+    std::vector<AnimationInfo*> animationInfos;
     
-    while(animationSpeedNode->Find(curIndex))
+    int numRows = animationNode->Find("Rows")->GetValue().ToInt();
+    int numColumns = animationNode->Find("Columns")->GetValue().ToInt();
+    while(animationNode->Find(curIndex))
     {
-      ParserNode* curNode = animationSpeedNode->Find(curIndex);
-      std::vector<float> singleSpeeds = curNode->GetValue().ToFloatVector();
-      
-      // Convert from frames to time.
-      if(frameBased)
+      ParserNode *currentAnimation = animationNode->Find(curIndex);
+      float speedModifier = 1;
+      if(currentAnimation->Find("SpeedModifier"))
       {
-        for(unsigned i = 0; i < singleSpeeds.size(); ++i)
+        speedModifier = currentAnimation->Find("SpeedModifier")->GetValue().ToFloat();
+      }
+      
+      std::vector<int> frames;
+      if(currentAnimation->Find("Frames"))
+      {
+        frames = currentAnimation->Find("Frames")->GetValue().ToIntVector();
+      }
+      else if(currentAnimation->Find("NumFrames"))
+      {
+        int numFrames = currentAnimation->Find("NumFrames")->GetValue().ToInt();
+        int rowOffset = index;
+        int columnOffset = 0;
+        if(currentAnimation->Find("RowOffset"))
+          rowOffset = currentAnimation->Find("RowOffset")->GetValue().ToInt();
+        if(currentAnimation->Find("ColumnOffset"))
+          columnOffset = currentAnimation->Find("ColumnOffset")->GetValue().ToInt();
+        
+        for(int i = 0; i < numFrames; ++i)
         {
-          singleSpeeds[i] = singleSpeeds[i] * frameRate;
+          frames.push_back(i + columnOffset + (numColumns * rowOffset));
+        }
+      }
+      else
+      {
+        assert(!"Animation passed in without frames");
+      }
+      
+      std::vector<float> speeds;
+      if(currentAnimation->Find("Speeds"))
+      {
+        speeds = currentAnimation->Find("Speeds")->GetValue().ToFloatVector();
+      }
+      else if(currentAnimation->Find("Speed"))
+      {
+        float speed = currentAnimation->Find("Speed")->GetValue().ToFloat();
+        for(int i = 0; i < frames.size(); ++i)
+        {
+          speeds.push_back(speed);
+        }
+      }
+      else
+      {
+        for(int i = 0; i < frames.size(); ++i)
+        {
+          speeds.push_back(frameRate);
         }
       }
       
-      animationSpeed.push_back(singleSpeeds);
+      AnimationInfo *info = new AnimationInfo(index, speedModifier, speeds, frames);
+      animationInfos.push_back(info);
+      
       ++index;
       curIndex = nodeName + Common::IntToString(index);
     }
-  }
-  else if(aNode->Find("AnimationSpeeds"))
-  {
-    // Clear animation speed.
-    animationSpeed.clear();
     
-    // Optional parameter to change the animation speeds.
-    ParserNode* animationSpeedNode = aNode->Find("AnimationSpeeds");
-    std::vector<float> singleSpeeds = animationSpeedNode->GetValue().ToFloatVector();
-    
-    for(unsigned i = 0; i < singleSpeeds.size(); ++i)
-    {
-      std::vector<float> speedVector;
-      for(int j = 0; j < numFrames[i]; ++j)
-      {
-        speedVector.push_back((frameBased) ? singleSpeeds[i] * frameRate : singleSpeeds[i]);
-      }
-      animationSpeed.push_back(speedVector);
-    }
+    SetTextureCoordinateData(numColumns, numRows, animationInfos);
   }
-  else if(aNode->Find("AnimationSpeed"))
+  else
   {
-    // Clear animation speed.
-    animationSpeed.clear();
-    
-    // Optional parameter to change the animation speed, using a single number.
-    ParserNode* animationSpeedNode = aNode->Find("AnimationSpeed");
-    for(int i = 0; i < numAnimations; ++i)
+    if(aNode->Find("AnimationCount"))
     {
-      animationSpeed.push_back(std::vector<float>());
-      for(int j = 0; j < numFrames[i]; ++j)
+      ParserNode* animationCount = aNode->Find("AnimationCount");
+
+      numFrames.clear();
+      numAnimations = animationCount->GetValue().ToInt();
+      numFrames = aNode->Find("FrameNumbers")->GetValue().ToIntVector();
+      
+      bool isAnimated = aNode->Find("Animated")->GetValue().ToBool();
+      if(isAnimated)
+        animated = true;
+    }
+    // Supports compatibility mode with old and really old files, support single animation speed or multiple.
+    if(aNode->Find("AnimationSpeeds") && aNode->Find("AnimationSpeeds")->Find("Animation_0"))
+    {
+      // Clear animation speed.
+      animationSpeed.clear();
+      
+      // Optional parameter to change the animation speeds.
+      HashString const nodeName = "Animation_";
+      int index = 0;
+      HashString curIndex = nodeName + Common::IntToString(index);
+      ParserNode* animationSpeedNode = aNode->Find("AnimationSpeeds");
+      
+      while(animationSpeedNode->Find(curIndex))
       {
-        float speed = animationSpeedNode->GetValue().ToFloat();
-        animationSpeed[i].push_back((frameBased) ? speed * frameRate : speed);
+        ParserNode* curNode = animationSpeedNode->Find(curIndex);
+        std::vector<float> singleSpeeds = curNode->GetValue().ToFloatVector();
+        
+        // Convert from frames to time.
+        if(frameBased)
+        {
+          for(unsigned i = 0; i < singleSpeeds.size(); ++i)
+          {
+            singleSpeeds[i] = singleSpeeds[i] * frameRate;
+          }
+        }
+        
+        animationSpeed.push_back(singleSpeeds);
+        ++index;
+        curIndex = nodeName + Common::IntToString(index);
       }
     }
-  }
-  else if(animationSpeed.empty())
-  {
-    // Default to DT
-    for(int i = 0; i < numAnimations; ++i)
+    else if(aNode->Find("AnimationSpeeds"))
     {
-      animationSpeed.push_back(std::vector<float>());
-      for(int j = 0; j < numFrames[i]; ++j)
+      // Clear animation speed.
+      animationSpeed.clear();
+      
+      // Optional parameter to change the animation speeds.
+      ParserNode* animationSpeedNode = aNode->Find("AnimationSpeeds");
+      std::vector<float> singleSpeeds = animationSpeedNode->GetValue().ToFloatVector();
+      
+      for(unsigned i = 0; i < singleSpeeds.size(); ++i)
       {
-        animationSpeed[i].push_back(frameRate);
+        std::vector<float> speedVector;
+        for(int j = 0; j < numFrames[i]; ++j)
+        {
+          speedVector.push_back((frameBased) ? singleSpeeds[i] * frameRate : singleSpeeds[i]);
+        }
+        animationSpeed.push_back(speedVector);
       }
     }
+    else if(aNode->Find("AnimationSpeed"))
+    {
+      // Clear animation speed.
+      animationSpeed.clear();
+      
+      // Optional parameter to change the animation speed, using a single number.
+      ParserNode* animationSpeedNode = aNode->Find("AnimationSpeed");
+      for(int i = 0; i < numAnimations; ++i)
+      {
+        animationSpeed.push_back(std::vector<float>());
+        for(int j = 0; j < numFrames[i]; ++j)
+        {
+          float speed = animationSpeedNode->GetValue().ToFloat();
+          animationSpeed[i].push_back((frameBased) ? speed * frameRate : speed);
+        }
+      }
+    }
+    else if(animationSpeed.empty())
+    {
+      // Default to DT
+      for(int i = 0; i < numAnimations; ++i)
+      {
+        animationSpeed.push_back(std::vector<float>());
+        for(int j = 0; j < numFrames[i]; ++j)
+        {
+          animationSpeed[i].push_back(frameRate);
+        }
+      }
+    }
+    SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
   }
+  
+  // Rendering, color, etc.
   if(aNode->Find("NoRender"))
   {
     mNoRender = aNode->Find("NoRender")->GetValue().ToBool();
@@ -735,7 +823,6 @@ void Surface::Deserialize(ParserNode *aNode)
     }
   }
   
-  SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
   SetAnimated(animated);
   SetAnimation(startingAnimation);
   

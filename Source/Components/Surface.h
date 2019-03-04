@@ -128,6 +128,7 @@ public:
   // Texture Coordinates
   TextureCoordinates* GetTextureData() const;
   void                SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const &aNumFrames, std::vector<std::vector<float>> const &aAnimationSpeeds);
+  void                SetTextureCoordinateData(int const aNumColumns, int const aNumRows, std::vector<AnimationInfo*> const &aAnimations);
   void                SetAnimated(bool aAnimated);
   void                SetAnimation(int aAnimation, int aBehavior = TextureCoordinateBehavior::CONTINUOUS);
   void                SetCurrentFrame(int aFrame);

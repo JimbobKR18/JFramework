@@ -19,30 +19,50 @@ enum TextureCoordinateBehavior
   RETURN_TO_PREVIOUS
 };
 
-struct AnimationInfo
+struct AnimationPlayInfo
 {
   int mAnimation;
   TextureCoordinateBehavior mBehavior;
   
-  AnimationInfo() : mAnimation(0), mBehavior(TextureCoordinateBehavior::CONTINUOUS) {}
-  AnimationInfo(AnimationInfo const &aAnimationInfo) : mAnimation(aAnimationInfo.mAnimation), mBehavior(aAnimationInfo.mBehavior) {}
-  AnimationInfo(int aAnimation, TextureCoordinateBehavior const aBehavior) : 
+  AnimationPlayInfo() : mAnimation(0), mBehavior(TextureCoordinateBehavior::CONTINUOUS) {}
+  AnimationPlayInfo(AnimationPlayInfo const &aAnimationInfo) : mAnimation(aAnimationInfo.mAnimation), mBehavior(aAnimationInfo.mBehavior) {}
+  AnimationPlayInfo(int aAnimation, TextureCoordinateBehavior const aBehavior) : 
     mAnimation(aAnimation), mBehavior(aBehavior) {}
-  virtual ~AnimationInfo() {}
+  virtual ~AnimationPlayInfo() {}
+};
+
+struct AnimationInfo
+{
+  int mId;
+  float mSpeedModifier;
+  std::vector<float> mSpeeds;
+  std::vector<int> mFrames;
+  
+  AnimationInfo() : mId(0), mSpeedModifier(1), mSpeeds(), mFrames() {}
+  AnimationInfo(AnimationInfo const &aAnimationInfo) : mId(aAnimationInfo.mId), mSpeedModifier(aAnimationInfo.mSpeedModifier),
+    mSpeeds(aAnimationInfo.mSpeeds), mFrames(aAnimationInfo.mFrames) {}
+  AnimationInfo(int aId, float aSpeedModifier, std::vector<float> const &aSpeeds, std::vector<int> const &aFrames) : 
+    mId(aId), mSpeedModifier(aSpeedModifier), mSpeeds(aSpeeds), mFrames(aFrames) 
+  {
+    assert(mSpeeds.size() == mFrames.size());
+  }
+  virtual ~AnimationInfo() 
+  {
+    mSpeeds.clear();
+    mFrames.clear();
+  }
 };
 
 class TextureCoordinates
 {
 public:
-  typedef std::vector<float> SpeedContainer;
-  typedef SpeedContainer::const_iterator SpeedConstIT;
-  typedef std::list<AnimationInfo> AnimationInfoContainer;
-  typedef AnimationInfoContainer::const_iterator AnimationInfoConstIT;
+  typedef std::list<AnimationPlayInfo> AnimationPlayInfoContainer;
+  typedef AnimationPlayInfoContainer::const_iterator AnimationPlayInfoConstIT;
   
 private:
   int                         mCurFrame;
-  AnimationInfo               mCurAnimation;
-  AnimationInfoContainer      mPrevAnimations;
+  AnimationPlayInfo           mCurAnimation;
+  AnimationPlayInfoContainer  mPrevAnimations;
   int                         mTotalFrames;
   int                         mXSize;
   int                         mYSize;
@@ -56,18 +76,15 @@ private:
   bool                        mAnimated;
   bool                        mCompleted;
   
-  // <speeds>
-  std::vector<float>            mSpeedModifiers;
-  std::vector<SpeedContainer>   mSpeeds;
-  
-  // <numberofFrames>
-  std::vector<int>              mAnimations;
+  // <id, animation>
+  std::vector<AnimationInfo*> mAnimations;
   
 public:
   TextureCoordinates();
   TextureCoordinates(TextureCoordinates const &aTextureCoordinates);
   TextureCoordinates(int const aXSize, int const aYSize, int const aNumAnimations, 
                      std::vector<int> const &aNumFrames, std::vector<std::vector<float>> const &aAnimationSpeeds);
+  TextureCoordinates(int const aXSize, int const aYSize, int const aNumColumns, int const aNumRows, std::vector<AnimationInfo*> const &aAnimations);
   
   ~TextureCoordinates();
   
@@ -81,15 +98,17 @@ public:
   double GetBias(int const aIndex) const;
   float GetCurrentAnimationSpeed() const;
   int   GetCurrentAnimation() const;
-  AnimationInfoContainer GetPreviousAnimations() const;
+  AnimationPlayInfoContainer GetPreviousAnimations() const;
   int   GetNumberOfAnimations() const;
+  int   GetMaxFrames() const;
   int   GetTotalFrames() const;
   int   GetAnimationFrameCounts(int const aAnimation) const;
   std::vector<int> GetAllAnimationFrameCounts() const;
   int   GetCurrentFrame() const;
   float GetAnimationSpeed(int const aAnimation) const;
-  SpeedContainer const GetAnimationHolds(int const aAnimation) const;
-  std::vector<SpeedContainer> const GetAllAnimationHolds() const;
+  std::vector<float> const GetAnimationHolds(int const aAnimation) const;
+  std::vector<std::vector<float>> const GetAllAnimationHolds() const;
+  std::vector<AnimationInfo*> const GetAllAnimations() const;
   float GetTimeToFrame(int const aAnimation, int const aFrame) const;
   bool  GetCompleted() const;
   bool  GetAnimated() const;
@@ -111,6 +130,7 @@ public:
   
 private:
   void  FindPreviousAnimation();
+  void  SetFrames();
 };
 
 #endif /* defined(__JFramework__TextureCoordinates__) */
