@@ -23,6 +23,7 @@ float SystemProperties::mRefreshRate = 0;
 bool SystemProperties::mLockedFramerate = false;
 bool SystemProperties::m2DCollisionOnly = false;
 int SystemProperties::mPacketSize = 0;
+float SystemProperties::mDefaultVolume = 1.0f;
 
 SystemProperties::SystemProperties()
 {
@@ -213,6 +214,15 @@ int const SystemProperties::GetPacketSize()
 }
 
 /**
+ * @brief Get default volume.
+ * @return Default volume.
+ */
+float const SystemProperties::GetDefaultVolume()
+{
+  return mDefaultVolume;
+}
+
+/**
  * @brief Write out to file.
  */
 void SystemProperties::Serialize()
@@ -238,6 +248,7 @@ void SystemProperties::Serialize()
   outfile << "LockedFramerate = " << mLockedFramerate << std::endl;
   outfile << "2DCollisionOnly = " << m2DCollisionOnly << std::endl;
   outfile << "PacketSize = " << mPacketSize << std::endl;
+  outfile << "DefaultVolume = " << mDefaultVolume << std::endl;
   outfile.close();
 }
 
@@ -297,6 +308,8 @@ void SystemProperties::Deserialize()
       m2DCollisionOnly = Common::StringToBool(value);
     else if(key == "PacketSize")
       mPacketSize = Common::StringToInt(value);
+    else if(key == "DefaultVolume")
+      mDefaultVolume = Common::StringToFloat(value);
     else if(!key.empty())
     {
       DebugLogPrint("Invalid property %s found.\n", key.c_str());

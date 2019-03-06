@@ -29,6 +29,7 @@ SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundM
 #endif
 
   LoadSounds();
+  mSoundSystem->SetMasterVolume(SystemProperties::GetDefaultVolume());
 }
 
 SoundManager::~SoundManager()

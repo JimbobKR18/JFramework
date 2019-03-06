@@ -33,6 +33,7 @@ private:
   static bool mLockedFramerate;
   static bool m2DCollisionOnly;
   static int mPacketSize;
+  static float mDefaultVolume;
 
 public:
   SystemProperties();
@@ -59,6 +60,7 @@ public:
   static bool const GetLockedFramerate();
   static bool const Get2DCollisionOnly();
   static int const GetPacketSize();
+  static float const GetDefaultVolume();
   
   static void Serialize();
   static void Deserialize();
