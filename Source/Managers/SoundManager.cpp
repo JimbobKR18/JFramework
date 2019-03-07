@@ -1001,13 +1001,13 @@ void SoundManager::LoadSounds()
     SoundSystem::SoundSource source = SoundSystem::SoundSource::DEFAULT;
     
     HashString fileName = curBank->Find("File")->GetValue();
-    if(curBank->Find("Source") && curBank->Find("Source")->GetValue() == "Stream")
-      source = SoundSystem::SoundSource::STREAM;
-    else if(curBank->Find("Source") && curBank->Find("Source")->GetValue() == "Nonblocking")
+    if(curBank->Find("Source") && curBank->Find("Source")->GetValue() == "Nonblocking")
       source = SoundSystem::SoundSource::NONBLOCKING;
     else if(curBank->Find("Source") && curBank->Find("Source")->GetValue() == "Decompress")
       source = SoundSystem::SoundSource::DECOMPRESS;
     LoadSoundBank(fileName, source);
+    ++index;
+    curIndex = bankStr + Common::IntToString(index);
   }
   
   // Aliases
@@ -1019,6 +1019,8 @@ void SoundManager::LoadSounds()
     HashString key = curAlias->Find("Alias")->GetValue();
     HashString value = curAlias->Find("Filename")->GetValue();
     mAliases[key.ToHash()] = value;
+    ++index;
+    curIndex = aliasStr + Common::IntToString(index);
   }
   
   // Sound aliasing

@@ -86,7 +86,7 @@ void FMODStudioSoundSystem::LoadSoundBank(HashString const& aFilename, SoundSour
   if(result != FMOD_OK)
   {
     DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
-    assert(!"FMOD failed to create sound.");
+    assert(!"FMOD failed to load bank.");
   }
   
   mBanks[aFilename.ToHash()] = bank;
@@ -119,7 +119,12 @@ void FMODStudioSoundSystem::CreateSound(HashString const& aFilename, float const
   if(mEventDescriptions.find(key) == mEventDescriptions.end())
   {
     FMOD::Studio::EventDescription* description = nullptr;
-    mFMODStudioSystem->getEvent(aFilename.ToCharArray(), &description);
+    FMOD_RESULT result = mFMODStudioSystem->getEvent(aFilename.ToCharArray(), &description);
+    if(result != FMOD_OK)
+    {
+      DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+      assert(!"FMOD failed to create sound.");
+    }
     mEventDescriptions[key] = description;
   }
 }
@@ -153,14 +158,25 @@ int FMODStudioSoundSystem::PlaySound(HashString const& aName, int const aNumLoop
   if(mEventDescriptions.find(key) == mEventDescriptions.end())
   {
     FMOD::Studio::EventDescription* description = nullptr;
-    mFMODStudioSystem->getEvent(aName.ToCharArray(), &description);
+    FMOD_RESULT result = mFMODStudioSystem->getEvent(aName.ToCharArray(), &description);
+    if(result != FMOD_OK)
+    {
+      DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+      assert(!"FMOD failed to create sound.");
+    }
     mEventDescriptions[key] = description;
   }
   
   int index = mCurrentSound++;
   FMOD::Studio::EventInstance* instance = nullptr;
-  mEventDescriptions[key]->createInstance(&instance);
+  FMOD_RESULT result = mEventDescriptions[key]->createInstance(&instance);
+  if(result != FMOD_OK)
+  {
+    DebugLogPrint("FMOD error: (%d) %s\n", result, FMOD_ErrorString(result));
+    assert(!"FMOD failed to play sound.");
+  }
   mEventInstances[index] = instance;
+  instance->start();
   
   if(aNumLoops == 0)
   {
