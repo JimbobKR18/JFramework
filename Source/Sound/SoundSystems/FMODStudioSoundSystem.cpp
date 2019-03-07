@@ -324,6 +324,7 @@ void FMODStudioSoundSystem::FadeChannel(int const aChannel, int const aTime, flo
     return;
   }
   
+  // TODO this will stop a sound.
   mEventInstances[aChannel]->stop(FMOD_STUDIO_STOP_ALLOWFADEOUT);
 }
 
@@ -596,6 +597,7 @@ void FMODStudioSoundSystem::FadeChannelGroup(HashString const &aGroupName, int c
       continue;
     }
     
+    // TODO this will stop a sound.
     mEventInstances[*it]->stop(FMOD_STUDIO_STOP_ALLOWFADEOUT);
   }
 }
