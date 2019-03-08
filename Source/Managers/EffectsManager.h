@@ -29,9 +29,11 @@ public:
   // METHODS
   Effect* CreateEffect(HashString const &aType);
   void AddEffect(Effect* aEffect);
+  void RemoveEffect(Effect* aEffect);
   void RemoveEffect(HashString const &aName);
   void RemoveMatchingEffects(HashString const &aName);
   void RemoveEffectsForObject(GameObject *aObject);
+  void RemoveEffectsForObject(GameObject *aObject, HashString const &aName);
   Effect *GetEffect(HashString const &aName);
 
   bool Empty();

@@ -53,6 +53,25 @@ void EffectsManager::AddEffect(Effect* aEffect)
 
 /**
  * @brief Remove effect, completes effect before deletion
+ * @param aEffect Effect to delete
+ */
+void EffectsManager::RemoveEffect(Effect* aEffect)
+{
+  EffectIT end = mEffects.end();
+  for(EffectIT it = mEffects.begin(); it != end; ++it)
+  {
+    if(*it == aEffect)
+    {
+      (*it)->Complete();
+      delete *it;
+      it = mEffects.erase(it);
+      break;
+    }
+  }
+}
+
+/**
+ * @brief Remove effect, completes effect before deletion
  * @param aName Name of effect to delete
  */
 void EffectsManager::RemoveEffect(HashString const &aName)
@@ -101,6 +120,29 @@ void EffectsManager::RemoveEffectsForObject(GameObject *aObject)
   for(EffectIT it = mEffects.begin(); it != mEffects.end();)
   {
     if((*it)->GetObject() == aObject)
+    {
+      Effect *effect = *it;
+      it = mEffects.erase(it);
+      effect->Complete();
+      delete effect;
+    }
+    else
+    {
+      ++it;
+    }
+  }
+}
+
+/**
+ * @brief Remove all effects with object, completes effects before deletion
+ * @param aObject Object to remove
+ * @param aName Name to remove
+ */
+void EffectsManager::RemoveEffectsForObject(GameObject *aObject, HashString const &aName)
+{
+  for(EffectIT it = mEffects.begin(); it != mEffects.end();)
+  {
+    if((*it)->GetObject() == aObject && (*it)->GetName() == aName)
     {
       Effect *effect = *it;
       it = mEffects.erase(it);
