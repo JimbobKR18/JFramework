@@ -729,7 +729,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     SetShaderProperties(surface, false);
 
     // Reset to default texture
-    glBindTexture(GL_TEXTURE_2D, 0);
+    /*glBindTexture(GL_TEXTURE_2D, 0);
     GL_ERROR_CHECK();
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     GL_ERROR_CHECK();
@@ -738,7 +738,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     glUseProgram(0);
     GL_ERROR_CHECK();
     glBindVertexArray(0);
-    GL_ERROR_CHECK();
+    GL_ERROR_CHECK();*/
     
     vertexData.clear();
     textureData.clear();

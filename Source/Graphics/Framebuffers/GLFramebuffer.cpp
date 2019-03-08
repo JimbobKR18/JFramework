@@ -247,7 +247,7 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   DisableVertexAttribArray(posCoordPosLocation);
   DisableVertexAttribArray(texCoordPosLocation);
   SetShaderProperties(false);
-  glBindTexture(GL_TEXTURE_2D, 0);
+  /*glBindTexture(GL_TEXTURE_2D, 0);
   GL_ERROR_CHECK();
   glUseProgram(0);
   GL_ERROR_CHECK();
@@ -256,7 +256,7 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   GL_ERROR_CHECK();
   glBindVertexArray(0);
-  GL_ERROR_CHECK();
+  GL_ERROR_CHECK();*/
 }
 
 /**
