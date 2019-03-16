@@ -576,6 +576,7 @@ void Transform::CalculateHierarchy()
   mHierarchicalScale = mScale;
   mHierarchicalRotation = mRotation;
   
+  // Inheritance.
   GameObject *owner = GetOwner();
   if(mInheritInfo != INHERIT_NONE && owner && owner->GetParent())
   {
@@ -591,6 +592,15 @@ void Transform::CalculateHierarchy()
       mHierarchicalScale = parentTransform->GetHierarchicalScale().Multiply(mScale);
     if((mInheritInfo & INHERIT_ROTATION) != 0)
       mHierarchicalRotation = parentTransform->GetHierarchicalRotation() * mRotation;
+  }
+  
+  // Cascade calculations down the chain.
+  GameObject::GameObjectContainer children = owner->GetChildren();
+  GameObject::GameObjectIT end = children.end();
+  for(GameObject::GameObjectIT it = children.begin(); it != end; ++it)
+  {
+    GameObject *child = it->second;
+    child->GET<Transform>()->CalculateHierarchy();
   }
 }
 
