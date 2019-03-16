@@ -522,6 +522,9 @@ void Surface::Deserialize(ParserNode *aNode)
     
     int numRows = animationNode->Find("Rows")->GetValue().ToInt();
     int numColumns = animationNode->Find("Columns")->GetValue().ToInt();
+    bool isAnimated = aNode->Find("Animated")->GetValue().ToBool();
+    if(isAnimated)
+      animated = true;
     while(animationNode->Find(curIndex))
     {
       ParserNode *currentAnimation = animationNode->Find(curIndex);
