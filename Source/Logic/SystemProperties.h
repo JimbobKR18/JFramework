@@ -34,6 +34,7 @@ private:
   static bool m2DCollisionOnly;
   static int mPacketSize;
   static float mDefaultVolume;
+  static HashString mWorkingDirectory;
 
 public:
   SystemProperties();

@@ -1,6 +1,10 @@
 #include "SystemProperties.h"
 #include "LUATypes.h"
 
+#ifdef __APPLE__
+#include "CoreFoundation/CoreFoundation.h"
+#endif
+
 /* This class is meant to be read in from a file in the same location as
  * the executable. */
 HashString SystemProperties::mAssetsDirectory = HashString();
@@ -24,6 +28,7 @@ bool SystemProperties::mLockedFramerate = false;
 bool SystemProperties::m2DCollisionOnly = false;
 int SystemProperties::mPacketSize = 0;
 float SystemProperties::mDefaultVolume = 1.0f;
+HashString SystemProperties::mWorkingDirectory = HashString();
 
 SystemProperties::SystemProperties()
 {
@@ -227,7 +232,7 @@ float const SystemProperties::GetDefaultVolume()
  */
 void SystemProperties::Serialize()
 {
-  std::ofstream outfile("./SystemProperties.ini");
+  std::ofstream outfile((mWorkingDirectory + "/SystemProperties.ini").ToCharArray());
   outfile << "AssetsDirectory = " << mAssetsDirectory << std::endl;
   outfile << "DefaultVertexShaderFileName = " << mDefaultVertexShaderName << std::endl;
   outfile << "DefaultFragmentShaderFileName = " << mDefaultFragmentShaderName << std::endl;
@@ -238,7 +243,7 @@ void SystemProperties::Serialize()
   outfile << "WrapModeS = " << mWrapModeS << std::endl;
   outfile << "WrapModeT = " << mWrapModeT << std::endl;
   outfile << "SoundEngine = " << mSoundEngine << std::endl;
-  outfile << "FullScreen = " << mFullscreen << std::endl;
+  outfile << "FullScreen = " << Common::BoolToString(mFullscreen) << std::endl;
   outfile << "GameTitle = " << mGameTitle << std::endl;
   outfile << "ScreenWidth = " << mScreenWidth << std::endl;
   outfile << "ScreenHeight = " << mScreenHeight << std::endl;
@@ -257,7 +262,21 @@ void SystemProperties::Serialize()
  */
 void SystemProperties::Deserialize()
 {
-  std::ifstream infile("./SystemProperties.ini");
+#ifdef __APPLE__
+  CFBundleRef mainBundle = CFBundleGetMainBundle();
+  CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+  char path[PATH_MAX];
+  if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX))
+    assert(!"OSX resource directory not found.");
+  CFRelease(resourcesURL);
+  
+  chdir(path);
+  mWorkingDirectory = path;
+#else
+  mWorkingDirectory = ".";
+#endif
+  
+  std::ifstream infile((mWorkingDirectory + "/SystemProperties.ini").ToCharArray());
   if(!infile.good())
     assert(!"No system property file found, please place one in same directory as executable.");
     
