@@ -237,6 +237,15 @@ void SystemProperties::SetFullScreen(bool aFullscreen)
 }
 
 /**
+ * @brief Set default volume.
+ * @param aDefaultVolume Default volume. (0 - 1)
+ */
+void SystemProperties::SetDefaultVolume(float const aDefaultVolume)
+{
+  mDefaultVolume = aDefaultVolume;
+}
+
+/**
  * @brief Write out to file.
  */
 void SystemProperties::Serialize()

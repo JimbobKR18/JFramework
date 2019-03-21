@@ -63,7 +63,8 @@ public:
   static int const GetPacketSize();
   static float const GetDefaultVolume();
   
-  static void SetFullScreen(bool aFullscreen);
+  static void SetFullScreen(bool const aFullscreen);
+  static void SetDefaultVolume(float const aDefaultVolume);
   
   static void Serialize();
   static void Deserialize();
