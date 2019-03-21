@@ -63,6 +63,8 @@ public:
   static int const GetPacketSize();
   static float const GetDefaultVolume();
   
+  static void SetFullScreen(bool aFullscreen);
+  
   static void Serialize();
   static void Deserialize();
   static void SerializeLUA();

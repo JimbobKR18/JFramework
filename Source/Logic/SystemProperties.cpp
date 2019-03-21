@@ -228,6 +228,15 @@ float const SystemProperties::GetDefaultVolume()
 }
 
 /**
+ * @brief Set fullscreen status.
+ * @param aFullscreen Fullscreen status.
+ */
+void SystemProperties::SetFullScreen(bool aFullscreen)
+{
+  mFullscreen = aFullscreen;
+}
+
+/**
  * @brief Write out to file.
  */
 void SystemProperties::Serialize()
@@ -242,7 +251,7 @@ void SystemProperties::Serialize()
   outfile << "MinFilter = " << mMinFilter << std::endl;
   outfile << "WrapModeS = " << mWrapModeS << std::endl;
   outfile << "WrapModeT = " << mWrapModeT << std::endl;
-  outfile << "SoundEngine = " << mSoundEngine << std::endl;
+  outfile << "SoundEngine = " << (mSoundEngine.Empty() ? "DONT_CARE" : mSoundEngine)<< std::endl;
   outfile << "FullScreen = " << Common::BoolToString(mFullscreen) << std::endl;
   outfile << "GameTitle = " << mGameTitle << std::endl;
   outfile << "ScreenWidth = " << mScreenWidth << std::endl;
