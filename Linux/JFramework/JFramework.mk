@@ -5,7 +5,7 @@
 ## Release
 ProjectName            :=JFramework
 ConfigurationName      :=Release
-WorkspacePath          :=/home/jimmy/Documents/project-chang-e/Linux/Chang-e
+WorkspacePath          :=/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth
 ProjectPath            :=/home/jimmy/Documents/JFramework/Linux/JFramework
 IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jimmy Spencer
-Date                   :=03/03/19
+Date                   :=20/03/19
 CodeLitePath           :=/home/jimmy/.codelite
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -88,8 +88,8 @@ $(OutputFile): $(Objects)
 	@echo $(Objects0)  > $(ObjectsFileList)
 	@echo $(Objects1) >> $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList) $(ArLibs)
-	@$(MakeDirCommand) "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release"
-	@echo rebuilt > "/home/jimmy/Documents/project-chang-e/Linux/Chang-e/.build-release/JFramework"
+	@$(MakeDirCommand) "/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth/.build-release"
+	@echo rebuilt > "/home/jimmy/Documents/ZombieStealth/Linux/ZombieStealth/.build-release/JFramework"
 
 MakeIntermediateDirs:
 	@test -d ./Release || $(MakeDirCommand) ./Release

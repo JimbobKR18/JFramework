@@ -47,6 +47,7 @@ public:
   HashString SubString(int aStart, int aLength) const;
   HashString Trim() const;
   std::vector<HashString> Split(HashString const &aDelimiter) const;
+  HashString Replace(HashString const &aDelimiter, HashString const &aReplacement);
 
   // Non-Const Operations
   void Reverse();

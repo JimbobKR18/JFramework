@@ -193,6 +193,25 @@ std::vector<HashString> HashString::Split(HashString const &aDelimiter) const
   return ret;
 }
 
+/**
+ * @brief Replace delimiter with a different string
+ * @param aDelimiter String to replace
+ * @param aReplacement Replacement string
+ * @return String with replaced contents
+ */
+HashString HashString::Replace(HashString const &aDelimiter, HashString const &aReplacement)
+{
+  std::vector<HashString> split = Split(aDelimiter);
+  HashString ret;
+  for(int i = 0; i < split.size(); ++i)
+  {
+    ret += split[i];
+    if(i != split.size() - 1)
+      ret += aReplacement;
+  }
+  return ret;
+}
+
 // Non-Const Operations
 /**
  * @brief Reverse the string.
