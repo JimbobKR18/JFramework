@@ -84,7 +84,7 @@ void PCShaderSurface::LoadText(HashString const &aText)
   Vector3 size;
   if(data->mTextureID != (unsigned)-1)
   {
-    size = Vector3(data->mWidth, data->mHeight, 0);
+    size = Vector3(data->mWidth / 2.0f, data->mHeight / 2.0f, 0);
     mTextureID = data->mTextureID;
     SetTextureSize(size);
   }
@@ -94,7 +94,7 @@ void PCShaderSurface::LoadText(HashString const &aText)
       GetColor(), GetSecondaryColor(), GetFontSize(), GetMaxTextWidth());
     if(textureData)
     {
-      size = Vector3(textureData->mWidth, textureData->mHeight, 0);
+      size = Vector3(textureData->mWidth / 2.0f, textureData->mHeight / 2.0f, 0);
       SetTextureSize(size);
       GetManager()->AddTexturePairing(textureData->mTextureName, textureData);
       mTextureID = textureData->mTextureID;
