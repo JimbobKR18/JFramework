@@ -633,6 +633,7 @@ void Surface::Deserialize(ParserNode *aNode)
         ++index;
         curIndex = nodeName + Common::IntToString(index);
       }
+      SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
     }
     else if(aNode->Find("AnimationSpeeds"))
     {
@@ -652,6 +653,7 @@ void Surface::Deserialize(ParserNode *aNode)
         }
         animationSpeed.push_back(speedVector);
       }
+      SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
     }
     else if(aNode->Find("AnimationSpeed"))
     {
@@ -669,6 +671,7 @@ void Surface::Deserialize(ParserNode *aNode)
           animationSpeed[i].push_back((frameBased) ? speed * frameRate : speed);
         }
       }
+      SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
     }
     else if(animationSpeed.empty())
     {
@@ -681,8 +684,11 @@ void Surface::Deserialize(ParserNode *aNode)
           animationSpeed[i].push_back(frameRate);
         }
       }
+      SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
     }
-    SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
+    
+    // Used to be here, but removed since we may not need to set texture data.
+    // SetTextureCoordinateData(numAnimations, numFrames, animationSpeed);
   }
   
   // Rendering, color, etc.
