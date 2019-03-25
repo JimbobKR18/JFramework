@@ -7,6 +7,7 @@
 
 /* This class is meant to be read in from a file in the same location as
  * the executable. */
+HashString SystemProperties::mOriginalAssetsDirectory = HashString();
 HashString SystemProperties::mAssetsDirectory = HashString();
 HashString SystemProperties::mDefaultVertexShaderName = HashString();
 HashString SystemProperties::mDefaultFragmentShaderName = HashString();
@@ -251,7 +252,7 @@ void SystemProperties::SetDefaultVolume(float const aDefaultVolume)
 void SystemProperties::Serialize()
 {
   std::ofstream outfile((mWorkingDirectory + "/SystemProperties.ini").ToCharArray());
-  outfile << "AssetsDirectory = " << mAssetsDirectory << std::endl;
+  outfile << "AssetsDirectory = " << mOriginalAssetsDirectory << std::endl;
   outfile << "DefaultVertexShaderFileName = " << mDefaultVertexShaderName << std::endl;
   outfile << "DefaultFragmentShaderFileName = " << mDefaultFragmentShaderName << std::endl;
   outfile << "FramebufferVertexShaderFileName = " << mFramebufferVertexShaderName << std::endl;
@@ -306,7 +307,18 @@ void SystemProperties::Deserialize()
     infile >> value;
     
     if(key == "AssetsDirectory")
+    {
+      mOriginalAssetsDirectory = value;
       mAssetsDirectory = value;
+      
+      HashString workingDirectory = "%w";
+      if(mAssetsDirectory.StartsWith(workingDirectory.ToCharArray()))
+      {
+        mAssetsDirectory = mAssetsDirectory.SubString(workingDirectory.Length(),
+                                                      mAssetsDirectory.Length() - workingDirectory.Length());
+        mAssetsDirectory = mWorkingDirectory + mAssetsDirectory;
+      }
+    }
     else if(key == "DefaultVertexShaderFileName")
       mDefaultVertexShaderName = value;
     else if(key == "DefaultFragmentShaderFileName")

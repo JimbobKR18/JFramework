@@ -13,6 +13,7 @@
 class SystemProperties
 {
 private:
+  static HashString mOriginalAssetsDirectory;
   static HashString mAssetsDirectory;
   static HashString mDefaultVertexShaderName;
   static HashString mDefaultFragmentShaderName;
