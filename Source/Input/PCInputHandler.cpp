@@ -17,14 +17,6 @@ void PCInputHandler::Update()
 {
   for(std::unordered_map<int, DeviceInfo*>::iterator it = mDevices.begin(); it != mDevices.end(); ++it)
   {
-    DeviceInfo *info = it->second;
-    SDL_GameController* gameController = mGameControllers[info->GetId()];
-    /*info->SetAxis(0, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_LEFTX));
-    info->SetAxis(1, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_LEFTY));
-    info->SetAxis(2, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_RIGHTX));
-    info->SetAxis(3, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_RIGHTY));
-    info->SetAxis(4, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_TRIGGERLEFT));
-    info->SetAxis(5, SDL_GameControllerGetAxis(gameController, SDL_CONTROLLER_AXIS_TRIGGERRIGHT));*/
   }
 }
 
@@ -34,10 +26,26 @@ void PCInputHandler::Update()
  */
 void PCInputHandler::DeviceAdd(int const aId)
 {
+  JoypadController *joyPad = new JoypadController();
   SDL_GameController* gameController = SDL_GameControllerOpen(aId);
   HashString stickName = SDL_GameControllerName(gameController);
-  mDevices[aId] = new DeviceInfo(aId, stickName);
-  mGameControllers[aId] = gameController;
+  SDL_Joystick *j = SDL_GameControllerGetJoystick(gameController);
+  
+  joyPad->mController = gameController;
+  joyPad->mInstanceId = SDL_JoystickInstanceID(j);
+  
+  // Get next available id.
+  int nextId = 0;
+  std::set<int> orderedControllerIds;
+  for(std::unordered_map<int, DeviceInfo*>::iterator it = mDevices.begin(); it != mDevices.end(); ++it)
+  {
+    orderedControllerIds.insert(it->second->GetId());
+  }
+  while(orderedControllerIds.find(nextId) != orderedControllerIds.end())
+    ++nextId;
+  
+  mDevices[joyPad->mInstanceId] = new DeviceInfo(nextId, stickName);
+  mGameControllers[joyPad->mInstanceId] = joyPad;
 }
 
 /**
@@ -48,7 +56,8 @@ void PCInputHandler::DeviceRemove(int const aId)
 {
   delete mDevices[aId];
   mDevices.erase(aId);
-  SDL_GameControllerClose(mGameControllers[aId]);
+  SDL_GameControllerClose(mGameControllers[aId]->mController);
+  delete mGameControllers[aId];
   mGameControllers.erase(aId);
 }
 
@@ -68,11 +77,11 @@ int PCInputHandler::GetInputCount()
  */
 SDL_GameController* PCInputHandler::GetGameController(int const index) const
 {
-  std::unordered_map<int, SDL_GameController*>::const_iterator instance = mGameControllers.find(index);
+  std::unordered_map<int, JoypadController*>::const_iterator instance = mGameControllers.find(index);
   if(instance == mGameControllers.end())
   {
     return nullptr;
   }
   
-  return instance->second;
+  return instance->second->mController;
 }

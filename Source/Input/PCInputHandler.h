@@ -10,10 +10,23 @@
   #include <SDL2/SDL.h>
 #endif
 
+struct JoypadController
+{
+  SDL_GameController* mController;
+  SDL_JoystickID mInstanceId;
+  
+  JoypadController() : mController(nullptr), mInstanceId(-1)
+  {
+  }
+  virtual ~JoypadController()
+  {
+  }
+};
+
 class PCInputHandler : public InputHandler
 {
 private:
-  std::unordered_map<int, SDL_GameController*> mGameControllers;
+  std::unordered_map<int, JoypadController*> mGameControllers;
   
 public:
   PCInputHandler();
