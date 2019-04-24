@@ -8,7 +8,7 @@ class ZRenderSorter : public ScreenRenderSorter
 public:
   ZRenderSorter();
   virtual ~ZRenderSorter();
-  virtual void SortPredicate(std::vector<Surface*> &aSurfaces);
+  virtual void SortPredicate(std::vector<Renderable*> &aRenderables);
 };
 
 #endif // ZRENDERSORTER_H

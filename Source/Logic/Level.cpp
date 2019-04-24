@@ -1049,13 +1049,13 @@ void Level::LoadObject(GameObject *aObject, ObjectPlacement const aPlacement)
   mOwner->GetOwningApp()->GET<ObjectManager>()->AddObject(aObject, (aPlacement == ObjectPlacement::STATIC) ? true : false);
   if(aObject->GET<PhysicsObject>())
     mOwner->GetOwningApp()->GET<PhysicsWorld>()->AddObject(aObject->GET<PhysicsObject>());
-  if(aObject->GET<Surface>())
+  if(aObject->GET<Renderable>())
   {
-    Surface *surface = aObject->GET<Surface>();
-    if(surface->GetUIElement())
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddUISurface(aObject->GET<Surface>());
+    Renderable *renderable = aObject->GET<Renderable>();
+    if(renderable->GetUIElement())
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddUIRenderable(aObject->GET<Renderable>());
     else
-      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddSurface(aObject->GET<Surface>());
+      mOwner->GetOwningApp()->GET<GraphicsManager>()->AddRenderable(aObject->GET<Renderable>());
   }
   if(aObject->GET<Controller>())
     mOwner->GetOwningApp()->GET<ControllerManager>()->AddController(aObject->GET<Controller>());
@@ -1080,8 +1080,8 @@ void Level::UnloadObject(GameObject *aObject)
   mOwner->GetOwningApp()->GET<ObjectManager>()->RemoveObject(aObject);
   if(aObject->GET<PhysicsObject>())
     mOwner->GetOwningApp()->GET<PhysicsWorld>()->RemoveObject(aObject->GET<PhysicsObject>());
-  if(aObject->GET<Surface>())
-    mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveSurface(aObject->GET<Surface>());
+  if(aObject->GET<Renderable>())
+    mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveRenderable(aObject->GET<Renderable>());
   if(aObject->GET<Controller>())
     mOwner->GetOwningApp()->GET<ControllerManager>()->RemoveController(aObject->GET<Controller>());
   if(aObject->GET<ChemistryMaterial>())

@@ -4,7 +4,7 @@
 #include "Common.h"
 #include "MathExt.h"
 #include "Component.h"
-#include "Framebuffer.h"
+#include "Pipeline.h"
 
 class GraphicsManager;
 
@@ -15,9 +15,8 @@ private:
   Vector3 mOffset;
   bool mPrimary;
   GraphicsManager *mManager;
-  Framebuffer *mFramebuffer;
-  HashString mMinFilter;
-  HashString mMagFilter;
+  FrameLayerContainer mFramebuffers;
+  HashString mPipelineName;
 
   static int const  sUID;
   
@@ -34,7 +33,10 @@ public:
   void SetOffset(Vector3 const &aOffset);
   bool GetPrimary() const;
   void SetPrimary(bool aPrimary);
-  Framebuffer* GetFramebuffer();
+  Framebuffer* GetFramebuffer(int const aLayer);
+  FrameLayerContainer const &GetFramebuffers() const;
+  HashString GetPipelineName() const;
+  void SetPipelineName(HashString const &aPipelineName);
   
   // Virtuals derived from Component
   virtual void Update();

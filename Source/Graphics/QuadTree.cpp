@@ -12,9 +12,9 @@ QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 c
 {
 }
 
-QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 const &aMaxRange, std::unordered_set<Surface*> aSurfaces) : Tree(aMinRange, aMaxRange), mCapacity(aCapacity), mNorthWest(nullptr), mNorthEast(nullptr), mSouthWest(nullptr), mSouthEast(nullptr)
+QuadTree::QuadTree(unsigned const aCapacity, Vector3 const &aMinRange, Vector3 const &aMaxRange, std::unordered_set<Renderable*> aRenderables) : Tree(aMinRange, aMaxRange), mCapacity(aCapacity), mNorthWest(nullptr), mNorthEast(nullptr), mSouthWest(nullptr), mSouthEast(nullptr)
 {
-  for(std::unordered_set<Surface*>::iterator it = aSurfaces.begin(); it != aSurfaces.end(); ++it)
+  for(std::unordered_set<Renderable*>::iterator it = aRenderables.begin(); it != aRenderables.end(); ++it)
   {
     Insert(*it);
   }
@@ -54,9 +54,9 @@ void QuadTree::Resize(Vector3 const &aMinRange, Vector3 const &aMaxRange)
 {
   mMinRange = aMinRange;
   mMaxRange = aMaxRange;
-  std::unordered_set<Surface*> allObjects = GetAllObjects();
+  std::unordered_set<Renderable*> allObjects = GetAllObjects();
   Clear();
-  for(std::unordered_set<Surface*>::iterator it = allObjects.begin(); it != allObjects.end(); ++it)
+  for(std::unordered_set<Renderable*>::iterator it = allObjects.begin(); it != allObjects.end(); ++it)
   {
     Insert(*it);
   }
@@ -75,7 +75,7 @@ void QuadTree::Split()
   mSouthWest = new QuadTree(mCapacity, midpoint - Vector3(size.x, 0, 0), midpoint + Vector3(0, size.y, 0));
   mSouthEast = new QuadTree(mCapacity, midpoint, mMaxRange);
   
-  for(std::unordered_set<Surface*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+  for(std::unordered_set<Renderable*>::iterator it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     bool result = mNorthWest->Insert(*it);
     if(!result)
@@ -92,30 +92,30 @@ void QuadTree::Split()
 
 /**
  * @brief Insert object into QuadTree.
- * @param aSurface Object to add.
+ * @param aRenderable Object to add.
  * @return True if inserted.
  */
-bool QuadTree::Insert(Surface *aSurface)
+bool QuadTree::Insert(Renderable *aRenderable)
 {
-  if(!ObjectInRange(aSurface))
+  if(!ObjectInRange(aRenderable))
     return false;
     
   if(mObjects.size() < mCapacity && !mNorthWest)
   {
-    mObjects.insert(aSurface);
+    mObjects.insert(aRenderable);
     return true;
   }
     
   if(!mNorthWest)
     Split();
   
-  if(mNorthWest->Insert(aSurface)) 
+  if(mNorthWest->Insert(aRenderable)) 
     return true;
-  if(mNorthEast->Insert(aSurface)) 
+  if(mNorthEast->Insert(aRenderable)) 
     return true;
-  if(mSouthWest->Insert(aSurface)) 
+  if(mSouthWest->Insert(aRenderable)) 
     return true;
-  if(mSouthEast->Insert(aSurface)) 
+  if(mSouthEast->Insert(aRenderable)) 
     return true;
     
   return false;
@@ -123,27 +123,27 @@ bool QuadTree::Insert(Surface *aSurface)
 
 /**
  * @brief Remove object from QuadTree.
- * @param aSurface Object to remove.
+ * @param aRenderable Object to remove.
  * @return True if removed.
  */
-bool QuadTree::Remove(Surface *aSurface)
+bool QuadTree::Remove(Renderable *aRenderable)
 {
-  if(mObjects.find(aSurface) != mObjects.end() && !mNorthWest)
+  if(mObjects.find(aRenderable) != mObjects.end() && !mNorthWest)
   {
-    mObjects.erase(aSurface);
+    mObjects.erase(aRenderable);
     return true;
   }
   
   if(!mNorthWest)
     return false;
     
-  if(mNorthWest->Remove(aSurface)) 
+  if(mNorthWest->Remove(aRenderable)) 
     return true;
-  if(mNorthEast->Remove(aSurface)) 
+  if(mNorthEast->Remove(aRenderable)) 
     return true;
-  if(mSouthWest->Remove(aSurface)) 
+  if(mSouthWest->Remove(aRenderable)) 
     return true;
-  if(mSouthEast->Remove(aSurface)) 
+  if(mSouthEast->Remove(aRenderable)) 
     return true;
     
   return false;
@@ -153,13 +153,13 @@ bool QuadTree::Remove(Surface *aSurface)
  * @brief Get all objects inside of QuadTree and children.
  * @return All objects.
  */
-std::unordered_set<Surface*> QuadTree::GetAllObjects() const
+std::unordered_set<Renderable*> QuadTree::GetAllObjects() const
 {
-  std::unordered_set<Surface*> allObjects = mObjects;
+  std::unordered_set<Renderable*> allObjects = mObjects;
   if(!mNorthWest)
     return allObjects;
     
-  std::unordered_set<Surface*> objects = mNorthWest->GetAllObjects();
+  std::unordered_set<Renderable*> objects = mNorthWest->GetAllObjects();
   allObjects.insert(objects.begin(), objects.end());
   
   objects = mNorthEast->GetAllObjects();
@@ -180,13 +180,13 @@ std::unordered_set<Surface*> QuadTree::GetAllObjects() const
  * @param aMax Maximum value.
  * @return Objects in range.
  */
-std::unordered_set<Surface*> QuadTree::Query(Vector3 const &aMin, Vector3 const &aMax)
+std::unordered_set<Renderable*> QuadTree::Query(Vector3 const &aMin, Vector3 const &aMax)
 {
-  std::unordered_set<Surface*> ret;
+  std::unordered_set<Renderable*> ret;
   if(!SectionInRange(aMin, aMax))
     return ret;
     
-  for(std::unordered_set<Surface*>::const_iterator it = mObjects.begin(); it != mObjects.end(); ++it)
+  for(std::unordered_set<Renderable*>::const_iterator it = mObjects.begin(); it != mObjects.end(); ++it)
   {
     if(ObjectInRange(*it))
       ret.insert(*it);
@@ -195,15 +195,15 @@ std::unordered_set<Surface*> QuadTree::Query(Vector3 const &aMin, Vector3 const 
   if(!mNorthWest)
     return ret;
   
-  //Future(std::unordered_set<Surface*>) nwTemp = ASync(&QuadTree::Query, mNorthWest, aMin, aMax);
-  //Future(std::unordered_set<Surface*>) neTemp = ASync(&QuadTree::Query, mNorthEast, aMin, aMax);
-  //Future(std::unordered_set<Surface*>) swTemp = ASync(&QuadTree::Query, mSouthWest, aMin, aMax);
-  //Future(std::unordered_set<Surface*>) seTemp = ASync(&QuadTree::Query, mSouthEast, aMin, aMax);
+  //Future(std::unordered_set<Renderable*>) nwTemp = ASync(&QuadTree::Query, mNorthWest, aMin, aMax);
+  //Future(std::unordered_set<Renderable*>) neTemp = ASync(&QuadTree::Query, mNorthEast, aMin, aMax);
+  //Future(std::unordered_set<Renderable*>) swTemp = ASync(&QuadTree::Query, mSouthWest, aMin, aMax);
+  //Future(std::unordered_set<Renderable*>) seTemp = ASync(&QuadTree::Query, mSouthEast, aMin, aMax);
   
-  std::unordered_set<Surface*> const &nwResults = mNorthWest->Query(aMin, aMax);//nwTemp.get();
-  std::unordered_set<Surface*> const &neResults = mNorthEast->Query(aMin, aMax);//neTemp.get();
-  std::unordered_set<Surface*> const &swResults = mSouthWest->Query(aMin, aMax);//swTemp.get();
-  std::unordered_set<Surface*> const &seResults = mSouthEast->Query(aMin, aMax);//seTemp.get();
+  std::unordered_set<Renderable*> const &nwResults = mNorthWest->Query(aMin, aMax);//nwTemp.get();
+  std::unordered_set<Renderable*> const &neResults = mNorthEast->Query(aMin, aMax);//neTemp.get();
+  std::unordered_set<Renderable*> const &swResults = mSouthWest->Query(aMin, aMax);//swTemp.get();
+  std::unordered_set<Renderable*> const &seResults = mSouthEast->Query(aMin, aMax);//seTemp.get();
 
   ret.insert(nwResults.begin(), nwResults.end());
   ret.insert(neResults.begin(), neResults.end());
@@ -216,12 +216,12 @@ std::unordered_set<Surface*> QuadTree::Query(Vector3 const &aMin, Vector3 const 
 
 /**
  * @brief Find out if an object is in the range specified.
- * @param aSurface Object in question.
+ * @param aRenderable Object in question.
  * @return Whether the object is in this range or not.
  */
-bool QuadTree::ObjectInRange(Surface* aSurface) const
+bool QuadTree::ObjectInRange(Renderable* aRenderable) const
 {
-  GameObject *owner = aSurface->GetOwner();
+  GameObject *owner = aRenderable->GetOwner();
   Transform *transform = owner->GET<Transform>();
   Vector3 midpoint = (mMaxRange + mMinRange) / 2.0f;
   Vector3 size = mMaxRange - midpoint;

@@ -18,26 +18,21 @@ Camera::Camera() : Component(Camera::sUID)
 
 Camera::Camera(GraphicsManager *aManager) : Component(Camera::sUID), 
   mSize(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 0),
-  mOffset(), mPrimary(false), mManager(aManager),
-  mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter())
+  mOffset(), mPrimary(false), mManager(aManager), mFramebuffers(), mPipelineName("Default")
 {
-  #ifdef SHADER_COMPATIBLE
-  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y, mMinFilter, mMagFilter);
-  #endif
 }
 
 Camera::Camera(Camera const &aCamera) : Component(Camera::sUID), mSize(aCamera.mSize),
   mOffset(aCamera.mOffset), mPrimary(false), mManager(aCamera.mManager),
-  mMinFilter(aCamera.mMinFilter), mMagFilter(aCamera.mMagFilter)
+  mFramebuffers(), mPipelineName("Default")
 {
-  #ifdef SHADER_COMPATIBLE
-  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y, mMinFilter, mMagFilter);
-  #endif
 }
 
 Camera::~Camera()
 {
-  delete mFramebuffer;
+  for(FrameLayerContainerIT it = mFramebuffers.begin(); it != mFramebuffers.end(); ++it)
+    delete it->second;
+  mFramebuffers.clear();
 }
 
 // Methods
@@ -97,11 +92,48 @@ void Camera::SetPrimary(bool aPrimary)
 
 /**
  * @brief Get frame buffer
+ * @param aLayer The layer to retrieve
  * @return Frame buffer
  */
-Framebuffer* Camera::GetFramebuffer()
+Framebuffer* Camera::GetFramebuffer(int const aLayer)
 {
-  return mFramebuffer;
+  if(mFramebuffers.find(aLayer) == mFramebuffers.end())
+  {
+#ifdef SHADER_COMPATIBLE
+    mFramebuffers[aLayer] = new GLFramebuffer(mSize.x, mSize.y, SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter());
+    mFramebuffers[aLayer]->SetShaders(mManager, SystemProperties::GetFramebufferVertexShaderName(), SystemProperties::GetFramebufferFragmentShaderName());
+    mFramebuffers[aLayer]->Generate(mManager);
+#endif
+  }
+  
+  return mFramebuffers[aLayer];
+}
+
+/**
+ * @brief Get all framebuffers being drawn to
+ * @return Framebuffers
+ */
+FrameLayerContainer const &Camera::GetFramebuffers() const
+{
+  return mFramebuffers;
+}
+
+/**
+ * @brief Get name of pipeline
+ * @return Pipeline
+ */
+HashString Camera::GetPipelineName() const
+{
+  return mPipelineName;
+}
+
+/**
+ * @brief Set name of pipeline
+ * @param aPipelineName Pipeline name
+ */
+void Camera::SetPipelineName(HashString const &aPipelineName)
+{
+  mPipelineName = aPipelineName;
 }
 
 // Virtuals derived from Component
@@ -142,6 +174,7 @@ void Camera::Serialize(ParserNode *aNode)
   
   object->Place("Width", Common::IntToString(mSize.x));
   object->Place("Height", Common::IntToString(mSize.y));
+  object->Place("Pipeline", mPipelineName);
   
   if(mManager->GetPrimaryCamera() == this)
     object->Place("Primary", Common::BoolToString(true));
@@ -162,62 +195,8 @@ void Camera::Deserialize(ParserNode *aNode)
     mSize.y = aNode->Find("Height")->GetValue().ToFloat();
   if(aNode->Find("Primary"))
     mPrimary = aNode->Find("Primary")->GetValue().ToBool();
-  if(aNode->Find("VertexShader"))
-    vertexShaderFileName = aNode->Find("VertexShader")->GetValue();
-  if(aNode->Find("FragmentShader"))
-    fragmentShaderFileName = aNode->Find("FragmentShader")->GetValue();
-  if(aNode->Find("MinFilter"))
-    mMinFilter = aNode->Find("MinFilter")->GetValue();
-  if(aNode->Find("MagFilter"))
-    mMagFilter = aNode->Find("MagFilter")->GetValue();
-  
-  delete mFramebuffer;
-  
-  #ifdef SHADER_COMPATIBLE
-  mFramebuffer = new GLFramebuffer(mSize.x, mSize.y, mMinFilter, mMagFilter);
-  #endif
-  
-  mFramebuffer->SetShaders(mManager, vertexShaderFileName, fragmentShaderFileName);
-  mFramebuffer->Generate(mManager);
-  
-  if(aNode->Find("Properties"))
-  {
-    HashString const nodeName = "Property_";
-    int index = 0;
-    HashString curIndex = nodeName + Common::IntToString(index);
-    ParserNode* propertyNode = aNode->Find("Properties");
-    
-    while(propertyNode->Find(curIndex))
-    {
-      ParserNode* curNode = propertyNode->Find(curIndex);
-      PropertyType propertyType = PropertyType::INT1;
-      HashString const type = curNode->Find("Type")->GetValue();
-      
-      if(type == "INT1")
-        propertyType = PropertyType::INT1;
-      else if(type == "INT3")
-        propertyType = PropertyType::INT3;
-      else if(type == "INT4")
-        propertyType = PropertyType::INT4;
-      else if(type == "FLOAT1")
-        propertyType = PropertyType::FLOAT1;
-      else if(type == "FLOAT3")
-        propertyType = PropertyType::FLOAT3;
-      else if(type == "FLOAT4")
-        propertyType = PropertyType::FLOAT4;
-      else
-      {
-        DebugLogPrint("Invalid value %s passed into Property deserialization.", type.ToCharArray());
-        assert(!"Invalid value passed into Property deserialization.");
-      }
-      
-      mFramebuffer->AddOrEditProperty(curNode->Find("Name")->GetValue(), propertyType, 
-        curNode->Find("TargetValue")->GetValue(), curNode->Find("DefaultValue")->GetValue());
-      
-      ++index;
-      curIndex = nodeName + Common::IntToString(index);
-    }
-  }
+  if(aNode->Find("Pipeline"))
+    mPipelineName = aNode->Find("Pipeline")->GetValue();
 }
 
 /**

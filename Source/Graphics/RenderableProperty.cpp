@@ -1,32 +1,32 @@
 #include "Common.h"
-#include "SurfaceProperty.h"
+#include "RenderableProperty.h"
 
-SurfaceProperty::SurfaceProperty(SurfaceProperty const &aSurfaceProperty) :
-  mName(aSurfaceProperty.mName), mType(aSurfaceProperty.mType), mTargetValue(aSurfaceProperty.mTargetValue),
-  mDefaultValue(aSurfaceProperty.mDefaultValue), mId(aSurfaceProperty.mId)
+RenderableProperty::RenderableProperty(RenderableProperty const &aRenderableProperty) :
+  mName(aRenderableProperty.mName), mType(aRenderableProperty.mType), mTargetValue(aRenderableProperty.mTargetValue),
+  mDefaultValue(aRenderableProperty.mDefaultValue), mId(aRenderableProperty.mId)
 {
 }
 
-SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, 
+RenderableProperty::RenderableProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, 
   HashString const &aDefaultValue) : 
   mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue), mId("0")
 {
 }
 
-SurfaceProperty::SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, 
+RenderableProperty::RenderableProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, 
   HashString const &aDefaultValue, HashString const &aId) : 
   mName(aName), mType(aType), mTargetValue(aTargetValue), mDefaultValue(aDefaultValue), mId(aId)
 {
 }
 
-SurfaceProperty::~SurfaceProperty() 
+RenderableProperty::~RenderableProperty() 
 {
 }
 
 /**
  * @brief Equality check
  */
-bool SurfaceProperty::operator==(SurfaceProperty const &aRhs)
+bool RenderableProperty::operator==(RenderableProperty const &aRhs)
 {
   return mName == aRhs.mName && mTargetValue == aRhs.mTargetValue && mDefaultValue == aRhs.mDefaultValue &&
     mType == aRhs.mType && mId == aRhs.mId;
@@ -35,7 +35,7 @@ bool SurfaceProperty::operator==(SurfaceProperty const &aRhs)
 /**
 * @brief Inequality check
 */
-bool SurfaceProperty::operator!=(SurfaceProperty const &aRhs)
+bool RenderableProperty::operator!=(RenderableProperty const &aRhs)
 {
   return !(*this == aRhs);
 }
@@ -44,7 +44,7 @@ bool SurfaceProperty::operator!=(SurfaceProperty const &aRhs)
  * @brief Get name of property
  * @return Name
  */
-HashString SurfaceProperty::GetName() const 
+HashString RenderableProperty::GetName() const 
 {
   return mName;
 }
@@ -53,7 +53,7 @@ HashString SurfaceProperty::GetName() const
  * @brief Get type of property
  * @return Type
  */
-PropertyType SurfaceProperty::GetType() const
+PropertyType RenderableProperty::GetType() const
 {
   return mType;
 }
@@ -62,7 +62,7 @@ PropertyType SurfaceProperty::GetType() const
  * @brief Get target value of property
  * @return Target value
  */
-HashString SurfaceProperty::GetTargetValue() const
+HashString RenderableProperty::GetTargetValue() const
 {
   return mTargetValue;
 }
@@ -71,7 +71,7 @@ HashString SurfaceProperty::GetTargetValue() const
  * @brief Get default value of property
  * @return Default value
  */
-HashString SurfaceProperty::GetDefaultValue() const
+HashString RenderableProperty::GetDefaultValue() const
 {
   return mDefaultValue;
 }
@@ -80,7 +80,7 @@ HashString SurfaceProperty::GetDefaultValue() const
  * @brief Get Id of property
  * @return Id
  */
-HashString SurfaceProperty::GetId() const
+HashString RenderableProperty::GetId() const
 {
   return mId;
 }
@@ -89,7 +89,7 @@ HashString SurfaceProperty::GetId() const
  * @brief Set name of property
  * @param aName Name
  */
-void SurfaceProperty::SetName(HashString const &aName)
+void RenderableProperty::SetName(HashString const &aName)
 {
   mName = aName;
 }
@@ -98,7 +98,7 @@ void SurfaceProperty::SetName(HashString const &aName)
  * @brief Set type of property
  * @param aType Type
  */
-void SurfaceProperty::SetType(PropertyType const &aType)
+void RenderableProperty::SetType(PropertyType const &aType)
 {
   mType = aType;
 }
@@ -107,7 +107,7 @@ void SurfaceProperty::SetType(PropertyType const &aType)
  * @brief Set target value of property
  * @param aValue Target Value
  */
-void SurfaceProperty::SetTargetValue(HashString const &aTargetValue)
+void RenderableProperty::SetTargetValue(HashString const &aTargetValue)
 {
   mTargetValue = aTargetValue;
 }
@@ -116,7 +116,7 @@ void SurfaceProperty::SetTargetValue(HashString const &aTargetValue)
  * @brief Set default value of property
  * @param aValue Default Value
  */
-void SurfaceProperty::SetDefaultValue(HashString const &aDefaultValue)
+void RenderableProperty::SetDefaultValue(HashString const &aDefaultValue)
 {
   mDefaultValue = aDefaultValue;
 }
@@ -125,7 +125,7 @@ void SurfaceProperty::SetDefaultValue(HashString const &aDefaultValue)
  * @brief Set id
  * @param aId id
  */
-void SurfaceProperty::SetId(HashString const &aId)
+void RenderableProperty::SetId(HashString const &aId)
 {
   mId = aId;
 }

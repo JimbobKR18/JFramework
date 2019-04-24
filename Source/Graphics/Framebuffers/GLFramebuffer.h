@@ -5,21 +5,7 @@
 #include "Constants.h"
 #include "GraphicsManager.h"
 #include "Framebuffer.h"
-
-#if defined(_WIN32)
-  #include <GL\glew.h>
-  #include "SDL.h"
-#elif defined(__APPLE__)
-  #include <GL/glew.h>
-  #include <OpenGL/gl3.h>
-  #include <OpenGL/gl3ext.h>
-  #include <SDL2/SDL.h>
-#else
-  #include <GL/glew.h>
-  #include <GL/gl.h>
-  #include <GL/glext.h>
-  #include <SDL2/SDL.h>
-#endif
+#include "PlatformIncludes.h"
 
 class GLFramebuffer : public Framebuffer
 {
@@ -29,6 +15,7 @@ private:
   GLuint        mFramebufferProgramID;
   GLuint        mFrameBufferID;
   GLuint        mRenderedTextureID;
+  GLuint        mDepthTextureID;
   GLuint        mVertexBufferID;
   GLuint        mTextureBufferID;
   GLuint        mIndexBufferID;

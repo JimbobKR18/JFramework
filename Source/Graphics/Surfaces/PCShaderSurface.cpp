@@ -22,19 +22,19 @@
 #endif
 #endif
 
-int const PCShaderSurface::sUID = Common::StringHashFunction("Surface");
+int const PCShaderSurface::sUID = Common::StringHashFunction("Renderable");
 
-PCShaderSurface::PCShaderSurface() : Surface(), mTextureID(-1), mProgramID(0), mVertexShaderID(0), mFragmentShaderID(0),
+PCShaderSurface::PCShaderSurface() : Renderable(), mTextureID(-1), mProgramID(0), mVertexShaderID(0), mFragmentShaderID(0),
                                      mVertexShaderFileName(), mFragmentShaderFileName()
 {
   assert(!"Do not use");
 }
-PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Surface(aManager), mTextureID(-1), mProgramID(0), mVertexShaderID(0),
+PCShaderSurface::PCShaderSurface(GraphicsManager *aManager) : Renderable(aManager), mTextureID(-1), mProgramID(0), mVertexShaderID(0),
                                                               mFragmentShaderID(0), mVertexShaderFileName(), mFragmentShaderFileName()
 {
 }
 
-PCShaderSurface::PCShaderSurface(PCShaderSurface const &aPCShaderSurface) : Surface(aPCShaderSurface), mTextureID(aPCShaderSurface.mTextureID),
+PCShaderSurface::PCShaderSurface(PCShaderSurface const &aPCShaderSurface) : Renderable(aPCShaderSurface), mTextureID(aPCShaderSurface.mTextureID),
   mProgramID(aPCShaderSurface.mProgramID), mVertexShaderID(aPCShaderSurface.mVertexShaderID), mFragmentShaderID(aPCShaderSurface.mFragmentShaderID),
   mVertexShaderFileName(aPCShaderSurface.mVertexShaderFileName), mFragmentShaderFileName(aPCShaderSurface.mFragmentShaderFileName)
 {
@@ -56,7 +56,7 @@ void PCShaderSurface::LoadImage(HashString const &aName)
   if(textureData->mTextureID != (unsigned)-1)
   {
     mTextureID = textureData->mTextureID;
-    SetTextureSize(Vector3(textureData->mWidth, textureData->mHeight, 0));
+    SetTextureSize(Vector3(textureData->mSize.x, textureData->mSize.y, 0));
   }
   // else we load the image from file
   else
@@ -64,7 +64,7 @@ void PCShaderSurface::LoadImage(HashString const &aName)
     textureData = ShaderLoader::LoadTexture(aName, GetMinFilter(), GetMagFilter());
     if(textureData)
     {
-      SetTextureSize(Vector3(textureData->mWidth, textureData->mHeight, 0));
+      SetTextureSize(Vector3(textureData->mSize.x, textureData->mSize.y, 0));
       GetManager()->AddTexturePairing(textureData->mTextureName, textureData);
       mTextureID = textureData->mTextureID;
     }
@@ -84,7 +84,7 @@ void PCShaderSurface::LoadText(HashString const &aText)
   Vector3 size;
   if(data->mTextureID != (unsigned)-1)
   {
-    size = Vector3(data->mWidth / 2.0f, data->mHeight / 2.0f, 0);
+    size = Vector3(data->mSize.x / 2.0f, data->mSize.y / 2.0f, 0);
     mTextureID = data->mTextureID;
     SetTextureSize(size);
   }
@@ -94,7 +94,7 @@ void PCShaderSurface::LoadText(HashString const &aText)
       GetColor(), GetSecondaryColor(), GetFontSize(), GetMaxTextWidth());
     if(textureData)
     {
-      size = Vector3(textureData->mWidth / 2.0f, textureData->mHeight / 2.0f, 0);
+      size = Vector3(textureData->mSize.x / 2.0f, textureData->mSize.y / 2.0f, 0);
       SetTextureSize(size);
       GetManager()->AddTexturePairing(textureData->mTextureName, textureData);
       mTextureID = textureData->mTextureID;
@@ -265,11 +265,52 @@ void PCShaderSurface::SetFragmentShaderID(unsigned const aFragmentShaderID)
 }
 
 /**
+ * @brief Get vertex data.
+ * @param aPosition Position in world space.
+ * @return All vertex data.
+ */
+VertexContainer PCShaderSurface::GetVertexData(Vector3 const &aPosition) const
+{
+  VertexContainer ret;
+  ret.reserve(6);
+  
+  Transform *transform = GetOwner()->GET<Transform>();
+  Matrix33 modelTransform = transform->GetHierarchicalRotation() * Matrix33(transform->GetHierarchicalScale());
+  Vector3 &size = transform->GetSize();
+  Vector3 position = aPosition;
+  
+  AlignmentHelper(transform, size, position, transform->GetScale());
+  
+  // Get the basic coordinates for the quad
+  Vector3 topLeft(-size.x, -size.y, 0);
+  Vector3 topRight(size.x, -size.y, 0);
+  Vector3 bottomRight(size.x, size.y, 0);
+  Vector3 bottomLeft(-size.x, size.y, 0);
+  
+  // Model transform
+  topLeft = modelTransform * topLeft;
+  topRight = modelTransform * topRight;
+  bottomLeft = modelTransform * bottomLeft;
+  bottomRight = modelTransform * bottomRight;
+  
+  Vector3 normal = topRight.Cross(topLeft).normalize();
+  
+  ret.push_back(VertexData(position, topLeft, Vector2(GetTextureData()->GetXValue(0), GetTextureData()->GetYValue(0)), GetColor(), normal));
+  ret.push_back(VertexData(position, bottomLeft, Vector2(GetTextureData()->GetXValue(0), GetTextureData()->GetYValue(1)), GetColor(), normal));
+  ret.push_back(VertexData(position, bottomRight, Vector2(GetTextureData()->GetXValue(1), GetTextureData()->GetYValue(1)), GetColor(), normal));
+  ret.push_back(VertexData(position, bottomRight, Vector2(GetTextureData()->GetXValue(1), GetTextureData()->GetYValue(1)), GetColor(), normal));
+  ret.push_back(VertexData(position, topRight, Vector2(GetTextureData()->GetXValue(1), GetTextureData()->GetYValue(0)), GetColor(), normal));
+  ret.push_back(VertexData(position, topLeft, Vector2(GetTextureData()->GetXValue(0), GetTextureData()->GetYValue(0)), GetColor(), normal));
+  
+  return ret;
+}
+
+/**
  * @brief Simple update loop.
  */
 void PCShaderSurface::Update()
 {
-  Surface::Update();
+  Renderable::Update();
 }
 
 /**
@@ -287,7 +328,7 @@ void PCShaderSurface::SendMessage(Message const &aMessage)
  */
 void PCShaderSurface::ReceiveMessage(Message const &aMessage)
 {
-  Surface::ReceiveMessage(aMessage);
+  Renderable::ReceiveMessage(aMessage);
 }
 
 /**
@@ -296,8 +337,8 @@ void PCShaderSurface::ReceiveMessage(Message const &aMessage)
  */
 void PCShaderSurface::Serialize(ParserNode *aNode)
 {
-  HashString const SURFACE = "Surface";
-  Surface::Serialize(aNode);
+  HashString const SURFACE = "Renderable";
+  Renderable::Serialize(aNode);
   ParserNode* surface = aNode->Find(SURFACE);
   surface->Place("TextureName", GetFileName());
   surface->Place("VertexShader", mVertexShaderFileName);
@@ -310,7 +351,7 @@ void PCShaderSurface::Serialize(ParserNode *aNode)
  */
 void PCShaderSurface::Deserialize(ParserNode *aNode)
 {
-  Surface::Deserialize(aNode);
+  Renderable::Deserialize(aNode);
   HashString vertexShader = (GetVertexShaderFilename() == "") ? SystemProperties::GetDefaultVertexShaderName() : GetVertexShaderFilename();
   HashString fragmentShader = (GetFragmentShaderFilename() == "") ? SystemProperties::GetDefaultFragmentShaderName() : GetFragmentShaderFilename();
   
@@ -319,7 +360,7 @@ void PCShaderSurface::Deserialize(ParserNode *aNode)
   if(aNode->Find("FragmentShader"))
     fragmentShader = aNode->Find("FragmentShader")->GetValue().ToString();
 
-  if(aNode->GetName() == "Surface")
+  if(aNode->GetName() == "Renderable" || aNode->GetName() == "Surface")
   {
     HashString fileName = GetFileName();
     if(aNode->Find("TextureName"))
@@ -371,5 +412,5 @@ Component* PCShaderSurface::Clone(GameObject *aNewOwner) const
 void PCShaderSurface::SerializeLUA()
 {
   SLB::Class<PCShaderSurface>("PCShaderSurface")
-    .inherits<Surface>();
+    .inherits<Renderable>();
 }

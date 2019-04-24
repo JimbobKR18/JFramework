@@ -4,21 +4,13 @@
 #include "Component.h"
 #include "TextureCoordinates.h"
 #include "MathExt.h"
-#include "SurfaceProperty.h"
-
-class GraphicsManager;
+#include "RenderableProperty.h"
+#include "Transform.h"
 
 enum ScrollType
 {
   VERTICAL = 0,
   HORIZONTAL
-};
-
-enum Viewspace
-{
-  VIEW_RELATIVE_TO_CAMERA = 0,
-  VIEW_ABSOLUTE,
-  VIEW_PERCENTAGE_OF_CAMERA
 };
 
 enum TextRenderStyle
@@ -31,7 +23,7 @@ enum TextRenderStyle
 struct ScrollInfo
 {
   ScrollType mType;
-  Vector3 mGoalSize;
+  Vector2 mGoalSize;
   
   ScrollInfo() : mType(ScrollType::VERTICAL), mGoalSize() {}
   ScrollInfo(ScrollInfo const &aScrollInfo) : mType(aScrollInfo.mType),
@@ -39,11 +31,44 @@ struct ScrollInfo
   virtual ~ScrollInfo() {}
 };
 
-class Surface : public Component
+enum Viewspace
+{
+  VIEW_RELATIVE_TO_CAMERA = 0,
+  VIEW_ABSOLUTE,
+  VIEW_PERCENTAGE_OF_CAMERA
+};
+
+struct VertexData
+{
+  Vector3 mPosition;
+  Vector3 mVertex;
+  Vector2 mTextureCoord;
+  Vector4 mColor;
+  Vector3 mNormal;
+  
+  VertexData() : mPosition(), mVertex(), mTextureCoord(), mColor(), mNormal() {}
+  VertexData(Vector3 const &aPosition, Vector3 const &aVertex, Vector2 const &aTextureCoord, Vector4 const &aColor, Vector3 const &aNormal) :
+    mPosition(aPosition), mVertex(aVertex), mTextureCoord(aTextureCoord), mColor(aColor), mNormal(aNormal) {}
+  virtual ~VertexData() {}
+};
+
+typedef std::vector<VertexData> VertexContainer;
+typedef VertexContainer::iterator VertexIT;
+typedef VertexContainer::const_iterator VertexConstIT;
+
+class GraphicsManager;
+class Renderable : public Component
 {
 public:
+  static unsigned const BACKGROUND = 1000;
+  static unsigned const GEOMETRY = 2000;
+  static unsigned const TRANSPARENT = 3000;
+  static unsigned const OVERLAY = 4000;
+  
   typedef std::vector<ScrollInfo> ScrollInfoContainer;
   typedef ScrollInfoContainer::const_iterator ScrollInfoIT;
+  typedef std::vector<int> IsolatedRenderLayerContainer;
+  typedef IsolatedRenderLayerContainer::const_iterator IsolatedRenderLayerIT;
   
 private:
   // Base
@@ -56,6 +81,7 @@ private:
   HashString          mMinFilter;
   HashString          mMagFilter;
   int                 mLayer;
+  IsolatedRenderLayerContainer mIsolatedRenderLayers;
   
   // Default
   HashString          mFileName;
@@ -76,16 +102,15 @@ private:
   
   static int const sUID;
 public:
-  Surface();
-  Surface(Surface const &aSurface);
-  Surface(GraphicsManager *aManager);
-  virtual ~Surface();
+  Renderable();
+  Renderable(Renderable const &aSurface);
+  Renderable(GraphicsManager *aManager);
+  virtual ~Renderable();
 
   // Getters
   GraphicsManager*    GetManager() const { return mManager; }
-  Viewspace           GetViewMode() const { return mViewmode; }
   Vector4&            GetColor() { return mPrimaryColor; }
-  bool                GetNoRender() { return mNoRender; }
+  Vector4 const&      GetColor() const { return mPrimaryColor; }
   HashString          GetFileName() const { return mFileName; }
   HashString          GetText() const { return mText; }
   HashString          GetFontName() const { return mFontName; }
@@ -98,9 +123,12 @@ public:
   int                 GetCurrentFrame() const { if(mTexCoord) return mTexCoord->GetCurrentFrame(); else return 0; }
   HashString          GetMinFilter() const { return mMinFilter; }
   HashString          GetMagFilter() const { return mMagFilter; }
-  int                 GetLayer() const { return mLayer; }
   Vector3             GetTextureSize() const { return mTextureSize; }
+  int                 GetLayer() const { return mLayer; }
+  Viewspace           GetViewMode() const { return mViewmode; }
+  bool                GetNoRender() const { return mNoRender; }
   bool                GetUIElement() const { return mUIElement; }
+  IsolatedRenderLayerContainer const &GetIsolatedRenderLayers() const { return mIsolatedRenderLayers; }
 
   // Setters
   void                SetViewMode(Viewspace const& aViewmode) { mViewmode = aViewmode; }
@@ -119,6 +147,7 @@ public:
   void                SetMagFilter(HashString const &aMagFilter) { mMagFilter = aMagFilter; }
   void                SetLayer(int const aLayer) { mLayer = aLayer; }
   void                SetUIElement(bool const aUIElement) { mUIElement = aUIElement; }
+  void                SetIsolatedRenderLayers(IsolatedRenderLayerContainer const &aIsolatedRenderLayers) { mIsolatedRenderLayers = aIsolatedRenderLayers; }
   
   // Textures and Shaders
   virtual void        LoadImage(HashString const &aName);
@@ -137,19 +166,20 @@ public:
   void                FinishAnimation();
   bool                CurrentAnimationCompleted();
   
-  // Batching
-  bool                SurfacePropertiesEquals(Surface const *aSurface) const;
-  virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); return 0; }
-  virtual unsigned    GetProgramID() const { assert(!"Cannot call GetProgramID() on a raw Surface."); return 0; }
-  
   // Scrolling
   void                CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& aGoalSize);
   
   // Properties
-  PropertyContainer const&  GetProperties() const;
-  void                      AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
-  void                      AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId);
-  void                      ClearProperties();
+  virtual bool                RenderablePropertiesEquals(Renderable const *aRenderable) const;
+  virtual PropertyContainer const&  GetProperties() const;
+  virtual void                      AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
+  virtual void                      AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId);
+  virtual void                      ClearProperties();
+  
+  // Derive these
+  virtual unsigned    GetTextureID() const { assert(!"Cannot call GetTextureID() on a raw Surface."); return 0; }
+  virtual unsigned    GetProgramID() const { assert(!"Cannot call GetProgramID() on a raw Surface."); return 0; }
+  virtual VertexContainer GetVertexData(Vector3 const &aPosition) const { assert(!"Cannot call GetVertexData() on a raw Surface."); return VertexContainer(); };
   
   // Derived from Component
   virtual void        Update();
@@ -160,6 +190,8 @@ public:
   virtual Component*  Clone(GameObject *aNewOwner) const;
   static void         SerializeLUA();
   static int          GetUID() {return sUID;}
+  
+  static void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition, Vector3 &aScale);
 };
 
 #endif

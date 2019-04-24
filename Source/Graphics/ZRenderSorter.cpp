@@ -7,7 +7,7 @@
  * @param object2
  * @return true if object1 goes before object2, false otherwise.
  */
-bool ZSortPredicate(Surface *object1, Surface *object2)
+bool ZSortPredicate(Renderable *object1, Renderable *object2)
 {
   // Default values in case no owner found.
   float z1 = -0.9999f;
@@ -57,9 +57,9 @@ ZRenderSorter::~ZRenderSorter()
 
 /**
  * @brief Sorts a list of surfaces.
- * @param aSurfaces
+ * @param aRenderables
  */
-void ZRenderSorter::SortPredicate(std::vector<Surface*> &aSurfaces)
+void ZRenderSorter::SortPredicate(std::vector<Renderable*> &aRenderables)
 {
-  std::sort(aSurfaces.begin(), aSurfaces.end(), ZSortPredicate);
+  std::sort(aRenderables.begin(), aRenderables.end(), ZSortPredicate);
 }

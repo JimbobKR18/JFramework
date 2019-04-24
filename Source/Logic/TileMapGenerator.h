@@ -17,7 +17,7 @@
 #include "GraphicsManager.h"
 #include "ChemistryManager.h"
 #include "MathExt.h"
-#include "Surface.h"
+#include "Renderable.h"
 #include "Transform.h"
 
 class Level;
@@ -87,7 +87,7 @@ private:
   // Animated tiles
   float                             mAnimationSpeed;
   float                             mCurrentAnimationTime;
-  std::unordered_map<Surface*, int>           mAnimatedObjects;
+  std::unordered_map<Renderable*, int>           mAnimatedObjects;
   std::unordered_map<int, std::vector<int>>   mAnimations;
   std::unordered_map<int, int>                mCurrentFrames;
   

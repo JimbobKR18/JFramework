@@ -8,8 +8,8 @@
 #ifndef SHADERDATA_H_
 #define SHADERDATA_H_
 
-// TODO may be worth to split up vertex and fragment shaders.
-// Use multiple programs somehow.
+#include "Common.h"
+
 struct ShaderData
 {
   unsigned mProgramID;

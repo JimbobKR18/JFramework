@@ -21,32 +21,28 @@ private:
   GLuint        mIndexBufferID;
   GLuint        mNormalBufferID;
   GLint         mMaxTextures;
-  
-#if defined(__APPLE__)
-  Framebuffer*  mFrameBuffer;
-#endif
 
 public:
   PCShaderScreen();
   PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFullScreen);
   virtual ~PCShaderScreen();
 
-  virtual void SetGlobalShaderProperty(ShaderData *aShaderData, SurfaceProperty const &aProperty);
-  virtual void ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData);
-  virtual void ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData);
+  virtual void SetGlobalShaderProperty(ShaderData *aShaderData, RenderableProperty const &aProperty);
+  virtual void ResetObjectTexture(Renderable* aRenderable, TextureData* aOldData, TextureData* aNewData);
+  virtual void ResetObjectShader(Renderable* aRenderable, ShaderData* aOldData, ShaderData* aNewData);
   virtual void PreDraw();
-  virtual void Draw(std::map<int, std::vector<Surface*>> const &aObjects, Camera* aCamera);
-  virtual void DebugDraw(std::vector<Surface*> const &aObjects);
+  virtual void Draw(std::map<int, std::vector<Renderable*>> const &aObjects, Camera* aCamera);
+  virtual void DebugDraw(std::vector<Renderable*> const &aObjects);
   virtual void SwapBuffers();
   virtual void SetClearColor(Vector4 const &aClearColor);
   virtual void ChangeSize(int aW, int aH, bool aFullScreen);
 
 private:
-  void DrawObjects(std::vector<Surface*> const &aObjects, Camera *aCamera);
-  void SetOptionalUniforms(Surface* aSurface);
+  std::map<int, std::vector<Renderable*>> DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera);
+  void SetOptionalUniforms(Renderable* aRenderable);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
-  void SetShaderProperties(Surface *aSurface, bool aActive);
+  void SetShaderProperties(Renderable *aRenderable, bool aActive);
   void DisableVertexAttribArray(int aVertexAttrib);
   void PushRenderDataV2(std::vector<Vector2> &aData, int aAttribLocation, Vector2 const &aAttribute);
   void PushRenderDataV3(std::vector<Vector3> &aData, int aAttribLocation, Vector3 const &aAttribute);
@@ -54,7 +50,6 @@ private:
   void BindAttributeV2(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector2> &aData);
   void BindAttributeV3(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector3> &aData);
   void BindAttributeV4(GLenum aTarget, int const aBufferID, int const aAttributeLocation, std::vector<Vector4> &aData);
-  void SetShaderUniform(int aProgram, HashString const &aName, PropertyType const &aPropertyType, HashString const &aValue, HashString const &aId);
 };
 
 #endif

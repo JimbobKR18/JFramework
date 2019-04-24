@@ -11,7 +11,7 @@
 #include "Component.h"
 #include "ObjectManager.h"
 #include "Transform.h"
-#include "Surface.h"
+#include "Renderable.h"
 #include "PhysicsObject.h"
 #include "StateObject.h"
 #include "GameObjectFactory.h"
@@ -386,9 +386,9 @@ GameObject* GameObject::Clone(GameObjectFactory *aFactory) const
   {
     newObject->AddComponent(GET<PhysicsObject>()->Clone(newObject));
   }
-  if(HAS<Surface>())
+  if(HAS<Renderable>())
   {
-    newObject->AddComponent(GET<Surface>()->Clone(newObject));
+    newObject->AddComponent(GET<Renderable>()->Clone(newObject));
   }
   
   // Copy every other component
@@ -493,7 +493,7 @@ void GameObject::SerializeLUA()
           .set("GetComponent", &GameObject::GetComponentByName)
           .set("HasComponent", &GameObject::HasComponentByName)
           .set("GetTransform", &GameObject::GET<Transform>)
-          .set("GetSurface", &GameObject::GET<Surface>)
+          .set("GetSurface", &GameObject::GET<Renderable>)
           .set("GetPhysicsObject", &GameObject::GET<PhysicsObject>)
           .set("GetStateObject", &GameObject::GET<StateObject>)
           .set("GetFollowComponent", &GameObject::GET<FollowComponent>)

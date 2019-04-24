@@ -1,5 +1,5 @@
-#ifndef __JFramework_SurfaceProperty_h_
-#define __JFramework_SurfaceProperty_h_
+#ifndef __JFramework_RenderableProperty_h_
+#define __JFramework_RenderableProperty_h_
 
 #include "HashString.h"
 
@@ -25,7 +25,7 @@ enum PropertyType
   SAMPLER2VECTOR
 };
 
-class SurfaceProperty
+class RenderableProperty
 {
 private:
   HashString mName;
@@ -35,14 +35,14 @@ private:
   HashString mId;
   
 public:
-  SurfaceProperty(SurfaceProperty const &aSurfaceProperty);
-  SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
-  SurfaceProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId);
-  virtual ~SurfaceProperty();
+  RenderableProperty(RenderableProperty const &aRenderableProperty);
+  RenderableProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue);
+  RenderableProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId);
+  virtual ~RenderableProperty();
 
   // Operations
-  bool operator==(SurfaceProperty const &aRhs);
-  bool operator!=(SurfaceProperty const &aRhs);
+  bool operator==(RenderableProperty const &aRhs);
+  bool operator!=(RenderableProperty const &aRhs);
   
   // Getters
   HashString GetName() const;
@@ -59,7 +59,7 @@ public:
   void SetId(HashString const &aId);
 };
 
-typedef std::unordered_map<int, SurfaceProperty*> PropertyContainer;
+typedef std::unordered_map<int, RenderableProperty*> PropertyContainer;
 typedef PropertyContainer::iterator PropertyContainerIt;
 typedef PropertyContainer::const_iterator PropertyContainerConstIt;
 

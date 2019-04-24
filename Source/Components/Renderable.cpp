@@ -1,4 +1,4 @@
-#include "Surface.h"
+#include "Renderable.h"
 #include "LUATypes.h"
 #include "GraphicsManager.h"
 #include "ObjectManager.h"
@@ -6,44 +6,45 @@
 
 #define DT (1.0f/60.0f)
 
-int const Surface::sUID = Common::StringHashFunction("Surface");
+int const Renderable::sUID = Common::StringHashFunction("Renderable");
 
-Surface::Surface() : Component(Surface::sUID), mTexCoord(nullptr), mViewmode(VIEW_ABSOLUTE),
+Renderable::Renderable() : Component(Renderable::sUID), mTexCoord(nullptr), mViewmode(VIEW_ABSOLUTE),
                      mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
                      mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()), 
-                     mLayer(0), mFileName(), mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
+                     mLayer(0), mIsolatedRenderLayers(), mFileName(), mText(), mFontName(), mFontSize(0), mMaxTextWidth(0), mSecondaryColor(),
                      mOriginalSize(), mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties(), mUIElement(false)
 {
-  assert(!"Surface needs a graphicsmanager");
+  assert(!"Renderable needs a graphicsmanager");
 }
 
-Surface::Surface(Surface const &aSurface) : Component(Surface::sUID), mTexCoord(new TextureCoordinates(*(aSurface.mTexCoord))), mManager(aSurface.mManager),
-                                            mViewmode(aSurface.mViewmode), mTextureSize(aSurface.mTextureSize),
-                                            mPrimaryColor(aSurface.mPrimaryColor), mNoRender(aSurface.mNoRender),
-                                            mMinFilter(aSurface.mMinFilter), mMagFilter(aSurface.mMagFilter), mLayer(aSurface.mLayer),
-                                            mFileName(aSurface.mFileName), mText(aSurface.mText), mFontName(aSurface.mFontName),
-                                            mFontSize(aSurface.mFontSize), mMaxTextWidth(aSurface.mMaxTextWidth),
-                                            mSecondaryColor(aSurface.mSecondaryColor), mOriginalSize(aSurface.mOriginalSize),
-                                            mTextRenderStyle(aSurface.mTextRenderStyle), mScrollInfo(aSurface.mScrollInfo), mUIElement(false)
+Renderable::Renderable(Renderable const &aRenderable) : Component(Renderable::sUID), mTexCoord(new TextureCoordinates(*(aRenderable.mTexCoord))), mManager(aRenderable.mManager),
+                                            mViewmode(aRenderable.mViewmode), mTextureSize(aRenderable.mTextureSize),
+                                            mPrimaryColor(aRenderable.mPrimaryColor), mNoRender(aRenderable.mNoRender),
+                                            mMinFilter(aRenderable.mMinFilter), mMagFilter(aRenderable.mMagFilter), mLayer(aRenderable.mLayer),
+                                            mIsolatedRenderLayers(aRenderable.mIsolatedRenderLayers),
+                                            mFileName(aRenderable.mFileName), mText(aRenderable.mText), mFontName(aRenderable.mFontName),
+                                            mFontSize(aRenderable.mFontSize), mMaxTextWidth(aRenderable.mMaxTextWidth),
+                                            mSecondaryColor(aRenderable.mSecondaryColor), mOriginalSize(aRenderable.mOriginalSize),
+                                            mTextRenderStyle(aRenderable.mTextRenderStyle), mScrollInfo(aRenderable.mScrollInfo), mUIElement(false)
 {
-  PropertyContainerConstIt propertyEnd = aSurface.mProperties.end();
-  for(PropertyContainerConstIt it = aSurface.mProperties.begin(); it != propertyEnd; ++it)
+  PropertyContainerConstIt propertyEnd = aRenderable.mProperties.end();
+  for(PropertyContainerConstIt it = aRenderable.mProperties.begin(); it != propertyEnd; ++it)
   {
-    mProperties[it->second->GetName().ToHash()] = new SurfaceProperty(*(it->second));
+    mProperties[it->second->GetName().ToHash()] = new RenderableProperty(*(it->second));
   }
 }
 
-Surface::Surface(GraphicsManager *aManager) : Component(Surface::sUID), mTexCoord(NULL),
+Renderable::Renderable(GraphicsManager *aManager) : Component(Renderable::sUID), mTexCoord(nullptr),
                                               mManager(aManager), mViewmode(VIEW_ABSOLUTE),
                                               mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
                                               mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()),
-                                              mLayer(0), mFileName(), mText(), mFontName(), mFontSize(0), 
+                                              mLayer(0), mIsolatedRenderLayers(), mFileName(), mText(), mFontName(), mFontSize(0), 
                                               mMaxTextWidth(0), mSecondaryColor(), mOriginalSize(),
                                               mTextRenderStyle(DEFAULT_RENDER_STYLE), mScrollInfo(), mProperties(), mUIElement(false)
 {
 }
 
-Surface::~Surface()
+Renderable::~Renderable()
 {
   ClearProperties();
   mManager = nullptr;
@@ -58,9 +59,9 @@ Surface::~Surface()
  * @brief Asserts, please implement the platform specific implementation.
  * @param aName Nothing.
  */
-void Surface::LoadImage(HashString const &aName)
+void Renderable::LoadImage(HashString const &aName)
 {
-  assert(!"Not supported (Surface LoadImage)");
+  assert(!"Not supported (Renderable LoadImage)");
 }
 
 /**
@@ -68,9 +69,9 @@ void Surface::LoadImage(HashString const &aName)
  * @param aText Nothing.
  * @return Nothing.
  */
-void Surface::LoadText(HashString const &aText)
+void Renderable::LoadText(HashString const &aText)
 {
-  assert(!"Not supported (Surface LoadText)");
+  assert(!"Not supported (Renderable LoadText)");
 }
 
 /**
@@ -78,16 +79,16 @@ void Surface::LoadText(HashString const &aText)
  * @param aVertexShaderFilename Nothing.
  * @param aFragmentShaderFilename Nothing.
  */
-void Surface::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
+void Renderable::LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename)
 {
-  assert(!"Not supported (Surface LoadShaders)");
+  assert(!"Not supported (Renderable LoadShaders)");
 }
 
 /**
  * @brief Get texture coordinate data (animation data)
  * @return Texture coordinate data.
  */
-TextureCoordinates *Surface::GetTextureData() const
+TextureCoordinates *Renderable::GetTextureData() const
 {
   return mTexCoord;
 }
@@ -98,7 +99,7 @@ TextureCoordinates *Surface::GetTextureData() const
  * @param aNumFrames Number of frames per animation
  * @param aAnimationSpeed Time between frames
  */
-void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const &aNumFrames, 
+void Renderable::SetTextureCoordinateData(int const aNumAnimations, std::vector<int> const &aNumFrames, 
                                        std::vector<std::vector<float>> const &aAnimationSpeeds)
 {
   if(mTexCoord)
@@ -113,7 +114,7 @@ void Surface::SetTextureCoordinateData(int const aNumAnimations, std::vector<int
  * @param aNumRows Rows in file
  * @param aAnimations Animation data
  */
-void Surface::SetTextureCoordinateData(int const aNumColumns, int const aNumRows, std::vector<AnimationInfo*> const &aAnimations)
+void Renderable::SetTextureCoordinateData(int const aNumColumns, int const aNumRows, std::vector<AnimationInfo*> const &aAnimations)
 {
   if(mTexCoord)
     delete mTexCoord;
@@ -125,7 +126,7 @@ void Surface::SetTextureCoordinateData(int const aNumColumns, int const aNumRows
  * @brief Set whether this surface is animated
  * @param aAnimated True is animated, false otherwise
  */
-void Surface::SetAnimated(bool aAnimated)
+void Renderable::SetAnimated(bool aAnimated)
 {
   if(mTexCoord)
     mTexCoord->SetAnimated(aAnimated);
@@ -136,7 +137,7 @@ void Surface::SetAnimated(bool aAnimated)
  * @param aAnimation Animation id to run
  * @param aBehavior Set behavior of animation (run once and stop or run and reset, etc.)
  */
-void Surface::SetAnimation(int aAnimation, int aBehavior)
+void Renderable::SetAnimation(int aAnimation, int aBehavior)
 {
   if(mTexCoord)
   {
@@ -149,7 +150,7 @@ void Surface::SetAnimation(int aAnimation, int aBehavior)
  * @brief Set current frame of animation
  * @param aFrame Frame of current animation
  */
-void Surface::SetCurrentFrame(int aFrame)
+void Renderable::SetCurrentFrame(int aFrame)
 {
   if(mTexCoord)
     mTexCoord->SetCurrentFrame(aFrame);
@@ -159,7 +160,7 @@ void Surface::SetCurrentFrame(int aFrame)
  * @brief Set frame by id in animation file. (Regardless of animation)
  * @param aFrameID The id to set to.
  */
-void Surface::SetFrameByID(int aFrameID)
+void Renderable::SetFrameByID(int aFrameID)
 {
   if(mTexCoord)
     mTexCoord->SetFrameByID(aFrameID);
@@ -169,7 +170,7 @@ void Surface::SetFrameByID(int aFrameID)
  * @brief Set speed of current animation
  * @param aAnimationSpeed Time between frames (in seconds)
  */
-void Surface::SetAnimationSpeed(float aAnimationSpeed)
+void Renderable::SetAnimationSpeed(float aAnimationSpeed)
 {
   if(mTexCoord)
     mTexCoord->SetCurrentAnimationSpeed(aAnimationSpeed);
@@ -178,7 +179,7 @@ void Surface::SetAnimationSpeed(float aAnimationSpeed)
 /**
  * @brief Force finish animation
  */
-void Surface::FinishAnimation()
+void Renderable::FinishAnimation()
 {
   if(mTexCoord)
     mTexCoord->Finish();
@@ -188,17 +189,17 @@ void Surface::FinishAnimation()
  * @brief Check if current animation has iterated at least once
  * @return True if true.
  */
-bool Surface::CurrentAnimationCompleted()
+bool Renderable::CurrentAnimationCompleted()
 {
   if(mTexCoord)
     return mTexCoord->GetCompleted();
   return false;
 }
 
-bool Surface::SurfacePropertiesEquals(Surface const *aSurface) const
+bool Renderable::RenderablePropertiesEquals(Renderable const *aRenderable) const
 {
-  PropertyContainer const& otherSurfaceProperties = aSurface->mProperties;
-  if(mProperties.size() != otherSurfaceProperties.size())
+  PropertyContainer const& otherRenderableProperties = ((Renderable*)aRenderable)->mProperties;
+  if(mProperties.size() != otherRenderableProperties.size())
   {
     return false;
   }
@@ -206,10 +207,10 @@ bool Surface::SurfacePropertiesEquals(Surface const *aSurface) const
   PropertyContainerConstIt end = mProperties.end();
   for(PropertyContainerConstIt it = mProperties.begin(); it != mProperties.end(); ++it) 
   {
-    SurfaceProperty *property = it->second;
+    RenderableProperty *property = it->second;
     int hash = property->GetName().ToHash();
-    PropertyContainerConstIt otherPropertyIt = otherSurfaceProperties.find(hash);
-    if(otherPropertyIt == otherSurfaceProperties.end())
+    PropertyContainerConstIt otherPropertyIt = otherRenderableProperties.find(hash);
+    if(otherPropertyIt == otherRenderableProperties.end())
     {
       return false;
     }
@@ -226,11 +227,11 @@ bool Surface::SurfacePropertiesEquals(Surface const *aSurface) const
  * @param aScrollType HORIZONTAL or VERTICAL.
  * @param aGoalSize Goal size of the object (in world space).
  */
-void Surface::CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& aGoalSize)
+void Renderable::CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& aGoalSize)
 {
   ScrollInfo scrollInfo;
   scrollInfo.mType = aScrollType;
-  scrollInfo.mGoalSize = aGoalSize;
+  scrollInfo.mGoalSize = Vector2(aGoalSize.x, aGoalSize.y);
   mScrollInfo.push_back(scrollInfo);
 }
 
@@ -238,7 +239,7 @@ void Surface::CreateScrollEffect(ScrollType const& aScrollType, Vector3 const& a
  * @brief Get properties container
  * @return Container of properties
  */
-PropertyContainer const& Surface::GetProperties() const
+PropertyContainer const& Renderable::GetProperties() const
 {
   return mProperties;
 }
@@ -250,17 +251,17 @@ PropertyContainer const& Surface::GetProperties() const
  * @param aTargetValue Target value of property
  * @param aDefaultValue Default value of property
  */
-void Surface::AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)
+void Renderable::AddOrEditProperty(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue)
 {
   if(mProperties.find(aName.ToHash()) != mProperties.end())
   {
-    SurfaceProperty *surfaceProperty = mProperties[aName.ToHash()];
+    RenderableProperty *surfaceProperty = mProperties[aName.ToHash()];
     surfaceProperty->SetType(aType);
     surfaceProperty->SetTargetValue(aTargetValue);
     surfaceProperty->SetDefaultValue(aDefaultValue);
     return;
   }
-  mProperties[aName.ToHash()] = new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue);
+  mProperties[aName.ToHash()] = new RenderableProperty(aName, aType, aTargetValue, aDefaultValue);
 }
 
 /**
@@ -271,24 +272,24 @@ void Surface::AddOrEditProperty(HashString const &aName, PropertyType const &aTy
  * @param aDefaultValue Default value of property
  * @param aId Id of property
  */
-void Surface::AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId)
+void Renderable::AddOrEditPropertyWithId(HashString const &aName, PropertyType const &aType, HashString const &aTargetValue, HashString const &aDefaultValue, HashString const &aId)
 {
   if(mProperties.find(aName.ToHash()) != mProperties.end())
   {
-    SurfaceProperty *surfaceProperty = mProperties[aName.ToHash()];
+    RenderableProperty *surfaceProperty = mProperties[aName.ToHash()];
     surfaceProperty->SetType(aType);
     surfaceProperty->SetTargetValue(aTargetValue);
     surfaceProperty->SetDefaultValue(aDefaultValue);
     surfaceProperty->SetId(aId);
     return;
   }
-  mProperties[aName.ToHash()] = new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue, aId);
+  mProperties[aName.ToHash()] = new RenderableProperty(aName, aType, aTargetValue, aDefaultValue, aId);
 }
 
 /**
  * @brief Clear properties for a surface.
  */
-void Surface::ClearProperties()
+void Renderable::ClearProperties()
 {
   PropertyContainerIt propertyEnd = mProperties.end();
   for(PropertyContainerIt it = mProperties.begin(); it != propertyEnd; ++it)
@@ -301,7 +302,7 @@ void Surface::ClearProperties()
 /**
  * @brief Simple update loop.
  */
-void Surface::Update()
+void Renderable::Update()
 {
   float dt = GetOwner()->GetManager()->GetOwningApp()->GetAppStep();
 
@@ -335,7 +336,7 @@ void Surface::Update()
  * @brief Send message to owner for other components
  * @param aMessage Message to send.
  */
-void Surface::SendMessage(Message const &aMessage)
+void Renderable::SendMessage(Message const &aMessage)
 {
   GetOwner()->ReceiveMessage(aMessage);
 }
@@ -344,7 +345,7 @@ void Surface::SendMessage(Message const &aMessage)
  * @brief Receive a message
  * @param aMessage Received message
  */
-void Surface::ReceiveMessage(Message const &aMessage)
+void Renderable::ReceiveMessage(Message const &aMessage)
 {
   if(aMessage.GetDescription() == "Finish")
   {
@@ -361,9 +362,9 @@ void Surface::ReceiveMessage(Message const &aMessage)
  * @brief Serialize to file
  * @param aNode ParserNode to write to.
  */
-void Surface::Serialize(ParserNode *aNode)
+void Renderable::Serialize(ParserNode *aNode)
 {
-  HashString const SURFACE = "Surface";
+  HashString const SURFACE = "Renderable";
   TextureCoordinates *coords = GetTextureData();
   std::vector<int> animations;
   bool animated = coords->GetAnimated();
@@ -412,6 +413,10 @@ void Surface::Serialize(ParserNode *aNode)
   surface->Place("MinFilter", mMinFilter);
   surface->Place("MagFilter", mMagFilter);
   surface->Place("Layer", Common::IntToString(mLayer));
+  if(!mIsolatedRenderLayers.empty())
+  {
+    surface->Place("IsolatedLayers", Common::IntVectorToString(mIsolatedRenderLayers));
+  }
   
   // View mode
   HashString viewMode = "ABSOLUTE";
@@ -434,7 +439,7 @@ void Surface::Serialize(ParserNode *aNode)
       propertiesNode->Place(curNode, "");
       
       HashString type = "";
-      SurfaceProperty* surfaceProperty = it->second;
+      RenderableProperty* surfaceProperty = it->second;
       switch(surfaceProperty->GetType())
       {
       case PropertyType::INT1:
@@ -482,7 +487,7 @@ void Surface::Serialize(ParserNode *aNode)
  * @brief Read from file
  * @param aNode ParserNode to read from.
  */
-void Surface::Deserialize(ParserNode *aNode)
+void Renderable::Deserialize(ParserNode *aNode)
 {
   float const frameRate = GetManager()->GetOwningApp()->GetAppStep();
   bool animated = false;
@@ -731,7 +736,7 @@ void Surface::Deserialize(ParserNode *aNode)
     else if(viewMode == "PERCENTAGE")
       mViewmode = VIEW_PERCENTAGE_OF_CAMERA;
     else
-      assert(!"Invalid value passed into ViewMode for Surface. (Surface.cpp)");  
+      assert(!"Invalid value passed into ViewMode for Renderable. (Renderable.cpp)");  
   }
   if(aNode->Find("StartingAnimation"))
   {
@@ -801,6 +806,10 @@ void Surface::Deserialize(ParserNode *aNode)
   {
     mLayer = aNode->Find("Layer")->GetValue().ToInt();
   }
+  if(aNode->Find("IsolatedLayers"))
+  {
+    mIsolatedRenderLayers = aNode->Find("IsolatedLayers")->GetValue().ToIntVector();
+  }
   
   // Text
   mMaxTextWidth = mManager->GetScreen()->GetWidth();
@@ -845,26 +854,77 @@ void Surface::Deserialize(ParserNode *aNode)
  * @param aNewOwner The new owner
  * @return Copied surface
  */
-Component* Surface::Clone(GameObject *aNewOwner) const
+Component* Renderable::Clone(GameObject *aNewOwner) const
 {
-  return new Surface(*this);
+  return new Renderable(*this);
 }
 
 /**
  * @brief Make this object usable in LUA
  */
-void Surface::SerializeLUA()
+void Renderable::SerializeLUA()
 {
-  SLB::Class<Surface>("Surface")
+  SLB::Class<Renderable>("Renderable")
     .inherits<Component>()
     .enumValue("Continuous", TextureCoordinateBehavior::CONTINUOUS)
-    .set("SetAnimation", &Surface::SetAnimation)
-    .set("SetFrameByID", &Surface::SetFrameByID)
-    .set("SetAnimated", &Surface::SetAnimated)
-    .set("SetCurrentFrame", &Surface::SetCurrentFrame)
-    .set("SetAnimationSpeed", &Surface::SetAnimationSpeed)
-    .set("CurrentAnimatedCompleted", &Surface::CurrentAnimationCompleted)
-    .set("SetColor", &Surface::SetColor)
-    .set("AddOrEditProperty", &Surface::AddOrEditProperty)
-    .set("ClearProperties", &Surface::ClearProperties);
+    .set("SetAnimation", &Renderable::SetAnimation)
+    .set("SetFrameByID", &Renderable::SetFrameByID)
+    .set("SetAnimated", &Renderable::SetAnimated)
+    .set("SetCurrentFrame", &Renderable::SetCurrentFrame)
+    .set("SetAnimationSpeed", &Renderable::SetAnimationSpeed)
+    .set("CurrentAnimatedCompleted", &Renderable::CurrentAnimationCompleted)
+    .set("SetColor", &Renderable::SetColor)
+    .set("AddOrEditProperty", &Renderable::AddOrEditProperty)
+    .set("ClearProperties", &Renderable::ClearProperties);
 }
+
+/**
+ * @brief Align objects
+ * @param aTransform Transform of object
+ * @param aSize Object size
+ * @param aPosition Object position
+ * @param aScale Object scale
+ */
+void Renderable::AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition, Vector3 &aScale)
+{
+  X_ALIGNMENT xAlign = aTransform->GetXAlignment();
+  Y_ALIGNMENT yAlign = aTransform->GetYAlignment();
+  Z_ALIGNMENT zAlign = aTransform->GetZAlignment();
+
+  switch(xAlign)
+  {
+  case X_ALIGN_LEFT:
+    aPosition.x += aSize.x * aScale.x;
+    break;
+  case X_ALIGN_RIGHT:
+    aPosition.x -= aSize.x * aScale.x;
+    break;
+  default:
+    break;
+  }
+
+  switch(yAlign)
+  {
+  case Y_ALIGN_TOP:
+    aPosition.y += aSize.y * aScale.y;
+    break;
+  case Y_ALIGN_BOTTOM:
+    aPosition.y -= aSize.y * aScale.y;
+    break;
+  default:
+    break;
+  }
+
+  switch(zAlign)
+  {
+  case Z_ALIGN_FRONT:
+    aPosition.z += aSize.z * aScale.z;
+    break;
+  case Z_ALIGN_BACK:
+    aPosition.z -= aSize.z * aScale.z;
+    break;
+  default:
+    break;
+  }
+}
+

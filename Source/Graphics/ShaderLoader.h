@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "ShaderData.h"
 #include "TextureData.h"
+#include "RenderableProperty.h"
 #if defined(_WIN32)
   #include "SDL.h"
   #include "SDL_ttf.h"
@@ -44,6 +45,7 @@ public:
   static TextureData* LoadTexture(HashString const &aTextureFileName, HashString const &aMinFilter, HashString const &aMagFilter);
   static TextureData* LoadText(HashString const &aFont, HashString const &aText, HashString const &aMinFilter, HashString const &aMagFilter, 
     Vector4 const &aForegroundColor, Vector4 const &aBackgroundColor, int aSize, int aMaxWidth);
+  static void SetShaderUniform(int aProgram, HashString const &aName, PropertyType const &aPropertyType, HashString const &aValue, HashString const &aId);
   static void Clear();
   
 private:

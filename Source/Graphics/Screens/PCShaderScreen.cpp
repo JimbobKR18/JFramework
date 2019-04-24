@@ -3,7 +3,7 @@
 #include "PCShaderSurface.h"
 #include "Constants.h"
 #include "SystemProperties.h"
-#include "SurfaceProperty.h"
+#include "RenderableProperty.h"
 #include "GraphicsManager.h"
 #include "ShaderLoader.h"
 
@@ -29,8 +29,8 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   SDL_Init(SDL_INIT_EVERYTHING);
   
   glewExperimental = GL_TRUE;
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
   SDL_GL_SetSwapInterval(1);
   // TODO, detect retina display, add SDL_WINDOW_ALLOW_HIGHDPI flag
@@ -50,20 +50,10 @@ PCShaderScreen::PCShaderScreen(GraphicsManager *aOwner, int aW, int aH, bool aFu
   }
   
   ChangeSize(aW, aH, aFullScreen);
-  
-#if defined(__APPLE__)
-  mFrameBuffer = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(),
-    SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter());
-  mFrameBuffer->Generate(GetOwner());
-#endif
 }
 
 PCShaderScreen::~PCShaderScreen()
 {
-#if defined(__APPLE__)
-  delete mFrameBuffer;
-#endif
-  
   glDeleteBuffers(1, &mVertexBufferID);
   glDeleteBuffers(1, &mTextureBufferID);
   glDeleteBuffers(1, &mPositionBufferID);
@@ -80,7 +70,7 @@ PCShaderScreen::~PCShaderScreen()
  * @brief Draw debug lines around objects, physics boxes only.
  * @param aObjects
  */
-void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
+void PCShaderScreen::DebugDraw(std::vector<Renderable*> const &aObjects)
 {
   // Draw debug hitboxes for objects in environment, requires PhysicsObject
   // Camera position and size
@@ -96,8 +86,8 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
     cameraMatrix[i] = viewMatrix.values[i/3][i%3];
   }
   
-  std::vector<Surface*>::const_iterator end = aObjects.end();
-  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end; ++it)
+  std::vector<Renderable*>::const_iterator end = aObjects.end();
+  for(std::vector<Renderable*>::const_iterator it = aObjects.begin(); it != end; ++it)
   {
     GameObject *obj = (*it)->GetOwner();
 
@@ -271,39 +261,39 @@ void PCShaderScreen::DebugDraw(std::vector<Surface*> const &aObjects)
  * @param aShaderData Shader information, specifically program id.
  * @param aProperty Property to set uniform to.
  */
-void PCShaderScreen::SetGlobalShaderProperty(ShaderData *aShaderData, SurfaceProperty const &aProperty)
+void PCShaderScreen::SetGlobalShaderProperty(ShaderData *aShaderData, RenderableProperty const &aProperty)
 {
   int program = aShaderData->mProgramID;
   glUseProgram(program);
-  SetShaderUniform(program, aProperty.GetName(), aProperty.GetType(), aProperty.GetTargetValue(), aProperty.GetId());
+  ShaderLoader::SetShaderUniform(program, aProperty.GetName(), aProperty.GetType(), aProperty.GetTargetValue(), aProperty.GetId());
 }
 
 /**
  * @brief Reset object texture on device reset.
- * @param aSurface Surface to reset.
+ * @param aRenderable Renderable to reset.
  * @param aOldData Data pre reset.
  * @param aNewData Data post reset.
  */
-void PCShaderScreen::ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData)
+void PCShaderScreen::ResetObjectTexture(Renderable* aRenderable, TextureData* aOldData, TextureData* aNewData)
 {
-  if(!aSurface)
+  if(!aRenderable)
     return;
-  PCShaderSurface *surface = (PCShaderSurface*)aSurface;
+  PCShaderSurface *surface = (PCShaderSurface*)aRenderable;
   if(surface->GetTextureID() == aOldData->mTextureID)
     surface->SetTextureID(aNewData->mTextureID);
 }
 
 /**
  * @brief Reset object shader on device reset.
- * @param aSurface Surface to reset.
+ * @param aRenderable Renderable to reset.
  * @param aOldData Data pre reset.
  * @param aNewData Data post reset.
  */
-void PCShaderScreen::ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData)
+void PCShaderScreen::ResetObjectShader(Renderable* aRenderable, ShaderData* aOldData, ShaderData* aNewData)
 {
-  if(!aSurface)
+  if(!aRenderable)
     return;
-  PCShaderSurface *surface = (PCShaderSurface*)aSurface;
+  PCShaderSurface *surface = (PCShaderSurface*)aRenderable;
   if(surface->GetProgramID() == aOldData->mProgramID)
     surface->SetProgramID(aNewData->mProgramID);
   if(surface->GetVertexShaderID() == aOldData->mVertexShaderID)
@@ -326,37 +316,52 @@ void PCShaderScreen::PreDraw()
  * @param aObjects
  * @param aCamera
  */
-void PCShaderScreen::Draw(std::map<int, std::vector<Surface*>> const &aObjects, Camera* aCamera)
+void PCShaderScreen::Draw(std::map<int, std::vector<Renderable*>> const &aObjects, Camera* aCamera)
 {
-  // TODO Mac does not use multiple cameras with framebuffers
-#ifndef __APPLE__
-  aCamera->GetFramebuffer()->Bind();
-  for(std::map<int, std::vector<Surface*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
-  {
-    DrawObjects(it->second, aCamera);
-#ifdef _DEBUG_DRAW
-    DebugDraw(it->second);
-#endif
-  }
-  aCamera->GetFramebuffer()->Unbind(mDefaultFrameBufferID);
+  std::map<int, std::vector<Renderable*>> isolatedRenderObjects;
   
+  // Draw everything with ordering intact
+  aCamera->GetFramebuffer(0)->Bind();
+  for(std::map<int, std::vector<Renderable*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
+  {
+    std::map<int, std::vector<Renderable*>> renderPassObjects = DrawObjects(it->second, aCamera);
+#ifdef _DEBUG_DRAW
+    //DebugDraw(it->second);
+#endif
+
+    // Set up objects that will be rendered again in separate buffer.
+    for(std::map<int, std::vector<Renderable*>>::iterator it2 = renderPassObjects.begin(); it2 != renderPassObjects.end(); ++it2)
+    {
+      // Optimize
+      if(isolatedRenderObjects.find(it2->first) == isolatedRenderObjects.end())
+      {
+        isolatedRenderObjects[it2->first].reserve(it->second.size());
+      }
+      isolatedRenderObjects[it2->first].insert(isolatedRenderObjects[it2->first].end(), it2->second.begin(), it2->second.end());
+    }
+  }
+  aCamera->GetFramebuffer(0)->Unbind(mDefaultFrameBufferID);
+  
+  // Draw objects that request isolated layering.
+  std::vector<int> inputTextures;
+  inputTextures.reserve(isolatedRenderObjects.size());
+  for(std::map<int, std::vector<Renderable*>>::iterator it = isolatedRenderObjects.begin(); it != isolatedRenderObjects.end(); ++it)
+  {
+    aCamera->GetFramebuffer(it->first)->Bind();
+    DrawObjects(it->second, aCamera);
+    aCamera->GetFramebuffer(it->first)->Unbind(mDefaultFrameBufferID);
+    inputTextures.push_back(aCamera->GetFramebuffer(it->first)->GetTextureID());
+  }
+  
+  // If primary, run through pipeline
   if(aCamera->GetPrimary())
-    aCamera->GetFramebuffer()->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
-#else
-  mFrameBuffer->Bind();
-  if(!aCamera->GetPrimary())
-    return;
-  
-  for(std::map<int, std::vector<Surface*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    DrawObjects(it->second, aCamera);
-#ifdef _DEBUG_DRAW
-    DebugDraw(it->second);
-#endif
+    Pipeline *pipeline = GetOwner()->GetPipeline(aCamera->GetPipelineName().ToHash());
+    Framebuffer *result = pipeline->Run(aCamera->GetFramebuffers());
+    result->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
+    //aCamera->GetFramebuffer(0)->SetInputTextures(inputTextures);
+    //aCamera->GetFramebuffer(0)->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
   }
-  mFrameBuffer->Unbind(mDefaultFrameBufferID);
-  mFrameBuffer->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
-#endif
 }
 
 /**
@@ -427,9 +432,9 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
   SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
 
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   GL_ERROR_CHECK();
-  glClearDepth(1.0f);
+  glClearDepth(0.0f);
   GL_ERROR_CHECK();
   
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -442,7 +447,9 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   GL_ERROR_CHECK();
   glDisable(GL_DEPTH_TEST);
   GL_ERROR_CHECK();
-  glDepthMask(GL_FALSE);
+  glDepthMask(GL_TRUE);
+  GL_ERROR_CHECK();
+  glDepthFunc(GL_GREATER);
   GL_ERROR_CHECK();
   if(aFullScreen)
   {
@@ -468,7 +475,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
   GL_ERROR_CHECK();
 
   glOrtho(0, width, height, 0, 1, -1);
-  //gluPerspective(45, (float)width / (float)height, 0.01f, 100.0f);
+  //gluPerspective(45, (float)width / (float)height, 1, -1);
   GL_ERROR_CHECK();
 
   glMatrixMode(GL_MODELVIEW);
@@ -503,9 +510,12 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
  * @brief Draw objects from camera perspective
  * @param aObjects
  * @param aCamera
+ * @return Objects that need to be rendered to own layers.
  */
-void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *aCamera)
+std::map<int, std::vector<Renderable*>> PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera)
 {
+  std::map<int, std::vector<Renderable*>> ret;
+  
   // Camera position and size
   Transform *cameraTransform = aCamera->GetOwner()->GET<Transform>();
   Vector3 cameraPosition = cameraTransform->GetPosition() + aCamera->GetOffset();
@@ -532,11 +542,11 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
   // Draw each object
   // NOTE: The objects are sorted by texture id
   int activeTexture = 0;
-  std::vector<Surface*>::const_iterator end = aObjects.end();
-  for(std::vector<Surface*>::const_iterator it = aObjects.begin(); it != end;)
+  std::vector<Renderable*>::const_iterator end = aObjects.end();
+  for(std::vector<Renderable*>::const_iterator it = aObjects.begin(); it != end;)
   {
     // Get the texture id of the surface
-    Surface *surface = *it;
+    Renderable *surface = *it;
     GLuint texture = surface->GetTextureID();
     GLuint program = surface->GetProgramID();
     Viewspace viewSpace = surface->GetViewMode();
@@ -581,7 +591,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
           (*it)->GetTextureID() == texture && (*it)->GetViewMode() == viewSpace)
     {
       GameObject *owner = (*it)->GetOwner();
-      Surface *surface = *it;
+      Renderable *surface = *it;
       Transform *transform = owner->GET<Transform>();
       
       if(surface->GetNoRender())
@@ -593,9 +603,7 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
       // Get transforms in local and world space.
       Matrix33 modelTransform = transform->GetHierarchicalRotation() * Matrix33(transform->GetHierarchicalScale());
       Vector3 position = transform->GetHierarchicalPosition();
-      TextureCoordinates *texCoord = surface->GetTextureData();
       Vector3 &size = transform->GetSize();
-      Vector4 &color = surface->GetColor();
       
       // If transform is a percentage of screen, convert.
       if((*it)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
@@ -604,72 +612,30 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
         position.y = (cameraSize.y * 2.0f) * position.y;
       }
 
-      // Move object based on its alignment
-      AlignmentHelper(transform, size, position, transform->GetScale());
-      
-      // Get the basic coordinates for the quad
-      Vector3 topLeft(-size.x, -size.y, 0);
-      Vector3 topRight(size.x, -size.y, 0);
-      Vector3 bottomRight(size.x, size.y, 0);
-      Vector3 bottomLeft(-size.x, size.y, 0);
-      
-      // Model transform
-      topLeft = modelTransform * topLeft;
-      topRight = modelTransform * topRight;
-      bottomLeft = modelTransform * bottomLeft;
-      bottomRight = modelTransform * bottomRight;
-      
-      // Calculate normal
-      Vector3 normal = topRight.Cross(topLeft).normalize();
-      
-      // Vertex points
-      PushRenderDataV3(vertexData, vertexPosLocation, topLeft);
-      PushRenderDataV3(vertexData, vertexPosLocation, bottomLeft);
-      PushRenderDataV3(vertexData, vertexPosLocation, bottomRight);
-      PushRenderDataV3(vertexData, vertexPosLocation, bottomRight);
-      PushRenderDataV3(vertexData, vertexPosLocation, topRight);
-      PushRenderDataV3(vertexData, vertexPosLocation, topLeft);
-      
-      // Texture coordinates
-      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(0)));
-      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(1)));
-      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(1)));
-      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(1)));
-      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(1), texCoord->GetYValue(0)));
-      PushRenderDataV2(textureData, texCoordPosLocation, Vector2(texCoord->GetXValue(0), texCoord->GetYValue(0)));
-      
-      // Position data
-      PushRenderDataV3(positionData, objectPosLocation, position);
-      PushRenderDataV3(positionData, objectPosLocation, position);
-      PushRenderDataV3(positionData, objectPosLocation, position);
-      PushRenderDataV3(positionData, objectPosLocation, position);
-      PushRenderDataV3(positionData, objectPosLocation, position);
-      PushRenderDataV3(positionData, objectPosLocation, position);
-      
-      // Color data
-      PushRenderDataV4(colorData, colorPosLocation, color);
-      PushRenderDataV4(colorData, colorPosLocation, color);
-      PushRenderDataV4(colorData, colorPosLocation, color);
-      PushRenderDataV4(colorData, colorPosLocation, color);
-      PushRenderDataV4(colorData, colorPosLocation, color);
-      PushRenderDataV4(colorData, colorPosLocation, color);
-      
-      // Normal data
-      PushRenderDataV3(normalData, normalLocation, normal);
-      PushRenderDataV3(normalData, normalLocation, normal);
-      PushRenderDataV3(normalData, normalLocation, normal);
-      PushRenderDataV3(normalData, normalLocation, normal);
-      PushRenderDataV3(normalData, normalLocation, normal);
-      PushRenderDataV3(normalData, normalLocation, normal);
+      VertexContainer vertices = surface->GetVertexData(position);
+      for(VertexIT it = vertices.begin(); it != vertices.end(); ++it)
+      {
+        VertexData &vertex = *it;
+        PushRenderDataV3(positionData, objectPosLocation, vertex.mPosition);
+        PushRenderDataV3(vertexData, vertexPosLocation, vertex.mVertex);
+        PushRenderDataV2(textureData, texCoordPosLocation, vertex.mTextureCoord);
+        PushRenderDataV4(colorData, colorPosLocation, vertex.mColor);
+        PushRenderDataV3(normalData, normalLocation, vertex.mNormal);
+      }
       
       for(int i = 0; i < 6; ++i)
       {
         indices.push_back(i + (iteration * 6));
       }
       
+      for(std::vector<int>::const_iterator it2 = surface->GetIsolatedRenderLayers().begin(); it2 != surface->GetIsolatedRenderLayers().end(); ++it2)
+      {
+        ret[*it2].push_back(surface);
+      }
+      
       // If this object has different properties, separate into its own draw call.
       ++it;
-      if(it != end && !(*it)->SurfacePropertiesEquals(surface))
+      if(it != end && !(*it)->RenderablePropertiesEquals(surface))
       {
         break;
       }
@@ -723,18 +689,6 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     
     // Reset shader property values.
     SetShaderProperties(surface, false);
-
-    // Reset to default texture
-    /*glBindTexture(GL_TEXTURE_2D, 0);
-    GL_ERROR_CHECK();
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    GL_ERROR_CHECK();
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    GL_ERROR_CHECK();
-    glUseProgram(0);
-    GL_ERROR_CHECK();
-    glBindVertexArray(0);
-    GL_ERROR_CHECK();*/
     
     vertexData.clear();
     textureData.clear();
@@ -742,27 +696,29 @@ void PCShaderScreen::DrawObjects(std::vector<Surface*> const &aObjects, Camera *
     positionData.clear();
     indices.clear();
   }
+  
+  return ret;
 }
 
 /**
  * @brief Set optional uniforms for surface.
- * @param aSurface Surface.
+ * @param aRenderable Renderable.
  */
-void PCShaderScreen::SetOptionalUniforms(Surface* aSurface)
+void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable)
 {
   GLint location = -1;
-  location = glGetUniformLocation(aSurface->GetProgramID(), "textureWidth");
+  location = glGetUniformLocation(aRenderable->GetProgramID(), "textureWidth");
   GL_ERROR_CHECK();
   if(location != -1)
   {
-    glUniform1i(location, static_cast<int>(aSurface->GetTextureSize().x));
+    glUniform1i(location, static_cast<int>(aRenderable->GetTextureSize().x));
     GL_ERROR_CHECK();
   }
-  location = glGetUniformLocation(aSurface->GetProgramID(), "textureHeight");
+  location = glGetUniformLocation(aRenderable->GetProgramID(), "textureHeight");
   GL_ERROR_CHECK();
   if(location != -1)
   {
-    glUniform1i(location, static_cast<int>(aSurface->GetTextureSize().y));
+    glUniform1i(location, static_cast<int>(aRenderable->GetTextureSize().y));
     GL_ERROR_CHECK();
   }
 }
@@ -803,18 +759,18 @@ bool PCShaderScreen::BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd)
 /**
  * @brief Set shader properties based on surface. HINT: If you're not seeing your intended results, remember
  *        to declare the field as uniform in your shader.
- * @param aSurface Surface to set properties for.
+ * @param aRenderable Renderable to set properties for.
  * @param aActive Decide whether or not to set values or reset.
  */
-void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
+void PCShaderScreen::SetShaderProperties(Renderable *aRenderable, bool aActive)
 {
   // Set properties for shader. Separated by program id.
-  GLuint program = aSurface->GetProgramID();
-  PropertyContainer const &properties = aSurface->GetProperties();
+  GLuint program = aRenderable->GetProgramID();
+  PropertyContainer const &properties = aRenderable->GetProperties();
   PropertyContainerConstIt propertyEnd = properties.end();
   for(PropertyContainerConstIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
   {
-    SurfaceProperty *property = propertyIt->second;
+    RenderableProperty *property = propertyIt->second;
     HashString value = property->GetTargetValue();
     
     if(!aActive)
@@ -824,7 +780,7 @@ void PCShaderScreen::SetShaderProperties(Surface *aSurface, bool aActive)
       //DebugLogPrint("Setting uniform %s to %s\n", property->GetName().ToCharArray(), value.ToCharArray());
     #endif
     
-    SetShaderUniform(program, property->GetName(), property->GetType(), value, property->GetId());
+    ShaderLoader::SetShaderUniform(program, property->GetName(), property->GetType(), value, property->GetId());
   }
 }
 
@@ -953,165 +909,5 @@ void PCShaderScreen::BindAttributeV4(GLenum aTarget, int const aBufferID, int co
     GL_ERROR_CHECK();
     glBindBuffer(aTarget, 0);
     GL_ERROR_CHECK();
-  }
-}
-
-/**
- * @brief Set shader uniform by program id
- * @param aProgram Program that uniform is in
- * @param aName Name of uniform
- * @param aPropertyType Property type of uniform
- * @param aValue Value of uniform
- * @param aId Smapler id if applicable
- */
-void PCShaderScreen::SetShaderUniform(int aProgram, HashString const &aName, PropertyType const &aPropertyType, HashString const &aValue, HashString const &aId)
-{
-  switch(aPropertyType)
-  {
-    case PropertyType::INT1:
-    {
-      glUniform1i(glGetUniformLocation(aProgram, aName), aValue.ToInt());
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::INT2:
-    {
-      std::vector<int> intVector = aValue.ToIntVector();
-      glUniform2i(glGetUniformLocation(aProgram, aName), intVector[0], intVector[1]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::INT3:
-    {
-      std::vector<int> intVector = aValue.ToIntVector();
-      glUniform3i(glGetUniformLocation(aProgram, aName), intVector[0], intVector[1], intVector[2]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::INT4:
-    {
-      std::vector<int> intVector = aValue.ToIntVector();
-      glUniform4i(glGetUniformLocation(aProgram, aName), intVector[0], intVector[1], intVector[2], intVector[3]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT1:
-    {
-      glUniform1f(glGetUniformLocation(aProgram, aName), aValue.ToFloat());
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT2:
-    {
-      std::vector<float> floatVector = aValue.ToFloatVector();
-      glUniform2f(glGetUniformLocation(aProgram, aName), floatVector[0], floatVector[1]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT3:
-    {
-      std::vector<float> floatVector = aValue.ToFloatVector();
-      glUniform3f(glGetUniformLocation(aProgram, aName), floatVector[0], floatVector[1], floatVector[2]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT4:
-    {
-      std::vector<float> floatVector = aValue.ToFloatVector();
-      glUniform4f(glGetUniformLocation(aProgram, aName), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::SAMPLER2:
-    {
-      int id = aId.ToInt();
-      glActiveTexture(GL_TEXTURE0 + id);
-      GL_ERROR_CHECK();
-      glBindTexture(GL_TEXTURE_2D, aValue.ToInt());
-      GL_ERROR_CHECK();
-      glUniform1i(glGetUniformLocation(aProgram, aName), id);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::INT1VECTOR:
-    {
-      std::vector<int> intVector = aValue.ToIntVector();
-      glUniform1iv(glGetUniformLocation(aProgram, aName), intVector.size(), &intVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::INT2VECTOR:
-    {
-      std::vector<int> intVector = aValue.ToIntVector();
-      glUniform2iv(glGetUniformLocation(aProgram, aName), intVector.size() / 2, &intVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::INT3VECTOR:
-    {
-      std::vector<int> intVector = aValue.ToIntVector();
-      glUniform3iv(glGetUniformLocation(aProgram, aName), intVector.size() / 3, &intVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::INT4VECTOR:
-    {
-      std::vector<int> intVector = aValue.ToIntVector();
-      glUniform4iv(glGetUniformLocation(aProgram, aName), intVector.size() / 4, &intVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT1VECTOR:
-    {
-      std::vector<float> floatVector = aValue.ToFloatVector();
-      glUniform1fv(glGetUniformLocation(aProgram, aName), floatVector.size(), &floatVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT2VECTOR:
-    {
-      std::vector<float> floatVector = aValue.ToFloatVector();
-      glUniform2fv(glGetUniformLocation(aProgram, aName), floatVector.size() / 2, &floatVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT3VECTOR:
-    {
-      std::vector<float> floatVector = aValue.ToFloatVector();
-      glUniform3fv(glGetUniformLocation(aProgram, aName), floatVector.size() / 3, &floatVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::FLOAT4VECTOR:
-    {
-      std::vector<float> floatVector = aValue.ToFloatVector();
-      glUniform4fv(glGetUniformLocation(aProgram, aName), floatVector.size() / 4, &floatVector[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    case PropertyType::SAMPLER2VECTOR:
-    {
-      std::vector<int> ids = aId.ToIntVector();
-      std::vector<int> values = aValue.ToIntVector();
-      
-      if(ids.size() != values.size())
-        assert(!"Sampler id and value sizes do not match. (PCShaderScreen.cpp)(SetShaderProperties)");
-      
-      for(int i = 0; i < ids.size(); ++i)
-      {
-        glActiveTexture(GL_TEXTURE0 + ids[i]);
-        GL_ERROR_CHECK();
-        glBindTexture(GL_TEXTURE_2D, values[i]);
-        GL_ERROR_CHECK();
-      }
-      glUniform1iv(glGetUniformLocation(aProgram, aName), ids.size(), &ids[0]);
-      GL_ERROR_CHECK();
-      break;
-    }
-    default:
-    {
-      assert(!"Invalid property type.");
-      break;
-    }
   }
 }

@@ -17,8 +17,7 @@ struct TextureData
   // Common
   HashString mTextureName;
   unsigned mTextureID;
-  unsigned mWidth;
-  unsigned mHeight;
+  Vector2 mSize;
   HashString mMinFilter;
   HashString mMagFilter;
   
@@ -27,26 +26,26 @@ struct TextureData
   HashString mText;
   Vector4 mForegroundColor;
   Vector4 mBackgroundColor; 
-  int mSize;
+  int mFontSize;
   int mMaxWidth;
 
-  TextureData() : mTextureName(), mTextureID(-1), mWidth(0), mHeight(0), 
+  TextureData() : mTextureName(), mTextureID(-1), mSize(),
                   mMinFilter(SystemProperties::GetMinFilter()), mMagFilter(SystemProperties::GetMagFilter()),
                   mFont(), mText(), mForegroundColor(),
-                  mBackgroundColor(), mSize(0), mMaxWidth(0) {}
+                  mBackgroundColor(), mFontSize(0), mMaxWidth(0) {}
   TextureData(TextureData const &aRhs) : mTextureName(aRhs.mTextureName), mTextureID(aRhs.mTextureID), 
-  mWidth(aRhs.mWidth), mHeight(aRhs.mHeight), mMinFilter(aRhs.mMinFilter), mMagFilter(aRhs.mMagFilter), 
+  mSize(aRhs.mSize), mMinFilter(aRhs.mMinFilter), mMagFilter(aRhs.mMagFilter), 
   mFont(aRhs.mFont), mText(aRhs.mText), mForegroundColor(aRhs.mForegroundColor), mBackgroundColor(aRhs.mBackgroundColor), 
-  mSize(aRhs.mSize), mMaxWidth(aRhs.mMaxWidth)
+  mFontSize(aRhs.mFontSize), mMaxWidth(aRhs.mMaxWidth)
   {
   }
-  TextureData(HashString const &aTextureName, unsigned aTextureID, unsigned aWidth, unsigned aHeight,
+  TextureData(HashString const &aTextureName, unsigned aTextureID, Vector2 const &aSize,
               HashString const &aMinFilter, HashString const &aMagFilter,
               HashString const &aFont, HashString const &aText, Vector4 const &aForegroundColor, 
-              Vector4 const &aBackgroundColor, int aSize, int aMaxWidth) :
-    mTextureName(aTextureName), mTextureID(aTextureID), mWidth(aWidth), mHeight(aHeight), 
+              Vector4 const &aBackgroundColor, int aFontSize, int aMaxWidth) :
+    mTextureName(aTextureName), mTextureID(aTextureID), mSize(aSize), 
     mMinFilter(aMinFilter), mMagFilter(aMagFilter), mFont(aFont), mText(aText),
-    mForegroundColor(aForegroundColor), mBackgroundColor(aBackgroundColor), mSize(aSize), mMaxWidth(aMaxWidth)
+    mForegroundColor(aForegroundColor), mBackgroundColor(aBackgroundColor), mFontSize(aFontSize), mMaxWidth(aMaxWidth)
   {
   }
   virtual ~TextureData()
@@ -56,13 +55,12 @@ struct TextureData
   {
     mTextureName = aRhs.mTextureName;
     mTextureID = aRhs.mTextureID;
-    mWidth = aRhs.mWidth;
-    mHeight = aRhs.mHeight;
+    mSize = aRhs.mSize;
     mFont = aRhs.mFont; 
     mText = aRhs.mText;
     mForegroundColor = aRhs.mForegroundColor;
     mBackgroundColor = aRhs.mBackgroundColor;
-    mSize = aRhs.mSize; 
+    mFontSize = aRhs.mFontSize; 
     mMaxWidth = aRhs.mMaxWidth;
     mMinFilter = aRhs.mMinFilter;
     mMagFilter = aRhs.mMagFilter;

@@ -21,7 +21,7 @@ Tree::~Tree()
  * @brief Get objects in this section.
  * @return The objects in the section.
  */
-std::unordered_set<Surface*> const &Tree::GetObjects() const
+std::unordered_set<Renderable*> const &Tree::GetObjects() const
 {
   return mObjects;
 }
@@ -30,7 +30,7 @@ std::unordered_set<Surface*> const &Tree::GetObjects() const
  * @brief Get results of last query.
  * @return Last query results.
  */
-std::unordered_set<Surface*> &Tree::GetLastQuery()
+std::unordered_set<Renderable*> &Tree::GetLastQuery()
 {
   return mCachedQuery;
 }

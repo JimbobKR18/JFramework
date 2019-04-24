@@ -21,10 +21,10 @@
   #include <SDL2/SDL_ttf.h>
 #endif
 
-#include "Surface.h"
+#include "Renderable.h"
 #include "MathExt.h"
 
-class PCShaderSurface : public Surface
+class PCShaderSurface : public Renderable
 {
 private:
   GLuint        mTextureID;
@@ -47,8 +47,8 @@ public:
   virtual void        LoadShaders(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename);
   
   // Getters
-  unsigned            GetTextureID() const;
-  unsigned            GetProgramID() const;
+  virtual unsigned    GetTextureID() const;
+  virtual unsigned    GetProgramID() const;
   unsigned            GetVertexShaderID() const;
   unsigned            GetFragmentShaderID() const;
   HashString const&   GetVertexShaderFilename() const;
@@ -59,6 +59,9 @@ public:
   void                SetProgramID(unsigned const aProgramID);
   void                SetVertexShaderID(unsigned const aVertexShaderID);
   void                SetFragmentShaderID(unsigned const aFragmentShaderID);
+  
+  // Virtuals
+  virtual VertexContainer GetVertexData(Vector3 const &aPosition) const;
 
   // Derived from Component
   virtual void        Update();

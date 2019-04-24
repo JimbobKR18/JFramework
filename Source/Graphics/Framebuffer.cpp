@@ -1,12 +1,13 @@
 #include "Framebuffer.h"
 
-Framebuffer::Framebuffer() : mProperties()
+Framebuffer::Framebuffer() : mProperties(), mInputTextures()
 {
 }
 
 Framebuffer::~Framebuffer()
 {
   ClearProperties();
+  mInputTextures.clear();
 }
 
 /**
@@ -29,13 +30,13 @@ void Framebuffer::AddOrEditProperty(HashString const &aName, PropertyType const 
 {
   if(mProperties.find(aName.ToHash()) != mProperties.end())
   {
-    SurfaceProperty *surfaceProperty = mProperties[aName.ToHash()];
+    RenderableProperty *surfaceProperty = mProperties[aName.ToHash()];
     surfaceProperty->SetType(aType);
     surfaceProperty->SetTargetValue(aTargetValue);
     surfaceProperty->SetDefaultValue(aDefaultValue);
     return;
   }
-  mProperties[aName.ToHash()] = new SurfaceProperty(aName, aType, aTargetValue, aDefaultValue);
+  mProperties[aName.ToHash()] = new RenderableProperty(aName, aType, aTargetValue, aDefaultValue);
 }
 
 /**
@@ -49,4 +50,22 @@ void Framebuffer::ClearProperties()
     delete it->second;
   }
   mProperties.clear();
+}
+
+/**
+ * @brief Set input textures
+ * @return Input texture ids
+ */
+std::vector<int> const &Framebuffer::GetInputTextures() const
+{
+  return mInputTextures;
+}
+
+/**
+ * @brief Set input textures.
+ * @param aInputTextures Input texture ids.
+ */
+void Framebuffer::SetInputTextures(std::vector<int> const &aInputTextures)
+{
+  mInputTextures = aInputTextures;
 }

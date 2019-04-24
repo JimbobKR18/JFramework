@@ -11,7 +11,7 @@
 #include "LevelManager.h"
 #include "ChemistryMaterial.h"
 #include "Transform.h"
-#include "Surface.h"
+#include "Renderable.h"
 #include "PhysicsObject.h"
 #include "Level.h"
 #include "Threading.h"
@@ -102,8 +102,8 @@ void TileMapGenerator::Update()
   }
 
   // Set frames
-  std::unordered_map<Surface*, int>::iterator animatedEnd = mAnimatedObjects.end();
-  for (std::unordered_map<Surface*, int>::iterator it = mAnimatedObjects.begin(); it != animatedEnd; ++it)
+  std::unordered_map<Renderable*, int>::iterator animatedEnd = mAnimatedObjects.end();
+  for (std::unordered_map<Renderable*, int>::iterator it = mAnimatedObjects.begin(); it != animatedEnd; ++it)
   {
     std::vector<int> animation = mAnimations.find(it->second)->second;
     int currentFrame = mCurrentFrames.find(it->second)->second;
@@ -393,7 +393,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       mOwner->UpdateBoundaries(position, aTileSize);
 
       // Set the frame data
-      Surface *surface = obj->GET<Surface>();
+      Renderable *surface = obj->GET<Renderable>();
       TextureCoordinates *textureData = surface->GetTextureData();
       surface->SetAnimated(false);
       surface->SetFrameByID(mTiles[i]);

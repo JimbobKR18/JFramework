@@ -7,7 +7,7 @@
 
 #include "LUATypes.h"
 #include "Core/Common.h"
-#include "Components/Surface.h"
+#include "Components/Renderable.h"
 #include "Components/Transform.h"
 #include "Components/PhysicsObject.h"
 #include "Components/ChemistryElement.h"
@@ -102,7 +102,7 @@ namespace LUABind
     Transform::SerializeLUA();
     
     // Graphics
-    Surface::SerializeLUA();
+    Renderable::SerializeLUA();
     PCShaderSurface::SerializeLUA();
     Camera::SerializeLUA();
     

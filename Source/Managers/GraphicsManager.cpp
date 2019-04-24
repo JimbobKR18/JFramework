@@ -2,6 +2,7 @@
 #include "GraphicsManager.h"
 #include "ObjectDeleteMessage.h"
 #include "ObjectManager.h"
+#include "Parsers/ParserFactory.h"
 
 #if !defined(IOS) && !defined(ANDROID)
   #define SHADER_COMPATIBLE
@@ -11,9 +12,6 @@
   #include "PCShaderScreen.h"
   #include "PCShaderSurface.h"
   #include "ShaderLoader.h"
-#else
-  #include "PCScreen.h"
-  #include "PCSurface.h"
 #endif
 
 #define DEFAULT_TEXTURE_NAME "DefaultEmptyFirstBlank"
@@ -22,22 +20,25 @@ int const DEFAULT_QUADTREE_SIZE = 3000;
 unsigned const DEFAULT_QUADTREE_CAPACITY = 8;
 unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
-                                                                           mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
+                                                                           mRenderables(), mNewRenderables(), mMovingRenderables(), mUIElements(), mTextures(), mShaders(), mCameras(), 
+                                                                           mUnsortedLayers(), mPipelines(), mScreen(nullptr), mPrimaryCamera(nullptr)
 
 {
   // Add Default Texture
-  AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, 0, 0, 
+  AddTexturePairing(DEFAULT_TEXTURE_NAME, new TextureData(DEFAULT_TEXTURE_NAME, -1, Vector2(), 
     SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter(), "", "", Vector4(), Vector4(), 0, 0));
 #ifdef SHADER_COMPATIBLE
   mTree = new QuadTree(DEFAULT_QUADTREE_CAPACITY, Vector3(-DEFAULT_QUADTREE_SIZE, -DEFAULT_QUADTREE_SIZE, 0), Vector3(DEFAULT_QUADTREE_SIZE, DEFAULT_QUADTREE_SIZE, 0));
   mScreen = new PCShaderScreen(this, aWidth, aHeight, aFullScreen);
+  CreatePipeline("Default.txt");
 #else
   assert(!"Needs screen for this device.");
 #endif
 }
 
 GraphicsManager::GraphicsManager(GraphicsManager const &aGraphicsManager) : Manager(nullptr, "GraphicsManager", GraphicsManager::sUID),
-  mTree(nullptr), mSurfaces(), mNewSurfaces(), mMovingSurfaces(), mUIElements(), mTextures(), mShaders(), mCameras(), mScreen(nullptr), mPrimaryCamera(nullptr)
+  mTree(nullptr), mRenderables(), mNewRenderables(), mMovingRenderables(), mUIElements(), mTextures(), mShaders(), mCameras(), 
+  mUnsortedLayers(), mPipelines(), mScreen(nullptr), mPrimaryCamera(nullptr)
 {
   assert(!"Not allowed");
 }
@@ -52,8 +53,13 @@ GraphicsManager::~GraphicsManager()
   {
     delete it->second;
   }
+  for(std::unordered_map<int, Pipeline*>::iterator it = mPipelines.begin(); it != mPipelines.end(); ++it)
+  {
+    delete it->second;
+  }
   mTextures.clear();
   mShaders.clear();
+  mPipelines.clear();
   ShaderLoader::Clear();
   delete mScreen;
   delete mTree;
@@ -65,7 +71,7 @@ GraphicsManager::~GraphicsManager()
 void GraphicsManager::Update()
 {
   // Only insert static objects into QuadTree.
-  for(SurfaceIT it = mNewSurfaces.begin(); it != mNewSurfaces.end(); ++it)
+  for(RenderableIT it = mNewRenderables.begin(); it != mNewRenderables.end(); ++it)
   {
     GameObject *object = (*it)->GetOwner();
     if(object->GetPlacement() == ObjectPlacement::STATIC)
@@ -74,20 +80,20 @@ void GraphicsManager::Update()
     }
     else
     {
-      mMovingSurfaces.insert(*it);
+      mMovingRenderables.insert(*it);
     }
   }
-  mNewSurfaces.clear();
+  mNewRenderables.clear();
   
-  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> cameraObjectRenders = mScreen->PruneObjects(mTree, mMovingSurfaces, mCameras);
-  std::vector<Surface*> uiElements(mUIElements.begin(), mUIElements.end());
+  std::unordered_map<Camera*, std::map<int, std::vector<Renderable*>>> cameraObjectRenders = mScreen->PruneObjects(mTree, mMovingRenderables, mCameras);
+  std::vector<Renderable*> uiElements(mUIElements.begin(), mUIElements.end());
   mScreen->PreDraw();
   mScreen->SortUI(uiElements);
-  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator cameraObjectRenderEnd = cameraObjectRenders.end();
-  for(std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenderEnd; ++it)
+  std::unordered_map<Camera*, std::map<int, std::vector<Renderable*>>>::iterator cameraObjectRenderEnd = cameraObjectRenders.end();
+  for(std::unordered_map<Camera*, std::map<int, std::vector<Renderable*>>>::iterator it = cameraObjectRenders.begin(); it != cameraObjectRenderEnd; ++it)
   {
-    std::map<int, std::vector<Surface*>>::iterator layerEnd = it->second.end();
-    for(std::map<int, std::vector<Surface*>>::iterator it2 = it->second.begin(); it2 != layerEnd; ++it2)
+    std::map<int, std::vector<Renderable*>>::iterator layerEnd = it->second.end();
+    for(std::map<int, std::vector<Renderable*>>::iterator it2 = it->second.begin(); it2 != layerEnd; ++it2)
     {
       if(mUnsortedLayers.find(it2->first) == mUnsortedLayers.end())
       {
@@ -127,99 +133,99 @@ void GraphicsManager::SerializeLUA()
 }
 
 /**
- * @brief Create a new surface with owner this.
+ * @brief Create a new renderable with owner this.
  */
-Surface *GraphicsManager::CreateSurface()
+Renderable *GraphicsManager::CreateRenderable(HashString const &aType)
 {
 #ifdef SHADER_COMPATIBLE
-  Surface *surface = new PCShaderSurface(this);
+  Renderable *renderable = new PCShaderSurface(this);
 #else
-  assert(!"Create surface for device.");
+  assert(!"Create renderable for device.");
 #endif
 
-  AddSurface(surface);
+  AddRenderable(renderable);
 
-  return surface;
+  return renderable;
 }
 
 /**
- * @brief Create surface at UI layer, handy helper.
+ * @brief Create renderable at UI layer, handy helper.
  */
-Surface *GraphicsManager::CreateUISurface()
+Renderable *GraphicsManager::CreateUIRenderable(HashString const &aType)
 {
 #ifdef SHADER_COMPATIBLE
-  Surface *surface = new PCShaderSurface(this);
+  Renderable *renderable = new PCShaderSurface(this);
 #else
-  assert(!"Create surface for device.");
+  assert(!"Create renderable for device.");
 #endif
 
-  AddUISurface(surface);
+  AddUIRenderable(renderable);
 
-  return surface;
+  return renderable;
 }
 
 /**
- * @brief Delete and remove surface.
- * @param aSurface
+ * @brief Delete and remove renderable.
+ * @param aRenderable
  */
-void GraphicsManager::DeleteSurface(Surface *aSurface)
+void GraphicsManager::DeleteRenderable(Renderable *aRenderable)
 {
-  RemoveSurface(aSurface);
-  delete aSurface;
+  RemoveRenderable(aRenderable);
+  delete aRenderable;
 }
 
 /**
- * @brief Add surface to list.
- * @param aSurface
+ * @brief Add renderable to list.
+ * @param aRenderable
  */
-void GraphicsManager::AddSurface(Surface *aSurface)
+void GraphicsManager::AddRenderable(Renderable *aRenderable)
 {
-  mSurfaces.insert(aSurface);
-  mNewSurfaces.insert(aSurface);
-  aSurface->SetUIElement(false);
+  mRenderables.insert(aRenderable);
+  mNewRenderables.insert(aRenderable);
+  aRenderable->SetUIElement(false);
 }
 
 /**
- * @brief Add surface to UI list.
- * @param aSurface
+ * @brief Add renderable to UI list.
+ * @param aRenderable
  */
-void GraphicsManager::AddUISurface(Surface *aSurface)
+void GraphicsManager::AddUIRenderable(Renderable *aRenderable)
 {
-  mUIElements.insert(aSurface);
-  mNewSurfaces.insert(aSurface);
-  aSurface->SetUIElement(true);
+  mUIElements.insert(aRenderable);
+  mNewRenderables.insert(aRenderable);
+  aRenderable->SetUIElement(true);
 }
 
 /**
- * @brief Remove surface, do not delete.
- * @param aSurface
+ * @brief Remove renderable, do not delete.
+ * @param aRenderable
  */
-void GraphicsManager::RemoveSurface(Surface *aSurface)
+void GraphicsManager::RemoveRenderable(Renderable *aRenderable)
 {
-  mSurfaces.erase(aSurface);
-  mNewSurfaces.erase(aSurface);
-  mUIElements.erase(aSurface);
-  mMovingSurfaces.erase(aSurface);
-  mTree->Remove(aSurface);
+  mRenderables.erase(aRenderable);
+  mNewRenderables.erase(aRenderable);
+  mUIElements.erase(aRenderable);
+  mMovingRenderables.erase(aRenderable);
+  mTree->Remove(aRenderable);
 }
 
 /**
- * @brief Remove and delete all surfaces
+ * @brief Remove and delete all renderables
  */
-void GraphicsManager::ClearSurfaces()
+void GraphicsManager::ClearRenderables()
 {
-  for(SurfaceIT it = mSurfaces.begin(); it != mSurfaces.end();)
+  for(RenderableIT it = mRenderables.begin(); it != mRenderables.end();)
   {
-    DeleteSurface(*it);
+    DeleteRenderable(*it);
     mTree->Remove(*it);
-    it = mSurfaces.begin();
+    it = mRenderables.begin();
   }
-  for(SurfaceIT it = mUIElements.begin(); it != mUIElements.end();)
+  for(RenderableIT it = mUIElements.begin(); it != mUIElements.end();)
   {
-    DeleteSurface(*it);
+    DeleteRenderable(*it);
     it = mUIElements.begin();
   }
-  mMovingSurfaces.clear();
+  mMovingRenderables.clear();
 }
 
 /**
@@ -307,6 +313,61 @@ void GraphicsManager::SetPrimaryCamera(Camera *aCamera)
   mPrimaryCamera = aCamera;
   if(mPrimaryCamera)
     mPrimaryCamera->SetPrimary(true);
+}
+
+/**
+ * @brief Create pipeline from file
+ * @param aFileName Name of file, located in Shaders folder
+ * @return New pipeline
+ */
+Pipeline* GraphicsManager::CreatePipeline(HashString const &aFileName)
+{
+  Parser *parser = ParserFactory::CreateInputParser("Shaders", aFileName);
+  HashString const STEP = "Step_";
+  HashString const PASS = "Pass_";
+  
+  ParserNode *pipelineNode = parser->GetBaseRoot();
+  HashString name = pipelineNode->Find("Name")->GetValue();
+  
+  Pipeline *pipeline = new Pipeline(name);
+  int stepIndex = 0;
+  HashString currentStep = STEP + Common::IntToString(stepIndex);
+  while(pipelineNode->Find(currentStep))
+  {
+    ParserNode *stepNode = pipelineNode->Find(currentStep);
+    int passIndex = 0;
+    HashString currentPass = PASS + Common::IntToString(passIndex);
+    while(stepNode->Find(currentPass))
+    {
+      ParserNode *passNode = stepNode->Find(currentPass);
+      HashString vertexShader = passNode->Find("VertexShader")->GetValue();
+      HashString fragmentShader = passNode->Find("FragmentShader")->GetValue();
+      Pass *pass = new Pass(this, vertexShader, fragmentShader);
+      pipeline->AddPass(stepIndex, pass);
+      
+      ++passIndex;
+      currentPass = PASS + Common::IntToString(passIndex);
+    }
+    
+    ++stepIndex;
+    currentStep = STEP + Common::IntToString(stepIndex);
+  }
+  
+  mPipelines[name.ToHash()] = pipeline;
+  return pipeline;
+}
+
+/**
+ * @brief Get pipeline
+ * @param aId Id of pipeline
+ * @return Pipeline if available, otherwise nullptr
+ */
+Pipeline* GraphicsManager::GetPipeline(int const &aId)
+{
+  if(mPipelines.find(aId) == mPipelines.end())
+    return nullptr;
+    
+  return mPipelines[aId];
 }
 
 /**
@@ -423,7 +484,7 @@ bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
  * @param aProperty Property to set shader to.
  */
 void GraphicsManager::SetGlobalShaderProperty(HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename,
-                                            SurfaceProperty const &aProperty)
+                                            RenderableProperty const &aProperty)
 {
   HashString key = aVertexShaderFilename + aFragmentShaderFilename;
   if(ShaderDataExists(key))
@@ -448,7 +509,7 @@ void GraphicsManager::ResetDevice()
     
     if(!data->mFont.Empty())
       newTexture = ShaderLoader::LoadText(data->mFont, data->mText, data->mMinFilter, data->mMagFilter, 
-        data->mForegroundColor, data->mBackgroundColor, data->mSize, data->mMaxWidth);
+        data->mForegroundColor, data->mBackgroundColor, data->mFontSize, data->mMaxWidth);
     else
       newTexture = ShaderLoader::LoadTexture(data->mTextureName, data->mMinFilter, data->mMagFilter);
       
@@ -459,7 +520,7 @@ void GraphicsManager::ResetDevice()
     
     for(std::unordered_set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
     {
-      mScreen->ResetObjectTexture((*it2)->GET<Surface>(), data, newTexture);
+      mScreen->ResetObjectTexture((*it2)->GET<Renderable>(), data, newTexture);
     }
     
     delete data;
@@ -476,7 +537,7 @@ void GraphicsManager::ResetDevice()
     
     for(std::unordered_set<GameObject*>::iterator it2 = allocatedObjects.begin(); it2 != allocatedObjects.end(); ++it2)
     {
-      mScreen->ResetObjectShader((*it2)->GET<Surface>(), data, newShader);
+      mScreen->ResetObjectShader((*it2)->GET<Renderable>(), data, newShader);
     }
     
     delete data;

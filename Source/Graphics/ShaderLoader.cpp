@@ -207,8 +207,7 @@ TextureData* ShaderLoader::LoadTexture(HashString const &aTextureFileName, HashS
     }
 
     textureData->mTextureName = aTextureFileName;
-    textureData->mWidth = surface->w;
-    textureData->mHeight = surface->h;
+    textureData->mSize = Vector2(surface->w, surface->h);
     textureData->mTextureID = ImportTexture(surface, textureFormat, aMinFilter, aMagFilter);
     return textureData;
   }
@@ -282,18 +281,177 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
   SDL_BlitSurface(msg, NULL, surface, NULL);
   
   textureData->mTextureName = aFont + aText + Common::IntToString(aSize) + aMinFilter + aMagFilter;
-  textureData->mWidth = surface->w;
-  textureData->mHeight = surface->h;
+  textureData->mSize = Vector2(surface->w, surface->h);
   textureData->mTextureID = ImportTexture(surface, textureFormat, aMinFilter, aMagFilter);
   textureData->mFont = aFont;
   textureData->mText = aText;
   textureData->mForegroundColor = aForegroundColor;
   textureData->mBackgroundColor = aBackgroundColor;
-  textureData->mSize = aSize;
+  textureData->mFontSize = aSize;
   textureData->mMaxWidth = aMaxWidth;
   TTF_CloseFont(font);
   SDL_FreeSurface(msg);
   return textureData;
+}
+
+/**
+ * @brief Set shader uniform by program id
+ * @param aProgram Program that uniform is in
+ * @param aName Name of uniform
+ * @param aPropertyType Property type of uniform
+ * @param aValue Value of uniform
+ * @param aId Smapler id if applicable
+ */
+void ShaderLoader::SetShaderUniform(int aProgram, HashString const &aName, PropertyType const &aPropertyType, HashString const &aValue, HashString const &aId)
+{
+  switch(aPropertyType)
+  {
+    case PropertyType::INT1:
+    {
+      glUniform1i(glGetUniformLocation(aProgram, aName), aValue.ToInt());
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::INT2:
+    {
+      std::vector<int> intVector = aValue.ToIntVector();
+      glUniform2i(glGetUniformLocation(aProgram, aName), intVector[0], intVector[1]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::INT3:
+    {
+      std::vector<int> intVector = aValue.ToIntVector();
+      glUniform3i(glGetUniformLocation(aProgram, aName), intVector[0], intVector[1], intVector[2]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::INT4:
+    {
+      std::vector<int> intVector = aValue.ToIntVector();
+      glUniform4i(glGetUniformLocation(aProgram, aName), intVector[0], intVector[1], intVector[2], intVector[3]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT1:
+    {
+      glUniform1f(glGetUniformLocation(aProgram, aName), aValue.ToFloat());
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT2:
+    {
+      std::vector<float> floatVector = aValue.ToFloatVector();
+      glUniform2f(glGetUniformLocation(aProgram, aName), floatVector[0], floatVector[1]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT3:
+    {
+      std::vector<float> floatVector = aValue.ToFloatVector();
+      glUniform3f(glGetUniformLocation(aProgram, aName), floatVector[0], floatVector[1], floatVector[2]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT4:
+    {
+      std::vector<float> floatVector = aValue.ToFloatVector();
+      glUniform4f(glGetUniformLocation(aProgram, aName), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::SAMPLER2:
+    {
+      int id = aId.ToInt();
+      glActiveTexture(GL_TEXTURE0 + id);
+      GL_ERROR_CHECK();
+      glBindTexture(GL_TEXTURE_2D, aValue.ToInt());
+      GL_ERROR_CHECK();
+      glUniform1i(glGetUniformLocation(aProgram, aName), id);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::INT1VECTOR:
+    {
+      std::vector<int> intVector = aValue.ToIntVector();
+      glUniform1iv(glGetUniformLocation(aProgram, aName), intVector.size(), &intVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::INT2VECTOR:
+    {
+      std::vector<int> intVector = aValue.ToIntVector();
+      glUniform2iv(glGetUniformLocation(aProgram, aName), intVector.size() / 2, &intVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::INT3VECTOR:
+    {
+      std::vector<int> intVector = aValue.ToIntVector();
+      glUniform3iv(glGetUniformLocation(aProgram, aName), intVector.size() / 3, &intVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::INT4VECTOR:
+    {
+      std::vector<int> intVector = aValue.ToIntVector();
+      glUniform4iv(glGetUniformLocation(aProgram, aName), intVector.size() / 4, &intVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT1VECTOR:
+    {
+      std::vector<float> floatVector = aValue.ToFloatVector();
+      glUniform1fv(glGetUniformLocation(aProgram, aName), floatVector.size(), &floatVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT2VECTOR:
+    {
+      std::vector<float> floatVector = aValue.ToFloatVector();
+      glUniform2fv(glGetUniformLocation(aProgram, aName), floatVector.size() / 2, &floatVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT3VECTOR:
+    {
+      std::vector<float> floatVector = aValue.ToFloatVector();
+      glUniform3fv(glGetUniformLocation(aProgram, aName), floatVector.size() / 3, &floatVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::FLOAT4VECTOR:
+    {
+      std::vector<float> floatVector = aValue.ToFloatVector();
+      glUniform4fv(glGetUniformLocation(aProgram, aName), floatVector.size() / 4, &floatVector[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    case PropertyType::SAMPLER2VECTOR:
+    {
+      std::vector<int> ids = aId.ToIntVector();
+      std::vector<int> values = aValue.ToIntVector();
+      
+      if(ids.size() != values.size())
+        assert(!"Sampler id and value sizes do not match. (PCShaderScreen.cpp)(SetShaderProperties)");
+      
+      for(int i = 0; i < ids.size(); ++i)
+      {
+        glActiveTexture(GL_TEXTURE0 + ids[i]);
+        GL_ERROR_CHECK();
+        glBindTexture(GL_TEXTURE_2D, values[i]);
+        GL_ERROR_CHECK();
+      }
+      glUniform1iv(glGetUniformLocation(aProgram, aName), ids.size(), &ids[0]);
+      GL_ERROR_CHECK();
+      break;
+    }
+    default:
+    {
+      assert(!"Invalid property type.");
+      break;
+    }
+  }
 }
 
 /**

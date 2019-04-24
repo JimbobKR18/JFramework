@@ -1,7 +1,7 @@
 #ifndef __JFramework_Screen_h_
 #define __JFramework_Screen_h_
 
-#include "Surface.h"
+#include "Renderable.h"
 #include "ScreenRenderSorter.h"
 #include "TextureData.h"
 #include "ShaderData.h"
@@ -16,7 +16,6 @@ private:
   int                 mWidth;
   int                 mHeight;
   bool                mFullScreen;
-  ScreenRenderSorter* mBatchRenderSorter;
   ScreenRenderSorter* mDepthRenderSorter;
   ScreenRenderSorter* mUIRenderSorter;
 
@@ -33,10 +32,6 @@ public:
   void                    SetHeight(int const aHeight);
   bool                    IsFullScreen() const;
   void                    SetFullScreen(bool const aFullScreen);
-  // Get batch render sorting method
-  ScreenRenderSorter*     GetBatchRenderSorter();
-  // Set batch render sorting method
-  void                    SetBatchRenderSorter(ScreenRenderSorter *aBatchRenderSorter);
   // Get depth render sorting method (Post batching)
   ScreenRenderSorter*     GetDepthRenderSorter();
   // Set depth render sorting method
@@ -46,23 +41,20 @@ public:
   // Get UI render sorting method (Post batching)
   ScreenRenderSorter*     GetUIRenderSorter();
   // Batching
-  std::unordered_map<Camera*, std::map<int, std::vector<Surface*>>> PruneObjects(Tree *aObjects, 
-                                       std::unordered_set<Surface*> const &aMovingObjects, std::unordered_set<Camera*> const &aCameras);
-  void                    SortObjects(std::vector<Surface*> &aObjects);
-  void                    SortUI(std::vector<Surface*> &aObjects);
+  std::unordered_map<Camera*, std::map<int, std::vector<Renderable*>>> PruneObjects(Tree *aObjects, 
+                                       std::unordered_set<Renderable*> const &aMovingObjects, std::unordered_set<Camera*> const &aCameras);
+  void                    SortObjects(std::vector<Renderable*> &aObjects);
+  void                    SortUI(std::vector<Renderable*> &aObjects);
 
-  virtual void            SetGlobalShaderProperty(ShaderData *aShaderData, SurfaceProperty const &aProperty) = 0;
-  virtual void            ResetObjectTexture(Surface* aSurface, TextureData* aOldData, TextureData* aNewData) = 0;
-  virtual void            ResetObjectShader(Surface* aSurface, ShaderData* aOldData, ShaderData* aNewData) = 0;
+  virtual void            SetGlobalShaderProperty(ShaderData *aShaderData, RenderableProperty const &aProperty) = 0;
+  virtual void            ResetObjectTexture(Renderable* aRenderable, TextureData* aOldData, TextureData* aNewData) = 0;
+  virtual void            ResetObjectShader(Renderable* aRenderable, ShaderData* aOldData, ShaderData* aNewData) = 0;
   virtual void            SetClearColor(Vector4 const &aClearColor) = 0;
   virtual void            ChangeSize(int aW, int aH, bool aFullScreen) = 0;
   virtual void            PreDraw() = 0;
-  virtual void            Draw(std::map<int, std::vector<Surface*>> const &aObjects, Camera* aCamera) = 0;
-  virtual void            DebugDraw(std::vector<Surface*> const &aObjects) = 0;
+  virtual void            Draw(std::map<int, std::vector<Renderable*>> const &aObjects, Camera* aCamera) = 0;
+  virtual void            DebugDraw(std::vector<Renderable*> const &aObjects) = 0;
   virtual void            SwapBuffers() = 0;
-  
-protected:
-  void                    AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition, Vector3 &aScale);
 };
 
 #endif

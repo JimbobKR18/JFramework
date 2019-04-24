@@ -4,8 +4,8 @@
 #include "SystemProperties.h"
 
 GLFramebuffer::GLFramebuffer(int aWidth, int aHeight, HashString const &aMinFilter, HashString const &aMagFilter) : Framebuffer(), 
-  mWidth(aWidth), mHeight(aHeight), mFramebufferProgramID(0), mFrameBufferID(0), mRenderedTextureID(0), mVertexBufferID(0), 
-  mTextureBufferID(0), mIndexBufferID(0), mVertexArrayObjectID(0),
+  mWidth(aWidth), mHeight(aHeight), mFramebufferProgramID(0), mFrameBufferID(0), mRenderedTextureID(0), mDepthTextureID(0),
+  mVertexBufferID(0), mTextureBufferID(0), mIndexBufferID(0), mVertexArrayObjectID(0),
   mVertexShaderFilename(SystemProperties::GetFramebufferVertexShaderName()), 
   mFragmentShaderFilename(SystemProperties::GetFramebufferFragmentShaderName()),
   mMinFilter(aMinFilter), mMagFilter(aMagFilter),
@@ -25,6 +25,7 @@ GLFramebuffer::~GLFramebuffer()
     glDeleteVertexArrays(1, &mVertexArrayObjectID);
     glDeleteFramebuffers(1, &mFrameBufferID);
     glDeleteTextures(1, &mRenderedTextureID);
+    glDeleteTextures(1, &mDepthTextureID);
     
     mVertexBufferID = 0;
     mTextureBufferID = 0;
@@ -32,6 +33,7 @@ GLFramebuffer::~GLFramebuffer()
     mVertexArrayObjectID = 0;
     mFrameBufferID = 0;
     mRenderedTextureID = 0;
+    mDepthTextureID = 0;
   }
 }
 
@@ -107,6 +109,12 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   GL_ERROR_CHECK();
   glGenTextures(1, &mRenderedTextureID);
   GL_ERROR_CHECK();
+  glGenTextures(1, &mDepthTextureID);
+  GL_ERROR_CHECK();
+  
+  // Color Texture
+  glActiveTexture(GL_TEXTURE0);
+  GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, mRenderedTextureID);
   GL_ERROR_CHECK();
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
@@ -118,6 +126,24 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   GL_ERROR_CHECK();
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  GL_ERROR_CHECK();
+  glGenerateMipmap(GL_TEXTURE_2D);
+  GL_ERROR_CHECK();
+  
+  // Depth Texture
+  glActiveTexture(GL_TEXTURE1);
+  GL_ERROR_CHECK();
+  glBindTexture(GL_TEXTURE_2D, mDepthTextureID);
+  GL_ERROR_CHECK();
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
+  GL_ERROR_CHECK();
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+  GL_ERROR_CHECK();
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  GL_ERROR_CHECK();
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+  GL_ERROR_CHECK();
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, mWidth, mHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
   GL_ERROR_CHECK();
   glGenerateMipmap(GL_TEXTURE_2D);
   GL_ERROR_CHECK();
@@ -163,6 +189,8 @@ void GLFramebuffer::Bind()
   glBindFramebuffer(GL_FRAMEBUFFER, mFrameBufferID);
   GL_ERROR_CHECK();
   glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, mRenderedTextureID, 0);
+  GL_ERROR_CHECK();
+  glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, mDepthTextureID, 0);
   GL_ERROR_CHECK();
   glViewport(0, 0, mWidth, mHeight);
   GL_ERROR_CHECK();
@@ -228,8 +256,22 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   GL_ERROR_CHECK();
   glUseProgram(mFramebufferProgramID);
   GL_ERROR_CHECK();
-  glUniform1i(glGetUniformLocation(mFramebufferProgramID, "textureUnit"), 0);
+  glUniform1i(glGetUniformLocation(mFramebufferProgramID, "colorTextureUnit"), 0);
   GL_ERROR_CHECK();
+  glUniform1i(glGetUniformLocation(mFramebufferProgramID, "depthTextureUnit"), 1);
+  GL_ERROR_CHECK();
+  
+  std::vector<int> const &inputs = GetInputTextures();
+  int i = 2;
+  for(std::vector<int>::const_iterator it = inputs.begin(); it != inputs.end(); ++it, i++)
+  {
+    HashString name = HashString("inputTextureUnit") + Common::IntToString(i - 2);
+    glActiveTexture(GL_TEXTURE0 + i);
+    glBindTexture(GL_TEXTURE_2D, *it);
+    glUniform1i(glGetUniformLocation(mFramebufferProgramID, name.ToCharArray()), i);
+    GL_ERROR_CHECK();
+  }
+  
   SetShaderProperties(true);
   BindAttributeV3(GL_ARRAY_BUFFER, mVertexBufferID, posCoordPosLocation, mPositionCoords);
   BindAttributeV2(GL_ARRAY_BUFFER, mTextureBufferID, texCoordPosLocation, mTexCoords);
@@ -239,24 +281,20 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * mIndices.size(), &mIndices[0], GL_STATIC_DRAW);
   GL_ERROR_CHECK();
   
+  // Bind rendered texture
   glActiveTexture(GL_TEXTURE0);
   GL_ERROR_CHECK();
   glBindTexture(GL_TEXTURE_2D, mRenderedTextureID);
+  
+  // Bind depth texture
+  glActiveTexture(GL_TEXTURE1);
+  GL_ERROR_CHECK();
+  glBindTexture(GL_TEXTURE_2D, mDepthTextureID);
   glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_INT, 0);
   
   DisableVertexAttribArray(posCoordPosLocation);
   DisableVertexAttribArray(texCoordPosLocation);
   SetShaderProperties(false);
-  /*glBindTexture(GL_TEXTURE_2D, 0);
-  GL_ERROR_CHECK();
-  glUseProgram(0);
-  GL_ERROR_CHECK();
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-  GL_ERROR_CHECK();
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  GL_ERROR_CHECK();
-  glBindVertexArray(0);
-  GL_ERROR_CHECK();*/
 }
 
 /**
@@ -271,64 +309,13 @@ void GLFramebuffer::SetShaderProperties(bool aActive)
   PropertyContainerConstIt propertyEnd = properties.end();
   for(PropertyContainerConstIt propertyIt = properties.begin(); propertyIt != propertyEnd; ++propertyIt)
   {
-    SurfaceProperty *property = propertyIt->second;
+    RenderableProperty *property = propertyIt->second;
     HashString value = property->GetTargetValue();
     
     if(!aActive)
       value = property->GetDefaultValue();
       
-    #ifdef _DEBUG_DRAW
-      //DebugLogPrint("Setting uniform %s to %s\n", property->GetName().ToCharArray(), value.ToCharArray());
-    #endif
-    
-    switch(property->GetType())
-    {
-      case PropertyType::INT1:
-      {
-        glUniform1i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), value.ToInt());
-        GL_ERROR_CHECK();
-        break;
-      }
-      case PropertyType::INT3:
-      {
-        std::vector<int> intVector = value.ToIntVector();
-        glUniform3i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), intVector[0], intVector[1], intVector[2]);
-        GL_ERROR_CHECK();
-        break;
-      }
-      case PropertyType::INT4:
-      {
-        std::vector<int> intVector = value.ToIntVector();
-        glUniform4i(glGetUniformLocation(mFramebufferProgramID, property->GetName()), intVector[0], intVector[1], intVector[2], intVector[3]);
-        GL_ERROR_CHECK();
-        break;
-      }
-      case PropertyType::FLOAT1:
-      {
-        glUniform1f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), value.ToFloat());
-        GL_ERROR_CHECK();
-        break;
-      }
-      case PropertyType::FLOAT3:
-      {
-        std::vector<float> floatVector = value.ToFloatVector();
-        glUniform3f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), floatVector[0], floatVector[1], floatVector[2]);
-        GL_ERROR_CHECK();
-        break;
-      }
-      case PropertyType::FLOAT4:
-      {
-        std::vector<float> floatVector = value.ToFloatVector();
-        glUniform4f(glGetUniformLocation(mFramebufferProgramID, property->GetName()), floatVector[0], floatVector[1], floatVector[2], floatVector[3]);
-        GL_ERROR_CHECK();
-        break;
-      }
-      default:
-      {
-        assert(!"Invalid property type.");
-        break;
-      }
-    }
+    ShaderLoader::SetShaderUniform(mFramebufferProgramID, property->GetName(), property->GetType(), value, property->GetId());
   }
 }
 

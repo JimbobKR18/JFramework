@@ -2,7 +2,7 @@
 #define __JFramework_Framebuffer_h_
 
 #include "Common.h"
-#include "SurfaceProperty.h"
+#include "RenderableProperty.h"
 
 class GraphicsManager;
 
@@ -10,6 +10,7 @@ class Framebuffer
 {
 private:
   PropertyContainer mProperties;
+  std::vector<int> mInputTextures;
 
 public:
   Framebuffer();
@@ -22,8 +23,10 @@ public:
   
   // VIRTUAL GETTERS
   virtual int GetTextureID() const = 0;
+  virtual std::vector<int> const &GetInputTextures() const;
   
   // VIRTUAL SETTERS
+  virtual void SetInputTextures(std::vector<int> const &aInputTextures);
   virtual void SetShaders(GraphicsManager *aManager, HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename) = 0;
   
   // VIRTUAL METHODS

@@ -64,48 +64,48 @@ Component* DefaultComponentFactory::CreateComponent(GameApp* aApp, GameObject *a
   {
     ret = aObject->HAS<SoundListener>() ? aObject->GET<SoundListener>() : new SoundListener();
   }
-  else if(aNode->GetName() == "Surface")
+  else if(aNode->GetName() == "Surface" || aNode->GetName() == "Renderable")
   {
-    ret = aObject->GET<Surface>();
+    ret = aObject->GET<Renderable>();
     if(!ret)
     {
       if(aNode->Find("UIElement") && aNode->Find("UIElement")->GetValue().ToBool())
       {
 #if !defined(ANDROID) && !defined(IOS)
-        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateUISurface();
+        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateUIRenderable(aNode->GetName());
 #else
-        ret = aApp->GET<GraphicsManager>()->CreateUISurface();
+        ret = aApp->GET<GraphicsManager>()->CreateUIRenderable(aNode->GetName());
 #endif
       }
       else
       {
 #if !defined(ANDROID) && !defined(IOS)
-        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateSurface();
+        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateRenderable(aNode->GetName());
 #else
-        ret = aApp->GET<GraphicsManager>()->CreateSurface();
+        ret = aApp->GET<GraphicsManager>()->CreateRenderable(aNode->GetName());
 #endif
       }
     }
   }
   else if(aNode->GetName() == "Text")
   {
-    ret = aObject->GET<Surface>();
+    ret = aObject->GET<Renderable>();
     if(!ret)
     {
       if(aNode->Find("UIElement") && aNode->Find("UIElement")->GetValue().ToBool())
       {
 #if !defined(ANDROID) && !defined(IOS)
-        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateUISurface();
+        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateUIRenderable(aNode->GetName());
 #else
-        ret = aApp->GET<GraphicsManager>()->CreateUISurface();
+        ret = aApp->GET<GraphicsManager>()->CreateUIRenderable(aNode->GetName());
 #endif
       }
       else
       {
 #if !defined(ANDROID) && !defined(IOS)
-        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateSurface();
+        ret = (PCShaderSurface*)aApp->GET<GraphicsManager>()->CreateRenderable(aNode->GetName());
 #else
-        ret = aApp->GET<GraphicsManager>()->CreateSurface();
+        ret = aApp->GET<GraphicsManager>()->CreateRenderable(aNode->GetName());
 #endif
       }
     }
@@ -155,9 +155,9 @@ void DefaultComponentFactory::DeleteComponent(GameApp* aApp, GameObject *aObject
   {
     aApp->GET<ChemistryManager>()->RemoveElement(dynamic_cast<ChemistryElement*>(aComponent));
   }
-  else if(aComponent->GetDefinedUID() == Surface::GetUID())
+  else if(aComponent->GetDefinedUID() == Renderable::GetUID())
   {
-    aApp->GET<GraphicsManager>()->RemoveSurface(dynamic_cast<Surface*>(aComponent));
+    aApp->GET<GraphicsManager>()->RemoveRenderable(dynamic_cast<Renderable*>(aComponent));
   }
   else if(aComponent->GetDefinedUID() == Camera::GetUID())
   {

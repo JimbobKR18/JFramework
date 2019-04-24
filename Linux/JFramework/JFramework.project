@@ -94,9 +94,9 @@
     <File Name="../../Source/GameApp.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Components">
+    <File Name="../../Source/Components/Renderable.cpp"/>
+    <File Name="../../Source/Components/Renderable.h"/>
     <File Name="../../Source/Components/PhysicsObject.h"/>
-    <File Name="../../Source/Components/Surface.cpp"/>
-    <File Name="../../Source/Components/Surface.h"/>
     <File Name="../../Source/Components/Transform.h"/>
     <File Name="../../Source/Components/Controller.cpp"/>
     <File Name="../../Source/Components/Controller.h"/>
@@ -124,6 +124,10 @@
     <File Name="../../Source/Components/SoundListener.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Graphics">
+    <File Name="../../Source/Graphics/RenderableProperty.cpp"/>
+    <File Name="../../Source/Graphics/RenderableProperty.h"/>
+    <File Name="../../Source/Graphics/Pipeline.cpp"/>
+    <File Name="../../Source/Graphics/Pipeline.h"/>
     <File Name="../../Source/Graphics/Tree.h"/>
     <File Name="../../Source/Graphics/Tree.cpp"/>
     <File Name="../../Source/Graphics/QuadTree.h"/>
@@ -134,8 +138,6 @@
     <File Name="../../Source/Graphics/ScreenRenderSorter.h"/>
     <File Name="../../Source/Graphics/ZRenderSorter.h"/>
     <File Name="../../Source/Graphics/ZRenderSorter.cpp"/>
-    <File Name="../../Source/Graphics/BatchRenderSorter.h"/>
-    <File Name="../../Source/Graphics/BatchRenderSorter.cpp"/>
     <VirtualDirectory Name="Surfaces">
       <File Name="../../Source/Graphics/Surfaces/PCShaderSurface.cpp"/>
       <File Name="../../Source/Graphics/Surfaces/PCShaderSurface.h"/>
@@ -145,8 +147,6 @@
       <File Name="../../Source/Graphics/Screens/PCShaderScreen.h"/>
     </VirtualDirectory>
     <File Name="../../Source/Graphics/ShaderData.h"/>
-    <File Name="../../Source/Graphics/SurfaceProperty.h"/>
-    <File Name="../../Source/Graphics/SurfaceProperty.cpp"/>
     <File Name="../../Source/Graphics/ShaderLoader.h"/>
     <File Name="../../Source/Graphics/ShaderLoader.cpp"/>
     <File Name="../../Source/Graphics/Framebuffer.h"/>

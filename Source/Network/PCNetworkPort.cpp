@@ -91,7 +91,7 @@ void PCNetworkPort::SendMany(std::vector<HashString> const &aMessages)
 {
   UDPpacket **packetVector = SDLNet_AllocPacketV(aMessages.size(), SystemProperties::GetPacketSize());
   
-  for(int i = 0; i < aMessages.size(); ++i)
+  for(unsigned i = 0; i < aMessages.size(); ++i)
   {
     packetVector[i]->len = aMessages[i].Length();
     packetVector[i]->data = (Uint8*)aMessages[i].ToCharArray();

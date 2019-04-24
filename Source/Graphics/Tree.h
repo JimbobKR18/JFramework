@@ -11,15 +11,15 @@
 
 #include "Common.h"
 #include "MathExt.h"
-#include "Surface.h"
+#include "Renderable.h"
 #include "Threading.h"
 
 // Stores section data
 class Tree
 {
 protected:
-  std::unordered_set<Surface*> mObjects;
-  std::unordered_set<Surface*> mCachedQuery;
+  std::unordered_set<Renderable*> mObjects;
+  std::unordered_set<Renderable*> mCachedQuery;
   Vector3 mMinRange;
   Vector3 mMaxRange;
   
@@ -28,8 +28,8 @@ public:
   virtual ~Tree();
   
   // Getters
-  std::unordered_set<Surface*> const &GetObjects() const;
-  std::unordered_set<Surface*> &GetLastQuery();
+  std::unordered_set<Renderable*> const &GetObjects() const;
+  std::unordered_set<Renderable*> &GetLastQuery();
   Vector3 const &GetMinRange() const;
   Vector3 const &GetMaxRange() const;
   
@@ -37,10 +37,10 @@ public:
   virtual void Clear() = 0;
   virtual void Resize(Vector3 const &aMinRange, Vector3 const &aMaxRange) = 0;
   virtual void Split() = 0;
-  virtual bool Insert(Surface *aSurface) = 0;
-  virtual bool Remove(Surface *aSurface) = 0;
-  virtual std::unordered_set<Surface*> GetAllObjects() const = 0;
-  virtual std::unordered_set<Surface*> Query(Vector3 const &aMin, Vector3 const &aMax) = 0;
+  virtual bool Insert(Renderable *aRenderable) = 0;
+  virtual bool Remove(Renderable *aRenderable) = 0;
+  virtual std::unordered_set<Renderable*> GetAllObjects() const = 0;
+  virtual std::unordered_set<Renderable*> Query(Vector3 const &aMin, Vector3 const &aMax) = 0;
 };
 
 #endif
