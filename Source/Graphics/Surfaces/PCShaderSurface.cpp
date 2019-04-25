@@ -17,6 +17,7 @@
 #include "SDL_image.h"
 #undef LoadImage
 #undef SendMessage
+#undef GetYValue
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F
 #endif
