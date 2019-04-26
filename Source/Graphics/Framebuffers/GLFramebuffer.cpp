@@ -194,6 +194,14 @@ void GLFramebuffer::Bind()
   GL_ERROR_CHECK();
   glViewport(0, 0, mWidth, mHeight);
   GL_ERROR_CHECK();
+  glClearColor(0,0,0,0);
+  GL_ERROR_CHECK();
+  glClearDepth(0.0f);
+  GL_ERROR_CHECK();
+  glDepthMask(GL_TRUE);
+  GL_ERROR_CHECK();
+  glDepthFunc(GL_GREATER);
+  GL_ERROR_CHECK();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   GL_ERROR_CHECK();
 }
