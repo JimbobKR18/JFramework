@@ -359,8 +359,6 @@ void PCShaderScreen::Draw(std::map<int, std::vector<Renderable*>> const &aObject
     Pipeline *pipeline = GetOwner()->GetPipeline(aCamera->GetPipelineName().ToHash());
     Framebuffer *result = pipeline->Run(aCamera->GetFramebuffers());
     result->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
-    //aCamera->GetFramebuffer(0)->SetInputTextures(inputTextures);
-    //aCamera->GetFramebuffer(0)->Draw(GetWidth(), GetHeight(), mDisplayMode.w, mDisplayMode.h, IsFullScreen());
   }
 }
 
