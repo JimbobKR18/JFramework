@@ -186,6 +186,7 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
  */
 void GLFramebuffer::Bind()
 {
+  Vector4 const &clearColor = GetClearColor();
   glBindFramebuffer(GL_FRAMEBUFFER, mFrameBufferID);
   GL_ERROR_CHECK();
   glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, mRenderedTextureID, 0);
@@ -194,7 +195,7 @@ void GLFramebuffer::Bind()
   GL_ERROR_CHECK();
   glViewport(0, 0, mWidth, mHeight);
   GL_ERROR_CHECK();
-  glClearColor(0,0,0,0);
+  glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
   GL_ERROR_CHECK();
   glClearDepth(0.0f);
   GL_ERROR_CHECK();

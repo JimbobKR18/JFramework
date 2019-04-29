@@ -14,7 +14,8 @@ struct Pass
   HashString mVertexShaderName;
   HashString mFragmentShaderName;
   
-  Pass(GraphicsManager *aManager, HashString const &aVertexShaderName, HashString const &aFragmentShaderName);
+  Pass(GraphicsManager *aManager, HashString const &aVertexShaderName, HashString const &aFragmentShaderName,
+    Vector4 const &aClearColor);
   virtual ~Pass();
   
   void Run(std::vector<Framebuffer*> const &aInputs);

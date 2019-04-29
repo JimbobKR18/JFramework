@@ -347,6 +347,7 @@ void PCShaderScreen::Draw(std::map<int, std::vector<Renderable*>> const &aObject
   inputTextures.reserve(isolatedRenderObjects.size());
   for(std::map<int, std::vector<Renderable*>>::iterator it = isolatedRenderObjects.begin(); it != isolatedRenderObjects.end(); ++it)
   {
+    aCamera->GetFramebuffer(it->first)->SetClearColor(Vector4(0,0,0,0));
     aCamera->GetFramebuffer(it->first)->Bind();
     DrawObjects(it->second, aCamera);
     aCamera->GetFramebuffer(it->first)->Unbind(mDefaultFrameBufferID);

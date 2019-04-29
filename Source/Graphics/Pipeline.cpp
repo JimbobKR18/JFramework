@@ -10,18 +10,20 @@
 //--------------------------------
 // Pass
 //--------------------------------
-Pass::Pass(GraphicsManager *aManager, HashString const &aVertexShaderName, HashString const &aFragmentShaderName) : mDefaultFrameBufferID(0),
-  mVertexShaderName(aVertexShaderName), mFragmentShaderName(aFragmentShaderName)
+Pass::Pass(GraphicsManager *aManager, HashString const &aVertexShaderName, HashString const &aFragmentShaderName, Vector4 const &aClearColor) : 
+  mDefaultFrameBufferID(0), mVertexShaderName(aVertexShaderName), mFragmentShaderName(aFragmentShaderName)
 {
   #ifdef SHADER_COMPATIBLE
     mOutput = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 
       SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter());
     mOutput->SetShaders(aManager, mVertexShaderName, mFragmentShaderName);
+    mOutput->SetClearColor(aClearColor);
     mOutput->Generate(aManager);
     
     mInput = new GLFramebuffer(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 
       SystemProperties::GetMinFilter(), SystemProperties::GetMagFilter());
     mInput->SetShaders(aManager, mVertexShaderName, mFragmentShaderName);
+    mInput->SetClearColor(aClearColor);
     mInput->Generate(aManager);
     
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &mDefaultFrameBufferID);

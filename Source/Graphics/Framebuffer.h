@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "RenderableProperty.h"
+#include "MathExt.h"
 
 class GraphicsManager;
 
@@ -11,6 +12,7 @@ class Framebuffer
 private:
   PropertyContainer mProperties;
   std::vector<int> mInputTextures;
+  Vector4 mClearColor;
 
 public:
   Framebuffer();
@@ -24,10 +26,12 @@ public:
   // VIRTUAL GETTERS
   virtual int GetTextureID() const = 0;
   virtual std::vector<int> const &GetInputTextures() const;
+  virtual Vector4 const &GetClearColor() const;
   
   // VIRTUAL SETTERS
   virtual void SetInputTextures(std::vector<int> const &aInputTextures);
   virtual void SetShaders(GraphicsManager *aManager, HashString const &aVertexShaderFilename, HashString const &aFragmentShaderFilename) = 0;
+  virtual void SetClearColor(Vector4 const &aClearColor);
   
   // VIRTUAL METHODS
   virtual void Generate(GraphicsManager *aManager) = 0;

@@ -1,6 +1,6 @@
 #include "Framebuffer.h"
 
-Framebuffer::Framebuffer() : mProperties(), mInputTextures()
+Framebuffer::Framebuffer() : mProperties(), mInputTextures(), mClearColor(0,0,0,1)
 {
 }
 
@@ -62,10 +62,28 @@ std::vector<int> const &Framebuffer::GetInputTextures() const
 }
 
 /**
+ * @brief Get clear color
+ * @return Clear color
+ */
+Vector4 const &Framebuffer::GetClearColor() const
+{
+  return mClearColor;
+}
+
+/**
  * @brief Set input textures.
  * @param aInputTextures Input texture ids.
  */
 void Framebuffer::SetInputTextures(std::vector<int> const &aInputTextures)
 {
   mInputTextures = aInputTextures;
+}
+
+/**
+ * @brief Set clear color
+ * @param aClearColor Clear color
+ */
+void Framebuffer::SetClearColor(Vector4 const &aClearColor)
+{
+  mClearColor = aClearColor;
 }

@@ -342,7 +342,13 @@ Pipeline* GraphicsManager::CreatePipeline(HashString const &aFileName)
       ParserNode *passNode = stepNode->Find(currentPass);
       HashString vertexShader = passNode->Find("VertexShader")->GetValue();
       HashString fragmentShader = passNode->Find("FragmentShader")->GetValue();
-      Pass *pass = new Pass(this, vertexShader, fragmentShader);
+      Vector4 clearColor = Vector4(0,0,0,1);
+      if(passNode->Find("ClearColor"))
+      {
+        clearColor = passNode->Find("ClearColor")->GetValue().ToVector4();
+      }
+      
+      Pass *pass = new Pass(this, vertexShader, fragmentShader, clearColor);
       pipeline->AddPass(stepIndex, pass);
       
       ++passIndex;
