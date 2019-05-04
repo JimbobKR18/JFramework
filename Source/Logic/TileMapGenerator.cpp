@@ -35,6 +35,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, int a
                                    std::unordered_map<int, float> const &aTileHeights,
                                    std::unordered_map<int, HashString> const &aMaterialNames,
                                    std::unordered_map<int, bool> const &aEmptyTiles,
+                                   Renderable::IsolatedRenderLayerContainer const &aIsolatedRenderingLayers,
                                    std::unordered_map<int, std::vector<int>> const &aAnimations,
                                    float const aAnimationSpeed, Level *aOwner) :
                                    mWidth(aWidth), mHeight(aHeight), mTileSize(aTileSize), mLayer(aLayer),
@@ -45,7 +46,7 @@ TileMapGenerator::TileMapGenerator(int aWidth, int aHeight, int aTileSize, int a
                                    mAnimationSpeed(aAnimationSpeed), mCurrentAnimationTime(0),
                                    mAnimatedObjects(), mAnimations(aAnimations), mCurrentFrames(),
                                    mMaterials(aMaterials), mMaterialNames(aMaterialNames),
-                                   mEmptyTiles(aEmptyTiles), mOwner(aOwner)
+                                   mEmptyTiles(aEmptyTiles), mIsolatedRenderingLayers(aIsolatedRenderingLayers), mOwner(aOwner)
 {
   // mTiles and mCollisionData MUST be same size, or it's not a valid map.
   // For compatibility reasons, the shape data can be a different size because it can be empty.
@@ -313,9 +314,11 @@ void TileMapGenerator::Serialize(ParserNode *aNode)
                             Common::FloatToString(mCollisionOffset.z);
   aNode->Place("Width", Common::IntToString(mWidth));
   aNode->Place("Height", Common::IntToString(mHeight));
+  aNode->Place("Layer", Common::IntToString(mLayer));
   aNode->Place("TileSize", Common::IntToString(mTileSize));
   aNode->Place("ZOffset", Common::FloatToString(mZOffset));
   aNode->Place("CollisionOffset", offsetString);
+  aNode->Place("IsolatedRenderingLayers", Common::IntVectorToString(mIsolatedRenderingLayers));
   aNode->Place("Image", mImageName);
   aNode->Place("Data", mDataName);
 }
@@ -398,6 +401,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       surface->SetAnimated(false);
       surface->SetFrameByID(mTiles[i]);
       surface->SetLayer(mLayer);
+      surface->SetIsolatedRenderLayers(mIsolatedRenderingLayers);
       textureData->SetBias(0, 0.1f / textureData->GetXSize());
       textureData->SetBias(1, 0.1f / textureData->GetYSize());
       

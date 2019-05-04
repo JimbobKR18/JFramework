@@ -1268,6 +1268,7 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   std::unordered_map<int, std::vector<int>> animations;
   std::unordered_map<int, HashString> materialInfo;
   std::unordered_map<int, bool> emptyTiles;
+  Renderable::IsolatedRenderLayerContainer isolatedRenderingLayers;
   float tileAnimationSpeed = 0.0f;
   float zOffset = 0;
   int layer = 0;
@@ -1296,6 +1297,10 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
   if(aTileMap->Find("Layer"))
   {
     layer = aTileMap->Find("Layer")->GetValue().ToInt();
+  }
+  if(aTileMap->Find("IsolatedRenderingLayers"))
+  {
+    isolatedRenderingLayers = aTileMap->Find("IsolatedRenderingLayers")->GetValue().ToIntVector();
   }
   
   // If there's setting data, parse it in and use it.
@@ -1380,6 +1385,6 @@ void Level::ParseTileGenerator(ParserNode *aTileMap)
                                    zOffset, file, frameDataFilename, collisionOffset,
                                    frames, collision, shapes,
                                    materials, heights, materialInfo,
-                                   emptyTiles, animations, tileAnimationSpeed,
-                                   this));
+                                   emptyTiles, isolatedRenderingLayers, animations, 
+                                   tileAnimationSpeed, this));
 }

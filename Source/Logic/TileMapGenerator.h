@@ -93,10 +93,11 @@ private:
   
   // Materials
   std::vector<int>                  mMaterials;
-  std::unordered_map<int, HashString>         mMaterialNames;
+  std::unordered_map<int, HashString> mMaterialNames;
   
-  // Empty Tiles
+  // Etc.
   std::unordered_map<int, bool>     mEmptyTiles;
+  Renderable::IsolatedRenderLayerContainer mIsolatedRenderingLayers;
 
   // Level owning this generator
   Level*                          mOwner;
@@ -114,6 +115,7 @@ public:
                    std::unordered_map<int, float> const &aTileHeights, 
                    std::unordered_map<int, HashString> const &aMaterials,
                    std::unordered_map<int, bool> const &aEmptyTiles,
+                   Renderable::IsolatedRenderLayerContainer const &aIsolatedRenderingLayers,
                    std::unordered_map<int, std::vector<int>> const &aAnimations,
                    float const aAnimationSpeed, Level *aOwner);
   ~TileMapGenerator();
