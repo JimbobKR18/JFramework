@@ -318,41 +318,45 @@ void PCShaderScreen::PreDraw()
  */
 void PCShaderScreen::Draw(std::map<int, std::vector<Renderable*>> const &aObjects, Camera* aCamera)
 {
+  // Isolate objects
   std::map<int, std::vector<Renderable*>> isolatedRenderObjects;
+  for(std::map<int, std::vector<Renderable*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
+  {
+    for(std::vector<Renderable*>::const_iterator it2 = it->second.begin(); it2 != it->second.end(); ++it2)
+    {
+      Renderable *renderable = *it2;
+      for(std::vector<int>::const_iterator it3 = renderable->GetIsolatedRenderLayers().begin(); it3 != renderable->GetIsolatedRenderLayers().end(); ++it3)
+      {
+        if(isolatedRenderObjects.find(*it3) == isolatedRenderObjects.end())
+        {
+          isolatedRenderObjects[*it3].reserve(it->second.size());
+        }
+        isolatedRenderObjects[*it3].push_back(renderable);
+      }
+    }
+  }
+  
+  // Draw objects that request isolated layering.
+  std::vector<int> inputTextures;
+  for(std::map<int, std::vector<Renderable*>>::iterator it = isolatedRenderObjects.begin(); it != isolatedRenderObjects.end(); ++it)
+  {
+    aCamera->GetFramebuffer(it->first)->SetClearColor(Vector4(0,0,0,0));
+    aCamera->GetFramebuffer(it->first)->Bind();
+    DrawObjects(it->second, aCamera, std::vector<int>());
+    aCamera->GetFramebuffer(it->first)->Unbind(mDefaultFrameBufferID);
+    inputTextures.push_back(aCamera->GetFramebuffer(it->first)->GetTextureID());
+  }
   
   // Draw everything with ordering intact
   aCamera->GetFramebuffer(0)->Bind();
   for(std::map<int, std::vector<Renderable*>>::const_iterator it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    std::map<int, std::vector<Renderable*>> renderPassObjects = DrawObjects(it->second, aCamera);
+    DrawObjects(it->second, aCamera, inputTextures);
 #ifdef _DEBUG_DRAW
     //DebugDraw(it->second);
 #endif
-
-    // Set up objects that will be rendered again in separate buffer.
-    for(std::map<int, std::vector<Renderable*>>::iterator it2 = renderPassObjects.begin(); it2 != renderPassObjects.end(); ++it2)
-    {
-      // Optimize
-      if(isolatedRenderObjects.find(it2->first) == isolatedRenderObjects.end())
-      {
-        isolatedRenderObjects[it2->first].reserve(it->second.size());
-      }
-      isolatedRenderObjects[it2->first].insert(isolatedRenderObjects[it2->first].end(), it2->second.begin(), it2->second.end());
-    }
   }
   aCamera->GetFramebuffer(0)->Unbind(mDefaultFrameBufferID);
-  
-  // Draw objects that request isolated layering.
-  std::vector<int> inputTextures;
-  inputTextures.reserve(isolatedRenderObjects.size());
-  for(std::map<int, std::vector<Renderable*>>::iterator it = isolatedRenderObjects.begin(); it != isolatedRenderObjects.end(); ++it)
-  {
-    aCamera->GetFramebuffer(it->first)->SetClearColor(Vector4(0,0,0,0));
-    aCamera->GetFramebuffer(it->first)->Bind();
-    DrawObjects(it->second, aCamera);
-    aCamera->GetFramebuffer(it->first)->Unbind(mDefaultFrameBufferID);
-    inputTextures.push_back(aCamera->GetFramebuffer(it->first)->GetTextureID());
-  }
   
   // If primary, run through pipeline
   if(aCamera->GetPrimary())
@@ -509,12 +513,11 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
  * @brief Draw objects from camera perspective
  * @param aObjects
  * @param aCamera
+ * @param aInputTextures
  * @return Objects that need to be rendered to own layers.
  */
-std::map<int, std::vector<Renderable*>> PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera)
+void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera, std::vector<int> const &aInputTextures)
 {
-  std::map<int, std::vector<Renderable*>> ret;
-  
   // Camera position and size
   Transform *cameraTransform = aCamera->GetOwner()->GET<Transform>();
   Vector3 cameraPosition = cameraTransform->GetPosition() + aCamera->GetOffset();
@@ -627,11 +630,6 @@ std::map<int, std::vector<Renderable*>> PCShaderScreen::DrawObjects(std::vector<
         indices.push_back(i + (iteration * 6));
       }
       
-      for(std::vector<int>::const_iterator it2 = surface->GetIsolatedRenderLayers().begin(); it2 != surface->GetIsolatedRenderLayers().end(); ++it2)
-      {
-        ret[*it2].push_back(surface);
-      }
-      
       // If this object has different properties, separate into its own draw call.
       ++it;
       if(it != end && !(*it)->RenderablePropertiesEquals(surface))
@@ -659,7 +657,7 @@ std::map<int, std::vector<Renderable*>> PCShaderScreen::DrawObjects(std::vector<
     GL_ERROR_CHECK();
     
     // Set optional uniforms.
-    SetOptionalUniforms(surface);
+    SetOptionalUniforms(surface, aInputTextures);
     
     // Set shader properties. Due to batching, done on a per surface / shader basis.
     // Shader uniforms are reset upon relinking.
@@ -695,15 +693,14 @@ std::map<int, std::vector<Renderable*>> PCShaderScreen::DrawObjects(std::vector<
     positionData.clear();
     indices.clear();
   }
-  
-  return ret;
 }
 
 /**
  * @brief Set optional uniforms for surface.
  * @param aRenderable Renderable.
+ * @param aInputTextures Optional input textures.
  */
-void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable)
+void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable, std::vector<int> const &aInputTextures)
 {
   GLint location = -1;
   location = glGetUniformLocation(aRenderable->GetProgramID(), "textureWidth");
@@ -719,6 +716,21 @@ void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable)
   {
     glUniform1i(location, static_cast<int>(aRenderable->GetTextureSize().y));
     GL_ERROR_CHECK();
+  }
+  
+  int i = 1;
+  for(std::vector<int>::const_iterator it = aInputTextures.begin(); it != aInputTextures.end(); ++it, i++)
+  {
+    HashString name = HashString("inputTextureUnit") + Common::IntToString(i - 1);
+    if(glGetUniformLocation(aRenderable->GetProgramID(), name.ToCharArray()) != -1)
+    {
+      int value = *it;
+      GL_ERROR_CHECK();
+      glActiveTexture(GL_TEXTURE0 + i);
+      glBindTexture(GL_TEXTURE_2D, value);
+      glUniform1i(glGetUniformLocation(aRenderable->GetProgramID(), name.ToCharArray()), i);
+      GL_ERROR_CHECK();
+    }
   }
 }
 
