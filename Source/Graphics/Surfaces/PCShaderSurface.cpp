@@ -379,6 +379,8 @@ void PCShaderSurface::Deserialize(ParserNode *aNode)
         renderStyle = TextRenderStyle::SMOOTH_RENDER_STYLE;
       else if(aNode->Find("RenderStyle")->GetValue() == "CHARACTER_BY_CHARACTER")
         renderStyle = TextRenderStyle::CHARACTER_BY_CHARACTER_STYLE;
+      else if(aNode->Find("RenderStyle")->GetValue() == "DEFAULT")
+        renderStyle = TextRenderStyle::DEFAULT_RENDER_STYLE;
       else
       {
         DebugLogPrint("Incorrect render style %s used for text rendering.", aNode->Find("RenderStyle")->GetValue().ToCharArray());
