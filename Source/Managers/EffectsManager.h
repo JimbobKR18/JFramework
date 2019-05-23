@@ -35,6 +35,7 @@ public:
   void RemoveEffectsForObject(GameObject *aObject);
   void RemoveEffectsForObject(GameObject *aObject, HashString const &aName);
   Effect *GetEffect(HashString const &aName);
+  bool ObjectHasEffect(GameObject *aObject) const;
 
   bool Empty();
   void RemoveEffects();

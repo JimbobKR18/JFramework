@@ -173,6 +173,26 @@ Effect *EffectsManager::GetEffect(HashString const &aName)
 }
 
 /**
+ * @brief Query if object has effects on it
+ * @param aObject Object to check
+ * @return True if effect is found
+ */
+bool EffectsManager::ObjectHasEffect(GameObject *aObject) const
+{
+  if(aObject == nullptr)
+    return false;
+    
+  for(ConstEffectIT it = mEffects.begin(); it != mEffects.end(); ++it)
+  {
+    if((*it)->GetObject() == aObject)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
  * @brief Checks if empty
  * @return True if yes, false if no
  */
