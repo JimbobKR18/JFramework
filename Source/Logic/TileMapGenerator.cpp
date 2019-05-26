@@ -247,6 +247,17 @@ int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
 }
 
 /**
+ * @brief Get material value of tile at position
+ * @param aX X in world coordinates
+ * @param aY Y in world coordinates
+ * @return Material value of tile at position
+ */
+int TileMapGenerator::GetMaterialValue(int const aX, int const aY)
+{
+  return mMaterials[GetIndex(aX, aY)];
+}
+
+/**
  * @brief Helper method to get index value at position in world coordinates
  * @param aX X in world coordinates
  * @param aY Y in world coordinates

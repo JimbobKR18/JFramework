@@ -137,6 +137,7 @@ public:
   std::unordered_map<int, GameObject*> GetObjects();
   int               GetTileValue(int const aX, int const aY);
   int               GetCollisionValue(int const aX, int const aY);
+  int               GetMaterialValue(int const aX, int const aY);
   int               GetIndex(int const aX, int const aY);
   std::vector<int>  GetIndices(int const aX, int const aY, int const bX, int const bY);
 
