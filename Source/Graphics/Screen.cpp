@@ -195,7 +195,7 @@ std::unordered_map<Camera*, std::map<int, std::vector<Renderable*>>> Screen::Pru
       Vector3 &size = transform->GetSize();
       
       // If transform is a percentage of screen, convert.
-      if((*it2)->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
+      if(renderable->GetViewMode() == VIEW_PERCENTAGE_OF_CAMERA)
       {
         position.x = cameraSize.x * position.x;
         position.y = cameraSize.y * position.y;
