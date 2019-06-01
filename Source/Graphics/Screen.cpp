@@ -209,15 +209,22 @@ std::unordered_map<Camera*, std::map<int, std::vector<Renderable*>>> Screen::Pru
       Vector3 diff = closestPoint - cameraPosition;
       
       bool added = true;
-      for(int i = 0; i < 2; ++i)
+      if(renderable->GetViewMode() == VIEW_ABSOLUTE)
       {
-        float compare = cameraSize[i];
-        float d = diff.Dot(cameraAxes[i]);
-        if(fabs(d) > compare)
+        for(int i = 0; i < 2; ++i)
         {
-          added = false;
-          break;
+          float compare = cameraSize[i];
+          float d = diff.Dot(cameraAxes[i]);
+          if(fabs(d) > compare)
+          {
+            added = false;
+            break;
+          }
         }
+      }
+      else
+      {
+        // TODO not necessary right now.
       }
       
       if(added)
