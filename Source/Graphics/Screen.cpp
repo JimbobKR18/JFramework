@@ -207,24 +207,21 @@ std::unordered_map<Camera*, std::map<int, std::vector<Renderable*>>> Screen::Pru
       // OBB test
       Vector3 closestPoint = ShapeMath::ClosestPointPointOBB(cameraPosition, position, axes, transform->GetHierarchicalScale().Multiply(size));
       Vector3 diff = closestPoint - cameraPosition;
+      if(renderable->GetViewMode() != VIEW_ABSOLUTE)
+      {
+        diff = closestPoint;
+      }
       
       bool added = true;
-      if(renderable->GetViewMode() == VIEW_ABSOLUTE)
+      for(int i = 0; i < 2; ++i)
       {
-        for(int i = 0; i < 2; ++i)
+        float compare = cameraSize[i];
+        float d = diff.Dot(cameraAxes[i]);
+        if(fabs(d) > compare)
         {
-          float compare = cameraSize[i];
-          float d = diff.Dot(cameraAxes[i]);
-          if(fabs(d) > compare)
-          {
-            added = false;
-            break;
-          }
+          added = false;
+          break;
         }
-      }
-      else
-      {
-        // TODO not necessary right now.
       }
       
       if(added)
