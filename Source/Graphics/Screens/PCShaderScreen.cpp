@@ -327,6 +327,12 @@ void PCShaderScreen::Draw(std::map<int, std::vector<Renderable*>> const &aObject
       Renderable *renderable = *it2;
       for(std::vector<int>::const_iterator it3 = renderable->GetIsolatedRenderLayers().begin(); it3 != renderable->GetIsolatedRenderLayers().end(); ++it3)
       {
+#ifdef _DEBUG
+        if(*it3 == 0)
+        {
+          assert(!"Avoid writing to isolated layer 0.");
+        }
+#endif
         if(isolatedRenderObjects.find(*it3) == isolatedRenderObjects.end())
         {
           isolatedRenderObjects[*it3].reserve(it->second.size());
@@ -337,14 +343,14 @@ void PCShaderScreen::Draw(std::map<int, std::vector<Renderable*>> const &aObject
   }
   
   // Draw objects that request isolated layering.
-  std::vector<int> inputTextures;
+  std::unordered_map<int, int> inputTextures;
   for(std::map<int, std::vector<Renderable*>>::iterator it = isolatedRenderObjects.begin(); it != isolatedRenderObjects.end(); ++it)
   {
     aCamera->GetFramebuffer(it->first)->SetClearColor(Vector4(0,0,0,0));
     aCamera->GetFramebuffer(it->first)->Bind();
-    DrawObjects(it->second, aCamera, std::vector<int>());
+    DrawObjects(it->second, aCamera, std::unordered_map<int, int>());
     aCamera->GetFramebuffer(it->first)->Unbind(mDefaultFrameBufferID);
-    inputTextures.push_back(aCamera->GetFramebuffer(it->first)->GetTextureID());
+    inputTextures[it->first] = aCamera->GetFramebuffer(it->first)->GetTextureID();
   }
   
   // Draw everything with ordering intact
@@ -516,7 +522,7 @@ void PCShaderScreen::ChangeSize(int aW, int aH, bool aFullScreen)
  * @param aInputTextures
  * @return Objects that need to be rendered to own layers.
  */
-void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera, std::vector<int> const &aInputTextures)
+void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera, std::unordered_map<int, int> const &aInputTextures)
 {
   // Camera position and size
   Transform *cameraTransform = aCamera->GetOwner()->GET<Transform>();
@@ -700,7 +706,7 @@ void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camer
  * @param aRenderable Renderable.
  * @param aInputTextures Optional input textures.
  */
-void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable, std::vector<int> const &aInputTextures)
+void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable, std::unordered_map<int, int> const &aInputTextures)
 {
   GLint location = -1;
   location = glGetUniformLocation(aRenderable->GetProgramID(), "textureWidth");
@@ -719,12 +725,12 @@ void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable, std::vector<in
   }
   
   int i = 1;
-  for(std::vector<int>::const_iterator it = aInputTextures.begin(); it != aInputTextures.end(); ++it, i++)
+  for(std::unordered_map<int, int>::const_iterator it = aInputTextures.begin(); it != aInputTextures.end(); ++it, ++i)
   {
-    HashString name = HashString("inputTextureUnit") + Common::IntToString(i - 1);
+    HashString name = HashString("inputTextureUnit") + Common::IntToString(it->first);
     if(glGetUniformLocation(aRenderable->GetProgramID(), name.ToCharArray()) != -1)
     {
-      int value = *it;
+      int value = it->second;
       GL_ERROR_CHECK();
       glActiveTexture(GL_TEXTURE0 + i);
       glBindTexture(GL_TEXTURE_2D, value);

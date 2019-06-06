@@ -274,7 +274,7 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   int i = 2;
   for(std::vector<int>::const_iterator it = inputs.begin(); it != inputs.end(); ++it, i++)
   {
-    HashString name = HashString("inputTextureUnit") + Common::IntToString(i - 2);
+    HashString name = HashString("inputTextureUnit") + Common::IntToString(i - 1);
     glActiveTexture(GL_TEXTURE0 + i);
     glBindTexture(GL_TEXTURE_2D, *it);
     glUniform1i(glGetUniformLocation(mFramebufferProgramID, name.ToCharArray()), i);

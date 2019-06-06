@@ -38,8 +38,8 @@ public:
   virtual void ChangeSize(int aW, int aH, bool aFullScreen);
 
 private:
-  void DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera, std::vector<int> const &aInputTextures);
-  void SetOptionalUniforms(Renderable* aRenderable, std::vector<int> const &aInputTextures);
+  void DrawObjects(std::vector<Renderable*> const &aObjects, Camera *aCamera, std::unordered_map<int, int> const &aInputTextures);
+  void SetOptionalUniforms(Renderable* aRenderable, std::unordered_map<int, int> const &aInputTextures);
   bool PointIsOnScreen(Vector3 const &aPoint);
   bool BoxIsOnScreen(Vector3 const &aStart, Vector3 const &aEnd);
   void SetShaderProperties(Renderable *aRenderable, bool aActive);
