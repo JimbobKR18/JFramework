@@ -191,8 +191,9 @@ void GraphicsManager::AddRenderable(Renderable *aRenderable)
  */
 void GraphicsManager::AddUIRenderable(Renderable *aRenderable)
 {
+  // No need to insert into QuadTree because it is always gonna draw.
+  //mNewRenderables.insert(aRenderable);
   mUIElements.insert(aRenderable);
-  mNewRenderables.insert(aRenderable);
   aRenderable->SetUIElement(true);
 }
 
