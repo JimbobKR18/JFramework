@@ -7,15 +7,16 @@
 
 int const SoundEmitter::sUID = Common::StringHashFunction("SoundEmitter");
 
-SoundEmitter::SoundEmitter() : Component(SoundEmitter::sUID), mPattern(SoundEmitPattern::CONSTANT),
-  mSoundName(), mSoundOrigin(), mChannel(-1), mVolume(0), mListeners()
+SoundEmitter::SoundEmitter() : Component(SoundEmitter::sUID), mPattern(SoundEmitPattern::UNIFORM),
+  mFunction(SoundEmitFunction::CONSTANT), mSoundName(), mChannelGroup(), mSoundOrigin(), mChannel(-1), mVolume(0), 
+  mActive(true), mListeners()
 {
 }
 
 SoundEmitter::SoundEmitter(SoundEmitter const &aSoundEmitter) : Component(SoundEmitter::sUID),
-  mPattern(aSoundEmitter.mPattern), mSoundName(aSoundEmitter.mSoundName),
-  mSoundOrigin(aSoundEmitter.mSoundOrigin), mChannel(aSoundEmitter.mChannel),
-  mVolume(aSoundEmitter.mVolume), mListeners()
+  mPattern(aSoundEmitter.mPattern), mFunction(aSoundEmitter.mFunction), mSoundName(aSoundEmitter.mSoundName), 
+  mChannelGroup(aSoundEmitter.mChannelGroup), mSoundOrigin(aSoundEmitter.mSoundOrigin), mChannel(aSoundEmitter.mChannel), 
+  mVolume(aSoundEmitter.mVolume), mActive(true), mListeners()
 {
 }
 
@@ -33,12 +34,30 @@ SoundEmitPattern SoundEmitter::GetSoundEmitPattern() const
 }
 
 /**
+ * @brief Get emit function for emitter.
+ * @return Emit function.
+ */
+SoundEmitFunction SoundEmitter::GetSoundEmitFunction() const
+{
+  return mFunction;
+}
+
+/**
  * @brief Get name of sound that will play.
  * @return Name of sound.
  */
 HashString SoundEmitter::GetSoundName() const
 {
   return mSoundName;
+}
+
+/**
+ * @brief Get group of channel.
+ * @return Name of group.
+ */
+HashString SoundEmitter::GetChannelGroup() const
+{
+  return mChannelGroup;
 }
 
 /**
@@ -60,12 +79,30 @@ int SoundEmitter::GetChannel() const
 }
 
 /**
+ * @brief Get active state.
+ * @return True if active.
+ */
+bool SoundEmitter::GetActive() const
+{
+  return mActive;
+}
+
+/**
  * @brief Set sound emit pattern.
  * @param aPattern Sound emit pattern.
  */
 void SoundEmitter::SetSoundEmitPattern(SoundEmitPattern const &aPattern)
 {
   mPattern = aPattern;
+}
+
+/**
+ * @brief Set sound emit function.
+ * @param aFunction Sound emit function.
+ */
+void SoundEmitter::SetSoundEmitFunction(SoundEmitFunction const &aFunction)
+{
+  mFunction = aFunction;
 }
 
 /**
@@ -78,12 +115,30 @@ void SoundEmitter::SetSoundName(HashString const &aSoundName)
 }
 
 /**
+ * @brief Set sound channel group.
+ * @param aChannelGroup Name of group.
+ */
+void SoundEmitter::SetChannelGroup(HashString const &aChannelGroup)
+{
+  mChannelGroup = aChannelGroup;
+}
+
+/**
  * @brief Set location of where sound plays from.
  * @param aSoundOrigin Origin point in local space.
  */
 void SoundEmitter::SetSoundOrigin(Vector3 const &aSoundOrigin)
 {
   mSoundOrigin = aSoundOrigin;
+}
+
+/**
+ * @brief Set sound active status.
+ * @param aActive Sound active status.
+ */
+void SoundEmitter::SetActive(bool const &aActive)
+{
+  mActive = aActive;
 }
 
 /**
@@ -104,11 +159,12 @@ void SoundEmitter::StopSound()
  */
 void SoundEmitter::Update()
 {
+  mVolume = 0;
   if(mListeners.size() == 0)
   {
-    StopSound();
+    SoundManager *soundManager = GetOwner()->GetManager()->GetOwningApp()->GET<SoundManager>();
+    soundManager->SetChannelVolume(mChannel, mVolume);
   }
-  mVolume = 0;
   mListeners.clear();
 }
 
@@ -118,7 +174,7 @@ void SoundEmitter::Update()
  */
 void SoundEmitter::ReceiveMessage(Message const& aMessage)
 {
-  if(aMessage.GetDescription() != "Collision")
+  if(aMessage.GetDescription() != "Collision" || !mActive)
     return;
 
   CollisionMessage *message = (CollisionMessage*)&aMessage;
@@ -130,25 +186,45 @@ void SoundEmitter::ReceiveMessage(Message const& aMessage)
     Transform *ownerTransform = GetOwner()->GET<Transform>();
     Transform *notOwnerTransform = notOwner->GET<Transform>();
     Vector3 soundFinalPosition = ownerTransform->GetHierarchicalPosition() + mSoundOrigin;
+    Vector3 ownerFinalSize = ownerTransform->GetSize().Multiply(ownerTransform->GetHierarchicalScale());
     float volume = 1.0f;
     switch(mPattern)
     {
-      case CONSTANT:
+      case UNIFORM:
         volume = 1.0f;
         break;
       case HORIZONTAL_LINE:
-        volume = 1.0f - (fabs(notOwnerTransform->GetPosition().y - soundFinalPosition.y) / notOwnerTransform->GetSize().y);
+        volume = (fabs(notOwnerTransform->GetPosition().y - soundFinalPosition.y) / ownerFinalSize.y);
         break;
       case VERTICAL_LINE:
-        volume = 1.0f - (fabs(notOwnerTransform->GetPosition().x - soundFinalPosition.x) / notOwnerTransform->GetSize().x);
+        volume = (fabs(notOwnerTransform->GetPosition().x - soundFinalPosition.x) / ownerFinalSize.x);
         break;
       case RADIAL:
-        volume = 1.0f - ((notOwnerTransform->GetPosition() - soundFinalPosition).length() / notOwnerTransform->GetSize().length());
+        volume = ((notOwnerTransform->GetPosition() - soundFinalPosition).length() / ownerFinalSize.length());
+        break;
+    }
+    
+    switch(mFunction)
+    {
+      case CONSTANT:
+        break;
+      case LINEAR:
+        volume = 1.0f - volume;
+        break;
+      case SQUARED:
+        volume = volume * volume;
+        break;
+      case INVERSE_SQUARED:
+        volume = 1.0f - (volume * volume);
         break;
     }
     
     if(mChannel == -1)
+    {
       mChannel = soundManager->PlaySound(mSoundName, SoundManager::INFINITE_LOOPS);
+      if(!mChannelGroup.Empty())
+        soundManager->AddChannelToGroup(mChannelGroup, mChannel);
+    }
     
     if(volume > mVolume)
       mVolume = volume;
@@ -176,20 +252,33 @@ void SoundEmitter::Serialize(ParserNode* aNode)
   aNode->Place(SOUNDEMITTER, "");
   ParserNode* soundEmitter = aNode->Find(SOUNDEMITTER);
 
-  if(mPattern == SoundEmitPattern::CONSTANT)
-    soundEmitter->Place("Pattern", "CONSTANT");
+  if(mPattern == SoundEmitPattern::UNIFORM)
+    soundEmitter->Place("Pattern", "UNIFORM");
   else if(mPattern == SoundEmitPattern::HORIZONTAL_LINE)
     soundEmitter->Place("Pattern", "HORIZONTAL_LINE");
   else if(mPattern == SoundEmitPattern::VERTICAL_LINE)
     soundEmitter->Place("Pattern", "VERTICAL_LINE");
   else if(mPattern == SoundEmitPattern::RADIAL)
     soundEmitter->Place("Pattern", "RADIAL");
+    
+  if(mFunction == SoundEmitFunction::CONSTANT)
+    soundEmitter->Place("Function", "UNIFORM");
+  else if(mFunction == SoundEmitFunction::LINEAR)
+    soundEmitter->Place("Function", "LINEAR");
+  else if(mFunction == SoundEmitFunction::SQUARED)
+    soundEmitter->Place("Function", "SQUARED");
+  else if(mFunction == SoundEmitFunction::INVERSE_SQUARED)
+    soundEmitter->Place("Function", "INVERSE_SQUARED");
   
   HashString originString = Common::FloatToString(mSoundOrigin.x) + "," +
                             Common::FloatToString(mSoundOrigin.y) + "," +
                             Common::FloatToString(mSoundOrigin.z);
   soundEmitter->Place("SoundName", mSoundName);
   soundEmitter->Place("SoundOrigin", originString);
+  soundEmitter->Place("Active", Common::BoolToString(mActive));
+  
+  if(!mChannelGroup.Empty())
+    soundEmitter->Place("Group", mChannelGroup);
 }
 
 /**
@@ -202,11 +291,15 @@ void SoundEmitter::Deserialize(ParserNode* aNode)
     mSoundName = aNode->Find("SoundName")->GetValue();
   if(aNode->Find("SoundOrigin"))
     mSoundOrigin = aNode->Find("SoundOrigin")->GetValue().ToVector3();
+  if(aNode->Find("Active"))
+    mActive = aNode->Find("mActive")->GetValue().ToBool();
+  if(aNode->Find("Group"))
+    mChannelGroup = aNode->Find("Group")->GetValue();
   if(aNode->Find("Pattern"))
   {
     HashString pattern = aNode->Find("Pattern")->GetValue();
-    if(pattern == "CONSTANT")
-      mPattern = SoundEmitPattern::CONSTANT;
+    if(pattern == "UNIFORM")
+      mPattern = SoundEmitPattern::UNIFORM;
     else if(pattern == "HORIZONTAL_LINE")
       mPattern = SoundEmitPattern::HORIZONTAL_LINE;
     else if(pattern == "VERTICAL_LINE")
@@ -217,6 +310,23 @@ void SoundEmitter::Deserialize(ParserNode* aNode)
     {
       DebugLogPrint("Invalid SoundEmitPattern type %s passed into SoundEmitter Deserialize.\n", pattern.ToCharArray());
       assert(!"Invalid SoundEmitPattern type passed into SoundEmitter Deserialize.");
+    }
+  }
+  if(aNode->Find("Function"))
+  {
+    HashString function = aNode->Find("Function")->GetValue();
+    if(function == "CONSTANT")
+      mFunction = SoundEmitFunction::CONSTANT;
+    else if(function == "LINEAR")
+      mFunction = SoundEmitFunction::LINEAR;
+    else if(function == "SQUARED")
+      mFunction = SoundEmitFunction::SQUARED;
+    else if(function == "INVERSE_SQUARED")
+      mFunction = SoundEmitFunction::INVERSE_SQUARED;
+    else
+    {
+      DebugLogPrint("Invalid SoundEmitFunction type %s passed into SoundEmitter Deserialize.\n", function.ToCharArray());
+      assert(!"Invalid SoundEmitFunction type passed into SoundEmitter Deserialize.");
     }
   }
 }

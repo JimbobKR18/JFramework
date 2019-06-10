@@ -1069,6 +1069,9 @@ void Level::LoadObject(GameObject *aObject, ObjectPlacement const aPlacement)
     mOwner->GetOwningApp()->GET<GraphicsManager>()->SetPrimaryCamera(aObject->GET<Camera>());
   if(aObject->GET<FollowComponent>())
     aObject->GET<FollowComponent>()->ResetTarget();
+    
+  if(aObject->GET<SoundEmitter>())
+    aObject->GET<SoundEmitter>()->SetActive(true);
 }
 
 /**
@@ -1091,7 +1094,10 @@ void Level::UnloadObject(GameObject *aObject)
   if(aObject->GET<Camera>())
     mOwner->GetOwningApp()->GET<GraphicsManager>()->RemoveCamera(aObject->GET<Camera>());
   if(aObject->GET<SoundEmitter>())
+  {
     aObject->GET<SoundEmitter>()->StopSound();
+    aObject->GET<SoundEmitter>()->SetActive(false);
+  }
 }
 
 /**

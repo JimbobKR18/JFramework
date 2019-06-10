@@ -427,6 +427,9 @@ void SoundManager::AddSoundNameToGroup(HashString const &aGroupName, HashString 
  */
 void SoundManager::AddChannelToGroup(HashString const &aGroupName, int const aChannel)
 {
+  if(mSoundGroups.find(aGroupName.ToHash()) == mSoundGroups.end())
+    CreateChannelGroup(aGroupName);
+  
   mSoundSystem->AddChannelToGroup(aGroupName, aChannel);
 }
 

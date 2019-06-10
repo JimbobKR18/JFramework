@@ -8,20 +8,31 @@
 
 enum SoundEmitPattern
 {
-  CONSTANT,
+  UNIFORM,
   HORIZONTAL_LINE,
   VERTICAL_LINE,
   RADIAL
+};
+
+enum SoundEmitFunction
+{
+  CONSTANT,
+  LINEAR,
+  SQUARED,
+  INVERSE_SQUARED
 };
 
 class SoundEmitter : public Component
 {
 private:
   SoundEmitPattern mPattern;
+  SoundEmitFunction mFunction;
   HashString mSoundName;
+  HashString mChannelGroup;
   Vector3 mSoundOrigin;
   int mChannel;
   float mVolume;
+  bool mActive;
   
   std::set<SoundListener*> mListeners;
   
@@ -34,14 +45,20 @@ public:
   
   // GETTERS
   SoundEmitPattern GetSoundEmitPattern() const;
+  SoundEmitFunction GetSoundEmitFunction() const;
   HashString GetSoundName() const;
+  HashString GetChannelGroup() const;
   Vector3 GetSoundOrigin() const;
   int GetChannel() const;
+  bool GetActive() const;
   
   // SETTERS
   void SetSoundEmitPattern(SoundEmitPattern const &aPattern);
+  void SetSoundEmitFunction(SoundEmitFunction const &aFunction);
   void SetSoundName(HashString const &aSoundName);
+  void SetChannelGroup(HashString const &aChannelGroup);
   void SetSoundOrigin(Vector3 const &aSoundOrigin);
+  void SetActive(bool const &aActive);
   
   // METHODS
   void StopSound();
