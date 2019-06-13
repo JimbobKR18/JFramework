@@ -196,7 +196,7 @@ bool FMODStudioSoundSystem::IsChannelPaused(int const aChannel)
   bool result = false;
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return result;
   }
   
@@ -214,7 +214,7 @@ bool FMODStudioSoundSystem::IsChannelPlaying(int const aChannel)
   bool result = false;
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return result;
   }
   
@@ -231,7 +231,7 @@ void FMODStudioSoundSystem::ResumeChannel(int const aChannel)
 {
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return;
   }
   
@@ -246,7 +246,7 @@ void FMODStudioSoundSystem::PauseChannel(int const aChannel)
 {
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return;
   }
   
@@ -287,7 +287,7 @@ void FMODStudioSoundSystem::SetChannelVolume(int const aChannel, float const aVo
 {
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return;
   }
   
@@ -302,7 +302,7 @@ void FMODStudioSoundSystem::StopChannel(int const aChannel)
 {
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return;
   }
   
@@ -320,7 +320,7 @@ void FMODStudioSoundSystem::FadeChannel(int const aChannel, int const aTime, flo
 {
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return;
   }
   
@@ -350,7 +350,7 @@ float FMODStudioSoundSystem::GetChannelProperty(int const aChannel, HashString c
 {
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return 0;
   }
   
@@ -369,7 +369,7 @@ void FMODStudioSoundSystem::SetChannelProperty(int const aChannel, HashString co
 {
   if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    DebugLogPrint("Sound event instance %d not found.", aChannel);
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
     return;
   }
   
