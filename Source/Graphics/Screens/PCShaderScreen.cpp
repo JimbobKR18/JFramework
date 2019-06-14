@@ -723,6 +723,20 @@ void PCShaderScreen::SetOptionalUniforms(Renderable* aRenderable, std::unordered
     glUniform1i(location, static_cast<int>(aRenderable->GetTextureSize().y));
     GL_ERROR_CHECK();
   }
+  location = glGetUniformLocation(aRenderable->GetProgramID(), "time");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform1f(location, GetOwner()->GetOwningApp()->GetAppTime());
+    GL_ERROR_CHECK();
+  }
+  location = glGetUniformLocation(aRenderable->GetProgramID(), "resolution");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform2f(location, GetWidth(), GetHeight());
+    GL_ERROR_CHECK();
+  }
   
   int i = 1;
   for(std::unordered_map<int, int>::const_iterator it = aInputTextures.begin(); it != aInputTextures.end(); ++it, ++i)

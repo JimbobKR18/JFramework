@@ -19,7 +19,7 @@
 #include "ParserFactory.h"
 
 GameApp::GameApp() : mComponentFactory(new DefaultComponentFactory()), mManagers(), mManagerLookup(), mDelayedMessages(), 
-                     mLastFrame(0), mSkipFrames(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
+                     mLastFrame(0), mSkipFrames(0), mAppTime(0), mDT(0), mAppStep(0), mAppSpeed(1), mActive(true)
 {
   // AutoParses ./SystemProperties.ini
   SystemProperties::Deserialize();
@@ -92,6 +92,15 @@ void GameApp::SetComponentFactory(ComponentFactory *aComponentFactory)
 {
   delete mComponentFactory;
   mComponentFactory = aComponentFactory;
+}
+
+/**
+ * @brief Get app total lifetime.
+ * @return Total app lifetime in seconds.
+ */
+float GameApp::GetAppTime() const
+{
+  return mAppTime;
 }
 
 /**
@@ -176,8 +185,15 @@ void GameApp::Update(unsigned int const &aTicksSinceStart)
   std::vector<Message*>::iterator messagesEnd;
   std::vector<Manager*>::iterator managersEnd = mManagers.end();
   float diff = (float)(aTicksSinceStart - mLastFrame) / 1000.0f;
+  mAppTime += diff;
   mDT += diff;
   mLastFrame = aTicksSinceStart;
+  
+  // Make sure to avoid overflow
+  if(mAppTime > FLT_MAX)
+  {
+    mAppTime -= FLT_MAX;
+  }
   
   while(mDT >= mAppStep)
   {

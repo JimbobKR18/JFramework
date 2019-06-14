@@ -17,6 +17,7 @@ private:
   std::vector<Message*> mDelayedMessages;
   unsigned int          mLastFrame;
   unsigned int          mSkipFrames;
+  float                 mAppTime;
   float                 mDT;
   float                 mAppStep;
   float                 mAppSpeed;
@@ -27,6 +28,7 @@ public:
 
   ComponentFactory* GetComponentFactory();
   void              SetComponentFactory(ComponentFactory *aComponentFactory);
+  float             GetAppTime() const;
   float             GetAppStep() const;
   void              SetAppStep(float const aAppStep);
   float             GetAppSpeed() const;
