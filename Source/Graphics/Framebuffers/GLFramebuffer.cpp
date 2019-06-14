@@ -125,7 +125,11 @@ void GLFramebuffer::Generate(GraphicsManager *aManager)
   GL_ERROR_CHECK();
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   GL_ERROR_CHECK();
+#ifdef __APPLE__
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, 0);
+#else
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+#endif
   GL_ERROR_CHECK();
   glGenerateMipmap(GL_TEXTURE_2D);
   GL_ERROR_CHECK();
