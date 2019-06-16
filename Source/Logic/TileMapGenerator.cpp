@@ -413,8 +413,6 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       surface->SetFrameByID(mTiles[i]);
       surface->SetLayer(mLayer);
       surface->SetIsolatedRenderLayers(mIsolatedRenderingLayers);
-      textureData->SetBias(0, 0.1f / textureData->GetXSize());
-      textureData->SetBias(1, 0.1f / textureData->GetYSize());
       
       // Animation
       if(mAnimations.find(mTiles[i]) != mAnimations.end())
