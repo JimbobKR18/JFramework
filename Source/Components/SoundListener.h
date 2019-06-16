@@ -7,12 +7,16 @@
 class SoundListener : public Component
 {
 private:
+  bool mActive;
   static int const sUID;
   
 public:
   SoundListener();
   SoundListener(SoundListener const &aSoundListener);
   virtual ~SoundListener();
+  
+  bool GetActive() const;
+  void SetActive(bool const &aActive);
 
   // VIRTUALS
   virtual void Update();

@@ -160,7 +160,7 @@ void SoundEmitter::StopSound()
 void SoundEmitter::Update()
 {
   mVolume = 0;
-  if(mListeners.size() == 0)
+  if(mListeners.size() == 0 && mChannel != -1)
   {
     SoundManager *soundManager = GetOwner()->GetManager()->GetOwningApp()->GET<SoundManager>();
     soundManager->SetChannelVolume(mChannel, mVolume);
@@ -183,6 +183,9 @@ void SoundEmitter::ReceiveMessage(Message const& aMessage)
   
   if(notOwner->HAS<SoundListener>())
   {
+    if(!notOwner->GET<SoundListener>()->GetActive())
+      return;
+    
     Transform *ownerTransform = GetOwner()->GET<Transform>();
     Transform *notOwnerTransform = notOwner->GET<Transform>();
     Vector3 soundFinalPosition = ownerTransform->GetHierarchicalPosition() + mSoundOrigin;

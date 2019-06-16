@@ -3,16 +3,34 @@
 
 int const SoundListener::sUID = Common::StringHashFunction("SoundListener");
 
-SoundListener::SoundListener() : Component(SoundListener::sUID)
+SoundListener::SoundListener() : Component(SoundListener::sUID), mActive(true)
 {
 }
 
-SoundListener::SoundListener(SoundListener const &aSoundListener) : Component(SoundListener::sUID)
+SoundListener::SoundListener(SoundListener const &aSoundListener) : Component(SoundListener::sUID), mActive(aSoundListener.mActive)
 {
 }
 
 SoundListener::~SoundListener()
 {
+}
+
+/**
+ * @brief Get active state.
+ * @return Active state.
+ */
+bool SoundListener::GetActive() const
+{
+  return mActive;
+}
+
+/**
+ * @brief Set active state.
+ * @param aActive Active state.
+ */
+void SoundListener::SetActive(bool const &aActive)
+{
+  mActive = aActive;
 }
 
 /**
@@ -44,6 +62,10 @@ void SoundListener::SendMessage(Message const& aMessage)
  */
 void SoundListener::Serialize(ParserNode* aNode)
 {
+  aNode->Place("SoundListener", "");
+  
+  ParserNode* node = aNode->Find("SoundListener");
+  node->Place("Active", Common::BoolToString(mActive));
 }
 
 /**
@@ -52,6 +74,10 @@ void SoundListener::Serialize(ParserNode* aNode)
  */
 void SoundListener::Deserialize(ParserNode* aNode)
 {
+  if(aNode->Find("Active"))
+  {
+    mActive = aNode->Find("Active")->GetValue().ToBool();
+  }
 }
 
 /**
