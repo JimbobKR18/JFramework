@@ -23,10 +23,10 @@ Resolver::~Resolver()
  */
 void Resolver::Update(float aDuration)
 {
-  std::vector<PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
-  for(std::vector<PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
+  std::unordered_map<size_t, PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
+  for(std::unordered_map<size_t, PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
   {
-    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(*it);
+    std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(it->second);
     std::vector<CollisionPair>::iterator pairsEnd = pairs.end();
     for(std::vector<CollisionPair>::iterator it2 = pairs.begin(); it2 != pairsEnd; ++it2)
     {
@@ -43,7 +43,7 @@ void Resolver::Update(float aDuration)
  */
 void Resolver::AddPrelimPair(PotentialPair const &aPair)
 {
-  mPotentialPairs.push_back(aPair);
+  mPotentialPairs[aPair.mValue] = aPair;
 }
 
 /**
@@ -53,7 +53,7 @@ void Resolver::AddPrelimPair(PotentialPair const &aPair)
  */
 bool Resolver::Find(PotentialPair const &aPair)
 {
-  return std::find(mPotentialPairs.begin(), mPotentialPairs.end(), aPair) != mPotentialPairs.end();
+  return mPotentialPairs.find(aPair.mValue) != mPotentialPairs.end();
 }
 
 /**

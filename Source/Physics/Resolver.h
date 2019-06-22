@@ -9,7 +9,7 @@ class Resolver
 {
 private:
   int mResolveAxes;
-  std::vector<PotentialPair> mPotentialPairs;
+  std::unordered_map<size_t, PotentialPair> mPotentialPairs;
 
 public:
   Resolver();
@@ -17,7 +17,6 @@ public:
 
   void Update(float aDuration);
   void AddPrelimPair(PotentialPair const &aPair);
-  void AddCollidedPair(CollisionPair const &aPair);
   bool Find(PotentialPair const &aPair);
 
 private:
