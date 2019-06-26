@@ -1214,9 +1214,6 @@ void Level::ParseTransform(GameObject *aObject)
   Transform* objTransform = aObject->GET<Transform>();
   Vector3 pos = objTransform->GetPosition();
   Vector3 size = objTransform->GetSize();
-
-  // Auto set camera bounds based on objects in environment
-  UpdateBoundaries(pos, size);
 }
 
 /**
