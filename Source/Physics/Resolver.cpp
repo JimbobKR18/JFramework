@@ -23,8 +23,8 @@ Resolver::~Resolver()
  */
 void Resolver::Update(float aDuration)
 {
-  std::unordered_map<size_t, PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
-  for(std::unordered_map<size_t, PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
+  std::unordered_map<unsigned long long, PotentialPair>::iterator potentialEnd = mPotentialPairs.end();
+  for(std::unordered_map<unsigned long long, PotentialPair>::iterator it = mPotentialPairs.begin(); it != potentialEnd; ++it)
   {
     std::vector<CollisionPair> pairs = CollisionChecker::CheckShapeCollision(it->second);
     std::vector<CollisionPair>::iterator pairsEnd = pairs.end();

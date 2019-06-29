@@ -9,7 +9,7 @@ class Resolver
 {
 private:
   int mResolveAxes;
-  std::unordered_map<size_t, PotentialPair> mPotentialPairs;
+  std::unordered_map<unsigned long long, PotentialPair> mPotentialPairs;
 
 public:
   Resolver();

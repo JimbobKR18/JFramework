@@ -6,13 +6,14 @@
 class DefaultGameObjectFactory : public GameObjectFactory
 {
 private:
-  unsigned mIndex;
+  std::unordered_set<unsigned long> mIndices;
   
 public:
   DefaultGameObjectFactory();
   virtual ~DefaultGameObjectFactory();
 
   virtual GameObject* CreateGameObject(ObjectManager* aManager, HashString const& aFileName, HashString const& aType);
+  virtual void RemoveGameObject(GameObject *aObj);
 };
 
 #endif

@@ -12,6 +12,7 @@ public:
   virtual ~GameObjectFactory() {}
   
   virtual GameObject* CreateGameObject(ObjectManager *aManager, HashString const &aFileName, HashString const &aType) = 0;
+  virtual void RemoveGameObject(GameObject *aObj) = 0;
 };
 
 #endif

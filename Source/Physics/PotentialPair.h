@@ -11,7 +11,7 @@ struct PotentialPair
 public:
   PhysicsObject* mBodies[2];
   float mDistance;
-  size_t mValue;
+  unsigned long long mValue;
   
   PotentialPair();
   PotentialPair(PhysicsObject* mBody1, PhysicsObject* mBody2, float aDistance);

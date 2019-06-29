@@ -1,7 +1,7 @@
 #include "DefaultGameObjectFactory.h"
 #include "ObjectManager.h"
 
-DefaultGameObjectFactory::DefaultGameObjectFactory() : mIndex(0)
+DefaultGameObjectFactory::DefaultGameObjectFactory() : mIndices()
 {
 }
 
@@ -18,5 +18,18 @@ DefaultGameObjectFactory::~DefaultGameObjectFactory()
  */
 GameObject* DefaultGameObjectFactory::CreateGameObject(ObjectManager* aManager, HashString const& aFileName, HashString const& aType)
 {
-  return new GameObject(aManager, mIndex++, aFileName, aType);
+  unsigned long index = Common::lrand() % LONG_MAX;
+  while(mIndices.find(index) != mIndices.end())
+    index = Common::lrand() % LONG_MAX;
+  mIndices.insert(index);
+  return new GameObject(aManager, index, aFileName, aType);
+}
+
+/**
+ * @brief Remove game object.
+ * @param aObj Object to remove.
+ */
+void DefaultGameObjectFactory::RemoveGameObject(GameObject *aObj)
+{
+  mIndices.erase(aObj->GetID());
 }

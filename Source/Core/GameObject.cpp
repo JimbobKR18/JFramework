@@ -23,7 +23,7 @@ GameObject::GameObject()
   assert(!"GameObject instantiated without a file!");
 }
 
-GameObject::GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName,
+GameObject::GameObject(ObjectManager *aManager, unsigned long const &aID, HashString const &aFileName,
                        HashString const &aType) :
                        mID(aID), mFileName(aFileName), mName(""), mType(aType), mTags(), mComponents(),
                        mManager(aManager), mPlacement(ObjectPlacement::DEFAULT), mParent(nullptr), mChildren()
@@ -92,7 +92,7 @@ GameObject* GameObject::GetParent() const
  * @brief Get ID of this object.
  * @return ID.
  */
-int GameObject::GetID() const
+unsigned long GameObject::GetID() const
 {
   return mID;
 }

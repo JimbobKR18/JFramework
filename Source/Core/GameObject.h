@@ -33,7 +33,7 @@ public:
   typedef TagContainer::const_iterator TagConstIT;
   
 private:
-  unsigned            mID;
+  unsigned long       mID;
   HashString          mFileName;
   HashString          mName;
   HashString          mType;
@@ -47,13 +47,13 @@ private:
   
 public:
   GameObject();
-  GameObject(ObjectManager *aManager, unsigned const &aID, HashString const &aFileName,
+  GameObject(ObjectManager *aManager, unsigned long const &aID, HashString const &aFileName,
              HashString const &aType);
   GameObject(GameObject const &aGameObject);
   virtual ~GameObject();
 
   // GETTERS
-  int                        GetID() const;
+  unsigned long              GetID() const;
   HashString                 GetName() const;
   HashString                 GetType() const;
   HashString                 GetFileName() const;

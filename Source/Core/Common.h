@@ -30,6 +30,7 @@
 #include <chrono>
 #include <ctime>
 #include <exception>
+#include <random>
 #include "HashString.h"
 #include "SmartPointer.h"
 #include "ObjectPlacement.h"
@@ -89,6 +90,10 @@ namespace Common
   
   template<typename T>      
   std::unordered_map<int, T> ConvertVectorToHashMap(std::vector<T> const &aVector);
+  
+  unsigned char RandomChar();
+  std::string GenerateUUID(const unsigned aLen);
+  long lrand();
 }
 
 #endif

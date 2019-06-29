@@ -725,4 +725,44 @@ namespace Common
     
     return ret;
   }
+  
+  /**
+   * @brief Generate random char.
+   * @return Random char.
+   */
+  unsigned char RandomChar() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 255);
+    return static_cast<unsigned char>(dis(gen));
+  }
+  
+  /**
+   * @brief Generate UUID.
+   * @param aLen Length of UUID.
+   * @return UUID as string.
+   */
+  std::string GenerateUUID(const unsigned aLen) {
+    std::stringstream ss;
+    for(unsigned i = 0; i < aLen; i++) {
+      unsigned char rc = RandomChar();
+      std::stringstream hexstream;
+      hexstream << std::hex << int(rc);
+      std::string hex = hexstream.str();
+      ss << (hex.length() < 2 ? '0' + hex : hex);
+    }
+    return ss.str();
+  }
+  
+  /**
+   * @brief Generate random long.
+   * @return Random long.
+   */
+  long lrand()
+  {
+    if (sizeof(int) < sizeof(long))
+      return (static_cast<long>(rand()) << (sizeof(int) * 8)) | rand();
+    
+    return rand();
+  }
 }
