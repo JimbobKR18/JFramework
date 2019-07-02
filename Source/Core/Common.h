@@ -93,7 +93,7 @@ namespace Common
   
   unsigned char RandomChar();
   std::string GenerateUUID(const unsigned aLen);
-  long lrand();
+  unsigned long lrand();
 }
 
 #endif

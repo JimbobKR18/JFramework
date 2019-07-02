@@ -17,6 +17,9 @@
 
 namespace Common
 {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+
   /**
    * @brief Gets relative path for asset files, set by system properties.
    * @param aSubFolder Sub folder to search inside of asset directory.
@@ -758,11 +761,9 @@ namespace Common
    * @brief Generate random long.
    * @return Random long.
    */
-  long lrand()
+  unsigned long lrand()
   {
-    if (sizeof(int) < sizeof(long))
-      return (static_cast<long>(rand()) << (sizeof(int) * 8)) | rand();
-    
-    return rand();
+    std::uniform_int_distribution<unsigned long> dist;
+    return dist(gen);
   }
 }
