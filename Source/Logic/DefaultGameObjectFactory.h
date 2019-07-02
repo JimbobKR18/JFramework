@@ -7,6 +7,7 @@ class DefaultGameObjectFactory : public GameObjectFactory
 {
 private:
   std::unordered_set<unsigned long> mIndices;
+  unsigned long mCurrentIndex;
   
 public:
   DefaultGameObjectFactory();

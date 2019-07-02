@@ -1,7 +1,7 @@
 #include "DefaultGameObjectFactory.h"
 #include "ObjectManager.h"
 
-DefaultGameObjectFactory::DefaultGameObjectFactory() : mIndices()
+DefaultGameObjectFactory::DefaultGameObjectFactory() : mIndices(), mCurrentIndex(0)
 {
 }
 
@@ -18,11 +18,11 @@ DefaultGameObjectFactory::~DefaultGameObjectFactory()
  */
 GameObject* DefaultGameObjectFactory::CreateGameObject(ObjectManager* aManager, HashString const& aFileName, HashString const& aType)
 {
-  unsigned long index = Common::lrand() % LONG_MAX;
-  while(mIndices.find(index) != mIndices.end())
-    index = Common::lrand() % LONG_MAX;
-  mIndices.insert(index);
-  return new GameObject(aManager, index, aFileName, aType);
+  ++mCurrentIndex;
+  while(mIndices.find(mCurrentIndex) != mIndices.end())
+    ++mCurrentIndex;
+  mIndices.insert(mCurrentIndex);
+  return new GameObject(aManager, mCurrentIndex, aFileName, aType);
 }
 
 /**
