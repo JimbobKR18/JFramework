@@ -266,8 +266,6 @@ void PhysicsWorld::SweepAndPrune()
     for(PhysicsIT it2 = it; it2 != end; ++it2)
     {
       PhysicsObject *it2Object = *it2;
-      Transform *it2Transform = it2Object->GetOwner()->GET<Transform>();
-      
       if(itObject == it2Object)
         continue;
       else if(!it2Object->IsActive())
@@ -277,6 +275,7 @@ void PhysicsWorld::SweepAndPrune()
       else if(itObject->IgnoreObject(it2Object->GetOwner()) || it2Object->IgnoreObject(itObject->GetOwner()))
         continue;
 
+      Transform *it2Transform = it2Object->GetOwner()->GET<Transform>();
       float realDistance = (itTransform->GetHierarchicalPosition() - it2Transform->GetHierarchicalPosition()).length();
       PotentialPair potentialPair(itObject, it2Object, realDistance);
       if(!mResolver.Find(potentialPair))
