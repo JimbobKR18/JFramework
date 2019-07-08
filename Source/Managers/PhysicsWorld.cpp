@@ -261,7 +261,7 @@ void PhysicsWorld::SweepAndPrune()
     HashString itName = itObject->GetOwner()->GetName();
     Transform *itTransform = itObject->GetOwner()->GET<Transform>();
     float x1 = itTransform->GetHierarchicalPosition().x;
-    float x1Size = itObject->GetBroadSize().x * itTransform->GetHierarchicalScale().x;
+    Vector3 size1 = itObject->GetBroadSize().Multiply(itTransform->GetHierarchicalScale());
 
     for(PhysicsIT it2 = it; it2 != end; ++it2)
     {
@@ -280,14 +280,23 @@ void PhysicsWorld::SweepAndPrune()
       PotentialPair potentialPair(itObject, it2Object, realDistance);
       if(!mResolver.Find(potentialPair))
       {
+        // Broad phase
         float x2 = it2Transform->GetHierarchicalPosition().x;
-        float x2Size = it2Object->GetBroadSize().x * it2Transform->GetHierarchicalScale().x;
+        Vector3 size2 = it2Object->GetBroadSize().Multiply(it2Transform->GetHierarchicalScale());
         float xPosDiff = fabs(x1 - x2);
-        float xSizeTotal = x1Size + x2Size;
+        float xSizeTotal = size1.x + size2.x;
         
         if(xSizeTotal > xPosDiff)
         {
-          mResolver.AddPrelimPair(potentialPair);
+          // Min phase
+          float y1 = itTransform->GetHierarchicalPosition().y;
+          float y2 = it2Transform->GetHierarchicalPosition().y;
+          float yPosDiff = fabs(y1 - y2);
+          float ySizeTotal = size1.y + size2.y;
+          if(ySizeTotal > yPosDiff)
+          {
+            mResolver.AddPrelimPair(potentialPair);
+          }
         }
         else
         {
