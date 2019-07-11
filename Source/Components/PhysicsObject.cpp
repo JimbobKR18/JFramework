@@ -183,6 +183,7 @@ void PhysicsObject::Serialize(ParserNode *aNode)
   object->Place("Gravity", Common::BoolToString(IsAffectedByGravity()));
   object->Place("Static", Common::BoolToString(mStatic));
   object->Place("Passable", Common::BoolToString(mPassable));
+  object->Place("Active", Common::BoolToString(mActive));
   object->Place("Mass", Common::FloatToString(mMass));
   object->Place("Damping", Common::FloatToString(mDamping));
   object->Place("Restitution", Common::FloatToString(mRestitution));
@@ -301,6 +302,8 @@ void PhysicsObject::Deserialize(ParserNode *aNode)
     SetStatic(aNode->Find("Static")->GetValue().ToBool());
   if(aNode->Find("Passable"))
     SetPassable(aNode->Find("Passable")->GetValue().ToBool());
+  if(aNode->Find("Active"))
+    SetActive(aNode->Find("Active")->GetValue().ToBool());
   if(aNode->Find("Mass"))
     SetMass(aNode->Find("Mass")->GetValue().ToFloat());
   if(aNode->Find("Damping"))
