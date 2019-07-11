@@ -557,6 +557,9 @@ void PhysicsObject::RemoveIgnore(HashString const &aObjectName)
  */
 bool PhysicsObject::IgnoreObject(GameObject const *aObject) const
 {
+  if(mIgnoreList.empty())
+    return false;
+  
   if(mIgnoreList.find(aObject->GetName().ToHash()) != mIgnoreList.end())
     return true;
     
