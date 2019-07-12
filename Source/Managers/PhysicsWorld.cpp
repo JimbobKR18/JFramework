@@ -266,6 +266,15 @@ void PhysicsWorld::SweepAndPrune()
     for(PhysicsIT it2 = it; it2 != end; ++it2)
     {
       PhysicsObject *it2Object = *it2;
+      if(itObject == it2Object)
+        continue;
+      else if(!it2Object->IsActive())
+        continue;
+      else if(itObject->IsStatic() && it2Object->IsStatic())
+        continue;
+      else if(itObject->IgnoreObject(it2Object->GetOwner()) || it2Object->IgnoreObject(itObject->GetOwner()))
+        continue;
+
       Transform *it2Transform = it2Object->GetOwner()->GET<Transform>();
       float realDistance = (itTransform->GetHierarchicalPosition() - it2Transform->GetHierarchicalPosition()).length();
       PotentialPair potentialPair(itObject, it2Object, realDistance);
@@ -279,16 +288,6 @@ void PhysicsWorld::SweepAndPrune()
         
         if(xSizeTotal > xPosDiff)
         {
-          // Skip validating collision if need be
-          if(itObject == it2Object)
-            continue;
-          else if(!it2Object->IsActive())
-            continue;
-          else if(itObject->IsStatic() && it2Object->IsStatic())
-            continue;
-          else if(itObject->IgnoreObject(it2Object->GetOwner()) || it2Object->IgnoreObject(itObject->GetOwner()))
-            continue;
-            
           // Min phase
           float y1 = itTransform->GetHierarchicalPosition().y;
           float y2 = it2Transform->GetHierarchicalPosition().y;
