@@ -1,6 +1,8 @@
 #ifndef CLICKMESSAGE_H
 #define CLICKMESSAGE_H
 
+#include "Message.h"
+
 HashString const CLICK = "Click";
 HashString const EMPTY = "";
 

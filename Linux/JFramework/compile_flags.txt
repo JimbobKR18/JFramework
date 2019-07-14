@@ -2,6 +2,7 @@
 -I/home/jimmy/Documents/JFramework/Source
 -I/home/jimmy/Documents/JFramework/Source/Core
 -I/home/jimmy/Documents/JFramework/Source/Core/Interpolations
+-I/home/jimmy/Documents/JFramework/Source/Core/Structures
 -I/home/jimmy/Documents/JFramework/Source/Logic
 -I/home/jimmy/Documents/JFramework/Source/Logic/StateMachine
 -I/home/jimmy/Documents/JFramework/Source/Logic/Effects
@@ -25,6 +26,4 @@
 -I/home/jimmy/Documents/JFramework/Source/Core/Messages
 -I/home/jimmy/Documents/JFramework/Linux/fmod/api/studio/inc
 -I/home/jimmy/Documents/JFramework/Linux/fmod/api/lowlevel/inc
--DSLB_USE_EXCEPTIONS
--D_DEBUG_DRAW
--D_DEBUG
+-DNDEBUG

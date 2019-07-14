@@ -156,7 +156,7 @@ void ChemistryElement::SendMessage(Message const& aMessage)
  */
 void ChemistryElement::ReceiveMessage(Message const& aMessage)
 {
-  if(aMessage.GetDescription() != "Collision")
+  if(aMessage.GetDescription() != COLLISION)
     return;
 
   CollisionMessage *message = (CollisionMessage*)&aMessage;

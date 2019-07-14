@@ -189,7 +189,7 @@ void ChemistryMaterial::SendMessage(Message const& aMessage)
  */
 void ChemistryMaterial::ReceiveMessage(Message const& aMessage)
 {
-  if(aMessage.GetDescription() != "Collision")
+  if(aMessage.GetDescription() != COLLISION)
     return;
 
   CollisionMessage *message = (CollisionMessage*)&aMessage;

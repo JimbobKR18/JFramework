@@ -174,7 +174,7 @@ void SoundEmitter::Update()
  */
 void SoundEmitter::ReceiveMessage(Message const& aMessage)
 {
-  if(aMessage.GetDescription() != "Collision" || !mActive)
+  if(aMessage.GetDescription() != COLLISION || !mActive)
     return;
 
   CollisionMessage *message = (CollisionMessage*)&aMessage;

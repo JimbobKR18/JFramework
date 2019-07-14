@@ -13,6 +13,8 @@
 #include "Message.h"
 #include "MathExt.h"
 
+HashString const INPUT = "Input";
+
 class InputMessage : public Message
 {
 private:
@@ -25,7 +27,7 @@ private:
 public:
   InputMessage(HashString const &aContent, Vector3 const &aLocation, int const aId) : Message(), mLocation(aLocation), mId(aId)
   {
-    SetDescription("Input");
+    SetDescription(INPUT);
     SetContent(aContent);
   }
   virtual ~InputMessage() {}
