@@ -83,7 +83,7 @@ TextureCoordinates::TextureCoordinates(int const aXSize,
       frames.push_back(j + (mMaxFrames * i));
     }
     
-    AnimationInfo *animationInfo = new AnimationInfo(i, 1.0f, aAnimationSpeeds[i], frames);
+    AnimationInfo *animationInfo = new AnimationInfo(i, 1.0f, aAnimationSpeeds[i], frames, 0);
     mAnimations.push_back(animationInfo);
   }
   
@@ -177,7 +177,7 @@ void TextureCoordinates::Update(float aDT)
       }
       else
       {
-        mCurFrame = 0;
+        mCurFrame = animationInfo->mLoopStartFrame;
       }
     }
     

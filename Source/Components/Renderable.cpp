@@ -397,6 +397,7 @@ void Renderable::Serialize(ParserNode *aNode)
     animationInfosNode->Place("Speed", Common::FloatVectorToString(info->mSpeeds));
     animationInfosNode->Place("SpeedModifier", Common::FloatToString(info->mSpeedModifier));
     animationInfosNode->Place("Frames", Common::IntVectorToString(info->mFrames));
+    animationInfosNode->Place("LoopStartFrame", Common::IntToString(info->mLoopStartFrame));
   }
   
   // Everything else animation related
@@ -528,6 +529,7 @@ void Renderable::Deserialize(ParserNode *aNode)
     int numRows = animationNode->Find("Rows")->GetValue().ToInt();
     int numColumns = animationNode->Find("Columns")->GetValue().ToInt();
     bool isAnimated = aNode->Find("Animated")->GetValue().ToBool();
+    int loopFrame = 0;
     if(isAnimated)
       animated = true;
     while(animationNode->Find(curIndex))
@@ -564,6 +566,11 @@ void Renderable::Deserialize(ParserNode *aNode)
         assert(!"Animation passed in without frames");
       }
       
+      if(animationNode->Find("LoopStartFrame"))
+      {
+        loopFrame = animationNode->Find("LoopStartFrame")->GetValue().ToInt();
+      }
+      
       std::vector<float> speeds;
       if(currentAnimation->Find("Speeds"))
       {
@@ -585,7 +592,7 @@ void Renderable::Deserialize(ParserNode *aNode)
         }
       }
       
-      AnimationInfo *info = new AnimationInfo(index, speedModifier, speeds, frames);
+      AnimationInfo *info = new AnimationInfo(index, speedModifier, speeds, frames, loopFrame);
       animationInfos.push_back(info);
       
       ++index;

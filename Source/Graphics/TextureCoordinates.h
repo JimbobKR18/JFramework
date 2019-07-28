@@ -37,12 +37,14 @@ struct AnimationInfo
   float mSpeedModifier;
   std::vector<float> mSpeeds;
   std::vector<int> mFrames;
+  int mLoopStartFrame;
   
-  AnimationInfo() : mId(0), mSpeedModifier(1), mSpeeds(), mFrames() {}
+  AnimationInfo() : mId(0), mSpeedModifier(1), mSpeeds(), mFrames(), mLoopStartFrame(0) {}
   AnimationInfo(AnimationInfo const &aAnimationInfo) : mId(aAnimationInfo.mId), mSpeedModifier(aAnimationInfo.mSpeedModifier),
-    mSpeeds(aAnimationInfo.mSpeeds), mFrames(aAnimationInfo.mFrames) {}
-  AnimationInfo(int aId, float aSpeedModifier, std::vector<float> const &aSpeeds, std::vector<int> const &aFrames) : 
-    mId(aId), mSpeedModifier(aSpeedModifier), mSpeeds(aSpeeds), mFrames(aFrames) 
+    mSpeeds(aAnimationInfo.mSpeeds), mFrames(aAnimationInfo.mFrames), mLoopStartFrame(aAnimationInfo.mLoopStartFrame) {}
+  AnimationInfo(int const &aId, float const &aSpeedModifier, std::vector<float> const &aSpeeds, std::vector<int> const &aFrames, 
+    int const &aLoopStartFrame) : 
+    mId(aId), mSpeedModifier(aSpeedModifier), mSpeeds(aSpeeds), mFrames(aFrames) , mLoopStartFrame(aLoopStartFrame)
   {
     assert(mSpeeds.size() == mFrames.size());
   }
