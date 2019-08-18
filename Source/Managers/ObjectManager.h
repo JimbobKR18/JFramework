@@ -35,7 +35,7 @@ public:
   static std::string  GetName() {return "ObjectManager";}
   static unsigned     GetUID() {return sUID;}
 
-  GameObject*         CreateObject(HashString const &aFilename, HashString const &aFolder = "Game", HashString const &aType = "Default");
+  GameObject*         CreateObject(HashString const &aFilename, HashString const &aFolder = "Game", HashString const &aType = "Default", bool const &aStatic = false);
   GameObject*         CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder = "Game", HashString const &aType = "Default");
   GameObject*         FindObject(HashString const &aName);
   void                ParseObject(GameObject *aObject, HashString const &aFolder = "Game");

@@ -416,7 +416,7 @@ void Level::Load(Level *aPrevLevel)
 {
   // Load all objects
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
-    LoadObjects(mObjects[i], static_cast<ObjectPlacement>(i));
+    LoadObjects(mObjects[i]);
 
   LoadSounds(aPrevLevel);
 
@@ -450,11 +450,11 @@ void Level::Unload(Level *aNextLevel)
  * @brief Load all objects in list into view.
  * @param aObjects Objects to add.
  */
-void Level::LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const aPlacement)
+void Level::LoadObjects(ObjectContainer const &aObjects)
 {
   for(ConstObjectIT it = aObjects.begin(); it != aObjects.end(); ++it)
   {
-    LoadObject(*it, aPlacement);
+    LoadObject(*it, (*it)->GetPlacement());
   }
 }
 
@@ -630,14 +630,26 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
     // Make Object to assign params to
     HashString folder = "Game";
     HashString type = "Type";
+    ObjectPlacement placement = ObjectPlacement::DEFAULT;
     
     if(curRoot->Find("Folder"))
       folder = curRoot->Find("Folder")->GetValue();
     if(curRoot->Find("Type"))
       type = curRoot->Find("Type")->GetValue();
+    if(curRoot->Find("Placement"))
+    {
+      HashString value = curRoot->Find("Placement")->GetValue();
+      if(value == "Default")
+        placement = ObjectPlacement::DEFAULT;
+      else if(value == "Static")
+        placement = ObjectPlacement::STATIC;
+      else if(value == "Replaceable")
+        assert(!"Not recommended");
+    }
     
     object = objectManager->CreateObjectNoAdd(curRoot->Find("File")->GetValue(), folder, type);
-    mObjects[ObjectPlacement::DEFAULT].insert(object);
+    object->SetPlacement(placement);
+    mObjects[placement].insert(object);
     mScenarios[aFileName].insert(object);
     
     // Create components from factory.
@@ -870,7 +882,7 @@ void Level::LoadScenario(HashString const &aFileName)
   if(mScenarios.find(aFileName) != mScenarios.end())
   {
     ObjectContainer &objects = mScenarios[aFileName];
-    LoadObjects(objects, ObjectPlacement::DEFAULT);
+    LoadObjects(objects);
   }
   else
   {

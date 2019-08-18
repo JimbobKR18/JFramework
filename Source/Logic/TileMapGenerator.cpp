@@ -383,6 +383,7 @@ void TileMapGenerator::CreateTilesInRange(unsigned const aXStart, unsigned const
       
       // Make GameObject to place
       GameObject *obj = aObjectManager->CreateObjectNoAdd(mImageName);
+      obj->SetPlacement(ObjectPlacement::STATIC);
       aObjectManager->AddObject(obj, true);
       
       // Set name of tile, for collision reasons

@@ -143,11 +143,11 @@ void ObjectManager::ProcessDelayedMessage(Message *aMessage)
  * @param aFilename
  * @return The newly created object.
  */
-GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString const &aFolder, HashString const &aType)
+GameObject *ObjectManager::CreateObject(HashString const &aFilename, HashString const &aFolder, HashString const &aType, bool const &aStatic)
 {
   Parser *parser = ParserFactory::CreateInputParser(aFolder, aFilename);
   GameObject *object = mFactory->CreateGameObject(this, aFilename, aType);
-  AddObject(object);
+  AddObject(object, aStatic);
   ParseDictionary(object, parser);
   mAllocatedObjects.insert(object);
   return object;
@@ -307,6 +307,18 @@ void ObjectManager::ParseDictionary(GameObject *aObject, Parser *aParser)
   {
     HashString name = aParser->Find("Name", "Value")->GetValue();
     aObject->SetName(name);
+  }
+  if(aParser->Find("Placement"))
+  {
+    ObjectPlacement placement = ObjectPlacement::DEFAULT;
+    HashString value = aParser->Find("Placement", "Value")->GetValue();
+    if(value == "Default")
+      placement = ObjectPlacement::DEFAULT;
+    else if(value == "Static")
+      placement = ObjectPlacement::STATIC;
+    else if(value == "Replaceable")
+      assert(!"Not recommended");
+    aObject->SetPlacement(placement);
   }
   
   ComponentFactory *factory = GetOwningApp()->GetComponentFactory();

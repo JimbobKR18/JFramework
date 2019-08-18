@@ -91,7 +91,7 @@ public:
 
   void              Load(Level *aPrevLevel);
   void              Unload(Level *aNextLevel);
-  void              LoadObjects(ObjectContainer const &aObjects, ObjectPlacement const aPlacement);
+  void              LoadObjects(ObjectContainer const &aObjects);
   void              UnloadObjects(ObjectContainer const &aObjects);
 
   virtual void      PreReset() {};
