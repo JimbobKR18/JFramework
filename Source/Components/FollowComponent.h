@@ -42,6 +42,9 @@ public:
   // Statics
   static void SerializeLUA();
   static int GetUID() {return sUID;}
+  
+private:
+  void ClearInterpolator();
 };
 
 #endif // __JFramework_FollowComponent_h_

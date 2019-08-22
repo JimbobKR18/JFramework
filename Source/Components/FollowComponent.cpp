@@ -20,6 +20,7 @@ FollowComponent::FollowComponent(FollowComponent const &aFollowComponent) :
 
 FollowComponent::~FollowComponent()
 {
+  ClearInterpolator();
 }
 
 // Methods
@@ -109,7 +110,10 @@ void FollowComponent::Update()
     mPosition = transform->GetPosition();
     
     if(mTime <= 0.01f)
+    {
       mPosition = targetTransform->GetPosition();
+      ClearInterpolator();
+    }
     else
     {
       if(!mInterpolator)
@@ -121,8 +125,7 @@ void FollowComponent::Update()
         mInterpolator->Update(mTarget->GetManager()->GetOwningApp()->GetAppStep());
         if(mInterpolator->IsComplete())
         {
-          delete mInterpolator;
-          mInterpolator = nullptr;
+          ClearInterpolator();
         }
       }
     }
@@ -196,4 +199,16 @@ void FollowComponent::SerializeLUA()
     .set("SetTarget", &FollowComponent::SetTarget)
     .set("GetTargetName", &FollowComponent::GetTargetName)
     .set("SetTargetName", &FollowComponent::SetTargetName);
+}
+
+/**
+ * @brief Private method to clear interpolator, prevents duplicate code.
+ */
+void FollowComponent::ClearInterpolator()
+{
+  if(mInterpolator)
+  {
+    delete mInterpolator;
+    mInterpolator = nullptr;
+  }
 }
