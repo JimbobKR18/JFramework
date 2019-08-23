@@ -40,13 +40,13 @@ void InputManager::AddInput(HashString const &aInput, Vector3 const &aLocation, 
   // Check to see if object is in our list
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
-    if(it->mInput == aInput && it->mId == aId)
+    if((*it)->mInput == aInput && (*it)->mId == aId)
     {
       return;
     }
   }
   
-  mInputs.push_back(InputInfo(aInput, aLocation, aId, aSingleFrame));
+  mInputs.push_back(new InputInfo(aInput, aLocation, aId, aSingleFrame));
   GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Down"), aLocation, aId));
 }
 
@@ -58,8 +58,9 @@ void InputManager::RemoveInput(HashString const &aInput, int const aId)
 {
   for(InputIT it = mInputs.begin(); it != mInputs.end(); ++it)
   {
-    if(it->mInput == aInput && it->mId == aId)
+    if((*it)->mInput == aInput && (*it)->mId == aId)
     {
+      delete *it;
       mInputs.erase(it);
       break;
     }
@@ -127,9 +128,12 @@ void InputManager::Update()
   mHandler->Update();
   for(InputIT it = mInputs.begin(); it != mInputs.end();)
   {
-    GetOwningApp()->SendMessageDelayed(new InputMessage(it->mInput, it->mLocation, it->mId));
-    if(it->mSingleFrame)
+    GetOwningApp()->SendMessageDelayed(new InputMessage((*it)->mInput, (*it)->mLocation, (*it)->mId));
+    if((*it)->mSingleFrame)
+    {
+      delete *it;
       it = mInputs.erase(it);
+    }
     else
       ++it;
   }
