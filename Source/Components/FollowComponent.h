@@ -16,7 +16,7 @@ private:
   Interpolation<Vector3> *mInterpolator;
   Vector3 mPosition;
   
-  static int const sUID;
+  static HashType const sUID;
 public:
   FollowComponent();
   FollowComponent(FollowComponent const &aFollowComponent);
@@ -41,7 +41,7 @@ public:
   
   // Statics
   static void SerializeLUA();
-  static int GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
   
 private:
   void ClearInterpolator();

@@ -3,7 +3,7 @@
 #include "ChemistryElement.h"
 #include "DefaultChemicalFactory.h"
 
-unsigned const ChemistryManager::sUID = Common::StringHashFunction("ChemistryManager");
+HashType const ChemistryManager::sUID = Common::StringHashFunction("ChemistryManager");
 
 ChemistryManager::ChemistryManager(GameApp *aApp, float const aCurrentTemperature) : Manager(aApp, "ChemistryManager", ChemistryManager::sUID),
   mFactory(new DefaultChemicalFactory()), mMaterials(), mElements(), mCurrentTemperature(aCurrentTemperature)

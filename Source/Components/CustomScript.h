@@ -8,9 +8,9 @@ class CustomScript : public Component
 private:
   HashString mFileName;
   HashString mUpdateFunctionName;
-  std::unordered_map<int, HashString> mValues;
+  std::unordered_map<HashType, HashString> mValues;
   
-  static int const  sUID;
+  static HashType const sUID;
 public:
   CustomScript();
   CustomScript(CustomScript const &aCustomScript);
@@ -36,7 +36,7 @@ public:
   
   // Statics
   static void SerializeLUA();
-  static int GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
 };
 
 #endif // CUSTOMSCRIPT_H

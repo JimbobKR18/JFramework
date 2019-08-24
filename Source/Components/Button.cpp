@@ -3,7 +3,7 @@
 #include "Transform.h"
 #include "LUA/LUATypes.h"
 
-int const Button::sUID = Common::StringHashFunction("Button");
+HashType const Button::sUID = Common::StringHashFunction("Button");
 
 Button::Button() : Component(Button::sUID), mClickableArea()
 {

@@ -49,7 +49,7 @@ private:
   Vector3       mMaxBoundary;
   Vector3       mMinBoundary;
   
-  static int const sUID;
+  static HashType const sUID;
 
 public:
   Transform();
@@ -93,7 +93,7 @@ public:
   virtual void        Serialize(ParserNode *aNode);
   virtual void        Deserialize(ParserNode *aNode);
   virtual Component*  Clone(GameObject *aNewOwner) const;
-  static int          GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
   static void         SerializeLUA();
   
 private:

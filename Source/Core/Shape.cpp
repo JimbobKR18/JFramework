@@ -134,6 +134,7 @@ Vector3 OrientedBoundingBox::GetAxis(int index)
       break;
     default:
       assert(!"Wrong value handed into GetAxis for OBB");
+      return right;
       break;
   }
 }

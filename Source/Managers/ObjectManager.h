@@ -16,7 +16,7 @@ private:
   
   GameObjectFactory *mFactory;
 
-  static unsigned const sUID;
+  static HashType const sUID;
 public:
   ObjectManager(GameApp* aApp);
   virtual ~ObjectManager();
@@ -33,7 +33,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "ObjectManager";}
-  static unsigned     GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
 
   GameObject*         CreateObject(HashString const &aFilename, HashString const &aFolder = "Game", HashString const &aType = "Default", bool const &aStatic = false);
   GameObject*         CreateObjectNoAdd(HashString const &aFilename, HashString const &aFolder = "Game", HashString const &aType = "Default");

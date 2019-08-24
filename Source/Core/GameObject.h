@@ -20,15 +20,15 @@ class GameObjectFactory;
 class GameObject
 {
 public:
-  typedef std::unordered_map<int, Component*> ComponentContainer;
+  typedef std::unordered_map<HashType, Component*> ComponentContainer;
   typedef ComponentContainer::iterator ComponentIT;
   typedef ComponentContainer::const_iterator ComponentConstIT;
   
-  typedef std::unordered_map<unsigned, GameObject*> GameObjectContainer;
+  typedef std::unordered_map<unsigned long, GameObject*> GameObjectContainer;
   typedef GameObjectContainer::iterator GameObjectIT;
   typedef GameObjectContainer::const_iterator GameObjectConstIT;
   
-  typedef std::unordered_map<int, HashString> TagContainer;
+  typedef std::unordered_map<HashType, HashString> TagContainer;
   typedef TagContainer::iterator TagIT;
   typedef TagContainer::const_iterator TagConstIT;
   
@@ -75,9 +75,9 @@ public:
   void                       RemoveComponent(int const &aUID);
   void                       AddChild(GameObject* aObject);
   void                       RemoveChild(GameObject *aObject);
-  Component*                 GetComponent(int const &aUID) const;
+  Component*                 GetComponent(HashType const &aUID) const;
   Component*                 GetComponentByName(HashString const &aName) const;
-  bool                       HasComponent(int const &aUID) const;
+  bool                       HasComponent(HashType const &aUID) const;
   bool                       HasComponentByName(HashString const &aName) const;
   void                       AddTag(HashString const &aTag);
   void                       RemoveTag(HashString const &aTag);

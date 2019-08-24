@@ -6,7 +6,7 @@
 
 #define DT (1.0f/60.0f)
 
-int const Renderable::sUID = Common::StringHashFunction("Renderable");
+HashType const Renderable::sUID = Common::StringHashFunction("Renderable");
 
 Renderable::Renderable() : Component(Renderable::sUID), mTexCoord(nullptr), mViewmode(VIEW_ABSOLUTE),
                      mTextureSize(), mPrimaryColor(1,1,1,1), mNoRender(false), 
@@ -208,7 +208,7 @@ bool Renderable::RenderablePropertiesEquals(Renderable const *aRenderable) const
   for(PropertyContainerConstIt it = mProperties.begin(); it != mProperties.end(); ++it) 
   {
     RenderableProperty *property = it->second;
-    int hash = property->GetName().ToHash();
+    HashType hash = property->GetName().ToHash();
     PropertyContainerConstIt otherPropertyIt = otherRenderableProperties.find(hash);
     if(otherPropertyIt == otherRenderableProperties.end())
     {

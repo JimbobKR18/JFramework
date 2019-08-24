@@ -11,7 +11,7 @@
 #include "ControllerFactory.h"
 #include "ControllerChangeMessage.h"
 
-unsigned const ControllerManager::sUID = Common::StringHashFunction("ControllerManager");
+HashType const ControllerManager::sUID = Common::StringHashFunction("ControllerManager");
 ControllerManager::ControllerManager(GameApp* aApp) : Manager(aApp, "ControllerManager", ControllerManager::sUID),
   mControllers(), mFactory(nullptr)
 {

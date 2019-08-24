@@ -10,7 +10,7 @@
 #include "InputMessage.h"
 #include "PCInputHandler.h"
 
-unsigned const InputManager::sUID = Common::StringHashFunction("InputManager");
+HashType const InputManager::sUID = Common::StringHashFunction("InputManager");
 
 InputManager::InputManager(GameApp *aApp) : Manager(aApp, "InputManager", InputManager::sUID), mAcceptInput(true)
 {

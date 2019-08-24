@@ -1,7 +1,7 @@
 #include "StateObject.h"
 #include "ObjectManager.h"
 
-int const StateObject::sUID = Common::StringHashFunction("StateObject");
+HashType const StateObject::sUID = Common::StringHashFunction("StateObject");
 
 StateObject::StateObject() : Component(StateObject::sUID)
 {
@@ -124,7 +124,7 @@ void StateObject::Deserialize(ParserNode *aNode)
   
   int curIndex = 0;
   
-  std::map<int, State*> states;
+  std::map<HashType, State*> states;
   ParserNode* statesNode = aNode->Find("States");
   ParserNode* linksNode = aNode->Find("Links");
   

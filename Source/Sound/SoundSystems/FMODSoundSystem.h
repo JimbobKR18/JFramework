@@ -19,12 +19,12 @@ struct FMODSound
 class FMODSoundSystem : public SoundSystem
 {
 private:
-  typedef std::unordered_map<int, FMODSound*>     FMODSoundContainer;
-  typedef FMODSoundContainer::iterator              FMODSoundIt;
-  typedef std::unordered_map<int, FMOD::ChannelGroup*> FMODChannelGroupContainer;
-  typedef FMODChannelGroupContainer::iterator          FMODChannelGroupIt;
-  typedef std::unordered_map<int, FMOD::DSP*>     FMODDSPContainer;
-  typedef FMODDSPContainer::iterator              FMODDSPIt;
+  typedef std::unordered_map<HashType, FMODSound*>          FMODSoundContainer;
+  typedef FMODSoundContainer::iterator                           FMODSoundIt;
+  typedef std::unordered_map<HashType, FMOD::ChannelGroup*> FMODChannelGroupContainer;
+  typedef FMODChannelGroupContainer::iterator                    FMODChannelGroupIt;
+  typedef std::unordered_map<HashType, FMOD::DSP*>          FMODDSPContainer;
+  typedef FMODDSPContainer::iterator                             FMODDSPIt;
 
   FMOD::Studio::System* mFMODStudioSystem;
   FMOD::System* mFMODSystem;

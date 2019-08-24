@@ -1,7 +1,7 @@
 #include "CustomScript.h"
 #include "LUATypes.h"
 
-int const CustomScript::sUID = Common::StringHashFunction("CustomScript");
+HashType const CustomScript::sUID = Common::StringHashFunction("CustomScript");
 
 CustomScript::CustomScript() : Component(CustomScript::sUID), mFileName(), mUpdateFunctionName(),
   mValues()

@@ -23,7 +23,7 @@
 #endif
 #endif
 
-int const PCShaderSurface::sUID = Common::StringHashFunction("Renderable");
+HashType const PCShaderSurface::sUID = Common::StringHashFunction("Renderable");
 
 PCShaderSurface::PCShaderSurface() : Renderable(), mTextureID(-1), mProgramID(0), mVertexShaderID(0), mFragmentShaderID(0),
                                      mVertexShaderFileName(), mFragmentShaderFileName()

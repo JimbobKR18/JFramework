@@ -18,7 +18,7 @@ private:
   float             mConductivity;
   float             mHeatTransferRate;
   
-  static int const  sUID;
+  static HashType const  sUID;
 
 public:
   ChemistryMaterial(ChemistryManager* aManager);
@@ -56,7 +56,7 @@ public:
   
   // Statics
   static void SerializeLUA();
-  static int GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
 };
 
 #endif // __JFramework__ChemistryMaterial__

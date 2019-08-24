@@ -18,7 +18,7 @@ private:
   FrameLayerContainer mFramebuffers;
   HashString mPipelineName;
 
-  static int const  sUID;
+  static HashType const sUID;
   
 public:
   Camera();
@@ -48,7 +48,7 @@ public:
   
   // Statics
   static void SerializeLUA();
-  static int GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
 };
 
 #endif // __JFramework__Camera__

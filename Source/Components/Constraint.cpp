@@ -1,9 +1,9 @@
 #include "Constraint.h"
 
-int const Constraint::sUID = Common::StringHashFunction("Constraint");
+HashType const Constraint::sUID = Common::StringHashFunction("Constraint");
 
 // PROTECTED
-Constraint::Constraint(int const &aUID) : Component(aUID)
+Constraint::Constraint(HashType const &aUID) : Component(aUID)
 {
   mJoints[0] = nullptr;
   mJoints[1] = nullptr;

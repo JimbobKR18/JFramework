@@ -59,9 +59,9 @@
 namespace LUABind
 {
   // Our manager and scripts
-  std::unordered_map<int,HashString> mScripts;
-  typedef std::pair<int,HashString> ScriptPair;
-  std::unordered_map<int, HashString> mInvalidFunctionsCache;
+  std::unordered_map<HashType, HashString> mScripts;
+  typedef std::pair<HashType, HashString> ScriptPair;
+  std::unordered_map<HashType, HashString> mInvalidFunctionsCache;
   
   GameApp* StaticGameApp::mApp = NULL; 
   

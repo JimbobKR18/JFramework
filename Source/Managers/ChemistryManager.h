@@ -23,7 +23,7 @@ private:
   ElementContainer mElements;
   float mCurrentTemperature;
   
-  static unsigned const sUID;
+  static HashType const sUID;
 
 public:
   ChemistryManager(GameApp *aApp, float const aCurrentTemperature);
@@ -50,7 +50,7 @@ public:
   virtual void SendMessage(Message const& aMessage);
   
   static std::string  GetName() {return "ChemistryManager";}
-  static unsigned     GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
 };
 
 #endif // __JFramework__ChemistryManager__

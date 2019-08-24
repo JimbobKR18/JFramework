@@ -18,7 +18,7 @@
 
 int const DEFAULT_QUADTREE_SIZE = 3000;
 unsigned const DEFAULT_QUADTREE_CAPACITY = 8;
-unsigned const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
+HashType const GraphicsManager::sUID = Common::StringHashFunction("GraphicsManager");
 GraphicsManager::GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen) : Manager(aApp, "GraphicsManager", GraphicsManager::sUID),
                                                                            mRenderables(), mNewRenderables(), mMovingRenderables(), mUIElements(), mTextures(), mShaders(), mCameras(), 
                                                                            mUnsortedLayers(), mPipelines(), mScreen(nullptr), mPrimaryCamera(nullptr)
@@ -45,15 +45,15 @@ GraphicsManager::GraphicsManager(GraphicsManager const &aGraphicsManager) : Mana
 
 GraphicsManager::~GraphicsManager()
 {
-  for(std::unordered_map<int, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
+  for(std::unordered_map<HashType, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
   {
     delete it->second;
   }
-  for(std::unordered_map<int, ShaderData*>::iterator it = mShaders.begin(); it != mShaders.end(); ++it)
+  for(std::unordered_map<HashType, ShaderData*>::iterator it = mShaders.begin(); it != mShaders.end(); ++it)
   {
     delete it->second;
   }
-  for(std::unordered_map<int, Pipeline*>::iterator it = mPipelines.begin(); it != mPipelines.end(); ++it)
+  for(std::unordered_map<HashType, Pipeline*>::iterator it = mPipelines.begin(); it != mPipelines.end(); ++it)
   {
     delete it->second;
   }
@@ -369,7 +369,7 @@ Pipeline* GraphicsManager::CreatePipeline(HashString const &aFileName)
  * @param aId Id of pipeline
  * @return Pipeline if available, otherwise nullptr
  */
-Pipeline* GraphicsManager::GetPipeline(int const &aId)
+Pipeline* GraphicsManager::GetPipeline(HashType const &aId)
 {
   if(mPipelines.find(aId) == mPipelines.end())
     return nullptr;
@@ -419,7 +419,7 @@ Tree* GraphicsManager::GetTree()
  */
 void GraphicsManager::AddTexturePairing(HashString const &aFilename, TextureData *aData)
 {
-  mTextures.insert(std::pair<int, TextureData*>(aFilename.ToHash(), aData));
+  mTextures.insert(std::pair<HashType, TextureData*>(aFilename.ToHash(), aData));
 }
 
 /**
@@ -428,11 +428,12 @@ void GraphicsManager::AddTexturePairing(HashString const &aFilename, TextureData
  */
 TextureData* GraphicsManager::GetTextureData(HashString const &aFilename) const
 {
-  std::unordered_map<int, TextureData*>::const_iterator pos = mTextures.find(aFilename.ToHash());
+  std::unordered_map<HashType, TextureData*>::const_iterator pos = mTextures.find(aFilename.ToHash());
 
   if(pos == mTextures.end())
   {
-    return mTextures.find(Common::StringHashFunction(DEFAULT_TEXTURE_NAME))->second;
+    HashType hash = Common::StringHashFunction(DEFAULT_TEXTURE_NAME);
+    return mTextures.find(hash)->second;
   }
 
   return pos->second;
@@ -445,7 +446,7 @@ TextureData* GraphicsManager::GetTextureData(HashString const &aFilename) const
  */
 void GraphicsManager::AddShaderPairing(HashString const &aFilename, ShaderData *aData)
 {
-  mShaders.insert(std::pair<int, ShaderData*>(aFilename.ToHash(), aData));
+  mShaders.insert(std::pair<HashType, ShaderData*>(aFilename.ToHash(), aData));
 }
 
 /**
@@ -455,7 +456,7 @@ void GraphicsManager::AddShaderPairing(HashString const &aFilename, ShaderData *
  */
 ShaderData* GraphicsManager::GetShaderData(HashString const &aFilename) const
 {
-  std::unordered_map<int, ShaderData*>::const_iterator pos = mShaders.find(aFilename.ToHash());
+  std::unordered_map<HashType, ShaderData*>::const_iterator pos = mShaders.find(aFilename.ToHash());
 
   if(pos == mShaders.end())
   {
@@ -473,7 +474,7 @@ ShaderData* GraphicsManager::GetShaderData(HashString const &aFilename) const
  */
 bool GraphicsManager::ShaderDataExists(HashString const &aFilename) const
 {
-  std::unordered_map<int, ShaderData*>::const_iterator pos = mShaders.find(aFilename.ToHash());
+  std::unordered_map<HashType, ShaderData*>::const_iterator pos = mShaders.find(aFilename.ToHash());
 
   if(pos == mShaders.end())
   {
@@ -509,7 +510,7 @@ void GraphicsManager::ResetDevice()
   std::vector<TextureData*> newTextures;
   std::vector<ShaderData*> newShaders;
   std::unordered_set<GameObject*> allocatedObjects = GetOwningApp()->GET<ObjectManager>()->GetAllocatedObjects();
-  for(std::unordered_map<int, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
+  for(std::unordered_map<HashType, TextureData*>::iterator it = mTextures.begin(); it != mTextures.end(); ++it)
   {
     TextureData* data = it->second;
     TextureData* newTexture = nullptr;
@@ -532,7 +533,7 @@ void GraphicsManager::ResetDevice()
     
     delete data;
   }
-  for(std::unordered_map<int, ShaderData*>::iterator it = mShaders.begin(); it != mShaders.end(); ++it)
+  for(std::unordered_map<HashType, ShaderData*>::iterator it = mShaders.begin(); it != mShaders.end(); ++it)
   {
     ShaderData* data = it->second;
     ShaderData* newShader = ShaderLoader::LoadShaders(data->mVertexFileName, data->mFragmentFileName);
@@ -554,12 +555,12 @@ void GraphicsManager::ResetDevice()
   
   for(std::vector<TextureData*>::iterator it = newTextures.begin(); it != newTextures.end(); ++it)
   {
-    mTextures.insert(std::pair<int, TextureData*>((*it)->mTextureName.ToHash(), *it));
+    mTextures.insert(std::pair<HashType, TextureData*>((*it)->mTextureName.ToHash(), *it));
   }
   for(std::vector<ShaderData*>::iterator it = newShaders.begin(); it != newShaders.end(); ++it)
   {
     HashString shaderKey = (*it)->mVertexFileName + (*it)->mFragmentFileName;
-    mShaders.insert(std::pair<int, ShaderData*>(shaderKey.ToHash(), *it));
+    mShaders.insert(std::pair<HashType, ShaderData*>(shaderKey.ToHash(), *it));
   }
 }
 

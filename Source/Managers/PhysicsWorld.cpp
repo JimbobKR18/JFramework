@@ -34,7 +34,7 @@ bool SortPredicate(PhysicsObject *object1, PhysicsObject *object2)
   return false;
 }
 
-unsigned const PhysicsWorld::sUID = Common::StringHashFunction("PhysicsWorld");
+HashType const PhysicsWorld::sUID = Common::StringHashFunction("PhysicsWorld");
 
 PhysicsWorld::PhysicsWorld(GameApp *aApp) : Manager(aApp, "PhysicsWorld", PhysicsWorld::sUID), mObjects(), mRegistry(), 
   mGravity(Constants::GetVector3("GravityForce")), mResolver()

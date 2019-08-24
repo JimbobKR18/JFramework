@@ -1,7 +1,7 @@
 #include "EffectsManager.h"
 #include "DefaultEffectsFactory.h"
 
-unsigned const EffectsManager::sUID = Common::StringHashFunction("EffectsManager");
+HashType const EffectsManager::sUID = Common::StringHashFunction("EffectsManager");
 
 EffectsManager::EffectsManager(GameApp *aApp) : Manager(aApp, "EffectsManager", EffectsManager::sUID),
   mEffects(), mEffectsFactory(new DefaultEffectsFactory())

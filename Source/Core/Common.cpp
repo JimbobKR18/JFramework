@@ -640,9 +640,9 @@ namespace Common
    * @brief String hash function, good enough default
    * @param aString
    */
-  int StringHashFunction(std::string const &aString)
+  HashType StringHashFunction(std::string const &aString)
   {
-    int hashValue = 0;
+    HashType hashValue = 0;
     for(unsigned i = 0; i < aString.length(); ++i)
     {
       hashValue = (31 * hashValue) + aString[i];

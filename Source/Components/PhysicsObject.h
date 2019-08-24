@@ -18,7 +18,7 @@
 class PhysicsObject : public Component
 {
 public:
-  typedef std::unordered_map<int, HashString> IgnoreContainer;
+  typedef std::unordered_map<HashType, HashString> IgnoreContainer;
   typedef IgnoreContainer::iterator IgnoreIT;
   typedef IgnoreContainer::const_iterator ConstIgnoreIT;
   
@@ -50,7 +50,7 @@ private:
   ShapeContainer      mShapes;
   JointContainer      mJoints;
   
-  static int const sUID;
+  static HashType const sUID;
 
 public:
   PhysicsObject(PhysicsWorld *aWorld);
@@ -65,7 +65,7 @@ public:
   virtual void         Deserialize(ParserNode *aNode);
   virtual Component*   Clone(GameObject *aNewOwner) const;
   static void          SerializeLUA();
-  static int           GetUID() {return sUID;}
+  static HashType      GetUID() {return sUID;}
 
   // Methods - Misc.
   void                 AddShape(Shape* aShape);

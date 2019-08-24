@@ -9,10 +9,10 @@
 #include "Controller.h"
 #include "ControllerManager.h"
 
-int const Controller::sUID = Common::StringHashFunction("Controller");
+HashType const Controller::sUID = Common::StringHashFunction("Controller");
 
 // PROTECTED
-Controller::Controller(ControllerManager *aManager, int const &aUID) : Component(aUID), mManager(aManager), mPaused(false)
+Controller::Controller(ControllerManager *aManager, HashType const &aUID) : Component(aUID), mManager(aManager), mPaused(false)
 {
   aManager->AddController(this);
 }

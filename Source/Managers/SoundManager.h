@@ -30,10 +30,10 @@ private:
 
   typedef std::set<HashString>                          SoundNameContainer;
   typedef std::vector<SoundDSPInfo*>                    SoundDSPInfoVector;
-  typedef std::unordered_map<int, DSP*>                 DSPContainer;
-  typedef std::unordered_map<int, SoundDSPInfoVector>   SoundDSPContainer;
-  typedef std::unordered_map<int, SoundNameContainer>   SoundGroupContainer;
-  typedef std::unordered_map<int, HashString>           AliasContainer;
+  typedef std::unordered_map<HashType, DSP*>                 DSPContainer;
+  typedef std::unordered_map<HashType, SoundDSPInfoVector>   SoundDSPContainer;
+  typedef std::unordered_map<HashType, SoundNameContainer>   SoundGroupContainer;
+  typedef std::unordered_map<HashType, HashString>           AliasContainer;
   typedef DSPContainer::iterator                        DSPIt;
   typedef SoundDSPInfoVector::iterator                  SoundDSPInfoVectorIt;
   typedef SoundDSPContainer::iterator                   SoundDSPContainerIt;
@@ -48,7 +48,7 @@ private:
   SoundDSPContainer mGroupsToDSPs;
   AliasContainer mAliases;
 
-  static unsigned const sUID;
+  static HashType const sUID;
 
 public:
   static int const INFINITE_LOOPS = -1;
@@ -128,7 +128,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "SoundManager";}
-  static unsigned     GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
 
   static void         SerializeLUA();
   

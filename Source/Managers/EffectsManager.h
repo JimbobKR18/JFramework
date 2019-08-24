@@ -17,7 +17,7 @@ private:
   EffectContainer mEffects;
   EffectsFactory* mEffectsFactory;
   
-  static unsigned const sUID;
+  static HashType const sUID;
   
 public:
   EffectsManager(GameApp *aApp);
@@ -45,7 +45,7 @@ public:
   virtual void SendMessage(Message const& aMessage);
   
   static std::string  GetName() {return "EffectsManager";}
-  static unsigned     GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
 };
 
 #endif

@@ -16,7 +16,7 @@
 #include "PhysicsWorld.h"
 #include "ObjectManager.h"
 
-int const PhysicsObject::sUID = Common::StringHashFunction("PhysicsObject");
+HashType const PhysicsObject::sUID = Common::StringHashFunction("PhysicsObject");
 
 PhysicsObject::PhysicsObject(PhysicsWorld *aWorld) : Component(PhysicsObject::sUID), mWorld(aWorld),
                   mVelocity(0,0,0), mAcceleration(0,0,0), mForces(0,0,0),

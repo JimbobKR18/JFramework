@@ -259,11 +259,7 @@ void HashString::operator=(HashString const &aRhs)
  */
 bool HashString::operator==(HashString const &aRhs) const
 {
-  // If the hashes aren't equal, early out.
-  if(mHash != aRhs.mHash)
-    return false;
-  
-  return mString == aRhs.mString;
+  return mHash == aRhs.mHash;
 }
 
 /**
@@ -501,7 +497,7 @@ bool HashString::ToBool() const
  * @brief Convert to Hash
  * @return Hash value of string
  */
-int HashString::ToHash() const
+HashType HashString::ToHash() const
 {
   return mHash;
 }

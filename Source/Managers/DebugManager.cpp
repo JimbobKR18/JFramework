@@ -9,7 +9,7 @@
 #include "TextParser.h"
 #include "ParserFactory.h"
 
-unsigned const DebugManager::sUID = Common::StringHashFunction("DebugManager");
+HashType const DebugManager::sUID = Common::StringHashFunction("DebugManager");
 DebugManager::DebugManager(GameApp *aApp) : Manager(aApp, "DebugManager", DebugManager::sUID), mInvalidMemory()
 {
 }

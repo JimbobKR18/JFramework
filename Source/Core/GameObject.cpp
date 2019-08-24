@@ -280,7 +280,7 @@ void GameObject::RemoveChild(GameObject *aObject)
  * @param aUID uid of component
  * @return Component or nullptr
  */
-Component *GameObject::GetComponent(int const &aUID) const
+Component *GameObject::GetComponent(HashType const &aUID) const
 {
   ComponentConstIT component = mComponents.find(aUID);
   if(component != mComponents.end())
@@ -305,7 +305,7 @@ Component* GameObject::GetComponentByName(HashString const &aName) const
  * @param aUID uid of component
  * @return True if object has component
  */
-bool GameObject::HasComponent(int const &aUID) const
+bool GameObject::HasComponent(HashType const &aUID) const
 {
   ComponentConstIT component = mComponents.find(aUID);
   if(component != mComponents.end())

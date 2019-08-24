@@ -21,7 +21,7 @@ public:
 class FileCache
 {
 private:
-  typedef std::unordered_map<int, FileCacheData*> FileContainer;
+  typedef std::unordered_map<HashType, FileCacheData*> FileContainer;
   typedef FileContainer::iterator FileIT;
   static FileContainer mFiles;
 public:

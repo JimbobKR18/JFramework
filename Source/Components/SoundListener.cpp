@@ -1,7 +1,7 @@
 #include "SoundListener.h"
 #include "LUATypes.h"
 
-int const SoundListener::sUID = Common::StringHashFunction("SoundListener");
+HashType const SoundListener::sUID = Common::StringHashFunction("SoundListener");
 
 SoundListener::SoundListener() : Component(SoundListener::sUID), mActive(true)
 {

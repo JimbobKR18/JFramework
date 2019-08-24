@@ -286,9 +286,7 @@ GameObject* Level::CreateObjectDelayed(HashString const &aFileName, HashString c
 void Level::DeleteObjectDelayed(GameObject *aObject)
 {
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
   EffectsManager *effectsManager = mOwner->GetOwningApp()->GET<EffectsManager>();
-  bool found = false;
   
   for(int i = ObjectPlacement::DEFAULT; i != ObjectPlacement::PLACEMENT_ALL; ++i)
   {
@@ -622,7 +620,6 @@ void Level::ParseFile(HashString const &aFileName, HashString const &aFolderName
   ParserNode* curRoot = parser->Find(tempIndex);
   
   ObjectManager *objectManager = mOwner->GetOwningApp()->GET<ObjectManager>();
-  GraphicsManager *graphicsManager = mOwner->GetOwningApp()->GET<GraphicsManager>();
 
   // While there are objects to find.
   while(curRoot)
@@ -857,6 +854,7 @@ Level::ObjectContainer* Level::CreateEmptyScenario(HashString const &aScenarioNa
   {
     DebugLogPrint("%s scenario file already exists", aScenarioName.ToCharArray());
     assert(!"Scenario file already exists.");
+    return nullptr;
   }
 }
 

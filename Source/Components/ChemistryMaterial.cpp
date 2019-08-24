@@ -3,7 +3,7 @@
 #include "LUATypes.h"
 #include "CollisionMessage.h"
 
-int const ChemistryMaterial::sUID = Common::StringHashFunction("ChemistryMaterial");
+HashType const ChemistryMaterial::sUID = Common::StringHashFunction("ChemistryMaterial");
 
 ChemistryMaterial::ChemistryMaterial(ChemistryManager* aManager) : Component(ChemistryMaterial::sUID), mManager(aManager), 
   mName(""), mCurrentTemperature(0), mCurrentWattage(0), mBoilingPoint(FLT_MAX), mMeltingPoint(0), 

@@ -10,10 +10,10 @@ class Constraint : public Component
 {
 private:
   Joint* mJoints[2];
-  static int const sUID;
+  static HashType const sUID;
 
 protected:
-  Constraint(int const &aUID);
+  Constraint(HashType const &aUID);
 
 public:
   Constraint();
@@ -27,7 +27,7 @@ public:
   virtual void        Serialize(ParserNode *aNode) = 0;
   virtual void        Deserialize(ParserNode *aNode) = 0;
   virtual Component*  Clone(GameObject *aNewOwner) = 0;
-  static int          GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
 };
 
 #endif // __JFramework_Constraint_h_

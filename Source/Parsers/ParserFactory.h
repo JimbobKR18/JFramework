@@ -7,7 +7,7 @@
 class ParserFactory
 {
 private:
-  static std::unordered_map<int, Parser*> mParserCache;
+  static std::unordered_map<HashType, Parser*> mParserCache;
   ParserFactory();
   
 public:

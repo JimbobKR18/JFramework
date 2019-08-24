@@ -15,7 +15,7 @@
 #include "FMODStudioSoundSystem.h"
 #endif
 
-unsigned const SoundManager::sUID = Common::StringHashFunction("SoundManager");
+HashType const SoundManager::sUID = Common::StringHashFunction("SoundManager");
 SoundManager::SoundManager(GameApp *aApp) : Manager(aApp, "SoundManager", SoundManager::sUID), mSoundSystem(nullptr), 
   mDSPContainer(), mSoundsToDSPs(), mSoundGroups(), mAliases()
 {

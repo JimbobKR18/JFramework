@@ -9,7 +9,7 @@
   #define SHADER_COMPATIBLE
 #endif
 
-int const Camera::sUID = Common::StringHashFunction("Camera");
+HashType const Camera::sUID = Common::StringHashFunction("Camera");
 
 Camera::Camera() : Component(Camera::sUID)
 {

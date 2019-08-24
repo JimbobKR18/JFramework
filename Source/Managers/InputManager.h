@@ -32,7 +32,7 @@ private:
   std::vector<InputInfo*> mInputs;
   bool                mAcceptInput;
 
-  static unsigned const sUID;
+  static HashType const sUID;
 public:
   InputManager(GameApp *aApp);
   ~InputManager();
@@ -53,7 +53,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "InputManager";}
-  static unsigned     GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
   
   static void         SerializeLUA();
   

@@ -18,7 +18,7 @@ FileCache::~FileCache()
 HashString FileCache::GetFile(HashString const &aFilename)
 {
   // Keep an eye on this hash function.
-  int hash = aFilename.ToHash() + aFilename.Length();
+  HashType hash = aFilename.ToHash() + aFilename.Length();
   FileContainer::iterator file = mFiles.find(hash);
   if(file != mFiles.end())
   {

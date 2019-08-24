@@ -5,7 +5,7 @@
 #include "CollisionMessage.h"
 #include "LUATypes.h"
 
-int const SoundEmitter::sUID = Common::StringHashFunction("SoundEmitter");
+HashType const SoundEmitter::sUID = Common::StringHashFunction("SoundEmitter");
 
 SoundEmitter::SoundEmitter() : Component(SoundEmitter::sUID), mPattern(SoundEmitPattern::UNIFORM),
   mFunction(SoundEmitFunction::CONSTANT), mSoundName(), mChannelGroup(), mSoundOrigin(), mChannel(-1), mVolume(0), 

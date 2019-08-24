@@ -100,7 +100,7 @@ private:
   PropertyContainer   mProperties;
   bool                mUIElement;
   
-  static int const sUID;
+  static HashType const sUID;
 public:
   Renderable();
   Renderable(Renderable const &aSurface);
@@ -189,7 +189,7 @@ public:
   virtual void        Deserialize(ParserNode *aNode);
   virtual Component*  Clone(GameObject *aNewOwner) const;
   static void         SerializeLUA();
-  static int          GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
   
   static void AlignmentHelper(Transform *aTransform, Vector3 const &aSize, Vector3 &aPosition, Vector3 &aScale);
 };

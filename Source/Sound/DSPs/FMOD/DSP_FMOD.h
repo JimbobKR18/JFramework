@@ -9,7 +9,7 @@
 class DSP_FMOD : public DSP
 {
 private:
-  typedef std::unordered_map<int, FMOD::DSPConnection*>     FMODDSPConnectionContainer;
+  typedef std::unordered_map<HashType, FMOD::DSPConnection*>     FMODDSPConnectionContainer;
   typedef FMODDSPConnectionContainer::iterator              FMODDSPConnectionIt;
 
   FMOD::DSP* mDSP;

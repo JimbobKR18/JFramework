@@ -14,7 +14,7 @@
 class Constants
 {
 private:
-  typedef std::unordered_map<int, HashString> ValueContainer;
+  typedef std::unordered_map<HashType, HashString> ValueContainer;
   typedef ValueContainer::iterator ValueContainerIT;
   static ValueContainer mValues;
 

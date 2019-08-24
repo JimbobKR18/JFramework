@@ -21,10 +21,10 @@ class Controller : public Component
 {
 private:
   ControllerManager *mManager;
-  static int const sUID;
+  static HashType const sUID;
   bool mPaused;
 protected:
-  Controller(ControllerManager *aManager, int const &aUID);
+  Controller(ControllerManager *aManager, HashType const &aUID);
 public:
   Controller();
   virtual ~Controller();
@@ -42,7 +42,7 @@ public:
   virtual void        Serialize(ParserNode *aNode) = 0;
   virtual void        Deserialize(ParserNode *aNode) = 0;
   virtual Component*  Clone(GameObject *aNewOwner) const = 0;
-  static int          GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
 };
 
 #endif /* defined(__JFramework__Controller__) */

@@ -8,10 +8,10 @@
 class FMODStudioSoundSystem : public SoundSystem
 {
 private:
-  typedef std::unordered_map<int, FMOD::Studio::Bank*> BankContainer;
+  typedef std::unordered_map<HashType, FMOD::Studio::Bank*> BankContainer;
   typedef BankContainer::iterator BankIt;
   typedef BankContainer::const_iterator BankConstIt;
-  typedef std::unordered_map<int, FMOD::Studio::EventDescription*> EventDescriptionContainer;
+  typedef std::unordered_map<HashType, FMOD::Studio::EventDescription*> EventDescriptionContainer;
   typedef EventDescriptionContainer::iterator EventDescriptionIt;
   typedef EventDescriptionContainer::const_iterator EventDescriptionConstIt;
   typedef std::unordered_map<int, FMOD::Studio::EventInstance*> EventInstanceContainer;
@@ -20,7 +20,7 @@ private:
   typedef std::unordered_set<int> InstanceContainer;
   typedef InstanceContainer::iterator InstanceIt;
   typedef InstanceContainer::const_iterator InstanceConstIt;
-  typedef std::unordered_map<int, InstanceContainer> InstanceGroupContainer;
+  typedef std::unordered_map<HashType, InstanceContainer> InstanceGroupContainer;
   typedef InstanceGroupContainer::iterator InstanceGroupIt;
   typedef InstanceGroupContainer::const_iterator InstanceGroupConstIt;
   

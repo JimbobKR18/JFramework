@@ -13,6 +13,9 @@
 #include <set>
 #include <unordered_map>
 
+// Custom hash type
+typedef long HashType;
+
 // Defined for compilation reasons
 class Vector3;
 class Vector4;
@@ -22,7 +25,7 @@ class HashString
 {
 private:
   std::string mString;
-  int         mHash;
+  HashType    mHash;
 
   std::string::iterator stringIT;
   std::string::const_iterator constStringIT;
@@ -86,7 +89,7 @@ public:
   float ToFloat() const;
   double ToDouble() const;
   bool ToBool() const;
-  int ToHash() const;
+  HashType ToHash() const;
   std::vector<HashString> ToHashStringVector() const;
   std::vector<std::string> ToStringVector() const;
   std::vector<int> ToIntVector() const;

@@ -59,7 +59,7 @@ public:
   void SetId(HashString const &aId);
 };
 
-typedef std::unordered_map<int, RenderableProperty*> PropertyContainer;
+typedef std::unordered_map<HashType, RenderableProperty*> PropertyContainer;
 typedef PropertyContainer::iterator PropertyContainerIt;
 typedef PropertyContainer::const_iterator PropertyContainerConstIt;
 

@@ -4,7 +4,7 @@
 #include "Level.h"
 #include "Transform.h"
 
-int const FollowComponent::sUID = Common::StringHashFunction("FollowComponent");
+HashType const FollowComponent::sUID = Common::StringHashFunction("FollowComponent");
 
 FollowComponent::FollowComponent() : Component(FollowComponent::sUID), mTarget(nullptr), 
   mTargetName(), mTime(0), mInterpolator(nullptr), mPosition()

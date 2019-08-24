@@ -435,7 +435,7 @@ void ShaderLoader::SetShaderUniform(int aProgram, HashString const &aName, Prope
       if(ids.size() != values.size())
         assert(!"Sampler id and value sizes do not match. (PCShaderScreen.cpp)(SetShaderProperties)");
       
-      for(int i = 0; i < ids.size(); ++i)
+      for(unsigned i = 0; i < ids.size(); ++i)
       {
         glActiveTexture(GL_TEXTURE0 + ids[i]);
         GL_ERROR_CHECK();

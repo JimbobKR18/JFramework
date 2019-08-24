@@ -42,7 +42,7 @@ public:
   virtual void        Update() = 0;
   virtual void        SendMessage(Message const &aMessage) = 0;
   virtual void        ProcessDelayedMessage(Message *aMessage) = 0;
-  static unsigned     GetUID() {return DEFAULT_MANAGER_UID;}
+  static HashType GetUID() {return DEFAULT_MANAGER_UID;}
   static void         SerializeLUA()
   {
     SLB::Class<Manager, SLB::Instance::NoCopy>("Manager")

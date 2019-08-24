@@ -9,7 +9,7 @@ class StateObject : public Component
 private:
   StateMachine *mStateMachine;
   
-  static int const sUID;
+  static HashType const sUID;
   
 public:
   StateObject();
@@ -25,7 +25,7 @@ public:
   virtual void Update();
   virtual Component* Clone(GameObject *aNewOwner) const;
   static void  SerializeLUA();
-  static int   GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
 };
 
 #endif // __JFramework_StateObject_h_

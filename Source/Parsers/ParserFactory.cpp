@@ -1,7 +1,7 @@
 #include "ParserFactory.h"
 #include "TextParser.h"
 
-std::unordered_map<int, Parser*> ParserFactory::mParserCache;
+std::unordered_map<HashType, Parser*> ParserFactory::mParserCache;
 ParserFactory::ParserFactory()
 {
 }
@@ -15,7 +15,7 @@ Parser* ParserFactory::CreateInputParser(HashString const &aFolder, HashString c
   std::vector<HashString> split = aFileName.Split(".");
   HashString extension = split[split.size() - 1];
   
-  int hash = (aFolder + aFileName).ToHash();
+  HashType hash = (aFolder + aFileName).ToHash();
   if(extension == "txt")
   {
     if(mParserCache.find(hash) == mParserCache.end())
@@ -50,7 +50,7 @@ Parser* ParserFactory::CreateOutputParser(HashString const &aFolder, HashString 
 
 void ParserFactory::Cleanup()
 {
-  for(std::unordered_map<int, Parser*>::iterator it = mParserCache.begin(); it != mParserCache.end(); ++it)
+  for(std::unordered_map<HashType, Parser*>::iterator it = mParserCache.begin(); it != mParserCache.end(); ++it)
   {
     delete it->second;
   }

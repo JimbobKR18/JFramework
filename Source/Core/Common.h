@@ -79,7 +79,7 @@ namespace Common
   std::string               TrimString(std::string const &aString);
   
   HashString                RetrieveNameFromFileName(HashString const &aFileName);
-  int                       StringHashFunction(std::string const &aString);
+  HashType                  StringHashFunction(std::string const &aString);
 
   int                       RandomIntInRange(int const aX, int const bX);
   float                     RandomFloatInRange(float const aX, float const bX);

@@ -6,7 +6,7 @@ Component::Component()
   assert(!"Not supported.");
 }
 
-Component::Component(int const &aUID) : mOwner(nullptr), mInitialized(false), mUID(aUID) 
+Component::Component(HashType const &aUID) : mOwner(nullptr), mInitialized(false), mUID(aUID) 
 {
 }
 
@@ -43,7 +43,7 @@ void Component::SetOwner(GameObject *aOwner)
  * @brief Get UID of component
  * @return UID
  */
-int Component::GetDefinedUID() const
+HashType Component::GetDefinedUID() const
 {
   return mUID;
 }

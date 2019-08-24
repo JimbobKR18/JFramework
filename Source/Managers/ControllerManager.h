@@ -20,7 +20,7 @@ private:
   std::unordered_set<Controller*> mControllers;
   ControllerFactory *mFactory;
   
-  static unsigned const sUID;
+  static HashType const sUID;
 public:
   ControllerManager(GameApp* aApp);
   ~ControllerManager();
@@ -41,7 +41,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "ControllerManager";}
-  static unsigned     GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
   
   static void         SerializeLUA();
   

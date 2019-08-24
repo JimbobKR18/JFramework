@@ -115,7 +115,7 @@ void FMODStudioSoundSystem::UnloadSoundBank(HashString const& aFilename)
  */
 void FMODStudioSoundSystem::CreateSound(HashString const& aFilename, float const &aDefaultVolume, SoundSource const& aSource)
 {
-  int key = aFilename.ToHash();
+  HashType key = aFilename.ToHash();
   if(mEventDescriptions.find(key) == mEventDescriptions.end())
   {
     FMOD::Studio::EventDescription* description = nullptr;
@@ -135,7 +135,7 @@ void FMODStudioSoundSystem::CreateSound(HashString const& aFilename, float const
  */
 void FMODStudioSoundSystem::DeleteSound(HashString const& aName)
 {
-  int key = aName.ToHash();
+  HashType key = aName.ToHash();
   
   if(mBanks.find(key) == mBanks.end())
   {
@@ -154,7 +154,7 @@ void FMODStudioSoundSystem::DeleteSound(HashString const& aName)
  */
 int FMODStudioSoundSystem::PlaySound(HashString const& aName, int const aNumLoops)
 {
-  int key = aName.ToHash();
+  HashType key = aName.ToHash();
   if(mEventDescriptions.find(key) == mEventDescriptions.end())
   {
     FMOD::Studio::EventDescription* description = nullptr;

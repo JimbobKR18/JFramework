@@ -17,7 +17,7 @@ private:
   float                 mFalloff;
   Vector3               mDirectionality;
   
-  static int const  sUID;
+  static HashType const sUID;
 public:
   ChemistryElement(ChemistryManager* aManager);
   ChemistryElement(ChemistryElement const &aChemistryElement);
@@ -50,7 +50,7 @@ public:
   
   // Statics
   static void SerializeLUA();
-  static int GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
 };
 
 #endif // __JFramework__ChemistryElement__

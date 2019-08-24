@@ -13,17 +13,17 @@ class Component
 private:
   GameObject* mOwner;
   bool mInitialized;
-  int mUID;
+  HashType mUID;
 
 public:
   Component();
-  Component(int const &aUID);
+  Component(HashType const &aUID);
   Component(Component const &aComponent);
   virtual ~Component();
 
   GameObject*         GetOwner() const;
   void                SetOwner(GameObject *aOwner);
-  int                 GetDefinedUID() const;
+  HashType            GetDefinedUID() const;
   bool                GetInitialized() const;
 
   virtual void        Initialize();
@@ -33,7 +33,7 @@ public:
   virtual void        Serialize(ParserNode *aNode) = 0;
   virtual void        Deserialize(ParserNode *aNode) = 0;
   virtual Component*  Clone(GameObject *aNewOwner) const = 0;
-  static int          GetUID() {return DEFAULT_COMPONENT_UID;}
+  static HashType GetUID() {return DEFAULT_COMPONENT_UID;}
   static void         SerializeLUA();
 };
 

@@ -21,16 +21,16 @@ private:
   std::unordered_set<Renderable*>       mNewRenderables;
   std::unordered_set<Renderable*>       mMovingRenderables;
   std::unordered_set<Renderable*>       mUIElements;
-  std::unordered_map<int, TextureData*>  mTextures;
-  std::unordered_map<int, ShaderData*>   mShaders;
+  std::unordered_map<HashType, TextureData*>  mTextures;
+  std::unordered_map<HashType, ShaderData*>   mShaders;
   std::unordered_set<Camera*>         mCameras;
   std::unordered_set<int>             mUnsortedLayers;
-  std::unordered_map<int, Pipeline*>   mPipelines;
+  std::unordered_map<HashType, Pipeline*>   mPipelines;
   Screen*                             mScreen;
   Camera*                             mPrimaryCamera;
   ThreadPool                          mThreadPool;
 
-  static unsigned const sUID;
+  static HashType const sUID;
 public:
   GraphicsManager(GameApp *aApp, int aWidth, int aHeight, bool aFullScreen);
   GraphicsManager(GraphicsManager const &aGraphicsManager);
@@ -41,7 +41,7 @@ public:
   virtual void        SendMessage(Message const &aMessage);
   virtual void        ProcessDelayedMessage(Message *aMessage);
   static std::string  GetName() {return "GraphicsManager";}
-  static unsigned     GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
   
   static void         SerializeLUA();
 
@@ -64,7 +64,7 @@ public:
   
   // Pipeline Management
   Pipeline*           CreatePipeline(HashString const &aFileName);
-  Pipeline*           GetPipeline(int const &aId);
+  Pipeline*           GetPipeline(HashType const &aId);
   
   // Layer Management
   void                SetUnsortedLayers(std::unordered_set<int> const aUnsortedLayers);

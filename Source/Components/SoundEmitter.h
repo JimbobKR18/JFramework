@@ -36,7 +36,7 @@ private:
   
   std::set<SoundListener*> mListeners;
   
-  static int const sUID;
+  static HashType const sUID;
   
 public:
   SoundEmitter();
@@ -73,7 +73,7 @@ public:
   
   // STATICS
   static void SerializeLUA();
-  static int GetUID() {return sUID;}
+  static HashType GetUID() {return sUID;}
 };
 
 #endif

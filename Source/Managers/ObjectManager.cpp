@@ -8,7 +8,7 @@
 #include "DefaultGameObjectFactory.h"
 #include "ParserFactory.h"
 
-unsigned const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
+HashType const ObjectManager::sUID = Common::StringHashFunction("ObjectManager");
 ObjectManager::ObjectManager(GameApp *aApp) : Manager(aApp, "ObjectManager", ObjectManager::sUID),
   mArchetypes(), mObjects(), mStaticObjects(), mAllocatedObjects(), mFactory(new DefaultGameObjectFactory())
 {

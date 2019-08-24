@@ -9,7 +9,7 @@ class Button : public Component
 {
 private:
   AxisAlignedBoundingBox mClickableArea;
-  static int const sUID;
+  static HashType const sUID;
   
 public:
   Button();
@@ -24,7 +24,7 @@ public:
   virtual Component*  Clone(GameObject *aNewOwner) const = 0;
   virtual void        OnDownClick() = 0;
   virtual void        OnUpClick() = 0;
-  static int          GetUID() {return sUID;}
+  static HashType     GetUID() {return sUID;}
 };
 
 #endif // __JFramework_Button_h_
