@@ -2,6 +2,53 @@
 #include "LuaIncludes.h"
 
 HashType const Transform::sUID = Common::StringHashFunction("Transform");
+HashString const TRANSFORM = "Transform";
+HashString const POSITIONX = "PositionX";
+HashString const POSITIONY = "PositionY";
+HashString const POSITIONZ = "PositionZ";
+HashString const SCALEX = "ScaleX";
+HashString const SCALEY = "ScaleY";
+HashString const SCALEZ = "ScaleZ";
+HashString const SIZEX = "SizeX";
+HashString const SIZEY = "SizeY";
+HashString const SIZEZ = "SizeZ";
+HashString const MAXPOSITIONX = "MaxPositionX";
+HashString const MAXPOSITIONY = "MaxPositionY";
+HashString const MAXPOSITIONZ = "MaxPositionZ";
+HashString const MINPOSITIONX = "MinPositionX";
+HashString const MINPOSITIONY = "MinPositionY";
+HashString const MINPOSITIONZ = "MinPositionZ";
+HashString const ALIGNX = "AlignX";
+HashString const ALIGNY = "AlignY";
+HashString const ALIGNZ = "AlignZ";
+HashString const ROTATIONX = "RotationX";
+HashString const ROTATIONY = "RotationY";
+HashString const ROTATIONZ = "RotationZ";
+HashString const LOCKEDAXES = "LockedAxes";
+HashString const XAXIS = "X_AXIS";
+HashString const YAXIS = "Y_AXIS";
+HashString const ZAXIS = "Z_AXIS";
+HashString const XYAXIS = "XY_AXIS";
+HashString const YZAXIS = "YZ_AXIS";
+HashString const XZAXIS = "XZ_AXIS";
+HashString const ALLAXES = "ALL_AXES";
+HashString const NOAXIS = "NO_AXIS";
+HashString const INHERITINFO = "InheritInfo";
+HashString const INHERITNONE = "INHERIT_NONE";
+HashString const INHERITPOSITION = "INHERIT_POSITION";
+HashString const INHERITROTATION = "INHERIT_ROTATION";
+HashString const INHERITSCALE = "INHERIT_SCALE";
+HashString const INHERITPOSITIONROTATION = "INHERIT_POSITION_ROTATION";
+HashString const INHERITROTATIONSCALE = "INHERIT_ROTATION_SCALE";
+HashString const INHERITPOSITIONSCALE = "INHERIT_POSITION_SCALE";
+HashString const INHERITALL = "INHERIT_ALL";
+HashString const LEFT = "LEFT";
+HashString const RIGHT = "RIGHT";
+HashString const CENTER = "CENTER";
+HashString const TOP = "TOP";
+HashString const BOTTOM = "BOTTOM";
+HashString const FRONT = "FRONT";
+HashString const BACK = "BACK";
 
 Transform::Transform() : Component(Transform::sUID), mPosition(), mScale(1, 1, 1), mSize(), mRotation(),
                          mXAlign(X_ALIGN_CENTER), mYAlign(Y_ALIGN_CENTER), mZAlign(Z_ALIGN_CENTER), mLockedAxes(NO_AXIS),
@@ -310,16 +357,15 @@ void Transform::Update()
  */
 void Transform::Serialize(ParserNode *aNode)
 {
-  HashString const TRANSFORM = "Transform";
-  char const *values[9] = {"PositionX",
-                            "PositionY",
-                            "PositionZ",
-                            "ScaleX",
-                            "ScaleY",
-                            "ScaleZ",
-                            "SizeX",
-                            "SizeY",
-                            "SizeZ"};
+  HashString const values[9] = {POSITIONX,
+                            POSITIONY,
+                            POSITIONZ,
+                            SCALEX,
+                            SCALEY,
+                            SCALEZ,
+                            SIZEX,
+                            SIZEY,
+                            SIZEZ};
   aNode->Place(TRANSFORM, "");
   ParserNode* transform = aNode->Find(TRANSFORM);
   for(int i = 0; i < 9; ++i)
@@ -335,72 +381,72 @@ void Transform::Serialize(ParserNode *aNode)
   }
 
   if(mXAlign == X_ALIGN_LEFT)
-    transform->Place("AlignX", "LEFT");
+    transform->Place(ALIGNX, LEFT);
   else if(mXAlign == X_ALIGN_CENTER)
-    transform->Place("AlignX", "CENTER");
+    transform->Place(ALIGNX, CENTER);
   else if(mXAlign == X_ALIGN_RIGHT)
-    transform->Place("AlignX", "RIGHT");
+    transform->Place(ALIGNX, RIGHT);
 
   if(mYAlign == Y_ALIGN_TOP)
-    transform->Place("AlignY", "TOP");
+    transform->Place(ALIGNY, TOP);
   else if(mYAlign == Y_ALIGN_CENTER)
-    transform->Place("AlignY", "CENTER");
+    transform->Place(ALIGNY, CENTER);
   else if(mYAlign == Y_ALIGN_BOTTOM)
-    transform->Place("AlignY", "BOTTOM");
+    transform->Place(ALIGNY, BOTTOM);
 
   if(mZAlign == Z_ALIGN_FRONT)
-    transform->Place("AlignZ", "FRONT");
+    transform->Place(ALIGNZ, FRONT);
   else if(mZAlign == Z_ALIGN_CENTER)
-    transform->Place("AlignZ", "CENTER");
+    transform->Place(ALIGNZ, CENTER);
   else if(mZAlign == Z_ALIGN_BACK)
-    transform->Place("AlignZ", "BACK");
+    transform->Place(ALIGNZ, BACK);
     
   if(mLockedAxes == NO_AXIS)
-    transform->Place("LockedAxes", "NO_AXIS");
+    transform->Place(LOCKEDAXES, NOAXIS);
   else if(mLockedAxes == X_AXIS)
-    transform->Place("LockedAxes", "X_AXIS");
+    transform->Place(LOCKEDAXES, XAXIS);
   else if(mLockedAxes == Y_AXIS)
-    transform->Place("LockedAxes", "Y_AXIS");
+    transform->Place(LOCKEDAXES, YAXIS);
   else if(mLockedAxes == Z_AXIS)
-    transform->Place("LockedAxes", "Z_AXIS");
+    transform->Place(LOCKEDAXES, ZAXIS);
   else if(mLockedAxes == XY_AXIS)
-    transform->Place("LockedAxes", "XY_AXIS");
+    transform->Place(LOCKEDAXES, XYAXIS);
   else if(mLockedAxes == YZ_AXIS)
-    transform->Place("LockedAxes", "YZ_AXIS");
+    transform->Place(LOCKEDAXES, YZAXIS);
   else if(mLockedAxes == XZ_AXIS)
-    transform->Place("LockedAxes", "XZ_AXIS");
+    transform->Place(LOCKEDAXES, XZAXIS);
   else if(mLockedAxes == ALL_AXES)
-    transform->Place("LockedAxes", "ALL_AXES");
+    transform->Place(LOCKEDAXES, ALLAXES);
     
   if(mInheritInfo == INHERIT_NONE)
-    transform->Place("InheritInfo", "INHERIT_NONE");
+    transform->Place(INHERITINFO, INHERITNONE);
   else if(mInheritInfo == INHERIT_POSITION)
-    transform->Place("InheritInfo", "INHERIT_POSITION");
+    transform->Place(INHERITINFO, INHERITPOSITION);
   else if(mInheritInfo == INHERIT_ROTATION)
-    transform->Place("InheritInfo", "INHERIT_ROTATION");
+    transform->Place(INHERITINFO, INHERITROTATION);
   else if(mInheritInfo == INHERIT_SCALE)
-    transform->Place("InheritInfo", "INHERIT_SCALE");
+    transform->Place(INHERITINFO, INHERITSCALE);
   else if(mInheritInfo == INHERIT_POSITION_ROTATION)
-    transform->Place("InheritInfo", "INHERIT_POSITION_ROTATION");
+    transform->Place(INHERITINFO, INHERITPOSITIONROTATION);
   else if(mInheritInfo == INHERIT_ROTATION_SCALE)
-    transform->Place("InheritInfo", "INHERIT_ROTATION_SCALE");
+    transform->Place(INHERITINFO, INHERITROTATIONSCALE);
   else if(mInheritInfo == INHERIT_POSITION_SCALE)
-    transform->Place("InheritInfo", "INHERIT_POSITION_SCALE");
+    transform->Place(INHERITINFO, INHERITPOSITIONSCALE);
   else if(mInheritInfo == INHERIT_ALL)
-    transform->Place("InheritInfo", "INHERIT_ALL");
+    transform->Place(INHERITINFO, INHERITALL);
     
   // Rotations are a little TOO complicated, so set them to 0
-  transform->Place("RotationX", Common::IntToString(0));
-  transform->Place("RotationY", Common::IntToString(0));
-  transform->Place("RotationZ", Common::IntToString(0));
+  transform->Place(ROTATIONX, Common::IntToString(0));
+  transform->Place(ROTATIONY, Common::IntToString(0));
+  transform->Place(ROTATIONZ, Common::IntToString(0));
   
   // Boundaries
-  transform->Place("MaxPositionX", Common::FloatToString(mMaxBoundary.x));
-  transform->Place("MaxPositionY", Common::FloatToString(mMaxBoundary.y));
-  transform->Place("MaxPositionZ", Common::FloatToString(mMaxBoundary.z));
-  transform->Place("MinPositionX", Common::FloatToString(mMinBoundary.x));
-  transform->Place("MinPositionY", Common::FloatToString(mMinBoundary.y));
-  transform->Place("MinPositionZ", Common::FloatToString(mMinBoundary.z));
+  transform->Place(MAXPOSITIONX, Common::FloatToString(mMaxBoundary.x));
+  transform->Place(MAXPOSITIONY, Common::FloatToString(mMaxBoundary.y));
+  transform->Place(MAXPOSITIONZ, Common::FloatToString(mMaxBoundary.z));
+  transform->Place(MINPOSITIONX, Common::FloatToString(mMinBoundary.x));
+  transform->Place(MINPOSITIONY, Common::FloatToString(mMinBoundary.y));
+  transform->Place(MINPOSITIONZ, Common::FloatToString(mMinBoundary.z));
 }
 
 /**
@@ -411,127 +457,127 @@ void Transform::Deserialize(ParserNode *aNode)
 {
   // Position, Scale, Size
   Vector3 position = mPosition;
-  if(aNode->Find("PositionX"))
-    position.x = aNode->Find("PositionX")->GetValue().ToFloat();
-  if(aNode->Find("PositionY"))
-    position.y = aNode->Find("PositionY")->GetValue().ToFloat();
-  if(aNode->Find("PositionZ"))
-    position.z = aNode->Find("PositionZ")->GetValue().ToFloat();
+  if(aNode->Find(POSITIONX))
+    position.x = aNode->Find(POSITIONX)->GetValue().ToFloat();
+  if(aNode->Find(POSITIONY))
+    position.y = aNode->Find(POSITIONY)->GetValue().ToFloat();
+  if(aNode->Find(POSITIONZ))
+    position.z = aNode->Find(POSITIONZ)->GetValue().ToFloat();
   SetPosition(position);
   
   // WARNING: Setting scale to 0 causes a bug where the renderer doesn't draw them.
-  if(aNode->Find("ScaleX"))
-    mScale.x = aNode->Find("ScaleX")->GetValue().ToFloat();
-  if(aNode->Find("ScaleY"))
-    mScale.y = aNode->Find("ScaleY")->GetValue().ToFloat();
-  if(aNode->Find("ScaleZ"))
-    mScale.z = aNode->Find("ScaleZ")->GetValue().ToFloat();
+  if(aNode->Find(SCALEX))
+    mScale.x = aNode->Find(SCALEX)->GetValue().ToFloat();
+  if(aNode->Find(SCALEY))
+    mScale.y = aNode->Find(SCALEY)->GetValue().ToFloat();
+  if(aNode->Find(SCALEZ))
+    mScale.z = aNode->Find(SCALEZ)->GetValue().ToFloat();
     
-  if(aNode->Find("SizeX"))
-    mSize.x = aNode->Find("SizeX")->GetValue().ToFloat();
-  if(aNode->Find("SizeY"))
-    mSize.y = aNode->Find("SizeY")->GetValue().ToFloat();
-  if(aNode->Find("SizeZ"))
-    mSize.z = aNode->Find("SizeZ")->GetValue().ToFloat();
+  if(aNode->Find(SIZEX))
+    mSize.x = aNode->Find(SIZEX)->GetValue().ToFloat();
+  if(aNode->Find(SIZEY))
+    mSize.y = aNode->Find(SIZEY)->GetValue().ToFloat();
+  if(aNode->Find(SIZEZ))
+    mSize.z = aNode->Find(SIZEZ)->GetValue().ToFloat();
   
   // Boundaries
-  if(aNode->Find("MaxPositionX"))
-    mMaxBoundary.x = aNode->Find("MaxPositionX")->GetValue().ToFloat();
-  if(aNode->Find("MaxPositionY"))
-    mMaxBoundary.y = aNode->Find("MaxPositionY")->GetValue().ToFloat();
-  if(aNode->Find("MaxPositionZ"))
-    mMaxBoundary.z = aNode->Find("MaxPositionZ")->GetValue().ToFloat();
+  if(aNode->Find(MAXPOSITIONX))
+    mMaxBoundary.x = aNode->Find(MAXPOSITIONX)->GetValue().ToFloat();
+  if(aNode->Find(MAXPOSITIONY))
+    mMaxBoundary.y = aNode->Find(MAXPOSITIONY)->GetValue().ToFloat();
+  if(aNode->Find(MAXPOSITIONZ))
+    mMaxBoundary.z = aNode->Find(MAXPOSITIONZ)->GetValue().ToFloat();
     
-  if(aNode->Find("MinPositionX"))
-    mMinBoundary.x = aNode->Find("MinPositionX")->GetValue().ToFloat();
-  if(aNode->Find("MinPositionY"))
-    mMinBoundary.y = aNode->Find("MinPositionY")->GetValue().ToFloat();
-  if(aNode->Find("MinPositionZ"))
-    mMinBoundary.z = aNode->Find("MinPositionZ")->GetValue().ToFloat();
+  if(aNode->Find(MINPOSITIONX))
+    mMinBoundary.x = aNode->Find(MINPOSITIONX)->GetValue().ToFloat();
+  if(aNode->Find(MINPOSITIONY))
+    mMinBoundary.y = aNode->Find(MINPOSITIONY)->GetValue().ToFloat();
+  if(aNode->Find(MINPOSITIONZ))
+    mMinBoundary.z = aNode->Find(MINPOSITIONZ)->GetValue().ToFloat();
 
   // Alignment
-  HashString xAlign = aNode->Find("AlignX") ? aNode->Find("AlignX")->GetValue() : "";
-  HashString yAlign = aNode->Find("AlignY") ? aNode->Find("AlignY")->GetValue() : "";
-  HashString zAlign = aNode->Find("AlignZ") ? aNode->Find("AlignZ")->GetValue() : "";
+  HashString xAlign = aNode->Find(ALIGNX) ? aNode->Find(ALIGNX)->GetValue() : "";
+  HashString yAlign = aNode->Find(ALIGNY) ? aNode->Find(ALIGNY)->GetValue() : "";
+  HashString zAlign = aNode->Find(ALIGNZ) ? aNode->Find(ALIGNZ)->GetValue() : "";
   if(xAlign != "")
   {
-    if(xAlign == "LEFT")
+    if(xAlign == LEFT)
       mXAlign = X_ALIGN_LEFT;
-    else if(xAlign == "RIGHT")
+    else if(xAlign == RIGHT)
       mXAlign = X_ALIGN_RIGHT;
-    else if(xAlign != "CENTER")
+    else if(xAlign != CENTER)
       assert(!"Invalid value passed into XAlign");
   }
   if(yAlign != "")
   {
-    if(yAlign == "TOP")
+    if(yAlign == TOP)
       mYAlign = Y_ALIGN_TOP;
-    else if(yAlign == "BOTTOM")
+    else if(yAlign == BOTTOM)
       mYAlign = Y_ALIGN_BOTTOM;
-    else if(yAlign != "CENTER")
+    else if(yAlign != CENTER)
       assert(!"Invalid value passed into YAlign");
   }
   if(zAlign != "")
   {
-    if(zAlign == "FRONT")
+    if(zAlign == FRONT)
       mZAlign = Z_ALIGN_FRONT;
-    else if(zAlign == "BACK")
+    else if(zAlign == BACK)
       mZAlign = Z_ALIGN_BACK;
-    else if(zAlign != "CENTER")
+    else if(zAlign != CENTER)
       assert(!"Invalid value passed into ZAlign");
   }
   
   // Rotation
-  if(aNode->Find("RotationX"))
-    mRotation = mRotation.Rotate(Vector3(1,0,0), aNode->Find("RotationX")->GetValue().ToFloat());
-  if(aNode->Find("RotationY"))
-    mRotation = mRotation.Rotate(Vector3(0,1,0), aNode->Find("RotationY")->GetValue().ToFloat());
-  if(aNode->Find("RotationZ"))
-    mRotation = mRotation.Rotate(Vector3(0,0,1), aNode->Find("RotationZ")->GetValue().ToFloat());
+  if(aNode->Find(ROTATIONX))
+    mRotation = mRotation.Rotate(Vector3(1,0,0), aNode->Find(ROTATIONX)->GetValue().ToFloat());
+  if(aNode->Find(ROTATIONY))
+    mRotation = mRotation.Rotate(Vector3(0,1,0), aNode->Find(ROTATIONY)->GetValue().ToFloat());
+  if(aNode->Find(ROTATIONZ))
+    mRotation = mRotation.Rotate(Vector3(0,0,1), aNode->Find(ROTATIONZ)->GetValue().ToFloat());
   
   // Axis lock
-  if(aNode->Find("LockedAxes"))
+  if(aNode->Find(LOCKEDAXES))
   {
-    HashString axisLock = aNode->Find("LockedAxes")->GetValue();
-    if(axisLock == "X_AXIS")
+    HashString axisLock = aNode->Find(LOCKEDAXES)->GetValue();
+    if(axisLock == XAXIS)
       mLockedAxes = X_AXIS;
-    else if(axisLock == "Y_AXIS")
+    else if(axisLock == YAXIS)
       mLockedAxes = Y_AXIS;
-    else if(axisLock == "Z_AXIS")
+    else if(axisLock == ZAXIS)
       mLockedAxes = Z_AXIS;
-    else if(axisLock == "XY_AXIS")
+    else if(axisLock == XYAXIS)
       mLockedAxes = XY_AXIS;
-    else if(axisLock == "YZ_AXIS")
+    else if(axisLock == YZAXIS)
       mLockedAxes = YZ_AXIS;
-    else if(axisLock == "XZ_AXIS")
+    else if(axisLock == XZAXIS)
       mLockedAxes = XZ_AXIS;
-    else if(axisLock == "ALL_AXES")
+    else if(axisLock == ALLAXES)
       mLockedAxes = ALL_AXES;
-    else if(axisLock == "NO_AXIS")
+    else if(axisLock == NOAXIS)
       mLockedAxes = NO_AXIS;
     else
       assert(!"Invalid axis lock value passed in.");
   }
   
   // Parent inherit info
-  if(aNode->Find("InheritInfo"))
+  if(aNode->Find(INHERITINFO))
   {
-    HashString inheritInfo = aNode->Find("InheritInfo")->GetValue();
-    if(inheritInfo == "INHERIT_NONE")
+    HashString inheritInfo = aNode->Find(INHERITINFO)->GetValue();
+    if(inheritInfo == INHERITNONE)
       mInheritInfo = INHERIT_NONE;
-    else if(inheritInfo == "INHERIT_POSITION")
+    else if(inheritInfo == INHERITPOSITION)
       mInheritInfo = INHERIT_POSITION;
-    else if(inheritInfo == "INHERIT_ROTATION")
+    else if(inheritInfo == INHERITROTATION)
       mInheritInfo = INHERIT_ROTATION;
-    else if(inheritInfo == "INHERIT_SCALE")
+    else if(inheritInfo == INHERITSCALE)
       mInheritInfo = INHERIT_SCALE;
-    else if(inheritInfo == "INHERIT_POSITION_ROTATION")
+    else if(inheritInfo == INHERITPOSITIONROTATION)
       mInheritInfo = INHERIT_POSITION_ROTATION;
-    else if(inheritInfo == "INHERIT_ROTATION_SCALE")
+    else if(inheritInfo == INHERITROTATIONSCALE)
       mInheritInfo = INHERIT_ROTATION_SCALE;
-    else if(inheritInfo == "INHERIT_POSITION_SCALE")
+    else if(inheritInfo == INHERITPOSITIONSCALE)
       mInheritInfo = INHERIT_POSITION_SCALE;
-    else if(inheritInfo == "INHERIT_ALL")
+    else if(inheritInfo == INHERITALL)
       mInheritInfo = INHERIT_ALL;
     else
       assert(!"Invalid inheritance value passed in.");
