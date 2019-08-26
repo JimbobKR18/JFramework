@@ -137,7 +137,7 @@ ObjectManager *GameObject::GetManager() const
  * @brief Set ID of object
  * @param aID New ID of object
  */
-void GameObject::SetID(int const &aID)
+void GameObject::SetID(unsigned long const &aID)
 {
   mID = aID;
 }
@@ -234,7 +234,7 @@ void GameObject::RemoveComponent(Component *aComponent)
  * @brief Remove component by component's uid
  * @param aUID UID of component to remove
  */
-void GameObject::RemoveComponent(int const &aUID)
+void GameObject::RemoveComponent(HashType const &aUID)
 {
   ComponentIT component = mComponents.find(aUID);
   if(component != mComponents.end())

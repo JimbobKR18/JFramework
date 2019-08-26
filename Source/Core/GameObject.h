@@ -64,7 +64,7 @@ public:
   ComponentContainer&        GetComponents();
   
   // SETTERS
-  void                       SetID(int const &aID);
+  void                       SetID(unsigned long const &aID);
   void                       SetName(HashString const &aName);
   void                       SetType(HashString const &aType);
   void                       SetPlacement(ObjectPlacement const &aPlacement);
@@ -72,7 +72,7 @@ public:
   // OPERATIONS
   void                       AddComponent(Component *aComponent);
   void                       RemoveComponent(Component *aComponent);
-  void                       RemoveComponent(int const &aUID);
+  void                       RemoveComponent(HashType const &aUID);
   void                       AddChild(GameObject* aObject);
   void                       RemoveChild(GameObject *aObject);
   Component*                 GetComponent(HashType const &aUID) const;
