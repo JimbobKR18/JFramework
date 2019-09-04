@@ -88,14 +88,26 @@ ParserNode* Parser::Find(HashString const &aRoot, HashString const &aElement)
 
 /**
  * @brief Find all nodes with matching name.
+ * @param aRoot Name of root.
+ * @param aElement Name of element.
+ * @return All elements matching name.
+ */
+ParserNodeContainer Parser::FindAll(HashString const &aRoot, HashString const &aElement)
+{
+  // Find node and search it for an element
+  ParserNode *node = mDictionary->Find(aRoot);
+  return node->FindAll(aElement);
+}
+
+/**
+ * @brief Find all nodes with matching name.
  * @param aElement Name of element.
  * @return All elements matching name.
  */
 ParserNodeContainer Parser::FindAll(HashString const &aElement)
 {
   // Find node and search it for an element
-  ParserNode *node = mDictionary->Find(aElement);
-  return node->FindAll(aElement);
+  return mDictionary->FindAll(aElement);
 }
 
 /**

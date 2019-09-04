@@ -29,6 +29,7 @@ public:
   void                  Reset();
   ParserNode*           Find(HashString const &aElement);
   ParserNode*           Find(HashString const &aRoot, HashString const &aElement);
+  ParserNodeContainer   FindAll(HashString const &aRoot, HashString const &aElement);
   ParserNodeContainer   FindAll(HashString const &aElement);
   virtual void    Parse() = 0;
 
