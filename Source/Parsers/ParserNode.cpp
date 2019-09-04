@@ -9,6 +9,7 @@
 
 ParserNode::ParserNode() : mValue(""), mName(""), mChildren(), mParent(nullptr), mTouched(false), mRandom(false)
 {
+  mChildren.reserve(50);
 }
 
 ParserNode::~ParserNode()
