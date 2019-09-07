@@ -501,6 +501,14 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, Ha
   {
     wrapT = GL_CLAMP_TO_EDGE;
   }
+  if(SystemProperties::GetWrapModeS() == "GL_CLAMP_TO_BORDER")
+  {
+    wrapS = GL_CLAMP_TO_BORDER;
+  }
+  if(SystemProperties::GetWrapModeT() == "GL_CLAMP_TO_BORDER")
+  {
+    wrapT = GL_CLAMP_TO_BORDER;
+  }
 
   glGenTextures(1, &textureId);
   glBindTexture(GL_TEXTURE_2D, textureId);
