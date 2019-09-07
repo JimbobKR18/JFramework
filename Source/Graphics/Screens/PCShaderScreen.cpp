@@ -559,6 +559,9 @@ void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camer
     GLuint program = surface->GetProgramID();
     Viewspace viewSpace = surface->GetViewMode();
     Vector3 cameraTranslation;
+    GLTextureInfo info = GLTextureInfo(surface->GetMinFilter(), surface->GetMagFilter());
+    HashString const &minFilter = surface->GetMinFilter();
+    HashString const &magFilter = surface->GetMagFilter();
     
     if(surface->GetNoRender())
     {
@@ -596,7 +599,8 @@ void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camer
     
     int iteration = 0;
     while(it != end && (*it)->GetProgramID() == program &&
-          (*it)->GetTextureID() == texture && (*it)->GetViewMode() == viewSpace)
+          (*it)->GetTextureID() == texture && (*it)->GetViewMode() == viewSpace &&
+          (*it)->GetMinFilter() == minFilter && (*it)->GetMagFilter() == magFilter)
     {
       GameObject *owner = (*it)->GetOwner();
       Renderable *surface = *it;
@@ -652,6 +656,10 @@ void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camer
     glActiveTexture(GL_TEXTURE0 + activeTexture);
     GL_ERROR_CHECK();
     glBindTexture(GL_TEXTURE_2D, texture);
+    GL_ERROR_CHECK();
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, info.mMinFilter);
+    GL_ERROR_CHECK();
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, info.mMagFilter);
     GL_ERROR_CHECK();
     glUniform1i(glGetUniformLocation(program, "textureUnit"), activeTexture);
     GL_ERROR_CHECK();

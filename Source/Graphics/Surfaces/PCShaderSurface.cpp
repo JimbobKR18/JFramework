@@ -53,7 +53,7 @@ void PCShaderSurface::LoadImage(HashString const &aName)
 {
   /* If the file was already loaded,
      let's avoid assigning a new id. */
-  HashString key = aName + GetMinFilter() + GetMagFilter();
+  HashString key = aName;
   TextureData* textureData = GetManager()->GetTextureData(key);
   if(textureData->mTextureID != (unsigned)-1)
   {
@@ -370,6 +370,8 @@ void PCShaderSurface::Deserialize(ParserNode *aNode)
       
     SetFileName(fileName);
     LoadImage(GetFileName());
+    
+    
   }
   else if(aNode->GetName() == "Text")
   {

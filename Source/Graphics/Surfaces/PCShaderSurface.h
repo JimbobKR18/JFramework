@@ -31,6 +31,8 @@ private:
   GLuint        mProgramID;
   GLuint        mVertexShaderID;
   GLuint        mFragmentShaderID;
+  GLuint        mMinFilterCode;
+  GLuint        mMagFilterCode;
   HashString    mVertexShaderFileName;
   HashString    mFragmentShaderFileName;
   

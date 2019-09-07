@@ -18,7 +18,64 @@
 #endif
 
 std::vector<SDL_Surface*> ShaderLoader::mSurfaces;
+HashString const GLTextureInfo::GL_NEAREST_STRING = "GL_NEAREST";
+HashString const GLTextureInfo::GL_NEAREST_MIPMAP_NEAREST_STRING = "GL_NEAREST_MIPMAP_NEAREST";
+HashString const GLTextureInfo::GL_NEAREST_MIPMAP_LINEAR_STRING = "GL_NEAREST_MIPMAP_LINEAR";
+HashString const GLTextureInfo::GL_LINEAR_MIPMAP_NEAREST_STRING = "GL_LINEAR_MIPMAP_NEAREST";
+HashString const GLTextureInfo::GL_LINEAR_MIPMAP_LINEAR_STRING = "GL_LINEAR_MIPMAP_LINEAR";
+HashString const GLTextureInfo::GL_CLAMP_TO_EDGE_STRING = "GL_CLAMP_TO_EDGE";
+HashString const GLTextureInfo::GL_CLAMP_TO_BORDER_STRING = "GL_CLAMP_TO_BORDER";
 
+//------------------------------
+// GLTextureInfo
+//------------------------------
+GLTextureInfo::GLTextureInfo(HashString const &aMinFilter, HashString const &aMagFilter) : mTextureID(0), mMinFilter(GL_LINEAR), mMagFilter(GL_LINEAR), mWrapS(GL_REPEAT), mWrapT(GL_REPEAT)
+{
+  if(aMinFilter == GL_NEAREST_STRING)
+  {
+    mMinFilter = GL_NEAREST;
+  }
+  else if(aMinFilter == GL_NEAREST_MIPMAP_NEAREST_STRING)
+  {
+    mMinFilter = GL_NEAREST_MIPMAP_NEAREST;
+  }
+  else if(aMinFilter == GL_NEAREST_MIPMAP_LINEAR_STRING)
+  {
+    mMinFilter = GL_NEAREST_MIPMAP_LINEAR;
+  }
+  else if(aMinFilter == GL_LINEAR_MIPMAP_NEAREST_STRING)
+  {
+    mMinFilter = GL_LINEAR_MIPMAP_NEAREST;
+  }
+  else if(aMinFilter == GL_LINEAR_MIPMAP_LINEAR_STRING)
+  {
+    mMinFilter = GL_LINEAR_MIPMAP_LINEAR;
+  }
+  if(aMagFilter == GL_NEAREST_STRING)
+  {
+    mMagFilter = GL_NEAREST;
+  }
+  if(SystemProperties::GetWrapModeS() == GL_CLAMP_TO_EDGE_STRING)
+  {
+    mWrapS = GL_CLAMP_TO_EDGE;
+  }
+  if(SystemProperties::GetWrapModeT() == GL_CLAMP_TO_EDGE_STRING)
+  {
+    mWrapT = GL_CLAMP_TO_EDGE;
+  }
+  if(SystemProperties::GetWrapModeS() == GL_CLAMP_TO_BORDER_STRING)
+  {
+    mWrapS = GL_CLAMP_TO_BORDER;
+  }
+  if(SystemProperties::GetWrapModeT() == GL_CLAMP_TO_BORDER_STRING)
+  {
+    mWrapT = GL_CLAMP_TO_BORDER;
+  }
+}
+
+//------------------------------
+// ShaderLoader
+//------------------------------
 ShaderLoader::ShaderLoader()
 {
 }
@@ -462,53 +519,14 @@ void ShaderLoader::SetShaderUniform(int aProgram, HashString const &aName, Prope
  * @param aMagFilter Mag filter.
  * @return Texture id.
  */
-int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, HashString const &aMinFilter, HashString const &aMagFilter)
+unsigned ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, HashString const &aMinFilter, HashString const &aMagFilter)
 {
   GLuint textureId = 0;
-  GLint minFilter = GL_LINEAR;
-  GLint magFilter = GL_LINEAR;
-  GLint wrapS = GL_REPEAT;
-  GLint wrapT = GL_REPEAT;
-  if(aMinFilter == "GL_NEAREST")
-  {
-    minFilter = GL_NEAREST;
-  }
-  else if(aMinFilter == "GL_NEAREST_MIPMAP_NEAREST")
-  {
-    minFilter = GL_NEAREST_MIPMAP_NEAREST;
-  }
-  else if(aMinFilter == "GL_NEAREST_MIPMAP_LINEAR")
-  {
-    minFilter = GL_NEAREST_MIPMAP_LINEAR;
-  }
-  else if(aMinFilter == "GL_LINEAR_MIPMAP_NEAREST")
-  {
-    minFilter = GL_LINEAR_MIPMAP_NEAREST;
-  }
-  else if(aMinFilter == "GL_LINEAR_MIPMAP_LINEAR")
-  {
-    minFilter = GL_LINEAR_MIPMAP_LINEAR;
-  }
-  if(aMagFilter == "GL_NEAREST")
-  {
-    magFilter = GL_NEAREST;
-  }
-  if(SystemProperties::GetWrapModeS() == "GL_CLAMP_TO_EDGE")
-  {
-    wrapS = GL_CLAMP_TO_EDGE;
-  }
-  if(SystemProperties::GetWrapModeT() == "GL_CLAMP_TO_EDGE")
-  {
-    wrapT = GL_CLAMP_TO_EDGE;
-  }
-  if(SystemProperties::GetWrapModeS() == "GL_CLAMP_TO_BORDER")
-  {
-    wrapS = GL_CLAMP_TO_BORDER;
-  }
-  if(SystemProperties::GetWrapModeT() == "GL_CLAMP_TO_BORDER")
-  {
-    wrapT = GL_CLAMP_TO_BORDER;
-  }
+  GLTextureInfo info(aMinFilter, aMagFilter);
+  GLint minFilter = info.mMinFilter;
+  GLint magFilter = info.mMagFilter;
+  GLint wrapS = info.mWrapS;
+  GLint wrapT = info.mWrapT;
 
   glGenTextures(1, &textureId);
   glBindTexture(GL_TEXTURE_2D, textureId);
@@ -526,6 +544,7 @@ int ShaderLoader::ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, Ha
 #endif
   glGenerateMipmap(GL_TEXTURE_2D);
   mSurfaces.push_back(aSurface);
+  info.mTextureID = textureId;
 
   return textureId;
 }

@@ -31,6 +31,27 @@
   #define GL_ERROR_CHECK()
 #endif
 
+class GLTextureInfo
+{
+private:
+  static HashString const GL_NEAREST_STRING;
+  static HashString const GL_NEAREST_MIPMAP_NEAREST_STRING;
+  static HashString const GL_NEAREST_MIPMAP_LINEAR_STRING;
+  static HashString const GL_LINEAR_MIPMAP_NEAREST_STRING;
+  static HashString const GL_LINEAR_MIPMAP_LINEAR_STRING;
+  static HashString const GL_CLAMP_TO_EDGE_STRING;
+  static HashString const GL_CLAMP_TO_BORDER_STRING;
+
+public:
+  GLuint mTextureID;
+  GLint mMinFilter;
+  GLint mMagFilter;
+  GLint mWrapS;
+  GLint mWrapT;
+  
+  GLTextureInfo(HashString const &aMinFilter, HashString const &aMagFilter);
+};
+
 class ShaderLoader
 {
 private:
@@ -49,7 +70,7 @@ public:
   static void Clear();
   
 private:
-  static int ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, HashString const &aMinFilter, HashString const &aMagFilter);
+  static unsigned ImportTexture(SDL_Surface* aSurface, GLenum aTextureFormat, HashString const &aMinFilter, HashString const &aMagFilter);
 };
 
 #endif // __JFramework_ShaderLoader_h_

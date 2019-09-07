@@ -78,32 +78,9 @@ void GLFramebuffer::SetShaders(GraphicsManager *aManager, HashString const &aVer
 void GLFramebuffer::Generate(GraphicsManager *aManager)
 {
   mGenerated = true;
-  GLint minFilter = GL_LINEAR;
-  GLint magFilter = GL_LINEAR;
-  if(mMinFilter == "GL_NEAREST")
-  {
-    minFilter = GL_NEAREST;
-  }
-  else if(mMinFilter == "GL_NEAREST_MIPMAP_NEAREST")
-  {
-    minFilter = GL_NEAREST_MIPMAP_NEAREST;
-  }
-  else if(mMinFilter == "GL_NEAREST_MIPMAP_LINEAR")
-  {
-    minFilter = GL_NEAREST_MIPMAP_LINEAR;
-  }
-  else if(mMinFilter == "GL_LINEAR_MIPMAP_NEAREST")
-  {
-    minFilter = GL_LINEAR_MIPMAP_NEAREST;
-  }
-  else if(mMinFilter == "GL_LINEAR_MIPMAP_LINEAR")
-  {
-    minFilter = GL_LINEAR_MIPMAP_LINEAR;
-  }
-  if(mMagFilter == "GL_NEAREST")
-  {
-    magFilter = GL_NEAREST;
-  }
+  GLTextureInfo info(mMinFilter, mMagFilter);
+  GLint minFilter = info.mMinFilter;
+  GLint magFilter = info.mMagFilter;
   
   glGenFramebuffers(1, &mFrameBufferID);
   GL_ERROR_CHECK();
