@@ -39,7 +39,11 @@
   #define PC 1
 #endif
 
-#define DebugLogPrint std::printf
+#ifdef _DEBUG
+  #define DebugLogPrint std::printf
+#else
+  #define DebugLogPrint
+#endif
 
 namespace Common
 {
