@@ -550,6 +550,7 @@ void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camer
   // Draw each object
   // NOTE: The objects are sorted by texture id
   int activeTexture = 0;
+  GLTextureInfo info;
   std::vector<Renderable*>::const_iterator end = aObjects.end();
   for(std::vector<Renderable*>::const_iterator it = aObjects.begin(); it != end;)
   {
@@ -559,9 +560,9 @@ void PCShaderScreen::DrawObjects(std::vector<Renderable*> const &aObjects, Camer
     GLuint program = surface->GetProgramID();
     Viewspace viewSpace = surface->GetViewMode();
     Vector3 cameraTranslation;
-    GLTextureInfo info = GLTextureInfo(surface->GetMinFilter(), surface->GetMagFilter());
     HashString const &minFilter = surface->GetMinFilter();
     HashString const &magFilter = surface->GetMagFilter();
+    info.Set(minFilter, magFilter);
     
     if(surface->GetNoRender())
     {

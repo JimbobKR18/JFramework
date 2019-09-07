@@ -49,7 +49,9 @@ public:
   GLint mWrapS;
   GLint mWrapT;
   
+  GLTextureInfo();
   GLTextureInfo(HashString const &aMinFilter, HashString const &aMagFilter);
+  void Set(HashString const &aMinFilter, HashString const &aMagFilter);
 };
 
 class ShaderLoader

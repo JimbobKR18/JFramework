@@ -29,7 +29,22 @@ HashString const GLTextureInfo::GL_CLAMP_TO_BORDER_STRING = "GL_CLAMP_TO_BORDER"
 //------------------------------
 // GLTextureInfo
 //------------------------------
-GLTextureInfo::GLTextureInfo(HashString const &aMinFilter, HashString const &aMagFilter) : mTextureID(0), mMinFilter(GL_LINEAR), mMagFilter(GL_LINEAR), mWrapS(GL_REPEAT), mWrapT(GL_REPEAT)
+GLTextureInfo::GLTextureInfo() : mTextureID(0), mMinFilter(GL_LINEAR), mMagFilter(GL_LINEAR), mWrapS(GL_REPEAT), mWrapT(GL_REPEAT)
+{
+}
+
+GLTextureInfo::GLTextureInfo(HashString const &aMinFilter, HashString const &aMagFilter) : 
+  mTextureID(0), mMinFilter(GL_LINEAR), mMagFilter(GL_LINEAR), mWrapS(GL_REPEAT), mWrapT(GL_REPEAT)
+{
+  Set(aMinFilter, aMagFilter);
+}
+
+/**
+ * @brief Set filters
+ * @param aMinFilter
+ * @param aMagFilter
+ */
+void GLTextureInfo::Set(HashString const &aMinFilter, HashString const &aMagFilter)
 {
   if(aMinFilter == GL_NEAREST_STRING)
   {
@@ -219,7 +234,7 @@ ShaderData* ShaderLoader::LoadShaders(HashString const &aVertexShaderFilename, H
 TextureData* ShaderLoader::LoadTexture(HashString const &aTextureFileName, HashString const &aMinFilter, HashString const &aMagFilter)
 {
   TextureData* textureData = new TextureData();
-  GLenum textureFormat;
+  GLenum textureFormat = GL_RGBA;
   SDL_Surface* surface = IMG_Load(Common::RelativePath("Art", aTextureFileName).c_str());
   int numberOfColors = 0;
   if(surface)
@@ -318,9 +333,9 @@ TextureData* ShaderLoader::LoadText(HashString const &aFont, HashString const &a
 
   // Create text texture
   Vector4 foregroundColor = aForegroundColor * 255.0f;
-  Vector4 backgroundColor = aBackgroundColor * 255.0f;
+  //Vector4 backgroundColor = aBackgroundColor * 255.0f;
   SDL_Color fgColor = {(Uint8)foregroundColor.x, (Uint8)foregroundColor.y, (Uint8)foregroundColor.z, (Uint8)foregroundColor.w};
-  SDL_Color bgColor = {(Uint8)backgroundColor.x, (Uint8)backgroundColor.y, (Uint8)backgroundColor.z, (Uint8)backgroundColor.w};
+  //SDL_Color bgColor = {(Uint8)backgroundColor.x, (Uint8)backgroundColor.y, (Uint8)backgroundColor.z, (Uint8)backgroundColor.w};
   SDL_Surface *msg = TTF_RenderText_Blended_Wrapped(font, aText.ToCharArray(), fgColor, aMaxWidth);
   if(!msg)
   {
