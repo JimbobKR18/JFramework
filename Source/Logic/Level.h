@@ -61,8 +61,8 @@ public:
   Level(LevelManager *aManager, HashString const &aFileName, HashString const &aFolderName = "Game", bool aAutoParse = true);
   virtual ~Level();
 
-  HashString    GetName() const;
-  HashString    GetFileName() const;
+  HashString const&  GetName() const;
+  HashString const&  GetFileName() const;
   SoundNameContainer GetSoundNames() const;
   LevelManager* GetManager() const;
   SoundChannelContainer GetSoundChannels() const;
@@ -86,8 +86,8 @@ public:
   void              UpdateBoundaries(Vector3 const &aPosition, Vector3 const &aSize);
   void              SetMaxBoundary(Vector3 const &aMaxBoundary);
   void              SetMinBoundary(Vector3 const &aMinBoundary);
-  Vector3           GetMaxBoundary() const;
-  Vector3           GetMinBoundary() const;
+  Vector3 const&    GetMaxBoundary() const;
+  Vector3 const&    GetMinBoundary() const;
 
   void              Load(Level *aPrevLevel);
   void              Unload(Level *aNextLevel);

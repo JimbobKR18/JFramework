@@ -117,7 +117,7 @@ void TileMapGenerator::Update()
  * @brief Get Tilemap width
  * @return Width of tilemap
  */
-int TileMapGenerator::GetWidth() const
+int const& TileMapGenerator::GetWidth() const
 {
   return mWidth;
 }
@@ -126,7 +126,7 @@ int TileMapGenerator::GetWidth() const
  * @brief Get Tilemap height
  * @return Height of tilemap
  */
-int TileMapGenerator::GetHeight() const
+int const& TileMapGenerator::GetHeight() const
 {
   return mHeight;
 }
@@ -135,7 +135,7 @@ int TileMapGenerator::GetHeight() const
  * @brief Get tile size (in pixels)
  * @return Size of tiles in pixels.
  */
-int TileMapGenerator::GetTileSize() const
+int const& TileMapGenerator::GetTileSize() const
 {
   return mTileSize;
 }
@@ -144,7 +144,7 @@ int TileMapGenerator::GetTileSize() const
  * @brief Get source image name
  * @return Name of source image
  */
-HashString TileMapGenerator::GetImageName() const
+HashString const& TileMapGenerator::GetImageName() const
 {
   return mImageName;
 }
@@ -153,7 +153,7 @@ HashString TileMapGenerator::GetImageName() const
  * @brief Get data file name
  * @return Data file name
  */
-HashString TileMapGenerator::GetDataName() const
+HashString const& TileMapGenerator::GetDataName() const
 {
   return mDataName;
 }
@@ -230,7 +230,7 @@ std::unordered_map<int, GameObject*> TileMapGenerator::GetObjects()
  * @param aY Y in world coordinates
  * @return Art value of tile at position
  */
-int TileMapGenerator::GetTileValue(int const aX, int const aY)
+int const& TileMapGenerator::GetTileValue(int const aX, int const aY)
 {
   return mTiles[GetIndex(aX, aY)];
 }
@@ -241,7 +241,7 @@ int TileMapGenerator::GetTileValue(int const aX, int const aY)
  * @param aY Y in world coordinates
  * @return Collision value of tile at position
  */
-int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
+int const& TileMapGenerator::GetCollisionValue(int const aX, int const aY)
 {
   return mCollisionData[GetIndex(aX, aY)];
 }
@@ -252,7 +252,7 @@ int TileMapGenerator::GetCollisionValue(int const aX, int const aY)
  * @param aY Y in world coordinates
  * @return Material value of tile at position
  */
-int TileMapGenerator::GetMaterialValue(int const aX, int const aY)
+int const& TileMapGenerator::GetMaterialValue(int const aX, int const aY)
 {
   return mMaterials[GetIndex(aX, aY)];
 }

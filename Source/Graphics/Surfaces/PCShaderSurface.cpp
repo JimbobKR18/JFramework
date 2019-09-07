@@ -53,7 +53,8 @@ void PCShaderSurface::LoadImage(HashString const &aName)
 {
   /* If the file was already loaded,
      let's avoid assigning a new id. */
-  TextureData* textureData = GetManager()->GetTextureData(aName);
+  HashString key = aName + GetMinFilter() + GetMagFilter();
+  TextureData* textureData = GetManager()->GetTextureData(key);
   if(textureData->mTextureID != (unsigned)-1)
   {
     mTextureID = textureData->mTextureID;
@@ -66,7 +67,7 @@ void PCShaderSurface::LoadImage(HashString const &aName)
     if(textureData)
     {
       SetTextureSize(Vector3(textureData->mSize.x, textureData->mSize.y, 0));
-      GetManager()->AddTexturePairing(textureData->mTextureName, textureData);
+      GetManager()->AddTexturePairing(key, textureData);
       mTextureID = textureData->mTextureID;
     }
   }

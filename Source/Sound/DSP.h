@@ -14,7 +14,7 @@ public:
   DSP(HashString const& aName);
   virtual ~DSP();
   
-  HashString const GetName() const;
+  HashString const& GetName() const;
   
   // Virtuals
   virtual void SetFormat(int aNumChannels, Speaker_Mode const &aSpeakerMode) = 0;

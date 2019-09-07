@@ -79,7 +79,7 @@ Level::~Level()
  * @brief Get the level name. Not the file name.
  * @return The level name.
  */
-HashString Level::GetName() const
+HashString const& Level::GetName() const
 {
   return mName;
 }
@@ -88,7 +88,7 @@ HashString Level::GetName() const
 * @brief Get the file name, not the level name.
 * @return The file name.
 */
-HashString Level::GetFileName() const
+HashString const& Level::GetFileName() const
 {
   return mFileName;
 }
@@ -392,7 +392,7 @@ void Level::SetMinBoundary(Vector3 const &aMinBoundary)
  * @brief Get the max boundary of the level.
  * @return The max boundary of the level.
  */
-Vector3 Level::GetMaxBoundary() const
+Vector3 const& Level::GetMaxBoundary() const
 {
   return mMaxBoundary;
 }
@@ -401,7 +401,7 @@ Vector3 Level::GetMaxBoundary() const
  * @brief Get the min boundary of the level.
  * @return The min boundary of the level.
  */
-Vector3 Level::GetMinBoundary() const
+Vector3 const& Level::GetMinBoundary() const
 {
   return mMinBoundary;
 }

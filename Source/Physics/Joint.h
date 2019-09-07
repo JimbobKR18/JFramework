@@ -17,7 +17,7 @@ public:
   virtual ~Joint();
   
   // GETTERS
-  int GetID() const;
+  int const& GetID() const;
   Vector3 const& GetPosition() const;
   PhysicsObject *GetOwner() const;
   

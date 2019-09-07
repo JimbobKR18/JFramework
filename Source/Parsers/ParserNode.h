@@ -41,8 +41,8 @@ public:
   void            Reset();
 
   // GETTERS
-  HashString     GetName() const;
-  HashString     GetValue() const;
+  HashString const&    GetName() const;
+  HashString const&    GetValue() const;
   ParserNode*          GetParent() const;
   ParserNodeContainer& GetChildren();
   ParserNodeContainer  GetUntouchedRoots() const;

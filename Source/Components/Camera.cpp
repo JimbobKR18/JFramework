@@ -122,7 +122,7 @@ FrameLayerContainer const &Camera::GetFramebuffers() const
  * @brief Get name of pipeline
  * @return Pipeline
  */
-HashString Camera::GetPipelineName() const
+HashString const& Camera::GetPipelineName() const
 {
   return mPipelineName;
 }

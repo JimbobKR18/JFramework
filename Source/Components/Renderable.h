@@ -111,19 +111,19 @@ public:
   GraphicsManager*    GetManager() const { return mManager; }
   Vector4&            GetColor() { return mPrimaryColor; }
   Vector4 const&      GetColor() const { return mPrimaryColor; }
-  HashString          GetFileName() const { return mFileName; }
-  HashString          GetText() const { return mText; }
-  HashString          GetFontName() const { return mFontName; }
+  HashString const&   GetFileName() const { return mFileName; }
+  HashString const&   GetText() const { return mText; }
+  HashString const&   GetFontName() const { return mFontName; }
   int                 GetFontSize() const { return mFontSize; }
   int                 GetMaxTextWidth() const { return mMaxTextWidth; }
-  Vector4             GetSecondaryColor() const { return mSecondaryColor; }
-  Vector3             GetOriginalSize() const { return mOriginalSize; }
+  Vector4 const&      GetSecondaryColor() const { return mSecondaryColor; }
+  Vector3 const&      GetOriginalSize() const { return mOriginalSize; }
   TextRenderStyle     GetTextRenderStyle() const { return mTextRenderStyle; }
   int                 GetCurrentAnimation() const { if(mTexCoord) return mTexCoord->GetCurrentAnimation(); else return 0; }
   int                 GetCurrentFrame() const { if(mTexCoord) return mTexCoord->GetCurrentFrame(); else return 0; }
-  HashString          GetMinFilter() const { return mMinFilter; }
-  HashString          GetMagFilter() const { return mMagFilter; }
-  Vector3             GetTextureSize() const { return mTextureSize; }
+  HashString const&   GetMinFilter() const { return mMinFilter; }
+  HashString const&   GetMagFilter() const { return mMagFilter; }
+  Vector3 const&      GetTextureSize() const { return mTextureSize; }
   int                 GetLayer() const { return mLayer; }
   Viewspace           GetViewMode() const { return mViewmode; }
   bool                GetNoRender() const { return mNoRender; }

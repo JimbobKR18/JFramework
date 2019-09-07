@@ -20,7 +20,7 @@ int Parser::GetCurrentObjectIndex() const
 /**
  * @brief Get name of file.
  */
-std::string Parser::GetFilename() const
+HashString const& Parser::GetFilename() const
 {
   return mFilename;
 }

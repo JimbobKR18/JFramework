@@ -13,7 +13,7 @@ Joint::~Joint()
  * @brief Get Id.
  * @return Id.
  */
-int Joint::GetID() const
+int const& Joint::GetID() const
 {
   return mId;
 }

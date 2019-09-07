@@ -35,7 +35,7 @@ ChemistryManager* ChemistryElement::GetManager() const
 /**
  * @return Name
  */
-HashString const ChemistryElement::GetName() const
+HashString const& ChemistryElement::GetName() const
 {
   return mName;
 }

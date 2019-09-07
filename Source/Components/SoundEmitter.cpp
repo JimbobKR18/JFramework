@@ -64,7 +64,7 @@ HashString SoundEmitter::GetChannelGroup() const
  * @brief Get origin point of sound for emitter.
  * @return Origin point, in local space.
  */
-Vector3 SoundEmitter::GetSoundOrigin() const
+Vector3 const& SoundEmitter::GetSoundOrigin() const
 {
   return mSoundOrigin;
 }

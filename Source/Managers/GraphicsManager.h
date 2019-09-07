@@ -75,8 +75,8 @@ public:
   Tree*               GetTree();
   
   // Texture management
-  void                AddTexturePairing(HashString const &aFilename, TextureData *aData);
-  TextureData*        GetTextureData(HashString const &aFilename) const;
+  void                AddTexturePairing(HashString const &aKey, TextureData *aData);
+  TextureData*        GetTextureData(HashString const &aKey) const;
   
   // Shader management
   void                AddShaderPairing(HashString const &aFilename, ShaderData *aData);

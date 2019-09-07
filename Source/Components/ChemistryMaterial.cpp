@@ -34,7 +34,7 @@ ChemistryManager* ChemistryMaterial::GetManager() const
 /**
  * @return Name.
  */
-HashString const ChemistryMaterial::GetName() const
+HashString const& ChemistryMaterial::GetName() const
 {
   return mName;
 }

@@ -25,7 +25,7 @@ public:
   
   // Getters
   ChemistryManager* GetManager() const;
-  HashString const GetName() const;
+  HashString const& GetName() const;
   float const GetTemperature() const;
   float const GetWattage() const;
   float const GetScale() const;

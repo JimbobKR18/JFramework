@@ -19,7 +19,7 @@ public:
   // GETTERS
   GameObject* GetObject() const;
   float const GetTime() const;
-  HashString const GetName() const;
+  HashString const& GetName() const;
   
   // SETTERS
   void SetObject(GameObject* aObject);

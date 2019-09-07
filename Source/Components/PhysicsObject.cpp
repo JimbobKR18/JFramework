@@ -585,7 +585,7 @@ bool PhysicsObject::IgnoreObject(GameObject const *aObject) const
  * @brief Get velocity
  * @return Current velocity
  */
-Vector3 PhysicsObject::GetVelocity() const
+Vector3 const& PhysicsObject::GetVelocity() const
 {
   return mVelocity;
 }
@@ -603,7 +603,7 @@ void PhysicsObject::SetVelocity(Vector3 const &aVel)
  * @brief Get acceleration
  * @return Current acceleration
  */
-Vector3 PhysicsObject::GetAcceleration() const
+Vector3 const& PhysicsObject::GetAcceleration() const
 {
   return mAcceleration;
 }
@@ -793,7 +793,7 @@ void PhysicsObject::SetPaused(bool const aPaused)
  * @brief Set size for broadphasing (bigger than normal box)
  * @return Size for broadphasing
  */
-Vector3 PhysicsObject::GetBroadSize() const
+Vector3 const& PhysicsObject::GetBroadSize() const
 {
   return mBroadSize;
 }

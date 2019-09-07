@@ -161,7 +161,7 @@ void ParserNode::Reset()
 /**
  * @brief Get name of node.
  */
-HashString ParserNode::GetName() const
+HashString const& ParserNode::GetName() const
 {
   return mName;
 }
@@ -169,7 +169,7 @@ HashString ParserNode::GetName() const
 /**
  * @brief Get value of node
  */
-HashString ParserNode::GetValue() const
+HashString const& ParserNode::GetValue() const
 {
   if(mRandom)
   {

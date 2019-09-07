@@ -48,7 +48,7 @@ public:
   SoundEmitFunction GetSoundEmitFunction() const;
   HashString GetSoundName() const;
   HashString GetChannelGroup() const;
-  Vector3 GetSoundOrigin() const;
+  Vector3 const& GetSoundOrigin() const;
   int GetChannel() const;
   bool GetActive() const;
   

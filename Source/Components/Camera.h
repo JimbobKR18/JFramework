@@ -35,7 +35,7 @@ public:
   void SetPrimary(bool aPrimary);
   Framebuffer* GetFramebuffer(int const aLayer);
   FrameLayerContainer const &GetFramebuffers() const;
-  HashString GetPipelineName() const;
+  HashString const& GetPipelineName() const;
   void SetPipelineName(HashString const &aPipelineName);
   
   // Virtuals derived from Component

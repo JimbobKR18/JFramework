@@ -25,7 +25,7 @@ public:
   // Methods
   GameObject *GetTarget();
   void SetTarget(GameObject *aTarget);
-  HashString GetTargetName() const;
+  HashString const& GetTargetName() const;
   void SetTargetName(HashString const &aTargetName);
   void ResetTarget();
   float GetTime() const;

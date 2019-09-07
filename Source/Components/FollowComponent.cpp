@@ -49,7 +49,7 @@ void FollowComponent::SetTarget(GameObject *aTarget)
  * @brief Get name of target
  * @return Target name
  */
-HashString FollowComponent::GetTargetName() const
+HashString const& FollowComponent::GetTargetName() const
 {
   return mTargetName;
 }

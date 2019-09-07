@@ -12,7 +12,7 @@ DSP::~DSP()
  * @brief Get name of DSP
  * @return Name
  */
-HashString const DSP::GetName() const
+HashString const& DSP::GetName() const
 {
   return mName;
 }

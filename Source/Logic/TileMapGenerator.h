@@ -122,11 +122,11 @@ public:
 
   void              Update();
 
-  int               GetWidth() const;
-  int               GetHeight() const;
-  int               GetTileSize() const;
-  HashString        GetImageName() const;
-  HashString        GetDataName() const;
+  int const&        GetWidth() const;
+  int const&        GetHeight() const;
+  int const&        GetTileSize() const;
+  HashString const& GetImageName() const;
+  HashString const& GetDataName() const;
   std::vector<int>& GetArtTiles();
   std::vector<int>& GetCollisionTiles();
   std::vector<int>& GetCollisionShapes();
@@ -135,9 +135,9 @@ public:
   GameObject*       GetObject(int const aX, int const aY);
   GameObject*       GetObject(int const aIndex);
   std::unordered_map<int, GameObject*> GetObjects();
-  int               GetTileValue(int const aX, int const aY);
-  int               GetCollisionValue(int const aX, int const aY);
-  int               GetMaterialValue(int const aX, int const aY);
+  int const&        GetTileValue(int const aX, int const aY);
+  int const&        GetCollisionValue(int const aX, int const aY);
+  int const&        GetMaterialValue(int const aX, int const aY);
   int               GetIndex(int const aX, int const aY);
   std::vector<int>  GetIndices(int const aX, int const aY, int const bX, int const bY);
 

@@ -22,7 +22,7 @@ CustomScript::~CustomScript()
  * @brief Get lua file name.
  * @return Name of lua file.
  */
-HashString const CustomScript::GetFileName() const
+HashString const& CustomScript::GetFileName() const
 {
   return mFileName;
 }
@@ -31,7 +31,7 @@ HashString const CustomScript::GetFileName() const
  * @brief Get update function name in lua.
  * @return Function name in lua.
  */
-HashString const CustomScript::GetUpdateFunctionName() const
+HashString const& CustomScript::GetUpdateFunctionName() const
 {
   return mUpdateFunctionName;
 }
@@ -41,7 +41,7 @@ HashString const CustomScript::GetUpdateFunctionName() const
  * @param aFieldName Name of field to retrieve.
  * @return Value if found, else assert.
  */
-HashString const CustomScript::GetValue(HashString const &aFieldName)
+HashString const& CustomScript::GetValue(HashString const &aFieldName)
 {
   if(mValues.find(aFieldName.ToHash()) == mValues.end())
   {

@@ -77,9 +77,9 @@ public:
   bool                 IgnoreObject(GameObject const *aObject) const;
 
   // Getters and setters
-  Vector3              GetVelocity() const;
+  Vector3 const&       GetVelocity() const;
   void                 SetVelocity(Vector3 const &aVel);
-  Vector3              GetAcceleration() const;
+  Vector3 const&       GetAcceleration() const;
   void                 SetAcceleration(Vector3 const &aAccel);
 
   float                GetMass() const;
@@ -110,7 +110,7 @@ public:
   bool                 IsPaused() const;
   void                 SetPaused(bool const aPaused);
 
-  Vector3              GetBroadSize() const;
+  Vector3 const&       GetBroadSize() const;
   void                 SetBroadSize(Vector3 const &aSize);
   
   IgnoreContainer      GetIgnoreList() const;

@@ -44,7 +44,7 @@ bool RenderableProperty::operator!=(RenderableProperty const &aRhs)
  * @brief Get name of property
  * @return Name
  */
-HashString RenderableProperty::GetName() const 
+HashString const& RenderableProperty::GetName() const 
 {
   return mName;
 }
@@ -62,7 +62,7 @@ PropertyType RenderableProperty::GetType() const
  * @brief Get target value of property
  * @return Target value
  */
-HashString RenderableProperty::GetTargetValue() const
+HashString const& RenderableProperty::GetTargetValue() const
 {
   return mTargetValue;
 }
@@ -71,7 +71,7 @@ HashString RenderableProperty::GetTargetValue() const
  * @brief Get default value of property
  * @return Default value
  */
-HashString RenderableProperty::GetDefaultValue() const
+HashString const& RenderableProperty::GetDefaultValue() const
 {
   return mDefaultValue;
 }
@@ -80,7 +80,7 @@ HashString RenderableProperty::GetDefaultValue() const
  * @brief Get Id of property
  * @return Id
  */
-HashString RenderableProperty::GetId() const
+HashString const& RenderableProperty::GetId() const
 {
   return mId;
 }

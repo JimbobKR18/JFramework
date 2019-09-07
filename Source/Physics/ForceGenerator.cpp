@@ -18,7 +18,7 @@ ForceGenerator::~ForceGenerator()
 /**
  * @brief Get force.
  */
-Vector3 ForceGenerator::GetForce() const
+Vector3 const& ForceGenerator::GetForce() const
 {
 	return mForce;
 }

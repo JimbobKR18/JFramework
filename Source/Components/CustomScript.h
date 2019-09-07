@@ -17,9 +17,9 @@ public:
   virtual ~CustomScript();
   
   // Getters
-  HashString const GetFileName() const;
-  HashString const GetUpdateFunctionName() const;
-  HashString const GetValue(HashString const &aFieldName);
+  HashString const& GetFileName() const;
+  HashString const& GetUpdateFunctionName() const;
+  HashString const& GetValue(HashString const &aFieldName);
   
   // Setters
   void SetFileName(HashString const &aFileName);

@@ -18,7 +18,7 @@ public:
   State(State const &aState);
   virtual ~State();
   
-  HashString GetName() const;
+  HashString const& GetName() const;
   float GetTimeAlive() const;
   void SetName(HashString const &aName);
   void SetTimeAlive(float const &aTimeAlive);

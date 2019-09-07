@@ -21,9 +21,9 @@ public:
 	ForceGenerator(Vector3 const &aForce);
     virtual ~ForceGenerator();
 
-	virtual void  Update(PhysicsObject *aObject, float aDuration) = 0;
-	Vector3       GetForce() const;
-	void          SetActive(bool aActive);
+	virtual void   Update(PhysicsObject *aObject, float aDuration) = 0;
+	Vector3 const& GetForce() const;
+	void           SetActive(bool aActive);
 };
 
 

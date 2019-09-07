@@ -19,7 +19,7 @@ public:
 
   // Getters
   int             GetCurrentObjectIndex() const;
-  std::string     GetFilename() const;
+  HashString const&     GetFilename() const;
   ParserNode*           GetBaseRoot() const;
 
   // Setters

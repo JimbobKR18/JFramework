@@ -25,7 +25,7 @@ State::~State()
  * @brief Get name of State.
  * @return Name.
  */
-HashString State::GetName() const
+HashString const& State::GetName() const
 {
   return mName;
 }

@@ -414,21 +414,21 @@ Tree* GraphicsManager::GetTree()
 
 /**
  * @brief Add texture name and data to map.
- * @param aFilename
+ * @param aKey
  * @param aData
  */
-void GraphicsManager::AddTexturePairing(HashString const &aFilename, TextureData *aData)
+void GraphicsManager::AddTexturePairing(HashString const &aKey, TextureData *aData)
 {
-  mTextures.insert(std::pair<HashType, TextureData*>(aFilename.ToHash(), aData));
+  mTextures.insert(std::pair<HashType, TextureData*>(aKey.ToHash(), aData));
 }
 
 /**
  * @brief Get data for texture by filename
- * @param aFilename
+ * @param aKey
  */
-TextureData* GraphicsManager::GetTextureData(HashString const &aFilename) const
+TextureData* GraphicsManager::GetTextureData(HashString const &aKey) const
 {
-  std::unordered_map<HashType, TextureData*>::const_iterator pos = mTextures.find(aFilename.ToHash());
+  std::unordered_map<HashType, TextureData*>::const_iterator pos = mTextures.find(aKey.ToHash());
 
   if(pos == mTextures.end())
   {

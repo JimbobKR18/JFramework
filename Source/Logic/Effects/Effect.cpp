@@ -34,7 +34,7 @@ float const Effect::GetTime() const
  * @brief Get name
  * @return Name
  */
-HashString const Effect::GetName() const
+HashString const& Effect::GetName() const
 {
   return mName;
 }

@@ -45,11 +45,11 @@ public:
   bool operator!=(RenderableProperty const &aRhs);
   
   // Getters
-  HashString GetName() const;
+  HashString const& GetName() const;
   PropertyType GetType() const;
-  HashString GetTargetValue() const;
-  HashString GetDefaultValue() const;
-  HashString GetId() const;
+  HashString const& GetTargetValue() const;
+  HashString const& GetDefaultValue() const;
+  HashString const& GetId() const;
   
   // Setters
   void SetName(HashString const &aName);
