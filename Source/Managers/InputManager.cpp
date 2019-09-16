@@ -62,10 +62,10 @@ void InputManager::RemoveInput(HashString const &aInput, int const aId)
     {
       delete *it;
       mInputs.erase(it);
+      GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Up"), Vector3(), aId));
       break;
     }
   }
-  GetOwningApp()->SendMessageDelayed(new InputMessage(aInput + std::string("_Up"), Vector3(), aId));
 }
 
 /**
