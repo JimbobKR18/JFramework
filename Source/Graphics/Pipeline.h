@@ -18,7 +18,7 @@ struct Pass
     Vector4 const &aClearColor);
   virtual ~Pass();
   
-  void Run(std::vector<Framebuffer*> const &aInputs);
+  void Run(GraphicsManager *aManager, std::vector<Framebuffer*> const &aInputs);
 };
 
 typedef std::vector<Pass*> PassStep;
@@ -44,7 +44,7 @@ public:
   virtual ~Pipeline();
   
   void AddPass(int aIndex, Pass* aPass);
-  Framebuffer *Run(FrameLayerContainer const &aLayers);
+  Framebuffer *Run(GraphicsManager *aManager, FrameLayerContainer const &aLayers);
 };
 
 #endif // PIPELINE_H

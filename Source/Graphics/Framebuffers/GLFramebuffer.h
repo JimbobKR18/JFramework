@@ -39,7 +39,7 @@ public:
   virtual void Generate(GraphicsManager *aManager);
   virtual void Bind();
   virtual void Unbind(int aDefaultFramebuffer);
-  virtual void Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen);
+  virtual void Draw(GraphicsManager *aManager, int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen);
   virtual void SetShaderProperties(bool aActive);
   
   // METHODS

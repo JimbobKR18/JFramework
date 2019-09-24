@@ -216,16 +216,18 @@ void GLFramebuffer::Unbind(int aDefaultFramebuffer)
  * @param aScreenHeight Literal height of window.
  * @param aFullScreen Is this full screen?
  */
-void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen)
+void GLFramebuffer::Draw(GraphicsManager *aManager, int aDefaultWidth, int aDefaultHeight, int aScreenWidth, int aScreenHeight, bool aFullScreen)
 {
   int texCoordPosLocation = glGetAttribLocation(mFramebufferProgramID, "texCoord");
   int posCoordPosLocation = glGetAttribLocation(mFramebufferProgramID, "vertexPos");
+  int x = aDefaultWidth;
+  int y = aDefaultHeight;
   
   if(aFullScreen)
   {
     float ratio = ((float)aScreenHeight / (float)aDefaultHeight);
-    int x = aDefaultWidth * ratio;
-    int y = aDefaultHeight * ratio;
+    x = aDefaultWidth * ratio;
+    y = aDefaultHeight * ratio;
     if(x <= aScreenWidth)
     {
       glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, x, aScreenHeight);
@@ -254,6 +256,37 @@ void GLFramebuffer::Draw(int aDefaultWidth, int aDefaultHeight, int aScreenWidth
   GL_ERROR_CHECK();
   glUniform1i(glGetUniformLocation(mFramebufferProgramID, "depthTextureUnit"), 1);
   GL_ERROR_CHECK();
+  
+  // Optionals
+  GLint location = -1;
+  location = glGetUniformLocation(mFramebufferProgramID, "textureWidth");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform1i(location, static_cast<int>(x));
+    GL_ERROR_CHECK();
+  }
+  location = glGetUniformLocation(mFramebufferProgramID, "textureHeight");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform1i(location, static_cast<int>(y));
+    GL_ERROR_CHECK();
+  }
+  location = glGetUniformLocation(mFramebufferProgramID, "time");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform1f(location, aManager->GetOwningApp()->GetAppTime());
+    GL_ERROR_CHECK();
+  }
+  location = glGetUniformLocation(mFramebufferProgramID, "resolution");
+  GL_ERROR_CHECK();
+  if(location != -1)
+  {
+    glUniform2f(location, x, y);
+    GL_ERROR_CHECK();
+  }
   
   std::vector<int> const &inputs = GetInputTextures();
   int i = 2;

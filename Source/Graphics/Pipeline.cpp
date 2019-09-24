@@ -40,7 +40,7 @@ Pass::~Pass()
  * @brief Run pass using inputs
  * @param aInputs Input framebuffers
  */
-void Pass::Run(std::vector<Framebuffer*> const &aInputs)
+void Pass::Run(GraphicsManager *aManager, std::vector<Framebuffer*> const &aInputs)
 {
   std::vector<int> buffers;
   for(std::vector<Framebuffer*>::const_iterator it = aInputs.begin(); it != aInputs.end(); ++it)
@@ -50,7 +50,7 @@ void Pass::Run(std::vector<Framebuffer*> const &aInputs)
   
   mOutput->Bind();
   mInput->SetInputTextures(buffers);
-  mInput->Draw(SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 
+  mInput->Draw(aManager, SystemProperties::GetRenderWidth(), SystemProperties::GetRenderHeight(), 
     SystemProperties::GetScreenWidth(), SystemProperties::GetScreenHeight(), false);
   mOutput->Unbind(mDefaultFrameBufferID);
 }
@@ -95,7 +95,7 @@ void Pipeline::AddPass(int aIndex, Pass* aPass)
  * @param aLayers Input layers, contain image ids
  * @return Finalized output
  */
-Framebuffer *Pipeline::Run(FrameLayerContainer const &aLayers)
+Framebuffer *Pipeline::Run(GraphicsManager *aManager, FrameLayerContainer const &aLayers)
 {
   std::vector<Framebuffer*> current;
   for(FrameLayerContainerConstIT it = aLayers.begin(); it != aLayers.end(); ++it)
@@ -111,7 +111,7 @@ Framebuffer *Pipeline::Run(FrameLayerContainer const &aLayers)
     for(PassStep::iterator it2 = step.begin(); it2 != step.end(); ++it2)
     {
       Pass *pass = *it2;
-      pass->Run(current);
+      pass->Run(aManager, current);
       temp.push_back(pass->mOutput);
     }
     current = temp;
