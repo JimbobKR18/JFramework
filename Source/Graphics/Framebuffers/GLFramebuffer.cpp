@@ -231,6 +231,7 @@ void GLFramebuffer::Draw(GraphicsManager *aManager, int aDefaultWidth, int aDefa
     if(x <= aScreenWidth)
     {
       glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, x, aScreenHeight);
+      y = aScreenHeight;
       GL_ERROR_CHECK();
     }
     else
@@ -239,6 +240,7 @@ void GLFramebuffer::Draw(GraphicsManager *aManager, int aDefaultWidth, int aDefa
       x = aDefaultWidth * ratio;
       y = aDefaultHeight * ratio;
       glViewport((aScreenWidth - x)/2, (aScreenHeight - y)/2, aScreenWidth, y);
+      x = aScreenWidth;
       GL_ERROR_CHECK();
     }
   }
