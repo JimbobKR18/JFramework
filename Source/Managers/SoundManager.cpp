@@ -145,6 +145,41 @@ int SoundManager::PlaySound(HashString const &aName, int const aNumLoops)
 }
 
 /**
+ * @brief Create channel for sound
+ * @param aName Name of sound
+ * @return Channel
+ */
+int SoundManager::AllocateSoundChannel(HashString const& aName)
+{
+  HashString name = GetAliasIfAvailable(aName);
+  int channel = mSoundSystem->AllocateSoundChannel(name);
+  if(mSoundsToDSPs.find(aName.ToHash()) != mSoundsToDSPs.end())
+  {
+    SoundDSPInfoVector dsps = mSoundsToDSPs[aName.ToHash()];
+    for(SoundDSPInfoVectorIt it = dsps.begin(); it != dsps.end(); ++it)
+    {
+      SoundDSPInfo* info = *it;
+      if(mDSPContainer.find(info->mDSPName.ToHash()) != mDSPContainer.end())
+      {
+        DSP *dsp = mDSPContainer[info->mDSPName.ToHash()];
+        AddDSPToChannel(dsp, channel, info->mIndex);
+      }
+    }
+  }
+  return channel;
+}
+
+/**
+ * @brief Play sound based on channel number
+ * @param aChannel Channel to play
+ * @param aNumLoops
+ */
+void SoundManager::PlaySoundChannel(int const aChannel, int const aNumLoops)
+{
+  mSoundSystem->PlaySoundChannel(aChannel, aNumLoops);
+}
+
+/**
  * @brief Check if channel is paused
  * @param aChannel
  * @return True if paused
@@ -792,6 +827,8 @@ void SoundManager::SerializeLUA()
 {
   SLB::Class<SoundManager>("SoundManager").inherits<Manager>()
       .set("PlaySound", &SoundManager::PlaySound)
+      .set("PlaySoundChannel", &SoundManager::PlaySoundChannel)
+      .set("AllocateSoundChannel", &SoundManager::AllocateSoundChannel)
       .set("StopChannel", &SoundManager::StopChannel)
       .set("SetSoundVolume", &SoundManager::SetChannelVolume)
       .set("ResumeChannel", &SoundManager::ResumeChannel)

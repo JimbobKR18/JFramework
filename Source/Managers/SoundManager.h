@@ -64,6 +64,8 @@ public:
                    SoundSystem::SoundSource const &aSource = SoundSystem::SoundSource::DEFAULT);
   void DeleteSound(HashString const& aName);
   int PlaySound(HashString const& aName, int const aNumLoops);
+  int AllocateSoundChannel(HashString const& aName);
+  void PlaySoundChannel(int const aChannel, int const aNumLoops);
   
   // Channels
   bool IsChannelPaused(int const aChannel);

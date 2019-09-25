@@ -157,6 +157,27 @@ int FMODSoundSystem::PlaySound(HashString const& aName, int const aNumLoops)
 }
 
 /**
+ * @brief Create channel for sound
+ * @param aName Name of sound
+ * @return Channel
+ */
+int FMODSoundSystem::AllocateSoundChannel(HashString const& aName)
+{
+  return PlaySound(aName, 0);
+}
+
+/**
+ * @brief Play sound based on channel number
+ * @param aChannel Channel to play
+ * @param aNumLoops
+ */
+void FMODSoundSystem::PlaySoundChannel(int const aChannel, int const aNumLoops)
+{
+  // unsupported
+  DebugLogPrint("PlaySound unsupported\n");
+}
+
+/**
  * @brief Check if channel is paused
  * @param aChannel
  * @return True if paused

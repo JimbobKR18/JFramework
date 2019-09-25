@@ -29,6 +29,8 @@ public:
   virtual void CreateSound(HashString const& aFilename, float const &aDefaultVolume, SoundSource const& aSource) = 0;
   virtual void DeleteSound(HashString const& aName) = 0;
   virtual int PlaySound(HashString const& aName, int const aNumLoops) = 0;
+  virtual int AllocateSoundChannel(HashString const& aName) = 0;
+  virtual void PlaySoundChannel(int const aChannel, int const aNumLoops) = 0;
   
   // Channels
   virtual bool IsChannelPaused(int const aChannel) = 0;

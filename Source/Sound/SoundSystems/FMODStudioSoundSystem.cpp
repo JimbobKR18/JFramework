@@ -154,6 +154,19 @@ void FMODStudioSoundSystem::DeleteSound(HashString const& aName)
  */
 int FMODStudioSoundSystem::PlaySound(HashString const& aName, int const aNumLoops)
 {
+  int index = AllocateSoundChannel(aName);
+  PlaySoundChannel(index, aNumLoops);
+  
+  return index;
+}
+
+/**
+ * @brief Create channel for sound
+ * @param aName Name of sound
+ * @return Channel
+ */
+int FMODStudioSoundSystem::AllocateSoundChannel(HashString const& aName)
+{
   HashType key = aName.ToHash();
   if(mEventDescriptions.find(key) == mEventDescriptions.end())
   {
@@ -176,14 +189,27 @@ int FMODStudioSoundSystem::PlaySound(HashString const& aName, int const aNumLoop
     assert(!"FMOD failed to play sound.");
   }
   mEventInstances[index] = instance;
-  instance->start();
-  
-  if(aNumLoops == 0)
+  return index;
+}
+
+/**
+ * @brief Play sound based on channel number
+ * @param aChannel Channel to play
+ * @param aNumLoops
+ */
+void FMODStudioSoundSystem::PlaySoundChannel(int const aChannel, int const aNumLoops)
+{
+  if(mEventInstances.find(aChannel) == mEventInstances.end())
   {
-    instance->release();
+    DebugLogPrint("Sound event instance %d not found.\n", aChannel);
+    return;
   }
   
-  return index;
+  mEventInstances[aChannel]->start();
+  if(aNumLoops == 0)
+  {
+    mEventInstances[aChannel]->release();
+  }
 }
 
 /**
