@@ -135,7 +135,8 @@ void PhysicsObject::Update()
     maxRange.y = Greater<float>(maxRange.y, shape->position[1] + shape->GetSize(1) * transform->GetHierarchicalScale().y);
     maxRange.z = Greater<float>(maxRange.z, shape->position[2] + shape->GetSize(2) * transform->GetHierarchicalScale().z);
   }
-  mBroadSize = maxRange * 1.5f;
+  float length = maxRange.length() * 1.25f;
+  mBroadSize = Vector3(length, length, length);
 }
 
 /**
